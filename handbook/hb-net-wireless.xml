@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-wireless.xml,v 1.13 2006/10/28 09:17:55 neysx Exp $ -->
+
+<sections>
+
+<abstract>
+配置无线网络并不是一件简单的事情。希望我们能让您的无线网络正常工作。
+</abstract>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+目前您可以使用我们提供的<c>wireless-tools</c> 或<c>wpa_supplicant</c>工具来配置无
+线网络。请记住重要的一点是，您对无线网络的配置是全局性的，而非针对具体的接口。
+</p>
+
+<p>
+<c>wpa_supplicant</c>是一个最好的选择，但缺点是它不支持所有的驱动。请浏览<uri
+link="http://hostap.epitest.fi/wpa_supplicant">wpa_supplicant网站</uri>获得它所
+支持的驱动列表。另外，<c>wpa_supplicant</c>目前只能连接到那些你已经配置好ESSID的
+无线网络。
+</p>
+
+<p>
+<c>wireless-tools</c>支持几乎所有的无线网卡和驱动，但它不能连接到那些只支
+持WPA的AP。
+</p>
+
+<warn>
+由于<c>linux-wlan-ng</c>驱动有其自己特有的安装和配置方式，而且与其他软件的方式完
+全不同，因此目前它并不被baselayout所支持。有传闻说<c>linux-wlan-ng</c>的开发者要
+将它的设置方式改成<c>wireless-tools</c>的方式——到时候您就可以在baselayout中使
+用<c>linux-wlan-ng</c>了。
+</warn>
+
+</body>
+</section>
+<section>
+<title>WPA Supplicant</title>
+<body>
+
+<p>
+<uri link="http://hostap.epitest.fi/wpa_supplicant">WPA Supplicant</uri>工具包可
+以让您连接到那些使用WPA的AP。因为还只是beta版，所以它的配置方法仍会常常变化——尽管
+如此，在大部分情况下它已经能很好的工作。
+</p>
+
+<pre caption="安装wpa_supplicant">
+# <i>emerge net-wireless/wpa_supplicant</i>
+</pre>
+
+<impo>
+要让<c>wpa_supplicant</c>正常工作，您必须在内核中打开<c>CONFIG_PACKET</c>支持。
+</impo>
+
+<p>
+现在我们需要配置一下<path>/etc/conf.d/net</path>文件以便我们可以选择使
+用<c>wpa_supplicant</c>而不用<c>wireless-tools</c>（两者都安装在系统中时，默认使
+用的是<c>wireless-tools</c>）。
+</p>
+
+<pre caption="在/etc/conf.d/net中配置wpa_supplicant">
+<comment># 使用wpa_supplicant代替wireless-tools</comment>
+modules=( "wpa_supplicant" )
+
+<comment># 因为wpa_supplicant还不能很好的自动侦测驱动，所以需要我们为其指定正在使用的驱动。</comment>
+wpa_supplicant_eth0="-Dmadwifi"
+</pre>
+
+<note>
+如果您用host-ap驱动，您首先要将无线设备卡设置成<e>Managed模式</e>以便能正确地配
+合<c>wpa_supplicant</c>工作。你可以在<path>/etc/conf.d/net</path>中设
+置<c>iwconfig_eth0="mode managed"</c>来实现这一点。
+</note>
+
+<p>
+看起来这很简单，不是么？不过我们还需要配置<c>wpa_supplicant</c>本身，这将会比较麻烦一些，具体取决于你要连接的AP的安全程度。下面的例子是
+从<path>/etc/wpa_supplicant.conf.example</path>中抽取并简化而来的，此文件出
+自<c>wpa_supplicant</c>软件包。
+</p>
+
+<pre caption="一个/etc/wpa_supplicant.conf的例子">
+<comment># 请不要修改下面这一行内容，否则将不能正常工作</comment>
+ctrl_interface=/var/run/wpa_supplicant
+
+<comment># 确保只有root用户能读取WPA的配置</comment>
+ctrl_interface_group=0
+
+<comment># 使用wpa_supplicant来扫描和选择AP</comment>
+ap_scan=1
+
+<comment># 简单的情形：WPA-PSk密码验证方式，PSK是ASCII密码短语，所有合法的加密方式都允许连接</comment>
+network={
+  ssid="simple"
+  psk="very secret passphrase"
+  <comment># 优先级越高，就能越早匹配到。</comment>
+  priority=5
+}
+
+<comment># 与前面的设置相同，但要求对特定的SSID进行扫描（针对那些拒绝广播SSID的AP）</comment>
+network={
+  ssid="second ssid"
+  scan_ssid=1
+  psk="very secret passphrase"
+  priority=2
+}
+
+<comment># 仅使用WPA-PSK方式。允许使用任何合法的加密方式的组合</comment>
+network={
+  ssid="example"
+  proto=WPA
+  key_mgmt=WPA-PSK
+  pairwise=CCMP TKIP
+  group=CCMP TKIP WEP104 WEP40
+  psk=06b4be19da289f475aa46a33cb793029d4ab3db7a23ee92382eb0106c72ac7bb
+  priority=2
+}
+
+<comment># 明文连接方式（不使用WPA和IEEE802.1X）</comment>
+network={
+  ssid="plaintext-test"
+  key_mgmt=NONE
+}
+
+<comment># 共享WEP秘钥连接方式（不使用WPA和IEEE802.1X）</comment>
+network={
+  ssid="static-wep-test"
+  key_mgmt=NONE
+  wep_key0="abcde"
+  wep_key1=0102030405
+  wep_key2="1234567890123"
+  wep_tx_keyidx=0
+  priority=5
+}
+
+<comment># 共享WEP秘钥连接方式（无WPA和IEEE802.1X），使用共享秘钥IEEE802.11验证方式</comment>
+network={
+  ssid="static-wep-test2"
+  key_mgmt=NONE
+  wep_key0="abcde"
+  wep_key1=0102030405
+  wep_key2="1234567890123"
+  wep_tx_keyidx=0
+  priority=5
+  auth_alg=SHARED
+}
+
+<comment># 在IBSS/ad-hoc网络中使用WPA-None/TKIP</comment>
+network={
+  ssid="test adhoc"
+  mode=1
+  proto=WPA
+  key_mgmt=WPA-NONE
+  pairwise=NONE
+  group=TKIP
+  psk="secret passphrase"
+}
+</pre>                  
+
+</body>
+</section>
+<section>
+<title>Wireless Tools</title>
+
+<subsection>
+<title>初始设置和管理模式</title>
+<body>
+
+<p>
+<uri
+link="http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html">Wireless
+Tools</uri>提供了一个通用的方法设置无线网络接口，最高可达WEP安全等级。虽然WEP是一
+种较弱的安全方式，但它也是最普遍使用的加密方式。
+</p>
+
+<p>
+Wireless Tools的配置由几个主要变量来控制，以下配置文件的例子描述了您所需要了解的
+所有内容。要牢记于心的是：可确保“连接到没有加密的并且信号最强的AP”的配置并不存
+在——但我们会一直尝试并帮您连接到某个AP。
+</p>
+
+<pre caption="安装wireless-tools">
+# <i>emerge net-wireless/wireless-tools</i>
+</pre>
+
+<note>
+尽管您可以将无线设置保存在<path>/etc/conf.d/wireless</path>中，但是本指南还是推荐
+您将它们保存在<path>/etc/conf.d/net</path>之中。
+</note>
+
+<impo>
+您<e>将</e>需要参阅文档<uri
+link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
+</impo>
+
+<pre caption="在/etc/conf.d/net中配置iwconfig的例子">
+<comment># 使用iwconfig而不用wpa_supplicant</comment>
+modules=( "iwconfig" )
+
+<comment># 为名为ESSID1和ESSID2的AP配置WEP秘钥</comment>
+<comment># 您最多可以配置4个WEP密匙，但任何时候只有其中1个起作用。
+# 所以我们提供一个默认的下标[1]来设置秘钥[1]，之后紧接着把活动秘钥设置为[1]。
+# 我们这么做以备你让其他ESSID使用[1]以外的WEP秘钥。
+#
+# key加上前缀s：意味着它是一个ASCII秘钥，否则它就是一个16进制秘钥。
+#
+# enc open 指定开放安全性（最安全）
+# enc restricted 指定限制安全性（较不安全）</comment>
+key_ESSID1="[1] s:yourkeyhere key [1] enc open"
+key_ESSID2="[1] aaaa-bbbb-cccc-dd key [1] enc restricted"
+
+<comment># 以下仅在我们扫描可用的AP时起作用</comment>
+
+<comment># 有时有多个AP可见，所以我们需要规定一个首选的连接次序。</comment>
+preferred_aps=( "ESSID1" "ESSID2" )
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>细致调整AP选择</title>
+<body>
+
+<p>
+您可以添加一些额外的选项来细致的调整AP的选择，不过正常情况下并不需要这么做。
+</p>
+
+<p>
+您可以决定是否只连接首选的AP。默认情况下，当配置中列出的所有AP的连接都失
+败后，这时如果环境中有一个非加密的AP，系统将会与其连接。这个行为可以
+用<c>associate_order</c>变量来进行控制。下面给出一个相关的值的列表以及它们如何控制AP的选择。
+</p>
+
+<table>
+<tr>
+  <th>值</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>any</c></ti>
+  <ti>默认行为</ti>
+</tr>
+<tr>
+  <ti><c>preferredonly</c></ti>
+  <ti>只连接首选列表里的可见AP</ti>
+</tr>
+<tr>
+  <ti><c>forcepreferred</c></ti>
+  <ti>
+    按首选列表里的顺序强制连接AP，如果扫描不到的话
+  </ti>
+</tr>
+<tr>
+  <ti><c>forcepreferredonly</c></ti>
+  <ti>
+    不进行扫描——按首选列表里的顺序直接尝试连接AP
+  </ti>
+</tr>
+<tr>
+  <ti><c>forceany</c></ti>
+  <ti>和<c>forcepreferred</c>一样，外加连接到任何其他可用的AP</ti>
+</tr>
+</table>
+
+<p>
+最后我们还提供了一些<c>blacklist_aps</c>和<c>unique_ap</c>的选
+择。<c>blacklist_aps</c>的工作方式和<c>preferred_aps</c>类似。<c>unique_ap</c>是
+一个<c>yes</c>或<c>no</c>的值，它决定了是否允许两个无线接口同时接入一个AP。
+</p>
+
+<pre caption="blacklist_aps和unique_ap的例子">
+<comment># 有时您根本不想连接到某些AP</comment>
+blacklist_aps=( "ESSID3" "ESSID4" )
+
+<comment>#如果您有多个无线网卡，您可以决定是否允许每个卡都能连接到同一个无线AP
+# 可以取的值是"yes"或者"no"
+# 默认设置为"yes"</comment>
+unique_ap="yes"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>Ad-Hoc和Master模式</title>
+<body>
+
+<p>
+当您在管理模式中无法连接到任何AP时，您也可以将自己的设备设置成Ad-Hoc节点。
+</p>
+
+<pre caption="失败后转用ad-hoc模式">
+adhoc_essid_eth0="This Adhoc Node"
+</pre>
+
+<p>
+那么，要如何连接到Ad-Hoc网络，或者干脆运行于Master模式使自身成为一个无线接入点
+呢？这里有这样一个设置！您可能需要参照本章前面的内容来指定WEP秘钥。</p>
+
+<pre caption="ad-hoc/master配置的例子">
+<comment># 设定模式为managed（默认）、ad-hoc或者master。并不是所有的设备都支持所有的模式。
+</comment>
+mode_eth0="ad-hoc"
+
+<comment># 设定接口的ESSID
+# 在managed模式中，这将强制此接口只尝试连接特定的ESSID。
+</comment>
+essid_eth0="This Adhoc Node"
+
+<comment># 指定使用的频道，否则将默认使用频道3。
+</comment>
+channel_eth0="9"
+</pre>
+
+<impo>
+以下是从<uri 
+link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</uri>
+的BSD wavelan文档中逐字逐句复制过来的内容。目前共计有14个可用的频道；1-11频道在北
+美是合法的，而在欧洲大部分地区则是频道1-13，在法国是频道10-13，在日本只允许使用频
+道14。如果有疑问，请参考随您所购买的无线网卡或AP附带的说明书。确保调整您的无线网
+卡与AP（或工作于ad-hoc模式的另一块无线网卡）使用同一个频道。默认情况下，在北美和
+欧洲大部分地区销售的无线网卡使用频道3；在法国使用频道11，在日本使用频道14。
+</impo>
+
+</body>
+</subsection>
+<subsection>
+<title>Wireless Tools故障修除</title>
+<body>
+
+<p>
+一些环境或驱动的问题可能会使无线网络不能正常工作，下表多给出一些变量，可能有助于
+你解决问题。
+</p>
+
+<table>
+<tr>
+  <th>参数</th>
+  <th>默认值</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>iwconfig_eth0</c></ti>
+  <ti/>
+  <ti>请参看<c>iwconfig</c>的man page了解<c>iwconfig</c>各项参数</ti>
+</tr>
+<tr>
+  <ti><c>iwpriv_eth0</c></ti>
+  <ti/>
+  <ti>请参看<c>iwpriv</c>的man pages了解<c>iwpriv</c>各项参数</ti>
+</tr>
+<tr>
+  <ti><c>sleep_scan_eth0</c></ti>
+  <ti><c>0</c></ti>
+  <ti>
+    在尝试扫描前的休眠时间（以秒为单位）。当驱动／固件需要时间激活时设置这个值。
+  </ti>
+</tr>
+<tr>
+  <ti><c>sleep_associate_eth0</c></ti>
+  <ti><c>5</c></ti>
+  <ti>
+    无线网络尝试连接到AP等待的秒数，超时则转向下一个AP。
+  </ti>
+</tr>
+<tr>
+  <ti><c>associate_test_eth0</c></ti>
+  <ti><c>MAC</c></ti>
+  <ti>
+   一些驱动程序在失去连接或尝试连接时不会重置无效AP的MAC地址，而有一些驱动程序在
+   碰到这些情况时不会重设quality level。这里有效的设定
+   是<c>MAC</c>，<c>quality</c>和<c>all</c>。
+  </ti>
+</tr>
+<tr>
+  <ti><c>scan_mode_eth0</c></ti>
+  <ti/>
+  <ti>
+  某些驱动必须在ad-hoc模式下扫描，因此若扫描失败的话请尝试把此变量设置
+  成<c>ad-hoc</c>
+  </ti>
+</tr>
+<tr>
+  <ti><c>iwpriv_scan_pre_eth0</c></ti>
+  <ti/>
+  <ti>
+    扫描前先向接口发送一些<c>iwpriv</c>命令。更多细节请参看iwpriv的man page。
+  </ti>
+</tr>
+<tr>
+  <ti><c>iwpriv_scan_post_eth0</c></ti>
+  <ti/>
+  <ti>
+    扫描后向接口发送一些<c>iwpriv</c>命令。更多细节请参看iwpriv的man page。
+  </ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>针对每个ESSID的网络配置</title>
+<body>
+
+<p>
+有时，您连接<e>ESSID1</e>需要使用一个固定IP，而连接<e>ESSID2</e>要使用DHCP。实
+际上，大多数模块变量可以针对每个ESSID来定义。下面我们给出具体的做法。
+</p>
+
+<note>
+只有使用WPA Supplicant或者Wireless Tools时，这些设定才起作用。
+</note>
+
+<impo>
+您<e>将</e>需要参阅文档<uri
+link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
+</impo>
+
+<pre caption="覆盖每一个ESSID的配置">
+config_ESSID1=( "192.168.0.3/24 brd 192.168.0.255" )
+routes_ESSID1=( "default via 192.168.0.1" )
+
+config_ESSID2=( "dhcp" )
+fallback_ESSID2=( "192.168.3.4/24" )
+fallback_route_ESSID2=( "default via 192.168.3.1" )
+
+<comment># 我们可以定义DNS服务器和其他的一些东西</comment>
+<comment># 注意:DHCP将覆盖这些设定，除非我们要求它不要覆盖</comment>
+dns_servers_ESSID1=( "192.168.0.1" "192.168.0.2" )
+dns_domain_ESSID1="some.domain"
+dns_search_domains_ESSID1="search.this.domain search.that.domain"
+
+<comment># 根据无线AP的MAC地址来覆盖相关设定
+# 这在不同地点有相同ESSID的情况下非常有用</comment>
+config_001122334455=( "dhcp" )
+dhcpcd_001122334455="-t 10"
+dns_servers_001122334455=( "192.168.0.1" "192.168.0.2" )
+</pre>
+
+</body>
+</section>
+</sections>

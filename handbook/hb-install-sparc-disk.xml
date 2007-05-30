@@ -1,0 +1,546 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-disk.xml,v 1.27 2006/11/02 20:49:38 nightmorph Exp $ -->
+<sections>
+
+<version>3.1</version>
+<date>2006-11-02</date>
+
+<section>
+<title>块设备入门</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，包括Linux文件系统、
+分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和
+文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+我们从介绍<e>块设备</e>开始。最典型的块设备可能是Linux系统里的第一个SCSI硬盘，即<path>/dev/sda</path>。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交
+互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续
+的、可随机访问的512字节大小的块来访问。
+</p>
+
+<p>
+块设备作为一些条目出现在<path>/dev/</path>里。一般来说，第一个SCSI驱动器被命名为<path>/dev/sda</path>，第二个叫<path>/dev/sdb</path>，依此类推。IDE驱动器的命名也类似，只是他们以hd-作为前缀而不是sd-。如果你使用IDE驱动器，那么第一个是<path>/dev/hda</path>，第二个是<path>/dev/hdb</path>，等等。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分区</title>
+<body>
+
+<p>
+虽然理论上有可能使用整个磁盘来安放你的Linux系统，实际上几乎从不这么做。相反，完整的磁盘块设备会被分割成更小的，更易管理的块设备。这些被称为<e>分区</e>或者<e>切片</e>。
+</p>
+
+<p>
+第一个SCSI磁盘上的第一个分区是<path>/dev/sda1</path>，第二个是<path>/dev/sda2</path>依此类推。类似的，第一个IDE磁盘上的前两个分区是<path>/dev/hda1</path>和<path>/dev/hda2</path>
+</p>
+
+<p>
+Sun系统上的第三个分区被留出来作为一个特殊的切片名为"whole disk"。这个分区不能含有文件系统。
+</p>
+
+<p>
+过去使用DOS分区方案的用户须注意Sun的磁盘标签里没有“主分区”和“扩展分区”。而是每个驱动器最多可以有8个分区,其中第三个被保留。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>默认分区方案</title>
+<body>
+
+<p>
+如果你对制订一个分区方案没有兴趣，那么可以采用下表的建议，一个适合多数系统的方案。对基于IDE硬盘的系统，把下面的<c>sda</c>替换成<c>hda</c>。
+</p>
+
+<p>
+注意，通常不推荐在SPARC上使用一个单独的<path>/boot</path>分区，因为这会使引导器的配置变得复杂。
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>文件系统</th>
+  <th>大小</th>
+  <th>挂载点</th>
+  <th>描述</th>
+</tr>
+<tr>
+    <ti>/dev/sda1</ti>
+    <ti>ext3</ti>
+    <ti>&lt;2 GB</ti>
+    <ti>/</ti>
+    <ti>
+      根分区。对sun4c、sun4d以及sun4m系统，有些PROM要求这个分区小于1G，而且是磁盘上的第一个分区。
+    </ti>
+</tr>
+<tr>
+    <ti>/dev/sda2</ti>
+    <ti>swap</ti>
+    <ti>512 MB</ti>
+    <ti>none</ti>
+    <ti>
+      交换分区。对于bootstrap和某些比较大的编译，需要至少512M的内存（包括交换分区）。
+    </ti>
+</tr>
+<tr>
+    <ti>/dev/sda3</ti>
+    <ti>none</ti>
+    <ti>Whole disk</ti>
+    <ti>none</ti>
+    <ti>整个磁盘分区。这是SPARC系统必需的。</ti>
+</tr>
+<tr>
+    <ti>/dev/sda4</ti>
+    <ti>ext3</ti>
+    <ti>至少2G</ti>
+    <ti>/usr</ti>
+    <ti>
+      /usr分区。应用程序都安装在这里。默认情况下这个分区还用来保存Portage数据（除去源代码大概占用500M空间）。
+    </ti>
+</tr>
+<tr>
+    <ti>/dev/sda5</ti>
+    <ti>ext3</ti>
+    <ti>至少1G</ti>
+    <ti>/var</ti>
+    <ti>
+      /var 
+分区。用来存放程序产生的数据。默认情况下Portage在编译的时候把这个分区作为临时空间。某些大型的应用程序比如Mozilla和OpenOffice.org在编译的时候需要超过1G的临时空间。
+    </ti>
+</tr>
+<tr>
+    <ti>/dev/sda6</ti>
+    <ti>ext3</ti>
+    <ti>剩余的空间</ti>
+    <ti>/home</ti>
+    <ti>/home 分区。用来放用户的家目录。</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+
+<section id="fdisk">
+<title>使用fdisk对你的磁盘分区</title>
+<subsection>
+<body>
+
+<p>
+接下来的部分解释了如何创建先前范例中的分区方案，也就是：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>描述</th>
+</tr>
+<tr>
+    <ti>/dev/sda1</ti>
+    <ti>/</ti>
+</tr>
+<tr>
+    <ti>/dev/sda2</ti>
+    <ti>swap</ti>
+</tr>
+<tr>
+    <ti>/dev/sda3</ti>
+    <ti>whole disk slice</ti>
+</tr>
+<tr>
+    <ti>/dev/sda4</ti>
+    <ti>/usr</ti>
+</tr>
+<tr>
+    <ti>/dev/sda5</ti>
+    <ti>/var</ti>
+</tr>
+<tr>
+    <ti>/dev/sda6</ti>
+    <ti>/home</ti>
+</tr>
+</table>
+
+<p>
+按照需要改变分区方案。记住对于旧的系统请保持根分区在磁盘的前2G以内。还有对于SCSI和SATA硬盘有15个分区的限制。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>开始fdisk</title>
+<body>
+
+<p>
+用你的磁盘作为参数来启动fdisk：
+</p>
+
+<pre caption="启动fdisk">
+# <i>fdisk /dev/sda</i>
+</pre>
+
+<p>
+你应该看到fdisk的提示符：
+</p>
+
+<pre caption="fdisk的提示符">
+Command (m for help):
+</pre>
+
+<p>
+显示可用的分区，请输入<c>p</c>：
+</p>
+
+<pre caption="列出可用分区">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (Sun disk label): 64 heads, 32 sectors, 8635 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+   Device Flag    Start       End    Blocks   Id  System
+/dev/sda1             0       488    499712   83  Linux native
+/dev/sda2           488       976    499712   82  Linux swap
+/dev/sda3             0      8635   8842240    5  Whole disk
+/dev/sda4           976      1953   1000448   83  Linux native
+/dev/sda5          1953      2144    195584   83  Linux native
+/dev/sda6          2144      8635   6646784   83  Linux native
+</pre>
+
+<p>
+注意输出中的<c>Sun disk 
+label</c>。如果没有这个，磁盘将采用DOS分割，而不是Sun分割。在这种情况下，使用<c>s</c>来确保磁盘有一个sun的分区表：
+</p>
+
+<pre caption="创建一个Sun的磁盘标签">
+Command (m for help): s
+Building a new sun disklabel. Changes will remain in memory only,
+until you decide to write them. After that, of course, the previous
+content won't be recoverable.
+
+Drive type
+   ?   auto configure
+   0   custom (with hardware detected defaults)
+   a   Quantum ProDrive 80S
+   b   Quantum ProDrive 105S
+   c   CDC Wren IV 94171-344
+   d   IBM DPES-31080
+   e   IBM DORS-32160
+   f   IBM DNES-318350
+   g   SEAGATE ST34371
+   h   SUN0104
+   i   SUN0207
+   j   SUN0327
+   k   SUN0340
+   l   SUN0424
+   m   SUN0535
+   n   SUN0669
+   o   SUN1.0G
+   p   SUN1.05
+   q   SUN1.3G
+   r   SUN2.1G
+   s   IOMEGA Jaz
+Select type (? for auto, 0 for custom): <i>0</i>
+Heads (1-1024, default 64): 
+Using default value 64
+Sectors/track (1-1024, default 32): 
+Using default value 32
+Cylinders (1-65535, default 8635): 
+Using default value 8635
+Alternate cylinders (0-65535, default 2): 
+Using default value 2
+Physical cylinders (0-65535, default 8637): 
+Using default value 8637
+Rotation speed (rpm) (1-100000, default 5400): <i>10000</i>
+Interleave factor (1-32, default 1): 
+Using default value 1
+Extra sectors per cylinder (0-32, default 0): 
+Using default value 0
+</pre>
+
+<p>
+你能在磁盘的说明书中找到正确的值。而'auto configure'通常不会起作用。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>删除现有的分区</title>
+<body>
+
+<p>
+到了删除全部现有分区的时候了。输入<c>d</c>然后回车。你会被提示输入想要删除的分区号。删除一个已经存在的<path>/dev/sda1</path>，你将输入：
+</p>
+
+<pre caption="删除一个分区">
+Command (m for help): <i>d</i>
+Partition number (1-4): <i>1</i>
+</pre>
+
+<p>
+<e>你不要删除分区3（whole disk）。</e>它是必需的。如果这个分区不存在，请按照前面"创建一个Sun的磁盘标签"的命令来做。
+</p>
+
+<p>
+在删掉除Whole disk分区以外的所有分区后，你将有一个和下面相似的分区布局：
+</p>
+
+<pre caption="查看一个空的分区方案">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (Sun disk label): 64 heads, 32 sectors, 8635 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+   Device Flag    Start       End    Blocks   Id  System
+/dev/sda3             0      8635   8842240    5  Whole disk
+</pre>
+
+
+</body>
+</subsection>
+
+<subsection>
+<title>创建根分区</title>
+<body>
+
+<p>
+我们准备好创建根分区了。输入<c>n</c>来创建新的分区，然后输入<c>1</c>来建立分区。当提示第一个柱面的时候，直接回车。当提示最后一个柱面的时候，输入<c>+512M</c>来建立一个<c>512M</c>大小的分区。确定整个根分区在磁盘的前2G以内。你可用在下面看到这些步骤的输出：
+</p>
+
+<pre caption="创建根分区">
+Command (m for help): <i>n</i>
+Partition number (1-8): <i>1</i>
+First cylinder (0-8635): <i>(press Enter)</i>
+Last cylinder or +size or +sizeM or +sizeK (0-8635, default 8635): <i>+512M</i>
+</pre>
+
+<p>
+现在，当你输入<c>p</c>，你应该看见下面这些分区被列出来：
+</p>
+
+<pre caption="列出分区布局">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (Sun disk label): 64 heads, 32 sectors, 8635 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+   Device Flag    Start       End    Blocks   Id  System
+/dev/sda1             0       488    499712   83  Linux native
+/dev/sda3             0      8635   8842240    5  Whole disk
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建交换分区</title>
+<body>
+
+<p>
+接着，我们来创建交换分区。输入<c>n</c>来创建新分区，然后敲<c>2</c>建立第二个分区，目前是<path>/dev/sda2</path>。当提示第一个柱面的时候，直接回车。当提示最后一个柱面的时候，输入<c>+512M</c>来建立一个512M的分区。做完以后，输入<c>t</c>来设置分区类型，然后输入<c>82</c>把分区类型设为"Linux 
+Swap"。做完这些步骤以后，输入<c>p</c>应该会显示出类似这样的分区表：
+</p>
+
+<pre caption="列出可用的分区">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (Sun disk label): 64 heads, 32 sectors, 8635 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+   Device Flag    Start       End    Blocks   Id  System
+/dev/sda1             0       488    499712   83  Linux native
+/dev/sda2           488       976    499712   82  Linux swap
+/dev/sda3             0      8635   8842240    5  Whole disk
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建/usr、/var和/home分区</title>
+<body>
+
+<p>
+最后，让我们来创建/usr、/var和/home分区。和前面一样，输入<c>n</c>来创建新的分区，然后输入<c>4</c>创建第三个分区，在本例中是<path>/dev/sda4</path>。在提示第一个柱面的时候，敲回车。当提示最后一个柱面的时候，输入<c>+2048M</c>来建立一个大小为2G的分区。对<path>sda5</path>和<path>sda6</path>重复这些步骤，并使用需要的大小。一旦你做完了，就可以看到类似如下的东西：
+</p>
+
+<pre caption="列出完整的分区表">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (Sun disk label): 64 heads, 32 sectors, 8635 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+   Device Flag    Start       End    Blocks   Id  System
+/dev/sda1             0       488    499712   83  Linux native
+/dev/sda2           488       976    499712   82  Linux swap
+/dev/sda3             0      8635   8842240    5  Whole disk
+/dev/sda4           976      1953   1000448   83  Linux native
+/dev/sda5          1953      2144    195584   83  Linux native
+/dev/sda6          2144      8635   6646784   83  Linux native
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>保存并退出</title>
+<body>
+
+<p>
+保存你的分区表并退出<c>fdisk</c>，输入<c>w</c>：
+</p>
+
+<pre caption="保存并退出fdisk">
+Command (m for help): <i>w</i>
+</pre>
+
+<p>
+现在分区已经建好，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在你的分区已经建好，到了放置文件系统的时候了。如果你不在意使用什么文件系统并且乐意使用本手册的默认选择，那么继续<uri 
+link="#filesystems-apply">在分区上建立文件系统</uri>。否则，接着看下去了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+有很多文件系统可用，有些在SPARC上已经稳定。比如ext2和ext3都工作的很好。其它的文件系统可能会工作不正常。
+</p>
+
+<p>
+<b>ext2</b>是可靠的Linux文件系统。它不支持日志，也就是说周期性的检查在启动的时候会非常消耗时间。确实有新一代的日志文件系统能够在启动的时候非常快速得完成一致性检查，所以通常首选那些未做日志的副本。一般来说，日志文件系统可以避免系统启动的长时间延迟以及文件系统的不一致状态。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的日志版本。它不但提供了元数据日志用来快速恢复而且还有其它增强的日志模式如完整数据和有序数据日志。它使用了经过哈希处理的B*-tree索引在多数情况下可以获得高性能。Ext3是ext2出色和可靠的替代者。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>在分区上建立文件系统</title>
+<body>
+
+<p>
+在分区上创建文件系统或者卷，对于选定的文件系统有特定的工具可供使用：
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+</table>
+
+<p>
+举个例子，在根分区（在本例中是<path>/dev/sda1</path>）上创建ext2，在<path>/usr</path>，<path>/var</path>和<path>/home</path>分区（在本例中分别是<path>/dev/sda4</path>、<path>5</path>和<path>6</path>）上建立ext3，你要用：
+</p>
+
+<pre caption="在分区上建立文件系统">
+# <i>mke2fs /dev/sda1</i>
+# <i>mke2fs -j /dev/sda4</i>
+# <i>mke2fs -j /dev/sda5</i>
+# <i>mke2fs -j /dev/sda6</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是用来初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区">
+# <i>mkswap /dev/sda2</i>
+</pre>
+
+<p>
+要激活交换分区，使用<c>swapon</c>：
+</p>
+
+<pre caption="激活交换分区">
+# <i>swapon /dev/sda2</i>
+</pre>
+
+<p>
+现在用上述命令创建并激活交换分区。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区都已初始化并拥有文件系统，到了用<c>mount</c>命令来挂载他们的时候了。不要忘记先为每个分区创建需要挂载的目录。比如：
+</p>
+
+<pre caption="挂载分区">
+# <i>mount /dev/sda1 /mnt/gentoo</i>
+# <i>mkdir /mnt/gentoo/usr</i>
+# <i>mount /dev/sda4 /mnt/gentoo/usr</i>
+# <i>mkdir /mnt/gentoo/var</i>
+# <i>mount /dev/sda5 /mnt/gentoo/var</i>
+# <i>mkdir /mnt/gentoo/home</i>
+# <i>mount /dev/sda6 /mnt/gentoo/home</i>
+</pre>
+
+<note>
+如果你想把<path>/tmp</path>作为一个单独的分区，确信在挂载以后修改权限：<c>chmod 1777 
+/mnt/gentoo/tmp</c>。<path>/var/tmp</path>也要这么做。
+</note>
+
+<p>
+同样我们需要挂载proc文件系统（一个内核的虚拟接口）到<path>/proc</path>。但是我们需要先把文件放到分区里。
+</p>
+
+<p>
+继续<uri link="?part=1&amp;chap=5">安装Gentoo的安装文件</uri>。
+</p>
+
+</body>
+</section>
+</sections>
+

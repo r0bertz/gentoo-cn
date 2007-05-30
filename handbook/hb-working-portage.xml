@@ -1,0 +1,520 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-portage.xml,v 1.61 2006/11/12 21:28:30 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+本章节阐述了一些“简单”的步骤，这些步骤是用户要维护自己系统中的软件所必须知道的。
+</abstract>
+
+<version>1.55</version>
+<date>2006-11-12</date>
+
+<section>
+<title>欢迎使用Portage</title>
+<body>
+
+<p>
+Portage可能是Gentoo在软件包管理方面最瞩目的创新。它所具有的高度灵活性以及其他大量的特性，使其经常被认为是Linux中最好用的软件包管理工具。
+</p>
+
+<p>
+Portage完全用<uri link="http://www.python.org">Python</uri>和<uri link="http://www.gnu.org/software/bash">Bash</uri>写成。由于它们均为脚本语言，所以Portage对于用户而言也就是完全可见的。
+</p>
+
+<p>
+绝大部分用户将通过<c>emerge</c>工具来使用Portage。本章节的目的不是在重复emerge的man page里已经提供的内容，如果要完整的了解emerge工具提供的选项，请参考其man page里给出的相应说明。
+</p>
+
+<pre caption="获取emerge的帮助信息">
+$ <i>man emerge</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>Portage树</title>
+<subsection>
+<title>Ebuilds</title>
+<body>
+
+<p>
+当我们谈到（软件）包的时候，我们通常指的是Portage树为Gentoo用户提供的包的名称。Portage树是<e>ebuilds</e>文件的集合，这些文件包含了Portage管理工具维护软件（安装，搜索，查询， ...）时所需要的所有信息，并被默认的放置在<path>/usr/portage</path>目录中。
+</p>
+
+<p>
+每当您要求Portage对系统中的软件包执行一些操作的时候，它会以系统中的ebuilds文件作为基础。因此您最好定期更新系统Portage树中的ebuild文件，这样Portage才知道新加入了哪些软件，哪些软件发布了安全更新，等等。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>更新Portage树</title>
+<body>
+
+<p>
+通常我们使用<uri
+link="http://rsync.samba.org/">rsync</uri>命令来更新Portage树，它是一个快速的增量性的文件传输工具。另外<c>emerge</c>命令为rsync命令提供了一个相当简单的前端。
+</p>
+
+<pre caption="更新Portage树">
+# <i>emerge --sync</i>
+</pre>
+
+<p>
+如果由于防火墙的限制，您无法进行rsync操作，您仍然可以通过下载我们每天汇总的Portage树快照来更新本地的Portage树。<c>emerge-webrsync</c>命令会自动将最新的Portage快照下载并安装到您的系统中。
+</p>
+
+<pre caption="运行emerge-webrsync">
+# <i>emerge-webrsync</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>软件包维护</title>
+<subsection>
+<title>软件的查询</title>
+<body>
+
+<p>
+要在Portage树中查找指的的软件，您可以使用<c>emerge</c>命令里内建的查找功能。默认情况下，<c>emerge --search</c>会返回那些名字与您指定（无论完整或部分）的名字匹配的软件包。
+</p>
+
+<p>
+例如，要查找那些名字中包含“pdf”字样的软件：
+</p>
+
+<pre caption="查找名字包含pdf的软件包">
+$ <i>emerge --search pdf</i>
+</pre>
+
+<p>
+而如果要通过软件的描述来查找相应的软件，您可以使用<c>--searchdesc</c> (或者简写为 <c>-S</c>) 开关：
+</p>
+
+<pre caption="查找与pdf相关的软件包">
+$ <i>emerge --searchdesc pdf</i>
+</pre>
+
+<p>
+当您观察输出结果的时候，会注意到它提供了大量信息。因为相关的区域已经进行了明确的标注，我们就不再进一步介绍各个部分的含义：
+</p>
+
+<pre caption="'emerge --search'返回结果的例子">
+*  net-print/cups-pdf
+      Latest version available: 1.5.2
+      Latest version installed: [ Not Installed ]
+      Size of downloaded files: 15 kB
+      Homepage:    http://cip.physik.uni-wuerzburg.de/~vrbehr/cups-pdf/
+      Description: Provides a virtual printer for CUPS to produce PDF files.
+      License:     GPL-2
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>软件的安装</title>
+<body>
+
+<p>
+每当您找到一个感兴趣的软件，您可以轻松地用<c>emerge</c>命令安装它。例如，要安装<c>gnumeric</c>：
+</p>
+
+<pre caption="安装gnumeric">
+# <i>emerge gnumeric</i>
+</pre>
+
+<p>
+因为许多应用程序互相依赖，试图安装其中任何一个，可能将会要求同时安装其所依赖的其他相关软件。无需担心，Portage可以很好地处理软件包间的依赖问题。当您安装某个软件的时候，您可以加上<c>--pretend</c>开关，以便观察Portage<e>将会</e>同时安装哪些软件。例如：
+</p>
+
+<pre caption="假装安装gnumeric">
+# <i>emerge --pretend gnumeric</i>
+</pre>
+
+<p>
+当您要求Portage安装一个软件的时候，必要时它会自动从internet下载相应的源代码包并默认将其保存在<path>/usr/portage/distfiles</path>目录中，然后将源代码包解压缩，编译并安装软件。如果您仅仅希望Portage将源代码包下载到本地而不安装它们，在<c>emerge</c>命令后加上<c>--fetchonly</c>的选项：
+</p>
+
+<pre caption="下载gnumeric的源代码包">
+# <i>emerge --fetchonly gnumeric</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>查找已安装软件的文档</title>
+<body>
+
+<p>
+许多软件包中包含有自己的文档，有些时候<c>doc</c>的USE标记决定了软件包中的自带文档是否会被安装到本地。您可以通过<c>emerge -vp
+&lt;软件包名称&gt;</c>命令来检查是否存在<c>doc</c> USE标记。
+</p>
+
+<pre caption="检查是否存在doc的USE标记">
+<comment>(当然alsa-lib只是一个例子。)</comment>
+# <i>emerge -vp alsa-lib</i>
+[ebuild  N    ] media-libs/alsa-lib-1.0.9_rc3  +doc -jack 674 kB
+</pre>
+
+<p>
+您可以在<path>/etc/make.conf</path>文件中全局的设置，或者在<path>/etc/portage/package.use</path>文件中单个的设置，来决定打开或关闭<c>doc</c> USE标记。您也可以创建一个<path>/etc/portage/package.use</path>目录，并在里面的一个文件中加入相应内容来达到相同的效果。在<uri
+link="?part=2&amp;chap=2">USE 标志</uri>章节中有相关用法的详细说明。
+</p>
+
+<p>
+当一个软件包安装结束后，它的文档通常会存放在<path>/usr/share/doc</path>目录下以软件包名命名的子目录中。您也可以通过<c>equery</c>工具来列出此软件安装后生成的所有文件，这个工具来自于<c>app-portage/gentoolkit</c> <uri
+link="/doc/en/gentoolkit.xml">包</uri>。
+</p>
+
+<pre caption="定位包的文档">
+# <i>ls -l /usr/share/doc/alsa-lib-1.0.9_rc3</i>
+total 28
+-rw-r--r--  1 root root  669 May 17 21:54 ChangeLog.gz
+-rw-r--r--  1 root root 9373 May 17 21:54 COPYING.gz
+drwxr-xr-x  2 root root 8560 May 17 21:54 html
+-rw-r--r--  1 root root  196 May 17 21:54 TODO.gz
+
+<comment>(或者使用equery来定位您感兴趣的文件:)</comment>
+# <i>equery files alsa-lib | less</i>
+media-libs/alsa-lib-1.0.9_rc3
+* Contents of media-libs/alsa-lib-1.0.9_rc3:
+/usr
+/usr/bin
+/usr/bin/alsalisp
+<comment>(部分输出内容)</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>软件的移除</title>
+<body>
+
+<p>
+当您想把一个软件包从系统中移除的时候，使用<c>emerge
+--unmerge</c>命令。命令执行完成后，<e>除了</e>那些在安装软件包后您修改过的配置文件，Portage将会移除此软件包安装到您系统中的所有文件。保留这些修改过的配置文件是为了便于您今后再次使用同一个软件包。
+</p>
+
+<p>
+不过，您需要<brite>特别注意</brite>的是：Portage将<e>不会</e>检查您要删除的包是否仍被其他的包依赖。但是当您要删除一个可能破坏您系统的重要的软件包时，它还是会给予警告。
+</p>
+
+<pre caption="从系统中删除gnumeric">
+# <i>emerge --unmerge gnumeric</i>
+</pre>
+
+<p>
+当您从系统中移除一个软件包时，之前那些为了满足其依赖关系而自动被一并安装的软件包将会被保留。如果想让Portage找出那些现在可以移除的相关软件包，可以使用<c>emerge</c>的<c>--depclean</c>功能。稍后我们将谈到这点。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>更新您的系统</title>
+<body>
+
+<p>
+要保持您系统在最佳状态（更不用说安装那些最新的安全更新），您需要定期的更新您的系统。由于Portage只能检查本地Portage树中已有的ebuilds文件，因此您首先应该更新您的Portage树。当您的Portage树更新后，您可以用<c>emerge --update world</c>命令来更新系统。在下一个例子里，我们还会使用<c>--ask</c>开关来控制Portage显示它要更新的软件包列表，并让您决定是否继续更新。
+</p>
+
+<pre caption="更新您的系统">
+# <i>emerge --update --ask world</i>
+</pre>
+
+<p>
+Portage接下来会查找您已经安装的软件包是否有更新版本，但它只会核对那些您已经<e>明确地</e>安装过的软件包(也就是在<path>/var/lib/portage/world</path>文件中列出的包），并不会完整去的检查与这些软件产生依赖关系的包是否也需要更新。如果您想更新系统中的<e>每个软件包</e>，那就加上<c>--deep</c>参数：
+</p>
+
+<pre caption="更新整个系统">
+# <i>emerge --update --deep world</i>
+</pre>
+
+<p>
+因为有时开发者会为那些您没有明确要求安装（但被其他软件包依赖而装入系统中）的包推出安全更新，我们也推荐偶尔运行一下这个命令。
+</p>
+
+<p>
+每当您改变了系统中任何的<uri link="?part=2&amp;chap=2">USE标记</uri>后，您可能需要加入<c>--newuse</c>选项。这样Portage将会检查这个USE标记的变动是否导致需要安装新的软件包或者将现有的包重新编译。
+</p>
+
+<pre caption="执行完整更新">
+# <i>emerge --update --deep --newuse world</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>Meta软件包</title>
+<body>
+
+<p>
+Portage树中的一些软件包并没有包含任何实际的内容，而只是用来安装一系列软件包的集合。例如，<c>kde</c>包就是一个包含了一系列与KDE相关的互相依赖的软件包的集合，您可以通过安装它来在系统中搭建起一个完整的KDE环境。
+</p>
+
+<p>
+如果您试图从系统中移除一个这样的软件包的集合体，只是单纯地使用<c>emerge
+--unmerge</c>命令并不能完成您的要求，原因在于这些包的依赖关系仍然保留在系统中。
+</p>
+
+<p>
+不用担心，Portage也提供了移除孤立依赖的软件包的功能，但由于软件包间的依赖关系是动态的，您首先需要充分地更新您的整个系统，包括更改USE标记设定而导致的变化。在这之后您可以运行<c>emerge --depclean</c>来移除那些完全没有被其他包依赖的软件包（“orphaned dependencies”）。移除之后你需要重新编译那些曾经与刚刚移除的这些包动态连接过的应用程序，因为实际上这些程序不需要那些包。
+</p>
+
+<p>
+所有这些可以用以下三个命令来实现：
+</p>
+
+<pre caption="移除孤立依赖的软件包">
+# <i>emerge --update --deep --newuse world</i>
+# <i>emerge --depclean</i>
+# <i>revdep-rebuild</i>
+</pre>
+
+<p>
+<c>revdep-rebuild</c>工具由<c>gentoolkit</c>包提供；使用前别忘了首先emerge它：
+</p>
+
+<pre caption="安装gentoolkit包">
+# <i>emerge gentoolkit</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>当Portage抱怨的时候...</title>
+<subsection>
+<title>有关SLOT，Virtual，分支，体系结构和Profile</title>
+<body>
+
+<p>
+正如我们之前指出的那样，Portage是一个非常强大并支持许多特性的软件包管理工具，而这是其他类似工具所欠缺的。为了理解这一点，我们为您粗略地解释一些Portage的面貌。
+</p>
+
+<p>
+通过使用Portage，一个软件的不同版本可以共存于一个系统中。其他发行版倾向于直接在软件包名字中包含版本号（例如<c>freetype</c> 和 <c>freetype2</c>），Gentoo的Portage使用一种我们称之为<e>SLOT</e>的技术来实现这种并存。一个ebuild为它自身的版本声明了一个确切的SLOT。具有不同SLOT的同一软件的Ebuild可以共存于同一个系统中。例如，上例中那个<c>freetype</c>包就拥有不同的ebuilds，里面分别有<c>SLOT="1"</c>和<c>SLOT="2"</c>的标志。
+</p>
+
+<p>
+有一些不同的软件包提供了类似的功能。比如<c>metalogd</c>，<c>sysklogd</c>和<c>syslog-ng</c>都是系统日志记录工具。那些依赖于“系统日志记录工具”的程序并不能随便的依赖于其中之一，比如<c>metalogd</c>，因为其他的系统日志工具可能也是很好的选择。好在Portage允许使用<e>虚拟包</e>：每一个系统日志记录工具都可以提供<c>virtual/syslog</c>包，因此应用程序们可以设定成仅仅依赖于<c>virtual/syslog</c>即可。
+</p>
+
+<p>
+Portage树中的软件可以存在于不同的分支中。您的系统默认只会接受那些Gentoo认为稳定的软件包。绝大多数新提交的软件会被添加到测试分支里。这意味着在此软件被标示为稳定版前需要进行更多的测试。尽管您可以看到那些软件的ebuilds已经加入Portage树，在它们未被加入稳定分支前Portage将不会安装它们。
+</p>
+
+<p>
+有些软件只在某几个体系结构上可用。或者在其他体系结构中还不能运行，或者仍需要对其进行更多的测试，或者将软件提交到Portage树中的开发者还不能确定这个软件能否运行于其他体系结构。
+</p>
+
+<p>
+每一个Gentoo安装都依附于一个确定的<c>profile</c>，此文件里除了其他信息外还包含了一个正常工作的系统需要的软件包的列表。
+</p>
+
+</body>
+</subsection>
+<subsection id="blocked">
+<title>被阻挡的包</title>
+<body>
+
+<pre caption="Portage关于被阻挡的包的警告(使用 --pretend参数)">
+[blocks B     ] mail-mta/ssmtp (is blocking mail-mta/postfix-2.2.2-r1)
+</pre>
+
+<pre caption="Portage关于被阻挡的包的警告(不使用 --pretend参数)">
+!!! Error: the mail-mta/postfix package conflicts with another package.
+!!!        both can't be installed on the same system together.
+!!!        Please use 'emerge --pretend' to determine blockers. 
+</pre>
+
+<p>
+Ebuilds文件中包含了特定的字段，里面为Portage提供了此软件的各种依赖关系的信息。总计有两种可能的依赖关系：一种是编译依赖，在<c>DEPEND</c>区域进行声明;另一种是“运行时”依赖，在<c>RDEPEND</c>区域中进行声明。如果上述两种依赖关系中任何一个明确指明某个实体或者虚拟包（译注：可能已安装和正要安装）与要安装的包<e>不</e>相容的时候，就会阻挡软件的安装。
+</p>
+
+<p>
+为了使安装得以继续进行，您可以选择不安装这个软件包，或者先将发生冲突的包unmerge。例如，在我们给出的这个例子中，您可以选择不安装<c>postfix</c>，或者先移除<c>ssmtp</c>。
+</p>
+
+<p>
+也有可能两个需要安装的包互相阻挡。这种少见的情况下，您应该明确自己为什么需要同时安装它们。绝大多数时候您只需要安装它们之中的一个就可以了。如果不是这样，请您到<uri link="http://bugs.gentoo.org">Gentoo的bug跟踪系统</uri>中提交一个bug，以便我们找出解决方案。
+</p>
+
+</body>
+</subsection>
+<subsection id="masked">
+<title>被屏蔽的包</title>
+<body>
+
+<pre caption="Portage关于被屏蔽的包的警告">
+!!! all ebuilds that could satisfy "bootsplash" have been masked. 
+</pre>
+
+<pre caption="Portage关于被屏蔽的包的警告——原因">
+!!! possible candidates are:
+
+- gnome-base/gnome-2.8.0_pre1 (masked by: <i>~x86 keyword</i>)
+- lm-sensors/lm-sensors-2.8.7 (masked by: <i>-sparc keyword</i>)
+- sys-libs/glibc-2.3.4.20040808 (masked by: <i>-* keyword</i>)
+- dev-util/cvsd-1.0.2 (masked by: <i>missing keyword</i>)
+- media-video/ati-gatos-4.3.0 (masked by: <i>package.mask</i>)
+- sys-libs/glibc-2.3.2-r11 (masked by: <i>profile</i>)
+</pre>
+
+<p>
+当您想安装一个对于您系统不可用的软件包。您会收到类似这样的屏蔽错误提示。您应该试着安装那些对于您系统可用的程序或者等待那些不可用的包被置为可用的。通常一个软件包被屏蔽的原因在于：
+</p>
+
+<ul>
+  <li>
+    <b>~arch keyword</b> 意味着这个软件没有经过充分的测试，不能进入稳定分支，请等待一段时间后在尝试使用它。
+  </li>
+  <li>
+    <b>-arch keyword</b> 或 <b>-* keyword</b> 意味着这个软件不能工作在您机器的体系结构中。如果您确信它能工作那么请到我们的<uri link="http://bugs.gentoo.org">bugzilla</uri>网站提交一个bug报告。
+  </li>
+  <li>
+    <b>missing keyword</b> 意味着这个软件还没有在您机器的体系结构中进行过测试。您可以咨询相应体系结构移植小组是否能对它进行测试，或者您自己为他们进行这样的测试并将您得到的结论提交到我们的<uri link="http://bugs.gentoo.org">bugzilla</uri>网站。
+  </li>
+  <li>
+    <b>package.mask</b> 意味着这个软件被认为是损坏的，不稳定的或者有更严重的问题，它被故意标识为“不应使用”。
+  </li>
+  <li>
+    <b>profile</b> 意味着这个软件不适用于您的profile。安装这样的应用软件可能会破坏您的系统，或者只是不能与您使用的profile相兼容。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection id="missingependencies">
+<title>依赖缺失</title>
+<body>
+
+<pre caption="Portage关于依赖缺失的警告">
+emerge: there are no ebuilds to satisfy "&gt;=sys-devel/gcc-3.4.2-r4".
+
+!!! Problem with ebuild sys-devel/gcc-3.4.2-r2
+!!! Possibly a DEPEND/*DEPEND problem. 
+</pre>
+
+<p>
+这表示您正尝试安装的应用程序依赖于您的系统不可用的另外一些软件包。请到<uri
+link="http://bugs.gentoo.org">bugzilla</uri>查看是否有此问题的记录，如果没有查找到相关信息的话请提交一个报告。除非您的系统混用了不同分支，否则这类问题不应该发生，若发生了那就是一个bug。
+</p>
+
+</body>
+</subsection>
+<subsection id="ambiguousebuild">
+<title>意指不明的Ebuild名称</title>
+<body>
+
+<pre caption="Portage对于意指不明的Ebuild名称的警告">
+!!! The short ebuild name "aterm" is ambiguous.  Please specify
+!!! one of the following fully-qualified ebuild names instead:
+
+    dev-libs/aterm
+    x11-terms/aterm
+</pre>
+
+<p>
+您要安装的应用程序对应有多个同名的包。您需要同时指定类别的名称。Portage会列出所有可供选择的名称匹配的包。
+</p>
+
+</body>
+</subsection>
+<subsection id="circulardependencies">
+<title>循环依赖</title>
+<body>
+
+<pre caption="Portage关于循环依赖问题的警告">
+!!! Error: circular dependencies: 
+
+ebuild / net-print/cups-1.1.15-r2 depends on ebuild / app-text/ghostscript-7.05.3-r1
+ebuild / app-text/ghostscript-7.05.3-r1 depends on ebuild / net-print/cups-1.1.15-r2 
+</pre>
+
+<p>
+两个（或多个）您想安装的包由于循环依赖而不能安装。这很可能源于Portage树中的bug。请等一段时间后重新sync再尝试安装。您也可以去<uri link="http://bugs.gentoo.org">bugzilla</uri>看看是否已经有此问题的报告，或者提交一个关于它的报告。
+</p>
+
+</body>
+</subsection>
+<subsection id="fetchfailed">
+<title>下载失败</title>
+<body>
+
+<pre caption="Portage关于下载失败的警告">
+!!! Fetch failed for sys-libs/ncurses-5.4-r5, continuing...
+<comment>(...)</comment>
+!!! Some fetch errors were encountered.  Please see above for details.
+</pre>
+
+<p>
+当Portage下载指定软件的源代码失败时，它会尝试继续安装其它（若适用）的应用程序。源代码下载失败可能源于镜像服务器没有正确同步，也可能因为ebuild文件给出了错误的下载地址。那些保存源代码的服务器也可能因为某些原因当机。
+</p>
+
+<p>
+一小时后重试一次看看问题是否仍然存在。
+</p>
+
+</body>
+</subsection>
+<subsection id="profileprotect">
+<title>系统Profile保护</title>
+<body>
+
+<pre caption="Portage关于profile中保护的包的警告">
+!!! Trying to unmerge package(s) in system profile. 'sys-apps/portage'
+!!! This could be damaging to your system.
+</pre>
+
+<p>
+您要求移除系统核心软件包中的一个。它是您的profile中所列出的必需的软件，因此不能从系统中移除。
+</p>
+
+</body>
+</subsection>
+<subsection id="digesterror">
+<title>Digest验证失败</title>
+<body>
+
+<p>
+有时当您试图emerge一个软件包时，它会失败并给出以下信息：
+</p>
+
+<pre caption="Digest验证失败">
+&gt;&gt;&gt; checking ebuild checksums
+!!! Digest verification failed:
+</pre>
+
+<p>
+这是Portage树中出现了错误的迹象，通常这是由于开发者在向Portage树提交一个软件包时出错造成的。
+</p>
+
+<p>
+当digest校验失败的时候，请<e>不要</e>尝试自己去为此软件包重新产生digest。使用<c>ebuild foo digest</c>并不能修复问题，反而几乎肯定会使问题变得更糟。
+</p>
+
+<p>
+取而代之的应该是等待一至两个小时以便让开发者来修复Portage树。一般来说错误很有可能马上就会被开发者注意到，但Portage树的修复也需要一点点时间。当您等待的时候，到<uri link="http://bugs.gentoo.org">Bugzilla</uri>看看是否已经有人报告了这个问题。如果没有，那就为那个损坏的包提交一个bug报告吧。
+</p>
+
+<p>
+一旦在Bugzilla上看到此问题已经修复，您只需要重新sync就可以下载下来那些修复后的digest。
+</p>
+
+<impo>
+但值得注意的是：这并<e>不</e>意为着您可以短时间内多次重复sync您的portage树（对于同一个rsync服务器）。正如（当您运行<c>emerge --sync</c>时）rsync策略所指出的那样，那些短时间内过于频繁进行多次sync的用户将会被更新服务器禁止访问（一般是将你的IP添加到禁止名单并保留一段指定的时间后才解除）。实际上，最好等到您的下次计划更新的日子再sync，因为这样您不会使rsync服务器过载而影响其他用户的正常使用。
+</impo>
+
+</body>
+</subsection>
+</section>
+</sections>

@@ -1,0 +1,328 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-portage-configuration.xml,v 1.13 2006/11/03 22:35:43 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+Portage所有的设置都可以通过不同的变量来完成，你可以设置在配置文件中或者设置成一个
+环境变量。
+</abstract>
+
+<version>1.5</version>
+<date>2006-11-03</date>
+
+<section>
+<title>Portage的配置</title>
+<subsection>
+<body>
+
+<p>
+如前面所述，你可以在<path>/etc/make.conf</path>中定义许多变量来配置Portage。
+请参考<path>make.conf</path>的手册页以获得更详细和完整的信息:
+</p>
+
+<pre caption="阅读make.conf的手册页">
+$ <i>man make.conf</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>构建相关的选项</title>
+<subsection>
+<title>配置和编译器选项</title>
+<body>
+
+<p>
+当Portage构建应用程序时，他会将下面变量的内容传给编译器和configure脚本:
+</p>
+
+<ul>
+  <li>
+    CFLAGS和CXXFLAGS定义了编译器编译C和C++程序所使用的参数。
+  </li>
+  <li>
+    CHOST为程序的configure脚本定义了build和host信息。
+  </li>
+  <li>
+    MAKEOPTS参数被传递给<c>make</c>命令，通常用来设定编译时并行处理线程的数量。
+    更多关于make的参数可在<c>make</c>的手册页中找到。
+  </li>
+</ul>
+
+<p>
+USE变量也会在配置和编译的过程中被用到，不过这在前面的章节中已经详细解释过了。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装相关选项</title>
+<body>
+
+<p>
+当Portage在安装了一个某软件的新版本后，会把属于旧版本的已经过时的文件从你的系统中
+删除。在此之前Portage会给用户5秒钟时间撤销此操作，这5秒钟由CLEAN_DELAY变量定义。
+</p>
+
+<p>
+你可以通过设定EMERGE_DEFAULT_OPTS变量以使<c>emerge</c>每次运行时都使用某些特定的选
+项。一些常用的选项是--ask, --verbose, --tree,等等。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>配置文件的保护</title>
+<subsection>
+<title>Portage的保护位置</title>
+<body>
+
+<p>
+Portage一般会用新文件覆盖掉旧文件，除非这些旧文件位于<e>受保护的</e>位置里。这些受
+保护的位置由CONFIG_PROTECT变量设定，通常是配置文件的位置。在设置时，多个目录间用空
+格分开。
+</p>
+
+<p>
+当受保护的位置里的文件有新版本时，新文件被保存前将会被更名，同时用户会被告知此新配置文件的存在。
+</p>
+
+<p>
+你可以利用<c>emerge --info</c>来获得目前CONFIG_PROTECT的设置:
+</p>
+
+<pre caption="获得CONFIG_PROTECT的设定">
+$ <i>emerge --info | grep 'CONFIG_PROTECT='</i>
+</pre>
+
+<p>
+更多关于Portage配置文件保护的信息可以通过<c>emerge</c>获得:
+</p>
+
+<pre caption="更多关于Portage配置文件保护的信息">
+$ <i>emerge --help config</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>解除对某些目录的保护</title>
+<body>
+
+<p>
+你可以通过变量CONFIG_PROTECT_MASK来解除对受保护目录下某些子目录的保护。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>下载的选项</title>
+<subsection>
+<title>服务器的地址</title>
+<body>
+
+<p>
+当你的系统上没有所需要的信息和数据时，Portage就会从网络上获取数据。
+含有这些信息和数据的服务器的位置定义在以下变量中:
+</p>
+
+<ul>
+  <li>
+    GENTOO_MIRRORS定义了一些提供源代码（distfiles）的服务器地址。
+  </li>
+  <li>
+    PORTAGE_BINHOST定义了一个特定的服务器地址，此服务器可为你的系统提供预先编译好
+    的软件包。
+  </li>
+</ul>
+
+<p>
+第3个变量设定rsync服务器的地址，此服务器用来更新你的Portage树:
+</p>
+
+<ul>
+  <li>
+    SYNC定义了一个特定的服务器，Portage用此服务器获取Portage树。
+  </li>
+</ul>
+
+<p>
+GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首先你要<c>emerge mirrorselect</c>。
+更多信息参考 mirrorselect 的在线帮助:
+</p>
+
+<pre caption="更多关于mirrorselect的信息">
+# <i>mirrorselect --help</i>
+</pre>
+
+<p>
+如果你需要使用代理服务器，你可以用HTTP_PROXY、FTP_PROXY和RSYNC_PROXY变量来设定它们。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>获取源代码的命令</title>
+<body>
+
+<p>
+当Portage需要获取源代码时，默认使用<c>wget</c>来下载。你可以通过定义FETCHCOMMAND变
+量来改变它。 
+</p>
+
+<p>
+Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以通过定义RESUMECOMMAND来
+变量来改变它。
+</p>
+
+<p>
+确保你的FETCHCOMMAND和RESUMECOMMAND把源代码存放到正确的位置。
+在这些变量中你应该用\${URI}和\${DISTDIR}分别指定源代码和distfiles的位置。
+</p>
+
+<p>
+你可以对不同的传输协议使用不同的设置，相关的参数有FETCHCOMMAND_HTTP、
+FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Rsync的设置</title>
+<body>
+
+<p>
+你不能改变Portage用来更新Portage树所使用的rsync命令,但你可以设定一些与rsync命令相
+关的变量:
+</p>
+
+<ul>
+  <li>
+    PORTAGE_RSYNC_OPTS定义了一些在sync过程中使用的变量，变量之间用空格分开。不要做
+    任何改变除非你<e>十分清楚</e>会有什么后果。注意某些必要的选项总会起作用，即使
+    PORTAGE_RSYNC_OPTS的设置是空的。
+  </li>
+    <li>
+    <ul>
+      <li>
+        --recursive: 彻底检查所有类别和软件包的目录。
+      </li>
+      <li>
+	--times: 保留文件修改时间
+      </li>
+      <li>
+        --exclude='/distfiles' --exclude='/local' --exclude='/packages': 这些设定
+        让Portage不去干预已下载的软件包的位置(在DISTDIR中定义)， 包括任何局部
+        的Portage overlay(在 PORTDIR_OVERLAY 定义)和用户编译的二进制代码包。注意任
+        何选项都可能被--exclude='!' 所覆盖，你希望Portage去改变它们吗。
+      </li>
+      <li>
+	--compress: 在同步过程中压缩已传输的数据
+      </li>
+      <li>
+        --whole-file: 以整个文件为单位发送数据，而不是分块传递。
+      </li>
+    </ul>
+    </li>
+  <li>
+    PORTAGE_RSYNC_EXTRA_OPTS可以用于在同步过程中设置附加选项。选项之间用空格分开。
+  </li>
+  <li>
+    <ul>
+      <li>
+         --timeout=&lt;number&gt;: 这里设定rsync连接超时的秒数。此变量默认为180秒
+	 。如果用户是使用拨号上网或者一台处理速度慢的电脑，这个值需要设到300或者更
+	 高。
+      </li>
+      <li>
+	--exclude-from=/etc/portage/rsync_excludes: 这个参数指定一个文件，内容
+	是rsync在更新过程中需要忽略的软件包和/或者类别的列表。这个例子指定的
+	是 <path>/etc/portage/rsync_excludes</path>。请参考<uri
+	link="?part=3&amp;chap=5">使用Portage树的子集</uri>以了解此文件的格式。
+      </li>
+      <li>--quiet: 减少屏幕输出</li>
+      <li>--verbose: 在屏幕上输出完整的文件列表</li>
+      <li>--progress: 为每个文件显示一个进度条</li>
+    </ul>
+  </li>
+  <li>
+    PORTAGE_RSYNC_RETRIES定义了rsync程序试图连接到由SYNC变量所指定的服务器的次数，    默认为3。
+  </li>
+</ul>
+
+<p>
+更多有关这些参数的信息请阅读<c>man rsync</c>.
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>Gentoo的设置</title>
+<subsection>
+<title>分支的选则</title>
+<body>
+
+<p>
+你可以用ACCEPT_KEYWORDS变量改变默认的系统分支。此变量的默认设置为你的电脑体系结构
+的稳定分支。更多关于Gentoo分支的信息可以在下一章节找到。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Portage的特性</title>
+<body>
+
+<p>
+你可以通过FEATURES变量激活Portage的某个特性。这些已在前面的章节中讨论过，如<uri
+link="?part=2&amp;chap=3">Portage的特性</uri>.
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>Portage的行为</title>
+<subsection>
+<title>资源管理</title>
+<body>
+
+<p>
+通过PORTAGE_NICENESS变量，你可以增加或减少Portage运行时
+的nice值。PORTAGE_NICENESS变量的值会被<e>加到</e>目前的nice值上。
+</p>
+
+<p>
+更多关于nice值的信息, 请参考nice的手册页:
+</p>
+
+<pre caption="更多关于nice的信息">
+$ <i>man nice</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>输出行为</title>
+<body>
+
+<p>
+NOCLOR变量的默认值为“false”，如果你想禁用Portage的彩色输出，请把这个变量设
+为“true”。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

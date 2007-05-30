@@ -1,0 +1,727 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-disk.xml,v 1.23 2006/11/02 20:49:38 nightmorph Exp $ -->
+
+<sections>
+
+<version>7.1</version>
+<date>2006-11-02</date>
+
+<section>
+<title>块设备介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，包括Linux文件系统、
+分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和
+文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示
+第一块SCSI硬盘的<path>/dev/sda</path>。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行
+交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连
+续的、可随机访问的512字节大小的块来访问。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分片</title>
+<body>
+
+<p>
+尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不
+这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。在Aplha系统中，这
+些小块设备称为<e>分片</e>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>默认分区方案</title>
+<body>
+
+<p>
+我们使用以下分片布局作为例子：
+</p>
+
+<table>
+<tr>
+  <th>分片</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>Swap分片</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>Root分片</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>整个磁盘（必需）</ti>
+</tr>
+</table>
+
+
+<p>
+如果你想知道一个分区应该多大，或者你需要多少个分区，继续阅读。否则请阅读<uri 
+link="#fdisk_SRM">使用fdisk来为你的磁盘分区（SRM）</uri>或<uri 
+link="#fdisk_ARC">使用fdisk来为你的磁盘分区（ARC/AlphaBIOS）</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>多少和多大？</title>
+<body>
+
+<p>
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你
+的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。
+如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮
+件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统
+性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都
+安装在那。理由也与<path>/home</path>目录类似：安全与备份。你一定要
+使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，
+而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+</p>
+
+<p>
+正如你所看到的，这完全取决于你想要达到什么目的。独立的分区或卷有以下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每一个分区或卷选择最佳性能的文件系统
+</li>
+<li>
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间都用完
+</li>
+<li>
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势在多磁盘系统上比多分区系统上更为明显）
+</li>
+<li>
+  通过对一些分区进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式的挂载，安全性会大大增强
+</li>
+</ul>
+
+<p>
+然而，多分区系统有一大缺点：如果配置得不合理，可能导致系统中一个分区有很大的
+空闲空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="fdisk_SRM">
+<title>使用fdisk来为你的磁盘分区（SRM）</title>
+<subsection>
+<body>
+
+<p>
+下面来解释如何创建前面说明的那个示例分片布局，即：
+</p>
+
+<table>
+<tr>
+  <th>分片</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>Swap分片</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>Root分片</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>整个磁盘（必须）</ti>
+</tr>
+</table>
+
+<p>
+根据你自己的喜好来改变分片布局。
+</p>
+
+
+</body>
+</subsection>
+<subsection>
+<title>识别可用的磁盘</title>
+<body>
+
+<p>
+使用以下命令来查看哪些磁盘正在运行：
+</p>
+
+<pre caption="识别可用的磁盘">
+# <i>dmesg | grep 'drive$'</i>        <comment>（IDE磁盘）</comment>
+# <i>dmesg | grep 'scsi'</i>          <comment>（SCSI磁盘）</comment>
+</pre>
+
+<p>
+你可以从这个命令的输出中看出检测到了哪些磁盘以及它们对应的<path>/dev</path>条目。在接下来的部分中我们假定这是一个<path>/dev/sda</path>上的SCSI磁盘。
+</p>
+
+<p>
+现在启动<c>fdisk</c>：
+</p>
+
+<pre caption="启动fdisk">
+# <i>fdisk /dev/sda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>删除所有分片</title>
+<body>
+
+<p>
+如果是个完全空白的硬盘，那么你必须首先创建一个BSD磁盘标签。
+</p>
+
+<pre caption="创建一个BSD磁盘标签">
+Command (m for help): <i>b</i>
+/dev/sda contains no disklabel.
+Do you want to create a disklabel? (y/n) <i>y</i>
+<comment>这里将列出一组驱动器相关信息</comment>
+3 partitions:
+#       start       end      size     fstype   [fsize bsize   cpg]                                    
+  c:        1      5290*     5289*    unused        0     0
+</pre>
+
+<p>
+一开始我们先删除<e>除了</e>‘c’分片（使用BSD磁盘标签时必须的）之外的所有分片。接下来的命令显示如何删除一个分片（我们用‘a’作为例子）。重复这个步骤以删除所有其它分片（再次提醒，除了‘c’分片）。
+</p>
+
+<p>
+使用<c>p</c>查看现有的全部分片。<c>d</c>用来删除一个分片。
+</p>
+
+<pre caption="删除一个分片">
+BSD disklabel command (m for help): <i>p</i>
+
+8 partitions:
+#       start       end      size     fstype   [fsize bsize   cpg]                                    
+  a:        1       235*      234*    4.2BSD     1024  8192    16
+  b:      235*      469*      234*      swap
+  c:        1      5290*     5289*    unused        0     0
+  d:      469*     2076*     1607*    unused        0     0
+  e:     2076*     3683*     1607*    unused        0     0
+  f:     3683*     5290*     1607*    unused        0     0
+  g:      469*     1749*     1280     4.2BSD     1024  8192    16
+  h:     1749*     5290*     3541*    unused        0     0
+
+BSD disklabel command (m for help): <i>d</i>
+Partition (a-h): <i>a</i>
+</pre>
+
+<p>
+完成所有分片的删除步骤之后，显示的列表将类似下面这样：
+</p>
+
+<pre caption="查看一个空的模式">
+BSD disklabel command (m for help): <i>p</i>
+
+3 partitions:
+#       start       end      size     fstype   [fsize bsize   cpg]                                    
+  c:        1      5290*     5289*    unused        0     0
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建Swap分片</title>
+<body>
+
+<p>
+基于Alpha的系统不需要单独的启动分区。不过，不能使用第一个柱面，因为<c>aboot</c>映像文件要装在那里。
+</p>
+
+<p>
+我们从第三个柱面开始创建swap分片，总大小为1GB。使用<c>n</c>来创建一个新的分片。创建好之后，将它的类型改为<c>1</c>（一），代表<e>swap</e>。
+</p>
+
+<pre caption="创建swap分片">
+BSD disklabel command (m for help): <i>n</i>
+Partition (a-p): <i>a</i>
+First cylinder (1-5290, default 1): <i>3</i>
+Last cylinder or +size or +sizeM or +sizeK (3-5290, default 5290): <i>+1024M</i>
+
+BSD disklabel command (m for help): <i>t</i>
+Partition (a-c): <i>a</i>
+Hex code (type L to list codes): <i>1</i>
+</pre>
+
+<p>
+完成这些步骤之后，你将看到一个类似下面的布局：
+</p>
+
+<pre caption="创建swap分片之后的布局">
+BSD disklabel command (m for help): <i>p</i>
+
+3 partitions:
+#       start       end      size     fstype   [fsize bsize   cpg]                                    
+  a:        3      1003      1001       swap
+  c:        1      5290*     5289*    unused        0     0
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建Root分片</title>
+<body>
+
+<p>
+现在我们将从swap分片<e>之后</e>的第一个柱面开始创建root分片。使用<c>p</c>命令查看swap分片结束的位置。我们的示例中是在1003，因此root分区从1004开始。
+</p>
+
+<p>
+还有一个问题是当前版本的<c>fdisk</c>存在一个bug，它认为的可用柱面数比实际的柱面数大一。换言之，你要将最后一个柱面的数值（本例中为：5290）减一。
+</p>
+
+<p>
+创建好root分区后，将它的类型改为<c>8</c>，代表<e>ext2</e>。
+</p>
+
+<pre caption="创建root分片">
+D disklabel command (m for help): <i>n</i>
+Partition (a-p): <i>b</i>
+First cylinder (1-5290, default 1): <i>1004</i>
+Last cylinder or +size or +sizeM or +sizeK (1004-5290, default 5290): <i>5289</i>
+
+BSD disklabel command (m for help): <i>t</i>
+Partition (a-c): <i>b</i>
+Hex code (type L to list codes): <i>8</i>
+</pre>
+
+<p>
+现在你的分片布局应该类似下面这样：
+</p>
+
+<pre caption="查看分片布局">
+BSD disklabel command (m for help): <i>p</i>
+
+3 partitions:
+#       start       end      size     fstype   [fsize bsize   cpg]                                    
+  a:        3      1003      1001       swap
+  b:     1004      5289      4286       ext2
+  c:        1      5290*     5289*    unused        0     0
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>保存分片布局并退出</title>
+<body>
+
+<p>
+输入<c>w</c>，保存<c>fdisk</c>操作。这同时也保存了分片布局。
+</p>
+
+<pre caption="保存并退出fdisk">
+Command (m for help): <i>w</i>
+</pre>
+
+<p>
+现在分片已经创建完毕，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="fdisk_ARC">
+<title>使用fdisk来为你的磁盘分区（ARC/AlphaBIOS）</title>
+<subsection>
+<body>
+
+<p>
+下面解释如何使用前面说明的那个布局来给磁盘分区，即：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>根分区</ti>
+</tr>
+</table>
+
+<p>
+根据你自己的喜好来改变分区布局。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>识别可用的磁盘</title>
+<body>
+
+<p>
+使用以下命令来查看哪些磁盘正在运行：
+</p>
+
+<pre caption="识别可用的磁盘">
+# <i>dmesg | grep 'drive$'</i>        <comment>（IDE磁盘）</comment>
+# <i>dmesg | grep 'scsi'</i>          <comment>（SCSI磁盘）</comment>
+</pre>
+
+<p>
+你可以从这个命令的输出中看出检测到了哪些磁盘以及它们对应的<path>/dev</path>条目。在接下来的部分中我们假定这是一个<path>/dev/sda</path>上的SCSI磁盘。
+</p>
+
+<p>
+现在启动<c>fdisk</c>：
+</p>
+
+<pre caption="启动fdisk">
+# <i>fdisk /dev/sda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>删除所有分区</title>
+<body>
+
+<p>
+如果是个完全空白的硬盘，那么你必须首先创建一个DOS磁盘标签。
+</p>
+
+<pre caption="创建一个DOS磁盘标签">
+Command (m for help): <i>o</i>
+Building a new DOS disklabel.
+</pre>
+
+<p>
+一开始我们先删除所有分区。接下来的命令显示如何删除一个分区（我们用‘1’作为例子）。重复这个步骤以删除所有其它分区。
+</p>
+
+<p>
+使用<c>p</c>查看现有的全部分区。<c>d</c>用来删除一个分区。
+</p>
+
+<pre caption="删除一个分区">
+command (m for help): <i>p</i>
+
+Disk /dev/sda: 9150 MB, 9150996480 bytes
+64 heads, 32 sectors/track, 8727 cylinders
+Units = cylinders of 2048 * 512 = 1048576 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1         478      489456   83  Linux
+/dev/sda2             479        8727     8446976    5  Extended
+/dev/sda5             479        1433      977904   83  Linux Swap
+/dev/sda6            1434        8727     7469040   83  Linux
+
+command (m for help): <i>d</i>
+Partition number (1-6): <i>1</i>
+</pre>
+
+
+</body>
+</subsection>
+<subsection>
+<title>创建启动分区</title>
+<body>
+
+<p>
+使用MILO引导的Alpha系统必须创建一个较小的vfat格式的启动分区。
+</p>
+
+<pre caption="创建启动分区">
+Command (m for help): <i>n</i>
+Command action
+  e   extended
+  p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>1</i>
+First cylinder (1-8727, default 1): <i>1</i>
+Last cylinder or +size or +sizeM or +sizeK (1-8727, default 8727): <i>+16M</i>
+
+Command (m for help): <i>t</i>
+Selected partition 1
+Hex code (type L to list codes): <i>6</i>
+Changed system type of partition 1 to 6 (FAT16)
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建交换分区</title>
+<body>
+
+<p>
+我们从第三个柱面开始创建交换分区，总大小为1GB。使用<c>n</c>来创建一个新的分区。
+</p>
+
+<pre caption="创建交换分区">
+Command (m for help): <i>n</i>
+Command action
+  e   extended
+  p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>2</i>
+First cylinder (17-8727, default 17): <i>17</i>
+Last cylinder or +size or +sizeM or +sizeK (17-8727, default 8727): <i>+1000M</i>
+
+Command (m for help): <i>t</i>
+Partition number (1-4): <i>1</i>
+Hex code (type L to list codes): <i>82</i>
+Changed system type of partition 2 to 82 (Linux swap)
+</pre>
+
+<p>
+完成这些步骤之后，你将看到一个类似下面的布局：
+</p>
+
+<pre caption="创建交换分区后的分区列表">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 9150 MB, 9150996480 bytes
+64 heads, 32 sectors/track, 8727 cylinders
+Units = cylinders of 2048 * 512 = 1048576 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1          16       16368    6  FAT16
+/dev/sda2              17         971      977920   82  Linux swap
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建根分区</title>
+<body>
+
+<p>
+现在我们创建根分区。同样，使用<c>n</c>命令即可。
+</p>
+
+<pre caption="创建根分区">
+Command (m for help): <i>n</i>
+Command action
+  e   extended
+  p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>3</i>
+First cylinder (972-8727, default 972): <i>972</i>
+Last cylinder or +size or +sizeM or +sizeK (972-8727, default 8727): <i>8727</i>
+</pre>
+
+<p>
+完成这些步骤之后，你将看到一个类似下面的布局：
+</p>
+
+<pre caption="创建根分区后的分区列表">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 9150 MB, 9150996480 bytes
+64 heads, 32 sectors/track, 8727 cylinders
+Units = cylinders of 2048 * 512 = 1048576 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1          16       16368    6  FAT16
+/dev/sda2              17         971      977920   82  Linux swap
+/dev/sda3             972        8727     7942144   83  Linux
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>保存分区布局并退出</title>
+<body>
+
+<p>
+输入<c>w</c>，保存<c>fdisk</c>操作。这同时也保存了分区布局。
+</p>
+
+<pre caption="保存并退出fdisk">
+Command (m for help): <i>w</i>
+</pre>
+
+<p>
+现在分区已经创建完毕，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你的分区已经创建完了，现在可以在上面安装文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+有几种文件系统是可以使用的。其中大多数在Alpha架构上是稳定的。
+</p>
+
+<note>
+<c>aboot</c>仅支持从这些分区启动： <b>ext2</b>和<b>ext3</b>分区。
+</note>
+
+<p>
+<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味着在启动系统时的ext2文件系统的日常检查相当耗时。现在有相当一部分新一代的日志文件系统可供选择，它们可以非常迅速地检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志功能，目的是为了快速恢复数据，以及其他的增强日志模式，如全数据和有序数据日志。它使用了哈希B*-树索引，在几乎所有的情况下都能保持高性能。目前，ext3是非常好且可靠的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是基于B*-树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种极其便于使用且具有元数据日志的文件系统。它坚固且不仅是可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+</p>
+
+<p>
+<b>XFS</b>是一种带元数据日志的文件系统，它带有一个健壮特性集，并且对可测量性进行了优化。我们仅推荐当你使用带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统的时候才使用这个文件系统。因为XFS会主动地在内存中缓存传输数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘的时候未做足准备措施的程序，且这种程序相当多）可能会丢失大量数据。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了，但是目前还没有足够的相关记录来对其一般稳定性做出积极或消极的评价。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>在分区上应用文件系统</title>
+<body>
+
+<p>
+要在分区或卷上创建文件系统，对于每种可能的文件系统都有专门的工具。
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+例如，要使根分区（本例中的<path>/dev/sda2</path>）为ext3，应该这样做：
+</p>
+
+<pre caption="在分区上应用文件系统">
+# <i>mke2fs -j /dev/sda2</i>
+</pre>
+
+<p>
+现在在你新建的分区（或逻辑卷）上创建文件系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区标志">
+# <i>mkswap /dev/sda1</i>
+</pre>
+
+<p>
+使用<c>swapon</c>命令来激活交换分区：
+</p>
+
+<pre caption="激活交换分区">
+# <i>swapon /dev/sda1</i>
+</pre>
+
+<p>
+使用上面提到的命令来创建和激活交换分区。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区都已经初始化了，并且安装了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令进行挂载。别忘记为每个你创建的分区建立所需的挂载目录。作为例子，我们来挂载根分区和启动分区：
+</p>
+
+<pre caption="挂载分区">
+# <i>mount /dev/sda2 /mnt/gentoo</i>
+</pre>
+
+<note>
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+</note>
+
+<p>
+我们还需要在<path>/proc</path>目录上挂载proc文件系统（内核的虚拟接口）。但是，我们首先需要把我们的文件放到分区上。
+</p>
+
+<p>
+请继续阅读<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>。
+</p>
+
+</body>
+</section>
+</sections>

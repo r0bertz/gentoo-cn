@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-advanced.xml,v 1.13 2006/10/28 09:17:55 neysx Exp $ -->
+
+<sections>
+
+<abstract>
+这里，我们将学习这些配置是如何起作用的——对于将来学习模块化网络来说，这是必不可少
+的知识。
+</abstract>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>高级配置</title>
+<body>
+
+<p>
+<c>config_eth0</c>变量是一个网络接口配置的核心。它包含了一组用来配置接口的高级指
+令列表（我们用<c>eth0</c>作为示例）。指令列表中的每一条命令都是顺序执行的。该列表
+中只要至少有一条命令正常工作，则这个网络接口就被认为是可以使用的。
+</p>
+
+<p>
+这里列出了一些可用的指令。
+</p>
+
+<table>
+<tr>
+  <th>命令</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>null</c></ti>
+  <ti>不做任何事</ti>
+</tr>
+<tr>
+  <ti><c>noop</c></ti>
+  <ti>
+    如果网络接口已经开启并且也绑定好地址的话，则中止配置过程，配置成功。
+  </ti>
+</tr>
+<tr>
+  <ti>一个IPv4或是IPv6的地址</ti>
+  <ti>绑定地址到接口上</ti>
+</tr>
+<tr>
+  <ti>
+    <c>dhcp</c>、<c>adsl</c>或<c>apipa</c>（或者一个第三方模块提供的自定义命令）
+  </ti>
+  <ti>
+    运行提供这些命令的模块，例如<c>dhcp</c>这个命令会运行一个提供DHCP功能的模块，
+    它可能是<c>dhcpcd</c>、<c>udhcpc</c>、<c>dhclient</c>或者<c>pump</c>中的一
+    个。
+  </ti>
+</tr>
+</table>
+
+<p>
+如果一条命令执行失败，你可以指定一条fallback指令。这条fallback指令必须完全符合配
+置的结构。
+</p>
+
+<p>
+你可以连在一起使用这些指令，下面是一些真实应用的例子。
+</p>
+
+<pre caption="配置示例">
+<comment># 加上三个IPv4的地址</comment>
+config_eth0=(
+  "192.168.0.2/24"
+  "192.168.0.3/24"
+  "192.168.0.4/24"
+)
+
+<comment># 加上一个IPv4的地址和两个IPv6的地址</comment>
+config_eth0=(
+  "192.168.0.2/24"
+  "4321:0:1:2:3:4:567:89ab"
+  "4321:0:1:2:3:4:567:89ac"
+)
+
+<comment># 保持使用内核分配的地址，除非网络接口没有启动。如果是这样则改用DHCP获
+#取。如果DHCP失败的话则由APIPA指定一个网络地址。</comment>
+config_eth0=(
+  "noop"
+  "dhcp"
+)
+fallback_eth0=(
+  "null"
+  "apipa"
+)
+</pre>
+
+<note>
+当你使用的是<c>ifconfig</c>模块并且绑定了一个以上的网络地址，系统会为每一个网络地
+址建立一个别名。在上面的两个例子中你将会得到这几个网络接
+口：<c>eth0</c>、<c>eth0:1</c>和<c>eth0:2</c>。由于内核和其他程序会
+把<c>eth0:1</c>和<c>eth0:2</c>看作<c>eth0</c>，所以你将无法对这些接口做什么特殊的事情。
+</note>
+
+<impo>
+fallback中的顺序相当重要！如果我们没有指定<c>null</c>选项，那么<c>apipa</c>只会
+在<c>noop</c>命令失败后才会执行。
+</impo>
+
+<note>
+<uri link="?part=4&amp;chap=3#apipa">APIPA</uri>和<uri
+link="?part=4&amp;chap=3#dhcp">DHCP</uri>稍后会讨论。
+</note>
+
+</body>
+</section>
+<section>
+<title>网络依赖性</title>
+<body>
+
+<p>
+<path>/etc/init.d</path>中的初始化脚本可能依赖于某个特定的网络接口或只是net服
+务。可以通过定义在<path>/etc/conf.d/rc</path>中的<c>RC_NET_STRICT_CHKING</c>这个
+变量，来使<c>net</c>代表不同的意思。
+</p>
+
+<table>
+<tr>
+  <th>值</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>none</c></ti>
+  <ti>系统始终认为<path>net</path>服务已经启动了</ti>
+</tr>
+<tr>
+  <ti><c>no</c></ti>
+  <ti>
+    这是说除了<path>net.lo</path>之外，至少还需要再启动一个<path>net.*</path>服务
+    。同时拥有WIFI网络和静态NIC网络的笔记本用户可使用这个值。对他们来说某一时间只    要有一个网络接口启动，那么net服务就应被视为启动了。
+  </ti>
+</tr>
+<tr>
+  <ti><c>lo</c></ti>
+  <ti>
+    这和<c>no</c>选项相同，不过就是把<path>net.lo</path>也考虑在内了。它对那些不
+    怎么在意在系统启动时哪个网络接口会被启动的用户很有用。
+  </ti>
+</tr>
+<tr>
+  <ti><c>yes</c></ti>
+  <ti>
+    所有的网络接口都启动后，net服务才算启动。
+  </ti>
+</tr>
+</table>
+
+<p>
+可是需要依赖<path>net.eth0</path>和<path>net.eth1</path>的<path>net.br0</path>应
+该怎么处理呢？<path>net.eth1</path>可能是一个无线网络或是一个PPP设备，且需要在桥
+接前先设定好。这不能在<path>/etc/init.d/net.br0</path>中定义，因为它只是一个
+到<path>net.lo</path>的符号连接。
+</p>
+
+<p>
+答案是在<path>/etc/conf.d/net</path>里定义一个自己的<c>depend()</c>函数。
+</p>
+
+<pre caption="/etc/conf.d/net中net.br0的依赖关系">
+<comment># 你可以使用目前脚本里能用的任何依赖关系（use、after、before）</comment>
+depend_br0() {
+  need net.eth0 net.eth1
+}
+</pre>
+
+<p>
+要获得更多关于依赖性的讨论。请参考Gentoo手册中的这一节<uri 
+link="?part=2&amp;chap=4#doc_chap4">撰写初始化脚本</uri> 
+</p>
+
+</body>
+</section>
+
+<section id="variable_name">
+<title>变量名称和值</title>
+<body>
+
+<p>
+变量的名称是动态的，它们通常的结构是<c>variable_${interface|mac|essid|apmac}</c>
+。例如<c>dhcpcd_eth0</c>变量代表eth0的dhcpcd命令参数。而<c>dhcpcd_essid</c>变量代
+表连接到ESSID为"essid"的AP的网络接口的dhcpcd命令参数。
+</p>
+
+<p>
+不过，没有什么强制性的和快速的标准规定了网络接口名称必须是ethx。事实上，许多无线
+网络接口除了使用ethx之外，也会使用类似于wlanx、rax之类的名称。而且一些用户自定义
+的网络接口（比如网桥接口）可以被命名为任何名字（比如 foo）。更有趣的是，无线网络
+接入点可以在ESSID中使用非英文字符或数字字符——这一点很重要，因为你可以为每一
+个ESSID设定网络参数。
+</p>
+
+<p>
+不幸的是Gentoo在网络设定方面使用的是bash的变量名——而bash不能使用数字、英文字母之
+外的任何字符。为了突破这样的一个限制，我们把所有除数字、英文字母之外的字符
+用<c>_</c>字符表示。
+</p>
+
+<p>
+bash的另一个问题是变量的内容——一些字符需要转义。这可以通过在需要转义的字符前面
+加<c>\</c>来解决。下面列出的是需要转义的字符列表：<c>"</c>、<c>'</c>和<c>\</c>。
+</p>
+
+<p>
+在这个例子中，我们使用无线网络ESSID，因为它可以包含的字符范围最广。我们使
+用<c>My "\ NET</c>这个ESSID：
+</p>
+
+<pre caption="变量名示例">
+<comment># 这样确实可以传递域名，但是域名的值是非法的</comment>
+dns_domain_My____NET="My \"\\ NET"
+
+<comment># 上面的例子是当一块无线网卡连接到ESSID为My "\ NET的无线接入点时
+# 把dns域名设置为My "\NET </comment>
+</pre>
+
+</body>
+</section>
+</sections>

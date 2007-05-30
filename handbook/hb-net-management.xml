@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-management.xml,v 1.8 2006/10/28 09:17:55 neysx Exp $ -->
+
+<sections>
+
+<abstract>
+本章是为笔记本电脑用户和频繁切换网络的用户准备的。
+</abstract>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>网络管理</title>
+<body>
+
+<p>
+如果你经常移动你的电脑，你可能会遇到没有网线和没有插入网线或者没有无线网络可用的
+情况。你也许希望在插入网线或无线网络可用时网络能够自动连上。
+</p>
+
+<p>
+在这里你可以找到帮助你实现这个功能的一些工具。
+</p>
+
+<note>
+本章只介绍<c>ifplugd</c>，但还有一些工具如<c>quickswitch</c>可供选择。
+</note>
+
+</body>
+</section>
+<section>
+<title>ifplugd</title>
+<body>
+
+<p>
+<uri link="http://0pointer.de/lennart/projects/ifplugd/">ifplugd</uri>是一个
+在插入或拔出网线时启动或停止网络连接的程序。它也可以检测你的无线网卡和AP的关联，
+或者是在AP进入范围时检测。
+</p>
+
+<pre caption="安装ifplugd">
+# <i>emerge sys-apps/ifplugd</i>
+</pre>
+
+<p>
+ifplugd的配置相当简单。配置文件放置在<path>/etc/conf.d/ifplugd</path>中。
+运行<c>man ifplugd</c>以获得详细的变量信息。
+</p>
+
+<pre caption="ifplug设置范例">
+<comment># 设定要监视的网络接口</comment>
+INTERFACES="eth0"
+
+AUTO="no"
+BEEP="yes"
+IGNORE_FAIL="yes"
+IGNORE_FAIL_POSITIVE="no"
+IGNORE_RETVAL="yes"
+POLL_TIME="1"
+DELAY_UP="0"
+DELAY_DOWN="0"
+API_MODE="auto"
+SHUTDOWN="no"
+WAIT_ON_FORK="no"
+MONITOR="no"
+ARGS=""
+
+<comment>
+# 某个网络接口上ifplugd的额外参数。
+# 注意为某个接口设置这样的变量后，全局变量将被忽略。</comment>
+MONITOR_wlan0="yes"
+DELAY_UP_wlan0="5"
+DELAY_DOWN_wlan0="5"
+</pre>
+
+</body>
+</section>
+
+</sections>

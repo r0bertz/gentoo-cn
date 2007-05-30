@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-kernel.xml,v 1.2 2006/09/02 09:00:59 vapier Exp $ -->
+
+<sections>
+
+<version>7.1</version>
+<date>2006-08-30</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设您要用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。 
+</p>
+
+<p>
+对于ARM系统，可用的内核有<c>vanilla-sources</c>（默认的内核源码，在<uri link="http://kernel.org/">kernel.org</uri>上发布）和<c>gentoo-sources</c>（包含额外的补丁，加强性能和稳定性）。
+</p>
+
+<p>
+选择您的内核源码并且用<c>emerge</c>命令安装它。<c>USE="-doc"</c>用来避免您现在就安装xorg-x11或者其他的从属包。<c>USE="symlink"</c>对于一个全新安装来说并不是必须的。但是，请确定你创建了<path>/usr/src/linux</path>的符号连接。
+</p>
+
+<pre caption="安装内核源码">
+# <i>USE="-doc symlink" emerge gentoo-sources</i>
+</pre>
+
+<p>
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码是<c>gentoo-sources-<keyval id="kernel-version"/></c>。您的版本可能有所不同，所以请你记住它。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section id="manual">
+<title>缺省：手动配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——但是当您手动配置几次内核之后，您就不会再觉得它有多么难了。;)
+</p>
+
+<p>
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在非chroot的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。
+</p>
+
+<p>
+现在进入到您的内核目录并且执行<c>make menuconfig</c>。这将会启动一个基于ncureses的配置菜单。
+</p>
+
+<pre caption="开始menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者根本不能运行）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>必须启用的选项</title>
+<body>
+
+<p>
+鉴于嵌入设备的特殊属性，我们将在这里介绍已知的arm板配置。如果您的机器不在列表中，那么您应当访问相关的社区站点，搜询如何正确配置您的内核。
+</p>
+
+<p>
+不管您的机器是哪一种，都应当确保开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
+</p>
+
+<pre caption="选择General setup下的experimental code/drivers">
+Code maturity level options ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+请从以下列表中选择您的机器来进入配置章节。
+</p>
+
+<ul>
+ <li><uri link="#netwinder">NetWinder</uri></li>
+</ul>
+
+</body>
+</subsection>
+</section>
+<section id="netwinder">
+<title>NetWinder配置选项</title>
+<body>
+
+<p>
+记住启动分区需要EXT2支持，因为那是引导程序唯一能从中读取到可靠数据的文件系统。另外，EXT3是唯一已测试过的文件系统，您可以和其他玩家一起试用;)。
+</p>
+
+<pre caption="NetWinder配置选项">
+<comment>首先声称一个默认配置</comment>
+# <i>make netwinder_defconfig</i>
+
+<comment>必须启用的选项</comment>
+System Type ---&gt;
+  ARM system type (FootBridge) ---&gt;
+    (X) FootBridge
+  Footbridge Implementations ---&gt;
+    [*] NetWinder
+
+Floating point emulation ---&gt;
+  [*] NWFPE math emulation
+
+File systems ---&gt;
+  [*] Second extended fs support
+  Pseudo Filesystems ---&gt;
+    [*] /proc file system support
+    [*] Virtual memory file system support (former shm fs)
+
+Device Drivers ---&gt;
+  ATA/ATAPI/MFM/RLL support ---&gt;
+    [*] ATA/ATAPI/MFM/RLL support
+    [*]   Enhanced IDE/MFM/RLL disk/cdrom/tape/floppy support
+    [*]     Include IDE/ATA-2 DISK support
+    ---     IDE chipset support/bugfixes
+    [*]     PCI IDE chipset support
+    [*]       Winbond SL82c105 support
+    [*]       Generic PCI bus-master DMA support
+    [*]         Use PCI DMA by default when available
+
+  Network device support ---&gt;
+    [*] Network device support
+    Ethernet (10 or 100Mbit) ---&gt;
+      [*] Ethernet (10 or 100Mbit)
+      Tulip family network device support ---&gt;
+        [*] "Tulip" family network device support
+        [*]   DECchip Tulip (dc2114x) PCI support
+        [*]     Use PCI shared mem for NIC registers
+        [*]     Use NAPI RX polling
+      [*] EISA, VLB, PCI and on board controllers
+      [*]   PCI NE2000 and clones support
+
+  Character devices ---&gt;
+    Serial drivers ---&gt;
+      [*] 8250/16550 and compatible serial support
+      [*]   Console on 8250/16550 and compatible serial port
+      --- Non-8250 serial port support
+      [*] DC21285 serial port support
+      [*]   Console on DC21285 serial port
+    Watchdog Cards ---&gt;
+      [*] Watchdog Timer Support
+      [*]   NetWinder WB83C977 watchdog
+    [*] NetWinder thermometer support
+    [*] NetWinder Button
+    [*]   Reboot Using Button
+
+<comment>推荐的选项</comment>
+Kernel Features ---&gt;
+  [*] Preemptible Kernel
+  [*] Timer and CPU usage LEDs
+  [*]   CPU usage LED
+
+File systems ---&gt;
+  [*] Ext3 journalling file system support
+
+Device Drivers ---&gt;
+  Input device support ---&gt;
+    [*] Keyboards ---&gt;
+      [*] AT keyboard
+    [*] Mouse ---&gt;
+      [*] PS/2 mouse
+
+  Graphics support ---&gt;
+    [*] Support for frame buffer devices
+    [*]   Enable firmware EDID
+    [*]   CyberPro 2000/2010/5000 support
+    Logo configuration ---&gt;
+      [*] Bootup logo
+      [*]   Standard 224-color Linux logo
+
+  Sound ---&gt;
+    [*] Sound card support
+    Open Sound System ---&gt;
+      [*] Open Sound System
+      [*]   OSS sound modules
+      [*]     Yamaha FM synthesizer (YM3812/OPL-3) support
+      [*]     Netwinder WaveArtist
+
+<comment>只有当您升级闪存的时候才必须开启这个选项</comment>
+Device Drivers ---&gt;
+  Character devices ---&gt;
+    [*] NetWinder flash support
+</pre>
+
+<p>
+当您完成了内核配置，点击<uri link="#compiling">编译与安装</uri>。
+</p>
+
+</body>
+</section>
+<section id="compiling">
+<title>编译与安装</title>
+<body>
+
+<p>
+既然现在您的内核已经配置成功了，那么就是时候编译并且安装它了。退出配置界面并且开启编译进程：
+</p>
+
+<pre caption="编译内核">
+# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<p>
+当内核编译完成，复制内核映像到<path>/boot</path>。给您所选的内核映像定个恰当的名字并记住它，因为后面当您配置引导程序的时候还要用到它。记得替换<c><keyval id="kernel-name"/></c>为您的内核名字和版本。
+</p>
+
+<pre caption="安装内核">
+# <i>cp vmlinux.gz /boot/<keyval id="kernel-name"/></i>
+</pre>
+
+<p>
+现在请从<uri link="#kernel_modules">内核模块</uri>继续。
+</p>
+
+</body>
+</section>
+<section id="kernel_modules">
+<title>内核模块</title>
+<subsection>
+<title>配置内核模块</title>
+<body>
+
+<p>
+您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记置换<c><keyval id="kernel-version"/></c>为您刚刚编译的内核的版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/<keyval id="kernel-version"/>/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>文件，输入模块的名字。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+3c59x
+</pre>
+
+<p>
+现在请从<uri link="?part=1&amp;chap=8">配置您的系统</uri>一章来继续您的安装。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

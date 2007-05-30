@@ -1,0 +1,309 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-working-特性.xml,v 1.34 2006/11/03 22:03:06 nightmorph Exp $ -->
+
+<sections>
+          
+<abstract>
+学习Portage所拥有的特性，比如对分布式编译的支持，以及ccache等等。
+</abstract>
+
+<version>1.30</version>
+<date>2006-11-03</date>
+
+<section>
+<title>Portage特性</title>
+<body>
+
+<p>
+Portage有几个附加的特性，它们能够令您的Gentoo之旅更加愉快。这些特性中的大多数
+依赖于某些能够提高性能、可靠性、安全性等的软件工具。
+</p>
+
+<p>
+为了打开或者关闭某一Portage特性您需要编辑<path>/etc/make.conf</path>中
+的<c>FEATURES</c>变量，这个变量包含不同的特性关键字，用空格分开。在一些情
+况下您可能还需要额外的安装被这个特性所依赖的工具。
+</p>
+
+<p>
+并不是所有Portage所支持的特性都在这里列出。完整的概述，请查
+阅<path>make.conf</path>手册页。
+</p>
+
+<pre caption="查阅make.conf手册页">
+$ <i>man make.conf</i>
+</pre>
+
+<p>
+查看特性的默认设置，运行<c>emerge --info</c>并且查找FEATURE变量或者
+用grep显示它：
+</p>
+
+<pre caption="找出已经被设定的特性">
+$ <i>emerge --info | grep FEATURE</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>分布式编译</title>
+<subsection>
+<title>使用distcc</title>
+<body>
+
+<p>
+<c>distcc</c>是一个分布式编译程序，可以把编译任务分配给同一网络中的不同机器，这
+些机器的配置不必完全相同。<c>distcc</c>客户端发送所有必须的信息给所有可利用
+的distcc服务器（运行<c>distccd</c>的机器）。这样它们每一个都能为客户端编译一部分
+源码。所导致的效果就是更短的编译时间。
+</p>
+
+<p>
+您可以在<uri link="/doc/zh_cn/distcc.xml">Gentoo Distcc
+文档</uri>里找到更多的关于<c>distcc</c>的信息（包括如何让它
+在Gentoo上工作）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装distcc</title>
+<body>
+
+<p>
+Distcc使用一个图形化监视器来监视您的机器发送出去的编译工作。如果您使用GNOME，那
+么将“gnome”放入您的<c>USE</c>设置中。但是，如果您不使用GNOME而仍然希望
+使用这个监视器，那么就把“gtk”放进您的<c>USE</c>设置中。
+</p>
+
+<pre caption="安装distcc">
+# <i>emerge distcc</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>激活Portage支持</title>
+<body>
+
+<p>
+添加<c>distcc</c>到<path>/etc/make.conf</path>之中的FEATURES变量。
+然后，设定您合意的MAKEOPTS变量。一个众所周知的参数是"-jX"，其中<c>X</c>为
+运行<c>distccd</c>主机（包含当前主机）的CPU数目加上一，但是您也可能用其他
+的数字来得到更好的结果。
+</p>
+
+<p>
+现在运行<c>distcc-config</c>并输入已有的DistCC服务器。作为一个简单例子，
+我们假设已有的DistCC服务器是<c>192.168.1.102</c>（当前主机）
+、<c>192.168.1.103</c>和<c>192.168.1.104</c>（两个远端服务器）：
+</p>
+
+<pre caption="配置Distcc，使用已有的三个DistCC服务器">
+# <i>distcc-config --set-hosts "192.168.1.102 192.168.1.103 192.168.1.104"</i>
+</pre>
+
+<p>
+当然，也不要忘了运行<c>distccd</c>系统服务：
+</p>
+
+<pre caption="开始Distcc系统服务">
+# <i>rc-update add distccd default</i>
+# <i>/etc/init.d/distccd start</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>缓冲编译结果</title>
+<subsection>
+<title>关于ccache</title>
+<body>
+
+<p>
+<c>ccache</c>是一个快速的编译器缓存。当您编译一个程序的时候，它会缓存中间的
+结果。这样，不论什么时候您重新编译同一个程序，编译所需要得时间将被大大缩短。
+对于普通的编译来说，这可以提高编译速度5到10倍。
+</p>
+
+<p>
+如果您对<c>ccache</c>的工作机制有兴趣，请访问<uri
+link="http://ccache.samba.org">ccache主页</uri>.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装ccache</title>
+<body>
+
+<p>
+要安装<c>ccache</c>，只需要运行<c>emerge ccache</c>:
+</p>
+
+<pre caption="安装ccache">
+# <i>emerge ccache</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>激活Portage支持</title>
+<body>
+
+<p>
+打开<path>/etc/make.conf</path>并添加<c>ccache</c>到FEATURES变量。
+然后添加一个新的变量CCACHE_SIZE并设置它为"2G":
+</p>
+
+<pre caption="在/etc/make.conf中设定CCACHE_SIZE">
+CCACHE_SIZE="2G"
+</pre>
+
+<p>
+要检查ccache是否运行，只需让它提供给您它的统计数据。因为Portage使用一个不
+同的ccache主目录，您需要设定<c>CCACHE_DIR</c>变量：
+</p>
+
+<pre caption="查看ccache统计数据">
+# <i>CCACHE_DIR="/var/tmp/ccache" ccache -s</i>
+</pre>
+
+<p>
+<path>/var/tmp/ccache</path>是Portage的默认ccache主目录；为了修改这
+个设置，您可以设定<path>/etc/make.conf</path>中的<c>CCACHE_DIR</c>参数。
+</p>
+
+<p>
+不过，如果您运行<c>ccache</c>，它使用的默认目录是<path>${HOME}/.ccache</path>。
+这就是为什么当您查询（Portage）ccache统计数据的时候您需要设定<c>CCACHE_DIR</c>参
+数的原因。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>非Portage C编译中使用ccache</title>
+<body>
+
+<p>
+如果您需要在非Portage编译中使用ccache，添加<path>/usr/lib/ccache/bin</path>到
+您PATH参数里靠前的位置（在<path>/usr/bin</path>之前）。这一点可以通过编辑在您用
+户主目录中的<path>.bash_profile</path>文件来实现。使
+用<path>.bash_profile</path>是定义PATH参数的一个方式.
+</p>
+
+<pre caption="编辑.bash_profile">
+PATH="<i>/usr/lib/ccache/bin</i>:/opt/bin"
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>二进制包支持</title>
+<subsection>
+<title>创建预编译包</title>
+<body>
+
+<p>
+Portage支持用预编译包安装。尽管Gentoo本身并不
+提供预编译包（除GRP快照之外），Portage依然能
+够处理预编译包。
+</p>
+
+<p>
+如果某个包已经被安装在您的系统上，您可以用<c>quickpkg</c>来创建一个预编译包。
+也可以用带有<c>--buildpkg</c>或<c>--buildpkgonly</c>选项的<c>emerge</c>命令。
+</p>
+
+<p>
+如果您希望Portage为您所安装的每一个单独的包创建预编译包，
+在FEATURES中添加<c>buildpkg</c>参数.
+</p>
+
+<p>
+预编译包的更多扩展支持可以用<c>catalyst</c>得到。关于catalyst的更多信息请
+参阅<uri link="/proj/zh_cn/releng/catalyst/2.x/reference.xml">Catalyst参考手
+册</uri>以及<uri link="/proj/zh_cn/releng/catalyst/faq.xml">Catalyst 
+FAQ</uri>.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装预编译包</title>
+<body>
+
+<p>
+尽管Gentoo并不提供，但是您可以自己建立一个“中心仓库”来存放预编译包。 
+如果您希望使用这个仓库，您需要设定PORTAGE_BINHOST参数使Portage
+能够知道它。例如，如果预编译包在ftp://buildhost/gentoo上：
+</p>
+
+<pre caption="在/etc/make.conf中设定PORTAGE_BINHOST参数">
+PORTAGE_BINHOST="ftp://buildhost/gentoo"
+</pre>
+
+<p>
+当您需要安装预编译包的时候，在emerge命令后的<c>--getbinpkg</c>选项旁加入
+<c>--usepkg</c>选项。前者让emerge命令从预定的服务器上下载预编译包，后者
+让emerge首先试图安装预编译包，如果预编译包不存在，那么才下载并编译源码。
+</p>
+
+<p>
+例如：用预编译包安装<c>gnumeric</c>
+</p>
+
+<pre caption="安装gnumeric的预编译包">
+# <i>emerge --usepkg --getbinpkg gnumeric</i>
+</pre>
+
+<p>
+关于emerge的预编译包的更多信息请参阅
+emerge手册页:
+</p>
+
+<pre caption="阅读emerge手册页">
+$ <i>man emerge</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>下载文件</title>
+<subsection>
+<title>并行下载</title>
+<body>
+
+<p>
+当您在编译一系列软件的时候，Portage能在编译某一个包的同时下载编译列表中后面的
+包的源码，这样就缩短了安装时间。如果您希望使用这种功能，添加
+“parallel-fetch”到您的FEATURES变量里。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Usersfetch</title>
+<body>
+
+<p>
+当您以root身份运行Portage，FEATURES="userfetch"可以让Portage在下载源码包
+的时候放弃root特权。这是一个小小的安全性的提高。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
+
+

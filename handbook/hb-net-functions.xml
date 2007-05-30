@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-functions.xml,v 1.9 2006/10/28 09:17:55 neysx Exp $ -->
+
+<sections>
+
+<abstract>
+如果你喜欢冒险的感觉，你可以在网络中加上自己的功能。
+</abstract>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>标准函数钩子</title>
+<body>
+
+<p>
+你可以定义4个函数，它们将会在<c>start</c>/<c>stop</c>操作前后被调用。这些函数将会
+以接口名称作为参数被调用，以便于一个函数可以控制多个适配器。
+</p>
+
+<p>
+<c>preup()</c>和<c>predown()</c>函数的返回值必须为0（成功），这意味着可以使一个网
+络接口进入配置状态或退出配置状态。如果<c>preup()</c>返回一个非0值，则网络接口配置
+过程将被中止。如果<c>predown()</c>返回一个非0值，则停止该网络接口运行的操作将被终
+止。
+</p>
+
+<p>
+<c>postup()</c>和<c>postdown()</c>函数的返回值会被忽略，因为就算它们返回失败，系
+统也没有什么可以做的。
+</p>
+
+<p>
+<c>${IFACE}</c>表示要打开/关闭的接口。<c>${IFVAR}</c>是<c>${IFACE}</c>转化而来的
+bash允许的变量名。
+</p>
+
+<pre caption="pre/post up/down函数范例">
+preup() {
+  <comment># 在打开接口之前先测试它的网络物理连接是否已连接上。这只在某些网络
+  # 适配器上有效，而且需要安装mii-diag包。</comment>
+  if mii-tool ${IFACE} 2> /dev/null | grep -q 'no link'; then
+    ewarn "No link on ${IFACE}, aborting configuration"
+    return 1
+  fi
+
+  <comment># 在打开接口之前先测试它的网络物理链接是否已连接上。这只在某些网络
+  # 适配器上有效，而且需要安装ethtool包。</comment>
+  if ethtool ${IFACE} | grep -q 'Link detected: no'; then
+    ewarn "No link on ${IFACE}, aborting configuration"
+    return 1
+  fi
+
+  <comment># 记得返回0以表示操作成功</comment>
+  return 0
+}
+
+predown() {
+  <comment># 脚本默认内容是测试根文件系统是否是NFS提供的。在此情况下系统是不会允
+  # 许你关闭接口的。注意，如果你定义了一个predown()函数，你就覆盖了这个逻辑。
+  # 如果你仍然需要它的话，请往下看……
+  </comment>
+  if is_net_fs /; then
+    eerror "root filesystem is network mounted -- can't stop ${IFACE}"
+    return 1
+  fi
+
+  <comment># 记得返回0以表示操作成功</comment>
+  return 0
+}
+
+postup() {
+  <comment># 这个函数可以被用来实现一些功能，比如注册一个动态DNS服务。
+  # 而另一个可能是在网络接口一启动时就开始传送/接收邮件。</comment>
+  return 0
+}
+
+postdown() {
+  <comment># 这个函数出现在这主要是为了完整性……我还没有想到任何可以用它来做的好玩的事情 ;-)</comment>
+  return 0
+}
+</pre>
+
+</body>
+</section>
+<section>
+<title>无线工具函数钩子</title>
+<body>
+
+<note>
+此功能不适用于WPA Supplicant──但是<c>${ESSID}</c>和<c>${ESSIDVAR}</c>变量
+在<c>postup()</c>函数中是可用的。
+</note>
+
+<p>
+你可以定义2个函数，它们将会在执行相关的操作前后被调用。这些函数将会以接口名称作为
+参数被调用，以便于一个函数可以控制多个适配器。
+</p>
+
+<p>
+<c>preassociate()</c>函数的返回值应该为0（成功），这意味着一个网络接口的配置或取
+消配置过程可以继续。如果<c>preassociate()</c>返回一个非0值，则网络接口的配置过程
+将被中止。
+</p>
+
+<p>
+<c>postassociate()</c>函数的返回值是被忽略的，因为就算它们返回失败，系统也没有什
+么可以做的。
+</p>
+
+<p>
+<c>${ESSID}</c>被设置为你所连接到的AP的ESSID。
+<c>${ESSIDVAR}</c>是<c>${ESSID}</c>转化而来的bash允许的变量名。
+</p>
+
+<pre caption="pre/post association functions">
+preassociate() {
+  <comment># 下面添加了两个配置变量leap_user_ESSID和leap_pass_ESSID。
+  # 当你已经连接的ESSID的这两个变量都被配置时，我们就执行CISCO LEAP脚本。
+  </comment>
+
+  local user pass
+  eval user=\"\$\{leap_user_${ESSIDVAR}\}\"
+  eval pass=\"\$\{leap_pass_${ESSIDVAR}\}\"
+
+  if [[ -n ${user} &amp;&amp; -n ${pass} ]]; then
+    if [[ ! -x /opt/cisco/bin/leapscript ]]; then
+      eend "For LEAP support, please emerge net-misc/cisco-aironet-client-utils"
+      return 1
+    fi
+    einfo "Waiting for LEAP Authentication on \"${ESSID//\\\\//}\""
+    if /opt/cisco/bin/leapscript ${user} ${pass} | grep -q 'Login incorrect'; then
+      ewarn "Login Failed for ${user}"
+      return 1
+    fi
+  fi
+
+  return 0
+}
+
+postassociate() {
+  <comment># 这个函数出现在这主要是为了完整性……我还没有想到任何可以用它来做的好玩的事情 ;-)</comment>
+
+  return 0
+}
+</pre>
+
+<note>
+<c>${ESSID}</c>和<c>${ESSIDVAR}</c>在<c>predown()</c>和<c>postdown()</c>函数中
+不可用。
+</note>
+
+</body>
+</section>
+
+</sections>

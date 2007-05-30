@@ -1,0 +1,416 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-stage.xml,v 1.3 2007/03/30 23:18:07 nightmorph Exp $ -->
+
+<sections>
+
+<version>7.1</version>
+<date>2006-10-31</date>
+
+<section>
+<title>安装一个Stage Tarball</title>
+<subsection>
+<title>正确设置日期／时间</title>
+<body>
+
+<p>
+在继续之前，你需要检查和更新系统日期／时间。未正确设置
+的时钟可能会在将来导致奇怪的结果！
+</p>
+
+<p>
+确认当前日期／时间，请运行<c>date</c>:
+</p>
+
+<pre caption="确认日期／时间">
+# <i>date</i>
+Fri Mar 29 16:21:18 UTC 2005
+</pre>
+
+<p>
+如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>命令
+（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，
+<b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设
+置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
+</p>
+
+<pre caption="设置UTC日期／时间">
+# <i>date 032916212005</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>使用Stage3文件</title>
+<body>
+
+<p>
+如果你已经配置好网络并打算下载一个适合你计算机架构的stage3，那么继续阅读
+<uri link="#download">备选：使用从网上下载的Stage3</uri>。
+否则的话请阅读<uri link="#available">默认：使用安装光盘里的Stage3</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="available">
+<title>默认：使用安装光盘里的Stage3</title>
+<subsection>
+<title>解开stage</title>
+<body>
+
+<p>
+stage文件的位置是在光盘的<path>/mnt/cdrom/stages</path>目录里。如果你想要查看可用
+的stage，请使用<c>ls</c>命令：
+</p>
+
+<pre caption="查看可用的stage">
+# <i>ls /mnt/cdrom/stages</i>
+</pre>
+
+<p>
+如果系统返回一个错误提示，你可能需要先挂载CD-ROM：
+</p>
+
+<pre caption="挂载CD-ROM">
+# <i>ls /mnt/cdrom/stages</i>
+ls: /mnt/cdrom/stages: No such file or directory
+# <i>mount /dev/cdroms/cdrom0 /mnt/cdrom</i>
+# <i>ls /mnt/cdrom/stages</i>
+</pre>
+
+<p>
+我们现在进入你Gentoo的挂载点（通常是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入目录/mnt/gentoo">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+现在我们来解开你所选择的stage tarball，使用的是<c>tar</c>这个工具。请确认你使
+用了同样的参数（<c>xvjpf</c>）。<c>x</c>参数代表<e>Extract</e>（解压缩）
+，<c>v</c>参数代表<e>Verbose</e>（可选参数，添加该参数后可以看到在解开tar包的过
+程中发生了些什么），<c>j</c>参数代表<e>使用bzip2解压缩</e>，<c>p</c>参数代
+表<e>Preserve permissiions</e>（保留权限），而<c>f</c>参数代表我们想要解开的是一个文件而不是来自于标准输入的数据。在接下来的一个例子里，我们将解
+开stage tarball<path>stage3-&lt;subarch&gt;-2006.1.tar.bz2</path>。请确保用你
+的stage文件名来替换我们给出的tarball文件名。
+</p>
+
+<pre caption="解开stage tarball">
+# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2006.1.tar.bz2</i>
+</pre>
+
+<p>
+现在stage已经安装好，下面我们继续<uri link="#installing_portage">安
+装Portage</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="download">
+<title>备选：使用从网上下载的Stage</title>
+<subsection>
+<title>下载Stage Tarball</title>
+<body>
+
+<p>
+进入Gentoo的挂载点，也就是装Gentoo的分区挂载的地方（很可能是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入Gentoo的挂载点">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+根据你使用的安装介质不同，你有好几个工具可用来下载stage。如果有<c>links</c>，
+你可以马上连接到<uri link="/main/en/mirrors.xml">Gentoo镜像列表</uri>，
+然后选择一个离你最近的镜像站点来下载。
+</p>
+
+<p>
+假如你没有<c>links</c>，那你应该有<c>lynx</c>。如果你是通过代理服务器
+上网的，那么请export <c>http_proxy</c>和<c>ftp_proxy</c>这两个变量：
+</p>
+
+<pre caption="为lynx设置代理信息">
+# <i>export http_proxy="http://proxy.server.com:port"</i>
+# <i>export ftp_proxy="http://proxy.server.com:port"</i>
+</pre>
+
+<p>
+我们现在假设你使用<c>links</c>。
+</p>
+
+<p>
+进入<path>releases/</path>目录，依据你所使用计算机的体系结构
+（例如<path>x86/</path>）和Gentoo的版本（<path>2006.1</path>）进入到
+<path>stages/</path>目录。你将会看到所有适合你计算机体系结构的stage
+文件（它们也可能放在各个独立的子体系名称的子目录里）。选择一个后敲击<c>D</c>来下
+载。下载完以后，再按<c>Q</c>退出浏览器。
+</p>
+
+<pre caption="用links打开镜像列表">
+# <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
+
+<comment>如果links需要使用代理：）</comment>
+# <i>links -http-proxy proxy.server.com:8080 http://www.gentoo.org/main/en/mirrors.xml</i>
+</pre>
+
+<p>
+确保你下载的是<b>stage3</b>的tarball——使用stage1或stage2进行安装
+已经不再被支持。
+</p>
+
+<p>
+如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然
+后把输出同镜像站上提供的MD5校验码对比。例如校验一个x86的stage tarball：
+</p>
+
+<pre caption="一个校验stage tarball完整性的例子">
+# <i>md5sum -c stage3-x86-2006.1.tar.bz2.DIGESTS</i>
+stage3-x86-2006.1.tar.bz2: OK
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>解开Stage Tarball</title>
+<body>
+
+<p>
+现在把你所下载的stage解压缩到系统里。我们使用<c>tar</c>命令
+来做，这是最简单的方法：
+</p>
+
+<pre caption="解开stage">
+# <i>tar xvjpf stage3-*.tar.bz2</i>
+</pre>
+
+<p>
+请确认你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>参数代表<e>Extract</e>，
+<c>v</c>参数代表<e>Verbose</e>（可选参数，添加该参数后可以看到在解开tar包
+的过程中发生了些什么），<c>j</c>参数代表<e>使用bzip2解压缩</e>，<c>p</c>
+参数代表<e>Preserve permissiions</e>（保留权限），而<c>f</c>参数代表我们
+想要解开的是一个文件而不是来自于标准输入的数据。
+
+</p>
+
+<p>
+现在stage已经安装好，下面我们继续<uri link="#installing_portage">安
+装Portage</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="installing_portage">
+<title>安装Portage</title>
+<subsection>
+<title>解开一个Portage快照</title>
+<body>
+
+<p>
+现在你得安装一个Portage的快照，它包含的一堆文件告诉Portage哪些软件可
+以安装，有哪些profile可用等等。
+</p>
+
+</body>
+</subsection>
+<subsection id="installing_from_InstallCD">
+<title>从安装光盘里解开Portage快照</title>
+<body>
+
+<p>
+为了安装快照，到<path>/mnt/cdrom/snapshots/</path>里面看一下有
+哪些快照可用：
+</p>
+
+<pre caption="查看/mnt/cdrom/snapshots的内容">
+# <i>ls /mnt/cdrom/snapshots</i>
+</pre>
+
+<p>
+现在按下面的步骤来解开快照。再次确认你使用了正确的<c>tar</c>参数。另
+外<c>-C</c>是大写的<c>C</c>，而不是<c>c</c>。在下一个例子里我们将使
+用<path>portage-&lt;date&gt;.tar.bz2</path>作为快照的文件名。
+确保用你安装光盘上的快照文件名来替换此文件名。
+</p>
+
+<pre caption="解开一个Portage快照">
+# <i>tar xvjf /mnt/cdrom/snapshots/portage-&lt;date&gt;.tar.bz2 -C /mnt/gentoo/usr</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="copysources">
+<title>复制源代码包</title>
+<body>
+
+<p>
+你还需要从通用安装光盘里复制所有的源代码包。
+</p>
+
+<pre caption="复制源代码包">
+# <i>mkdir /mnt/gentoo/usr/portage/distfiles</i>
+# <i>cp /mnt/cdrom/distfiles/* /mnt/gentoo/usr/portage/distfiles/</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section id="compile_options">
+<title>配置编译选项</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你可设置一些影响Portage行为的变量来优化Gentoo。这些变量都可作为环境变量
+来设置（使用<c>export</c>），但是它们不是永久的。为了保持你的设置，Portage
+为你提供了<path>/etc/make.conf</path>，一个Portage的配置文件。这
+就是我们现在要编辑的文件。
+</p>
+
+<note>
+所有可能的变量都用注释形式罗列在<path>/mnt/gentoo/etc/make.conf.example</path>里
+。为了成功地安装Gentoo，你只需要设置下面提到的变量就可以了。
+</note>
+
+<p>
+打开你喜欢的编辑器（在这个指南里我们使用<c>nano</c>），这样我们可以改变我
+们下面将讨论的优化变量。
+</p>
+
+<pre caption="打开/etc/make.conf">
+# <i>nano -w /mnt/gentoo/etc/make.conf</i>
+</pre>
+
+<p>
+你很可能已经注意到了，<path>make.conf.example</path>文件的结构和一般
+的shell脚本一样：注释行以"#"开头，其它行使用<c>VARIABLE="content"</c>的语
+法来定义变量。<path>make.conf</path>文件也使用相同的语法。其中的一些
+变量我们接下来讨论。
+</p>
+
+<warn>
+假设你打算使用我们提供的预编译软件包（GRP套件）那就不要对USE变量做任何修
+改。在装完你所需要的软件包以后就可以更改USE变量了。如果忽略这个警告你的系
+统将会有麻烦！
+</warn>
+
+</body>
+</subsection>
+<subsection>
+<title>CHOST</title>
+<body>
+
+<p>
+<c>CHOST</c>变量声明了你的系统的target、build和host（译注：target定义了编译出的
+工具链产生的代码将运行的系统类型，只在编译工具链时有意义；build定义了本机系统类
+型； host定义了编译出的软件将运行的系统类型）。这个变量应该已经被设置为正确的值
+了。<brite>不要编辑它</brite>，这可能会毁坏你的系统。如果<c>CHOST</c>变量看起来
+是不正确的，你也许使用了错误的stage3 tarball。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>CFLAGS和CXXFLAGS</title>
+<body>
+
+<p>
+<c>CFLAGS</c>和<c>CXXFLAGS</c>变量分别定义了<c>gcc</c> （C和C++的编译器）
+的优化标记。尽管我们通常都在这里定义，你也可以对每个软件单独定义这些优化标记以
+获得最好的性能。因为每个程序都是不同的。
+</p>
+
+<p>
+在<path>make.conf</path>里你应该定义一些你认为可以使系统在<e>一般情
+况</e>下快速响应的优化标记。不要把实验性质的设置放到这个变量里来；过
+多的优化会使程序表现很差（崩溃，甚至更糟，不正常工作）。
+</p>
+
+<p>
+我们不会在这里解释所有可能的优化选项。如果你想搞清楚它们，请阅读<uri
+link="http://gcc.gnu.org/onlinedocs/">GNU在线手册</uri>
+或者是<c>gcc</c> info页面（<c>info gcc</c>——只能在装好的Linux系统
+中查看）。<path>make.conf.example</path>本身也包含了不少信息和范例；
+不要忘了也看看它。
+</p>
+
+<p>
+作为例子，在x86架构上，对于Athlon XP机器你需要这样设置-march=标志：
+</p>
+
+<pre caption="GCC的march设置">
+-march=athlon-xp
+</pre>
+
+<p>
+第二个是<c>-O</c>标记（是大写的O，而不是数字零），它是指定<c>gcc</c>的优
+化级别的标记。可能的级别有<c>s</c>（为优化文件大小），<c>0</c>（0——不优化）
+，<c>1</c>、<c>2</c>或者<c>3</c>是针对速度的优化标记（每个级别都包含
+前一级标记的优化措施，并额外增加了一些）。举个例子，下面是级别2的优化：
+</p>
+
+<pre caption="GCC的O设置">
+-O2
+</pre>
+
+<p>
+另一个普遍使用的优化标记是<c>-pipe</c>（在各种不同阶段编译的时候使用管道而不是临时文件来通信）。
+</p>
+
+<p>
+提醒你一下，使用<c>-fomit-frame-pointer</c>（它将不在寄存器里为不需要帧指针的函
+数保存帧指针）可能会在调试程序的时候造成严重后果！
+</p>
+
+<p>
+在你定义<c>CFLAGS</c>和<c>CXXFLAGS</c>的时候，你需要像下面的例子一样
+把这些优化标记都合并起来：
+</p>
+
+<pre caption="定义CFLAGS和CXXFLAGS变量">
+CFLAGS="-march=athlon-xp -pipe -O2"   
+CXXFLAGS="${CFLAGS}"
+<comment># 两个变量使用相同的设置</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>MAKEOPTS</title>
+<body>
+
+<p>
+通过使用<c>MAKEOPTS</c>你可以定义在安装软件的时候同时可以产生并行编译的数目。
+你的CPU数目加一是个不错的选择，但是这个准则并不永远都是完美的。
+</p>
+
+<pre caption="单CPU系统的MAKEOPTS">
+MAKEOPTS="-j2"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>设置已准备好，让我们开始！</title>
+<body>
+
+<p>
+根据你的喜好更新<path>/mnt/gentoo/etc/make.conf</path>并保存
+（<c>nano</c>用户可以敲<c>Ctrl-X</c>）。你现在准备好可以继
+续<uri link="?part=1&amp;chap=6">安装Gentoo基本系统</uri>了。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

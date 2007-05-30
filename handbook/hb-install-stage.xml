@@ -1,0 +1,455 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.104 2006/11/01 21:40:28 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+我们使用一个stage3文件来安装Gentoo。在这一章里我
+们将教你如何解压缩stage3文件和配置Portage。
+</abstract>
+
+<version>7.4</version>
+<date>2006-11-01</date>
+
+<section>
+<title>安装一个Stage Tarball</title>
+<subsection>
+<title>正确设置日期／时间</title>
+<body>
+
+<p>
+在继续之前，你需要检查和更新系统日期／时间。未正确设置
+的时钟可能会在将来导致奇怪的结果！
+</p>
+
+<p>
+确认当前日期／时间，请运行<c>date</c>：
+</p>
+
+<pre caption="确认日期／时间">
+# <i>date</i>
+Fri Mar 29 16:21:18 UTC 2005
+</pre>
+
+<p>
+如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>语句
+（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，
+<b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设
+置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
+</p>
+
+<pre caption="设置UTC日期／时间">
+# <i>date 032916212005</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>做出你的选择</title>
+<body>
+
+<p>
+接下来，你要把<e>stage3</e> tarball安装到系统。你可以选择从
+网上下载它，或者如果你是使用Gentoo通用安装光盘引导系统的话，也
+可以从光盘里拷贝一个出来。如果你有通用安装光盘的话且光盘中有你需要的
+Stage文件，就直接用光盘里的吧，否则再从网上下载就是浪费带宽，因为它和
+网上下载的是一样的。大多数情况下，运行命令<c>uname -m</c>可以告诉你
+哪个stage文件才是你要下载的。
+</p>
+
+<ul>
+<li>
+  <uri link="#doc_chap2">默认：使用从网上下载的Stage</uri>
+</li>
+<li>
+  <uri link="#doc_chap3">备选：使用安装光盘里的Stage</uri>
+</li>
+</ul>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>默认：使用从网上下载的Stage</title>
+<subsection>
+<title>下载Stage Tarball</title>
+<body>
+
+<p>
+进入Gentoo的挂载点，也就是装Gentoo的分区挂载的地方（很可能是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入Gentoo的挂载点">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+根据你使用的安装介质不同，你有好几个工具可用来下载stage。如果
+有<c>links</c>，你可以马上连接到<uri link="/main/en/mirrors.xml">
+Gentoo镜像列表</uri>，然后选择一个离你最近的镜像站点来下载。
+</p>
+
+<p>
+假如你没有可用的<c>links</c>，那你应该有<c>lynx</c>。如果你
+需要通过代理上网的，那么请export <c>http_proxy</c>和<c>ftp_proxy</c>这两个变量：
+</p>
+
+<pre caption="为lynx设置代理信息">
+# <i>export http_proxy="http://proxy.server.com:port"</i>
+# <i>export ftp_proxy="http://proxy.server.com:port"</i>
+</pre>
+
+<p>
+我们现在假设你使用<c>links</c>。
+</p>
+
+<p>
+进入<path>releases/</path>目录，顺着你计算机的体系结构
+（例如<path>x86/</path>）和Gentoo的版本（<path>2006.1</path>）进入到
+<path>stages/</path>目录。你将会看到所有适合你计算机体系结构的stage
+文件（它们也可能放在各个独立的子体系名称的子目录里）。选择一个，
+然后按<c>D</c>来下载。下载完以后，再按<c>Q</c>退出浏览器。
+</p>
+
+<pre caption="用links连接镜像列表">
+# <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
+
+<comment>（如果links需要使用代理：）</comment>
+# <i>links -http-proxy proxy.server.com:8080 http://www.gentoo.org/main/en/mirrors.xml</i>
+</pre>
+
+<p>
+确保你下载的是<b>stage3</b> tarball——使用stage1或stage2进行安装
+已经不再被支持。
+</p>
+
+<p>
+如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然
+后把输出同镜像站上提供的MD5校验码对比。
+例如校验一个x86的stage tarball：
+</p>
+
+<pre caption="校验一个stage tarball完整性的例子">
+# <i>md5sum -c stage3-x86-2006.1.tar.bz2.DIGESTS</i>
+stage3-x86-2006.1.tar.bz2: OK
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>解开Stage Tarball</title>
+<body>
+
+<p>
+现在把你所下载的stage解压缩到系统里。我们使用<c>tar</c>命令
+来做，这是最简单的方法：
+</p>
+
+<pre caption="解开stage">
+# <i>tar xvjpf stage3-*.tar.bz2</i>
+</pre>
+
+<p>
+确保你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>表示解开（
+<e>Extract</e>），<c>v</c>表示详细信息（<e>Verbose</e>）可以用来
+查看解压缩时发生了什么（可选参数），<c>j</c>表示使用bzip2
+解压缩，<c>p</c>表示保留权限（<e>Preserve permissions</e>），还
+有<c>f</c>表示我们要解开一个文件，而不是标准输入。
+</p>
+
+<note>
+有些体系结构（例如：MIPS）的安装光盘和引导镜像依赖Busybox内
+建的<c>tar</c>命令，而它目前还不支持<c>v</c>参数。所以请用
+<c>xjpf</c>参数来代替。
+</note>
+
+<p>
+现在stage已经安装好，下面我们继续<uri link="#installing_portage">安
+装Portage</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>备选：使用安装光盘里的Stage</title>
+<subsection>
+<title>解开Stage Tarball</title>
+<body>
+
+<impo test="contains('AMD64 x86', func:keyval('arch'))">
+如果你在<keyval id="arch"/>上并且使用安装LiveCD，你的光盘上就<e>没
+有</e>stage。你需要按照<uri link="#doc_chap2">使用从网上下载
+的Stage</uri>来做。
+</impo>
+
+<p>
+stage文件在光盘的<path>/mnt/cdrom/stages</path>目录里。查看可用的stage
+，请使用<c>ls</c>：
+</p>
+
+<pre caption="查看可用的stage">
+# <i>ls /mnt/cdrom/stages</i>
+</pre>
+
+<p>
+如果系统返回错误，你可能需要先挂载CD-ROM：
+</p>
+
+<pre caption="挂载CD-ROM">
+# <i>ls /mnt/cdrom/stages</i>
+ls: /mnt/cdrom/stages: No such file or directory
+# <i>mount /dev/cdroms/cdrom0 /mnt/cdrom</i>
+# <i>ls /mnt/cdrom/stages</i>
+</pre>
+
+<p>
+我们现在进入你Gentoo的挂载点（通常是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入目录/mnt/gentoo">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+现在我们来解开你选择的stage tarball。我们将使用<c>tar</c>。确保你使
+用了同样的参数（<c>xvjpf</c>）。<c>v</c>参数是可选的，而且有些版本
+的<c>tar</c>不支持它。接下来的一个例子里，我们解开stage tarball
+<path>stage3-&lt;subarch&gt;-2006.1.tar.bz2</path>。确保用你的stage
+来替换tarball的文件名。
+</p>
+
+<pre caption="解开stage tarball">
+# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2006.1.tar.bz2</i>
+</pre>
+
+<p>
+现在stage已经安装好，下面我们继续<uri link="#installing_portage">安
+装Portage</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="installing_portage">
+<title>安装Portage</title>
+<subsection>
+<title>解开一个Portage快照</title>
+<body>
+
+<p>
+现在你得安装一个Portage的快照，它包含的一堆文件告诉Portage哪些软件可
+以安装，有哪些profile可用等等。
+</p>
+
+</body>
+</subsection>
+<subsection id="installing_from_Internet">
+<title>从网上下载和安装Portage快照</title>
+<body>
+
+<p>
+进入Gentoo文件系统的挂载点（很可能是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入Gentoo的挂载点">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+打开<c>links</c>（或者<c>lynx</c>）然后到我们
+的<uri link="/main/en/mirrors.xml">Gentoo镜像列表</uri>。选择一个离
+你最近的镜像，打开<path>snapshots/</path>目录。然后选择最新的Portage快照（<path>portage-latest.tar.bz2</path>）并按<c>D</c>来下载它。
+</p>
+
+<pre caption="浏览Gentoo镜像列表">
+# <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
+</pre>
+
+<p>
+现在按<c>Q</c>来退出浏览器。你现在已经有一个Portage快照保存
+在<path>/mnt/gentoo</path>里了。
+</p>
+
+<p>
+如果你想校验所下载的快照的完整性，使用<c>md5sum</c>然后把输出和镜像
+站提供的MD5校验码比较。
+</p>
+
+<pre caption="校验Portage快照的完整性">
+# <i>md5sum -c portage-latest.tar.bz2.md5sum</i>
+portage-latest.tar.bz2: OK
+</pre>
+
+<p>
+下一步，我们要把Portage快照解压缩到你的系统里。确保你使用的解压缩命
+令里最后一个参数是大写的<c>C</c>，而不是<c>c</c>。
+</p>
+
+<pre caption="解开Portage快照">
+# <i>tar xvjf /mnt/gentoo/portage-latest.tar.bz2 -C /mnt/gentoo/usr</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section id="compile_options">
+<title>配置编译选项</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你可设置一些影响Portage行为的变量来优化Gentoo。这些变量都可作为环境
+变量来设置（使用<c>export</c>），但是它们不是永久的。为了保持你的设
+置，Portage为你提供了<path>/etc/make.conf</path>，一个Portage的配置
+文件。这就是我们现在要编辑的文件。
+</p>
+
+<note>
+所有可能的变量都用注释形式罗列
+在<path>/mnt/gentoo/etc/make.conf.example</path>里。你只需要设置下面提到的变量就可以成功地安装Gentoo。
+</note>
+
+<p>
+打开你喜欢的编辑器（在这个指南里我们使用<c>nano</c>），这样我们可以
+改变我们现在和之后将讨论的优化变量。
+</p>
+
+<pre caption="打开/etc/make.conf">
+# <i>nano -w /mnt/gentoo/etc/make.conf</i>
+</pre>
+
+<p>
+你很可能已经注意到了，<path>make.conf.example</path>文件的结构和一般
+的文件一样：注释行以"#"开头，其它行使用<c>VARIABLE="content"</c>的语
+法来定义变量。<path>make.conf</path>文件也使用相同的语法。其中的一些
+变量我们接下来讨论。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>CHOST</title>
+<body>
+
+<p>
+<c>CHOST</c>变量声明了你的系统的target、build和host（译注：target定义了编译出的工
+具链产生的代码将运行的系统类型，只在编译工具链时有意义；build定义了本机系统类型；
+host定义了编译出的软件将运行的系统类型）。这个变量应该已经被设置为正确的值了。
+<brite>不要编辑它</brite>，这可能会毁坏你的系统。如果<c>CHOST</c>变量看起来是不正
+确的，你也许使用了错误的stage3 tarball。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>CFLAGS和CXXFLAGS</title>
+<body>
+
+<p>
+<c>CFLAGS</c>和<c>CXXFLAGS</c>变量分别定义了<c>gcc</c> C和C++编译器
+的优化标记。尽管我们通常都在这里定义，你也可以对每个软件单独定义这
+些优化标记以获得最好的性能。因为每个程序都是不同的。
+</p>
+
+<p>
+在<path>make.conf</path>里你应该定义一些你认为可以使系统在<e>一般情
+况</e>下快速响应的优化标记。不要把实验性质的设置放到这个变量里来；过
+多的优化会使程序表现很差（崩溃，甚至更糟，不正常工作）。
+</p>
+
+<p>
+我们不会解释所有可能的优化选项。如果你想搞清楚它们，请阅
+读<uri link="http://gcc.gnu.org/onlinedocs/">GNU在线手册</uri>
+或者是<c>gcc</c> info页面（<c>info gcc</c>——只能在可工作的Linux系统
+中查看）。<path>make.conf.example</path>本身也包含了不少信息和范例；
+不要忘了也看看它。
+</p>
+
+<p>
+第一个设置是<c>-march=</c>标记，它指定了目标架构的名字。可能的选项
+会在<path>make.conf.example</path>里有说明（以注释形式出现）。比如，
+对于x86 Athlon XP架构：
+</p>
+
+<pre caption="GCC的march设置">
+-march=athlon-xp
+</pre>
+
+<p>
+第二个是<c>-O</c>标记（是大写的O，而不是数字零），它是指定<c>gcc</c>
+的优化级别的标记。可能的级别有<c>s</c>（为优化文件大小），<c>0</c>（
+零——不优化），<c>1</c>、<c>2</c>或者<c>3</c>是为了获得更快速度的
+优化标记（每个级别都包含前一级标记的优化措施，并额外增加了一些）。
+举个例子，下面是级别2的优化：
+</p>
+
+<pre caption="GCC的O设置">
+-O2
+</pre>
+
+<p>
+另一个普遍使用的优化标记是<c>-pipe</c>（在各种不同阶段编译的时候使用管道而不是临时文件来通信）。
+</p>
+
+<p>
+提醒你一下，使用<c>-fomit-frame-pointer</c>（它将不在寄存器里为不需
+要帧指针的函数保存帧指针）可能会在调试程序的时候造成严重后果！
+</p>
+
+<p>
+在你定义<c>CFLAGS</c>和<c>CXXFLAGS</c>的时候，你需要像下面的例子一样
+把这些优化标记都合并起来：
+</p>
+
+<pre test="contains('Alpha arm HPPA IA64 MIPS PPC PPC64 SPARC x86', func:keyval('arch'))" caption="定义CFLAGS和CXXFLAGS变量">
+CFLAGS="-march=athlon-xp -pipe -O2"
+CXXFLAGS="${CFLAGS}"                  <comment># 两个变量使用相同的设置</comment>
+</pre>
+
+<pre test="func:keyval('arch')='AMD64'" caption="定义CFLAGS和CXXFLAGS变量">
+CFLAGS="-march=athlon-xp -pipe -O2"   <comment># AMD64用户想要一个原生的64位系统的话，应该使用-march=athlon64</comment>
+                                     <comment># EM64T用户应该用-march=nocona</comment>
+CXXFLAGS="${CFLAGS}"                 <comment># 两个变量使用相同的设置</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>MAKEOPTS</title>
+<body>
+
+<p>
+通过使用<c>MAKEOPTS</c>你可以定义在安装软件的时候同时可以产生并行编
+译的数目。你的CPU数目加一是个不错的选择，但是这个准则并不永远都是完
+美的。
+</p>
+
+<pre caption="单CPU系统的MAKEOPTS">
+MAKEOPTS="-j2"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>设置已准备好，让我们开始！</title>
+<body>
+
+<p>
+根据你的喜好更新<path>/mnt/gentoo/etc/make.conf</path>并保存
+（<c>nano</c>用户可以敲<c>Ctrl-X</c>）。你现在准备好可以继
+续<uri link="?part=1&amp;chap=6">安装Gentoo基本系统</uri>了。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

@@ -1,0 +1,377 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-gli-dialog.xml,v 1.2 2006/11/01 23:57:49 nightmorph Exp $ -->
+
+<!--  The content of this document is licensed under the CC-BY-SA license -->
+<!--  See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<sections>
+
+<version>2.1</version>
+<date>2006-11-01</date>
+
+<section>
+<title>欢迎</title>
+<subsection>
+<title>在您开始之前</title>
+<body>
+
+<p>
+启动Gentoo Linux 安装程序LiveCD后，默认会载入一个图形桌面。若不能启动图形桌面，
+则会显示一个命令行提示符。运行安装程序，只需简单输入：
+</p>
+
+<pre caption="运行安装程序">
+# <i>installer</i>
+</pre>
+
+<p>
+当安装程序加载结束后，你会看到显示屏上欢迎的问候信息。它提供了一份友好的Gentoo安
+装步骤的说明。请仔细阅读每一个选项。屏幕顶端有每一个安装步骤的详细帮助信息。我们
+建议你在做出每个选择前，都参考一下帮助信息。请注意在安装过程中的任何时候您都可以
+保存你的配置进度，以便在中止后随时继续之前的安装。请使用（你键盘上
+的）<c>Tab</c>键选择屏幕上的菜单，使用<c>Enter</c>键来确认一个动作。
+</p>
+
+<p>
+这里提供两种可用的安装方式。选择<c>Networkless</c>来开始Gentoo Linux的安装。
+</p>
+
+<note>
+选择<c>networkless</c>方式会导致后面的一些配置选项不可用，直接忽略并进入下一步即
+可。
+</note>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>安装前的配置</title>
+<subsection>
+<title>可选：手动配置网络</title>
+<body>
+
+<p>
+尽管我们安装时并不需要连接到Internet，但你可以手动设置将机器连入局域网，那样你就
+可以从局域网中的另一台机来远程安装Gentoo。
+</p>
+
+<p>
+如果您想通过SSH访问这台机器（以便进行远程安装），可以启动<c>sshd</c>，并设置一
+个root密码。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：加载额外的内核模块</title>
+<body>
+
+<p>
+如果您需要加载更多的内核模块以支持您的硬件，请输入它们的名字，用空格分开。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>分区</title>
+<subsection>
+<title>预备磁盘</title>
+<body>
+
+<p>
+为了在你的机器上安装Gentoo，你需要准备好磁盘。<e>Partitioning</e>画面将显示已
+检测到的磁盘列表，您可以为每一个分区指定文件系统。选择<c>Clear partitions</c>将
+会清除您磁盘上先前所有的分区，请谨慎使用！你也可以为某些分区重新指定大小。
+</p>
+
+<p>
+如果您选择<c>Recommend layout</c>，安装程序将建立三个分区：<path>/boot:</path>
+100MB,<path>/swap:</path>最多512MB，剩下的所有有效空间都给<path>/</path>根分区
+使用。如果您的硬盘上未分区的空间大于4GB，使用“Recommend layout”将自动分区并且不
+会破坏您原有分区上的任何数据。
+</p>
+
+<warn>
+在使用任何分区工具来更改您的分区表前，您都应该先备份好您的系统，任何一点bug都可
+能造成您数据的丢失。
+</warn>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>网络磁盘挂载</title>
+<subsection>
+<title>可选：定义网络磁盘</title>
+<body>
+
+<p>
+本节中您可以设置和挂载任何已经存在的网络磁盘，以便在安装过程中和安装后使用。目前只支持NFS。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<!-- removed per codeman's suggestion on IRC; selecting "Networkless at
+beginning makes these options unavailable
+
+<section>
+<title>Stage Selection</title>
+<subsection>
+<title>Dynamic stage generation</title>
+<body>
+
+<p>
+Since you are performing an installation <e>without</e> an internet connection,
+you <e>must</e> select <c>3+GRP</c> from the stage options present. Then, on the next
+screen, select <c>Create from 光盘</c>. Everything you need to build your system will
+then be generated from the files on the LiveCD.
+</p>
+
+<warn>
+Do <e>not</e> select any options other than those specified above when you are
+installing without an internet connection.
+</warn>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Portage Tree</title>
+<subsection>
+<title>Obtaining a Portage tree</title>
+<body>
+
+<p>
+You must choose <c>Snapshot</c> on this screen. The installer will automatically
+install a Portage tree from the LiveCD once you select Snapshot; you do not
+need to specify a snapshot URI.
+</p>
+
+</body>
+</subsection>
+</section>
+
+-->
+
+<section>
+<title>make.conf</title>
+<subsection>
+<title>USE标记</title>
+<body>
+
+<p>
+因为您正在进行GRP/无网络安装，所以不能在安装之前选择USE标记。不过，当您重起进入安装
+完成的系统后，您就可以在<path>/etc/make.conf</path>中设置USE标记了。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>CFLAGS</title>
+<body>
+
+<p>
+在CFLAGS这一节您可以选择你的处理器类型以及设定任何你想要的优化参数，比
+如<c>-O2</c>和<c>-pipe</c>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>FEATURES</title>
+<body>
+
+<p>
+现在你可以设置将来想用的任何其他选项。请遍阅可用的<b>FEATURES</b>，然后作出选择。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>内核源代码</title>
+<subsection>
+<title>使用LiveCD的内核</title>
+<body>
+
+<p>
+使用GRP/无网络方式安装，您必须使用LiveCD上提供的内核。这只是一个由Gentoo的内核
+自动编译工具——<c>genkernel</c>编译的<c>gentoo-sources</c>内核，它可以在您开机的
+时候自动检测并设置您的硬件。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Bootloader</title>
+<subsection>
+<title>作出你的选择</title>
+<body>
+
+<p>
+在这一节，您可以选择系统bootloader。然后选择你的启动设备，最后如果需要，也可以指定额外的启动选项。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>时区</title>
+<subsection>
+<title>选择你的时区</title>
+<body>
+
+<p>
+从列表中选择跟你实际位置最近的地区。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>网络</title>
+<subsection>
+<title>添加网络设备</title>
+<body>
+
+<p>
+在这一节，你可以配置检测到的各种各样的网络设备。仔细阅读可用的选项。
+</p>
+
+<p>
+下一节你可以选择使用DHCP或手动配置IP地址。一旦网络设备正确配置好了，你就要为系
+统设一个主机名。如果需要，您还可以指定一个域名以及任何必要的DNS服务器信息。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>额外的软件包</title>
+<subsection>
+<title>可选: 安装额外的软件包</title>
+<body>
+
+<p>
+LiveCD已经包含了许多预编译包。如果您想安装的话，请勾上相应的确认框。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>开机时启动的服务</title>
+<subsection>
+<body>
+
+<p>
+在这一节您可以选择开机时要启动的一些服务。仔细阅读可用的选项和描述，然后选择您想要
+的服务。举个例子，如果您已经选择安装<c>xorg-x11</c>，并想一开机就直接进入图形桌
+面，那您就要从列表中选择“xdm”。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>其他设置</title>
+<subsection>
+<title>杂项</title>
+<body>
+
+<p>
+现在您可以调整各种设定，包括键盘布局、图形化的显示管理器、默认编辑器，以及设定
+您的系统时钟（UTC时间还是local时间）。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>用户</title>
+<subsection>
+<title>添加用户和组</title>
+<body>
+
+<p>
+首先为系统管理员（<e>root</e>用户）设置root密码。
+</p>
+
+<p>
+我们<e>强烈</e>建议你创建一个普通用户，作为平时使用。用root用户来完成所有工作非
+常不安全，应当尽量避免！建立您的用户，设定密码，并加入到合适的组中。您也可以为
+用户另外指定主目录，选择一个shell，以及添加有用的注释。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>回顾</title>
+<subsection>
+<title>完工</title>
+<body>
+
+<p>
+请花点时间再次检查一下安装过程中的每一个步骤，确认您的系统设置正确。当您检查完
+成之后，您就可以保存设定并退出，或者选择<c>Install</c>开始自动安装gentoo.
+</p>
+
+<p>
+安装程序会在安装结束时提示你。你会回到命令提示符。之后要做的事就是重启系统，输入：
+</p>
+
+<pre caption="重新启动">
+# <i>shutdown -r now</i>
+</pre>
+
+<p>
+恭喜，您的系统现在已经安装好了。接下来请看<uri link="?part=1&amp;chap=5">下一步该
+怎么走？</uri>一章以学习更多关于Gentoo的知识。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
+
+<!--
+Steps of the dialog:
+(pre): type installer at the prompt to begin the dialog
+1. Partitioning
+(note: we absolutely must include partitioning info here; gli-dialog refers
+users to the partitioning info in the gentoo handbook! note that the gtkfe
+installer already has this partition info in its graphical help screens)
+
+2. Network mounts
+3. Stage Selection
+4. kernel sources
+5. bootloader
+6. timezone
+7. network interface selection/configuration (inc. dhcp/static-manual)
+8. hostname/domainname/dns
+9. Optional: install additional packages
+10. set root password
+11. add user, set passwords/groups
+12. review
+(post) finishes, drops to prompt: shutdown -r now
+-->

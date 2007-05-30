@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-diverttree.xml,v 1.13 2006/11/01 23:49:39 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类，
+加入自己的软件包等等的心得技巧。
+</abstract>
+
+<version>1.5</version>
+<date>2006-11-01</date>
+
+<section>
+<title>使用Portage树的一个子集</title>
+<subsection>
+<title>排除软件包/类别</title>
+<body>
+
+<p>
+你可以有选择地更新特定的类别/软件包并且忽略其他类别/软件包。我们通过
+让<c>emerge --sync</c>在执行<c>rsync</c>的时候排除个别类别/软件包来实现这个功能。
+</p>
+
+<p>
+你需要赋予<path>/etc/make.conf</path>中的<c>--exclude-from</c>参数一个文件名，该文
+件应包含你想要排除的软件包。
+</p>
+
+<pre caption="在/etc/make.conf中指定包含排除软件包条目的文件">
+PORTAGE_RSYNC_EXTRA_OPTS="--exclude-from=/etc/portage/rsync_excludes"
+</pre>
+
+<pre caption="在/etc/portage/rsync_excludes中设定排除所有游戏">
+games-*/*
+</pre>
+
+<p>
+然而要注意的是这可能导致依赖性问题，因为允许安装的软件包可能依赖于那些新的、但被排
+除的软件包。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>添加非官方Ebuild</title>
+<subsection>
+<title>定义一个Portage Overlay目录</title>
+<body>
+
+<p>
+可以让你的Portage使用官方Portage树里面没有的ebuild。创建一个新的目录（比
+如<path>/usr/local/portage</path>）用以存放第三方ebuild。请在新目录中使用跟官方Portage树一样的目录结构！
+</p>
+
+<p>
+然后在<path>/etc/make.conf</path>中定义PORTDIR_OVERLAY变量，使它指向刚才创建
+的目录。现在，每当你用到Portage的时候，这些ebuilds也会被同时计算在内，并且当你下次
+运行<c>emerge --sync</c>时，不会删除/覆盖这些ebuild。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>使用多个Overlay仓库</title>
+<body>
+
+<p>
+对于开发多个Overlay的许多高级用户而言，他们会在更新Portage树之前测试软件包或是想使
+用来源广泛的非官方ebuild。<c>app-portage/gentoolkit-dev</c>软件包提供
+了<c>gensync</c>工具，帮助你的overlay仓库时时都处于最新的状态。
+</p>
+
+<p>
+可以用<c>gensync</c>一次更新所有的仓库，也可以选择更新其中的几个。每个仓库会有一
+个<path>.syncsource</path>文件于<path>/etc/gensync/</path>配置目录下，其内容包含仓
+库的存放位置、名字、ID等。
+</p>
+
+<p>
+假设你有两个额外的仓库，分别名为<c>java</c>（存放开发中的java ebuild）
+和<c>entapps</c>（存放在家中为你给公司开发的应用程序）。那么可以通过以下命令来更新
+这些仓库：
+</p>
+
+<pre caption="使用gensync更新仓库">
+# <i>gensync java entapps</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>非Portage维护的软件</title>
+<subsection>
+<title>Portage环境下使用自己维护的软件</title>
+<body>
+
+<p>
+尽管Portage以及提供了某些软件，但是某些情况下你还是想自己配置、安装和维护这些软件
+，而不是希望Portage为你自动完成这些过程。典型的例子是内核源码和nvidia驱动程序。你
+可以配置一下Portage让它知道某个软件包已经通过手动安装到系统中了。这个过程叫做
+<e>注入</e>”，Portage是通过<path>/etc/portage/profile/package.provided</path>文件
+来实现这个功能的。
+</p>
+
+<p>
+举个例子，如果你想告诉Portage已经手动安装了<c>vanilla-sources-2.6.11.6</c>，
+那么把下面一行添加到<path>/etc/portage/profile/package.provided</path>文件里：
+</p>
+
+<pre caption="package.provided范例">
+sys-kernel/vanilla-sources-2.6.11.6
+</pre>
+
+</body>
+</subsection>
+</section>
+</sections>

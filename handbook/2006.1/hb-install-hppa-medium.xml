@@ -1,0 +1,437 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license
+ See http://creativecommons.org/licenses/by-sa/2.5
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-hppa-medium.xml,v 1.1 2006/08/30 20:17:31 nightmorph Exp $ -->
+<sections>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>硬件需求</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+在开始之前，我们首先列出安装Gentoo的硬件需求。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>硬件需求</title>
+<body>
+
+<p>
+支持的硬件列表可以在<uri link="http://www.pateam.org/list.html">PA
+Team的网站</uri>找到。你可以在<uri
+link="http://hwdb.parisc-linux.org">Parisc-Linux硬件数据
+库</uri>和<uri>www.openpa.net</uri>上的<uri
+link="http://www.openpa.net/cpu.html">处理器列表</uri>里找到有关你的机器的额外
+信息。
+</p>
+
+<p>
+如果你不知道你的机器使用的是什么版本的PA-RISC，请检查上面的连接来找出你使用的版
+本是1.1还是2.0。后面你将要用到这些信息。
+</p>
+
+<table>
+<tr>
+  <th>内存</th>
+  <ti>64MB</ti>
+</tr>
+<tr>
+  <th>硬盘空间</th>
+  <ti>1.5GB(不包括交换分区)</ti>
+</tr>
+<tr>
+  <th>交换分区</th>
+  <ti>至少256MB</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+
+
+<!-- Copy/paste from hb-install-x86-medium.xml
+ START -->
+<section>
+<title>Gentoo通用安装光盘</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+Gentoo Linux可以使用<e>stage3</e>tarball文件来安装。这样的一
+个tarball是一个包含了最小环境的归档文件，从它开始你可以成功的在你的系统上安
+装Gentoo Linux。
+</p>
+
+<p>
+使用stage1或者stage2 tarball文件的安装方式在Gentoo手册中并无讲解——请阅读<uri
+link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>里的相关问题。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Gentoo通用安装光盘</title>
+<body>
+
+<p>
+Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境，允许你从光盘启动Linux。
+在启动过程中，它们会自动检测你的硬件并加载相应的驱动程序。这些光盘是由Gentoo开发
+者维护的。
+</p>
+
+<p>
+目前我们提供两种安装光盘：
+</p>
+
+<ul>
+  <li>
+  通用安装光盘包含了你安装Gentoo所需要的一切东西。它提供了常见架构的stage3文件，
+  供您选择的额外应用程序的源代码，当然，还有针对你的硬件构架的安装指南。
+  </li>
+  <li>
+  最小化安装光盘包含了一个最小化的环境，它可以允许你启动并配置你的网络，以使你可以
+  连接到互联网。它不包含任何额外的文件，不适用于本安装方式。
+  </li>
+</ul>
+
+</body>
+</subsection>
+</section>
+
+<!-- STOP -->
+<section>
+<title>下载刻录并启动Gentoo通用安装光盘</title>
+<subsection>
+<title>下载和刻录安装光盘</title>
+<body>
+
+<p>
+你可以从我们任何一个<uri
+link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘。这些安装光盘位于
+<path>releases/hppa/2006.1/installcd</path>目录里。
+</p>
+
+<p>
+在那个目录里你可以找到一些ISO文件，这些都是你可以在CD-R上刻录的光盘镜像。
+</p>
+
+<p>
+下载完这个文件后，你可以验证它的完整性来检查它是否已经损坏：
+</p>
+
+<ul>
+  <li>
+  你可以查看它的MD5校验和，并和我们所提供的MD5校验和相比较（比如使
+  用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri
+  link="http://www.etree.org/md5com.html">md5sum</uri>）
+  </li>
+  <li>
+  您可以验证我们提供的数字签名。要验证，您需要先获得我们所使用的公钥（17072058）。
+  </li>
+</ul>
+
+<p>
+执行下面的命令来使用GnuPG获得我们的公钥：
+</p>
+
+<pre caption="获得公匙">
+$ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
+</pre>
+
+<p>
+现在验证签名：
+</p>
+
+<pre caption="验证密匙">
+$ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
+</pre>
+
+<p>
+要刻录这些下载的ISO文件，你必须选择raw方式刻录。具体方法取决于你所选择的刻录软件。
+这里我们将讨论<c>cdrecord</c>和<c>K3B</c>;更多的信息可以在<uri
+link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
+</p>
+
+<ul>
+  <li>
+  使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso
+  文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+  </li>
+  <li>
+  使用K3B，选择<c>Tools</c> &gt; <c>光盘</c> &gt; <c>Burn Image</c>。
+  然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>启动通用安装光盘</title>
+<body>
+
+<note>
+如果你在启动安装光盘或者其他媒介时遇到了问题，请阅读<uri
+link="http://www.tldp.org/HOWOT/PA-RISC-Linux-Boot-HOWTO/index.html">PA-RISC
+Linux Boot HOWOT</uri>。
+</note>
+
+<p>
+启动你的HPPA系统。在启动过程中，你将会看到类似下面的信息：
+</p>
+
+<pre caption="HPPA启动信息">
+Searching for Potential Boot Devices.
+To terminate search, press and hold the ESCAPE key.
+</pre>
+
+<p>
+当这些信息出现时，请按下并按住Esc键直到一个选项菜单出现。这将需要一段时间，请耐
+心等待。默认的，你将进入BOOT_ADMIN控制台。如果你看到了选项菜单，选择<c>Enter
+Boot Administration mode</c>来进入BOOT_ADMIN控制台。你将得到一个'&gt;'提示符。
+</p>
+
+<p>
+把Gentoo安装光盘放入光驱。如果你不知道你的光驱的SCSI ID，你的PA-RISC工作站会帮你
+寻找，如果你输入这个<c>寻找</c>命令。
+</p>
+
+<pre caption="寻找SCSI ID">
+&gt; <i>search</i>
+Searching for Devices with Bootable Media.
+To terminate search, please press and hold the ESCAPE key.
+</pre>
+
+<p>
+你的PA-RISC工作站现在会显示出所有可用的启动介质。这是这个命令的输出示例：
+</p>
+
+<pre caption="可用的启动媒介">
+Device Selection      Device Path             Device Type and Utilities
+---------------------------------------------------------------------------
+
+P0                    scsi.5.0                TOSHIBA CD-ROM XM-3301TA
+                                                  IPL
+P1                    scsi.2.0                COMPAQ ST32550N
+                                                  IPL
+P2                    lan.0010a7-06d1b6.3.6   server
+                                                  IPL
+</pre>
+
+<p>
+要从光驱启动你需要与之相匹配的设备路径。比如，在上面的例子中如果我们想
+从TOSHIBA光驱启动，我们需要输入下面的命令：
+</p>
+
+<pre caption="从CD-ROM启动">
+&gt; <i>boot scsi.5.0 ipl</i>
+
+Trying scsi.5.0
+</pre>
+
+<p>
+这个<c>ipl</c>关键字（Initial Program Loader）告诉palo（PA-RISC boot
+LOader）进入交互模式。这样你就能去改动一些设定，比如内核启动参数。
+</p>
+
+<p>
+如果启动成功，palo将进入交互模式：
+</p>
+
+<pre caption="PALO交互模式">
+Boot path initialized.
+Attempting to load IPL.
+
+
+HARD Booted.
+palo ipl 1.5 root@hope Sat Apr 23 18:06:47 CEST 2005
+
+Boot image contains:
+    0/vmlinux32 6241293 bytes @ 0x3904000
+    0/vmlinux64 8352719 bytes @ 0x3ef8000
+    0/ramdisk 1007589 bytes @ 0x105800
+
+Information: No console specified on kernel command line. This is normal.
+PALO will choose the console currently used by firmware (serial).Current command line:
+0/vmlinux initrd=initrd TERM=linux root=/dev/ram0 init=/linuxrc cdroot looptype=squashfs loop=/livecd.squashfs hda=scsi console=ttyS0
+ 0: 0/vmlinux
+ 1: initrd=initrd
+ 2: TERM=linux
+ 3: root=/dev/ram0
+ 4: init=/linuxrc
+ 5: cdroot
+ 6: looptype=squashfs
+ 7: loop=/livecd.squashfs
+ 8: hda=scsi
+ 9: console=ttyS0
+
+&lt;#&gt;    edit the numbered field
+'b'    boot with this command line
+'r'    restore command line
+'l'    list dir
+</pre>
+
+<p>
+这些参数在多数情况下都适用。
+</p>
+
+<p>
+如果你需要额外的特性，你必须把合适的关键字加到命令行的末尾。要加入一个关键字，编辑最后一个字段，添加一个空格并输入你的关键字。到目前为止，仅有的实现了的关键字有<c>cdcache</c>，它能使安装光盘把自己加载入内存以使你能够卸载光盘，还有<c>noload=module1[,module2[,...]]</c>，它允许你明确的禁止加载某些模块。
+</p>
+
+<pre caption="添加启动参数hdb=scsi">
+(or 'b' to boot with this command line)? <i>9</i>
+console=ttyS0 <i>hdb=scsi</i>
+</pre>
+
+<p>
+现在你已经优化了你的内核启动参数，可以启动它了。
+</p>
+
+<pre caption="引导内核">
+(or 'b' to boot with this command line)? <i>b</i>
+</pre>
+
+<p>
+你应该在当前的控制台上得到了一个root("#")提示符，并且可以通过
+按Alt-F2、Alt-F3和Alt-F4切换到其他控制台。回到一开始的控制台，请按Alt-F1。
+</p>
+
+<p>
+现在从<uri link="#hardware">其他硬件配置</uri>继续。
+</p>
+
+</body>
+</subsection>
+<subsection id="hardware">
+<title>其他硬件配置</title>
+<body>
+
+<p>
+大多数hppa机器有一个板载以太网卡。旧的机器使用编译进内核的lasi驱动。新的机器使
+用编译成模块的tulip驱动。要使用后者，你需要加载它的驱动。
+</p>
+
+<p>
+在下一个例子中，我们尝试加载<c>tulip</c>模块（支持某种网卡）：
+</p>
+
+<pre caption="加载内核模块">
+# <i>modprobe tulip</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection id="useraccounts">
+<title>可选：用户帐号</title>
+<body>
+
+<p>
+如果你打算给其他的人提供你的安装环境的访问权限，或者你不想用root用户权限（因为
+安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
+</p>
+
+<p>
+使用<c>passwd</c>命令来修改root用户密码：
+</p>
+
+<pre caption="修改root用户密码">
+# <i>passwd</i>
+New password: <comment>(Enter your new password)</comment>
+Re-enter password: <comment>(Re-enter your password)</comment>
+</pre>
+
+<p>
+要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以使
+用<c>useradd</c>和<c>passwd</c>来完成。在下个的例子中，我们创建一个名为“john”的
+用户。
+</p>
+
+<pre caption="创建一个新用户">
+# <i>useradd -m -G users john</i>
+# <i>passwd john</i>
+New password: <comment>(输入john的密码)</comment>
+Re-enter password: <comment>(再次输入john的密码)</comment>
+</pre>
+
+<p>
+你可以使用su从root用户切换到新建的用户：
+</p>
+
+<pre caption="切换用户">
+# <i>su - john</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：在安装时查看文档</title>
+<body>
+
+<p>
+如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），确认你已经创建好
+了一个用户帐号（查看可选：<uri
+link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终
+端并登录进入。
+</p>
+
+<p>
+如果你想查看光盘里的文档，你可以立即运行<c>links</c>来阅读：
+</p>
+
+<pre caption="查看光盘里的文档">
+# <i>links /mnt/cdrom/docs/handbook/html/index.html</i>
+</pre>
+
+<p>
+不过，首选的还是在线查看Gentoo手册，因为这比光盘里提供的要新。你也可以使用<c>links</c>阅读它，
+但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
+</p>
+
+<pre caption="查看在线文档">
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/handbook-hppa.xml</i>
+</pre>
+
+<p>
+你可以按<c>Alf-F1</c>来回到原来的终端。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：启动SSH服务</title>
+<body>
+
+<p>
+如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮
+助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码
+（这<e>只</e>在你<b>完全信任</b>这位用户的情况下）。
+</p>
+
+<p>
+执行下面的命令来启动SSH服务：
+</p>
+
+<pre caption="启动SSH服务">
+# <i>/etc/init.d/sshd start</i>
+</pre>
+
+<p>
+在使用sshd之前，你必须设置好你的网络。 请从<uri link="?part=1&amp;chap=3">配置网络</uri>一章继续。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

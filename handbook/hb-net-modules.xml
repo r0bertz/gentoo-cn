@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-modules.xml,v 1.21 2007/01/04 06:03:26 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+Gentoo为您提供了灵活的网络支持——本节将告诉你怎样选择不同的DHCP客户端程序，
+如何配置网络的绑定和桥接以及配置VLAN等等相关的知识。
+</abstract>
+
+<version>7.1</version>
+<date>2007-01-04</date>
+
+<section>
+<title>网络模块</title>
+<body>
+
+<p>
+我们现在支持模块化的网络脚本，这意味着我们可以很方便地增添新的网络接口和配置模块
+，同时和原来已存在的模块或是接口保持良好的兼容性。
+</p>
+
+<p>
+只要模块需要的软件包已安装，它就会被默认载入。如果你指定一个模块而它需要的软件包
+未被安装，则你就会收到一个错误信息通知你需要安装哪一个软件包。一般来说，只有当你
+安装了提供相同服务的两个及以上的软件包时，你才需要使用模块设定来选择你想使用其中
+的哪一个。
+</p>
+
+<note>
+除非有特别说明，这里所讨论的全部设定都保存在<path>/etc/conf.d/net</path>中。
+</note>
+
+<pre caption="模块选择">
+<comment># 选择iproute2而不用ifconfig</comment>
+modules=( "iproute2" )
+
+<comment># 你也可以为一个网络接口指定其他的模块
+# 这个例子中我们希望使用udhcpc来代替dhcpcd</comment>
+modules_eth0=( "udhcpc" )
+
+<comment># 你也可以指定不使用哪一个模块——例如你一方面想使用supplicant或是
+# linux-wlan-ng来控制无线网络配置，一方面又想配置每一个ESSID相关联的网络设定。</comment>
+modules=( "!iwconfig" )
+</pre>
+
+</body>
+</section>
+<section>
+<title>网络接口处理程序</title>
+<body>
+
+<p>
+目前我们提供了两个网络接口处理程序：<c>ifconfig</c>和<c>iproute2</c>。你可以使用i
+这两个程序中的一个进行任意种类的网络配置。
+</p>
+
+<p>
+<c>ifconfig</c>是目前Gentoo默认使用的网络接口处理程序，而且它也包含在系统
+的profile之中。<c>iproute2</c>是另一个灵活且强大的软件包，但是默认的系统配置中并
+不包含它。
+</p>
+
+<pre caption="安装iproute2">
+# <i>emerge sys-apps/iproute2</i>
+
+<comment># 在iproute2和ifconfig都已安装的情况下，选用iproute2</comment>
+modules=( "iproute2" )
+</pre>
+
+<p>
+由于<c>ifconfig</c>和<c>iproute2</c>的功能很类似，我们允许使用它们的基本配置功能
+以使二者可以通用。例如说下面的代码片段对于它们之中的任何一个来说都是起效的。
+</p>
+
+<pre caption="ifconfig和iproute2示例">
+config_eth0=( "192.168.0.2/24" )
+config_eth0=( "192.168.0.2 netmask 255.255.255.0" )
+
+<comment># 我们也可以指定广播地址</comment>
+config_eth0=( "192.168.0.2/24 brd 192.168.0.255" )
+config_eth0=( "192.168.0.2 netmask 255.255.255.0 broadcast 192.168.0.255" )
+</pre>
+
+</body>
+</section>
+<section id="dhcp">
+<title>DHCP</title>
+<body>
+
+<p>
+DHCP是一种通过DHCP服务器来获得相关的网络信息（比如IP地址、DNS服务器、网关等）的方
+式。这意味着如果在网络上存在着一个DHCP服务器的话，你只要让每一个客户端使用DHCP，
+这些客户端就会自动地配置好相关的网络设置。当然，如果在使用DHCP之前还需要配置无线
+网络或是PPP等其他设定的话，你就必须先配置好这些才行。
+</p>
+
+<p>
+<c>dhclient</c>、<c>dhcpcd</c>、<c>pump</c>或者<c>udhcpc</c>都可以提供DHCP功能。
+每一种DHCP模块都有各自的优缺点——下面是一个快速的检阅。
+</p>
+
+<table>
+<tr>
+  <th>DHCP模块</th>
+  <th>软件包</th>
+  <th>优点</th>
+  <th>缺点</th>
+</tr>
+<tr>
+  <ti><c>dhclient</c></ti>
+  <ti><c>net-misc/dhcp</c></ti>
+  <ti>
+    由ISC（也是BIND DNS软件的开发人员）制作；高度可配置性。
+  </ti>
+  <ti>
+    配置起来过于复杂；软件十分臃肿；无法通过DHCP获得NTP服务器；默认不发送主机名。
+  </ti>
+</tr>
+<tr>
+  <ti><c>dhcpcd</c></ti>
+  <ti><c>net-misc/dhcpcd</c></ti>
+  <ti>
+    Gentoo一直以来的预设软件；不依赖其他外部软件；由Gentoo开发的。
+  </ti>
+  <ti>有时很慢；当租约为无穷大时不会变成守护进程。</ti>
+</tr>
+<tr>
+  <ti><c>pump</c></ti>
+  <ti><c>net-misc/pump</c></ti>
+  <ti>
+    轻量级的；不依赖其他外部软件
+  </ti>
+  <ti>
+    不再被上游维护，不可靠，尤其在使用modem的时候；不能通过DHCP获得NIS服务器。
+  </ti>
+</tr>
+<tr>
+  <ti><c>udhcpc</c></ti>
+  <ti><c>net-misc/udhcp</c></ti>
+  <ti>
+    轻量级的——最小的DHCP客户端，为嵌入式系统设计。
+  </ti>
+  <ti>
+    未经考验——没有任何发行版默认使用它，不能定义3秒以上的超时。
+  </ti>
+</tr>
+</table>
+     
+<p>
+当你在系统上安装有不止一种DHCP客户端，你需要指定使用哪一个——否则如果系统装
+有<c>dhcpcd</c>，我们将默认使用它。
+</p>
+
+<p>
+你可以使用<c>module_eth0="..."</c><e>（把module改成你所使用DHCP模块的名称——例如
+：<c>dhcpcd_eth0</c>）</e>为DHCP模块指定选项。
+</p>
+
+<p>
+我们尝试使DHCP的配置更加灵活——所以我们通过<c>dhcp_eth0</c>变量来支持下面这些命令
+，默认不使用它们中的任何一个：
+</p>
+
+<ul>
+  <li><c>release</c> - 释放IP地址以便它可以被重新使用</li>
+  <li><c>nodns</c> - 不覆盖<path>/etc/resolv.conf</path></li>
+  <li><c>nontp</c> - 不覆盖<path>/etc/ntp.conf</path></li>
+  <li><c>nonis</c> - 不覆盖<path>/etc/yp.conf</path></li>
+</ul>
+
+<pre caption="在/etc/conf.d/net中的DHCP配置范例">
+<comment># 只在你安装了一个以上的DHCP模块后才需要</comment>
+modules=( "dhcpcd" ) 
+
+config_eth0=( "dhcp" )
+dhcpcd_eth0="-t 10" <comment># 10秒后超时</comment>
+dhcp_eth0="release nodns nontp nonis" <comment># 只获取IP地址</comment>
+</pre>
+
+<note>
+由于<c>dhcpcd</c>、<c>udhcpc</c>和<c>pump</c>默认会把主机名发送给DHCP服务器，
+所以你就可以不用去指定它了。
+</note>
+
+</body>
+</section>
+<section>
+<title>ADSL Modem</title>
+<body>
+
+<p>
+首先我们安装ADSL软件。
+</p>
+
+<pre caption="安装rp-pppoe软件包">
+# <i>emerge net-dialup/rp-pppoe</i>
+</pre>
+
+<warn>
+<c>baselayout-1.11.x</c>目前只支持PPPoE。我们希望以后的版本可以支持PPPoA。
+</warn>
+
+<p>
+现在我们需要通过修改<path>/etc/conf.d/net</path>来把<c>eth0</c>配置成ADSL的接口，
+并输入我们的用户名。
+</p>
+
+<pre caption="在/etc/conf.d/net中配置eth0为使用ADSL">
+config_eth0=( "adsl" )
+adsl_user_eth0="username"
+</pre>
+
+<p>
+最后你需要在<path>/etc/ppp/pap-secrets</path>中定义你的用户名和密码。
+</p>
+
+<pre caption="/etc/ppp/pap-secrets范例">
+<comment># *号非常重要</comment>
+"username"  *  "password"
+</pre>
+
+</body>
+</section>
+<section id="apipa">
+<title>APIPA（自动获得私有的IP地址）</title>
+<body>
+
+<p>
+APIPA通过在某网络接口arping在169.254.0.0-169.254.255.255范围内的某个随机地址的方
+式来在该范围内尝试寻找空闲地址。如果没有收到任何ARP应答，该IP地址就会被绑定到这个
+网络接口上。
+</p>
+
+<p>
+只有在网络上不存在DHCP服务器，同时本机不直接连接到internet并且其他所有的计算机都
+使用APIPA时才适用。
+</p>
+
+<p>
+为了支持APIPA，请emerge <c>net-misc/iputils</c>或<c>net-analyzer/arping</c>。
+</p>
+
+<pre caption="/etc/conf.d/net中的APIPA配置">
+<comment># 首先尝试DHCP——如果DHCP失败则使用APIPA</comment>
+config_eth0=( "dhcp" )
+fallback_eth0=( "apipa" )
+
+<comment># 只使用APIPA</comment>
+config_eth0=( "apipa" )
+</pre>
+
+</body>
+</section>
+<section>
+<title>绑定</title>
+<body>
+
+<p>
+为了使用连接绑定，请emerge <c>net-misc/ifenslave</c>。
+</p>
+
+<p>
+绑定可以用来增加网络带宽。如果你有两块网卡连接到同一个网络，你可以把它们绑定在
+一起这样你的应用程序只看到一个网卡，但实际上却是在同时使用两个物理网卡传送数据。
+</p>
+
+<pre caption="在/etc/conf.d/net中配置绑定">
+<comment># 把网络接口绑定在一起</comment>
+slaves_bond0="eth0 eth1 eth2"
+
+<comment># 你可以不为绑定而得的网络接口配置IP地址</comment>
+config_bond0=( "null" )
+
+<comment># 依赖eth0、eth1和eth2， 因为它们需要额外的配置</comment>
+depend_bond0() {
+  need net.eth0 net.eth1 net.eth2
+}
+</pre>
+
+</body>
+</section>
+<section>
+<title>桥接（802.1d的支持）</title>
+<body>
+
+<p>
+为了获得对桥接支持，请emerge <c>net-misc/bridge-utils</c>。
+</p>
+
+<p>
+桥接是用来把两个网络连接在一起。举例来说，你有一台通过ADSL modem接入internet的
+服务器，它同时通过无线网卡为其他计算机提供internet接入服务。你就可以创建桥接
+把这两个网络接口连接在一起。
+</p>
+
+<pre caption="/etc/conf.d/net中桥接的配置">
+<comment># 配置桥接——可以使用"man btctl"来获得更多信息</comment>
+brctl_br0=( "setfd 0" "sethello 0" "stp off" )
+
+<comment># 增加端口到网桥br0中</comment>
+bridge_br0="eth0 eth1"
+
+<comment># 你需要把端口配置成null，这样dhcp就不会启动了</comment>
+config_eth0=( "null" )
+config_eth1=( "null" )
+
+<comment># 最后为网桥配置一个IP地址——你也可以使用DHCP</comment>
+config_br0=( "192.168.0.1/24" )
+
+<comment># 依赖eth0和eth1，因为它们需要额外的配置</comment>
+depend_br0() {
+  need net.eth0 net.eth1
+}
+</pre>
+
+<impo>
+在使用一些桥接的设定时，
+你可能需要参考文档<uri link="?part=4&amp;chap=2#variable_name">变量名称</uri>
+</impo>
+
+</body>
+</section>
+<section>
+<title>MAC地址</title>
+<body>
+
+<p>
+如果你使用的是<c>sys-apps/baselayout-1.11.14</c>或者更新版本的话，你无需安装
+任何软件就可以更改网络接口对应的MAC地址或者为某个网络接口指定一个MAC地址。
+不过，如果你需要为网络接口指定一个随机的MAC地址或者你的baselayout的版本比上述版本
+要旧的话，你需要安装好<c>net-analyzer/macchanger</c>后才能使用这些功能。
+</p>
+
+<pre caption="MAC地址变更示例">
+<comment># 设置网络接口的MAC地址</comment>
+mac_eth0="00:11:22:33:44:55"
+
+<comment># 只随机选择MAC地址的最后3个字节</comment>
+mac_eth0="random-ending"
+
+<comment># 在同种物理连接类型(比如: 光纤、铜缆、无线)中随机选择，范围至所有制造商</comment>
+mac_eth0="random-samekind"
+
+<comment># 在任意物理连接类型(比如: 光纤、铜缆、无线)中随机选择，范围至所有制造商</comment>
+mac_eth0="random-anykind"
+
+<comment># 完全随机——警告: 一些通过这个方式获得的MAC地址有可能无法正常工作</comment>
+mac_eth0="random-full"
+</pre>
+
+</body>
+</section>
+<section>
+<title>隧道</title>
+<body>
+
+<p>
+你不需要安装任何软件就可以使用隧道，因为网络接口处理程序会帮你做好这些事。
+</p>
+
+<pre caption="在/etc/conf.d/net中配置隧道">
+<comment># GRE隧道</comment>
+iptunnel_vpn0="mode gre remote 207.170.82.1 key 0xffffffff ttl 255"
+
+<comment># IPIP隧道</comment>
+iptunnel_vpn0="mode ipip remote 207.170.82.2 ttl 255"
+
+<comment># 配置网络接口</comment>
+config_vpn0=( "192.168.0.2 peer 192.168.1.1" ) 
+</pre>
+
+</body>
+</section>
+<section>
+<title>VLAN（802.1q的支持）</title>
+<body>
+
+<p>
+为了获得对VLAN的支持，请emerge <c>net-misc/vconfig</c>.
+</p>
+
+<p>
+虚拟局域网（Virtual LAN）是一组有如运作在同个网段的一组网络设备的集合——尽管实际上
+可能不是。VLAN成员只能看到同一VLAN的成员，哪怕和其他VLAN成员处于同一物理网段中。
+</p>
+
+<pre caption="在/etc/conf.d/net中配置VLAN">
+<comment># 像这样为网络接口指定VLAN号</comment>
+<comment># 请确认每个VLAN号前面没有以0填充</comment>
+vlans_eth0="1 2"
+
+<comment># 你也可以配置VLAN</comment>
+<comment># 查看vconfig的手册页获取更多的信息</comment>
+vconfig_eth0=( "set_name_type VLAN_PLUS_VID_NO_PAD" )
+vconfig_vlan1=( "set_flag 1" "set_egress_map 2 6" )
+
+<comment># 按通常方法配置网络接口</comment>
+config_vlan1=( "172.16.3.1 netmask 255.255.254.0" )
+config_vlan2=( "172.16.2.1 netmask 255.255.254.0" )
+</pre>
+
+<impo>
+在使用一些VLAN的设定时，
+你可能需要查看文档<uri link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
+</impo>
+
+</body>
+</section>
+
+</sections>

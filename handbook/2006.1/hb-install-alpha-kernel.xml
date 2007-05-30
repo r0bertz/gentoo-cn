@@ -1,0 +1,403 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-alpha-kernel.xml,v 1.3 2007/03/13 20:17:31 nightmorph Exp $ -->
+
+<sections>
+
+<version>7.2</version>
+<date>2007-03-13</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设您要用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+</p>
+
+<p>
+对于alpha架构的系统，可以使用<c>vanilla-sources</c>（默认的2.6内核源码）。
+</p>
+
+<pre caption="安装内核源码">
+# <i>emerge vanilla-sources</i>
+</pre>
+
+<p>
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码是<c>vanilla-sources-2.6.16.19</c>。您的版本可能有所不同，所以请你记住它。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; linux-2.6.16.19
+</pre>
+
+<p>
+现在，我们开始配置和编译您的内核。您可以用<c>genkernel</c>来做这件事。这将会建立一个和安装光盘所用的内核相同的内核。我们将首先说明如何手动配置一个内核，因为这是优化您系统环境的最佳方法。
+</p>
+
+<p>
+如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。如果您希望使用<c>genkernel</c>，您可以阅读<uri link="#genkernel">备选：使用genkernel</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="manual">
+<title>默认：手动配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——但是当您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
+</p>
+
+<p>
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块（这是个不错的提示，它可以教你该选择哪些模块）。
+</p>
+
+<p>
+现在进入到您的内核目录并且执行<c>make menuconfig</c>。这将会启动一个基于ncureses的配置菜单。
+</p>
+
+<pre caption="开始menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者根本不能运行）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>必须启用的选项</title>
+<body>
+
+<p>
+首先，开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
+</p>
+
+<pre caption="选择experimental code/drivers">
+Code maturity level options ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时选择<c>Virtual memory</c>和<c>/proc file system</c>（2.4内核为<c>/dev file system</c> ＋ <c>Automatically mount at boot</c>）：
+</p>
+
+<pre caption="选择需要的文件系统">
+<comment>（2.4.x版本内核）</comment>
+File systems ---&gt;
+  [*] Virtual memory file system support (former shm fs)
+  [*] /proc file system support
+  [*] /dev file system support (EXPERIMENTAL)
+  [*]   Automatically mount at boot
+  [ ] /dev/pts file system for Unix98 PTYs
+
+<comment>（2.6.x版本内核）</comment>
+File systems ---&gt;
+  Pseudo Filesystems ---&gt;
+    [*] /proc file system support
+    [*] Virtual memory file system support (former shm fs)
+
+<comment>（选择下面所列出的您的系统所需要的一个或多个选项）</comment>
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; Ext3 journalling file system support
+  &lt;*&gt; JFS filesystem support
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; XFS filesystem support
+</pre>
+
+<p>
+如果您在使用PPPoE接入Interne或者您在使用拨号的调制解调器，您需要下面的选项：
+</p>
+
+<pre caption="选择PPPoE驱动">
+<comment>（2.4.x版本内核）</comment>
+Network device support ---&gt;
+  &lt;*&gt; PPP (point-to-point protocol) support
+  &lt;*&gt;   PPP support for async serial ports
+  &lt;*&gt;   PPP support for sync tty ports
+
+<comment>（2.6.x版本内核）</comment>
+Device Drivers ---&gt;
+  Networking support ---&gt;
+    &lt;*&gt; PPP (point-to-point protocol) support
+    &lt;*&gt;   PPP support for async serial ports
+    &lt;*&gt;   PPP support for sync tty ports
+</pre>
+
+<p>
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>rp-pppoe</c>并被配置成是使用核心PPPoE时才会用到它。
+</p>
+
+<p>
+如果您需要它，请不要忘记在内核中包含对您的网卡的支持。
+</p>
+
+<p>
+以下选项也是推荐您启用的：
+</p>
+
+<pre caption="推荐的Alpha选项">
+General setup ---&gt;
+  &lt;*&gt; SRM environment through procfs
+  &lt;*&gt; Configure uac policy via sysctl
+
+Plug and Play configuration ---&gt;
+  &lt;*&gt; Plug and Play support
+  &lt;M&gt;   ISA Plug and Play support
+
+SCSI support ---&gt;
+  SCSI low-level drivers ---&gt;
+    &lt;*&gt; SYM53C8XX Version 2 SCSI support (NEW)
+    &lt;*&gt; Qlogic ISP SCSI support
+
+Network device support ---&gt;
+  Ethernet (10 or 100 Mbit) ---&gt;
+    &lt;M&gt; DECchip Tulip (dc21x4x) PCI support
+    &lt;M&gt; Generic DECchip &amp; DIGITAL EtherWORKS PCI/EISA
+    &lt;M&gt; EtherExpressPro/100 support (eepro100)
+    &lt;M&gt; EtherExpressPro/100 support (e100)
+  Ethernet (1000 Mbit) ---&gt;
+    &lt;M&gt; Alteon AceNIC
+      [*] Omit support for old Tigon I
+    &lt;M&gt; Broadcom Tigon3
+  [*] FDDI driver support
+  &lt;M&gt; Digital DEFEA and DEFPA
+  &lt;*&gt; PPP support
+    &lt;*&gt; PPP Deflate compression
+
+Character devices ---&gt;
+  [*] Support for console on serial port
+  [*] Direct Rendering Manager
+
+File systems ---&gt;
+  &lt;*&gt; Kernel automounter version 4 support
+  Network File Systems ---&gt;
+    &lt;*&gt; NFS
+      [*] NFSv3 client
+      &lt;*&gt; NFS server
+      [*] NFSv3 server
+  Partition Types ---&gt;
+    [*] Advanced partition selection
+    [*] Alpha OSF partition support
+  Native Language Support
+    &lt;*&gt; NLS ISO 8859-1
+
+Sound ---&gt;
+  &lt;M&gt; Sound card support
+    &lt;M&gt; OSS sound modules
+      [*] Verbose initialisation
+      [*] Persistent DMA buffers
+      &lt;M&gt; 100% Sound Blaster compatibles
+</pre>
+
+<p>
+当您完成了内核配置，点击<uri link="#compiling">编译与安装</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译与安装</title>
+<body>
+
+<p>
+既然现在您的内核已经配置成功了，那么就是时候编译并且安装它了。退出配置界面并且开启编译进程：
+</p>
+
+<pre caption="编译内核">
+<comment>（2.4版本内核）</comment>
+# <i>make dep &amp;&amp; make vmlinux modules modules_install</i>
+
+<comment>（2.6版本内核）</comment>
+# <i>make &amp;&amp; make modules_install</i>
+
+<comment>（所有版本内核）</comment>
+# <i>make boot</i>
+</pre>
+
+<p>
+当内核编译完成，复制内核映像到<path>/boot</path>。较新版本的内核会创建<path>vmlinux</path>而不是<path>vmlinux.gz</path>。您复制内核映像的时候要记清楚了。
+</p>
+
+<pre caption="安装内核">
+# <i>cp arch/alpha/boot/vmlinux.gz /boot/</i>
+</pre>
+
+<p>
+现在请从<uri link="#kernel_modules">安装独立内核模块</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="genkernel">
+<title>备选：使用genkernel</title>
+<body>
+
+<p>
+如果您在阅读这部分，那么您选择了使用<c>genkernel</c>脚本来配置您自己的内核。
+</p>
+
+<p>
+现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用户来说是一个理想的解决方案。
+</p>
+
+<p>
+现在让我们来看看如何使用genkernel吧。首先，安装genkernel：
+</p>
+
+<pre caption="安装genkernel">
+# <i>emerge genkernel</i>
+</pre>
+
+<p>
+现在执行<c>genkernel all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间。
+</p>
+
+<p>
+另外需要注意的是，如果您的启动分区没有使用ext2或者ext3文件系统，您必须使用<c>genkernel --menuconfig all</c>来手动配置您的内核，把您所使用的文件系统编译进内核（<e>不能</e>编译为模块！）。
+</p>
+
+<pre caption="运行genkernel">
+* Gentoo Linux Genkernel; Version 3.4.0
+* Running with options: all
+
+* Linux Kernel 2.6.16.19 for alpha...
+* kernel: >> Running mrproper...
+# <i>genkernel all</i>
+<comment>（省略输出以增加可读性）</comment>
+* Kernel compiled successfully!
+*
+* Required Kernel Parameters:
+*     real_root=/dev/$ROOT
+*
+*     Where $ROOT is the device node for your root partition as the
+*     one specified in /etc/fstab
+*
+* If you require Genkernel's hardware detection features; you MUST
+* tell your bootloader to use the provided INITRAMFS file. Otherwise;
+* substitute the root argument for the real_root argument if you are
+* not planning to use the initrd...
+
+* WARNING... WARNING... WARNING...
+* Additional kernel cmdline arguments that *may* be required to boot properly...
+* Do NOT report kernel bugs as genkernel bugs unless your bug
+* is about the default genkernel configuration...
+*
+* Make sure you have the latest genkernel before reporting bugs.
+</pre>
+
+<p>
+一旦<c>genkernel</c>运行完成，一个包括全部模块和initrd的内核将被建立。在后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为您将在配置引导程序的时候用到他们。initrd将会在启动真正的系统前自动识别硬件（如同安装光盘一样）。
+</p>
+
+<pre caption="查看内核和initrd的名字">
+# <i>ls /boot/kernel* /boot/initramfs*</i>
+</pre>
+
+</body>
+</section>
+<section id="kernel_modules">
+<title>安装独立内核模块</title>
+<subsection>
+<title>安装额外的模块</title>
+<body>
+
+<p>
+您应该根据您系统上额外的硬件适当地安装一些ebuild。这儿列出一些内核相关的euibld，您可以考虑安装：
+</p>
+
+<table>
+<tcolumn width="1in"/>
+<tcolumn width="4in"/>
+<tcolumn width="2in"/>
+<tr>
+  <th>Ebuild</th>
+  <th>用途</th>
+  <th>命令</th>
+</tr>
+<tr>
+  <ti>x11-drm</ti>
+  <ti>
+    xorg-x11用来给9200、Rage128、Matrox、Voodoo以及其他更新的ATI Radeon显卡作图形加速用的。请查看<path>/usr/portage/x11-base/x11-drm</path> ebuild中的<c>IUSE_VIDEO_CARDS</c>变量，找出你的显卡代替命令中的<c>yourcard</c>。
+  </ti>
+  <ti><c>VIDEO_CARDS="yourcard" emerge x11-drm</c></ti>
+</tr>
+</table>
+
+<p>
+请注意，某些ebuild可能关联很多依赖性。要检查当emerge一个ebuild时会安装哪些软件包，使用<c>emerge --pretend</c>。以<c>x11-drm</c>软件包为例：
+</p>
+
+<pre caption="查看完整的安装软件包列表">
+# <i>emerge --pretend x11-drm</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>配置内核模块</title>
+<body>
+
+<p>
+您可以在<path>/etc/modules.autoload.d/kernel-2.4</path>（或<path>kernel-2.6</path>）中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记置换"&lt;kernel version&gt;"为您刚刚编译的内核的版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.4</path>或<path>kernel-2.6</path>然后输入模块的名字。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.4">
+<comment>（以2.4内核为例）</comment>
+# <i>nano -w /etc/modules.autoload.d/kernel-2.4</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.4或kernel-2.6">
+3c59x
+</pre>
+
+<p>
+现在请从<uri link="?part=1&amp;chap=8">配置您的系统</uri>一章来继续您的安装。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

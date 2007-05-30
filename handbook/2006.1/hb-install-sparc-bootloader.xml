@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+
+
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-sparc-bootloader.xml,v 1.1 2006/08/30 20:17:31 nightmorph Exp $ -->
+<sections>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>做出你的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在你的内核已经配置并编译好，系统必须的配置文件也写好了，到了安装启动你内核的程序的时候了。这样的程序被称作<e>引导器</e>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>安装SPARC的引导器：SILO</title>
+<body>
+
+<p>
+是时候安装和配置<uri 
+link="http://www.sparc-boot.org">SILO</uri>了，改进过的Sparc引导器(Sparc 
+Improved boot LOader)。
+</p>
+
+<pre caption = "安装SILO">
+# <i>emerge silo</i>
+</pre>
+
+<p>
+现在打开你喜欢的编辑器（我们使用<c>nano</c>来做例子）并创建<path>/etc/silo.conf</path>。
+</p>
+
+<pre caption = "创建 /etc/silo.conf">
+# <i>nano -w /etc/silo.conf</i>
+</pre>
+
+<p>
+在下面你可以找到一个<path>silo.conf</path>的范例。它使用本手册一直使用的分区方案并用<path>kernel-2.4.31</path>作为内核镜像
+</p>
+
+<pre caption = "/etc/silo.conf 范例">
+partition = 1         <comment># 引导分区（= 根分区）</comment>
+root = /dev/sda1      <comment># 根分区</comment>
+timeout = 150         <comment># 引导默认选择前等待15秒钟</comment>
+
+image = /boot/kernel-2.4.31
+  label = linux
+</pre>
+
+<p>
+如果你要使用Portage自带的<path>silo.conf</path>范例，请确保注释掉<e>所有</e>你不需要的行。
+</p>
+
+<p>
+如果你打算安装SILO的物理磁盘和存放<path>/etc/silo.conf</path>的不是同一个，那么你必须拷贝一份<path>/etc/silo.conf</path>到那个磁盘的分区里去。假设<path>/boot</path>是那个磁盘的一个单独分区，拷贝一份配置文件到<path>/boot</path>然后运行<c>/sbin/silo 
+-f</c>：
+</p>
+
+<pre caption = "仅在 /boot 和SILO的安装地点不在同一个磁盘">
+# <i>cp /etc/silo.conf /boot</i>
+# <i>/sbin/silo -f -C /boot/silo.conf</i>
+/boot/silo.conf appears to be valid
+</pre>
+
+<p>
+否则只要运行<c>/sbin/silo -f</c>：
+</p>
+
+<pre caption = "运行 silo">
+# <i>/sbin/silo -f</i>
+/etc/silo.conf appears to be valid
+</pre>
+
+<note>
+在你每次更新或者重装<c>sys-boot/silo</c>后都得再次运行<c>silo</c>（带参数）
+</note>
+
+<p>
+接下来<uri link="#reboot">重新启动系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重新启动系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot环境并卸载所有挂载过的分区。然后输入一个具有魔力的也是你期待已久的命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出 chroot，卸载所有分区然后重启">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然，不要忘记把引导CD拿出来，不然CD将再次启动你的电脑而不是你新装的Gentoo系统。
+</p>
+
+<p>
+一旦重启到你的Gentoo，接着来<uri 
+link="?part=1&amp;chap=11">结束你的Gentoo安装</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

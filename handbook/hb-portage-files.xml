@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-files.xml,v 1.14 2006/11/25 04:50:31 nightmorph Exp $ -->
+
+<sections>
+
+<abstract>
+当你想要深入了解Portage的时候，你需要知道它将文件和数据放在了什么地方。
+</abstract>
+
+<version>1.8</version>
+<date>2006-11-03</date>
+
+<section>
+<title>Portage 文件</title>
+<subsection>
+	
+<title>配置指南</title>
+<body>
+
+<p>
+Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当你打开它时，你
+就会发现所有的Portage配置选项都是通过变量来控制的。Portage听取的是什么变量的，这
+些变量分别又是什么意思，下面将详细解释。
+</p>
+
+<p>
+因为许多配置在不同的构架下是不同的，Portage也有默认的配置文件，它是你的profile的
+一部分。你的profile是<path>/etc/make.profile</path>这个链接所指向的；Portage的配
+置选项是在你的profile以及它所有的父profile中的<path>make.defaults</path>文件中设
+定的。我们稍后将详细解释profile及<path>/etc/make.profile</path>目录。
+</p>
+
+<p>
+如果打算改变配置变量，<e>不要</e>改动<path>/etc/make.globals</path>或
+是<path>make.defaults</path>。而应该修改<path>/etc/make.conf</path>，它比前面的
+文件有更高的优先级。你也会发现有一个<path>/etc/make.conf.example</path>。
+顾名思义，它是一个范例文件而已——Portage并不读取这个文件。
+</p>
+
+<p>
+你也可以将一个Portage的配置变量定义为环境变量，但我们并不推荐这样做。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Profile特定的信息</title>
+<body>
+
+<p>
+我们已经见到过<path>/etc/make.profile</path>目录了。不过，这并不是一个真正的目录
+，而是一个指向profile的符号链接，默认情况下是一个位
+于<path>/usr/portage/profiles</path>里的目录，虽然你也可以在其他地方创建自己
+的profile并指向他们。这个符号链接指向的profile就是你的系统所使用的。
+</p>
+
+<p>
+一个profile包含了Portage需要的架构相关的信息，比如该profile对应的system包含的软
+件包的列表，以及对这个profile来说不能运行的（或者被屏蔽掉）的软件列表，等等。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>用户特定的配置</title>
+<body>
+
+<p>
+当你需要变更Portage安装软件的行为时，你需要做的就是编
+辑<path>/etc/portage</path> 中的文件。我们<e>强烈建议</e>你使
+用<path>/etc/portage</path>中的文件而<e>不是</e>通过修改环境变量来变更这些行为！
+</p>
+
+<p>
+在<path>/etc/portage</path>目录中，你可以创建下列文档：
+</p>
+
+<ul>
+  <li>
+    <path>package.mask</path>它列出了你永远不希望Portage安装的软件包。
+  </li>
+  <li>
+    <path>package.unmask</path>它列出了你希望能安装的软件包，即使Gentoo的的开发者强烈建议你不要安装它们。
+  </li>
+  <li>
+    <path>package.keywords</path>它列出了你要安装的软件，即使它们还未被确认适合你的系统或架构。
+  </li>
+  <li>
+    <path>package.use</path>它列出了你希望某些特定软件包使用的而不是整个系统使用的USE标记。
+  </li>
+</ul>
+
+<p>
+更多关于<path>/etc/portage</path>目录的信息及你能创建的文件的完整列表可以
+在Portage的手册页中找到：
+</p>
+
+<pre caption="阅读Portage的手册页">
+$ <i>man portage</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>改变Portage文件和目录的位置</title>
+<body>
+
+<p>
+先前提到的配置文件不能保存在其他地方——Portage总是会在这些确定的位置搜索配置文件
+。不过Portage还用了许多其他的位置来满足不同的目的：编译、保存源代码、保
+存portage树。
+</p>
+
+<p>
+所有的这些目的都有大家都知道的默认位置，不过你可以根据你自己的口味
+通过<path>/etc/make.conf</path>来改变它们。本章中的其他部分将解释 Portage使用哪
+些特定的位置存放它们以及怎样改变它们在你的文件系统中的存放地点。
+</p>
+
+<p>
+这篇文档并不是一份全面的参考。如果你需要100%范围的说明，请参看Portage
+和<path>make.conf</path>的手册页:
+</p>
+
+<pre caption="阅读Portage和make.conf的手册页">
+$ <i>man portage</i>
+$ <i>man make.conf</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>储存文件</title>
+<subsection>
+<title>Portage树</title>
+<body>
+
+<p>
+Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定义的。当你
+把Portage树保存在其他位置（通过改变这个变量），不要忘了相应的改变符号
+链接<path>/etc/make.profile</path>的指向。
+</p>
+
+<p>
+如果你改变了PORTDIR变量，你可能也需要改变下面几个变量，因为它们不会注意
+到PORTDIR的改变。这是由于Portage处理变量的方式导致的：PKGDIR、DISTDIR、RPMDIR。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>预编译二进制包</title>
+<body>
+
+<p>
+虽然Portage并不默认使用预编译的二进制包，但却对其有广泛的支持。当你要
+求Portage使用预编译的二进制包时，它就会在<path>/usr/portage/packages</path>中寻
+找它们。这个位置是PKGDIR变量定义的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>源代码</title>
+<body>
+
+<p>
+程序的源代码默认保存于<path>/usr/portage/distfiles</path>。这个位置是DISTDIR变量定义的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>RPM文件</title>
+<body>
+
+<p>
+尽管Portage不能使用RPM文件，但它可以通过<c>ebuild</c>命令
+（参看<uri link="?part=3&amp;chap=6">Ebuild的应用</uri>）来生成他们。Portage默
+认保存RPM文件的位置是<path>/usr/portage/rpm</path>，是RPMDIR变量定义的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Portage数据库</title>
+<body>
+
+<p>
+Portage将你系统的状态（装了哪些软件包，什么文件属于哪个软件包……）保存
+在<path>/var/db/pkg</path>。<e>不要</e>手动改变这些文件！它可能破坏Portage对你系
+统的了解。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Portage缓存</title>
+<body>
+
+<p>
+Portage缓存（包括修改时间、虚拟包、依赖关系树信息……）储存
+在<path>/var/cache/edb</path>。这个位置就是一个缓存：如果你没有正在运
+行portage相关的程序，你就可以清空它。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>编译软件</title>
+<subsection>
+<title>Portage的临时文件</title>
+<body>
+
+<p>
+Portage的临时文件默认保存在<path>/var/tmp</path>。这是PORTAGE_TMPDIR变量定义的。
+</p>
+
+<p>
+如果你改变了PORTAGE_TMPDIR变量，你也需要改变下列的变量，因为它们不会注意
+到PORTAGE_TMPDIR的改变。这是由于PORTAGE处理变量的方式导致的：BUILD_PREFIX。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>编译目录</title>
+<body>
+
+<p>
+Portage为每一个它所安装的软件包在<path>/var/tmp/portage</path>里创建特定的编译
+目录。这一位置是BUILD_PREFIX变量定义的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Live文件系统位置</title>
+<body>
+
+<p>
+默认情况下，Portage将所有的文件安装到当前文件系统（<path>/</path>）里。但是你可
+以通过改变环境变量ROOT来改变它。这在你想要创建一个新的构造镜像时是很有用的。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>日志特性</title>
+<subsection>
+<title>Ebuild日志</title>
+<body>
+
+<p>
+Portage能为每一个ebuild建立日志文件，但只有当PORT_LOGDIR变量设定的位置
+是portage可写的才行。默认情况下，这个变量没有设定。如果你没有设定PORT_LOGDIR，你
+就不会收到当前日志系统报告的任何编译日志，然而你可能收到一些来自新
+的<c>elog</c>机制的日志。如果你定义了PORT_LOGDIR并且你也使用elog，你就将收到编译
+日志以及elog保存的任何日志，就像下文解释的一样。
+</p>
+
+<p>
+Portage通过<c>elog</c>对日志记录提供精确的控制：
+</p>
+
+<ul>
+  <li>
+    PORTAGE_ELOG_CLASSES：这是你设置什么信息被记入日志的地方。你可以使用任何用空
+    格分隔的<c>info</c>、<c>warn</c>、<c>error</c>和<c>log</c>的组合。
+  </li>
+  <li>
+    <ul>
+      <li>info: 记录下ebuild打印的“einfo”信息</li>
+      <li>warn: 记录下ebuild打印的“ewarn”信息</li>
+      <li>error: 记录下 ebuild打印的“eerror”信息</li>
+      <li>log: 记录下一些ebuild中的“elog”信息</li>
+    </ul>
+  </li>
+  <li>
+    PORTAGE_ELOG_SYSTEM：这是用来选择处理日志信息的模块的。如果留空，则日志记录
+    就被取消。你可以使用任何用空格分隔开
+    的<c>save</c>、<c>custom</c>、<c>syslog</c> 和 <c>mail</c>的组合。你必须至少
+    选择一个模块以使用elog。
+  </li>
+  <li>
+    <ul>
+      <li>
+        save：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或
+        者是在$PORT_LOGDIR 没有配置的情况下保存
+	在<path>/var/log/portage/elog</path> 目录下面。
+      </li>
+      <li>
+        custom：将所有的信息传递给用户在$PORTAGE_ELOG_COMMAND中定义的命令，这将
+        在随后讨论。
+      </li>
+      <li>syslog：把所有的信息发送给已安装的系统日志软件。</li>
+      <li>
+        mail：把所有的信息传递给用户在$PORTAGE_ELOG_MAILURI中定义的邮件服务器；
+        这将在随后讨论。这一elog的邮件特性需要&gt;=<c>portage-2.1.1</c>。
+      </li>
+    </ul>
+  </li>
+  <li>
+    PORTAGE_ELOG_COMMAND：这个仅仅在<c>custom</c>模块被激活时使用。在这里你指定
+    一个命令来处理日志信息。注意，你可以利用两个变量：${PACKAGE}是软件包的名字和
+    版本，而${LOGFILE}是日志文件的绝对路径。这里是一个可能的用法：
+  </li>
+  <li>
+    <ul>
+      <li>
+        PORTAGE_ELOG_COMMAND="/path/to/logger -p '\${PACKAGE}' -f '\${LOGFILE}'"
+      </li>
+    </ul>
+  </li>
+  <li>
+    PORTAGE_ELOG_MAILURI：这包含了<c>mail</c>模块的设定，如地址、用户、密码、
+    邮件服务器、端口。默认配置是 “root@localhost localhost”。
+  </li>
+  <li>
+    这里是一个使用smtp服务器的例子，基于用户名和密码认证并使用特定端口(默认端口
+    是25)：
+  </li>
+  <li>
+    <ul>
+      <li>
+        PORTAGE_ELOG_MAILURI="user@some.domain
+        username:password@smtp.some.domain:995"
+      </li>
+    </ul>
+  </li>
+  <li>
+    PORTAGE_ELOG_MAILFROM：允许你配置日志邮件的“from”地址；如果没有配置的话，默
+    认是“portage”。
+  </li>
+  <li>
+    PORTAGE_ELOG_MAILSUBJECT：允许你为日志邮件生成一个主题行。注意你可以使用两个
+    变量：${PACKAGE}将会显示软件包的名子和版本，而${HOST}则是运行Portage的主机的
+    FQDN。
+  </li>
+  <li>这里是一个可能的应用：</li>
+  <li>
+    <ul>
+      <li>
+	PORTAGE_ELOG_MAILSUBJECT="package \${PACKAGE} was merged on \${HOST}
+	with some messages"
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<impo>
+如果你使用Portage-2.0.*中的<c>enotice</c>，你必须完全移除enotice，因为它和elog不
+兼容。
+</impo>
+
+</body>
+</subsection>
+</section>
+</sections>
