@@ -205,7 +205,7 @@ magicboot=/usr/lib/yaboot/ofboot
 
 <comment>#################
 ## 如果你使用了一个以上的内核或是一组以上的启动选项这部分配置可以被复制
-## 启动参数-用你自己的kernel-version替换kernel-name
+## 启动参数-用你自己的内核文件名替换kernel-name
 #################</comment>
 image=/boot/kernel-name
   label=Linux
@@ -245,7 +245,7 @@ link="http://penguinppc.org/引导程序s/yaboot">yaboot项目</uri>。现在，
 </subsection>
 </section>
 <section id="bootx">
-<title>可选：BootX</title>
+<title>备选：BootX</title>
 <body>
 
 <impo>
