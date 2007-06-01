@@ -4,7 +4,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2006.1/hb-install-ppc-引导程序.xml,v 1.3 2006/11/13 09:56:55 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2006.1/hb-install-ppc-bootloader.xml,v 1.3 2006/11/13 09:56:55 nightmorph Exp $ -->
 
 <sections>
 
@@ -26,7 +26,7 @@
 如果你使用的是NewWorld架构的Apple或IBM机器，你需要使用<uri link="#yaboot">yaboot</uri>。
 OldWorld架构的Apple机器有两个选择，<uri link="#bootx">BootX</uri>（推荐）和
 <uri link="#quik">quik</uri>。虽然Pegasos机器并不需要一个引导程序，但是你仍然
-需要emerge<uri link="#bootcreator">BootCreator</uri>来创建SmartFirmware启动菜
+需要emerge <uri link="#bootcreator">BootCreator</uri>来创建SmartFirmware启动菜
 单。
 </p>
 
