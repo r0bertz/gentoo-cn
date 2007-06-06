@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-network.xml,v 1.51 2006/11/10 11:09:42 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-network.xml,v 1.52 2006/11/10 11:09:42 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 要下载最新的源代码，你要先设置好网络。
 </abstract>
 
-<version>3.1</version>
-<date>2006-11-10</date>
+<version>4.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>自动网络检测</title>
@@ -124,7 +124,7 @@ amd64、alpha、ppc和ppc64平台可用）来继续配置。
     普通以太网用户请继续阅读<uri link="#net-setup">默认：使用net-setup</uri>
   </li>
   <li>
-    ADSL用户请继续阅读<uri link="#rp-pppoe">备选：使用RP-PPPoE</uri>
+    ADSL用户请继续阅读<uri link="#ppp">备选：使用PPP</uri>
   </li>
   <li>
     PPTP用户请继续阅读<uri link="#pptp">备选：使用PPTP</uri>
@@ -159,18 +159,18 @@ amd64、alpha、ppc和ppc64平台可用）来继续配置。
 
 </body>
 </subsection>
-<subsection id="rp-pppoe">
-<title>备选：使用RP-PPPoE</title>
+<subsection id="ppp">
+<title>备选：使用PPP</title>
 <body>
 
 <p>
-假如你通过PPPoE连接internet，安装盘（所有版本）中包含的<c>rp-pppoe</c>工具
+假如你通过PPPoE连接internet，安装盘（所有版本）中包含的<c>ppp</c>工具
 会让事情变得简单。使用所提供的<c>pppoe-setup</c>脚本来配置网络。它会提示你输入
 一些信息，包括连接到你的adsl调制解调器的网络设备、用户名和密码、DNS服务器的
 IP以及是否需要一个基本的防火墙。
 </p>
 
-<pre caption="使用rp-pppoe">
+<pre caption="使用ppp">
 # <i>pppoe-setup</i>
 # <i>pppoe-start</i>
 </pre>
@@ -192,10 +192,6 @@ IP以及是否需要一个基本的防火墙。
 <subsection id="pptp">
 <title>备选：使用PPTP</title>
 <body>
-
-<note>
-PPTP仅支持x86架构
-</note>
 
 <p>
 如果你需要支持PPTP连接，可以使用我们的安装光盘中所提供的<c>pptpclient</c>。不过

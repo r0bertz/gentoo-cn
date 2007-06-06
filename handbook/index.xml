@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.66 2007/01/18 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.70 2007/01/18 15:35:24 nightmorph Exp $ -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
 <title>Gentoo手册</title>
@@ -18,8 +18,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 
 <license/>
 
-<version>0.42</version>
-<date>2006-10-15</date>
+<version>0.45</version>
+<date>2007-05-07</date>
 
 <chapter>
 <title>Gentoo手册的成果</title>
@@ -84,7 +84,9 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
     <uri link="handbook-ppc64.xml">ppc64</uri>, 
     <uri link="handbook-alpha.xml">alpha</uri>, 
     <uri link="handbook-hppa.xml">hppa</uri>, 
-    <uri link="handbook-mips.xml">mips</uri>
+    <uri link="handbook-mips.xml">mips</uri>,
+    <uri link="handbook-ia64.xml">ia64</uri>,
+    <uri link="handbook-arm.xml">arm</uri>
   </ti>
 </tr>
 <tr>
@@ -98,7 +100,9 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
     <uri link="handbook-ppc64.xml?full=1">ppc64</uri>, 
     <uri link="handbook-alpha.xml?full=1">alpha</uri>, 
     <uri link="handbook-hppa.xml?full=1">hppa</uri>, 
-    <uri link="handbook-mips.xml?full=1">mips</uri>
+    <uri link="handbook-mips.xml?full=1">mips</uri>,
+    <uri link="handbook-ia64.xml?full=1">ia64</uri>,
+    <uri link="handbook-arm.xml?full=1">arm</uri>
   </ti>
 </tr>
 <tr>
@@ -112,14 +116,16 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
     <uri link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri>, 
     <uri link="handbook-alpha.xml?style=printable&amp;full=1">alpha</uri>, 
     <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>, 
-    <uri link="handbook-mips.xml?style=printable&amp;full=1">mips</uri>
+    <uri link="handbook-mips.xml?style=printable&amp;full=1">mips</uri>,
+    <uri link="handbook-ia64.xml?style=printable&amp;full=1">ia64</uri>,
+    <uri link="handbook-arm.xml?style=printable&amp;full=1">arm</uri>,
   </ti>
 </tr>
 <tr>
   <ti>HTML</ti>
-  <ti>2006.1无网络安装指南</ti>
+  <ti>2007.0无网络安装指南</ti>
   <ti>
-    <uri link="/doc/zh_cn/handbook/2006.1/index.xml">2006.1 Gentoo手册</uri>
+    <uri link="/doc/zh_cn/handbook/2007.0/index.xml">2007.0 Gentoo手册</uri>
   </ti>
 </tr>
 </table>
@@ -127,7 +133,7 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 <p>
 我们也有基于特定发行版本的手册，它们包含了使用光盘进行<b>无网络</b>安装的安装
 指南。如果你对无网络安装感兴趣，请参阅<uri 
-link="/doc/zh_cn/handbook/2006.1/index.xml">Gentoo Linux 2006.1手册</uri>。
+link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
 </p>
 
 </body>
@@ -207,6 +213,18 @@ link="/doc/zh_cn/handbook/2006.1/index.xml">Gentoo Linux 2006.1手册</uri>。
     <uri link="2006.0/handbook-x86.xml">x86</uri>
   </ti>
 </tr>
+<tr>
+  <ti>2006.1</ti>
+  <ti>
+    <uri link="2006.1/handbook-alpha.xml">alpha</uri>,
+    <uri link="2006.1/handbook-amd64.xml">amd64</uri>,
+    <uri link="2006.1/handbook-hppa.xml">hppa</uri>,
+    <uri link="2006.1/handbook-ppc.xml">ppc</uri>,
+    <uri link="2006.1/handbook-ppc64.xml">ppc64</uri>,
+    <uri link="2006.1/handbook-sparc.xml">sparc</uri>,
+    <uri link="2006.1/handbook-x86.xml">x86</uri>
+  </ti>
+</tr>
 </table>
 
 </body>
@@ -257,8 +275,7 @@ Gentoo手册的目标是创建一份描述Gentoo Linux各方各面的有条有�
 
 <p>
 如果你发现手册中的一个bug，请访问我们的<uri link="http://bugs.gentoo.org">Gentoo
-Linux Bugzilla</uri>并给<e>Docs-user</e>项目的<e>Handbook</e>模块提交bug报告。
-
+Linux Bugzilla</uri>并给<e>Documentation</e>项目的<e>Installation Handbook</e>模块提交bug报告。
 </p>
 
 </body>

@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.104 2006/11/01 21:40:28 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.107 2006/11/01 21:40:28 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>7.4</version>
-<date>2006-11-01</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -63,12 +63,16 @@ Stage文件，就直接用光盘里的吧，否则再从网上下载就是浪费
 哪个stage文件才是你要下载的。
 </p>
 
-<ul>
+<p>
+最小化光盘，LiveCD和LiveDVD不包含任何stage文件
+</p>
+
+<ul test="not(contains('AMD64 x86', func:keyval('arch')))">
 <li>
   <uri link="#doc_chap2">默认：使用从网上下载的Stage</uri>
 </li>
 <li>
-  <uri link="#doc_chap3">备选：使用安装光盘里的Stage</uri>
+  <uri link="#doc_chap3">备选：使用通用安装光盘里的Stage</uri>
 </li>
 </ul>
 
@@ -91,8 +95,8 @@ Stage文件，就直接用光盘里的吧，否则再从网上下载就是浪费
 
 <p>
 根据你使用的安装介质不同，你有好几个工具可用来下载stage。如果
-有<c>links</c>，你可以马上连接到<uri link="/main/en/mirrors.xml">
-Gentoo镜像列表</uri>，然后选择一个离你最近的镜像站点来下载。
+有<c>links</c>，你可以马上连接到<uri
+link="/main/en/mirrors.xml">Gentoo镜像列表</uri>，然后选择一个离你最近的镜像站点来下载。
 </p>
 
 <p>
@@ -110,11 +114,13 @@ Gentoo镜像列表</uri>，然后选择一个离你最近的镜像站点来下�
 </p>
 
 <p>
-进入<path>releases/</path>目录，顺着你计算机的体系结构
-（例如<path>x86/</path>）和Gentoo的版本（<path>2006.1</path>）进入到
-<path>stages/</path>目录。你将会看到所有适合你计算机体系结构的stage
-文件（它们也可能放在各个独立的子体系名称的子目录里）。选择一个，
-然后按<c>D</c>来下载。下载完以后，再按<c>Q</c>退出浏览器。
+进入<path><keyval id="release-dir"/>stages/</path>目录里。你将会看到所有适合
+你的计算机体系结构的stage文件（它们也可能放在各个独立的子体系名称的子目录里）。
+选择一个，然后按<c>D</c>来下载。下载完以后，再按<c>Q</c>退出浏览器。
+</p>
+
+<p test="'x86'=func:keyval('arch')">
+大多数PC用户应该使用<b><keyval id="stage3"/></b> stage3文件。所有现代PC都是i686机器。如果你用的是一部旧机器，你可以检查Wikipedia上的<uri link="http://en.wikipedia.org/wiki/I686">i686兼容处理器列表</uri>。旧的处理器，比如Pentium，K5，K6或者Via C3以及其他类似的，需要<b>i586</b> stage3。只有很旧的处理器，比如80386和80486需要普适性的<b>x86</b> stage3（和很大的耐心）。
 </p>
 
 <pre caption="用links连接镜像列表">
@@ -136,8 +142,8 @@ Gentoo镜像列表</uri>，然后选择一个离你最近的镜像站点来下�
 </p>
 
 <pre caption="校验一个stage tarball完整性的例子">
-# <i>md5sum -c stage3-x86-2006.1.tar.bz2.DIGESTS</i>
-stage3-x86-2006.1.tar.bz2: OK
+# <i>md5sum -c <keyval id="stage3"/>.DIGESTS</i>
+<keyval id="stage3"/>: OK
 </pre>
 
 </body>
@@ -163,11 +169,13 @@ stage3-x86-2006.1.tar.bz2: OK
 有<c>f</c>表示我们要解开一个文件，而不是标准输入。
 </p>
 
+<!-- MIPS uses its own hb-install-stage.xml file, any other arch?
 <note>
 有些体系结构（例如：MIPS）的安装光盘和引导镜像依赖Busybox内
 建的<c>tar</c>命令，而它目前还不支持<c>v</c>参数。所以请用
 <c>xjpf</c>参数来代替。
 </note>
+-->
 
 <p>
 现在stage已经安装好，下面我们继续<uri link="#installing_portage">安
@@ -177,17 +185,11 @@ stage3-x86-2006.1.tar.bz2: OK
 </body>
 </subsection>
 </section>
-<section>
-<title>备选：使用安装光盘里的Stage</title>
+<section test="not(contains('AMD64 x86', func:keyval('arch')))">
+<title>备选：使用通用安装光盘里的Stage</title>
 <subsection>
 <title>解开Stage Tarball</title>
 <body>
-
-<impo test="contains('AMD64 x86', func:keyval('arch'))">
-如果你在<keyval id="arch"/>上并且使用安装LiveCD，你的光盘上就<e>没
-有</e>stage。你需要按照<uri link="#doc_chap2">使用从网上下载
-的Stage</uri>来做。
-</impo>
 
 <p>
 stage文件在光盘的<path>/mnt/cdrom/stages</path>目录里。查看可用的stage
@@ -221,12 +223,12 @@ ls: /mnt/cdrom/stages: No such file or directory
 现在我们来解开你选择的stage tarball。我们将使用<c>tar</c>。确保你使
 用了同样的参数（<c>xvjpf</c>）。<c>v</c>参数是可选的，而且有些版本
 的<c>tar</c>不支持它。接下来的一个例子里，我们解开stage tarball
-<path>stage3-&lt;subarch&gt;-2006.1.tar.bz2</path>。确保用你的stage
+<path>stage3-&lt;subarch&gt;-2007.0.tar.bz2</path>。确保用你的stage
 来替换tarball的文件名。
 </p>
 
 <pre caption="解开stage tarball">
-# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2006.1.tar.bz2</i>
+# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2007.0.tar.bz2</i>
 </pre>
 
 <p>
@@ -375,50 +377,43 @@ host定义了编译出的软件将运行的系统类型）。这个变量应该�
 </p>
 
 <p>
-第一个设置是<c>-march=</c>标记，它指定了目标架构的名字。可能的选项
-会在<path>make.conf.example</path>里有说明（以注释形式出现）。比如，
-对于x86 Athlon XP架构：
+第一个设置是<c>-march=</c>或者<c>-mcpu=</c>标记，它指定了目标架构的名字。可能的选项
+会在<path>make.conf.example</path>里有说明（以注释形式出现）。
 </p>
-
-<pre caption="GCC的march设置">
--march=athlon-xp
-</pre>
 
 <p>
 第二个是<c>-O</c>标记（是大写的O，而不是数字零），它是指定<c>gcc</c>
 的优化级别的标记。可能的级别有<c>s</c>（为优化文件大小），<c>0</c>（
 零——不优化），<c>1</c>、<c>2</c>或者<c>3</c>是为了获得更快速度的
 优化标记（每个级别都包含前一级标记的优化措施，并额外增加了一些）。
-举个例子，下面是级别2的优化：
+<c>-O2</c>是推荐的默认设置。
 </p>
-
-<pre caption="GCC的O设置">
--O2
-</pre>
 
 <p>
 另一个普遍使用的优化标记是<c>-pipe</c>（在各种不同阶段编译的时候使用管道而不是临时文件来通信）。
+它对产生的代码没有任何影响。
 </p>
 
 <p>
-提醒你一下，使用<c>-fomit-frame-pointer</c>（它将不在寄存器里为不需
+使用<c>-fomit-frame-pointer</c>（它将不在寄存器里为不需
 要帧指针的函数保存帧指针）可能会在调试程序的时候造成严重后果！
 </p>
 
 <p>
-在你定义<c>CFLAGS</c>和<c>CXXFLAGS</c>的时候，你需要像下面的例子一样
-把这些优化标记都合并起来：
+在你定义<c>CFLAGS</c>和<c>CXXFLAGS</c>的时候，你需要把这些优化标记都合并起来。
+stage3文件里包含的你解压缩出来的默认值已经足够好了。下面这个例子仅仅是个例子：
 </p>
 
-<pre test="contains('Alpha arm HPPA IA64 MIPS PPC PPC64 SPARC x86', func:keyval('arch'))" caption="定义CFLAGS和CXXFLAGS变量">
-CFLAGS="-march=athlon-xp -pipe -O2"
-CXXFLAGS="${CFLAGS}"                  <comment># 两个变量使用相同的设置</comment>
+<pre test="not(func:keyval('arch')='AMD64')" caption="定义CFLAGS和CXXFLAGS变量">
+CFLAGS="<keyval id="CFLAGS"/>"
+<comment># 两个变量使用相同的设置</comment>
+CXXFLAGS="${CFLAGS}"                  
 </pre>
 
 <pre test="func:keyval('arch')='AMD64'" caption="定义CFLAGS和CXXFLAGS变量">
-CFLAGS="-march=athlon-xp -pipe -O2"   <comment># AMD64用户想要一个原生的64位系统的话，应该使用-march=athlon64</comment>
-                                     <comment># EM64T用户应该用-march=nocona</comment>
-CXXFLAGS="${CFLAGS}"                 <comment># 两个变量使用相同的设置</comment>
+CFLAGS="<keyval id="CFLAGS"/>"   <comment># EM64T应该使用-march=nocona</comment>
+<comment># 两个变量使用相同的设置</comment>
+CXXFLAGS="${CFLAGS}"                  
 </pre>
 
 </body>

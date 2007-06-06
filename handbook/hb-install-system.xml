@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-system.xml,v 1.104 2006/11/02 09:50:33 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-system.xml,v 1.106 2006/11/02 09:50:33 neysx Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 到这一状态。
 </abstract>
 
-<version>7.5</version>
-<date>2006-11-01</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>Chroot</title>
@@ -74,7 +74,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 
 </body>
 </subsection>
-<subsection>
+<subsection test="not(func:keyval('arch')='IA64')">
 <title>挂载/proc和/dev文件系统</title>
 <body>
 
@@ -87,6 +87,24 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 <pre caption="挂载/proc和/dev">
 # <i>mount -t proc none /mnt/gentoo/proc</i>
 # <i>mount -o bind /dev /mnt/gentoo/dev</i>
+</pre>
+
+</body>
+</subsection>
+<subsection test="func:keyval('arch')='IA64'">
+<title>挂载/proc和/dev文件系统</title>
+<body>
+
+<p>
+将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的
+环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path>
+<path>/sys</path>文件系统。
+</p>
+
+<pre caption="挂载/proc /sys和/dev">
+# <i>mount -t proc none /mnt/gentoo/proc</i>
+# <i>mount -o bind /dev /mnt/gentoo/dev</i>
+# <i>mount -o bind /sys /mnt/gentoo/sys</i>
 </pre>
 
 </body>
@@ -166,12 +184,7 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
 值，它还把系统可用的软件版本锁定在某个范围。而这些都是由Gentoo的开发者来维护的。
 </p>
 
-<p test="contains('Alpha x86', func:keyval('arch'))">
-以前，这个profile很少被用户接触到。然而<keyval id="arch"/>用户可以在两个profile
-中选择，一个是2.4版本的内核，一个是2.6版本的内核。这样做是为了加强对2.6内核的可整合性。
-</p>
-
-<p test="contains('AMD64 arm HPPA IA64 MIPS PPC PPC64 SPARC', func:keyval('arch'))">
+<p>
 以前，这个profile很少会有用户接触到。然而，有些情况下你可以决定需不需要修改profile。
 </p>
 
@@ -181,7 +194,7 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
 
 <pre caption="验证系统profile">
 # <i>ls -FGg /etc/make.profile</i>
-lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/default-linux/x86/2006.1/
+lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/default-linux/x86/2007.0/
 </pre>
 
 <p>
@@ -191,83 +204,25 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/defau
 
 <p>
 系统也为某些架构提供了可用的<c>desktop</c>和<c>server</c>的子profile。请查看一下
-是否可以在<path>2006.1/</path>profile里面找到这两个子profile。你也许想看一
+是否可以在<path>2007.0/</path>profile里面找到这两个子profile。你也许想看一
 下<c>desktop</c> profile的<path>make.defaults</path>是否适合你的需要。
 </p>
 
+<p>
+看完了<path>/usr/portage/profiles/</path>里你的体系结构可用的profile之后，如果你
+愿意，你可以换一个profile。
+</p>
+
+<pre caption="切换profile">
+# <i>ln -snf /usr/portage/profiles/&lt;profile name&gt; /etc/make.profile</i>
+</pre>
+
 <p test="func:keyval('arch')='AMD64'">
-如果你想要一个纯64位的环境，而不需要32位应用程序和库，你应该使用non-multilib profile：
+如果你想使用纯64位环境，不用任何的32位程序和库，你应该使用no-multilib profile。
 </p>
 
 <pre test="func:keyval('arch')='AMD64'" caption="切换到non-multilib profile">
-# <i>ln -snf /usr/portage/profiles/default-linux/amd64/2006.1/no-multilib /etc/make.profile</i>
-</pre>
-
-<p>
-有一些用户想要安装一个基于旧的2.4版本内核profile的系统。如果你确实想要这么做，请
-先检查一下是否有额外的profile存在。在x86硬件架构上，我们可用用下面的命令来做：
-</p>
-
-<pre caption="找出是否还有额外的profile存在">
-# <i>ls -d /usr/portage/profiles/default-linux/x86/no-nptl/2.4</i>
-/usr/portage/profiles/default-linux/x86/no-nptl/2.4
-</pre>
-
-<p>
-上面的例子显示出有额外的2.4 profile存在（比如:它没有抱怨说找不到文件或者目录）。
-尽管我们推荐你使用默认的，但是如果你想要切换到另一个，你可以照下面的做：
-</p>
-
-<pre caption="切换到一个2.4的profile">
-<comment>（确定你使用了正确的架构，下面的例子用的是x86）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/x86/no-nptl/2.4 /etc/make.profile</i>
-<comment>（列出2.4 profile里的文件）</comment>
-# <i>ls -FGg /etc/make.profile/</i>
-total 12
--rw-r--r--  1 939 Dec 10 14:06 packages
--rw-r--r--  1 347 Dec  3  2004 parent
--rw-r--r--  1 573 Dec  3  2004 virtuals
-</pre>
-
-<p test="func:keyval('arch')='PPC'">
-对于ppc，2006.1提供了几个新的profile：
-</p>
-
-<pre test="func:keyval('arch')='PPC'" caption="PPC Profiles PPC的Profile">
-<comment>（通用的PPC profile，适用于所有的PPC机器，最精简的）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc32/2006.1 /etc/make.profile</i>
-<comment>（G3 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc32/2006.1/G3 /etc/make.profile</i>
-<comment>（G3 Pegasos profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc32/2006.1/G3/Pegasos/ /etc/make.profile</i>
-<comment>（G4 (Altivec) profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc32/2006.1/G4 /etc/make.profile</i>
-<comment>（G4 (Altivec) Pegasos profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc32/2006.1/G4/Pegasos/ /etc/make.profile</i>
-</pre>
-
-<p test="func:keyval('arch')='PPC64'">
-对于ppc64,2006.1提供了几个新的profile：
-</p>
-
-<pre test="func:keyval('arch')='PPC64'" caption="PPC64 Profiles">
-<comment>（一般的64位用户层的PPC64的profile，适用于所有PPC64的机器）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/64bit-userland /etc/make.profile</i>
-<comment>（一般的32位用户层的PPC64的profile，适用于所有PPC64的机器）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/32bit-userland /etc/make.profile</i>
-<comment>（每个类型的用户层都有相应的子profile，通过把(userland)替换成上面提到的用户层的名称来选择它们）
-</comment>
-<comment>（JS20对应的970 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/(userland)/970 /etc/make.profile</i>
-<comment>（G5 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/(userland)/970/pmac /etc/make.profile</i>
-<comment>（POWER3 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/(userland)/power3 /etc/make.profile</i>
-<comment>（POWER4 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/(userland)/power4 /etc/make.profile</i>
-<comment>（POWER5 profile）</comment>
-# <i>ln -snf /usr/portage/profiles/default-linux/ppc/ppc64/2006.1/(userland)/power5 /etc/make.profile</i>
-<comment>（这个发行版本里的multilib profile目前还不稳定。）</comment>
+# <i>ln -snf /usr/portage/profiles/default-linux/amd64/2007.0/no-multilib /etc/make.profile</i>
 </pre>
 
 </body>
@@ -336,7 +291,7 @@ USE="-gtk -gnome qt3 qt4 kde dvd alsa cdr"
 </body>
 </subsection>
 <subsection>
-<title>可选：GLIBC Locales</title>
+<title>可选：glibc Locales</title>
 <body>
 
 <p>
@@ -363,11 +318,6 @@ de_DE@euro ISO-8859-15
 下一步我们运行<c>locale-gen</c>。它会产生所有你指定的
 位于<path>/etc/locale.gen</path>文件里的locale。
 </p>
-
-<note>
-<c>locale-gen</c>在<c>glibc-2.3.6-r4</c>以及被它更新的版本里提供。如果你在使用一
-个旧版本的glibc，你应该现在就升级它。
-</note>
 
 <p>
 现在我们继续<uri link="?part=1&amp;chap=7">配置内核</uri>。

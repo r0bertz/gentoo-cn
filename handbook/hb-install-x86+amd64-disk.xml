@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-disk.xml,v 1.6 2006/11/02 20:55:33 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-disk.xml,v 1.8 2006/11/02 20:55:33 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 为了能够安装Gentoo，你必须创建所需的分区。本章讲解如何给磁盘分区以备后用。
 </abstract>
 
-<version>4.1</version>
-<date>2006-11-02</date>
+<version>5.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>块设备介绍</title>

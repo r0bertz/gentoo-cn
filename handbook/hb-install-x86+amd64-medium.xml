@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml,v 1.5 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml,v 1.8 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你可以用许多方法安装Gentoo。本章讲解怎样用最小化安装光盘安装Gentoo，尽管使用安装程序LiveCD也是可以的。
 </abstract>
 
-<version>4.0</version>
-<date>2006-08-30</date>
+<version>5.1</version>
+<date>2007-05-18</date>
 
 <section>
 <title>硬件需求</title>
@@ -46,7 +46,7 @@
 <tr>
   <th>内存</th>
   <ti>64MB</ti>
-  <ti>128MB</ti>
+  <ti>256MB</ti>
 </tr>
 <tr>
   <th>硬盘空间</th>
@@ -63,20 +63,26 @@
 
 <table>
 <tr>
+  <ti/>
+  <th>Minimal CD</th>
+  <th>LiveCD</th>
+</tr>
+<tr>
   <th>CPU</th>
-  <ti>任何AMD64 CPU</ti>
+  <ti colspan="2">任何AMD64 CPU或者EM64T CPU</ti>
 </tr>
 <tr>
   <th>内存</th>
   <ti>64MB</ti>
+  <ti>256MB</ti>
 </tr>
 <tr>
   <th>硬盘空间</th>
-  <ti>1.5GB(不包括交换分区)</ti>
+  <ti colspan="2">1.5GB(不包括交换分区)</ti>
 </tr>
 <tr>
   <th>交换分区</th>
-  <ti>至少256MB</ti>
+  <ti colspan="2">至少256MB</ti>
 </tr>
 </table>
 
@@ -107,7 +113,7 @@ AMD64项目的页面</uri>。
 </p>
 
 <impo>
-如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2006.1/">Gentoo 2006.1
+如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2007.0/">Gentoo 2007.0
 手册</uri>里的说明。
 </impo>
 
@@ -224,8 +230,8 @@ id="release-dir"/>stages/</path>目录里下载。
 
 <p>
 你可以从我们任何一个<uri
-link="/main/en/mirrors.xml">镜像</uri>下载。这些安装光盘位于
-<path><keyval id="release-dir"/>installcd/</path>目录里。
+link="/main/en/mirrors.xml">镜像</uri>下载。这些安装光盘位于<path><keyval
+id="release-dir"/>installcd/</path>目录里。
 </p>
 
 <p>
@@ -412,14 +418,6 @@ boot: <i>gentoo dopcmcia</i>
 
 <pre caption="加载内核模块">
 # <i>modprobe 8139too</i>
-</pre>
-
-<p>
-如果你需要PCMCIA的支持，你应该启动pcmcia初始化脚本：
-</p>
-
-<pre caption="启动pcmcia初始化脚本">
-# <i>/etc/init.d/pcmcia start</i>
 </pre>
 
 </body>
