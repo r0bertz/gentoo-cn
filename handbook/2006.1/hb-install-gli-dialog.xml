@@ -169,7 +169,7 @@ need to specify a snapshot URI.
 <body>
 
 <p>
-因为您正在进行GRP/无网络安装，所以不能在安装之前选择USE标记。不过，当您重起进入安装
+因为您正在进行GRP/无网络安装，所以不能在安装之前选择USE标记。不过，当您重启进入安装
 完成的系统后，您就可以在<path>/etc/make.conf</path>中设置USE标记了。
 </p>
 
