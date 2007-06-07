@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/handbook-x86.xml,v 1.4 2006/11/29 15:28:54 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/handbook-x86.xml,v 1.5 2006/11/29 15:28:54 nightmorph Exp $ -->
 
 <book link="/doc/zh_cn/handbook/2006.1/handbook-x86.xml" disclaimer="oldbook" lang="zh_cn">
 <title>Gentoo Linux 2006.1 x86手册</title>

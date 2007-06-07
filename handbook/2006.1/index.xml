@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/index.xml,v 1.3 2006/11/29 15:28:54 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/index.xml,v 1.4 2006/11/29 15:28:54 nightmorph Exp $ -->
 
 <guide link="/doc/zh_cn/handbook/2006.1/index.xml" disclaimer="oldbook" lang="zh_cn">
 <title>Gentoo 2006.1 手册</title>
