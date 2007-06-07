@@ -4,15 +4,15 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license
  See http://creativecommons.org/licenses/by-sa/2.5
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-kernel.xml,v 1.7 2006/12/06 19:59:09 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-kernel.xml,v 1.13 2006/12/06 19:59:09 nightmorph Exp $ -->
 <sections>
 
 <abstract>
 Linux内核是每个发行版的核心。本章节将解释如何配置您自己的内核。
 </abstract>
 
-<version>4.1</version>
-<date>2006-12-06</date>
+<version>5.1</version>
+<date>2007-05-15</date>
 
 <section>
 <title>时区</title>
@@ -47,23 +47,20 @@ link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </p>
 
 <p test="func:keyval('arch')='x86'">
-对于x86架构的系统来说，可以使用列表中的<c>vanilla-sources</c>（内核开发者开发的
-基础版本），<c>gentoo-sources</c>（包含高性能和特性补丁的版本）……
+对于x86架构的系统来说，可以使用列表中的<c>gentoo-sources</c>（包含性能提升补丁的版本）。
 </p>
 
 <p test="func:keyval('arch')='AMD64'">
 对于AMD64架构的系统来说，Gentoo提供<c>gentoo-sources</c>（打过专门针对amd64的补
-丁的提升了稳定性、性能和硬件支持的2.6版内核）。
+丁的提升了稳定性、性能和硬件支持的内核）。
 </p>
 
 <p>
-选择你的内核源代码并使用<c>emerge</c>来安装。<c>USE="-doc"</c>用来避免您现在
-就安装xorg-x11或者其他依赖关系。<c>USE="symlink"</c>对于一个全新安装来说并不是
-必须的，但是它可以确保<path>/usr/src/linux</path>符号连接的正确创建。
+选择你的内核源代码并使用<c>emerge</c>来安装。
 </p>
 
 <pre caption="安装内核源码">
-# <i>USE="-doc symlink" emerge gentoo-sources</i>
+# <i>emerge gentoo-sources</i>
 </pre>
 
 <p>
@@ -194,21 +191,7 @@ memory</c>和<c>/proc file system</c>的支持。
 </body>
 <body test="func:keyval('arch')='x86'">
 
-<p>
-如果您正在使用的是2.4版本的内核，您需要选择<c>/dev file system</c>因为2.4内
-核不支持<c>udev</c>。
-</p>
-
 <pre caption="选择需要的文件系统">
-<comment>（2.4.x版本内核）</comment>
-File systems ---&gt;
-  [*] Virtual memory file system support (former shm fs)
-  [*] /proc file system support
-  [*] /dev file system support (EXPERIMENTAL)
-  [*]   automatically mount /dev at boot
-  [ ] /dev/pts file system for Unix98 PTYs
-
-<comment>（2.6.x版本内核）</comment>
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
     [*] /proc file system support
@@ -221,20 +204,6 @@ File systems ---&gt;
   &lt;*&gt; JFS filesystem support
   &lt;*&gt; Second extended fs support
   &lt;*&gt; XFS filesystem support
-</pre>
-
-<p>
-如果您的BIOS不支持大硬盘而且您设置了硬盘的跳线致其报告硬盘容量受限，您需要开启
-下面的选项：
-</p>
-
-<pre caption="启用Auto-geometry resizing的支持">
-<comment>(仅限于2.4.版本内核)</comment>
-ATA/IDE/MFM/RLL support ---&gt;
-  IDE, ATA and ATAPI Block devices ---&gt;
-    &lt;*&gt;   Include IDE/ATA-2 DISK support
-    [ ]     Use multi-mode by default
-    [*]     Auto-Geometry Resizing support
 </pre>
 
 </body>
@@ -282,13 +251,6 @@ Device Drivers ---&gt;
 </pre>
 
 <pre caption="选择PPPoE驱动" test="func:keyval('arch')='x86'">
-<comment>（2.4.x版本内核）</comment>
-Network device support ---&gt;
-  &lt;*&gt; PPP (point-to-point protocol) support
-  &lt;*&gt;   PPP support for async serial ports
-  &lt;*&gt;   PPP support for sync tty ports
-
-<comment>（2.6.x版本内核）</comment>
 Device Drivers ---&gt;
   Networking support ---&gt;
     &lt;*&gt; PPP (point-to-point protocol) support
@@ -298,7 +260,7 @@ Device Drivers ---&gt;
 
 <p>
 两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项
-也不是必需的，只在使用<c>rp-pppoe</c>并被配置成是使用核心PPPoE时才会用到它。
+也不是必需的，只在使用<c>ppp</c>并被配置成使用核心PPPoE时才会用到它。
 </p>
 
 <p>
@@ -338,16 +300,10 @@ Device Drivers ---&gt;
 <body test="func:keyval('arch')='x86'">
 
 <p>
-那些希望使用PCMCIA的笔记本用户如果使用的是2.4版本的内核，他们就<e>不应该</e>
-使用PCMCIA驱动。以后可以通过安装<c>pcmcia-cs</c>软件包来支持近来的大部
-分PCMCIA驱动程序。2.6版本内核的用户应该使用内核中的PCMCIA驱动。
+如果你想要对你的笔记本的PCMCIA支持，也不要忘了在系统中允许PCMCIA card bridge。
 </p>
 
-<p>
-除了在2.6内核中加入PCMCIA支持，也不要忘了在系统中允许PCMCIA card bridge。
-</p>
-
-<pre caption="启动2.6内核的PCMCIA支持">
+<pre caption="启用PCMCIA支持">
 Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
   PCCARD (PCMCIA/CardBus) support  ---&gt;
     &lt;*&gt; PCCard (PCMCIA/CardBus) support
@@ -378,11 +334,7 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 开启编译进程：
 </p>
 
-<pre caption="编译内核" test="func:keyval('arch')='x86'">
-<comment>（2.4版本内核）</comment>
-# <i>make dep &amp;&amp; make bzImage modules modules_install</i>
-
-<comment>（2.6版本内核）</comment>
+<pre caption="编译内核">
 # <i>make &amp;&amp; make modules_install</i>
 </pre>
 
@@ -435,12 +387,10 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 <body test="func:keyval('arch')='x86'">
 
 <p>
-然后，如果您要配置2.6内核，复制安装光盘上的内核配置文件到genkernel搜索配置文
-件的默认位置：
+然后，复制安装光盘上的内核配置文件到genkernel搜索配置文件的默认位置：
 </p>
 
 <pre caption="复制安装光盘的配置文件">
-<comment>（仅限于配置2.6版本内核）</comment>
 # <i>zcat /proc/config.gz &gt; /usr/share/genkernel/x86/kernel-config-2.6</i>
 </pre>
 
@@ -473,23 +423,6 @@ all</c>来手动配置您的内核，把您所使用的文件系统
 # <i>ls /boot/kernel* /boot/initramfs*</i>
 </pre>
 
-<p>
-现在，让我们进行下一个步骤以使我们的系统更象安装光盘──安装<c>coldplug</c>。
-当initrd自动识别引导系统的硬件的时候，<c>coldplug</c>自动识别其他的硬件。
-要安装和使用<c>coldplug</c>，请按照以下输入：
-</p>
-
-<pre caption="安装和使用coldplug">
-# <i>emerge coldplug</i>
-# <i>rc-update add coldplug boot</i>
-</pre>
-
-<note>
-如果您在使用<c>udev</c>103或者更高的版本，您就不用安装<c>coldplug</c>。
-如果您接收到<c>udev</c> blocks <c>coldplug</c>的信息，那么您就不需要安
-装<c>coldplug</c>。
-</note>
-
 </body>
 </section>
 <section id="kernel_modules">
@@ -497,10 +430,6 @@ all</c>来手动配置您的内核，把您所使用的文件系统
 <subsection>
 <title>配置内核模块</title>
 <body>
-
-<note test="func:keyval('arch')='x86'">
-如果您选择2.4版本内核，只需要用<c>2.4</c>来代替本段出现的<c>2.6</c>。
-</note>
 
 <p>
 您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要

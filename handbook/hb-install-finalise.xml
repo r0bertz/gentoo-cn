@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-finalise.xml,v 1.47 2006/12/03 23:05:54 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-finalise.xml,v 1.48 2006/12/03 23:05:54 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 您几乎已经完成了。接下来我们只需要为您的系统创建一个（或更多）用户就可以了。
 </abstract>
 
-<version>7.1</version>
-<date>2006-12-03</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>用户管理</title>
@@ -112,7 +112,7 @@ Re-enter password: <comment>（再次输入以便进行校验）</comment>
 <p>
 现在您的gentoo已经结束了安装并完成了重启，如果一切顺利，您就可以将下载下来
 的stage3 tarball和Portage快照文件从硬盘里清除掉了。请记住它们是被下载到您
-的根(<path>/</path>)目录中的。
+的<path>/</path>目录中的。
 </p>
 
 <pre caption="移除stage3 tarball">

@@ -5,12 +5,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml,v 1.6 2006/11/02 07:27:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml,v 1.8 2006/11/02 07:27:24 nightmorph Exp $ -->
 
 <sections>
 
-<version>4.2</version>
-<date>2006-11-01</date>
+<version>5.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>做出您的选择</title>
@@ -54,7 +54,7 @@ link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
 是<c>vesafb</c>驱动，您将<e>需要</e>设置<c>vga</c>参数。
 </p>
 
-<p test="func:keyval('arch')='AMD64'">
+<p test="contains('AMD64 IA64',func:keyval('arch'))">
 64位系统必须使用<c>vesafb</c>驱动，并且需要在内核启动参数中添加<c>vga</c>参数。
 </p>
 
@@ -148,16 +148,20 @@ link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
 </table>
 
 </body>
-<body test="func:keyval('arch')='AMD64'">
+<body test="contains('AMD64 IA64',func:keyval('arch'))">
 
 <p>
 最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>。将它
 们记下来；很快您将用到它们。
 </p>
 
-<p>
+<p test="func:keyval('arch')='AMD64'">
 由于目前LILO还不能在AMD64位平台上正常工作，Gentoo只推荐使用GRUB。现在我们继续介
 绍它的<uri link="#grub">安装</uri>。
+</p>
+
+<p test="func:keyval('arch')='IA64'">
+现在你应该安装<uri link="#elilo">elilo引导程序</uri>.
 </p>
 
 </body>
@@ -177,7 +181,7 @@ link="#lilo">LILO</uri>。
 </body>
 </subsection>
 </section>
-<section id="grub">
+<section id="grub" test="contains('AMD64 x86',func:keyval('arch'))">
 <title>默认：使用GRUB</title>
 <subsection>
 <title>了解GRUB的术语</title>
@@ -383,7 +387,7 @@ GRUB的开发者推荐使用<c>grub-install</c>。尽管如此，如果在某些
 </p>
 
 <pre caption="执行grub-install">
-# <i>grub-install /dev/hda</i>
+# <i>grub-install --no-floppy /dev/hda</i>
 </pre>
 
 <p>
@@ -409,7 +413,7 @@ link="http://www.gnu.org/software/grub/manual/">GRUB手册</uri>。
 </p>
 
 <pre caption="启动GRUB shell">
-# <i>grub</i>
+# <i>grub --no-floppy</i>
 </pre>
 
 <note>
@@ -603,11 +607,78 @@ link="http://en.wikipedia.org/wiki/LILO_(boot_loader)">wikipedia页面</uri>。
 </p>
 
 <p>
-现在您可以继续<uri link="#reboot">重启系统</uri>章节的内容了。
+现在请继续阅读<uri link="#reboot">重启系统</uri>。
 </p>
 
 </body>
 </subsection>
+</section>
+<section id="elilo" test="func:keyval('arch')='IA64'">
+<title>默认：安装elilo</title>
+<body>
+
+<p>
+在IA64平台上，引导程序叫elilo。首先你需要在你的机器上安装它。
+</p>
+
+<pre caption="安装elilo">
+# <i>emerge elilo</i>
+</pre>
+
+<p>
+elilo的配置文件是<path>/etc/elilo.conf</path>。示例配置文件在典型的
+文档目录下<path>/usr/share/doc/elilo-&lt;ver&gt;/</path>。这里是另外
+一个配置文件示例： 
+</p>
+
+<pre caption="/etc/elilo.conf示例">
+boot=/dev/sda1
+delay=30
+timeout=50
+default=Gentoo
+append="console=ttyS0,9600"
+prompt
+
+image=/vmlinuz
+ label=Gentoo
+ root=/dev/sda2
+ read-only
+
+image=/vmlinuz.old
+ label=Gentoo.old
+ root=/dev/sda2
+ read-only
+</pre>
+
+<p>
+以<c>boot</c>开始的这一行告诉elilo启动分区的位置（在这个例子里
+是<path>/dev/sda1</path>）。<c>delay</c>设定了在非交互模式下自动启动默认启动项
+前等待的时间，单位是10<sup>分之一</sup>秒。<c>timeout</c>和delay作用类似，但是
+是在交互模式下。<c>default</c>设定了默认的内核项（内核项是在下面
+定义的）。<c>append</c>添加了额外的内核命令行参数。<c>prompt</c>把elilo的默认行为
+设定为交互模式。
+</p>
+
+<p>
+由<c>image</c>开始的区段定义了不同的可启动镜像。每个镜像都有一个好看
+的<c>label</c>，一个<c>根（root）</c>文件系统，并且将只以<c>只读（read-only）</c>方式
+挂载根文件系统。
+</p>
+
+<p>
+当配置完成后，只需运行<c>elilo --efiboot</c>。<c>--efiboot</c>参数会在EFI启动
+管理器里添加一个Gentoo Linux的菜单项。
+</p>
+
+<pre caption="应用elilo的配置">
+# <i>elilo --efiboot</i>
+</pre>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>.
+</p>
+
+</body>
 </section>
 <section id="reboot">
 <title>重启系统</title>
@@ -619,7 +690,14 @@ link="http://en.wikipedia.org/wiki/LILO_(boot_loader)">wikipedia页面</uri>。
 命令：<c>reboot</c>。
 </p>
 
-<pre caption="卸载所有分区和重启">
+<pre caption="卸载所有分区和重启" test="func:keyval('arch')='IA64'">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/sys /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+  	 
+<pre caption="卸载所有分区和重启" test="not(func:keyval('arch')='IA64')">
 # <i>exit</i>
 cdimage ~# <i>cd</i>
 cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
@@ -628,6 +706,11 @@ cdimage ~# <i>reboot</i>
 
 <p>
 当然您别忘了取出可引导的光盘盘，否则重启后引导的将是这张光盘而不是您的新Gentoo系统。
+</p>
+
+<p test="func:keyval('arch')='IA64'">
+当你重启的时候，你应该可以在EFI启动管理器里看到一个新的Gentoo Linux菜单选项，这个选项
+就可以启动Gentoo。
 </p>
 
 <p>
