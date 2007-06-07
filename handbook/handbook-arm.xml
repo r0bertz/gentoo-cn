@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-arm.xml,v 1.68 2006/11/29 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-arm.xml,v 1.69 2006/11/29 15:35:24 nightmorph Exp $ -->
 <book link="/doc/en/handbook/handbook-arm.xml" lang="zh_cn">
 <title>Gentoo Linux ARM手册</title>
 
@@ -132,8 +132,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>7.1</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <part>
 <title>安装Gentoo</title>

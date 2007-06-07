@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-mips.xml,v 1.120 2006/11/29 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-mips.xml,v 1.121 2006/11/29 15:35:24 nightmorph Exp $ -->
 <book link="/doc/en/handbook/handbook-mips.xml" lang="zh_cn">
 <title>Gentoo Linux/MIPS手册</title>
 
 <values>
  <key id="arch">MIPS</key>
  <key id="/boot">/dev/sda1</key>
+ <key id="kernel-version">2.6.17.10-mips</key>
+ <key id="kernel-name">kernel-2.6.17.10-mips</key>
 </values>
 
 <author title="作者">
@@ -106,6 +108,9 @@
 <author title="编辑">
   <mail link="neysx@gentoo.org">Xavier Neys</mail>
 </author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
 <author title="审校">
     <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
 </author>
@@ -128,8 +133,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>7.2</version>
-<date>2006-10-08</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <part>
 <title>安装Gentoo</title>

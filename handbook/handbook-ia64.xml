@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-ia64.xml,v 1.6 2006/11/29 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-ia64.xml,v 1.8 2006/11/29 15:35:24 nightmorph Exp $ -->
 <book link="/doc/en/handbook/handbook-ia64.xml" lang="zh_cn">
 <title>Gentoo Linux/IA64手册</title>
 
@@ -11,9 +11,11 @@
  <key id="kernel-name">kernel-2.6.17-gentoo-r5</key>
  <key id="genkernel-name">kernel-genkernel-ia64-2.6.17-gentoo-r5</key>
  <key id="genkernel-initrd">initramfs-genkernel-ia64-2.6.17-gentoo-r5</key>
- <key id="min-cd-name">install-ia64-minimal-2006.1.iso</key>
+ <key id="min-cd-name">install-ia64-minimal-2007.0.iso</key>
  <key id="min-cd-size">52</key>
- <key id="release-dir">releases/ia64/2006.1/</key>
+ <key id="release-dir">releases/ia64/2007.0/</key>
+ <key id="stage3">stage3-ia64-2007.0.tar.bz2</key>
+ <key id="CFLAGS">-O2 -pipe</key>
  <key id="online-book">handbook-ia64.xml</key>
 </values>
 
@@ -119,6 +121,9 @@
 <author title="编辑">
   <mail link="neysx@gentoo.org">Xavier Neys</mail>
 </author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
 <author title="审校">
     <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
 </author>
@@ -140,8 +145,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>7.1</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <part>
 <title>安装Gentoo</title>
@@ -208,7 +213,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 <abstract>
 ia64架构使用elilo引导程序。本章解释怎样安装和配置elilo。
 </abstract>
-  <include href="hb-install-ia64-bootloader.xml"/>
+  <include href="hb-install-x86+amd64-bootloader.xml"/>
 </chapter>
 
 <chapter>
