@@ -79,7 +79,7 @@ id="arch"/>系统中，这些被称作<e>分区</e>。
 <body>
 
 <p>
-<keyval id="arch"/>安装光盘提供了对EVMS和LVM2的支持。EVMS和LVM2提高了你的分区设置
+此<keyval id="arch"/>安装光盘提供了对EVMS和LVM2的支持。EVMS和LVM2提高了你的分区设置
 的灵活性。在安装指南中，我们将把精力集中在“常规”分区上，但是了解一下我们支持EVMS和LVM2也是有好处的。
 </p>
 

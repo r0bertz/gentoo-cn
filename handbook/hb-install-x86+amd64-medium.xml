@@ -383,7 +383,7 @@ link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
 例如：我们给你演示如何以<c>dopcmcia</c>内核参数启动<c>gentoo</c>内核：
 </p>
 
-<pre caption="启动安装光盘">
+<pre caption="启动一个安装光盘">
 boot: <i>gentoo dopcmcia</i>
 </pre>
 
