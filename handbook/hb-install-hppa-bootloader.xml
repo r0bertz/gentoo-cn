@@ -2,12 +2,12 @@
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-bootloader.xml,v 1.15 2006/08/30 23:08:59 nightmorph Exp $ -->
+See http://creativecommons.org/licenses/by-sa/2.5 
+$Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-bootloader.xml,v 1.16 2006/08/30 23:08:59 nightmorph Exp $ -->
 <sections>
 
-<version>7.1</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-30</date>
 
 <section>
 <title>安装PALO</title>
@@ -26,14 +26,14 @@ PA-RISC平台上的引导程序叫palo。首先你要在你的机器上安装它
 </p>
 
 <pre caption = "/etc/palo.conf示例">
---commandline=2/kernel-2.6.16.18-pa11 root=/dev/sda4
+--commandline=2/<keyval id="kernel-name"/> root=/dev/sda4
 --recoverykernel=/vmlinux.old
 --init-partitioned=/dev/sda
 </pre>
 
 <p>
-第一行告诉palo内核的位置和它所使用的启动参数。<c>2/kernel-2.6.16.18-pa11</c>的
-意思是文件名为<c>kernel-2.6.16.18-pa11</c>的内核位于第二个分区。要注意的是，内
+第一行告诉palo内核的位置和它所使用的启动参数。<c>2/<keyval id="kernel-name"/></c>的
+意思是文件名为<c>/<keyval id="kernel-name"/></c>的内核位于第二个分区。要注意的是，内
 核文件的路径是相对于分区，而不是相对于你的根目录的。
 </p>
 

@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license
  See http://creativecommons.org/licenses/by-sa/2.5
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-medium.xml,v 1.41 2006/08/30 22:52:28 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-medium.xml,v 1.46 2006/08/30 22:52:28 nightmorph Exp $ -->
 <sections>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.1</version>
+<date>2007-05-07</date>
 
 <section>
 <title>硬件需求</title>
@@ -29,7 +29,7 @@
 支持的硬件列表可以在<uri link="http://www.pateam.org/list.html">PA
 Team的网站</uri>找到。你可以在<uri
 link="http://hwdb.parisc-linux.org">Parisc-Linux硬件数据
-库</uri>和<uri>www.openpa.net</uri>上的<uri
+库</uri>和<uri link="http://www.openpa.net">www.openpa.net</uri>上的<uri
 link="http://www.openpa.net/cpu.html">处理器列表</uri>里找到有关你的机器的额外
 信息。
 </p>
@@ -78,7 +78,7 @@ link="http://www.openpa.net/cpu.html">处理器列表</uri>里找到有关你的
 </p>
 
 <p>
-如果你想在无网络条件下安装Gentoo，请参考<uri link="2006.1/index.xml">Gentoo 2006.1
+如果你想在无网络条件下安装Gentoo，请参考<uri link="2007.0/index.xml">Gentoo 2007.0
 手册</uri>里的说明。
 </p>
 
@@ -108,7 +108,7 @@ link="http://www.openpa.net/cpu.html">处理器列表</uri>里找到有关你的
 <body>
 
 <p>
-最小化安装光盘叫做<c>install-hppa-minimal-2006.1.iso</c>，只有75MB大小。你可以使
+最小化安装光盘叫做<c>install-hppa-minimal-2007.0.iso</c>，只有75MB大小。你可以使
 用这个安装光盘来安装Gentoo，不过只有在有网络连接的情况下才行。
 </p>
 
@@ -136,7 +136,7 @@ link="http://www.openpa.net/cpu.html">处理器列表</uri>里找到有关你的
 <body>
 
 <p>
-通用安装光盘叫做<c>install-hppa-universal-2006.1.iso</c>，刻成盘后占据339
+通用安装光盘叫做<c>install-hppa-universal-2007.0.iso</c>，刻成盘后占据339
 MB的空间。你可以使用这个安装光盘来安装Gentoo，也甚至能用它在没有网络连接的情况下
 安装Gentoo，比如万一你在其他电脑上安装Gentoo的时候就用的着了。
 </p>
@@ -208,7 +208,7 @@ link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
 <p>
 你可以从我们任何一个<uri link="/main/en/mirrors.xml">镜像</uri>下载任意一种
 安装光盘（如果你愿意，还可以下载软件包光盘）。这些安装光盘位于
-<path>releases/hppa/2006.1/installcd</path>目录里。
+<path><keyval id="release-dir"/>installcd</path>目录里。
 </p>
 
 <p>
@@ -492,7 +492,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </p>
 
 <pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/zh_cn/handbook/handbook-hppa.xml</i>
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
 </pre>
 
 <p>
