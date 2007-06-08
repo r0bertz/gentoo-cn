@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-diverttree.xml,v 1.13 2006/11/01 23:49:39 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-diverttree.xml,v 1.14 2006/11/01 23:49:39 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 加入自己的软件包等等的心得技巧。
 </abstract>
 
-<version>1.5</version>
-<date>2006-11-01</date>
+<version>1.6</version>
+<date>2007-02-26</date>
 
 <section>
 <title>使用Portage树的一个子集</title>
@@ -112,12 +112,12 @@ games-*/*
 </p>
 
 <p>
-举个例子，如果你想告诉Portage已经手动安装了<c>vanilla-sources-2.6.11.6</c>，
+举个例子，如果你想告诉Portage已经手动安装了<c>gentoo-sources-2.6.11.6</c>，
 那么把下面一行添加到<path>/etc/portage/profile/package.provided</path>文件里：
 </p>
 
 <pre caption="package.provided范例">
-sys-kernel/vanilla-sources-2.6.11.6
+sys-kernel/gentoo-sources-2.6.11.6
 </pre>
 
 </body>

@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-modules.xml,v 1.21 2007/01/04 06:03:26 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-modules.xml,v 1.23 2007/01/04 06:03:26 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@ Gentoo为您提供了灵活的网络支持——本节将告诉你怎样选择�
 如何配置网络的绑定和桥接以及配置VLAN等等相关的知识。
 </abstract>
 
-<version>7.1</version>
-<date>2007-01-04</date>
+<version>8.2</version>
+<date>2007-04-13</date>
 
 <section>
 <title>网络模块</title>
@@ -192,39 +192,80 @@ dhcp_eth0="release nodns nontp nonis" <comment># 只获取IP地址</comment>
 </body>
 </section>
 <section>
-<title>ADSL Modem</title>
+<title>基于PPPoE/PPPoA的ADSL</title>
 <body>
 
 <p>
 首先我们安装ADSL软件。
 </p>
 
-<pre caption="安装rp-pppoe软件包">
-# <i>emerge net-dialup/rp-pppoe</i>
+<pre caption="安装ppp软件包">
+# <i>emerge net-dialup/ppp</i>
 </pre>
 
-<warn>
-<c>baselayout-1.11.x</c>目前只支持PPPoE。我们希望以后的版本可以支持PPPoA。
-</warn>
+<note>
+如果你需要PPPoA，确保你使用的是>=<c>baselayout-1.12.x</c>。
+</note>
 
 <p>
-现在我们需要通过修改<path>/etc/conf.d/net</path>来把<c>eth0</c>配置成ADSL的接口，
-并输入我们的用户名。
+其次，创建PPP网络脚本和PPP所使用的以太网卡的网络脚本：
 </p>
 
-<pre caption="在/etc/conf.d/net中配置eth0为使用ADSL">
-config_eth0=( "adsl" )
-adsl_user_eth0="username"
+<pre caption="创建PPP和以太网卡网络脚本">
+# <i>ln -s /etc/init.d/net.lo /etc/init.d/net.ppp0</i>
+# <i>ln -s /etc/init.d/net.lo /etc/init.d/net.eth0</i>
 </pre>
 
 <p>
-最后你需要在<path>/etc/ppp/pap-secrets</path>中定义你的用户名和密码。
+确保在<path>/etc/conf.d/rc</path>设定RC_NET_STRICT_CHECKING="yes"。
+</p>
+
+<p>
+现在我们需要配置<path>/etc/conf.d/net</path>。
+</p>
+
+<pre caption="一个基本的PPPoE设定">
+config_eth0=( null ) <comment>（指定你的以太网卡）</comment>
+config_ppp0=( "ppp" )
+link_ppp0="eth0" <comment>（指定你的以太网卡）</comment>
+plugins_ppp0=( "pppoe" )
+username_ppp0='user'
+password_ppp0='password'
+pppd_ppp0=(
+       "noauth"
+       "defaultroute"
+       "usepeerdns"
+       "holdoff 3"
+       "child-timeout 60"
+       "lcp-echo-interval 15"
+       "lcp-echo-failure 3"
+       noaccomp noccp nobsdcomp nodeflate nopcomp novj novjccomp
+)
+
+depend_ppp0() {
+    need net.eth0
+}
+</pre>
+
+<p>
+你也可以在<path>/etc/ppp/pap-secrets</path>中定义你的密码。
 </p>
 
 <pre caption="/etc/ppp/pap-secrets范例">
 <comment># *号非常重要</comment>
 "username"  *  "password"
 </pre>
+
+<p>
+如果你通过一个USB调制解调器来使用PPPoE，你需要emerge <c>br2684ctl</c>。请
+阅读<path>/usr/portage/net-dialup/speedtouch-usb/files/README</path>来了解
+如果正确的配置它。
+</p>
+
+<impo>
+请仔细阅读<path>/etc/conf.d/net.example</path>里有关ADSL和PPP的部分。
+它包含了你的PPP设定可能需要的设置的详尽解释。
+</impo>
 
 </body>
 </section>

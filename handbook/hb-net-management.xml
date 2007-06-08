@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-management.xml,v 1.8 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-management.xml,v 1.11 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本章是为笔记本电脑用户和频繁切换网络的用户准备的。
 </abstract>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>网络管理</title>
@@ -30,7 +30,9 @@
 </p>
 
 <note>
-本章只介绍<c>ifplugd</c>，但还有一些工具如<c>quickswitch</c>可供选择。
+本章只介绍<c>ifplugd</c>，但还有一些工具如<c>netplug</c>可供选择。<c>netplug</c>是
+<c>ifplugd</c>的轻量级替代者，但是它依赖于你的内核网络驱动的正常工作，而很多驱动不能
+正常工作。
 </note>
 
 </body>
@@ -50,35 +52,32 @@
 </pre>
 
 <p>
-ifplugd的配置相当简单。配置文件放置在<path>/etc/conf.d/ifplugd</path>中。
-运行<c>man ifplugd</c>以获得详细的变量信息。
+ifplugd的配置相当简单。配置文件放置在<path>/etc/conf.d/net</path>中。
+运行<c>man ifplugd</c>以获得详细的变量信息。同时，请
+查看<path>/etc/conf.d/net.example</path>以获得更多例子。
 </p>
 
 <pre caption="ifplug设置范例">
-<comment># 设定要监视的网络接口</comment>
-INTERFACES="eth0"
+<comment>（把eth0替换成要监控的网卡）</comment>
+ifplugd_eth0="..."
 
-AUTO="no"
-BEEP="yes"
-IGNORE_FAIL="yes"
-IGNORE_FAIL_POSITIVE="no"
-IGNORE_RETVAL="yes"
-POLL_TIME="1"
-DELAY_UP="0"
-DELAY_DOWN="0"
-API_MODE="auto"
-SHUTDOWN="no"
-WAIT_ON_FORK="no"
-MONITOR="no"
-ARGS=""
-
-<comment>
-# 某个网络接口上ifplugd的额外参数。
-# 注意为某个接口设置这样的变量后，全局变量将被忽略。</comment>
-MONITOR_wlan0="yes"
-DELAY_UP_wlan0="5"
-DELAY_DOWN_wlan0="5"
+<comment>（监控一个无限网卡）</comment>
+ifplugd_eth0="--api-mode=wlan"
 </pre>
+
+<p>
+除了管理多个网络连接之外，你可能需要增加一个工具来使得管理多个DNS服务器和配置
+更加容易。当你通过DHCP来获取IP地址时，这将非常有用。只需要emerge
+<c>resolvconf-gentoo</c>.
+</p>
+
+<pre caption="安装resolvconf-gentoo">
+# <i>emerge resolvconf-gentoo</i>
+</pre>
+
+<p>
+查看<c>man resolvconf</c>来学习他更多的特性。
+</p>
 
 </body>
 </section>

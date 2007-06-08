@@ -5,17 +5,17 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-rcscripts.xml,v 1.27 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-rcscripts.xml,v 1.29 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
 <abstract>
-Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的
-决定和虚拟的初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
+Gentoo使用一种特殊的初始化脚本格式，有很多特色，包括由依赖关系驱动的决定和虚拟
+初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
 </abstract>
 
-<version>1.22</version>
-<date>2006-09-07</date>
+<version>1.23</version>
+<date>2007-03-07</date>
 
 <section>
 <title>运行级别</title>
@@ -696,6 +696,22 @@ restartdelay() {
                local | offline
             net.eth0 |
 </pre>
+
+<p>
+虽然<c>net.eth0</c>已经从offline运行级别中被移除了，<c>udev</c>仍然尝试启动任何它检测
+到的设备并启动对应的服务。因此，你将需要把每一个你不想启动的网络服务（还有其他
+任何udev可能启动的设备的服务）加入<path>/etc/conf.d/rc</path>，如下所示。
+</p>
+
+<pre caption="在/etc/conf.d/rc里禁用设备启动的服务">
+RC_COLDPLUG="yes"
+<comment>（下面指定你不想自动启动的服务名称）</comment>
+RC_PLUG_SERVICES="!net.eth0"
+</pre>
+
+<note>
+欲知更多有关设备启动的服务的信息，请看<path>/etc/conf.d/rc</path>文件中的注释。
+</note>
 
 <p>
 现在可以编辑你的引导程序的配置文件并且添加一个<c>offline</c>运行级别的条目。

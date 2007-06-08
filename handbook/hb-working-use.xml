@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-use.xml,v 1.44 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-use.xml,v 1.46 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
 </abstract>
 
-<version>1.35</version>
-<date>2006-10-08</date>
+<version>1.36</version>
+<date>2007-02-20</date>
 
 <section>
 <title>USE标记是什么？</title>
@@ -194,11 +194,11 @@ dev-php/php -java
 </p>
 
 <p>
-下面的例子我们将在安装mozilla的时候暂时性地从USE设置中移去java标记。
+下面的例子我们将在安装seamonkey的时候暂时性地从USE设置中移去java标记。
 </p>
 
 <pre caption="将USE作为一个环境变量使用">
-# <i>USE="-java" emerge mozilla</i>
+# <i>USE="-java" emerge seamonkey</i>
 </pre>
 
 </body>
@@ -290,18 +290,18 @@ depclean完成之后，运行<c>revdep-rebuild</c>来重新构建那些动态链
 <body>
 
 <p>
-让我们以<c>mozilla</c>来作例子，看看它接收什么USE标记。我们可以以<c>--pretend</c>
+让我们以<c>seamonkey</c>来作例子，看看它接收什么USE标记。我们可以以<c>--pretend</c>
 和<c>--verbose</c>为选项执行<c>emerge</c>来查看：
 </p>
 
 <pre caption="查看使用的USE标记">
-# <i>emerge --pretend --verbose mozilla</i>
+# <i>emerge --pretend --verbose seamonkey</i>
 These are the packages that I would merge, in order:
 
 Calculating dependencies ...done!
-[ebuild   R   ] www-client/mozilla-1.7.12-r2  USE="crypt gnome java mozsvg ssl
-truetype xprint -debug -ipv6 -ldap -mozcalendar -mozdevelop -moznocompose
--moznoirc -moznomail -moznoxft -postgres -xinerama" 0 kB
+[ebuild   R   ] www-client/seamonkey-1.0.7  USE="crypt gnome java -debug -ipv6
+-ldap -mozcalendar -mozdevelop -moznocompose -moznoirc -moznomail -moznopango
+-moznoroaming -postgres -xinerama -xprint" 0 kB
 </pre>
 
 <p>

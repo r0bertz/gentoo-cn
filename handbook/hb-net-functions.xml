@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-functions.xml,v 1.9 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-functions.xml,v 1.11 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 如果你喜欢冒险的感觉，你可以在网络中加上自己的功能。
 </abstract>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>标准函数钩子</title>
@@ -45,13 +45,6 @@ bash允许的变量名。
 <pre caption="pre/post up/down函数范例">
 preup() {
   <comment># 在打开接口之前先测试它的网络物理连接是否已连接上。这只在某些网络
-  # 适配器上有效，而且需要安装mii-diag包。</comment>
-  if mii-tool ${IFACE} 2> /dev/null | grep -q 'no link'; then
-    ewarn "No link on ${IFACE}, aborting configuration"
-    return 1
-  fi
-
-  <comment># 在打开接口之前先测试它的网络物理链接是否已连接上。这只在某些网络
   # 适配器上有效，而且需要安装ethtool包。</comment>
   if ethtool ${IFACE} | grep -q 'Link detected: no'; then
     ewarn "No link on ${IFACE}, aborting configuration"

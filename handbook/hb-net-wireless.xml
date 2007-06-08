@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-wireless.xml,v 1.13 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-wireless.xml,v 1.15 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 配置无线网络并不是一件简单的事情。希望我们能让您的无线网络正常工作。
 </abstract>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>介绍</title>
@@ -85,12 +85,13 @@ wpa_supplicant_eth0="-Dmadwifi"
 </note>
 
 <p>
-看起来这很简单，不是么？不过我们还需要配置<c>wpa_supplicant</c>本身，这将会比较麻烦一些，具体取决于你要连接的AP的安全程度。下面的例子是
-从<path>/etc/wpa_supplicant.conf.example</path>中抽取并简化而来的，此文件出
-自<c>wpa_supplicant</c>软件包。
+看起来这很简单，不是么？不过我们还需要配置<c>wpa_supplicant</c>本身，这将会
+比较麻烦一些，具体取决于你要连接的AP的安全程度。下面的例子是
+从<path>/usr/share/doc/wpa_supplicant-&lt;version&gt;/wpa_supplicant.conf.gz</path>中
+抽取并简化而来的，此文件出自<c>wpa_supplicant</c>软件包。
 </p>
 
-<pre caption="一个/etc/wpa_supplicant.conf的例子">
+<pre caption="一个/etc/wpa_supplicant/wpa_supplicant.conf的例子">
 <comment># 请不要修改下面这一行内容，否则将不能正常工作</comment>
 ctrl_interface=/var/run/wpa_supplicant
 

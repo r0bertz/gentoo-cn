@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-files.xml,v 1.14 2006/11/25 04:50:31 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-files.xml,v 1.16 2006/11/25 04:50:31 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,11 +13,11 @@
 当你想要深入了解Portage的时候，你需要知道它将文件和数据放在了什么地方。
 </abstract>
 
-<version>1.8</version>
-<date>2006-11-03</date>
+<version>1.10</version>
+<date>2007-05-26</date>
 
 <section>
-<title>Portage 文件</title>
+<title>Portage文件</title>
 <subsection>
 	
 <title>配置指南</title>
@@ -178,18 +178,6 @@ Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定�
 </body>
 </subsection>
 <subsection>
-<title>RPM文件</title>
-<body>
-
-<p>
-尽管Portage不能使用RPM文件，但它可以通过<c>ebuild</c>命令
-（参看<uri link="?part=3&amp;chap=6">Ebuild的应用</uri>）来生成他们。Portage默
-认保存RPM文件的位置是<path>/usr/portage/rpm</path>，是RPMDIR变量定义的。
-</p>
-
-</body>
-</subsection>
-<subsection>
 <title>Portage数据库</title>
 <body>
 
@@ -276,8 +264,6 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
   <li>
     PORTAGE_ELOG_CLASSES：这是你设置什么信息被记入日志的地方。你可以使用任何用空
     格分隔的<c>info</c>、<c>warn</c>、<c>error</c>和<c>log</c>的组合。
-  </li>
-  <li>
     <ul>
       <li>info: 记录下ebuild打印的“einfo”信息</li>
       <li>warn: 记录下ebuild打印的“ewarn”信息</li>
@@ -290,8 +276,6 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
     就被取消。你可以使用任何用空格分隔开
     的<c>save</c>、<c>custom</c>、<c>syslog</c> 和 <c>mail</c>的组合。你必须至少
     选择一个模块以使用elog。
-  </li>
-  <li>
     <ul>
       <li>
         save：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或
@@ -313,8 +297,6 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
     PORTAGE_ELOG_COMMAND：这个仅仅在<c>custom</c>模块被激活时使用。在这里你指定
     一个命令来处理日志信息。注意，你可以利用两个变量：${PACKAGE}是软件包的名字和
     版本，而${LOGFILE}是日志文件的绝对路径。这里是一个可能的用法：
-  </li>
-  <li>
     <ul>
       <li>
         PORTAGE_ELOG_COMMAND="/path/to/logger -p '\${PACKAGE}' -f '\${LOGFILE}'"
@@ -328,8 +310,6 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
   <li>
     这里是一个使用smtp服务器的例子，基于用户名和密码认证并使用特定端口(默认端口
     是25)：
-  </li>
-  <li>
     <ul>
       <li>
         PORTAGE_ELOG_MAILURI="user@some.domain
@@ -346,8 +326,8 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
     变量：${PACKAGE}将会显示软件包的名子和版本，而${HOST}则是运行Portage的主机的
     FQDN。
   </li>
-  <li>这里是一个可能的应用：</li>
   <li>
+    这里是一个可能的应用：
     <ul>
       <li>
 	PORTAGE_ELOG_MAILSUBJECT="package \${PACKAGE} was merged on \${HOST}

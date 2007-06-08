@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-advanced.xml,v 1.13 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-advanced.xml,v 1.14 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 的知识。
 </abstract>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>高级配置</title>
@@ -219,11 +219,11 @@ bash的另一个问题是变量的内容——一些字符需要转义。这可�
 </p>
 
 <pre caption="变量名示例">
-<comment># 这样确实可以传递域名，但是域名的值是非法的</comment>
+<comment>（这样确实可以传递域名，但是域名的值是非法的）</comment>
 dns_domain_My____NET="My \"\\ NET"
 
-<comment># 上面的例子是当一块无线网卡连接到ESSID为My "\ NET的无线接入点时
-# 把dns域名设置为My "\NET </comment>
+<comment>（上面的例子意思是当一块无线网卡连接到ESSID为My "\ NET的无线接入点时
+把dns域名设置为My "\NET）</comment>
 </pre>
 
 </body>

@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-variables.xml,v 1.20 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-variables.xml,v 1.22 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 本章将教你如何去做，并描述一些常用的变量。
 </abstract>
 
-<version>1.14</version>
-<date>2005-09-28</date>
+<version>1.16</version>
+<date>2007-05-18</date>
 
 <section>
 <title>环境变量？</title>
@@ -102,12 +102,6 @@
   </ti>
 </tr>
 <tr>
-  <ti>CLASSPATH</ti>
-  <ti>
-    这个变量包含了一系列用冒号隔开的目录，在这些目录中包含了Java类。
-  </ti>
-</tr>
-<tr>
   <ti>CONFIG_PROTECT</ti>
   <ti>
     这个变量包含了一系列用<e>空格</e>隔开的目录，它们在更新的时候会被Portage
@@ -136,7 +130,6 @@ INFODIR="/usr/share/info:/usr/local/share/info"
 PAGER="/usr/bin/less"
 EDITOR="/usr/bin/vim"
 KDEDIRS="/usr"
-CLASSPATH="/opt/blackdown-jre-1.4.1/lib/rt.jar:."
 CONFIG_PROTECT="/usr/X11R6/lib/X11/xkb /opt/tomcat/conf \
                 /usr/kde/3.1/share/config /usr/share/texmf/tex/generic/config/ \
                 /usr/share/texmf/tex/platex/config/ /usr/share/config"
@@ -228,7 +221,7 @@ PATH="/bin:/usr/bin:/usr/kde/3.2/bin:/usr/local/bin"
 
 <p>
 变量并不总是被串联起来，只有下列变量才会被串联：<c>KDEDIRS</c>、<c>PATH</c>、
-<c>CLASSPATH</c>、<c>LDPATH</c>、<c>MANPATH</c>、<c>INFODIR</c>、<c>INFOPATH</c>、
+<c>LDPATH</c>、<c>MANPATH</c>、<c>INFODIR</c>、<c>INFOPATH</c>、
 <c>ROOTPATH</c>、<c>CONFIG_PROTECT</c>、<c>CONFIG_PROTECT_MASK</c>、
 <c>PRELINK_PATH</c>以及<c>PRELINK_PATH_MASK</c>。对于（<path>/etc/env.d</path>
 里的文件中按照字母顺序排列后）其他所有变量，最新定义的值才会被使用到。
@@ -259,6 +252,11 @@ PATH="/bin:/usr/bin:/usr/kde/3.2/bin:/usr/local/bin"
 <c>/etc/init.d/xdm restart</c>。如果不是这样，你需要注销然后重新登录回X
 这样才能产生使用新变量值的子程序。
 </note>
+
+<impo>
+你在定义其他变量时不能使用shell变量。这意味着这样的定义<c>FOO="$BAR"</c>（此处
+<c>$BAR</c>是另外一个变量）是不允许的。
+</impo>
 
 </body>
 </subsection>

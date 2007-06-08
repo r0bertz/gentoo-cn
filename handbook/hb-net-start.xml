@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-start.xml,v 1.7 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-net-start.xml,v 1.8 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本指南可让你的网卡在大多数通用环境下迅速设置好并运行起来
 </abstract>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>新手上路</title>
@@ -56,7 +56,7 @@ routes_eth0=( &quot;default via 192.168.0.1&quot; )
 
 <comment># 使用netmask形式表示的静态IP</comment>
 config_eth0=( &quot;192.168.0.7 netmask 255.255.255.0&quot; )
-routes_eth0=( &quot;default gw 192.168.0.1&quot; )
+routes_eth0=( &quot;default via 192.168.0.1&quot; )
 </pre>
 
 <note>如果你没有指定，DHCP是默认选项。</note>
