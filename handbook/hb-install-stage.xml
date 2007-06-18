@@ -64,7 +64,7 @@ Stage文件，就直接用光盘里的吧，否则再从网上下载就是浪费
 </p>
 
 <p>
-最小化光盘，LiveCD和LiveDVD不包含任何stage文件
+最小化光盘、LiveCD和LiveDVD不包含任何stage文件
 </p>
 
 <ul test="not(contains('AMD64 x86', func:keyval('arch')))">
