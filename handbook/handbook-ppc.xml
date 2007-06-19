@@ -212,7 +212,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 </chapter>
 
 <chapter>
-<title>完成Gentoo的安装</title>
+<title>结束Gentoo的安装</title>
   <include href="hb-install-finalise.xml"/>
 </chapter>
 

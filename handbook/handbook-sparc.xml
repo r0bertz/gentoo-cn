@@ -205,7 +205,7 @@ SPARC架构使用SILO引导程序来启动你的Linux系统。我们会一步步
 </chapter>
 
 <chapter>
-<title>完成Gentoo的安装</title>
+<title>结束Gentoo的安装</title>
   <include href="hb-install-finalise.xml"/>
 </chapter>
 

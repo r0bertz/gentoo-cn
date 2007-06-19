@@ -217,7 +217,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 </chapter>
 
 <chapter>
-<title>结束Gentoo安装</title>
+<title>结束Gentoo的安装</title>
 <abstract>
 你基本上已经完成安装了。我们将为你的系统创建一个（或者多个）用户而且可以（有选择地）安装预构建的软件包。
 </abstract>

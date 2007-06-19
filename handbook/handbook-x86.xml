@@ -209,7 +209,7 @@ x86架构存在几种引导程序。它们中的每一种都有自己的配置�
 </chapter>
 
 <chapter>
-<title>完成Gentoo的安装</title>
+<title>结束Gentoo的安装</title>
   <include href="hb-install-finalise.xml"/>
 </chapter>
 

@@ -313,7 +313,7 @@ cdimage ~# <i>reboot</i>
 
 <p>
 现在重新启动并启动至Linux中，并请继续阅读<uri
-link="?part=1&amp;chap=11">结束你的Gentoo安装</uri>。
+link="?part=1&amp;chap=11">结束Gentoo的安装</uri>。
 </p>
 
 </body>
@@ -502,7 +502,7 @@ livecd ~# <i>reboot</i>
 
 <p>
 当重启进入到您新装的Gentoo系统之后，请阅读<uri
-link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
 </p>
 
 </body>
