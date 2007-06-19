@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.107 2006/11/01 21:40:28 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.110 2006/11/01 21:40:28 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.2</version>
+<date>2007-06-19</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -56,15 +56,15 @@ Fri Mar 29 16:21:18 UTC 2005
 
 <p>
 接下来，你要把<e>stage3</e> tarball安装到系统。你可以选择从
-网上下载它，或者如果你是使用Gentoo通用安装光盘引导系统的话，也
-可以从光盘里拷贝一个出来。如果你有通用安装光盘的话且光盘中有你需要的
-Stage文件，就直接用光盘里的吧，否则再从网上下载就是浪费带宽，因为它和
+网上下载它，或者如果你是使用Gentoo通用安装光盘或者LiveDVD引导系统的话，也
+可以从光盘里拷贝一个出来。如果你有通用安装光盘或者LiveDVD且光盘中有你需要的
+Stage文件的话，就直接用光盘里的吧，否则再从网上下载就是浪费带宽，因为它和
 网上下载的是一样的。大多数情况下，运行命令<c>uname -m</c>可以告诉你
 哪个stage文件才是你要下载的。
 </p>
 
 <p>
-最小化光盘、LiveCD和LiveDVD不包含任何stage文件
+最小化光盘和LiveCD不包含任何stage文件，不过LiveDVD里有。
 </p>
 
 <ul test="not(contains('AMD64 x86', func:keyval('arch')))">
@@ -120,7 +120,7 @@ link="/main/en/mirrors.xml">Gentoo镜像列表</uri>，然后选择一个离你�
 </p>
 
 <p test="'x86'=func:keyval('arch')">
-大多数PC用户应该使用<b><keyval id="stage3"/></b> stage3文件。所有现代PC都是i686机器。如果你用的是一部旧机器，你可以检查Wikipedia上的<uri link="http://en.wikipedia.org/wiki/I686">i686兼容处理器列表</uri>。旧的处理器，比如Pentium，K5，K6或者Via C3以及其他类似的，需要<b>i586</b> stage3。只有很旧的处理器，比如80386和80486需要普适性的<b>x86</b> stage3（和很大的耐心）。
+大多数PC用户应该使用<b><keyval id="stage3"/></b> stage3文件。所有现代PC都是i686机器。如果你用的是一部旧机器，你可以检查Wikipedia上的<uri link="http://en.wikipedia.org/wiki/I686">i686兼容处理器列表</uri>。旧的处理器，比如Pentium，K5，K6或者Via C3以及其他类似的，需要普适性的<b>x86</b> stage3。
 </p>
 
 <pre caption="用links连接镜像列表">

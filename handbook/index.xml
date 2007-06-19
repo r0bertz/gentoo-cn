@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.70 2007/01/18 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.71 2007/01/18 15:35:24 nightmorph Exp $ -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
 <title>Gentoo手册</title>
@@ -18,8 +18,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 
 <license/>
 
-<version>0.45</version>
-<date>2007-05-07</date>
+<version>0.46</version>
+<date>2007-06-07</date>
 
 <chapter>
 <title>Gentoo手册的成果</title>
@@ -30,21 +30,21 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 <p>Gentoo手册目前有如下语言版本：</p>
 
 <p>
-<uri link="/doc/pt_br/handbook/">巴西葡萄牙文</uri> |
+<!--<uri link="/doc/pt_br/handbook/">巴西葡萄牙文</uri> |
 <uri link="/doc/cs/handbook/">捷克文</uri> |
-<!--<uri link="/doc/da/handbook/">Danish </uri> |-->
+<uri link="/doc/da/handbook/">Danish </uri> |-->
 <uri link="/doc/de/handbook/">德文</uri> |
 <uri link="/doc/en/handbook/">英文</uri> |
 <uri link="/doc/fr/handbook/">法文</uri> |
 <!--<uri link="/doc/id/handbook/">Indonesian</uri> |-->
 <uri link="/doc/it/handbook/">意大利文</uri> |
-<uri link="/doc/ja/handbook/">日文</uri> |
+<!--<uri link="/doc/ja/handbook/">日文</uri> |-->
 <uri link="/doc/pl/handbook/">波兰文</uri> |
-<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |
-<uri link="/doc/ru/handbook/">俄文</uri> |
+<!--<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |-->
+<!--<uri link="/doc/ru/handbook/">俄文</uri> |-->
 <uri link="/doc/es/handbook/">西班牙文</uri> |
-<uri link="/doc/zh_cn/handbook">简体中文</uri> |
-<uri link="/doc/zh_tw/handbook/">繁体中文</uri>
+<uri link="/doc/zh_cn/handbook">简体中文</uri> <!--|
+<uri link="/doc/zh_tw/handbook/">繁体中文</uri>-->
 </p>
 
 </body>

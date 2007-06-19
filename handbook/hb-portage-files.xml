@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-files.xml,v 1.16 2006/11/25 04:50:31 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-portage-files.xml,v 1.18 2006/11/25 04:50:31 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 当你想要深入了解Portage的时候，你需要知道它将文件和数据放在了什么地方。
 </abstract>
 
-<version>1.10</version>
-<date>2007-05-26</date>
+<version>1.11</version>
+<date>2007-06-11</date>
 
 <section>
 <title>Portage文件</title>
@@ -263,33 +263,44 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
 <ul>
   <li>
     PORTAGE_ELOG_CLASSES：这是你设置什么信息被记入日志的地方。你可以使用任何用空
-    格分隔的<c>info</c>、<c>warn</c>、<c>error</c>和<c>log</c>的组合。
+    格分隔的<c>info</c>、<c>warn</c>、<c>error</c>、<c>log</c>和<c>qa</c>的组合。
     <ul>
-      <li>info: 记录下ebuild打印的“einfo”信息</li>
-      <li>warn: 记录下ebuild打印的“ewarn”信息</li>
-      <li>error: 记录下 ebuild打印的“eerror”信息</li>
-      <li>log: 记录下一些ebuild中的“elog”信息</li>
+      <li><c>info</c>: 记录下ebuild打印的“einfo”信息</li>
+      <li><c>warn</c>: 记录下ebuild打印的“ewarn”信息</li>
+      <li><c>error</c>: 记录下ebuild打印的“eerror”信息</li>
+      <li><c>log</c>: 记录下一些ebuild中的“elog”信息</li>
+      <li><c>qa</c>: 记录下ebuild打印的“QA Notice”信息</li>
     </ul>
   </li>
   <li>
     PORTAGE_ELOG_SYSTEM：这是用来选择处理日志信息的模块的。如果留空，则日志记录
-    就被取消。你可以使用任何用空格分隔开
-    的<c>save</c>、<c>custom</c>、<c>syslog</c> 和 <c>mail</c>的组合。你必须至少
-    选择一个模块以使用elog。
+    就被取消。你可以使用任何用空格分隔开的<c>save</c>、<c>custom</c>、
+    <c>syslog</c>、<c>mail</c>、<c>save_summary</c>和<c>mail_summary</c>的组合。
+    你必须至少选择一个模块以使用elog。
     <ul>
       <li>
-        save：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或
+        <c>save</c>：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或
         者是在$PORT_LOGDIR 没有配置的情况下保存
 	在<path>/var/log/portage/elog</path> 目录下面。
       </li>
       <li>
-        custom：将所有的信息传递给用户在$PORTAGE_ELOG_COMMAND中定义的命令，这将
+	<c>custom</c>：将所有的信息传递给用户在$PORTAGE_ELOG_COMMAND中定义的命令，这将
         在随后讨论。
       </li>
-      <li>syslog：把所有的信息发送给已安装的系统日志软件。</li>
       <li>
-        mail：把所有的信息传递给用户在$PORTAGE_ELOG_MAILURI中定义的邮件服务器；
+        <c>syslog</c>：把所有的信息发送给已安装的系统日志软件。</li>
+      <li>
+        <c>mail</c>：把所有的信息传递给用户在$PORTAGE_ELOG_MAILURI中定义的邮件服务器；
         这将在随后讨论。这一elog的邮件特性需要&gt;=<c>portage-2.1.1</c>。
+      </li>
+      <li>
+        <c>save_summary</c>： 和<c>save</c>类似，不过它把所有的信息保存
+        在<path>$PORT_LOGDIR/elog/summary.log</path>里，
+        或者<path>/var/log/portage/elog/summary.log</path>里，如果$PORT_LOGDIR没有定义的话。
+      </li>
+      <li>
+        <c>mail_summary</c>： 和<c>mail</c>类似，不过它会在emerge结束时把所有的信息
+        在一个邮件里发送出去。
       </li>
     </ul>
   </li>
