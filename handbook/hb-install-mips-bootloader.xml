@@ -1,0 +1,498 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-bootloader.xml,v 1.18 2007/05/07 18:11:41 nightmorph Exp $ -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section id="sgi">
+<title>Silicon Graphics机器——配置arcload</title>
+<subsection>
+<title>哪一个？</title>
+<body>
+
+<p>
+在SGI机器上，我们使用<c>arcload</c>引导程序。在之前的发布中，我们也提供<c>arcboot</c>，不过它已经被正式宣布淘汰了，替代者就是<c>arcload</c>。
+</p>
+
+<note>
+SGI卷头文件名最长为8个字符，在一个卷头里最多不能存在超过16个文件。
+</note>
+
+</body>
+</subsection>
+
+<subsection>
+<title>安装arcload</title>
+<body>
+
+<p>
+<c>arcload</c>是为需要64位内核的机器写的，因此不能使用<c>arcboot</c>（因为后者不能很容易地编译得到64位的可执行程序）。它还解决了一些从卷头加载内核时所引发的问题。所以，现在你知道为什么了，我们就可以继续安装了：
+</p>
+
+<pre caption="安装arcload和dvhtool">
+# <i>emerge arcload dvhtool</i>
+</pre>
+
+<p>
+安装结束后，你应该可以发现<c>arcload</c> 
+二进制文件静静的躺在<path>/usr/lib/arcload</path>路径下。现在，有两个文件存在：
+</p>
+
+<ul>
+  <li>
+    <c>sashARCS</c>：针对Indy、Indigo2 (R4k)、Challenge S和O2系统的32位二进制文件
+  </li>
+  <li>
+    <c>sash64</c>：针对Octane/Octane2、Origin 200/2000和Indigo2 Impact系统的64位二进制文件
+  </li>
+</ul>
+
+<p>
+使用<c>dvhtool</c>来安装适用于你的系统的二进制文件到卷头里：
+</p>
+
+<pre caption="把arcload放到卷头">
+<comment>（Indy/Indigo2/Challenge S/O2用户）</comment>
+# <i>dvhtool --unix-to-vh /usr/lib/arcload/sashARCS sashARCS</i>
+
+<comment>（Indigo2 Impact/Octane/Octane2/Origin 200/Origin 2000用户）</comment>
+# <i>dvhtool --unix-to-vh /usr/lib/arcload/sash64 sash64</i>
+</pre>
+
+<note>
+你不一定非要使用<c>sasARCS</c>或者<c>sash64</c>这两个名字，除非你要把它安装到一个可引导光盘的卷头里。对于普通的硬盘启动，如果你愿意，你可以使用别的名字。
+</note>
+
+<p>
+现在使用<c>dvhtool</c>命令来验证它们已经被装到卷头里了。
+</p>
+
+<pre caption="检查arcload已经在卷头里">
+# <i>dvhtool --print-volume-directory</i>
+----- directory entries -----
+Entry #0, name "sash64", start 4, bytes 55859
+#
+</pre>
+
+<p>
+现在，<c>arc.cf</c>文件的语法类似C语言。要知道如何配置它的详细信息，请看<uri 
+link="http://www.linux-mips.org/wiki/Arcload">Linux/MIPS 
+wiki上的arcload页</uri>。简单的说，你定义一些选项，这些选项你可以在启动时使用<c>OSLoadFilename</c>变量来启用和禁用。
+</p>
+
+<pre caption="一个arc.cf的例子">
+<comment># ARCLoad的配置</comment>
+
+<comment># 一些默认设定……</comment>
+append  "root=/dev/sda3";
+append  "ro";
+append  "console=ttyS0,9600";
+
+<comment># 我们主要的定义。ip28这个名字可以改成其他的，如果你愿意。</comment>
+ip28 {
+        <comment># 一个"working"内核的定义</comment>
+        <comment># 通过设定OSLoadFilename="ip28(working)"来选择此项</comment>
+        working {
+                description     "SGI Indigo2 Impact R10000\n\r";
+                image system    "/working";
+        }
+
+        <comment># 一个"new"内核的定义</comment>
+        <comment># 通过设定OSLoadFilename="ip28(working)"来选择此项</comment>
+        new {
+                description     "SGI Indigo2 Impact R10000 - Testing Kernel\n\r";
+                image system    "/new";
+        }
+
+        <comment># debug内核使用的</comment>
+        <comment># 通过设定OSLoadFilename="ip28(working,debug)"</comment>
+        <comment># 或者OSLoadFilename="ip28(new,debug)"来选择此项</comment>
+        debug {
+                description     "Debug console";
+                append          "init=/bin/bash";
+        }
+}
+</pre>
+
+<p>
+从<c>arcload-0.5</c>开始，<path>arc.df</path>和内核既可以存在于卷头中，也可以位于分区里。如果你想用这个新功能，你可以把这些文件放在你<path>/boot</path>分区里（或者<path>/</path>如果你的boot分区不是独立的）。<c>arcload</c>使用来自流行的<c>grub</c>引导程序的文件系统驱动代码，因此支持相当一批文件系统。
+</p>
+
+<pre caption="把arc.cf和内核放在卷头">
+# <i>dvhtool --unix-to-vh arc.cf arc.cf</i>
+# <i>dvhtool --unix-to-vh /usr/src/linux/vmlinux new</i>
+</pre>
+
+<p>
+完成后，剩下要做的只是在PROM中设定一些选项。请参阅<uri link="#reboot">重启系统</uri>一节。
+</p>
+
+</body>
+</subsection>
+
+</section>
+
+<section id="cobalt">
+<title>Cobalt微服务器——配置Colo</title>
+<subsection>
+<title>安装CoLo</title>
+<body>
+
+<p>
+在Cobalt服务器上，这些机器的芯片里安装的固件的能力很有限。Cobalt的BOOTROM和SGI的PROM相比很原始，有一些很严重的局限性。
+</p>
+
+<ul>
+  <li>
+    内核大小的限制为675kb（大约）。Linux 2.4目前的大小几乎不可能使内核大小达到这个要求。Linux 2.6更加是完全没有可能。
+  </li>
+  <li>
+    原始的固件不支持64位内核（虽然现在的Cobalt机器试验性的支持了这个功能）
+  </li>
+  <li>
+    shell最多只是基本的
+  </li>
+</ul>
+
+<p>
+为了克服这些限制，人们开发了另外一个固件，叫做<uri 
+link="http://www.colonel-panic.org/cobalt-mips/">Colo</uri>（Cobalt 
+Loader）。这是一个BOOTROM镜像，既可以烧入Cobalt服务器里的芯片里，也可以从已有的固件中加载。
+</p>
+
+<note>
+本指南将引领你完成Colo的设置，以使它可以被初始的固件所加载。这是唯一真正安全的我们所推荐的设置Colo的方法。
+</note>
+
+<warn>
+你可以，如果你愿意，把它烧入服务器，完全替代原来的固件——不过，如果那样做的话，你自己要为你的行为负全责。万一发生了什么错误，你将需要物理的移除BOOTROM并使用初始的固件来重新编程它。如果你不确定如何来做到这一点——那么<e>不要</e>把它烧入你的机器。如果你忽略了这个建议，那么我们将不会为之后所发生的任何事情负任何责任。
+</warn>
+
+<p>
+好了，结束了这条警告，我们继续来安装CoLo。首先，从emerge这个包开始。
+</p>
+
+<pre caption="安装colo">
+# <i>emerge colo</i>
+</pre>
+
+<p>
+安装好之后（我希望你看到了那些信息;-)）你应该可以在<path>/usr/lib/colo</path>目录下找到2个文件，<path>colo-chain.elf</path>：初始固件要加载的“内核”，和<path>colo-rom-image.bin</path>：可以烧入BOOTROM的ROM镜像。首先我们挂载/boot并且制作一个<path>colo-chain.elf</path>的压缩副本放在<path>/boot</path>里，系统将会在这个目录寻找它。
+</p>
+
+<pre caption="把CoLo放在它应该存在的地方">
+# <i>gzip -9vc /usr/lib/colo/colo-chain.elf &gt; /boot/vmlinux.gz</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>配置CoLo</title>
+
+<body>
+
+<p>
+现在，当系统第一次启动时，它会加载CoLo，后者会在背面的LCD上显示一个菜单。第一个选项（也是默认选项，大约5秒钟后将执行它）是启动硬盘。然后系统将尝试挂载它所发现的第一个Linux分区，然后执行<path>default.colo</path>。该文件的语法在CoLo的文档（看一下<path>/usr/share/doc/colo-X.YY/README.shell.gz</path>——其中X.YY是实际安装的版本号）中有详细的说明，同时也很简单。
+</p>
+
+<note>
+小贴士：当安装内核的时候，我通常创建两个内核镜像，<path>kernel.gz.working</path>——一个已知可以工作的内核，和<path>kernel.gz.new</path>——一个刚刚编译好的内核。你可以用符号连接来指向当前的"new"和"working"内核，或者干脆重命名内核镜像。
+</note>
+
+<pre caption="一个基本的default.colo">
+<comment>#:CoLo:#</comment>
+mount hda1
+load /kernel.gz.working
+execute root=/dev/hda3 ro console=ttyS0,115200
+</pre>
+
+<note>
+CoLo会拒绝加载不是以<c>#:CoLo:#</c>开头的脚本。你可以把它想象成shell脚本里的<c>#!/bin/sh</c>。
+</note>
+
+<p>
+也可以问一个问题，比如你想以启动哪个内核和配置，并设定一个默认超时时间。这个配置就实现了这一点，询问用户希望使用哪个内核，并执行选中的镜像。<path>vmlinuz.gz.new</path>和<path>vmlinuz.gz.working</path>可以是实际的内核镜像，也可以指向磁盘上的内核镜像的符号链接。<c>50</c>作为<c>select</c>的参数，指定了50/10秒后将会启动第一个选项（“Working“）。
+</p>
+
+<pre caption="基于菜单的配置">
+<comment>#:CoLo:#</comment>
+
+lcd "Mounting hda1"
+mount hda1
+select "Which Kernel?" 50 Working New
+
+goto {menu-option}
+var image-name vmlinux.gz.working
+goto 3f
+@var image-name vmlinux.gz.working
+goto 2f
+@var image-name vmlinux.gz.new
+
+@lcd "Loading Linux" {image-name}
+load /{image-name}
+lcd "Booting..."
+execute root=/dev/hda5 ro console=ttyS0,115200
+boot
+</pre>
+
+<p>
+请看位于<path>/usr/share/doc/colo-VERSION</path>的文档以获得更多信息。
+</p>
+
+</body>
+
+</subsection>
+</section>
+
+<section>
+<title>设置串口终端</title>
+
+<subsection>
+<body>
+
+<p>
+OK，到目前为止，安装好的Linux已经可以正常启动，不过只是假设你从物理终端登录的前提下。在Cobalt机器上，很不幸——没有物理终端。
+</p>
+
+<note>
+对于有受支持的显卡的用户来说，如果他们愿意，可以跳过本节。
+</note>
+
+<p>
+首先，打开你的文本编辑器开始编辑<path>/etc/inittab</path>。在这个文件里，你可以看到类似这样的内容：
+</p>
+
+<pre caption="inittab的配置">
+<comment># SERIAL CONSOLE</comment>
+<comment>#c0:12345:respawn:/sbin/agetty 9600 ttyS0 vt102</comment>
+
+<comment># TERMINALS</comment>
+c1:12345:respawn:/sbin/agetty 38400 tty1 linux
+c2:12345:respawn:/sbin/agetty 38400 tty2 linux
+c3:12345:respawn:/sbin/agetty 38400 tty3 linux
+c4:12345:respawn:/sbin/agetty 38400 tty4 linux
+c5:12345:respawn:/sbin/agetty 38400 tty5 linux
+c6:12345:respawn:/sbin/agetty 38400 tty6 linux
+
+<comment># What to do at the "Three Finger Salute".</comment>
+ca:12345:ctrlaltdel:/sbin/shutdown -r now
+</pre>
+
+<p>
+首先，请注释掉<c>c0</c>这一行。默认的，这个设定是为了使用波特率为9600 
+bps的终端。在Cobalt服务器上，你可能需要把这里改为115200以匹配BOOT 
+ROM所决定的波特率。下面是我的机器上这一段的配置。在无头机器上（例如Cobalt服务器），我还建议把本地终端那几行（<c>c1</c>到<c>c6</c>）都注释掉，因为当他们不能打开<path>/dev/ttyX</path>的时候总会有奇怪的行为。
+</p>
+
+<pre caption="inittab的示例片段">
+<comment># SERIAL CONSOLE</comment>
+c0:12345:respawn:/sbin/agetty 115200 ttyS0 vt102
+
+<comment># TERMINALS -- 这些在无头qube上是没有用的</comment>
+<comment>#c1:12345:respawn:/sbin/agetty 38400 tty1 linux</comment>
+<comment>#c2:12345:respawn:/sbin/agetty 38400 tty2 linux</comment>
+<comment>#c3:12345:respawn:/sbin/agetty 38400 tty3 linux</comment>
+<comment>#c4:12345:respawn:/sbin/agetty 38400 tty4 linux</comment>
+<comment>#c5:12345:respawn:/sbin/agetty 38400 tty5 linux</comment>
+<comment>#c6:12345:respawn:/sbin/agetty 38400 tty6 linux</comment>
+</pre>
+
+<p>
+现在，最后一步……我们需要告诉系统，本地的串口可以被认为是安全的终端。我们需要修改的文件是<path>/etc/securetty</path>。它包含了一个系统信任的终端列表。我们只需要多加两行进去，使串口线可以用来让<c>root</c>用户登录。
+</p>
+
+<pre caption="使root可以在串口终端登录">
+<comment>(/dev/ttyS0 -- 第一个串口的传统命名)</comment>
+# <i>echo 'ttyS0' >> /etc/securetty</i>
+
+<comment>（最近，Linux也把它称为/dev/tts/0——所以我们也把它加上）</comment>
+# <i>echo 'tts/0' >> /etc/securetty</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的 命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有分区和重启">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<note>
+<e>Cobalt用户：</e>本章的剩余部分讲解了如何设定SGI 
+PROM以使它可以从磁盘引导<c>arcload</c>并加载Linux。这并不适用于Cobalt服务器的配置。实际上，你要做的已经完成了——第一次启动前没有其他需要配置的了，你可以跳到下一章：<uri 
+link="?part=1&amp;chap=11">结束Gentoo的安装</uri>
+</note>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>调较SGI PROM</title>
+<subsection>
+<title>一般性的PROM设定</title>
+<body>
+
+<p>
+既然你已经安装好了引导程序，你可以重启机器了。
+</p>
+
+<pre caption="重启系统">
+<comment>（退出chroot环境）</comment>
+# <i>exit</i>
+
+<comment>（卸载驱动器）</comment>
+# <i>umount /mnt/gentoo/boot</i>
+# <i>umount /mnt/gentoo</i>
+
+<comment>（重启）</comment>
+# <i>reboot</i>
+</pre>
+
+<p>
+当你重启之后，去到<e>System Maintenance Menu</e>并选择<e>Enter Command 
+Monitor</e>（<c>5</c>）就像你netboot这台机器时做的一样。
+</p>
+
+<pre caption="配置PROM来启动Gentoo">
+1) Start System
+2) Install System Software
+3) Run Diagnostics
+4) Recover System
+5) Enter Command Monitor
+
+Option? <i>5</i>
+Command Monitor. Type "exit" to return to the menu.
+
+<comment>(为arcload设定一些选项)</comment>
+
+<comment>（提供卷头的位置）</comment>
+&gt;&gt; <i>setenv SystemPartition scsi(0)disk(1)rdisk(0)partition(8)</i>
+
+<comment>（自动启动Gentoo）</comment>
+&gt;&gt; <i>setenv AutoLoad Yes</i>
+
+<comment>（设定时区）</comment>
+&gt;&gt; <i>setenv TimeZone EST5EDT</i>
+
+<comment>（使用串口终端——显卡用户应该用"g"，而不是用"d1"（数字一））</comment>
+&gt;&gt; <i>setenv console d1</i>
+
+<comment>（设定串口终端波特率。这是可选的，9600是默认设定。）
+（如果需要，可以设置最高到38400。）</comment>
+&gt;&gt; <i>setenv dbaud 9600</i>
+</pre>
+
+<p>
+现在，下边的设定取决于你要怎样引导系统。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>直接卷头启动的设定</title>
+<body>
+
+<p>
+这部分内容的出现只是为了保持完整。我们推荐用户查看安装<c>arcload</c>那部分内容，而不要看这里。
+</p>
+
+<note>
+只适用于Indy，Indigo2(R4k)和Challenge S。
+</note>
+
+<pre caption="从卷头启动的PROM设定">
+<comment>（&lt;根设备&gt; = Gentoo的根分区，比如/dev/sda3）</comment>
+&gt;&gt; <i>setenv OSLoadPartition &lt;根设备&gt;</i>
+
+<comment>（要列出可用的内核，请键入“ls”）</comment>
+&gt;&gt; <i>setenv OSLoader &lt;内核文件名&gt;</i>
+&gt;&gt; <i>setenv OSLoadFilename &lt;内核文件名&gt;</i>
+
+<comment>（声明你要传递的内核参数）</comment>
+&gt;&gt; <i>setenv OSLoadOptions &lt;内核参数&gt;</i>
+</pre>
+
+<p>
+如果你想尝试启动一个内核，而不改变当前的内核参数设定，你可以执行<c>boot -f</c>PROM命令：
+</p>
+
+<pre caption="在不改变环境变量的情况下启动">
+<comment>（启动一个内核，“new”，使用额外的选项）</comment>
+# <i>boot -f new root=/dev/sda3 ro</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>arcload的设定</title>
+<body>
+
+<p>
+<c>arcload</c>使用<c>OSLoadFilename</c>选项来指定哪些选项用<path>arc.cf</path>里的内容来设定。这个配置文件本质上是一个脚本，脚本中的顶级块为不同的系统定义了启动镜像，在块内可定义一些可选的设定。所以，定义<c>OSLoadFilename=mysys(serial)</c>就能引入<c>mysys</c>块的设定，并且<c>serial</c>选项的内容将会覆盖已有的设定。
+</p>
+
+<p>
+在前面的示例文件里，我们定义了一个系统块，<c>ip28</c>，有<c>working</c>、<c>new</c>和<c>debug</c>3个选项。我们这样来定义我们的PROM变量：
+</p>
+
+<pre caption="使用arcload的PROM设定">
+<comment>（选择arcload作为引导程序：sash64或者sashARCS）</comment>
+&gt;&gt; <i>setenv OSLoader sash64</i>
+
+<comment>（使用“working”内核镜像，定义于arc.cf的“ip28”段）</comment>
+&gt;&gt; <i>setenv OSLoadFilename ip28(working)</i>
+</pre>
+
+<p>
+从<c>arcload-0.5</c>开始，文件不需要再放在卷头里——它们可以被放在分区内。要告诉<c>arcload</c>哪里去寻找它的配置文件和内核，我们需要设定<c>OSLoadPartition</c> 
+PROM变量。确切的值这里将取决于你的磁盘在SCSI总线的什么位置。把<c>SystemPartitions</c>PROM变量作为一个引导——只有分区号码需要改变。
+</p>
+
+<note>
+分区是从0开始命名，而不是1，和在Linux里一样
+</note>
+
+<pre caption="告诉arcload哪里去寻找arc.cf">
+<comment>（如果你想从卷头里加载——使用分区8）</comment>
+&gt;&gt; <i>setenv OSLoadPartition scsi(0)disk(1)rdisk(0)partition(8)</i>
+
+<comment>（否则，指定分区和文件系统类型）</comment>
+&gt;&gt; <i>setenv OSLoadPartition scsi(0)disk(1)rdisk(0)partition(0)[ext2]</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>全部完成</title>
+<body>
+
+<p>
+现在你已经准备好享受Gentoo了！当重启进入到您新装的Gentoo系统之后，请阅读<uri 
+link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
