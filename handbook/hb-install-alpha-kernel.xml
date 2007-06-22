@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-kernel.xml,v 1.35 2006/12/06 19:59:09 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-kernel.xml,v 1.41 2007/05/20 20:32:23 nightmorph Exp $ -->
 
 <sections>
 
-<version>7.1</version>
-<date>2006-12-06</date>
+<version>8.1</version>
+<date>2007-05-15</date>
 
 <section>
 <title>时区</title>
@@ -38,28 +38,20 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于alpha架构的系统，可以使用<c>vanilla-sources</c>（默认的2.6内核源码）。
-</p>
-
-<p>
-选择您的内核源码并且用<c>emerge</c>命令安装它。
-</p>
-
-<p>
-接下来的例子中我们安装<c>vanilla-sources</c>。当然，您可以用自己选择的源码来代替，这里只是一个示例。<c>USE="-doc"</c>用来避免您现在就安装xorg-x11或者其他的从属包。<c>USE="symlink"</c>对于一个全新安装来说并不是必须的，但是它可以确保/usr/src/linux符号连接的正确创建。
+对于alpha架构的系统，可以使用<c>gentoo-sourcesc>（默认的2.6内核源码）。
 </p>
 
 <pre caption="安装内核源码">
-# <i>USE="-doc symlink" emerge vanilla-sources</i>
+# <i>emerge gentoo-sources</i>
 </pre>
 
 <p>
-当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码是<c>vanilla-sources-2.6.16.19</c>。您的版本可能有所不同，所以请您记住这一点。
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码是<c>gentoo-sources-<keyval id="kernel-version"/></c>。您的版本可能有所不同，所以请您记住这一点。
 </p>
 
 <pre caption="查看内核源码符号链接">
 # <i>ls -l /usr/src/linux</i>
-lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; linux-2.6.16.19
+lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
 </pre>
 
 <p>
@@ -118,19 +110,10 @@ General setup ---&gt;
 </pre>
 
 <p>
-现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。如果您正在使用的是2.4版本的内核，您也要选择<c>/dev file system</c>和<c>Automatically mount at boot</c>选项，并且要确保执行<c>emerge devfsd</c>。
+现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
 </p>
 
 <pre caption="选择需要的文件系统">
-<comment>（2.4.x版本内核）</comment>
-File systems ---&gt;
-  [*] Virtual memory file system support (former shm fs)
-  [*] /proc file system support
-  [*] /dev file system support (EXPERIMENTAL)
-  [*]   Automatically mount at boot
-  [ ] /dev/pts file system for Unix98 PTYs
-
-<comment>（2.6.x版本内核）</comment>
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
     [*] /proc file system support
@@ -149,13 +132,6 @@ File systems ---&gt;
 </p>
 
 <pre caption="选择PPPoE驱动">
-<comment>（2.4.x版本内核）</comment>
-Network device support ---&gt;
-  &lt;*&gt; PPP (point-to-point protocol) support
-  &lt;*&gt;   PPP support for async serial ports
-  &lt;*&gt;   PPP support for sync tty ports
-
-<comment>（2.6.x版本内核）</comment>
 Device Drivers ---&gt;
   Networking support ---&gt;
     &lt;*&gt; PPP (point-to-point protocol) support
@@ -164,7 +140,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>rp-pppoe</c>并被配置成是使用核心PPPoE时才会用到它。
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成是使用核心PPPoE时才会用到它。
 </p>
 
 <p>
@@ -244,13 +220,7 @@ Sound ---&gt;
 </p>
 
 <pre caption="编译内核">
-<comment>（2.4版本内核）</comment>
-# <i>make dep &amp;&amp; make vmlinux modules modules_install</i>
-
-<comment>（2.6版本内核）</comment>
 # <i>make &amp;&amp; make modules_install</i>
-
-<comment>（所有版本内核）</comment>
 # <i>make boot</i>
 </pre>
 
@@ -299,31 +269,6 @@ Sound ---&gt;
 
 <pre caption="运行genkernel">
 # <i>genkernel all</i>
-* Gentoo Linux Genkernel; Version 3.4.0
-* Running with options: all
-
-* Linux Kernel 2.6.16.19 for alpha...
-* kernel: >> Running mrproper...
-<comment>（为增加可读性，输出欠奉）</comment>
-* Kernel compiled successfully!
-*
-* Required Kernel Parameters:
-*     real_root=/dev/$ROOT
-*
-*     Where $ROOT is the device node for your root partition as the
-*     one specified in /etc/fstab
-*
-* If you require Genkernel's hardware detection features; you MUST
-* tell your bootloader to use the provided INITRAMFS file. Otherwise;
-* substitute the root argument for the real_root argument if you are
-* not planning to use the initrd...
-
-* WARNING... WARNING... WARNING...
-* Additional kernel cmdline arguments that *may* be required to boot properly...
-* Do NOT report kernel bugs as genkernel bugs unless your bug
-* is about the default genkernel configuration...
-*
-* Make sure you have the latest genkernel before reporting bugs.
 </pre>
 
 <p>
@@ -334,65 +279,16 @@ Sound ---&gt;
 # <i>ls /boot/kernel* /boot/initramfs-*</i>
 </pre>
 
-<p>
-现在，让我们进行下一个步骤以使我们的系统更象安装光盘──安装<c>coldplug</c>。当initrd自动识别引导系统的硬件的时候，<c>coldplug</c>自动识别其他的硬件。要安装和使用<c>coldplug</c>，请按照以下输入：
-</p>
-
-<pre caption="安装和使用coldplug">
-# <i>emerge coldplug</i>
-# <i>rc-update add coldplug boot</i>
-</pre>
-
-<note>
-如果您在使用<c>udev</c>103或者更高的版本，您就不用安装<c>coldplug</c>。如果您接收到<c>udev</c> blocks <c>coldplug</c>的信息，那么您就不需要安装<c>coldplug</c>。
-</note>
-
 </body>
 </section>
 <section id="kernel_modules">
 <title>安装独立内核模块</title>
 <subsection>
-<title>安装额外的模块</title>
-<body>
-
-<p>
-您应该根据您系统上额外的硬件适当地安装一些ebuild。这儿列出一些内核相关的euibld，您可以考虑安装：
-</p>
-
-<table>
-<tcolumn width="1in"/>
-<tcolumn width="4in"/>
-<tcolumn width="2in"/>
-<tr>
-  <th>Ebuild</th>
-  <th>用途</th>
-  <th>命令</th>
-</tr>
-<tr>
-  <ti>x11-drm</ti>
-  <ti>
-    xorg-x11用来给9200、Rage128、Matrox、Voodoo以及其他更新的ATI Radeon显卡作图形加速用的。请查看<path>/usr/portage/x11-base/x11-drm</path> ebuild中的<c>IUSE_VIDEO_CARDS</c>变量，找出你的显卡代替命令中的<c>yourcard</c>。
-  </ti>
-  <ti><c>VIDEO_CARDS="yourcard" emerge x11-drm</c></ti>
-</tr>
-</table>
-
-<p>
-请注意，某些ebuild可能关联很多依赖性。要检查当emerge一个ebuild时会安装哪些软件包，使用<c>emerge --pretend</c>。以<c>x11-drm</c>软件包为例：
-</p>
-
-<pre caption="查看完整的安装软件包列表">
-# <i>emerge --pretend x11-drm</i>
-</pre>
-
-</body>
-</subsection>
-<subsection>
 <title>配置内核模块</title>
 <body>
 
 <p>
-您可以在<path>/etc/modules.autoload.d/kernel-2.4</path>（或<path>kernel-2.6</path>）中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
+您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
 </p>
 
 <p>
@@ -404,15 +300,14 @@ Sound ---&gt;
 </pre>
 
 <p>
-例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.4</path>或<path>kernel-2.6</path>然后输入模块的名字。
+例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>然后输入模块的名字。
 </p>
 
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.4">
-<comment>（以2.4内核为例）</comment>
-# <i>nano -w /etc/modules.autoload.d/kernel-2.4</i>
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
 </pre>
 
-<pre caption="/etc/modules.autoload.d/kernel-2.4或kernel-2.6">
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
 3c59x
 </pre>
 

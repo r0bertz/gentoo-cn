@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-kernel.xml,v 1.2 2006/09/02 09:00:59 vapier Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-kernel.xml,v 1.7 2007/05/20 20:32:23 nightmorph Exp $ -->
 
 <sections>
 
-<version>7.1</version>
-<date>2006-08-30</date>
+<version>8.1</version>
+<date>2007-05-15</date>
 
 <section>
 <title>时区</title>
@@ -38,15 +38,15 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于ARM系统，可用的内核有<c>vanilla-sources</c>（默认的内核源码，在<uri link="http://kernel.org/">kernel.org</uri>上发布）和<c>gentoo-sources</c>（包含额外的补丁，加强性能和稳定性）。
+对于ARM系统，我们使用<c>gentoo-sources</c>（包含额外的补丁，加强性能和稳定性）。
 </p>
 
 <p>
-选择您的内核源码并且用<c>emerge</c>命令安装它。<c>USE="-doc"</c>用来避免您现在就安装xorg-x11或者其他的从属包。<c>USE="symlink"</c>对于一个全新安装来说并不是必须的。但是，请确定你创建了<path>/usr/src/linux</path>的符号连接。
+现在请使用<c>emerge</c>命令安装它。
 </p>
 
 <pre caption="安装内核源码">
-# <i>USE="-doc symlink" emerge gentoo-sources</i>
+# <i>emerge gentoo-sources</i>
 </pre>
 
 <p>

@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-medium.xml,v 1.42 2006/09/05 06:50:30 rane Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-medium.xml,v 1.45 2007/05/17 13:37:21 neysx Exp $ -->
 
 <sections>
 
-<version>7.1</version>
-<date>2006-09-04</date>
+<version>8.1</version>
+<date>2007-05-17</date>
 
 <section>
 <title>硬件需求</title>
@@ -52,8 +52,6 @@
 </subsection>
 </section>
 
-<!-- Copy/paste from hb-install-x86-medium.xml -->
-<!-- START -->
 <section>
 <title>Gentoo安装光盘</title>
 <subsection>
@@ -64,12 +62,13 @@
 <e>Gentoo安装光盘</e>是可启动的光盘，它含有一个完整的Gentoo环境，允许你从光盘启动Linux。在启动过程中，它们会自动检测你的硬件并加载相应的驱动程序。这些光盘是由Gentoo开发者维护的。
 </p>
 
+<!--
 <p>
 所有的安装光盘都允许你启动、设置网络、初始化硬盘分区和从因特网上开始安装Gentoo。我们目前提供两种安装光盘，它们都同样适合安装Gentoo，只要你想通过网络安装并使用最新的软件包。
 </p>
 
 <p>
-如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2006.1/">Gentoo 2006.1手册</uri>里的说明。
+如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2007.0/index.xml">Gentoo 2007.0手册</uri>里的说明。
 </p>
 
 <p>
@@ -88,6 +87,7 @@
 <p>
 为了让你更好的做出选择，我们列出了每种安装光盘的优点和缺点。
 </p>
+-->
 
 </body>
 </subsection>
@@ -96,9 +96,9 @@
 <body>
 
 <p>
-这个最小化安装光盘名为<c>install-alpha-minimal-2006.1.iso</c>。大小只有65MB。你可以用它安装Gentoo，但是只能用于有网络的环境。
+这个最小化安装光盘名为<c>install-alpha-minimal-2007.0.iso</c>。大小只有65MB。你必须在有网络的环境下用它来安装Gentoo。
 </p>
-
+<!--
 <table>
 <tr>
   <th>最小化安装光盘</th>
@@ -123,7 +123,7 @@
 <body>
 
 <p>
-通用安装光盘名为<c>install-alpha-universal-2006.1.iso</c>，大约占用一张光盘的316MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
+通用安装光盘名为<c>install-alpha-universal-2007.0.iso</c>，大约占用一张光盘的316MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
 </p>
 
 <table>
@@ -147,7 +147,7 @@
 
 </body>
 </subsection>
-<!-- No package CDs for Alpha - 2006.1
+
 <subsection>
 <title>Other CDs</title>
 <body>
@@ -165,9 +165,9 @@ Gentoo installation.
 If you intend to use the Packages 光盘 to quickly install additional software,
 make sure that you use the same subarchitecture as the stage3 tarball you use.
 </p>
-
+-->
 </body>
-</subsection>-->
+</subsection>
 <subsection>
 <title>Stage3</title>
 <body>
@@ -191,7 +191,7 @@ stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安�
 </p>
 
 <p>
-你可以从我们的其中一个<uri link="/main/en/mirrors.xml">镜像</uri>下载任何安装光盘（并且，如果需要，还有一张软件包光盘）。这些安装光盘位于<path>releases/alpha/2006.1/installcd</path>目录里。
+你可以从我们的其中一个<uri link="/main/en/mirrors.xml">镜像</uri>下载任何安装光盘（并且，如果需要，还有一张软件包光盘）。这些安装光盘位于<path><keyval id="release-dir"/>installcd</path>目录里。
 </p>
 
 <p>
@@ -199,7 +199,7 @@ stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安�
 </p>
 
 <p>
-如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path>install-alpha-minimal-2006.1.iso.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
+如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path>install-alpha-minimal-2007.0.iso.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
 </p>
 
 <p>
@@ -253,10 +253,6 @@ SRM是基于Alpha Console Subsystem规范的，它为OpenVMS、Tru64 UNIX和Linu
 现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>映像文件。
 </p>
 
-<p>
-有些人可能因为机器没有键盘和显示屏，希望能在安装过程中使用串口控制台。这个发行版为这些人准备了两个办法。一个是允许你使用串口控制台启动2.6内核，另一个允许使用同样的方法启动2.4内核。
-</p>
-
 <pre caption="使用SRM来启动光盘">
 <comment>（列出可用的驱动器）</comment>
 &gt;&gt;&gt; <i>show device</i>
@@ -264,25 +260,15 @@ dkb0.0.1.4.0        DKB0       TOSHIBA CDROM
 <comment>（……）</comment>
 <comment>（用你的光驱设备代替dkb0）</comment>
 &gt;&gt;&gt; <i>boot dkb0 -flags 0</i>
-<comment>启动2.4内核而不是默认的2.6内核请使用：</comment>
-&gt;&gt;&gt; <i>boot dkb -flags 1</i>
 <comment>（如果需要串口控制台支持）</comment>
-<comment>从串口控制台启动2.6内核请使用：</comment>
 &gt;&gt;&gt; <i>boot dkb0 -flags 2</i>
-<comment>从串口控制台启动2.4内核请使用：</comment>
-&gt;&gt;&gt; <i>boot dkb0 -flags 3</i>
 </pre>
 
 <pre caption="使用MILO来启动光盘">
 <comment>（用你的光驱设备代替hdb）</comment>
 MILO&gt; <i>boot hdb:/boot/gentoo_2.6 initrd=/boot/gentoo_2_6.igz root=/dev/ram0 init=/linuxrc looptype=zisofs loop=/zisofs cdroot</i>
-<comment>启动2.4内核而不是默认的2.6内核请使用：</comment>
-MILO&gt; <i>boot hdb:/boot/gentoo_2.4 initrd=/boot/gentoo_2_4.igz root=/dev/ram0 init=/linuxrc looptype=zisofs loop=/zisofs cdroot</i>
 <comment>（如果需要串口控制台支持）</comment>
-<comment>从串口控制台启动2.6内核请使用：</comment>
 MILO&gt; <i>boot hdb:/boot/gentoo_2.6 initrd=/boot/gentoo_2_6.igz root=/dev/ram0 init=/linuxrc looptype=zisofs loop=/zisofs console=ttyS0 cdroot</i>
-<comment>从串口控制台启动2.4内核请使用：</comment>
-MILO&gt; <i>boot hdb:/boot/gentoo_2.4 initrd=/boot/gentoo_2_4.igz root=/dev/ram0 init=/linuxrc looptype=zisofs loop=/zisofs console=ttyS0 cdroot</i>
 </pre>
 
 <p>
@@ -330,8 +316,10 @@ MILO&gt; <i>boot hdb:/boot/gentoo_2.4 initrd=/boot/gentoo_2_4.igz root=/dev/ram0
 </p>
 
 <pre caption="调整硬盘性能">
-<comment>激活DMA：</comment>                                       # <i>hdparm -d 1 /dev/hda</i>
-<comment>激活DMA，并附加安全选项：</comment>  # <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+<comment>激活DMA：</comment>
+# <i>hdparm -d 1 /dev/hda</i>
+<comment>激活DMA，并附加安全选项：</comment>
+# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
 </pre>
 
 </body>
@@ -396,11 +384,11 @@ Re-enter password: <comment>（再次输入john的密码）</comment>
 </p>
 
 <pre caption="查看在线文档">
-# <i>lynx http://www.gentoo.org/doc/en/handbook/handbook-alpha.xml</i>
+# <i>lynx http://www.gentoo.org/doc/en/handbook/<keyval id="online-book"/></i>
 </pre>
 
 <p>
-你可以按<c>Alf-F1</c>来回到原来的终端。
+你可以按<c>Alt-F1</c>来回到原来的终端。
 </p>
 
 </body>

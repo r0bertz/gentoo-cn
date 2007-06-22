@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-disk.xml,v 1.23 2006/11/02 20:49:38 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-alpha-disk.xml,v 1.25 2007/05/07 18:11:40 nightmorph Exp $ -->
 
 <sections>
 
-<version>7.1</version>
-<date>2006-11-02</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>块设备介绍</title>
