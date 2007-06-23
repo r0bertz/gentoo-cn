@@ -38,7 +38,7 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于alpha架构的系统，可以使用<c>gentoo-sourcesc>（默认的2.6内核源码）。
+对于alpha架构的系统，可以使用<c>gentoo-sources</c>（默认的2.6内核源码）。
 </p>
 
 <pre caption="安装内核源码">
