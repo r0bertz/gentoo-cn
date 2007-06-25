@@ -247,10 +247,10 @@ link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和�
 
 <p>
 另外一种检查下载文件的完整性的方法是使用GnuPG来验证我们提供的数字签名
-（这个文件以<path>.asc</path>结尾）。下载签名文件。并获得公匙：
+（这个文件以<path>.asc</path>结尾）。下载签名文件。并获得公钥：
 </p>
 
-<pre caption="获得公匙">
+<pre caption="获得公钥">
 $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
 </pre>
 
@@ -258,7 +258,7 @@ $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
 现在验证签名：
 </p>
 
-<pre caption="验证密匙">
+<pre caption="验证数字签名">
 $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 </pre>
 

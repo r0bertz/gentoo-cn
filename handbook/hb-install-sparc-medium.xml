@@ -215,10 +215,10 @@ link="http://www.etree.org/md5com.html">md5sum</uri>）。
 </p>
 
 <p>
-另一个检查下载文件有效性的方法就是用GnuPG来校验我们提供的加密签名（以<path>.asc</path>结尾的文件）。下载签名文件和取得公匙：
+另一个检查下载文件有效性的方法就是用GnuPG来校验我们提供的加密签名（以<path>.asc</path>结尾的文件）。下载签名文件和取得公钥：
 </p>
 
-<pre caption="取得公匙">
+<pre caption="取得公钥">
 $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
 </pre>
 
@@ -226,7 +226,7 @@ $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
 现在校验签名：
 </p>
 
-<pre caption="校验密码签名">
+<pre caption="验证数字签名">
 $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 </pre>
 

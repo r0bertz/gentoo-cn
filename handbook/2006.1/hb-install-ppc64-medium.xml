@@ -158,7 +158,7 @@ FAQ</uri>里有描述。
 使用GnuPG应用程序来获得我们的公钥，执行下面的命令：
 </p>
 
-<pre caption="获得公匙">
+<pre caption="获得公钥">
 $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 0x17072058</i>
 </pre>
 
@@ -166,7 +166,7 @@ $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 0x17072058</i>
 现在验证签名：
 </p>
 
-<pre caption="验证密匙">
+<pre caption="验证数字签名">
 $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 </pre>
     

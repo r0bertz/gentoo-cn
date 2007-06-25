@@ -210,7 +210,7 @@ link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
 modules=( "iwconfig" )
 
 <comment># 为名为ESSID1和ESSID2的AP配置WEP秘钥</comment>
-<comment># 您最多可以配置4个WEP密匙，但任何时候只有其中1个起作用。
+<comment># 您最多可以配置4个WEP密钥，但任何时候只有其中1个起作用。
 # 所以我们提供一个默认的下标[1]来设置秘钥[1]，之后紧接着把活动秘钥设置为[1]。
 # 我们这么做以备你让其他ESSID使用[1]以外的WEP秘钥。
 #
