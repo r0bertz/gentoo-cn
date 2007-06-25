@@ -118,7 +118,7 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
     <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>, 
     <uri link="handbook-mips.xml?style=printable&amp;full=1">mips</uri>,
     <uri link="handbook-ia64.xml?style=printable&amp;full=1">ia64</uri>,
-    <uri link="handbook-arm.xml?style=printable&amp;full=1">arm</uri>,
+    <uri link="handbook-arm.xml?style=printable&amp;full=1">arm</uri>
   </ti>
 </tr>
 <tr>
@@ -156,6 +156,7 @@ link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
   <th>发行版本</th>
   <th>架构</th>
 </tr>
+<!--
 <tr>
   <ti>2004.2</ti>
   <ti>
@@ -213,6 +214,7 @@ link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
     <uri link="2006.0/handbook-x86.xml">x86</uri>
   </ti>
 </tr>
+-->
 <tr>
   <ti>2006.1</ti>
   <ti>

@@ -282,7 +282,7 @@ Wiki</uri>上有一个布线图，而且大多数电子商店里应该可以买�
 </note>
 
 <note>
-至于终端，可以是一个真正的VT100/ANSI终端，或者可以是PC上运行的终端模拟软件（比如HyperTerminal，Minicom，seyon，Telex，xc，screen——任何你所喜欢的）。这台机器是什么平台都无所谓——只要有一个能用的RS-232串口，和合适的软件。
+至于终端，可以是一个真正的VT100/ANSI终端，或者可以是PC上运行的终端模拟软件（比如HyperTerminal，Minicom，seyon，Telex，xc，screen——任何你所喜欢的）。这台机器是什么平台都无所谓——只要有一个能用的RS-232串口和合适的软件。
 </note>
 
 <note>
@@ -425,12 +425,12 @@ link="/main/en/mirrors.xml">镜像</uri>里找到这些镜像。
 
 <p>
 当你下载完文件后，把压缩的镜像放到你的<path>/tftproot</path>目录里。(使用<c>bzip2 
--d</c>来解压缩)然后修改你的<path>/etc/dhcp/dhcpd.conf</path>文件，为你的SGI客户端添加条目。
+-d</c>来解压缩）然后修改你的<path>/etc/dhcp/dhcpd.conf</path>文件，为你的SGI客户端添加条目。
 </p>
 
 <pre caption="SGI工作站的dhcpd.conf片段">
 subnet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx {
-  <comment># ……通用的内容在这里……</comment>
+  <comment># ……常见的内容在这里……</comment>
 
   <comment># SGI工作站……把'sgi'改成你的SGI机器的主机名</comment>
   host <i>sgi</i> {
@@ -669,7 +669,7 @@ Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头
 <body>
 
 <p>
-和SGI机器不同的是，Cobalt服务器用NFS来传输需要启动的内核。机器加电时，按住左右方向键来启动机器。然后机器会尝试通过BOOTP来获得IP地址，通过NFS从服务器挂载<path>/nfsroot</path>目录，然后尝试下载并启动文件<path>vmlinux_raq-2800.gz</path>（文件名取决于型号），此文件应该是一个标准的ELF二进制文件。
+和SGI机器不同的是，Cobalt服务器用NFS来传输需要启动的内核。机器加电启动时，按住左右两个方向键。然后机器会尝试通过BOOTP来获得IP地址，通过NFS从服务器挂载<path>/nfsroot</path>目录，然后尝试下载并启动文件<path>vmlinux_raq-2800.gz</path>（文件名取决于型号），此文件应该是一个标准的ELF二进制文件。
 </p>
 
 </body>
@@ -680,8 +680,8 @@ Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头
 <body>
 
 <p>
-在这个页面上<uri 
-link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/</uri>，你可以找到使Cobalt启动运行所必需的启动镜像。你所需要的文件的名字是<path>nfsroot-KERNEL-COLO-DATE-cobalt.tar</path>——选择最新的一个然后像下面那样把它解压缩到<path>/</path>里。
+在这个页面<uri 
+link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/</uri>上，你可以找到使Cobalt启动运行所必需的启动镜像。你所需要的文件的名字是<path>nfsroot-KERNEL-COLO-DATE-cobalt.tar</path>——选择最新的一个然后像下面那样把它解压缩到<path>/</path>里。
 </p>
 
 <pre caption="解压缩nfsroot镜像">
@@ -719,7 +719,7 @@ link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.
 </pre>
 
 <p>
-如果现在NFS服务器已经在运行了，你可以告诉它让它用<c>exportfs</c>再看一下<c>exports</c>文件。
+如果现在NFS服务器已经在运行了，你可以告诉它让它用<c>exportfs</c>再查看一下<c>exports</c>文件。
 </p>
 
 <pre caption="Export一个新的文件系统">
@@ -739,7 +739,7 @@ link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.
 
 <pre caption="Cobalt服务器的dhcpd.conf片段">
 subnet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx {
-  <comment># ……通用的内容在这里……</comment>
+  <comment># ……常见的内容在这里……</comment>
 
   <comment># 一个Cobalt服务器的配置</comment>
   <comment># 这里设定hostname：</comment>
@@ -798,7 +798,7 @@ modem线，把终端设置成波特率115200，8位，无奇偶校验位，一�
 </p>
 
 <p>
-如果一切正常，背部面板应该显示“Net Booting”，你应该看到一些网络活动，紧接着CoLo开始启动。在后面板上，下拉菜单知道你看到“Network 
+如果一切正常，背部面板应该显示“Net Booting”，你应该看到一些网络活动，紧接着CoLo开始启动。在后面板上，下拉菜单直到你看到“Network 
 (NFS)”然后按回车。你应该可以在串口终端上观察到机器开始启动。
 </p>
 
