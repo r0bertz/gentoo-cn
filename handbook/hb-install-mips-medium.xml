@@ -1,0 +1,882 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-medium.xml,v 1.22 2007/05/07 18:11:41 nightmorph Exp $ -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>硬件需求</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+在开始之前，我们首先列出安装Gentoo的硬件需求。 
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>硬件需求</title>
+<body>
+
+<table>
+<tr>
+  <th>CPU <e>（大头端）</e></th>
+  <ti>MIPS3、MIPS4、MIPS5或者MIPS64级CPU</ti>
+</tr>
+<tr>
+  <th>CPU <e>（小头端）</e></th>
+  <ti>MIPS4、MIPS5或者和MIPS64级CPU</ti>
+</tr>
+<tr>
+  <th>内存</th>
+  <ti>128MB</ti>
+</tr>
+<tr>
+  <th>硬盘空间</th>
+  <ti>3.0GB(不包括交换分区)</ti>
+</tr>
+<tr>
+  <th>交换分区</th>
+  <ti>至少256MB</ti>
+</tr>
+</table>
+
+<p>
+你也应该查看一下我们的网站上的<uri link="/doc/en/mips-requirements.xml">MIPS硬件要求</uri>文档。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>安装说明</title>
+<subsection>
+<title>有关处理器架构的说明</title>
+<body>
+
+<p>
+在很多架构上，处理器都经过了几代的发展，每一代新处理都是在前一代处理器的基础上构建而来。MIPS也不例外。MIPS架构包含了好几代CPU。为了正确的选择你的netboot镜像stage 
+tarball和<c>CFLAGS</c>，你需要知道你的系统的CPU属于哪个家族。这些所谓的家族被称为<b>I</b>nstruction 
+<b>S</b>et <b>A</b>rchitecture。
+</p>
+
+<table>
+  <tr>
+    <th>MIPS ISA</th>
+    <th>32或64位</th>
+    <th>包括的CPU</th>
+  </tr>
+  <tr>
+    <ti>MIPS 1</ti>
+    <ti>32位</ti>
+    <ti>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R2000">R2000</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/R2000">R3000</uri>
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS 2</ti>
+    <ti>32位</ti>
+    <ti>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R6000">R6000</uri>
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS 3</ti>
+    <ti>64位</ti>
+    <ti>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4000</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/R4000">R4400</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/R4000">R4600</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/R4000">R4700</uri>
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS 4</ti>
+    <ti>64位</ti>
+    <ti>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R5000">R5000</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/R5000">RM5000</uri>, <uri 
+link="http://www.linux-mips.org/wiki/index.php/RM7000">RM7000</uri> <uri 
+link="http://www.linux-mips.org/wiki/index.php/R8000">R8000</uri>, R9000, 
+<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R10000</uri>, 
+<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R12000</uri>, 
+<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R14000</uri>, 
+<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R16000</uri>
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS 5</ti>
+    <ti>64位</ti>
+    <ti>
+      目前没有
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS32</ti>
+    <ti>32位</ti>
+    <ti>
+      AMD Alchemy系列，4kc、4km等等……有好几个属于MIPS32 ISA的版本。
+    </ti>
+  </tr>
+  <tr>
+    <ti>MIPS64</ti>
+    <ti>64位</ti>
+    <ti>
+      Broadcom SiByte SB1、5kc……等等……有好几个属于MIPS64 ISA的版本。
+    </ti>
+  </tr>
+</table>
+
+<note>
+这个<c>MIPS5</c>ISA级别是Silicon 
+Graphics早在1994年设计的，不过从来没有应用到实物CPU里。它继续在<c>MIPS64</c> ISA里做为它的一部分存在着。
+</note>
+
+<note>
+经常的，<c>MIPS32</c>和<c>MIPS64</c> ISA会被人们所误解。<c>MIPS64</c> 
+ISA级别实际上是<c>MIPS5</c> 
+ISA的超集，所以它包括了<c>MIPS5</c>和之前的ISA的所有指令。<c>MIPS32</c>是<c>MIPS64</c>的32位子集，它的存在是由于大多数程序只需要32位的处理能力。
+</note>
+
+<p>
+还有，另外一个需要掌握的概念是<b>endianness</b>。Endianness指的是CPU从内存读取字的方式。一个字可以以<e>大</e>头端（最高位字节在前）方式读取，也可以以<e>小</e>头端方式读取。Intel 
+x86机器是小头端的，不过Apple和Sparc机器是大头端。在MIPS上，两种都有可能。为了把它们区分开，我们在架构名后加上<c>el</c>来表示小头端。
+</p>
+
+<table>
+  <tr>
+    <th>架构</th>
+    <th>32或64位</th>
+    <th>Endianness</th>
+    <th>包括的机器</th>
+  </tr>
+  <tr>
+    <ti><c>mips</c></ti>
+    <ti>32位</ti>
+    <ti>大头端</ti>
+    <ti>Silicon Graphics</ti>
+  </tr>
+  <tr>
+    <ti><c>mipsel</c></ti>
+    <ti>32位</ti>
+    <ti>小头端</ti>
+    <ti>Cobalt服务器</ti>
+  </tr>
+  <tr>
+    <ti><c>mips64</c></ti>
+    <ti>64位</ti>
+    <ti>大头端</ti>
+    <ti>Silicon Graphics</ti>
+  </tr>
+  <tr>
+    <ti><c>mips64el</c></ti>
+    <ti>64位</ti>
+    <ti>小头端</ti>
+    <ti>Cobalt服务器</ti>
+  </tr>
+</table>
+
+<p>
+如果你想学习更多有关ISA的知识，下面的网站可能有用。
+</p>
+
+<ul>
+  <li>
+    <uri 
+link="http://www.linux-mips.org/wiki/index.php/Instruction_Set_Architecture"> 
+Linux/MIPS Website: MIPS ISA </uri>
+  </li>
+  <li>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Endianess"> Linux/MIPS 
+Website: Endianness </uri>
+  </li>
+  <li>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Processors"> Linux/MIPS 
+Website: Processors </uri>
+  </li>
+  <li>
+    <uri link="http://en.wikipedia.org/wiki/Instruction_set"> Wikipedia: 
+Instruction Set </uri>
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>Stage3 Tarball</title>
+<body>
+
+<p>
+stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。 
+如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12"> 
+如何使用stage1或stage2安装Gentoo？</uri>
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Netboot概述</title>
+<subsection>
+<body>
+
+<p>
+在这一节中，我们将讲解要想成功的网络启动Silicon 
+Graphics工作站或者Cobalt服务器，你需要做些什么。这只是一个简单的指引，内容不是很详尽，要获取更多信息，推荐您阅读<uri 
+link="/doc/en/diskless-howto.xml">无盘HOWTO</uri>。
+</p>
+
+<p>
+你所需要的：取决于具体的机器，你将需要一些特定的硬件才能成功netboot并安装Linux。
+</p>
+
+<ul>
+  <li>
+    基本需求：
+    <ul>
+      <li>DHCP／BOAMD Alchemy系列，4kc、4km等等……有好几个属于MIPS32 ISA的版本。OTP服务器（推荐ISC DHCPd）</li>
+      <li>耐心——很多耐心</li>
+    </ul>
+  </li>
+  <li>
+    Silicon Graphics工作站需要：
+    <ul>
+      <li>TFTP服务器（推荐tftp-hpa）</li>
+      <li>
+        如果你想要或需要使用串口终端：
+        <ul>
+          <li>
+	    MiniDIN8 --&gt; RS-232串口线（只有IP22和IP28系统需要）
+	  </li>
+          <li>Null-modem线</li>
+          <li>VT100或者ANSI兼容终端，支持9600波特率</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Cobalt服务器（不是早期的Qube）需要：
+    <ul>
+      <li>NFS服务器</li>
+      <li>Null-modem线</li>
+      <li>VT100或者ANSI兼容终端，支持115200波特率</li>
+    </ul>
+  </li>
+</ul>
+
+<note>
+SGI机器的串口使用MiniDIN 8接口。很显然Apple 
+modem线正好可用来做串口线，不过随着近来越来越多的Apple机器转而使用USE和内置modem，这种线已经很难找了。<uri 
+link="http://www.linux-mips.org/wiki/Serial_Cable">Linux/MIPS 
+Wiki</uri>上有一个布线图，而且大多数电子商店里应该可以买到所需的接头。
+</note>
+
+<note>
+至于终端，可以是一个真正的VT100/ANSI终端，或者可以是PC上运行的终端模拟软件（比如HyperTerminal，Minicom，seyon，Telex，xc，screen——任何你所喜欢的）。这台机器是什么平台都无所谓——只要有一个能用的RS-232串口，和合适的软件。
+</note>
+
+<note>
+注意本指引不涵盖早期的Qube。早期的Qube服务器在它的默认配置中缺少串口，所以在上面安装Gentoo是不可能的，除非在改锥和替代机器的帮助下。下面的网站上有一个如何在这种机器上安装Gentoo的指引。<uri 
+link="http://www.metzner.org/projects/qube/">http://www.metzner.org/projects/qube/</uri>
+</note>
+</body>
+</subsection>
+<subsection>
+<title>设置TFTP和DHCP——一个简单的指引</title>
+<body>
+
+<p>
+好了，工已利其器，现在该善其事了。就像前面提到的——这不是一个完整的指引，这只是可以完成安装的一个基本配置。你可以使用本指引来完成你的第一次安装，也可以使用本指引的建议来修改你目前的安装步骤来支持netboot。
+</p>
+
+<p>
+值得注意的是这些服务器不一定必须运行Gentoo Linux，你也可以运行FreeBSD或者其他类Unix系统。不过，本指引假设你要运行Gentoo 
+Linux。如果需要，你也可以在其他机器上运行TFTP／NFS，而不在DHCP服务器上运行。
+</p>
+
+<warn>
+Gentoo/MIPS团队不能帮你把其他操作系统设定为netboot服务器。如果你选择了其他OS，我们假设你知道你自己在做什么。
+</warn>
+
+<p>
+第一步——配置DHCP。为了让ISC DHCP守护进程可响应BOOTP请求（就像SGI和Cobalt 
+BOOTROM所要求的），你需要在所使用的地址范围上启用动态BOOTP；然后为每一个客户端设定一个条目包括指向启动镜像的指针。
+</p>
+
+<pre caption="安装ISC的DHCP">
+# <i>emerge dhcp</i>
+</pre>
+
+<p>
+安装完后你要创建<path>/etc/dhcp/dhcpd.conf</path>。这里有一个基本的配置可以让你很快上路。
+</p>
+
+<pre caption="一个基本的dhcpd.conf">
+<comment># 让dhcpd禁用动态DNS.</comment>
+<comment># 没有这个dhcpd会拒绝启动</comment>
+ddns-update-style none;
+
+<comment># 创建一个子网：</comment>
+subnet <i>192.168.10.0</i> netmask <i>255.255.255.0</i> {
+  <comment># 我们的启动客户端的地址池。不要忘记了“动态bootp”！</comment>
+  pool {
+    range dynamic-bootp <i>192.168.10.1 192.168.10.254</i>;
+  }
+
+  <comment># DNS服务器和默认网关——按实际情况替换相应的值</comment>
+  option domain-name-servers <i>203.1.72.96</i>, <i>202.47.56.17</i>;
+  option routers <i>192.168.10.1</i>;
+
+  <comment># 告诉DHCP服务器对于这个子网来说它是有权威性的。</comment>
+  authoritative;
+
+  <comment># 允许在这个子网上使用BOOTP</comment>
+  allow bootp;
+}
+</pre>
+
+<p>
+使用这个配置，我们可以在subnet子句中添加任意多个客户端。后面我们将讲解需要添加些什么内容。
+</p>
+
+<p>
+下一步——配置TFTP服务器。建议你使用<c>tftp-hpa</c>，因为这是唯一已知可以正常工作的TFTP服务器。按照下面的指令来安装它。
+</p>
+
+<pre caption="安装tftp-hpa">
+# <i>emerge net-ftp/tftp-hpa</i>
+</pre>
+
+<p>
+这将会为你创建<path>/tftproot</path>供你存放netboot镜像。如果你愿意你可以把它移到别处。本指引将假设你使用默认位置。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>Netboot SGI工作站</title>
+<subsection>
+<title>下载Netboot镜像</title>
+<body>
+
+<p>
+根据你要安装的系统的不同，我们提供了几个可能的镜像供下载。它们都是根据系统类型和CPU而命名的。机器类型如下：
+</p>
+
+<table>
+  <tr>
+    <th>代号</th>
+    <th>机器</th>
+  </tr>
+  <tr>
+    <ti>IP22</ti>
+    <ti>Indy, *Indigo 2, Challenge S</ti>
+  </tr>
+  <tr>
+    <ti>IP26</ti>
+    <ti>*Indigo 2 Power</ti>
+  </tr>
+  <tr>
+    <ti>IP27</ti>
+    <ti>Origin 200, Origin 2000</ti>
+  </tr>
+  <tr>
+    <ti>IP28</ti>
+    <ti>*Indigo 2 Impact</ti>
+  </tr>
+  <tr>
+    <ti>IP30</ti>
+    <ti>Octane</ti>
+  </tr>
+  <tr>
+    <ti>IP32</ti>
+    <ti>O2</ti>
+  </tr>
+</table>
+
+<note>
+* 一个常见的错误是混淆IRIS Indigo（IP23配置有R3000 CPU或者IP20配置有R4000 
+CPU，它们都不运行Linux），Indigo 2（IP22，可以运行Linux），基于R8000的Indigo 2 
+Power（根本不能运行Linux）和基于R10000的Indigo 2 Impact（IP28，高度实验性的）。请记住它们是不同的机器。
+</note>
+
+<p>
+还有在文件名里，r4k指代R4000系列处理器，r5k指代R5000，rm5k指代RM5200，还有r10k指代R10000。你可以在Gentoo<uri 
+link="/main/en/mirrors.xml">镜像</uri>里找到这些镜像。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>一个SGI客户端的DHCP配置</title>
+<body>
+
+<p>
+当你下载完文件后，把压缩的镜像放到你的<path>/tftproot</path>目录里。(使用<c>bzip2 
+-d</c>来解压缩)然后修改你的<path>/etc/dhcp/dhcpd.conf</path>文件，为你的SGI客户端添加条目。
+</p>
+
+<pre caption="SGI工作站的dhcpd.conf片段">
+subnet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx {
+  <comment># ……通用的内容在这里……</comment>
+
+  <comment># SGI工作站……把'sgi'改成你的SGI机器的主机名</comment>
+  host <i>sgi</i> {
+  
+    <comment># SGI机器的MAC地址。通常这个地址写在机器的</comment>
+    <comment># 背面或底部。</comment>
+    hardware ethernet <i>08:00:69:08:db:77</i>;
+
+    <comment># 供下载的TFTP服务器（默认的，和DHCP服务器是同一台机器）</comment>
+    next-server <i>192.168.10.1</i>;
+
+    <comment># 要分配给SGI机器的IP地址</comment>
+    fixed-address <i>192.168.10.3</i>;
+
+    <comment># PROM要下载和启动的文件名</comment>
+    filename "<i>/gentoo-r4k.img</i>";
+  }
+}
+</pre>
+</body>
+</subsection>
+
+<subsection>
+<title>内核选项</title>
+<body>
+<p>
+我们差不多完成了，不过还需要做一些小的调较。用root权限打开一个终端，键入下面的命令。
+</p>
+
+<pre caption="为了能让TFTP正常工作而对SGI机器做的一些修正">
+<comment>（禁用“Path Maximum Transfer Unit”，否则SGI Prom不能找到内核）</comment>
+# <i>echo 1 &gt; /proc/sys/net/ipv4/ip_no_pmtu_disc</i>
+
+<comment>（设定SGI PROM可以使用的端口范围）</comment>
+# <i>echo "2048 32767" &gt; /proc/sys/net/ipv4/ip_local_port_range</i>
+</pre>
+
+<p>
+这样你的Linux服务器与SGI的PROM就应该能正常工作了。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>启动你的守护进程……</title>
+<body>
+<p>
+现在，你已经可以启动守护进程了。键入下面的命令：
+</p>
+
+<pre caption="启动DHCP和TFTP守护进程">
+# <i>/etc/init.d/dhcp start</i>
+# <i>/etc/init.d/in.tftpd start</i>
+</pre>
+
+<p>
+如果上一步没有出现任何错误，你就可以启动工作站了，然后继续按手册进行安装。不管什么原因，如果DHCP服务器没有启动起来，尝试在命令行执行“dhcpd”看看有什么反应——如果一切正常，它应该在后台启动，否则你会看到它的错误信息，以及紧挨着的“exiting。”
+</p>
+
+<p>
+一个简单的验证tftp守护进程是否在运行的方法是键入下面的命令——如果你看到类似下面的输出——那么一切正常。
+</p>
+
+<pre caption="检查TFTPd正在运行">
+# <i>netstat -al | grep ^udp</i>
+udp        0      0 *:bootpc                *:*
+udp        0      0 *:631                   *:*
+udp        0      0 *:xdmcp                 *:*
+udp        0      0 *:tftp                  *:* <comment>&lt;-- （寻找这一行）</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>Netboot SGI机器</title>
+<body>
+
+<p>
+好了，所有的事情都准备就绪，DHCP和TFTP都已经正常运行。现在是时候启动SGI机器了。启动机器——当你在屏幕上看到“Running power-on 
+diagnostics”，点击“Stop For Maintenance”或者按ESCAPE。你可以看到类似下面的菜单。像下面那样键入命令。 
+</p>
+
+<pre caption="SGI PROM维护菜单">
+        Running power-on diagnostics
+
+System Maintenance Menu
+
+1) Start System
+2) Install System Software
+3) Run Diagnostics
+4) Recover System
+5) Enter Command Monitor
+
+Option? <i>5</i>
+Command Monitor. Type "exit" to return to the menu.
+&gt;&gt; <i>bootp(): root=/dev/ram0</i>
+</pre>
+
+<p>
+从这里开始，机器开始下载镜像，然后，大约20秒后，开始启动Linux。如果一切正常，你应该像下面显示的那样停在Busybox的<c>ash</c> 
+shell处，然后就可以继续<uri link="?part=1&amp;chap=3">配置网络</uri>了。
+</p>
+
+<pre caption="当一切正常的时候……">
+init started:  BusyBox v1.00-pre10 (2004.04.27-02:55+0000) multi-call binary
+
+Gentoo Linux; http://www.gentoo.org/
+ Copyright 2001-2004 Gentoo Technologies, Inc.; Distributed under the GPL
+
+ Gentoo/MIPS Netboot for Silicon Graphics Machines
+ Build Date: April 26th, 2004
+
+ * To configure networking, do the following:
+
+ * For Static IP:
+ * /bin/net-setup &lt;IP Address&gt; &lt;Gateway Address&gt; [telnet]
+
+ * For Dynamic IP:
+ * /bin/net-setup dhcp [telnet]
+
+ * If you would like a telnetd daemon loaded as well, pass "telnet"
+ * As the final argument to /bin/net-setup.
+
+Please press Enter to activate this console.
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>除错</title>
+<body>
+
+<p>
+如果机器不听话拒绝下载镜像，有两种可能，（1）你在某一步犯了错误，或者（2）它需要一点温柔的劝告。（不，把手里的大锤放下！）这里有一个检查列表：
+</p>
+
+<ul>
+  <li>
+    <c>dhcpd</c>可以分配给SGI机器IP地址。你可以应该可以在系统日志里看到一些有关BOOTP的信息。<c>tcpdump</c>这里也是有用的。
+  </li>
+  <li>
+    你的tftp文件夹（一般是<path>/tftproot</path>）的权限设置正确——应该是全体可读的。
+  </li>
+  <li>
+    检查系统日志来查看tftp服务器报告了什么（可能是错误）
+  </li>
+</ul>
+
+<p>
+如果你已经检查了服务器上的所有的服务，在SGI机器上仍然得到超时等结果，尝试在终端键入下面的命令。
+</p>
+
+<pre caption="哄骗SGI PROM令其正常工作">
+&gt;&gt; <i>resetenv</i>
+&gt;&gt; <i>unsetenv netaddr</i>
+&gt;&gt; <i>unsetenv dlserver</i>
+&gt;&gt; <i>init</i>
+&gt;&gt; <i>bootp(): root=/dev/ram0</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>备选方法：Gentoo/MIPS SGI LiveCD</title>
+<subsection>
+<title>概览</title>
+<body>
+
+<p>
+在Silicon 
+Graphics机器上，可以从光盘启动来安装操作系统。（比如IRIX就是这样装的）最近，用于装Gentoo的这样的可引导光盘的镜像也出现了。这些光盘的工作方式和IRIX的是一样的。
+</p>
+
+<p>
+目前Gentoo/MIPS LiveCD只能用于配置有R4000和R5000系列CPU的SGI Indy，Indigo 
+2和O2工作站，不过其他平台在将来也可能支持。
+</p>
+
+<p>
+你可以在你喜欢的Gentoo镜像的<path>experimental/mips/livecd</path>目录里找到可以下载的LiveCD镜像。
+</p>
+
+<warn>
+这些光盘目前仍然处于高度实验阶段。现在不能保证它一定可以用。你可以报告成功或失败到<uri 
+link="http://bugs.gentoo.org">Bugzilla</uri>，<uri 
+link="http:///forums.gentoo.org/viewtopic.php?t=242518">论坛里的这个帖子</uri>或者<c>#gentoo-mips</c> 
+<uri link="/main/en/irc.xml">IRC频道</uri>。我们期待着听到您的消息。
+</warn>
+
+</body>
+
+</subsection>
+
+<subsection>
+<title>烧录LiveCD</title>
+<body>
+
+<p>
+一件值得注意的重要事项，SGI PROM不支持ISO9660格式，也不支持El 
+Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头里保存着启动镜像。所以，烧录这些CD镜像的时候必须要小心。
+</p>
+
+<p>
+下面是一个命令示例，假设使用一个24倍速的IDE刻录机。如果你有一个SCSI刻录机，你可能需要修改<c>dev</c>参数。类似的还有<c>speed</c>参数——如果你碰到了麻烦，你可能需要降速。
+</p>
+
+<pre caption="使用cdrecord烧录">
+# <i>bzip2 -d mips-livecd-prototype-rc2-20041027.img.bz2</i>
+# <i>cdrecord -vv -pad speed=24 dev=ATAPI:0,0,0 -tao mips-livecd-prototype-rc2-20041027.img</i>
+</pre>
+
+<note>
+在Windows里烧录这些光盘也是可能的，假设你的刻录软件只是不加分辨的照现有的样子烧录这些镜像。不过目前为之，还没有人成功的以这种方式烧录出可用的光盘。
+</note>
+
+<note>
+如果你不知道该用什么作为<c>dev</c>的参数，以root身份运行<c>cdrecord -scanbus</c>——这将会告诉你你的刻录机的位置。
+</note>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Netboot Cobalt服务器</title>
+<subsection>
+<body>
+
+</body>
+</subsection>
+
+<subsection>
+<title>netboot步骤概览</title>
+<body>
+
+<p>
+和SGI机器不同的是，Cobalt服务器用NFS来传输需要启动的内核。机器加电时，按住左右方向键来启动机器。然后机器会尝试通过BOOTP来获得IP地址，通过NFS从服务器挂载<path>/nfsroot</path>目录，然后尝试下载并启动文件<path>vmlinux_raq-2800.gz</path>（文件名取决于型号），此文件应该是一个标准的ELF二进制文件。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>下载Netboot镜像</title>
+<body>
+
+<p>
+在这个页面上<uri 
+link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/</uri>，你可以找到使Cobalt启动运行所必需的启动镜像。你所需要的文件的名字是<path>nfsroot-KERNEL-COLO-DATE-cobalt.tar</path>——选择最新的一个然后像下面那样把它解压缩到<path>/</path>里。
+</p>
+
+<pre caption="解压缩nfsroot镜像">
+# <i>tar -C / -xvf nfsroot-2.6.13.4-1.19-20051122-cobalt.tar</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>NFS服务器的配置</title>
+<body>
+
+<p>
+因为这台机器使用NFS来下载它的镜像，你需要在你的服务器上导出<path>/nfsroot</path>。如果你还没有做这一步，你需要安装net-fs/nfs-utils。
+</p>
+<pre caption="安装nfs-utils">
+# <i>emerge net-fs/nfs-utils</i>
+</pre>
+
+<p>
+这一步完成后，把下面的内容放到你的<path>/etc/exports</path>文件里。如果你原因你可以设置更严格的限制。
+</p>
+
+<pre caption="Export /nfsroot目录">
+/nfsroot      *(ro,sync)
+</pre>
+
+<p>
+现在，当前面的完成后，你就可以启动NFS服务器了：
+</p>
+
+<pre caption="启动NFS服务器">
+# <i>/etc/init.d/nfs start</i>
+</pre>
+
+<p>
+如果现在NFS服务器已经在运行了，你可以告诉它让它用<c>exportfs</c>再看一下<c>exports</c>文件。
+</p>
+
+<pre caption="Export一个新的文件系统">
+# <i>exportfs -av</i>
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Cobalt机器的DHCP配置</title>
+<body>
+
+<p>
+现在，DHCP的配置是比较简单直接的。把下面的内容加入你的<path>/etc/dhcp/dhcpd.conf</path>文件。
+</p>
+
+<pre caption="Cobalt服务器的dhcpd.conf片段">
+subnet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx {
+  <comment># ……通用的内容在这里……</comment>
+
+  <comment># 一个Cobalt服务器的配置</comment>
+  <comment># 这里设定hostname：</comment>
+  host <i>qube</i> {
+    <comment># nfsroot目录的路径</comment>
+    <comment># 主要是在CoLo上使用TFTP启动参数时用到的</comment>
+    <comment># 你不应该改动这个。</comment>
+    option root-path "/nfsroot";
+
+    <comment># Cobalt服务器的以太网MAC地址</comment>
+    hardware ethernet <i>00:10:e0:00:86:3d</i>;
+
+    <comment># 下载镜像所用的服务器</comment>
+    next-server <i>192.168.10.1</i>;
+
+    <comment># cobalt服务器的IP地址</comment>
+    fixed-address <i>192.168.10.2</i>;
+
+    <comment># 相对于/nfsroot的default.colo文件的位置</comment>
+    <comment># 你不应该改动这个。</comment>
+    filename "default.colo";
+  }
+}
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>启动你的守护进程……</title>
+<body>
+
+<p>
+现在，你已经可以启动守护进程了。键入下面的命令：
+</p>
+
+<pre caption="启动DHCP和NFS守护进程">
+# <i>/etc/init.d/dhcp start</i>
+# <i>/etc/init.d/nfs start</i>
+</pre>
+
+<p>
+如果上一步没有出现任何错误，你就可以启动工作站了，然后继续按手册进行安装。不管什么原因，如果DHCP服务器没有启动起来，尝试在命令行执行“dhcpd”看看有什么反应——如果一切正常，它应该在后台启动，否则你会看到它的错误信息，以及紧挨着的“exiting。”
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Netboot Cobalt机器</title>
+<body>
+
+<p>
+好了，所有的事情已经齐备，DHCP已经运行了，和NFS一样。现在是时候启动Cobalt机器了。连接好null 
+modem线，把终端设置成波特率115200，8位，无奇偶校验位，一个停止位，VT100模拟。当这步完成后，在加电时按住左右两个方向键。
+</p>
+
+<p>
+如果一切正常，背部面板应该显示“Net Booting”，你应该看到一些网络活动，紧接着CoLo开始启动。在后面板上，下拉菜单知道你看到“Network 
+(NFS)”然后按回车。你应该可以在串口终端上观察到机器开始启动。
+</p>
+
+<pre caption="启动内核">
+elf: 80080000 &lt;-- 00001000 6586368t + 192624t
+elf: entry 80328040
+net: interface down
+CPU revision is: 000028a0
+FPU revision is: 000028a0
+Primary instruction cache 32kB, physically tagged, 2-way, linesize 32 bytes.
+Primary data cache 32kB 2-way, linesize 32 bytes.
+Linux version 2.4.26-mipscvs-20040415 (root@khazad-dum) (gcc version 3.3.3...
+Determined physical RAM map:
+ memory: 08000000 @ 00000000 (usable)
+Initial ramdisk at: 0x80392000 (3366912 bytes)
+On node 0 totalpages: 32768
+zone(0): 32768 pages.
+zone(1): 0 pages.
+zone(2): 0 pages.
+Kernel command line: console=ttyS0,115200 root=/dev/ram0
+Calibrating delay loop... 249.85 BogoMIPS
+Memory: 122512k/131072k available (2708k kernel code, 8560k reserved, 3424k dat)
+</pre>
+
+<p>
+如果一切正常，您应该会停在Busybox的<c>ash</c> shell处，就想下面所显示的，然后你可以继续<uri 
+link="?part=1&amp;chap=3">配置网络</uri>了。
+</p>
+
+<pre caption="当一切正常的时候……">
+VFS: Mounted root (ext2 filesystem) readonly.
+Freeing unused kernel memory: 280k freed
+init started:  BusyBox v1.00-pre10 (2004.04.27-02:55+0000) multi-call binary
+
+Gentoo Linux; http://www.gentoo.org/
+ Copyright 2001-2004 Gentoo Technologies, Inc.; Distributed under the GPL
+
+ Gentoo/MIPS Netboot for Cobalt Microserver Machines
+ Build Date: April 26th, 2004
+
+ * To configure networking, do the following:
+
+ * For Static IP:
+ * /bin/net-setup &lt;IP Address&gt; &lt;Gateway Address&gt; [telnet]
+
+ * For Dynamic IP:
+ * /bin/net-setup dhcp [telnet]
+
+ * If you would like a telnetd daemon loaded as well, pass "telnet"
+ * As the final argument to /bin/net-setup.
+
+Please press Enter to activate this console.
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>除错</title>
+<body>
+
+<p>
+如果机器不听话拒绝下载镜像，有两种可能，（1）你在某一步犯了错误，或者（2）它需要一点温柔的劝告。（不，把手里的大锤放下！）这里有一个检查列表：
+</p>
+
+<ul>
+  <li>
+    dhcpd是用来赋予Cobalt服务器IP地址的。你应该在系统日志里看到一些有关BOOTP请求的信息。<c>tcpdump</c>在这里也是有用的。
+  </li>
+  <li>
+    你的<path>/nfsroot</path>文件夹的权限设置正确。（应该是全体可读的）
+  </li>
+  <li>
+    确保NFS服务器正在运行并且已经导出了<path>/nfsroot</path>目录。在服务器上用<c>exportfs -v</c>来检查。
+  </li>
+</ul>
+</body>
+</subsection>
+</section>
+
+</sections>
