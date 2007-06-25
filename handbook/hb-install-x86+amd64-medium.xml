@@ -259,7 +259,7 @@ $ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
 </p>
 
 <pre caption="验证数字签名">
-$ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
+$ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 </pre>
 
 <p>
