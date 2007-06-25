@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-ppc64-bootloader.xml,v 1.1 2006/08/30 20:17:31 nightmorph Exp $ -->
+<sections>
+
+<version>7.0</version>
+<date>2006-08-30</date>
+
+<section>
+<title>做出您的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在您的内核已经配置并编译好，必要的系统配置文件也已正确配置好，是时候安装一个在启动时用以引导
+你内核的程序了。这样的程序叫做<e>引导器</e>。
+</p>
+
+<p>
+在Linux/PPC64平台上在grub2完成前我们只能使用yaBoot这个引导器。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="yaboot">
+<title>使用yaBoot</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<impo>
+对于一个使用64位平台的用户来说，请使用yaboot-static来代替yaboot，因
+为yaboot无法在64位的用户机器上编译。对于一个使用32位平台的用户来说，请
+像往常一样使用yaboot。
+</impo>
+
+<p>
+目前有两种方法可以用来为你的系统配置yaBoot。你可以使用最新并且改进过的包含
+在<path>yaboot-1.3.8-r1</path>软件包中的<c>yabootconfig</c>进行
+yaboot日后的自动配置。如果因为一些原因你不想运行<c>yabootconfig</c>来自动配置
+<path>/etc/yaboot.conf</path>，或者你正在一个G5上安装Gentoo（在这种平台上
+<c>yabootconfig</c>并不一定能运行成功），你还可以修改已经安装在你系统上的例子文件。
+</p>
+
+<impo>
+如果你在一台G5上使用在线的方式安装系统，并且没有使用为G5优化过的stage文件，你
+必须改变系统目前链接到的profile。如果你没有做，你将无法得到Apple系统上yaboot
+需要的必须的依赖关系。在命令行下用你选择的用户位数替换<c>(userland)</c>。如果你
+是在离线的情况下在G5上进行安装，你必须手动安装好这些软件包。
+</impo>
+
+<pre caption = "（只针对G5用户在线安装）更改你的profile">
+# <i>rm /etc/make.profile</i>
+# <i>ln -sf /usr/portage/profiles/default-linux/ppc/2006.1/ppc64/(userland)/970/pmac /etc/make.profile</i>
+</pre>
+
+<pre caption = "（只针对G5用户离线安装）安装必要的文件系统工具">
+# <i>emerge hfsutils hfsplusutils</i>
+</pre>
+
+<pre caption = "安装bootloader">
+<comment>（64位用户）</comment>
+# <i>emerge --update yaboot-static</i>
+<comment>（32位用户）</comment>
+# <i>emerge --update yaboot</i>
+</pre>
+
+<impo>
+yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式安装yaboot：<uri 
+link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
+</impo>
+
+<note>
+如果你的root文件系统使用JFS文件系统，请确认一下添加了内核参数<c>ro</c>。JFS
+在它被挂载为可读写模式前必须要在只读模式下替换它的日志文件。
+</note>
+
+<ul>
+  <li><uri link="#yabootconfig">默认：使用yabootconfig</uri></li>
+  <li>
+    <uri link="#manual_yaboot">备选：手动配置yaBoot</uri>
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection id="yabootconfig">
+<title>默认：使用yabootconfig</title>
+<body>
+
+<p>
+<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和 Mac OS X 这
+样的双重和三重的启动组合。
+</p>
+
+<p>
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区， 
+并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况。这些步骤必
+须事先完成。首先运行<c>emerge --update yaboot-static</c>来确保已
+经安装了最新版本的yaboot。这步是必须的，因为最新版本的yaboot会在portage中发
+布，但也有可能你的portage文件中没有最新版本。
+</p>
+
+<p>
+现在请运行<c>yabootconfig</c>。程序会首先确认bootstrap分区的位置。如果输出正确
+请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。yabootconfig
+会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。
+<c>mkofboot</c>是用来格式化bootstrap分区以及为你安装yaboot的配置文件用的。
+</p>
+
+<p>
+你可能需要校验一下<path>/etc/yaboot.conf</path>的内容。如果你在
+<path>/etc/yaboot.conf</path>中做了些更改（比如设置默认/启动的操作系统），
+请确保再次运行一次<c>ybin -v</c>以便将这些更改应用到bootstrap分区中去。
+</p>
+
+<p>
+接下来请阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection id="manual_yaboot">
+<title>备选：手动yaBoot配置</title>
+<body>
+
+<p>
+下面你可以发现一个完整的<path>yaboot.conf</path>文件。你可以任意修改它。
+</p>
+
+<pre caption = "/etc/yaboot.conf">
+<comment>## /etc/yaboot.conf
+##
+## 运行："man yaboot.conf"可以得到更多详细帮助。在未看帮助前请不要做任何改动！！
+## 也可以参考：/usr/share/doc/yaboot/examples可以得到一些配置的示例。
+
+## 如果需要双重启动菜单，请添加以下一项或多项：
+## bsd=/dev/hdaX, macos=/dev/hdaY, macosx=/dev/hdaZ
+
+## 我们的bootstrap分区：</comment>
+
+boot=/dev/hda2
+
+<comment>## ofboot是openfireware指定bootstrap分区的方式。
+## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
+## 你将一些必要的参数传给mkofboot/ybin程序）。
+## hd:X 表示 /dev/sdaX（或/dev/hdaX）。
+</comment>
+
+ofboot=hd:2
+
+<comment>## hd：是open firmware称呼hda的方式</comment>
+device=hd:
+
+delay=5
+defaultos=macosx
+timeout=30
+install=/usr/lib/yaboot/yaboot
+magicboot=/usr/lib/yaboot/ofboot
+
+<comment>#################
+## 如果你使用了一个以上的内核或是一组以上的启动选项，你可以复制这部分的配置
+## -用你自己的内核文件名替换2.6.17-gentoo-r5
+#################</comment>
+image=/boot/kernel-2.6.17-gentoo-r5
+  label=Linux
+  root=/dev/hda3
+  partition=3
+  read-only
+
+macos=hd:13
+macosx=hd:12
+enablecdboot
+enableofboot
+</pre>
+
+<p>
+一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot 
+-v</c>将配置信息安装到bootstrap分区中。<e>不要忘了这个！</e>在<c>mkofboot</c>
+问你创建一个新的文件系统时选是。
+</p>
+
+<p>
+如果万事俱备并且你拥有以上例子中同样的选项，下一步的重启会展示给你一个简单的、拥有五
+项内容的启动菜单。如果你日后更新你的yaboot配置文件，你会需要运行<c>ybin 
+-v</c>来更新bootstrap分区-<c>mkofboot</c>只为初始化设置用。
+</p>
+
+<p>
+更多关于yaboot的信息，你可以参看<uri 
+link="http://penguinppc.org/projects/yaboot">yaboot项目</uri>。现在，请阅读<uri 
+link="#reboot">重启系统</uri>来继续安装。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="yaboot-ibm">
+<title>在IBM硬件上使用yaboot</title>
+<body>
+
+<p>
+在IBM硬件上你无法运行yabootconfig或yabin。你需要经历以下几个步骤：
+</p>
+
+<ul>
+  <li>安装yaboot-static</li>
+  <li>运行 'dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX' 
+（用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子/dev/sda1）</li>
+  <li>下一步构建你自己的yaboot.conf文件并置于/etc内。（再看一下以上的配置文
+件，参考一下yaboot.conf的man页面或者参考下如下的yaboot.conf示例）</li>
+  <li>假设你在OF中的启动设备是指向你预启动分区激活的硬盘，它随后就能正常工作
+了，否则在IPL时，你将需要进入多重启动菜单并设置好启动设备指向至你预启动分区的一个才行。</li>
+  <li>就这么点就行了！</li>
+</ul>
+
+<pre caption = "IBM硬件的yaboot.conf">
+device=disk:
+partition=2
+root=/dev/sda2
+default=2.6.17-gentoo-r5
+timeout=50
+
+image=/boot/kernel-2.6.17-gentoo-r5
+      label=Linux
+      append="console=ttyS0,9600"
+      read-only
+</pre>
+
+<p>
+对于Power4、Power5、和一些基于blade的硬件，PReP磁盘分区和包含你内核
+文件的磁盘分区是在同一块物理磁盘上的，你可以使用一个简化的yaboot.conf
+文件。以下的内容应该足够了：
+</p>
+
+<pre caption="PReP硬件的yaboot.conf">
+default = Linux
+timeout = 100
+image=/boot/kernel-2.6.17-gentoo-r5
+      label=linux
+      read-only
+      root = /dev/sda2
+      append="root=/dev/sda2"
+</pre>
+
+<p>
+为了验证yaboot已经复制到PReP分区中：
+</p>
+
+<pre caption="验证yaboot安装到PReP上">
+# <i>dd if=/dev/sda1 count=10 | grep ELF</i>
+Binary file (standard input) matches
+10+0 records in
+10+0 records out
+</pre>
+
+<p>
+这就标志着yaboot已经正确安装好了。
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot环境且卸载掉所有已挂载的分区。随后键入那个已经等待多时的魔幻
+命令： <c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有的分区并重启">
+# <i>exit</i>
+~# <i>cd</i>
+~# <i>umount /mnt/gentoo/proc /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+~# <i>reboot</i>
+</pre>
+
+<p>
+当然，请不要忘记将可启动的CD从光驱中取出，否则机器会再次启动CD，而不是你新
+安装的Gentoo系统。
+</p>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请阅读<uri 
+link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+
+</sections>
