@@ -24,8 +24,8 @@
 
 <p>
 如果你使用的是NewWorld架构的Apple或IBM机器，你需要使用<uri link="#yaboot">yaboot</uri>。
-OldWorld架构的Apple机器有两个选择，<uri link="#bootx">BootX</uri>（推荐）和
-<uri link="#quik">quik</uri>。虽然Pegasos机器并不需要一个引导程序，但是你仍然
+OldWorld架构的Apple机器有两个选择，<uri link="#bootx">BootX</uri>（推荐）
+和<uri link="#quik">quik</uri>。虽然Pegasos机器并不需要一个引导程序，但是你仍然
 需要emerge <uri link="#bootcreator">BootCreator</uri>来创建SmartFirmware启动菜
 单。
 </p>
@@ -381,8 +381,8 @@ link="http://penguinppc.org/bootloaders/quik/quirks.php">quirk</uri>。
 <note>
 在MacOS中也可以改变你的启动变量。根据不同的型号，有可能需要用<uri
 link="http://penguinppc.org/bootloaders/quik/BootVars.sit.hqx">bootvars</uri>或是<uri
-link="ftp://ftp.apple.com/developer/macosxserver/utilities/SystemDisk2.3.1.smi.bin">
-Apple系统磁盘</uri>。请参看以上的quik quirks页面以获得更多的信息。
+link="ftp://ftp.apple.com/developer/macosxserver/utilities/SystemDisk2.3.1.smi.bin">Apple系统
+磁盘</uri>。请参看以上的quik quirks页面以获得更多的信息。
 </note>
 
 <p>
@@ -399,7 +399,7 @@ Apple系统磁盘</uri>。请参看以上的quik quirks页面以获得更多的�
 
 <p>
 现在，请阅读
-<uri link="#reboot">Rebooting the System 重启系统</uri>来继续安装。
+<uri link="#reboot">重启系统</uri>来继续安装。
 </p>
 
 </body>

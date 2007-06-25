@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-ppc64-kernel.xml,v 1.2 2007/02/26 08:55:48 nightmorph Exp $ -->
@@ -22,7 +17,7 @@
 您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在
 <path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到
 <path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>
-下的时区，因为它们"名不副实"。 例如，<path>GMT-8</path>事实上是GMT+8区。
+下的时区，因为它们"名不副实"。例如，<path>GMT-8</path>事实上是GMT+8区。
 </p>
 
 <pre caption="设置时区信息">
@@ -64,12 +59,12 @@ lrwxrwxrwx    1 root    root       12 Aug 10 11:04 /usr/src/linux -&gt; linux-2.
 </pre>
 
 <p>
-现在，我们开始配置和编译您的内核。您可以用"genkernel"来做这件事。 
+现在，我们开始配置和编译您的内核。您可以用"genkernel"来做这件事。
 这将会建立一个和安装光盘所用的内核类似的通用内核。不过目前在PPC64下它工作的并非十分正常。
 </p>
 
 <p>
-现在请继续阅读<uri link="#manual">手动配置你的系统</uri>。 
+现在请继续阅读<uri link="#manual">手动配置你的系统</uri>。
 </p>
 
 </body>
@@ -82,31 +77,31 @@ lrwxrwxrwx    1 root    root       12 Aug 10 11:04 /usr/src/linux -&gt; linux-2.
 <body>
 
 <p>
-手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此--当您手
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手
 动配置几次内核之后，您就不会再觉得它有多么难了:)
 </p>
 
 <p>
-然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。
+然而，有件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。
 您可以安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>
 来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。
-您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。 
+您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。
 此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。
 结果是相同的。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。
-（这也是个不错的提示， 它可以教你该选择哪些模块）。
+（这也是个不错的提示，它可以教你该选择哪些模块）。
 </p>
 
 <pre caption="调用menuconfig">
 # <i>cd /usr/src/linux</i>
-<comment>重要事项：万一你是32位的用户，你必须修改在/usr/src/linux中的顶层Makefile文件
-，然后把CROSS_COMPILE选项改为CROSS_COMPILE ?= powerpc64-unknown-linux-gnu-。
+<comment>重要事项：如果你使用32位用户层，你必须修改/usr/src/linux中顶层的Makefile文件，
+然后把CROSS_COMPILE选项改为CROSS_COMPILE ?= powerpc64-unknown-linux-gnu-。
 你必须在运行make menuconfig之前做这个，否则在内核编译过程中可能出现问题。</comment>
 # <i>make menuconfig</i>
 </pre>
 
 <p>
 您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo
-将不能正常运行或者在没有额外的调试下根本不能运行）。
+将根本不能运行或者在没有额外调较的情况下不能正常运行）。
 </p>
 
 </body>
@@ -116,7 +111,7 @@ lrwxrwxrwx    1 root    root       12 Aug 10 11:04 /usr/src/linux -&gt; linux-2.
 <body>
 
 <p>
-首先，开启development and experimental code/drivers。您必须激活它， 
+首先，开启development and experimental code/drivers。您必须激活它，
 否则，您将无法看到一些非常重要的代码/驱动。
 </p>
 
@@ -203,7 +198,7 @@ Macintosh Device Drivers ---&gt;
 
 <p>
 当你的内核编译完成之后，复制内核镜像至<path>/boot</path>目录。
-记住用你实际的内核版本替换<path>&lt;kernel-version&gt;</path>： 
+记住用你实际的内核版本替换<path>&lt;kernel-version&gt;</path>：
 </p>
 
 <pre caption="安装内核">
@@ -222,7 +217,7 @@ Macintosh Device Drivers ---&gt;
 <body>
 
 <p>
-你应该将你想在启动时加载的模块列在<path>/etc/modules.autoload.d/kernel-2.6</path>中。 
+你应该将你想在启动时加载的模块列在<path>/etc/modules.autoload.d/kernel-2.6</path>中。
 如果有需要的话你也能为这些模块加上额外的选项。
 </p>
 

@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-ppc64-medium.xml,v 1.1 2006/08/30 20:17:31 nightmorph Exp $ -->
@@ -21,7 +16,7 @@
 <body>
 
 <p>
-在开始之前，我们首先列出安装Gentoo的硬件需求。 
+在开始之前，我们首先列出安装Gentoo的硬件需求。
 </p>
 
 </body>
@@ -79,7 +74,7 @@ Gentoo Linux可以使用<e>stage3</e>tarball文件来安装。这样的一
 </p>
 
 <p>
-使用stage1或stage2 tarball安装系统的方法在Gentoo手册中并无描述 - 相关
+使用stage1或stage2 tarball安装系统的方法在Gentoo手册中并无描述——相关
 事宜请阅读<uri link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>。
 </p>
 
@@ -88,10 +83,10 @@ Gentoo Linux可以使用<e>stage3</e>tarball文件来安装。这样的一
 <subsection>
 <title>Gentoo安装光盘</title>
 <body>
-  
-<p> 
+
+<p>
 Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境，允许你从光盘
-启动Linux。 在启动过程中，它会自动检测你的硬件并加载相应的驱动程序。这些
+启动Linux。在启动过程中，它会自动检测你的硬件并加载相应的驱动程序。这些
 光盘是由Gentoo开发者维护的。
 </p>
 
@@ -151,8 +146,8 @@ Gentoo也提供了软件包光盘。这不是一个安装光盘，但它是一�
 你可以检验它的MD5校验码并和我们提供的MD5校验码进行比对（比如通过使用
 Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri 
 link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS 
-X中验证MD5校验码是在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
-FAQ</uri>中描述的。
+X中验证MD5校验码在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
+FAQ</uri>里有描述。
   </li>
   <li>
   你可以验证我们提供的数字签名。要实行验证，你首先需要获得我们使用的公钥(0x17072058)。
@@ -220,9 +215,9 @@ Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
 <tr>
   <ti><c>video</c></ti>
   <ti>
-    这个选项需要和以下具有厂商特征标签中的一个连用：<c>radeonfb</c>、
+    这个选项后跟着以下表示厂商的标签中的一个：<c>radeonfb</c>、
 <c>rivafb</c>、<c>atyfb</c>、<c>aty128</c>、<c>nvidiafb</c>或<c>ofonly</c>。
-你可以采用如下所示的分辨率刷新率和色深数。比如，<c>video=radeonfb:1280x1024@75-32</c>。
+标签后你可以加上你想要的分辨率刷新率。比如，<c>video=radeonfb:1280x1024@75</c>。
 如果你不是很明白要选择哪个，<c>video=ofonly</c>在大多数情况下都能正常工作。
   </ti>
 </tr>
@@ -248,14 +243,14 @@ Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
 <tr>
   <ti><c>bootfrom=X</c></ti>
   <ti>
-    从一个不同的设备启动
+    从其他设备启动
   </ti>
 </tr>
 </table>
 
 <p>
 在提示符界面简单按回车便行，接下来会从光盘上装载起一个完整的Gentoo Linux环境。
-请继续阅读<uri link="#booted">当你启动好后...</uri>。
+请继续阅读<uri link="#booted">当启动完毕后……</uri>。
 </p>
 
 </body>
@@ -282,18 +277,18 @@ IBM"在终端上一闪而过时按住'1'）。在一些老式的pSeries机器上
 等等信息时开始按键。
   </li>
   <li>运行命令0> boot cdrom:1,yaboot</li>
-  <li>作壁上观，然后享受吧！</li>
+  <li>静静的等待，然后享受吧！</li>
 </ol>
 
 </body>
 </subsection>
 <subsection id="booted">
-<title>当你启动好后...</title>
+<title>当启动完毕后……</title>
 <body>
 
 <p>
-首先你会在目前的终端上看到一个root的("#")提示符。当然你也可以通过键入
-Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
+首先你会在目前的终端上看到一个root的("#")提示符。当然你也可以通过
+键入Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
 回到之前的终端。
 </p>
 
@@ -310,10 +305,10 @@ Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
 </pre>
 
 <p>
-现在装载你选择的键盘布局
+现在加载你选择的键盘布局
 </p>
 
-<pre caption="装载键盘布局">
+<pre caption="加载键盘布局">
 # <i>loadkeys be-latin1</i>
 </pre>
 
@@ -328,9 +323,9 @@ Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
 <body>
 
 <p>
-当安装光盘启动时，它会尝试检测所有的硬件设备并加载准确的内核模块来支持这些硬件。 
-绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。 
-如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。 
+当安装光盘启动时，它会尝试检测所有的硬件设备并加载准确的内核模块来支持这些硬件。
+绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。
+如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。
 </p>
 
 <p>
@@ -348,7 +343,7 @@ Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
 <body>
 
 <p>
-如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。 
+如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。
 你可以使用<c>-tT</c>选项来测试你的硬盘的性能（多执行几次以得到更精确的结果）：
 </p>
 
@@ -362,8 +357,8 @@ Alt-fn-F2、Alt-fn-F3和Alt-fn-F4切换到其他的终端。键入Alt-fn-F1
 </p>
 
 <pre caption="调整硬盘性能">
-<comment>激活DMA：</comment>                                       # <i>hdparm -d 1 /dev/hda</i>
-<comment>激活DMA，并附加安全选项：</comment>  # <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+<comment>激活DMA：</comment>                            # <i>hdparm -d 1 /dev/hda</i>
+<comment>激活DMA，并附加安全的性能提升选项：</comment>  # <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
 </pre>
 
 </body>
@@ -389,8 +384,9 @@ Re-enter password: <comment>(Re-enter your password)</comment>
 </pre>
 
 <p>
-要创建用户帐号，首先输入他们的用户名，再输入他的密码。 我们可以使用<c>useradd</c>
-和<c>passwd</c>来完成。 在下个的例子中，我们创建一个名为&quot;john&quot;的用户。
+要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以
+使用<c>useradd</c>和<c>passwd</c>来完成。
+在下个的例子中，我们创建一个名为&quot;john&quot;的用户。
 </p>
 
 <pre caption="创建一个新用户">
@@ -416,8 +412,8 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 
 <p>
 如果你想在安装的时候查看Gentoo手册，请确认你已经创建好了一个用户帐号
-（查看<uri link="#useraccounts">可选：用户帐号</uri>）。 然后按
-<c>Alt-F2</c>打开一个新的终端并登录进入。
+（查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后
+按<c>Alt-F2</c>打开一个新的终端并登录进入。
 </p>
 
 <p>
@@ -449,7 +445,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 <p>
 如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的
 用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，
-甚至提供root用户密码 （这<e>只</e>在你<b>完全信任</b>这位用户的情况下）。
+甚至提供root用户密码（这<e>只</e>在你<b>完全信任</b>这位用户的情况下）。
 </p>
 
 <p>
@@ -461,7 +457,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </pre>
 
 <p>
-在使用sshd之前，你必须设置好你的网络。 请从<uri link="?part=1&amp;chap=3">配置网络</uri>
+在使用sshd之前，你必须设置好你的网络。请从<uri link="?part=1&amp;chap=3">配置网络</uri>
 一章继续。
 </p>
 

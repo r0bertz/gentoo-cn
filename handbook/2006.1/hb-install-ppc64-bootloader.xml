@@ -17,11 +17,11 @@
 
 <p>
 现在您的内核已经配置并编译好，必要的系统配置文件也已正确配置好，是时候安装一个在启动时用以引导
-你内核的程序了。这样的程序叫做<e>引导器</e>。
+你内核的程序了。这样的程序叫做<e>引导程序</e>。
 </p>
 
 <p>
-在Linux/PPC64平台上在grub2完成前我们只能使用yaBoot这个引导器。
+在Linux/PPC64平台上在grub2完成前我们只能使用yaBoot这个引导程序。
 </p>
 
 </body>
@@ -34,23 +34,22 @@
 <body>
 
 <impo>
-对于一个使用64位平台的用户来说，请使用yaboot-static来代替yaboot，因
-为yaboot无法在64位的用户机器上编译。对于一个使用32位平台的用户来说，请
-像往常一样使用yaboot。
+如使用64位用户层，请使用yaboot-static来代替yaboot，因为yaboot无法在64位用户层的
+系统里编译。如使用32位用户层，请像往常一样使用yaboot。
 </impo>
 
 <p>
-目前有两种方法可以用来为你的系统配置yaBoot。你可以使用最新并且改进过的包含
-在<path>yaboot-1.3.8-r1</path>软件包中的<c>yabootconfig</c>进行
-yaboot日后的自动配置。如果因为一些原因你不想运行<c>yabootconfig</c>来自动配置
+目前有两种方法可以用来为你的系统配置yaBoot。你可以使用最新的改进过的包含
+在<path>yaboot-1.3.8-r1</path>或更高版本中的<c>yabootconfig</c>来
+自动配置yaboot。如果因为一些原因你不想运行<c>yabootconfig</c>来自动配置
 <path>/etc/yaboot.conf</path>，或者你正在一个G5上安装Gentoo（在这种平台上
 <c>yabootconfig</c>并不一定能运行成功），你还可以修改已经安装在你系统上的例子文件。
 </p>
 
 <impo>
 如果你在一台G5上使用在线的方式安装系统，并且没有使用为G5优化过的stage文件，你
-必须改变系统目前链接到的profile。如果你没有做，你将无法得到Apple系统上yaboot
-需要的必须的依赖关系。在命令行下用你选择的用户位数替换<c>(userland)</c>。如果你
+必须改变你目前链接到的profile。如果你不这样做，你将无法得到Apple系统上yaboot
+需要的必须的依赖关系。在命令行下用你选择的用户层位数替换<c>(userland)</c>。如果你
 是在离线的情况下在G5上进行安装，你必须手动安装好这些软件包。
 </impo>
 
@@ -64,9 +63,9 @@ yaboot日后的自动配置。如果因为一些原因你不想运行<c>yabootco
 </pre>
 
 <pre caption = "安装bootloader">
-<comment>（64位用户）</comment>
+<comment>（64位用户层）</comment>
 # <i>emerge --update yaboot-static</i>
-<comment>（32位用户）</comment>
+<comment>（32位用户层）</comment>
 # <i>emerge --update yaboot</i>
 </pre>
 
@@ -94,8 +93,8 @@ link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
 <body>
 
 <p>
-<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和 Mac OS X 这
-样的双重和三重的启动组合。
+<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和Mac OS X这
+样的双重或三重的启动组合。
 </p>
 
 <p>
@@ -165,7 +164,7 @@ magicboot=/usr/lib/yaboot/ofboot
 
 <comment>#################
 ## 如果你使用了一个以上的内核或是一组以上的启动选项，你可以复制这部分的配置
-## -用你自己的内核文件名替换2.6.17-gentoo-r5
+## ——用你自己的内核文件名替换2.6.17-gentoo-r5
 #################</comment>
 image=/boot/kernel-2.6.17-gentoo-r5
   label=Linux
@@ -182,12 +181,12 @@ enableofboot
 <p>
 一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot 
 -v</c>将配置信息安装到bootstrap分区中。<e>不要忘了这个！</e>在<c>mkofboot</c>
-问你创建一个新的文件系统时选是。
+问你是否创建一个新的文件系统时选是。
 </p>
 
 <p>
 如果万事俱备并且你拥有以上例子中同样的选项，下一步的重启会展示给你一个简单的、拥有五
-项内容的启动菜单。如果你日后更新你的yaboot配置文件，你会需要运行<c>ybin 
+项内容的启动菜单。如果你以后更新你的yaboot配置文件，你会需要运行<c>ybin 
 -v</c>来更新bootstrap分区-<c>mkofboot</c>只为初始化设置用。
 </p>
 
@@ -233,7 +232,7 @@ image=/boot/kernel-2.6.17-gentoo-r5
 </pre>
 
 <p>
-对于Power4、Power5、和一些基于blade的硬件，PReP磁盘分区和包含你内核
+对于Power4、Power5和一些基于blade的硬件，PReP磁盘分区和包含你内核
 文件的磁盘分区是在同一块物理磁盘上的，你可以使用一个简化的yaboot.conf
 文件。以下的内容应该足够了：
 </p>

@@ -187,8 +187,8 @@ File Systems ---&gt;
 </pre>
 
 <p>
-目前，kernel preemption在PPC上仍然不稳定以及可能导致编译错误和随机段错误。我们
-<e>强烈</e>建议你不要使用这个特性。
+目前，kernel preemption在PPC上仍然不稳定以及可能导致编译错误和随机段错误。
+我们<e>强烈</e>建议你不要使用这个特性。
 </p>
 
 <pre caption="确保Preemptible Kernel选项是关闭的">
@@ -393,10 +393,10 @@ vmlinux内核。注意，因为<c>genkernel</c>编译的内核支持大多数的
 </p>
 
 <p>
-请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用
-<c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：
-<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加
-<c>--evms2</c>或<c>--lvm2</c>参数。
+请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要
+使用<c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：
+<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要
+添加<c>--evms2</c>或<c>--lvm2</c>参数。
 </p>
 
 <pre caption="运行genkernel">

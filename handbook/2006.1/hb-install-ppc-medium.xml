@@ -158,7 +158,7 @@ link="/main/en/mirrors.xml">mirrors</uri>中的任意一个镜像地址下载通
 下的<c>md5sum</c>工具或者Windows下的<uri 
 link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS 
 X中验证MD5校验码在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
-FAQ</uri>中有描述。
+FAQ</uri>里有描述。
   </li>
   <li>
     你可以验证我们提供的数字签名。要进行验证，你首先需要获得我们使用的公钥(0x17072058)。
@@ -228,10 +228,11 @@ Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
 <tr>
   <ti><c>video</c></ti>
   <ti>
-    这个选项需要和以下具有厂商特征标签中的一个连用：<c>nvidiafb</c>、<c>radeonfb</c>、<c>rivafb</c>、
-<c>atyfb</c>、<c>aty128</c>或<c>ofonly</c>。你可以采用如下所示的分辨率、刷新率和色深数。比如，
-<c>video=radeonfb:1280x1024@75-32</c>会选择ATI Radeon frame buffer、采用的分辨率为
-1280x1024刷新率75Hz和色深32位下。如果不是很明白要选择哪个，或者默认的设置无法工作，
+    这个选项后跟着以下表示厂商的标签中的一个：<c>radeonfb</c>、
+<c>rivafb</c>、<c>atyfb</c>、<c>aty128</c>、<c>nvidiafb</c>或<c>ofonly</c>。
+标签后你可以加上你想要的分辨率、刷新率和色深数。
+比如，<c>video=radeonfb:1280x1024@75-32</c>会选择ATI Radeon frame buffer、采用的分辨率为
+1280x1024刷新率75Hz和色深32位。如果不是很明白要选择哪个，或者默认的设置无法工作，
 <c>video=ofonly</c>在大多数情况下都能工作。
   </ti>
 </tr>
@@ -439,8 +440,9 @@ Re-enter password: <comment>(重新输入你的密码)</comment>
 </pre>
 
 <p>
-要创建用户帐号，首先输入他们的用户名，再输入他的密码。 我们可以使用<c>useradd</c>和
-<c>passwd</c>来完成。 在下个的例子中，我们创建一个名为&quot;john&quot;的用户。
+要创建用户帐号，首先输入他们的用户名，再输入他的密码。 我们可以
+使用<c>useradd</c>和<c>passwd</c>来完成。
+在下个的例子中，我们创建一个名为&quot;john&quot;的用户。
 </p>
 
 <pre caption="创建一个新用户">
@@ -466,8 +468,8 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 
 <p>
 如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），请确认你已经创建好了
-一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。 然后按
-<c>Alt-F2</c>打开一个新的终端并登录进入。
+一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。
+然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
 </p>
 
 <p>
