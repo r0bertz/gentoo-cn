@@ -154,10 +154,10 @@ link="/main/en/mirrors.xml">mirrors</uri>中的任意一个镜像地址下载通
 
 <ul>
   <li>
-    你可以检验它的MD5校验码并和我们提供的MD5校验码进行比对（比如通过使用Linux/Unix
+    你可以检验它的MD5校验和并和我们提供的MD5校验和进行比对（比如通过使用Linux/Unix
 下的<c>md5sum</c>工具或者Windows下的<uri 
 link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS 
-X中验证MD5校验码在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
+X中验证MD5校验和在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
 FAQ</uri>里有描述。
   </li>
   <li>

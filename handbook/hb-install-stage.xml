@@ -38,7 +38,7 @@ Fri Mar 29 16:21:18 UTC 2005
 </pre>
 
 <p>
-如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>语句
+如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>命令
 （<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，
 <b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设
 置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
@@ -137,7 +137,7 @@ link="/main/en/mirrors.xml">Gentoo镜像列表</uri>，然后选择一个离你�
 
 <p>
 如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然
-后把输出同镜像站上提供的MD5校验码对比。
+后把输出同镜像站上提供的MD5校验和对比。
 例如校验一个x86的stage tarball：
 </p>
 
@@ -281,7 +281,7 @@ ls: /mnt/cdrom/stages: No such file or directory
 
 <p>
 如果你想校验所下载的快照的完整性，使用<c>md5sum</c>然后把输出和镜像
-站提供的MD5校验码比较。
+站提供的MD5校验和比较。
 </p>
 
 <pre caption="校验Portage快照的完整性">
@@ -317,7 +317,7 @@ portage-latest.tar.bz2: OK
 
 <note>
 所有可能的变量都用注释形式罗列
-在<path>/mnt/gentoo/etc/make.conf.example</path>里。你只需要设置下面提到的变量就可以成功地安装Gentoo。
+在<path>/mnt/gentoo/etc/make.conf.example</path>里。要成功地安装Gentoo，你只需要设置下面提到的变量。
 </note>
 
 <p>

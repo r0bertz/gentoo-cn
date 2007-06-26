@@ -210,7 +210,7 @@ link="/main/en/mirrors.xml">镜像</uri>下载安装光盘（如果你愿意也�
 </p>
 
 <p>
-你可以检查它的MD5校验然后和我们提供的MD5校验和（比如<path>install-sparc64-minimal-2006.1.iso.DIGESTS</path>）进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri 
+你可以检查它的MD5校验和然后与我们提供的MD5校验和（比如<path>install-sparc64-minimal-2006.1.iso.DIGESTS</path>）进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri 
 link="http://www.etree.org/md5com.html">md5sum</uri>）。
 </p>
 

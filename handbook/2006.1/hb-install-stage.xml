@@ -169,7 +169,7 @@ ls: /mnt/cdrom/stages: No such file or directory
 
 <p>
 如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然
-后把输出同镜像站上提供的MD5校验码对比。例如校验一个x86的stage tarball：
+后把输出同镜像站上提供的MD5校验和对比。例如校验一个x86的stage tarball：
 </p>
 
 <pre caption="一个校验stage tarball完整性的例子">
@@ -279,7 +279,7 @@ stage3-x86-2006.1.tar.bz2: OK
 
 <note>
 所有可能的变量都用注释形式罗列在<path>/mnt/gentoo/etc/make.conf.example</path>里
-。为了成功地安装Gentoo，你只需要设置下面提到的变量就可以了。
+。为了成功地安装Gentoo，你只需要设置下面提到的变量。
 </note>
 
 <p>
