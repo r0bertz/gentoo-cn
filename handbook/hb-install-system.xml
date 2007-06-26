@@ -315,8 +315,7 @@ de_DE@euro ISO-8859-15
 </pre>
 
 <p>
-下一步我们运行<c>locale-gen</c>。它会产生所有你指定的
-位于<path>/etc/locale.gen</path>文件里的locale。
+下一步我们运行<c>locale-gen</c>。它会产生所有你在<path>/etc/locale.gen</path>文件里指定的locale。
 </p>
 
 <p>
