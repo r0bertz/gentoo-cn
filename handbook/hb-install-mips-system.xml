@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-system.xml,v 1.4 2007/05/07 18:11:41 nightmorph Exp $ -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>Chroot</title>
+<subsection>
+<title>拷贝DNS信息</title>
+<body>
+
+<p>
+在我们进入新环境之前，还有一件事需要完成，那就是从<path>/etc/resolv.conf</path>拷贝DNS信息。这一步可以保证你在进入新的系统环境后还可以继续使用网络。<path>/etc/resolv.conf</path>包含了你网络里的域名服务器。
+</p>
+
+<pre caption="拷贝DNS信息">
+<comment>（参数"-L"是必须的，用来确保我们拷贝的不是一个符号链接）</comment>
+# <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>挂载/proc和/dev文件系统</title>
+<body>
+
+<p>
+将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path>文件系统。
+</p>
+
+<pre caption="挂载/proc和/dev">
+# <i>mount -t proc none /mnt/gentoo/proc</i>
+# <i>mount -o bind /dev /mnt/gentoo/dev</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>进入新的系统环境</title>
+<body>
+
+<p>
+现在所有的分区都已经被初始化，基本环境也已安装完毕，现在是到了该用<e>chroot</e>进入新安装环境的时候了。这意味着我们从当前安装环境（安装光盘或者其他安装介质）切换到你安装的系统里（也就是被初始化的分区）。
+</p>
+
+<p>
+完成chroot有三步。首先我们用<c>chroot</c>把根文件系统从<path>/</path>（安装介质里）切换到<path>/mnt/gentoo</path>（在你的分区里）。然后我们使用<c>env-update</c>来建立新的环境，也就是创建新的环境变量。最后我们用<c>source</c>加载这些变量。
+</p>
+
+<pre caption = "chroot到新环境里">
+# <i>chroot /mnt/gentoo /bin/bash</i>
+# <i>env-update</i>
+>> Regenerating /etc/ld.so.cache...
+# <i>source /etc/profile</i>
+# <i>export PS1="(chroot) $PS1"</i>
+</pre>
+
+<p>
+祝贺你！你现在已经在你自己的Gentoo Linux环境里了。当然这离安装完成还有段时间，因为我们可以看到安装指南还剩下很多章节呢 :-)
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>配置Portage</title>
+<subsection>
+<title>更新Portage树</title>
+<body>
+
+<p>
+你现在应该更新你的Portage树到最新版本。执行<c>emerge --sync</c>。
+</p>
+
+<pre caption="更新Portage树">
+# <i>emerge --sync</i>
+<comment>(如果你在使用一个慢速终端比如一些帧缓冲或者是串口的控制台，你可以添加--quiet选项来加速这个过程:)</comment>
+# <i>emerge --sync --quiet</i>
+</pre>
+
+<p>
+如果你网络前面的防火墙的配置使得rsync请求被阻挡的话，你可以使 
+用<c>emerge-webrsync</c>下载和安装一个最新的portage快照。
+</p>
+
+<p>
+如果系统警告你有一个新版本的Portage可用，你可以 使用<c>emerge portage</c>来更新它。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>选择正确的Profile</title>
+<body>
+
+<p>
+首先，我们看一下一些小的定义。
+</p>
+
+<p>
+profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以及其他重要变量的默认值，它还把系统可用的软件版本锁定在某个范围。而这些都是由Gentoo的开发者来维护的。
+</p>
+
+<p>
+以前，这个profile很少会有用户接触到。然而，有些情况下你可以决定需不需要修改profile。
+</p>
+
+<p>
+从2006.0开始，MIPS系统的profile经历了一次重新洗牌。这些profile设定了很多不同的选项包括USE标记，它能影响到很多不同的系统中的关键包（特别是，<c>gcc</c>和<c>mips-sources</c>）会启用哪些补丁集。
+</p>
+
+<p>
+所以，必须要很小心的确保为你的系统类型选择了正确的profile。Gentoo/MIPS 2007.0包含的profile有：
+</p>
+
+<table>
+  <tr>
+    <th>系统</th>
+    <th>Profile</th>
+    <th>Userland</th>
+    <th>状态／备注</th>
+  </tr>
+  <tr>
+    <ti>Cobalt Qube/RaQ</ti>
+    <ti>default-linux/mips/2007.0/cobalt/o32</ti>
+    <ti>32位Linuxthreads</ti>
+    <ti>推荐</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/cobalt/o32/nptl</ti>
+    <ti>32位NPTL</ti>
+    <ti>正在测试 (1)</ti>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <ti>
+      一般的大头端<br />
+      <e>包括SGI Indy, Indigo2 (R4x00), Challenge S and O2</e>
+    </ti>
+    <ti>default-linux/mips/2007.0/generic-be/o32</ti>
+    <ti>32位Linuxthreads</ti>
+    <ti>推荐</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/generic-be/o32/nptl</ti>
+    <ti>32位NPTL</ti>
+    <ti>正在测试 (1)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/generic-be/n32</ti>
+    <ti>N32 Linuxthreads</ti>
+    <ti>高度实验性质 (2)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/generic-be/n32/nptl</ti>
+    <ti>N32 NPTL</ti>
+    <ti>高度实验性质 (1) (2)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/generic-be/n64</ti>
+    <ti>N64 Linuxthreads</ti>
+    <ti>不支持 (3)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/generic-be/n64/nptl</ti>
+    <ti>N64 NPTL</ti>
+    <ti>不支持 (1) (3)</ti>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <ti>SGI Origin 200/2000</ti>
+    <ti>default-linux/mips/2007.0/ip27/o32</ti>
+    <ti>32位Linuxthreads</ti>
+    <ti>推荐</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip27/o32/nptl</ti>
+    <ti>32位NPTL</ti>
+    <ti>正在测试 (1)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip27/n32</ti>
+    <ti>N32 Linuxthreads</ti>
+    <ti>高度实验性质 (2)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip27/n32/nptl</ti>
+    <ti>N32 NPTL</ti>
+    <ti>高度实验性质 (1) (2)</ti>
+  </tr>
+
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <ti>SGI Indigo2 Impact R10000</ti>
+    <ti>default-linux/mips/2007.0/ip28/o32</ti>
+    <ti>32位Linuxthreads</ti>
+    <ti>推荐</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip28/o32/nptl</ti>
+    <ti>32位NPTL</ti>
+    <ti>正在测试 (1)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip28/n32</ti>
+    <ti>N32 Linuxthreads</ti>
+    <ti>高度实验性质 (2)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip28/n32/nptl</ti>
+    <ti>N32 NPTL</ti>
+    <ti>高度实验性质 (1) (2)</ti>
+  </tr>
+  <tr>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+    <th>&nbsp;</th>
+  </tr>
+  <tr>
+    <ti>SGI Octane/Octane2</ti>
+    <ti>default-linux/mips/2007.0/ip30/o32</ti>
+    <ti>32位Linuxthreads</ti>
+    <ti>推荐</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip30/o32/nptl</ti>
+    <ti>32位NPTL</ti>
+    <ti>正在测试 (1)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip30/n32</ti>
+    <ti>N32 Linuxthreads</ti>
+    <ti>高度实验性质 (2)</ti>
+  </tr>
+  <tr>
+    <ti>"</ti>
+    <ti>default-linux/mips/2007.0/ip30/n32/nptl</ti>
+    <ti>N32 NPTL</ti>
+    <ti>高度实验性质 (1) (2)</ti>
+  </tr>
+</table>
+
+<impo>
+(1) 
+MIPS里的NPTL目前正在测试中，需要<c>gcc-4.1</c>和<c>glibc-2.4</c>。一般认为NPTL已经足够安全可供人们使用了，以后的版本中它将成为默认设定。欢迎勇敢的用户测试这些profile，并报告使用结果。
+</impo>
+
+<warn>
+(2) n32 
+Userland是高度实验性的，很多软件使用这个ABI都有问题，所以目前可以保证你会遇到稳定性问题。目前有人正致力于改进目前的状况，如果你使用这个profile将不会获得任何支持，除非你愿意提交补丁来帮助解决存在的问题。
+</warn>
+
+<warn>
+(3) n64 Userland目前在所有的系统上都不获支持。现在没有stage支持n64，不远的将来这种情况也不会改变。
+</warn>
+
+<p>
+你可以用下面的命令来查看当前使用的profile：
+</p>
+
+<pre caption="验证系统profile">
+# <i>ls -FGg /etc/make.profile</i>
+lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/default-linux/mips/2007.0/generic-be/o32/
+</pre>
+
+<p>
+看完了上面的profile，决定了哪个最合适，你需要调整你的<path>make.profile</path>符号链接。默认的，profile在<path>/usr/portage/profiles</path>里，所以如果你把portage树移到了别处（不推荐这样做），就要适当的调整下面的命令。
+</p>
+
+<pre caption="设定系统profile">
+<comment>（删除旧的profile符号连接）</comment>
+# <i>rm -f /etc/make.profile</i>
+
+<comment>（创建一个新的符号链接指向你指定的profile）
+（比如，这个是在Indy或者O2上可以用的。）</comment>
+# <i>ln -s /usr/portage/profiles/default-linux/mips/2007.0/generic-be/o32</i>
+</pre>
+
+<note>
+对不熟悉Bash的人的一个小提示……如果你打了一个文件名或者命令的一部分，然后按TAB键，bash会自动填充命令／文件名直到最后一个相同的字符。比如，键入<c>/usr/portage/profiles/def&lt;TAB&gt;</c>，<c>bash</c>会自动输入<c>default-</c>。再按TAB几次，将会显示几种可能的填充，<c>default-linux</c>、<c>default-darwin</c>和<c>default-bsd</c>。试一试，你会发现这个功能在命令行浏览时很有用。
+</note>
+
+</body>
+</subsection>
+<subsection id="configure_USE">
+<title>配置USE变量</title>
+<body>
+
+<p>
+<c>USE</c>是Gentoo为用户提供的最具威力的变量之一。很多程序通过它可以选择编译或者不编译某些可选的支持。例如，一些程序可以在编译时加入对gtk或是对qt的支持。其它的程序可以在编译时加入或不加入对于SLL的支持。有些程序甚至可以在编译时加入对帧缓冲的支持（svgalib）以取代X11（X服务器）。
+</p>
+
+<p>
+大多数的发行版会使用尽可能多的支持特性编译它们的软件包，这既增加了软件的大小也减慢了启动时间，而这些还没有算上可能会涉及到的大量依赖性问题。Gentoo可以让你自己定义软件编译的选项，而这正是<c>USE</c>要做的事。
+</p>
+
+<p>
+在<c>USE</c>变量里你可以定义关键字，它被用来对应相应的编译选项。比如，<e>ssl</e>会让程序在它编译时加入对它的支持。<e>-X</e>会移除其对于X服务器的支持（注意前面的减号）。<e>gnome 
+gtk -kde -qt3 
+-qt4</e>将会在你编译软件的时候添加对gnome（和gtk）的支持，并且移除对kde（和qt）的支持，这可以让你的系统尽可能多的为GNOME做优化。
+</p>
+
+<p>
+默认的<c>USE</c>设置位于你profile的<path>make.defaults</path>文件里。你可以在符号连接<path>/etc/make.profile</path>所指向的目录里找到<path>make.defaults</path>文件。默认的<c>USE</c>设置是所有<path>make.defaults</path>文件里<c>USE</c>的集合。所有你放在<path>/etc/make.conf</path>里的<c>USE</c>都会根据默认设置重新计算。如果你添加了一些<c>USE</c>的设置，它会被增加到默认的列表里。如果你删除了一些<c>USE</c>设置（通过放一个减号到它前面），它将被从默认的列表里移除（如果它确实在默认列表里的话）。<e>绝对不</e>要改变<path>/etc/make.profile</path>目录里的任何东西，它会在你更新Portage的时候被覆盖掉！
+</p>
+
+<p>
+关于<c>USE</c>的详解你可以在Gentoo手册的第二部分，<uri 
+link="?part=2&amp;chap=2">USE标记</uri>里找到。对于USE标记的详细介绍可以查看你的系统里<path>/usr/portage/profiles/use.desc</path>。 
+</p>
+
+<pre caption="查看可用的USE标记">
+# <i>less /usr/portage/profiles/use.desc</i>
+<comment>（你可用用方向键来滚动，按'q'键退出）</comment>
+</pre>
+
+<p>
+作为一个例子，我们展示一个基于KDE的系统并带有DVD、ALSA以及光盘刻录支持 的<c>USE</c>设置：
+</p>
+
+<pre caption="打开/etc/make.conf">
+# <i>nano -w /etc/make.conf</i>
+</pre>
+
+<pre caption="USE设置">
+USE="-gtk -gnome qt3 qt4 kde dvd alsa cdr"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：glibc Locales</title>
+<body>
+
+<p>
+在你的系统里可能只会用到一个或两个locale。你可用<path>/etc/locale.gen</path>来指定locale。
+</p>
+
+<pre caption="打开/etc/locale.gen">
+# <i>nano -w /etc/locale.gen</i>
+</pre>
+
+<p>
+下面这个例子中的locale同时支持英语（美国）和德语（德国）并带有字符集格式（比如UTF-8）的支持。
+</p>
+
+<pre caption="指定你的locale">
+en_US ISO-8859-1
+en_US.UTF-8 UTF-8
+de_DE ISO-8859-1
+de_DE@euro ISO-8859-15
+</pre>
+
+<p>
+下一步我们运行<c>locale-gen</c>。它会产生所有你在<path>/etc/locale.gen</path>文件里指定的locale。
+</p>
+
+<p>
+现在我们继续<uri link="?part=1&amp;chap=7">配置内核</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
