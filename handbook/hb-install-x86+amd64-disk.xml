@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-disk.xml,v 1.8 2006/11/02 20:55:33 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86+amd64-disk.xml,v 1.9 2006/11/02 20:55:33 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 为了能够安装Gentoo，你必须创建所需的分区。本章讲解如何给磁盘分区以备后用。
 </abstract>
 
-<version>5.0</version>
-<date>2007-05-07</date>
+<version>5.1</version>
+<date>2007-06-26</date>
 
 <section>
 <title>块设备介绍</title>
@@ -489,11 +489,11 @@ Linux内核支持各种各样的文件系统。我们将介绍ext2、ext3、Reis
 </p>
 
 <p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了哈希B*-树索引，在几乎所有的情况下都能保持高性能。Ext3是ext2出色和可靠的替代者。
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
 </p>
 
 <p>
-<b>ReiserFS</b>是基于B*-树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
 </p>
 
 <p>

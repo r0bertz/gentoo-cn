@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.110 2006/11/01 21:40:28 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.111 2006/11/01 21:40:28 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>8.2</version>
-<date>2007-06-19</date>
+<version>8.3</version>
+<date>2007-06-22</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -120,7 +120,7 @@ link="/main/en/mirrors.xml">Gentoo镜像列表</uri>，然后选择一个离你�
 </p>
 
 <p test="'x86'=func:keyval('arch')">
-大多数PC用户应该使用<b><keyval id="stage3"/></b> stage3文件。所有现代PC都是i686机器。如果你用的是一部旧机器，你可以检查Wikipedia上的<uri link="http://en.wikipedia.org/wiki/I686">i686兼容处理器列表</uri>。旧的处理器，比如Pentium，K5，K6或者Via C3以及其他类似的，需要普适性的<b>x86</b> stage3。
+大多数PC用户应该使用<b><keyval id="stage3"/></b> stage3文件。所有现代PC都是i686机器。如果你用的是一部旧机器，你可以检查Wikipedia上的<uri link="http://en.wikipedia.org/wiki/I686">i686兼容处理器列表</uri>。旧的处理器，比如Pentium，K5，K6或者Via C3以及其他类似的，需要普适性的<b>x86</b> stage3。<b>i486</b>之前的处理器不获支持。
 </p>
 
 <pre caption="用links连接镜像列表">
