@@ -80,7 +80,7 @@ image = /boot/kernel-<keyval id="kernel-version"/>
 </pre>
 
 <note>
-注意这个命令<c>silo</c>每次你升级和重新安装<c>sys-boot/silo</c>之后，你需要再次运行（包括参数）。
+这个命令<c>silo</c>，每次你升级和重新安装<c>sys-boot/silo</c>之后，都需要再次运行（包括参数）。
 </note>
 
 <p>

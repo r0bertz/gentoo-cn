@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-medium.xml,v 1.42 2006/08/30 22:52:28 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-medium.xml,v 1.44 2006/08/30 22:52:28 nightmorph Exp $ -->
 <sections>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>必需的硬件</title>
@@ -57,12 +57,8 @@ link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
 </body>
 </subsection>
 </section>
-
-
-
 <!-- Copy/Paste from hb-install-x86-medium.xml 
- Warning: The part originally contains "x86" 
- START -->
+START -->
 <section>
 <title>Gentoo安装光盘</title>
 <subsection>
@@ -78,8 +74,8 @@ link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
 </p>
 
 <p>
-如果你想在脱离网络连接的情况下安装Gentoo，请使用<uri link="2006.1/index.xml">Gentoo 
-2006.1手册</uri>。
+如果你想在脱离网络连接的情况下安装Gentoo，请使用<uri link="2007.0/index.xml">Gentoo 
+2007.0手册</uri>。
 </p>
 
 <p>
@@ -96,11 +92,6 @@ link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
 </ul>
 
 <p>
-目前我们只提供sparc64架构的安装光盘。sparc32用户可以使用实验性的网络引导镜像来安装Gentoo。更多关于网络引导的信息可以在<uri 
-link="/doc/en/gentoo-sparc-netboot-howto.xml">Gentoo/SPARC网络引导HOWTO</uri>找到。
-</p>
-
-<p>
 为了帮助你决定需要下哪张光盘，我们写下了每种安装光盘的主要优点和缺点。
 </p>
 
@@ -111,7 +102,7 @@ link="/doc/en/gentoo-sparc-netboot-howto.xml">Gentoo/SPARC网络引导HOWTO</uri
 <body>
 
 <p>
-最小安装光盘叫做<c>install-sparc64-minimal-2006.1.iso</c>并且只需要32MB的磁盘空间。你可以使用这个安装光盘来安装Gentoo，但是仅在有Internet连接的时候。
+最小安装光盘叫做<c>install-sparc64-minimal-2007.0.iso</c>并且只需要32MB的磁盘空间。你可以使用这个安装光盘来安装Gentoo，但是仅在有Internet连接的时候。
 </p>
 
 <table>
@@ -138,7 +129,7 @@ link="/doc/en/gentoo-sparc-netboot-howto.xml">Gentoo/SPARC网络引导HOWTO</uri
 <body>
 
 <p>
-通用安装光盘叫做<c>install-sparc64-universal-2006.1.iso</c>并需要287MB的空间。你可以使用这张安装光盘来安装Gentoo，甚至你可以脱离网络环境进行安装，万一你想在另一台电脑上安装Gentoo，而不是现在你安装的Gentoo上面:)
+通用安装光盘叫做<c>install-sparc64-universal-2007.0.iso</c>并需要287MB的空间。你可以使用这张安装光盘来安装Gentoo，甚至你可以脱离网络环境进行安装，万一你想在另一台电脑上安装Gentoo，而不是现在你安装的Gentoo上面:)
 </p>
 
 <table>
@@ -202,7 +193,7 @@ link="/doc/en/faq.xml#stage12">如果使用Stage1或Stage2 Tarball安装Gentoo�
 
 <p>
 你可以从我们的某个<uri 
-link="/main/en/mirrors.xml">镜像</uri>下载安装光盘（如果你愿意也可以下载软件光盘）。安装光盘在<path>releases/sparc/2006.1/sparc64/installcd</path>目录下；软件光盘在<path>releases/sparc/2006.1/sparc64/packagecd</path>目录里。
+link="/main/en/mirrors.xml">镜像</uri>下载安装光盘（如果你愿意也可以下载软件光盘）。安装光盘在<path><keyval id="release-dir"/>installcd</path>目录下。
 </p>
 
 <p>
@@ -210,7 +201,7 @@ link="/main/en/mirrors.xml">镜像</uri>下载安装光盘（如果你愿意也�
 </p>
 
 <p>
-你可以检查它的MD5校验和然后与我们提供的MD5校验和（比如<path>install-sparc64-minimal-2006.1.iso.DIGESTS</path>）进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri 
+你可以检查它的MD5校验和然后与我们提供的MD5校验和（比如<path>install-sparc64-minimal-2007.0.iso.DIGESTS</path>）进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri 
 link="http://www.etree.org/md5com.html">md5sum</uri>）。
 </p>
 
@@ -261,11 +252,11 @@ ok <i>boot cdrom</i>
 </pre>
 
 <p>
-映入眼帘的将是SILO引导管理器（安装光盘上的）。输入<c>gentoo</c>然后按回车继续引导系统：
+映入眼帘的将是SILO引导管理器（安装光盘上的）。如果你愿意，输入回车来获得更多帮助信息。键入<c>2617</c>（如果你有一个FC-AL机器；请检查<uri link="http://www.gentoo.org/proj/en/base/sparc/sunhw.xml">硬件兼容性列表</uri>）或者<c>2620</c>（所有其他人），然后按回车继续引导系统：
 </p>
 
 <pre caption="接着从安装光盘开始引导">
-boot: <i>gentoo</i>
+boot: <i>2620</i>
 </pre>
 
 <p>
@@ -273,7 +264,7 @@ boot: <i>gentoo</i>
 </p>
 
 <p>
-你应该在当前控制台得到一个根用户提示符（"#"），也可以按Alt-F2、Alt-F3和Alt-F4切换到其它控制台。按Alt-F1就回到开始的那个了。你还可以在串口控制台（<path>ttyS0</path>）找到一个根用户提示符。
+你应该在当前控制台得到一个根用户提示符（"#"）。你还可以在串口控制台（<path>ttyS0</path>）找到一个根用户提示符。
 </p>
 
 <p>
@@ -361,7 +352,7 @@ link="#useraccounts">可选的：用户账号</uri>。然后按<c>Alt-F2</c>切�
 </p>
 
 <pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/en/handbook/handbook-sparc.xml</i>
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
 </pre>
 
 <p>

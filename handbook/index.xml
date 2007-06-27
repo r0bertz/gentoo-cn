@@ -156,65 +156,6 @@ link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
   <th>发行版本</th>
   <th>架构</th>
 </tr>
-<!--
-<tr>
-  <ti>2004.2</ti>
-  <ti>
-    <uri link="2004.2/handbook-alpha.xml">alpha</uri>, 
-    <uri link="2004.2/handbook-amd64.xml">amd64</uri>, 
-    <uri link="2004.2/handbook-hppa.xml">hppa</uri>, 
-    <uri link="2004.2/handbook-mips.xml">mips</uri>, 
-    <uri link="2004.2/handbook-ppc.xml">ppc</uri>, 
-    <uri link="2004.2/handbook-sparc.xml">sparc</uri>, 
-    <uri link="2004.2/handbook-x86.xml">x86</uri>
-  </ti>
-</tr>
-<tr>
-  <ti>2004.3</ti>
-  <ti>
-    <uri link="2004.3/handbook-amd64.xml">amd64</uri>, 
-    <uri link="2004.3/handbook-hppa.xml">hppa</uri>, 
-    <uri link="2004.3/handbook-ppc.xml">ppc</uri>, 
-    <uri link="2004.3/handbook-sparc.xml">sparc</uri>, 
-    <uri link="2004.3/handbook-x86.xml">x86</uri>
-  </ti>
-</tr>
-<tr>
-  <ti>2005.0</ti>
-  <ti>
-    <uri link="2005.0/handbook-alpha.xml">alpha</uri>, 
-    <uri link="2005.0/handbook-amd64.xml">amd64</uri>, 
-    <uri link="2005.0/handbook-hppa.xml">hppa</uri>, 
-    <uri link="2005.0/handbook-ppc.xml">ppc</uri>, 
-    <uri link="2005.0/handbook-sparc.xml">sparc</uri>, 
-    <uri link="2005.0/handbook-x86.xml">x86</uri>
-  </ti>
-</tr>
-<tr>
-  <ti>2005.1</ti>
-  <ti>
-    <uri link="2005.1/handbook-alpha.xml">alpha</uri>, 
-    <uri link="2005.1/handbook-amd64.xml">amd64</uri>, 
-    <uri link="2005.1/handbook-hppa.xml">hppa</uri>, 
-    <uri link="2005.1/handbook-ppc.xml">ppc</uri>, 
-    <uri link="2005.1/handbook-ppc64.xml">ppc64</uri>, 
-    <uri link="2005.1/handbook-sparc.xml">sparc</uri>, 
-    <uri link="2005.1/handbook-x86.xml">x86</uri>
-  </ti>
-</tr>
-<tr>
-  <ti>2006.0</ti>
-  <ti>
-    <uri link="2006.0/handbook-alpha.xml">alpha</uri>, 
-    <uri link="2006.0/handbook-amd64.xml">amd64</uri>, 
-    <uri link="2006.0/handbook-hppa.xml">hppa</uri>, 
-    <uri link="2006.0/handbook-ppc.xml">ppc</uri>, 
-    <uri link="2006.0/handbook-ppc64.xml">ppc64</uri>, 
-    <uri link="2006.0/handbook-sparc.xml">sparc</uri>, 
-    <uri link="2006.0/handbook-x86.xml">x86</uri>
-  </ti>
-</tr>
--->
 <tr>
   <ti>2006.1</ti>
   <ti>

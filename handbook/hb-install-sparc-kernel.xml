@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-kernel.xml,v 1.23 2006/08/30 22:52:28 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-kernel.xml,v 1.29 2006/08/30 22:52:28 nightmorph Exp $ -->
 <sections>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.1</version>
+<date>2007-05-15</date>
 
 <section>
 <title>时区</title>
@@ -37,28 +37,24 @@ link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。
 </p>
 
 <p>
-对基于sparc的系统我们有<c>sparc-sources</c>（为SPARC用户优化过的2.4内核源代码），<c>gentoo-sources</c>（推荐的2.6内核源代码）和<c>vanilla-sources</c>（linux官方内核源代码）。
+对基于sparc的系统我们有<c>sparc-sources</c>（推荐使用的2.6内核源代码）。
 </p>
 
 <p>
-选择你的内核源代码并使用<c>emerge</c>来安装它。 
-</p>
-
-<p>
-接下来的例子中我们将安装<c>gentoo-sources</c>。当然这只是个例子，可以用你选择的源代码替换它。在这里<c>USE="-doc"</c>是必需的以避免安装xorg-x11或者其它的依赖。而<c>USE="symlink"</c>对一个全新安装来说不是必需的，但是可以确保创建合适的<path>/usr/src/linux</path>符号链接。
+下面的例子里我们来安装<c>sparc-sources</c>。
 </p>
 
 <pre caption="安装内核源码">
-# <i>USE="-doc symlink" emerge sparc-sources</i>
+# <i>emerge sparc-sources</i>
 </pre>
 
 <p>
-当你看一看<path>/usr/src</path>的时候应该能看到一个名为<path>linux</path>的符号链接指向你的内核源代码。在这个例子中，安装好的内核源代码指向<c>sparc-sources-2.4.31</c>。你的版本可能会不同，注意这一点。
+当你看一看<path>/usr/src</path>的时候应该能看到一个名为<path>linux</path>的符号链接指向你的内核源代码。在这个例子中，安装好的内核源代码指向<c>linux-<keyval id="kernel-version"/></c>。你的版本可能会不同，注意这一点。
 </p>
 
 <pre caption="查看内核源码符号链接">
 # <i>ls -l /usr/src/linux</i>
-lrwxrwxrwx    1 root     root        12 Oct 13 11:04 /usr/src/linux -&gt; linux-2.4.31-sparc
+lrwxrwxrwx    1 root     root        12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
 </pre>
 
 <p>
@@ -114,31 +110,18 @@ Code maturity level options ---&gt;
 <p>
 现在到<c>File 
 Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual 
-memory</c>和<c>/proc file system</c>也选上。如果你使用2.4内核，你还需要选中<c>/dev file 
-system</c>+<c>Automatically mount at boot</c>：
+memory</c>和<c>/proc file system</c>也选上：
 </p>
 
 <pre caption="选择必需的文件系统">
-<comment>（使用2.4.x的内核）</comment>
-File systems ---&gt;
-  [*] Virtual memory file system support (former shm fs)
-  [*] /proc file system support
-  [*] /dev file system support (EXPERIMENTAL)
-  [*]   Automatically mount at boot
-  [ ] /dev/pts file system for Unix98 PTYs
-
-<comment>（使用2.6.x的内核）</comment>
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
     [*] /proc file system support
     [*] Virtual memory file system support (former shm fs)
 
 <comment>（选中一个或多个你系统需要的选项）</comment>
-  &lt; &gt; Reiserfs support
   &lt;*&gt; Ext3 journalling file system support
-  &lt; &gt; JFS filesystem support
   &lt;*&gt; Second extended fs support
-  &lt; &gt; XFS filesystem support
 </pre>
 
 <p>
@@ -146,13 +129,6 @@ File systems ---&gt;
 </p>
 
 <pre caption="选择PPPoE所必需的驱动">
-<comment>（使用2.4.x的内核）</comment>
-Network device support ---&gt;
-  &lt;*&gt; PPP (point-to-point protocol) support
-  &lt;*&gt;   PPP support for async serial ports
-  &lt;*&gt;   PPP support for sync tty ports
-
-<comment>（使用2.6.x的内核）</comment>
 Device Drivers ---&gt;
   Networking support ---&gt;
     &lt;*&gt; PPP (point-to-point protocol) support
@@ -162,11 +138,7 @@ Device Drivers ---&gt;
 
 <p>
 这两个压缩选项并没有坏处但并不一定需要，<c>PPP over 
-Ethernet</c>选项也是，它可能仅被<c>rp-pppoe</c>配置为内核方式的PPPoE需要。
-</p>
-
-<p>
-如果你需要它，不要忘了在内核中包含你网卡的驱动。
+Ethernet</c>选项也是，它可能仅被<c>ppp</c>配置为内核方式的PPPoE需要。
 </p>
 
 <p>
@@ -217,7 +189,7 @@ Network device support ---&gt;
 </pre>
 
 <p>
-当你有一台4口以太网接口的机器（10/100或是10/100/1000）的端口顺序和使用Solaris的时候不一样。你可以用<c>sys-apps/ethtool</c>或者<c>mii-tool</c>来检查端口连接状态。
+当你有一台4口以太网接口的机器（10/100或是10/100/1000）的端口顺序和使用Solaris的时候不一样。你可以用<c>sys-apps/ethtool</c>来检查端口连接状态。
 </p>
 
 <p>
@@ -230,12 +202,8 @@ Network device support ---&gt;
 </pre>
 
 <p>
-如果（未压缩）大小超过2.5MB（对Sparc32）或者3.5MB（对Sparc64），重新配置你的内核直到没有超过这些限制。把大多数的内核驱动都编译成模块是达到目的的一个办法。忽略这个将导致内核无法引导。
+如果（未压缩）大小超过7.5MB，重新配置你的内核直到没有超过这些限制。把大多数的内核驱动都编译成模块是达到目的的一个办法。忽略这个将导致内核无法引导。
 </p>
-
-<note>
-如果你使用2.6.3或者更高版本的内核，sparc64的内核可以有7.5MB。
-</note>
 
 <p>
 同样的，如果你的内核刚好有一点点大，你可以试试用<c>strip</c>命令来剥离：
@@ -256,16 +224,6 @@ Network device support ---&gt;
 </p>
 
 <pre caption="编译内核">
-<comment>（对于2.4内核的sparc32系统）</comment>
-# <i>make dep &amp;&amp; make clean vmlinux modules modules_install</i>
-
-<comment>（对于2.4内核的sparc64系统）</comment>
-# <i>make dep &amp;&amp; make clean vmlinux image modules modules_install</i>
-
-<comment>（对于2.6内核的sparc32系统）</comment>
-# <i>make &amp;&amp; make modules_install</i>
-
-<comment>（对于2.6内核的sparc64系统）</comment>
 # <i>make &amp;&amp; make image modules_install</i>
 </pre>
 
@@ -274,16 +232,6 @@ Network device support ---&gt;
 </p>
 
 <pre caption="安装内核">
-<comment>（对于2.4内核的sparc32系统）</comment>
-# <i>cp vmlinux /boot/&lt;kernel-version&gt;</i>
-
-<comment>（对于2.4内核的sparc64系统）</comment>
-# <i>cp arch/sparc64/boot/image /boot/&lt;kernel-version&gt;</i>
-
-<comment>（对于2.6内核的sparc32系统）</comment>
-# <i>cp arch/sparc/boot/image /boot/&lt;kernel-version&gt;</i>
-
-<comment>（对于2.6内核的sparc64系统）</comment>
 # <i>cp arch/sparc64/boot/image /boot/&lt;kernel-version&gt;</i>
 </pre>
 
@@ -301,7 +249,7 @@ Network device support ---&gt;
 <body>
 
 <p>
-你应该列出<path>/etc/modules.autoload.d/kernel-2.4</path>中想要自动加载的模块。如果你愿意也可以对模块添加额外的参数。
+你应该在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出想要自动加载的模块。如果你愿意也可以对模块添加额外的参数。
 </p>
 
 <p>
@@ -313,15 +261,14 @@ Network device support ---&gt;
 </pre>
 
 <p>
-比如，为了自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.4</path>并输入模块的名字。
+比如，为了自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>并输入模块的名字。
 </p>
 
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.4">
-<comment>(Example for 2.4 kernels)</comment>
-编辑/etc/modules.autoload.d/kernel-2.4
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
 </pre>
 
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.4 或者 kernel-2.6">
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
 3c59x
 </pre>
 
