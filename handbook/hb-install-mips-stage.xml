@@ -148,7 +148,7 @@ netboot镜像里不可能提供功能更完善的浏览器。LiveCD用户可以�
 
 <p>
 如果你想校验所下载的stage 
-tarball的完整性，使用<c>md5sum</c>或者<c>sha1sum然后把输出同镜像站上提供的MD5校验和对比。 
+tarball的完整性，使用<c>md5sum</c>或者<c>sha1sum</c>然后把输出同镜像站上提供的MD5校验和对比。 
 例如校验一个mips4的stage tarball：
 </p>
 

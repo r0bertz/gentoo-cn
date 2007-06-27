@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-bootloader.xml,v 1.19 2006/10/28 11:00:55 neysx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-bootloader.xml,v 1.20 2006/10/28 11:00:55 neysx Exp $ -->
 <sections>
 
-<version>2.4</version>
-<date>2006-10-28</date>
+<version>3.0</version>
+<date>2007-05-07</date>
 
 <section>
 <title>做出你的选择</title>
@@ -44,7 +44,7 @@ Improved boot LOader)。
 </pre>
 
 <p>
-在下面你可以找到一个<path>silo.conf</path>的范例。它使用本手册一直使用的分区方案并用<path>kernel-2.4.31</path>作为内核镜像
+在下面你可以找到一个<path>silo.conf</path>的范例。它使用本手册一直使用的分区方案并用<path>kernel-<keyval id="kernel-version"/></path>作为内核镜像
 </p>
 
 <pre caption = "/etc/silo.conf 范例">
@@ -52,7 +52,7 @@ partition = 1         <comment># 引导分区（= 根分区）</comment>
 root = /dev/sda1      <comment># 根分区</comment>
 timeout = 150         <comment># 引导默认选择前等待15秒钟</comment>
 
-image = /boot/kernel-2.4.31
+image = /boot/kernel-<keyval id="kernel-version"/>
   label = linux
 </pre>
 
@@ -78,6 +78,10 @@ image = /boot/kernel-2.4.31
 # <i>/sbin/silo</i>
 /etc/silo.conf appears to be valid
 </pre>
+
+<note>
+注意这个命令<c>silo</c>每次你升级和重新安装<c>sys-boot/silo</c>之后，你需要再次运行（包括参数）。
+</note>
 
 <p>
 接下来<uri link="#reboot">重新启动系统</uri>。

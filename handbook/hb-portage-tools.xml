@@ -22,7 +22,7 @@
 <body>
 
 <p>
-<c>etc-update</c>是一个帮助整合<patch>._cfg0000_&lt;名称&gt;</patch>文件的工具。它
+<c>etc-update</c>是一个帮助整合<path>._cfg0000_&lt;名称&gt;</path>文件的工具。它
 提供了交互的整合过程并且能自动整合微不足道的更新。<path>._cfg0000_&lt;名
 称&gt;</path>文件是Portage需要覆盖由CONFIG_PROTECT变量所保护的某个目录里的文件时建
 立的。
