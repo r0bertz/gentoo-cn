@@ -2,7 +2,7 @@
 <!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/zh_cn/metadoc.xml,v 1.181 2007/05/17 13:37:21 neysx Exp $ -->
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 
-<metadoc lang="zh_cn">
+<metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
 <version>1.106</version>
   <members>
     <lead>r0bertz</lead>
