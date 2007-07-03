@@ -400,13 +400,13 @@ console=ttyS0 <i>hdb=scsi</i>
 </p>
 
 <p>
-现在从<uri link="#hardware">其他硬件配置</uri>继续
+现在从<uri link="#hardware">额外硬件配置</uri>继续
 </p>
 
 </body>
 </subsection>
 <subsection id="hardware">
-<title>其他硬件配置</title>
+<title>额外硬件配置</title>
 <body>
 
 <p>
@@ -430,8 +430,7 @@ console=ttyS0 <i>hdb=scsi</i>
 <body>
 
 <p>
-如果你打算给其他的人提供你的安装环境的访问权限，或者你不想用root用户权限（因为
-安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
+如果你打算为其他人提供你安装环境的访问权限，或者你不想以root帐号的身份（因为安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
 </p>
 
 <p>
@@ -440,21 +439,19 @@ console=ttyS0 <i>hdb=scsi</i>
 
 <pre caption="修改root用户密码">
 # <i>passwd</i>
-New password: <comment>(Enter your new password)</comment>
-Re-enter password: <comment>(Re-enter your password)</comment>
+New password: <comment>（输入新密码）</comment>
+Re-enter password: <comment>（再次输入密码）</comment>
 </pre>
 
 <p>
-要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以
-使用<c>useradd</c>和<c>passwd</c>来完成。
-在下个的例子中，我们创建一个名为“john”的用户。
+要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以使用<c>useradd</c>和<c>passwd</c>来完成。在下个的例子中，我们创建一个名为“john”的用户。
 </p>
 
 <pre caption="创建一个新用户">
 # <i>useradd -m -G users john</i>
 # <i>passwd john</i>
-New password: <comment>(输入john的密码)</comment>
-Re-enter password: <comment>(再次输入john的密码)</comment>
+New password: <comment>（输入john的密码）</comment>
+Re-enter password: <comment>（再次输入john的密码）</comment>
 </pre>
 
 <p>
@@ -472,9 +469,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 <body>
 
 <p>
-如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），确认你已经创建好
-了一个用户帐号（查看可选：<uri link="#useraccounts">可选：用户帐号</uri>）。
-然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
+如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），请确认你已经创建好了一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
 </p>
 
 <p>
@@ -486,9 +481,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </pre>
 
 <p>
-不过，首选的还是在线查看Gentoo手册，因为这比光盘里提供的要新。你也可以
-使用<c>links</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到
-因特网上查看文档）：
+不过，首选的还是在线查看Gentoo手册，因为它比光盘里提供的要新。你也可以使用<c>links</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
 </p>
 
 <pre caption="查看在线文档">
@@ -496,7 +489,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </pre>
 
 <p>
-你可以按<c>Alf-F1</c>来回到原来的终端。
+你可以按<c>Alt-F1</c>来回到原来的终端。
 </p>
 
 </body>
@@ -506,9 +499,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 <body>
 
 <p>
-如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮
-助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码
-（这<e>只</e>在你<b>完全信任</b>这位用户的情况下）。
+如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（<e>只有</e>在你<b>完全信任</b>这位用户的情况下才行）。
 </p>
 
 <p>
@@ -520,8 +511,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </pre>
 
 <p>
-在使用sshd之前，你必须设置好你的网络。请从<uri
-link="?part=1&amp;chap=3">配置网络</uri>一章继续。
+在使用sshd之前，你必须设置好你的网络。请从<uri link="?part=1&amp;chap=3">配置网络</uri>一章继续。
 </p>
 
 </body>

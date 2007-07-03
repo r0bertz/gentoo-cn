@@ -339,7 +339,7 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 </pre>
 
 <p>
-当内核编译完成后，复制内核映像到<path>/boot</path>。您可以给内核任意命名，然后
+当内核编译完成后，复制内核镜像到<path>/boot</path>。您可以给内核任意命名，然后
 记住它。因为在您配置您的系统引导程序的时候您需要用到它。记得用您内核的名字和版
 本来替代<c><keyval id="kernel-name"/></c>。
 </p>

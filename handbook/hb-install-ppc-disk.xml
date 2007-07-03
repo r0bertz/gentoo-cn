@@ -1,18 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-disk.xml,v 1.42 2007/05/09 00:52:08 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-disk.xml,v 1.44 2007/05/09 00:52:08 nightmorph Exp $ -->
 <sections>
 
-<version>8.1</version>
-<date>2007-05-08</date>
+<version>8.3</version>
+<date>2007-06-26</date>
 
 <section>
 <title>块设备介绍</title>
@@ -21,14 +16,11 @@
 <body>
 
 <p>
-我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、 
-分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和 文件系统，为你安装Gentoo Linux做好准备。
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
 </p>
 
 <p>
-首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的 
-<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你 
-的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘可以在<path>/dev/hdc</path>找到。
+首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘可以在<path>/dev/hdc</path>找到。
 </p>
 
 <p>
@@ -65,18 +57,15 @@
 <body>
 
 <p>
-Apple New World架构的机器是相当容易配置的。第一个分区通常是一个<e>Apple Partition 
-Map</e>。这个分区维护着你磁盘的布局。你不能删除这个分区。下一个分区通常是一个bootstrap分区。这个分区包含了一个小的（800k）HFS文件系统，它包含了一份启动程序yaboot的复本以及它的配置文件。这个分区<e>不</e>是像其他一些架构上的<path>/boot</path>分区。在启动分区后，根据以下的模式置有通常的Linux文件系统。交换分区是一个当你的系统用完物理内存时暂时存放的地方。root分区会包含gentoo安装的系统。如果你想要双启动，确保yaboot先启动后OSX分区可以进入任何bootstrap分区后的系统。
+Apple New World架构的机器是相当容易配置的。第一个分区通常是一个<e>Apple Partition Map</e>。这个分区维护着你磁盘的布局。你不能删除这个分区。下一个分区通常是一个bootstrap分区。这个分区包含了一个小的（800k）HFS文件系统，它包含了一份启动程序yaboot的复本以及它的配置文件。这个分区<e>不</e>是像其他一些架构上的<path>/boot</path>分区。在启动分区后，根据以下的模式置有通常的Linux文件系统。交换分区是一个当你的系统用完物理内存时暂时存放的地方。root分区会包含gentoo安装的系统。如果你想要双启动，确保yaboot先启动后OSX分区可以进入任何bootstrap分区后的系统。
 </p>
 
 <note>
-那儿可能就是你磁盘上"Disk 
-Driver"分区了，比如<path>Apple_Driver63</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>和<path>Apple_Patches</path>。这些是用来启动Mac 
-OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选项来初始化磁盘删除它们。这样会完全抹除整个磁盘！如果你还在犹豫中，就不要动它们。
+你磁盘上可能会有“Disk Driver”分区，比如<path>Apple_Driver63</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>和<path>Apple_Patches</path>。这些是用来启动Mac OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选项来初始化磁盘删除它们。这样会完全抹除整个磁盘！如果你不确定该怎么处理它们，干脆不要动它们。
 </note>
 
 <note>
-如果你是通过Apple的磁盘工具分区的，在分区之间会有128M的保留空间是Apple为了"将来使用"预留的。你可以安全的删除掉它们。
+如果你是通过Apple的磁盘工具分区的，在分区之间会有128M的保留空间是Apple为了“将来使用”预留的。你可以安全的删除掉它们。
 </note>
 
 <table>
@@ -119,10 +108,7 @@ OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选�
 <body>
 
 <p>
-Apple Old World架构的机器相对来说配置起来有点复杂。第一个分区通常是<e>Apple Partition 
-Map</e>。这个分区记录着磁盘的布局。你不能删除掉这个分区。如果你正在使用BootX，如下的配置是假设MacOS安装在一个独立的磁盘上的。如果不是这样，会有额外的"Apple 
-Disk 
-Drivers"分区比如<path>Apple_Driver63、Apple_Driver_ATA、Apple_FWDriver、Apple_Driver_IOKit、Apple_Patches</path>和MacOS安装文件。如果你正在使用Quik，你会需要创建一个包含有内核的启动分区，这点不像其他的Apple启动方法。在启动分区之后，就是一些如下模式通常的Linux文件系统了。交换分区是一个当你物理内存用完后暂时存储的地方。root分区会包含Gentoo安装的文件。
+Apple Old World架构的机器相对来说配置起来有点复杂。第一个分区通常是<e>Apple Partition Map</e>。这个分区记录着磁盘的布局。你不能删除掉这个分区。如果你正在使用BootX，如下的配置是假设MacOS安装在一个独立的磁盘上的。如果不是这样，会有额外的“Apple Disk Drivers”分区比如<path>Apple_Driver63、Apple_Driver_ATA、Apple_FWDriver、Apple_Driver_IOKit、Apple_Patches</path>和MacOS安装文件。如果你正在使用Quik，你会需要创建一个包含有内核的启动分区，这点不像其他的Apple启动方法。在启动分区之后，就是一些如下模式通常的Linux文件系统了。交换分区是一个当你物理内存用完后暂时存储的地方。root分区会包含Gentoo安装的文件。
 </p>
 
 <note>
@@ -238,13 +224,13 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 
 <warn>
 <c>parted</c>能够重新划分包括HFS+在内的分区的大小+。不幸的是，它不能够重新划分HFS+日志文件系统，所以在重新定义大小前，请在Mac 
-OS X中关闭掉日志记录功能。 牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据。
+OS X中关闭掉日志记录功能。牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据。
 </warn>
 
 <p>
-如果你对知道一个分区究竟应该多大或者你究竟需要多个个分区感兴趣，请继续阅读。 否则，请跳转到<uri 
-link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘 分区</uri>或者<uri 
-link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
+如果你对知道一个分区究竟应该多大或者你究竟需要多个个分区感兴趣，请继续阅读。否则，请跳转到<uri 
+link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘分区</uri>或者<uri 
+link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
 </p>
 
 </body>
@@ -254,12 +240,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 <body>
 
 <p>
-分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的 
-<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果 
-你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都 
-存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性 
-能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安 
-装在那。理由也与<path>/home</path>目录类似：安全与备份。无论你选择什么样的布局，你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安装在那。理由也与<path>/home</path>目录类似：安全与备份。无论你选择什么样的布局，你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
 </p>
 
 <p>
@@ -271,10 +252,10 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
   你可以为每一个分区或卷选择最佳性能的文件系统
 </li>
 <li>
-  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间 都用完
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间都用完
 </li>
 <li>
-  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势 在多磁盘系统上比多分区系统上更为明显）
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势在多磁盘系统上比多分区系统上更为明显）
 </li>
 <li>
   通过对一些分区或卷进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式挂载，安全性会大大增强。
@@ -282,7 +263,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 </ul>
 
 <p>
-然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲 空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
+然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
 </p>
 
 </body>
@@ -305,13 +286,11 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 </p>
 
 <p>
-其次，使用<c>b</c>来创建一个<e>Apple_Bootstrap</e>分区。它会询问你从哪块开始。 
-键入你第一个空余分区的号码，然后紧跟一个<c>p</c>。比如在这儿，是<c>2p</c>。
+其次，使用<c>b</c>来创建一个<e>Apple_Bootstrap</e>分区。它会询问你从哪块开始。键入你第一个空余分区的号码，然后紧跟一个<c>p</c>。比如在这儿，是<c>2p</c>。
 </p>
 
 <note>
-这个分区并<e>不</e>是一个<path>/boot</path>分区。它根本不被Linux所用；你不需要 
-在上面放置任何文件系统以及永远不用挂载它。Apple用户并不需要一个额外的<path>/boot</path>分区。
+这个分区并<e>不</e>是一个<path>/boot</path>分区。它根本不被Linux所用；你不需要在上面放置任何文件系统以及永远不用挂载它。Apple用户并不需要一个额外的<path>/boot</path>分区。
 </note>
 
 <p>
@@ -319,8 +298,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 </p>
 
 <p>
-键入<c>c</c>，来创建root分区，紧跟<c>4p</c>用以选择root分区从哪块开始。当被询问 
-到大小的时候，再次输入<c>4p</c>。<c>mac-fdisk</c>会将这种行为解释成"使用所有的空余空间"。当被问到名字的时候，键入<c>root</c>。
+键入<c>c</c>，来创建root分区，紧跟<c>4p</c>用以选择root分区从哪块开始。当被询问到大小的时候，再次输入<c>4p</c>。<c>mac-fdisk</c>会将这种行为解释成“使用所有的空余空间”。当被问到名字的时候，键入<c>root</c>。
 </p>
 
 <p>
@@ -328,8 +306,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 </p>
 
 <note>
-确保万事具备，你可以再次运行<c>mac-fdisk 
--l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按"i"来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
+确保万事具备，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
 </note>
 
 <p>
@@ -343,8 +320,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 <body>
 
 <p>
-<c>parted</c>，一个分区编辑器，能够操作Mac OS和Mac OS X使用的HFS+分区。通过 
-这个工具你可以重新划分Mac-分区的大小以及为你的Linux分区创建空间。不过以下的 例子只是描述了Pegasos机器的分区。
+<c>parted</c>，一个分区编辑器，能够操作Mac OS和Mac OS X使用的HFS+分区。通过这个工具你可以重新划分Mac-分区的大小以及为你的Linux分区创建空间。不过以下的例子只是描述了Pegasos机器的分区。
 </p>
 
 <p>
@@ -364,21 +340,15 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘 分区</uri>。
 </p>
 
 <p>
-如果你准备在你的Pegasos机器上安装MorphOS，你在磁盘的最开始创建一个affs1文件系统。32M已经足够用于存放MorphOS内核。如果你拥有一台Pegasos 
-I或者想要使用除了ext2或ext3的文件系统，你同样需要将你的Linux内核存放到这个分区上（Pegasos 
-II只能从ext2/ext3或affs1分区启动）。运行<c>mkpart primary affs1 START 
-END</c>来创建一个分区，在这儿<c>START</c>和<c>END</c>需要被替换成以兆为单位的区间（比如：<c>0 
-32</c>）它会创建一个从0M开始至32M结束的32M大小的分区。如果你选择创建一个ext2或ext3分区，用ext2或ext3替换mkpart命令中的affs1。
+如果你准备在你的Pegasos机器上安装MorphOS，你在磁盘的最开始创建一个affs1文件系统。32M已经足够用于存放MorphOS内核。如果你拥有一台Pegasos I或者想要使用除了ext2或ext3的文件系统，你同样需要将你的Linux内核存放到这个分区上（Pegasos II只能从ext2/ext3或affs1分区启动）。运行<c>mkpart primary affs1 START END</c>来创建一个分区，在这儿<c>START</c>和<c>END</c>需要被替换成以兆为单位的区间（比如：<c>0 32</c>）它会创建一个从0M开始至32M结束的32M大小的分区。如果你选择创建一个ext2或ext3分区，用ext2或ext3替换mkpart命令中的affs1。
 </p>
 
 <p>
-你需要为Linux创建两个分区，一个root文件系统和一个交换分区。运行<c>mkpart primary START 
-END</c>来创建各个分区，用需要的兆边界值来替换<c>START</c>和<c>END</c>。
+你需要为Linux创建两个分区，一个root文件系统和一个交换分区。运行<c>mkpart primary START END</c>来创建各个分区，用需要的兆边界值来替换<c>START</c>和<c>END</c>。
 </p>
 
 <p>
-通常我们建议创建一个两倍于你内存容量大小的交换分区，但至少512M是我们推荐的。运行<c>mkpart primary linux-swap START 
-END</c>其中用分区边界值来替换其中的值来创建交换分区。
+通常我们建议创建一个两倍于你内存容量大小的交换分区，但至少512M是我们推荐的。运行<c>mkpart primary linux-swap START END</c>其中用分区边界值来替换其中的值来创建交换分区。
 </p>
 
 <p>
@@ -394,8 +364,7 @@ END</c>其中用分区边界值来替换其中的值来创建交换分区。
 <body>
 
 <p>
-至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri 
-link="#filesystems-apply">将文件系统应用到分区上</uri>。 否则就继续阅读以了解可用的文件系统。
+至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统。
 </p>
 
 </body>
@@ -413,15 +382,15 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS已
 </p>
 
 <p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志功能，目的是为了快速恢复数据，以及其他的增强日志模式，如全数据和有序数据日志。它使用了哈希B*-树索引，在几乎所有的情况下都能保持高性能。目前，ext3是非常好且可靠的文件系统且大多数安装推荐的文件系统。
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
 </p>
 
 <p>
-<b>ReiserFS</b>是基于B*-树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种极其便于使用且具有元数据日志的文件系统。它坚固且不仅是可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
 </p>
 
 <p>
-<b>XFS</b>是一种带元数据日志的文件系统，它带有一个健壮特性集，并且对可测量性进行了优化。我们仅推荐当你使用带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统的时候才使用这个文件系统。因为XFS会主动地在内存中缓存传输数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘的时候未做足准备措施的程序，且这种程序相当多）可能会丢失大量数据。
+<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
 </p>
 
 </body>
@@ -495,10 +464,12 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS已
 现在在你新建的分区（或逻辑卷）上创建文件系统。
 </p>
 
+<impo>
+如果你的<path>/</path>选择使用ReiserFS，并且你将使用<c>yaboot</c>作为你的引导程序的话，不要改变ReiserFS的默认块大小，就像<uri link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
+</impo>
+
 <note>
-在Pegasos II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构的机器 
-能够从任何ext2、ext3、XFS、ReiserFS甚至是HFS/HFS+文件系统上启动。在使用BootX 
-启动的OldWorld机器上，内核需要放置到HFS分区上，不过这会在你配置你的引导程序时 完成。
+在Pegasos II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构的机器能够从任何ext2、ext3、XFS、ReiserFS甚至是HFS/HFS+文件系统上启动。在使用BootX启动的OldWorld机器上，内核需要放置到HFS分区上，不过这会在你配置你的引导程序时完成。
 </note>
 
 </body>
@@ -509,7 +480,7 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS已
 <body>
 
 <p>
-现在你的分区已经初始化好，而且也有了文件系统，是时候来挂载这些分区了。使用 <c>mount</c>命令。这里有个例子，我们来挂载root分区：
+现在你的分区已经初始化好，而且也有了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令。这里有个例子，我们来挂载root分区：
 </p>
 
 <pre caption="挂载分区">
@@ -517,8 +488,7 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS已
 </pre>
 
 <note>
-如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载和解压之后修改它的权限：<c>chmod 1777 
-/mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载和解压之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
 </note>
 
 <p>

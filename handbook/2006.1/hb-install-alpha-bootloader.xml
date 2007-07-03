@@ -102,7 +102,7 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 </pre>
 
 <p>
-MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO映像文件（image）。以下命令制作一张配合MILO使用的启动软盘。记得要为你的alpha系统选用正确的映像文件。
+MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO镜像文件（image）。以下命令制作一张配合MILO使用的启动软盘。记得要为你的alpha系统选用正确的镜像文件。
 </p>
 
 <pre caption = "将MILO安装到软盘">

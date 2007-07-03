@@ -5,9 +5,7 @@
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-x86.xml,v 1.161 2007/01/18 15:35:24 nightmorph Exp $ -->
 
 <book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn">
-<title>Gentoo Linux x86 Handbook
-
-Gentoo Linux x86手册</title>
+<title>Gentoo Linux x86手册</title>
 
 <values>
  <key id="arch">x86</key>

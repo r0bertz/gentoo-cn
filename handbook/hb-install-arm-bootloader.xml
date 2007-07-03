@@ -54,7 +54,7 @@ Linux/ARM下存在数种引导程序。您必须选择其中一个受支持的�
 <body>
 
 <p>
-NeTTrom引导程序是为NetWinder机器专门开发的固件。由于历史原因，其它ARM板都不使用NeTTrom，它的源代码已不再提供。不过，最新版固件的映像文件仍四处流传，所以你要做的第一件事是升级到最新的2.3.3版本。本章可作为一份快速指南，而不能取代完整的<uri link="http://www.netwinder.org/howto/Firmware-HOWTO-3.html">固件升级HOWTO</uri>。
+NeTTrom引导程序是为NetWinder机器专门开发的固件。由于历史原因，其它ARM板都不使用NeTTrom，它的源代码已不再提供。不过，最新版固件的镜像文件仍四处流传，所以你要做的第一件事是升级到最新的2.3.3版本。本章可作为一份快速指南，而不能取代完整的<uri link="http://www.netwinder.org/howto/Firmware-HOWTO-3.html">固件升级HOWTO</uri>。
 </p>
 
 <p>

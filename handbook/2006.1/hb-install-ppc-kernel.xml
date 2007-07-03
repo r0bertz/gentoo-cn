@@ -415,7 +415,7 @@ vmlinux内核。注意，因为<c>genkernel</c>编译的内核支持大多数的
 复制下需要的启动参数，因为一个使用genkernel编译的内核的成功启动也需要这些。
 </p>
 
-<pre caption="检查创建好的内核映像名和initrd">
+<pre caption="检查创建好的内核镜像名和initrd">
 # <i>ls /boot/kernel* /boot/initramfs*</i>
 </pre>
 

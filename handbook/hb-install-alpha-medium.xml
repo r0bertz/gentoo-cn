@@ -250,7 +250,7 @@ SRM是基于Alpha Console Subsystem规范的，它为OpenVMS、Tru64 UNIX和Linu
 </p>
 
 <p>
-现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>映像文件。
+现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>镜像文件。
 </p>
 
 <pre caption="使用SRM来启动光盘">
@@ -276,13 +276,13 @@ MILO&gt; <i>boot hdb:/boot/gentoo_2.6 initrd=/boot/gentoo_2_6.igz root=/dev/ram0
 </p>
 
 <p>
-现在从<uri link="#hardware">其他硬件配置</uri>继续。
+现在从<uri link="#hardware">额外硬件配置</uri>继续。
 </p>
 
 </body>
 </subsection>
 <subsection id="hardware">
-<title>其他硬件配置</title>
+<title>额外硬件配置</title>
 <body>
 
 <p>
@@ -329,7 +329,7 @@ MILO&gt; <i>boot hdb:/boot/gentoo_2.6 initrd=/boot/gentoo_2_6.igz root=/dev/ram0
 <body>
 
 <p>
-如果你打算给其他的人提供你的安装环境的访问权限，或者你不想用root用户权限（因为安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
+如果你打算为其他人提供你安装环境的访问权限，或者你不想以root帐号的身份（因为安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
 </p>
 
 <p>
@@ -368,7 +368,7 @@ Re-enter password: <comment>（再次输入john的密码）</comment>
 <body>
 
 <p>
-如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），确认你已经创建好了一个用户帐号（查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
+如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），请确认你已经创建好了一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
 </p>
 
 <p>
@@ -380,7 +380,7 @@ Re-enter password: <comment>（再次输入john的密码）</comment>
 </pre>
 
 <p>
-但是，首选的还是在线查看Gentoo手册，因为这比光盘里提供的要新。你也可以使用<c>lynx</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
+不过，首选的还是在线查看Gentoo手册，因为它比光盘里提供的要新。你也可以使用<c>lynx</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
 </p>
 
 <pre caption="查看在线文档">
@@ -398,7 +398,7 @@ Re-enter password: <comment>（再次输入john的密码）</comment>
 <body>
 
 <p>
-如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（这<e>只</e>在你 <b>完全信任</b>这位用户的情况下）。
+如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（<e>只有</e>在你<b>完全信任</b>这位用户的情况下才行）。
 </p>
 
 <p>

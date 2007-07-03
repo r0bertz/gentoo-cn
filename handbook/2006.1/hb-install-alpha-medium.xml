@@ -171,7 +171,7 @@ SRM是基于Alpha Console Subsystem规范的，它为OpenVMS、Tru64 UNIX和Linu
 </p>
 
 <p>
-现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>映像文件。
+现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>镜像文件。
 </p>
 
 <p>
@@ -211,13 +211,13 @@ MILO&gt; <i>boot hdb:/boot/gentoo_2.4 initrd=/boot/gentoo_2_4.igz root=/dev/ram0
 </p>
 
 <p>
-现在从<uri link="#hardware">其他硬件配置</uri>继续。
+现在从<uri link="#hardware">额外硬件配置</uri>继续。
 </p>
 
 </body>
 </subsection>
 <subsection id="hardware">
-<title>其他硬件配置</title>
+<title>额外硬件配置</title>
 <body>
 
 <p>

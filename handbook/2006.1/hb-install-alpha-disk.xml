@@ -237,7 +237,7 @@ BSD disklabel command (m for help): <i>p</i>
 <body>
 
 <p>
-基于Alpha的系统不需要单独的启动分区。不过，不能使用第一个柱面，因为<c>aboot</c>映像文件要装在那里。
+基于Alpha的系统不需要单独的启动分区。不过，不能使用第一个柱面，因为<c>aboot</c>镜像文件要装在那里。
 </p>
 
 <p>

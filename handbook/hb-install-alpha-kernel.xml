@@ -225,7 +225,7 @@ Sound ---&gt;
 </pre>
 
 <p>
-当内核编译完成，复制内核映像到<path>/boot</path>。较新版本的内核会创建<path>vmlinux</path>而不是<path>vmlinux.gz</path>。您复制内核映像的时候要记清楚了。
+当内核编译完成，复制内核镜像到<path>/boot</path>。较新版本的内核会创建<path>vmlinux</path>而不是<path>vmlinux.gz</path>。您复制内核镜像的时候要记清楚了。
 </p>
 
 <pre caption="安装内核">

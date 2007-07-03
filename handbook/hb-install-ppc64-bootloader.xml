@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc64-bootloader.xml,v 1.26 2007/05/07 18:11:41 nightmorph Exp $ -->
@@ -68,17 +63,17 @@ link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
 <body>
 
 <p>
-<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和 Mac OS X 这样的双重和三重的启动组合。
+<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和Mac OS X这样的双重或三重的启动组合。
 </p>
 
 <p>
-为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区， 
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区，
 并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况。这些步骤必须事先完成。接下来运行<c>emerge 
 --update 
 yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须的，因为最新版本的yaboot会在portage中发布，但也有可能你的portage文件中没有最新版本。
 </p>
 
-<pre caption = "安装yaboot-static">
+<pre caption="安装yaboot-static">
 <comment>（64位用户）</comment>
 # <i>emerge --update yaboot-static</i>
 
@@ -109,7 +104,7 @@ yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须
 首先确保你已经在系统上安装了最新版本的<c>yaboot-static</c>：
 </p>
 
-<pre caption = "安装yaboot">
+<pre caption="安装yaboot">
 <comment>（64位用户）</comment>
 # <i>emerge --update yaboot-static</i>
 
@@ -121,10 +116,10 @@ yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须
 下面你可以发现一个完整的<path>yaboot.conf</path>文件。你可以任意修改它。
 </p>
 
-<pre caption = "/etc/yaboot.conf">
+<pre caption="/etc/yaboot.conf">
 <comment>## /etc/yaboot.conf
 ##
-## 运行："man yaboot.conf"可以得到更多详细帮助。在未看帮助前请不要做任何改动！！
+## 运行：“man yaboot.conf”可以得到更多详细帮助。在未看帮助前请不要做任何改动！！
 ## 也可以参考：/usr/share/doc/yaboot/examples可以得到一些配置的示例。
 
 ## 如果需要双重启动菜单，请添加以下一项或多项：
@@ -137,7 +132,7 @@ boot=/dev/hda2
 <comment>## ofboot是openfireware指定bootstrap分区的方式。
 ## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
 ## 你将一些必要的参数传给mkofboot/ybin程序）。
-## hd:X 表示 /dev/sdaX（或/dev/hdaX）。
+## hd:X表示/dev/sdaX（或/dev/hdaX）。
 </comment>
 
 ofboot=hd:2
@@ -153,7 +148,7 @@ magicboot=/usr/lib/yaboot/ofboot
 
 <comment>#################
 ## 如果你使用了一个以上的内核或是一组以上的启动选项这部分配置可以被复制
-## -替换 <keyval id="kernel-name"/> 用你的内核版本
+## -用你的内核版本替换<keyval id="kernel-name"/>
 #################</comment>
 image=/boot/<keyval id="kernel-name"/>
   label=Linux
@@ -195,18 +190,18 @@ link="#reboot">重启系统</uri>来继续安装。
 </p>
 
 <ul>
-  <li>安装yaboot-static</li>
-  <li>
-    运行 <c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c> 
+<li>安装yaboot-static</li>
+<li>
+运行<c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c>
 （用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子<path>/dev/sda1</path>）
-  </li>
-  <li>
-    下一步构建你自己的<path>yaboot.conf</path>文件并置于<path>/etc</path>内。（再看一下以上的配置文件，参考一下yaboot.conf的man页面或者参考下如下的<path>yaboot.conf</path>示例）
-  </li>
-  <li>
-    假设你在OF中的启动设备是指向你预启动分区激活的硬盘，它随后就能正常工作了，否则在IPL时，要进入多重启动菜单并设置好启动设备指向至你预启动分区的一个才行。
-  </li>
-  <li>就是它了！</li>
+</li>
+<li>
+下一步构建你自己的<path>yaboot.conf</path>文件并置于<path>/etc</path>内。（再看一下以上的配置文件，参考一下yaboot.conf的man页面或者参考下如下的<path>yaboot.conf</path>示例）
+</li>
+<li>
+假设你在OF中的启动设备是指向你预启动分区激活的硬盘，它随后就能正常工作了，否则在IPL时，要进入多重启动菜单并设置好启动设备指向至你预启动分区的一个才行。
+</li>
+<li>搞定！</li>
 </ul>
 
 <pre caption="IBM硬件的yaboot.conf">
@@ -248,7 +243,7 @@ Binary file (standard input) matches
 </pre>
 
 <p>
-一个配对就标志着yaboot已经正确安装好了。
+如果配对的话就标志着yaboot已经正确安装好了。
 </p>
 
 </body>
@@ -259,7 +254,7 @@ Binary file (standard input) matches
 <body>
 
 <p>
-退出chroot环境且卸载掉所有已挂载的分区。随后键入那个已经等待多时的魔幻命令： <c>reboot</c>。
+退出chroot环境且卸载掉所有已挂载的分区。随后键入那个已经等待多时的魔幻命令：<c>reboot</c>。
 </p>
 
 <pre caption="退出chroot，卸载所有的分区并重启">
