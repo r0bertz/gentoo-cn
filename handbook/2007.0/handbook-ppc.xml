@@ -1,0 +1,393 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE book SYSTEM "/dtd/book.dtd">
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/handbook-ppc.xml,v 1.12 2007/06/06 16:47:21 neysx Exp $ -->
+
+<book link="/doc/en/handbook/2007.0/handbook-ppc.xml">
+<title>Gentoo Linux 2007.0 PPC手册</title>
+
+<values>
+ <key id="arch">PPC</key>
+ <key id="kernel-version">2.6.19-r5</key>
+ <key id="kernel-name">kernel-2.6.19-gentoo-r5</key>
+ <key id="kernel-gentoo">2.6.19-gentoo-r5</key>
+ <key id="online-book">2007.0/handbook-ppc.xml</key>
+ <key id="release-dir">releases/ppc/2007.0/ppc32/</key>
+ <key id="stage3">stage3-ppc-2007.0.tar.bz2</key>
+ <key id="CFLAGS">-O2 -mcpu=powerpc -mtune=powerpc -fno-strict-aliasing -pipe</key>
+</values>
+
+<author title="作者">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="作者">
+  <mail link="g2boojum@gentoo.org">Grant Goodyear</mail>
+</author>
+<author title="作者">
+  <mail link="uberlord@gentoo.org">Roy Marples</mail>
+</author>
+<author title="作者">
+    <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="作者">
+  <mail link="chouser@gentoo.org">Chris Houser</mail>
+</author>
+<author title="作者">
+  <mail link="jerry@gentoo.org">Jerry Alexandratos</mail>
+</author>
+<author title="Gentoo x86开发人员">
+  <mail link="seemant@gentoo.org">Seemant Kulleen</mail>
+</author>
+<author title="Gentoo Alpha开发人员">
+  <mail link="taviso@gentoo.org">Tavis Ormandy</mail>
+</author>
+<author title="Gentoo AMD64开发人员">
+  <mail link="jhuebel@gentoo.org">Jason Huebel</mail>
+</author>
+<author title="Gentoo HPPA开发人员">
+  <mail link="gmsoft@gentoo.org">Guy Martin</mail>
+</author>
+<author title="Gentoo PPC开发人员">
+   <mail link="pvdabeel@gentoo.org">Pieter Van den Abeele</mail>
+</author>
+<author title="Gentoo SPARC开发人员">
+  <mail link="blademan@gentoo.org">Joe Kallar</mail>
+</author>
+<author title="编辑">
+    <mail link="zhen@gentoo.org">John P. Davis</mail>
+</author>
+<author title="编辑">Pierre-Henri Jondot</author>
+<author title="编辑">
+    <mail link="stocke2@gentoo.org">Eric Stockbridge</mail>
+</author>
+<author title="编辑">
+    <mail link="rajiv@gentoo.org">Rajiv Manglani</mail>
+</author>
+<author title="编辑">
+    <mail link="seo@gentoo.org">Jungmin Seo</mail>
+</author>
+<author title="编辑">
+    <mail link="zhware@gentoo.org">Stoyan Zhekov</mail>
+</author>
+<author title="编辑">
+    <mail link="jhhudso@gentoo.org">Jared Hudson</mail>
+</author>
+<author title="编辑">
+    <mail link="peitolm@gentoo.org">Colin Morey</mail>
+</author>
+<author title="编辑">
+    <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="编辑">
+    <mail link="carl@gentoo.org">Carl Anderson</mail>
+</author>
+<author title="编辑">
+    <mail link="avenj@gentoo.org">Jon Portnoy</mail>
+</author>
+<author title="编辑">
+     <mail link="klasikahl@gentoo.org">Zack Gilburd</mail>
+</author>
+<author title="编辑">
+  <mail link="jmorgan@gentoo.org">Jack Morgan</mail>
+</author>
+<author title="编辑">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="编辑">
+  <mail link="erwin@gentoo.org">Erwin</mail>
+</author>
+<author title="编辑">
+  <mail link="kumba@gentoo.org">Joshua Kinard</mail>
+</author>
+<author title="编辑">
+  <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+</author>
+<author title="编辑">
+   <mail link="pylon@gentoo.org">Lars Weiler</mail>
+</author>
+<author title="编辑">
+   <mail link="sejo@gentoo.org">Jochen Maes </mail>
+</author>
+<author title="编辑">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="编辑">
+  <mail link="josejx@gentoo.org">Joseph Jezak</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="审校">
+    <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
+</author>
+<author title="审校">
+    <mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>
+</author>
+<author title="审校">
+    <mail link="antifa@gentoo.org">Ken Nowack</mail>
+</author>
+
+<abstract>
+Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含了在PPC架构上无网络条件下的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<part>
+<title>安装Gentoo</title>
+<abstract>
+在这部分中，你将学习如何在你的系统中安装Gentoo。
+</abstract>
+
+<chapter>
+<title>关于如何安装Gentoo Linux</title>
+<abstract>
+不熟悉Gentoo的用户并不总是了解Gentoo的一切都是选择。 
+</abstract>
+  <include href="hb-install-about.xml"/>
+</chapter>
+
+<chapter>
+<title>启动通用安装光盘</title>
+<abstract>
+使用我们的通用安装光盘你可以使你的系统启动到一个可运行的环境中以便安装Gentoo。
+</abstract>
+  <include href="hb-install-ppc-medium.xml"/>
+</chapter>
+
+<chapter>
+<title>配置你的网络</title>
+<abstract>
+如果你需要网络连接，这里是配置网络（互联网连接）的地方。
+</abstract>
+  <include href="hb-install-network.xml"/>
+</chapter>
+
+<chapter>
+<title>预备磁盘</title>
+<abstract>
+为了能安装Gentoo，你必须创建必要的分区。这一章节将介绍如何分区以便将来使用。
+</abstract>
+  <include href="hb-install-ppc-disk.xml"/>
+</chapter>
+
+<chapter>
+<title>安装Gentoo安装文件</title>
+<abstract>
+本章我们将介绍如果解压缩一个stage3文件以及如何配置Portage。
+</abstract>
+  <include href="hb-install-stage.xml"/>
+</chapter>
+
+<chapter>
+<title>Chroot到Gentoo基础系统</title>
+<abstract>
+现在stage3文件已经解压缩好了，我们要chroot到新的系统然后修改USE变量。
+</abstract>
+  <include href="hb-install-system.xml"/>
+</chapter>
+
+<chapter>
+<title>配置内核</title>
+<abstract>
+Linux内核是任何一个发行版本的核心。这一章节将说明如何配置内核。
+</abstract>
+  <include href="hb-install-ppc-kernel.xml"/>
+</chapter>
+
+<chapter>
+<title>配置你的系统</title>
+<abstract>
+你需要修改一些重要的配置文件。本章将使您对这些文件有一个概览，并将说明如何进行配置。
+</abstract>
+  <include href="hb-install-config.xml"/>
+</chapter>
+
+<chapter>
+<title>安装必要的系统工具</title>
+<abstract>
+就像我们之前提及的，拥有Gentoo就是拥有个性化配置。在这一章节我们将帮助你选择和安装一些重要的工具。
+</abstract>
+  <include href="hb-install-tools.xml"/>
+</chapter>
+
+<chapter>
+<title>配置引导程序</title>
+<abstract>
+本架构存在几种引导程序。它们中的每一种都有自己的配置方法。在这一章节我们会一步步来告诉你怎样根据你的需求来配置一个引导程序。
+</abstract>
+  <include href="hb-install-ppc-bootloader.xml"/>
+</chapter>
+
+<chapter>
+<title>结束Gentoo的安装</title>
+<abstract>
+你基本上已经完成安装了。我们将为你的系统创建一个（或者多个）用户而且可以（有选择地）安装预构建的软件包。
+</abstract>
+  <include href="hb-install-finalise.xml"/>
+</chapter>
+
+<chapter>
+<title>下一步该做什么？</title>
+<abstract>
+现在你已经拥有了你自己的Gentoo操作系统了，但是下一步该做什么呢？ 
+</abstract>
+  <include href="hb-install-next.xml"/>
+</chapter>
+</part>
+
+<part>
+<title>使用Gentoo</title>
+<abstract>
+学习如何使用Gentoo：安装软件、更改变量、改变Portage行为方式等。 
+</abstract>
+
+<chapter>
+<title>Portage入门</title>
+<abstract>
+这一章节讲解了用户最起码要了解的如何在他的系统上维护软件的“简单”步骤。
+</abstract>
+  <include href="../hb-working-portage.xml"/>
+</chapter>
+
+<chapter>
+<title>USE标记</title>
+<abstract>
+USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
+</abstract>
+  <include href="../hb-working-use.xml"/>
+</chapter>
+
+<chapter>
+<title>Portage特性</title>
+<abstract>
+揭示Portage拥有的一些特性，比如支持分布式编译，ccache等等。
+</abstract>
+  <include href="../hb-working-features.xml"/>
+</chapter>
+
+<chapter>
+<title>初始化脚本</title>
+<abstract>
+Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的决定和虚拟的初始化 
+脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
+</abstract>
+  <include href="../hb-working-rcscripts.xml"/>
+</chapter>
+
+<chapter>
+<title>环境变量</title>
+<abstract>
+使用Gentoo你可以容易地管理你系统中的环境变量。本章会解释管理方式以及描述一些经常会使用到的变量。
+</abstract>
+  <include href="../hb-working-variables.xml"/>
+</chapter>
+</part>
+
+<part>
+<title>使用Portage</title>
+<abstract>
+“使用Portage”深入全面介绍了Gentoo的软件管理工具Portage的功能。
+</abstract>
+
+<chapter>
+<title>文件和目录</title>
+<abstract>
+当你想要深入了解Portage的时候，你需要知道它将文件和数据放在了什么地方。
+</abstract>
+  <include href="../hb-portage-files.xml"/>
+</chapter>
+
+<chapter>
+<title>通过变量来配置</title>
+<abstract>
+你可以通过在配置文件里或者环境变量里设定的各种变量来全面的配置Portage。
+</abstract>
+  <include href="../hb-portage-configuration.xml"/>
+</chapter>
+
+<chapter>
+<title>使用多个软件分支</title>
+<abstract>
+Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支中。“使用多个软件分支”告诉你 
+这些分支是如何配置的以及如何在个别情况下使用其他分支的软件。
+</abstract>
+  <include href="../hb-portage-branches.xml"/>
+</chapter>
+
+<chapter>
+<title>Portage附加工具</title>
+<abstract>
+您可以通过Portage提供的一些附加工具为您的Gentoo旅程带来更多的快乐。通过下文的阅读你会学会如何使用dispatch-conf和其他的一些工具。
+</abstract>
+  <include href="../hb-portage-tools.xml"/>
+</chapter>
+
+<chapter>
+<title>改造Portage树</title>
+<abstract>
+“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类，加入自己的软件包等等的心得技巧。
+</abstract>
+  <include href="../hb-portage-diverttree.xml"/>
+</chapter>
+</part>
+
+<part>
+<title>Gentoo网络配置</title>
+<abstract>一份全面的Gentoo网络指南。</abstract>
+
+<chapter>
+<title>新手上路</title>
+<abstract>
+一份能快速启动你的网络设备，并使之在大多数情况下能运转正常的指南。
+</abstract>
+<include href="../hb-net-start.xml"/>
+</chapter>
+
+<chapter>
+<title>高级配置</title>
+<abstract>
+这儿我们将学习到这些配置是如何工作的——在我们开始学习模块化网络前你必须先弄懂这个。
+</abstract>
+<include href="../hb-net-advanced.xml"/>
+</chapter>
+
+<chapter>
+<title>模块化网络</title>
+<abstract>
+Gentoo提供了灵活多变的组网方式——在这里你将会了解到选择不同的DHCP客户端，设置Bonding，桥接，VLAN等等。
+</abstract>
+<include href="../hb-net-modules.xml"/>
+</chapter>
+
+<chapter>
+<title>无线网络</title>
+<abstract>
+无线网络的设定不是很容易。希望我们的介绍可以让你的网络工作起来！
+</abstract>
+<include href="../hb-net-wireless.xml"/>
+</chapter>
+
+<chapter>
+<title>附加功能</title>
+<abstract>
+如果你敢于冒险，你可以为你的网络添加个性化的功能。
+</abstract>
+<include href="../hb-net-functions.xml"/>
+</chapter>
+
+<chapter>
+<title>网络管理</title>
+<abstract>
+这部分是为那些使用笔记本的用户和经常在不同的网络中移动他们的电脑的人准备的。
+</abstract>
+<include href="../hb-net-management.xml"/>
+</chapter>
+</part>
+
+</book>

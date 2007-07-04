@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-about.xml,v 1.8 2007/06/03 01:23:57 nightmorph Exp $ -->
+
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>介绍</title>
+<subsection>
+<title>欢迎！</title>
+<body>
+
+<p>
+首先，<e>欢迎</e>使用Gentoo。你将进入一个制定和性能的世界。 
+当你安装Gentoo时，你将会被反复的清楚的告知——你可以选择怎样编译软件， 
+如何安装Gentoo，以及使用哪种系统日志程序等等。
+</p>
+
+<p>
+Gentoo是一个快速和现代化的元发行版，拥有简洁灵活的设计理念。Gentoo基于自由 
+软件构建，它不会对用户隐瞒任何底层细节。Portage是Gentoo使用的软件包管理系统，由 
+于它是使用Python语言编写的，因此你可以轻松地查看和修改源代码。Gentoo的软件包系 
+统使用的是源代码（尽管也包含对预编译的软件包的支持），配置Gentoo使用的也都是标准的文 
+本文件。换句话说就是，开放无处不在。
+</p>
+
+<p>
+希望您能理解的是Gentoo赖以生存的根本在于<e>赋予用户以选择的权利</e>，这一点很重 
+要。我们会尽力做到不强加给用户任何东西，并且我们会尽最大努力为用户提供选择。如果你觉得有地方需要改进，请提交一 
+个<uri link="http://bugs.gentoo.org">bug报告</uri>。
+</p>
+
+</body>
+</subsection>
+
+<subsection test="contains('AMD64 x86', func:keyval('arch'))">
+<title>我该如何安装Gentoo</title>
+<body>
+
+<p>
+Gentoo 
+Linux有两种易用的安装程序。一个是基于GTK+的（在X环境下使用），另一个是基于对话的，在控制台下使用。这本手册的第3章的内容涉及GTK+的安装程序第4章将讲解基于对话的安装程序。
+</p>
+
+</body>
+</subsection>
+
+<subsection test="not(contains('AMD64 x86', func:keyval('arch')))">
+<title>安装的步骤有哪些？</title>
+<body>
+
+<p>
+Gentoo的安装可以被分成10个步骤，从第2章到第11章，每一步都会令系统进入一个新的状态：
+</p>
+
+<ul>
+<li>
+  第一步后，你已准备就绪，可以安装Gentoo了
+</li>
+<li>
+  第二步后，你的网络连接已经准备好了，如果你打算用到网络的话（这是个
+ 可选步骤
+</li>
+<li>
+  第三步后，你的硬盘已初始化完毕，等待Gentoo的
+ 安装
+</li>
+<li>
+  第四步后，你的安装环境已经准备好了，
+ 并准备chroot到一个新的系统环境中
+</li>
+<li>
+  第五步后，一些核心的软件包安装完毕，这在所有的Gentoo安装中都是相同的
+</li>
+<li>
+  第六步后，你已经编译好了你的Linux内核
+</li>
+<li>
+  第七步后，你已经写好绝大多数的Gentoo系统配置文件
+</li>
+<li>
+  第八步后，必要的系统工具（你可以从列表中选择）已经安装完毕
+</li>
+<li>
+  第九步后，你选择的启动引导程序已经安装配置好了，并且你已经登录了你新的Gentoo系统中
+</li>
+<li>
+  第十步后，你就可以在你的Gentoo linux系统中探索了
+</li>
+</ul>
+
+<p>
+当你面临某个选择时，我们会尽力为你解释它的利弊。 
+我们首先会介绍一个默认的选项，这在标题中会以“默认：”标识出来。剩下的则会被标注为：“备选：” 
+千万<e>不要</e>认为默认选项是我们推荐的，这只是我们认为绝大多数用户会采用的。
+</p>
+
+<p>
+有时候你也可以做一些可选的步骤。这样的步骤会被标注为“可选：”， 
+当然这些步骤对于安装Gentoo来说就不是必须的。然而，有些可选的步骤依赖于你之前所做出 
+的决定。我们将会在你需要做这样决定以及可选步骤出现的时候提醒你。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>我有哪些选择</title>
+<body>
+
+<p>
+你可以通过很多不同的方法来安装Gentoo。你可以下载我们的安装光盘安装，可以从一个 
+已有的系统上安装，可以从一张可引导光盘上安装（比如Knoppix），也可以从网络启动 
+环境或从一张恢复软盘上安装等等。 
+</p>
+
+<p>
+这份文档讲解了如何使用Gentoo Linux安装光盘来安装Gentoo， 
+这张可启动光盘包含了安装Gentoo并使之运行起来所需要的全部东西。 
+这里有两种类型的安装光盘， 
+安装光盘和含安装程序的LiveCD。 
+安装光盘是安装Gentoo所需的最小环境，它只包含了安装Gentoo 
+Linux所必需的软件包。 LiveCD具有完整的Gentoo 
+Linux环境，你可以使用它做各种各样的工作， 
+而其中的一个就是安装Gentoo 
+Linux。目前，并不是所有的体系结构都有LiveCD， 
+如果你使用的架构没有LiveCD，那么这篇文档中所指的就是通用安装光盘。
+</p>
+
+<p>
+这篇安装向导并不会马上安装所有软件的最新可用版本； 
+如果你想使用最新的软件进行安装请查看<uri 
+link="/doc/zh_cn/handbook/index.xml">Gentoo 
+Linux手册</uri>中的安装指南。
+</p>
+
+<p>
+关于其他安装方法请参考我们的<uri 
+link="/doc/zh_cn/altinstall.xml">其他安装指南 
+</uri>。我们还提供了<uri 
+link="/doc/zh_cn/gentoo-x86-tipsntricks.xml">Gentoo安 
+装技巧和窍门</uri>，也值得一读。如果你觉得本安装指南太过详细，你还可以 
+使用我们<uri 
+link="/doc/zh_cn/index.xml">文档资源</uri>中的可用于你的硬件架构的 
+快速安装手册。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>碰到问题？</title>
+<body>
+
+<p>
+如果你在安装过程中（或是在安装文档中）碰到问题，请到<uri 
+link="/proj/en/releng/">Gentoo发行版管理工程</uri>查找这些错误, 
+访问<uri 
+link="http://bugs.gentoo.org">bug追踪系统</uri>检查这是否是已知的bug。 
+如果没有，请创建一个bug报告，然后我们来解决它。 
+大家不要害怕负责解决（你的）bug的开发人员，他们通常是不会吃人的。
+</p>
+
+<p>
+需要注意的是，虽然你当前阅读的文档是针对某一特定的硬件架构的，但是它还是会包含 
+对其他平台架构的引用。这是因为Gentoo手册中的绝大部分的源代码是对所有硬件架构都 
+适用的（目的是减少重复劳动和节省有限的开发资源)。我们会努力把这种负面影响减少到 
+最小以避免混淆。
+</p>
+
+<p>
+如果你不能确定你的问题是否是一个使用者问题（尽管你已经仔细地阅读了文档但仍然出了错） 
+还是一个软件问题（尽管我们已经仔细地测试了安装步骤/文档但仍然出了错），我们欢迎你到 
+irc.freenode.net的#gentoo（英文）或是#gentoo-cn（中文）提问。当然，如果你有其他方面 
+的关于Gentoo的问题，我们也欢迎:)
+</p>
+
+<p>
+如果你有关于Gentoo的问题，请到我们的<uri 
+link="/doc/zh_cn/">Gentoo文档</uri>查看<uri 
+link="/doc/zh_cn/faq.xml">常见问题</uri>。你也可以浏览我们<uri 
+link="http://forums.gentoo.org">论坛</uri>中的<uri 
+link="http://forums.gentoo.org/viewforum.php?f=40">FAQs</uri>。如果你还是无法找 
+到答案，那么就去irc.freenode.net中我们的#gentoo频道寻找吧，我们中的一 
+些狂热者会一直呆在IRC里的:-)
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>使用Gentoo参考平台(GRP)快速安装</title>
+<subsection>
+<title>什么是Gentoo参考平台(GRP)?</title>
+<body>
+
+<p>
+Gentoo参考平台，以下缩写为GRP，它是一个预构建好的软件包快照，可以让使用者(也就是你！)  
+加快安装Gentoo的过程。GRP包含了构建一个完整可用的Gentoo所需要的所有软件包。 
+它不仅可以在安装基础系统时加速安装过程，而且对于需要耗费长时间编译的软件 
+(比如 
+xorg-x11、GNOME、OpenOffice、Mozilla、‥‥‥)都有对应的GRP软件包可供使用。
+</p>
+
+<p>
+但是这些预编译的软件包在Gentoo发行版本的生命周期中并不会被维护下去。 
+这些快照在每次Gentoo发布新版本时发布，这么做是为了可以在短时间内安装好具有完整功能的Gentoo。 
+当你装好Gentoo后，就可以边使用，边在后台更新你的Gentoo系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Portage如何处理GRP软件包</title>
+<body>
+
+<p>
+你的Portage树——<e>ebuilds</e>(包含了软件包的所有相关信息，比如描述、主页、源代码URL、 
+编译步骤、依赖性等等)的集合——它必须和GRP集同步：软件可用的ebuild版本和对应的GRP软件包版本必须相符。
+</p>
+
+<p>
+因为这个原因，你只会在使用当前这种安装方式时受益于GRP。 
+要提醒那些想用所有软件的最新版本来进行安装的人们的是，那样的GRP并不存在。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>是否有GRP可用？</title>
+<body>
+
+<p>
+并不是所有的硬件架构都提供GRP软件包。当然这也并不说明GRP不支持其他的硬件架构， 
+只是由于我们没有足够的硬件资源构建和测试GRP软件包。
+</p>
+
+<p>
+目前，如下所列这些硬件架构平台都有GRP软件可供使用：
+</p>
+
+<ul>
+  <li>
+    The <b>alpha</b> 架构 (alpha)
+  </li>
+  <li>
+    The <b>amd64</b> 架构 (amd64)。 注意：目前这些软件包可以在安装程序LiveCD中获得。
+  </li>
+  <li>
+    The <b>ppc</b> 架构 (ppc32, ppc64)
+  </li>
+  <li>
+    The <b>sparc</b> 架构 (sparc64)
+  </li>
+  <li>
+    The <b>x86</b> 架构 (athlon, athlon-xp, athlon-mp, pentium-pro,
+    pentium2, pentium3, pentium4 and pentium-m) 注意：i686硬件架构平台下的软件包可以在安装程序LiveCD中获得。
+  </li>
+</ul>
+
+<p>
+如果你的硬件架构(或是子架构)不在列表中，你将无法使用GRP来进行安装。
+</p>
+
+<p>
+介绍就到此为止了，让我们从启动<uri 
+link="?part=1&amp;chap=2">通用安装光盘／安装程序LiveCD</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
