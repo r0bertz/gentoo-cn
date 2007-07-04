@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-medium.xml,v 1.44 2006/08/30 22:52:28 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-medium.xml,v 1.45 2006/08/30 22:52:28 nightmorph Exp $ -->
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-06-29</date>
 
 <section>
 <title>必需的硬件</title>
@@ -232,7 +232,7 @@ link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>中找到。
 iso&gt;</c>（把<path>/dev/hdc</path>替换为你的刻录机的路径）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。然后在"Image to 
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后在"Image to 
 Burn"区域里指定你的ISO文件所在。最后点击<c>Start</c>。
   </li>
 </ul>

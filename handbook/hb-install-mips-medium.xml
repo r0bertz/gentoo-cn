@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-medium.xml,v 1.22 2007/05/07 18:11:41 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-medium.xml,v 1.23 2007/05/07 18:11:41 nightmorph Exp $ -->
 <sections>
 
 <version>8.0</version>
@@ -658,12 +658,6 @@ Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头
 
 <section>
 <title>Netboot Cobalt服务器</title>
-<subsection>
-<body>
-
-</body>
-</subsection>
-
 <subsection>
 <title>netboot步骤概览</title>
 <body>

@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml,v 1.8 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml,v 1.9 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你可以用许多方法安装Gentoo。本章讲解怎样用最小化安装光盘安装Gentoo，尽管使用安装程序LiveCD也是可以的。
 </abstract>
 
-<version>5.1</version>
-<date>2007-05-18</date>
+<version>5.2</version>
+<date>2007-06-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -274,7 +274,7 @@ link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
     文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>光盘</c> &gt; <c>Burn Image</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。
     然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>

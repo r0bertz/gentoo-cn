@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.111 2006/11/01 21:40:28 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-stage.xml,v 1.112 2006/11/01 21:40:28 nightmorph Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@
 们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>8.3</version>
-<date>2007-06-22</date>
+<version>8.4</version>
+<date>2007-06-28</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -376,8 +376,13 @@ host定义了编译出的软件将运行的系统类型）。这个变量应该�
 不要忘了也看看它。
 </p>
 
-<p>
+<p test="not(contains('AMD64 x86', func:keyval('arch')))">
 第一个设置是<c>-march=</c>或者<c>-mcpu=</c>标记，它指定了目标架构的名字。可能的选项
+会在<path>make.conf.example</path>里有说明（以注释形式出现）。
+</p>
+
+<p test="contains('AMD64 x86',func:keyval('arch'))">
+第一个设置是<c>-march=</c>或者<c>-mtune=</c>标记，它指定了目标架构的名字。可能的选项
 会在<path>make.conf.example</path>里有说明（以注释形式出现）。
 </p>
 

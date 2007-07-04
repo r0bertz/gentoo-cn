@@ -3,11 +3,12 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc64-medium.xml,v 1.34 2007/05/15 16:17:25 neysx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc64-medium.xml,v 1.35 2007/05/15 16:17:25 neysx Exp $ -->
+
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-06-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -239,7 +240,7 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。 然后你可以在'Image to 
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to 
 Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
   <li>
