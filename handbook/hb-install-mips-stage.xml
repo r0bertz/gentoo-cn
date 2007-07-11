@@ -70,51 +70,51 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 
 <table>
 <tr>
-  <th>Endianness</th>
+  <th>字节序</th>
   <th>CPU</th>
   <th>位置</th>
 </tr>
 <tr>
   <ti>
-    大头端<br />
+    大端<br/>
     <e>(SGI用户)</e>
   </ti>
   <ti>
-    R4000<br />
-    R4400<br />
+    R4000<br/>
+    R4400<br/>
     R4600
   </ti>
   <ti><c>mips3/stage#-mips3-RELEASE.tar.bz2</c></ti>
 </tr>
 <tr>
   <ti>
-    大头端<br />
+    大端<br/>
     <e>(SGI用户)</e>
   </ti>
   <ti>
-    R5000<br />
-    RM5200<br />
-    RM7000<br />
-    R10000<br />
-    R12000<br />
+    R5000<br/>
+    RM5200<br/>
+    RM7000<br/>
+    R10000<br/>
+    R12000<br/>
     R14000
   </ti>
   <ti><c>mips4/stage#-mips4-RELEASE.tar.bz2</c></ti>
 </tr>
 <tr>
   <ti>
-    小头端<br />
+    小端<br/>
     <e>(Cobalt用户)</e>
   </ti>
   <ti>
-    RM5230<br />
+    RM5230<br/>
     RM5231
   </ti>
   <ti><c>cobalt/stage#-mipsel4-RELEASE.tar.bz2</c></ti>
 </tr>
 <tr>
   <ti>
-    小头端<br />
+    小端<br/>
     <e>(其他用户)</e>
   </ti>
   <ti>
@@ -125,7 +125,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </table>
 
 <warn>
-虽然我们提供小头端MIPS1的stage，但是对于小头端MIPS系统的支持只局限于Cobalt服务器。它们是为那些想在目前不支持的平台上试验Gentoo的人提供的，所以我们假设你知道你在做什么。
+虽然我们提供小端MIPS1的stage，但是对于小端MIPS系统的支持只局限于Cobalt服务器。它们是为那些想在目前不支持的平台上试验Gentoo的人提供的，所以我们假设你知道你在做什么。
 </warn>
 
 <p>

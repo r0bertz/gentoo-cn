@@ -33,11 +33,11 @@
 
 <table>
 <tr>
-  <th>CPU <e>(Big Endian)</e></th>
+  <th>CPU <e>（大端）</e></th>
   <ti>IXP425</ti>
 </tr>
 <tr>
-  <th>CPU <e>(Little Endian)</e></th>
+  <th>CPU <e>（小端）</e></th>
   <ti>IXP425, StrongARM-110</ti>
 </tr>
 <tr>
@@ -69,7 +69,7 @@
 </p>
 
 <p>
-另一个需要掌握的重要概念为<b>字节序（endianness）</b>。字节序关系到CPU从主存读取一个字的方式。一个字的读取方式有<e>big</e> endian（先读最高有效字节）和<e>little</e> endian（先读最低有效字节）两种。Intel x86系列的机器普遍采用Little endian，Apple和Sparc机器采用Big Endian。而ARM可以为任意一种方式。实际应用中little endian更趋于流行，因此我们在架构名后面添加<c>eb</c>来表示big endian，以示区别。
+另一个需要掌握的重要概念为<b>字节序</b>。字节序关系到CPU从主存读取一个字的方式。一个字的读取方式有<e>大</e>端（最高位字节在前）和<e>小</e>端（最低位字节在前）两种。Intel x86系列的机器普遍采用小端字节序，Apple和Sparc机器采用大端字节序。而ARM可以为任意一种方式。实际应用中小端更趋于流行，因此我们在采用大端字节序的架构名后面添加<c>eb</c>以示区别。
 </p>
 
 </body>
