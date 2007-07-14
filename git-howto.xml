@@ -9,23 +9,44 @@
   <mail link="xudong.guan@gmail.com">管旭东</mail>
 </author>
 
+<author title="编辑">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<author title="贡献者">
+  <mail link="crquan@gmail.com">程任全</mail>
+</author>
+
+<author title="贡献者">
+  <mail link="fengguang.wu@gmail.com">Wu Fengguang</mail>
+</author>
+
 <abstract>
 本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何
 git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布
 到gentoo-china@googlegroups.com邮件列表上，供维护人员评阅和采纳。
 </abstract>
 
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.0</version>
+<date>2007-07-14</date>
+
 <chapter>
+<title>准备工作</title>
+<section>
 <title>安装git</title>
 <body>
 
 <pre caption="通过emerge获取git">
-$ emerge dev-util/git
+$ <i>emerge dev-util/git</i>
 </pre>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>获取主拷贝</title>
 <body>
 
@@ -34,49 +55,56 @@ $ emerge dev-util/git
 </p>
 
 <pre caption="获取现有的主拷贝">
-$ cd /path/to/work
-$ git clone http://zhangle.is-a-geek.org/zh_cn.git
+$ <i>cd /path/to/work</i>
+$ <i>git clone http://zhangle.is-a-geek.org/zh_cn.git</i>
 </pre>
 
 <p>
-命令成功以后，会创建一个zh_cn目录。里面的有个隐藏的.git目录，称为repository，
-包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），
-对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内
-容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默
-认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，
-基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作
-拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由
+命令成功以后，会创建一个<path>zh_cn</path>目录。里面的有个隐藏的.git目录，称
+为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝
+（working copy），对其进行修改／删除不会影响repository的内容。Repository好
+比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以
+随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本
+叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中
+的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式
+给予开发者更多的信息和更大空间及自由
 度。
 </p>
 
 <p>
-这时可以先用gitk看看当前的修改历史。
+这时可以先用<c>gitk</c>看看当前的修改历史。
 </p>
 
 <pre caption="使用gitk --all可以通过图形方式查看项目的所有分支结构和历史修改">
-$ gitk --all
+$ <i>gitk --all</i>
 </pre>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>标明自己的身份</title>
 <body>
 
 <p>
-git的每个递交都会关联作者的email信息。在~/.bashrc里加上你的姓名和email地址，用来指定你的个人信息。
+git的每个递交都会关联作者的email信息。在最新版的git（1.5.2.2）中，可以使用
+<c>git-config</c>工具来标明自己的身份。
 </p>
 
-<pre caption="需要在~/.bashrc内添加的内容">
-export GIT_COMMITTER_NAME="Xudong Guan"
-export GIT_COMMITTER_EMAIL="xudong.guan@gmail.com"
-export GIT_AUTHOR_NAME="Xudong Guan"
-export GIT_AUTHOR_EMAIL="xudong.guan@gmail.com"
+<pre caption="设置自己的姓名和email地址">
+$ <i>git-config --global user.name 'Denis Cheng'</i>
+$ <i>git-config --global user.email 'crquan@gmail.com</i>
 </pre>
 
+<p>
+这样设置一次后就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
+</p>
+
 </body>
+</section>
 </chapter>
 <chapter>
+<title>编辑修改</title>
+<section>
 <title>修改／添加／删除文件</title>
 <body>
 
@@ -86,67 +114,70 @@ export GIT_AUTHOR_EMAIL="xudong.guan@gmail.com"
 </p>
 
 <pre caption="在工作目录中添加一个文件">
-$ cd zh_cn
-$ echo "this is a test" > new_file.xml
+$ <i>cd zh_cn</i>
+$ <i>echo "this is a test" > new_file.xml</i>
 </pre>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>检查所做的修改</title>
 <body>
 
 <p>
-你可以随时用git status和git diff查看目前的工作拷贝和repository HEAD的差别。
+你可以随时用<c>git status</c>和<c>git diff</c>查看目前的工作拷贝和repository HEAD的差别。
 </p>
 
 <pre caption="建立新文件后，git status输出的结果">
-$ git status
-# On branch master
+$ <i>git status</i>
+<comment># On branch master
 # Untracked files:
 #   (use "git add &lt;file&gt;..." to include in what will be committed)
 #
-#       new_file.xml
+#       new_file.xml</comment>
 nothing added to commit but untracked files present (use "git add" to track)
 </pre>
 
 </body>
+</section>
 </chapter>
 <chapter>
+<title>提交修改</title>
+<section>
 <title>添加文件到repository</title>
 <body>
 
 <p>
-上述git status输出表明新文件new_file.xml还没有添加到repository。你可以用git add
-完成这个任务。对修改和删除的已有的文件不需要额外步骤。
+上述<c>git status</c>输出表明新文件<path>new_file.xml</path>还没有添加到repository。你
+可以用<c>git add</c>完成这个任务。对修改和删除的已有的文件不需要额外步骤。
 </p>
 
 <pre caption="添加文件">
-$ git add new_file.xml
-$ git status
-# On branch master
+$ <i>git add new_file.xml</i>
+$ <i>git status</i>
+<comment># On branch master
 # Changes to be committed:
 #   (use "git reset HEAD &lt;file&gt;..." to unstage)
 #
 #       new file:   new_file.xml
-#
+#</comment>
 </pre>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>用git commit提交你的修改</title>
 <body>
 
 <p>
-你可以随时用git commit提交你的修改。刚开始使用git时，可以尽量多提交。因为和
+你可以随时用<c>git commit</c>提交你的修改。刚开始使用git时，可以尽量多提交。因为和
 cvs/svn不同，这个拷贝是你个人的，你应该经常保存你的工作。你日后还可以对你的这
 些工作进一步整理，例如，合并多个提交结果，修改提交信息等，来形成最终可以发布到
 gentoo-china@googlegroups.com的工作。
 </p>
 
 <pre caption="提交你的修改">
-$ git commit -a
+$ <i>git commit -a</i>
 Created commit 96ffadde5682bc9b3d96582822bc4e75e8dccdca
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 new_file.xml
@@ -159,13 +190,13 @@ Created commit 96ffadde5682bc9b3d96582822bc4e75e8dccdca
 
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>用gitk或者git diff查看新的历史</title>
 <body>
 
 <pre caption="使用git diff">
-$ git diff HEAD^..HEAD
+$ <i>git diff HEAD^..HEAD</i>
 diff --git a/new_file.xml b/new_file.xml
 new file mode 100644
 index 0000000..0527e6b
@@ -176,15 +207,18 @@ index 0000000..0527e6b
 </pre>
 
 <p>
-不加参数的git diff可以查看工作拷贝和HEAD的差别。git diff HEAD^..HEAD用于查看最后
+不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后
 一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，
 HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可
 以查看提交对应的哈希值），等等。
 </p>
 
 </body>
+</section>
 </chapter>
 <chapter>
+<title>发布修改</title>
+<section>
 <title>整理你的个人提交</title>
 <body>
 
@@ -194,8 +228,8 @@ HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或g
 </p>
 
 <pre caption="更多的修改">
-$ echo "this is the second line" >> new_file.xml
-$ git diff
+$ <i>echo "this is the second line" >> new_file.xml</i>
+$ <i>git diff</i>
 diff --git a/new_file.xml b/new_file.xml
 index 90bfcb5..030e90b 100644
 --- a/new_file.xml
@@ -203,7 +237,7 @@ index 90bfcb5..030e90b 100644
 @@ -1 +1,2 @@
  this is a test
 +this is the second line
-$ git commit -a -m "some more log"
+$ <i>git commit -a -m "some more log"</i>
 Created commit 1958506a599d1bcecd38fb4879b3483545226ef4
  1 files changed, 1 insertions(+), 0 deletions(-)
 bumpy:/data1/build/work/zh_cn$ git whatchanged HEAD^^..HEAD
@@ -229,23 +263,23 @@ Date:   Fri Jul 13 16:28:08 2007 +0100
 </p>
 
 <pre caption="整理你的上两个提交为一个新的提交">
-$ git branch                         # 显示分支
-* master                             # 带*的为当前活动分支
-$ git checkout -b new_branch HEAD    # 建立并切换到新的分支
+$ <i>git branch</i>                         <comment># 显示分支</comment>
+* master                             <comment># 带*的为当前活动分支</comment>
+$ <i>git checkout -b new_branch HEAD</i>    <comment># 建立并切换到新的分支</comment>
 Switched to a new branch "new_branch"
-$ git branch
+$ <i>git branch</i>
   master
 * new_branch
-$ git reset HEAD^^                   # 回退两个历史，但保留工作拷贝
-$ git status
-# On branch new_branch
+$ <i>git reset HEAD^^</i>                   <comment># 回退两个历史，但保留工作拷贝</comment>
+$ <i>git status</i>
+<comment># On branch new_branch
 # Untracked files:
 #   (use "git add &lt;file&gt;..." to include in what will be committed)
 #
-#       new_file.xml
+#       new_file.xml</comment>
 nothing added to commit but untracked files present (use "git add" to track)
-$ git add new_file.xml
-$ git commit -a -m "Added new file new_file.xml
+$ <i>git add new_file.xml</i>
+$ <i>git commit -a -m "Added new file new_file.xml</i>
 > 
 > 张兄，这是一个新添加的文件，他的用途主要是演示
 > 如何使用git.
@@ -259,7 +293,7 @@ Created commit 39b648fef75b446331e7defa89438157a95d87ec
 
 <p>
 此时你原来的两次提交还保留在master分支上。而你现在的new_branch分支则保存了一个整
-理好的提交。同时写了一个更加详细的提交描述。现在建议用gitk --all看看两个分支的
+理好的提交。同时写了一个更加详细的提交描述。现在建议用<c>gitk --all</c>看看两个分支的
 可视化效果。
 </p>
 
@@ -282,20 +316,20 @@ Added new file new_file.xml
 </p>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>发布你的修改</title>
 <body>
 
 <p>
-当你的工作值得发布时，你可以用git format-patch和git send-email将你的工作发送到
+当你的工作值得发布时，你可以用<c>git format-patch</c>和<c>git send-email</c>将你的工作发送到
 gentoo-china@googlegroups.com。(如果只是用于测试，可以发到一个个人的邮箱)
 </p>
 
 <pre caption="用git format-patch自动生成发布邮件">
-$ git format-patch HEAD^..HEAD -s
+$ <i>git format-patch HEAD^..HEAD -s</i>
 0001-Added-new-file-new_file.xml.patch
-$ cat 0001-Adde-new-file-new_file.xml.patch
+$ <i>cat 0001-Adde-new-file-new_file.xml.patch</i>
 From 39b648fef75b446331e7defa89438157a95d87ec Mon Sep 17 00:00:00 2001
 From: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 Date: Fri, 13 Jul 2007 17:03:55 +0100
@@ -327,7 +361,7 @@ index 0000000..030e90b
 </pre>
 
 <pre caption="用git send-email发送邮件">
-$ git send-email 0001-Added-file-new_file_xml.patch --to xudong.guan@gmail.com
+$ <i>git send-email 0001-Added-file-new_file_xml.patch --to xudong.guan@gmail.com</i>
 Who should the emails appear to be from? [Xudong Guan &lt;xudong.guan@gmail.com&gt;] 
 Emails will be sent from: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 Message-ID to be used as In-Reply-To for the first email? 
@@ -349,12 +383,15 @@ Result: OK
 </p>
 
 <pre caption="用sendmail发布你的修改">
-$ cat 0001-Added-file-new_file_xml.patch | sendmail xudong.guan@gmail.com
+$ <i>cat 0001-Added-file-new_file_xml.patch | sendmail xudong.guan@gmail.com</i>
 </pre>
 
 </body>
+</section>
 </chapter>
 <chapter>
+<title>接收补丁</title>
+<section>
 <title>维护人员／开发者接收你的补丁</title>
 <body>
 
@@ -366,11 +403,11 @@ $ cat 0001-Added-file-new_file_xml.patch | sendmail xudong.guan@gmail.com
 
 <p>
 首先你需要把补丁邮件接收到本地，并保存邮件全文到一个文件，比如tmp.txt。
-然后你可以使用git applymbox。
+然后你可以使用<c>git applymbox</c>。
 </p>
 
 <pre caption="接收他人工作">
-$ git applymbox tmp.txt me
+$ <i>git applymbox tmp.txt me</i>
 1 patch(es) to process.
 
 Applying 'Added file new_file_xml'
@@ -380,8 +417,11 @@ Committed: 6e1aac302bf0d1b12b52d9a11aad5a9f437e0982
 </pre>
 
 </body>
+</section>
 </chapter>
 <chapter>
+<title>分支处理</title>
+<section>
 <title>关于分支</title>
 <body>
 
@@ -392,26 +432,26 @@ Committed: 6e1aac302bf0d1b12b52d9a11aad5a9f437e0982
 </p>
 
 <pre caption="查看你的分支">
-$ git branch
+$ <i>git branch</i>
 master
 * new_branch
-$ gitk --all
+$ <i>gitk --all</i>
 </pre>
 
 <p>
-切换活动分支也是通过git checkout。此时要保证工作拷贝没有未提交的修改。
+切换活动分支也是通过<c>git checkout</c>。此时要保证工作拷贝没有未提交的修改。
 </p>
 
 <pre caption="切换活动分支">
-$ git checkout master
-$ git branch
+$ <i>git checkout master</i>
+$ <i>git branch</i>
 * master
 new_branch
 </pre>
 
 </body>
-</chapter>
-<chapter>
+</section>
+<section>
 <title>删除提交</title>
 <body>
 
@@ -422,17 +462,18 @@ new_branch
 </p>
 
 <pre caption="恢复主拷贝">
-$ git checkout master          # 回到master分支
-$ git checkout -b trash master # 为master分支的修改建立trash分支
-$ git checkout master          # 回到master分支
-$ git reset --hard HEAD^^      # 删除最近两个提交
-$ gitk --all
+$ <i>git checkout master</i>          <comment># 回到master分支</comment>
+$ <i>git checkout -b trash master</i> <comment># 为master分支的修改建立trash分支</comment>
+$ <i>git checkout master</i>          <comment># 回到master分支</comment>
+$ <i>git reset --hard HEAD^^</i>      <comment># 删除最近两个提交</comment>
+$ <i>gitk --all</i>
 </pre>
 
 <p>
-如果需要，可以通过git reset和git branch -d彻底删除trash分支。
+如果需要，可以通过<c>git reset</c>和<c>git branch -d</c>彻底删除trash分支。
 </p>
 
 </body>
+</section>
 </chapter>
 </guide>

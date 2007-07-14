@@ -391,6 +391,7 @@
     <file id="qa-automagic">/proj/zh_cn/qa/automagic.xml</file>
     <file id="qa-backtraces">/proj/zh_cn/qa/backtraces.xml</file>
     <file id="manually-fixing-portage">/proj/zh_cn/portage/doc/manually-fixing-portage.xml</file>
+    <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
   </files>
   <docs>
     <doc id="name-logo">
