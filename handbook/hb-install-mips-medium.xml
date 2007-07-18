@@ -27,11 +27,11 @@
 
 <table>
 <tr>
-  <th>CPU <e>（大端）</e></th>
+  <th>CPU <e>（big endian）</e></th>
   <ti>MIPS3、MIPS4、MIPS5或者MIPS64级CPU</ti>
 </tr>
 <tr>
-  <th>CPU <e>（小端）</e></th>
+  <th>CPU <e>（little endian）</e></th>
   <ti>MIPS4、MIPS5或者和MIPS64级CPU</ti>
 </tr>
 <tr>
@@ -148,38 +148,38 @@ ISA的超集，所以它包括了<c>MIPS5</c>和之前的ISA的所有指令。<c
 </note>
 
 <p>
-还有，另外一个需要掌握的概念是<b>字节序</b>。字节序指的是CPU从内存读取字的方式。一个字可以以<e>大</e>端（最高位字节在前）方式读取，也可以以<e>小</e>端方式读取。Intel x86机器是小端的，不过Apple和Sparc机器是大端。在MIPS上，两种都有可能。为了把它们区分开，我们在架构名后加上<c>el</c>来表示小端。
+还有，另外一个需要掌握的概念是<b>字节序（endianness）</b>。字节序就是一个字在内存里保存的方式。一个字的保存方式有<e>big</e> endian（最高位字节在前），和<e>little</e> endian（最低位字节在前）两种。Intel x86机器是little endian的，不过Apple和Sparc机器是big endian。在MIPS上，两种都有可能。为了把它们区分开，我们在架构名后加上<c>el</c>来表示little endian。
 </p>
 
 <table>
   <tr>
     <th>架构</th>
     <th>32或64位</th>
-    <th>大端</th>
+    <th>字节序</th>
     <th>包括的机器</th>
   </tr>
   <tr>
     <ti><c>mips</c></ti>
     <ti>32位</ti>
-    <ti>大端</ti>
+    <ti>big endian</ti>
     <ti>Silicon Graphics</ti>
   </tr>
   <tr>
     <ti><c>mipsel</c></ti>
     <ti>32位</ti>
-    <ti>小端</ti>
+    <ti>little endian</ti>
     <ti>Cobalt服务器</ti>
   </tr>
   <tr>
     <ti><c>mips64</c></ti>
     <ti>64位</ti>
-    <ti>大端</ti>
+    <ti>big endian</ti>
     <ti>Silicon Graphics</ti>
   </tr>
   <tr>
     <ti><c>mips64el</c></ti>
     <ti>64位</ti>
-    <ti>小端</ti>
+    <ti>little endian</ti>
     <ti>Cobalt服务器</ti>
   </tr>
 </table>

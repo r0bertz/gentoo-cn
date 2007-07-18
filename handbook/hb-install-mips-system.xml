@@ -147,7 +147,7 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
   </tr>
   <tr>
     <ti>
-      一般的大端<br />
+      一般的big endian<br/>
       <e>包括SGI Indy, Indigo2 (R4x00), Challenge S and O2</e>
     </ti>
     <ti>default-linux/mips/2007.0/generic-be/o32</ti>

@@ -76,7 +76,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </tr>
 <tr>
   <ti>
-    大端<br/>
+    big endian<br/>
     <e>(SGI用户)</e>
   </ti>
   <ti>
@@ -88,7 +88,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </tr>
 <tr>
   <ti>
-    大端<br/>
+    big endian<br/>
     <e>(SGI用户)</e>
   </ti>
   <ti>
@@ -103,7 +103,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </tr>
 <tr>
   <ti>
-    小端<br/>
+    little endian<br/>
     <e>(Cobalt用户)</e>
   </ti>
   <ti>
@@ -114,7 +114,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </tr>
 <tr>
   <ti>
-    小端<br/>
+    little endian<br/>
     <e>(其他用户)</e>
   </ti>
   <ti>
@@ -125,7 +125,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </table>
 
 <warn>
-虽然我们提供小端MIPS1的stage，但是对于小端MIPS系统的支持只局限于Cobalt服务器。它们是为那些想在目前不支持的平台上试验Gentoo的人提供的，所以我们假设你知道你在做什么。
+虽然我们提供little endian MIPS1的stage，但是对于little endian MIPS系统的支持只局限于Cobalt服务器。它们是为那些想在目前不支持的平台上试验Gentoo的人提供的，所以我们假设你知道你在做什么。
 </warn>
 
 <p>

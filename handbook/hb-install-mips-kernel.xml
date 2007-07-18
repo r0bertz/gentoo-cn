@@ -197,7 +197,7 @@ Octane系统上JFS和ALSA有一个已知问题，ALSA不能工作。鉴于JFS在
 </p>
 
 <note>
-在64位机器上，你需要指定<c>CROSS_COMPILE=mips64-unknown-linux-gnu-</c>（或者<c>mips64el-...</c>如果这是个小端系统）来使用64位编译器。
+在64位机器上，你需要指定<c>CROSS_COMPILE=mips64-unknown-linux-gnu-</c>（或者<c>mips64el-...</c>如果这是个little endian系统）来使用64位编译器。
 </note>
 
 <pre caption="编译内核">
