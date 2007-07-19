@@ -82,21 +82,23 @@ $ <i>gitk --all</i>
 </body>
 </section>
 <section>
-<title>标明自己的身份</title>
+<title>设定全局变量</title>
 <body>
 
 <p>
 git的每个递交都会关联作者的email信息。在最新版的git（1.5.2.2）中，可以使用
-<c>git-config</c>工具来标明自己的身份。
+<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
 </p>
 
 <pre caption="设置自己的姓名和email地址">
 $ <i>git-config --global user.name 'Denis Cheng'</i>
-$ <i>git-config --global user.email 'crquan@gmail.com</i>
+$ <i>git-config --global user.email 'crquan@gmail.com'</i>
+$ <i>git-config --global sendemail.smtpserver 'smtp.i-cable.com'</i>
 </pre>
 
 <p>
-这样设置一次后就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
+用你自己的名字、email和SMTP服务器地址代替上面的值。这样设置一次后就会保存
+在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
 </p>
 
 </body>
@@ -376,14 +378,6 @@ Cc: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 To: xudong.guan@gmail.com
 
 Result: OK
-</pre>
-
-<p>
-或者直接用sendmail (我装的是msmtp，很好用)
-</p>
-
-<pre caption="用sendmail发布你的修改">
-$ <i>cat 0001-Added-file-new_file_xml.patch | sendmail xudong.guan@gmail.com</i>
 </pre>
 
 </body>
