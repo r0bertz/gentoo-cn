@@ -242,7 +242,7 @@ index 90bfcb5..030e90b 100644
 $ <i>git commit -a -m "some more log"</i>
 Created commit 1958506a599d1bcecd38fb4879b3483545226ef4
  1 files changed, 1 insertions(+), 0 deletions(-)
-bumpy:/data1/build/work/zh_cn$ git whatchanged HEAD^^..HEAD
+$ <i>git whatchanged HEAD^^..HEAD</i>
 commit 1958506a599d1bcecd38fb4879b3483545226ef4
 Author: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 Date:   Fri Jul 13 16:44:07 2007 +0100
