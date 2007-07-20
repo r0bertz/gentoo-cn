@@ -130,16 +130,16 @@ USE="x86 oss apm arts avi berkdb bitmap-fonts crypt cups encode fortran f77
 </pre>
 
 <p>
-就像你看到的那样，这个变量已经包括了非常多的关键字。<b>不</b>要通过修改<path>
-make.defaults</path>文件里的<c>USE</c>变量来满足你的需要：在升级Portage的时候，
-这个文件将会被破坏（被覆盖）。
+就像你看到的那样，这个变量已经包括了非常多的关键字。<b>不</b>要通过
+修改<path>make.defaults</path>文件里的<c>USE</c>变量来满足你的需要：
+在升级Portage的时候，这个文件将会被破坏（被覆盖）。
 </p>
 
 <p>
-要改变这个默认设置，你需要在<c>USE</c>变量里添加或移去关键字。这可以通过
-在<path>/etc/make.conf</path>里声明<c>USE</c>全局变量来实现。在这个变量里，添加
-你需要的额外USE标记，或者移去你不需要的USE变量。后者可通过在变量前面加个负号
-（“-”）前缀来实现。
+要改变这个默认设置，你需要在<c>USE</c>变量里添加或移去关键字。这是通过
+在<path>/etc/make.conf</path>里定义<c>USE</c>全局变量来实现的。在这个变量里，
+添加你需要的额外的USE标记，或者移去你不需要的USE标记。后者可通过在标记前面加个
+负号（“-”）前缀来实现。
 </p>
 
 <p>
