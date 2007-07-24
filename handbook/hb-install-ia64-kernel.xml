@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ia64-kernel.xml,v 1.8 2007/05/20 20:32:23 nightmorph Exp $ -->
@@ -19,7 +14,7 @@
 <body>
 
 <p>
-您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们"名不副实"。 
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。 
 例如，<path>GMT-8</path>实际上是GMT+8区。
 </p>
 
@@ -38,8 +33,8 @@
 <body>
 
 <p>
-Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个 可选的内核源码。完整的清单参见<uri 
-link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。 
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri 
+link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </p>
 
 <p>
@@ -70,7 +65,7 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 </p>
 
 <p>
-如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。 
+如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。
 如果您希望使用<c>genkernel</c>，您可以阅读<uri link="#genkernel">备选：使用genkernel</uri>。
 </p>
 
@@ -89,10 +84,7 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 
 <p>
 然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge 
-pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>抛出的警告（类似于pcilib: 
-cannot open/sys/bus/pci/devices）。 
-此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。 
-您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块（这也是个不错的提示，它可以教你该选择哪些模块）。
+pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>抛出的警告（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块（这也是个不错的提示，它可以教你该选择哪些模块）。
 </p>
 
 <p>
@@ -115,8 +107,7 @@ cannot open/sys/bus/pci/devices）。
 <body>
 
 <p>
-首先，开启"development and experimental 
-code/drivers"。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
+首先，开启"development and experimental code/drivers"。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
 </p>
 
 <pre caption="选择experimental code/drivers，General setup">
@@ -127,8 +118,7 @@ General setup  ---&gt;
 </pre>
 
 <p>
-确信对于启动您的系统所必须的驱动（比如SCSI 
-controller，...）被编译<e>进</e>内核而不是作为模块加入的。否则您的系统将完全不能启动。
+确信对于启动您的系统所必须的驱动（比如SCSI controller……）被编译<e>进</e>内核而不是作为模块加入的。否则您的系统将完全不能启动。
 </p>
 
 <p>
@@ -145,9 +135,7 @@ Processor type ---&gt;
 </pre>
 
 <p>
-现在进入<c>File 
-Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual 
-memory</c>和<c>/proc file system</c>的支持。
+现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
 </p>
 
 <pre caption="选择必需的文件系统">
@@ -192,8 +180,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over 
-Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成使用核心PPPoE时才会用到它。
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成使用核心PPPoE时才会用到它。
 </p>
 
 <p>
@@ -201,8 +188,7 @@ Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成使�
 </p>
 
 <p>
-如果您拥有支持HyperThreading（tm）的Intel CPU，或者您有多CPU系统，您需要激活"Symmetric 
-multi-processing support"：
+如果您拥有支持HyperThreading（tm）的Intel CPU，或者您有多CPU系统，您需要激活"Symmetric multi-processing support"：
 </p>
 
 <pre caption="启用SMP支持">
@@ -263,10 +249,11 @@ Device Drivers ---&gt;
 </p>
 
 <p>
-现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核 
-了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您 
-用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有 
-的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用 户来说是一个理想的解决方案。
+现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核
+了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您
+用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有
+的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用
+户来说是一个理想的解决方案。
 </p>
 
 <p>
@@ -278,12 +265,11 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-现在执行<c>genkernel --udev 
-all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间！
+现在执行<c>genkernel --udev all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间！
 </p>
 
 <note>
-EVMS2或LVM2的用户可能需要在genkernel命令行上添加<c>--evms2</c>或<c>--lvm2</>。
+EVMS2或LVM2的用户可能需要在genkernel命令行上添加<c>--evms2</c>或<c>--lvm2</c>。
 </note>
 
 <pre caption="运行genkernel">
@@ -291,9 +277,7 @@ EVMS2或LVM2的用户可能需要在genkernel命令行上添加<c>--evms2</c>或
 </pre>
 
 <p>
-一旦<c>genkernel</c>运行完成，一个包括全部模块和<e>initial root 
-disk</e>（initrd）的内核将被建立。在后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为您将在配置引导程序的时候用到他们。initrd将会在启动"真正"的系统前自动识别硬件 
-（如同安装光盘一样）。
+一旦<c>genkernel</c>运行完成，一个包括全部模块和<e>initial root disk</e>（initrd）的内核将被建立。在后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为您将在配置引导程序的时候用到他们。initrd将会在启动“真正”的系统前自动识别硬件（如同安装光盘一样）。
 </p>
 
 <pre caption="查看创建的内核映像名和initrd">
@@ -309,7 +293,7 @@ disk</e>（initrd）的内核将被建立。在后面配置引导程序时我们
 <body>
 
 <p>
-您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要 
+您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要
 自动加载的模块。如果您愿意，您也可以加上模块的选项。
 </p>
 
