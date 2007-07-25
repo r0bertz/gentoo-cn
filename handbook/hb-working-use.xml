@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-use.xml,v 1.46 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-use.xml,v 1.48 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
 </abstract>
 
-<version>1.36</version>
-<date>2007-02-20</date>
+<version>1.37</version>
+<date>2007-07-04</date>
 
 <section>
 <title>USE标记是什么？</title>
@@ -319,19 +319,19 @@ Calculating dependencies ...done!
 </p>
 
 <pre caption="用equery来查看当前使用的USE标记">
-# <i>equery uses =gnumeric-1.6.3 -a</i>
+# <i>equery --nocolor uses =gnumeric-1.6.3 -a</i>
 [ Searching for packages matching =gnumeric-1.6.3... ]
-[ Colour Code : <comment>set</comment> <i>unset</i> ]
+[ Colour Code : set unset ]
 [ Legend        : Left column  (U) - USE flags from make.conf  ]
 [               : Right column (I) - USE flags packages was installed with ]
 [ Found these USE variables for app-office/gnumeric-1.6.3 ]
  U I
-- - <i>debug</i>   : Tells configure and the makefiles to build for debugging.
-                     Effects vary across packages, but generally it will at
-                     least add -g to CFLAGS.  Remember to set FEATURES=nostrip too 
-- - <i>gnome</i>   : Adds GNOME support
-+ + <comment>python</comment>   : Adds support/bindings for the Python language
-- - <i>static</i>   : !!do not set this during bootstrap!! Causes binaries to be
+- - debug   : Enable extra debug codepaths, like asserts and extra output.
+              If you want to get meaningful backtraces see
+	      http://www.gentoo.org/proj/en/qa/backtraces.xml.
+- - gnome   : Adds GNOME support
++ + python   : Adds support/bindings for the Python language
+- - static   : !!do not set this during bootstrap!! Causes binaries to be
                      statically linked instead of dynamically
 </pre>
 
