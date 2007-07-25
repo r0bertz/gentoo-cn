@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-kernel.xml,v 1.53 2007/05/21 04:06:25 josejx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-kernel.xml,v 1.54 2007/05/21 04:06:25 josejx Exp $ -->
 <sections>
 
 <version>8.2</version>
@@ -208,7 +208,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用OpenFirmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
+不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用Open Firmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
 </p>
 
 <pre caption="选择一个Framebuffer驱动">

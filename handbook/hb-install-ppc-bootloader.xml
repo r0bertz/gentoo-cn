@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-bootloader.xml,v 1.42 2007/05/15 00:46:29 rane Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc-bootloader.xml,v 1.43 2007/05/15 00:46:29 rane Exp $ -->
 <sections>
 
 <version>8.1</version>
@@ -166,7 +166,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 
 boot=/dev/hda2
 
-<comment>## ofboot是openfireware的指定bootstrap分区的方式。
+<comment>## ofboot是Open Firmware指定bootstrap分区的方式。
 ## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
 ## 你将一些必要的参数传给mkofboot/ybin程序）。
 ## hd:X表示/dev/sdaX（或/dev/hdaX）。
