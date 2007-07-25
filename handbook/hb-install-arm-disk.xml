@@ -4,7 +4,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-disk.xml,v 1.6 2007/05/07 18:11:40 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-disk.xml,v 1.7 2007/05/07 18:11:40 nightmorph Exp $ -->
 
 <sections>
 
@@ -408,7 +408,7 @@ Command (m for help): <i>w</i>
 <body>
 
 <p>
-有几种文件系统是可以使用的。其中一些在amd64架构上是稳定的，另一些则不稳定。下列文件系统被证实是稳定的：ext2和ext3。jfs和reiserfs也许可以工作，但是需要更多的测试。如果你很喜欢冒险，你可以尝试未被支持的文件系统。
+有几种文件系统是可以使用的。其中一些在arm架构上是稳定的，另一些则不稳定。下列文件系统被证实是稳定的：ext2和ext3。jfs和reiserfs也许可以工作，但是需要更多的测试。如果你很喜欢冒险，你可以尝试未被支持的文件系统。
 </p>
 
 <p>
