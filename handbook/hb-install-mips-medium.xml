@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-medium.xml,v 1.23 2007/05/07 18:11:41 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-medium.xml,v 1.24 2007/05/07 18:11:41 nightmorph Exp $ -->
 <sections>
 
 <version>8.0</version>
@@ -859,7 +859,7 @@ Please press Enter to activate this console.
 
 <ul>
   <li>
-    dhcpd是用来赋予Cobalt服务器IP地址的。你应该在系统日志里看到一些有关BOOTP请求的信息。<c>tcpdump</c>在这里也是有用的。
+    <c>dhcpd</c>是用来赋予Cobalt服务器IP地址的。你应该在系统日志里看到一些有关BOOTP请求的信息。<c>tcpdump</c>在这里也是有用的。
   </li>
   <li>
     你的<path>/nfsroot</path>文件夹的权限设置正确。（应该是全体可读的）
