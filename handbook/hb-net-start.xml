@@ -21,9 +21,7 @@
 <body>
 
 <note>
-本文假定你已经配置好了你的内核，包括你的硬件的模块，并且你知道你的硬件（译注：这
-里指网卡）的接口名。 我们同时假定你已经设置了<c>eth0</c>，当然它也可以
-是<c>eth1</c>、<c>wlan0</c>等等。
+本文假定你已经配置好了你的内核，包括你的硬件的模块，并且你知道你的硬件（译注：这里指网卡）的接口名。我们同时假定你已经设置了<c>eth0</c>，当然它也可以是<c>eth1</c>、<c>wlan0</c>等等。
 </note>
 
 <note>
@@ -31,9 +29,7 @@
 </note>
 
 <p>
-要开始配置你的网卡，你首先需要告诉Gentoo RC系统你的网卡。这可以通过
-在<path>/etc/init.d</path>目录里建立一个指向<path>net.lo</path>的名
-叫<path>net.eth0</path>的符号链接来实现。
+要开始配置你的网卡，你首先需要告诉Gentoo RC系统你的网卡。这可以通过在<path>/etc/init.d</path>目录里建立一个指向<path>net.lo</path>的名叫<path>net.eth0</path>的符号链接来实现。
 </p>
 
 <pre caption="建立符号连接net.eth0指向net.lo">
@@ -42,9 +38,7 @@
 </pre>
 
 <p>
-现在Gentoo的RC系统知道了这个接口。它还需要知道怎么来配置这个接口。所有的网络接口
-都在<path>/etc/conf.d/net</path>文件里设置。下面是一个设置DHCP和静态地址的简单配
-置：</p>
+现在Gentoo的RC系统知道了这个接口。它还需要知道怎么来配置这个接口。所有的网络接口都在<path>/etc/conf.d/net</path>文件里设置。下面是一个设置DHCP和静态地址的简单配置：</p>
 
 <pre caption="/etc/conf.d/net文件的一个示例">
 <comment># DHCP</comment>
@@ -61,12 +55,7 @@ routes_eth0=( &quot;default via 192.168.0.1&quot; )
 
 <note>如果你没有指定，DHCP是默认选项。</note>
 
-<note>
-CIDR代表无级别Internet域路由（Classless InterDomain Routing）。一开始，IPv4地址被
-归类为A，B或者C类 。最初的分类系统没有考虑到Internet如此流行，会有耗尽IP的危
-险。CIDR允许一个IP地址可以表达多个IP地址。除了以一个斜线跟着一个数字结束外，CIDR
-IP地址跟普通IP地址是一样的；例如：192.168.0.0/16。CIDR是<uri
- link="http://rfc.net/rfc1519.html">RFC 1519</uri>定义的。
+<note>CIDR代表无级别Internet域路由（Classless InterDomain Routing）。一开始，IPv4地址被归类为A，B或者C类。最初的分类系统没有考虑到Internet如此流行，会有耗尽IP的危险。CIDR允许一个IP地址可以表达多个IP地址。除了以一个斜线跟着一个数字结束外，CIDR IP地址跟普通IP地址是一样的；例如：192.168.0.0/16。CIDR是<uri link="http://rfc.net/rfc1519.html">RFC 1519</uri>定义的。
 </note>
 
 <p>
@@ -79,14 +68,11 @@ IP地址跟普通IP地址是一样的；例如：192.168.0.0/16。CIDR是<uri
 </pre>
 
 <impo>
-我们建议你在<path>/etc/conf.d/rc</path>文件里设
-置<c>RC_VERBOSE=&quot;yes&quot;</c>。这样你可以在网络出现故障的时候，得到关于故障
-的更多信息。
+我们建议你在<path>/etc/conf.d/rc</path>文件里设置<c>RC_VERBOSE=&quot;yes&quot;</c>。这样你可以在网络出现故障的时候，得到关于故障的更多信息。
 </impo>
 
 <p>
-现在已经成功地启动并停止了你的网络接口，你可能希望在Gentoo启动的时候启动它。这样
-做就可以了：（最后那个“rc”命令通知Gentoo启动当前runlevel中还没有被启动的脚本）
+现在已经成功地启动并停止了你的网络接口，你可能希望在Gentoo启动的时候启动它。这样做就可以了：（最后那个“rc”命令通知Gentoo启动当前runlevel中还没有被启动的脚本）
 </p>
 
 <pre caption="配置网络接口以便在启动的时候装载它">

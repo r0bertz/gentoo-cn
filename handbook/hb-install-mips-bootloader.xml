@@ -39,8 +39,7 @@ SGI卷头文件名最长为8个字符，在一个卷头里最多不能存在超�
 </pre>
 
 <p>
-安装结束后，你应该可以发现<c>arcload</c> 
-二进制文件静静的躺在<path>/usr/lib/arcload</path>路径下。现在，有两个文件存在：
+安装结束后，你应该可以发现<c>arcload</c>二进制文件静静的躺在<path>/usr/lib/arcload</path>路径下。现在，有两个文件存在：
 </p>
 
 <ul>
@@ -80,9 +79,7 @@ Entry #0, name "sash64", start 4, bytes 55859
 </pre>
 
 <p>
-现在，<c>arc.cf</c>文件的语法类似C语言。要知道如何配置它的详细信息，请看<uri 
-link="http://www.linux-mips.org/wiki/Arcload">Linux/MIPS 
-wiki上的arcload页</uri>。简单的说，你定义一些选项，这些选项你可以在启动时使用<c>OSLoadFilename</c>变量来启用和禁用。
+现在，<c>arc.cf</c>文件的语法类似C语言。要知道如何配置它的详细信息，请看<uri link="http://www.linux-mips.org/wiki/Arcload">Linux/MIPS wiki上的arcload页</uri>。简单的说，你定义一些选项，这些选项你可以在启动时使用<c>OSLoadFilename</c>变量来启用和禁用。
 </p>
 
 <pre caption="一个arc.cf的例子">
@@ -160,9 +157,7 @@ ip28 {
 </ul>
 
 <p>
-为了克服这些限制，人们开发了另外一个固件，叫做<uri 
-link="http://www.colonel-panic.org/cobalt-mips/">Colo</uri>（Cobalt 
-Loader）。这是一个BOOTROM镜像，既可以烧入Cobalt服务器里的芯片里，也可以从已有的固件中加载。
+为了克服这些限制，人们开发了另外一个固件，叫做<uri link="http://www.colonel-panic.org/cobalt-mips/">Colo</uri>（Cobalt Loader）。这是一个BOOTROM镜像，既可以烧入Cobalt服务器里的芯片里，也可以从已有的固件中加载。
 </p>
 
 <note>
@@ -285,9 +280,7 @@ ca:12345:ctrlaltdel:/sbin/shutdown -r now
 </pre>
 
 <p>
-首先，请注释掉<c>c0</c>这一行。默认的，这个设定是为了使用波特率为9600 
-bps的终端。在Cobalt服务器上，你可能需要把这里改为115200以匹配BOOT 
-ROM所决定的波特率。下面是我的机器上这一段的配置。在无头机器上（例如Cobalt服务器），我还建议把本地终端那几行（<c>c1</c>到<c>c6</c>）都注释掉，因为当他们不能打开<path>/dev/ttyX</path>的时候总会有奇怪的行为。
+首先，请注释掉<c>c0</c>这一行。默认的，这个设定是为了使用波特率为9600 bps的终端。在Cobalt服务器上，你可能需要把这里改为115200以匹配BOOT ROM所决定的波特率。下面是我的机器上这一段的配置。在无头机器上（例如Cobalt服务器），我还建议把本地终端那几行（<c>c1</c>到<c>c6</c>）都注释掉，因为当他们不能打开<path>/dev/ttyX</path>的时候总会有奇怪的行为。
 </p>
 
 <pre caption="inittab的示例片段">
@@ -336,9 +329,7 @@ cdimage ~# <i>reboot</i>
 </pre>
 
 <note>
-<e>Cobalt用户：</e>本章的剩余部分讲解了如何设定SGI 
-PROM以使它可以从磁盘引导<c>arcload</c>并加载Linux。这并不适用于Cobalt服务器的配置。实际上，你要做的已经完成了——第一次启动前没有其他需要配置的了，你可以跳到下一章：<uri 
-link="?part=1&amp;chap=11">结束Gentoo的安装</uri>
+<e>Cobalt用户：</e>本章的剩余部分讲解了如何设定SGI PROM以使它可以从磁盘引导<c>arcload</c>并加载Linux。这并不适用于Cobalt服务器的配置。实际上，你要做的已经完成了——第一次启动前没有其他需要配置的了，你可以跳到下一章：<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>
 </note>
 
 </body>
@@ -367,8 +358,7 @@ link="?part=1&amp;chap=11">结束Gentoo的安装</uri>
 </pre>
 
 <p>
-当你重启之后，去到<e>System Maintenance Menu</e>并选择<e>Enter Command 
-Monitor</e>（<c>5</c>）就像你netboot这台机器时做的一样。
+当你重启之后，去到<e>System Maintenance Menu</e>并选择<e>Enter Command Monitor</e>（<c>5</c>）就像你netboot这台机器时做的一样。
 </p>
 
 <pre caption="配置PROM来启动Gentoo">
@@ -464,8 +454,7 @@ Command Monitor. Type "exit" to return to the menu.
 </pre>
 
 <p>
-从<c>arcload-0.5</c>开始，文件不需要再放在卷头里——它们可以被放在分区内。要告诉<c>arcload</c>哪里去寻找它的配置文件和内核，我们需要设定<c>OSLoadPartition</c> 
-PROM变量。确切的值这里将取决于你的磁盘在SCSI总线的什么位置。把<c>SystemPartitions</c>PROM变量作为一个引导——只有分区号码需要改变。
+从<c>arcload-0.5</c>开始，文件不需要再放在卷头里——它们可以被放在分区内。要告诉<c>arcload</c>哪里去寻找它的配置文件和内核，我们需要设定<c>OSLoadPartition</c> PROM变量。确切的值这里将取决于你的磁盘在SCSI总线的什么位置。把<c>SystemPartitions</c>PROM变量作为一个引导——只有分区号码需要改变。
 </p>
 
 <note>
@@ -488,8 +477,7 @@ PROM变量。确切的值这里将取决于你的磁盘在SCSI总线的什么位
 <body>
 
 <p>
-现在你已经准备好享受Gentoo了！当重启进入到您新装的Gentoo系统之后，请阅读<uri 
-link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+现在你已经准备好享受Gentoo了！当重启进入到您新装的Gentoo系统之后，请阅读<uri link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
 </p>
 
 </body>

@@ -355,8 +355,7 @@ memory      keyboard     network      scsi      speaker
 </p>
 
 <p>
-如果在一个使用非美语布局的键盘的系统上安装Gentoo，使用<c>loadkeys</c>为你的键盘装载好键盘布局。为了列出可用的键盘布局，执行<c>ls 
-/usr/share/keymaps/i386</c>。
+如果在一个使用非美语布局的键盘的系统上安装Gentoo，使用<c>loadkeys</c>为你的键盘装载好键盘布局。为了列出可用的键盘布局，执行<c>ls /usr/share/keymaps/i386</c>。
 </p>
 
 <pre caption="列出可用的键盘布局">

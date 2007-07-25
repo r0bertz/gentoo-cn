@@ -10,8 +10,7 @@
 <sections>
 
 <abstract>
-Portage所有的设置都可以通过不同的变量来完成，你可以设置在配置文件中或者设置成一个
-环境变量。
+Portage所有的设置都可以通过不同的变量来完成，你可以设置在配置文件中或者设置成一个环境变量。
 </abstract>
 
 <version>1.7</version>
@@ -23,8 +22,7 @@ Portage所有的设置都可以通过不同的变量来完成，你可以设置�
 <body>
 
 <p>
-如前面所述，你可以在<path>/etc/make.conf</path>中定义许多变量来配置Portage。
-请参考<path>make.conf</path>的手册页以获得更详细和完整的信息:
+如前面所述，你可以在<path>/etc/make.conf</path>中定义许多变量来配置Portage。请参考<path>make.conf</path>的手册页以获得更详细和完整的信息:
 </p>
 
 <pre caption="阅读make.conf的手册页">
@@ -68,13 +66,11 @@ USE变量也会在配置和编译的过程中被用到，不过这在前面的�
 <body>
 
 <p>
-当Portage在安装了一个某软件的新版本后，会把属于旧版本的已经过时的文件从你的系统中
-删除。在此之前Portage会给用户5秒钟时间撤销此操作，这5秒钟由CLEAN_DELAY变量定义。
+当Portage在安装了一个某软件的新版本后，会把属于旧版本的已经过时的文件从你的系统中删除。在此之前Portage会给用户5秒钟时间撤销此操作，这5秒钟由CLEAN_DELAY变量定义。
 </p>
 
 <p>
-你可以通过设定EMERGE_DEFAULT_OPTS变量以使<c>emerge</c>每次运行时都使用某些特定的选
-项。一些常用的选项是--ask, --verbose, --tree,等等。
+你可以通过设定EMERGE_DEFAULT_OPTS变量以使<c>emerge</c>每次运行时都使用某些特定的选项。一些常用的选项是--ask，--verbose，--tree，等等。
 </p>
 
 </body>
@@ -87,9 +83,7 @@ USE变量也会在配置和编译的过程中被用到，不过这在前面的�
 <body>
 
 <p>
-Portage一般会用新文件覆盖掉旧文件，除非这些旧文件位于<e>受保护的</e>位置里。这些受
-保护的位置由CONFIG_PROTECT变量设定，通常是配置文件的位置。在设置时，多个目录间用空
-格分开。
+Portage一般会用新文件覆盖掉旧文件，除非这些旧文件位于<e>受保护的</e>位置里。这些受保护的位置由CONFIG_PROTECT变量设定，通常是配置文件的位置。在设置时，多个目录间用空格分开。
 </p>
 
 <p>
@@ -132,8 +126,7 @@ $ <i>emerge --help config</i>
 <body>
 
 <p>
-当你的系统上没有所需要的信息和数据时，Portage就会从网络上获取数据。
-含有这些信息和数据的服务器的位置定义在以下变量中:
+当你的系统上没有所需要的信息和数据时，Portage就会从网络上获取数据。含有这些信息和数据的服务器的位置定义在以下变量中:
 </p>
 
 <ul>
@@ -157,8 +150,7 @@ $ <i>emerge --help config</i>
 </ul>
 
 <p>
-GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首先你要<c>emerge mirrorselect</c>。
-更多信息参考 mirrorselect 的在线帮助:
+GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首先你要<c>emerge mirrorselect</c>。更多信息参考mirrorselect的在线帮助:
 </p>
 
 <pre caption="更多关于mirrorselect的信息">
@@ -176,23 +168,19 @@ GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首�
 <body>
 
 <p>
-当Portage需要获取源代码时，默认使用<c>wget</c>来下载。你可以通过定义FETCHCOMMAND变
-量来改变它。 
+当Portage需要获取源代码时，默认使用<c>wget</c>来下载。你可以通过定义FETCHCOMMAND变量来改变它。
 </p>
 
 <p>
-Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以通过定义RESUMECOMMAND来
-变量来改变它。
+Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以通过定义RESUMECOMMAND来变量来改变它。
 </p>
 
 <p>
-确保你的FETCHCOMMAND和RESUMECOMMAND把源代码存放到正确的位置。
-在这些变量中你应该用\${URI}和\${DISTDIR}分别指定源代码和distfiles的位置。
+确保你的FETCHCOMMAND和RESUMECOMMAND把源代码存放到正确的位置。在这些变量中你应该用\${URI}和\${DISTDIR}分别指定源代码和distfiles的位置。
 </p>
 
 <p>
-你可以对不同的传输协议使用不同的设置，相关的参数有FETCHCOMMAND_HTTP、
-FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
+你可以对不同的传输协议使用不同的设置，相关的参数有FETCHCOMMAND_HTTP、FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
 </p>
 
 </body>
@@ -202,8 +190,7 @@ FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
 <body>
 
 <p>
-你不能改变Portage用来更新Portage树所使用的rsync命令,但你可以设定一些与rsync命令相
-关的变量:
+你不能改变Portage用来更新Portage树所使用的rsync命令,但你可以设定一些与rsync命令相关的变量:
 </p>
 
 <ul>
@@ -250,8 +237,7 @@ FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
 <body>
 
 <p>
-你可以用ACCEPT_KEYWORDS变量改变默认的系统分支。此变量的默认设置为你的电脑体系结构
-的稳定分支。更多关于Gentoo分支的信息可以在下一章节找到。
+你可以用ACCEPT_KEYWORDS变量改变默认的系统分支。此变量的默认设置为你的电脑体系结构的稳定分支。更多关于Gentoo分支的信息可以在下一章节找到。
 </p>
 
 </body>
@@ -261,8 +247,7 @@ FETCHCOMMAND_FTP、RESUMECOMMAND_HTTP和RESUMECOMMAND_FTP等等。
 <body>
 
 <p>
-你可以通过FEATURES变量激活Portage的某个特性。这些已在前面的章节中讨论过，如<uri
-link="?part=2&amp;chap=3">Portage的特性</uri>.
+你可以通过FEATURES变量激活Portage的某个特性。这些已在前面的章节中讨论过，如<uri link="?part=2&amp;chap=3">Portage的特性</uri>.
 </p>
 
 </body>
@@ -275,8 +260,7 @@ link="?part=2&amp;chap=3">Portage的特性</uri>.
 <body>
 
 <p>
-通过PORTAGE_NICENESS变量，你可以增加或减少Portage运行时
-的nice值。PORTAGE_NICENESS变量的值会被<e>加到</e>目前的nice值上。
+通过PORTAGE_NICENESS变量，你可以增加或减少Portage运行时的nice值。PORTAGE_NICENESS变量的值会被<e>加到</e>目前的nice值上。
 </p>
 
 <p>
@@ -294,8 +278,7 @@ $ <i>man nice</i>
 <body>
 
 <p>
-NOCLOR变量的默认值为“false”，如果你想禁用Portage的彩色输出，请把这个变量设
-为“true”。
+NOCLOR变量的默认值为“false”，如果你想禁用Portage的彩色输出，请把这个变量设为“true”。
 </p>
 
 </body>

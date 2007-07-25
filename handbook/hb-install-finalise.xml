@@ -23,8 +23,7 @@
 <body>
 
 <p>
-在Unix/Linux系统中，用root进行工作是一件<e>危险</e>的事情，应该尽量避免。因
-此我们<e>强烈</e>推荐您为日常使用添加一个普通用户。
+在Unix/Linux系统中，用root进行工作是一件<e>危险</e>的事情，应该尽量避免。因此我们<e>强烈</e>推荐您为日常使用添加一个普通用户。
 </p>
 
 <p>
@@ -79,9 +78,7 @@
 </table>
 
 <p>
-例如，要创建一个名为<c>john</c>的用户，并使其隶属
-于<c>wheel</c>组，<c>users</c>组和<c>audio</c>组，请先用root用户登录（只有root有
-权限创建用户），然后执行<c>useradd</c>命令：
+例如，要创建一个名为<c>john</c>的用户，并使其隶属于<c>wheel</c>组，<c>users</c>组和<c>audio</c>组，请先用root用户登录（只有root有权限创建用户），然后执行<c>useradd</c>命令：
 </p>
 
 <pre caption="添加一个日常使用的用户">
@@ -95,9 +92,7 @@ Re-enter password: <comment>（再次输入以便进行校验）</comment>
 </pre>
 
 <p>
-有时，普通用户可能需要以root身份执行一些任务，这时您可以使用<c>su -</c>来临时取
-得root权限。另外一种方法就是使用<c>sudo</c>包，如果配置正确，使用它将会非常
-安全。
+有时，普通用户可能需要以root身份执行一些任务，这时您可以使用<c>su -</c>来临时取得root权限。另外一种方法就是使用<c>sudo</c>包，如果配置正确，使用它将会非常安全。
 </p>
 
 </body>
@@ -110,9 +105,7 @@ Re-enter password: <comment>（再次输入以便进行校验）</comment>
 <body>
 
 <p>
-现在您的gentoo已经结束了安装并完成了重启，如果一切顺利，您就可以将下载下来
-的stage3 tarball和Portage快照文件从硬盘里清除掉了。请记住它们是被下载到您
-的<path>/</path>目录中的。
+现在您的gentoo已经结束了安装并完成了重启，如果一切顺利，您就可以将下载下来的stage3 tarball和Portage快照文件从硬盘里清除掉了。请记住它们是被下载到您的<path>/</path>目录中的。
 </p>
 
 <pre caption="移除stage3 tarball">

@@ -10,8 +10,7 @@
 <sections>
 
 <abstract>
-安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达
-到这一状态。
+安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
 <version>8.0</version>
@@ -24,11 +23,7 @@
 <body>
 
 <p>
-为了快速下载源代码，建议你选择一个速度快的境像站点。Portage将
-在<path>make.conf</path>中查找并使用GENTOO_MIRRORS变量定义的境像列表。你也可以浏
-览我们的<uri link="/main/en/mirrors.xml">镜像列表</uri>来寻找一个或者多个离你最
-近的镜像（通常它们是最快的），不过我们提供了一个不错的工具来帮助你选择境像，它
-叫<c>mirrorselect</c>。
+为了快速下载源代码，建议你选择一个速度快的境像站点。Portage将在<path>make.conf</path>中查找并使用GENTOO_MIRRORS变量定义的境像列表。你也可以浏览我们的<uri link="/main/en/mirrors.xml">镜像列表</uri>来寻找一个或者多个离你最近的镜像（通常它们是最快的），不过我们提供了一个不错的工具来帮助你选择境像，它叫<c>mirrorselect</c>。
 </p>
   
 <pre caption="使用mirrorselect更新GENTOO_MIRRORS变量">
@@ -40,10 +35,7 @@
 </warn>
 
 <p>
-另一个重要的设置就是<path>make.conf</path>里的SYNC设置。这个变量包含你更
-新Portage树（Portage下载和安装软件时需要用到的ebuild和脚本等信息的集合）时用到的
-rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，不过还是
-让<c>mirrorselect</c>来帮你完成更加的方便：
+另一个重要的设置就是<path>make.conf</path>里的SYNC设置。这个变量包含你更新Portage树（Portage下载和安装软件时需要用到的ebuild和脚本等信息的集合）时用到的rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，不过还是让<c>mirrorselect</c>来帮你完成更加的方便：
 </p>
 
 <pre caption="使用mirrorselect选择rsync镜像站点">
@@ -51,8 +43,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 </pre>
 
 <p>
-运行完<c>mirrorselect</c>以后，最好自己再检查一
-下<path>/mnt/gentoo/etc/make.conf</path>里的设置！
+运行完<c>mirrorselect</c>以后，最好自己再检查一下<path>/mnt/gentoo/etc/make.conf</path>里的设置！
 </p>
 
 </body>
@@ -62,9 +53,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 <body>
 
 <p>
-在我们进入新环境之前，还有一件事需要完成，那就是
-从<path>/etc/resolv.conf</path>拷贝DNS信息。这一步可以保证你在进入新的系统环境后
-还可以继续使用网络。<path>/etc/resolv.conf</path>包含了你网络里的域名服务器。
+在我们进入新环境之前，还有一件事需要完成，那就是从<path>/etc/resolv.conf</path>拷贝DNS信息。这一步可以保证你在进入新的系统环境后还可以继续使用网络。<path>/etc/resolv.conf</path>包含了你网络里的域名服务器。
 </p>
 
 <pre caption="拷贝DNS信息">
@@ -79,9 +68,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 <body>
 
 <p>
-将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的
-环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path>文
-件系统。
+将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path>文件系统。
 </p>
 
 <pre caption="挂载/proc和/dev">
@@ -96,9 +83,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 <body>
 
 <p>
-将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的
-环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path>
-<path>/sys</path>文件系统。
+将<path>/proc</path>文件系统挂载到<path>/mnt/gentoo/proc</path>，这样chroot后的环境里安装时也可以获取内核提供的相关信息，然后以bind方式挂载<path>/dev</path> <path>/sys</path>文件系统。
 </p>
 
 <pre caption="挂载/proc /sys和/dev">
@@ -114,16 +99,11 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 <body>
 
 <p>
-现在所有的分区都已经被初始化，基本环境也已安装完毕，现在是到了该
-用<e>chroot</e>进入新安装环境的时候了。这意味着我们从当前安装环境（安装光盘或者其
-他安装介质）切换到你安装的系统里（也就是被初始化的分区）。
+现在所有的分区都已经被初始化，基本环境也已安装完毕，现在是到了该用<e>chroot</e>进入新安装环境的时候了。这意味着我们从当前安装环境（安装光盘或者其他安装介质）切换到你安装的系统里（也就是被初始化的分区）。
 </p>
 
 <p>
-完成chroot有三步。首先我们用<c>chroot</c>把根文件系统从<path>/</path>（安装介质
-里）切换到<path>/mnt/gentoo</path>（在你的分区里）。然后我们使
-用<c>env-update</c>来建立新的环境，也就是创建新的环境变量。最后我们
-用<c>source</c>加载这些变量。
+完成chroot有三步。首先我们用<c>chroot</c>把根文件系统从<path>/</path>（安装介质里）切换到<path>/mnt/gentoo</path>（在你的分区里）。然后我们使用<c>env-update</c>来建立新的环境，也就是创建新的环境变量。最后我们用<c>source</c>加载这些变量。
 </p>
 
 <pre caption = "chroot到新环境里">
@@ -135,8 +115,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 </pre>
 
 <p>
-祝贺你！你现在已经在你自己的Gentoo Linux环境里了。当然这离安装完成还有段时间，因
-为我们可以看到安装指南还剩下很多章节呢 :-)
+祝贺你！你现在已经在你自己的Gentoo Linux环境里了。当然这离安装完成还有段时间，因为我们可以看到安装指南还剩下很多章节呢 :-)
 </p>
 
 </body>
@@ -161,13 +140,11 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 </pre>
 
 <p>
-如果你网络前面的防火墙的配置使得rsync请求被阻挡的话，你可以使
-用<c>emerge-webrsync</c>下载和安装一个最新的portage快照。
+如果你网络前面的防火墙的配置使得rsync请求被阻挡的话，你可以使用<c>emerge-webrsync</c>下载和安装一个最新的portage快照。
 </p>
 
 <p>
-如果系统警告你有一个新版本的Portage可用，你可以
-使用<c>emerge portage</c>来更新它。</p>
+如果系统警告你有一个新版本的Portage可用，你可以使用<c>emerge portage</c>来更新它。</p>
 
 </body>
 </subsection>
@@ -180,8 +157,7 @@ rsync服务器信息。虽然你可以手动输入一个SYNC服务器地址，�
 </p>
 
 <p>
-profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以及其他重要变量的默认
-值，它还把系统可用的软件版本锁定在某个范围。而这些都是由Gentoo的开发者来维护的。
+profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以及其他重要变量的默认值，它还把系统可用的软件版本锁定在某个范围。而这些都是由Gentoo的开发者来维护的。
 </p>
 
 <p>
@@ -198,19 +174,15 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/defau
 </pre>
 
 <p>
-默认的profile会提供给你一个基于2.6版本内核的Linux系统。这是默认推荐的，但是你也
-可以选择另外一个profile。
+默认的profile会提供给你一个基于2.6版本内核的Linux系统。这是默认推荐的，但是你也可以选择另外一个profile。
 </p>
 
 <p>
-系统也为某些架构提供了可用的<c>desktop</c>和<c>server</c>的子profile。请查看一下
-是否可以在<path>2007.0/</path>profile里面找到这两个子profile。你也许想看一
-下<c>desktop</c> profile的<path>make.defaults</path>是否适合你的需要。
+系统也为某些架构提供了可用的<c>desktop</c>和<c>server</c>的子profile。请查看一下是否可以在<path>2007.0/</path>profile里面找到这两个子profile。你也许想看一下<c>desktop</c> profile的<path>make.defaults</path>是否适合你的需要。
 </p>
 
 <p>
-看完了<path>/usr/portage/profiles/</path>里你的体系结构可用的profile之后，如果你
-愿意，你可以换一个profile。
+看完了<path>/usr/portage/profiles/</path>里你的体系结构可用的profile之后，如果你愿意，你可以换一个profile。
 </p>
 
 <pre caption="切换profile">
@@ -232,42 +204,23 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/defau
 <body>
 
 <p>
-<c>USE</c>是Gentoo为用户提供的最具威力的变量之一。很多程序通过它可以选择编译或者
-不编译某些可选的支持。例如，一些程序可以在编译时加入对gtk或是对qt的支持。其它的
-程序可以在编译时加入或不加入对于SLL的支持。有些程序甚至可以在编译时加入对帧缓冲
-的支持（svgalib）以取代X11（X服务器）。
+<c>USE</c>是Gentoo为用户提供的最具威力的变量之一。很多程序通过它可以选择编译或者不编译某些可选的支持。例如，一些程序可以在编译时加入对gtk或是对qt的支持。其它的程序可以在编译时加入或不加入对于SLL的支持。有些程序甚至可以在编译时加入对帧缓冲的支持（svgalib）以取代X11（X服务器）。
 </p>
 
 <p>
-大多数的发行版会使用尽可能多的支持特性编译它们的软件包，这既增加了软件的大小也减
-慢了启动时间，而这些还没有算上可能会涉及到的大量依赖性问题。Gentoo可以让你自己定
-义软件编译的选项，而这正是<c>USE</c>要做的事。
+大多数的发行版会使用尽可能多的支持特性编译它们的软件包，这既增加了软件的大小也减慢了启动时间，而这些还没有算上可能会涉及到的大量依赖性问题。Gentoo可以让你自己定义软件编译的选项，而这正是<c>USE</c>要做的事。
 </p>
 
 <p>
-在<c>USE</c>变量里你可以定义关键字，它被用来对应相应的编译选项。
-比如，<e>ssl</e>会让程序在它编译时加入对它的支持。<e>-X</e>会移除其对于X服务器的
-支持（注意前面的减号）。<e>gnome gtk -kde -qt3 -qt4</e>将会在你编译软件的时候添
-加对gnome（和gtk）的支持，并且移除对kde（和qt）的支持，这可以让你的系统尽可能多
-的为GNOME做优化。
+在<c>USE</c>变量里你可以定义关键字，它被用来对应相应的编译选项。比如，<e>ssl</e>会让程序在它编译时加入对它的支持。<e>-X</e>会移除其对于X服务器的支持（注意前面的减号）。<e>gnome gtk -kde -qt3 -qt4</e>将会在你编译软件的时候添加对gnome（和gtk）的支持，并且移除对kde（和qt）的支持，这可以让你的系统尽可能多的为GNOME做优化。
 </p>
 
 <p>
-默认的<c>USE</c>设置位于你profile的<path>make.defaults</path>文件里。你可以在符
-号连接<path>/etc/make.profile</path>所指向的目录里找
-到<path>make.defaults</path>文件。默认的<c>USE</c>设置是所
-有<path>make.defaults</path>文件里<c>USE</c>的集合。所有你放
-在<path>/etc/make.conf</path>里的<c>USE</c>都会根据默认设置重新计算。如果你添加
-了一些<c>USE</c>的设置，它会被增加到默认的列表里。如果你删除了一些<c>USE</c>设置
-（通过放一个减号到它前面），它将被从默认的列表里移除（如果它确实在默认列表里的话
-）。<e>绝对不</e>要改变<path>/etc/make.profile</path>目录里的任何东西，它会在你
-更新Portage的时候被覆盖掉！
+默认的<c>USE</c>设置位于你profile的<path>make.defaults</path>文件里。你可以在符号连接<path>/etc/make.profile</path>所指向的目录里找到<path>make.defaults</path>文件。默认的<c>USE</c>设置是所有<path>make.defaults</path>文件里<c>USE</c>的集合。所有你放在<path>/etc/make.conf</path>里的<c>USE</c>都会根据默认设置重新计算。如果你添加了一些<c>USE</c>的设置，它会被增加到默认的列表里。如果你删除了一些<c>USE</c>设置（通过放一个减号到它前面），它将被从默认的列表里移除（如果它确实在默认列表里的话）。<e>绝对不</e>要改变<path>/etc/make.profile</path>目录里的任何东西，它会在你更新Portage的时候被覆盖掉！
 </p>
 
 <p>
-关于<c>USE</c>的详解你可以在Gentoo手册的第二部
-分，<uri link="?part=2&amp;chap=2">USE标记</uri>里找到。对于USE标记的详细介绍可
-以查看你的系统里<path>/usr/portage/profiles/use.desc</path>。
+关于<c>USE</c>的详解你可以在Gentoo手册的第二部分，<uri link="?part=2&amp;chap=2">USE标记</uri>里找到。对于USE标记的详细介绍可以查看你的系统里<path>/usr/portage/profiles/use.desc</path>。
 </p>
 
 <pre caption="查看可用的USE标记">
@@ -276,8 +229,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/defau
 </pre>
 
 <p>
-作为一个例子，我们展示一个基于KDE的系统并带有DVD、ALSA以及光盘刻录支持
-的<c>USE</c>设置：
+作为一个例子，我们展示一个基于KDE的系统并带有DVD、ALSA以及光盘刻录支持的<c>USE</c>设置：
 </p>
 
 <pre caption="打开/etc/make.conf">
@@ -295,8 +247,7 @@ USE="-gtk -gnome qt3 qt4 kde dvd alsa cdr"
 <body>
 
 <p>
-在你的系统里可能只会用到一个或两个locale。你可用<path>/etc/locale.gen</path>来
-指定locale。
+在你的系统里可能只会用到一个或两个locale。你可用<path>/etc/locale.gen</path>来指定locale。
 </p>
 
 <pre caption="打开/etc/locale.gen">

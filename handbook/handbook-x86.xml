@@ -134,8 +134,7 @@
 </author>
 
 <abstract>
-这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在x86系统上的基
-于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。 
+这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在x86系统上的基于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -200,8 +199,7 @@
 <chapter>
 <title>配置引导程序</title>
 <abstract>
-x86架构存在几种引导程序。它们中的每一种都有自己的配置方法。我们会一步步来告诉
-你怎样根据你的需求配置一个引导程序。
+x86架构存在几种引导程序。它们中的每一种都有自己的配置方法。我们会一步步来告诉你怎样根据你的需求配置一个引导程序。
 </abstract>
   <include href="hb-install-x86+amd64-bootloader.xml"/>
 </chapter>

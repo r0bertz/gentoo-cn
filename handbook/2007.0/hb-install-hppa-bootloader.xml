@@ -16,8 +16,7 @@
 <body>
 
 <p>
-PA-RISC平台上的引导程序叫palo。它的配置文件路径是<path>/etc/palo.conf</path>。这 
-里有一个例子：
+PA-RISC平台上的引导程序叫palo。它的配置文件路径是<path>/etc/palo.conf</path>。这里有一个例子：
 </p>
 
 <pre caption = "/etc/palo.conf示例">
@@ -27,13 +26,11 @@ PA-RISC平台上的引导程序叫palo。它的配置文件路径是<path>/etc/p
 </pre>
 
 <p>
-第一行告诉palo内核的位置和它所使用的启动参数。<c>2/<keyval id="kernel-name"/></c> 的意思是文件名为<c><keyval id="kernel-name"/></c>的内核位于第二个分区。要注意的是，内核文 
-件的路径是相对于分区，而不是相对于你的根目录的。
+第一行告诉palo内核的位置和它所使用的启动参数。<c>2/<keyval id="kernel-name"/></c>的意思是文件名为<c><keyval id="kernel-name"/></c>的内核位于第二个分区。要注意的是，内核文件的路径是相对于分区，而不是相对于你的根目录的。
 </p>
 
 <p>
-第二行指明了使用哪个修复内核。如果这是你第一次安装并且你没有修复内核，请注释掉这 
-行。第三行指明了palo位于哪个磁盘。 
+第二行指明了使用哪个修复内核。如果这是你第一次安装并且你没有修复内核，请注释掉这行。第三行指明了palo位于哪个磁盘。
 </p>
 
 <p>
@@ -56,8 +53,7 @@ PA-RISC平台上的引导程序叫palo。它的配置文件路径是<path>/etc/p
 <body>
 
 <p>
-退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令 
-：<c>reboot</c>。
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
 </p>
 
 <pre caption="退出chroot，卸载所有分区并重启">
@@ -72,8 +68,7 @@ cdimage ~# <i>reboot</i>
 </p>
 
 <p>
-当重启进入到您新装的Gentoo系统之后，请以<uri 
-link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+当重启进入到您新装的Gentoo系统之后，请以<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
 </p>
 
 </body>

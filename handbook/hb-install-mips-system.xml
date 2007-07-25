@@ -86,8 +86,7 @@
 </pre>
 
 <p>
-如果你网络前面的防火墙的配置使得rsync请求被阻挡的话，你可以使 
-用<c>emerge-webrsync</c>下载和安装一个最新的portage快照。
+如果你网络前面的防火墙的配置使得rsync请求被阻挡的话，你可以使用<c>emerge-webrsync</c>下载和安装一个最新的portage快照。
 </p>
 
 <p>
@@ -278,13 +277,11 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
 </table>
 
 <impo>
-(1) 
-MIPS里的NPTL目前正在测试中，需要<c>gcc-4.1</c>和<c>glibc-2.4</c>。一般认为NPTL已经足够安全可供人们使用了，以后的版本中它将成为默认设定。欢迎勇敢的用户测试这些profile，并报告使用结果。
+(1) MIPS里的NPTL目前正在测试中，需要<c>gcc-4.1</c>和<c>glibc-2.4</c>。一般认为NPTL已经足够安全可供人们使用了，以后的版本中它将成为默认设定。欢迎勇敢的用户测试这些profile，并报告使用结果。
 </impo>
 
 <warn>
-(2) n32 
-Userland是高度实验性的，很多软件使用这个ABI都有问题，所以目前可以保证你会遇到稳定性问题。目前有人正致力于改进目前的状况，如果你使用这个profile将不会获得任何支持，除非你愿意提交补丁来帮助解决存在的问题。
+(2) n32 Userland是高度实验性的，很多软件使用这个ABI都有问题，所以目前可以保证你会遇到稳定性问题。目前有人正致力于改进目前的状况，如果你使用这个profile将不会获得任何支持，除非你愿意提交补丁来帮助解决存在的问题。
 </warn>
 
 <warn>
@@ -332,9 +329,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/defau
 </p>
 
 <p>
-在<c>USE</c>变量里你可以定义关键字，它被用来对应相应的编译选项。比如，<e>ssl</e>会让程序在它编译时加入对它的支持。<e>-X</e>会移除其对于X服务器的支持（注意前面的减号）。<e>gnome 
-gtk -kde -qt3 
--qt4</e>将会在你编译软件的时候添加对gnome（和gtk）的支持，并且移除对kde（和qt）的支持，这可以让你的系统尽可能多的为GNOME做优化。
+在<c>USE</c>变量里你可以定义关键字，它被用来对应相应的编译选项。比如，<e>ssl</e>会让程序在它编译时加入对它的支持。<e>-X</e>会移除其对于X服务器的支持（注意前面的减号）。<e>gnome gtk -kde -qt3 -qt4</e>将会在你编译软件的时候添加对gnome（和gtk）的支持，并且移除对kde（和qt）的支持，这可以让你的系统尽可能多的为GNOME做优化。
 </p>
 
 <p>
@@ -342,8 +337,7 @@ gtk -kde -qt3
 </p>
 
 <p>
-关于<c>USE</c>的详解你可以在Gentoo手册的第二部分，<uri 
-link="?part=2&amp;chap=2">USE标记</uri>里找到。对于USE标记的详细介绍可以查看你的系统里<path>/usr/portage/profiles/use.desc</path>。 
+关于<c>USE</c>的详解你可以在Gentoo手册的第二部分，<uri link="?part=2&amp;chap=2">USE标记</uri>里找到。对于USE标记的详细介绍可以查看你的系统里<path>/usr/portage/profiles/use.desc</path>。
 </p>
 
 <pre caption="查看可用的USE标记">

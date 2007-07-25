@@ -37,8 +37,7 @@
 <body>
 
 <p>
-Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri 
-link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。 
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </p>
 
 <p>
@@ -50,8 +49,7 @@ link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </pre>
 
 <p>
-当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>gentoo-sources-<keyval
-id="kernel-version"/></c>。你的版本号可能会不同，所以请记住这点。
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>gentoo-sources-<keyval id="kernel-version"/></c>。你的版本号可能会不同，所以请记住这点。
 </p>
 
 <pre caption="查看内核源码符号链接">
@@ -64,9 +62,7 @@ lrwxrwxrwx    1 root     root           22  Mar 18 16:23 /usr/src/linux -&gt; li
 </p>
 
 <p>
-如果您希望手动配置您的内核，点击<uri 
-link="#manual">默认：手动配置</uri>。如果您希望使用<c>genkernel</c>，您可以阅读<uri 
-link="#genkernel">备选：使用genkernel</uri>。
+如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。如果您希望使用<c>genkernel</c>，您可以阅读<uri link="#genkernel">备选：使用genkernel</uri>。
 </p>
 
 </body>
@@ -83,16 +79,11 @@ link="#genkernel">备选：使用genkernel</uri>。
 </p>
 
 <p>
-然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge --usepkg 
-pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: 
-cannot 
-open/sys/bus/pci/devices）。此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。另外一个查找哪些组件功能需要激活的好地方是检查成功启动好的内核消息日志。键入<c>dmesg</c>用来查看内核消息。
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge --usepkg pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。另外一个查找哪些组件功能需要激活的好地方是检查成功启动好的内核消息日志。键入<c>dmesg</c>用来查看内核消息。
 </p>
 
 <p>
-现在进入你的内核源代码目录，是时候来配置你的内核了。在大多数的32位PowerPC机器上首先运行<c>make 
-pmac32_defconfig</c>为你的配置增加默认设置。在默认设置生成后，运行<c>make 
-menuconfig</c>会出现一个基于ncurses的配置菜单。
+现在进入你的内核源代码目录，是时候来配置你的内核了。在大多数的32位PowerPC机器上首先运行<c>make pmac32_defconfig</c>为你的配置增加默认设置。在默认设置生成后，运行<c>make menuconfig</c>会出现一个基于ncurses的配置菜单。
 </p>
 
 <pre caption="调用menuconfig">
@@ -121,10 +112,7 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-现在转到<c>File 
-Systems</c>，选中你使用的文件系统支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc 
-file system</c>和 <c>Virtual 
-memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
+现在转到<c>File Systems</c>，选中你使用的文件系统支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
 </p>
 
 <pre caption="选中需要的文件系统">
@@ -169,8 +157,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over 
-Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成是使用核心PPPoE时才会用到它。
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成是使用核心PPPoE时才会用到它。
 </p>
 
 <p>
@@ -189,9 +176,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-目前，完全的kernel 
-preemption在PPC上仍然不稳定以及可能导致编译错误和随机段错误。我们<e>强烈</e>建议你不要使用这个特性。<e>Voluntary 
-Preemption</e>和<e>No Forced Preemption</e>都是安全的。
+目前，完全的kernel preemption在PPC上仍然不稳定以及可能导致编译错误和随机段错误。我们<e>强烈</e>建议你不要使用这个特性。<e>Voluntary Preemption</e>和<e>No Forced Preemption</e>都是安全的。
 </p>
 
 <pre caption="确保Preemptible Kernel选项是关闭的">
@@ -227,8 +212,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用OpenFirmware 
-framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
+不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用OpenFirmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
 </p>
 
 <pre caption="选择一个Framebuffer驱动">
@@ -351,9 +335,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-如果你使用firewire或USB设备启动，你需要增加一些模块到initrd中。编辑<path>/usr/share/genkernel/ppc/modules_load</path>然后修改<c>MODULES_FIREWIRE="ieee1394 
-ohci1394 sbp2"</c>用以支持firewire或者是<c>MODULES_USB="usbcore ohci-hcd ehci-hcd 
-usb-storage"</c>用以支持USB。
+如果你使用firewire或USB设备启动，你需要增加一些模块到initrd中。编辑<path>/usr/share/genkernel/ppc/modules_load</path>然后修改<c>MODULES_FIREWIRE="ieee1394 ohci1394 sbp2"</c>用以支持firewire或者是<c>MODULES_USB="usbcore ohci-hcd ehci-hcd usb-storage"</c>用以支持USB。
 </p>
 
 <p>
@@ -367,13 +349,11 @@ usb-storage"</c>用以支持USB。
 </pre>
 
 <p>
-现在通过运行<c>genkernel --genzimage 
-all</c>来编译你的内核源代码。对于Pegasos机器，我们需要使用一个不同的配置文件以及创建一个zImage，而不是Apple机器使用的vmlinux内核。注意，因为<c>genkernel</c>编译的内核支持大多数的硬件，所以编译需要相当一会儿的时间才能完成！
+现在通过运行<c>genkernel --genzimage all</c>来编译你的内核源代码。对于Pegasos机器，我们需要使用一个不同的配置文件以及创建一个zImage，而不是Apple机器使用的vmlinux内核。注意，因为<c>genkernel</c>编译的内核支持大多数的硬件，所以编译需要相当一会儿的时间才能完成！
 </p>
 
 <p>
-请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用 <c>genkernel --menuconfig 
-all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加<c>--evms2</c>或<c>--lvm2</c>参数。
+请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用<c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加<c>--evms2</c>或<c>--lvm2</c>参数。
 </p>
 
 <pre caption="运行genkernel">

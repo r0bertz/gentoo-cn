@@ -29,8 +29,7 @@ Fri Mar 29 16:21:18 CEST 2005
 </pre>
 
 <p>
-如果显示的日期／时间不正确，可以使用<c>date 
-MMDDhhmmYYYY</c>命令（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，<b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
+如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>命令（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，<b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
 </p>
 
 <pre caption="设置UTC日期／时间">
@@ -64,8 +63,7 @@ MMDDhhmmYYYY</c>命令（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<
 </pre>
 
 <p>
-下面这个表格指定了你的系统需要哪个stage。Stage可以从<uri 
-link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>releases/mips/current</c>目录下。
+下面这个表格指定了你的系统需要哪个stage。Stage可以从<uri link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>releases/mips/current</c>目录下。
 </p>
 
 <table>
@@ -138,8 +136,7 @@ link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>release
 </pre>
 
 <p>
-Gentoo/MIPS netboot镜像提供了<c>wget</c>作为下载文件的工具。因为空间的限制，在SGI 
-netboot镜像里不可能提供功能更完善的浏览器。LiveCD用户可以是用<c>elinks</c>。
+Gentoo/MIPS netboot镜像提供了<c>wget</c>作为下载文件的工具。因为空间的限制，在SGI netboot镜像里不可能提供功能更完善的浏览器。LiveCD用户可以是用<c>elinks</c>。
 </p>
 
 <pre caption="用wget下载tarball">
@@ -147,9 +144,7 @@ netboot镜像里不可能提供功能更完善的浏览器。LiveCD用户可以�
 </pre>
 
 <p>
-如果你想校验所下载的stage 
-tarball的完整性，使用<c>md5sum</c>或者<c>sha1sum</c>然后把输出同镜像站上提供的MD5校验和对比。 
-例如校验一个mips4的stage tarball：
+如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>或者<c>sha1sum</c>然后把输出同镜像站上提供的MD5校验和对比。例如校验一个mips4的stage tarball：
 </p>
 
 <pre caption="校验一个stage tarball完整性的例子">
@@ -174,8 +169,7 @@ stage3-mips4-2007.0.tar.bz2: OK
 </pre>
 
 <p>
-确保你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>表示解开（<e>Extract</e>），<c>v</c>表示详细信息（<e>Verbose</e>）可以用来查看解压缩时发生了什么（可选参数），<c>j</c>表示使用bzip2解压缩，<c>p</c>表示保留权限（<e>Preserve 
-permissions</e>），还有<c>f</c>表示我们要解开一个文件，而不是标准输入。
+确保你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>表示解开（<e>Extract</e>），<c>v</c>表示详细信息（<e>Verbose</e>）可以用来查看解压缩时发生了什么（可选参数），<c>j</c>表示使用bzip2解压缩，<c>p</c>表示保留权限（<e>Preserve permissions</e>），还有<c>f</c>表示我们要解开一个文件，而不是标准输入。
 </p>
 
 <p>
@@ -211,9 +205,7 @@ permissions</e>），还有<c>f</c>表示我们要解开一个文件，而不是
 </pre>
 
 <p>
-从<uri 
-link="/main/en/mirrors.xml">本地镜像</uri>下载一个portage快照。你可以在<path>snapshots/</path>目录下找到它们。使用和stage 
-tarball一样的处理方式把它传输到目标系统里。
+从<uri link="/main/en/mirrors.xml">本地镜像</uri>下载一个portage快照。你可以在<path>snapshots/</path>目录下找到它们。使用和stage tarball一样的处理方式把它传输到目标系统里。
 </p>
 
 <pre caption="解开Portage快照">
@@ -257,8 +249,7 @@ tarball一样的处理方式把它传输到目标系统里。
 <body>
 
 <p>
-<c>CFLAGS</c>和<c>CXXFLAGS</c>变量分别定义了<c>gcc</c> 
-C和C++编译器的优化标记。尽管我们通常都在这里定义，你也可以对每个软件单独定义这些优化标记以获得最好的性能。因为每个程序都是不同的。
+<c>CFLAGS</c>和<c>CXXFLAGS</c>变量分别定义了<c>gcc</c> C和C++编译器的优化标记。尽管我们通常都在这里定义，你也可以对每个软件单独定义这些优化标记以获得最好的性能。因为每个程序都是不同的。
 </p>
 
 <p>
@@ -266,10 +257,7 @@ C和C++编译器的优化标记。尽管我们通常都在这里定义，你也�
 </p>
 
 <p>
-我们不会解释所有可能的优化选项。如果你想搞清楚它们，请阅读<uri 
-link="http://gcc.gnu.org/onlinedocs/">GNU在线手册</uri> 或者是<c>gcc</c> 
-info页面（<c>info 
-gcc</c>——只能在可工作的Linux系统中查看）。<path>make.conf.example</path>本身也包含了不少信息和范例；不要忘了也看看它。 
+我们不会解释所有可能的优化选项。如果你想搞清楚它们，请阅读<uri link="http://gcc.gnu.org/onlinedocs/">GNU在线手册</uri>或者是<c>gcc</c> info页面（<c>info gcc</c>——只能在可工作的Linux系统中查看）。<path>make.conf.example</path>本身也包含了不少信息和范例；不要忘了也看看它。
 </p>
 
 <p>
@@ -296,8 +284,7 @@ gcc</c>——只能在可工作的Linux系统中查看）。<path>make.conf.exam
 </pre>
 
 <p>
-在MIPS世界里很重要的一个设定是<c>-mabi=</c>参数。MIPS有3个不同的ABI：<c>32</c>（纯32位，也称<c>o32</c>），<c>64</c>（全64位，也称<c>n64</c>）和<c>n32</c>（32位数据结构和64位指令的混合体）。你想用哪个就用这个参数来选择。注意你需要有你所选择的ABI的库。比如，在layman的术语里，这意味着你不能在32位 
-userland（甚至<c>n32</c> userland）里使用<c>-mabi=64</c>。
+在MIPS世界里很重要的一个设定是<c>-mabi=</c>参数。MIPS有3个不同的ABI：<c>32</c>（纯32位，也称<c>o32</c>），<c>64</c>（全64位，也称<c>n64</c>）和<c>n32</c>（32位数据结构和64位指令的混合体）。你想用哪个就用这个参数来选择。注意你需要有你所选择的ABI的库。比如，在layman的术语里，这意味着你不能在32位userland（甚至<c>n32</c> userland）里使用<c>-mabi=64</c>。
 </p>
 
 <p>
@@ -338,8 +325,7 @@ MAKEOPTS="-j2"
 <body>
 
 <p>
-根据你的喜好更新<path>/mnt/gentoo/etc/make.conf</path>并保存（<c>nano</c>用户可以敲<c>Ctrl-X</c>）。你现在准备好可以继续<uri 
-link="?part=1&amp;chap=6">安装Gentoo基本系统</uri>了。
+根据你的喜好更新<path>/mnt/gentoo/etc/make.conf</path>并保存（<c>nano</c>用户可以敲<c>Ctrl-X</c>）。你现在准备好可以继续<uri link="?part=1&amp;chap=6">安装Gentoo基本系统</uri>了。
 </p>
 
 </body>

@@ -120,8 +120,7 @@
 </author>
 
 <abstract>
-Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含在x86平台无网络条件 
-下安装操作指南以及讲述如何使用Gentoo和Portage的章节。
+Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含在x86平台无网络条件下安装操作指南以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 
@@ -157,8 +156,7 @@ Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起�
 <chapter>
 <title>使用基于GTK+的Gentoo Linux安装程序</title>
 <abstract>
-你现在可以选择使用我们的图形化安装程序安装Gentoo。使用一个易用的GUI界面来配置你所需要的选项， 
-然后就可以开始安装进程。
+你现在可以选择使用我们的图形化安装程序安装Gentoo。使用一个易用的GUI界面来配置你所需要的选项，然后就可以开始安装进程。
 </abstract>
   <include href="hb-install-gtkfe.xml" />
 </chapter>
@@ -166,8 +164,7 @@ Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起�
 <chapter>
 <title>使用基于Dialog的Gentoo Linux安装程序</title>
 <abstract>
-你可以选择使用我们文本模式的安装程序安装Gentoo。使用一组易用的菜单来配置你所需的选项， 
-然后就可以开始安装进程。
+你可以选择使用我们文本模式的安装程序安装Gentoo。使用一组易用的菜单来配置你所需的选项，然后就可以开始安装进程。
 </abstract>
   <include href="hb-install-gli-dialog.xml" />
 </chapter>
@@ -198,8 +195,7 @@ Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起�
 <chapter>
 <title>USE标记</title>
 <abstract>
-USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响 
-你的系统构建。
+USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
 </abstract>
   <include href="../hb-working-use.xml"/>
 </chapter>
@@ -215,8 +211,7 @@ USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定US
 <chapter>
 <title>初始化脚本</title>
 <abstract>
-Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的决定和虚拟的初始化 
-脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
+Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的决定和虚拟的初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
 </abstract>
   <include href="../hb-working-rcscripts.xml"/>
 </chapter>
@@ -224,8 +219,7 @@ Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中�
 <chapter>
 <title>环境变量</title>
 <abstract>
-使用Gentoo你可以容易地管理你系统中的环境变量。本章会解释管理方式以及描述一些经常会使用到 
-的变量。
+使用Gentoo你可以容易地管理你系统中的环境变量。本章会解释管理方式以及描述一些经常会使用到的变量。
 </abstract>
   <include href="../hb-working-variables.xml"/>
 </chapter>
@@ -256,8 +250,7 @@ Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中�
 <chapter>
 <title>使用多个软件分支</title>
 <abstract>
-Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支中。“使用多个软件分支”告诉你 
-这些分支是如何配置的以及如何在个别情况下使用其他分支的软件。
+Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支中。“使用多个软件分支”告诉你这些分支是如何配置的以及如何在个别情况下使用其他分支的软件。
 </abstract>
   <include href="../hb-portage-branches.xml"/>
 </chapter>
@@ -273,8 +266,7 @@ Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支�
 <chapter>
 <title>改造Portage树</title>
 <abstract>
-“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类， 
-加入自己的软件包等等的心得技巧。
+“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类，加入自己的软件包等等的心得技巧。
 </abstract>
   <include href="../hb-portage-diverttree.xml"/>
 </chapter>
@@ -303,8 +295,7 @@ Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支�
 <chapter>
 <title>模块化网络</title>
 <abstract>
-Gentoo提供了灵活多变的组网方式——在这里你将会了解到选择不同的DHCP客户端，设置Bonding， 
-桥接，VLAN等等。
+Gentoo提供了灵活多变的组网方式——在这里你将会了解到选择不同的DHCP客户端，设置Bonding，桥接，VLAN等等。
 </abstract>
 <include href="../hb-net-modules.xml"/>
 </chapter>

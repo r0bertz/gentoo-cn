@@ -26,7 +26,7 @@
   <mail link="uberlord@gentoo.org">Roy Marples</mail>
 </author>
 <author title="作者">
-    <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
 </author>
 <author title="作者">
   <mail link="chouser@gentoo.org">Chris Houser</mail>
@@ -52,44 +52,44 @@
   <mail link="gmsoft@gentoo.org">Guy Martin</mail>
 </author>
 <author title="Gentoo PPC开发人员">
-   <mail link="pvdabeel@gentoo.org">Pieter Van den Abeele</mail>
+  <mail link="pvdabeel@gentoo.org">Pieter Van den Abeele</mail>
 </author>
 <author title="Gentoo SPARC开发人员">
   <mail link="blademan@gentoo.org">Joe Kallar</mail>
 </author>
 <author title="编辑">
-    <mail link="zhen@gentoo.org">John P. Davis</mail>
+  <mail link="zhen@gentoo.org">John P. Davis</mail>
 </author>
 <author title="编辑">Pierre-Henri Jondot</author>
 <author title="编辑">
-    <mail link="stocke2@gentoo.org">Eric Stockbridge</mail>
+  <mail link="stocke2@gentoo.org">Eric Stockbridge</mail>
 </author>
 <author title="编辑">
-    <mail link="rajiv@gentoo.org">Rajiv Manglani</mail>
+  <mail link="rajiv@gentoo.org">Rajiv Manglani</mail>
 </author>
 <author title="编辑">
-    <mail link="seo@gentoo.org">Jungmin Seo</mail>
+  <mail link="seo@gentoo.org">Jungmin Seo</mail>
 </author>
 <author title="编辑">
-    <mail link="zhware@gentoo.org">Stoyan Zhekov</mail>
+  <mail link="zhware@gentoo.org">Stoyan Zhekov</mail>
 </author>
 <author title="编辑">
-    <mail link="jhhudso@gentoo.org">Jared Hudson</mail>
+  <mail link="jhhudso@gentoo.org">Jared Hudson</mail>
 </author>
 <author title="编辑">
-    <mail link="peitolm@gentoo.org">Colin Morey</mail>
+  <mail link="peitolm@gentoo.org">Colin Morey</mail>
 </author>
 <author title="编辑">
-    <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
 </author>
 <author title="编辑">
-    <mail link="carl@gentoo.org">Carl Anderson</mail>
+  <mail link="carl@gentoo.org">Carl Anderson</mail>
 </author>
 <author title="编辑">
-    <mail link="avenj@gentoo.org">Jon Portnoy</mail>
+  <mail link="avenj@gentoo.org">Jon Portnoy</mail>
 </author>
 <author title="编辑">
-     <mail link="klasikahl@gentoo.org">Zack Gilburd</mail>
+  <mail link="klasikahl@gentoo.org">Zack Gilburd</mail>
 </author>
 <author title="编辑">
   <mail link="jmorgan@gentoo.org">Jack Morgan</mail>
@@ -113,21 +113,20 @@
   <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
 <author title="审校">
-    <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
+  <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
 </author>
 <author title="审校">
-    <mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>
+  <mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>
 </author>
 <author title="审校">
-    <mail link="antifa@gentoo.org">Ken Nowack</mail>
+  <mail link="antifa@gentoo.org">Ken Nowack</mail>
 </author>
 <author title="投稿">
-   <mail link="pylon@gentoo.org">Lars Weiler</mail>
+  <mail link="pylon@gentoo.org">Lars Weiler</mail>
 </author>
 
 <abstract>
-这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在Alpha系统上的基 
-于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
+这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在Alpha系统上的基于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
@@ -135,7 +134,7 @@
 <license/>
 
 <version>8.0</version>
-<date>2007-05-07777777</date>
+<date>2007-05-07</date>
 
 <part>
 <title>安装Gentoo</title>

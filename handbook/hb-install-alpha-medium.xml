@@ -152,17 +152,11 @@
 <body>
 
 <p>
-You might find a Package 光盘 on one of our mirrors. This 光盘 is not an
-Installation 光盘 but an additional resource that can be exploited during a
-networkless installation. It contains prebuilt packages (also known as the GRP
-set) that allow you to easily and quickly install additional applications
-(such as OpenOffice.org, KDE, GNOME, ...) immediately after the networkless
-Gentoo installation.
+You might find a Package 光盘 on one of our mirrors. This 光盘 is not an Installation 光盘 but an additional resource that can be exploited during a networkless installation. It contains prebuilt packages (also known as the GRP set) that allow you to easily and quickly install additional applications (such as OpenOffice.org, KDE, GNOME, ...) immediately after the networkless Gentoo installation.
 </p>
 
 <p>
-If you intend to use the Packages 光盘 to quickly install additional software,
-make sure that you use the same subarchitecture as the stage3 tarball you use.
+If you intend to use the Packages 光盘 to quickly install additional software, make sure that you use the same subarchitecture as the stage3 tarball you use.
 </p>
 -->
 </body>

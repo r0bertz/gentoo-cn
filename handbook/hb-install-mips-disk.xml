@@ -16,8 +16,7 @@
 <body>
 
 <p>
-我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、 
-分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
 </p>
 
 <p>
@@ -151,8 +150,7 @@ Command (m for help):
 </pre>
 
 <note>
-如果你的磁盘已经有了一个SGI盘标，那么fdisk不将允许再创建一个新的盘标。有两个方法可以解决这个问题。一个是创建一个Sun或者MS-DOS盘标，把改动写入磁盘，然后重启fdisk。第二个是用空数据覆盖分区表，用这个命令：<c>dd 
-if=/dev/zero of=/dev/sda bs=512 count=1</c>。
+如果你的磁盘已经有了一个SGI盘标，那么fdisk不将允许再创建一个新的盘标。有两个方法可以解决这个问题。一个是创建一个Sun或者MS-DOS盘标，把改动写入磁盘，然后重启fdisk。第二个是用空数据覆盖分区表，用这个命令：<c>dd if=/dev/zero of=/dev/sda bs=512 count=1</c>。
 </note>
 </body>
 </subsection>
@@ -202,8 +200,7 @@ First cylinder (0-50, default 0): <i>0</i>
 </p>
 
 <p>
-这些完成后，你就可以任意创建其他的分区了。当所有的分区划分完毕后，记得把交换分区的ID改为<c>82</c>，也就是Linux 
-Swap。如果不改，ID将为<c>83</c>，Linux Native。
+这些完成后，你就可以任意创建其他的分区了。当所有的分区划分完毕后，记得把交换分区的ID改为<c>82</c>，也就是Linux Swap。如果不改，ID将为<c>83</c>，Linux Native。
 </p>
 
 <p>
@@ -218,8 +215,7 @@ Swap。如果不改，ID将为<c>83</c>，Linux Native。
 <body>
 
 <p>
-在Cobalt机器上，BOOTROM期望看到一个MS-DOS主引导扇区，所以分区是相对简单的——实际上，这和在Inter 
-x86机器上分区是一样的。<e>不过</e>你要记得一些事情。
+在Cobalt机器上，BOOTROM期望看到一个MS-DOS主引导扇区，所以分区是相对简单的——实际上，这和在Inter x86机器上分区是一样的。<e>不过</e>你要记得一些事情。
 </p>
 
 <ul>
@@ -442,8 +438,7 @@ Syncing disks.
 <body>
 
 <p>
-你的分区已经创建完了，现在可以在上面安装文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri 
-link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
+你的分区已经创建完了，现在可以在上面安装文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
 </p>
 
 </body>
@@ -514,8 +509,7 @@ link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续
 </table>
 
 <p>
-例如，要使启动分区（本例中的<path>/dev/hda1</path>）为ext2和根分区（本例中的 
-<path>/dev/hda3</path>）为ext3,应该这样做：
+例如，要使启动分区（本例中的<path>/dev/hda1</path>）为ext2和根分区（本例中的<path>/dev/hda3</path>）为ext3,应该这样做：
 </p>
 
 <pre caption="在分区上应用文件系统">
@@ -528,10 +522,7 @@ link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续
 </p>
 
 <warn>
-如果你在Cobalt服务器上安装，记得<path>/dev/hda1</path>必须是<e>EXT2 revision 
-0</e>；所有其他文件系统（比如EXT2 revision 
-1、EXT3、ReiserFS、XFS、JFS还有其他的)<e>都不行！</e>你可以用这个命令来格式化：<c>mke2fs -r 0 
-/dev/hda1</c>。
+如果你在Cobalt服务器上安装，记得<path>/dev/hda1</path>必须是<e>EXT2 revision 0</e>；所有其他文件系统（比如EXT2 revision 1、EXT3、ReiserFS、XFS、JFS还有其他的)<e>都不行！</e>你可以用这个命令来格式化：<c>mke2fs -r 0 /dev/hda1</c>。
 </warn>
 
 </body>
@@ -578,8 +569,7 @@ link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续
 </pre>
 
 <note>
-如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权 限：<c>chmod 1777 
-/mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
 </note>
 
 <p>

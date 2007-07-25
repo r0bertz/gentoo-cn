@@ -21,9 +21,7 @@
 <body>
 
 <p>
-我们要好好了解下Gentoo 
-Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo 
-Linux做好准备。
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
 </p>
 
 <p>
@@ -64,14 +62,11 @@ Linux做好准备。
 <body>
 
 <p>
-Apple New World架构的机器是相当容易配置的。第一个分区通常是一个<e>Apple Partition 
-Map</e>。这个分区维护着你磁盘的布局。你不能删除这个分区。下一个分区通常是一个bootstrap分区。这个分区包含了一个小的（800k）HFS文件系统，它包含了一份启动程序yaboot的复本以及它的配置文件。这个分区<e>不</e>是像其他一些架构上的<path>/boot</path>分区。在启动分区后，根据以下的模式置有通常的Linux文件系统。交换分区是一个当你的系统用完物理内存时暂时存放的地方。root分区会包含gentoo安装的系统。如果你想要双启动，确保yaboot先启动后OSX分区可以进入任何bootstrap分区后的系统。
+Apple New World架构的机器是相当容易配置的。第一个分区通常是一个<e>Apple Partition Map</e>。这个分区维护着你磁盘的布局。你不能删除这个分区。下一个分区通常是一个bootstrap分区。这个分区包含了一个小的（800k）HFS文件系统，它包含了一份启动程序yaboot的复本以及它的配置文件。这个分区<e>不</e>是像其他一些架构上的<path>/boot</path>分区。在启动分区后，根据以下的模式置有通常的Linux文件系统。交换分区是一个当你的系统用完物理内存时暂时存放的地方。root分区会包含gentoo安装的系统。如果你想要双启动，确保yaboot先启动后OSX分区可以进入任何bootstrap分区后的系统。
 </p>
 
 <note>
-你磁盘上可能会有“Disk 
-Driver”分区，比如<path>Apple_Driver63</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>和<path>Apple_Patches</path>。这些是用来启动Mac 
-OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选项来初始化磁盘删除它们。这样会完全抹除整个磁盘！如果你不确定该怎么处理它们，干脆不要动它们。
+你磁盘上可能会有“Disk Driver”分区，比如<path>Apple_Driver63</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>和<path>Apple_Patches</path>。这些是用来启动Mac OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选项来初始化磁盘删除它们。这样会完全抹除整个磁盘！如果你不确定该怎么处理它们，干脆不要动它们。
 </note>
 
 <note>
@@ -118,10 +113,7 @@ OS的，所以你如果不需要它们，你可以通过mac-fdisk的<c>i</c>选�
 <body>
 
 <p>
-Apple Old World架构的机器相对来说配置起来有点复杂。第一个分区通常是<e>Apple Partition 
-Map</e>。这个分区记录着磁盘的布局。你不能删除掉这个分区。如果你正在使用BootX，如下的配置是假设MacOS安装在一个独立的磁盘上的。如果不是这样，会有额外的“Apple 
-Disk 
-Drivers”分区比如<path>Apple_Driver63、Apple_Driver_ATA、Apple_FWDriver、Apple_Driver_IOKit、Apple_Patches</path>和MacOS安装文件。如果你正在使用Quik，你会需要创建一个包含有内核的启动分区，这点不像其他的Apple启动方法。在启动分区之后，就是一些如下模式通常的Linux文件系统了。交换分区是一个当你物理内存用完后暂时存储的地方。root分区会包含Gentoo安装的文件。
+Apple Old World架构的机器相对来说配置起来有点复杂。第一个分区通常是<e>Apple Partition Map</e>。这个分区记录着磁盘的布局。你不能删除掉这个分区。如果你正在使用BootX，如下的配置是假设MacOS安装在一个独立的磁盘上的。如果不是这样，会有额外的“Apple Disk Drivers”分区比如<path>Apple_Driver63、Apple_Driver_ATA、Apple_FWDriver、Apple_Driver_IOKit、Apple_Patches</path>和MacOS安装文件。如果你正在使用Quik，你会需要创建一个包含有内核的启动分区，这点不像其他的Apple启动方法。在启动分区之后，就是一些如下模式通常的Linux文件系统了。交换分区是一个当你物理内存用完后暂时存储的地方。root分区会包含Gentoo安装的文件。
 </p>
 
 <note>
@@ -236,14 +228,11 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </table>
 
 <warn>
-<c>parted</c>能够重新划分包括HFS+在内的分区的大小。不幸的是，它不能够重新划分HFS+日志文件系统，所以在重新定义大小前，为了保证最好的结果，请在Mac 
-OS X中关闭掉日志记录功能。牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据！
+<c>parted</c>能够重新划分包括HFS+在内的分区的大小。不幸的是，它不能够重新划分HFS+日志文件系统，所以在重新定义大小前，为了保证最好的结果，请在Mac OS X中关闭掉日志记录功能。牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据！
 </warn>
 
 <p>
-如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则，请跳转到<uri 
-link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘分区</uri>或者<uri 
-link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
+如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则，请跳转到<uri link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘分区</uri>或者<uri link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
 </p>
 
 </body>
@@ -319,8 +308,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
 </p>
 
 <note>
-确保万事具备，你可以再次运行<c>mac-fdisk 
--l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
+确保万事具备，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
 </note>
 
 <p>
@@ -334,8 +322,7 @@ link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
 <body>
 
 <p>
-<c>parted</c>，一个分区编辑器，能够操作Mac OS和Mac OS 
-X使用的HFS+分区。通过这个工具你可以重新划分Mac-分区的大小以及为你的Linux分区创建空间。不过以下的例子只是描述了Pegasos机器的分区。
+<c>parted</c>，一个分区编辑器，能够操作Mac OS和Mac OS X使用的HFS+分区。通过这个工具你可以重新划分Mac-分区的大小以及为你的Linux分区创建空间。不过以下的例子只是描述了Pegasos机器的分区。
 </p>
 
 <p>
@@ -355,21 +342,15 @@ X使用的HFS+分区。通过这个工具你可以重新划分Mac-分区的大�
 </p>
 
 <p>
-如果你准备在你的Pegasos机器上安装MorphOS，你在磁盘的最开始创建一个affs1文件系统。32M已经足够用于存放MorphOS内核。如果你拥有一台Pegasos 
-I或者想要使用除了ext2或ext3的文件系统，你同样需要将你的Linux内核存放到这个分区上（Pegasos 
-II只能从ext2/ext3或affs1分区启动）。运行<c>mkpart primary affs1 START 
-END</c>来创建一个分区，在这儿<c>START</c>和<c>END</c>需要被替换成以兆为单位的区间（比如：<c>0 
-32</c>）它会创建一个从0M开始至32M结束的32M大小的分区。如果你选择创建一个ext2或ext3分区，用ext2或ext3替换mkpart命令中的affs1。
+如果你准备在你的Pegasos机器上安装MorphOS，你在磁盘的最开始创建一个affs1文件系统。32M已经足够用于存放MorphOS内核。如果你拥有一台Pegasos I或者想要使用除了ext2或ext3的文件系统，你同样需要将你的Linux内核存放到这个分区上（Pegasos II只能从ext2/ext3或affs1分区启动）。运行<c>mkpart primary affs1 START END</c>来创建一个分区，在这儿<c>START</c>和<c>END</c>需要被替换成以兆为单位的区间（比如：<c>0 32</c>）它会创建一个从0M开始至32M结束的32M大小的分区。如果你选择创建一个ext2或ext3分区，用ext2或ext3替换mkpart命令中的affs1。
 </p>
 
 <p>
-你需要为Linux创建两个分区，一个root文件系统和一个交换分区。运行<c>mkpart primary START 
-END</c>来创建各个分区，用需要的兆边界值来替换<c>START</c>和<c>END</c>。
+你需要为Linux创建两个分区，一个root文件系统和一个交换分区。运行<c>mkpart primary START END</c>来创建各个分区，用需要的兆边界值来替换<c>START</c>和<c>END</c>。
 </p>
 
 <p>
-通常我们建议创建一个两倍于你内存容量大小的交换分区，但至少512M是我们推荐的。运行<c>mkpart primary linux-swap START 
-END</c>其中用分区边界值来替换其中的值来创建交换分区。
+通常我们建议创建一个两倍于你内存容量大小的交换分区，但至少512M是我们推荐的。运行<c>mkpart primary linux-swap START END</c>其中用分区边界值来替换其中的值来创建交换分区。
 </p>
 
 <p>
@@ -385,8 +366,7 @@ END</c>其中用分区边界值来替换其中的值来创建交换分区。
 <body>
 
 <p>
-至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri 
-link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统。
+至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统。
 </p>
 
 </body>
@@ -487,8 +467,7 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS它
 </p>
 
 <note>
-在Pegasos 
-II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构的机器能够从任何ext2、ext3、XFS、ReiserFS甚至是HFS/HFS+文件系统上启动。在使用BootX启动的OldWorld机器上，内核需要放置到HFS分区上，不过这会在你配置你的引导程序时完成。
+在Pegasos II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构的机器能够从任何ext2、ext3、XFS、ReiserFS甚至是HFS/HFS+文件系统上启动。在使用BootX启动的OldWorld机器上，内核需要放置到HFS分区上，不过这会在你配置你的引导程序时完成。
 </note>
 
 </body>
@@ -507,8 +486,7 @@ II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构�
 </pre>
 
 <note>
-如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载和解压之后修改它的权限：<c>chmod 1777 
-/mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载和解压之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
 </note>
 
 <p>

@@ -32,8 +32,7 @@
 <body>
 
 <p>
-被所有发行版构造的核心就是Linux内核。它的层次介于用户程序和系统硬件之间。Gentoo给它的用户提供了很多内核源代码。一个完整的说明列表可以从<uri 
-link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。 
+被所有发行版构造的核心就是Linux内核。它的层次介于用户程序和系统硬件之间。Gentoo给它的用户提供了很多内核源代码。一个完整的说明列表可以从<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。
 </p>
 
 <p>
@@ -71,8 +70,7 @@ lrwxrwxrwx    1 root     root        12 Oct 13 11:04 /usr/src/linux -&gt; linux-
 <body>
 
 <p>
-手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当
-您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
 </p>
 
 <p>
@@ -108,9 +106,7 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-现在到<c>File 
-Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual 
-memory</c>和<c>/proc file system</c>也选上：
+现在到<c>File Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual memory</c>和<c>/proc file system</c>也选上：
 </p>
 
 <pre caption="选择必需的文件系统">
@@ -137,8 +133,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-这两个压缩选项并没有坏处但并不一定需要，<c>PPP over 
-Ethernet</c>选项也是，它可能仅被<c>ppp</c>配置为内核方式的PPPoE需要。
+这两个压缩选项并没有坏处但并不一定需要，<c>PPP over Ethernet</c>选项也是，它可能仅被<c>ppp</c>配置为内核方式的PPPoE需要。
 </p>
 
 <p>

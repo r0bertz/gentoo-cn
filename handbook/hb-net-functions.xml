@@ -21,25 +21,19 @@
 <body>
 
 <p>
-你可以定义4个函数，它们将会在<c>start</c>/<c>stop</c>操作前后被调用。这些函数将会
-以接口名称作为参数被调用，以便于一个函数可以控制多个适配器。
+你可以定义4个函数，它们将会在<c>start</c>/<c>stop</c>操作前后被调用。这些函数将会以接口名称作为参数被调用，以便于一个函数可以控制多个适配器。
 </p>
 
 <p>
-<c>preup()</c>和<c>predown()</c>函数的返回值必须为0（成功），这意味着可以使一个网
-络接口进入配置状态或退出配置状态。如果<c>preup()</c>返回一个非0值，则网络接口配置
-过程将被中止。如果<c>predown()</c>返回一个非0值，则停止该网络接口运行的操作将被终
-止。
+<c>preup()</c>和<c>predown()</c>函数的返回值必须为0（成功），这意味着可以使一个网络接口进入配置状态或退出配置状态。如果<c>preup()</c>返回一个非0值，则网络接口配置过程将被中止。如果<c>predown()</c>返回一个非0值，则停止该网络接口运行的操作将被终止。
 </p>
 
 <p>
-<c>postup()</c>和<c>postdown()</c>函数的返回值会被忽略，因为就算它们返回失败，系
-统也没有什么可以做的。
+<c>postup()</c>和<c>postdown()</c>函数的返回值会被忽略，因为就算它们返回失败，系统也没有什么可以做的。
 </p>
 
 <p>
-<c>${IFACE}</c>表示要打开/关闭的接口。<c>${IFVAR}</c>是<c>${IFACE}</c>转化而来的
-bash允许的变量名。
+<c>${IFACE}</c>表示要打开/关闭的接口。<c>${IFVAR}</c>是<c>${IFACE}</c>转化而来的bash允许的变量名。
 </p>
 
 <pre caption="pre/post up/down函数范例">
@@ -88,29 +82,23 @@ postdown() {
 <body>
 
 <note>
-此功能不适用于WPA Supplicant──但是<c>${ESSID}</c>和<c>${ESSIDVAR}</c>变量
-在<c>postup()</c>函数中是可用的。
+此功能不适用于WPA Supplicant──但是<c>${ESSID}</c>和<c>${ESSIDVAR}</c>变量在<c>postup()</c>函数中是可用的。
 </note>
 
 <p>
-你可以定义2个函数，它们将会在执行相关的操作前后被调用。这些函数将会以接口名称作为
-参数被调用，以便于一个函数可以控制多个适配器。
+你可以定义2个函数，它们将会在执行相关的操作前后被调用。这些函数将会以接口名称作为参数被调用，以便于一个函数可以控制多个适配器。
 </p>
 
 <p>
-<c>preassociate()</c>函数的返回值应该为0（成功），这意味着一个网络接口的配置或取
-消配置过程可以继续。如果<c>preassociate()</c>返回一个非0值，则网络接口的配置过程
-将被中止。
+<c>preassociate()</c>函数的返回值应该为0（成功），这意味着一个网络接口的配置或取消配置过程可以继续。如果<c>preassociate()</c>返回一个非0值，则网络接口的配置过程将被中止。
 </p>
 
 <p>
-<c>postassociate()</c>函数的返回值是被忽略的，因为就算它们返回失败，系统也没有什
-么可以做的。
+<c>postassociate()</c>函数的返回值是被忽略的，因为就算它们返回失败，系统也没有什么可以做的。
 </p>
 
 <p>
-<c>${ESSID}</c>被设置为你所连接到的AP的ESSID。
-<c>${ESSIDVAR}</c>是<c>${ESSID}</c>转化而来的bash允许的变量名。
+<c>${ESSID}</c>被设置为你所连接到的AP的ESSID。<c>${ESSIDVAR}</c>是<c>${ESSID}</c>转化而来的bash允许的变量名。
 </p>
 
 <pre caption="pre/post association functions">
@@ -146,8 +134,7 @@ postassociate() {
 </pre>
 
 <note>
-<c>${ESSID}</c>和<c>${ESSIDVAR}</c>在<c>predown()</c>和<c>postdown()</c>函数中
-不可用。
+<c>${ESSID}</c>和<c>${ESSIDVAR}</c>在<c>predown()</c>和<c>postdown()</c>函数中不可用。
 </note>
 
 </body>

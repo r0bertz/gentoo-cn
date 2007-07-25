@@ -63,9 +63,7 @@
 <body>
 
 <p>
-在很多架构上，处理器都经过了几代的发展，每一代新处理都是在前一代处理器的基础上构建而来。MIPS也不例外。MIPS架构包含了好几代CPU。为了正确的选择你的netboot镜像stage 
-tarball和<c>CFLAGS</c>，你需要知道你的系统的CPU属于哪个家族。这些所谓的家族被称为<b>I</b>nstruction 
-<b>S</b>et <b>A</b>rchitecture。
+在很多架构上，处理器都经过了几代的发展，每一代新处理都是在前一代处理器的基础上构建而来。MIPS也不例外。MIPS架构包含了好几代CPU。为了正确的选择你的netboot镜像stage tarball和<c>CFLAGS</c>，你需要知道你的系统的CPU属于哪个家族。这些所谓的家族被称为<b>I</b>nstruction <b>S</b>et <b>A</b>rchitecture。
 </p>
 
 <table>
@@ -137,14 +135,11 @@ link="http://www.linux-mips.org/wiki/index.php/R8000">R8000</uri>, R9000,
 </table>
 
 <note>
-这个<c>MIPS5</c>ISA级别是Silicon 
-Graphics早在1994年设计的，不过从来没有应用到实物CPU里。它继续在<c>MIPS64</c> ISA里做为它的一部分存在着。
+这个<c>MIPS5</c>ISA级别是Silicon Graphics早在1994年设计的，不过从来没有应用到实物CPU里。它继续在<c>MIPS64</c> ISA里做为它的一部分存在着。
 </note>
 
 <note>
-经常的，<c>MIPS32</c>和<c>MIPS64</c> ISA会被人们所误解。<c>MIPS64</c> 
-ISA级别实际上是<c>MIPS5</c> 
-ISA的超集，所以它包括了<c>MIPS5</c>和之前的ISA的所有指令。<c>MIPS32</c>是<c>MIPS64</c>的32位子集，它的存在是由于大多数程序只需要32位的处理能力。
+经常的，<c>MIPS32</c>和<c>MIPS64</c> ISA会被人们所误解。<c>MIPS64</c> ISA级别实际上是<c>MIPS5</c> ISA的超集，所以它包括了<c>MIPS5</c>和之前的ISA的所有指令。<c>MIPS32</c>是<c>MIPS64</c>的32位子集，它的存在是由于大多数程序只需要32位的处理能力。
 </note>
 
 <p>
@@ -215,9 +210,7 @@ Instruction Set </uri>
 <body>
 
 <p>
-stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。 
-如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12"> 
-如何使用stage1或stage2安装Gentoo？</uri>
+stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
 </p>
 
 </body>
@@ -230,9 +223,7 @@ stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安�
 <body>
 
 <p>
-在这一节中，我们将讲解要想成功的网络启动Silicon 
-Graphics工作站或者Cobalt服务器，你需要做些什么。这只是一个简单的指引，内容不是很详尽，要获取更多信息，推荐您阅读<uri 
-link="/doc/en/diskless-howto.xml">无盘HOWTO</uri>。
+在这一节中，我们将讲解要想成功的网络启动Silicon Graphics工作站或者Cobalt服务器，你需要做些什么。这只是一个简单的指引，内容不是很详尽，要获取更多信息，推荐您阅读<uri link="/doc/en/diskless-howto.xml">无盘HOWTO</uri>。
 </p>
 
 <p>
@@ -274,10 +265,7 @@ link="/doc/en/diskless-howto.xml">无盘HOWTO</uri>。
 </ul>
 
 <note>
-SGI机器的串口使用MiniDIN 8接口。很显然Apple 
-modem线正好可用来做串口线，不过随着近来越来越多的Apple机器转而使用USE和内置modem，这种线已经很难找了。<uri 
-link="http://www.linux-mips.org/wiki/Serial_Cable">Linux/MIPS 
-Wiki</uri>上有一个布线图，而且大多数电子商店里应该可以买到所需的接头。
+SGI机器的串口使用MiniDIN 8接口。很显然Apple modem线正好可用来做串口线，不过随着近来越来越多的Apple机器转而使用USE和内置modem，这种线已经很难找了。<uri link="http://www.linux-mips.org/wiki/Serial_Cable">Linux/MIPS Wiki</uri>上有一个布线图，而且大多数电子商店里应该可以买到所需的接头。
 </note>
 
 <note>
@@ -285,8 +273,7 @@ Wiki</uri>上有一个布线图，而且大多数电子商店里应该可以买�
 </note>
 
 <note>
-注意本指引不涵盖早期的Qube。早期的Qube服务器在它的默认配置中缺少串口，所以在上面安装Gentoo是不可能的，除非在改锥和替代机器的帮助下。下面的网站上有一个如何在这种机器上安装Gentoo的指引。<uri 
-link="http://www.metzner.org/projects/qube/">http://www.metzner.org/projects/qube/</uri>
+注意本指引不涵盖早期的Qube。早期的Qube服务器在它的默认配置中缺少串口，所以在上面安装Gentoo是不可能的，除非在改锥和替代机器的帮助下。下面的网站上有一个如何在这种机器上安装Gentoo的指引。<uri link="http://www.metzner.org/projects/qube/">http://www.metzner.org/projects/qube/</uri>
 </note>
 </body>
 </subsection>
@@ -299,8 +286,7 @@ link="http://www.metzner.org/projects/qube/">http://www.metzner.org/projects/qub
 </p>
 
 <p>
-值得注意的是这些服务器不一定必须运行Gentoo Linux，你也可以运行FreeBSD或者其他类Unix系统。不过，本指引假设你要运行Gentoo 
-Linux。如果需要，你也可以在其他机器上运行TFTP／NFS，而不在DHCP服务器上运行。
+值得注意的是这些服务器不一定必须运行Gentoo Linux，你也可以运行FreeBSD或者其他类Unix系统。不过，本指引假设你要运行Gentoo Linux。如果需要，你也可以在其他机器上运行TFTP／NFS，而不在DHCP服务器上运行。
 </p>
 
 <warn>
@@ -308,8 +294,7 @@ Gentoo/MIPS团队不能帮你把其他操作系统设定为netboot服务器。�
 </warn>
 
 <p>
-第一步——配置DHCP。为了让ISC DHCP守护进程可响应BOOTP请求（就像SGI和Cobalt 
-BOOTROM所要求的），你需要在所使用的地址范围上启用动态BOOTP；然后为每一个客户端设定一个条目包括指向启动镜像的指针。
+第一步——配置DHCP。为了让ISC DHCP守护进程可响应BOOTP请求（就像SGI和Cobalt BOOTROM所要求的），你需要在所使用的地址范围上启用动态BOOTP；然后为每一个客户端设定一个条目包括指向启动镜像的指针。
 </p>
 
 <pre caption="安装ISC的DHCP">
@@ -406,13 +391,11 @@ subnet <i>192.168.10.0</i> netmask <i>255.255.255.0</i> {
 
 <note>
 * 一个常见的错误是混淆IRIS Indigo（IP23配置有R3000 CPU或者IP20配置有R4000 
-CPU，它们都不运行Linux），Indigo 2（IP22，可以运行Linux），基于R8000的Indigo 2 
-Power（根本不能运行Linux）和基于R10000的Indigo 2 Impact（IP28，高度实验性的）。请记住它们是不同的机器。
+CPU，它们都不运行Linux），Indigo 2（IP22，可以运行Linux），基于R8000的Indigo 2 Power（根本不能运行Linux）和基于R10000的Indigo 2 Impact（IP28，高度实验性的）。请记住它们是不同的机器。
 </note>
 
 <p>
-还有在文件名里，r4k指代R4000系列处理器，r5k指代R5000，rm5k指代RM5200，还有r10k指代R10000。你可以在Gentoo<uri 
-link="/main/en/mirrors.xml">镜像</uri>里找到这些镜像。
+还有在文件名里，r4k指代R4000系列处理器，r5k指代R5000，rm5k指代RM5200，还有r10k指代R10000。你可以在Gentoo<uri link="/main/en/mirrors.xml">镜像</uri>里找到这些镜像。
 </p>
 
 </body>
@@ -423,8 +406,7 @@ link="/main/en/mirrors.xml">镜像</uri>里找到这些镜像。
 <body>
 
 <p>
-当你下载完文件后，把压缩的镜像放到你的<path>/tftproot</path>目录里。(使用<c>bzip2 
--d</c>来解压缩）然后修改你的<path>/etc/dhcp/dhcpd.conf</path>文件，为你的SGI客户端添加条目。
+当你下载完文件后，把压缩的镜像放到你的<path>/tftproot</path>目录里。(使用<c>bzip2 -d</c>来解压缩）然后修改你的<path>/etc/dhcp/dhcpd.conf</path>文件，为你的SGI客户端添加条目。
 </p>
 
 <pre caption="SGI工作站的dhcpd.conf片段">
@@ -508,8 +490,7 @@ udp        0      0 *:tftp                  *:* <comment>&lt;-- （寻找这一�
 <body>
 
 <p>
-好了，所有的事情都准备就绪，DHCP和TFTP都已经正常运行。现在是时候启动SGI机器了。启动机器——当你在屏幕上看到“Running power-on 
-diagnostics”，点击“Stop For Maintenance”或者按ESCAPE。你可以看到类似下面的菜单。像下面那样键入命令。 
+好了，所有的事情都准备就绪，DHCP和TFTP都已经正常运行。现在是时候启动SGI机器了。启动机器——当你在屏幕上看到“Running power-on diagnostics”，点击“Stop For Maintenance”或者按ESCAPE。你可以看到类似下面的菜单。像下面那样键入命令。
 </p>
 
 <pre caption="SGI PROM维护菜单">
@@ -529,8 +510,7 @@ Command Monitor. Type "exit" to return to the menu.
 </pre>
 
 <p>
-从这里开始，机器开始下载镜像，然后，大约20秒后，开始启动Linux。如果一切正常，你应该像下面显示的那样停在Busybox的<c>ash</c> 
-shell处，然后就可以继续<uri link="?part=1&amp;chap=3">配置网络</uri>了。
+从这里开始，机器开始下载镜像，然后，大约20秒后，开始启动Linux。如果一切正常，你应该像下面显示的那样停在Busybox的<c>ash</c> shell处，然后就可以继续<uri link="?part=1&amp;chap=3">配置网络</uri>了。
 </p>
 
 <pre caption="当一切正常的时候……">
@@ -601,13 +581,11 @@ Please press Enter to activate this console.
 <body>
 
 <p>
-在Silicon 
-Graphics机器上，可以从光盘启动来安装操作系统。（比如IRIX就是这样装的）最近，用于装Gentoo的这样的可引导光盘的镜像也出现了。这些光盘的工作方式和IRIX的是一样的。
+在Silicon Graphics机器上，可以从光盘启动来安装操作系统。（比如IRIX就是这样装的）最近，用于装Gentoo的这样的可引导光盘的镜像也出现了。这些光盘的工作方式和IRIX的是一样的。
 </p>
 
 <p>
-目前Gentoo/MIPS LiveCD只能用于配置有R4000和R5000系列CPU的SGI Indy，Indigo 
-2和O2工作站，不过其他平台在将来也可能支持。
+目前Gentoo/MIPS LiveCD只能用于配置有R4000和R5000系列CPU的SGI Indy，Indigo 2和O2工作站，不过其他平台在将来也可能支持。
 </p>
 
 <p>
@@ -615,10 +593,7 @@ Graphics机器上，可以从光盘启动来安装操作系统。（比如IRIX�
 </p>
 
 <warn>
-这些光盘目前仍然处于高度实验阶段。现在不能保证它一定可以用。你可以报告成功或失败到<uri 
-link="http://bugs.gentoo.org">Bugzilla</uri>，<uri 
-link="http:///forums.gentoo.org/viewtopic.php?t=242518">论坛里的这个帖子</uri>或者<c>#gentoo-mips</c> 
-<uri link="/main/en/irc.xml">IRC频道</uri>。我们期待着听到您的消息。
+这些光盘目前仍然处于高度实验阶段。现在不能保证它一定可以用。你可以报告成功或失败到<uri link="http://bugs.gentoo.org">Bugzilla</uri>，<uri link="http:///forums.gentoo.org/viewtopic.php?t=242518">论坛里的这个帖子</uri>或者<c>#gentoo-mips</c> <uri link="/main/en/irc.xml">IRC频道</uri>。我们期待着听到您的消息。
 </warn>
 
 </body>
@@ -630,8 +605,7 @@ link="http:///forums.gentoo.org/viewtopic.php?t=242518">论坛里的这个帖子
 <body>
 
 <p>
-一件值得注意的重要事项，SGI PROM不支持ISO9660格式，也不支持El 
-Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头里保存着启动镜像。所以，烧录这些CD镜像的时候必须要小心。
+一件值得注意的重要事项，SGI PROM不支持ISO9660格式，也不支持El Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头里保存着启动镜像。所以，烧录这些CD镜像的时候必须要小心。
 </p>
 
 <p>
@@ -673,8 +647,7 @@ Torito引导标准。这些CD镜像就像一个硬盘一样有SGI盘标，卷头
 <body>
 
 <p>
-在这个页面<uri 
-link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/</uri>上，你可以找到使Cobalt启动运行所必需的启动镜像。你所需要的文件的名字是<path>nfsroot-KERNEL-COLO-DATE-cobalt.tar</path>——选择最新的一个然后像下面那样把它解压缩到<path>/</path>里。
+在这个页面<uri link="http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/">http://dev.gentoo.org/~redhatter/mips/cobalt/netboots/</uri>上，你可以找到使Cobalt启动运行所必需的启动镜像。你所需要的文件的名字是<path>nfsroot-KERNEL-COLO-DATE-cobalt.tar</path>——选择最新的一个然后像下面那样把它解压缩到<path>/</path>里。
 </p>
 
 <pre caption="解压缩nfsroot镜像">
@@ -786,13 +759,11 @@ subnet xxx.xxx.xxx.xxx netmask xxx.xxx.xxx.xxx {
 <body>
 
 <p>
-好了，所有的事情已经齐备，DHCP已经运行了，和NFS一样。现在是时候启动Cobalt机器了。连接好null 
-modem线，把终端设置成波特率115200，8位，无奇偶校验位，一个停止位，VT100模拟。当这步完成后，在加电时按住左右两个方向键。
+好了，所有的事情已经齐备，DHCP已经运行了，和NFS一样。现在是时候启动Cobalt机器了。连接好null modem线，把终端设置成波特率115200，8位，无奇偶校验位，一个停止位，VT100模拟。当这步完成后，在加电时按住左右两个方向键。
 </p>
 
 <p>
-如果一切正常，背部面板应该显示“Net Booting”，你应该看到一些网络活动，紧接着CoLo开始启动。在后面板上，下拉菜单直到你看到“Network 
-(NFS)”然后按回车。你应该可以在串口终端上观察到机器开始启动。
+如果一切正常，背部面板应该显示“Net Booting”，你应该看到一些网络活动，紧接着CoLo开始启动。在后面板上，下拉菜单直到你看到“Network (NFS)”然后按回车。你应该可以在串口终端上观察到机器开始启动。
 </p>
 
 <pre caption="启动内核">
@@ -817,8 +788,7 @@ Memory: 122512k/131072k available (2708k kernel code, 8560k reserved, 3424k dat)
 </pre>
 
 <p>
-如果一切正常，您应该会停在Busybox的<c>ash</c> shell处，就想下面所显示的，然后你可以继续<uri 
-link="?part=1&amp;chap=3">配置网络</uri>了。
+如果一切正常，您应该会停在Busybox的<c>ash</c> shell处，就想下面所显示的，然后你可以继续<uri link="?part=1&amp;chap=3">配置网络</uri>了。
 </p>
 
 <pre caption="当一切正常的时候……">

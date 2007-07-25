@@ -27,8 +27,7 @@
 <body>
 
 <p>
-是时候安装和配置<uri link="http://www.sparc-boot.org">SILO</uri>了，改进过的Sparc引导器(Sparc 
-Improved boot LOader)。
+是时候安装和配置<uri link="http://www.sparc-boot.org">SILO</uri>了，改进过的Sparc引导器(Sparc Improved boot LOader)。
 </p>
 
 <pre caption = "安装SILO">

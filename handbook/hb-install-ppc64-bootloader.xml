@@ -41,8 +41,7 @@
 </p>
 
 <impo>
-yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式安装yaboot：<uri 
-link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
+yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式安装yaboot：<uri link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
 </impo>
 
 <note>
@@ -67,10 +66,7 @@ link="#yaboot-ibm">在IBM硬件上使用yaboot</uri>
 </p>
 
 <p>
-为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区，
-并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况。这些步骤必须事先完成。接下来运行<c>emerge 
---update 
-yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须的，因为最新版本的yaboot会在portage中发布，但也有可能你的portage文件中没有最新版本。
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区，并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况。这些步骤必须事先完成。接下来运行<c>emerge --update yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须的，因为最新版本的yaboot会在portage中发布，但也有可能你的portage文件中没有最新版本。
 </p>
 
 <pre caption="安装yaboot-static">
@@ -86,8 +82,7 @@ yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须
 </p>
 
 <p>
-你可能需要校验<path>/etc/yaboot.conf</path>的内容。如果你在<path>/etc/yaboot.conf</path>中做了些更改（比如设置默认/启动的操作系统），请确保再次运行一次<c>ybin 
--v</c>以便将这些更改应用到bootstrap分区中去。
+你可能需要校验<path>/etc/yaboot.conf</path>的内容。如果你在<path>/etc/yaboot.conf</path>中做了些更改（比如设置默认/启动的操作系统），请确保再次运行一次<c>ybin -v</c>以便将这些更改应用到bootstrap分区中去。
 </p>
 
 <p>
@@ -163,19 +158,15 @@ enableofboot
 </pre>
 
 <p>
-一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot 
--v</c>将配置信息安装到bootstrap分区中。<e>不要忘了这个！</e>在<c>mkofboot</c>问你创建一个新的文件系统时选是。
+一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot -v</c>将配置信息安装到bootstrap分区中。<e>不要忘了这个！</e>在<c>mkofboot</c>问你创建一个新的文件系统时选是。
 </p>
 
 <p>
-如果万事俱备且你拥有以上例子中同样的选项，你下一步的重启会展示给你一个简单、五项内容的启动菜单。如果你日后更新你的yaboot配置文件，你会需要运行<c>ybin 
--v</c>来更新bootstrap分区-<c>mkofboot</c>只为初始化设置用。
+如果万事俱备且你拥有以上例子中同样的选项，你下一步的重启会展示给你一个简单、五项内容的启动菜单。如果你日后更新你的yaboot配置文件，你会需要运行<c>ybin -v</c>来更新bootstrap分区-<c>mkofboot</c>只为初始化设置用。
 </p>
 
 <p>
-更多关于yaboot的信息，你可以参看<uri 
-link="http://penguinppc.org/projects/yaboot">yaboot项目</uri>。现在，请阅读<uri 
-link="#reboot">重启系统</uri>来继续安装。
+更多关于yaboot的信息，你可以参看<uri link="http://penguinppc.org/projects/yaboot">yaboot项目</uri>。现在，请阅读<uri link="#reboot">重启系统</uri>来继续安装。
 </p>
 
 </body>
@@ -269,8 +260,7 @@ Binary file (standard input) matches
 </p>
 
 <p>
-当重启进入到您新装的Gentoo系统之后，请阅读<uri 
-link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+当重启进入到您新装的Gentoo系统之后，请阅读<uri link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
 </p>
 
 </body>

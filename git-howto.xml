@@ -22,9 +22,7 @@
 </author>
 
 <abstract>
-本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何
-git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布
-到gentoo-china@googlegroups.com邮件列表上，供维护人员评阅和采纳。
+本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布到gentoo-china@googlegroups.com邮件列表上，供维护人员评阅和采纳。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -60,15 +58,7 @@ $ <i>git clone http://zhangle.is-a-geek.org/zh_cn.git</i>
 </pre>
 
 <p>
-命令成功以后，会创建一个<path>zh_cn</path>目录。里面的有个隐藏的.git目录，称
-为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝
-（working copy），对其进行修改／删除不会影响repository的内容。Repository好
-比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以
-随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本
-叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中
-的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式
-给予开发者更多的信息和更大空间及自由
-度。
+命令成功以后，会创建一个<path>zh_cn</path>目录。里面的有个隐藏的.git目录，称为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由度。
 </p>
 
 <p>
@@ -86,8 +76,7 @@ $ <i>gitk --all</i>
 <body>
 
 <p>
-git的每个递交都会关联作者的email信息。在最新版的git（1.5.2.2）中，可以使用
-<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
+git的每个递交都会关联作者的email信息。在最新版的git（1.5.2.2）中，可以使用<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
 </p>
 
 <pre caption="设置自己的姓名和email地址">
@@ -97,8 +86,7 @@ $ <i>git-config --global sendemail.smtpserver 'smtp.i-cable.com'</i>
 </pre>
 
 <p>
-用你自己的名字、email和SMTP服务器地址代替上面的值。这样设置一次后就会保存
-在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
+用你自己的名字、email和SMTP服务器地址代替上面的值。这样设置一次后就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
 </p>
 
 </body>
@@ -111,8 +99,7 @@ $ <i>git-config --global sendemail.smtpserver 'smtp.i-cable.com'</i>
 <body>
 
 <p>
-完成上述准备工作后，你就可以开始你的正式工作了。你可以修改现有的文件，也可以添加
-新文件或删除文件。我们以添加一个文件为例，来看看如何利用git进行管理。
+完成上述准备工作后，你就可以开始你的正式工作了。你可以修改现有的文件，也可以添加新文件或删除文件。我们以添加一个文件为例，来看看如何利用git进行管理。
 </p>
 
 <pre caption="在工作目录中添加一个文件">
@@ -150,8 +137,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 <body>
 
 <p>
-上述<c>git status</c>输出表明新文件<path>new_file.xml</path>还没有添加到repository。你
-可以用<c>git add</c>完成这个任务。对修改和删除的已有的文件不需要额外步骤。
+上述<c>git status</c>输出表明新文件<path>new_file.xml</path>还没有添加到repository。你可以用<c>git add</c>完成这个任务。对修改和删除的已有的文件不需要额外步骤。
 </p>
 
 <pre caption="添加文件">
@@ -172,10 +158,7 @@ $ <i>git status</i>
 <body>
 
 <p>
-你可以随时用<c>git commit</c>提交你的修改。刚开始使用git时，可以尽量多提交。因为和
-cvs/svn不同，这个拷贝是你个人的，你应该经常保存你的工作。你日后还可以对你的这
-些工作进一步整理，例如，合并多个提交结果，修改提交信息等，来形成最终可以发布到
-gentoo-china@googlegroups.com的工作。
+你可以随时用<c>git commit</c>提交你的修改。刚开始使用git时，可以尽量多提交。因为和cvs/svn不同，这个拷贝是你个人的，你应该经常保存你的工作。你日后还可以对你的这些工作进一步整理，例如，合并多个提交结果，修改提交信息等，来形成最终可以发布到gentoo-china@googlegroups.com的工作。
 </p>
 
 <pre caption="提交你的修改">
@@ -186,8 +169,7 @@ Created commit 96ffadde5682bc9b3d96582822bc4e75e8dccdca
 </pre>
 
 <p>
-和cvs/svn一样，你需要填写一个描述此次修改的简短信息。对于自己使用的临时提交，信
-息可以比较随便。
+和cvs/svn一样，你需要填写一个描述此次修改的简短信息。对于自己使用的临时提交，信息可以比较随便。
 </p>
 
 
@@ -209,10 +191,7 @@ index 0000000..0527e6b
 </pre>
 
 <p>
-不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后
-一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，
-HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可
-以查看提交对应的哈希值），等等。
+不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可以查看提交对应的哈希值），等等。
 </p>
 
 </body>
@@ -225,8 +204,7 @@ HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或g
 <body>
 
 <p>
-往往你需要对你的个人提交进行整理。尤其是当你想发布你的工作时，一般希望把之前的很
-多次提交集中起来。假设你还进行了如下的改动。
+往往你需要对你的个人提交进行整理。尤其是当你想发布你的工作时，一般希望把之前的很多次提交集中起来。假设你还进行了如下的改动。
 </p>
 
 <pre caption="更多的修改">
@@ -294,9 +272,7 @@ Created commit 39b648fef75b446331e7defa89438157a95d87ec
 </pre>
 
 <p>
-此时你原来的两次提交还保留在master分支上。而你现在的new_branch分支则保存了一个整
-理好的提交。同时写了一个更加详细的提交描述。现在建议用<c>gitk --all</c>看看两个分支的
-可视化效果。
+此时你原来的两次提交还保留在master分支上。而你现在的new_branch分支则保存了一个整理好的提交。同时写了一个更加详细的提交描述。现在建议用<c>gitk --all</c>看看两个分支的可视化效果。
 </p>
 
 <p>
@@ -312,9 +288,7 @@ Added new file new_file.xml
 </pre>
 
 <p>
-信息中的第一行简要描述此次修改的主题，它同时也会是将来发送到邮件列表上时的邮件主
-题。第一行后请空一行，然后象写邮件正文一行，详细描述你的修改。描述使用中文或英文
-都可以，但是标题使用中文的话，git将来生成提交的patch邮件文件名时，会把中文过滤掉。
+信息中的第一行简要描述此次修改的主题，它同时也会是将来发送到邮件列表上时的邮件主题。第一行后请空一行，然后象写邮件正文一行，详细描述你的修改。描述使用中文或英文都可以，但是标题使用中文的话，git将来生成提交的patch邮件文件名时，会把中文过滤掉。
 </p>
 
 </body>
@@ -324,8 +298,7 @@ Added new file new_file.xml
 <body>
 
 <p>
-当你的工作值得发布时，你可以用<c>git format-patch</c>和<c>git send-email</c>将你的工作发送到
-gentoo-china@googlegroups.com。(如果只是用于测试，可以发到一个个人的邮箱)
+当你的工作值得发布时，你可以用<c>git format-patch</c>和<c>git send-email</c>将你的工作发送到gentoo-china@googlegroups.com。(如果只是用于测试，可以发到一个个人的邮箱)
 </p>
 
 <pre caption="用git format-patch自动生成发布邮件">
@@ -390,14 +363,11 @@ Result: OK
 <body>
 
 <p>
-你的邮件发到列表上后，会有一定的反馈意见。你在听取修改意见后可以再次发布。
-你的发布可以被维护人员接收到主拷贝。其他开发者也可以不通过主拷贝，而是通过
-邮件直接获得你的工作（me是用来加上接收人的Sign-off行的）。
+你的邮件发到列表上后，会有一定的反馈意见。你在听取修改意见后可以再次发布。你的发布可以被维护人员接收到主拷贝。其他开发者也可以不通过主拷贝，而是通过邮件直接获得你的工作（me是用来加上接收人的Sign-off行的）。
 </p>
 
 <p>
-首先你需要把补丁邮件接收到本地，并保存邮件全文到一个文件，比如tmp.txt。
-然后你可以使用<c>git applymbox</c>。
+首先你需要把补丁邮件接收到本地，并保存邮件全文到一个文件，比如tmp.txt。然后你可以使用<c>git applymbox</c>。
 </p>
 
 <pre caption="接收他人工作">
@@ -420,9 +390,7 @@ Committed: 6e1aac302bf0d1b12b52d9a11aad5a9f437e0982
 <body>
 
 <p>
-与cvs不同，使用git建立分支非常容易和直观。通过gitk可以很容易理解分支的概念。git
-也鼓励多使用分支。你现在已经有了两个分支：一个是从clone得来的master分支，另一个
-是整理修改的new_branch分支。
+与cvs不同，使用git建立分支非常容易和直观。通过gitk可以很容易理解分支的概念。git也鼓励多使用分支。你现在已经有了两个分支：一个是从clone得来的master分支，另一个是整理修改的new_branch分支。
 </p>
 
 <pre caption="查看你的分支">
@@ -450,9 +418,7 @@ new_branch
 <body>
 
 <p>
-以上我们对master分支做了很多修改，这在实际使用中不是一个好主意，因为你需要经常从
-主拷贝更新你的本地内容。你可以使用如下方法将你的修改移到另外一个分支上，并把主拷
-贝恢复原样。
+以上我们对master分支做了很多修改，这在实际使用中不是一个好主意，因为你需要经常从主拷贝更新你的本地内容。你可以使用如下方法将你的修改移到另外一个分支上，并把主拷贝恢复原样。
 </p>
 
 <pre caption="恢复主拷贝">

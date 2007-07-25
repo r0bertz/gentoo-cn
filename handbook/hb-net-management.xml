@@ -21,8 +21,7 @@
 <body>
 
 <p>
-如果你经常移动你的电脑，你可能会遇到没有网线和没有插入网线或者没有无线网络可用的
-情况。你也许希望在插入网线或无线网络可用时网络能够自动连上。
+如果你经常移动你的电脑，你可能会遇到没有网线和没有插入网线或者没有无线网络可用的情况。你也许希望在插入网线或无线网络可用时网络能够自动连上。
 </p>
 
 <p>
@@ -30,9 +29,7 @@
 </p>
 
 <note>
-本章只介绍<c>ifplugd</c>，但还有一些工具如<c>netplug</c>可供选择。<c>netplug</c>是
-<c>ifplugd</c>的轻量级替代者，但是它依赖于你的内核网络驱动的正常工作，而很多驱动不能
-正常工作。
+本章只介绍<c>ifplugd</c>，但还有一些工具如<c>netplug</c>可供选择。<c>netplug</c>是<c>ifplugd</c>的轻量级替代者，但是它依赖于你的内核网络驱动的正常工作，而很多驱动不能正常工作。
 </note>
 
 </body>
@@ -42,9 +39,7 @@
 <body>
 
 <p>
-<uri link="http://0pointer.de/lennart/projects/ifplugd/">ifplugd</uri>是一个
-在插入或拔出网线时启动或停止网络连接的程序。它也可以检测你的无线网卡和AP的关联，
-或者是在AP进入范围时检测。
+<uri link="http://0pointer.de/lennart/projects/ifplugd/">ifplugd</uri>是一个在插入或拔出网线时启动或停止网络连接的程序。它也可以检测你的无线网卡和AP的关联，或者是在AP进入范围时检测。
 </p>
 
 <pre caption="安装ifplugd">
@@ -52,9 +47,7 @@
 </pre>
 
 <p>
-ifplugd的配置相当简单。配置文件放置在<path>/etc/conf.d/net</path>中。
-运行<c>man ifplugd</c>以获得详细的变量信息。同时，请
-查看<path>/etc/conf.d/net.example</path>以获得更多例子。
+ifplugd的配置相当简单。配置文件放置在<path>/etc/conf.d/net</path>中。运行<c>man ifplugd</c>以获得详细的变量信息。同时，请查看<path>/etc/conf.d/net.example</path>以获得更多例子。
 </p>
 
 <pre caption="ifplug设置范例">
@@ -66,9 +59,7 @@ ifplugd_eth0="--api-mode=wlan"
 </pre>
 
 <p>
-除了管理多个网络连接之外，你可能需要增加一个工具来使得管理多个DNS服务器和配置
-更加容易。当你通过DHCP来获取IP地址时，这将非常有用。只需要emerge
-<c>resolvconf-gentoo</c>.
+除了管理多个网络连接之外，你可能需要增加一个工具来使得管理多个DNS服务器和配置更加容易。当你通过DHCP来获取IP地址时，这将非常有用。只需要emerge <c>resolvconf-gentoo</c>.
 </p>
 
 <pre caption="安装resolvconf-gentoo">

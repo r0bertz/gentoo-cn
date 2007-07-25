@@ -19,11 +19,7 @@ Linux内核是每个发行版的核心。本章节将解释如何配置您自己
 <body>
 
 <p>
-您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以
-在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制
-到<path>/etc/localtime</path>。请不要使
-用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。
-例如，<path>GMT-8</path>事实上是GMT+8区。
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
 </p>
 
 <pre caption="设置时区信息">
@@ -41,9 +37,7 @@ Linux内核是每个发行版的核心。本章节将解释如何配置您自己
 <body>
 
 <p>
-Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个
-可选的内核源码。完整的清单参见<uri
-link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </p>
 
 <p test="func:keyval('arch')='x86'">
@@ -64,10 +58,7 @@ link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </pre>
 
 <p>
-当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的
-符号链接指向您安装的内核源码。在我们这个例子中，安装的源码
-指向<c>gentoo-sources-<keyval id="kernel-version"/></c>。您的版本可能
-有所不同，所以请你记住这一点。
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>gentoo-sources-<keyval id="kernel-version"/></c>。您的版本可能有所不同，所以请你记住这一点。
 </p>
 
 <pre caption="查看内核源码符号链接">
@@ -76,15 +67,11 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 </pre>
 
 <p>
-现在，我们开始配置和编译您的内核。您可以用<c>genkernel</c>来做这件事。
-这将会建立一个和安装光盘所用的内核类似的通用内核。不过我们将首先说明如何手动配置
-一个内核，因为这是优化您系统环境的最佳方法。
+现在，我们开始配置和编译您的内核。您可以用<c>genkernel</c>来做这件事。这将会建立一个和安装光盘所用的内核类似的通用内核。不过我们将首先说明如何手动配置一个内核，因为这是优化您系统环境的最佳方法。
 </p>
 
 <p>
-如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。
-如果您希望使用<c>genkernel</c>，您可以阅读<uri 
-link="#genkernel">备选：使用genkernel</uri>。
+如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。如果您希望使用<c>genkernel</c>，您可以阅读<uri link="#genkernel">备选：使用genkernel</uri>。
 </p>
 
 </body>
@@ -97,23 +84,15 @@ link="#genkernel">备选：使用genkernel</uri>。
 <body>
 
 <p>
-手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——但是当
-您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——但是当您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
 </p>
 
 <p>
-然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以
-安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>来了解您
-需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任
-何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。
-此外，您也可以在非chroot的环境执行<c>lspci</c>。结果相同。
-您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，
-它可以教你该选择哪些模块）。
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在非chroot的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。
 </p>
 
 <p>
-现在进入到您的内核目录并且执行<c>make menuconfig</c>。这将会启动一个
-基于ncureses的配置菜单。
+现在进入到您的内核目录并且执行<c>make menuconfig</c>。这将会启动一个基于ncureses的配置菜单。
 </p>
 
 <pre caption="开始menuconfig">
@@ -122,8 +101,7 @@ link="#genkernel">备选：使用genkernel</uri>。
 </pre>
 
 <p>
-您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能
-正常运行或者根本不能运行）。
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者根本不能运行）。
 </p>
 
 </body>
@@ -133,8 +111,7 @@ link="#genkernel">备选：使用genkernel</uri>。
 <body>
 
 <p>
-首先，开启“development and experimental code/drivers”。您必须激活它，
-否则，您将无法看到一些非常重要的代码/驱动。
+首先，开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动。
 </p>
 
 <pre caption="选择experimental code/drivers">
@@ -143,17 +120,14 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-确信对于启动您的系统所必须的驱动（比如SCSI controller，……）被<e>编译进</e>内核
-而不是作为模块加入的。否则您的系统将完全不能启动。
+确信对于启动您的系统所必须的驱动（比如SCSI controller，……）被<e>编译进</e>内核而不是作为模块加入的。否则您的系统将完全不能启动。
 </p>
 
 </body>
 <body test="func:keyval('arch')='AMD64'">
 
 <p>
-然后我们将精确的选择处理器类型。x86_64内核维护者强烈推荐用户打开MCE功能，这
-样他们能够得到任何硬件问题的通知。在x86_64中，这些错误并不是如同其他架构那样写
-入<c>dmesg</c>，而是写入<path>/dev/mcelog</path>。这需要 安装<c>app-admin/mcelog</c>。
+然后我们将精确的选择处理器类型。x86_64内核维护者强烈推荐用户打开MCE功能，这样他们能够得到任何硬件问题的通知。在x86_64中，这些错误并不是如同其他架构那样写入<c>dmesg</c>，而是写入<path>/dev/mcelog</path>。这需要安装<c>app-admin/mcelog</c>。
 </p>
 
 <pre caption="选择处理器类型和特性">
@@ -183,9 +157,7 @@ Processor type and features ---&gt;
 <body>
 
 <p>
-现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们
-编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要 启用<c>Virtual
-memory</c>和<c>/proc file system</c>的支持。
+现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
 </p>
 
 </body>
@@ -259,8 +231,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项
-也不是必需的，只在使用<c>ppp</c>并被配置成使用核心PPPoE时才会用到它。
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成使用核心PPPoE时才会用到它。
 </p>
 
 <p>
@@ -330,8 +301,7 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 <body>
 
 <p>
-既然现在您的内核已经配置成功了，那么就是时候编译并且安装它了。退出配置界面并且
-开启编译进程：
+既然现在您的内核已经配置成功了，那么就是时候编译并且安装它了。退出配置界面并且开启编译进程：
 </p>
 
 <pre caption="编译内核">
@@ -339,9 +309,7 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 </pre>
 
 <p>
-当内核编译完成后，复制内核镜像到<path>/boot</path>。您可以给内核任意命名，然后
-记住它。因为在您配置您的系统引导程序的时候您需要用到它。记得用您内核的名字和版
-本来替代<c><keyval id="kernel-name"/></c>。
+当内核编译完成后，复制内核镜像到<path>/boot</path>。您可以给内核任意命名，然后记住它。因为在您配置您的系统引导程序的时候您需要用到它。记得用您内核的名字和版本来替代<c><keyval id="kernel-name"/></c>。
 </p>
 
 <pre caption="安装内核">
@@ -364,11 +332,7 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 </p>
 
 <p>
-现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核
-了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您
-用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有
-的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用
-户来说是一个理想的解决方案。
+现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用户来说是一个理想的解决方案。
 </p>
 
 <p>
@@ -394,14 +358,11 @@ Bus options (PCI, PCMCIA, EISA, MCA, ISA)  ---&gt;
 <body>
 
 <p>
-现在执行<c>genkernel
-all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间。
+现在执行<c>genkernel all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间。
 </p>
 
 <p>
-另外需要注意的是，如果您的启动分区没有使用ext2或者ext3文件系统，您必须 使用<c>genkernel --menuconfig
-all</c>来手动配置您的内核，把您所使用的文件系统
-编译进内核。（<e>不能</e>编译为模块！）。EVMS2和LVM2的用户很可能也需要加上<c>--evms2</c>和<c>--lvm2</c>参数。
+另外需要注意的是，如果您的启动分区没有使用ext2或者ext3文件系统，您必须使用<c>genkernel --menuconfig all</c>来手动配置您的内核，把您所使用的文件系统编译进内核。（<e>不能</e>编译为模块！）。EVMS2和LVM2的用户很可能也需要加上<c>--evms2</c>和<c>--lvm2</c>参数。
 </p>
 
 <pre caption="运行genkernel">
@@ -409,10 +370,7 @@ all</c>来手动配置您的内核，把您所使用的文件系统
 </pre>
 
 <p>
-一旦<c>genkernel</c>运行完成，一个包括全部模块和initrd的内核将被建立。在
-后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为
-您将在配置引导程序的时候用到他们。initrd将会在启动真正的系统前自动识别硬件
-（如同安装光盘一样）。
+一旦<c>genkernel</c>运行完成，一个包括全部模块和initrd的内核将被建立。在后面配置引导程序时我们将会用到这个内核和initrd。请记下内核和initrd的名字，因为您将在配置引导程序的时候用到他们。initrd将会在启动真正的系统前自动识别硬件（如同安装光盘一样）。
 </p>
 
 <pre caption="查看内核和initrd的名字">
@@ -428,13 +386,11 @@ all</c>来手动配置您的内核，把您所使用的文件系统
 <body>
 
 <p>
-您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要
-自动加载的模块。如果您愿意，您也可以加上模块的选项。
+您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
 </p>
 
 <p>
-要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记
-把<c><keyval id="kernel-version"/></c>替换为您刚刚编译的内核的版本。
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把<c><keyval id="kernel-version"/></c>替换为您刚刚编译的内核的版本。
 </p>
 
 <pre caption="查看所有可用的模块">
@@ -442,8 +398,7 @@ all</c>来手动配置您的内核，把您所使用的文件系统
 </pre>
 
 <p>
-例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>然后输入
-模块的名字。
+例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>然后输入模块的名字。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">

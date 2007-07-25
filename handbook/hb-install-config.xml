@@ -10,8 +10,7 @@
 <sections>
 
 <abstract>
-你需要编辑一些重要的配置文件。在这一章中将对这些重要的配置文件作概述，
-并且介绍如何配置它们。
+你需要编辑一些重要的配置文件。在这一章中将对这些重要的配置文件作概述，并且介绍如何配置它们。
 </abstract>
 
 <version>8.2</version>
@@ -24,9 +23,7 @@
 <body>
 
 <p>
-在Linux系统下，系统所用到的所有分区都必须在<path>/etc/fstab</path>文件中指明。
-这个文件包含了这些分区的挂载点（在系统目录树中的位置）、挂载方法和特殊挂载选项
-（是否自动挂载，是否可以用户挂载等）。
+在Linux系统下，系统所用到的所有分区都必须在<path>/etc/fstab</path>文件中指明。这个文件包含了这些分区的挂载点（在系统目录树中的位置）、挂载方法和特殊挂载选项（是否自动挂载，是否可以用户挂载等）。
 </p>
 
 </body>
@@ -36,9 +33,7 @@
 <body>
 
 <p>
-<path>/etc/fstab</path>使用一种特殊语法格式。每行都包含六个字段。
-这些字段之间由空白键（空格键，tab键，或者两者混合使用）分隔。
-每个字段都有自己的含意：
+<path>/etc/fstab</path>使用一种特殊语法格式。每行都包含六个字段。这些字段之间由空白键（空格键，tab键，或者两者混合使用）分隔。每个字段都有自己的含意：
 </p>
 
 <ul>
@@ -68,8 +63,7 @@
 </ul>
 
 <impo>
-Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件</e>。
-你必须创建自己的<path>/etc/fstab</path>。
+Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件</e>。你必须创建自己的<path>/etc/fstab</path>。
 </impo>
 
 <pre caption="打开/etc/fstab">
@@ -80,8 +74,7 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 <body test="func:keyval('/boot')">
 
 <p>
-让我们看看<path>/boot</path>分区的挂载选项是怎么写的。这仅仅是个例子，
-如果你没有或者不能创建<path>/boot</path>，请不要复制它。
+让我们看看<path>/boot</path>分区的挂载选项是怎么写的。这仅仅是个例子，如果你没有或者不能创建<path>/boot</path>，请不要复制它。
 </p>
 
 <p test="contains(func:keyval('/boot'), '/dev/hd')">
@@ -102,9 +95,7 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 </pre>
 
 <p>
-为了提高系统的安全性，一部分用户不希望<path>/boot</path>分区自动挂载。
-这些用户应该用<c>noauto</c>替换<c>defaults</c>。这就表示用户每次使用该分区时，
-需要手动挂载。
+为了提高系统的安全性，一部分用户不希望<path>/boot</path>分区自动挂载。这些用户应该用<c>noauto</c>替换<c>defaults</c>。这就表示用户每次使用该分区时，需要手动挂载。
 </p>
 
 </body>
@@ -197,14 +188,11 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 </pre>
 
 <p>
-<c>auto</c>选项可以使<c>mount</c>猜测文件系统（推荐对于可移动设备采用这个选项，
-因为它们可能采用很多不同的文件系统），而<c>user</c>选项使得非root用户可以
-挂载光驱。
+<c>auto</c>选项可以使<c>mount</c>猜测文件系统（推荐对于可移动设备采用这个选项，因为它们可能采用很多不同的文件系统），而<c>user</c>选项使得非root用户可以挂载光驱。
 </p>
 
 <p>
-为了提高性能，大部分用户会添加<c>noatime</c>挂载选项。由于不记录该分区中文件的
-访问时间（一般来说你并不需要知道它），这个选项能够提高系统速度。
+为了提高性能，大部分用户会添加<c>noatime</c>挂载选项。由于不记录该分区中文件的访问时间（一般来说你并不需要知道它），这个选项能够提高系统速度。
 </p>
 
 <p>
@@ -221,10 +209,7 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 <body>
 
 <p>
-用户必须要做的事情之一就是命名自己的机器。尽管这看上去很容易，但是<e>很多</e>
-用户觉得为他们的Linux机器起一个合适的名字是很难的。为了加快事情的进度，你应该
-知道你所命名的所有名字都是可以在今后重新修改的。因此，你可以简单命名你的系统
-为<c>tux</c>，域名为<c>homenetwork</c>。
+用户必须要做的事情之一就是命名自己的机器。尽管这看上去很容易，但是<e>很多</e>用户觉得为他们的Linux机器起一个合适的名字是很难的。为了加快事情的进度，你应该知道你所命名的所有名字都是可以在今后重新修改的。因此，你可以简单命名你的系统为<c>tux</c>，域名为<c>homenetwork</c>。
 </p>
 
 <pre caption="设定主机名">
@@ -235,9 +220,7 @@ HOSTNAME="<i>tux</i>"
 </pre>
 
 <p>
-第二，<e>如果</e>你需要一个域名，在<path>/etc/conf.d/net</path>中设定。只有
-你的ISP或者网络管理员说你需要一个域名，或者你有一个DNS服务器但是没有DHCP服务器
-的时候，你才需要域名。如果你的网络是DHCP分配IP，那么你不需要理会DNS和域名的问题。
+第二，<e>如果</e>你需要一个域名，在<path>/etc/conf.d/net</path>中设定。只有你的ISP或者网络管理员说你需要一个域名，或者你有一个DNS服务器但是没有DHCP服务器的时候，你才需要域名。如果你的网络是DHCP分配IP，那么你不需要理会DNS和域名的问题。
 </p>
 
 <pre caption="设定域名">
@@ -248,8 +231,7 @@ dns_domain_lo="<i>homenetwork</i>"
 </pre>
 
 <note>
-如果你选择不设定域名，你可以去掉登录界面上的这条信息“This is hostname.(none)”。
-你只需要修改<path>/etc/issue</path>，把字符串<c>.\O</c>从该文件里删掉即可。
+如果你选择不设定域名，你可以去掉登录界面上的这条信息“This is hostname.(none)”。你只需要修改<path>/etc/issue</path>，把字符串<c>.\O</c>从该文件里删掉即可。
 </note>
 
 <p>
@@ -264,9 +246,7 @@ nis_domain_lo="<i>my-nisdomain</i>"
 </pre>
 
 <note>
-如果想知道更多关于DNS和NIS配置的信息，可以
-看<path>/etc/conf.d/net.example</path>当中的例子。当然，你也可以
-安装<c>resolvconf-gentoo</c>来帮助设置DNS、NIS。
+如果想知道更多关于DNS和NIS配置的信息，可以看<path>/etc/conf.d/net.example</path>当中的例子。当然，你也可以安装<c>resolvconf-gentoo</c>来帮助设置DNS、NIS。
 </note>
 
 </body>
@@ -276,31 +256,23 @@ nis_domain_lo="<i>my-nisdomain</i>"
 <body>
 
 <p>
-在准备说“嘿，我们已经配置过网络”之前，你应该记得在开始安装Gentoo之初所设置
-的网络配置是仅仅为了安装而设置的。现在你所要设置的是Gentoo系统的永久网络配置。
+在准备说“嘿，我们已经配置过网络”之前，你应该记得在开始安装Gentoo之初所设置的网络配置是仅仅为了安装而设置的。现在你所要设置的是Gentoo系统的永久网络配置。
 </p>
 
 <note>
-更多关于网络配置的详细信息，包括网卡绑定、网桥、802.1Q VLANs和无线网络在内的
-高级配置会在<uri link="?part=4">Gentoo网络配置</uri>这一部分介绍.
+更多关于网络配置的详细信息，包括网卡绑定、网桥、802.1Q VLANs和无线网络在内的高级配置会在<uri link="?part=4">Gentoo网络配置</uri>这一部分介绍.
 </note>
 
 <p>
-<path>/etc/conf.d/net</path>当中收集了所有的网络信息。尽管这个文件采用直接易
-懂的语法，如果你还是因为觉得不够直观而完全不知道如何手动进行网络配置的话，请不
-用担心，我们将一一解释。在<path>/etc/conf.d/net.example</path>中有一个详细注释
-过的例子，它涵盖了许多种类不同的配置。
+<path>/etc/conf.d/net</path>当中收集了所有的网络信息。尽管这个文件采用直接易懂的语法，如果你还是因为觉得不够直观而完全不知道如何手动进行网络配置的话，请不用担心，我们将一一解释。在<path>/etc/conf.d/net.example</path>中有一个详细注释过的例子，它涵盖了许多种类不同的配置。
 </p>
 
 <p>
-系统默认为DHCP。如果要采用DHCP的话，你需要安装一个DHCP客户端。这个将在稍后的
-<uri link="?part=1&amp;chap=9#networking-tools">安装必要的系统工具</uri>部分
-介绍。但是不要忘记安装一个DHCP客户端。
+系统默认为DHCP。如果要采用DHCP的话，你需要安装一个DHCP客户端。这个将在稍后的<uri link="?part=1&amp;chap=9#networking-tools">安装必要的系统工具</uri>部分介绍。但是不要忘记安装一个DHCP客户端。
 </p>
 
 <p>
-如果你需要配置你的网络连接，不管是因为你是需要指定DHCP选项还是你根本不想采用DHCP，请使用你喜欢的编辑器（在这个例子中用的是<c>nano</c>）打开
-<path>/etc/conf.d/net</path>：
+如果你需要配置你的网络连接，不管是因为你是需要指定DHCP选项还是你根本不想采用DHCP，请使用你喜欢的编辑器（在这个例子中用的是<c>nano</c>）打开<path>/etc/conf.d/net</path>：
 </p>
 
 <pre caption="打开/etc/conf.d/net准备编辑">
@@ -319,8 +291,7 @@ nis_domain_lo="<i>my-nisdomain</i>"
 </pre>
 
 <p>
-为了输入你自己的IP地址，子网掩码和网关，你需要
-设置<c>config_eth0</c>和<c>routes_eth0</c>：
+为了输入你自己的IP地址，子网掩码和网关，你需要设置<c>config_eth0</c>和<c>routes_eth0</c>：
 </p>
 
 <pre caption="手动为eth0设置IP信息">
@@ -329,8 +300,7 @@ routes_eth0=( "default via 192.168.0.1" )
 </pre>
 
 <p>
-如果你使用DHCP并且想设定DHCP选项，请定义
-一下<c>config_eth0</c>和<c>dhcp_eth0</c>:
+如果你使用DHCP并且想设定DHCP选项，请定义一下<c>config_eth0</c>和<c>dhcp_eth0</c>:
 </p>
 
 <pre caption="让eth0自动获得IP地址">
@@ -343,8 +313,7 @@ dhcp_eth0="nodns nontp nonis"
 </p>
 
 <p>
-如果你有多个网络接口，那么重复之前对于<c>config_eth1</c>、<c>config_eth2</c>等
-的操作步骤。
+如果你有多个网络接口，那么重复之前对于<c>config_eth1</c>、<c>config_eth2</c>等的操作步骤。
 </p>
 
 <p>
@@ -366,8 +335,7 @@ dhcp_eth0="nodns nontp nonis"
 </pre>
 
 <p>
-如果你有多个网络接口，你需要为他们创建合适的<path>net.eth1</path>、
-<path>net.eth2</path>等启动脚本。你可以用<c>ln</c>来做这个。
+如果你有多个网络接口，你需要为他们创建合适的<path>net.eth1</path>、<path>net.eth2</path>等启动脚本。你可以用<c>ln</c>来做这个。
 </p>
 
 <pre caption="创建额外的启动脚本">
@@ -383,9 +351,7 @@ dhcp_eth0="nodns nontp nonis"
 <body>
 
 <p>
-现在你需要告诉Linux有关你的网络的信息。这需要在<path>/etc/hosts</path>文件中定
-义，它将帮助你将那些无法被域名解析器解析的主机名解析成IP地址。你需要定义你自己
-的系统。如果你不想启用内部DNS系统的话，你也需要定义内部网络上的其它系统。
+现在你需要告诉Linux有关你的网络的信息。这需要在<path>/etc/hosts</path>文件中定义，它将帮助你将那些无法被域名解析器解析的主机名解析成IP地址。你需要定义你自己的系统。如果你不想启用内部DNS系统的话，你也需要定义内部网络上的其它系统。
 </p>
 
 <pre caption="打开/etc/hosts">
@@ -450,8 +416,7 @@ PCMCIA用户首先应该安装<c>pcmciautils</c>软件包。
 <body>
 
 <p>
-Gentoo使用<path>/etc/rc.conf</path>来做通用的、系统级的配置。
-打开<path>/etc/rc.conf</path>并好好读读这个文件中的注解：）
+Gentoo使用<path>/etc/rc.conf</path>来做通用的、系统级的配置。打开<path>/etc/rc.conf</path>并好好读读这个文件中的注解：）
 </p>
 
 <pre caption="打开/etc/rc.conf">
@@ -463,14 +428,11 @@ Gentoo使用<path>/etc/rc.conf</path>来做通用的、系统级的配置。
 </p>
 
 <p>
-正如你所看到的，为了帮助你完成必要变量的配置，这个文件有丰富的注释信息。
-你可以让你的系统使用unicode并定义你的默认编辑器和你的显示管理器
-（比如gdm或者kdm）。
+正如你所看到的，为了帮助你完成必要变量的配置，这个文件有丰富的注释信息。你可以让你的系统使用unicode并定义你的默认编辑器和你的显示管理器（比如gdm或者kdm）。
 </p>
 
 <p>
-Gentoo用<path>/etc/conf.d/keymaps</path>来处理键盘设置。
-编辑它就可以设置你的键盘。
+Gentoo用<path>/etc/conf.d/keymaps</path>来处理键盘设置。编辑它就可以设置你的键盘。
 </p>
 
 <pre caption="打开/etc/conf.d/keymaps">
@@ -478,8 +440,7 @@ Gentoo用<path>/etc/conf.d/keymaps</path>来处理键盘设置。
 </pre>
 
 <p>
-<c>KEYMAP</c>这个变量要特别注意。如果你选择了错误的<c>KEYMAP</c>，
-在你敲击键盘的时候会有奇怪的结果。
+<c>KEYMAP</c>这个变量要特别注意。如果你选择了错误的<c>KEYMAP</c>，在你敲击键盘的时候会有奇怪的结果。
 </p>
 
 <note test="substring(func:keyval('arch'),1,3)='PPC'">
@@ -501,8 +462,7 @@ Gentoo使用<path>/etc/conf.d/clock</path>来设置时钟选项。根据你的�
 </pre>
 
 <p>
-如果你机器上的钟不用UTC，你需要在文件钟加上<c>CLOCK="local"</c>。
-否则，你的时钟就有可能出现偏差。
+如果你机器上的钟不用UTC，你需要在文件钟加上<c>CLOCK="local"</c>。否则，你的时钟就有可能出现偏差。
 </p>
 
 <p>
@@ -520,8 +480,7 @@ Gentoo使用<path>/etc/conf.d/clock</path>来设置时钟选项。根据你的�
 <body>
 
 <p>
-如果你使用虚拟控制台，就必须将<path>/etc/inittab</path>中的对应内容解除注释，
-以使得虚拟控制台生成登陆提示。
+如果你使用虚拟控制台，就必须将<path>/etc/inittab</path>中的对应内容解除注释，以使得虚拟控制台生成登陆提示。
 </p>
 
 <pre caption="开通/etc/inittab中的hvc和hvsi支持">
@@ -534,14 +493,11 @@ hvsi:12345:respawn:/sbin/agetty -L 19200 hvsi0
 </p>
 
 <p>
-你应该把timezone定义为你之前复制成<path>/etc/localtime</path>的时区，
-这样<c>sys-libs/timezone-data</c>的升级将会自动升级<path>/etc/localtime</path>。
-比如，如果你使用GMT时区，你应该加上<c>TIMEZONE="GMT"</c>。
+你应该把timezone定义为你之前复制成<path>/etc/localtime</path>的时区，这样<c>sys-libs/timezone-data</c>的升级将会自动升级<path>/etc/localtime</path>。比如，如果你使用GMT时区，你应该加上<c>TIMEZONE="GMT"</c>。
 </p>
 
 <p>
-你现在可以继续进行<uri link="?part=1&amp;chap=9">安装必要的系统工具</uri>这部分
-了。
+你现在可以继续进行<uri link="?part=1&amp;chap=9">安装必要的系统工具</uri>这部分了。
 </p>
 
 </body>

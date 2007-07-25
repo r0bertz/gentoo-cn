@@ -18,13 +18,11 @@
 <body>
 
 <p>
-现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个
-叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。
+现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。
 </p>
 
 <p>
-Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的引导程序，而不是全部。
-你可以从<uri link="#aboot">aBoot</uri>和<uri link="#milo">MILO</uri>中选择一个。
+Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的引导程序，而不是全部。你可以从<uri link="#aboot">aBoot</uri>和<uri link="#milo">MILO</uri>中选择一个。
 </p>
 
 </body>
@@ -35,8 +33,7 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 <body>
 
 <note>
-<c>aboot</c>只支持从这些分区引导： <b>ext2</b> 和 <b>ext3</b>
-分区。
+<c>aboot</c>只支持从这些分区引导：<b>ext2</b>和<b>ext3</b>分区。
 </note>
 
 <p>
@@ -48,8 +45,7 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 </pre>
 
 <p>
-下一步是使磁盘可引导。这会让你在引导系统时启动<c>aboot</c>。我们通过
-将<c>aboot</c>引导程序写入磁盘的起始位置使它可引导。
+下一步是使磁盘可引导。这会让你在引导系统时启动<c>aboot</c>。我们通过将<c>aboot</c>引导程序写入磁盘的起始位置使它可引导。
 </p>
 
 <pre caption="使磁盘可引导">
@@ -58,15 +54,11 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 </pre>
 
 <note>
-如果你使用的分区规划跟我们在本章中所使用的不同，那么你必须相应地修改这些命令。
-请阅读相关的手册页（<c>man 8 swriteboot</c>和<c>man 8 abootconf</c>）。并且，如
-果你的root文件系统用的是JFS文件系统，必须通过添加<c>ro</c>内核选项使它在刚开始
-以只读方式挂载。
+如果你使用的分区规划跟我们在本章中所使用的不同，那么你必须相应地修改这些命令。请阅读相关的手册页（<c>man 8 swriteboot</c>和<c>man 8 abootconf</c>）。并且，如果你的root文件系统用的是JFS文件系统，必须通过添加<c>ro</c>内核选项使它在刚开始以只读方式挂载。
 </note>
 
 <p>
-另外，你可以通过设置aboot配置文件和一些SRM变量来让Gentoo自动启动。你可以试着
-从Linux来设置这些变量，不过通过SRM控制台本身来做更容易。
+另外，你可以通过设置aboot配置文件和一些SRM变量来让Gentoo自动启动。你可以试着从Linux来设置这些变量，不过通过SRM控制台本身来做更容易。
 </p>
 
 <pre caption="自动启动Gentoo">
@@ -80,13 +72,11 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 </pre>
 
 <p>
-如果之后你需要再进入SRM控制台（还原Gentoo安装、设置某些变量等等），只要
-按下CTRL+C中止自动加载过程。
+如果之后你需要再进入SRM控制台（还原Gentoo安装、设置某些变量等等），只要按下CTRL+C中止自动加载过程。
 </p>
 
 <p>
-如果你是使用串口控制台安装，要记得在<path>aboot.conf</path>中加入串口控制台启动
-参数。参考<path>/etc/aboot.conf.example</path>获取更多信息。
+如果你是使用串口控制台安装，要记得在<path>aboot.conf</path>中加入串口控制台启动参数。参考<path>/etc/aboot.conf.example</path>获取更多信息。
 </p>
 
 <p>
@@ -100,8 +90,7 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 <body>
 
 <p>
-继续之前，你先要决定如何使用MILO。本节中我们假设你想制作一个MILO启动软盘。如果
-你要从你硬盘上的一个MS-DOS分区启动，须相应地修改这些命令。
+继续之前，你先要决定如何使用MILO。本节中我们假设你想制作一个MILO启动软盘。如果你要从你硬盘上的一个MS-DOS分区启动，须相应地修改这些命令。
 </p>
 
 <p>
@@ -113,8 +102,7 @@ Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的
 </pre>
 
 <p>
-MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO镜像文件（image）。用下面
-的命令制作一张配合MILO使用的启动软盘。记得要为你的alpha系统选用正确的镜像文件。
+MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO镜像文件（image）。用下面的命令制作一张配合MILO使用的启动软盘。记得要为你的alpha系统选用正确的镜像文件。
 </p>
 
 <pre caption="将MILO安装到软盘">
@@ -130,15 +118,11 @@ MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO镜像文件�
 </pre>
 
 <p>
-现在你的MILO启动软盘已经准备好启动Gentoo Linux了。你可能需要在你的ARCS固件中
-设置环境变量来起动MILO；这在<uri 
-link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>中有完整的解释，其中附
-有常见系统上的一些例子，以及交互模式下命令使用的示例。
+现在你的MILO启动软盘已经准备好启动Gentoo Linux了。你可能需要在你的ARCS固件中设置环境变量来起动MILO；这在<uri link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>中有完整的解释，其中附有常见系统上的一些例子，以及交互模式下命令使用的示例。
 </p>
 
 <p>
-我们<e>强烈</e>建议你阅读<uri 
-link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>。
+我们<e>强烈</e>建议你阅读<uri link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>。
 </p>
 
 <p>
@@ -153,8 +137,7 @@ link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>。
 <body>
 
 <p>
-退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的
-命令：<c>reboot</c>。
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
 </p>
 
 <pre caption="退出chroot，卸载所有分区并重启">
@@ -169,8 +152,7 @@ cdimage ~# <i>reboot</i>
 </p>
 
 <p>
-当重启进入到您新装的Gentoo系统之后，请以<uri
-link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+当重启进入到您新装的Gentoo系统之后，请以<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
 </p>
 
 </body>

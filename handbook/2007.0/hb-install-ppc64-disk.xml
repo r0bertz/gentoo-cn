@@ -21,9 +21,7 @@
 <body>
 
 <p>
-我们要好好了解下Gentoo 
-Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo 
-Linux做好准备。
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
 </p>
 
 <p>
@@ -91,14 +89,11 @@ Linux做好准备。
 </table>
 
 <note>
-有些分区命名为：<path>Apple_Driver43</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>、<path>Apple_Patches</path>。如果你计划不再使用MacOS 
-9你可以将它们删除，因为MacOS X和Linux都不需要它们。你可以使用parted来删除这些不需要的分区，因为mac-fdisk也无法删除它们。
+有些分区命名为：<path>Apple_Driver43</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>、<path>Apple_Patches</path>。如果你计划不再使用MacOS 9你可以将它们删除，因为MacOS X和Linux都不需要它们。你可以使用parted来删除这些不需要的分区，因为mac-fdisk也无法删除它们。
 </note>
 
 <p>
-如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则请跳转到<uri link="#mac-fdisk">Apple 
-G5：使用mac-fdisk来给磁盘分区</uri>或跳转到<uri link="#fdisk">IBM 
-pSeries：使用fdisk来给磁盘分区</uri>
+如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则请跳转到<uri link="#mac-fdisk">Apple G5：使用mac-fdisk来给磁盘分区</uri>或跳转到<uri link="#fdisk">IBM pSeries：使用fdisk来给磁盘分区</uri>
 </p>
 
 </body>
@@ -189,8 +184,7 @@ pSeries：使用fdisk来给磁盘分区</uri>
 <body>
 
 <note>
-如果你计划使用RAID磁盘阵列来安装你的Gentoo系统而且你使用的是基于POWER5架构的硬件，你应该运行<c>iprconfig</c>来格式化磁盘到Advanced 
-Function格式和创建磁盘阵列。应该在安装完成后emerge <c>iprutils</c>。
+如果你计划使用RAID磁盘阵列来安装你的Gentoo系统而且你使用的是基于POWER5架构的硬件，你应该运行<c>iprconfig</c>来格式化磁盘到Advanced Function格式和创建磁盘阵列。应该在安装完成后emerge <c>iprutils</c>。
 </note>
 
 <p>
@@ -326,8 +320,7 @@ Command (m for help):
 <body>
 
 <p>
-我们首先创建一个小的PReP启动分区。键入<c>n</c>来创建一个新的分区，然后键入<c>p</c>来选择一个主分区，紧接着键入<c>1</c>来选择第一个主分区。当碰到要填写第一个柱面时，按回车键。遇到要填写最后一个柱面时，输入<c>+7M</c>来创建一个大小为7M的分区。在这之后，键入<c>t</c>设置分区类型，<c>1</c>用来选择你刚创建的分区，然后键入<c>41</c>来设置分区为“PPC 
-PReP Boot”。最终，你需要将PReP分区标为可启动。
+我们首先创建一个小的PReP启动分区。键入<c>n</c>来创建一个新的分区，然后键入<c>p</c>来选择一个主分区，紧接着键入<c>1</c>来选择第一个主分区。当碰到要填写第一个柱面时，按回车键。遇到要填写最后一个柱面时，输入<c>+7M</c>来创建一个大小为7M的分区。在这之后，键入<c>t</c>设置分区类型，<c>1</c>用来选择你刚创建的分区，然后键入<c>41</c>来设置分区为“PPC PReP Boot”。最终，你需要将PReP分区标为可启动。
 </p>
 
 <note>
@@ -387,8 +380,7 @@ Command (m for help):
 <body>
 
 <p>
-让我们现在开始创建交换分区吧。首先键入<c>n</c>来创建一个新的分区，然后按<c>p</c>告知fdisk你想要一个主分区。接着按<c>2</c>来创建第二个主分区，我们例子中使用<path>/dev/sda2</path>。当遇到填写第一个柱面时，按回车。遇到填写最后一个柱面时，输入<c>+512M</c>来创建一个512M大小的分区。在这之后，键入<c>t</c>来设置分区类型，<c>2</c>来选择你刚刚键入的磁盘分区，接着键入<c>82</c>来设置分区类型为“Linux 
-Swap”。在完成这些步骤后，键入<c>p</c>应该可以看到近似以下的分区表：
+让我们现在开始创建交换分区吧。首先键入<c>n</c>来创建一个新的分区，然后按<c>p</c>告知fdisk你想要一个主分区。接着按<c>2</c>来创建第二个主分区，我们例子中使用<path>/dev/sda2</path>。当遇到填写第一个柱面时，按回车。遇到填写最后一个柱面时，输入<c>+512M</c>来创建一个512M大小的分区。在这之后，键入<c>t</c>来设置分区类型，<c>2</c>来选择你刚刚键入的磁盘分区，接着键入<c>82</c>来设置分区类型为“Linux Swap”。在完成这些步骤后，键入<c>p</c>应该可以看到近似以下的分区表：
 </p>
 
 <pre caption="创建一个交换分区后的分区列表">
@@ -457,8 +449,7 @@ Command (m for help): <i>w</i>
 <body>
 
 <p>
-至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri 
-link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统……
+至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统……
 </p>
 
 </body>
@@ -484,8 +475,7 @@ link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继
 </p>
 
 <p>
-<b>XFS</b>是一种带元数据日志的文件系统，并且在Gentoo 
-Linux的xfs-sources内核下得到完整支持。它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
+<b>XFS</b>是一种带元数据日志的文件系统，并且在Gentoo Linux的xfs-sources内核下得到完整支持。它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
 </p>
 
 <p>
@@ -542,8 +532,7 @@ Linux的xfs-sources内核下得到完整支持。它有一个健壮的特性集�
 </p>
 
 <impo>
-如果你的<path>/</path>选择使用ReiserFS，并且你将使用<c>yaboot</c>作为你的引导程序的话，不要改变ReiserFS的默认块大小，就像<uri 
-link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
+如果你的<path>/</path>选择使用ReiserFS，并且你将使用<c>yaboot</c>作为你的引导程序的话，不要改变ReiserFS的默认块大小，就像<uri link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
 </impo>
 
 </body>
@@ -589,8 +578,7 @@ link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
 </pre>
 
 <note>
-如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权 限：<c>chmod 1777 
-/mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
 </note>
 
 <p>

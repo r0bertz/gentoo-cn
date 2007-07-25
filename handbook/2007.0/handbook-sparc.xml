@@ -121,8 +121,7 @@
 </author>
 
 <abstract>
-Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含了在Sparc架构上无网络条件 
-下的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
+Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含了在Sparc架构上无网络条件下的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -197,8 +196,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 <chapter>
 <title>配置你的系统</title>
 <abstract>
-你需要修改一些重要的配置文件。本章将使您对这些文件有一个概览，并将说明如何进行 
-配置。
+你需要修改一些重要的配置文件。本章将使您对这些文件有一个概览，并将说明如何进行配置。
 </abstract>
   <include href="hb-install-config.xml"/>
 </chapter>
@@ -206,8 +204,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 <chapter>
 <title>安装必要的系统工具</title>
 <abstract>
-就像我们之前提及的，拥有Gentoo就是拥有个性化配置。在这一章节我们将帮助你选择和 
-安装一些重要的工具。
+就像我们之前提及的，拥有Gentoo就是拥有个性化配置。在这一章节我们将帮助你选择和安装一些重要的工具。
 </abstract>
   <include href="hb-install-tools.xml"/>
 </chapter>
@@ -215,8 +212,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 <chapter>
 <title>配置引导程序</title>
 <abstract>
-SPARC架构采用SILO引导程序来启动你的Linux系统。在这一章节我们会一步步来告诉 
-你怎样根据你的需求来配置一个引导程序。
+SPARC架构采用SILO引导程序来启动你的Linux系统。在这一章节我们会一步步来告诉你怎样根据你的需求来配置一个引导程序。
 </abstract>
   <include href="hb-install-sparc-bootloader.xml"/>
 </chapter>
@@ -224,8 +220,7 @@ SPARC架构采用SILO引导程序来启动你的Linux系统。在这一章节我
 <chapter>
 <title>结束Gentoo的安装</title>
 <abstract>
-你基本上已经完成安装了。我们将为你的系统创建一个（或者多个）用户而且可以 
-（有选择地）安装预构建的软件包。
+你基本上已经完成安装了。我们将为你的系统创建一个（或者多个）用户而且可以（有选择地）安装预构建的软件包。
 </abstract>
   <include href="hb-install-finalise.xml"/>
 </chapter>
@@ -256,8 +251,7 @@ SPARC架构采用SILO引导程序来启动你的Linux系统。在这一章节我
 <chapter>
 <title>USE标记</title>
 <abstract>
-USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响 
-你的系统构建。
+USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
 </abstract>
   <include href="../hb-working-use.xml"/>
 </chapter>
@@ -273,8 +267,7 @@ USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定US
 <chapter>
 <title>初始化脚本</title>
 <abstract>
-Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的决定和虚拟的初始化 
-脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
+Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中包括了允许依赖关系驱动的决定和虚拟的初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
 </abstract>
   <include href="../hb-working-rcscripts.xml"/>
 </chapter>
@@ -282,8 +275,7 @@ Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中�
 <chapter>
 <title>环境变量</title>
 <abstract>
-使用Gentoo你可以容易地管理你系统中的环境变量。本章会解释管理方式以及描述一些经常会使用到 
-的变量。
+使用Gentoo你可以容易地管理你系统中的环境变量。本章会解释管理方式以及描述一些经常会使用到的变量。
 </abstract>
   <include href="../hb-working-variables.xml"/>
 </chapter>
@@ -314,8 +306,7 @@ Gentoo使用一种特殊的初始化脚本格式，在其众多的特色之中�
 <chapter>
 <title>使用多个软件分支</title>
 <abstract>
-Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支中。“使用多个软件分支”告诉你 
-这些分支是如何配置的以及如何在个别情况下使用其他分支的软件。
+Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支中。“使用多个软件分支”告诉你这些分支是如何配置的以及如何在个别情况下使用其他分支的软件。
 </abstract>
   <include href="../hb-portage-branches.xml"/>
 </chapter>
@@ -331,8 +322,7 @@ Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支�
 <chapter>
 <title>改造Portage树</title>
 <abstract>
-“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类， 
-加入自己的软件包等等的心得技巧。
+“改造Portage树”提供给你一些关于如何使用你自己的Portage树，如何只同步你想要的分类，加入自己的软件包等等的心得技巧。
 </abstract>
   <include href="../hb-portage-diverttree.xml"/>
 </chapter>
@@ -361,8 +351,7 @@ Gentoo根据软件的稳定性和架构支持将它们划分在不同的分支�
 <chapter>
 <title>模块化网络</title>
 <abstract>
-Gentoo提供了灵活多变的组网方式——在这里你将会了解到选择不同的DHCP客户端，设置Bonding， 
-桥接，VLAN等等。
+Gentoo提供了灵活多变的组网方式——在这里你将会了解到选择不同的DHCP客户端，设置Bonding，桥接，VLAN等等。
 </abstract>
 <include href="../hb-net-modules.xml"/>
 </chapter>

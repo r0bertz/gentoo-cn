@@ -21,27 +21,19 @@
 <body>
 
 <p>
-目前您可以使用我们提供的<c>wireless-tools</c> 或<c>wpa_supplicant</c>工具来配置无
-线网络。请记住重要的一点是，您对无线网络的配置是全局性的，而非针对具体的接口。
+目前您可以使用我们提供的<c>wireless-tools</c> 或<c>wpa_supplicant</c>工具来配置无线网络。请记住重要的一点是，您对无线网络的配置是全局性的，而非针对具体的接口。
 </p>
 
 <p>
-<c>wpa_supplicant</c>是一个最好的选择，但缺点是它不支持所有的驱动。请浏览<uri
-link="http://hostap.epitest.fi/wpa_supplicant">wpa_supplicant网站</uri>获得它所
-支持的驱动列表。另外，<c>wpa_supplicant</c>目前只能连接到那些你已经配置好ESSID的
-无线网络。
+<c>wpa_supplicant</c>是一个最好的选择，但缺点是它不支持所有的驱动。请浏览<uri link="http://hostap.epitest.fi/wpa_supplicant">wpa_supplicant网站</uri>获得它所支持的驱动列表。另外，<c>wpa_supplicant</c>目前只能连接到那些你已经配置好ESSID的无线网络。
 </p>
 
 <p>
-<c>wireless-tools</c>支持几乎所有的无线网卡和驱动，但它不能连接到那些只支
-持WPA的AP。
+<c>wireless-tools</c>支持几乎所有的无线网卡和驱动，但它不能连接到那些只支持WPA的AP。
 </p>
 
 <warn>
-由于<c>linux-wlan-ng</c>驱动有其自己特有的安装和配置方式，而且与其他软件的方式完
-全不同，因此目前它并不被baselayout所支持。有传闻说<c>linux-wlan-ng</c>的开发者要
-将它的设置方式改成<c>wireless-tools</c>的方式——到时候您就可以在baselayout中使
-用<c>linux-wlan-ng</c>了。
+由于<c>linux-wlan-ng</c>驱动有其自己特有的安装和配置方式，而且与其他软件的方式完全不同，因此目前它并不被baselayout所支持。有传闻说<c>linux-wlan-ng</c>的开发者要将它的设置方式改成<c>wireless-tools</c>的方式——到时候您就可以在baselayout中使用<c>linux-wlan-ng</c>了。
 </warn>
 
 </body>
@@ -51,9 +43,7 @@ link="http://hostap.epitest.fi/wpa_supplicant">wpa_supplicant网站</uri>获得�
 <body>
 
 <p>
-<uri link="http://hostap.epitest.fi/wpa_supplicant">WPA Supplicant</uri>工具包可
-以让您连接到那些使用WPA的AP。因为还只是beta版，所以它的配置方法仍会常常变化——尽管
-如此，在大部分情况下它已经能很好的工作。
+<uri link="http://hostap.epitest.fi/wpa_supplicant">WPA Supplicant</uri>工具包可以让您连接到那些使用WPA的AP。因为还只是beta版，所以它的配置方法仍会常常变化——尽管如此，在大部分情况下它已经能很好的工作。
 </p>
 
 <pre caption="安装wpa_supplicant">
@@ -65,9 +55,7 @@ link="http://hostap.epitest.fi/wpa_supplicant">wpa_supplicant网站</uri>获得�
 </impo>
 
 <p>
-现在我们需要配置一下<path>/etc/conf.d/net</path>文件以便我们可以选择使
-用<c>wpa_supplicant</c>而不用<c>wireless-tools</c>（两者都安装在系统中时，默认使
-用的是<c>wireless-tools</c>）。
+现在我们需要配置一下<path>/etc/conf.d/net</path>文件以便我们可以选择使用<c>wpa_supplicant</c>而不用<c>wireless-tools</c>（两者都安装在系统中时，默认使用的是<c>wireless-tools</c>）。
 </p>
 
 <pre caption="在/etc/conf.d/net中配置wpa_supplicant">
@@ -79,16 +67,11 @@ wpa_supplicant_eth0="-Dmadwifi"
 </pre>
 
 <note>
-如果您用host-ap驱动，您首先要将无线设备卡设置成<e>Managed模式</e>以便能正确地配
-合<c>wpa_supplicant</c>工作。你可以在<path>/etc/conf.d/net</path>中设
-置<c>iwconfig_eth0="mode managed"</c>来实现这一点。
+如果您用host-ap驱动，您首先要将无线设备卡设置成<e>Managed模式</e>以便能正确地配合<c>wpa_supplicant</c>工作。你可以在<path>/etc/conf.d/net</path>中设置<c>iwconfig_eth0="mode managed"</c>来实现这一点。
 </note>
 
 <p>
-看起来这很简单，不是么？不过我们还需要配置<c>wpa_supplicant</c>本身，这将会
-比较麻烦一些，具体取决于你要连接的AP的安全程度。下面的例子是
-从<path>/usr/share/doc/wpa_supplicant-&lt;version&gt;/wpa_supplicant.conf.gz</path>中
-抽取并简化而来的，此文件出自<c>wpa_supplicant</c>软件包。
+看起来这很简单，不是么？不过我们还需要配置<c>wpa_supplicant</c>本身，这将会比较麻烦一些，具体取决于你要连接的AP的安全程度。下面的例子是从<path>/usr/share/doc/wpa_supplicant-&lt;version&gt;/wpa_supplicant.conf.gz</path>中抽取并简化而来的，此文件出自<c>wpa_supplicant</c>软件包。
 </p>
 
 <pre caption="一个/etc/wpa_supplicant/wpa_supplicant.conf的例子">
@@ -179,16 +162,11 @@ network={
 <body>
 
 <p>
-<uri
-link="http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html">Wireless
-Tools</uri>提供了一个通用的方法设置无线网络接口，最高可达WEP安全等级。虽然WEP是一
-种较弱的安全方式，但它也是最普遍使用的加密方式。
+<uri link="http://www.hpl.hp.com/personal/Jean_Tourrilhes/Linux/Tools.html">Wireless Tools</uri>提供了一个通用的方法设置无线网络接口，最高可达WEP安全等级。虽然WEP是一种较弱的安全方式，但它也是最普遍使用的加密方式。
 </p>
 
 <p>
-Wireless Tools的配置由几个主要变量来控制，以下配置文件的例子描述了您所需要了解的
-所有内容。要牢记于心的是：可确保“连接到没有加密的并且信号最强的AP”的配置并不存
-在——但我们会一直尝试并帮您连接到某个AP。
+Wireless Tools的配置由几个主要变量来控制，以下配置文件的例子描述了您所需要了解的所有内容。要牢记于心的是：可确保“连接到没有加密的并且信号最强的AP”的配置并不存在——但我们会一直尝试并帮您连接到某个AP。
 </p>
 
 <pre caption="安装wireless-tools">
@@ -196,13 +174,11 @@ Wireless Tools的配置由几个主要变量来控制，以下配置文件的例
 </pre>
 
 <note>
-尽管您可以将无线设置保存在<path>/etc/conf.d/wireless</path>中，但是本指南还是推荐
-您将它们保存在<path>/etc/conf.d/net</path>之中。
+尽管您可以将无线设置保存在<path>/etc/conf.d/wireless</path>中，但是本指南还是推荐您将它们保存在<path>/etc/conf.d/net</path>之中。
 </note>
 
 <impo>
-您<e>将</e>需要参阅文档<uri
-link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
+您<e>将</e>需要参阅文档<uri link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
 </impo>
 
 <pre caption="在/etc/conf.d/net中配置iwconfig的例子">
@@ -238,9 +214,7 @@ preferred_aps=( "ESSID1" "ESSID2" )
 </p>
 
 <p>
-您可以决定是否只连接首选的AP。默认情况下，当配置中列出的所有AP的连接都失
-败后，这时如果环境中有一个非加密的AP，系统将会与其连接。这个行为可以
-用<c>associate_order</c>变量来进行控制。下面给出一个相关的值的列表以及它们如何控制AP的选择。
+您可以决定是否只连接首选的AP。默认情况下，当配置中列出的所有AP的连接都失败后，这时如果环境中有一个非加密的AP，系统将会与其连接。这个行为可以用<c>associate_order</c>变量来进行控制。下面给出一个相关的值的列表以及它们如何控制AP的选择。
 </p>
 
 <table>
@@ -275,9 +249,7 @@ preferred_aps=( "ESSID1" "ESSID2" )
 </table>
 
 <p>
-最后我们还提供了一些<c>blacklist_aps</c>和<c>unique_ap</c>的选
-择。<c>blacklist_aps</c>的工作方式和<c>preferred_aps</c>类似。<c>unique_ap</c>是
-一个<c>yes</c>或<c>no</c>的值，它决定了是否允许两个无线接口同时接入一个AP。
+最后我们还提供了一些<c>blacklist_aps</c>和<c>unique_ap</c>的选择。<c>blacklist_aps</c>的工作方式和<c>preferred_aps</c>类似。<c>unique_ap</c>是一个<c>yes</c>或<c>no</c>的值，它决定了是否允许两个无线接口同时接入一个AP。
 </p>
 
 <pre caption="blacklist_aps和unique_ap的例子">
@@ -305,8 +277,7 @@ adhoc_essid_eth0="This Adhoc Node"
 </pre>
 
 <p>
-那么，要如何连接到Ad-Hoc网络，或者干脆运行于Master模式使自身成为一个无线接入点
-呢？这里有这样一个设置！您可能需要参照本章前面的内容来指定WEP秘钥。</p>
+那么，要如何连接到Ad-Hoc网络，或者干脆运行于Master模式使自身成为一个无线接入点呢？这里有这样一个设置！您可能需要参照本章前面的内容来指定WEP秘钥。</p>
 
 <pre caption="ad-hoc/master配置的例子">
 <comment># 设定模式为managed（默认）、ad-hoc或者master。并不是所有的设备都支持所有的模式。
@@ -324,13 +295,7 @@ channel_eth0="9"
 </pre>
 
 <impo>
-以下是从<uri 
-link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</uri>
-的BSD wavelan文档中逐字逐句复制过来的内容。目前共计有14个可用的频道；1-11频道在北
-美是合法的，而在欧洲大部分地区则是频道1-13，在法国是频道10-13，在日本只允许使用频
-道14。如果有疑问，请参考随您所购买的无线网卡或AP附带的说明书。确保调整您的无线网
-卡与AP（或工作于ad-hoc模式的另一块无线网卡）使用同一个频道。默认情况下，在北美和
-欧洲大部分地区销售的无线网卡使用频道3；在法国使用频道11，在日本使用频道14。
+以下是从<uri link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</uri>的BSD wavelan文档中逐字逐句复制过来的内容。目前共计有14个可用的频道；1-11频道在北美是合法的，而在欧洲大部分地区则是频道1-13，在法国是频道10-13，在日本只允许使用频道14。如果有疑问，请参考随您所购买的无线网卡或AP附带的说明书。确保调整您的无线网卡与AP（或工作于ad-hoc模式的另一块无线网卡）使用同一个频道。默认情况下，在北美和欧洲大部分地区销售的无线网卡使用频道3；在法国使用频道11，在日本使用频道14。
 </impo>
 
 </body>
@@ -340,8 +305,7 @@ link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</u
 <body>
 
 <p>
-一些环境或驱动的问题可能会使无线网络不能正常工作，下表多给出一些变量，可能有助于
-你解决问题。
+一些环境或驱动的问题可能会使无线网络不能正常工作，下表多给出一些变量，可能有助于你解决问题。
 </p>
 
 <table>
@@ -415,8 +379,7 @@ link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</u
 <body>
 
 <p>
-有时，您连接<e>ESSID1</e>需要使用一个固定IP，而连接<e>ESSID2</e>要使用DHCP。实
-际上，大多数模块变量可以针对每个ESSID来定义。下面我们给出具体的做法。
+有时，您连接<e>ESSID1</e>需要使用一个固定IP，而连接<e>ESSID2</e>要使用DHCP。实际上，大多数模块变量可以针对每个ESSID来定义。下面我们给出具体的做法。
 </p>
 
 <note>
@@ -424,8 +387,7 @@ link="http://www.netbsd.org/Documentation/network/wavelan.html">NetBSD 文档</u
 </note>
 
 <impo>
-您<e>将</e>需要参阅文档<uri
-link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
+您<e>将</e>需要参阅文档<uri link="?part=4&amp;chap=2#variable_name">变量名称</uri>。
 </impo>
 
 <pre caption="覆盖每一个ESSID的配置">

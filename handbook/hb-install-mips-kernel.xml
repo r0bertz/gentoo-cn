@@ -33,8 +33,7 @@
 <body>
 
 <p>
-Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri 
-link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </p>
 
 <p>
@@ -46,9 +45,7 @@ link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
 </pre>
 
 <impo>
-在Origin 200/2000、Indigo2 Impact 
-(R10000)、Octane/Octane2和O2上，需要一个64位内核来启动系统。对于这些机器，你应该<c>emerge 
-kgcc64</c>来创建一个交叉编译器来编译64位内核。
+在Origin 200/2000、Indigo2 Impact (R10000)、Octane/Octane2和O2上，需要一个64位内核来启动系统。对于这些机器，你应该<c>emerge kgcc64</c>来创建一个交叉编译器来编译64位内核。
 </impo>
 
 <pre caption="安装kgcc64……">
@@ -56,9 +53,7 @@ kgcc64</c>来创建一个交叉编译器来编译64位内核。
 </pre>
 
 <p>
-当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的
-符号链接指向您安装的内核源码。在我们这个例子中，安装的源码
-指向<c>mips-sources-<keyval id="kernel-version"/></c>。您的版本可能 有所不同，所以请你记住这一点。
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>mips-sources-<keyval id="kernel-version"/></c>。您的版本可能有所不同，所以请你记住这一点。
 </p>
 
 <pre caption="查看内核源码符号链接">
@@ -138,8 +133,7 @@ lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; lin
 </pre>
 
 <impo>
-这个内核配置是netboot镜像用的。也就是它需要就近找到一个根文件系统，要么是initramfs里的一个目录，要么是一个initrd回环设备。所以当你运行<c>make 
-menuconfig</c>时，不要忘记进到General Setup里禁用initramfs的选项。
+这个内核配置是netboot镜像用的。也就是它需要就近找到一个根文件系统，要么是initramfs里的一个目录，要么是一个initrd回环设备。所以当你运行<c>make menuconfig</c>时，不要忘记进到General Setup里禁用initramfs的选项。
 </impo>
 
 </body>
@@ -165,8 +159,7 @@ menuconfig</c>时，不要忘记进到General Setup里禁用initramfs的选项�
 <body>
 
 <p>
-当你找到一个配置之后，下载到你的内核源代码目录里，重命名为<path>.config</path>。在那个目录里，运行<c>make 
-oldconfig</c>来更新配置文件，在编译开始前你还能定制这个配置文件。
+当你找到一个配置之后，下载到你的内核源代码目录里，重命名为<path>.config</path>。在那个目录里，运行<c>make oldconfig</c>来更新配置文件，在编译开始前你还能定制这个配置文件。
 </p>
 
 <pre caption="编译内核">
@@ -178,8 +171,7 @@ oldconfig</c>来更新配置文件，在编译开始前你还能定制这个配�
 </pre>
 
 <impo>
-在Kernel 
-Hacking部分，有一个选项叫“你正在使用交叉编译器么？”这个会告诉内核Makefile在编译内核时把“<c>mips-linux-</c>”（或者<c>mipsel-linux-</c>……等等）加在<c>gcc</c>和<c>as</c>前。这个选项应该被关闭，即时是在交叉编译时。如果你确实需要调用交叉编译器，请定义<c>CROSS_COMPILE</c>变量就像下面一节所演示的。 
+在Kernel Hacking部分，有一个选项叫“你正在使用交叉编译器么？”这个会告诉内核Makefile在编译内核时把“<c>mips-linux-</c>”（或者<c>mipsel-linux-</c>……等等）加在<c>gcc</c>和<c>as</c>前。这个选项应该被关闭，即时是在交叉编译时。如果你确实需要调用交叉编译器，请定义<c>CROSS_COMPILE</c>变量就像下面一节所演示的。
 </impo>
 
 <impo>
@@ -216,8 +208,7 @@ Octane系统上JFS和ALSA有一个已知问题，ALSA不能工作。鉴于JFS在
 </pre>
 
 <impo>
-当为Indy、Indigo2 (R4k)、Challenge 
-S和O2编译64位内核时，请使用<c>vmlinux.32</c>目标，而不要用<c>vmlinux</c>。否则，你的系统将不能启动。这样做因为PROM不支持ELF64格式。
+当为Indy、Indigo2 (R4k)、Challenge S和O2编译64位内核时，请使用<c>vmlinux.32</c>目标，而不要用<c>vmlinux</c>。否则，你的系统将不能启动。这样做因为PROM不支持ELF64格式。
 </impo>
 
 <pre caption="使用vmlinux.32目标">
@@ -230,8 +221,7 @@ S和O2编译64位内核时，请使用<c>vmlinux.32</c>目标，而不要用<c>v
 </p>
 
 <note>
-在Cobalt服务器上，引导程序需要的是一个压缩了的内核镜像。复制到<path>/boot</path>之后记得用<c>gzip 
--9</c>来压缩一下内核镜像．
+在Cobalt服务器上，引导程序需要的是一个压缩了的内核镜像。复制到<path>/boot</path>之后记得用<c>gzip -9</c>来压缩一下内核镜像．
 </note>
 
 <pre caption="安装内核">

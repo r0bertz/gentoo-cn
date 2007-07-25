@@ -12,8 +12,7 @@
 </author>
 
 <abstract>
-Gentoo 
-2007.0手册的目的是将文档集中在一个条理分明的手册中。它包括了2007.0发行版本的无网络安装操作指南以及讲述如何使用Gentoo和Portage的章节。
+Gentoo 2007.0手册的目的是将文档集中在一个条理分明的手册中。它包括了2007.0发行版本的无网络安装操作指南以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <license/>
@@ -46,13 +45,11 @@ link="/doc/pl/handbook/2007.0">波兰语</uri>
 <body>
 
 <p>
-欢迎您阅读Gentoo Linux 2007.0手册。本手册是同Gentoo 
-Linux版本一起发行的，包含了<brite>无网络条件下</brite>安装Gentoo Linux 2007.0所必需的安装操作指南。
+欢迎您阅读Gentoo Linux 2007.0手册。本手册是同Gentoo Linux版本一起发行的，包含了<brite>无网络条件下</brite>安装Gentoo Linux 2007.0所必需的安装操作指南。
 </p>
 
 <p>
-而且，如果你想使用最新版本的软件包安装Gentoo Linux，请参考<uri link="/doc/zh_cn/handbook/">Gentoo 
-Linux 手册</uri>中符合你的机器架构的安装操作指南进行安装。
+而且，如果你想使用最新版本的软件包安装Gentoo Linux，请参考<uri link="/doc/zh_cn/handbook/">Gentoo Linux 手册</uri>中符合你的机器架构的安装操作指南进行安装。
 </p>
 
 </body>

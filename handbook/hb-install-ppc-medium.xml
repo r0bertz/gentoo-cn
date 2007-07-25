@@ -237,8 +237,7 @@ Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
 </table>
 
 <p>
-为了使用以上的选项，在<e>boot:</e>提示符后键入<e>apple</e>并可以紧跟需要的选项。在以下的例子中，我们强制使用Open
-Firmware的frambuffer来替代设备特定的驱动。
+为了使用以上的选项，在<e>boot:</e>提示符后键入<e>apple</e>并可以紧跟需要的选项。在以下的例子中，我们强制使用Open Firmware的frambuffer来替代设备特定的驱动。
 </p>
 
 <pre caption="强制使用Open Firmware的framebuffer">

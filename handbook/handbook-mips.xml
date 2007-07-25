@@ -125,8 +125,7 @@
 </author>
 
 <abstract>
-这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在MIPS系统上的基 
-于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
+这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在MIPS系统上的基于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
@@ -205,8 +204,7 @@ Linux内核是任何一个发行版本的核心。这一章节将说明如何配
 <chapter>
 <title>配置引导程序</title>
 <abstract>
-在Silicon 
-Graphics机器和Cobalt服务器上，都需要使用引导程序来加载内核。本节解释了如何设置SGI机器的arcboot/arcload和Cobalt服务器的colo。
+在Silicon Graphics机器和Cobalt服务器上，都需要使用引导程序来加载内核。本节解释了如何设置SGI机器的arcboot/arcload和Cobalt服务器的colo。
 </abstract>
   <include href="hb-install-mips-bootloader.xml"/>
 </chapter>

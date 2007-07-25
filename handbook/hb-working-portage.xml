@@ -59,8 +59,7 @@ $ <i>man emerge</i>
 <body>
 
 <p>
-通常我们使用<uri
-link="http://rsync.samba.org/">rsync</uri>命令来更新Portage树，它是一个快速的增量性的文件传输工具。另外<c>emerge</c>命令为rsync命令提供了一个相当简单的前端。
+通常我们使用<uri link="http://rsync.samba.org/">rsync</uri>命令来更新Portage树，它是一个快速的增量性的文件传输工具。另外<c>emerge</c>命令为rsync命令提供了一个相当简单的前端。
 </p>
 
 <pre caption="更新Portage树">
@@ -155,8 +154,7 @@ $ <i>emerge --searchdesc pdf</i>
 <body>
 
 <p>
-许多软件包中包含有自己的文档，有些时候<c>doc</c>的USE标记决定了软件包中的自带文档是否会被安装到本地。您可以通过<c>emerge -vp
-&lt;软件包名称&gt;</c>命令来检查是否存在<c>doc</c> USE标记。
+许多软件包中包含有自己的文档，有些时候<c>doc</c>的USE标记决定了软件包中的自带文档是否会被安装到本地。您可以通过<c>emerge -vp &lt;软件包名称&gt;</c>命令来检查是否存在<c>doc</c> USE标记。
 </p>
 
 <pre caption="检查是否存在doc的USE标记">
@@ -170,8 +168,7 @@ $ <i>emerge --searchdesc pdf</i>
 </p>
 
 <p>
-当一个软件包安装结束后，它的文档通常会存放在<path>/usr/share/doc</path>目录下以软件包名命名的子目录中。您也可以通过<c>equery</c>工具来列出此软件安装后生成的所有文件，这个工具来自于<c>app-portage/gentoolkit</c> <uri
-link="/doc/en/gentoolkit.xml">包</uri>。
+当一个软件包安装结束后，它的文档通常会存放在<path>/usr/share/doc</path>目录下以软件包名命名的子目录中。您也可以通过<c>equery</c>工具来列出此软件安装后生成的所有文件，这个工具来自于<c>app-portage/gentoolkit</c> <uri link="/doc/en/gentoolkit.xml">包</uri>。
 </p>
 
 <pre caption="定位包的文档">
@@ -199,8 +196,7 @@ media-libs/alsa-lib-1.0.14_rc1
 <body>
 
 <p>
-当您想把一个软件包从系统中移除的时候，使用<c>emerge
---unmerge</c>命令。命令执行完成后，<e>除了</e>那些在安装软件包后您修改过的配置文件，Portage将会移除此软件包安装到您系统中的所有文件。保留这些修改过的配置文件是为了便于您今后再次使用同一个软件包。
+当您想把一个软件包从系统中移除的时候，使用<c>emerge --unmerge</c>命令。命令执行完成后，<e>除了</e>那些在安装软件包后您修改过的配置文件，Portage将会移除此软件包安装到您系统中的所有文件。保留这些修改过的配置文件是为了便于您今后再次使用同一个软件包。
 </p>
 
 <p>
@@ -260,8 +256,7 @@ Portage树中的一些软件包并没有包含任何实际的内容，而只是�
 </p>
 
 <p>
-如果您试图从系统中移除一个这样的软件包的集合体，只是单纯地使用<c>emerge
---unmerge</c>命令并不能完成您的要求，原因在于这些包的依赖关系仍然保留在系统中。
+如果您试图从系统中移除一个这样的软件包的集合体，只是单纯地使用<c>emerge --unmerge</c>命令并不能完成您的要求，原因在于这些包的依赖关系仍然保留在系统中。
 </p>
 
 <p>
@@ -408,8 +403,7 @@ emerge: there are no ebuilds to satisfy "&gt;=sys-devel/gcc-3.4.2-r4".
 </pre>
 
 <p>
-这表示您正尝试安装的应用程序依赖于您的系统不可用的另外一些软件包。请到<uri
-link="http://bugs.gentoo.org">bugzilla</uri>查看是否有此问题的记录，如果没有查找到相关信息的话请提交一个报告。除非您的系统混用了不同分支，否则这类问题不应该发生，若发生了那就是一个bug。
+这表示您正尝试安装的应用程序依赖于您的系统不可用的另外一些软件包。请到<uri link="http://bugs.gentoo.org">bugzilla</uri>查看是否有此问题的记录，如果没有查找到相关信息的话请提交一个报告。除非您的系统混用了不同分支，否则这类问题不应该发生，若发生了那就是一个bug。
 </p>
 
 </body>
