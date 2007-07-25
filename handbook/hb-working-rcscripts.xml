@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-rcscripts.xml,v 1.29 2006/10/28 09:17:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-rcscripts.xml,v 1.30 2006/10/28 09:17:55 neysx Exp $ -->
 
 <sections>
 
@@ -14,8 +14,8 @@ Gentoo使用一种特殊的初始化脚本格式，有很多特色，包括由�
 初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
 </abstract>
 
-<version>1.23</version>
-<date>2007-03-07</date>
+<version>1.24</version>
+<date>2007-07-07</date>
 
 <section>
 <title>运行级别</title>
@@ -305,13 +305,18 @@ Gentoo的初始化系统使用依赖关系树（dependency-tree）来决定什�
 </pre>
 
 <p>
-<c>rc-update show</c>命令将会显示出所有已存在的初始化脚本，并列出它们在哪个运行
+<c>rc-update -v show</c>命令将会显示出所有已存在的初始化脚本，并列出它们在哪个运行
 级别中运行：
 </p>
 
 <pre caption="获得初始化脚本的信息">
-# <i>rc-update show</i>
+# <i>rc-update -v show</i>
 </pre>
+
+<p>
+你也可以运行<c>rc-update show</c>（没有<c>-v</c>参数）来只查看已经启用的初始化
+脚本和他们的运行级别。
+</p>
 
 </body>
 </subsection>
