@@ -132,6 +132,15 @@
 <author title="投稿">
    <mail link="pylon@gentoo.org">Lars Weiler</mail>
 </author>
+<author title="译者">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+<author title="译者">
+  <mail link="wcw8410@gmail.com">吴传文</mail>
+</author>
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
 
 <abstract>
 这是Gentoo手册，一个集中了Gentoo/Linux信息的地方。这份手册包含了在x86系统上的基于网络安装的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。

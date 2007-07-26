@@ -9,6 +9,14 @@
   <mail link="swift@gentoo.org">Sven Vermeulen</mail>
 </author>
 
+<author title="译者">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
 <abstract>
 这个是旧的Gentoo手册的替代文档。新的Gentoo手册安装架构不同而区分开了（差不多如此），因此就不在使用handbook.xml这个名字了。
 
