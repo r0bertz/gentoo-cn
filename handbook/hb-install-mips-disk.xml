@@ -91,8 +91,7 @@ SGI系统里的所有磁盘都需要一个<e>SGI盘标</e>，它和Sun和MS-DOS�
     <e>SGI卷头</e>（第9分区）：这个分区很重要。这是引导程序保存的地方，某些情况下还保存内核镜像。
   </li>
   <li>
-    <e>SGI卷</e>（第11分区）：这个分区的目的类似于Sun盘标的第三个分区“Whole 
-disk”。这个分区跨越整个磁盘，不要碰它。除了以某种未知方式帮助PROM（或者IRIX会以某些方式用到它）之外，它没有其他什么特殊用途。
+    <e>SGI卷</e>（第11分区）：这个分区的目的类似于Sun盘标的第三个分区“Whole disk”。这个分区跨越整个磁盘，不要碰它。除了以某种未知方式帮助PROM（或者IRIX会以某些方式用到它）之外，它没有其他什么特殊用途。
   </li>
 </ul>
 
@@ -220,8 +219,7 @@ First cylinder (0-50, default 0): <i>0</i>
 
 <ul>
   <li>
-    Cobalt固件要求<path>/dev/hda1</path>是一个格式化为<e>EXT2 Revision 
-0</e>的Linux分区。<e>不可以是EXT2 Revision 1!</e>（Cobalt BOOTROM只能理解EXT2r0）
+    Cobalt固件要求<path>/dev/hda1</path>是一个格式化为<e>EXT2 Revision 0</e>的Linux分区。<e>不可以是EXT2 Revision 1!</e>（Cobalt BOOTROM只能理解EXT2r0）
   </li>
   <li>
     前面说到的分区的根目录里必须有一个gzip压缩的ELF镜像，<path>vmlinux.gz</path>，它将会作为内核被加载

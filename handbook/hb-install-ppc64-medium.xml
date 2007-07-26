@@ -34,7 +34,7 @@
 <tr>
   <th>系统</th>
   <ti>
-    IBM RS/6000s、Power Macintosh G5、IBM pSeries和IBM OpenPower
+    IBM RS/6000s、Power Macintosh G5、IBM pSeries和IBM OpenPower 
   </ti>
 </tr>
 <tr>
@@ -236,20 +236,16 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc 
-&lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to 
-Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
   <li>
-    在Mac OS X Panther中，在<path>Applications/Utilities</path>中启动<c>Disk 
-Utility</c>，在<c>Images</c>菜单中选择<c>Open</c>，选择在主窗口中已挂载的磁盘镜像然后选择<c>Images</c>菜单中<c>Burn</c>。
+    在Mac OS X Panther中，在<path>Applications/Utilities</path>中启动<c>Disk Utility</c>，在<c>Images</c>菜单中选择<c>Open</c>，选择在主窗口中已挂载的磁盘镜像然后选择<c>Images</c>菜单中<c>Burn</c>。
   </li>
   <li>
-    在Mac OS X Jaguar中，在<path>Applications/Utilities</path>中启动<c>Disk 
-Copy</c>，从<c>File</c>菜单中选择<c>Burn Image</c>，选好ISO然后按<c>Burn</c>按钮。
+    在Mac OS X Jaguar中，在<path>Applications/Utilities</path>中启动<c>Disk Copy</c>，从<c>File</c>菜单中选择<c>Burn Image</c>，选好ISO然后按<c>Burn</c>按钮。
   </li>
 </ul>
 

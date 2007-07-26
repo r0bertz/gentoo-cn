@@ -29,26 +29,25 @@
 <tr>
   <th>Apple NewWorld机器</th>
   <ti>
-    Power/PowerPC微处理器（G3、G4、G5）例如iMac、eMac、iBook PowerBook、Xserver、PowerMac
+    Power/PowerPC微处理器（G3、G4、G5）例如iMac、eMac、iBook PowerBook、Xserver、PowerMac 
   </ti>
 </tr>
 <tr>
   <th>Apple OldWorld机器</th>
   <ti>
-    Open Firmware版本小于3的Apple机器，比如Beige G3、PCI PowerMac和PCI 
-PowerBook。基于PCI的Apple克隆机应该也可以被支持。
+    Open Firmware版本小于3的Apple机器，比如Beige G3、PCI PowerMac和PCI PowerBook。基于PCI的Apple克隆机应该也可以被支持。
   </ti>
 </tr>
 <tr>
   <th>Genesi</th>
   <ti>
-    Pegasos I/II，Open式桌面工作站，Efika
+    Pegasos I/II，Open式桌面工作站，Efika 
   </ti>
 </tr>
 <tr>
   <th>IBM</th>
   <ti>
-    RS/6000、iSeries、pSeries
+    RS/6000、iSeries、pSeries 
   </ti>
 </tr>
 <tr>
@@ -174,12 +173,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc 
-&lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to 
-Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 

@@ -51,7 +51,7 @@ yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式
 <ul>
   <li><uri link="#yabootconfig">默认：使用yabootconfig</uri></li>
   <li>
-    <uri link="#manual_yaboot">备选：手动配置yaBoot</uri>
+    <uri link="#manual_yaboot">备选：手动配置yaBoot</uri> 
   </li>
 </ul>
 
@@ -183,8 +183,7 @@ enableofboot
 <ul>
 <li>安装yaboot-static</li>
 <li>
-运行<c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c>
-（用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子<path>/dev/sda1</path>）
+运行<c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c>（用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子<path>/dev/sda1</path>）
 </li>
 <li>
 下一步构建你自己的<path>yaboot.conf</path>文件并置于<path>/etc</path>内。（再看一下以上的配置文件，参考一下yaboot.conf的man页面或者参考下如下的<path>yaboot.conf</path>示例）

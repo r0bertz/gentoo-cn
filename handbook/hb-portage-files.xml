@@ -226,8 +226,7 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
 
 <ul>
   <li>
-    PORTAGE_ELOG_CLASSES：这是你设置什么信息被记入日志的地方。你可以使用任何用空
-    格分隔的<c>info</c>、<c>warn</c>、<c>error</c>、<c>log</c>和<c>qa</c>的组合。
+    PORTAGE_ELOG_CLASSES：这是你设置什么信息被记入日志的地方。你可以使用任何用空格分隔的<c>info</c>、<c>warn</c>、<c>error</c>、<c>log</c>和<c>qa</c>的组合。
     <ul>
       <li><c>info</c>: 记录下ebuild打印的“einfo”信息</li>
       <li><c>warn</c>: 记录下ebuild打印的“ewarn”信息</li>
@@ -237,41 +236,30 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
     </ul>
   </li>
   <li>
-    PORTAGE_ELOG_SYSTEM：这是用来选择处理日志信息的模块的。如果留空，则日志记录
-    就被取消。你可以使用任何用空格分隔开的<c>save</c>、<c>custom</c>、
-    <c>syslog</c>、<c>mail</c>、<c>save_summary</c>和<c>mail_summary</c>的组合。
-    你必须至少选择一个模块以使用elog。
+    PORTAGE_ELOG_SYSTEM：这是用来选择处理日志信息的模块的。如果留空，则日志记录就被取消。你可以使用任何用空格分隔开的<c>save</c>、<c>custom</c>、<c>syslog</c>、<c>mail</c>、<c>save_summary</c>和<c>mail_summary</c>的组合。你必须至少选择一个模块以使用elog。
     <ul>
       <li>
-        <c>save</c>：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或
-        者是在$PORT_LOGDIR 没有配置的情况下保存
-	在<path>/var/log/portage/elog</path> 目录下面。
+        <c>save</c>：表示将每一个软件包的日志保存在<path>$PORT_LOGDIR/elog</path>中，或者是在$PORT_LOGDIR 没有配置的情况下保存在<path>/var/log/portage/elog</path> 目录下面。
       </li>
       <li>
-	<c>custom</c>：将所有的信息传递给用户在$PORTAGE_ELOG_COMMAND中定义的命令，这将
-        在随后讨论。
+	<c>custom</c>：将所有的信息传递给用户在$PORTAGE_ELOG_COMMAND中定义的命令，这将在随后讨论。
       </li>
       <li>
-        <c>syslog</c>：把所有的信息发送给已安装的系统日志软件。</li>
-      <li>
-        <c>mail</c>：把所有的信息传递给用户在$PORTAGE_ELOG_MAILURI中定义的邮件服务器；
-        这将在随后讨论。这一elog的邮件特性需要&gt;=<c>portage-2.1.1</c>。
+        <c>syslog</c>：把所有的信息发送给已安装的系统日志软件。
       </li>
       <li>
-        <c>save_summary</c>： 和<c>save</c>类似，不过它把所有的信息保存
-        在<path>$PORT_LOGDIR/elog/summary.log</path>里，
-        或者<path>/var/log/portage/elog/summary.log</path>里，如果$PORT_LOGDIR没有定义的话。
+        <c>mail</c>：把所有的信息传递给用户在$PORTAGE_ELOG_MAILURI中定义的邮件服务器；这将在随后讨论。这一elog的邮件特性需要&gt;=<c>portage-2.1.1</c>。
       </li>
       <li>
-        <c>mail_summary</c>： 和<c>mail</c>类似，不过它会在emerge结束时把所有的信息
-        在一个邮件里发送出去。
+        <c>save_summary</c>： 和<c>save</c>类似，不过它把所有的信息保存在<path>$PORT_LOGDIR/elog/summary.log</path>里，或者<path>/var/log/portage/elog/summary.log</path>里，如果$PORT_LOGDIR没有定义的话。
+      </li>
+      <li>
+        <c>mail_summary</c>： 和<c>mail</c>类似，不过它会在emerge结束时把所有的信息在一个邮件里发送出去。
       </li>
     </ul>
   </li>
   <li>
-    PORTAGE_ELOG_COMMAND：这个仅仅在<c>custom</c>模块被激活时使用。在这里你指定
-    一个命令来处理日志信息。注意，你可以利用两个变量：${PACKAGE}是软件包的名字和
-    版本，而${LOGFILE}是日志文件的绝对路径。这里是一个可能的用法：
+    PORTAGE_ELOG_COMMAND：这个仅仅在<c>custom</c>模块被激活时使用。在这里你指定一个命令来处理日志信息。注意，你可以利用两个变量：${PACKAGE}是软件包的名字和版本，而${LOGFILE}是日志文件的绝对路径。这里是一个可能的用法：
     <ul>
       <li>
         PORTAGE_ELOG_COMMAND="/path/to/logger -p '\${PACKAGE}' -f '\${LOGFILE}'"
@@ -279,34 +267,27 @@ Portage通过<c>elog</c>对日志记录提供精确的控制：
     </ul>
   </li>
   <li>
-    PORTAGE_ELOG_MAILURI：这包含了<c>mail</c>模块的设定，如地址、用户、密码、
-    邮件服务器、端口。默认配置是 “root@localhost localhost”。
+    PORTAGE_ELOG_MAILURI：这包含了<c>mail</c>模块的设定，如地址、用户、密码、邮件服务器、端口。默认配置是 “root@localhost localhost”。
   </li>
   <li>
-    这里是一个使用smtp服务器的例子，基于用户名和密码认证并使用特定端口(默认端口
-    是25)：
+    这里是一个使用smtp服务器的例子，基于用户名和密码认证并使用特定端口(默认端口是25)：
     <ul>
       <li>
-        PORTAGE_ELOG_MAILURI="user@some.domain
-        username:password@smtp.some.domain:995"
+        PORTAGE_ELOG_MAILURI="user@some.domain username:password@smtp.some.domain:995"
       </li>
     </ul>
   </li>
   <li>
-    PORTAGE_ELOG_MAILFROM：允许你配置日志邮件的“from”地址；如果没有配置的话，默
-    认是“portage”。
+    PORTAGE_ELOG_MAILFROM：允许你配置日志邮件的“from”地址；如果没有配置的话，默认是“portage”。
   </li>
   <li>
-    PORTAGE_ELOG_MAILSUBJECT：允许你为日志邮件生成一个主题行。注意你可以使用两个
-    变量：${PACKAGE}将会显示软件包的名子和版本，而${HOST}则是运行Portage的主机的
-    FQDN。
+    PORTAGE_ELOG_MAILSUBJECT：允许你为日志邮件生成一个主题行。注意你可以使用两个变量：${PACKAGE}将会显示软件包的名子和版本，而${HOST}则是运行Portage的主机的FQDN。
   </li>
   <li>
     这里是一个可能的应用：
     <ul>
       <li>
-	PORTAGE_ELOG_MAILSUBJECT="package \${PACKAGE} was merged on \${HOST}
-	with some messages"
+	PORTAGE_ELOG_MAILSUBJECT="package \${PACKAGE} was merged on \${HOST} with some messages"
       </li>
     </ul>
   </li>

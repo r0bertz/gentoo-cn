@@ -76,8 +76,8 @@
     <ti>MIPS 1</ti>
     <ti>32位</ti>
     <ti>
-      <uri link="http://www.linux-mips.org/wiki/index.php/R2000">R2000</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/R2000">R3000</uri>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R2000">R2000</uri>, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R2000">R3000</uri>
     </ti>
   </tr>
   <tr>
@@ -91,24 +91,25 @@ link="http://www.linux-mips.org/wiki/index.php/R2000">R3000</uri>
     <ti>MIPS 3</ti>
     <ti>64位</ti>
     <ti>
-      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4000</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/R4000">R4400</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/R4000">R4600</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/R4000">R4700</uri>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4000</uri>,
+      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4400</uri>,
+      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4600</uri>, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R4000">R4700</uri>
     </ti>
   </tr>
   <tr>
     <ti>MIPS 4</ti>
     <ti>64位</ti>
     <ti>
-      <uri link="http://www.linux-mips.org/wiki/index.php/R5000">R5000</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/R5000">RM5000</uri>, <uri 
-link="http://www.linux-mips.org/wiki/index.php/RM7000">RM7000</uri> <uri 
-link="http://www.linux-mips.org/wiki/index.php/R8000">R8000</uri>, R9000, 
-<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R10000</uri>, 
-<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R12000</uri>, 
-<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R14000</uri>, 
-<uri link="http://www.linux-mips.org/wiki/index.php/R10000">R16000</uri>
+      <uri link="http://www.linux-mips.org/wiki/index.php/R5000">R5000</uri>,
+	  <uri link="http://www.linux-mips.org/wiki/index.php/R5000">RM5000</uri>,
+	  <uri link="http://www.linux-mips.org/wiki/index.php/RM7000">RM7000</uri>,
+	  <uri link="http://www.linux-mips.org/wiki/index.php/R8000">R8000</uri>,
+      R9000, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R10000">R10000</uri>, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R10000">R12000</uri>, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R10000">R14000</uri>, 
+      <uri link="http://www.linux-mips.org/wiki/index.php/R10000">R16000</uri>
     </ti>
   </tr>
   <tr>
@@ -185,21 +186,16 @@ link="http://www.linux-mips.org/wiki/index.php/R8000">R8000</uri>, R9000,
 
 <ul>
   <li>
-    <uri 
-link="http://www.linux-mips.org/wiki/index.php/Instruction_Set_Architecture"> 
-Linux/MIPS Website: MIPS ISA </uri>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Instruction_Set_Architecture"> Linux/MIPS Website: MIPS ISA </uri> 
   </li>
   <li>
-    <uri link="http://www.linux-mips.org/wiki/index.php/Endianess"> Linux/MIPS 
-Website: Endianness </uri>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Endianess"> Linux/MIPS Website: Endianness </uri> 
   </li>
   <li>
-    <uri link="http://www.linux-mips.org/wiki/index.php/Processors"> Linux/MIPS 
-Website: Processors </uri>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Processors"> Linux/MIPS Website: Processors </uri> 
   </li>
   <li>
-    <uri link="http://en.wikipedia.org/wiki/Instruction_set"> Wikipedia: 
-Instruction Set </uri>
+    <uri link="http://en.wikipedia.org/wiki/Instruction_set"> Wikipedia: Instruction Set </uri> 
   </li>
 </ul>
 

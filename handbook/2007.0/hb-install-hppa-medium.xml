@@ -85,12 +85,10 @@ Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境�
 
 <ul>
   <li>
-    通用安装光盘包含了你安装Gentoo所需要的一切东西。它提供了常见架构的stage3文件，
-  供您选择的额外应用程序的源代码，当然，还有针对你的硬件构架的安装指南。
+    通用安装光盘包含了你安装Gentoo所需要的一切东西。它提供了常见架构的stage3文件，供您选择的额外应用程序的源代码，当然，还有针对你的硬件构架的安装指南。
   </li>
   <li>
-    最小化安装光盘包含了一个最小化的环境，它可以允许你启动并配置你的网络，以使你可以
-  连接到互联网。它不包含任何额外的文件，不适用于本安装方式。
+    最小化安装光盘包含了一个最小化的环境，它可以允许你启动并配置你的网络，以使你可以连接到互联网。它不包含任何额外的文件，不适用于本安装方式。
   </li>
 </ul>
 
@@ -118,9 +116,7 @@ Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境�
 
 <ul>
   <li>
-    你可以查看它的MD5校验和，并和我们所提供的MD5校验和相比较（比如使
-  用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri
-  link="http://www.etree.org/md5com.html">md5sum</uri>）
+    你可以查看它的MD5校验和，并和我们所提供的MD5校验和相比较（比如使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）
   </li>
   <li>
     您可以验证我们提供的数字签名。要验证，您需要先获得我们所使用的公钥（17072058）。
@@ -149,12 +145,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso
-文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。
-  然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 

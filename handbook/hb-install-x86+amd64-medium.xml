@@ -119,13 +119,10 @@
 
 <ul>
   <li>
-    Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，
-    准备网络和进行Gentoo的安装。
+    Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
   </li>
   <li>
-    Gentoo<e>安装程序LiveCD</e>包含了你安装Gentoo所需要的一切东西。
-    它提供了一个图形化的环境，包括能够自动进行安装的图形界面程序和文本界面程序，
-    当然，还有针对你的硬件构架的安装指南。
+    Gentoo<e>安装程序LiveCD</e>包含了你安装Gentoo所需要的一切东西。它提供了一个图形化的环境，包括能够自动进行安装的图形界面程序和文本界面程序，当然，还有针对你的硬件构架的安装指南。
   </li>
 </ul>
 
@@ -249,12 +246,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso 
-    文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso 文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。
-    然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 

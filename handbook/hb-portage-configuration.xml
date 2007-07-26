@@ -50,8 +50,7 @@ $ <i>man make.conf</i>
     CHOST为程序的configure脚本定义了build和host信息。
   </li>
   <li>
-    MAKEOPTS参数被传递给<c>make</c>命令，通常用来设定编译时并行处理线程的数量。
-    更多关于make的参数可在<c>make</c>的手册页中找到。
+    MAKEOPTS参数被传递给<c>make</c>命令，通常用来设定编译时并行处理线程的数量。更多关于make的参数可在<c>make</c>的手册页中找到。
   </li>
 </ul>
 
@@ -134,8 +133,7 @@ $ <i>emerge --help config</i>
     GENTOO_MIRRORS定义了一些提供源代码（distfiles）的服务器地址。
   </li>
   <li>
-    PORTAGE_BINHOST定义了一个特定的服务器地址，此服务器可为你的系统提供预先编译好
-    的软件包。
+    PORTAGE_BINHOST定义了一个特定的服务器地址，此服务器可为你的系统提供预先编译好的软件包。
   </li>
 </ul>
 
@@ -195,31 +193,20 @@ Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以�
 
 <ul>
   <li>
-    PORTAGE_RSYNC_OPTS定义了一些在sync过程中使用的变量，变量之间用空格分开。不要做
-    任何改变除非你<e>十分清楚</e>会有什么后果。注意某些必要的选项总会起作用，即使
-    PORTAGE_RSYNC_OPTS的设置是空的。
+    PORTAGE_RSYNC_OPTS定义了一些在sync过程中使用的变量，变量之间用空格分开。不要做任何改变除非你<e>十分清楚</e>会有什么后果。注意某些必要的选项总会起作用，即使PORTAGE_RSYNC_OPTS的设置是空的。
   </li>
-    <li>
+  <li>
     PORTAGE_RSYNC_EXTRA_OPTS可以用于在同步过程中设置附加选项。选项之间用空格分开。
     <ul>
-      <li>
-         --timeout=&lt;number&gt;: 这里设定rsync连接超时的秒数。此变量默认为180秒
-	 。如果用户是使用拨号上网或者一台处理速度慢的电脑，这个值需要设到300或者更
-	 高。
-      </li>
-      <li>
-	--exclude-from=/etc/portage/rsync_excludes: 这个参数指定一个文件，内容
-	是rsync在更新过程中需要忽略的软件包和/或者类别的列表。这个例子指定的
-	是 <path>/etc/portage/rsync_excludes</path>。请参考<uri
-	link="?part=3&amp;chap=5">使用Portage树的子集</uri>以了解此文件的格式。
-      </li>
+      <li>--timeout=&lt;number&gt;: 这里设定rsync连接超时的秒数。此变量默认为180秒。如果用户是使用拨号上网或者一台处理速度慢的电脑，这个值需要设到300或者更高。</li>
+      <li>--exclude-from=/etc/portage/rsync_excludes: 这个参数指定一个文件，内容是rsync在更新过程中需要忽略的软件包和/或者类别的列表。这个例子指定的是<path>/etc/portage/rsync_excludes</path>。请参考<uri link="?part=3&amp;chap=5">使用Portage树的子集</uri>以了解此文件的格式。</li>
       <li>--quiet: 减少屏幕输出</li>
       <li>--verbose: 在屏幕上输出完整的文件列表</li>
       <li>--progress: 为每个文件显示一个进度条</li>
     </ul>
   </li>
   <li>
-    PORTAGE_RSYNC_RETRIES定义了rsync程序试图连接到由SYNC变量所指定的服务器的次数，    默认为3。
+    PORTAGE_RSYNC_RETRIES定义了rsync程序试图连接到由SYNC变量所指定的服务器的次数，默认为3。
   </li>
 </ul>
 

@@ -56,16 +56,13 @@ Gentoo的安装可以被分成10个步骤，从第2章到第11章，每一步都
   第一步后，你已准备就绪，可以安装Gentoo了
 </li>
 <li>
-  第二步后，你的网络连接已经准备好了，如果你打算用到网络的话（这是个
- 可选步骤
+  第二步后，你的网络连接已经准备好了，如果你打算用到网络的话（这是个可选步骤）
 </li>
 <li>
-  第三步后，你的硬盘已初始化完毕，等待Gentoo的
- 安装
+  第三步后，你的硬盘已初始化完毕，等待Gentoo的安装
 </li>
 <li>
-  第四步后，你的安装环境已经准备好了，
- 并准备chroot到一个新的系统环境中
+  第四步后，你的安装环境已经准备好了，并准备chroot到一个新的系统环境中
 </li>
 <li>
   第五步后，一些核心的软件包安装完毕，这在所有的Gentoo安装中都是相同的
@@ -186,20 +183,19 @@ Gentoo参考平台，以下缩写为GRP，它是一个预构建好的软件包�
 
 <ul>
   <li>
-    The <b>alpha</b> 架构 (alpha)
+    The <b>alpha</b> 架构 (alpha) 
   </li>
   <li>
     The <b>amd64</b> 架构 (amd64)。 注意：目前这些软件包可以在安装程序LiveCD中获得。
   </li>
   <li>
-    The <b>ppc</b> 架构 (ppc32, ppc64)
+    The <b>ppc</b> 架构 (ppc32, ppc64) 
   </li>
   <li>
-    The <b>sparc</b> 架构 (sparc64)
+    The <b>sparc</b> 架构 (sparc64) 
   </li>
   <li>
-    The <b>x86</b> 架构 (athlon, athlon-xp, athlon-mp, pentium-pro,
-    pentium2, pentium3, pentium4 and pentium-m) 注意：i686硬件架构平台下的软件包可以在安装程序LiveCD中获得。
+    The <b>x86</b> 架构 (athlon, athlon-xp, athlon-mp, pentium-pro, pentium2, pentium3, pentium4 and pentium-m) 注意：i686硬件架构平台下的软件包可以在安装程序LiveCD中获得。
   </li>
 </ul>
 

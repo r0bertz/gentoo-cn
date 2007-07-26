@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-medium.xml,v 1.7 2007/05/07 18:11:42 nightmorph Exp $ -->
@@ -38,7 +33,7 @@
 <tr>
   <th>系统</th>
   <ti>
-    IBM RS/6000s、Power Macintosh G5、iMac G5、IBM pSeries和IBM OpenPower
+    IBM RS/6000s、Power Macintosh G5、iMac G5、IBM pSeries和IBM OpenPower 
   </ti>
 </tr>
 <tr>
@@ -85,7 +80,7 @@
 <subsection>
 <title>Gentoo通用安装光盘</title>
 <body>
-  
+
 <p> 
 安装光盘是可启动的光盘，它含有一个完整的Gentoo环境，允许你从光盘启动Linux。在启动过程中，它会自动检测你的硬件并加载相应的驱动程序。这些安装光盘是由Gentoo开发者维护的。
 </p>
@@ -96,10 +91,10 @@
 
 <ul>
   <li>
-    Gentoo安装光盘包含了你安装Gentoo所需要的一切东西。它为通用架构提供了stage3文件，为一些你额外选择的应用程序提供了源代码，当然，当然，还有针对你的硬件构架的安装指南。<
+    Gentoo安装光盘包含了你安装Gentoo所需要的一切东西。它为通用架构提供了stage3文件，为一些你额外选择的应用程序提供了源代码，当然，当然，还有针对你的硬件构架的安装指南。 
   </li>
   <li>
-    最小安装光盘只包含了一个最小的环境，这个环境允许你启动并配置好网络，这样你就能连接上互联网。它没有包含任何额外的文件，也无法应用在目前的安装方法中。<
+    最小安装光盘只包含了一个最小的环境，这个环境允许你启动并配置好网络，这样你就能连接上互联网。它没有包含任何额外的文件，也无法应用在目前的安装方法中。 
   </li>
 </ul>
 
@@ -108,7 +103,7 @@ Gentoo也提供了软件包光盘。这不是一个安装光盘，但它是一�
 </p>
 
 <p>
-软件包光盘的使用会在以后的文档中涵盖。<
+软件包光盘的使用会在以后的文档中涵盖。
 </p>
 
 </body> 
@@ -157,18 +152,15 @@ Gentoo/PPC64团队同时为32位userland和64位userland提供了stage和软件�
 </p>
 
 <p>
-在下载完文件后，你能验证它的完整性来判断它是否损坏：<
+在下载完文件后，你能验证它的完整性来判断它是否损坏：
 </p>
 
 <ul>
   <li>
-    你可以检验它的MD5校验码并和我们提供的校验码进行比对（比如通过使用Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri 
-link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS 
-X中验证MD5校验码是在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC 
-FAQ</uri>中描述的。<
+    你可以检验它的MD5校验码并和我们提供的校验码进行比对（比如通过使用Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS X中验证MD5校验码是在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC FAQ</uri>中描述的。
   </li>
   <li>
-    你可以验证密钥签名。首先你需要获得我们使用的公钥(0x17072058)。<
+    你可以验证密钥签名。首先你需要获得我们使用的公钥(0x17072058)。
   </li>
 </ul>
 
@@ -194,12 +186,10 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc 
-&lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。 然后你可以在'Image to 
-Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 
@@ -287,7 +277,7 @@ Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
 </body>
 </subsection>
 <subsection id="booted">
-<title>当你启动好后...</title>
+<title>当你启动好后……</title>
 <body>
 
 <p>

@@ -79,12 +79,10 @@
 
 <ul>
   <li>
-  Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络
-  和进行Gentoo的安装。
+    Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
   </li>
   <li>
-  Gentoo<e>通用</e>安装光盘是一个和最小化安装光盘有同样能力的可启动光盘。此外，它还包
-  括了几个stage3 tarball（为每个子架构所专门优化的）。
+    Gentoo<e>通用</e>安装光盘是一个和最小化安装光盘有同样能力的可启动光盘。此外，它还包括了几个stage3 tarball（为每个子架构所专门优化的）。
   </li>
 </ul>
 
@@ -199,9 +197,7 @@ stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安�
 
 <ul>
   <li>
-  你可以查看它的MD5校验和，并和我们所提供的MD5校验和相比较（比如使用Linux和Unix下
-  的<c>md5sum</c>工具或者Windows下的<uri
-  link="http://www.etree.org/md5com.html">md5sum</uri>）
+    你可以查看它的MD5校验和，并和我们所提供的MD5校验和相比较（比如使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）
   </li>
   <li>
     您可以验证我们提供的数字签名。要验证，您需要先获得我们所使用的公钥（17072058）。
@@ -230,12 +226,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 
 <ul>
   <li>
-  使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文
-  件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-  使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后你可以
-  在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 

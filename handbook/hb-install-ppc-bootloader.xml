@@ -75,7 +75,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 <ul>
   <li><uri link="#yabootconfig">默认：使用yabootconfig</uri></li>
   <li>
-    <uri link="#manual_yaboot">备选：手动yaboot配置</uri>
+    <uri link="#manual_yaboot">备选：手动yaboot配置</uri> 
   </li>
 </ul>
 

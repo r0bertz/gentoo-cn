@@ -239,7 +239,7 @@ preferred_aps=( "ESSID1" "ESSID2" )
 <tr>
   <ti><c>forcepreferredonly</c></ti>
   <ti>
-    不进行扫描——按首选列表里的顺序直接尝试连接AP
+    不进行扫描——按首选列表里的顺序直接尝试连接AP 
   </ti>
 </tr>
 <tr>
@@ -342,17 +342,14 @@ channel_eth0="9"
   <ti><c>associate_test_eth0</c></ti>
   <ti><c>MAC</c></ti>
   <ti>
-   一些驱动程序在失去连接或尝试连接时不会重置无效AP的MAC地址，而有一些驱动程序在
-   碰到这些情况时不会重设quality level。这里有效的设定
-   是<c>MAC</c>，<c>quality</c>和<c>all</c>。
+    一些驱动程序在失去连接或尝试连接时不会重置无效AP的MAC地址，而有一些驱动程序在碰到这些情况时不会重设quality level。这里有效的设定是<c>MAC</c>，<c>quality</c>和<c>all</c>。
   </ti>
 </tr>
 <tr>
   <ti><c>scan_mode_eth0</c></ti>
   <ti/>
   <ti>
-  某些驱动必须在ad-hoc模式下扫描，因此若扫描失败的话请尝试把此变量设置
-  成<c>ad-hoc</c>
+    某些驱动必须在ad-hoc模式下扫描，因此若扫描失败的话请尝试把此变量设置成<c>ad-hoc</c> 
   </ti>
 </tr>
 <tr>

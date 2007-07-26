@@ -1,10 +1,8 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-
-
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/index.xml,v 1.11 2007/05/18 14:21:43 neysx Exp $ -->
-<guide link="/doc/zh_cn/handbook/2007.0/index.xml">
+<guide link="/doc/zh_cn/handbook/2007.0/index.xml" lang="zh_cn">
 <title>Gentoo 2007.0 手册</title>
 
 <author title="作者">
@@ -70,36 +68,36 @@ link="/doc/pl/handbook/2007.0">波兰语</uri>
   <ti>HTML</ti>
   <ti>一页一个章节，适合在线阅读</ti>
   <ti>
-    <uri link="handbook-x86.xml">x86</uri>, <uri 
-link="handbook-sparc.xml">sparc</uri>, <uri 
-link="handbook-amd64.xml">amd64</uri>, <uri 
-link="handbook-ppc.xml">ppc</uri>, <uri 
-link="handbook-ppc64.xml">ppc64</uri>, <uri 
-link="handbook-hppa.xml">hppa</uri>
+    <uri link="handbook-x86.xml">x86</uri>,
+    <uri link="handbook-sparc.xml">sparc</uri>,
+    <uri link="handbook-amd64.xml">amd64</uri>,
+    <uri link="handbook-ppc.xml">ppc</uri>,
+    <uri link="handbook-ppc64.xml">ppc64</uri>,
+    <uri link="handbook-hppa.xml">hppa</uri>
   </ti>
 </tr>
 <tr>
   <ti>HTML</ti>
   <ti>全部在一个页面</ti>
   <ti>
-    <uri link="handbook-x86.xml?full=1">x86</uri>, <uri 
-link="handbook-sparc.xml?full=1">sparc</uri>, <uri 
-link="handbook-amd64.xml?full=1">amd64</uri>, <uri 
-link="handbook-ppc.xml?full=1">ppc</uri>, <uri 
-link="handbook-ppc64.xml?full=1">ppc64</uri>, <uri 
-link="handbook-hppa.xml?full=1">hppa</uri>
+    <uri link="handbook-x86.xml?full=1">x86</uri>,
+    <uri link="handbook-sparc.xml?full=1">sparc</uri>,
+    <uri link="handbook-amd64.xml?full=1">amd64</uri>,
+    <uri link="handbook-ppc.xml?full=1">ppc</uri>,
+    <uri link="handbook-ppc64.xml?full=1">ppc64</uri>,
+    <uri link="handbook-hppa.xml?full=1">hppa</uri>
   </ti>
 </tr>
 <tr>
   <ti>HTML</ti>
   <ti>全部在一个页面，可打印版本</ti>
   <ti>
-    <uri link="handbook-x86.xml?style=printable&amp;full=1">x86</uri>, <uri 
-link="handbook-sparc.xml?style=printable&amp;full=1">sparc</uri>, <uri 
-link="handbook-amd64.xml?style=printable&amp;full=1">amd64</uri>, <uri 
-link="handbook-ppc.xml?style=printable&amp;full=1">ppc</uri>, <uri 
-link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri>, <uri 
-link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>
+    <uri link="handbook-x86.xml?style=printable&amp;full=1">x86</uri>,
+    <uri link="handbook-sparc.xml?style=printable&amp;full=1">sparc</uri>,
+    <uri link="handbook-amd64.xml?style=printable&amp;full=1">amd64</uri>,
+    <uri link="handbook-ppc.xml?style=printable&amp;full=1">ppc</uri>,
+    <uri link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri>,
+    <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>
   </ti>
 </tr>
 </table>

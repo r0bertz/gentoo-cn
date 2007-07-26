@@ -108,7 +108,7 @@ lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; lin
 <tr>
   <ti>Indigo2 Impact (R10k)</ti>
   <ti>
-    <c>make ip28_defconfig</c>
+    <c>make ip28_defconfig</c> 
   </ti>
 </tr>
 <tr>

@@ -23,16 +23,13 @@
 
 <ul>
   <li>
-    储存在通用安装光盘中的stage3包跟你的硬件架构不匹配，你需要下载正确
-    的stage3包
+    储存在通用安装光盘中的stage3包跟你的硬件架构不匹配，你需要下载正确的stage3包
   </li>
   <li>
     安装程序LiveCD生成的stage3包跟你的硬件架构不匹配，你需要下载正确的stage3包
   </li>
   <li>
-    你需要安装一个特定的能让你连接到Internet的网络应用程序。通用安装光盘
-    或安装程序LiveCD中没有这个程序，但支持这个程序（也就是你可以使用光盘连接到互联
-    网但光盘里没提供这个程序的源代码）
+    你需要安装一个特定的能让你连接到Internet的网络应用程序。通用安装光盘或安装程序LiveCD中没有这个程序，但支持这个程序（也就是你可以使用光盘连接到互联网但光盘里没提供这个程序的源代码）
   </li>
   <li>
     安装过程中你希望得到远程协助（使用SSH或使用IRC直接交流）
@@ -159,13 +156,13 @@ ping一下你的ISP提供的DNS服务器（可于<path>/etc/resolv.conf</path>�
 
 <ul>
   <li>
-    普通以太网用户请继续阅读<uri link="#net-setup">默认：使用net-setup</uri>
+    普通以太网用户请继续阅读<uri link="#net-setup">默认：使用net-setup</uri> 
   </li>
   <li>
-    ADSL用户请继续阅读<uri link="#ppp">备选：使用PPP</uri>
+    ADSL用户请继续阅读<uri link="#ppp">备选：使用PPP</uri> 
   </li>
   <li>
-    PPTP用户请继续阅读<uri link="#pptp">备选：使用PPTP</uri>
+    PPTP用户请继续阅读<uri link="#pptp">备选：使用PPTP</uri> 
   </li>
 </ul>
 
@@ -328,12 +325,10 @@ eth0: error fetching interface information: Device not found
     <uri link="#wireless">预备无线网络接入</uri>如果你有一张无线网卡
   </li>
   <li>
-    <uri link="#network_term">理解网络术语</uri>解释了你需要了解哪些关于网络方面
-    的知识
+    <uri link="#network_term">理解网络术语</uri>解释了你需要了解哪些关于网络方面的知识
   </li>
   <li>
-    <uri link="#ifconfig_route">使用ifconfig和route</uri>解释了如何手动设置你的
-    网络
+    <uri link="#ifconfig_route">使用ifconfig和route</uri>解释了如何手动设置你的网络
   </li>
 </ul>
 

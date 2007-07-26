@@ -29,15 +29,13 @@
 <tr>
   <th>Sparc系统</th>
   <ti>
-    请先检查<uri link="/proj/en/base/sparc/sunhw.xml">Gentoo 
-Linux/SPARC64兼容性列表</uri>或者<uri 
-link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
+    请先检查<uri link="/proj/en/base/sparc/sunhw.xml">Gentoo Linux/SPARC64兼容性列表</uri>或者<uri link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri> 
   </ti>
 </tr>
 <tr>
   <th>CPU</th>
   <ti>
-    目前我们仅支持sparc64 CPU
+    目前我们仅支持sparc64 CPU 
   </ti>
 </tr>
 <tr>
@@ -221,12 +219,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 
 <ul>
   <li>
-    使用cdrecord，你只要简单的输入<c>cdrecord dev=/dev/hdc &lt;downloaded 
-iso&gt;</c>（把<path>/dev/hdc</path>替换为你的刻录机的路径）。
+    使用cdrecord，你只要简单的输入<c>cdrecord dev=/dev/hdc &lt;downloaded iso&gt;</c>（把<path>/dev/hdc</path>替换为你的刻录机的路径）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后在"Image to 
-Burn"区域里指定你的ISO文件所在。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后在"Image to Burn"区域里指定你的ISO文件所在。最后点击<c>Start</c>。
   </li>
 </ul>
 

@@ -88,46 +88,45 @@ Sun系统上的第三个分区被留出来作为一个特殊的切片名为"whol
     </ti>
 </tr>
 <tr>
-    <ti>/dev/sda2</ti>
-    <ti>swap</ti>
-    <ti>512 MB</ti>
-    <ti>none</ti>
-    <ti>
-      交换分区。对于bootstrap和某些比较大的编译，需要至少512M的内存（包括交换分区）。
-    </ti>
+  <ti>/dev/sda2</ti>
+  <ti>swap</ti>
+  <ti>512 MB</ti>
+  <ti>none</ti>
+  <ti>
+    交换分区。对于bootstrap和某些比较大的编译，需要至少512M的内存（包括交换分区）。
+  </ti>
 </tr>
 <tr>
-    <ti>/dev/sda3</ti>
-    <ti>none</ti>
-    <ti>Whole disk</ti>
-    <ti>none</ti>
-    <ti>整个磁盘分区。这是SPARC系统必需的。</ti>
+  <ti>/dev/sda3</ti>
+  <ti>none</ti>
+  <ti>Whole disk</ti>
+  <ti>none</ti>
+  <ti>整个磁盘分区。这是SPARC系统必需的。</ti>
 </tr>
 <tr>
-    <ti>/dev/sda4</ti>
-    <ti>ext3</ti>
-    <ti>至少2G</ti>
-    <ti>/usr</ti>
-    <ti>
-      /usr分区。应用程序都安装在这里。默认情况下这个分区还用来保存Portage数据（除去源代码大概占用500M空间）。
-    </ti>
+  <ti>/dev/sda4</ti>
+  <ti>ext3</ti>
+  <ti>至少2G</ti>
+  <ti>/usr</ti>
+  <ti>
+    /usr分区。应用程序都安装在这里。默认情况下这个分区还用来保存Portage数据（除去源代码大概占用500M空间）。
+  </ti>
 </tr>
 <tr>
-    <ti>/dev/sda5</ti>
-    <ti>ext3</ti>
-    <ti>至少1G</ti>
-    <ti>/var</ti>
-    <ti>
-      /var 
-分区。用来存放程序产生的数据。默认情况下Portage在编译的时候把这个分区作为临时空间。某些大型的应用程序比如Mozilla和OpenOffice.org在编译的时候需要超过1G的临时空间。
-    </ti>
+  <ti>/dev/sda5</ti>
+  <ti>ext3</ti>
+  <ti>至少1G</ti>
+  <ti>/var</ti>
+  <ti>
+    /var分区。用来存放程序产生的数据。默认情况下Portage在编译的时候把这个分区作为临时空间。某些大型的应用程序比如Mozilla和OpenOffice.org在编译的时候需要超过1G的临时空间。
+  </ti>
 </tr>
 <tr>
-    <ti>/dev/sda6</ti>
-    <ti>ext3</ti>
-    <ti>剩余的空间</ti>
-    <ti>/home</ti>
-    <ti>/home 分区。用来放用户的家目录。</ti>
+  <ti>/dev/sda6</ti>
+  <ti>ext3</ti>
+  <ti>剩余的空间</ti>
+  <ti>/home</ti>
+  <ti>/home 分区。用来放用户的家目录。</ti>
 </tr>
 </table>
 
@@ -150,28 +149,28 @@ Sun系统上的第三个分区被留出来作为一个特殊的切片名为"whol
   <th>描述</th>
 </tr>
 <tr>
-    <ti>/dev/sda1</ti>
-    <ti>/</ti>
+  <ti>/dev/sda1</ti>
+  <ti>/</ti>
 </tr>
 <tr>
-    <ti>/dev/sda2</ti>
-    <ti>swap</ti>
+  <ti>/dev/sda2</ti>
+  <ti>swap</ti>
 </tr>
 <tr>
-    <ti>/dev/sda3</ti>
-    <ti>whole disk slice</ti>
+  <ti>/dev/sda3</ti>
+  <ti>whole disk slice</ti>
 </tr>
 <tr>
-    <ti>/dev/sda4</ti>
-    <ti>/usr</ti>
+  <ti>/dev/sda4</ti>
+  <ti>/usr</ti>
 </tr>
 <tr>
-    <ti>/dev/sda5</ti>
-    <ti>/var</ti>
+  <ti>/dev/sda5</ti>
+  <ti>/var</ti>
 </tr>
 <tr>
-    <ti>/dev/sda6</ti>
-    <ti>/home</ti>
+  <ti>/dev/sda6</ti>
+  <ti>/home</ti>
 </tr>
 </table>
 

@@ -52,9 +52,7 @@
     <c>dhcp</c>、<c>adsl</c>或<c>apipa</c>（或者一个第三方模块提供的自定义命令）
   </ti>
   <ti>
-    运行提供这些命令的模块，例如<c>dhcp</c>这个命令会运行一个提供DHCP功能的模块，
-    它可能是<c>dhcpcd</c>、<c>udhcpc</c>、<c>dhclient</c>或者<c>pump</c>中的一
-    个。
+    运行提供这些命令的模块，例如<c>dhcp</c>这个命令会运行一个提供DHCP功能的模块，它可能是<c>dhcpcd</c>、<c>udhcpc</c>、<c>dhclient</c>或者<c>pump</c>中的一个。
   </ti>
 </tr>
 </table>
