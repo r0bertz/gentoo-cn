@@ -24,7 +24,7 @@
   <insert name="Print">打印</insert>
   <insert name="PrintTip">查看利于打印版本</insert>
   <insert name="Home">主页</insert>
-  <insert name="License">本文档的内容遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5">知识共享署名-相同方式共享</uri>许可协议</insert>
+  <insert name="License">本文档的内容遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5/deed.zh">知识共享-署名-相同方式共享</uri>许可协议</insert>
   <insert name="hb_file">指向书中其他部分的连接欠奉</insert>
   <!-- Metadoc stuff -->
   <insert name="GLinuxDocCat">Gentoo Linux文档类别</insert>

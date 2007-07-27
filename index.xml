@@ -6,76 +6,63 @@
 
 <!DOCTYPE dynamic SYSTEM "/dtd/metadoc.dtd">
 
-<dynamic metadoc="/doc/en/metadoc.xml">
+<dynamic metadoc="/doc/zh_cn/metadoc.xml">
 <version>8</version>
 
-<title>Gentoo Documentation Resources</title>
+<title>Gentoo文档资源</title>
 <intro>
 
 <section>
-<title>Available Languages</title>
+<title>语言版本</title>
 <body>
 
 <p>
-Our documentation is also available in the following languages:
+我们的文档提供了下列语言版本：
 </p>
 
 <p>
 <!--<uri link="/doc/pt_br/">Brazilian Portuguese</uri> |-->
-<uri link="/doc/cs/">Czech</uri> |
+<uri link="/doc/cs/">捷克文</uri> |
 <!--<uri link="/doc/da/">Danish</uri> |-->
 <!--<uri link="/doc/nl/">Dutch</uri> |-->
-<uri link="/doc/en/">English</uri> |
+<uri link="/doc/en/">英文</uri> |
 <!--<uri link="/doc/fi/">Finnish</uri> |-->
-<uri link="/doc/fr/">French</uri> |
-<uri link="/doc/de/">German</uri> |
+<uri link="/doc/fr/">法文</uri> |
+<uri link="/doc/de/">德文</uri> |
 <!--<uri link="/doc/hu/">Hungarian</uri> |-->
-<uri link="/doc/it/">Italian</uri> |
+<uri link="/doc/it/">意大利文</uri> |
 <!--<uri link="/doc/ja/">Japanese</uri> |
 <uri link="/doc/ko/">Korean</uri> |-->
-<uri link="/doc/pl/">Polish</uri> |
+<uri link="/doc/pl/">波兰文</uri> |
 <!--<uri link="/doc/ro/">Romanian</uri> |-->
-<uri link="/doc/ru/">Russian</uri> |
-<uri link="/doc/es/">Spanish</uri> <!--|
-<uri link="/doc/zh_tw/">Traditional Chinese</uri>-->
+<uri link="/doc/ru/">俄文</uri> |
+<uri link="/doc/es/">西班牙文</uri> |
+<!--<uri link="/doc/zh_tw/">Traditional Chinese</uri>-->
+<uri link="/doc/zh_cn/">简体中文</uri>
 </p>
 
 </body>
 </section>
 <section>
-<title>Introduction</title>
+<title>介绍</title>
 <body>
 
 <p>
-Welcome to the Gentoo Documentation Resources. This page will give you a quick
-overview on the documentation we provide. Most documentation is released under
-the <uri link="http://creativecommons.org/licenses/by-sa/2.5">Creative Commons -
-Attribution / Share Alike</uri> license, an open documentation license. All
-documentation should also be available in a printer-friendly format. To view
-this document, append <path>?style=printable</path> to the URL. You'll also find
-a "Print" link on the top-right corner of each document.
+欢迎浏览Gentoo文档资源。本页将给您提供我们所提供的文档的快速预览。绝大多数文档都遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5/deed.zh">知识共享-署名-相同方式共享</uri>许可协议——一个开源文档协议——而发布。所有文档都提供方便打印的格式。要以这种格式浏览，在URL后加上<path>?style=printable</path>。这样你就可以在每个文档的右上角发现一个“打印”链接。
 </p>
 
 <p>
-If you find bugs in our documentation or have proposals, please use our <uri
-link="http://bugs.gentoo.org">Bugtracking System</uri> and fill in a bug report
-for "Documentation" or "Doc Other". These bug reports will then be handled by
-the <uri link="/proj/en/gdp/">Gentoo Documentation Project</uri>.
+如果你发现我们文档中的bug或者有建议要提，请使用我们的<uri link="http://bugs.gentoo.org">Bug跟踪系统</uri>，为“Documentation”或者“Doc Other”提交一个bug报告。这些bug报告将由<uri link="/proj/en/gdp/">Gentoo文档项目</uri>处理。
 </p>
 
 </body>
 </section>
 <section>
-<title>Documentation Repository</title>
+<title>文档仓库</title>
 <body>
 
 <p>
-Our documentation is <uri link="index.xml#doc_chap2">categorized</uri> and
-hierarchically navigable. If you want a quick overview of all available
-documentation without the additional information, please use our <uri
-link="list.xml">Documentation Listing</uri> page. We also have a <uri
-link="list.xml?desc=1">full listing</uri> of all our documents with their
-descriptions.
+我们的文档是<uri link="index.xml#doc_chap2">分类的</uri>并且可以分层浏览。如果你想快速浏览所有提供的文档，不需附加信息，请看我们的<uri link="list.xml">文档列表</uri>页。我们也有一个我们全部文档的<uri link="list.xml?desc=1">完整列表</uri>，包含了它们的描述信息。
 </p>
 
 </body>
