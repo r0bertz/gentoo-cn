@@ -196,11 +196,11 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-disk.xml">v 1.5</uri></ti>
     <ti>2007/06/26</ti>
     <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/07/31</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml">v 1.4</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml">v 1.5</uri></ti>
+    <ti>2007/07/31</ti>
   </tr>
   <tr>
     <ti>hb-install-hppa-kernel.xml</ti>
@@ -218,11 +218,11 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-medium.xml">v 1.8</uri></ti>
     <ti>2007/06/30</ti>
     <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/07/31</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml">v 1.7</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml">v 1.8</uri></ti>
+    <ti>2007/07/31</ti>
   </tr>
   <tr>
     <ti>hb-install-network.xml</ti>
@@ -251,18 +251,18 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-bootloader.xml">v 1.5</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/07/31</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml">v 1.4</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml">v 1.5</uri></ti>
+    <ti>2007/07/31</ti>
   </tr>
   <tr>
     <ti>hb-install-ppc64-disk.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-disk.xml">v 1.8</uri></ti>
     <ti>2007/06/26</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
+    <ti>R</ti>
     <ti>2007/07/19</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml">v 1.8</uri></ti>
@@ -273,7 +273,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.9</uri></ti>
     <ti>2007/05/21</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
+    <ti>R</ti>
     <ti>2007/07/19</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.9</uri></ti>
@@ -284,7 +284,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-medium.xml">v 1.8</uri></ti>
     <ti>2007/06/30</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
+    <ti>R</ti>
     <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-medium.xml">v 1.7</uri></ti>
@@ -295,7 +295,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-bootloader.xml">v 1.11</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
+    <ti>R</ti>
     <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml">v 1.10</uri></ti>
@@ -306,7 +306,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-disk.xml">v 1.12</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
+    <ti>R</ti>
     <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml">v 1.9</uri></ti>
@@ -317,7 +317,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.14</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
+    <ti>R</ti>
     <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.13</uri></ti>
@@ -328,7 +328,7 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-medium.xml">v 1.9</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
+    <ti>R</ti>
     <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml">v 1.7</uri></ti>
@@ -416,11 +416,11 @@
     <ti><uri link="/doc/en/handbook/2007.0/index.xml">v 1.12</uri></ti>
     <ti>2007/06/06</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/07/31</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/index.xml">v 1.11</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/index.xml">v 1.12</uri></ti>
+    <ti>2007/07/31</ti>
   </tr>
 </table>
 </body>
