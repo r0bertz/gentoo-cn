@@ -33,11 +33,11 @@
 <body>
 
 <impo>
-如果你正在使用64位，你需要使用<c>yaboot-static</c>软件包，因为yaboot不能编译成为64位的应用程序。32位的用户就用常规的yaboot软件包好了。
+如果你正在使用64位userland，你需要使用<c>yaboot-static</c>软件包，因为yaboot不能编译成为64位的应用程序。32位userland用常规的yaboot软件包就好了。
 </impo>
 
 <p>
-目前有两种方法可以用来为你的系统配置yaBoot。你可以使用最新且改进过的<c>yabootconfig</c>包括<path>yaboot-1.3.8-r1</path>，用来日后自动配置yaboot。如果因为一些原因你不想运行<c>yabootconfig</c>来自动配置<path>/etc/yaboot.conf</path>或者你正在一个G5上安装Gentoo（在这种平台上<c>yabootconfig</c>并不一定能运行成功），你可以修改已经安装在你系统上的例子文件。
+目前有两种方法可以用来为你的系统配置yaBoot。你可以使用最新且改进过的<c>yabootconfig</c>，<path>yaboot-1.3.8-r1</path>及以后的版本包含这个工具，它可用来自动配置yaboot。如果因为一些原因你不想让<c>yabootconfig</c>来自动配置<path>/etc/yaboot.conf</path>或者你正在一个G5上安装Gentoo（在这种平台上<c>yabootconfig</c>并不一定能运行成功），你可以修改已经安装在你系统上的例子文件。
 </p>
 
 <impo>
@@ -45,7 +45,7 @@ yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式
 </impo>
 
 <note>
-如果你的root文件系统使用JFS文件系统，确保添加内核参数<c>ro</c>。JFS必须能够在它被挂载为可读可写模式前在只读模式下替换它的日志文件。
+如果你的根文件系统使用JFS文件系统，一定要添加内核参数<c>ro</c>。JFS必须要在只读模式下重放它的日志，然后再以读写模式挂载。
 </note>
 
 <ul>
@@ -66,14 +66,14 @@ yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式
 </p>
 
 <p>
-为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区，并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况。这些步骤必须事先完成。接下来运行<c>emerge --update yaboot-static</c>先确保已经安装了最新版本的yaboot。这步是必须的，因为最新版本的yaboot会在portage中发布，但也有可能你的portage文件中没有最新版本。
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个bootstrap分区，并且<path>/etc/fstab</path>的配置要和你的Linux分区情况一致。这些在之前的步骤中应该已经完成了。要开始配置，请先确保已经安装了最新版本的yaboot，运行<c>emerge --update yaboot-static</c>。这步是必须的，因为portage中的yaboot肯定是最新版本，但stage文件中却不一定。
 </p>
 
 <pre caption="安装yaboot-static">
-<comment>（64位用户）</comment>
+<comment>（64位userland）</comment>
 # <i>emerge --update yaboot-static</i>
 
-<comment>（32位用户）</comment>
+<comment>（32位userland）</comment>
 # <i>emerge yaboot</i>
 </pre>
 
@@ -100,10 +100,10 @@ yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式
 </p>
 
 <pre caption="安装yaboot">
-<comment>（64位用户）</comment>
+<comment>（64位userland）</comment>
 # <i>emerge --update yaboot-static</i>
 
-<comment>（32位用户）</comment>
+<comment>（32位userland）</comment>
 # <i>emerge yaboot</i>
 </pre>
 
@@ -132,7 +132,7 @@ boot=/dev/hda2
 
 ofboot=hd:2
 
-<comment>## hd：是Open Firmware称呼hda的方式</comment>
+<comment>## hd:是Open Firmware称呼hda的方式</comment>
 device=hd:
 
 delay=5
@@ -158,11 +158,11 @@ enableofboot
 </pre>
 
 <p>
-一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot -v</c>将配置信息安装到bootstrap分区中。<e>不要忘了这个！</e>在<c>mkofboot</c>问你创建一个新的文件系统时选是。
+一旦<path>yaboot.conf</path>如你所希望的配置好后，你可以运行<c>mkofboot -v</c>将配置信息安装到bootstrap分区中。<e>不要忘记这一步！</e>在<c>mkofboot</c>问你创建一个新的文件系统时选是。
 </p>
 
 <p>
-如果万事俱备且你拥有以上例子中同样的选项，你下一步的重启会展示给你一个简单、五项内容的启动菜单。如果你日后更新你的yaboot配置文件，你会需要运行<c>ybin -v</c>来更新bootstrap分区-<c>mkofboot</c>只为初始化设置用。
+如果一切都没问题，且你拥有和以上例子相同的选项，你下一步的重启会展示给你一个简单的、五个菜单项的启动菜单。如果你以后更新你的yaboot配置文件，你需要运行<c>ybin -v</c>来更新bootstrap分区——<c>mkofboot</c>只在初始设置时使用。
 </p>
 
 <p>
@@ -181,17 +181,17 @@ enableofboot
 </p>
 
 <ul>
-<li>安装yaboot-static</li>
-<li>
-运行<c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c>（用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子<path>/dev/sda1</path>）
-</li>
-<li>
-下一步构建你自己的<path>yaboot.conf</path>文件并置于<path>/etc</path>内。（再看一下以上的配置文件，参考一下yaboot.conf的man页面或者参考下如下的<path>yaboot.conf</path>示例）
-</li>
-<li>
-假设你在OF中的启动设备是指向你预启动分区激活的硬盘，它随后就能正常工作了，否则在IPL时，要进入多重启动菜单并设置好启动设备指向至你预启动分区的一个才行。
-</li>
-<li>搞定！</li>
+  <li>安装yaboot-static</li>
+  <li>
+    运行<c>dd if=/usr/lib/yaboot/yaboot.chrp of=/dev/sdXX</c>（用你的PReP分区的磁盘和分区填入XX；这里是我们使用的例子<path>/dev/sda1</path>）
+  </li>
+  <li>
+    下一步构建你自己的<path>yaboot.conf</path>文件并置于<path>/etc</path>内。（再看一下以上的配置文件，参考一下yaboot.conf的man页面或者参考下如下的<path>yaboot.conf</path>示例）
+  </li>
+  <li>
+    假设你在OF中的启动设备指向的是你含有prep启动分区的硬盘，它随后就能正常工作了，否则在IPL时，要进入多重启动菜单并把启动设备设置为包含prep启动分区的硬盘。
+  </li>
+  <li>搞定！</li>
 </ul>
 
 <pre caption="IBM硬件的yaboot.conf">
@@ -233,7 +233,7 @@ Binary file (standard input) matches
 </pre>
 
 <p>
-如果配对的话就标志着yaboot已经正确安装好了。
+如果上面的结果中输入输出相匹配的话就标志着yaboot已经正确安装好了。
 </p>
 
 </body>
