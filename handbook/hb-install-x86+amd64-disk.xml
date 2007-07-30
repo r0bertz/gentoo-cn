@@ -414,14 +414,11 @@ Command (m for help): <i>w</i>
 <body>
 
 <p test="func:keyval('arch')='x86'">
-Linux内核支持各种各样的文件系统。我们将介绍ext2、ext3、ReiserFS、XFS和JFS，因为
-它们是Linux系统中使用最普遍的文件系统。
+Linux内核支持各种各样的文件系统。我们将介绍ext2、ext3、ReiserFS、XFS和JFS，因为它们是Linux系统中使用最普遍的文件系统。
 </p>
 
 <p test="func:keyval('arch')='AMD64'">
-有几种文件系统是可以使用的。其中一些在amd64架构上是稳定的，另一些则不稳定。下列
-文件系统被证实是稳定的：ext2和ext3。jfs和reiserfs也许可以工作，但是需要更多的测
-试。如果你很喜欢冒险，你可以尝试未被支持的文件系统。
+有几种文件系统是可以使用的。其中一些在amd64架构上是稳定的，另一些则不稳定。下列文件系统被证实是稳定的：ext2和ext3。jfs和reiserfs也许可以工作，但是需要更多的测试。如果你很喜欢冒险，你可以尝试未被支持的文件系统。
 </p>
 
 <p>

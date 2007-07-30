@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-hppa-medium.xml,v 1.7 2007/05/08 04:45:26 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-hppa-medium.xml,v 1.8 2007/05/08 04:45:26 nightmorph Exp $ -->
 
 <sections>
 
-<version>8.1</version>
-<date>2007-05-07</date>
+<version>8.2</version>
+<date>2007-06-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -18,7 +18,7 @@
 <body>
 
 <p>
-在开始之前，我们首先列出安装Gentoo的硬件需求。 
+在开始之前，我们首先列出安装Gentoo的硬件需求。
 </p>
 
 </body>
@@ -148,7 +148,7 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
     使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后你可以在“Image to Burn”区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 
@@ -176,7 +176,7 @@ To terminate search, press and hold the ESCAPE key.
 </p>
 
 <p>
-把Gentoo安装光盘放入光驱。如果你不知道你的光驱的SCSI ID，你的PA-RISC工作站会帮你寻找，如果你输入这个<c>寻找</c>命令。
+把Gentoo安装光盘放入光驱。如果你不知道你的光驱的SCSI ID，你的PA-RISC工作站会帮你寻找，如果你输入这个<c>search</c>命令。
 </p>
 
 <pre caption="寻找SCSI ID">
@@ -362,7 +362,7 @@ Re-enter password: <comment>(再次输入john的密码)</comment>
 </p>
 
 <pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/zh_cn/handbook/handbook-hppa.xml</i><keyval id="online-book"/></i>
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/handbook-hppa.xml<keyval id="online-book"/></i>
 </pre>
 
 <p>

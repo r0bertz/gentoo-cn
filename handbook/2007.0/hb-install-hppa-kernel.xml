@@ -38,8 +38,7 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于HPPA架构，我们有<c>hppa-sources</c>。默认情况下这些源代码是基于2.6内核的。 
- 
+对于HPPA架构，我们有<c>hppa-sources</c>。默认情况下这些源代码是基于2.6内核的。
 </p>
 
 <pre caption="安装内核源码">
@@ -47,7 +46,7 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </pre>
 
 <p>
-当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的 符号链接指向您安装的内核源码。在我们这个例子中，安装的源码 是<c>hppa-sources-<keyval id="kernel-version"/></c>。你的内核版本可能与此不同，请记得这一点。 
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码是<c>hppa-sources-<keyval id="kernel-version"/></c>。你的内核版本可能与此不同，请记得这一点。
 </p>
 
 <pre caption="查看内核源码符号链接">
@@ -193,7 +192,7 @@ Graphics support ---&gt;
 </pre>
 
 <p>
-当您完成配置您的内核这步，请从<uri link="#compiling">编译与安装</uri>。继续
+当您配置完您的内核之后，请继续<uri link="#compiling">编译与安装</uri>。
 </p>
 
 </body>
