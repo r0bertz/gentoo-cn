@@ -1,0 +1,1722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE mainpage SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header: /doc/progress.xml, v 0.1 2006/01/06 r0bertz Exp $ -->
+
+<mainpage>
+<title>Gentoo中文文档进度表</title>
+<author title="Author">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+
+<version>0.1</version>
+<date>2007年5月25日</date>
+
+<chapter>
+<title>列表分类</title>
+<section>
+<body>
+
+<ul>
+<li><uri link="#doc_chap2">Gentoo 2007.0 Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap3">Gentoo 2006.1 Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap4">Gentoo Handbook翻译进度表</uri></li>
+<!--
+<li><uri link="#doc_chap4">Gentoo文档翻译进度表</uri></li>
+<li><uri link="#doc_chap5">Gentoo Developer Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap6">中文文档资源其他文档</uri></li>
+-->
+</ul>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo 2007.0 Handbook 翻译进度表</title>
+<section>
+<body>
+<table>
+  <tr>
+    <th>文档</th>
+    <th>英文版本</th>
+    <th>最后更新</th>
+    <th>负责人</th>
+    <th>进度</th>
+    <th>完成期限</th>
+    <th>审校</th>
+    <th>翻译版本</th>
+    <th>最后更新</th>
+  </tr>
+  <tr>
+    <ti>handbook-amd64.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-amd64.xml">v 1.8</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-amd64.xml">v 1.8</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>handbook-hppa.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-hppa.xml">v 1.10</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-hppa.xml">v 1.10</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc64.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-ppc64.xml">v 1.13</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-ppc64.xml">v 1.13</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-ppc.xml">v 1.12</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-ppc.xml">v 1.12</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>handbook-sparc.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-sparc.xml">v 1.11</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-sparc.xml">v 1.11</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>handbook-x86.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/handbook-x86.xml">v 1.8</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/handbook-x86.xml">v 1.8</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-about.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-about.xml">v 1.8</uri></ti>
+    <ti>2007/06/03</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-about.xml">v 1.8</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-config.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-config.xml">v 1.12</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-config.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-finalise.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-finalise.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gli-dialog.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-gli-dialog.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gli-dialog.xml">v 1.4</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gli-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-gli-medium.xml">v 1.7</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="greyeye.cn@gmail.com">GreyEye</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gtkfe.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-gtkfe.xml">v 1.7</uri></ti>
+    <ti>2007/06/03</ti>
+    <ti><mail link="wtuguyu5460@gmail.com">fsping110</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-bootloader.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/19</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-bootloader.xml">v 1.4</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-disk.xml">v 1.5</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml">v 1.4</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-kernel.xml">v 1.8</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/19</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml">v 1.8</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-medium.xml">v 1.8</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml">v 1.7</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-network.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-network.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/05</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-network.xml">v 1.4</uri></ti>
+    <ti>2007/07/05</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-next.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-next.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-next.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-bootloader.xml">v 1.5</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml">v 1.4</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-disk.xml">v 1.8</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/19</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml">v 1.8</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.9</uri></ti>
+    <ti>2007/05/21</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/19</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.9</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-medium.xml">v 1.8</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-medium.xml">v 1.7</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-bootloader.xml">v 1.11</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml">v 1.10</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-disk.xml">v 1.12</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml">v 1.9</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.14</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.13</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-medium.xml">v 1.9</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml">v 1.7</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-bootloader.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-sparc-bootloader.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-disk.xml">v 1.6</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-sparc-disk.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-kernel.xml">v 1.9</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-medium.xml">v 1.7</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-sparc-medium.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-stage.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-stage.xml">v 1.9</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-stage.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-system.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-system.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-system.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-tools.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-tools.xml">v 1.7</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-tools.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>index.xml</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/index.xml">v 1.12</uri></ti>
+    <ti>2007/06/06</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>W</ti>
+    <ti></ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/index.xml">v 1.11</uri></ti>
+    <ti>2007/07/19</ti>
+  </tr>
+</table>
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo 2006.1 Handbook 翻译进度表</title>
+<section>
+<body>
+<table>
+  <tr>
+    <th>文档</th>
+    <th>英文版本</th>
+    <th>最后更新</th>
+    <th>负责人</th>
+    <th>进度</th>
+    <th>完成期限</th>
+    <th>审校</th>
+    <th>翻译版本</th>
+    <th>最后更新</th>
+  </tr>
+  <tr>
+    <ti>handbook-alpha.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-alpha.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-alpha.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-amd64.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-amd64.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-amd64.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-hppa.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-hppa.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-hppa.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc64.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-ppc64.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-ppc64.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-ppc.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-ppc.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-sparc.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-sparc.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-sparc.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>handbook-x86.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/handbook-x86.xml">v 1.5</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/handbook-x86.xml">v 1.5</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-about.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-about.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-about.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-alpha-bootloader.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-alpha-bootloader.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-alpha-disk.xml">v 1.2</uri></ti>
+    <ti>2006/11/02</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-alpha-disk.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-alpha-kernel.xml">v 1.3</uri></ti>
+    <ti>2007/03/13</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-alpha-kernel.xml">v 1.3</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-alpha-medium.xml">v 1.2</uri></ti>
+    <ti>2006/09/05</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-alpha-medium.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-config.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-config.xml">v 1.6</uri></ti>
+    <ti>2007/03/12</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-config.xml">v 1.6</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-finalise.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-finalise.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/20</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-finalise.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gli-dialog.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-gli-dialog.xml">v 1.2</uri></ti>
+    <ti>2006/11/01</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/16</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-gli-dialog.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gli-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-gli-medium.xml">v 1.4</uri></ti>
+    <ti>2007/02/27</ti>
+    <ti><mail link="greyeye.cn@gmail.com">GreyEye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-gli-medium.xml">v 1.4</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-gtkfe.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-gtkfe.xml">v 1.2</uri></ti>
+    <ti>2006/11/01</ti>
+    <ti><mail link="wtuguyu5460@gmail.com">fsping110</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/17</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-gtkfe.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-hppa-bootloader.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-hppa-bootloader.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-hppa-disk.xml">v 1.2</uri></ti>
+    <ti>2006/11/02</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-hppa-disk.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-hppa-kernel.xml">v 1.4</uri></ti>
+    <ti>2007/03/13</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-hppa-kernel.xml">v 1.4</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-hppa-medium.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-hppa-medium.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-network.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-network.xml">v 1.2</uri></ti>
+    <ti>2006/11/10</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/02/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-network.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-next.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-next.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/14</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-next.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc-bootloader.xml">v 1.3</uri></ti>
+    <ti>2006/11/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/25</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc-bootloader.xml">v 1.3</uri></ti>
+    <ti>2007/06/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc-disk.xml">v 1.2</uri></ti>
+    <ti>2006/11/02</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/28</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc-disk.xml">v 1.2</uri></ti>
+    <ti>2007/05/30</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc-kernel.xml">v 1.7</uri></ti>
+    <ti>2007/03/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/30</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc-kernel.xml">v 1.7</uri></ti>
+    <ti>2007/05/30</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc-medium.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc-medium.xml">v 1.1</uri></ti>
+    <ti>2007/06/26</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc64-bootloader.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc64-bootloader.xml">v 1.1</uri></ti>
+    <ti>2007/06/26</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc64-disk.xml">v 1.2</uri></ti>
+    <ti>2006/11/02</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc64-disk.xml">v 1.2</uri></ti>
+    <ti>2007/06/26</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc64-kernel.xml">v 1.2</uri></ti>
+    <ti>2007/02/26</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc64-kernel.xml">v 1.2</uri></ti>
+    <ti>2007/06/26</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-ppc64-medium.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-ppc64-medium.xml">v 1.1</uri></ti>
+    <ti>2007/06/26</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-sparc-bootloader.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/14</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-sparc-bootloader.xml">v 1.1</uri></ti>
+    <ti>2007/05/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-sparc-disk.xml">v 1.3</uri></ti>
+    <ti>2006/11/02</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/14</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-sparc-disk.xml">v 1.3</uri></ti>
+    <ti>2007/05/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-sparc-kernel.xml">v 1.3</uri></ti>
+    <ti>2007/03/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-sparc-kernel.xml">v 1.3</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-sparc-medium.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/14</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-sparc-medium.xml">v 1.1</uri></ti>
+    <ti>2007/05/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-stage.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-stage.xml">v 1.3</uri></ti>
+    <ti>2007/03/30</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-stage.xml">v 1.3</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-system.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-system.xml">v 1.2</uri></ti>
+    <ti>2006/10/08</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/03/13</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-system.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-tools.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-install-tools.xml">v 1.2</uri></ti>
+    <ti>2006/12/30</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/04/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-install-tools.xml">v 1.2</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-installer-about.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/hb-installer-about.xml">v 1.1</uri></ti>
+    <ti>2006/08/30</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/15</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/hb-installer-about.xml">v 1.1</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>index.xml</ti>
+    <ti><uri link="/doc/en/handbook/2006.1/index.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/05/28</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2006.1/index.xml">v 1.4</uri></ti>
+    <ti>2007/05/28</ti>
+  </tr>
+</table>
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo Handbook 翻译进度表</title>
+<section>
+<body>
+
+<table>
+  <tr>
+    <th>文档</th>
+    <th>英文版本</th>
+    <th>最后更新</th>
+    <th>负责人</th>
+    <th>进度</th>
+    <th>完成期限</th>
+    <th>审校</th>
+    <th>翻译版本</th>
+    <th>最后更新</th>
+  </tr>
+  <tr>
+    <ti>index.xml</ti>
+    <ti><uri link="/doc/en/handbook/index.xml">v 1.71</uri></ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="wcw8410@gmail.com">wcw</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/19</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/index.xml">v 1.71</uri></ti>
+    <ti>2007/06/19</ti>
+  </tr>
+  <tr>
+    <ti>handbook-x86.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-x86.xml">v 1.161</uri></ti>
+    <ti>2007/05/08</ti>
+    <ti><mail link="wcw8410@gmail.com">wcw</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-x86.xml">v 1.161</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-about.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-about.xml">v 1.42</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-about.xml">v 1.42</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-x86+amd64-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-medium.xml">v 1.9</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml">v 1.9</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-network.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-network.xml">v 1.52</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-network.xml">v 1.52</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-x86+amd64-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-disk.xml">v 1.9</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="greyeye.cn@gmail.com">GreyEye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-x86+amd64-disk.xml">v 1.9</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-stage.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-stage.xml">v 1.112</uri></ti>
+    <ti>2007/06/28</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-stage.xml">v 1.112</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-system.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-system.xml">v 1.106</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-system.xml">v 1.106</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-x86+amd64-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-kernel.xml">v 1.13</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="dongbin.lou@gmail.com">Amorous</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml">v 1.13</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-config.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-config.xml">v 1.94</uri></ti>
+    <ti>2007/06/02</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-config.xml">v 1.94</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-tools.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-tools.xml">v 1.46</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="vivian.ye@gmail.com">vivian.ye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-tools.xml">v 1.46</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-x86+amd64-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-bootloader.xml">v 1.8</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml">v 1.8</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-finalise.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-finalise.xml">v 1.48</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-finalise.xml">v 1.48</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-next.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-next.xml">v 1.26</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="greyeye.cn@gmail.com">GreyEye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-next.xml">v 1.26</uri></ti>
+    <ti>2007/06/07</ti>
+  </tr>
+  <tr>
+    <ti>handbook-alpha.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-alpha.xml">v 1.133</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-alpha.xml">v 1.133</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-amd64.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-amd64.xml">v 1.141</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-amd64.xml">v 1.141</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-arm.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-arm.xml">v 1.69</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-arm.xml">v 1.69</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-hppa.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-hppa.xml">v 1.130</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-hppa.xml">v 1.130</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ia64.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-ia64.xml">v 1.8</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-ia64.xml">v 1.8</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-mips.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-mips.xml">v 1.121</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-mips.xml">v 1.121</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc64.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-ppc64.xml">v 1.72</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-ppc64.xml">v 1.72</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-ppc.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-ppc.xml">v 1.151</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-ppc.xml">v 1.151</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook-sparc.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook-sparc.xml">v 1.134</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook-sparc.xml">v 1.134</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>handbook.xml</ti>
+    <ti><uri link="/doc/en/handbook/handbook.xml">v 1.143</uri></ti>
+    <ti>2006/11/29</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/handbook.xml">v 1.143</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-alpha-bootloader.xml">v 1.20</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-alpha-bootloader.xml">v 1.20</uri></ti>
+    <ti>2007/06/23</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-alpha-disk.xml">v 1.26</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-alpha-disk.xml">v 1.26</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-alpha-kernel.xml">v 1.41</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-alpha-kernel.xml">v 1.41</uri></ti>
+    <ti>2007/06/23</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-alpha-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-alpha-medium.xml">v 1.46</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-alpha-medium.xml">v 1.46</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-arm-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-arm-bootloader.xml">v 1.3</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-arm-bootloader.xml">v 1.3</uri></ti>
+    <ti>2007/06/23</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-arm-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-arm-disk.xml">v 1.7</uri></ti>
+    <ti>2007/07/10</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-arm-disk.xml">v 1.7</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-arm-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-arm-kernel.xml">v 1.7</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-arm-kernel.xml">v 1.7</uri></ti>
+    <ti>2007/06/23</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-arm-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-arm-medium.xml">v 1.8</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/23</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-arm-medium.xml">v 1.8</uri></ti>
+    <ti>2007/06/23</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-hppa-bootloader.xml">v 1.16</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/09</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-hppa-bootloader.xml">v 1.16</uri></ti>
+    <ti>2007/06/09</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-hppa-disk.xml">v 1.23</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-hppa-disk.xml">v 1.23</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-hppa-kernel.xml">v 1.41</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/09</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-hppa-kernel.xml">v 1.41</uri></ti>
+    <ti>2007/06/09</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-hppa-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-hppa-medium.xml">v 1.47</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-hppa-medium.xml">v 1.47</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ia64-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ia64-disk.xml">v 1.6</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ia64-disk.xml">v 1.6</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ia64-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ia64-kernel.xml">v 1.8</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/20</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ia64-kernel.xml">v 1.8</uri></ti>
+    <ti>2007/07/20</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ia64-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ia64-medium.xml">v 1.4</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ia64-medium.xml">v 1.4</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-bootloader.xml">v 1.18</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/20</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-bootloader.xml">v 1.18</uri></ti>
+    <ti>2007/06/20</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-disk.xml">v 1.24</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-disk.xml">v 1.24</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-kernel.xml">v 1.27</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-kernel.xml">v 1.27</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-medium.xml">v 1.24</uri></ti>
+    <ti>2007/07/16</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-medium.xml">v 1.24</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-stage.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-stage.xml">v 1.8</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-stage.xml">v 1.8</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-mips-system.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-system.xml">v 1.4</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-system.xml">v 1.4</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc-bootloader.xml">v 1.43</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-bootloader.xml">v 1.43</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc-disk.xml">v 1.45</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-disk.xml">v 1.45</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc-kernel.xml">v 1.54</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-kernel.xml">v 1.54</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc-medium.xml">v 1.57</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-medium.xml">v 1.57</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc64-bootloader.xml">v 1.27</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc64-bootloader.xml">v 1.27</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc64-disk.xml">v 1.32</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc64-disk.xml">v 1.32</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc64-kernel.xml">v 1.30</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc64-kernel.xml">v 1.30</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-ppc64-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc64-medium.xml">v 1.36</uri></ti>
+    <ti>2007/07/13</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc64-medium.xml">v 1.36</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-bootloader.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-sparc-bootloader.xml">v 1.20</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-sparc-bootloader.xml">v 1.20</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-disk.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-sparc-disk.xml">v 1.30</uri></ti>
+    <ti>2007/06/26</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-sparc-disk.xml">v 1.30</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-kernel.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-sparc-kernel.xml">v 1.29</uri></ti>
+    <ti>2007/05/20</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/27</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-sparc-kernel.xml">v 1.29</uri></ti>
+    <ti>2007/06/27</ti>
+  </tr>
+  <tr>
+    <ti>hb-install-sparc-medium.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-sparc-medium.xml">v 1.45</uri></ti>
+    <ti>2007/06/30</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-sparc-medium.xml">v 1.45</uri></ti>
+    <ti>2007/07/04</ti>
+  </tr>
+  <tr>
+    <ti>hb-working-portage.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-portage.xml">v 1.63</uri></ti>
+    <ti>2007/03/25</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-working-portage.xml">v 1.63</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-working-use.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-use.xml">v 1.48</uri></ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="zhudingshibai@gmail.com">zhudingshibai</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-working-use.xml">v 1.48</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-working-features.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-features.xml">v 1.35</uri></ti>
+    <ti>2007/01/18</ti>
+    <ti><mail link="dongbin.lou@gmail.com">Amorous</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-working-features.xml">v 1.35</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-working-rcscripts.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-rcscripts.xml">v 1.30</uri></ti>
+    <ti>2007/07/08</ti>
+    <ti><mail link="linuxjia@gmail.com">clsjz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/07/25</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-working-rcscripts.xml">v 1.30</uri></ti>
+    <ti>2007/07/25</ti>
+  </tr>
+  <tr>
+    <ti>hb-working-variables.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-variables.xml">v 1.22</uri></ti>
+    <ti>2007/05/19</ti>
+    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-working-variables.xml">v 1.22</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-portage-files.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-portage-files.xml">v 1.18</uri></ti>
+    <ti>2007/06/12</ti>
+    <ti><mail link="acevery@gmail.com">acevery</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/19</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-portage-files.xml">v 1.18</uri></ti>
+    <ti>2007/06/19</ti>
+  </tr>
+  <tr>
+    <ti>hb-portage-configuration.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-portage-configuration.xml">v 1.15</uri></ti>
+    <ti>2007/03/25</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-portage-configuration.xml">v 1.15</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-portage-branches.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-portage-branches.xml">v 1.15</uri></ti>
+    <ti>2006/10/28</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/16</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-portage-branches.xml">v 1.15</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-portage-tools.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-portage-tools.xml">v 1.9</uri></ti>
+    <ti>2006/10/28</ti>
+    <ti><mail link="coolshoulder@gmail.com">chendy</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/24</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-portage-tools.xml">v 1.9</uri></ti>
+    <ti>2007/05/01</ti>
+  </tr>
+  <tr>
+    <ti>hb-portage-diverttree.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-portage-diverttree.xml">v 1.14</uri></ti>
+    <ti>2007/02/26</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-portage-diverttree.xml">v 1.14</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-start.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-start.xml">v 1.8</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="zhudingshibai@gmail.com">zhudingshibai</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-start.xml">v 1.8</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-advanced.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-advanced.xml">v 1.14</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-advanced.xml">v 1.14</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-modules.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-modules.xml">v 1.23</uri></ti>
+    <ti>2007/04/14</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-modules.xml">v 1.23</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-wireless.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-wireless.xml">v 1.15</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-wireless.xml">v 1.15</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-functions.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-functions.xml">v 1.11</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="greyeye.cn@gmail.com">GreyEye</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-functions.xml">v 1.11</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+  <tr>
+    <ti>hb-net-management.xml</ti>
+    <ti><uri link="/doc/en/handbook/hb-net-management.xml">v 1.11</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
+    <ti>T</ti>
+    <ti>2007/06/08</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-net-management.xml">v 1.11</uri></ti>
+    <ti>2007/06/08</ti>
+  </tr>
+</table>
+
+<note>
+N:暂不译；U:未翻译；T：已翻译；W:正在翻译；R:正在审校
+</note>
+
+<note>
+先进行x86的handbook的翻译，接着再翻译别的架构的handbook。
+</note>
+
+</body>
+</section>
+</chapter>
+</mainpage>
