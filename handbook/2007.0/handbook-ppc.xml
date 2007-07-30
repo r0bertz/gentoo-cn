@@ -3,7 +3,7 @@
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/handbook-ppc.xml,v 1.12 2007/06/06 16:47:21 neysx Exp $ -->
 
-<book link="/doc/en/handbook/2007.0/handbook-ppc.xml">
+<book link="/doc/en/handbook/2007.0/handbook-ppc.xml" lang="zh_cn">
 <title>Gentoo Linux 2007.0 PPC手册</title>
 
 <values>

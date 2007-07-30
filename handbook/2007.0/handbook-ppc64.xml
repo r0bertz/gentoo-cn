@@ -3,7 +3,7 @@
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/handbook-ppc64.xml,v 1.13 2007/06/06 16:47:21 neysx Exp $ -->
 
-<book link="/doc/en/handbook/2007.0/handbook-ppc64.xml">
+<book link="/doc/en/handbook/2007.0/handbook-ppc64.xml" lang="zh_cn">
 <title>Gentoo Linux 2007.0 PPC64手册</title>
 
 <values>

@@ -3,7 +3,7 @@
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/handbook-hppa.xml,v 1.10 2007/06/06 16:47:21 neysx Exp $ -->
 
-<book link="/doc/en/handbook/2007.0/handbook-hppa.xml">
+<book link="/doc/en/handbook/2007.0/handbook-hppa.xml" lang="zh_cn">
 <title>Gentoo Linux 2007.0 HPPA手册</title>
 
 <values>

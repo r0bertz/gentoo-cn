@@ -3,7 +3,7 @@
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/handbook-amd64.xml,v 1.8 2007/06/06 16:47:21 neysx Exp $ -->
 
-<book link="/doc/en/handbook/2007.0/handbook-amd64.xml">
+<book link="/doc/en/handbook/2007.0/handbook-amd64.xml" lang="zh_cn">
 <title>Gentoo Linux 2007.0 AMD64手册</title>
 
 <values>
