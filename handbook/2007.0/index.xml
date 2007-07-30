@@ -1,39 +1,40 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/index.xml,v 1.11 2007/05/18 14:21:43 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/index.xml,v 1.12 2007/05/18 14:21:43 neysx Exp $ -->
 <guide link="/doc/zh_cn/handbook/2007.0/index.xml" lang="zh_cn">
-<title>Gentoo 2007.0 手册</title>
+<title>Gentoo 2007.0无网络安装手册</title>
 
 <author title="作者">
   <mail link="swift@gentoo.org">Sven Vermeulen</mail>
 </author>
 
 <abstract>
-Gentoo 2007.0手册的目的是将文档集中在一个条理分明的手册中。它包括了2007.0发行版本的无网络安装操作指南以及讲述如何使用Gentoo和Portage的章节。
+Gentoo 2007.0无网络安装手册的目的是将文档集中在一个条理分明的手册中。它包括了2007.0发行版本的无网络安装操作指南以及讲述如何使用Gentoo和Portage的章节。
 </abstract>
 
 <license/>
 
-<version>8.5</version>
-<date>2007-05-18</date>
+<version>8.6</version>
+<date>2007-06-06</date>
 
 <chapter>
-<title>Gentoo Linux 2007.0手册</title>
+<title>Gentoo Linux 2007.0无网络安装手册</title>
 
 <section>
 <title>可用语言</title>
 <body>
 
 <p>
-Gentoo Linux 2007.0手册有以下几种语言可用：
+Gentoo Linux 2007.0无网络安装手册提供了以下几种语言版本：
 </p>
 
 <p>
-<uri link="/doc/en/handbook/2007.0/">英语</uri> | <uri 
-link="/doc/id/handbook/2007.0/">印度尼西亚语</uri> | <uri 
-link="/doc/it/handbook/2007.0/">意大利语</uri> | <uri 
-link="/doc/pl/handbook/2007.0">波兰语</uri> 
+<uri link="/doc/en/handbook/2007.0/">英文</uri> |
+<uri link="/doc/id/handbook/2007.0/">印度尼西亚文</uri> |
+<uri link="/doc/it/handbook/2007.0/">意大利文</uri> |
+<uri link="/doc/pl/handbook/2007.0">波兰文</uri> | 
+<uri link="/doc/zh_cn/handbook/2007.0">简体中文</uri>
 </p>
 
 </body>
@@ -43,7 +44,7 @@ link="/doc/pl/handbook/2007.0">波兰语</uri>
 <body>
 
 <p>
-欢迎您阅读Gentoo Linux 2007.0手册。本手册是同Gentoo Linux版本一起发行的，包含了<brite>无网络条件下</brite>安装Gentoo Linux 2007.0所必需的安装操作指南。
+欢迎您阅读Gentoo Linux 2007.0无网络安装手册。本手册是同Gentoo Linux版本一起发行的，包含了<brite>无网络条件下</brite>安装Gentoo Linux 2007.0所必需的安装操作指南。
 </p>
 
 <p>
