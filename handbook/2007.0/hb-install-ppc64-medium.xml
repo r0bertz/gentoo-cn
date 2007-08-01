@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-medium.xml,v 1.7 2007/05/07 18:11:42 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-medium.xml,v 1.8 2007/05/07 18:11:42 nightmorph Exp $ -->
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-06-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -189,7 +189,7 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
     使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 

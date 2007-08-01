@@ -90,7 +90,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 </p>
 
 <p>
-为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个Apple_Bootstrap分区，并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况（请注意Bootstrap分区<e>不</e>应该在你的fstab文件中）。虽然这些步骤应该已经完成了，但是仍需在进行下一步前检查<path>/etc/fstab</path>。现在可以安装<c>yaboot</c>了。
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个Apple_Bootstrap分区，并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况（请注意Bootstrap分区<e>不</e>应该在你的fstab文件中）。虽然这些步骤应该已经完成了，但是还是请检查<path>/etc/fstab</path>后再进行下一步。现在可以安装<c>yaboot</c>了。
 </p>
 
 <pre caption="安装yaboot">
@@ -98,7 +98,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 </pre>
 
 <p>
-现在退出chroot并运行<c>yabootconfig --chroot /mnt/gentoo</c>。首先，程序会确认bootstrap分区的位置。如果你使用了建议的磁盘分区模式，那你的bootstrap分区应该是/dev/hda2。如果输出正确请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。<c>yabootconfig</c>会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。<c>mkofboot</c>是格式化Apple_Bootstrap分区以及安装yaboot的配置文件用的。在此之后请再次进入chroot。
+现在退出chroot并运行<c>yabootconfig --chroot /mnt/gentoo</c>。首先，程序会确认bootstrap分区的位置。如果你使用了建议的磁盘分区布局，那你的bootstrap分区应该是/dev/hda2。如果输出正确请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。<c>yabootconfig</c>会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。<c>mkofboot</c>是格式化Apple_Bootstrap分区以及安装yaboot的配置文件用的。在此之后请再次进入chroot。
 </p>
 
 <pre caption="重新进入chroot">
@@ -176,8 +176,8 @@ install=/usr/lib/yaboot/yaboot
 magicboot=/usr/lib/yaboot/ofboot
 
 <comment>###########################################################
-## 如果你有超过一个内核或是启动选项组合，这部分内容可以被复制
-## -用你内核和initrd镜像的确切名字替换image和initrd的值。
+## 如果你有一个以上的内核或是启动选项的组合，这部分内容可以被复制
+## ——用你内核和initrd镜像的确切名字替换image和initrd的值。
 ###########################################################</comment>
 image=/boot/<keyval id="kernel-name"/>
   label=Linux
@@ -221,7 +221,7 @@ BootX只能用于使用MacOS 9及更早的操作系统的OldWorld架构的Apple�
 </impo>
 
 <p>
-因为BooX需要从运行着的MacOS里启动Linux，所以需要将内核从Linux分区拷贝到MacOS分区。首先，从chroot环境外挂载MacOS分区。使用<c>mac-fdisk -l</c>来查找MacOS分区号，这里使用sda6作为示例。当这个分区被挂载起来后，我们就要将内核拷贝至系统目录以便BootX能够找得到它。
+因为BootX需要从运行着的MacOS里启动Linux，所以需要将内核从Linux分区拷贝到MacOS分区。首先，从chroot环境外挂载MacOS分区。使用<c>mac-fdisk -l</c>来查找MacOS分区号，这里使用sda6作为示例。当这个分区被挂载起来后，我们就要将内核拷贝至系统目录以便BootX能够找得到它。
 </p>
 
 <pre caption="将内核拷贝至MacOS分区">
@@ -309,7 +309,7 @@ image = /<keyval id="kernel-name"/>
 </pre>
 
 <p>
-你的quik.conf文件<e>必须</e>和quik启动镜像存放在相同的磁盘上，它也可以是在相同磁盘的不同分区上，虽然我们还是推荐你将它移动到你的启动分区上。
+你的quik.conf文件<e>必须</e>和quik启动镜像存放在相同的磁盘上，它也可以是在相同磁盘的不同分区上，推荐你将它移动到你的启动分区上。
 </p>
 
 <pre caption="将quik.conf移动至/boot">

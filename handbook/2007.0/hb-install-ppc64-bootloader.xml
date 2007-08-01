@@ -132,8 +132,8 @@ install=/usr/lib/yaboot/yaboot
 magicboot=/usr/lib/yaboot/ofboot
 
 <comment>#################
-## 如果你使用了一个以上的内核或是一组以上的启动选项这部分配置可以被复制
-## -用你的内核版本替换<keyval id="kernel-name"/> #################</comment>
+## 如果你有一个以上的内核或是启动选项的组合这部分配置可以被复制
+## ——用你的内核版本替换<keyval id="kernel-name"/> #################</comment>
 image=/boot/<keyval id="kernel-name"/>
   label=Linux
   root=/dev/hda3
