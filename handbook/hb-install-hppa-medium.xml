@@ -79,10 +79,10 @@
 
 <ul>
   <li>
-    Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
+    Gentoo<e>最小</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
   </li>
   <li>
-    Gentoo<e>通用</e>安装光盘是一个和最小化安装光盘有同样能力的可启动光盘。此外，它还包括了几个stage3 tarball（为每个子架构所专门优化的）。
+    Gentoo<e>通用</e>安装光盘是一个和最小安装光盘有同样能力的可启动光盘。此外，它还包括了几个stage3 tarball（为每个子架构所专门优化的）。
   </li>
 </ul>
 
@@ -93,16 +93,16 @@
 </body>
 </subsection>
 <subsection>
-<title>Gentoo最小化安装光盘</title>
+<title>Gentoo最小安装光盘</title>
 <body>
 
 <p>
-最小化安装光盘叫做<c>install-hppa-minimal-2007.0.iso</c>，只有75MB大小。你可以使用这个安装光盘来安装Gentoo，不过只有在有网络连接的情况下才行。
+最小安装光盘叫做<c>install-hppa-minimal-2007.0.iso</c>，只有75MB大小。你可以使用这个安装光盘来安装Gentoo，不过只有在有网络连接的情况下才行。
 </p>
 
 <table>
 <tr>
-  <th>最小化安装光盘</th>
+  <th>最小安装光盘</th>
   <th>优点及缺点</th>
 </tr>
 <tr>
@@ -165,7 +165,7 @@
 <body>
 
 <p>
-stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
+stage3是一个含有最小Gentoo环境的压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
 </p>
 
 </body>

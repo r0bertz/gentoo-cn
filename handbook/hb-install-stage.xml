@@ -54,7 +54,7 @@ Fri Mar 29 16:21:18 UTC 2005
 </p>
 
 <p>
-最小化光盘和LiveCD不包含任何stage文件，不过LiveDVD里有。
+最小光盘和LiveCD不包含任何stage文件，不过LiveDVD里有。
 </p>
 
 <ul test="not(contains('AMD64 x86', func:keyval('arch')))">

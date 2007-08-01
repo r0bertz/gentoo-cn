@@ -86,7 +86,7 @@
 
 <ul>
   <li>
-    Gentoo<e>最小化</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
+    Gentoo<e>最小</e>安装光盘，一个小而精简的可启动光盘，它只能引导系统，准备网络和进行Gentoo的安装。
   </li>
   <li>
     Gentoo<e>通用</e>安装光盘，是一个具有和最小安装光盘相同功能的可以启动的光盘。另外，它还包含一些stage3 tarball文件（为一些独立的子架构优化）。
@@ -109,7 +109,7 @@
 
 <table>
 <tr>
-  <th>最小化安装光盘</th>
+  <th>最小安装光盘</th>
   <th>优点及缺点</th>
 </tr>
 <tr>
@@ -158,7 +158,7 @@
 <body>
 
 <p>
-stage3 tarball是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2 tarball，但在官方的安装指南中只使用stage3 tarball。如果你对stage1和stage2安装感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
+stage3 tarball是一个含有最小Gentoo环境的压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2 tarball，但在官方的安装指南中只使用stage3 tarball。如果你对stage1和stage2安装感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
 </p>
 
 </body>

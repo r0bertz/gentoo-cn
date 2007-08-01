@@ -206,7 +206,7 @@
 <body>
 
 <p>
-stage3是一个最小化的Gentoo系统压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
+stage3是一个含有最小Gentoo环境的压缩包，适合按照手册继续安装Gentoo。以前，Gentoo手册介绍了使用3种stage的安装方法。虽然Gentoo仍然提供stage1和stage2，但在官方的安装指南中只使用stage3。如果你对stage1和stage2感兴趣，请阅读Gentoo FAQ中的<uri link="/doc/en/faq.xml#stage12">如何使用stage1或stage2安装Gentoo？</uri>
 </p>
 
 </body>

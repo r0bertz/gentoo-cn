@@ -62,7 +62,7 @@
 <body>
 
 <p>
-Gentoo Linux可以使用<e>stage3</e>tarball文件来安装。这样的一个tarball是一个包含了最小环境的归档文件，从它开始你可以成功的在你的系统上安装Gentoo Linux。
+Gentoo Linux可以使用<e>stage3</e> tarball文件来安装。这样的一个tarball是一个包含了最小环境的归档文件，从它开始你可以成功的在你的系统上安装Gentoo Linux。
 </p>
 
 <p>
@@ -88,7 +88,7 @@ Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境�
     通用安装光盘包含了你安装Gentoo所需要的一切东西。它提供了常见架构的stage3文件，供您选择的额外应用程序的源代码，当然，还有针对你的硬件构架的安装指南。
   </li>
   <li>
-    最小化安装光盘包含了一个最小化的环境，它可以允许你启动并配置你的网络，以使你可以连接到互联网。它不包含任何额外的文件，不适用于本安装方式。
+    最小安装光盘包含了一个最小的环境，它可以允许你启动并配置你的网络，以使你可以连接到互联网。它不包含任何额外的文件，不适用于本安装方式。
   </li>
 </ul>
 
@@ -103,7 +103,7 @@ Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境�
 <body>
 
 <p>
-你可以从我们任何一个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘。这些安装光盘位于 <path><keyval id="release-dir"/>installcd</path>目录里。
+你可以从我们任何一个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘。这些安装光盘位于<path><keyval id="release-dir"/>installcd</path>目录里。
 </p>
 
 <p>
