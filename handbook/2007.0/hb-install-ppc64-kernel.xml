@@ -1,11 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml,v 1.9 2007/05/21 17:03:44 josejx Exp $ -->
@@ -75,7 +70,7 @@ lrwxrwxrwx    1 root    root       12 Aug 10 11:04 /usr/src/linux -&gt; linux-<k
 <body>
 
 <p>
-手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此--当您手动配置几次内核之后，您就不会再觉得它有多么难了:)
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了:)
 </p>
 
 <p>
@@ -84,14 +79,14 @@ lrwxrwxrwx    1 root    root       12 Aug 10 11:04 /usr/src/linux -&gt; linux-<k
 
 <pre caption="调用menuconfig">
 # <i>cd /usr/src/linux</i>
-<comment>重要事项：万一你使用32位的用户组件，你必须修改在/usr/src/linux中的顶层Makefile文件
+<comment>重要事项：如果你使用32位userland，你必须修改在/usr/src/linux中的顶层Makefile文件
 然后改变CROSS_COMPILE选项为CROSS_COMPILE ?= powerpc64-unknown-linux-gnu-。
-你必须在运行make menuconfig之前做这个，否则可能导致内核编译问题。</comment>
+你必须在运行make menuconfig之前做这个，否则可能导致内核编译时出问题。</comment>
 # <i>make menuconfig</i>
 </pre>
 
 <p>
-您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者在没有额外的调试下根本不能运行）。
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将根本不能运行或者在未经调试的情况下不能正常运行）。
 </p>
 
 </body>
