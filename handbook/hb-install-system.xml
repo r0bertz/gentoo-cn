@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-system.xml,v 1.106 2006/11/02 09:50:33 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-system.xml,v 1.107 2006/11/02 09:50:33 neysx Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-07-26</date>
 
 <section>
 <title>Chroot</title>
@@ -58,7 +58,7 @@
 
 <pre caption="拷贝DNS信息">
 <comment>（参数"-L"是必须的，用来确保我们拷贝的不是一个符号链接）</comment>
-# <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf</i>
+# <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/</i>
 </pre>
 
 </body>

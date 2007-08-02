@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-system.xml,v 1.4 2007/05/07 18:11:41 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-mips-system.xml,v 1.5 2007/05/07 18:11:41 nightmorph Exp $ -->
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-07-26</date>
 
 <section>
 <title>Chroot</title>
@@ -21,7 +21,7 @@
 
 <pre caption="拷贝DNS信息">
 <comment>（参数"-L"是必须的，用来确保我们拷贝的不是一个符号链接）</comment>
-# <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf</i>
+# <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/</i>
 </pre>
 
 </body>
