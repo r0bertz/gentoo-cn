@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-config.xml,v 1.94 2006/11/28 07:40:38 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-config.xml,v 1.95 2006/11/28 07:40:38 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你需要编辑一些重要的配置文件。在这一章中将对这些重要的配置文件作概述，并且介绍如何配置它们。
 </abstract>
 
-<version>8.2</version>
-<date>2007-06-02</date>
+<version>8.3</version>
+<date>2007-08-01</date>
 
 <section>
 <title>文件系统信息</title>
@@ -97,14 +97,11 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 <body>
 
 <p test="not(func:keyval('arch')='SPARC')">
-增加符合你分区方案的规则，为<path>/proc</path>、<c>tmpfs</c>和你的光驱
-（当然，如果你有其他分区或者驱动器，也为它们加上）添加挂载规则。
+增加符合你分区方案的规则，为你的光驱（当然，如果你有其他分区或者驱动器，也为它们加上）添加挂载规则。
 </p>
 
 <p test="func:keyval('arch')='SPARC'">
-增加符合你分区方案的规则，为<path>/proc/openprom</path>、<path>/proc</path>、
-<c>tmpfs</c>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们加上）
-添加挂载规则。
+增加符合你分区方案的规则，为<path>/proc/openprom</path>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们加上）添加挂载规则。
 </p>
 
 <p>
@@ -116,9 +113,6 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 /dev/hda2   none         swap    sw                   0 0
 /dev/hda3   /            ext3    noatime              0 1
 
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
-
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
 
@@ -127,9 +121,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 /dev/sda3   none         swap    sw                   0 0
 /dev/sda4   /            ext3    noatime              0 1
 
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
-
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
 
@@ -137,9 +128,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 <keyval id="/boot"/>   /boot        ext2    defaults,noatime     1 2
 /dev/sda2   none         swap    sw                   0 0
 /dev/sda3   /            ext3    noatime              0 1
-
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
@@ -152,8 +140,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 /dev/sda6   /home           ext3        noatime              0 2
 
 openprom    /proc/openprom  openpromfs  defaults             0 0
-proc        /proc           proc        nodev,nosuid,noexec  0 0
-shm         /dev/shm        tmpfs       nodev,nosuid,noexec  0 0
 
 /dev/cdrom  /mnt/cdrom      auto        noauto,user          0 0
 </pre>
@@ -166,18 +152,12 @@ shm         /dev/shm        tmpfs       nodev,nosuid,noexec  0 0
 /dev/hda4   /            ext3    noatime              0 1
 /dev/hda3   none         swap    sw                   0 0
 
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
-
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
 
 <pre caption="/etc/fstab的一个完整例子" test="func:keyval('arch')='PPC64'">
 /dev/sda4   /            ext3    noatime              0 1
 /dev/sda3   none         swap    sw                   0 0
-
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
