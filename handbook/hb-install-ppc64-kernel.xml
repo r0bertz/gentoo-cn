@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc64-kernel.xml,v 1.30 2007/05/20 20:32:23 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ppc64-kernel.xml,v 1.31 2007/05/20 20:32:23 nightmorph Exp $ -->
 <sections>
 
-<version>8.1</version>
-<date>2007-05-15</date>
+<version>8.2</version>
+<date>2007-07-29</date>
 
 <section>
 <title>时区</title>
@@ -196,11 +196,11 @@ Macintosh Device Drivers ---&gt;
 </p>
 
 <p>
-要查看所有可用的模块，运行下面的<c>find</c>命令。不要忘了用你刚编译的内核版本替换"&lt;kernel version&gt;"：
+要查看所有可用的模块，运行如下的命令：
 </p>
 
 <pre caption="查看所有可用的模块">
-# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+# <i>modprobe -l</i>
 </pre>
 
 <p>

@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license
 See http://creativecommons.org/licenses/by-sa/2.5
-$Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-kernel.xml,v 1.41 2006/12/06 19:59:09 nightmorph Exp $ -->
+$Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-kernel.xml,v 1.42 2006/12/06 19:59:09 nightmorph Exp $ -->
 <sections>
 
-<version>8.2</version>
-<date>2006-12-06</date>
+<version>8.3</version>
+<date>2007-07-29</date>
 
 <section>
 <title>时区</title>
@@ -280,11 +280,11 @@ Graphics support ---&gt;
 </p>
 
 <p>
-要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换为你刚编译的内核的版本：
+要查看所有可用的模块，运行如下的命令：
 </p>
 
 <pre caption="查看所有可用的模块">
-# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+# <i>modprobe -l</i>
 </pre>
 
 <p>
