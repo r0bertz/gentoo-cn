@@ -105,7 +105,7 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-现在转到<c>File Systems</c>，选中支持你使用的文件系统。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>以及<c>/dev/pts file system for Unix98 PTYs</c>：
+现在转到<c>File Systems</c>，选中你使用的文件系统的支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>以及<c>/dev/pts file system for Unix98 PTYs</c>：
 </p>
 
 <pre caption="选中必需的文件系统">
@@ -204,7 +204,7 @@ Macintosh Device Drivers ---&gt;
 </pre>
 
 <p>
-比如，要自动加载<c>3c59x.o</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名。
+比如，要自动加载<c>3c59x</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">

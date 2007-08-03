@@ -1,17 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml,v 1.13 2007/05/21 04:06:25 josejx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml,v 1.15 2007/05/21 04:06:25 josejx Exp $ -->
 <sections>
 
-<version>8.2</version>
+<version>8.3</version>
 <date>2007-07-29</date>
 
 <section>
@@ -112,10 +107,10 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-现在转到<c>File Systems</c>，选中你使用的文件系统支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
+现在转到<c>File Systems</c>，选中你使用的文件系统的支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
 </p>
 
-<pre caption="选中需要的文件系统">
+<pre caption="选中必需的文件系统">
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
 <comment>（/proc可能被强制选上了，如果这样你会看到---）</comment>
@@ -212,7 +207,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用OpenFirmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
+不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用Open Firmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
 </p>
 
 <pre caption="选择一个Framebuffer驱动">
@@ -250,7 +245,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-当你的内核编译完成之后，复制内核映像至如下<path>/boot</path>目录。如果你有一个独立的启动分区，比如在Pegasos机器上，要确保其已被正常挂载。如果你用BootX来启动，我们等一下再复制内核。
+当你的内核编译完成之后，复制内核镜像至如下<path>/boot</path>目录。如果你有一个独立的启动分区，比如在Pegasos机器上，要确保其已被正常挂载。如果你用BootX来启动，我们等一下再复制内核。
 </p>
 
 <p>
@@ -368,7 +363,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 一旦<c>genkernel</c>完成，一个内核、全套模块和<e>初始root磁盘</e>（initrd）都会被创建好。在后面文档中配置引导程序的时候，我们会使用到这个内核和initrd。写下你将来要用的内核和initrd文件的名字，在配置引导程序时你需要它们。在启动至自动检测硬件之后（就像安装CD上那样）你“真正”的系统启动前，initrd将会立即启动。同时确保复制下需要的启动参数，因为一个使用genkernel编译的内核的成功启动也需要这些。
 </p>
 
-<pre caption="检查创建好的内核映像名和initrd">
+<pre caption="检查创建好的内核镜像名和initrd">
 <comment>注意，你的内核版本可能不同</comment>
 # <i>ls /boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> /boot/initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/></i>
 </pre>

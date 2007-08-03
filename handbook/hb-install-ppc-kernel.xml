@@ -70,7 +70,7 @@ lrwxrwxrwx    1 root     root           22  Mar 18 16:23 /usr/src/linux -&gt; li
 <body>
 
 <p>
-手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了:)
 </p>
 
 <p>
@@ -107,10 +107,10 @@ Code maturity level options ---&gt;
 </pre>
 
 <p>
-现在转到<c>File Systems</c>，选中你使用的文件系统支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和 <c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
+现在转到<c>File Systems</c>，选中你使用的文件系统的支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
 </p>
 
-<pre caption="选中需要的文件系统">
+<pre caption="选中必需的文件系统">
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
 <comment>（/proc可能被强制选上了，如果这样你会看到---）</comment>
@@ -140,7 +140,7 @@ File Systems ---&gt;
 </pre>
 
 <p>
-如果您在使用PPPoE接入Interne或者您在使用拨号的调制解调器，您需要下面的选项：
+如果您在使用PPPoE接入Internet或者您在使用拨号的调制解调器，您需要下面的选项：
 </p>
 
 <pre caption="选中PPPoE需要的驱动">
@@ -178,8 +178,8 @@ Device Drivers ---&gt;
 Kernel options ---&gt;
 <comment>（选择一个）</comment>
   Preemption Model 
-     (X) No Forced Preemption (Server)
-     (X) Voluntary Kernel Preemption (Desktop)
+    (X) No Forced Preemption (Server)
+    (X) Voluntary Kernel Preemption (Desktop)
 </pre>
 
 <p>
@@ -287,7 +287,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-比如，要自动加载<c>3c59x.o</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名，一行一个模块。
+比如，要自动加载<c>3c59x</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名，一行一个模块。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
@@ -322,10 +322,10 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-接下来，复制安装CD使用的内核配置到genkernel用于寻找默认内核配置的地方：
+接下来，复制安装光盘使用的内核配置到genkernel用于寻找默认内核配置的地方：
 </p>
 
-<pre caption="复制安装CD的内核配置">
+<pre caption="复制安装光盘的内核配置">
 # <i>zcat /proc/config.gz > /usr/share/genkernel/ppc/kernel-config-2.6</i>
 </pre>
 
@@ -334,7 +334,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </p>
 
 <p>
-在编译你的源代码前，fstab需要轻微地调整下。fstab剩余部分会在接下来的步骤中完成，所以现在不用担心细节方面。如果你之前没有创建过一个单独的启动分区（不是bootstrap，它们是不同的），从<path>/etc/fstab</path>中移除掉引用/boot的那一行。在大多数Apple的机器上都需要这样做。
+在编译你的源代码前，fstab需要轻微地调整下。fstab剩余部分会在接下来的步骤中完成，所以现在不用担心细节方面。如果你之前没有创建过一个单独的启动分区（不是bootstrap，它们是不同的），从<path>/etc/fstab</path>中移除掉引用<path>/boot</path>的那一行。在大多数Apple的机器上都需要这样做。
 </p>
 
 <pre caption="在没有启动分区的机器上将/boot从/etc/fstab中删掉">
@@ -348,7 +348,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </p>
 
 <p>
-请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用 <c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加<c>--evms2</c>或<c>--lvm2</c>参数。
+请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用<c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加<c>--evms2</c>或<c>--lvm2</c>参数。
 </p>
 
 <pre caption="运行genkernel">
