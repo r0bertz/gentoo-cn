@@ -129,23 +129,23 @@
     <ti>hb-install-config.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-config.xml">v 1.12</uri></ti>
     <ti>2007/05/20</ti>
-    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-config.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-config.xml">v 1.12</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-finalise.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-finalise.xml">v 1.4</uri></ti>
     <ti>2007/05/07</ti>
-    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml">v 1.4</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-gli-dialog.xml</ti>
@@ -162,23 +162,23 @@
     <ti>hb-install-gli-medium.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-gli-medium.xml">v 1.7</uri></ti>
     <ti>2007/06/30</ti>
-    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml">v 1.7</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-gtkfe.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-gtkfe.xml">v 1.7</uri></ti>
     <ti>2007/06/03</ti>
-    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml">v 1.7</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-hppa-bootloader.xml</ti>
@@ -239,12 +239,12 @@
     <ti>hb-install-next.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-next.xml">v 1.4</uri></ti>
     <ti>2007/05/07</ti>
-    <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-next.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-next.xml">v 1.4</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-ppc64-bootloader.xml</ti>
@@ -382,34 +382,34 @@
     <ti>hb-install-stage.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-stage.xml">v 1.9</uri></ti>
     <ti>2007/05/07</ti>
-    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-stage.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-stage.xml">v 1.9</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-system.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-system.xml">v 1.4</uri></ti>
     <ti>2007/05/07</ti>
-    <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-system.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-system.xml">v 1.4</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>hb-install-tools.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-tools.xml">v 1.7</uri></ti>
     <ti>2007/05/07</ti>
-    <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>W</ti>
-    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-tools.xml"></uri></ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/04</ti>
+    <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-tools.xml">v 1.7</uri></ti>
+    <ti>2007/08/04</ti>
   </tr>
   <tr>
     <ti>index.xml</ti>
@@ -1425,10 +1425,10 @@
     <ti><uri link="/doc/en/handbook/hb-install-ppc-kernel.xml">v 1.55</uri></ti>
     <ti>2007/07/29</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-kernel.xml">v 1.56</uri></ti>
+    <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-kernel.xml">v 1.55</uri></ti>
     <ti>2007/08/03</ti>
   </tr>
   <tr>
