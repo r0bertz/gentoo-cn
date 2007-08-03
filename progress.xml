@@ -306,33 +306,33 @@
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-disk.xml">v 1.12</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>R</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/08/03</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml">v 1.9</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml">v 1.12</uri></ti>
+    <ti>2007/08/03</ti>
   </tr>
   <tr>
     <ti>hb-install-ppc-kernel.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.15</uri></ti>
     <ti>2007/07/29</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>R</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/08/03</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.13</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.15</uri></ti>
+    <ti>2007/08/03</ti>
   </tr>
   <tr>
     <ti>hb-install-ppc-medium.xml</ti>
     <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-medium.xml">v 1.9</uri></ti>
     <ti>2007/07/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>R</ti>
-    <ti></ti>
+    <ti>T</ti>
+    <ti>2007/08/03</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml">v 1.7</uri></ti>
-    <ti>2007/07/19</ti>
+    <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml">v 1.9</uri></ti>
+    <ti>2007/08/03</ti>
   </tr>
   <tr>
     <ti>hb-install-sparc-bootloader.xml</ti>
