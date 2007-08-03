@@ -20,7 +20,7 @@
 </p>
 
 <p>
-首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘可以在<path>/dev/hdc</path>找到。
+首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘就是<path>/dev/hdc</path>。
 </p>
 
 <p>
@@ -89,7 +89,7 @@ Apple New World架构的机器是相当容易配置的。第一个分区通常�
 </tr>
 <tr>
   <ti><path>/dev/hda3</path></ti>
-  <ti>512M</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -136,7 +136,7 @@ Apple Old World架构的机器相对来说配置起来有点复杂。第一个�
 </tr>
 <tr>
   <ti><path>/dev/hda3</path></ti>
-  <ti>512M</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -173,7 +173,7 @@ Pegasos分区布局相对Apple布局来说简单。第一个是启动分区，�
 </tr>
 <tr>
   <ti><path>/dev/hda2</path></ti>
-  <ti>512M</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -206,11 +206,11 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
   <ti><path>/dev/hda1</path></ti>
   <ti>800k</ti>
   <ti>无</ti>
-  <ti>PReP root分区（类型 0x41）</ti>
+  <ti>PReP Boot分区（类型 0x41）</ti>
 </tr>
 <tr>
   <ti><path>/dev/hda2</path></ti>
-  <ti>512M</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux Swap （类型0x82）</ti>
 </tr>
@@ -223,11 +223,11 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </table>
 
 <warn>
-<c>parted</c>能够重新划分包括HFS+在内的分区的大小+。不幸的是，它不能够重新划分HFS+日志文件系统，所以在重新定义大小前，请在Mac OS X中关闭掉日志记录功能。牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据。
+<c>parted</c>能够重新划分包括HFS+在内的分区的大小。不幸的是，它不能够重新划分HFS+日志文件系统，所以在重新定义大小前，为了保证最好的结果，请在Mac OS X中关闭掉日志记录功能。牢记任何重划分大小的行为都是有危险的，所以后果自负！确保在你重新划分大小前要备份好你的数据！
 </warn>
 
 <p>
-如果你对知道一个分区究竟应该多大或者你究竟需要多个个分区感兴趣，请继续阅读。否则，请跳转到<uri link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘分区</uri>或者<uri link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
+如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则，请跳转到<uri link="#mac-fdisk">默认：使用mac-fdisk（Apple）为你的磁盘分区</uri>或者<uri link="#parted">备选：使用parted(IBM/Pegasos)为你的磁盘分区</uri>。
 </p>
 
 </body>
@@ -303,7 +303,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <note>
-确保万事具备，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
+为了确保一切正常，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
 </note>
 
 <p>
@@ -371,7 +371,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 <body>
 
 <p>
-PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS已经被证明可稳定运行。
+PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS它们各有长处和短处。
 </p>
 
 <p>

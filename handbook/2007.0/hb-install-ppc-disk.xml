@@ -1,18 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-
-
-
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-disk.xml,v 1.9 2007/05/09 00:52:08 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-disk.xml,v 1.12 2007/05/09 00:52:08 nightmorph Exp $ -->
 <sections>
 
-<version>8.1</version>
-<date>2007-05-08</date>
+<version>8.3</version>
+<date>2007-06-26</date>
 
 <section>
 <title>块设备介绍</title>
@@ -25,7 +20,7 @@
 </p>
 
 <p>
-首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘可以在<path>/dev/hdc</path>找到。
+首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘就是<path>/dev/hdc</path>。
 </p>
 
 <p>
@@ -94,7 +89,7 @@ Apple New World架构的机器是相当容易配置的。第一个分区通常�
 </tr>
 <tr>
   <ti><path>/dev/hda3</path></ti>
-  <ti>512Mb</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -135,13 +130,13 @@ Apple Old World架构的机器相对来说配置起来有点复杂。第一个�
 </tr>
 <tr>
   <ti><path>/dev/hda2</path></ti>
-  <ti>32Mb</ti>
+  <ti>32MB</ti>
   <ti>ext2</ti>
   <ti>Quik启动分区（只针对quik）</ti>
 </tr>
 <tr>
   <ti><path>/dev/hda3</path></ti>
-  <ti>512Mb</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -172,13 +167,13 @@ Pegasos分区布局相对Apple布局来说简单。第一个是启动分区，�
 </tr>
 <tr>
   <ti><path>/dev/hda1</path></ti>
-  <ti>32Mb</ti>
+  <ti>32MB</ti>
   <ti>affs1或ext2</ti>
   <ti>启动分区</ti>
 </tr>
 <tr>
   <ti><path>/dev/hda2</path></ti>
-  <ti>512Mb</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
@@ -215,7 +210,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </tr>
 <tr>
   <ti><path>/dev/hda2</path></ti>
-  <ti>512Mb</ti>
+  <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux Swap （类型0x82）</ti>
 </tr>
@@ -308,7 +303,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <note>
-确保万事具备，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
+为了确保一切正常，你可以再次运行<c>mac-fdisk -l</c>来检测所有的分区是否在那儿。如果你没有看到任何你创建的分区，或者你所做的改动，在mac-fdisk中你需要按“i”来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。
 </note>
 
 <p>
@@ -384,11 +379,11 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS它
 </p>
 
 <p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了哈希B*-tree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统，对大多数安装来说都极度推荐。
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
 </p>
 
 <p>
-<b>ReiserFS</b>是基于B*-tree的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
 </p>
 
 <p>
@@ -465,6 +460,10 @@ PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS它
 <p>
 现在在你新建的分区（或逻辑卷）上创建文件系统。
 </p>
+
+<impo>
+如果你的<path>/</path>选择使用ReiserFS，并且你将使用<c>yaboot</c>作为你的引导程序的话，不要改变ReiserFS的默认块大小，就像<uri link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
+</impo>
 
 <note>
 在Pegasos II上，你的存放内核的分区必须是ext2/ext3或affs1。NewWorld架构的机器能够从任何ext2、ext3、XFS、ReiserFS甚至是HFS/HFS+文件系统上启动。在使用BootX启动的OldWorld机器上，内核需要放置到HFS分区上，不过这会在你配置你的引导程序时完成。
