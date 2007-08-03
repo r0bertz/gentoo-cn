@@ -72,10 +72,10 @@ Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当�
     <path>package.mask</path>它列出了你永远不希望Portage安装的软件包。
   </li>
   <li>
-    <path>package.unmask</path>它列出了你希望能安装的软件包，即使Gentoo的的开发者强烈建议你不要安装它们。
+    <path>package.unmask</path>它列出了本来Gentoo的开发者不建议安装的，但是你希望能安装的软件包。
   </li>
   <li>
-    <path>package.keywords</path>它列出了你要安装的软件，即使它们还未被确认适合你的系统或架构。
+    <path>package.keywords</path>它列出了还未被确认适合你的系统或架构，但是你希望能安装的软件包。
   </li>
   <li>
     <path>package.use</path>它列出了你希望某些特定软件包使用的而不是整个系统使用的USE标记。
