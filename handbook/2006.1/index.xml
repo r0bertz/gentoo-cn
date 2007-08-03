@@ -10,6 +10,12 @@
 <author title="作者">
   <mail link="swift@gentoo.org">Sven Vermeulen</mail>
 </author>
+<author title="译者">
+  <mail link="chenjun.shen@gmail.com">沈辰俊</mail>
+</author>
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
 
 <abstract>
 Gentoo 2006.1手册的目的是将文档集中在一个条理分明的手册中。它包括了2006.1发行版
