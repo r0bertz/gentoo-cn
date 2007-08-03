@@ -4,7 +4,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-kernel.xml,v 1.9 2007/05/20 20:32:23 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-arm-kernel.xml,v 1.10 2007/05/20 20:32:23 nightmorph Exp $ -->
 
 <sections>
 
@@ -271,7 +271,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>文件，输入模块的名字。
+例如，要自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>文件，输入模块的名字。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">

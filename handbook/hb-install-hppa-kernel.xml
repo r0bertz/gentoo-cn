@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license
 See http://creativecommons.org/licenses/by-sa/2.5
-$Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-kernel.xml,v 1.42 2006/12/06 19:59:09 nightmorph Exp $ -->
+$Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-hppa-kernel.xml,v 1.43 2006/12/06 19:59:09 nightmorph Exp $ -->
 <sections>
 
 <version>8.3</version>
@@ -288,7 +288,7 @@ Graphics support ---&gt;
 </pre>
 
 <p>
-例如，要自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>然后输入模块的名字。
+例如，要自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>然后输入模块的名字。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">

@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-kernel.xml,v 1.30 2006/08/30 22:52:28 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-kernel.xml,v 1.31 2006/08/30 22:52:28 nightmorph Exp $ -->
 <sections>
 
 <version>8.2</version>
@@ -256,7 +256,7 @@ Network device support ---&gt;
 </pre>
 
 <p>
-比如，为了自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.6</path>并输入模块的名字。
+比如，为了自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>并输入模块的名字。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">

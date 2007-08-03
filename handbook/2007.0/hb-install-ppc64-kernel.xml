@@ -3,7 +3,7 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml,v 1.10 2007/05/21 17:03:44 josejx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml,v 1.11 2007/05/21 17:03:44 josejx Exp $ -->
 <sections>
 
 <version>8.3</version>
@@ -204,7 +204,7 @@ Macintosh Device Drivers ---&gt;
 </pre>
 
 <p>
-比如，要自动加载<c>3c59x</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名。
+比如，要自动加载<c>3c59x.ko</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名。
 </p>
 
 <pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
@@ -212,7 +212,7 @@ Macintosh Device Drivers ---&gt;
 </pre>
 
 <pre caption="/etc/modules.autoload.d/kernel-2.6">
-3c59x
+3c59x.ko
 </pre>
 
 <p>
