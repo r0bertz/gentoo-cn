@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-medium.xml,v 1.7 2007/05/07 18:11:42 nightmorph Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-medium.xml,v 1.9 2007/05/07 18:11:42 nightmorph Exp $ -->
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.1</version>
+<date>2007-06-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -16,7 +16,7 @@
 <body>
 
 <p>
-在开始之前，我们首先列出成功安装Gentoo的硬件需求。 
+在开始之前，我们首先列出安装Gentoo的硬件需求。
 </p>
 
 </body>
@@ -35,7 +35,7 @@
 <tr>
   <th>Apple OldWorld机器</th>
   <ti>
-    OpenFirmware版本小于3的Apple机器，比如Beige G3、PCI PowerMac和PCI PowerBook。基于PCI的Apple克隆机应该也可以被支持。
+    Open Firmware版本小于3的Apple机器，比如Beige G3、PCI PowerMac和PCI PowerBook。基于PCI的Apple克隆机应该也可以被支持。
   </ti>
 </tr>
 <tr>
@@ -71,7 +71,6 @@
 </body>
 </subsection>
 </section>
-
 
 <!-- Copy/paste of hb-install-x86-medium.xml, with s/x86/ppc/ 
  START -->
@@ -117,7 +116,7 @@ Gentoo也提供了软件包光盘。这不是一个安装光盘，但它是一�
 </p>
 
 <p>
-软件包光盘的使用会在后面的文档中介绍。 
+软件包光盘的使用会在后面的文档中介绍。
 </p>
 
 </body>
@@ -145,7 +144,7 @@ Gentoo也提供了软件包光盘。这不是一个安装光盘，但它是一�
 
 <ul>
   <li>
-    你可以检验它的MD5校验和并和我们提供的MD5校验和进行比对（比如通过使用Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS X中验证MD5校验和在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC FAQ</uri>里有描述。
+    你可以检验它的MD5校验和并与我们提供的MD5校验和进行比对（比如通过使用Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS X中验证MD5校验和在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC FAQ</uri>里有描述。
   </li>
   <li>
     你可以验证我们提供的数字签名。要进行验证，你首先需要获得我们使用的公钥(0x17072058)。
@@ -177,7 +176,7 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
     使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
   </li>
 </ul>
 
@@ -217,7 +216,7 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 <tr>
   <ti><c>nol3</c></ti>
   <ti>
-    在一些Powerbook上禁用掉Level3缓存（至少17&quot;是必须的）
+    在一些Powerbook上禁用掉Level 3缓存（至少17&quot;是必须的）
   </ti>
 </tr>
 <tr>
@@ -235,10 +234,10 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 </table>
 
 <p>
-为了使用以上的选项，在<e>boot:</e>提示符后键入<e>apple</e>并可以紧跟需要的选项。在以下的例子中，我们强制使用OpenFirware的frambuffer来替代设备特定的驱动。
+为了使用以上的选项，在<e>boot:</e>提示符后键入<e>apple</e>并可以紧跟需要的选项。在以下的例子中，我们强制使用Open Firmware的frambuffer来替代设备特定的驱动。
 </p>
 
-<pre caption="强制使用OpenFirmware的framebuffer">
+<pre caption="强制使用Open Firmware的framebuffer">
 boot: <i>apple video=ofonly</i>
 </pre>
 
@@ -327,11 +326,11 @@ cdroot root=/dev/ram0 init=linuxrc loop=image.squashfs looptype=squashfs console
 <body>
 
 <p>
-当安装光盘启动时，它会尝试检测所有的硬件设备和加载准确的内核模块来支持这些硬件。绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。 
+当安装光盘启动时，它会尝试检测所有的硬件设备和加载准确的内核模块来支持这些硬件。绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。
 </p>
 
 <p>
-在下一个例子中我们会试图装载<c>airport</c>模块。这个模块仅支持老式的Airport卡(802.11b)。由于一些firmware发行方面的限制安装光盘暂不支持Airport Extreme(802.11g)。
+在下一个例子中我们会试图装载<c>airport</c>模块。这个模块仅支持老式的Airport卡(802.11b)。由于固件发布的限制，安装光盘暂不支持Airport Extreme(802.11g)。
 </p>
 
 <pre caption="加载airport模块">
