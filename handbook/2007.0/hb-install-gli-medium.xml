@@ -1,0 +1,517 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-gli-medium.xml,v 1.7 2007/06/30 00:50:06 nightm
+orph Exp $ -->
+
+<sections>
+
+<version>8.2</version>
+<date>2007-06-29</date>
+
+<section>
+<title>硬件需求</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+在开始之前，我们首先列出能够让你使用LiveCD成功安装Gentoo系统所需要硬件。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>硬件需求</title>
+<body>
+
+<table>
+<tr test="func:keyval('arch')='x86'">
+  <th>CPU</th>
+  <ti>i686及以后</ti>
+</tr>
+<tr test="func:keyval('arch')='AMD64'">
+  <th>CPU</th>
+  <ti>任何AMD64或EM64T CPU</ti>
+</tr>
+<tr>
+  <th>内存</th>
+  <ti>256MB</ti>
+</tr>
+<tr>
+  <th>磁盘空间</th>
+  <ti>1.5GB（不包括交换分区）</ti>
+</tr>
+<tr>
+  <th>交换分区</th>
+  <ti>至少256MB</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<!-- General description, propagated to other architectures as well -->
+<!-- START -->
+<section>
+<title>Gentoo Linux安装程序LiveCD</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+LiveCD是一个可启动的光盘，它包含一个完整的Gentoo环境，允许你从光盘启动Linux。
+在启动的过程中，它会检测你系统中的硬件并且加载相应的驱动程序。Gentoo安装光盘是
+由Gentoo开发者维护的。
+</p>
+
+<p>
+目前有两种安装光盘可以使用：
+</p>
+
+<ul>
+<li>
+LiveCD安装盘包含了你安装Gentoo所需要的一切东西。它提供了一个图形化的环境，
+能够自动进行安装一个图形界面程序和一个文本界面程序，当然，还有针对你的硬件
+架构的安装指南
+</li>
+<li>
+最小化安装光盘仅包含了使你能够启动系统并且配置网络以便连接到互联网的最小环
+境。除此之外不包含任何其他文件，因此不能用于当前的安装方式。
+</li>
+</ul>
+
+</body>
+</subsection>
+</section>
+<!-- STOP -->
+<section>
+<title>下载、刻录及启动Gentoo Linux安装程序LiveCD</title>
+<subsection>
+<title>下载及刻录安装程序LiveCD</title>
+<body>
+
+<p>
+你可以从我们的任何一个<uri link="/main/en/mirrors.xml">镜像网站</uri>下载LiveCD
+。它们位于<path><keyval id="release-dir"/>livecd</path>目录下。
+</p>
+
+<p>
+在那个目录中，你能找到一个ISO文件。那是一个完全的光盘镜像文件，你可以把它刻录到
+CD-R的光盘上。
+</p>
+
+<p>
+下载文件之后，你可以校验一下它的完整性，看它是不是被损坏了：
+</p>
+
+<ul>
+  <li>
+    你可以计算它的MD5校验和并与我们提供的MD5校验和进行比较（例如，在Linux/Unix下
+    使用<c>md5sum</c>工具，或者Windows下的<uri
+    link="http://www.etree.org/md5com.html">md5sum</uri>）
+  </li>
+  <li>
+    你可以验证我们提供的数字签名。在你操作之前，你需要获得我们使用的公钥
+    （17072058）。
+  </li>
+</ul>
+
+<p>
+使用GnuPG程序来取得我们的公钥，执行下列命令：
+</p>
+
+<pre caption="获取公钥">
+$ <i>gpg --keyserver subkeys.pgp.net --recv-keys 17072058</i>
+</pre>
+
+<p>
+现在验证签名：
+</p>
+
+<pre caption="验证加密签名">
+$ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
+</pre>
+
+<p>
+你必须选择原始刻录方式来刻录下载的ISO文件。至于具体如何刻录，则取决于你选择的刻录
+程序。我们将在这里讨论<c>cdrecord</c>和<c>K3B</c>；更多的信息可以在我们的<uri
+link="/doc/zh_cn/faq.xml#isoburning">Gentoo FAQ</uri>中找到。
+</p>
+
+<ul>
+  <li>
+    若使用cdrecord，你可以简单的键入命令<c>cdrecord dev=/dev/hdc &lt;downloaded
+    iso file&gt;</c>（把<path>/dev/hdc</path>替换为你的CD-RW的驱动设备路径）。
+  </li>
+  <li>
+    若使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后在
+    'Image to Burn'中填入你要刻录的ISO文件的位置。最后单击<c>Start</c>。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>启动安装程序LiveCD</title>
+<body>
+
+<impo>
+请完整阅读本节，因为在继续开始后面的工作之前你很可能将没有机会阅读它了。
+</impo>
+
+<p>
+一旦你已经刻录完LiveCD，就是时候来启动它了。把你所有光驱中的光盘全部取出，重新启动
+系统并且进入BIOS。通常按DEL、F1或ESC键来进入，这取决于你使用的BIOS版本。在BIOS里
+修改启动顺序使得光驱在硬盘之前启动。这个设置通常在"CMOS Setup"下。如果你不进行设
+置，你的系统会忽略光驱，只从硬盘启动。
+</p>
+
+<p>
+现在把LiveCD放入光驱中并重新启动系统。你会看到一个启动提示符。在这一屏按回车键
+以使用默认选项来开始启动过程，或者在启动选项中指定一个内核来定制启动LiveCD，然后
+单击回车键。
+</p>
+
+<p>
+指定内核？对，我们在LiveCD上提供了几个内核。默认的是<c>gentoo</c>。其他的内核是
+为了特定硬件的需要，名字带<c>-nofb</c>的表示的是未启用framebuffer的内核。
+</p>
+
+<p>
+下面列出的是你能够使用的内核的简单介绍：
+</p>
+
+<table>
+<tr>
+  <th>内核</th>
+  <th>说明</th>
+</tr>
+<tr test="func:keyval('arch')='x86'">
+  <ti>gentoo</ti>
+  <ti>默认的2.6内核，带有多CPU支持</ti>
+</tr>
+<tr test="func:keyval('arch')='x86'">
+  <ti>gentoo-nofb</ti>
+  <ti>与<c>gentoo</c>相同，但是不支持framebuffer</ti>
+</tr>
+<tr test="func:keyval('arch')='AMD64'">
+  <ti>gentoo</ti>
+  <ti>
+    支持K8 CPU（带NUMA支持）和EM64T CPU的默认内核
+  </ti>
+</tr>
+<tr>
+  <ti>memtest86</ti>
+  <ti>测试本地内存错误</ti>
+</tr>
+</table>
+
+<p>
+你也能够设置内核选项。那些选项都是可选的设置，你可以根据自己的意愿打开或者关闭他
+们。以下列表与你在启动界面按下F2至F7键收到的信息相同。
+</p>
+
+<pre caption="可传递给你选择的内核的选项">
+<comment>硬件选项：</comment>
+acpi=on         加载对ACPI的支持，在启动光盘的同时启动acpid后台程序。这个选项只有
+                在你的系统需要ACPI才能正常运行的情况下才需要。启用超线程的支持
+                这个选项不是必需的。
+
+acpi=off        完全关闭ACPI。这在一些比较老的系统上有用，同时也是使用高级电源管
+                理（APM）的必要选项。这也将关闭你的处理器对超线程的任何支持。
+
+console=X       这个选项可以设置光盘的串口访问。第一个选项是设备，在x86上通常为
+                ttyS0，后面可以跟其他选项并用逗号分隔。默认选项为9600,8,n,1。
+
+dmraid=X        这个选项用于向设备映射器RAID子系统传递参数。传递的参数必须包含
+                在引号内。
+
+doapm           这个选项加载高级电源管理（APM）驱动支持。这需要你同时使用acpi=off
+                选项。
+
+doslowusb       这个选项在启动过程中增加一些额外的暂停，主要是为了IBM
+                BladeCenter的慢速USB CDROM。
+
+dopcmcia        这个选项加载了对PCMCIA和Cardbus硬件的支持，也使得pcmcia卡的
+                cardmgr能够在光盘启动的时候运行起来。这个选项只有在从
+                PCMCIA/Cardbus设备启动的时候才需要。
+
+doscsi          这个选项加载对大部分SCSI控制器的支持。在大多数USB设备启动的时候
+                也需要这个选项，因为USB设备使用内核中的SCSI子系统。
+
+hda=stroke      这个选项允许你对整个硬盘进行分区，即使你的BIOS不能处理大硬盘。
+                此选项仅使用在使用旧BIOS的机器上。使用时把hda替换为需要这个选项
+                的设备。
+
+ide=nodma       此选项强制关闭内核中的DMA，一些IDE和CDROM驱动需要这个选项。如果
+                你的系统在读取IDE接口的光驱的时候遇到麻烦，可以尝试一下此选项。
+                此选项同时也将关闭hdparm的默认设置。
+
+noapic          此选项关闭了在一些新主板上存在的高级可编程中断控制器。它在一些旧
+                的硬件上会引发一些问题。
+
+nodetect        此选项降会关闭光盘会做的所有自动检测，包括设备检测和DHCP探测。这
+                在调试有问题的光盘或驱动的时候有用。
+
+nodhcp          此选项将禁止在检测到的网卡上进行DHCP探测。这对仅有静态地址的网络
+                很有用。
+
+nodmraid        关闭了设备映射RAID的支持，例如用于板载IDE/SATA RAID的控制器。
+
+nofirewire      此选项关闭了Firewire模块加载。这个选项只有在你的Firewire硬件导致
+                光盘启动出现问题的时候才需要。
+
+nogpm           此选项关闭了gpm控制台鼠标支持。
+
+nohotplug       此选项关闭启动时对热插拔（hotplug）和冷插拔（coldplug）启动脚本的加
+                载。这个选项在调试失败的光盘和驱动的时候有用。
+
+nokeymap        此选项禁止了键盘布局选择。
+
+nolapic         此选项关闭了在单处理器内核上的本地APIC。
+
+nosata          此选项关闭了对串行ATA（SATA）模块的加载。当你的系统的SATA子系统有
+                问题的时候，此选项有用。
+
+nosmp           此选项关闭了在支持SMP（对称式多处理）的内核中的SMP功能。这个选项用
+                于调试在特定的驱动和主板上与SMP相关的问题。
+
+nosound         此选项关闭了声音支持和音量的设置。这个选项在声音支持出现问题的系
+                统上有用。
+
+nousb           此选项关闭了USB模块的自动加载。这个选项在调试USB问题时有用。
+
+<comment>卷/设备管理：</comment>
+
+dodevfs         此选项在2.6系统中打开过时的设备文件系统（devfs）。你需要同时使用
+                noudev选项来使此选项生效。由于devfs是2.4内核的唯一选择，所以当使
+                用2.4内核启动的时候这个选项没有作用。
+
+doevms2         此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
+                lvm2同时使用并不安全。
+
+dolvm2          此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms2同时使用
+                并不安全。
+
+noudev          此选项关闭了2.6内核中对udev的支持。这个选项需要与dodevfs选项一起
+                使用。由于2.4内核不支持udev，所以如果启动2.4内核时此选项不起作用。
+
+unionfs         在支持Unionfs的光盘镜像文件上打开此支持。这个选项将在tmpfs上创建一
+                个可写的Unionfs overlay，允许你在光盘上改变任何文件。
+
+unionfs=X       在支持Unionfs的光盘镜像文件上打开此支持。这个选项将在你指定的设备
+                上创建一个可写的Unionfs overlay。这个设备必须是格式化过的，并且
+                文件系统是内核可辨认的类型且可写的。
+
+<comment>其他选项：</comment>
+
+debug           启用调试代码。这个选项会在屏幕上显示很多数据，可能会很凌乱。
+
+docache         此选项把光盘中整个运行部分缓存到内存中，你就可以umount /mnt/cdrom
+                然后mount另一个CDROM。此选项要求你至少有两倍于CDROM的可用内存。
+
+doload=X        此选项使得初始内存盘加载任何列出的及其依赖的模块。把X替换成模
+                块名称。多个模块可以用一个逗号分隔的列表来指定。
+
+noload=X        此选项使得初始内存盘跳过那些指定的可能引起问题的模块。语法同
+                doload。
+
+nox             此选项使得一个支持X的LiveCD不自动启动X，而是启动到命令行模式。
+
+scandelay       此选项使光盘在启动过程的特定部分暂停10秒，以允许那些初始化比较慢的
+                设备能够被使用。
+
+scandelay=X     此选项允许你在启动过程的特定部分指定暂停指定的秒数，以允许那些
+                初始化比较慢的设备能够被使用。把X替换成暂停的秒数。
+</pre>
+
+<p>
+现在启动你的光盘，选择一个内核（如果你不喜欢默认的<c>gentoo</c>内核）和启动选项。例
+如：我们给你演示如何以<c>dopcmcia</c>内核参数启动<c>gentoo</c>内核：
+</p>
+
+<pre caption="启动安装光盘">
+boot: <i>gentoo dopcmcia</i>
+</pre>
+
+<p>
+你将看到启动界面和一个进度条。如果你正在把Gentoo安装到一个使用非US键盘的系统中，
+你必须立刻按下Alt-F1键切换到字符模式下，按提示信息来做。如果10秒钟内没有选择，系统
+则接受默认的键盘布局（US键盘）并继续启动过程。一旦启动过程结束，系统将启动Gnome桌
+面环境，你将会以“gentoo”用户的身份自动登陆图形模式的“Live” Gentoo Linux。在其
+他控制台你将以“root”用户登陆，并使用root提示符（#）。你可以通过按键Alt-F2，Alt-F3，
+Alt-F4，Alt-F5，Alt-F6切换到其他控制台。按键Alt-F7切换回你启动的图形桌面。如果你想
+在X界面里切换到其他控制台，需要在上述组合键前面加上Ctrl。你可以通过使用<c>sudo</c>
+程序在图形环境中的终端上以root用户执行命令。你甚至可以在终端中变成root用户来执行多
+个任务。
+</p>
+
+<pre caption="使用sudo来运行程序">
+<comment>（仅仅是示例）</comment>
+<comment>（编辑组文件）</comment>
+# <i>sudo vi /etc/group</i>
+<comment>（在一个会话中变为root）</comment>
+# <i>sudo su -</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="hardware">
+<title>额外硬件配置</title>
+<body>
+
+<p>
+当LiveCD启动时，它尝试检测你的所有硬件设备并加载相适应的内核模块来支持你的硬件。
+在大多数情况下，它做的很好。但是，在某些情况下，它可能没法自动加载你需要的内核模
+块。如果PCI自动检测漏掉了你的系统的一些硬件，你不得不手动加在相应的内核模块。而这
+个任务需要root权限。
+</p>
+
+<p>
+在下一个例子中，我们尝试加载<c>8139too</c>模块（支持特定型号的网卡）：
+</p>
+
+<pre caption="加载内核模块">
+# <i>modprobe 8139too</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：调整硬盘性能</title>
+<body>
+
+<p>
+如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。你可以在root权限下
+使用<c>hdparm</c>程序。你可以使用<c>-tT</c>选项来测试你的硬盘的性能（多执行几次以
+得到更精确的结果）：
+</p>
+
+<pre caption="测试硬盘性能">
+# <i>hdparm -tT /dev/hda</i>
+</pre>
+
+<p>
+为了调整性能，你可以使用下面任何一个实例（或者自己试验），它们都是以<path>/dev/hda
+</path>作为示例的对象（请替换成您使用的硬盘）。
+</p>
+
+<pre caption="调整硬盘性能">
+<comment>（激活DMA:）</comment>
+# <i>hdparm -d 1 /dev/hda</i>
+<comment>（或使用安全的性能选项：）</comment>
+# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="useraccounts">
+<title>可选：用户帐号</title>
+<body>
+
+<p>
+如果你想让其他人访问你的安装环境，或是你不想使用root权限的<c>irssi</c>来
+聊天（由于安全的原因），你需要创建必需的用户帐号并且修改root密码。修改root密码和添
+加新用户这些工作需要你拥有root权限。
+</p>
+
+<p>
+使用<c>passwd</c>工具修改root密码：
+</p>
+
+<pre caption="修改root密码">
+$ <i>sudo su -</i>
+# <i>passwd</i>
+New password: <comment>（输入你的新密码）</comment>
+Re-enter password: <comment>（再输入一次）</comment>
+</pre>
+
+<p>
+为了创建一个用户帐号，我们首先输入它的相关信息，接着是密码。我们
+使用<c>useradd</c>和<c>passwd</c>来完成这些工作。
+下面的例子中，我们创建一个叫“john”的用户。
+</p>
+
+<pre caption="创建用户帐号">
+# <i>useradd -m -G users john</i>
+# <i>passwd john</i>
+New password: <comment>（输入john的密码）</comment>
+Re-enter password: <comment>（再输入john的密码）</comment>
+</pre>
+
+<p>
+你可以使用<c>su</c>来把你的用户身份从root变成新建的用户：
+</p>
+
+<pre caption="改变用户id">
+# <i>su - john</i>
+</pre>
+
+<p>
+你也可以改变图形环境中的“gentoo”用户的密码。这个帐号已经适合在互联网上冲浪使用了。
+</p>
+
+<pre caption="改变gentoo的密码">
+$ <i>passwd</i>
+New password: <comment>（输入你的新密码）</comment>
+Re-enter password: <comment>（再输入一次）</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：安装时显示文档</title>
+<body>
+
+<p>
+如果你想在安装的时候查看Gentoo用户手册（不管是光盘中的还是在线的），你可以使用Mozilla
+Firefox（在图形环境中）或者使用<c>links</c>（在终端环境下）。
+</p>
+
+<pre caption="在Firefox中显示光盘上的文档">
+# <i>firefox /mnt/cdrom/docs/handbook/html/index.html</i>
+</pre>
+
+<p>
+如果你更喜欢使用<c>links</c>来看文本形式的手册，请确认你已经创建了一个用户帐号
+（参见<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>进入一
+个新的终端然后登陆。
+</p>
+
+<pre caption="使用links来显示光盘上的文档">
+# <i>links /mnt/cdrom/docs/handbook/html/index.html</i>
+</pre>
+
+<p>
+你可以通过按<c>Alt-F7</c>返回一开始的图形界面。
+</p>
+
+<p>
+不过，最好还是使用Gentoo在线手册，因为它比光盘上提供的要新。你可以使用Firefox
+或<c>links</c>来查看，但是必须在你完成<e>配置你的网络</e>那章之后（否则你将无法连
+接到互联网来查看文档）：
+</p>
+
+<pre caption="使用Firefox查看在线文档">
+# <i>firefox http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
+</pre>
+
+<pre caption="使用links查看在线文档">
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
+</pre>
+
+<p>
+你现在可以选择使用<uri link="?part=1&amp;chap=3">基于GTK+的安装程序</uri>（需要X）
+或者<uri link="?part=1&amp;chap=4">基于Dialog的安装程序</uri>（可以运行在控制台
+上）来继续安装。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
