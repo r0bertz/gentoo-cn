@@ -119,6 +119,45 @@
 <author title="投稿">
    <mail link="pylon@gentoo.org">Lars Weiler</mail>
 </author>
+<author title="译者">
+  <mail link="gnuguys@gmail.com">杨珂</mail>
+</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+<author title="译者">
+  <mail link="daqiehexigua@gmail.com">余雷</mail>
+</author>
+<author title="译者">
+  <mail link="zhudingshibai@gmail.com">王国辉</mail>
+</author>
+<author title="译者">
+  <mail link="dongbin.lou@gmail.com">娄东斌</mail>
+</author>
+<author title="译者">
+  <mail link="linuxjia@gmail.com">贾震</mail>
+</author>
+<author title="译者">
+  <mail link="druggo@gmail.com">杨小广</mail>
+</author>
+<author title="译者">
+  <mail link="acevery@gmail.com">余鈺炜</mail>
+</author>
+<author title="译者">
+  <mail link="coolshoulder@gmail.com">陈代焱</mail>
+</author>
+<author title="译者">
+  <mail link="linuxfans.linky@gmail.com">范华</mail>
+</author>
+<author title="译者">
+  <mail link="greyeye.cn@gmail.com">陈永骥</mail>
+</author>
+<author title="译者">
+  <mail link="chenjun.shen@gmail.com">沈辰俊</mail>
+</author>
 
 <abstract>
 Gentoo手册目的是要将Gentoo/Linux的相关资料都集中收编在一起。本手册包含了在Sparc架构上无网络条件下的系统安装指南，以及讲述如何使用Gentoo和Portage的章节。
