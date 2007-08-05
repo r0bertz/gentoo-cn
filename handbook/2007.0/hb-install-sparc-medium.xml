@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2006.1/hb-install-sparc-medium.xml,v 1.1 2006/08/30 20:17:31 nightmorph Exp $ -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-sparc-medium.xml,v 1.7 2007/06/30 00:50:06 nigh
+tmorph Exp $ -->
+
 <sections>
 
-<version>7.0</version>
-<date>2006-08-30</date>
+<version>8.1</version>
+<date>2007-06-29</date>
 
 <section>
 <title>必需的硬件</title>
@@ -29,15 +32,13 @@
 <tr>
   <th>Sparc系统</th>
   <ti>
-    请先检查<uri link="/proj/en/base/sparc/sunhw.xml">Gentoo 
-Linux/SPARC64兼容性列表</uri>或者<uri 
-link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
+    请先检查<uri link="/proj/en/base/sparc/sunhw.xml">Gentoo Linux/SPARC64兼容性列表</uri>或者<uri link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
   </ti>
 </tr>
 <tr>
   <th>CPU</th>
   <ti>
-    尽管只有sparc64平台有官方支持，对于sparc32也有实验性的支持
+    我们现在只支持sparc64平台
   </ti>
 </tr>
 <tr>
@@ -53,12 +54,6 @@ link="http://www.ultralinux.org/faq.html#s_2">UltraLinux FAQ</uri>
   <ti>至少256MB</ti>
 </tr>
 </table>
-
-<p>
-目前我们只提供sparc64架构的安装光盘。sparc32用户可以使用实验性的网络引导镜像来安装Gentoo。更多关于网络引导的信息可以在<uri 
-link="/doc/en/gentoo-sparc-netboot-howto.xml">基于Gentoo 
-Linux的网络引导HOWTO</uri>找到。
-</p>
 
 </body>
 </subsection>
@@ -128,8 +123,7 @@ Gentoo还提供了软件光盘。这不是一个安装光盘，而是个附加�
 <body>
 
 <p>
-你可以从我们的某个<uri 
-link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘（如果你愿意也可以下载软件光盘）。安装光盘在<path>releases/sparc/2006.1/sparc64/installcd</path>目录下；软件光盘在<path>releases/sparc/2006.1/sparc64/packagecd</path>目录里。
+你可以从我们的某个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘（如果你愿意也可以下载软件光盘）。安装光盘在<path><keyval id="release-dir"/>installcd</path>目录下；软件光盘在<path><keyval id="release-dir"/>packagecd</path>目录里。
 </p>
 
 <p>
@@ -137,18 +131,12 @@ link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘（如果你愿�
 </p>
 
 <p>
-下载完文件以后，你可以校验它的完整性来看是否损坏：
+如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path><keyval id="min-cd-name"/>.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
 </p>
 
-<ul>
-  <li>
-    你可以检查它的MD5校验和然后与我们提供的MD5校验和进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri 
-link="http://www.etree.org/md5com.html">md5sum</uri>）。
-  </li>
-  <li>
-    你可以校验我们提供的加密签名。在这之前你需要取得我们使用的（17072058）公钥。
-  </li>
-</ul>
+<p>
+另一个检查下载文件有效性的方法就是用GnuPG来校验我们提供的加密签名（以<path>.asc</path>结尾的文件）。下载签名文件和取得公钥：
+</p>
 
 <p>
 使用GnuPG程序来取得我们的公钥，运行如下命令：
@@ -173,14 +161,10 @@ link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
 
 <ul>
   <li>
-    使用cdrecord，你只要简单的输入<c>cdrecord dev=/dev/hdc 
-&lt;downloaded 
-iso&gt;</c>（把<path>/dev/hdc</path>替换为你的刻录机的路径）。
+    使用cdrecord，你只要简单的输入<c>cdrecord dev=/dev/hdc &lt;downloaded iso&gt;</c>（把<path>/dev/hdc</path>替换为你的刻录机的路径）。
   </li>
   <li>
-    使用K3B，选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn 
-Image</c>。然后在"Image to 
-Burn”区域里指定你的ISO文件所在。最后点击<c>Start</c>。
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。然后在"Image to Burn”区域里指定你的ISO文件所在。最后点击<c>Start</c>。
   </li>
 </ul>
 
@@ -199,11 +183,11 @@ ok <i>boot cdrom</i>
 </pre>
 
 <p>
-你会看到SILO引导管理器（在安装光盘上）。输入<c>2616</c>来使用2.6.16内核或者是<c>2617</c>来使用2.6.17内核，然后按回车开始引导系统。<c>2616</c>被广泛的测试过，所以当默认的<c>2617</c>不工作的时候可以用它。如果你想要支持比较新的Sun机器（Niagara、UltraSPARC、T1），你应该选择默认的<c>2617</c>。
+你会看到SILO引导管理器（在安装光盘上）。如果需要，你可以输入回车来查看更多的帮助信息。输入<c>2617</c>（如果你的是一台FC-AL机器，请检查<uri link="http://www.gentoo.org/proj/en/base/sparc/sunhw.xml">硬件兼容性列表</uri>）或者是<c>2620</c>（对于所有其他人），然后按回车开始引导系统。
 </p>
 
 <pre caption="接着从安装光盘开始引导">
-boot: <i>2617</i>
+boot: <i>2620</i>
 </pre>
 
 <p>
@@ -211,7 +195,7 @@ boot: <i>2617</i>
 </p>
 
 <p>
-你应该在当前控制台得到一个根用户提示符（"#"），也可以按Alt-F2、Alt-F3和Alt-F4切换到其它控制台。按Alt-F1就回到开始的那个了。你还可以在串口控制台（<path>ttyS0</path>）找到一个根用户提示符。
+你应该在当前控制台得到一个根用户提示符（"#"）。你还可以在串口控制台（<path>ttyS0</path>）找到根用户提示符。
 </p>
 
 <p>
@@ -299,7 +283,7 @@ link="#useraccounts">可选：用户账号</uri>。然后按<c>Alt-F2</c>切换�
 </p>
 
 <pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/en/handbook/handbook-sparc.xml</i>
+# <i>links http://www.gentoo.org/doc/en/handbook/<keyval id="online-book"/></i>
 </pre>
 
 <p>

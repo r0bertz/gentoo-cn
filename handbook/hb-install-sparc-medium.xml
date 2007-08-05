@@ -194,7 +194,7 @@ stage3 tarball是个含有最小Gentoo环境的归档，适合你按照本手册
 </p>
 
 <p>
-你可以检查它的MD5校验和然后与我们提供的MD5校验和（比如<path>install-sparc64-minimal-2007.0.iso.DIGESTS</path>）进行比较（例如在Linux/Unix下使用<c>md5sum</c>工具或在Windows下用<uri link="http://www.etree.org/md5com.html">md5sum</uri>）。
+如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path><keyval id="min-cd-name"/>.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
 </p>
 
 <p>
