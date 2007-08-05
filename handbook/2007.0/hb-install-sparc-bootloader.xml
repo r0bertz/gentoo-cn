@@ -1,12 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-sparc-bootloader.xml,v 1.20 2006/10/28 11:00:55 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-sparc-bootloader.xml,v 1.4 2007/05/07 18:11:42 nightmorph Exp $ -->
+
 <sections>
 
-<version>3.0</version>
+<version>8.0</version>
 <date>2007-05-07</date>
 
 <section>
@@ -30,7 +31,7 @@
 是时候安装和配置<uri link="http://www.sparc-boot.org">SILO</uri>了，改进过的Sparc引导器(Sparc Improved boot LOader)。
 </p>
 
-<pre caption = "安装SILO">
+<pre caption="安装SILO">
 # <i>emerge silo</i>
 </pre>
 
@@ -38,7 +39,7 @@
 现在打开你喜欢的编辑器（我们使用<c>nano</c>来做例子）并创建<path>/etc/silo.conf</path>。
 </p>
 
-<pre caption = "创建 /etc/silo.conf">
+<pre caption="创建 /etc/silo.conf">
 # <i>nano -w /etc/silo.conf</i>
 </pre>
 
@@ -60,12 +61,12 @@ image = /boot/kernel-<keyval id="kernel-version"/>
 </p>
 
 <p>
-如果你打算安装SILO的物理磁盘和存放<path>/etc/silo.conf</path>的不是同一个，那么你必须拷贝一份<path>/etc/silo.conf</path>到那个磁盘的分区里去。假设<path>/boot</path>是那个磁盘的一个单独分区，拷贝一份配置文件到<path>/boot</path>然后运行<c>/sbin/silo</c>：
+如果你打算安装SILO的物理磁盘和存放<path>/etc/silo.conf</path>的不是同一个，那么你必须拷贝一份<path>/etc/silo.conf</path>到那个磁盘的分区里去。假设<path>/boot</path>是那个磁盘的一个单独分区，拷贝一份配置文件到<path>/boot</path>然后运行<c>/sbin/silo -f</c>：
 </p>
 
-<pre caption = "仅在 /boot 和SILO的安装地点不在同一个磁盘">
+<pre caption="仅在/boot 和SILO的安装地点不在同一个磁盘">
 # <i>cp /etc/silo.conf /boot</i>
-# <i>/sbin/silo -C /boot/silo.conf</i>
+# <i>/sbin/silo -f -C /boot/silo.conf</i>
 /boot/silo.conf appears to be valid
 </pre>
 
@@ -73,8 +74,8 @@ image = /boot/kernel-<keyval id="kernel-version"/>
 否则只要运行<c>/sbin/silo -f</c>：
 </p>
 
-<pre caption = "运行 silo">
-# <i>/sbin/silo</i>
+<pre caption="运行 silo">
+# <i>/sbin/silo -f</i>
 /etc/silo.conf appears to be valid
 </pre>
 
@@ -100,8 +101,7 @@ image = /boot/kernel-<keyval id="kernel-version"/>
 <pre caption="退出 chroot，卸载所有分区然后重启">
 # <i>exit</i>
 cdimage ~# <i>cd</i>
-cdimage ~# <i>umount /mnt/gentoo/usr /mnt/gentoo/home /mnt/gentoo/var</i>
-cdimage ~# <i>umount /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
 cdimage ~# <i>reboot</i>
 </pre>
 
