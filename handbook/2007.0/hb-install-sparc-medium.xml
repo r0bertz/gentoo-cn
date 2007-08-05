@@ -69,15 +69,11 @@ tmorph Exp $ -->
 <body>
 
 <p>
-安装Gentoo 
-Linux可以使用<e>stage3</e>tarball文件。这样的一个tarball包含了安装Gentoo 
-Linux所需的一个最小环境的档案文件。
+安装Gentoo Linux可以使用<e>stage3</e>tarball文件。这样的一个tarball包含了安装Gentoo Linux所需的一个最小环境的档案文件。
 </p>
 
 <p>
-使用stage1或者stage2 tarball进行安装Gentoo手册中没有文档 
-── 关于这些事情，请看<uri link="/doc/en/faq.xml#stage12">Gentoo 
-FAQ</uri>。
+使用stage1或者stage2 tarball进行安装Gentoo手册中没有文档 ── 关于这些事情，请看<uri link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>。
 </p>
 
 </body>
@@ -155,8 +151,7 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 </pre>
 
 <p>
-为了刻录下载的ISO文件，你需要选择raw-burning。怎么做这依赖你所用的程序。这里我们将讨论<c>cdrecord</c>和<c>K3B</c>；更多的信息可以在我们的<uri 
-link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
+为了刻录下载的ISO文件，你需要选择raw-burning。怎么做这依赖你所用的程序。这里我们将讨论<c>cdrecord</c>和<c>K3B</c>；更多的信息可以在我们的<uri link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
 </p>
 
 <ul>
@@ -266,8 +261,7 @@ Re-enter password: <comment>(Re-enter john's password)</comment>
 <body>
 
 <p>
-在安装过程中你想查看Gentoo手册（要么是光盘上的或者在线的），确定你有建立一个用户账号（查看<uri 
-link="#useraccounts">可选：用户账号</uri>。然后按<c>Alt-F2</c>切换到一个新的终端并登陆。
+在安装过程中你想查看Gentoo手册（要么是光盘上的或者在线的），确定你有建立一个用户账号（查看<uri link="#useraccounts">可选：用户账号</uri>。然后按<c>Alt-F2</c>切换到一个新的终端并登陆。
 </p>
 
 <p>
@@ -309,8 +303,7 @@ link="#useraccounts">可选：用户账号</uri>。然后按<c>Alt-F2</c>切换�
 </pre>
 
 <p>
-为了能使用sshd，你需要先设置好网络。继续到下一章<uri 
-link="?part=1&amp;chap=3">配置你的网络</uri>。
+为了能使用sshd，你需要先设置好网络。继续到下一章<uri link="?part=1&amp;chap=3">配置你的网络</uri>。
 </p>
 
 </body>
