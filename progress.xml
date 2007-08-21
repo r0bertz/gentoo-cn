@@ -19,16 +19,267 @@
 <body>
 
 <ul>
-<li><uri link="#doc_chap2">Gentoo 2007.0 Handbook翻译进度表</uri></li>
-<li><uri link="#doc_chap3">Gentoo 2006.1 Handbook翻译进度表</uri></li>
-<li><uri link="#doc_chap4">Gentoo Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap2">Gentoo文档翻译进度表</uri></li>
+<li><uri link="#doc_chap3">Gentoo Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap4">Gentoo 2007.0 Handbook翻译进度表</uri></li>
+<li><uri link="#doc_chap5">Gentoo 2006.1 Handbook翻译进度表</uri></li>
 <!--
-<li><uri link="#doc_chap4">Gentoo文档翻译进度表</uri></li>
 <li><uri link="#doc_chap5">Gentoo Developer Handbook翻译进度表</uri></li>
 <li><uri link="#doc_chap6">中文文档资源其他文档</uri></li>
 -->
 </ul>
 
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo文档翻译进度表</title>
+<section>
+<body>
+<table>
+  <tr>
+    <th>文档</th>
+    <th>英文版本</th>
+    <th>最后更新</th>
+    <th>负责人</th>
+    <th>进度</th>
+    <th>完成期限</th>
+    <th>审校</th>
+    <th>翻译版本</th>
+    <th>最后更新</th>
+  </tr>
+  <tr>
+    <ti>faq.xml</ti>
+    <ti><uri link="/doc/en/faq.xml">v 1.106</uri></ti>
+    <ti>2006/11/29</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/faq.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>articles/making-the-distro-p1.xml</ti>
+    <ti><uri link="/doc/en/articles/making-the-distro-p1.xml">v 1.5</uri></ti>
+    <ti>2005/10/09</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/making-the-distro-p1.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>articles/making-the-distro-p2.xml</ti>
+    <ti><uri link="/doc/en/articles/making-the-distro-p2.xml">v 1.4</uri></ti>
+    <ti>2005/10/09</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/making-the-distro-p2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>articles/making-the-distro-p3.xml</ti>
+    <ti><uri link="/doc/en/articles/making-the-distro-p3.xml">v 1.4</uri></ti>
+    <ti>2005/10/09</ti>
+    <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/making-the-distro-p3.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>guide-localization.xml</ti>
+    <ti><uri link="/doc/en/guide-localization.xml">v 1.47</uri></ti>
+    <ti>2007/07/08</ti>
+    <ti><mail link="litao@web2.0geek.org">lit40</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/guide-localization.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>xfce-config.xml</ti>
+    <ti><uri link="/doc/en/xfce-config.xml">v 1.8</uri></ti>
+    <ti>2007/07/21</ti>
+    <ti><mail link="wcw8410@gmail.com">wcw</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/xfce-config.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>nvidia-guide.xml</ti>
+    <ti><uri link="/doc/en/nvidia-guide.xml">v 1.43</uri></ti>
+    <ti>2007/08/18</ti>
+    <ti><mail link="liuqing.com@gmail.com">gorf</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/nvidia-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>gnome-config.xml</ti>
+    <ti><uri link="/doc/en/gnome-config.xml">v 1.19</uri></ti>
+    <ti>2007/07/04</ti>
+    <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/gnome-config.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>gentoo-x86+raid+lvm2-quickinstall.xml</ti>
+    <ti><uri link="/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml">v 1.18</uri></ti>
+    <ti>2007/07/18</ti>
+    <ti><mail link="tan.august@gmail.com">August</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/gentoo-x86+raid+lvm2-quickinstall.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>xorg-config.xml</ti>
+    <ti><uri link="/doc/en/xorg-config.xml">v 1.23</uri></ti>
+    <ti>2007/06/21</ti>
+    <ti><mail link="jeffkyjin@gmail.com">jeffkyjin</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/xorg-config.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>ati-faq.xml</ti>
+    <ti><uri link="/doc/en/ati-faq.xml">v 1.43</uri></ti>
+    <ti>2007/08/07</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/ati-faq.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>dri-howto.xml</ti>
+    <ti><uri link="/doc/en/dri-howto.xml">v 1.39</uri></ti>
+    <ti>2007/07/22</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/dri-howto.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>kde-config.xml</ti>
+    <ti><uri link="/doc/en/kde-config.xml">v 1.32</uri></ti>
+    <ti>2007/06/24</ti>
+    <ti><mail link="">fideas</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/kde-config.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>nano-basics-guide.xml</ti>
+    <ti><uri link="/doc/en/nano-basics-guide.xml">v 1.25</uri></ti>
+    <ti>2006/11/29</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/nano-basics-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>lvm2.xml</ti>
+    <ti><uri link="/doc/en/lvm2.xml">v 1.22</uri></ti>
+    <ti>2007/02/26</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/lvm2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>articles/lvm-p1.xml</ti>
+    <ti><uri link="/doc/en/articles/lvm-p1.xml">v 1.4</uri></ti>
+    <ti>2006/01/22</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/lvm-p1.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>articles/lvm-p2.xml</ti>
+    <ti><uri link="/doc/en/articles/lvm-p2.xml">v 1.4</uri></ti>
+    <ti>2006/01/22</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/lvm-p2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>alsa-guide.xml</ti>
+    <ti><uri link="/doc/en/alsa-guide.xml">v 1.80</uri></ti>
+    <ti>2007/05/19</ti>
+    <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/alsa-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>vdr-guide.xml</ti>
+    <ti><uri link="/doc/en/vdr-guide.xml">v 1.7</uri></ti>
+    <ti>2007/01/16</ti>
+    <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/vdr-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>vi-guide.xml</ti>
+    <ti><uri link="/doc/en/vi-guide.xml">v 1.14</uri></ti>
+    <ti>2005/07/21</ti>
+    <ti><mail link="ghostm55@gmail.com">ghosTM55</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/vi-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>utf-8.xml</ti>
+    <ti><uri link="/doc/en/utf-8.xml">v 1.47</uri></ti>
+    <ti>2007/04/17</ti>
+    <ti><mail link="goldenshore999@gmail.com">DawnFantasy</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/utf-8.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+</table>
 </body>
 </section>
 </chapter>
