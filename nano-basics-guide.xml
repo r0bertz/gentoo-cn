@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/nano-guide.xml,v 1.2 2004/09/21 12:38:09 neysx Exp $ -->
+
+<guide link="/doc/zh_cn/nano-guide.xml">
+
+<title>Nano 基础指南</title>
+
+<author title="Gentoo Doc Editor">
+<mail link="meekrob@gentoo.org">Sherman Boyd</mail>
+</author>
+
+<author title="Translator">
+<mail link="liqiang@iscas.cn">Zhang Liqiang</mail></author>
+
+<abstract>
+这是一个nano的简单介绍，使你尽快的熟悉它的基本功能。
+</abstract>
+
+<version>1.0</version>
+<date>2002年4月5</date>
+
+<chapter>
+<title>Nano 基础</title>
+<section>
+<title>计划</title>
+<body>
+
+<p>
+本指南包括 nano 中的基本操作，意思是说这很简洁。要得到更多的 nano 信息，请查看：
+</p>
+
+<p>
+<uri>http://www.nano-editor.org</uri>
+</p>
+
+</body>
+</section>
+<section>
+<title>打开，建立文件</title>
+<body>
+
+<p>
+在 nano 中打开和建立文件很简单，只要键入：
+</p>
+
+<pre>
+# <i>nano filename</i>
+</pre>
+
+<p>
+Nano 是非模态的编辑器，你可以直接打字输入文本。如果你在编辑像<path>/etc/fstab</path> 
+一样的配置文件，请加上 -w 选项，例如： 
+</p>
+
+<pre>
+# <i>nano -w /etc/fstab</i>
+</pre>
+
+<warn>
+在你打开一个配置文件时加上 -w 选项是非常非常重要的。 未能这样可能会造成启动失败或者其他毛病。
+</warn>
+
+</body>
+</section>
+
+<section>
+<title>剪切和粘贴</title>
+<body>
+
+<p>
+要剪切单独一行用 <c>^K</c>。你只要简单的同时按下<c>CTRL</c> 和 <c>k</c>。这行消失了。
+要粘贴这行，只要简单的把光标移动到你想要粘贴的位置，在键盘上按下 <c>^U</c>（<c>CTRL u</c>） 。
+BAM! 这行又出现了。假设你需要移动一整段。 要移动多行，只要一行一行的剪切再粘贴。
+BAM！整段都到了你期望的位置。
+</p>
+
+<p>
+如果你需要更加一些的控制，那你要给文本加标记。
+将光标移动到你想剪切文本的开始，敲入 <c>^^</c>（就是 <c>ctrl ^</c>或 <c>ctrl 6</c>）。
+现在移动光标到你想剪切文本的结尾。需要的文本现在已经高亮显示。如果你想取消文本标记，简单的再次敲入 <c>
+^^</c>。敲入 <c>^K</c>来剪切文本。使用 <c>^U</c>来粘贴它。 BAM! 现在，弄好了。
+</p>
+</body>
+</section>
+<section>
+<title>查找文本</title>
+<body>
+
+<p>
+查找字串就像只要你想到 <e>"WhereIs"</e> 而不是 <e>"Search"</e>。
+简单的敲入 <c>^W</c>（<c>CTRL w</c>） 再键入你想要找的字串。就像我说的，简单。
+</p>
+</body>
+</section>
+<section>
+<title>完成</title>
+<body>
+
+<p>
+就是这些！谢谢 #gentoo频道的 kiyose 和 quazion。再一次， 要得到更多的 nano 信息，请查看：
+</p>
+
+<p>
+<uri>http://www.nano-editor.org</uri>
+</p>
+</body>
+</section>
+</chapter>
+</guide>

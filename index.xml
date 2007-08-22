@@ -2,7 +2,7 @@
 <?xml-stylesheet href="/xsl/metadoc.xsl" type="text/xsl"?>
 <?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/index.xml,v 1.109 2007/06/13 07:22:02 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/index.xml,v 1.1 2007/08/20 10:38:46 neysx Exp $ -->
 
 <!DOCTYPE dynamic SYSTEM "/dtd/metadoc.dtd">
 

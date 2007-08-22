@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE inserts SYSTEM "/dtd/inserts.dtd">
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/inserts.xml,v 1.1 2006/03/06 16:45:58 neysx Exp $-->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/inserts.xml,v 1.1 2006/09/01 10:47:13 neysx Exp $-->
 <inserts lang="zh_cn">
   <version>1</version>
   <insert name="Content">内容</insert>
