@@ -228,7 +228,7 @@
     <file id="lvm2">/doc/en/lvm2.xml</file>
     <file id="gentoo-kernel">/doc/en/gentoo-kernel.xml</file>
     <file id="gentoo-ppc-faq">/doc/en/gentoo-ppc-faq.xml</file>
-    <file id="alsa-guide">/doc/en/alsa-guide.xml</file>
+    <file id="alsa-guide">/doc/zh_cn/alsa-guide.xml</file>
     <file id="xorg-config">/doc/en/xorg-config.xml</file>
     <file id="quick-samba-howto">/doc/en/quick-samba-howto.xml</file>
     <file id="ltsp">/doc/zh_cn/ltsp.xml</file>
