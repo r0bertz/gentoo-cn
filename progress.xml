@@ -109,7 +109,7 @@
     <ti>2007/07/21</ti>
     <ti><mail link="wcw8410@gmail.com">wcw</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/10/01</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/xfce-config.xml"></uri></ti>
     <ti>N/A</ti>
@@ -153,7 +153,7 @@
     <ti>2007/06/21</ti>
     <ti><mail link="jeffkyjin@gmail.com">jeffkyjin</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/10/01</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/xorg-config.xml"></uri></ti>
     <ti>N/A</ti>
@@ -164,7 +164,7 @@
     <ti>2007/08/07</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/09/02</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/ati-faq.xml"></uri></ti>
     <ti>N/A</ti>
@@ -175,7 +175,7 @@
     <ti>2007/07/22</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/09/02</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/dri-howto.xml"></uri></ti>
     <ti>N/A</ti>
@@ -196,10 +196,10 @@
     <ti><uri link="/doc/en/nano-basics-guide.xml">v 1.25</uri></ti>
     <ti>2006/11/29</ti>
     <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
-    <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/24</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/nano-basics-guide.xml"></uri></ti>
+    <ti><uri link="/doc/zh_cn/nano-basics-guide.xml">v 1.25</uri></ti>
     <ti>N/A</ti>
   </tr>
   <tr>
@@ -208,7 +208,7 @@
     <ti>2007/02/26</ti>
     <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/08/25</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/lvm2.xml"></uri></ti>
     <ti>N/A</ti>
@@ -219,7 +219,7 @@
     <ti>2006/01/22</ti>
     <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/09/06</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/articles/lvm-p1.xml"></uri></ti>
     <ti>N/A</ti>
@@ -230,7 +230,7 @@
     <ti>2006/01/22</ti>
     <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/09/06</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/articles/lvm-p2.xml"></uri></ti>
     <ti>N/A</ti>
@@ -240,10 +240,10 @@
     <ti><uri link="/doc/en/alsa-guide.xml">v 1.80</uri></ti>
     <ti>2007/05/19</ti>
     <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
-    <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/08/22</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/alsa-guide.xml"></uri></ti>
+    <ti><uri link="/doc/zh_cn/alsa-guide.xml">v 1.80</uri></ti>
     <ti>N/A</ti>
   </tr>
   <tr>
@@ -252,7 +252,7 @@
     <ti>2007/01/16</ti>
     <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/11/22</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/vdr-guide.xml"></uri></ti>
     <ti>N/A</ti>
@@ -263,7 +263,7 @@
     <ti>2005/07/21</ti>
     <ti><mail link="ghostm55@gmail.com">ghosTM55</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/10/01</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/vi-guide.xml"></uri></ti>
     <ti>N/A</ti>
@@ -277,6 +277,50 @@
     <ti>N/A</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/utf-8.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>gpm.xml</ti>
+    <ti><uri link="/doc/en/gpm.xml">v 1.4</uri></ti>
+    <ti>2006/02/17</ti>
+    <ti><mail link="">jjj311</mail></ti>
+    <ti>W</ti>
+    <ti>2007/08/28</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/gpm.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>mysql-upgrading.xml</ti>
+    <ti><uri link="/doc/en/mysql-upgrading.xml">v 1.21</uri></ti>
+    <ti>2007/06/04</ti>
+    <ti><mail link="">jjj311</mail></ti>
+    <ti>W</ti>
+    <ti>2007/08/28</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/mysql-upgrading.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>portage-utils.xml</ti>
+    <ti><uri link="/doc/en/portage-utils.xml">v 1.5</uri></ti>
+    <ti>2007/05/23</ti>
+    <ti><mail link="">jjj311</mail></ti>
+    <ti>W</ti>
+    <ti>2007/08/28</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/portage-utils.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>php-upgrading.xml</ti>
+    <ti><uri link="/proj/en/php/php-upgrading.xml">v 1.5</uri></ti>
+    <ti>2007/08/11</ti>
+    <ti><mail link="">jjj311</mail></ti>
+    <ti>W</ti>
+    <ti>2007/08/28</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/php/php-upgrading.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
