@@ -13,6 +13,9 @@
   <mail link="swift@gentoo.org">Sven Vermeulen</mail>
 </author>
 <author title="Author">Steven Wagner</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
 
 <abstract>
 这篇快速安装指南以一种相对简略的方式介绍Gentoo安装过程。目的是让没有太多时间的
