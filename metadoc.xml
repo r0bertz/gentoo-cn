@@ -253,7 +253,7 @@
     <file id="qmail-howto">/doc/en/qmail-howto.xml</file>
     <file id="source_mirrors">/doc/en/source_mirrors.xml</file>
     <file id="gentoo-ppc-install">/doc/en/gentoo-ppc-install.xml</file>
-    <file id="gentoo-x86-quickinstall">/doc/en/gentoo-x86-quickinstall.xml</file>
+    <file id="gentoo-x86-quickinstall">/doc/zh_cn/gentoo-x86-quickinstall.xml</file>
     <file id="gentoo-x86-quickinstall+raid">/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml</file>
     <file id="vi-guide">/doc/en/vi-guide.xml</file>
     <file id="virt-mail-howto">/doc/en/virt-mail-howto.xml</file>

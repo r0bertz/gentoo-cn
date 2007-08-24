@@ -323,6 +323,17 @@
     <ti><uri link="/proj/zh_cn/php/php-upgrading.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
+  <tr>
+    <ti>gentoo-x86-quickinstall.xml</ti>
+    <ti><uri link="/doc/en/gentoo-x86-quickinstall.xml">v 1.67</uri></ti>
+    <ti>2006/11/29</ti>
+    <ti><mail link="">tell</mail></ti>
+    <ti>T</ti>
+    <ti>2007/01/23</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/gentoo-x86-quickinstall.xml">v 1.67</uri></ti>
+    <ti>N/A</ti>
+  </tr>
 </table>
 </body>
 </section>
