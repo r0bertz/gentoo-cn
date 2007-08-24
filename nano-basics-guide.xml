@@ -1,33 +1,37 @@
 <?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/nano-basics-guide.xml,v 1.25 2006/11/29 15:48:57 nightmorph Exp $ -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/nano-guide.xml,v 1.2 2004/09/21 12:38:09 neysx Exp $ -->
 
-<guide link="/doc/zh_cn/nano-guide.xml">
+<guide link="/doc/zh_CN/nano-basics-guide.xml">
 
-<title>Nano 基础指南</title>
+<title>基本 Nano 指南</title>
 
 <author title="Gentoo Doc Editor">
-<mail link="meekrob@gentoo.org">Sherman Boyd</mail>
+  <!-- meekrob@gentoo.org -->
+Sherman Boyd
 </author>
-
+<author title="Editor">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
 <author title="Translator">
-<mail link="liqiang@iscas.cn">Zhang Liqiang</mail></author>
-
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
 <abstract>
-这是一个nano的简单介绍，使你尽快的熟悉它的基本功能。
+这是篇 nano 简明使用指南，能帮助你尽快了解 nano 的基本用法。
 </abstract>
 
-<version>1.0</version>
-<date>2002年4月5</date>
+<version>1.6</version>
+<date>2006年1月5日</date>
 
 <chapter>
-<title>Nano 基础</title>
+<title>基本的 Nano</title>
 <section>
-<title>计划</title>
+<title>目的</title>
 <body>
 
 <p>
-本指南包括 nano 中的基本操作，意思是说这很简洁。要得到更多的 nano 信息，请查看：
+这是篇 nano 简明使用指南，帮助你快速了解 nano 
+的基本用法。如想获取更多的帮助信息，请参阅：
 </p>
 
 <p>
@@ -37,74 +41,126 @@
 </body>
 </section>
 <section>
-<title>打开，建立文件</title>
+<title>打开文件与新建文件</title>
 <body>
 
 <p>
-在 nano 中打开和建立文件很简单，只要键入：
+使用 nano 打开或新建文件，只需键入：
 </p>
 
-<pre>
-# <i>nano filename</i>
+<pre caption="打开或新建文件">
+# <i>nano 文件名</i>
 </pre>
 
 <p>
-Nano 是非模态的编辑器，你可以直接打字输入文本。如果你在编辑像<path>/etc/fstab</path> 
-一样的配置文件，请加上 -w 选项，例如： 
+Nano 
+是一种单模式编辑器，你可以直接输入文字。如果你要编辑一个像 
+<path>/etc/fstab</path> 一样的配置文件，请使用 <c>-w</c> 
+参数，例如：
 </p>
 
-<pre>
+<pre caption="禁用自动换行">
 # <i>nano -w /etc/fstab</i>
 </pre>
 
 <warn>
-在你打开一个配置文件时加上 -w 选项是非常非常重要的。 未能这样可能会造成启动失败或者其他毛病。
+这非常重要。如果在编辑配置文件时忘了加 <c>-w</c> 
+参数，可能会导致你的系统无法起动或产生别的异常。
 </warn>
 
 </body>
 </section>
+<section>
+<title>保存和退出</title>
+<body>
 
+<p>
+如果你要保存所做的修改，按下 
+<c>Ctrl+O</c>。想要退出，按下 
+<c>Ctrl+X</c>。如果你退出前没有保存所做的修改，它会提示你是否要保存。如果不要，请按 
+<c>N</c>，反之，则按 
+<c>Y</c>。然后它会让你确认要保存的文件名，确认或修改后按 
+<c>Enter</c> 即可。
+</p>
+
+<p>
+如果你没有修改好而不小心按了保存键，您可以在请求确认文件名时按 
+<c>Ctrl+C</c> 来取消。
+</p>
+
+</body>
+</section>
 <section>
 <title>剪切和粘贴</title>
 <body>
 
 <p>
-要剪切单独一行用 <c>^K</c>。你只要简单的同时按下<c>CTRL</c> 和 <c>k</c>。这行消失了。
-要粘贴这行，只要简单的把光标移动到你想要粘贴的位置，在键盘上按下 <c>^U</c>（<c>CTRL u</c>） 。
-BAM! 这行又出现了。假设你需要移动一整段。 要移动多行，只要一行一行的剪切再粘贴。
-BAM！整段都到了你期望的位置。
+要剪切一整行，请用 <c>Ctrl+K</c>（按住 <c>Ctrl</c> 
+不放，再按下 <c>K</c> 
+键）。光标所在的行便消失了。要粘贴它，只需把光标移动到您所要粘贴的位置，然后按 
+<c>Ctrl+U</c> 即可。要移动多行，只需多按几次 <c>Ctrl+K</c> 
+把需要移动内容都剪切下来，然后按一次 <c>Ctrl+U</c> 
+就可以把刚剪切的内容全部粘贴上来。
 </p>
 
 <p>
-如果你需要更加一些的控制，那你要给文本加标记。
-将光标移动到你想剪切文本的开始，敲入 <c>^^</c>（就是 <c>ctrl ^</c>或 <c>ctrl 6</c>）。
-现在移动光标到你想剪切文本的结尾。需要的文本现在已经高亮显示。如果你想取消文本标记，简单的再次敲入 <c>
-^^</c>。敲入 <c>^K</c>来剪切文本。使用 <c>^U</c>来粘贴它。 BAM! 现在，弄好了。
+如果你想使用更精确的剪切控制，则需要给文本做标记。移动光标到需要剪切文本的开头，按下 
+<c>Ctrl+6</c>（或者 
+<c>Alt+A</c>）。然后移动光标到待剪切文本的末尾：被做了标记的文本便会反白。要撤消文本标记，只需再按一次 
+<c>Ctrl+6</c>。用 <c>Ctrl+K</c> 来剪切被标记的文本，用 
+<c>Ctrl+U</c> 来粘贴。
 </p>
+
 </body>
 </section>
 <section>
-<title>查找文本</title>
+<title>搜索特定文字</title>
 <body>
 
 <p>
-查找字串就像只要你想到 <e>"WhereIs"</e> 而不是 <e>"Search"</e>。
-简单的敲入 <c>^W</c>（<c>CTRL w</c>） 再键入你想要找的字串。就像我说的，简单。
+当你想搜索某特定文字时，只要想成 <e>"WhereIs"</e> 而不是 
+<e>"Search"</e>，事情就简单了。只要按下 
+<c>Ctrl+W</c>，键入你要搜索的字符串，再按 <c>Enter</c> 
+就可以了。想再次搜索相同的字符串，可以直接按 
+<c>Alt+W</c>。
 </p>
+
+<note>
+在nano帮助文档里，Ctrl-键被表示为一个脱字符（<c>^</c>），因此 
+<c>Ctrl+W</c> 被写成了 <c>^W</c>，等等。Alt-键被表示为一个 
+<c>M</c>（从 "Meta" 而来），因此 <c>Alt+W</c> 被写成了 
+<c>M-W</c>。
+</note>
+
 </body>
 </section>
 <section>
-<title>完成</title>
+<title>更多选项</title>
 <body>
 
 <p>
-就是这些！谢谢 #gentoo频道的 kiyose 和 quazion。再一次， 要得到更多的 nano 信息，请查看：
+如果你有兴趣调整nano设置，一定去看看 
+<path>/etc/nanorc</path>。
+</p>
+
+</body>
+</section>
+<section>
+<title>最后</title>
+<body>
+
+<p>
+就这样子吧！感谢#gentoo频道里的 kiyose 和 
+quazion。再次提醒你，要了解更多的 nano 信息，请参阅：
 </p>
 
 <p>
 <uri>http://www.nano-editor.org</uri>
 </p>
+
 </body>
 </section>
 </chapter>
 </guide>
+
+ 
