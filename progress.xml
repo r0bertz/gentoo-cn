@@ -4,7 +4,7 @@
 
 <!-- $Header: /doc/progress.xml, v 0.1 2006/01/06 r0bertz Exp $ -->
 
-<mainpage>
+<mainpage lang="zh_cn">
 <title>Gentoo中文文档进度表</title>
 <author title="Author">
 <mail link="robert.zhangle@gmail.com">张乐</mail>
@@ -28,6 +28,10 @@
 <li><uri link="#doc_chap6">中文文档资源其他文档</uri></li>
 -->
 </ul>
+
+<note>
+如果欲获得xml源文件，请在连接后加?passthru=1。例如：<uri link="/doc/en/faq.xml?passthru=1">http://www.gentoo.org/doc/en/faq.xml?passthru=1</uri>
+</note>
 
 </body>
 </section>
@@ -184,7 +188,7 @@
     <ti>kde-config.xml</ti>
     <ti><uri link="/doc/en/kde-config.xml">v 1.32</uri></ti>
     <ti>2007/06/24</ti>
-    <ti><mail link="">fideas</mail></ti>
+    <ti><mail link="yuanqingfeng@gmail.com">fideas</mail></ti>
     <ti>W</ti>
     <ti>N/A</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
