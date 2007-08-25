@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding="utf-8"?>
-
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/zh_cn/alsa-guide.xml">
+<guide link="/doc/zh_cn/alsa-guide.xml" lang="zh_cn">
 <title>Gentoo Linux ALSA 指南</title>
 
 <author title="作者">
@@ -20,12 +18,12 @@
 本文档可以帮助用户在Gentoo Linux上设置ALSA
 </abstract>
 
-
-
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
 <version>2.22</version>
-<date>2007年5月7日</date>
+<date>2007-05-07</date>
 
 <chapter>
 <title>简介</title>
@@ -34,16 +32,11 @@
 <body>
 
 <p>
-ALSA是<e>Advanced Linux Sound 
-Architecture，高级Linux声音架构</e>的简称,它在Linux操作系统上提供了音频和MIDI（<e>Musical 
-Instrument Digital 
-Interface</e>，音乐设备数字化接口）的支持。在2.6系列内核中，ALSA已经成为默认的声音子系统，用来替换2.4系列内核中的OSS（<e>Open 
-Sound System</e>，开放声音系统）。
+ALSA是<e>Advanced Linux Sound Architecture，高级Linux声音架构</e>的简称,它在Linux操作系统上提供了音频和MIDI（<e>Musical Instrument Digital Interface</e>，音乐设备数字化接口）的支持。在2.6系列内核中，ALSA已经成为默认的声音子系统，用来替换2.4系列内核中的OSS（<e>Open Sound System</e>，开放声音系统）。
 </p>
 
 <p>
-ALSA的主要特性包括：高效地支持从消费类入门级声卡到专业级音频设备所有类型的音频接口，完全模块化的设计， 
-支持对称多处理（SMP）和线程安全，对OSS的向后兼容，以及提供了用户空间的<c>alsa-lib</c>库来简化应用程序的开发。
+ALSA的主要特性包括：高效地支持从消费类入门级声卡到专业级音频设备所有类型的音频接口，完全模块化的设计， 支持对称多处理（SMP）和线程安全，对OSS的向后兼容，以及提供了用户空间的<c>alsa-lib</c>库来简化应用程序的开发。
 </p>
 
 </body>
@@ -78,7 +71,7 @@ Gentoo的一个主要优势在于用户可以最大限度的控制如何安装�
   <li>
     采用内核提供的ALSA。这也是我们推荐的方法。
   </li>
-  <li>采用Gentoo的<c>media-sound/alsa-driver</c>软件包。 </li>
+  <li>采用Gentoo的<c>media-sound/alsa-driver</c>软件包。</li>
 </ol>
 
 <p>
@@ -140,13 +133,11 @@ Gentoo的一个主要优势在于用户可以最大限度的控制如何安装�
 </body>
 </section>
 <section>
-<title>所以...</title>
+<title>所以……</title>
 <body>
 
 <p>
-如上所述，<c>alsa-driver</c>和内核自带的ALSA驱动的差别非常细微；考虑到易用性，我们建议您<e>首先</e>采用内核自带的驱动。在您向 
-<uri link="https://bugs.gentoo.org">Gentoo Bugzilla</uri> 
-提交任何和声音相关的问题之前，请先试着用<c>alsa-driver</c>重现它们，再提交缺陷报告。
+如上所述，<c>alsa-driver</c>和内核自带的ALSA驱动的差别非常细微；考虑到易用性，我们建议您<e>首先</e>采用内核自带的驱动。在您向 <uri link="https://bugs.gentoo.org">Gentoo Bugzilla</uri> 提交任何和声音相关的问题之前，请先试着用<c>alsa-driver</c>重现它们，再提交缺陷报告。
 </p>
 
 </body>
@@ -156,22 +147,18 @@ Gentoo的一个主要优势在于用户可以最大限度的控制如何安装�
 <body>
 
 <p>
-无论您采用哪种方式，您必须要知道您的声卡用什么驱动。大多数情况下，声卡（板载和独立声卡）基于PCI总线，<c>lspci</c>将帮助您获取所需的信息。如果您没有安装<c>lspci</c>，请<c>emerge 
-sys-apps/pciutils</c>。如果您使用的是USB声卡，<c>sys-apps/usbutils</c>的<c>lsusb</c><e>或许</e>有用。ISA声卡的用户，请试一下<c>sys-apps/isapnptools</c>。下列页面对使用ISA声卡的用户<e>也许</e>有所帮助：
+无论您采用哪种方式，您必须要知道您的声卡用什么驱动。大多数情况下，声卡（板载和独立声卡）基于PCI总线，<c>lspci</c>将帮助您获取所需的信息。如果您没有安装<c>lspci</c>，请<c>emerge sys-apps/pciutils</c>。如果您使用的是USB声卡，<c>sys-apps/usbutils</c>的<c>lsusb</c><e>或许</e>有用。ISA声卡的用户，请试一下<c>sys-apps/isapnptools</c>。下列页面对使用ISA声卡的用户<e>也许</e>有所帮助：
 </p>
 
 <ul>
   <li>
-  <uri link="http://www.roestock.demon.co.uk/isapnptools/">The ISAPNPTOOLS
-  Page</uri>
+  <uri link="http://www.roestock.demon.co.uk/isapnptools/">The ISAPNPTOOLS Page</uri>
   </li>
   <li>
-  <uri link="http://www2.linuxjournal.com/article/3269">LinuxJournal PnP
-  Article</uri>
+  <uri link="http://www2.linuxjournal.com/article/3269">LinuxJournal PnP Article</uri>
   </li>
   <li>
-  <uri link="http://www.tldp.org/HOWTO/Sound-HOWTO/x320.html">TLDP Sound
-  HowTo</uri>
+  <uri link="http://www.tldp.org/HOWTO/Sound-HOWTO/x320.html">TLDP Sound HowTo</uri>
   </li>
 </ul>
 
@@ -189,18 +176,11 @@ sys-apps/pciutils</c>。如果您使用的是USB声卡，<c>sys-apps/usbutils</c
 </pre>
 
 <p>
-现在我们知道机器里的声卡是Sound Blaster 
-Live!，而且声卡的制造商是Creative Labs。看一下<uri 
-link="http://bugtrack.alsa-project.org/main/index.php/Matrix:Main">ALSA声卡支持表</uri>，选择Creative 
-Labs。您将会跳转到Creative 
-Labs支持设备表的页面，您可以看到SB 
-Live!采用<c>emu10k1</c>模块。这正是我们所需要的信息。如果您对技术细节有兴趣，您可以点击"详细信息"旁边的的链接，访问<c>emu10k1</c>的相关页面。
+现在我们知道机器里的声卡是Sound Blaster Live!，而且声卡的制造商是Creative Labs。看一下<uri link="http://bugtrack.alsa-project.org/main/index.php/Matrix:Main">ALSA声卡支持表</uri>，选择Creative Labs。您将会跳转到Creative Labs支持设备表的页面，您可以看到SB Live!采用<c>emu10k1</c>模块。这正是我们所需要的信息。如果您对技术细节有兴趣，您可以点击"详细信息"旁边的的链接，访问<c>emu10k1</c>的相关页面。
 </p>
 
 <p>
-如果您想使用MIDI, 
-在emerge任何ALSA软件包之前，您必须在<path>/etc/make.conf</path>里，把<c>midi</c>加入到您的USE标记中。我们在下文中将会介绍如何<uri 
-link="#midi">设置MIDI支持</uri>。
+如果您想使用MIDI, 在emerge任何ALSA软件包之前，您必须在<path>/etc/make.conf</path>里，把<c>midi</c>加入到您的USE标记中。我们在下文中将会介绍如何<uri link="#midi">设置MIDI支持</uri>。
 </p>
 
 </body>
@@ -239,8 +219,7 @@ link="#midi">设置MIDI支持</uri>。
 </p>
 
 <p>
-请注意：由于考虑到易用性，下面的例子中ALSA都被编译成模块。我们建议您采用相同的步骤，从而可以使用<c>alsaconf</c>来配置您的声卡。请<e>不要</e>跳过本文的<uri 
-link="#alsa-config">配置</uri>部分。如果您还是希望将其编入内核，请作相应的调整。
+请注意：由于考虑到易用性，下面的例子中ALSA都被编译成模块。我们建议您采用相同的步骤，从而可以使用<c>alsaconf</c>来配置您的声卡。请<e>不要</e>跳过本文的<uri link="#alsa-config">配置</uri>部分。如果您还是希望将其编入内核，请作相应的调整。
 </p>
 
 <pre caption="ALSA内核配置">
@@ -287,8 +266,7 @@ USB Devices   ---&gt;
 </pre>
 
 <p>
-现在所有的选项都配置好了，您可以（重新）编译内核，声卡的ALSA支持应该在重启后使用新内核时生效。不要忘了更新您的GRUB配置并使用新编译的内核。您可以前进到<uri 
-link="#alsa-utilities">ALSA实用工具</uri>查看是否一切都工作正常。 
+现在所有的选项都配置好了，您可以（重新）编译内核，声卡的ALSA支持应该在重启后使用新内核时生效。不要忘了更新您的GRUB配置并使用新编译的内核。您可以前进到<uri link="#alsa-utilities">ALSA实用工具</uri>查看是否一切都工作正常。 
  
 </p>
 
@@ -303,11 +281,10 @@ link="#alsa-utilities">ALSA实用工具</uri>查看是否一切都工作正常�
 </p>
 
 <p>
-如果您不清楚您的声卡需要什么样的驱动，请参看本文的<uri 
-link="#lspci">lspci</uri>部分。如果您知道驱动的名字（在此以<c>emu10k1</c>为例），编辑<path>/etc/make.conf</path>，加入变量<c>ALSA_CARDS</c>。
+如果您不清楚您的声卡需要什么样的驱动，请参看本文的<uri link="#lspci">lspci</uri>部分。如果您知道驱动的名字（在此以<c>emu10k1</c>为例），编辑<path>/etc/make.conf</path>，加入变量<c>ALSA_CARDS</c>。
 </p>
 
-<pre caption="编辑 /etc/make.conf，加入ALSA_CARDS">
+<pre caption="编辑/etc/make.conf，加入ALSA_CARDS">
 <comment>（对于一块声卡）</comment>
 ALSA_CARDS="emu10k1"
 <comment>（对于多块声卡，用空格分隔名字）</comment>
@@ -319,22 +296,21 @@ ALSA_CARDS="emu10k1 via82xx"
 </p>
 
 <note>
-<c>genkernel</c> 可以前进至<uri link="#doc_chap2_pre6">安装
-alsa-driver</uri>, 他们的默认配置符合下列条件。
+<c>genkernel</c> 可以前进至<uri link="#doc_chap2_pre6">安装alsa-driver</uri>, 他们的默认配置符合下列条件。
 </note>
 
 <ol>
   <li>
-  <c>CONFIG_SOUND</c> 被启用。（启用基本的声音支持）
+  <c>CONFIG_SOUND</c>被启用。（启用基本的声音支持）
   </li>
   <li>
   <c>CONFIG_SOUND_PRIME</c>没有被启用。（内置的OSS支持被禁用）
   </li>
   <li>
-  <c>CONFIG_SND</c> 没有被启用。（内置的ALSA支持被禁用）
+  <c>CONFIG_SND</c>没有被启用。（内置的ALSA支持被禁用）
   </li>
   <li>
-  <path>/usr/src/linux</path> 指向使用ALSA的内核源代码。
+  <path>/usr/src/linux</path>指向使用ALSA的内核源代码。
   </li>
 </ol>
 
@@ -342,7 +318,7 @@ alsa-driver</uri>, 他们的默认配置符合下列条件。
 <comment>（假设linux符号链接指向正确的内核源代码）</comment>
 # <i>cd /usr/src/linux</i>
 # <i>grep SOUND .config</i>
-<comment>（1. 为真）</comment>
+<comment>（1.为真）</comment>
 CONFIG_SOUND=y
 <comment>（2.为真）</comment>
 CONFIG_SOUND_PRIME is not set
@@ -352,7 +328,7 @@ CONFIG_SND is not set
 </pre>
 
 <p>
-下一步就是键入魔咒...哦，不，不是abracadabra。
+下一步就是键入魔咒……哦，不，不是abracadabra。
 </p>
 
 <pre caption="安装alsa-driver">
@@ -382,9 +358,7 @@ CONFIG_SND is not set
 </pre>
 
 <note>
-如果您在<uri link="#kernel">内核</uri>里激活了ALSA,<e>并且</e>没有将其编译成模块，请前进至
-<uri link="#initscript">ALSA启动脚本</uri>部分。否则您需要
-配置ALSA。由<c>alsa-utils</c>提供的<c>alsaconf</c>使得这个过程相当容易。
+如果您在<uri link="#kernel">内核</uri>里激活了ALSA,<e>并且</e>没有将其编译成模块，请前进至<uri link="#initscript">ALSA启动脚本</uri>部分。否则您需要配置ALSA。由<c>alsa-utils</c>提供的<c>alsaconf</c>使得这个过程相当容易。
 </note>
 
 </body>
@@ -394,8 +368,7 @@ CONFIG_SND is not set
 <body>
 
 <p>
-最新版本的<c>udev</c> 
-（<c>>=udev-103</c>）为您的声卡提供了某种程度上的内核级自动配置。如果可能的话，让内核自动来设置您的声卡。否则如下所示，用<c>alsaconf</c>来配置您的声卡。
+最新版本的<c>udev</c> （<c>>=udev-103</c>）为您的声卡提供了某种程度上的内核级自动配置。如果可能的话，让内核自动来设置您的声卡。否则如下所示，用<c>alsaconf</c>来配置您的声卡。
 </p>
 
 <note>
@@ -422,8 +395,7 @@ CONFIG_SND is not set
 <body>
 
 <p>
-我们几乎完成了所有的配置。无论您采用何种方法来安装ALSA，您都需要在系统启动的时候，加载模块，初始化ALSA，恢复您的音量设定。ALSA启动脚本可以为您处理所有的这一切，它就是<c>alsasound</c>。 
-我们将它加入到启动运行级。
+我们几乎完成了所有的配置。无论您采用何种方法来安装ALSA，您都需要在系统启动的时候，加载模块，初始化ALSA，恢复您的音量设定。ALSA启动脚本可以为您处理所有的这一切，它就是<c>alsasound</c>。 我们将它加入到启动运行级。
 </p>
 
 <pre caption="将ALSA加入到启动运行级">
@@ -443,8 +415,7 @@ CONFIG_SND is not set
 <body>
 
 <p>
-在我们开始测试之前，最后还有一个<e>重要</e>设定。类Unix操作系统的经验——除非必要，不要运行在root权限，也适用于此;)。怎么做呢？大多数时间，您以普通用户的身份登录系统听音乐或者访问您的声卡。因此，您需要在""audio" 
-组中。在此，我们将用户加入到audio组中，当他们需要访问声卡的时候就不会有任何问题。我们需要以root的身份登录，运行<c>gpasswd</c>。
+在我们开始测试之前，最后还有一个<e>重要</e>设定。类Unix操作系统的经验——除非必要，不要运行在root权限，也适用于此;)。怎么做呢？大多数时间，您以普通用户的身份登录系统听音乐或者访问您的声卡。因此，您需要在""audio" 组中。在此，我们将用户加入到audio组中，当他们需要访问声卡的时候就不会有任何问题。我们需要以root的身份登录，运行<c>gpasswd</c>。
 </p>
 
 <pre caption="将用户加入audio组">
@@ -477,15 +448,11 @@ CONFIG_SND is not set
 </pre>
 
 <impo>
-如果您由于下列错误，无法启动<c>alsamixer</c>
-：alsamixer: function snd_ctl_open failed for default: No such file or directory,
-这通常是因为udev无法设置设备。运行<c>killall
- udevd; udevstart</c>来重新加载<path>/dev</path>下的相关设备文件，然后启动<c>alsamixer</c>。这应该能够解决问题。
+如果您无法启动<c>alsamixer</c>，且收到这样的错误alsamixer: function snd_ctl_open failed for default: No such file or directory，这通常是因为udev无法设置设备。运行<c>killall udevd; udevstart</c>来重新加载<path>/dev</path>下的相关设备文件，然后启动<c>alsamixer</c>。这应该能够解决问题。
 </impo>
 
 <p>
-这<e>也许</e>是ALSA 
-Mixer在您首次打开时的界面。请注意Master和PCM声道，它们下面都有MM的标记。这意味着它们都被静音了。如果在此状态下，您试图播放任何音频文件，您将无法从您的扬声器里听到任何声音。
+这<e>也许</e>是ALSA Mixer在您首次打开时的界面。请注意Master和PCM声道，它们下面都有MM的标记。这意味着它们都被静音了。如果在此状态下，您试图播放任何音频文件，您将无法从您的扬声器里听到任何声音。
 </p>
 
 <figure link="/images/docs/alsa-mixermuted.png" short="AlsaMixer静音" caption="Alsa Mixer主窗口，静音"/>
@@ -500,8 +467,7 @@ Mixer在您首次打开时的界面。请注意Master和PCM声道，它们下面
 
 <ul>
   <li>
-  使用您的左右箭头键（&lt;-
-  &amp; -&gt;）来转换声道。
+  使用您的左右箭头键（&lt;- &amp; -&gt;）来转换声道。
   </li>
   <li>
   要静音／禁止静音，移动到该声道，比如说Master，按键盘上的m键。
@@ -516,8 +482,7 @@ Mixer在您首次打开时的界面。请注意Master和PCM声道，它们下面
 </note>
 
 <p>
-作完了这些以后，您的ALSA 
-Mixer应该看起来如下。请注意00标记，而非MM标记；而且音量也作了调整。
+作完了这些以后，您的ALSA Mixer应该看起来如下。请注意00标记，而非MM标记；而且音量也作了调整。
 </p>
 
 <figure link="/images/docs/alsa-mixerunmuted.png" short="AlsaMixer禁止静音" caption="Alsa Mixer蓄势待发"/>
@@ -529,8 +494,7 @@ Mixer应该看起来如下。请注意00标记，而非MM标记；而且音量�
 <body>
 
 <p>
-终于可以来点音乐了。如果上述一切工作正常，您可以听些不错的音乐了。一个快捷的测试方法是运行像<c>media-sound/madplay</c>这样的命令行工具。您也可以用一些更有名的工具，比如<c>mpg123</c>。如果您青睐ogg, 
-您可以使用由<c>media-sound/vorbis-tools</c>提供的<c>ogg123</c>。选一个您用着舒服的程序。一直如此，emerge您想要的。
+终于可以来点音乐了。如果上述一切工作正常，您可以听些不错的音乐了。一个快捷的测试方法是运行像<c>media-sound/madplay</c>这样的命令行工具。您也可以用一些更有名的工具，比如<c>mpg123</c>。如果您青睐ogg, 您可以使用由<c>media-sound/vorbis-tools</c>提供的<c>ogg123</c>。选一个您用着舒服的程序。一直如此，emerge您想要的。
 </p>
 
 <pre caption="获取软件">
@@ -541,7 +505,7 @@ Mixer应该看起来如下。请注意00标记，而非MM标记；而且音量�
 </pre>
 
 <p>
-播放您喜爱的音乐...
+播放您喜爱的音乐……
 </p>
 
 <pre caption="播放音乐">
@@ -576,8 +540,7 @@ Time: 00:11.31 [04:28.75] of 04:40.06  (200.6 kbps)  Output Buffer  96.9%
 <body>
 
 <p>
-现在您可以把<c>alsa</c> 
-use标记加入到<path>/etc/make.conf</path>使得您的应用程序如果支持ALSA，就在编译时加入这个特性。某些架构，比如x86和amd64默认加入了这个标记。
+现在您可以把<c>alsa</c> use标记加入到<path>/etc/make.conf</path>使得您的应用程序如果支持ALSA，就在编译时加入这个特性。某些架构，比如x86和amd64默认加入了这个标记。
 </p>
 
 </body>
@@ -587,9 +550,7 @@ use标记加入到<path>/etc/make.conf</path>使得您的应用程序如果支�
 <body>
 
 <p>
-如果由于某些原因，您无法听到声音，请您首先查看<uri 
-link="#doc_chap3_pre6">alsamixer</uri> 
-设置，80%的问题源于声道被静音或者音量过低。您也可以查看您的窗口管理器的声音小程序以确保音量被调整到听得见的水平。
+如果由于某些原因，您无法听到声音，请您首先查看<uri link="#doc_chap3_pre6">alsamixer</uri> 设置，80%的问题源于声道被静音或者音量过低。您也可以查看您的窗口管理器的声音小程序以确保音量被调整到听得见的水平。
 </p>
 
 <p>
@@ -635,11 +596,10 @@ Mixers:
 </pre>
 
 <p>
-其他用户碰到的常见问题是可怖的"Unknown symbol in 
-module"错误。举例如下。
+其他用户碰到的常见问题是可怖的"Unknown symbol in module"错误。举例如下。
 </p>
 
-<pre caption="Unknown Symbol in module 错误">
+<pre caption="Unknown Symbol in module错误">
 # <i>/etc/init.d/alsasound start</i>
  * Loading ALSA modules ...
  *   Loading: snd-card-0 ...                                              [ ok ]
@@ -685,14 +645,11 @@ snd_mixer_oss: Unknown symbol snd_oss_info_register
 </pre>
 
 <p>
-上述问题是由于您从<c>alsa-driver</c>转换到内核自带的ALSA而造成的, 
-在您卸载<c>alsa-driver</c>时，内核模块由于受保护而没有移除。所以当您使用内核自带的ALSA，运行<c>modprobe</c>时, 
-<c>alsa-driver</c>和内核自带的驱动混在一起，造成了上述的错误。
+上述问题是由于您从<c>alsa-driver</c>转换到内核自带的ALSA而造成的, 在您卸载<c>alsa-driver</c>时，内核模块由于受保护而没有移除。所以当您使用内核自带的ALSA，运行<c>modprobe</c>时, <c>alsa-driver</c>和内核自带的驱动混在一起，造成了上述的错误。
 </p>
 
 <p>
-解决方案相当简单。我们只需要在unmerge 
-<c>alsa-driver</c>后手动删除出问题的目录。请确定您删除的是正确的内核版本而非当前的版本！
+解决方案相当简单。我们只需要在unmerge <c>alsa-driver</c>后手动删除出问题的目录。请确定您删除的是正确的内核版本而非当前的版本！
 </p>
 
 <pre caption="删除alsa-driver模块">
@@ -700,8 +657,7 @@ snd_mixer_oss: Unknown symbol snd_oss_info_register
 </pre>
 
 <p>
-另一个引起类似错误的可能是在<path>/etc/modules.d</path>中的某个文件错误地输出了 
-<c>device_mode</c>参数。请确认这是问题所在，并且找出这个捣蛋鬼。 
+另一个引起类似错误的可能是在<path>/etc/modules.d</path>中的某个文件错误地输出了 <c>device_mode</c>参数。请确认这是问题所在，并且找出这个捣蛋鬼。 
  
 </p>
 
@@ -714,8 +670,7 @@ snd: Unknown parameter `device_mode'
 </pre>
 
 <p>
-通常是一个叫<path>alsa</path>的文件包含了一行: <c>options snd 
-device_mode=0666</c>。删除此行，重启alsasound服务应该能够解决问题。
+通常是一个叫<path>alsa</path>的文件包含了一行: <c>options snd device_mode=0666</c>。删除此行，重启alsasound服务应该能够解决问题。
 </p>
 
 </body>
@@ -729,13 +684,11 @@ device_mode=0666</c>。删除此行，重启alsasound服务应该能够解决问
 <body>
 
 <p>
-首先请确定<path>/etc/make.conf</path>有<c>midi</c> 
-USE标记。如果没有，请加上它。您需要重新emerge任何使用了<c>midi</c>标记的ALSA软件包，比如<c>alsa-lib</c>，<c>alsa-utils</c>和<c>alsa-driver</c>。
+首先请确定<path>/etc/make.conf</path>有<c>midi</c> USE标记。如果没有，请加上它。您需要重新emerge任何使用了<c>midi</c>标记的ALSA软件包，比如<c>alsa-lib</c>，<c>alsa-utils</c>和<c>alsa-driver</c>。
 </p>
 
 <p>
-如果您的声卡有板载的MIDI合成器并且您希望听一些.mid文件，您需要安装<c>awesfx</c>，它基本上是一组实用工具来控制AWE32驱动。我们首先要安装它。如果没有硬件合成器，您可以使用虚拟合成器，更多信息，请查看<uri 
-link="#vsynth">虚拟合成器</uri>一节。
+如果您的声卡有板载的MIDI合成器并且您希望听一些.mid文件，您需要安装<c>awesfx</c>，它基本上是一组实用工具来控制AWE32驱动。我们首先要安装它。如果没有硬件合成器，您可以使用虚拟合成器，更多信息，请查看<uri link="#vsynth">虚拟合成器</uri>一节。
 </p>
 
 <pre caption="安装awesfx">
@@ -751,8 +704,7 @@ link="#vsynth">虚拟合成器</uri>一节。
 </p>
 
 <note>
-下述代码列表中的<path>/mnt</path>路径也许和您的机器上的路径<e>不同</e>
-。它们只是例子而已，您需要根据您的机器改变路径。
+下述代码列表中的<path>/mnt</path>路径也许和您的机器上的路径<e>不同</e>。它们只是例子而已，您需要根据您的机器改变路径。
 </note>
 
 <pre caption="加载Soundfonts">
@@ -765,8 +717,7 @@ link="#vsynth">虚拟合成器</uri>一节。
 </pre>
 
 <p>
-您现在可以用<c>aplaymidi</c>这样的程序来播放midi文件。运行<c>aplaymidi 
--l</c>来获取端口列表，然后选择一个端口来播放。
+您现在可以用<c>aplaymidi</c>这样的程序来播放midi文件。运行<c>aplaymidi -l</c>来获取端口列表，然后选择一个端口来播放。
 </p>
 
 <pre caption="播放MIDI">
@@ -864,8 +815,7 @@ options snd-hda-intel index=1,2
 <body>
 
 <p>
-您也许想安装一些插件来获得额外的功能。<c>alsa-plugins</c>打包提供了一些有用的插件，包括: 
-PulseAudio输出，采样率转换器；jack（一个低延迟的音频服务器）和一个可以通过数字S/PDIF接口（光线或同轴电缆）输出6声道音频的编码器。您可以通过USE标记来选择安装什么插件
+您也许想安装一些插件来获得额外的功能。<c>alsa-plugins</c>打包提供了一些有用的插件，包括: PulseAudio输出，采样率转换器；jack（一个低延迟的音频服务器）和一个可以通过数字S/PDIF接口（光线或同轴电缆）输出6声道音频的编码器。您可以通过USE标记来选择安装什么插件
 </p>
 
 <pre caption="安装alsa-plugins">
@@ -879,9 +829,7 @@ PulseAudio输出，采样率转换器；jack（一个低延迟的音频服务器
 <body>
 
 <p>
-所有Gentoo ALSA指南的贡献者: Vincent Verleye, Grant Goodyear, Arcady 
-Genkin, Jeremy Huddleston, John P. Davis, Sven Vermeulen, Benny Chuang, 
-Tiemo Kieft and Erwin。
+所有Gentoo ALSA指南的贡献者: Vincent Verleye, Grant Goodyear, Arcady Genkin, Jeremy Huddleston, John P. Davis, Sven Vermeulen, Benny Chuang, Tiemo Kieft and Erwin。
 </p>
 
 </body>
