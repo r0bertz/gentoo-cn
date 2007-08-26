@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061113-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年11月13日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author>
+
+<!-- <author title="Author">
+<mail link="phnix@fastmail.net">Kyle Bishop</mail>
+</author> -->
+
+<author title="Author">
+<mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>
+</author>
+
+<author title="Author">
+<mail link="robbat2@gentoo.org">Robin H. Miller</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="chenjun.shen@gmail.com">沈辰俊</mail>
+</author>
+<author title="Translator">
+<mail link="liwenqiu@gmail.com">李文秋</mail>
+</author>
+
+<abstract>这是2006年11月13日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 46</version>
+<date>2006-11-13</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>匿名CVS和SVN现在启用</title>
+<body>
+
+<p>Gentoo<uri link="/proj/en/infrastructure">基础设施团队</uri>非常高兴地宣布他们已经完成匿名只读访问Gentoo仓库的CVS和SVN的配置和测试，而这些服务已向公众开放。</p>
+
+<p>这些匿名服务主要是为了帮助我们的非开发人员贡献者能够方便地制作补丁和修改(cvs diff/svn diff)，还能更便捷地存取gentoo官方项目的源代码。</p>
+
+<p>对于我们那些更多的热心用户，请注意CVS和SVN服务并<b>不</b>比可通过rsync服务获得的文件及时，而且可能要晚更新30分钟，主要是需要装载到不同的机器上。请不要仅仅因为认为会更快获得文件树或者感觉这样很酷就切换到CVS。相比我们的rsync发布方法。这些匿名服务可以利用的资源相当有限（包括处理过程和带宽）。Gentoo基础设施团队会毫不犹豫地封杀那些滥用这个服务的IP地址。</p>
+
+<p><b>CVS</b></p>
+
+<p>CVS限制为最多5个并发用户，当前提供如下仓库：gentoo，gentoo-projects，gentoo-src和gentoo-x86</p>
+
+<pre caption="从CVS中检出">
+$ cvs -d :pserver:anonymous@anoncvs.gentoo.org/var/cvsroot co &lt;repo&gt;
+</pre>
+
+<p><b>SVN</b></p>
+
+<p>SVN提供如下仓库：apache，baselayout，catalyst，devmanual，eselect，genkernel，gentoo-alt，gentoo-python，gentoo-syntax，gentoo-vdr，gentoolkit，gli，glsr，hardened，hwdata，keychain，linux-patches，livecd-tools，portage，sandbox</p>
+
+<pre caption="从SVN中检出">
+$ svn co http://anonsvn.gentoo.org/repositories/&lt;repo&gt;
+</pre>
+
+<p>这项服务的首页是<uri>http://anoncvs.gentoo.org/</uri>。上面有可用仓库的完整列表，也包括完整的说明和警告信息。</p>
+
+<p>对于可能发生的任何错误，请提交一个基础设置（Infrastructure）<uri link="http://bugs.gentoo.org/enter_bug.cgi?product=Gentoo%20Infrastructure">bug</uri>。</p>
+
+<p>之前讨论的对cvs gzip压缩的屏蔽将不获执行，因为CPU使用率不是问题。不过因为服务器带宽的限制，最大同时在线用户的数量被相应降低了。</p>
+
+<p>感谢kengland，robbat2，kingtaco，ramereth等人，是他们帮助实现了这一切。</p>
+
+</body>
+</section>
+
+<section>
+<title>Engine Yard用Gentoo集群来提供Ruby on Rails服务。</title>
+<body>
+
+<p>Engine Yard使用基于Gentoo的集群来做它的Ruby on Rails部署服务。这个地址<uri>http://qualityhumans.com/images/tom_ezra_gentoo.mov</uri>上有一个视频。在这段视频里，他们讲解了Gentoo是怎样帮助他们设计他们的服务的，并且他们赞扬了Gentoo的可定制性。他们还做了几个对Gentoo的幽默的评价，比如“我深信所有其他的发行版都是建立的Gentoo的基础上的”。然后他们接着描述了他们即将诞生的Xen domU镜像，这将是一个基于Gentoo的Ruby on Rails开发环境。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<section>
+<title>gentoo-user</title>
+<body>
+
+<p><b>链接到chroot之外的符号连接</b></p>
+
+<p>Brian Davis想在一个chroot环境里来运行他的Apache服务器。但是他不想把图片和其他内容拷贝到chroot里去。他想知道他是否可以创建符号连接连到chroot之外的内容。</p>
+
+<p>有gentoo用户指出这种情况符号连接不起作用，并建议使用<c>mount --bind</c>来代替。</p>
+
+<pre caption="使用mount的--bind参数">
+# mount --bind /source /chroot/target
+</pre>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_103623.xml</uri></li>
+</ul>
+
+<p><b>Gentoo新手。第一次尝试启动时遇到了困难</b></p>
+
+<p>Jon M把<c>/dev/hda3</c>作为他的根分区，使用ReiserFS。但是，当他尝试启动的时候，他收到了这样的错误信息“VFS: Cannot open root device "hda3" or unknown-block(0,0)”。</p>
+
+<p>Richard Fish回复说“unknown-block(0,0)”表明内核找不到hda3对应的设备。这个症状可能是因为Jon没有把他的IDE芯片组所需要的驱动或者整个IDE支持编译进内核所造成的。</p>
+
+<p>Jon M查看了一下他的内核的.config文件，发现他确实没有编译他的芯片组的驱动。</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_103578.xml</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-dev -->
+
+<!-- gentoo-catalyst -->
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+</chapter>
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Alexander Færøy （eroyf）用户关系/Alpha/MIPS</li>
+<li>Cédric Krier（cedk）netmon团队</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>NVIDIA显卡驱动：权限提升漏洞</title>
+<body>
+
+<p>NVIDIA显卡驱动存在一个漏洞，使得本地账号可以通过X会话获得权限提升。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-03.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Bugzilla：多个漏洞</title>
+<body>
+
+<p>Bugzilla存在跨站脚本攻击（cross-site scripting）、脚本注入（script, injection）、以及请求伪造（request forgery）的漏洞。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-04.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Netkit FTP服务器：权限提升</title>
+<body>
+
+<p>一个错误的seteuid()调用使得FTP用户可越权访问一些文件或目录。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-05.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Upcoming package removals -->
+
+<chapter>
+<title>即将移除的包</title>
+
+<section>
+<body>
+
+<p>这个列表里的包是已经宣布将来会被删除的。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。</p>
+
+</body>
+</section>
+
+<section>
+<title>最后的仪式：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>games-fps/ut2004-domain2049</ti>
+<ti>2006年12月10日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-db/dbbalancer</ti>
+<ti>2006年12月10日</ti>
+<ti><mail link="dev-zero@gentoo.org">Tiziano Mueller</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bug-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年11月5日到2006年11月12日，这个站点记录下了：</p>
+
+<ul>
+<li>753个在这段时间内被发现的新bug</li>
+<li>484个在这段时间内被修正或解决的bug</li>
+<li>15个先前修复了的但在这段时间重现的bug</li>
+<li>183个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>181个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的10914个bug里面：29个被标记为"blocker"，103个被标记为"critical"，还有487个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，34个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，30个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+<li><mail link="pgsql-bugs@gentoo.org">PgSQL Bugs</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=pgsql-bugs@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，21个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=x11-drivers@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;resolution=FIXED&amp;assigned_to=sound@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=x11-drivers@gentoo.org">新bug</uri></li>
+<li><mail link="sanchan@gentoo.org">Sandro</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=sanchan@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=java@gentoo.org">新bug</uri></li>
+<li><mail link="x11@gentoo.org">Gentoo X-windows维护者</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=x11@gentoo.org">新bug</uri></li>
+<li><mail link="nerdboy@gentoo.org">Steve Arnold</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-05&amp;chfieldto=2006-11-12&amp;assigned_to=nerdboy@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的职员是由为之提交想法和文章的志愿者和社区成员组成的。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者只是有点想法或文章要提交给GWN，请你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

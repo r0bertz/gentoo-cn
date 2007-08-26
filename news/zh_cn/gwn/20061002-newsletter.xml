@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061002-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年10月02日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="ellingsw@cebridge.net">Steven W. Elling</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+
+<abstract>这是2006年10月02日的Gentoo周报。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 40</version>
+<date>2006-10-02</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>2006.1介质已上架</title>
+<body>
+
+<p>从今天开始，<uri link="/proj/en/releng/release/2006.1/2006.1.xml">2006.1</uri> 版本的Gentoo Linux可以从官方<uri link="http://www.cafepress.com/officialgentoo/">Gentoo商店</uri>上获得。如果你正在寻找支持Gentoo发展的途径，每张售出CD中的5美元会被捐给Gentoo基金会。除了2006.1介质之外，还有帽子，帖纸，鼠标垫，短袖衫，绒线衫，甚至一款Gentoo钟！</p>
+
+</body>
+</section>
+
+<section>
+<title>Openoffice.org模板，剪贴画比赛</title>
+<body>
+
+<p>Openoffice.org的文档项目正在举办一个模板和剪贴画的比赛。作品将被收录在未来的Oppenoffice.org版本中。比赛由<uri link="http://www.worldlabel.com">WorldLabel.com</uri> 赞助，有不少奖品。项目的目标是增进OpenDocument格式模板的数量和质量，方便Oppenoffice.org用户。更多信息请看OO.o文档项目的主页<uri>http://documentation.openoffice.org/</uri>。 </p>
+
+</body>
+</section>
+
+
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<!-- forums -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<!-- gentoo-dev -->
+
+<!-- Gentoo International-->
+
+<chapter>
+<title>Gentoo国际</title>
+
+<section>
+<title>丹麦: LinuxParty, Roskild</title>
+<body>
+
+<p>Linuxparty.dk Roskilde 2006 9月22日和9月24日之间在丹麦Roskide成功举行。Gentoo的四位开发成员和一位前开发成员，以及许多的丹麦Gentoo用户参加了这次的会议。<mail link="kloeri@gentoo.org">Bryan Østergaard</mail>发表了两场演讲。一场是关于成为一个像Gentoo这样的大型开源项目的一员，另外那场的话题是关于SELinux。</p>
+
+<ul>
+<li><uri>http://pics.stener.nu/linuxparty/</uri></li>
+<li><uri>http://ostebaronen.dk/galleri/?g=linuxparty_2006</uri></li>
+<li><uri>http://wiki.linuxparty.dk/</uri>（丹麦文）</li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo in the press -->
+
+<!-- <chapter>
+<title>Gentoo in the press</title>
+
+</chapter> -->
+
+<!-- Tips and Tricks -->
+
+<chapter>
+<title>心得技巧</title>
+
+<section>
+<title>在portage中使用'until'</title>
+<body>
+
+<p>您有过这样的经历吗？当您更新system或world的时候，离开几个小时回来后却发现仅因为某个包失败而导致更新没有完成。</p>
+
+<p>下列简单的命令和bash的“until”命令可以让您更新world或system至完成并跳过那些失败的软件包：</p>
+
+<pre caption="使用until来略过有问题的包">
+# sudo emerge -Du world ||
+# until sudo emerge --resume --skipfirst; do
+# sudo emerge --resume --skipfirst; done
+</pre>
+
+<p>一旦命令执行完毕，您可以用以下命令找出哪些软件包更新失败：</p>
+
+<pre caption="检查安装失败的包">
+# emerge -Dup world
+</pre>
+
+<warn>在某些情形下，这将导致系统不稳定。使用此技巧前请务必检查<c>emerge -Dup world</c>的输出结果。</warn>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li>Sven Vermeulen (swift)</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Tristan Heaven (nyhm)游戏团队</li>
+<li>Tiziano Müller (dev-zero) PostgreSQL团队</li>
+<li>Jim Ramsay (lack) Rox团队</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>ImageMagick：多个漏洞</title>
+<body>
+
+<p>ImageMagick中发现了多个缓冲区溢出，有可能导致任意代码的执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-14.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>GnuTLS：RSA签名伪造</title>
+<body>
+
+<p>GnuTLS中对于无法处理过量数据的问题将使得攻击者能够伪造PKCS #1 v1.5的签名。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-15.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Tikiwiki：任意命令执行</title>
+<body>
+
+<p>Tikiwiki包含了一个跨站点脚步（XSS）漏洞和一个能使远程执行任意代码的漏洞。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-16.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>OpenSSH：拒绝服务</title>
+<body>
+
+<p>OpenSSH后台程序里一个漏洞可允许未验证身份的用户远程发动拒绝服务攻击。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-17.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Opera：RSA签名伪造</title>
+<body>
+
+<p>Opera在验证某些签名时会失败。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-18.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Mozilla Firefox：多个漏洞</title>
+<body>
+
+<p>Mozilla基金会报告了多个关于Mozilla Firefox的安全漏洞，其中一个可以导致任意代码的执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-19.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>DokuWiki：Shell命令注入和拒绝服务</title>
+<body>
+
+<p>DokuWiki的漏洞可遭受shell命令注入攻击，在使用ImageMagick时还可遭受拒绝服务攻击。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-20.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+<li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+<li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年9月24日到2006年10月1日，这个站点记录下了：</p>
+
+<ul>
+<li>798个在这段时间内被发现的新bug</li>
+<li>470个在这段时间内被修正或解决的bug</li>
+<li>25个先前修复了的但在这段时间重现的bug</li>
+<li>147个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>174个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的11209个bug里面：33个被标记为"blocker"，122个被标记为"critical"，还有525个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，40个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，20个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="cluster@gentoo.org">Gentoo Linux集群团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=cluster@gentoo.org">被修正的bug</uri></li>
+<li><mail link="dev-portage@gentoo.org">Portage团队</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="robbat2@gentoo.org">Robin Johnson</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=robbat2@gentoo.org">被修正的bug</uri></li>
+<li><mail link="php-bugs@gentoo.org">PHP Bugs</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=php-bugs@gentoo.org">被修正的bug</uri></li>
+<li><mail link="vmware@gentoo.org">Gentoo VMWare Bug清理者</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;resolution=FIXED&amp;assigned_to=vmware@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，33个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，25个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="shell-tools@gentoo.org">Gentoo Shell Tools Herd Bugs</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=shell-tools@gentoo.org">新bug</uri></li>
+<li><mail link="treecleaner@gentoo.org">Gentoo树清理者项目</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=treecleaner@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="wschlich@gentoo.org">Wolfram Schlich</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=wschlich@gentoo.org">新bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=netmon@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-24&amp;chfieldto=2006-10-01&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<!-- <li>
+<uri link="/news/tr/gwn/gwn.xml">Turkish</uri>
+</li> -->
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

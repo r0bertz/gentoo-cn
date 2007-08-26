@@ -1,0 +1,400 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/openmosix-howto.xml">
+  
+<title>Gentoo 中的 openMosix 集群</title>
+
+<author title="Author"><mail link="tantive@gentoo.org">Michael Imhof</mail>
+</author>
+
+<author title="Author"><mail link="ma53@drexel.edu">Michael Andrews</mail>
+</author>
+
+<author title="Reviewer"><mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+
+<author title="Reviewer"><mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+
+<author title="Translator"><mail link="liqiang@iscas.cn">Zhang Liqiang</mail>
+</author>
+
+<license/>
+
+<abstract>
+这个HOWTO会帮助你使用 gentoo 创建 openMosix 集群
+</abstract>
+
+<version>1.3</version>
+<date>2003年11月20日</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>关于本 HOWTO</title>
+<body>
+
+<p>这个 HOWTO 会帮助你建立一个 openMosix 集群。它基于 Gentoo Linux d发布。
+我有意使文档尽可能的友好，迎合 Linux 新手的需要。
+当一个有经验的用户可以轻松的把 openMosix，无盘节点和网络方面的 HOWTO 扎在一起的时候，
+我还在这个 HOWTO 上有各种我希望能够缓解的困难。
+</p>
+
+<note>
+如果你计划使用无盘节点来建立你的 openMosix 集群，你要阅读下面内核部分，
+来学习如何编译 openMosix 支持的内核，然后阅读我们的 
+<uri link="diskless-howto.xml">无盘 HOWTO</uri>，再回来这里，继续进行实际的内核安装。
+</note>
+
+</body>
+</section>
+<section>
+<title>关于 openMosix</title>
+<body>
+
+<p>
+openMosix 是一个Linux内核补丁，允许多个主机充当单系统镜像（SSI）。
+这使得多个主机<e>看起来</e>像是一个多处理器的大主机。
+写作本文档的时候，我正在用最新的 openMosix 内核补丁，版本 2.4.20，openMosix 用户工具版本 0.2.4-r4。
+在 <uri>http://openmosix.sourceforge.net</uri> 有非常广泛的关于 openMosix 的信息。
+当我尝试集群不同版本修补过的内核源码时曾有过困难，并且发现补丁并不向后兼容。 
+当执行a.out或ELF格式二进制，或者重量级进程 fork时， OpenMosix 明确的迁移重量级进程。 
+它不能迁移多线程的进程，或是使用共享内存的重量级进程。
+</p>
+
+<p>
+要得到更多关于openMosix的信息访问他们的 <uri
+link="http://openmosix.sourceforge.net">主页</uri>.
+</p>
+
+</body>
+</section>
+<section>
+<title>关于集群</title>
+<body>
+
+<p>
+我们的集群由共享运算资源的独立计算机（节点）组成，以增进全部节点的运算能力。
+并不需要所有节点的构架相同，不过那将会使组建集群的任务更加容易。
+</p>
+
+</body>
+</section>
+<section>
+<title>开始之前</title>
+<body>
+
+<p>
+你应当已经在你的主节点上安装了 Gentoo，
+并且上面有足够的空间存放要host从节点的文件系统。  
+另外，你应当有 openMosix 内核源码，已经由 Gentoo 方便的补丁过的。
+</p>
+
+<p>
+要得到源码，简单的使用 <c>emerge</c>，键入：
+</p>
+
+<pre caption="获得补丁过的内核源码">
+# <i>emerge openmosix-sources</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>配置内核</title>
+<section>
+<title>关于内核</title>
+<body>
+
+<p>
+内核是处在你的硬件和你在机器上加载的所有其他软件之间的软件，本质上说内核是操作系统的基本。
+当你的计算机启动，BIOS 执行在硬盘引导空间找到的指令。这些指令一般就是加载你内核的引导程序。
+当你的内核被加载后，所有的进程都将由内核处理（管理）。 
+</p>
+
+<p>
+要得到更多内核与内核配置的信息，可以查看这个很有帮助的 HOWTO， 
+<uri>http://www.tldp.org/HOWTO/Kernel-HOWTO.html</uri>.
+</p>
+
+</body>
+</section>
+<section>
+<title>配置内核</title>
+<body>
+
+<p>
+内核可以如你所想的大和定制，但是有一些内核选项不能选。
+</p>
+
+<impo>
+像下边这样，把 <path>/usr/src/linux</path> 链接到 
+openmosix-sources 目录是极其重要的。
+</impo>
+
+<pre caption="链接 /usr/src/linux 到 openmosix">
+# <i>cd /usr/src</i>
+# <i>rm linux</i>
+# <i>ln -s linux-2.4.22-openmosix linux</i>
+</pre>
+
+<p>
+然后进入你的内核配置过程：
+</p>
+
+<pre caption="编辑内核配置">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+你会见到一个灰头土脸的 GUI，提供一个比手工修改 <path>/usr/src/linux/.config</path> 文件更安全的选择。
+如果你的内核已经工作良好，你可能要退出 GUI，保存当前的配置文件。键入：
+</p>
+
+<pre caption="备份主节点内核配置">
+# <i>cp .config .config_working</i>
+</pre>
+
+<p>
+在 GUI 中，最顶上的菜单项应当是 <c>openMosix ---</c>。
+如果不是的话，你需要 emerge 带有 openMosix 补丁的内核源码。
+(<uri link="#doc_chap1_pre1">code listing 1.1</uri>)。
+进入下面的子菜单，确保下列项目选为内建<e>而不是</e>模块。
+</p>
+
+<pre caption="Menuconfig options">
+openMosix ---&gt;
+    [*] openMosix process migration support
+    [ ] Support clusters with a complex network topology
+    [*] Stricter security on openMosix ports
+    (1) Level of process-identity disclosure (0-3)
+    [*] openMosix File-System
+    [ ] Poll/Select exceptions on pipes
+    [ ] Disable OOM Killer
+    [ ] Load Limit
+
+Code maturity level options  ---&gt;
+    [*] Prompt for development and/or incomplete code/drivers
+
+Networking options ---&gt;
+    &lt;*&gt; Packet socket
+    [ ]   Packet socket: mmapped IO
+    &lt; &gt; Netlink device emulation
+    [ ] Network packet filtering (replaces ipchains)
+    [ ] Socket Filtering
+    &lt;*&gt; Unix domain sockets
+    [*] TCP/IP networking
+    [*]   IP: multicasting
+
+File systems ---&gt;
+    [*] /proc file system support
+    [*] /dev file system support (EXPERIMENTAL)
+    [*]   Automatically mount at boot 
+</pre>
+
+<note>
+这些内核配置只是应当附加在你的系统特定配置上，而不是完全取代那些选项。
+</note>
+
+
+<p>
+当你重新配置主节点内核之后，重新编译：
+</p>
+
+<pre caption="重编译内核和模块">
+# <i>make dep</i>
+# <i>make clean bzImage modules modules_install</i>
+<comment>（确保 /boot 在复制前已经加载）</comment>
+# <i>cp arch/i386/boot/bzImage /boot/bzImage-openmosix</i>
+</pre>
+
+<p>
+要为你的新内核增加项目到你的 <path>lilo.conf</path> 或者
+<path>grub.conf</path> （取决于你使用哪种启动引导器）并使新内核成为缺省。
+现在新的 <path>bzImage</path> 已经复制到你的 <path>/boot</path> 目录，
+你需要做的就是重新启动。
+</p>
+
+</body>
+</section>
+<section>
+<title>缺少选项</title>
+<body>
+
+<p>
+如果你的内核配置缺少某些选项，确定你选中了下面的：
+</p>
+
+<ul>
+<li>Code maturity level options ---</li>
+<ul><li>Prompt for development and/or incomplete code/drivers</li></ul>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>openMosix 节点的配置</title>
+<section>
+<title>安装 openMosix 用户工具</title>
+<body>
+
+<p>
+为了使集群能够迁移进程，需要安装一些用户方程序。
+另外，需要启动 openMosix 服务来使一个节点加入集群，并且应用 openMosix 所有能力。
+要得到这些程序和文件，使用 <c>emerge</c>：
+</p>
+
+<pre caption="安装 openMosix 用户方实用工具">
+# <i>emerge openmosix-user</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>配置 openMosix 节点</title>
+<body>
+
+<p>
+编辑或创建 <path>/etc/openmosix.map</path> 已经不需要了。
+新版本的用户方实用程序有自动搜索守护进程，可以自动的探测你网络中的所有节点。
+</p>
+
+<p>
+在所有节点上创建 <path>/mfs</path> 目录并且如果你要使用 openMosix 文件系统的话加载它（强烈建议），
+允许你访问你的所有节点。
+</p>
+
+<pre caption="mkdir /mfs">
+# <i>mkdir /mfs</i>
+</pre>
+
+<pre caption="/etc/fstab 中的示例项">
+none                    /mfs            mfs             noauto,dfsa=1          0 0
+</pre>
+
+
+<note>
+不需要所有的节点都运行来使 openMosix 功能正常。
+</note>
+
+</body>
+</section>
+<section>
+<title>启动 openMosix</title>
+<body>
+
+<p>
+启动 openMosix 真的很简单。下面的命令会启动你内核中 openMosix 的功能，
+并启动自动搜索守护进程，保持跟踪所有可用节点。
+</p>
+
+<pre caption="启动 openMosix">
+# <i>/etc/init.d/openmosix start</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>openMosix 用户方实用工具</title>
+<section>
+<title>命令行实用工具</title>
+<body>
+
+<p>
+openMosix-user 在你的系统上安装了几个有用的工具。介绍几个：
+</p>
+
+<ul>
+  <li>
+  <c>mosmon</c> - openMosix 监视器。允许你查看你所有节点的状态，包括cpu使用，安装内存，使用内存等。
+  </li>
+  <li>
+  <c>mtop</c> - top 增强版，显示在节点上实际运行的进程。
+  </li>
+  <li><c>mps</c> - ps 增强版。还显示节点号。</li>
+  <li>
+  <c>mosctl whois</c> - 这像 mosmon 一样非常有用，其它工具只能告诉你节点号。
+  通过 <c>mosctl whois nodenumber</c> 你能发现节点的 ip 或主机名。
+  </li>
+</ul>
+
+<p>
+openmosix 压力测试可以测试如果你集群中的所有都运转的话，在负载下它会怎样表现。
+这个软件包叫做 <c>openmosixtest</c>：
+</p>
+
+<pre caption="Emerge openmosixtest">
+# <i>emerge openmosixtest</i>
+</pre>
+
+<p>
+ebuild 会告诉你如何运行测试。
+</p>
+
+</body>
+</section>
+<section>
+<title>图形化实用工具</title>
+<body>
+
+<p>
+要得到你的集群的图形化概观，查看被迁移的进程，
+你可以使用 <c>openmosixview</c>.
+</p>
+
+<pre caption="Emerge openmosixview">
+# <i>emerge openmosixview</i>
+</pre>
+
+<p>
+要运行这个奇妙的应用只需键入 <c>openmosixview</c>:
+</p>
+
+<pre caption="开始 openmosixview">
+# <i>openmosixview</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>资源</title>
+<section>
+<title>openMosix</title>
+<body>
+
+<ul>
+  <li><uri>http://openmosix.sf.net</uri></li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>openMosix add-ons (ebuilds 可用)</title>
+<body>
+
+<ul>
+  <li><uri link="http://www.openmosixview.com">openMosixview</uri></li>
+  <li>
+  <uri link="http://www.openmosixview.com/omtest">openMosix stress test</uri>
+  </li>
+  <li>
+  <uri link="http://www.nongnu.org/gomd/">general openMosix daemon</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>

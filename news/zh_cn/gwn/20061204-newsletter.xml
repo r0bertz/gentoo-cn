@@ -1,0 +1,639 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061204-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年12月4日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<!-- Be sure to add yourself if you write an article -->
+
+<author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author>
+
+<author title="Author">
+<mail link="john.m.alberts@gmail.com">John Alberts</mail>
+</author>
+
+<author title="Author">
+<mail link="g@socallinuxexpo.org">Gareth J. Greenaway</mail>
+</author>
+
+<author title="Author">
+<mail link="christel@gentoo.org">Christel Dahlskjaer</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+
+<abstract>这是2006年12月4日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 49</version>
+<date>2006-12-04</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>Playstation 3上的Gentoo Linux</title>
+<body>
+
+<p>你在队伍中等候了近36小时，排除万难，最终得到了崭新的Playstation 3，现在你应该拿它来做什么呢？没错！马上安装Gentoo Linux。</p>
+
+<p>好几个人正在他们的PS3上装Gentoo。如果你也有兴趣做这件事，这里提供的一些<uri link="http://whitesanjuro.googlepages.com/">指令</uri>可以让你很快上手。作者解释了在你开始装之前你需要做什么，并且告诉你怎样做，他还给出了系统启动<uri link="http://picasaweb.google.com/whitesanjuro/Ps3DayOne/photo#4998546376786706450">Gentoo Linux PPC64 安装光盘</uri>的图片和<uri link="http://picasaweb.google.com/whitesanjuro/Ps3DayTwo/photo#4998878606740422674">系统</uri>安装好后的启动图片。</p>
+
+<p>CELL用户会感兴趣的还有<mail link="lu_zero@gentoo.org">Luca
+Barbato</mail>的开发者<uri link="http://overlays.gentoo.org/dev/lu_zero">overlay</uri>，那里有更新的CELL软件包，还有一些Luca从wiki里收集起来的信息。</p>
+
+</body>
+</section>
+
+<section>
+<title>南加州Linux Expo 5x开始注册了</title>
+<body>
+
+<p>从现在开始，SCALE 5x的注册可以在如下地址进行<uri>http://www.socallinuxexpo.org/order</uri>。先期注册的票价为60美元，可享有完全的准入许可，并可凭合法的学生证以30美元的价格购得学生票。1月24日后价格将会上扬，所以现在就注册吧。</p>
+
+<p>如果你有兴趣知道谁将会参加SCALE，参展者的列表在这里<uri>http://socallinuxexpo.com/scale5x/exhibitions.php</uri>。Gentoo将会出现于这次展会，所以大家都来支持咱们的Gentoo开发者吧！</p>
+
+<p>SCALE将会于2007年2月10日到11日，在Westin洛杉矶机场举行。对于要住宿的人，Westin为会展特别推出了特别优惠的酒店房价。酒店信息可以在这里<uri>http://socallinuxexpo.com/scale5x/location.php</uri>看到。</p>
+
+</body>
+</section>
+
+<section>
+<title>新任用户代表选出</title>
+<body>
+
+<p>11月17日星期五，George Prowse（即大伙熟知的cokehabit）离开了Gentoo用户关系项目组的用户代表一职。遗憾的是，他未能如众人所愿地适应这一职位的需求，因而选择了离开。我们非常感谢George在任其间所付出的时间与精力，祝他好运！</p>
+
+<p>同时，在2006年12月02日用户关系（项目组）和用户代表间的一个会议上，Alex Bokag，即djay-il被任命为第十一位（也就是最后一位）用户代表。这一提议获得一致通过，Alex即时接受了该职位。非常欢迎Alex的加入，望来年相互携手工作！</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<!-- gentoo-dev -->
+
+<section>
+<title>gentoo-dev</title>
+<body>
+
+<p><b>[RFC] USE_EXPAND中加入ALSA_CARDS</b></p>
+
+<p>Diego “Flameeyes” Pettenò发现alsa-drivers包没有ALSA_CARDS这个USE-expanded变量。他自己试着实现了一下并且感觉效果不错。</p>
+
+<pre caption="Diego的输出结果">
+Calculating dependencies... done!
+[ebuild   R   ] media-sound/alsa-driver-1.0.14_pre20061130  USE="-debug -doc 
+oss" 
+ALSA_CARDS="-ad1816a% -ad1848% -ad1848-lib% -ad1889% -adlib% -ali5451% -als100%
+-als300% -als4000% -aoa% -aoa-fabric-layout% -aoa-onyx% -aoa-soundbus%
+-aoa-soundbus-i2s% -aoa-tas% -aoa-toonie% -armaaci% -asihpi% -at91-soc%
+-at91-soc-eti-b1-wm8731% -atiixp% -atiixp-modem% -au1x00% -au8810% -au8820%
+-au8830% -azt2320% -azt3328% bt87x%* -ca0106% -cmi8330% -cmipci% -cs4231%
+-cs4231-lib% -cs4232% -cs4236% -cs4281% -cs46xx% -cs5535audio% -darla20%
+-darla24% -dt019x% -dummy% -echo3g% -emu10k1% -emu10k1x% -ens1370% -ens1371%
+-es1688% -es18xx% -es1938% -es1968% -es968% -fm801% -fm801-tea575x% -gina20%
+-gina24% -gusclassic% -gusextreme% -gusmax% -harmony% -hda-intel% -hdsp%
+-hdspm% -ice1712% -ice1724% -indigo% -indigodj% -indigoio% -intel8x0%
+-intel8x0m% -interwave% -interwave-stb% -korg1212% -layla20% -layla24%
+-loopback% -maestro3% -mia% -miro% -mixart% -mona% -mpu401% -msnd-pinnacle%
+-mtpav% -mts64% -nm256% -opl3sa2% -opti92x-ad1848% -opti92x-cs4231% -opti93x%
+-pc98-cs4232% -pcsp% -pcxhr% -pdaudiocf% -pdplus% -portman2x4% -powermac%
+-pxa2xx-i2sound% -pxa2xx-soc% -pxa2xx-soc-corgi% -pxa2xx-soc-poodle%
+-pxa2xx-soc-spitz% -pxa2xx-soc-tosa% -riptide% -rme32% -rme96% -rme9652%
+-s3c2410% -sa11xx-uda1341% -sb16% -sb8% -sbawe% -seq-dummy% -serial-u16550%
+-serialmidi% -sgalaxy% -soc% -sonicvibes% -sscape% -sun-amd7930% -sun-cs4231%
+-sun-dbri% -trident% -usb-audio% -usb-usx2y% via82xx%* -via82xx-modem%
+-virmidi% -vx222% -vxpocket% -wavefront% -ymfpci%" 0 kB
+</pre>
+
+<p>Diego问到有什么理由他不应该实现这个。Marius Mauch并不反对，只要默认设定合理。他指出他怀疑以上潜在驱动列表的正确性。</p>
+
+<p>Diego回应道默认情况下会编译所有的驱动。Petteri Räty反对，他认为应该像其他IUSE项目一样只有选择了才编译。但Diego提出有些IUSE默认启用所有选项(比如小包里面的LINGUAS)。无论如何，反复折衷之后，还是提议为每个架构设定默认构建列表。</p>
+
+<pre caption="x86/amd64的默认列表">
+ali5451 atiixp atiixp-modem cmipci emu10k1 emu10k1x ens1370 ens1371 fm801 
+hda-intel intel8x0 intel8x0m maestro3 mpu401 usb-audio via82xx via82xx-modem
+</pre>
+
+<pre caption="ppc的默认列表">
+aoa aoa-fabric-layout aoa-onyx aoa-soundbus aoa-soundbus-i2s aoa-tas 
+aoa-toonie powermac usb-audio
+</pre>
+
+<pre caption="sparc的默认列表">
+sun-amd7930 sun-cs4231 sun-dbri
+</pre>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-dev/msg_141321.xml</uri></li>
+</ul>
+
+<p><b>udev coldplugging和/etc/init.d/modules</b></p>
+
+<p>Sven Köhler对udev-103的coldplugging功能很恼火。数年来他通过指定<path>/etc/modules.autoload.d/kernel-2.?</path>里相关模块的加载次序确保他的网卡的次序。</p>
+
+<p>Stephen Bennet建议Sven用他网卡的MAC地址来建立udev规则，以可靠的命名他的网卡。Sven想了解更多关于使用udev和网卡的信息，Jean-François Gagnon Laporte建议他去看看<uri link="http://www.reactivated.net/writing_udev_rules.html#example-netif">Daniel Drake的udev规则页面的相关部分</uri>。</p>
+
+<p>内核黑客和udev之父Greg Kroah-Hartman也跳出来维护他视同孩子般的作品。Sven最好使用udev来指定网卡的名字。如果他真的想从公式里去掉udev，他可以将模块放入udev的黑名单中(blacklist)，并且像他以前做的那样手动启动这些模块。如果选择后者，他需要稍等一下，因为udev的黑名单功能正在修复中。</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-dev/msg_141352.xml</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-catalyst -->
+
+<!-- gentoo-cluster -->
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+</chapter>
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+
+<chapter>
+<title>心得技巧</title>
+
+<section>
+<title>一个简单的更新你的world的方法</title>
+<body>
+
+<p>毫无疑问，Gentoo最好的特性之一就是她的软件包管理系统，Portage。Portage使得更新整个系统只需要一条简单的命令。可惜的是，有时候事情不会像想像中的那么顺利。几乎每一个Gentoo用户都有过这样的经历，睡前敲入命令<c>emerge -uD world</c>，然后钻进被窝满心希望早晨醒来的时候看到一个崭新的系统。但不幸的是，醒来的时候发现200个软件包安装到第三个的时候就失败而中断了。然后就需要排除故障并且开始<c>emerge --resume</c>。</p>
+
+<p>输入update-world来省下你宝贵的时间。Update-world是一个bash脚本，是count_zero写的并于最近在论坛中<uri link="http://forums.gentoo.org/viewtopic-t-497125.html">贴出</uri>。这个脚本控制更新的过程并且强制portage跳过失败的包继续编译余下的包直到完成。最后编译失败的软件包将被加入一个列表中方便以后查阅。</p>
+
+<note>这个脚本需要用到“equery”命令，也就是说需要app-portage/gentookit这个软件包。</note>
+
+<p>显然在使用之前需要先下载，把它放到某个path路径下，加上执行权限。</p>
+
+<pre caption="获得脚本">
+# <i>wget -O /usr/bin/update-world http://countzero.amidal.com/files/update-world</i>
+# <i>chmod +x /usr/bin/update-world</i>
+</pre>
+
+<p>现在我们准备好了，可以开始使用这个脚本了。</p>
+
+<pre caption="运行update-world">
+# <i>update-world --prepare</i>
+</pre>
+
+<p>这条命令通过创建一个将要emerge的软件包列表(像<c>emerge -uD --newuse world</c>那样的)来开始升级过程。（或者您可以用<c>update-world --empty</c>创建系统上所有软件包的列表，和<c>emerge -e world</c>一样。）此命令在~/.update-world/下创建一个名叫“emergelist”列表。现在，您可以用最喜欢的编辑器随便修改这个列表——移除软件包，修改版本等等。当您觉得满意的时候，请继续下一步：</p>
+
+<pre caption="运行update-world（续）">
+# <i>update-world --install</i>
+</pre>
+
+<p>这条命令启动编译过程，就像emerge -uD world那样。两者的不同之处在于，如果某个软件包由于某些原因编译失败，它将被加入~/.update-world/下的“failedlist”列表。同时，将为那个包的portage日志文件（通常在/var/log/portage）建立一个链接，放在 ~/.update-world/[date]/log/。当升级结束时，您将一次得到所有编译失败的软件包列表，省去了不少时间。如果您需要中途停止，只需要“Control-C”。升级可以在任何时候恢复，并且从上次停止的地方开始，只需要再次输入<c>update-world --install</c>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li>Stuart Herbert (Stuart)</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Alexander Gabert (pappy) 系统安全团队</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>Kile：错误地备份文件权限</title>
+<body>
+
+<p>Kile备份文件使用默认权限，潜在地造成了信息暴露。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-21.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Ingo H3: 文件夹名shell命令注入</title>
+<body>
+
+<p>当处理procmail规则时，Ingo H3会暴露于任意shell命令执行攻击之中。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-22.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Mono: 不安全地临时文件创建</title>
+<body>
+
+<p>Mono暴露出链接攻击，潜在地允许本地用户重写任何文件。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-23.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>LHa: 多个安全漏洞</title>
+<body>
+
+<p>LHa受数个漏洞影响，其中包括远程任意代码执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-24.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>OpenLDAP: 拒绝服务漏洞</title>
+<body>
+
+<p>OpenLDAP里的一个瑕疵可以让远程未获认证的攻击者拒绝服务攻击得手。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-25.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>ProFTPD：远程执行任意代码</title>
+<body>
+
+<p>ProFTPD受数个漏洞影响，可以允许远程任意代码执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-26.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Upcoming package removals -->
+
+<chapter>
+<title>即将移除的包</title>
+
+<section>
+<body>
+
+<p>这个列表里的包是已经宣布将来会被删除的。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。</p>
+
+</body>
+</section>
+
+<section>
+<title>最后的仪式</title>
+<body>
+
+<!-- paste from email -->
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>app-xemacs/liece</ti>
+<ti>2006年12月26日</ti>
+<ti><mail link="graaff@gentoo.org">Hans de Graaff</mail></ti>
+</tr>
+
+<tr>
+<ti>net-p2p/gtkhx</ti>
+<ti>2006年12月26日</ti>
+<ti><mail link="beandog@gentoo.org">Steve Dibb</mail></ti>
+</tr>
+
+<tr>
+<ti>=net-misc/nxserver-personal-1.5*</ti>
+<ti>2006年12月27日</ti>
+<ti><mail link="stuart@gentoo.org">Stuart Herbert</mail></ti>
+</tr>
+
+<tr>
+<ti>=net-misc/nxserver-businessl-1.5*</ti>
+<ti>2006年12月27日</ti>
+<ti><mail link="stuart@gentoo.org">Stuart Herbert</mail></ti>
+</tr>
+
+<tr>
+<ti>=net-misc/nxserver-enterprise-1.5*</ti>
+<ti>2006年12月27日</ti>
+<ti><mail link="stuart@gentoo.org">Stuart Herbert</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/vlms</ti>
+<ti>2006年12月29日</ti>
+<ti><mail link="zzam@gentoo.org">Matthias Schwarzott</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/vls</ti>
+<ti>2006年12月29日</ti>
+<ti><mail link="zzam@gentoo.org">Matthias Schwarzott</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/libvideogfx</ti>
+<ti>2006年12月29日</ti>
+<ti><mail link="zzam@gentoo.org">Matthias Schwarzott</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/sampeg3</ti>
+<ti>2006年12月29日</ti>
+<ti><mail link="zzam@gentoo.org">Matthias Schwarzott</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bug-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年11月26日到2006年12月03日，这个站点记录下了：</p>
+
+<ul>
+<li>688个在这段时间内被发现的新bug</li>
+<li>440个在这段时间内被修正或解决的bug</li>
+<li>24个先前修复了的但在这段时间重现的bug</li>
+<li>171个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>209个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的10698个bug里面：27个被标记为"blocker"，106个被标记为"critical"，还有457个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，35个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="treecleaner@gentoo.org">树清理者项目</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=treecleaner@gentoo.org">被修正的bug</uri></li>
+<li><mail link="media-video@gentoo.org">media-video团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=media-video@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，18个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=netmon@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，27个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="alpha@gentoo.org">Alpha Porters</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=alpha@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=x11-drivers@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+<li><mail link="mips@gentoo.org">mips团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=mips@gentoo.org">新bug</uri></li>
+<li><mail link="x11@gentoo.org">Gentoo X-windows维护者</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=x11@gentoo.org">新bug</uri></li>
+<li><mail link="media-video@gentoo.org">media-video团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-11-26&amp;chfieldto=2006-12-03&amp;assigned_to=media-video@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的职员是由为之提交想法和文章的志愿者和社区成员组成的。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者只是有点想法或文章要提交给GWN，请你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

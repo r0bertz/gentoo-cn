@@ -1,0 +1,1560 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/tw/gentoo-howto.xml,v 1.1 2004/08/20 09:17:21 ccpz Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- rev 1.50 by Tien-Ren Chen -->
+<guide link="/doc/en/gentoo-howto.xml">
+<title>Gentoo Ebuild 開發者指南</title>
+<author title="Author">
+  <mail link="woodchip@gentoo.org">Donny Davies</mail>
+</author>
+<author title="Author">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="Author">
+  <mail link="pete@gentoo.org">Peter Gavin</mail>
+</author>
+<author title="Author">
+  <mail link="karltk@gentoo.org">Karl Trygve Kalleberg</mail>
+</author>
+<author title="Author"><!-- zhen@gentoo.org -->
+  John P. Davis
+</author>
+<author title="Author">
+  <mail link="vapier@gentoo.org">Mike Frysinger</mail>
+</author>
+<author title="Editor">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="Editor">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="Editor">
+  <mail link="klasikahl@gentoo.org">Zack Gilburd</mail>
+</author>
+<author title="Editor">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="Editor">
+  <mail link="erwin@gentoo.org">Erwin</mail>
+</author>
+<author title="Translator">
+  <mail link="trchen1033@gmail.com">Tien-Ren Chen</mail>
+</author>
+
+<abstract>
+這份文件用來描述 Gentoo Portage 系統, 以及如何為 Gentoo 建立新的套件,
+同時也作為 Gentoo 開發者某種程度上的準則.
+它目前還是個半成品, 還在不斷的更新與修改, 因此它的內容不可能完備.
+最好結合 portage 提供的 manpages (特別是 ebuild(5)) 以及 Gentoo Development Policy 一起閱讀.
+</abstract>
+
+<version>1.4.16</version>
+<date>2004年07月04日</date>
+
+<sections>
+<section>
+<title>Portage 目錄樹</title>
+<subsection>
+<title>簡介</title>
+<body>
+
+<p>
+Portage 目錄樹通常是放在 <path>/usr/portage</path> 底下,
+使用階層方式管理, 由許多分類目錄組成, 分類目錄之下放著個別套件目錄.
+這邊取個例子; 你可以在 <path>/usr/portage/sys-apps/util-linux</path> 目錄中
+找到 <path>util-linux-2.11y.ebuild</path> 這個檔案.
+裡頭除了 <path>util-linux-2.11y.ebuild</path> 以外可能也有一些其它版本 <c>util-linux</c> 的 ebuild 檔.
+一個套件的所有 ebuild 檔(不管是哪個版本)在 <path>/usr/portage</path> 中共用同一個 <path>分類/套件名稱</path> 目錄.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>從 CVS 中取出 Portage 目錄樹</title>
+<body>
+
+<p>
+如果你不熟悉 CVS 系統的操作, 請先閱讀
+<uri link="http://www.gentoo.org/doc/en/cvs-tutorial.xml">CVS Tutorial</uri>
+以取得更多資訊.
+</p>
+
+<p>
+你可以在 Gentoo Linux 目錄樹中的 gentoo-x86 模組(module)裡面找到 Portage 目錄樹.
+要取出這個模組(大約 350 MB), 你必須先參考上述那篇指南將 CVS 設定好,
+然後再 check out <c>gentoo-x86</c> 模組.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>哪些東西(不)該放進 Portage 目錄樹</title>
+<body>
+
+<p>
+在開始撰寫任何 ebuild 之前, 先到<uri link="http://bugs.gentoo.org/">bugs.gentoo.org</uri>
+去看看是否已經有與你想寫的相同, 卻還沒收進 Portage 中的 ebuild 檔.
+到<uri link="http://bugs.gentoo.org/">bugs.gentoo.org</uri>, 按下 query;
+在 product 欄位選擇 <e>Gentoo Linux</e>, component 選擇 <e>ebuilds</e>.
+在 search 欄位填入你要的 ebuild 名稱, 而 status 選擇 NEW, ASSIGNED, REOPENED 以及 RESOLVED
+(RESOLVED 尤其重要), 然後送出查詢.
+<uri link="http://bugs.gentoo.org/query.cgi?product=Gentoo%20Linux&amp;component=Ebuilds&amp;bug_status=UNCONFIRMED&amp;bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;bug_status=RESOLVED">在此</uri>提供一個懶人連結.
+</p>
+
+<p>
+一般來說, Portage 目錄樹只應該用來儲存 <path>.ebuild</path> 檔,
+以及其他相關伴隨的小檔案, 像是修補檔或是設定檔範例.
+這些伴隨的檔案應該被放置在 <path>/usr/portage/分類/套件名稱/files</path> 目錄之中,
+以維持 <path>分類/套件名稱</path> 主目錄的整齊清潔.
+這條規則有個例外就是對於所有大的修補檔應該被放入 Gentoo 的鏡像站中,
+那樣可以避免不必要的頻寬與磁碟空間的浪費.
+另外, 一般來說, 開發者最好不要把二進位檔 (非 ASCII 檔) 放進 CVS 中.
+但是如果有其必要性 (比方說, 如果你為了某些理由必須加入一個小小的 PNG 圖片,
+請確認你用了 <c>-kb</c> 參數將它加進 CVS, 像這樣:)
+</p>
+
+<pre caption="將二進位檔加進 CVS">
+# <i>cvs add -kb myphoto.png</i>
+</pre>
+
+<p>
+<c>-kb</c> 參數會告訴 CVS <path>myphoto.png</path> 是個二進位檔而進行特別的處置.
+像是合併兩個不同修改版本的變更, 就顯而易見的理由是不能進行的.
+另外, 說到合併更動部分, 任何加進 Portage 的修補檔一般來說都<e>不</e>應該被壓縮過.
+這樣才能讓 CVS 自動合併更動部分並告知開發者修改衝突的發生.
+</p>
+
+<p>
+記住, 當你所 commit 的套件被標示為 stable 的時候, 必須以要能夠做到使用者不需作任何的修改即可立即使用.
+請確定你包進了一組能適用於大多數系統與使用者的預設設定值. 如果你的套件目前是殘破的,
+而且你不知道要怎麼讓它順利運作, 你可以參考其他家也做了同一個套件的發佈套件.
+你可以在<uri link="http://cvs.mandrakesoft.com/cgi-bin/cvsweb.cgi/SPECS/">Mandrake</uri>或
+<uri link="http://www.debian.org/distrib/packages">Debian</uri>找到一些範例.
+</p>
+
+<p>
+請檢查再檢查你的 ebuild 檔並參考 <uri
+link="/doc/en/ebuild-mistakes.xml">Common Gentoo Ebuild Mistakes</uri> 這篇文章.
+</p>
+
+<p>
+當要 commit 進 CVS 時, 任何開發者都應該用 <c>repoman commit</c> 而不是
+<c>cvs commit</c> 來送出 ebuild 檔. 在進行 commit 之前, 請先執行 <c>repoman full</c>
+以確定你沒有忘記什麼事情.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>CVS Commit 規章</title>
+<body>
+
+<ul>
+<li>在 commit 之前一定要先執行 <c>repoman scan</c></li>
+<li>在 commit 之前最好先執行 <c>repoman full</c></li>
+<li>在 commit 之前一定要用 <c>emerge --pretend mypkg</c> 測試
+<path>package.mask</path>沒有問題, 並確認沒有包含任何衝突.</li>
+<li>在 commit 之前一定要先更新好 <path>ChangeLog</path></li>
+<li>在 commit 新的 package 之前先 commit 新的 <path>package.mask</path>,
+以免在 commit <path>package.mask</path> 時才發現衝突.</li>
+<li>進行 commit 必須一次到位, 除非你想搞爛使用者的系統, 不然當你
+commit 一個伴隨新的授權條文或是被 mask 住的套件時, 請先 commit 修改過的
+<path>package.mask</path>, 然後再<e>一次</e> commit 所有的東西, 包含 ebuild 檔,
+<path>ChangeLog</path> 以及授權條文.</li>
+</ul>
+
+</body>
+</subsection>
+
+<subsection>
+<title>files 目錄</title>
+<body>
+
+<p>
+如同先前所提到的, 每個個別套件的子目錄底下都有個 <path>files/</path>目錄.
+任何你的套件所需要的修補檔, 組態設定檔, 或其他補助檔案都應該被丟進這個目錄.
+你可以考慮將你所寫來使得套件能正常編譯的修補檔用自己的版本號來命名,
+像是 <path>套件名稱-1.0-gentoo.diff</path> 或是更簡潔的 <path>1.0-gentoo.diff</path>.
+另外注意, 檔名多加上的 <path>gentoo</path> 可以告訴人們這個修補檔是由我們
+Gentoo Linux 的開發者所製作的, 而不是從某個群組信件或者其它地方取來的.
+再提醒一次, 不要壓縮這些 diff 檔, 因為 CVS 並不是很會處理這些二進位檔.
+</p>
+
+<p>
+你可以考慮為每個你放進 <path>files/</path> 目錄的檔案命名時加上一些前置或後置的修飾字(像是 <path>套件名稱-1.0</path>),
+這樣為不同版本的 ebuild 所用的附加檔會比較好互相分辨,
+而不同修訂版本間的差異也會比較顯而易見. 這樣做通常會比較好 :).
+如果你想要對某個修補檔標註更多意義解釋, 你也可以用更多不同的後置修飾字.
+</p>
+
+<p>
+如果你一次要把很多檔案丟進 <path>files/</path> 目錄,
+你可以考慮新增一個如 <path>files/1.0/</path> 這樣的子目錄,
+然後分別把相關的檔案丟到適當的子目錄中.
+如果你這樣做, 就可以不用為每個檔名多加版本號, 通常這樣會比較方便.
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Ebuild scripts</title>
+<subsection>
+<title>簡介</title>
+<body>
+
+<p>
+Ebuild script 們是整個 portage 系統的根本.
+它們包含了所有用來下載, 解開, 編譯, 並安裝一組原始檔,
+以及進行可能需要的安裝前置以及移除善後或是組態設定動作的資訊.
+雖然 Portage 主要是用 Python 所寫的, 但是 ebuild script 它們卻是用 bash 寫的,
+因為 bash script 可以讓我們以有如輸入在命令列的方式下指令.
+一個 ebuild script 的重要設計原則是讓它下指令的方式就像一個人手動安裝套件時所會下的指令.
+為了這個目的, 使用 bash 語法是非常適當的.
+</p>
+
+<p>
+Ebuild script 會被 <c>ebuild</c> 與 <c>emerge</c> 指令所解譯.
+你可以把 <c>ebuild</c> 想成是一個低階的編譯工具.
+它會編譯以及安裝一個單一的 ebuild, 但也只會這個.
+它會檢查有沒有相依性問題, 但是不會嘗試自己去解決.
+而 <c>emerge</c> 方面則是一個高階的 <c>ebuild</c> 引擎, 如果必要, 他有自動安裝相依套件的能力,
+使用者也可以進行 <e>假想的</e> 安裝來先確定有哪些 ebuild 會被安裝到. 除此以外還有很多其它功能.
+一般來說, <c>emerge</c> 的功能比起 <c>ebuild</c> 都來得強大, 只除了一點以外.
+用 <c>ebuild</c> 你可以每次只單步進行套件的某一個安裝動作(抓取, 解壓, 編譯, 安裝與併入系統).
+對於開發者而言這是個無價的偵錯工具, 因為它能方便你找到 ebuild 中發生問題的特定部位.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>為 ebuild 檔命名</title>
+<body>
+
+<p>
+Ebuild 檔的檔名由四個不同意義的區段所組成:
+</p>
+
+<p>
+第一段是套件的名稱, 它只能包含小寫字母, 數字 0-9, 以及任意數量的破折號 ('-') 或底線 ('_') 字元.
+這裡提供一些範例, <c>util-linux</c>, <c>sysklogd</c>, <c>mod_php</c>, 以及 <c>glibc</c>.
+</p>
+
+<p>
+第二段是套件的版本號, 一般來講是跟主要的原始碼壓縮檔用相同的版本號.
+版本號通常是由兩到三個由句點隔開的數字所組成, 像是 <c>1.2</c> 或 <c>4.5.2</c>
+(雖說非常長的, 用句點隔開的數列也是有支援的),
+而且可以允許一個單一字母緊跟在最後一位數字後; 例如 <c>1.4b</c> 或 <c>2.6h</c>.
+套件的版本與套件名稱用一個破折號連接起來; 如: <c>foo-1.0</c>, <c>bar-2.4.6</c>等.
+</p>
+
+<impo>
+如果你有考慮要在版本字串的末端加上字母尾碼的話,
+請注意字母尾碼不應該被用來標示套件的 alpha 或 beta 狀態,
+因為 alpha 與 beta 版是 <e>釋出前版本</e> 而帶有字母的修訂版則代表 <e>更新版本</e>.
+這是一個很重要的差別, 因為 Portage 用 ebuild 的版本號來決定同樣類別與名稱的不同套件的新舊次序.
+版本號忠實的表現套件的版本新舊是非常重要的, 那樣 Portage 才能正確進行相依性檢查的勤務.
+</impo>
+
+<p>
+第三段(可有可無的)包含了一個特殊的後置修飾詞; 可以是 <c>_alpha</c>, <c>_beta</c>,
+<c>_pre</c> (預先釋出版本), <c>_rc</c> (候選正式版本), 或是 <c>_p</c> (修正版).
+這些修飾字都可以伴隨一個數字; 例如 <c>linux-2.4.0_pre10</c>;
+只看版本號的這個部分而言, <c>_alpha</c> 比 <c>_beta</c> 舊, <c>_beta</c> 又比 <c>_pre</c> 舊,
+<c>_pre</c> 比 <c>_rc</c> 舊, <c>_rc</c> 比沒有修飾詞舊, 沒有修飾詞又比 <c>_p</c> 來得舊.
+這一段只用來反應上游版本.
+</p>
+
+<note>
+一個標示為 <c>_rc</c> 的套件比一個沒有標示底線修飾字的套件來得舊 (如 <c>linux-2.4.0</c>),
+而 <c>linux-2.4.0</c> 又比有字母字尾的套件來得舊, 如 <c>linux-2.4.0b</c>.
+而你應該可以猜到, <c>linux-2.4.0b</c> 又代表比 <c>linux-2.4.0c</c> 來得舊.
+再提醒一次, 版本資訊非常重要, 因為 Portage 用它來決定一個同類同名的套件或 ebuild 的新舊次序.
+</note>
+
+<p>
+套件名稱的第四段(可有可無的)是 Gentoo Linux 自己給的修訂版本,
+用 <c>-r#</c> 的方式標記, <c>#</c> 是一個整數值, 像是 <c>package-4.5.3-r3</c>.
+這個修訂號碼與套件原始檔壓縮包的版本無關,
+它只用來告知人們某個套件有新的, 改進過的 Gentoo Linux 修訂版本出來了.
+</p>
+
+<p>
+如果你對某個 ebuild 檔做了不少的改進,
+那你應該將它複製一個新檔, 並把修訂版本號加一.
+初版通常不會標明修訂版本號, 像是 <path>package-4.5.3</path>,
+而 Portage 會把它的修訂版本號當作零.
+也就是說我們的計數是像這樣的:
+<c>1.0</c> (初版), <c>1.0-r1</c>, <c>1.0-r2</c>, 以此類推.
+請記住, 不管做了什麼改變, 都<e>一定</e>要在<path>ChangeLog</path>裡面註明.
+如果你不這樣做, 那你就有了大麻煩. 你的 CVS 存取權限可能會被撤銷.
+</p>
+
+<p>
+最後我相信其實我們的 ebuild 檔名還有第五段 -- 副檔名 <c>.ebuild</c>.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Ebuild 檔的內容</title>
+<body>
+
+<note>
+這個章節將對 ebuild 檔做個大致的介紹.
+要得知所有 ebuild 檔可能包含的東西,
+有一頁 man 有探討 ebuild script 中的內部格式, 變數, 函數: <c>man 5 ebuild</c>.
+</note>
+
+<p><b>變數</b></p>
+
+<p>
+每個 ebuild 的第一個部分是由一些變數組成.
+這些變數可以分為三種類型. (標為下面幾種):
+</p>
+
+<ul>
+<li>READ: 你可以利用這些變數, 但是<e>絕對不要更動它們</e></li>
+<li>MUST: 這些變數是你<e>一定要設定的</e></li>
+<li>OPT: 這些是你最好要設定的變數</li>
+</ul>
+
+<table>
+<tr>
+  <th>變數名稱</th>
+  <th>用法</th>
+  <th>功能描述</th>
+</tr>
+<tr>
+  <ti><c>P</c></ti>
+  <ti>READ</ti>
+  <ti>套件的名稱與版本.</ti>
+</tr>
+<tr>
+  <ti><c>PN</c></ti>
+  <ti>READ</ti>
+  <ti>套件的名稱.</ti>
+</tr>
+<tr>
+  <ti><c>PV</c></ti>
+  <ti>READ</ti>
+  <ti>套件的版本.</ti>
+</tr>
+<tr>
+  <ti><c>PR</c></ti>
+  <ti>READ</ti>
+  <ti>套件的修訂版本號, 或者如果沒有就是 <c>r0</c>.</ti>
+</tr>
+<tr>
+  <ti><c>PVR</c></ti>
+  <ti>READ</ti>
+  <ti>套件的版本包含修訂版本號.</ti>
+</tr>
+<tr>
+  <ti><c>PF</c></ti>
+  <ti>READ</ti>
+  <ti>完整的套件名稱 <c>${PN}-${PV}-${PR}</c>.</ti>
+</tr>
+<tr>
+  <ti><c>A</c></ti>
+  <ti>READ</ti>
+  <ti>
+    用空白分隔開的 <c>SRC_URI</c> 中的檔名清單. 只包含檔名, 不包含完整的 URL 路徑.
+  </ti>
+</tr>
+<tr>
+  <ti><c>WORKDIR</c></ti>
+  <ti>READ</ti>
+  <ti>
+    給 ebuild 用來產生套件的根目錄. 這個目錄之外的空間不應該被拿來使用.
+  </ti>
+</tr>
+<tr>
+  <ti><c>FILESDIR</c></ti>
+  <ti>READ</ti>
+  <ti>
+  在 portage 目錄樹之中, 套件所擁有的 <path>files</path> 子目錄的路徑. 不要修改這個變數.
+  </ti>
+</tr>
+<tr>
+  <ti><c>DISTDIR</c></ti>
+  <ti>READ</ti>
+  <ti>
+  儲存所有抓下來用以產生套件的檔案的 <path>distfiles</path> 目錄.
+  一般來講就是 <path>/usr/portage/distfiles</path>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>S</c></ti>
+  <ti>OPT</ti>
+  <ti>
+    套件的原始檔路徑; 通常是 <c>${WORKDIR}/${P}</c>.
+    Portage 預設會幫你設成這個值, 所以你大可不用動它.
+  </ti>
+</tr>
+<tr>
+  <ti><c>T</c></ti>
+  <ti>READ</ti>
+  <ti>
+    套件所用的暫存路徑. 在處理 ebuild 檔的過程中它會被作為虛擬的 <path>/tmp</path> 目錄.
+  </ti>
+</tr>
+<tr>
+  <ti><c>D</c></ti>
+  <ti>READ</ti>
+  <ti>
+    套件所要裝進的根目錄, 你可以把它當成是虛擬的 <path>/</path>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>SLOT</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    Portage 能夠處理同時數個不同版本的同一程式安裝在系統中.
+    如果你想要的話, 比方說將 GCC 2.95 與 GCC 3.2 安裝在一個系統上,
+    你可以為它們的 ebuild 設定個別的 <c>SLOT</c> 值.
+    這個例子我們可以把 GCC 2.95 的 <c>SLOT</c> 設成 <c>2</c> 而把 GCC 3.2 的設成 <c>3</c>.
+	<br/>
+    <b>註</b>: 用 <c>0</c> 作為 <c>SLOT</c> 的值表示這個套件只有一個 <c>SLOT</c> 值.
+    (換言之, 這個套件沒辦法分成多個 SLOT.)
+  </ti>
+</tr>
+<tr>
+  <ti><c>LICENSE</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    這個變數記錄了這套程式所使用的授權條款, 比方說 GPL-2, BSD, 等等...
+    這一欄必須設成一個可用的授權 (可以是任何在 <path>/usr/portage/license/</path> 裡找得到的授權條款).
+    如果你要使用原本不存在的授權, 那在該 ebuild 送進 portage 之前必須先把該授權加進該目錄之中.
+  </ti>
+</tr>
+<tr>
+  <ti><c>KEYWORDS</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    這個變數現在能夠提供多種功能.
+    首先, 這個變數能標示 ebuild 檔所屬的機器架構.
+    能夠使用的關鍵字有這些: <e>x86, ppc, sparc, mips, alpha, arm, hppa, amd64, ia64</e>.
+    你應該給它能反映對象機器的設定值. Portage 不會允許一台 x86 的機器編譯 x86 架構以外的套件,
+    遵照 <c>KEYWORDS</c> 變數的內容. Portage 會自動將不支援當地平台的套件給 mask 起來.
+    如果在 <c>KEYWORDS</c> 中關鍵字的前方有個 <e>~</e> 記號,
+    則代表雖然該 ebuild 能運作, 但是還需要在更多環境進行測試才能在該平台被標為穩定等級.
+    如果在 <c>KEYWORDS</c> 中關鍵字的前方有個 <e>-</e> 記號,
+    則代表該 ebuild 已知不能在該平台下工作.
+    如果在 <c>KEYWORDS</c> 中關鍵字的前方什麼也沒有,
+    則代表該 ebuild 被公認為穩定版本.
+    經由設定 <path>make.conf</path> 中的 <c>ACCEPT_KEYWORDS</c> 變數,
+    你可以允許系統安裝這些不同類型的套件.
+  </ti>
+</tr>
+<tr>
+  <ti><c>DESCRIPTION</c></ti>
+  <ti>MUST</ti>
+  <ti>給你的套件一段<e>簡短</e>, 單行的描述.</ti>
+</tr>
+<tr>
+  <ti><c>SRC_URI</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    所有你的套件所利用的原始檔案的 URL, 以空白分隔.
+    通常第一個檔案會像這樣 &quot;ftp://ftp.company.com/pub/somepackage/${P}.tar.bz2&quot;
+  </ti>
+</tr>
+<tr>
+  <ti><c>HOMEPAGE</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    套件所屬的網頁. 如果你沒辦法找到官方網站,
+    你可以嘗試去 <uri link="http://freshmeat.net/">freshmeat.net</uri>
+    或類似的套件追蹤網站找來連結.
+  </ti>
+</tr>
+<tr>
+  <ti><c>IUSE</c></ti>
+  <ti>MUST</ti>
+  <ti>
+    設定成任何所有你的套件所用到的 <c>USE</c> 標示.
+    記住, 屬於 <c>KEYWORDS</c> 的東西不應該被列進這裡.
+  </ti>
+</tr>
+<tr>
+  <ti><c>DEPEND</c></ti>
+  <ti>OPT</ti>
+  <ti>
+    套件編譯時期所相依的套件清單.
+    關於語法的詳情請見 <uri link="#doc_chap5">套件相依性</uri> 章節.
+  </ti>
+</tr>
+<tr>
+  <ti><c>RDEPEND</c></ti>
+  <ti>OPT</ti>
+  <ti>
+    套件執行時期所相依的套件清單.
+    同樣的, 詳情見 <uri link="#doc_chap5">套件相依性</uri> 章節.
+  </ti>
+</tr>
+</table>
+
+<p><b>函數</b></p>
+
+<p>
+有一些函數你可以定義在 ebuild 檔案中以控制套件的編譯與安裝流程.
+</p>
+
+<table>
+<tr>
+  <ti><c>pkg_setup</c></ti>
+  <ti>
+    用來進行任何雜項的預備工作.
+    可以是增加新的系統帳號, 也可以是檢查現存的設定檔.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_nofetch</c></ti>
+  <ti>
+    如果原始檔因為一些理由(比方說授權因素)而 Portage 無法下載, 告知使用者一些必須進行的步驟.
+    將這個與<c>RESTRICT=&quot;fetch&quot;</c>配合使用
+    你只應該在這個函數顯示一些訊息, 絕對不要自己呼叫 <c>die</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>src_unpack</c></ti>
+  <ti>
+    用這個函數解壓原始檔, 上補丁, 執行一些像 autotools 之類的輔助工具.
+    這個函數預設是將 <c>A</c> 中列出的壓縮包全部解開.
+    初始的工作目錄由 <c>WORKDIR</c> 所定義.
+  </ti>
+</tr>
+<tr>
+  <ti><c>src_compile</c></ti>
+  <ti>
+    這個函數用來設定並編譯套件原始碼.
+    初始的工作目錄為 <c>S</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>src_install</c></ti>
+  <ti>
+    這個函數用來把套件安裝到 <c>D</c> 作為套件塑像.
+    如果你的套件使用 automake, 你可以直接執行 <c>make DESTDIR=${D} install</c>.
+    <e>請一定要確定你的套件用 <c>D</c> 作為根目錄安裝所有的檔案!</e>
+    初始的工作目錄為 <c>S</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_preinst</c></ti>
+  <ti>
+  	即將把套件塑像<e>併入系統之前</e>會先執行這個函數裡的指令.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_postinst</c></ti>
+  <ti>
+    緊接在把套件塑像<e>併入系統之後</e>將執行這個函數裡的指令.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_prerm</c></ti>
+  <ti>
+    即將把套件塑像<e>移出系統之前</e>會先執行這個函數裡的指令.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_postrm</c></ti>
+  <ti>
+    緊接在把套件塑像<e>移出系統之後</e>將執行這個函數裡的指令.
+  </ti>
+</tr>
+<tr>
+  <ti><c>pkg_config</c></ti>
+  <ti>
+    你可以在套件安裝完成後用這個函數設定一份初始組態.
+    所有出現在這個函數中的路徑都應該要以 <c>ROOT</c> 為目錄的頭.
+    <e>只有</e>在使用者執行 <c>ebuild /var/db/pkg/${CATEGORY}/${PF}/${PF}.ebuild config</c> 時這個函數才會作用
+  </ti>
+</tr>
+</table>
+
+<p><b>輔助函數</b></p>
+
+<p>
+你也可以在 ebuild 檔中使用這些輔助函數.
+</p>
+
+<table>
+<tr>
+  <ti><c>use</c></ti>
+  <ti>
+    檢查是否定義了一個或數個指定的 use 旗標. 如果該 use 旗標存在於 <c>USE</c> 中,
+    這個函數將會輸出該旗標. 要檢查某個 use 旗標是否存在, 你可以用 <c>[ `use foobar` ]</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>has_version</c></ti>
+  <ti>
+    如果系統上有某個指定版本的套件則傳回 0, 例如 <c>has_version >=sys-libs/glibc-2.3.0</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>best_version</c></ti>
+  <ti>
+    傳回要求的 <path>分類/套件名稱</path> 最新的 <path>分類/套件名稱-版本號</path>.
+    例如 <c>best_version x11-libs/gtk+extra</c>.
+  </ti>
+</tr>
+<tr>
+  <ti><c>use_with</c></ti>
+  <ti>
+    這個函數會根據某個 use 旗標是否存在來決定傳回 &quot;--with-foobar&quot; 或
+    &quot;--without-foobar&quot;. 如果你只提供了一個參數,
+    則該參數將同時作為 use 旗標與 with(out) 參數字串.
+    不然第一個參數為 use 旗標, 第二個參數為 with(out) 參數字串.
+    例如假設 truetype 在 <c>USE</c> 之中, 則 <c>use_with truetype freetype</c> 將會輸出 &quot;--with-freetype&quot;.
+  </ti>
+</tr>
+<tr>
+  <ti><c>use_enable</c></ti>
+  <ti>
+    與 <c> use_with</c> 相同, 不過是傳回 &quot;--enable-foobar&quot; 或 &quot;--disable-foobar&quot;.
+  </ti>
+</tr>
+<tr>
+  <ti><c>check_KV</c></ti>
+  <ti>
+    檢查 Portage 是否知道核心的版本. 如果不知道, 則顯示錯誤並終止.
+    如果你在 script 之中要用到核心版本, 直接用 Portage 自動幫你設好的 <c>KV</c> 變數.
+    在使用 gentoo-sources-2.4.20-r6 的系統上,
+    <c>KV</c> 的值將會是 &quot;2.4.20&quot;.
+  </ti>
+</tr>
+<tr>
+  <ti><c>keepdir</c></ti>
+  <ti>
+    如果必要, 在指定的目錄中建立一個 <path>.keep</path> 檔以免該目錄被自動清除.
+    <e>永遠不要</e>自己動手建立 <path>.keep</path>.
+    不然如果 Portage 改變了 <c>keepdir</c> 的運作機制,
+    則自己動手建立標記檔可能會弄砸了套件.
+  </ti>
+</tr>
+<tr>
+  <ti><c>econf</c></ti>
+  <ti>
+    以必要的路徑參數 (prefix, host, mandir, infodir, datadir, sysconfdir, localstatedir)
+    執行 <c>./configure</c>. 呼叫 <c>econf</c> 時你可以自由地追加額外的參數轉送給 <c>./configure</c>.
+    或者也可以設定在 <c>EXTRA_ECONF</c> 環境變數之中.
+    送給 configure 參數的優先權是逆於給定順序的.
+    也就是說最後面給的參數會覆蓋先前給的參數.
+  </ti>
+</tr>
+<tr>
+  <ti><c>einstall</c></ti>
+  <ti>
+    以必要的路徑參數 (prefix, datadir, mandir, infodir, datadir, sysconfdir, localstatedir)
+    執行 <c>make install</c>. 同樣的, 呼叫 <c>einstall</c> 時你可以追加額外的參數轉送給 make.
+    請注意, 我們更喜歡用 <c>make install DESTDIR=${D}</c> 來安裝套件, 而不用 <c>einstall</c>.
+    這個指令只用來作為對付不良 makefile 的應變.
+  </ti>
+</tr>
+<tr>
+  <ti><c>die</c></ti>
+  <ti>
+    終結目前程序. 並以它的參數作為顯示給使用者的終結原因.
+    如果一個函數之中有多個地方會呼叫 <c>die</c>, 請給 <c>die</c> 一個訊息.
+    因為如果你無法是確定<c>哪裡</c>套件掛了, 那樣會提高偵錯的難度.
+  </ti>
+</tr>
+<tr>
+  <ti><c>einfo</c></ti>
+  <ti>
+    告知使用者一些重要訊息.
+    參數就是你希望用 <c>einfo</c> 顯示給使用者的訊息.
+    不要用 <c>einfo</c> 顯示像 &quot;*************************************&quot; 這樣的橫幅.
+    使用 <c>einfo</c> 就足以引起使用者的注意.
+  </ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+<subsection>
+<title>撰寫 ebuild 檔的規定</title>
+<body>
+
+<p>
+由於 ebuild 本來就只是 shell scripts, 所以你應該開啟編輯器的 shell-script 模式來編輯它.
+使用適當的縮排, 只使用定位字元 -- <e>不要用空白字元</e>.
+確定你的編輯器設定成四格一個定位點.
+一定要確定你用大括弧包住環境變數名稱, 例如用 <c>${P}</c> 而不只用 <c>$P</c>.
+</p>
+
+<p>
+一行太長可以用 ' \' 分行, 像這樣:
+</p>
+
+<pre caption="在 build 檔中分行">
+./configure \
+--prefix=/usr || die "configure failed"
+</pre>
+
+<p>
+更多細節請參考 <path>skel.ebuild</path> (通常是放在 <path>/usr/portage</path>).
+</p>
+
+<p>
+如果你是用 Vim 做為編輯器, 你可以把下面的片段加進你的 .vimrc 後面
+使得你在編輯任何 Gentoo 相關檔案時能使用正確的編輯設定.
+</p>
+
+<pre caption="設定 vimrc 以適合編輯 ebuild 檔">
+if (getcwd() =~ 'gentoo-x86\|gentoo-src\|portage')
+  set tabstop=4 shiftwidth=4 noexpandtab
+endif
+</pre>
+
+<p>
+如果你用 Emacs 做為編輯器, 你可以把下列片段加進你的 .emacsrc(如果是 GNU Emacs)
+或 init.el (如果是 XEmacs) 使你在編輯任何 Gentoo 相關檔案時能使用正確的編輯設定.
+</p>
+
+<pre caption="設定 emacsrc 以適合編輯 ebuild 檔">
+(defun ebuild-mode ()
+  (shell-script-mode)
+  (sh-set-shell "bash")
+  (make-local-variable 'tab-width)
+  (setq tab-width 4))
+(setq auto-mode-alist (cons '("\\.ebuild$" . ebuild-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.eclass$" . ebuild-mode) auto-mode-alist))
+</pre>
+
+<p>
+如果你用 nano 做為編輯器, 那你就走運了!
+你只需要編輯 <path>/etc/nanorc</path> 將關於 ebuild 檔的段落取消註解就可以了.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>USE 變數</title>
+<body>
+
+<p>
+設置 USE 變數的目的是讓你可以設定 Portage 自動全域性地開啟或關閉一些 <e>選擇性的編譯時期</e> 功能.
+舉例來說, 假設你是個 GNOME 愛好者, 然後你希望任何有選擇性 GNOME 支援的 ebuild 能開啟這些選項.
+這樣你可以將 <c>gnome</c> 加進 <path>/etc/make.conf</path> 的 <c>USE</c>變數中,
+這樣 Portage 將會自動在有選擇性支援的套件中開啟 GNOME 選項.
+同樣的, 如果你不希望選擇性的 GNOME 被自動打開,
+你可以直接編輯 <path>/etc/make.conf</path> 並確定 <c>gnome</c> 已經<e>不</e>在 <c>USE</c> 變數之中了.
+Gentoo Linux 擁有近乎無窮的 USE 選項, 使你的系統能夠設定得如你所需.
+</p>
+
+<note>
+如果你拿掉一項 USE 旗標 (舉例而言, 從 <c>USE</c> 中拿掉 <c>gnome</c>),
+那樣只會讓 Portage 關閉 <e>選擇性</e> 的 GNOME 編譯時期支援.
+也就是說, 如果你 <c>emerge</c> 一個<e>需要</e> GNOME 的 ebuild 檔,
+如你所預期的, 它當然會打開 GNOME 支援功能.
+這也代表如果 GNOME 不在系統上就會被自動安裝(作為相依套件).
+這就是為什麼在進行任何&quot;真正的&quot; <c>emerge</c> 動作之前,
+先跑個 <c>emerge --pretend</c> 是不會錯的;
+那樣的話, 你就可以確切知道你到底將要裝多少東西到系統上!
+</note>
+
+<p>
+在你自己的 ebuild 中, 你可以用 <c>use &lt;旗標名&gt;</c> 指令來確定一項 USE 旗標是否有設定.
+如果該旗標存在使用者的 <c>USE</c> 變數中, <c>use</c> 指令會印出 <c>&lt;旗標名&gt;</c>.
+通常這個指令會用以下用法:
+</p>
+
+<pre caption="得知某個 USE 旗標是否有設定">
+if use X ; then
+  跟 X 相關的指令
+fi
+</pre>
+
+<p>
+USE 變數也可以用來設定相依性. 舉例來說,
+你可能會想要只在某些 USE 旗標開啟的時候才相依一些套件.
+你可以在你的 ebuild 檔中的 <c>DEPEND</c> 使用 <c>旗標名稱? ( 套件分類/名稱 )</c> 這個語法.
+這這個範例中, 只有在 <c>旗標名稱</c> 出現在 <c>USE</c> 中的時候才會需要 <c>套件分類/名稱</c> 這個套件.
+你也可以同時指定當某個 USE 旗標有設定的時候該相依哪個套件, 而<e>沒有</e>的時候又該相依哪個套件:
+<c>旗標名稱? (套件分類/名稱) : (另一個套件的分類/名稱)</c>.
+這樣的話, 如果 <c>旗標名稱</c> 沒有設定, 則 <c>另一個套件的分類/名稱</c> 這個套件將會被使用,
+而 <c>套件分類/名稱</c> 不會.
+最後, 你也可以指定只有某個旗標<e>沒有</e>設定的時候才相依某個套件.
+只要在旗標名稱前置一個&quot;!&quot;, 像這樣: <c>!旗標名稱? ( 套件分類/名稱 )</c>.
+請確定你的 ebuild 使用這樣的語法而不是 Bash IFS.
+Bash 條件判斷會影響 Portage 的相依資料快取, 這樣做早晚會毀了你的 ebuild.
+</p>
+
+<p>
+這裡有個重要的 <c>USE</c> 使用小技巧.
+大多數的時候, 套件會有個 <c>./configure</c> script 用來進行原始碼設定.
+一般來說, 如果你的 ebuild 使用 <c>./configure</c>,
+任何選擇性的編譯時期功能都可以用適當的 <c>./configure</c> 參數來開啟或關閉.
+這邊有個絕佳的方式來處理這些事情:
+</p>
+
+<pre caption="利用 USE 設定的條件編譯">
+DEPEND="X? ( &gt;=x11-base/xfree-4.3 )
+mysql? ( &gt;=dev-db/mysql-3.23.49 )
+apache2? ( &gt;=net-www/apache-2 ) : ( =net-www/apache-1* )"
+
+src_compile() {
+  econf \
+    `use_enable X x11` \
+    `use_enable mysql` \
+    || die "configure failed"
+  emake || die &quot;emake failed&quot;
+}
+</pre>
+
+<p>
+這個作法有很棒的結果. 我們不用擔心 mysql 或 X 的預設設定(到底是開啟還是關閉),
+我們可以明白告訴 <c>econf</c> 我們想一切按照 <c>USE</c> 變數行事.
+再說在可讀性上這樣的寫法非常清楚.
+</p>
+
+<p>
+要得到一份持續更新的 USE 旗標列表, 請看<uri link="http://www.gentoo.org/dyn/use-index.xml">這裡</uri>.
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>檔案系統配置</title>
+<subsection>
+<title>FHS 簡介</title>
+<body>
+
+<p>
+Gentoo Linux 使用的檔案系統配置標準緊密地符合 FHS, <e>檔案系統目錄階層標準</e> 的簡稱.
+我們在這裡會給予這個標準簡化過的描述;
+你可以到 <uri>http://www.pathname.com/fhs/</uri> 得到一份完整的規格.
+</p>
+
+<note>
+<path>/opt</path> 目錄階層在 FHS 的 3.12 段所提出.
+而 4.4 段則是處理 <path>/usr/X11R6</path> 目錄.
+KDE 和 GNOME 則沒有被特別討論, 事實上在這個版本的 FHS 中甚至根本完全沒有提及.
+</note>
+
+</body>
+</subsection>
+<subsection>
+<title>如何讓你的套件適於這套檔案系統</title>
+<body>
+
+<p>
+一般而言, 如果套件使用 autoconf 與 automake,
+預設的安裝位置大致上都是正確的, 只有幾個例外:
+</p>
+
+<ul>
+<li>
+如果你要將程式裝進 <path>/bin</path>, <path>/sbin</path>, <path>/usr/bin</path>, 或 <path>/usr/sbin</path>,
+則該程式的 man page 應該被裝進 <path>/usr/share/man</path> 中.
+通常你可以在 ebuild 中指定 <c>./configure --mandir=/usr/share/man</c> 來解決.
+</li>
+<li>
+GNU info 檔案全部都應該被裝進 <path>/usr/share/info</path>,
+<e>即使那些 info 檔是屬於 X11, GNOME 或 KDE 相關的程式或工具</e>.
+注意: <path>/usr/share/info</path> 是<e>唯一的</e>官方 GNU info 檔位置.
+由於多數 <c>./configure</c> script 預設將 GNU info 裝到 <c>/usr/info</c>,
+通常呼叫 <c>./configure</c> 必須伴隨 <c>--infodir=/usr/share/info</c> 參數.
+</li>
+<li>
+文件檔要裝進 <path>/usr/share/doc</path> 中,
+一個反映該套件名稱, 版本, 以及修訂號的子目錄.
+這對所有的程式都一樣: GNOME, KDE, X11 或終端機下的.
+但是, 為了某些理由有些程式也可以將額外的文件與支援檔案裝進 <path>/usr/share</path>.
+</li>
+<li>
+X11 相關程式與函式庫都應該被裝進 <path>/usr</path>,
+而不直接裝進 <path>/usr/X11R6</path>.
+我們將 <path>/usr/X11R6</path> 目錄階層保留給 X Window System, Version 11 Release 6 <e>本身</e>.
+這樣應該比一些其它家的發佈套件更符合 FHS 的字面解釋.
+</li>
+<li>
+GNOME 與 KDE 程式, 同樣的, 都應該被裝入 <path>/usr</path>.
+</li>
+</ul>
+
+<impo>
+一些發佈套件選擇把 GNOME 與 KDE 裝進 <path>/opt</path>.
+事實上根本沒有一個標準規範這些桌面環境應該裝到哪裡.
+為了簡化性與一致性, 我們決定把所有的 KDE 與 GNOME 套件裝進 <path>/usr</path> 階層.
+</impo>
+
+<p>
+一般而言, 你應該讓你的 ebuild 檔把東西裝進 <path>/usr</path>.
+<e>有些</e>程式可以也可以不與 GNOME, KDE, 或 X11 連結, 這樣會造成困擾.
+我們的解法就是把所有東西都裝進 <path>/usr</path> 以防止模稜兩可,
+以及帶給 ebuild 撰寫者額外的麻煩. 安裝程式檔案的位置<e>不</e>應該受到某個
+<c>USE</c> 旗標的使用與否所影響. 所以, <e>幾乎所有</e> portage 中的 ebuild 都應該
+安裝到 <path>/usr</path> 階層中.
+</p>
+<note>
+<path>/opt</path> 目錄被 Gentoo Linux 用來保留給只有執行檔發佈的套件.
+例如 mozilla-bin, acroread, netscape 與 realplayer.
+那些安裝在這裡的套件通常會需要一個 <path>/etc/env.d/foo</path> 的拖油瓶.
+這樣它們的路徑與額外的變數才能被引入在環境變數中.
+要得到更多關於 <path>/etc/env.d</path> 的資訊, 請參閱
+<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=6">這篇</uri>文件.
+</note>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>Portage 提供的 scripts 與公用程式</title>
+<subsection>
+<title>開放的 scripts</title>
+<body>
+
+<p>
+系統管理者可以利用這些 script 來安裝或移除套件, 以及維護套件資料庫.
+</p>
+
+<p>
+<c>ebuild</c> 是 Portage 系統的主要引擎; 它用來進行所有的主要工作包括
+解壓, 編譯, 安裝, 併入以及抽離套件. 我們用這樣的命令來呼叫它:
+<c>ebuild 到/套件的/路徑.ebuild 命令</c>. 可用的命令有這些:
+</p>
+
+<table>
+<tr>
+  <th>命令</th>
+  <th>描述</th>
+  <th>相關的 <c>ebuild</c> 函數</th>
+</tr>
+<tr>
+  <ti><c>setup</c>*</ti>
+  <ti>
+    執行任何在 ebuild 主體進行之前所需的雜項指令.
+  </ti>
+  <ti><c>pkg_setup</c></ti>
+</tr>
+<tr>
+  <ti><c>depend</c></ti>
+  <ti>顯示用來編譯該套件的所有相依套件</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>merge</c>*</ti>
+  <ti>
+    解壓, 編譯, 安裝, 並將套件併入系統
+  </ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>qmerge</c>*</ti>
+  <ti>
+    將套件併入系統, 假定解壓, 編譯, 以及安裝的階段都已經執行完成
+  </ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>unpack</c>*</ti>
+  <ti>
+    將原始檔 tar 壓縮包解壓到工作用目錄
+  </ti>
+  <ti><c>src_unpack</c></ti>
+</tr>
+<tr>
+  <ti><c>compile</c>*</ti>
+  <ti>編譯該套件</ti>
+  <ti><c>src_compile</c></ti>
+</tr>
+<tr>
+  <ti><c>rpm</c></ti>
+  <ti>為該套件建立 RPM 套件包</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>package</c></ti>
+  <ti>建立 Gentoo 用的 tbz2 套件包</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>prerm</c>*</ti>
+  <ti>執行該套件的移除前動作</ti>
+  <ti><c>pkg_prerm</c></ti>
+</tr>
+<tr>
+  <ti><c>postrm</c>*</ti>
+  <ti>執行該套件的移除後動作</ti>
+  <ti><c>pkg_postrm</c></ti>
+</tr>
+<tr>
+  <ti><c>preinst</c>*</ti>
+  <ti>執行該套件的安裝前動作</ti>
+  <ti><c>pkg_preinst</c></ti>
+</tr>
+<tr>
+  <ti><c>postinst</c>*</ti>
+  <ti>執行該套件的安裝後動作</ti>
+  <ti><c>pkg_postinst</c></ti>
+</tr>
+<tr>
+  <ti><c>config</c></ti>
+  <ti>當該套件併入系統後設定一套預設組態</ti>
+  <ti><c>pkg_config</c></ti>
+</tr>
+<tr>
+  <ti><c>touch</c>*</ti>
+  <ti>為套件中每個原始檔壓縮包更新 mtime</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>clean</c>*</ti>
+  <ti>清除該套件的工作用目錄</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>fetch</c>*</ti>
+  <ti>抓取該套件的原始碼 tar 包</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>digest</c>*</ti>
+  <ti>為該套件建立數位簽署檔</ti>
+  <ti>N/A</ti>
+</tr>
+<tr>
+  <ti><c>install</c>*</ti>
+  <ti>將套件安裝到塑像目錄</ti>
+  <ti><c>src_install</c></ti>
+</tr>
+<tr>
+  <ti><c>unmerge</c></ti>
+  <ti>將套件從系統中抽離</ti>
+  <ti>N/A</ti>
+</tr>
+</table>
+<note>
+譯者實驗發現 depend 與 touch 兩個指令目前(portage-2.0.50-r9)是無法使用的.
+</note>
+<note>
+標示了星號(*)的指令通常只會被開發者所用到.
+</note>
+
+<p>
+<c>emerge</c> 會遞迴地併入套件與其相依套件到你的系統.
+這個指令有許多選項, 你可以試著用 <c>emerge --help</c> 來列出它們.
+</p>
+
+<p>
+<c>env-update</c> 會更新組態檔案(包含, 但不限定只是 <path>/etc/ld.so.conf</path>
+與 <path>/etc/profile.env</path>) 來引入新安裝的套件帶來的更改.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>內部的 scripts 與命令</title>
+<body>
+
+<p>
+這些是你可以用在 ebuild 檔來處理例行性工作的 script.
+</p>
+
+<p>
+想深入瞭解這些 script 做了什麼的人, 請自行閱讀 <path>/usr/lib/portage/bin</path> 裡的檔案.
+</p>
+
+<table>
+<tr>
+  <th>命令</th>
+  <th>預設值</th>
+  <th>描述</th>
+  <th>範例</th>
+</tr>
+<tr>
+  <ti><c>diropts</c></ti>
+  <ti>-m0755</ti>
+  <ti>設定 <c>dodir</c> 所使用的參數</ti>
+  <ti><c>diropts -m0750</c></ti>
+</tr>
+<tr>
+  <ti><c>dobin</c></ti>
+  <ti>N/A</ti>
+  <ti>將指定的二進位檔裝進 <path>DESTTREE/bin</path></ti>
+  <ti><c>dobin wmacpi</c></ti>
+</tr>
+<tr>
+  <ti><c>docinto</c></ti>
+  <ti><path>&quot;&quot;</path></ti>
+  <ti>
+    設定 <c>dodoc</c> 所使用的子目錄(<e>DOCDESTTREE</e>)相對路徑
+  </ti>
+  <ti><c>docinto examples</c></ti>
+</tr>
+<tr>
+  <ti><c>dodir</c></ti>
+  <ti>N/A</ti>
+  <ti>建立目錄, 會將 ${D} 納入處理</ti>
+  <ti><c>dodir /usr/lib/newpackage</c></ti>
+</tr>
+<tr>
+  <ti><c>dodoc</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將指定的檔案安裝到套件所屬的文件目錄
+    (<path>/usr/share/doc/${PF}/DOCDESTTREE</path>) (見 <c>docinto</c>)
+  </ti>
+  <ti><c>dodoc README *.txt</c></ti>
+</tr>
+<tr>
+  <ti><c>doexe</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將指定的檔案以 <e>EXEOPTIONS</e> (見 <c>exeopts</c>) 存取模式裝進 <path>EXEDESTTREE</path> (見 <c>exeinto</c>)
+  </ti>
+  <ti><c>doexe ${FILESDIR}/quake3</c></ti>
+</tr>
+<tr>
+  <ti><c>dohard</c></ti>
+  <ti>N/A</ti>
+  <ti>建立硬式連結, 會將 ${D} 納入處理</ti>
+  <ti><c>dohard ls /bin/dir</c></ti>
+</tr>
+<tr>
+  <ti><c>dohtml</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將指定的檔案與目錄裝進
+    <path>/usr/share/doc/${PF}/html</path> 
+  </ti>
+  <ti><c>dohtml -r doc/html/*</c></ti>
+</tr>
+<tr>
+  <ti><c>doinfo</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將指定的檔案裝進 <path>/usr/share/info</path>, 並用 gzip 壓縮
+  </ti>
+  <ti><c>doinfo doc/*.info</c></ti>
+</tr>
+<tr>
+  <ti><c>doins</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將指定的檔案以 <e>INSOPTIONS</e> (見 <c>insopts</c>) 存取模式裝進 <path>INSDESTTREE</path> (見 <c>insinto</c>)
+  </ti>
+  <ti><c>doins *.png icon.xpm</c></ti>
+</tr>
+<tr>
+  <ti><c>dolib</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    以 0644 存取模式將指定的函式庫裝進 <path>DESTTREE/lib</path>
+  </ti>
+  <ti><c>dolib *.a *.so</c></ti>
+</tr>
+<tr>
+  <ti><c>dolib.a</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    以 0644 存取模式將指定的函式庫裝進 <path>DESTTREE/lib</path>
+  </ti>
+  <ti><c>dolib.a *.a</c></ti>
+</tr>
+<tr>
+  <ti><c>dolib.so</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    以 0755 存取模式將指定的函式庫裝進 <path>DESTTREE/lib</path>
+  </ti>
+  <ti><c>dolib.so *.so</c></ti>
+</tr>
+<tr>
+  <ti><c>doman</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    根據檔案的副檔名(file.1 就是 <path>man1</path>)將指定的檔案裝進 <path>/usr/share/man/manX</path>.
+  </ti>
+  <ti><c>doman *.1 *.5</c></ti>
+</tr>
+<tr>
+  <ti><c>dosbin</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將檔案裝進 <path>DESTTREE/sbin</path>, 並確定它們有執行屬性
+  </ti>
+  <ti><c>dosbin ksymoops</c></ti>
+</tr>
+<tr>
+  <ti><c>dosym</c></ti>
+  <ti>N/A</ti>
+  <ti>建立符號連結, 會將 ${D} 納入處理</ti>
+  <ti><c>dosym gzip /bin/zcat</c></ti>
+</tr>
+<tr>
+  <ti><c>emake</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    以 <c>MAKEOPTS</c> 參數執行 make. 有些套件無法平行編譯, 請用 <c>emake -j1</c>
+  </ti>
+  <ti><c>emake</c></ti>
+</tr>
+<tr>
+  <ti><c>exeinto</c></ti>
+  <ti><path>/</path></ti>
+  <ti>設定 <c>doexe</c> 指令所用的根目錄 (<e>EXEDESTTREE</e>)</ti>
+  <ti><c>exeinto /usr/lib/${PN}</c></ti>
+</tr>
+<tr>
+  <ti><c>exeopts</c></ti>
+  <ti>-m0755</ti>
+  <ti>設定 <c>doexe</c> 所使用的參數</ti>
+  <ti><c>exeopts -m1770</c></ti>
+</tr>
+<tr>
+  <ti><c>fowners</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    用 chown 改變指定檔案的所有者, 會將 ${D} 納入處理
+  </ti>
+  <ti><c>fowners root:root /sbin/functions.sh</c></ti>
+</tr>
+<tr>
+  <ti><c>fperms</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    用 chown 改變指定檔案的存取權限, 會將 ${D} 納入處理
+  </ti>
+  <ti><c>fperms 700 /var/consoles</c></ti>
+</tr>
+<tr>
+  <ti><c>insinto</c></ti>
+  <ti><path>/usr</path></ti>
+  <ti>設定 <c>doins</c> 指令所用的根目錄 (<e>INSDESTTREE</e>)</ti>
+  <ti><c>insinto /usr/include</c></ti>
+</tr>
+<tr>
+  <ti><c>insopts</c></ti>
+  <ti>-m0644</ti>
+  <ti>設定 <c>doins</c> 所使用的參數</ti>
+  <ti><c>insopts -m0444</c></ti>
+</tr>
+<tr>
+  <ti><c>into</c></ti>
+  <ti><path>/usr</path></ti>
+  <ti>
+    設定所有 'do' 指令目的位置的的頭 (<path>DESTREE</path>)
+    (像是 <c>dobin</c>, <c>dolib</c>, <c>dolib.a</c>, <c>dolib.so</c>, <c>domo</c>, <c>dosbin</c>)
+  </ti>
+  <ti><c>into /</c></ti>
+</tr>
+<tr>
+  <ti><c>libopts</c></ti>
+  <ti>-m0644</ti>
+  <ti>設定 <c>dolib</c> 所使用的參數</ti>
+  <ti><c>libopts -m0555</c></ti>
+</tr>
+<tr>
+  <ti><c>newbin</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>dobin</c> 包起來, 幫你把指定的二進位檔更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newbin ${FILESDIR}/vmware.sh vmware</c></ti>
+</tr>
+<tr>
+  <ti><c>newdoc</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>dodoc</c> 包起來, 幫你把指定的檔案更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newdoc README README.opengl</c></ti>
+</tr>
+<tr>
+  <ti><c>newexe</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>doexe</c> 包起來, 幫你把指定的檔案更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newexe ${FILESDIR}/xinetd.rc xinetd</c></ti>
+</tr>
+<tr>
+  <ti><c>newins</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>doins</c> 包起來, 幫你把指定的檔案更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newins ntp.conf.example ntp.conf</c></ti>
+</tr>
+<tr>
+  <ti><c>newman</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>doman</c> 包起來, 幫你把指定的檔案更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newman xboing.man xboing.6</c></ti>
+</tr>
+<tr>
+  <ti><c>newsbin</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    將 <c>dosbin</c> 包起來, 幫你把指定的檔案更名為第二個參數進行安裝
+  </ti>
+  <ti><c>newsbin strings strings-static</c></ti>
+</tr>
+<tr>
+  <ti><c>prepall</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    執行 <c>prepallman</c>, <c>prepallinfo</c> 與 <c>prepallstrip</c>.
+    並確定 <path>/opt/*/lib</path>, <path>/lib</path>, <path>/usr/lib</path> 與 <path>/usr/X11R6/lib</path>
+    中的所有函式庫都有執行屬性.
+    並將任何放錯的 aclocal 巨集搬到 <path>/usr/share/aclocal</path>
+  </ti>
+  <ti><c>prepall</c></ti>
+</tr>
+<tr>
+  <ti><c>prepalldocs</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    遞迴的把所有 <path>/usr/share/doc</path> 中的文件檔用 gzip 壓縮,
+    並修正所有的符號連結
+  </ti>
+  <ti><c>prepalldocs</c></ti>
+</tr>
+<tr>
+  <ti><c>prepallinfo</c></ti>
+  <ti>N/A</ti>
+  <ti>遞迴的把所有 <path>/usr/share/info</path> 中的 info 檔用 gzip 壓縮</ti>
+  <ti><c>prepallinfo</c></ti>
+</tr>
+<tr>
+  <ti><c>prepallman</c></ti>
+  <ti>N/A</ti>
+  <ti>
+    遞迴的把所有 <path>/opt/*/man/*</path>, <path>/usr/share/man/*</path>,
+    <path>/usr/local/man/*</path>, <path>/usr/X11R6/share/man/*</path>
+    中的 man page 檔用 gzip 壓縮, 並修正所有的符號連結
+  </ti>
+  <ti><c>prepallman</c></ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>套件相依性</title>
+<subsection>
+<title>為什麼相依性很重要</title>
+<body>
+
+<p>
+Portage 不只是一套方便的 script 提供你一套統一的方式來編譯任何的專案(程式, 函式庫)原始碼.
+如果你有在 ebuild 中有費心註明相依套件, 它也會一併抓取並安裝任何所需的相依套件.
+</p>
+
+<p>
+在官方的 ebuild 中, 相依性應該都有註明,  所以當你下 <c>emerge net-www/mozilla/mozilla-1.0</c> 時,
+Portage 會保證所有用來編譯與執行 Mozilla 的函式庫在開始編譯 Mozilla 前都妥善安裝了.
+</p>
+
+<p>
+Portage 還有區分編譯時期的相依套件與執行時期的相依套件.
+(注意: 目前, Portage 會安裝所有的編譯時期與執行時期相依套件就不善後了,
+之後, 你也可以精簡你的系統只留下執行時期的相依套件.)
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>如何在 ebuild 中註明相依性 (也可以說就是 DEPEND 單元)</title>
+<body>
+
+<p>
+你的 <path>foo-x.y.z.ebuild</path> 中的 <c>DEPEND</c> 變數告訴 Portage
+它需要哪些套件才能編譯 <path>foo</path>.
+而 <c>RDEPEND</c> 變數註明安裝 <path>foo</path> 需要哪些套件.
+</p>
+
+<pre caption="相依性範例">
+DEPEND="virtual/glibc
+        sys-libs/zlib"
+RDEPEND="virtual/glibc"
+</pre>
+
+<p>
+這樣會告訴 Portage 它需要 <path>virtual/glibc</path> (用 virtual 會比較好些)
+與 <path>sys-libs/zlib</path> 才能編譯 <path>foo-x.y.z</path>.
+它沒有特別說明要那個版本的 glibc 或 zlib, 意思就是 "怎樣都好".
+</p>
+
+<p>
+"怎樣都好"當然聽起來很糟, 而且不見得在一般情形都適用.
+不過對於一些核心的函式庫, 像是 glibc, 它會儘量想辦法做到在執行檔上也 100% 相容,
+所以在這裡還適用. 而對於其他的函式庫, 我們當然要註明相依版本.
+</p>
+
+<pre caption="相依版本範例">
+&gt;=sys-apps/bar-1.2
+=sys-apps/baz-1.0
+</pre>
+
+<p>
+&gt;= 加上 = 的行為正如你所想; sys-apps/bar 的 1.2 或更新版本都能接受,
+(也就是說 sys-apps/bar-2.0 也可以), 而 sys-apps/baz 1.0 是
+唯一能接受的版本.
+更多關於套件的版本號架構的資訊, 請參考上面的
+<uri link="#doc_chap2_sect2">為 ebuild 檔命名</uri> 段落.
+</p>
+
+<p>
+以下還有一些其他註明相依版本的方式:
+</p>
+
+<pre caption="註明版本相依性">
+~sys-apps/qux-1.0
+=sys-apps/foo-1.2*
+!sys-libs/gdbm
+</pre>
+
+<p>
+~sys-apps/qux-1.0 會選擇 qux-1.0 最新的 portage 修訂版.
+</p>
+
+<p>
+=sys-apps/foo-1.2* 會選擇 1.2 系列的最新版, 並無視 1.3 以後的版本.
+也就是說 foo-1.2.3 與 foo-1.2.0 都適用,
+而 foo-1.3.3, foo-1.3.0, 與 foo-1.1.0 都不行.
+</p>
+
+<p>
+!sys-libs/gdbm 當 gdm 已經在系統上的時候, 會阻止該套件被併入系統.
+</p>
+
+<note>
+關於這些 DEPEND 單元的最新細節, 請參閱 ebuild 的 第 5 manpage: <c>man 5 ebuild</c>.
+</note>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>測試與發佈</title>
+<subsection>
+<title>ChangeLog</title>
+<body>
+
+<p>
+當你更新一個(或寫了一個新的) ebuild 檔的時候, 你一定要以起更新它的(或為它建立一個) ChangeLog.
+<path>skel.ChangeLog</path> 包含了一個你可以拿來作為基礎的 ChangeLog 範本.
+</p>
+
+<p>
+建立 ChangeLog 的目的是紀錄做了<e>哪些</e>事情,
+<e>為什麼</e>要做這些事情, 以及<e>誰</e>做了這些事情.
+這樣使得開發者與使用者都夠輕易地追蹤更變的發生.
+</p>
+
+<p>
+ChangeLog 主要是給使用者看的, 所以請寫得簡潔有力,
+並避免提及內部的技術細節.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>在本地儲存你自己的 ebuiild</title>
+<body>
+
+<p>
+要測試你的 ebuild 並讓 Portage 發覺它們, 你必須把它們放在一個已知的目錄.
+Portage 使用 <c>PORTDIR_OVERLAY</c> 變數, 你可以把它定義在 <path>/etc/make.conf</path>.
+你應該把這個變數設到你自己的目錄(如 <path>/usr/local/portage</path>).
+</p>
+
+<p>
+在那個目錄中, 你應該用與 <path>/usr/portage</path> 相同的目錄結構(與套件分類).
+</p>
+
+<p>
+用 <c>PORTDIR_OVERLAY</c>, 你的 ebuild 檔能保留在系統中,
+即使是 <c>emerge sync</c> 之後 Portage 還是會注意它們.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>有用的測試工具</title>
+<body>
+
+<p>
+我們有幾樣有用的工具來幫助你撰寫與維護你的 ebuild 檔.
+</p>
+
+<warn>
+<c>lintool</c> 爛了. 請用 repoman
+</warn>
+
+<table>
+<tr>
+  <th>工具</th>
+  <th>所屬套件</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>repoman</c></ti>
+  <ti>sys-apps/portage</ti>
+  <ti>
+    一個專為開發者設計來輔助 CVS checkin 的工具.
+    它會詢問很多例行性的問題嘗試確保將檔案加進 cvs 不會把 Portage 目錄樹弄爛.
+  </ti>
+</tr>
+<tr>
+  <ti><c>ccache</c></ti>
+  <ti>dev-util/ccache</ti>
+  <ti>
+    用來將先前處理過的檔案保留下來的工具, 使得重新編譯相同的套件可以加速<e>非常多</e>.
+    請記得將 <c>ccache</c> 加進 <path>/etc/make.conf</path> 的 <c>FEATURES</c> 變數!
+  </ti>
+</tr>
+<tr>
+  <ti><c>sandboxshell</c></ti>
+  <ti>app-shells/sandboxshell</ti>
+  <ti>
+    開啟一個 shell 建立一個 sandbox 環境.
+    能夠幫你進入與 portage 編譯套件相同的環境, 方便你手動進行偵錯.
+  </ti>
+</tr>
+<tr>
+  <ti><c>echangelog</c></ti>
+  <ti>app-portage/gentoolkit-dev</ti>
+  <ti>建立一個新的或在現存的 ChangeLog 檔增加一筆記錄.</ti>
+</tr>
+<!--
+<tr>
+  <ti><c>gentool-bump-revision</c></ti>
+  <ti>app-portage/gentoolkit</ti>
+  <ti>
+    Developer-only tool that bumps the revision number, adds the new revision 
+    to CVS, removed the old revision and updates the ChangeLog accordingly.
+  </ti>
+</tr>
+-->
+<tr>
+  <ti><c>qpkg</c></ti>
+  <ti>app-portage/gentoolkit</ti>
+  <ti>取得已安裝套件的雜項資訊的工具</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+</sections>
+</guide>

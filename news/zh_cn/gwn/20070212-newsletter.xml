@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20070212-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2007年2月12日</subtitle>
+
+<author title="Editor">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<!-- Be sure to add yourself if you write an article -->
+
+<!-- <author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author> -->
+
+<author title="Author">
+<mail link="rajiv@gentoo.org">Rajiv Aaron Manglani</mail>
+</author>
+
+<author title="Author">
+<mail link="flameeyes@gentoo.org">Diego Pettenò</mail>
+</author>
+
+<author title="Author">
+<mail link="diox@gentoo.org">Dimitry Bradt</mail>
+</author>
+
+<author title="Author">
+<mail link="masterdriverz@gentoo.org">Charlie Shepherd</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+
+<abstract>这是2007年2月12日的Gentoo Weekly Newsletter。这是2007年2月12日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 6, Issue 7</version>
+<date>2007-02-12</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>时区更新临近</title>
+<body>
+
+<p>美国通过了延长夏时制时间的法案。因为这个变化，有些用户需要通过更新他们的时区信息来确保计算机时钟准确。我们的美国用户，请确定你在3月11日或之前至少更新到2006p版的<c>sys-libs/timezone-data</c>。</p>
+
+</body>
+</section>
+
+<section>
+<title>测试media-lib/freetype-2.3.1</title>
+<body>
+
+<p>2月8日，星期四，树中的2.2.1和2.3.1版FreeType库为~arch(testing)用户取消屏蔽。这些版本被屏蔽了大约八个月以保证过度顺利。有些旧的软件所依赖的一些内部头文件、函数和变量，在这两个版本中将不再被导出给外部程序。尽管树中的大多数包应该已经改正，现在主要问题是旧版Qt和KDE已不再树中，我们欢迎更多测试。</p>
+
+<p>如果阁下发现任何标记为稳定或者是测试的软件包因新的FreeType版本而不能编译的话，请报告一个bug并将其分配给<mail link="flameeyes@gentoo.org">Diego
+Pettenò</mail>。</p>
+
+</body>
+</section>
+
+<section>
+<title>有关NSS／NSPR的问题</title>
+<body>
+
+<p>某些用户发现某些程序中存在问题，比如<c>www-client/mozilla-firefox</c>或者<c>mail-client/mozilla-thunderbird</c>在访问加密的资料的时候，例如一些启用了SSL的页面。这是由一个升级问题而导致的，将影响测试分支的用户。该问题是当<c>dev-libs/nspr</c>被升级后，类似<c>www-client/mozilla-firefox</c>的应用程序也被升级，而在此之前<c>dev-libs/nss</c>却没有被升级。解决办法很简单。只需按照顺序来升级这些软件包即可。</p>
+
+<pre caption="修正NSS/NSPR和Mozilla Firefox的问题">
+# emerge --oneshot dev-libs/nspr dev-libs/nss www-client/mozilla-firefox
+</pre>
+
+</body>
+</section>
+
+<section>
+<title>来自KDE团队的感谢</title>
+<body>
+
+<p>感谢所有给KDE团队提供帮助的人。目前已经有了大量的回复，团队正努力回应。如果还有谁想要帮忙，现在还不晚！请看<uri>http://dev.gentoo.org/~masterdriverz/kde-help.txt</uri>，并且有时间去<c>irc.freenode.net</c>上的<c>#gentoo-kde</c>看看。</p>
+
+</body>
+</section>
+
+<section>
+<title>Adopt-a-Dev更新</title>
+<body>
+
+<p>上任项目领导离开Gentoo后，<uri link="/proj/en/userrel/adopt-a-dev/">Adopt-a-Dev</uri>项目停滞了一段时间。在新领导<mail link="diox@gentoo.org">Dimitry
+Bradt</mail>的带领下，它又重新运转了。Dimitry联系了在停滞期发过email给项目的每一个人，并想感谢之前所有的捐赠者，感谢他们对此项目的信任和贡献。</p>
+
+<p>某些东西可能一直被你搁在阁楼或是书房的角落中，如果你认为Gentoo的开发人员可能会使用到它，或者你可以满足某位开发人员的请求，请访问<uri link="/proj/en/userrel/adopt-a-dev/">项目主页</uri>或写邮件到<uri link="/proj/en/userrel/adopt-a-dev/">项目主页</uri>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<!-- gentoo-dev -->
+
+<!-- gentoo-catalyst -->
+
+<!-- gentoo-cluster -->
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+<!-- Gentoo International-->
+
+<chapter>
+<title>Gentoo国际</title>
+
+<section>
+<title>丹麦：Linuxforum 2007，哥本哈根</title>
+<body>
+
+<p>北欧最大的开源会议，LinuxForum，将会迎来其10周年庆典。LinuxForum覆盖了多个主题包括UNIX，BSD，Open Source和Linux。今年，Gentoo将会有一个展台由丹麦的开发人员负责，同时也有一小部分其他国家的开发人员。该活动将在3月2日和3日举行，Gentoo将在3日进行演讲。</p>
+
+<p>有问题的话请到我们的展位，那有来自安全团队的代表，Alpha、IA64、MIPS发布协调员以及用户关系团队的领导。</p>
+
+<p>欲知详情，请参看<uri>http://www.linuxforum.dk/</uri>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<section>
+<body>
+
+<p>因无GLSA，Gentoo安全本周空缺（on hiatus）。</p>
+
+</body>
+</section>
+
+<!-- paste from the script -->
+
+</chapter>
+
+<!-- Gentoo package moves -->
+
+<chapter>
+<title>软件增减</title>
+
+<section>
+<body>
+
+<p>这一章节列出了已经被移除或加入到portage里的，以及已经发布“最后仪式”声明的即将被移除的包。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。列在最后仪式一节里的大部分包需要有人来维护，如果有人可以承担下维护的责任的话，它们可以得以继续保留在portage树里。</p>
+
+</body>
+</section>
+
+<!-- paste from the script -->
+
+<section>
+<title>已经移除：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>app-emacs/gnuplot-mode</ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ada/adabroker</ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="george@gentoo.org">George Shapovalov</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-games/cel-cvs</ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-games/crystalspace-cvs</ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti>app-i18n/jmode</ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-arnesi</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-yaclml</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-icu</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-fiveam</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-ucw</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/cl-rfc2109</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti>sys-fs/submount</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="dsd@gentoo.org">Daniel Drake</mail></ti>
+</tr>
+
+<tr>
+<ti>games-server/gta3mta</ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti>games-strategy/freecraft-fcmp</ti>
+<ti>2007年2月09日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti>app-portage/abeni</ti>
+<ti>2007年2月09日</ti>
+<ti><mail link="fuzzyray@gentoo.org">Paul Varner</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-misc/gpasman</ti>
+<ti>2007年2月09日</ti>
+<ti><mail link="nelchael@gentoo.org">Krzysiek Pawlik</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/openquicktime</ti>
+<ti>2007年2月10日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>net-p2p/ww</ti>
+<ti>2007年2月10日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti>net-p2p/azureus-bin</ti>
+<ti>2007年2月10日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti>app-laptop/macosd</ti>
+<ti>2007年2月11日</ti>
+<ti><mail link="corsair@gentoo.org">Markus Rothe</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<section>
+<title>已经加入：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>加入日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-ada;name=glade">dev-ada/glade</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="george@gentoo.org">George Shapovalov</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=media-libs;name=libafterimage">media-libs/libafterimage</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Return-Value">dev-perl/Return-Value</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-Send">dev-perl/Email-Send</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME-Encodings">dev-perl/Email-MIME-Encodings</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MessageID">dev-perl/Email-MessageID</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME-ContentType">dev-perl/Email-MIME-ContentType</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME">dev-perl/Email-MIME</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME-Modifier">dev-perl/Email-MIME-Modifier</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME-Attachment-Stripper">dev-perl/Email-MIME-Attachment-Stripper</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-Date">dev-perl/Email-Date</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-Simple-Creator">dev-perl/Email-Simple-Creator</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-MIME-Creator">dev-perl/Email-MIME-Creator</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Email-Reply">dev-perl/Email-Reply</uri></ti>
+<ti>2007年2月05日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=sys-block;name=fwdl">sys-block/fwdl</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="robbat2@gentoo.org">Robin H. Johnson</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=Astro-FITS-Header">dev-perl/Astro-FITS-Header</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="mcummings@gentoo.org">Michael Cummings</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-ml;name=ocaml-ssl">dev-ml/ocaml-ssl</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="nattfodd@gentoo.org">Alexandre Buisse</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-ml;name=ocaml-expat">dev-ml/ocaml-expat</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="nattfodd@gentoo.org">Alexandre Buisse</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=games-strategy;name=coldwar">games-strategy/coldwar</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=games-arcade;name=blockrage">games-arcade/blockrage</uri></ti>
+<ti>2007年2月06日</ti>
+<ti><mail link="tupone@gentoo.org">Alfredo Tupone</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-python;name=pyfits">dev-python/pyfits</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-util;name=ragel">dev-util/ragel</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="twp@gentoo.org">Tom William Payne</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-doc;name=lapack-docs">app-doc/lapack-docs</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-doc;name=blas-docs">app-doc/blas-docs</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-lang;name=cfortran">dev-lang/cfortran</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-perl;name=MLDBM-Sync">dev-perl/MLDBM-Sync</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="ian@gentoo.org">Christian Hartmann</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=games-board;name=fruit">games-board/fruit</uri></ti>
+<ti>2007年2月07日</ti>
+<ti><mail link="tupone@gentoo.org">Alfredo Tupone</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-backup;name=keep">app-backup/keep</uri></ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="drizzt@gentoo.org">Timothy Redaelli</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=games-arcade;name=amphetamine">games-arcade/amphetamine</uri></ti>
+<ti>2007年2月08日</ti>
+<ti><mail link="tupone@gentoo.org">Alfredo Tupone</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-java;name=cos">dev-java/cos</uri></ti>
+<ti>2007年2月10日</ti>
+<ti><mail link="nichoj@gentoo.org">Joshua Nichols</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=x11-themes;name=gtk-engines-rezlooks">x11-themes/gtk-engines-rezlooks</uri></ti>
+<ti>2007年2月11日</ti>
+<ti><mail link="compnerd@gentoo.org">Saleem Abdulrasool</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-lang;name=mono-basic">dev-lang/mono-basic</uri></ti>
+<ti>2007年2月11日</ti>
+<ti><mail link="compnerd@gentoo.org">Saleem Abdulrasool</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=games-arcade;name=supertransball2">games-arcade/supertransball2</uri></ti>
+<ti>2007年2月11日</ti>
+<ti><mail link="tupone@gentoo.org">Alfredo Tupone</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=xfce-extra;name=gsynaptics-mcs-plugin">xfce-extra/gsynaptics-mcs-plugin</uri></ti>
+<ti>2007年2月11日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<!-- <section>
+<title>Last Rites:</title>
+<body> -->
+
+<!-- paste from email -->
+
+<!-- </body>
+</section> -->
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bug-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2007年2月04日到2007年2月11日，这个站点记录下了：</p>
+
+<ul>
+<li>743个在这段时间内被发现的新bug</li>
+<li>531个在这段时间内被修正或解决的bug</li>
+<li>32个先前修复了的但在这段时间重现的bug</li>
+<li>148个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>148个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的10407个bug里面：16个被标记为“blocker”，111个被标记为“critical”，还有435个被标记为“major”。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，27个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，24个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=java@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，21个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+<li><mail link="emacs@gentoo.org">GNU Emacs Herd</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=emacs@gentoo.org">被修正的bug</uri></li>
+<li><mail link="media-video@gentoo.org">media-video团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=media-video@gentoo.org">被修正的bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;resolution=FIXED&amp;assigned_to=sound@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="kernel@gentoo.org">Gentoo内核维护者</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=kernel@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="x11@gentoo.org">Gentoo X-windows维护者</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=x11@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+<li><mail link="net-im@gentoo.org">Gentoo net-im团队</mail>，5个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=net-im@gentoo.org">新bug</uri></li>
+<li><mail link="dev-portage@gentoo.org">Portage团队</mail>，5个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-02-04&amp;chfieldto=2007-02-11&amp;assigned_to=dev-portage@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的职员是由为之提交想法和文章的志愿者和社区成员组成的。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者只是有点想法或文章要提交给GWN，请你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

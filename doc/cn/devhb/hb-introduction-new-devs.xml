@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/devrel/handbook/hb-introduction-new-devs.xml,v 1.4 2004/08/24 21:07:26 plasmaroo Exp $ -->
+
+<sections>
+<section>
+<title>Using CVS</title>
+<subsection>
+<title>Introduction</title>
+<body>
+
+<p>
+This guide is not intended to be a manual on using CVS; for that, take a look at
+the CVS info page or <uri>http://www.gentoo.org/doc/en/cvs-tutorial.xml</uri>.
+Instead, this guide focuses specifically on using CVS and Repoman in Gentoo's
+ebuild tree.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Configuration</title>
+<body>
+
+<p>
+Typically, you'll want something along these lines in your <path>~/.cvsrc</path>:
+</p>
+
+<pre caption="~/.cvsrc">
+cvs -q -z0
+diff -u -B
+checkout -P
+update -d -P
+</pre>
+
+<p>
+In order to make sure digests are correct, please put <c>cvs</c> in your <c>FEATURES</c> setting.
+</p>
+
+<p>
+Finally, many people using CVS like to use compression (-z#). We ask that
+developers who are not on dialup connections please use -z0 - with the contents
+of our CVS repository and the load on our CVS server, you actually experience a 
+speed <e>increase</e> without compression.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Checking out</title>
+<body>
+
+<p>
+There are a few useful modules in Gentoo's CVS repository. Ebuilds are kept in
+the <path>gentoo-x86</path> module. <path>gentoo-src</path> contains various
+projects - some useful, some inactive. <path>gentoo</path> contains the XML
+for the website, documentation, developer directories, developer pictures,
+and so on.
+</p>
+
+<pre caption="Checking out gentoo-x86">
+# cvs -d username@cvs.gentoo.org:/var/cvsroot co gentoo-x86
+</pre>
+
+<p>
+Before working in the tree at any time, it's always a good idea to do an update to check
+for changes and prevent conflicts. You can update in any subdirectory of the tree if you
+don't want to want for a tree-wide update, but from time to time it's a good idea to update
+your entire tree:
+</p>
+		
+<pre caption="Updating in gentoo-x86">
+# cd gentoo-x86
+# cvs update
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Updating Portage</title>
+<body>
+
+<p>
+If you want to use CVS as your primary Portage tree, you can add the following
+lines to <path>/etc/make.conf</path>, replacing <c>you</c> with your username:
+</p>
+
+<pre caption="Changing /etc/make.conf for use with CVS">
+SYNC="cvs://you@cvs.gentoo.org:/var/cvsroot"
+CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
+</pre>
+
+<p>
+Whether you wish to use a CVS checkout as your primary Portage tree or not,
+you should ensure that <c>cvs</c> is in your <c>FEATURES</c> in
+<path>/etc/make.conf</path>. This makes sure Portage downloads all the
+files an ebuild references in its <c>SRC_URI</c> when making a digest.
+</p>
+
+<p>
+You can add <c>digest</c> to your <c>FEATURES</c>, letting
+Portage automatically create new digests. You can also add
+<c>autoaddcvs</c> so <c>repoman</c>, the tool which you will use to
+commit in ebuilds, would automatically add missing digests for you into CVS.
+</p>
+
+<p>
+On supported architectures, you should also have <c>sandbox</c> in your
+<c>FEATURES</c> to ensure ebuilds do not modify the root filesystem
+directly.
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Adding/Removing</title>
+<body>
+
+<p>
+Say you're ready to add a brand new package, <c>foo</c>, in app-misc:
+</p>
+
+<pre>
+<comment>(Replace CVSROOT with the location of your checked-out CVS tree.)</comment>
+# cd $CVSROOT/app-misc
+<comment>(Always update before working in part of the CVS tree!)</comment>
+# cvs update
+# mkdir foo
+<comment>(Here, we add the package directory foo to the CVS repository.)</comment>
+# cvs add foo
+# cd foo
+<comment>(It's better to keep in-progress ebuilds in an overlay outside of your CVS tree.)</comment>
+# cp /path/to/foo-1.0.ebuild ./
+<comment>[Don't forget to create a ChangeLog - see the man page for echangelog.]</comment>
+<comment>(Make sure PORTDIR_OVERLAY is set to the CVS directory when creating digests.)</comment>
+# ebuild foo-1.0.ebuild digest
+# cvs add foo-1.0.ebuild ChangeLog files
+<comment>(FEATURES=autoaddcvs will do this for you...)</comment>
+# cvs add files/digest-foo-1.0
+</pre>
+
+<p>
+Remember to also add a metadata.xml file with maintainer
+information. See the <uri link="?part=2&amp;chap=4">Gentoo
+Metadata</uri> section for more information.
+</p>
+
+<p>
+At this point, you're ready to commit (see the section on Commits
+below). But what if you want to remove foo-1.0 when foo-1.1 is out?
+</p>
+
+<pre>
+# cd CVSROOT/app-misc/foo
+# cvs update
+# rm foo-1.0.ebuild files/digest-foo-1.0 <comment>(Files should be deleted first...)</comment>
+# cvs remove foo-1.0.ebuild files/digest-foo-1.0
+</pre>
+
+<p>
+And now you're ready to commit (see the section on Commits below).
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Commits</title>
+<body>
+
+<p>
+Always use <c>repoman commit</c> rather than <c>cvs commit</c>. Repoman is a quality assurance (QA)
+tool that performs basic checks and creates Manifests. If any part of repoman's output is unclear,
+please see <c>man repoman</c>. Additionally, you may tire of entering your key passphrase repeatedly;
+keychain (<uri>http://www.gentoo.org/proj/en/keychain.xml</uri>) can help you.
+</p>
+		
+<pre>
+<comment>[Make sure there are no root-owned files present prior to running repoman!]</comment>
+<comment>("scan" scans the current directory for QA issues. "full" is more complete.)</comment>
+# repoman scan
+<comment>("commit" does a scan, then commits, while also updating digests. Make sure you
+ add a verbose and useful CVS ChangeLog message...)</comment>
+# repoman commit
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Miscellaneous</title>
+<subsection>
+<title>Putting files on mirrors</title>
+<body>
+
+<p>
+The procedure for dropping a new file in distfiles on Gentoo mirrors is very simple: 
+copy it to <path>/space/distfiles-local</path> on <path>dev.gentoo.org</path>.
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Mail</title>
+<body>
+
+<p>
+Our infrastructure allows developers to manage their own mail.
+<uri>http://www.gentoo.org/proj/en/infrastructure/dev-email.xml</uri>
+contains instructions on configuring your gentoo.org mail.
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

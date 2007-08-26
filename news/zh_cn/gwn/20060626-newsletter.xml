@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060626-newsletter.xml" lang="zh_cn">
+  <title>Gentoo Weekly Newsletter</title>
+  <subtitle>2006年6月26日</subtitle>
+  <author title="Editor">
+    <mail link="plate@gentoo.org">Ulrich Plate</mail>
+  </author>
+  <author title="Author">
+    <mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+  </author>
+  <author title="Author">
+    <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+  </author>
+  <author title="Author">
+    <mail link="mark_alec@gentoo.org">Mark Kowarsky</mail>
+  </author>
+  <author title="Author">
+    <mail link="beandog@gentoo.org">Steve Dibb</mail>
+  </author>
+  <author title="Author">
+    <mail link="nichoj@gentoo.org">Josh Nichols</mail>
+  </author>
+  <author title="Translator">
+    <mail link="robert.zhangle@gmail.com">张乐</mail>
+  </author>
+  <author title="Translator">
+    <mail link="nkeric@gmail.com">许艺华</mail>
+  </author>
+  <author title="Translator">
+    <mail link="neville.lyh@gmail.com">李颖颢</mail>
+  </author>
+  <author title="Translator">
+    <mail link="dundask@gmail.com">邓京晶</mail>
+  </author>
+  <author title="Translator">
+    <mail link="jeffkyjin@gmail.com">金涛</mail>
+  </author>
+  <abstract>这是2006年6月26日的Gentoo Weekly Newsletter。</abstract>
+  <summary/>
+  <version>Volume 5, Issue 23</version>
+  <date>2006-06-26</date>
+  
+  <!-- Gentoo News -->
+  <chapter>
+    <title>Gentoo新闻</title>
+    <section>
+      <title>发布测试者招募中</title>
+      <body>
+      <p>Gentoo<uri link="/proj/en/releng">发布工程</uri>项目正在寻找有经验的用户和开发者来帮助测试即将到来的2006.1版本。他们希望可以得到很多不同种类的硬件来测试。所有的申请者都需要可以参与测试，并且要有宽带网络和CD/DVD刻录机，因为将会有很多ISO镜像要测试而且新镜像的发布将会很频繁。有兴趣的朋友请联系<mail link="roger55@gentoo.org">Roger Miliker</mail>并提供下列信息：</p>
+
+      <ul>
+        <li>CPU类型（i686，PPC，AMD64等等）</li>
+        <li>系统内存总量</li>
+        <li>磁盘类型（IDE，SCSI，SATA等等）</li>
+        <li>扫描仪类型（IDE，SCSI，SATA等等）</li>
+        <li>显卡类型（仅针对AMD64/x86）</li>
+        <li>刻录机类型（CD，DVD等等）</li>
+      </ul>
+
+      <p>如果您的硬件能够填补他们的测试范围的空白，或者您在向开发者提供解决问题所需信息方面很有经验的话，您将会被他们选中。</p>
+      </body>
+    </section>
+
+    <section>
+      <title>Gentoo x86架构测试者和开发者招募中</title>
+      <body>
+      <p>x86体系结构团队正在积极寻找有志于加入并协助该团队进行体系测试的人员（Arch Tester）。若你有意为Gentoo作贡献，却不知从何开始，这会是一个很好的机会！你将会参与的工作包括测试将被标为稳定的软件包，以及处理x86相关的bug。请阅读<uri link="http://www.gentoo.org/proj/en/base/x86/arch-testers-faq.xml">x86架构测试者（AT）文档</uri>，如果你遇到什么问题，请随时email联系<mail link="hparker@gentoo.org">Homer Parker</mail>或<mail link="tsunam@gentoo.org">Joshua Jackson</mail>。他们同时在寻找更多的开发人员，以协助他们处理bug报告，关键字申请（keywording requests──Gentoo Portage利用如~x86，ppc这样的关键字来标识一个软件包在各个体系结构上的稳定性状态；这句话大概是指当某个软件包要标记成某个关键字时，需要有专人进行一定的处理流程以决定是否满足要求并标上。- nkeric），以及解决安全相关bug。有兴趣的朋友具备如下条件即可参与：一个稳定的或 chroot 的系统（稳定的系统指关键字意义上的，例如你的Gentoo装的都是关键字为x86的软件包便是一个“稳定的系统” - nkeric），且愿意一起为x86团队处理指派给他们的bug。现在就发送邮件到<mail link="x86@gentoo.org">x86团队</mail>联系他们吧！</p>
+      </body>
+    </section>
+
+    <section>
+      <title>重要的ALSA信息</title>
+      <body>
+      <p>Diego "Flameeyes" Petten已更新ALSA相关软件包至1.0.12rc1以便与2.6.17版的内核兼容。这些软件包有所变动，<c>media-plugins/alsa-jack</c>已不推荐使用，因其功能已被加入到<c>media-plugins/alsa-plugins</c>中。PowerPC用户相信会对如下消息很感兴趣──snd-aoa已被合并到<c>media-sound/alsa-driver</c>1.0.12rc1中；不过目前这个包尚在package.mask中，需要有特定硬件的用户进行充分测试之后才会被unmask。</p>
+      </body>
+    </section>
+
+	<section>
+      <title>崭新的Java系统</title>
+      <body>
+        <p>Java团队很高兴向大家宣布──崭新的Java系统终于进入我们的软件树了（hit the tree）。尽管它目前尚在package.mask中，不过，Java团队预计它在最近几天被unmask。</p>
+
+        <p>目前你可以通过修改<c>/etc/portage/package.unmask</c>unmask之，然后跟随<uri link="http://www.gentoo.org/proj/en/java/java-upgrade.xml">升级指引</uri>即可开始使用。</p>
+
+<pre caption="/etc/portage/package.unmask">
+# Masked for testing changes to Java 
+&gt;=dev-java/java-config-1.3 
+dev-java/java-config-wrapper 
+&gt;dev-java/javatoolkit-0.1.0
+&gt;=dev-java/ant-core-1.6.5-r13
+&gt;=dev-java/ant-tasks-1.6.5-r2
+&gt;=dev-java/jikes-1.22-r12
+&gt;=dev-java/eclipse-ecj-3.1-r13
+=dev-java/blackdown-jdk-1.3.1-r23
+=dev-java/blackdown-jdk-1.4.1-r12
+=dev-java/blackdown-jdk-1.4.2.03-r12
+=dev-java/blackdown-jre-1.3.1-r20
+=dev-java/blackdown-jre-1.4.1-r12
+=dev-java/blackdown-jre-1.4.2.03-r11
+=dev-java/ibm-jdk-bin-1.4.2.04-r10
+=dev-java/ibm-jdk-bin-1.5.0-r11
+=dev-java/ibm-jre-bin-1.4.2.05
+=dev-java/jrockit-jdk-bin-1.4.2.10
+=dev-java/jrockit-jdk-bin-1.5.0.06
+=dev-java/kaffe-1.1.7
+=dev-java/sun-jdk-1.4.2.12
+=dev-java/sun-jdk-1.5.0.07
+=dev-java/sun-jre-bin-1.4.2.12
+=dev-java/sun-jre-bin-1.5.0.07
+</pre>
+
+        <p>下面列出一些有意思的东西以让你了解该新系统：</p>
+
+        <ul>
+          <li>可随时切换不同的VM（Java虚拟机）</li>
+          <li>对用户或系统VM的变更即时生效，不再受限于shell环境，这意味着当你切换系统VM的时候不必再通过运行env-update加source /etc/profile这样繁琐的步骤使之生效。</li>
+          <li>加入“build VM”概念，“build VM”用以emerge软件包，且具备完全独立于系统VM的配置。</li>
+          <li>无论是1.3，1.4，还是1.5版本的Java，build VM可通过配置以指定使用哪个供应商哪个版本的VM。</li>
+          <li>VM在emerge的过程中可根据软件包的依赖情况随时切换。例如，有些软件包无法用1.5进行编译，那么系统会在编译时自动切换并使用一个1.4的VM。</li>
+          <li>以ant编译的Java软件包，其build.xml会在编译时被完全重写以确保编译出正确版本的Java字节码。</li>
+          <li>将能够很快取消Java 1.5的屏蔽，并且在今年秋天推出时支持Java 1.6</li>
+        </ul>
+      </body>
+    </section>
+
+  </chapter>
+
+  <chapter>
+    <title>倾听社区</title>
+    <section>
+      <title>forums</title>
+      <body>
+      <p><b>Larry笨牛——傻气？</b></p>
+
+      <p>有些论坛用户表达了对Larry的不喜欢。他们觉得它没有目的，和Gentoo无关而且很“傻气”。然而其他人似乎喜欢我们笨牛的古怪。Larry是一个有用的吉祥物，Gentoo历史中有价值的一部分，还是一个陈旧无意义的角色？</p>
+
+      <ul>
+        <li><uri link="http://forums.gentoo.org/viewtopic-t-473584.html">那个奶牛很傻</uri></li>
+      </ul>
+      </body>
+    </section>
+
+    <section>
+      <title>planet.gentoo.org</title>
+      <body>
+      <p><b>Gentoo/Alpha FAQ更新</b></p>
+
+      <p>Gento/Alpha FAQ已经由Thomas Cort的补丁更新，现在包括额外的对硬件维护，.dotnet支持，和Alpha开机引导的解答。</p>
+
+      <ul>
+        <li><uri link="http://mediumbagel.org/nucleus/index.php?itemid=21">Gentoo/Alpha FAQ更新</uri></li>
+      </ul>
+
+      <p><b>grep对垒bash regex</b></p>
+
+      <p>Roy Marples用bash的内部函数代替<c>grep</c>并作了一些测试。测试的结果令人印象深刻，bash内部函数速度更快一些。他的测试只是针对小文件，对于大文件可能grep的表现会好一些，因为grep在找到匹配结果后会立即返回，而bash需要读取整个文件。</p>
+
+      <ul>
+        <li><uri link="http://roy.marples.name/node/267">grep对垒bash regex</uri></li>
+      </ul>
+      </body>
+    </section>
+  </chapter>
+
+  <!-- Gentoo in the press -->
+  <chapter>
+    <title>Gentoo媒体</title>
+    <section>
+      <title>LXer.com（2006年6月22日）</title>
+      <body>
+      <p>作者Hans Kwint写了一篇有趣的文章，内容关于他如何在桌面电脑上使用Gentoo Linux。这篇标题为<uri link="http://lxer.com/module/newswire/view/63474/index.html">Gentoo日记：介绍</uri>的文章是Gentoo日常生活应用系列文章的第一篇。</p>
+      </body>
+    </section>
+
+    <section>
+      <title>Linux Link Tech Show（2006年6月21日）</title>
+      <body>
+      <p>Linux Link Tech Show刊出了一篇很长的对于四位Gentoo开发者的采访，他们是<mail link="vapier@gentoo.org">Mike Frysinger</mail>，<mail link="mcummings@gentoo.org">Michael Cummings</mail>，<mail link="g2boojum@gentoo.org">Grant Goodyear</mail>和<mail link="seemant@gentoo.org">Seemant Kulleen</mail>。您可以以<mail link="vapier@gentoo.org">Mike Frysinger</mail>或者<mail link="mcummings@gentoo.org">Michael Cummings</mail>格式下载采访录音。采访持续时间大约24.5分钟。</p>
+      </body>
+    </section>
+
+    <section>
+	  <title>AnandTech（2006年6月7日）</title>
+      <body>
+      <p>AnandTech杂志最近发表了一篇对不同的新型CPU之间性能<uri link="http://www.anandtech.com/IT/showdoc.aspx?i=2772">大比拼</uri>的文章，包括Sun UltraSparc T1等等。文章中使用了Gentoo操作系统作为测试平台，感兴趣的朋友可以参考一下新的Sun处理器对阵Intel的Woodcrest和AMD的Opteron处理器。</p>
+     </body>
+   </section>
+  </chapter>
+
+  <!-- Tips and Tricks -->
+  <chapter>
+    <title>心得技巧</title>
+    <section>
+      <title>游戏时间：ScummVM</title>
+      <body>
+
+      <p>当今许多游戏无法在Linux系统里面运行，但是我们仍然有许多可以选择的模拟器使得以前不少的游戏可以流畅的运行。如果你能找到这些游戏的原始版本，<uri link="http://scummvm.sourceforge.net/">ScummVM</uri>可以让经典的点击类冒险游戏，比如“霹雳天使2（Full Throttle）”，“触须的日子（Day of the Tentacle）”和“猴岛的秘密（The Secret of Monkey Island）”。</p>
+
+      <p>这个项目开始的时候目的是找到一个能运行LucasArt的SCUMM游戏引擎的方法，但是现在它已经能够支持其他的游戏了。请去它的<uri link="http://scummvm.sourceforge.net/compatibility.php">兼容性列表</uri>中看看它能支持哪些游戏。</p>
+
+      <p>如果你还没开始搜寻80年代的电脑游戏的话，你仍然算是走运的。其中一个经典游戏“Flight of the Amazon”已经免费的发布并且出现在了portage之中。</p>
+
+      <p>让我们开始吧，先emerge在四个不同架构中（amd64，ppc，sparc，x86）都标记为稳定的scummvm，其实scummvm 本身可以运行于Windows，Mac OS X，PocketPC，PalmOS，OS/2等等的平台之上。当然，取决于你机器的架构，Flight of the Amazon Queen可能还未进入稳定版，所以请对你的package.keywords文件做相应的改动。</p>
+
+<pre caption="Installing queen">
+# <i>emerge scummvm -va</i> 
+# <i>echo "games-rpg/queen" &gt;&gt; /etc/portage/package.keywords"</i> 
+# <i>emerge queen</i>
+</pre>
+
+      <p>之后，请你将你的用户加入到“game”用户组中。</p>
+
+<pre caption="Adding user to games group">
+# <i>groups larry</i> 
+# <i>gpasswd -a larry games</i>
+</pre>
+        
+      <p>如果你打算把你的用户们加入这个组，记得你必须注销以后再登入才能使得刚才的改动生效。打开scummvm，你会见到一个图形界面，然后可以在里面加入你自己的游戏。默认的情况下，FOTAQ不会出现在列表中，但是你可以点击“加入游戏”来加入它。<c>/usr/share/games/queen</c>是存放着游戏数据的文件夹，当你浏览至这个文件夹的时候，只需要点击“选择”按钮就可以开始游戏了。当然，你也可以直接点击“皇后”(queen)来开始这个游戏。</p>
+      </body>
+    </section>
+  </chapter>
+
+<!-- Gentoo developer moves -->
+  <chapter>
+    <title>人员变更</title>
+    <section>
+      <title>离开</title>
+      <body>
+        <p>下列开发者最近离开Gentoo项目：</p>
+        <ul>
+          <li><e>本周没有</e></li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>加入</title>
+      <body>
+        <p>下列开发者最近加入Gentoo项目：</p>
+        <ul>
+          <li>Raphael Marichez (Falco) 安全小组</li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>变更</title>
+      <body>
+        <p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+        <ul>
+          <li>本周没有</li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+
+<!-- Gentoo security -->
+  <chapter>
+    <title>Gentoo安全</title>
+  <!-- paste from the script -->
+<section>
+<title>aRts：权限提升</title>
+<body>
+<p>aRts中的artswrapper部分允许本地用户以较高权限执行任意代码。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-22.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>KDM：Symlink漏洞</title>
+<body>
+<p>KDM中symlink弱点引起的漏洞可能会导致信息泄露。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-23.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>wv2：整数溢出</title>
+<body>
+<p>某个整数溢出可能会允许攻击者运行任意代码。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-24.xml">GLSA声明</uri></p>
+</body>
+</section>
+</chapter>
+
+  <!-- Bugzilla -->
+  <!-- paste from the script -->
+<chapter>
+<title>Bugzilla</title>
+<section>
+<title>总结</title>
+<body>
+     <ul>
+          <li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+          <li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+          <li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+     </ul>
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+     <p>Gentoo社区使用Bugzilla（<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>）来记录和追踪bug，提示，建议等形式的和开发团队之间的交流。从2006年6月18日到2006年6月25日，这个站点记录下了：</p>
+     <ul>
+          <li>759个在这段时间内被发现的新bug</li>
+          <li>364个在这段时间内被修正或解决的bug</li>
+          <li>24个先前修复了的但在这段时间重现的bug</li>
+     </ul>
+     <p>在当前还未被修正的10343个bug里面：53个被标记为"blocker"，140个被标记为"critical"，还有544个被标记为"major"。</p>
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+     <p>在这段时间内修复最多bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="games@gentoo.org">Gentoo游戏</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="security@gentoo.org">Gentoo安全</mail>，18个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="tools-portage@gentoo.org">Portage工具团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=tools-portage@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="media-video@gentoo.org">media-video团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=media-video@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="genkernel@gentoo.org">Gentoo Genkernel维护者</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=genkernel@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="x11@gentoo.org">Gentoo X-windows维护者</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=x11@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;resolution=FIXED&amp;assigned_to=maintainer-needed@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+     <p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，37个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+      <li><mail link="treecleaner@gentoo.org">Gentoo TreeCleaner项目</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=treecleaner@gentoo.org">新bug</uri></li>
+      <li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=x11-drivers@gentoo.org">新bug</uri></li>
+      <li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+      <li><mail link="toolchain@gentoo.org">Gentoo工具链维护者</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=toolchain@gentoo.org">新bug</uri></li>
+      <li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+      <li><mail link="java@gentoo.org">Java团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=java@gentoo.org">新bug</uri></li>
+      <li><mail link="games@gentoo.org">Gentoo游戏</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-18&amp;chfieldto=2006-06-25&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+</chapter>
+
+  <!-- GWN feedback information -->
+  <chapter>
+    <title>周报反馈</title>
+    <section>
+      <body>
+        <p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- GWN subscription information -->
+  <chapter>
+    <title>周报订阅</title>
+    <section>
+      <body>
+        <p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+        <p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+      </body>
+    </section>
+  </chapter>
+  
+  <!-- Other Languages -->
+  <chapter>
+    <title>其他语言</title>
+    <section>
+      <body>
+        <p>Gentoo周报还被翻译为以下几种语言文字：</p>
+        <ul>
+	  <li>
+	    <uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+	  </li>
+          <li>
+            <uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+          </li>
+          <li>
+            <uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/en/gwn/gwn.xml">英文</uri>
+          </li>
+          <li>
+            <uri link="/news/de/gwn/gwn.xml">德文</uri>
+          </li>
+          <li>
+            <uri link="/news/fr/gwn/gwn.xml">法文</uri>
+          </li>
+          <li>
+            <uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+          </li>
+          <li>
+            <uri link="/news/ja/gwn/gwn.xml">日文</uri>
+          </li>
+          <li>
+            <uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+          </li>
+          <li>
+            <uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+          </li>
+          <li>
+            <uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+          </li>
+          <li>
+            <uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+          </li>
+          <li>
+            <uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+          </li>
+          <li>
+            <uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+</guide>

@@ -1,0 +1,618 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- This document was last synched to:
+     cvs://gentoo/gentoo/xml/htdocs/doc/en/policy.xml :: R1.35.
+-->
+
+<sections>
+<section>
+<title>一般守則</title>
+<subsection>
+<body>
+<p>下列是一些應遵循的基本守則</p>
+<ul>
+
+<li>務必用 repoman 登錄您所作的改變；用 repoman 做 commit 的動作，不要使用 cvs 
+commit。</li>
+
+<li>如果某個套件的現行版本是毀損的，或是編譯/安裝的過程太過雜亂，您可以參考其他
+distribution 的作法：<ul>
+<li><uri>http://cvs.mandrakesoft.com/cgi-bin/cvsweb.cgi/SPECS/</uri></li>
+<li><uri>http://www.debian.org/distrib/packages</uri></li> </ul> </li>
+   
+<li>當您的套件完成，並且成為解除封鎖（unmasked）的狀態，這個套件應該讓使用者能
+立即安裝使用。所有安裝後所作的調整，都應該是非必要的；因此，套件應用合理的預設
+值來安裝。</li>
+
+<li>您可以多多參考我們一些資深開發者所編寫及維護的線上文件和 ebuilds，我們也歡
+迎您直接聯絡資深的開發者，詢問任何技術性或政策性的問題。</li>
+
+<li>請您對所交付的變更要非常謹慎，任何的錯誤都可能損害到上千使用者的系統。如
+果您的變更對 portage tree 造成任何的破壞，這些錯誤必須立即被修復。</li>
+
+<li>每個套件都必須有一份 <uri link="metadata.xml">metadata.xml</uri> 檔案，並在
+這份檔案中，記錄負責這個套件的所有人員。</li>
+
+</ul>
+</body>
+</subsection>
+</section>
+
+<section>
+<title>特殊守則</title>
+<subsection>
+<title>版權</title>
+<body>
+<p>所有 ebuild （還有文件）的版權均歸屬於 Gentoo Technologies。開發者不可以將
+自己的名字加入版權聲明中。更多相關的資訊請參考 
+<uri>http://www.gentoo.org/proj/en/devrel/copyright/index.xml</uri> 。
+</p>
+</body>
+</subsection>
+
+<subsection>
+<title>fPIC</title>
+<body>
+<p>在某些硬體架構上，分享函式庫一定要有 -fPIC 的參數才能編譯。在 x86 及其他架構
+上，分享函式庫可以不用加 -fPIC 就能編譯，但是這樣做卻是效率不彰的，而且可能導致
+效能不佳。如果您發現某個套件沒有使用 -fPIC 的參數來編譯分享函式庫，請將該套件的 
+Makefile 修改為<b>只</b>編譯出使用 -fPIC 參數的函式庫。更多關於 PIC 的資訊可以
+在 <uri>http://www.gentoo.org/proj/en/hardened/pic-internals.xml</uri> 找到。
+</p>
+</body>
+</subsection>
+
+<subsection>
+<title>Perl</title>
+<body>
+
+<p>
+要加入新的 Perl 模組，必須符合下列條件之一：
+</p>
+
+<ul>
+<li>該模組為滿足依賴關係之必要</li>
+<li>該模組不能用 <c>g-cpan</c> 處理</li>
+<li>該模組替既有的 ebuilds 增加新的功能</li>
+<li>該模組提供額外的工具、應用、或其他功能（例如提供比 .PM 檔更多功能）。</li>
+</ul>
+
+<p>
+請確認至少一位 perl 開發者認可您增加模組的要求
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>Ebuild 政策</title>
+<subsection>
+<title>命名政策</title>
+<body>
+
+<p>Ebuild 檔案名稱由四個部份組成：</p>
+
+<p><c>pkg-ver{_suf{#}}{-r#}.ebuild</c></p>
+
+<note>括弧 (<c>{}</c>) 是用來區隔選擇性的項目，不會出現在正式的套件名稱中。 
+<c>#</c> 代表任何非零的正整數</note>
+
+<p>
+第一個部份， <c>pkg</c> ，是套件名稱，只能包含小寫英文字母，數字 0-9 ，和任意個
+數的連字號（<c>-</c>）或底線符號（<c>_</c>）。例如：
+<c>util-linux</c>, <c>sysklogd</c>, <c>glibc</c>。在 Portage 內有一些套件名稱並
+未遵循這些原則，但是 <e>您的</e> 套件必需要遵守。
+</p>
+
+<p>
+第二部份， <c>ver</c> ，是套件版本，通常與主要的原始碼壓縮檔相同。版本通常由兩
+個或三個（或多個）數字組成，以點號相隔，像是 <c>1.2</c> 或是 <c>4.5.2</c> ，也
+有可能在數字之後加個英文字母；例如 <c>1.4b</c> 或是 <c>2.6h</c>。套件的版本用連
+字號加在套件名稱之後 ，例如：<c>foo-1.0</c>, <c>bar-2.4.6</c>。
+</p>
+
+<p>
+第三部份， <c>{_suf{#}}</c> ，是選擇性的，可包含任一既定的詞尾，表列如下，版
+本愈新，排列愈後：
+</p>
+
+<table>
+ <tr><th>詞尾</th><th>意義</th></tr>
+ <tr><ti><c>_alpha</c></ti><ti>Alpha 版本</ti></tr>
+ <tr><ti><c>_beta</c></ti><ti>Beta 版本</ti></tr>
+ <tr><ti><c>_pre</c></ti><ti>釋出測試版本（prerelease）</ti></tr>
+ <tr><ti><c>_rc</c></ti><ti>釋出候選版本（release candidate）</ti></tr>
+ <tr><ti>（無）</ti><ti>正式版本</ti></tr>
+ <tr><ti><c>_p</c></ti><ti>補釘修正（通常會加上數字結尾）
+ </ti></tr>
+</table>
+
+<p> 
+這些詞尾後面可能會接著一個非零的正整數，如 <c>linux-2.4.0_pre10</c>。如果版本序
+號相同，詞尾的排序按照（版本愈舊排序愈小）： <c>_alpha</c> &lt;
+<c>_beta</c> &lt; <c>_pre</c> &lt; <c>_rc</c> &lt; （無） &lt;
+<c>_p</c>。
+</p>
+       
+<p>
+比較連有數字的詞尾時，連接數字較大的，被視為較新的版本。例如： 
+<c>foo-1.0_alpha4</c> 和 <c>foo-1.0_alpha3</c> 相比，前者為新。
+</p>
+
+<p>
+套件名稱的第四個部份是 Gentoo Linux 專屬的修正版本編號（<c>{-r#}</c>）。這個部
+份和詞尾一樣，都不是必要的。<c>#</c> 是一非零的正整數；如 <c>package-4.5.3-r3</c>。 
+</p>
+
+<p>
+修正版本的編號與原始碼壓縮檔的版本無關，它的目的是告知使用者 Gentoo Linux 針對
+某個套件提供了新的改良。 ebuild 最初的版本不可以有改版編號；如 
+<c>package-4.5.3</c> ， Portage 把這種套件版本的修正版本編號視為零。因此版本更
+新的排序會是 <c>1.0</c> （最初版本）, <c>1.0-r1</c>, <c>1.0-r2</c>, 等。 
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>版本編號和修正版本的新增</title>
+<body>
+
+<p>
+當 Gentoo Linux 的開發者認為套件 ebuild 的變動，已足夠到會讓使用者希望升級時，
+就應該要提供新的修正版本。典型的例子像是， ebuild 做了些修正，會影響到安裝後的
+檔案，但是 ebuild 使用的原始碼壓縮檔並未改變。相對的，如果您所作的，只是針對 
+ebuild 內部程式風格的改變，就不需要新增修正版本。同樣的，如果您修正了某些使用者
+在程式編譯時遇到的問題，您無須提出新的修正版本，因為對於程式已正常運作的使用者
+來說，重新安裝這個修正後的 ebuild 沒有任何益處，而對於之前無法安裝的使用者來說
+，既未安裝（因為程式編譯失敗），自然沒有升級的必要。另外，如果修正會對少數使用
+者有幫助，但是該套件的編譯很耗時，這樣的修正版本，應該是不必要的。總而言之，在
+不同的情況下，請您審慎評估，做出最好的判斷。
+</p>
+
+<impo>
+當您編寫了某個 ebuild 新的修正版本，請務必要更新該 ebuild 目錄下的 
+<path>ChangeLog</path> 檔案。這個步驟的遺漏，會被視為非常嚴重的缺失，並可能會導
+致處分。
+</impo>
+
+<p>
+新的 ebuild 必須以前一版為基礎，以確保之前任何的修正，不會意外地被遺漏。所有的
+修正都應在 ebuild 內有適當的註解，說明修正的目的和理由。如果您對之前的修正並不
+熟悉，或者無法確定這些修正是否仍然必要，您就不該更新這個 ebuild。
+</p>
+
+</body> 
+</subsection> 
+
+<subsection>
+<title>虛擬套件（Virtuals）</title>
+<body>
+
+<p>
+Portage 支援一種稱為 "虛擬" 套件的概念。使用虛擬套件，就可以把特定 類別/套件 映
+射到別的套件名稱。
+</p>
+
+<p>
+下面的例子說明該如何使用虛擬套件。假設您編寫了一個新的 cron 套件 <c>foocron</c>
+。 Gentoo Linux 目前是將任何需要類似 cron 套件服務的程式，設定為依賴 
+<c>virtual/cron</c> 套件。這使得 ebuild 能確保系統上有某種 cron 服務，同時讓使
+用者保有選擇適合自己的 cron 套件的彈性。要把您的 
+<path>foocron-1.0.ebuild</path> 加進這個系統，您需要在 ebuild 內加入一行程式：
+</p>
+
+<pre>
+PROVIDE="virtual/cron"
+</pre>
+
+<p>
+這樣一來，當 <c>foocron-1.0</c> 安裝之後，套件 <c>virtual/cron</c> 就會被記錄下
+來，如果使用者之前沒有安裝任何 cron 相關的套件，任何 <e>依賴</e> 
+<c>virtual/cron</c> 的套件，這個依賴條件都會因此而被滿足。請注意， 
+<c>PROVIDE</c> 可以套用在任何類別的套件上，不一定要以 <c>virtual/</c> 起始。然
+而，除非您是為了處理套件重新命名的問題而使用 <c>PROVIDE</c> 功能，請您 
+<e>一定</e> 要使用 <c>virtual/</c> 類別。</p>
+
+<p>
+Gentoo Linux 虛擬套件的實作上還有第二個組件。如果系統上沒有安裝任何套件提供 
+<c>virtual/cron</c> 怎麼辦？ 這時 Portage 該如何選擇 "正確" 的 cron 套件來安裝
+，來滿足與 <c>virtual/cron</c> 的依存關係？ Portage 用一個 profile-specific 虛
+擬映射檔 <path>virtuals</path> 來處理這樣的問題，這個檔案存放在目錄 
+<path>/etc/make.profile</path> 底下。如果開啟您的 <path>virtuals</path> 檔案，
+您會看到類似下面的內容：
+</p>
+
+<pre caption="virtuals file 範例">
+virtual/lpr             net-print/cups
+virtual/python          dev-lang/python
+virtual/mta             net-mail/ssmtp
+</pre>
+
+<p>
+範例中的第一行告訴 Portage，如果有套件依賴 <c>virtual/lpr</c>，卻沒有任何 
+<c>virtual/lpr</c> 套件安裝紀錄在 Portage tree 內，則應該安裝 
+<c>net-print/cups</c> 來滿足這個依賴條件。 <c>net-print/cups</c> 內會有一行程式
+寫著 <c>PROVIDE="virtual/lpr"</c>，這樣以後任何依賴 <c>virtual/lps</c> 的條件都
+會符合。
+</p>
+
+<p>
+接下來說明開發者應遵循的守則。如果您要加入一個新的套件 <c>foocron</c>，您一定會
+希望所有依賴 <c>virtual/cron</c> 的程式都能正常的使用這個套件。同樣的，如果您要
+增加一個叫做 <c>foobarosity</c> 的套件，它需要依賴 <c>virtual/cron</c>，您也必
+須確認所有提供 <c>virtual/cron</c> 功能的套件，都能使 <c>foobarosity</c> 正常工
+作。
+</p>
+
+<p>
+在建立新的虛擬套件之前，請先在開發者內部的 mailing list 上討論，讓開發者知悉新
+的虛擬套件，這是維護虛擬套件使用的一致性，必要的手段。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>CVS 原始碼政策</title>
+<body>
+
+<p>
+如果 ebuild 要使用 CVS development tree 上的原始碼來編譯程式，有兩種方法。第一
+種，傳統的方式是建立一個 "CVS snapshot" ebuild ，也就是在 CVS tree 上建立您自己
+的原始碼壓縮擋，然後在官方的 distfile 目錄內，建立這個原始碼的映射，然後將 
+ebuild 設定為使用這個原始碼壓縮檔。這種類型的 CVS ebuilds 在下文以 
+"CVS snapshot ebuilds" 稱之。
+</p> 
+
+<p>
+另一種編寫以 CVS 為來源的 ebuild 方法，是用 <path>cvs.eclass</path> 來建立一個 
+"live" CVS ebuild。這種 ebuild 會在下載的時候，動態地抓取最新的開發版原始碼，以
+確保所得的原始碼是最新的。這種 CVS ebuilds 以下會以 "'live' ebuilds" 稱之。
+</p>
+
+<p>
+下面詳細說明以 CVS 為基礎的 ebuild 相關的政策。請注意，增加此類型 ebuilds 到 
+Portage tree 上的規定是非常嚴格的。
+</p>
+
+<p>
+相較之下，我們偏好使用 snapshot cvs ebuilds，而盡量不要使用 
+"live" <path>cvs.eclass</path> cvs ebuilds。
+</p> 
+
+<p>
+如果 cvs snapshot 包含了讓程式能正常運作的修正，或者一般認為，或是已經證明，程
+式的 cvs 版本比標準版本 "運作更為良好"，這樣的 snapshot cvs ebuilds 是可以被允
+許的。
+</p>
+
+<p>
+"Live" <path>cvs.eclass</path> ebuilds 通常是為了開發者的方便，所以必須以 
+<c>~[arch]</c> 關鍵字封鎖。因為 cvs tree 最新的版本隨時都可能更動，要保證 
+"live" <path>cvs.eclass</path> ebuild 的可靠性是不可能的，這就是為什麼它們一定
+要被封鎖的原因。
+</p> 
+
+<p>
+不管是 "live" cvs ebuild 還是 "snapshot" CVS ebuild，<b>身為開發者的您有責任確
+保 ebuild 能正確運作</b>。顯而易見的，"live" cvs ebuild 要做到這一點尤其困難。
+</p>
+
+<p>
+如果 ebuilds （任何類型） 無法正常運作或是不穩定，它們就必須要被修正或是從 
+Portage tree 中移除。如果這些是 "live" ebuilds ，它們就可能永遠被 <c>~[arch]</c> 關鍵字封鎖（此特殊例外在下文會更仔細說明）。
+</p>
+
+<p>
+如果有使用者特別要求一個 "live" cvs ebuild，您可以幫他們編寫一份，但是一定要用 
+<c>~[arch]</c> 關鍵字封鎖，這樣其他使用者才不會無意中安裝到該版本。
+</p>
+
+<p>
+這樣，有需要的使用者（通常是開發者）可以安裝它們，但是其他使用者卻不會意外的受
+到影響。再強調一次，這只適用於有使用者要求 
+"live" <path>cvs.eclas</path> CVS ebuild 的情況。Snapshot ebuilds 要進入 
+Portage tree，它們必須符合穩定，而且較正式版本提供更多功能的條件。
+</p>
+
+<impo>
+以 CVS <e>pre-release</e> 作為原始碼的 snapshot ebuilds 須命名如下： 
+<path>foo-x.y+preYYYYMMDD.ebuild</path>。 <c>foo</c> 是套件名稱， <c>x.y</c> 
+是 <e>即將</e> 釋出的版本編號， <c>_pre</c> 是前字串，最後的 <c>YYYYMMDD</c> 
+是 CVS snapshot 建立日期的時間戳記。這樣的命名傳統可以確保 <c>x.y.1</c> 版本不
+會被認為比 <c>x.y</c> snapshot 舊，同時還可以確保正式的 <c>x.y</c> 釋出版本會被
+認為比您的 CVS snapshot 版本 <e>更新</e>。如果 CVS snapshot 是 <e>已釋出</e> 
+的 CVS 原始碼，請使用 <path>foo-x.y_pYYYYMMDD.ebuild</path> 的格式（注意 
+<c>_p</c> 代表 "補釘程度（patchlevel）"）。這能確保您的 CVS ebuild 會被認為比標
+準的 <c>x.y</c> 版本 <e>更新</e>。
+</impo>
+
+<impo>
+目前關於 "live" cvs ebuilds 的命名政策就是確定套件名稱以 <c>-cvs</c> 結尾。未來
+可能會加入一個新的 <c>_cvs</c> 詞尾，到時候這個政策將會更新。
+</impo>
+
+</body>
+</subsection>
+
+<subsection>
+<title>使用者遞交的 ebuilds</title>
+<body>
+
+<p>
+不可以盲目地信任使用者遞交的 ebuilds ，一定要經過完整的測試和審查，才能交付到 
+CVS 上。<b>如果使用者交付的 ebuild 有問題，您必須負起責任。</b>當您交付一個 
+ebuild 到 CVS 上時，就代表您擔保這個 ebuild 已符合所有 Gentoo Linux 開發標準。
+</p>
+
+<p>記得要確認使用者遞交的 ebuilds 沒有包含類似下面的自定標頭</p>
+
+<pre caption="應該紀錄在 ChangLog 內的自訂標頭">
+# Ebuild updated by: me &lt;me@me.com&gt;
+</pre>
+
+<p>
+這個資訊應該加在 <path>ChangeLog</path> 內，並且使用合適的 ChangeLog 註解文法。
+<b>永遠確認 ChangeLog 給予編寫 ebuild 的作者應有的承認，這種資訊應該出現在 
+ChangeLog 的第一行。</b>
+</p>
+
+<p>同時也須確認您交付的任何新的 ebuilds 包含下列文字：</p>
+<pre>
+# &#36;Header: &#36;
+</pre>
+<p>許多使用者遞交的 ebuilds 是以 rsync 抓下來的檔案做範本，但是這些檔案常常包含
+了不正確的檔頭。</p>
+
+<p>
+如果使用者遞交的 ebuilds 是現有套件的升級版本，請鼓勵他們遞交與現行 ebuilds 
+的 diffs。這樣我們才能避免重新引進之前已修正的 bugs 到 "新" 的 ebuilds。如果您
+處理的並不是使用者提供的 diff，而是完整的 ebuild ，請使用 <c>diff</c> 指令看看
+有那些變動，留意任何在現行 ebuild 內應該留在新 ebuild 的部份，或是出現在新 
+ebuild 內但是該被修正或移除的部份。
+</p>
+
+<p>
+一般來說，請讓使用者做好這些確保品質的工作，除非您 <e>想要</e> 自己修整這個 
+ebuild。即便如此，讓使用者自己確認所有的細節，從錯誤中學習如何遞交乾淨的 
+ebuilds ，長遠來說仍然是比較好的方式。請您務必對任何提供者表達感謝之意，即使程
+式編寫地並不是非常完善。您的言語應誠實而有禮貌 -- 即使使用者遞交的 ebuild 不可
+行，您應該在不侮辱他們編寫 ebuild 的能力這樣的前提下告訴使用者。請記住，任何遞
+交出破損的 ebuild 的使用者，未來都可能成為我們專案中能幹而活躍的一員 -- 如果他
+們能獲得良好的鼓勵和支援，並且持續地增進他們的能力。
+</p>
+
+</body>
+</subsection>
+
+
+</section> 
+
+<section>
+<title>品管政策</title>
+<subsection>
+<title>Portage 釋出政策</title>
+<body>
+<note>自 2002 年 12 月 17 日起， Nick Jonse（carpaski）成為 Portage 維護員</note>
+
+<p>
+只有 Poratage 維護員有權利啟動新的 Portage 版本供人使用，無論是封鎖或解除封鎖的
+版本。<b>沒有</b>任何其他人員會被允許對 Portage 的釋出做出更動。
+</p>
+
+<p>
+唯一的例外是當 Portage 被發現有嚴重的 bug，但是卻無法在有限時間內聯絡到 
+Portage 維護員。在這種緊急的情況下，是允許某位資深的開發者測試 Portage 的修正，
+並進而啟動版本的更新。
+</p>
+
+<p>
+在使用這項 "例外條款" 之前，請您先自我確認下列問題： Portage 維護員是否真的無法
+聯絡？這個修正是否真的極端重要到必須在一小時之內進到 Portage tree？您是否已經測
+試過您新寫的 <e>所有</e> 程式碼，並且確定都能正常運作？<b>這是非常重要的！</b>
+請記住，如果您的 Portage 版本是損壞的，它會給所有使用者製造 <e>重大問題</e>，
+<e>尤其是</e> 如果它是解除封鎖的版本。請務必只有在 <e>絕對必要</e> 的情況下使
+用 "例外條款" -- 也就是當 <e>不</e> 使用例外條款的後果非常嚴重時。
+</p>
+
+<p>
+即使您對上述問題的回答都是確定的，這個緊急修正也必須經過所有在線開發者的協調努
+力（測試新版本，等等）之後才能交付，而不能是個 "獨行俠" 的決定。同時，您必須在 
+gentoo-core mailing list 上貼出一則公告，讓所有人知曉這個新的 "緊急版本" 的存在
+，並解釋這個修正的必要性，和為何等待 Portage 維護員來處理是不可接受的選項。
+</p>
+
+<p>
+Portage 維護員 <e>會</e> 允許某些特殊人員交付變更到 Portage development cvs 
+tree。但是，即使您是這些人員之一，這項特殊權利並沒有賦予您啟動新 Portage 版本釋
+出的權力。這是 Portage 維護員的工作。維護員的工作是在釋出新的 Portage 之前，審
+查並一定程度上 QA 您所作的變更。請讓 Portage 維護員來執行這項工作 -- 不要違反這
+些規定。我們希望透過清楚明確的政策，預防未來 Portage QA 上的問題。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>封鎖的套件（Masked packages）</title>
+<body>
+
+<p>
+檔案 <path>/usr/portage/profiles/package.mask</path> 包含了不該被使用者安裝的套
+件列表，並附有詳細的註解，說明套件被封鎖的理由。 Package.mask 是用來避免已破損
+、會損壞系統、或是在列入 Portage tree ~ARCH 關鍵字之前極度需要測試的套件被安裝
+。在您加列套件到 package.mask 之前，一定要先交付 package.mask，然後再交付被封鎖
+的 ebuild。這樣才能避免 ebuild 在更動過的 package.mask 之前送到使用者手中。
+</p>
+
+<p>
+<path>package.mask</path> 中任何套件的移除都必須非常謹慎。記住，一個套件會被列
+在 <path>package.mask</path> 內，一定有他的理由。如果您沒有封鎖這個 ebuild，請
+您一定要在採取任何行動之前，聯絡列在 <path>package.mask</path> 註解內的開發者。
+除此之外，如果被封鎖的 ebuild 是核心套件、核心套件的依賴套件、或是解除這個套件
+的封鎖可能產生不良影響，這樣的改變都必須經過 developer mailing list 內部的討論。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>~ARCH 關鍵字</title>
+<body>
+<p>
+~arch 關鍵字的目的是為了測試新增加到 Portage 的套件。
+</p>
+
+<p>
+<path>package.mask</path> 和 ~arch 的目的和功能並不相同。 ~arch 表示一個 
+<b>ebuild</b> 還需要測試，而使用 <path>package.mask</path> 則是代表這個軟體或
+是 library 本身仍是不穩定的。舉例來說，如果 <c>gimp-1.2.0</c> 是 Gimp 開發者釋
+出的穩定版本，而一個修正 bug 的新版本 1.2.1 被釋出，則開發者應用 ~arch 把這個 
+ebuild 列為需要測試，因為這個釋出的版本被認為是穩定的。另一個例子，如果 Gimp 決
+定釋出一個不穩定或是開發中的系列版本 1.3.0，則這些 ebuilds 應該被放在 
+<path>package.mask</path> 中，因為這個軟體本身是開發性質，軟體的開發者並不建議
+廣為發行使用。
+</p>
+
+<p>
+任何新套件在進入 Portage 時候，都必須在套件可以執行的所有硬體架構下被標示為 
+~arch。交付該 ebuild 的開發者必須確認它真的可以運作，而且架構的關鍵字是正確的。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>套件版本搬移：從 ~ARCH 到 ARCH</title>
+<body>
+<p>
+當套件版本經過長時間的測試，證明是穩定的，而且 Gentoo 該套件的維護者也相信套件
+升級不會破壞一般 Gentoo 使用者的系統，這時這個套件版本就可以從 ~ARCH 改為 ARCH
+。一個套件穩定性的指標是在該版本釋出後一個月內，沒有出現已證實的或是未解決的 
+bug report 出現。
+</p>
+<p>
+套件的那些版本是穩定的，或是開發版本應該列在 <path>package.mask</path> 內還是標
+誌為 ~arch，決定權在套件的維護者手上。
+</p>
+<p>
+您也必須確認該套件版本所有的依賴套件都在 ARCH 類別內。
+</p>
+<warn>
+標誌為 ~ARCH 這個步驟 <e>只有</e> 在這個套件版本包含了安全性修正或是 Gentoo 系
+統的重要 bug 修正時，才可以被省略。
+</warn>
+</body>
+</subsection>
+</section>
+
+<section>
+<title>變數</title>
+
+<subsection>
+<title>必要變數</title>
+<body>
+<p>
+Gentoo Linux 政策要求所有 ebuilds 都要包含變數 <c>KEYWORDS</c>、<c>LICENSE</c> 
+和 <c>SLOT</c>。除了特殊情形之外，變數 <c>HOMEPAGE</c>、<c>SRC_URI</c> 和 
+<c>DESCRIPTION</c> 也應當標明清楚。如果您的套件在編譯或執行時，需要依賴其他套件
+，您就應該要加入 <c>DEPEND</c>（必要的話， <c>RDEPEND</c>）變數。
+</p>
+</body>
+</subsection>
+
+<subsection>
+<title>DEPEND 和 RDEPEND</title>
+<body>
+
+<p>
+使用 <c>DEPEND</c> 變數來設定編譯某個套件所需的依賴套件，用 <c>RDEPEND</c> 變數
+來設定 <e>執行</e> 程式時需要的依賴套件。只有在執行時的依賴套件與您設定在 
+<c>DEPEND</c> 變數內的套件不同時，您才需要額外指定 <c>RDEPEND</c> 變數；如果沒
+有特別設定，<c>RDEPEND</c> 會自動定為與您指定的 <c>DEPEND</c> 相同。
+<b>絕對不可</b>自行把 <c>RDEPEND</c> 設定為等於 <c>DEPEND</c>。
+</p>
+
+<pre>
+# 可接受：
+RDEPEND="${DEPEND}
+	net-ftp/curl
+	virtual/glibc"
+# 不可接受：
+RDEPEND="${DEPEND}"
+</pre>
+
+<p>
+同樣重要的，當套件安裝是使用 binary <c>.tbz2</c> 檔案時，只有 <c>RDEPEND</c> 
+指定的依賴條件會被滿足；用這項資訊幫助您選擇正確的 <c>RDEPEND</c> 依賴關係。如
+果沒有定義， ebuild 的 <c>RDEPEND</c> 將會預設為等於 <c>DEPEND</c>。
+</p>
+
+<p> 
+設定套件的依賴條件時，應該選擇最早能滿足需求的版本。假使套件能使用 
+<c>libfoo-1.2.x</c>，不要只因為您有安裝，就把它設定為依賴 <c>libfoo-2.x</c>。
+</p>
+
+<p>
+一般來說，套件應該依賴 <c>=libfoo-1.2*</c> 而不是 <c>&gt;=libfoo-1.2</c>，否則
+當 <c>libfoo-2.0</c> 釋出之後，系統可能產生嚴重損壞。
+</p>
+
+<p>
+如果所依賴的是個虛擬套件，假設是 <c>virtual/foo</c>，那麼這個程式只有在所有提
+供 <c>virtual/foo</c> 服務的不同套件都有同樣的介面時，才會正常運作。以 
+<c>virtual/jdk-1.3</c> 為例子，某些套件無法使用 <c>ibm-jdk-1.3</c>，但是卻可以
+使用 <c>sun-jdk-1.3</c>。因為這個理由，請您一定要將您的套件與所有提供虛擬服務的
+套件一起測試過，才解除套件的封鎖。您的程式可能只需要依賴這個虛擬套件集合中的一
+部份，而不需要依賴整個集合。
+</p>
+
+</body>
+</subsection>
+
+</section>
+
+<section>
+<title>套件搬移</title>
+<subsection>
+<title>變更套件類別</title>
+<body>
+
+<p>
+Portage tree 不定時的會需要重組，將過度膨脹的類別分割成一些較小的特定類別。例如
+，如果在 <c>net-misc</c> 類別下，防火牆相關的套件數目過於龐大，將這些套件獨立分
+割出來，成為一個較小的類別，這個組織上的重整可能是有價值的。相對的，分割 
+<c>dev-perl</c> 就沒有什麼意義。
+</p>
+
+<p>
+這類型的議題，不是單一開發者就能決定的，而應該先在內部的 mailing list 上討論，
+透過意見交流，看看是否有更好的解決之道。
+</p>
+
+<p>
+在過去，類別變更的套件需要在新的 ebuild 內增加一行 <c>PROVIDE</c> 程式，這樣，
+所有依賴該套件，卻不知道套件新的位置的 ebuilds， <c>DEPEND</c> 變數的設定才能同
+樣被滿足。搬移套件新的正確的作法是在 <path>profiles/updates/</path> 目錄下，找
+到適當的檔案，在檔案內加入一行記錄搬移的文字。記錄的格式如下：
+</p>
+
+<pre>
+move net-misc/fwbuilder net-firewall/fwbuilder
+</pre>
+
+<p>
+在這個例子中，我們把套件 <c>fwbuilder</c> 從類別 <c>net-misc</c> 搬移到 
+<c>net-firewall</c>。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

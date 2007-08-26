@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/devrel/handbook/hb-introduction.xml,v 1.2 2004/07/18 09:30:26 plasmaroo Exp $ -->
+
+<sections>
+<section>
+<title>Introduction</title>
+<body>
+
+<p>
+The aim of this handbook is to outline Gentoo development policies, and make
+<e>you</e>, the developer, informed of policies, standards and procedures which
+Gentoo considers to be core values of our development system.
+</p>
+
+<p>
+This handbook is not intended to be the universal guide to everything
+- the opportunities open to you are endless, and as a result, this
+handbook is designed to teach you the principles which we think make
+up a good Gentoo developer - the rest is up to you!
+</p>
+
+<p>
+If you are new to Gentoo development or even an old veteran and are at
+any stage unsure about anything, feel free to ask the gentoo-dev
+mailing list, or #gentoo-dev.
+</p>
+
+</body>
+</section>
+<section>
+<title>Requirements</title>
+<body>
+<p>
+Before you start to tinker, it is important to have a working Gentoo
+installation, both for documentation and development purposes, and we
+also recommend that you have a good knowledge of topics covered in the
+``Working with Gentoo'' section in the User Handbook to help you with
+your development work.
+</p>
+<p>
+Most of this guide is targeted at developers, but, if you are just
+interested to see what makes Gentoo development work, this guide may
+provide some valuable insights.
+</p>
+<p>
+The best way to get noticed [ and to possibly become a Gentoo
+developer! ] is to file intuitive and accurate bug reports at the <uri
+link="http://bugs.gentoo.org">Gentoo Bugzilla</uri>, with patches if
+possible, and to help us out with what you think would make a better
+Gentoo for everyone whether by providing patches for new features, 
+submitting new ebuilds, or solving issues with existing ones.
+</p>
+</body>
+</section>
+</sections>

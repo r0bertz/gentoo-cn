@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/ati-faq.xml,v 1.7 2003/11/17 15:39:31 swift Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/ati-faq.xml">
+<title>Gentoo Linux ATi 常见问题解答</title>
+<author title="Author">
+  <mail link="lu_zero@gentoo.org">Luca Barbato</mail>
+</author>
+<author title="Editor">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="Editor">
+  <mail link="blubber@gentoo.org">Tiemo Kieft</mail>
+</author>
+<author title="Translator">
+  <mail link="dragonnapalm@163.com">dragonnapalm</mail>
+</author>
+
+<abstract>
+这篇FAQ可以帮助用户解决某些常见的有关DRI和xfree下ATI显卡的安装及配置问题。
+</abstract>
+
+<license/>
+
+<version>1.0.1</version>
+<date>August 25, 2003</date>
+
+<chapter>
+<title>硬件支持</title>
+<section>
+<title>我的ATI显卡可以被支持吗？</title>
+<body>
+
+<p>
+在2D加速的特性上，<uri 
+link="http://www.xfree86.org">Xfree86</uri>支持大多数的ATI显卡, 而XFree86自带的<uri 
+link="http://dri.sf.net">DRI</uri>以及<uri 
+link="http://mirror.ati.com/support/drivers/linux/radeon-linux.html">ATI提供的封闭源码驱动程序</uri>
+则为其3D加速特性提供相应的支持。
+</p>
+
+<table>
+<tr>
+  <th>GPU(图形处理单元)</th>
+  <th>通用名称</th>
+  <th>支持</th>
+</tr>
+<tr>
+  <ti>rage128</ti>
+  <ti>Rage128</ti>
+  <ti>xfree DRI</ti>
+</tr>
+<tr>
+  <ti>r100</ti>
+  <ti>Radeon7xxx, Radeon64</ti>
+  <ti>xfree DRI</ti>
+</tr>
+<tr>
+  <ti>r200,r250</ti>
+  <ti>Radeon8500, Radeon9000</ti>
+  <ti>xfree DRI, ATI DRI</ti>
+</tr>
+<tr>
+  <ti>r300, following</ti>
+  <ti>Radeon9500, Radeon9800</ti>
+  <ti>xfree 2D, ATI DRI</ti>
+</tr>
+</table>
+
+</body>
+</section>
+<section>
+<title>
+我有一块All-In-Wonder/Vivo 显卡,其附带的多媒体特性可以被支持吗?
+</title>
+<body>
+
+<p>
+<uri 
+link="http://gatos.sf.net">GATOS</uri>可以支持该显卡的多媒体特性.
+</p>
+
+<warn>
+ati-gatos现在已经长时间未被更新了.我们计划将有关gatos的支持直接加入到
+xfree中.
+</warn>
+
+</body>
+</section>
+<section>
+<title>我的计算机不是x86构架. 我是否有其他选择?</title>
+<body>
+
+<p>
+在ppc或者alpha构架的计算机上你同样可以得到xfree对ATI显卡的支持，但你无法使用ATI提供的
+驱动程序，这意味着你无法使用r300的3D特性。如果你的确有这样一块显卡并且 
+想让xfree支持它，你可以与<uri link="http://www.ati.com">ATI</uri> 取得联系，并要求
+他们开放相应的规格。
+</p>
+
+</body>
+</section>
+<section>
+<title>我有一台笔记本电脑.  我的ATI"mobility" 可以被支持吗？</title>
+<body>
+
+<p>
+它应该可以被支持，但是由于此类芯片的OEM PCI id，你可能会在配置过程中碰到一些问题。
+在大多数情况下，你可以自己编写配置文件或者使用<c>xf86config</c>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装</title>
+<section>
+<title>组件</title>
+<body>
+
+<p>
+<c>xfree</c> ebuild 提供XFree86. <c>xfree-drm</c>提供DRI所需的内核模块，
+<c>ati-drivers</c>提供ATI 封闭源码X驱动程序以及内核模块。
+</p>
+
+<impo>
+你的内核必须可以支持agpgart，并且DRM模块不能编译进内核。
+</impo>
+
+<pre caption="安装驱动程序">
+<codenote>如果你只想将 Rage128 驱动程序及其模块与xfree一起安装</codenote>
+# <i>VIDEO_CARDS="rage128" emerge xfree-drm</i>
+<codenote>仅让Radeon得到支持</codenote>
+<codenote>(r100, r200, r250, 还没有r300)</codenote>
+# <i>VIDEO_CARDS="radeon" emerge xfree-drm</i>
+<codenote>安装ATI封闭源码驱动程序</codenote>
+<codenote>(仅r200,r250 and r300)</codenote>
+# <i>emerge ati-drivers</i>
+<codenote>只安装XFree86而不安装</codenote>
+<codenote>任何模块</codenote>
+# <i>emerge xfree</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>配置</title>
+<body>
+
+<p>
+建议使用<c>xf86cfg</c>, <c>xf86config</c> 或直接使用XFree86自动配置选项:
+</p>
+
+<pre caption="自动配置 X">
+# <i>X -configure</i>
+</pre>
+
+<p>
+要了解如何获得<c>XF86Config</c>基本配置文件，
+请参阅<uri link="http://www.gentoo.org/doc/en/desktop.xml">DesktopConfiguration Guide</uri>.
+</p>
+
+<note>
+ati-drivers的用户也可以使用<c>fglrxconfig</c>。
+</note>
+
+<impo>
+PPC 用户可以通过emerge <c>xeasyconf</c> ebuild来使用独立的Xeasyconf配置程序.
+</impo>
+
+</body>
+</section>
+</chapter>
+</guide>
+

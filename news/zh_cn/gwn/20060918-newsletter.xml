@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060918-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年9月18日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="flameeyes@gentoo.org">Diego Pettenò</mail>
+</author>
+
+<author title="Author">
+<mail link="tillalfred@spray.se">Alfred Carlsson</mail>
+</author>
+
+<author title="Author">
+<mail link="ellotheth@gmail.com">Ellotheth Rimmwen</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<abstract>这是2006年9月18日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 38</version>
+<date>2006-09-18</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>有关openssl的问题</title>
+<body>
+
+<p>最近<c>dev-libs/openssl</c>的0.9.8c-r2版出现了一些问题。x86架构的用户可能需要在从0.9.8版本升级之后重新emerge openssh和所有其他启用了ssl的应用程序。如果你遇到过ssh段错误（segfault），表示你受到了这个问题的影响，并且需要重新emerge受影响的软件包。</p>
+
+</body>
+</section>
+
+<section>
+<title>Portage 2.1.1发布</title>
+<body>
+
+<p>通常补丁级别的版本更新不值得一提，但是这次的改动值得关注一下。2.1.1版本的portage已经在大部分的架构中被标记为稳定版本。这个版本的portage拥有一个新的<c>--depclean</c>实现。这个新的depclean功能在删除软件包的时候更加的谨慎。如果该功能对于一个软件包不能确认的时候，不会对其做出任何动作。同时这个功能可以指出world中所缺失的软件包依赖性。这将有助于减少在被更新系统中使用depclean功能的弊端。该版本也增加了<c>--newuse</c>的功能，使得使用时会侦测到IUSE的变化。在用户们升级到2.1版本后，注意到了相当多的软件包在使用--newuse的时候带入安装，这是正常的。欲知详情，请参考bugs<uri link="http://bugs.gentoo.org/116955">#116995</uri>, <uri link="http://bugs.gentoo.org/144333">#144333</uri>, <uri link="http://bugs.gentoo.org/144661">#144661</uri>, 和<uri link="http://bugs.gentoo.org/146060">#146060</uri>。</p>
+
+</body>
+</section>
+
+<section>
+<title>autotool包装器清理</title>
+<body>
+
+<p><mail link="vapier@gentoo.org">Mike Frysinger</mail>修改了autotool包装器的ebuild，使其不再包含相应autotool的所有版本。用户需要注意那些可能因此导致依赖关系被破坏的软件包。软件包应当依赖于具体某个版本的autotool而不是包装器。如果您遇到了缺少某个版本的autotool而造成的错误，请提交一个<uri link="http://bugs.gentoo.org">bug报告</uri>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums -->
+
+<section>
+<title>forums</title>
+<body>
+
+<p><b>让我们换个Larry的启动Logo！</b></p>
+
+<p>论坛用户Tom Lloyd(Napalm Llama)写了个内核补丁，可以把默认的Tux启动logo（译注：即象征Linux的企鹅形象）换成Larry（译注：Gentoo的吉祥物）。Tom询问是否Gentoo的补丁集应该加入这个补丁，来给我们这个性别不清的吉祥物在启动屏幕上占个位置。他的提议得到了全部的正面响应。</p>
+
+<ul>
+<li><uri>http://forums.gentoo.org/viewtopic-t-493774.html</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- planet.gentoo.org -->
+
+<section>
+<title>planet.gentoo.org</title>
+<body>
+
+<p><b>提前询问……新的Amarok支持</b></p>
+
+<p><mail link="flameeyes@gentoo.org">Diego Pettenò</mail>，Amarok's ebuild维护人员，一直期待下个发行版本能够加入对Rio Karma设备的支持，<mail link="flameeyes@gentoo.org">Diego Pettenò</mail>正在寻找同样对在Gentoo中加入对该系列播放器的支持感兴趣的用户。如果您有一个Rio Karma播放器，并且希望Amarok能支持您的播放器，或者您仅是希望Gentoo能对Rio Karma提供最基本的支持，请阅读这篇博客文章。</p>
+
+<ul>
+<li><uri>http://farragut.flameeyes.is-a-geek.org/articles/2006/09/13/trying-to-ask-before-new-amarok-support</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-user -->
+
+<section>
+<title>gentoo-user</title>
+<body>
+
+<p><b>卸载系统中的Gnome</b></p>
+
+<p>Etaoin Shrdlu询问如何删除系统中的Gnome。Bo Ørsted Andresen suggsted建议“只要手工的修改/var/lib/portage/world文件，移除gnome和一些不需要的应用程序，然后执行emerge --depclean -va 就可以了。”</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.user/170041</uri></li>
+</ul>
+
+<p><b>刷BIOS</b></p>
+
+<p>Grant询问刷BIOS的方法。用户提供了很多建议，其中有标准软盘解决方案，还有人提议先将交换分区转换成DOS分区然后从那里刷。Grant最终使用了Motherboard Flash Boot CD from Linux Mini HOWTO文中提到的方法。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.user/170106</uri></li>
+<li><uri>http://www.nenie.org/misc/flashbootcd.html</uri></li>
+</ul>
+
+<p><b>新的“domainname”怎么了？</b></p>
+
+<p>用户依然对新baselayout中的domainname的设置存在疑惑。提示：你可以参考/etc/conf.d/net.example说明文件来配置/etc/conf.d/net中的domainname。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.user/170468</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- gentoo-dev -->
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+
+<chapter>
+<title>心得技巧</title>
+
+<section>
+<title>改变portage的默认颜色</title>
+<body>
+
+<p>当终端使用白色背景并且portage以黄色显示某些字（比如，用"%"标记的新useflag）的时候，那些字会很难辨认。要把emerge输出里的黄颜色（一致且全局的）改成某些更可读的颜色，只需要创建这个文件<path>/etc/portage/color.map</path>，其中包含一下内容：</p>
+
+<pre caption="/etc/portage/color.map">
+yellow=0xAA00AA 
+WARN=0xAA00AA 
+MERGE_LIST_PROGRESS=0xAA00AA
+</pre>
+
+<p>一些可以在黑色和白色背景上都清晰可辨的颜色有：紫色：0xAA00AA 暗黄色：0xAA5500（看上去像棕色／橙色）</p>
+
+<p>更多信息可以在下面这个论坛帖子里找到。</p>
+
+<ul>
+<li><uri>http://forums.gentoo.org/viewtopic-t-427948.html</uri></li>
+<li><uri>http://forums.gentoo.org/viewtopic-p-3376132.html</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>AdPlug：多个漏洞</title>
+<body>
+
+<p>AdPlug中存在数个堆栈与缓冲区溢出问题</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-06.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>LibXfont，整体X.org：数个整数溢出问题</title>
+<body>
+
+<p>一些缓冲区溢出漏洞在CID字体分析器（font parser）中被发现，这可被利用来执行任意代码并提升权限。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-07.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>xine-lib：缓冲区溢出</title>
+<body>
+
+<p>xine-lib存在多个缓冲区溢出漏洞，可被用以执行任意代码。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-08.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>FFmpeg：缓冲区溢出</title>
+<body>
+
+<p>FFmpeg有多个可能导致任意代码被执行的缓冲溢出漏洞。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-09.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>DokuWiki：任意指令执行</title>
+<body>
+
+<p>有些DokuWiki的辅助脚本漏洞允许远程执行代码</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-10.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>BIND：拒绝服务</title>
+<body>
+
+<p>ISC BIND有两个漏洞，在某些情况下可导致拒绝服务攻击。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200609-11.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+<li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+<li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年9月10日到2006年9月17日，这个站点记录下了：</p>
+
+<ul>
+<li>861个在这段时间内被发现的新bug</li>
+<li>430个在这段时间内被修正或解决的bug</li>
+<li>32个先前修复了的但在这段时间重现的bug</li>
+<li>166个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>202个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的11130个bug里面：37个被标记为"blocker"，126个被标记为"critical"，还有530个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="java@gentoo.org">Java团队</mail>，27个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=java@gentoo.org">被修正的bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，20个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="vapier@gentoo.org">SpanKY</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=vapier@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="genkernel@gentoo.org">Gentoo Genkernel维护者</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;resolution=FIXED&amp;assigned_to=genkernel@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，55个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="devrel@gentoo.org">Gentoo开发者关系团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=devrel@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="mozilla@gentoo.org">Mozilla Gentoo团队</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=mozilla@gentoo.org">新bug</uri></li>
+<li><mail link="hanno@gentoo.org">Hanno Boeck</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=hanno@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-09-10&amp;chfieldto=2006-09-17&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- paste from the script -->
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<!-- <li>
+<uri link="/news/tr/gwn/gwn.xml">Turkish</uri>
+</li> -->
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

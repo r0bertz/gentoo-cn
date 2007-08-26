@@ -1,0 +1,570 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/metadata.xml,v 1.4 2004/03/07 12:12:53 swift Exp $ -->
+
+<guide link="/doc/zh_cn/fb.xml">
+<title>Gentoo Framebuffer, Bootsplash &amp; Grubsplash 指南</title>
+
+<author title="Author">
+  <mail link="">Narada</mail>
+</author>
+<author title="Author/Translator">
+  <mail link="">maxzhongcn</mail>
+</author>
+<author title="Editor">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<abstract>
+用CD-RW和用软盘一样，往已挂载的CD-ROM上拖放就行。
+</abstract>
+
+<license/>
+
+<version>0.1</version>
+<date>2004年7月22日</date>
+
+<chapter>
+<title>内核补丁</title>
+<body>
+
+<p>
+下面是对部分内核的 bootsplash 补丁下载地址:
+</p>
+
+<ul>
+<li>2.4.20: <uri>ftp://ftp.suse.com/pub/people/stepan/bootsplash/kernel/bootsplash-3.0.7-2.4.20-vanilla.diff</uri></li>
+<li>2.4.21: <uri>http://dhruba.codewordt.co.uk/patches/patch-2.4.21-bootsplash.bz2</uri></li>
+<li>2.4.22: <uri>ftp://ftp.suse.com/pub/people/stepan/bootsplash/kernel/bootsplash-3.0.7-2.4.22-vanilla.diff.bz2</uri></li>
+<li>2.6.0: <uri>ftp://ftp.suse.com/pub/people/stepan/bootsplash/kernel/bootsplash-3.1.3-2.6.0-test9.diff</uri></li>
+<li>2.6.3: <uri>http://dev.gentoo.org/~spock/stuff/bootsplash-3.1.3-2.6.3-r2.patch.bz2</uri></li>
+<li>2.6.5: <uri>http://dhruba.codewordt.co.uk/patches/bootsplash-3.1.3-2.6.5.bz2</uri></li>
+<li>2.6.6: <uri>http://www.bootsplash.de/files/bootsplash-3.1.4-2.6.6.diff</uri></li>
+<li>2.6.7: <uri>http://www.bootsplash.de/files/bootsplash-3.1.4-2.6.7.diff</uri></li>
+</ul>
+
+<p>
+本文系统平台参数：
+</p>
+
+<pre>
+Gentoo 1.4 RC4
+kernel 2.4.20-r8
+Simsung 753 DFX 1024x768@75Hz
+Nvidia GF2 MX400 64M
+</pre>
+
+</body>
+</chapter>
+<chapter>
+<title>方案目标</title>
+<body>
+
+<ul>
+<li>高分辨率的 Framebuffer</li>
+<li>高分辨率的 Bootsplash</li>
+<li>自定义 Framebuffer 字体</li>
+<li>自定义 Bootsplash 主题</li>
+<li>给你的 Framebuffer 和 Bootsplash 截图</li>
+<li>在 Framebuffer 下使用多媒体工具和图形化的浏览器</li>
+<li>自定义 Grub splash 图像</li>
+<li>扩展 Framebuffer 和 bootsplash 到所有12个虚拟终端</li>
+<li>让虚拟终端支持中文</li>
+<li>自定义登录问候画面</li>
+</ul>
+
+</body>
+</chapter>
+<chapter>
+<title>开始工作</title>
+<section>
+<title>获取必须的 bootsplash 程序</title>
+<body>
+
+<p>
+更新 portage 树
+</p>
+
+<pre>
+# emerge sync
+</pre>
+
+<p>
+编译安装<path>media-gfx/bootsplash</path> (字符界面下的 Framebuffer 背景图像)。
+由于bootsplash默认情况下是mask的，所以我们要：
+</p>
+
+<pre>
+# ACCEPT_KEYWORDS="~x86" emerge bootsplash
+</pre>
+
+<p>
+覆盖你原来的bootsplash配置文件：
+</p>
+
+<pre>
+# etc-update
+</pre>
+
+</body>
+</section>
+<section>
+<title>编译内核以支持 Framebuffer &amp; Bootsplash</title>
+<body>
+
+<p>
+首先检查<path>/usr/src/linux</path>是否指向你当前内核源代码目录
+</p>
+
+<pre>
+# ls -l /usr/src/
+</pre>
+
+<p>
+一些版本的内核如<path>gentoo-sources</path>, <path>gaming-sources</path>和<path>xfs-sources</path>已经内置了 Framebuffer 支持，如果你的内核没有支持，请检查并如下打上补丁。
+</p>
+
+<pre>
+# ebuild /var/db/pkg/media-gfx/bootsplash-0.6-r2/bootsplash-0.6-r2.ebuild config
+</pre>
+
+<p>
+开始配置内核
+</p>
+
+<pre>
+# cd /usr/src/linux
+# make menuconfig
+</pre>
+
+<p>
+把以下各项编译进内核.不要编译成模块，也不要开启 nvidia 或 ATI 选项（我们只要有vesa就可以了）.
+</p>
+
+<pre>
+Code maturity level options  --->
+[*] Prompt for development and/or incomplete code/drivers
+Processor type and features  ---> 
+[*] MTRR (Memory Type Range Register) support
+Block Devices ->
+[*] Loopback device support
+[*] RAM disk support
+(4096)   Default RAM disk size
+[*] Initial RAM disk (initrd) support
+Console Drivers ->
+[*] VGA text console
+[*] Video mode selection support 
+Console Drivers -> Frame-buffer support ->
+[*] Support for frame buffer devices
+[*] VESA VGA graphics console
+[*] Use splash screen instead of boot logo
+</pre>
+
+<p>
+开始编译内核，并复制新内核到<path>/boot</path>你最好先备份现有内核），完成后先不要重新启动，也不要卸载<path>/boot</path>分区。
+</p>
+
+<pre>
+make dep &amp;&amp; make clean bzImage modules modules_install
+mount /boot
+cp /boot/vmlinuz-2.4.20-r8 /boot/vmlinuz-2.4.20-r8.bak
+cp /usr/src/linux/arch/i386/boot/bzImage /boot/vmlinuz-2.4.20-r8-fb 
+</pre>
+
+<p>
+如果你在编译内核过程中出现错误，或者丢失了一些配置选项，请按照下面步骤重新编译。
+</p>
+
+<pre>
+cd /usr/src/linux/
+mv .config ~/kernel.config
+make mrproper
+mv ~/kernel.config .config
+make oldconfig
+make menuconfig
+</pre>
+
+<p>
+下面生成一个启动过程中的背景图像：
+</p>
+
+<pre>
+/sbin/splash -s -f /etc/bootsplash/default/config/bootsplash-1024x768.cfg > /boot/initrd-1024x768
+</pre>
+
+<p>
+编辑<path>/boot/grub/grub.conf</path>，下面是我的<path>grub.conf</path>，你可以参考我的加以修改，下面是一些参数的意思：
+</p>
+
+<ul>
+<li>video= 放在 kernel一行后面，用以控制显示参数， 如：ywrap和mtrr 来加速 Framebuffer 刷新。</li>
+<li>vga= 放在 kernel一行后面，用以控制 Framebuffer 的分辨率和色彩深度。</li>
+<li>splash= 放在 kernel一行后面，一般有<e>silent</e>、<e>verbose</e>可选。</li>
+<li>initrd= 放在 kernel 一行后面另起一行，用来装载启动时的背景图像。</li>
+</ul>
+
+<pre>
+timeout 30
+default 0
+splashimage=(hd0,7)/grub/splash.xpm.gz
+# For booting Windows 200 Pro
+title Windows 2000 Pro
+rootnoverify (hd0,0)
+chainloader +1
+
+# For booting Gentoo Linux with Framebuffer &amp; Bootsplash
+title Gentoo Linux 1.4 RC4 (2.4.20-8) Framebuffer
+root (hd0,9)
+kernel (hd0,7)/vmlinuz-2.4.20-r8-fb ro root=/dev/hda10 video=vesa:1024x768@72 vga=0x317
+initrd (hd0,7)/initrd-1024x768
+
+# For booting Gentoo Linux without Framebuffer &amp; Bootsplash
+title Gentoo Linux 1.4 RC4 (2.4.20-8)
+root (hd0,9)
+kernel (hd0,7)/vmlinuz-2.4.20-r8 ro root=/dev/hda10
+</pre>
+
+<p>
+下面是 kernel 中 "vga="参数一览表，根据自己的情况选择。
+</p>
+
+<pre>
+    | 640x480  800x600  1024x768 1280x1024
+----+-------------------------------------
+256 |  0x301    0x303    0x305    0x307
+32k |  0x310    0x313    0x316    0x319
+64k |  0x311    0x314    0x317    0x31A
+16M |  0x312    0x315    0x318    0x31B
+</pre>
+
+<p>
+如果你需要更详悉的解释，请参考下面的文档：
+</p>
+
+<pre>
+/usr/share/bootsplash/grub.conf.sample 
+/usr/src/linux/Documentation/fb/vesafb.txt
+/usr/src/linux/Documentation/svga.txt
+</pre>
+
+<p>
+把 bootsplash 加入default运行级，让其在启动是自动运行：
+</p>
+
+<pre>
+# rc-update add bootsplash default
+</pre>
+
+<p>
+现在重启！如果一切正常你就会看到漂亮的 Framebuffer 和 Bootsplash 啦！
+</p>
+
+<p>
+如果只想使用 Framebuffer 而不需要 Bootsplash ,只要：
+</p>
+
+<pre>
+# rc-update del bootsplash default
+</pre>
+
+<p>
+并且去掉grub.conf中的这一行：
+</p>
+
+<pre>
+initrd=/boot/initrd-1280x1024 
+</pre>
+
+<p>
+减小终端字体，打开<path>/etc/rc.conf</path>，修改下面一行
+</p>
+
+<pre>
+CONSOLEFONT="default8x9"
+</pre>
+
+<p>
+其它可用字体可以参考目录：<path>/usr/share/consolefonts</path>
+</p>
+
+</body>
+</section>
+<section>
+<title>自定义你的 Bootsplash 主题</title>
+<body>
+
+<p>
+建立 personal 目录：
+</p>
+
+<pre>
+# mkdir -p /etc/bootsplash/personal/images/
+# cp -r /etc/bootsplash/default/config /etc/bootsplash/personal/
+</pre>
+
+<p>
+修改 default 符号链接：
+</p>
+
+<pre>
+# rm /etc/bootsplash/default
+# ln -s /etc/bootsplash/personal /etc/bootsplash/default
+</pre>
+
+<p>
+打开<path>/etc/conf.d/bootsplash.conf</path>并修改如下：
+</p>
+
+<pre>
+BOOTSPLASH_THEME=personal
+</pre>
+
+<p>
+把你的 bootsplash 图像（大小要与grub.conf中的相一致）复制到<path>/etc/bootsplash/personal/images/bootsplash-1024x768.jpg</path>. 确保图像分辨率为<e>96x96</e>， 注意这里指的不是图像的大小，而是每英寸的像素值，可以使用gimp等修改。
+</p>
+
+<p>
+打开<path>/etc/bootsplash/personal/config/bootsplash-1024x768.cfg</path>并修改如下，以指向你的新图像位置：
+</p>
+
+<pre>
+# mount /boot
+# /sbin/splash -s -f /etc/bootsplash/default/config/bootsplash-1024x768.cfg > /boot/initrd-1024x768
+</pre>
+
+<p>
+重启！看看效果吧！
+</p>
+
+</body>
+</section>
+<section>
+<title>给我的 Framebuffer 截图</title>
+<body>
+
+<p>
+编译安装 fbgrab
+</p>
+
+<pre>
+# ACCEPT_KEYWORDS=~x86 emerge fbgrab
+# fbgrab ~/console.png 
+</pre>
+
+</body>
+</section>
+<section>
+<title>自定义 Grub splash 图像</title>
+<body>
+
+<p>
+要自定义 grub splash，只要自定义一幅图像复制到<path>/boot/grub</path>就可以了。
+</p>
+
+<p>
+先安装一个gimp的补丁用来生成grub可以使用的图像格式：
+</p>
+
+<pre>
+# emerge gimp
+# wget http://dhruba.codewordt.co.uk/files/grub-image.scm -P ~
+# mv ~/grub-image.scm /usr/share/gimp/1.2/scripts/ 
+</pre>
+
+<p>
+用 gimp 打开你选择的图片，右键单击图像，<path>File > Grub Boot Image</path>，然后保存起来，
+下面有一个例子图片，其它图片可以到这里找：<uri>http://linux.tkdack.com/node.php?id=15</uri>。
+</p>
+
+<pre>
+# mount /boot
+# wget http://linux.tkdack.com/downloads/g...wered-by.xpm.gz -P ~
+# mv ~powered-by.xpm.gz /boot/grub/
+</pre>
+
+<p>
+修改<path>/boot/grub/grub.conf</path>指向你的新图像：
+</p>
+
+<pre>
+splashimage=(hd0,0)/boot/grub/splash.xpm.gz 
+</pre>
+
+</body>
+</section>
+<section>
+<title>扩展 Framebuffer 到 12 个虚拟终端</title>
+<body>
+
+<p>
+打开<path>/etc/inittab</path>，在第37行后加入：
+</p>
+
+<pre>
+c8:12345:respawn:/sbin/agetty 38400 tty8 linux
+c9:12345:respawn:/sbin/agetty 38400 tty9 linux
+c10:12345:respawn:/sbin/agetty 38400 tty10 linux
+c11:12345:respawn:/sbin/agetty 38400 tty11 linux
+c12:12345:respawn:/sbin/agetty 38400 tty12 linux
+</pre>
+
+<p>
+打开<path>/etc/init.d/bootsplash</path>，在第30行修改如下：
+</p>
+
+<pre>
+for TTY in `seq 0 11`
+</pre>
+
+<p>
+重启后你就有了 12 个虚拟终端并都支持 Framebuffer splash 图像了！
+</p>
+
+</body>
+</section>
+<section>
+<title>让虚拟终端支持中文</title>
+<body>
+
+<pre caption="安装虚拟终端">
+<codenote>安装unicon</codenote>
+# emerge unicon
+
+<codenote><uri link="http://prdownloads.sourceforge.net/...tar.gz?download">这里</uri>下载编译zhcon</codenote>
+# ./configure &amp; make &amp; make install
+</pre>
+
+<p>
+安装字符界面下的浏览器
+</p>
+
+<pre>
+# emerge lynx  
+
+<codenote>或者</codenote>
+# emerge w3m 
+<codenote>推荐后者</codenote>
+</pre>
+
+</body>
+</section>
+<section>
+<title>让虚拟终端支持鼠标</title>
+<body>
+
+<pre>
+# emerge gpm
+</pre>
+
+<p>
+修改<path>/etc/conf.d/gpm</path>
+</p>
+
+<pre>
+MOUSE=ps2
+#MOUSE=imps2
+MOUSEDEV=/dev/psaux
+#MOUSEDEVMOUSE=ps2
+#MOUSEDEV=/dev/input/mice
+</pre>
+
+<p>
+把gpm加入default运行级
+</p>
+
+<pre>
+# rc-update add gpm default
+</pre>
+
+<p>
+重启后字符界面下就可以使用鼠标啦，左键拖动选择，中键单击粘贴。
+</p>
+
+</body>
+</section>
+<section>
+<title>自定义登录问候画面</title>
+<body>
+
+<p>
+下载安装 cowsay: <uri>http://freshmeat.net/redir/cowsay/1...say-3.03.tar.gz</uri>
+</p>
+
+<pre>
+# ./configure --prefix=/usr
+# make &amp; make install
+</pre>
+
+<p>
+建立如下<path>/etc/init.d/issue</path>脚本文件：
+</p>
+
+<pre>
+#!/bin/sh
+# Local system initialization script
+RELEASE="release 1.1a"
+COLOR1="\033[1;6m\033[35;40m" # bright magenta on black  COLOR2="\033[1;6m\033[37;40m" # bright white on black
+COLOR3="\033[1;6m\033[33;40m"
+COLOR_RESET="\033[0m"
+rm -f /etc/issue
+/usr/bin/clear &gt;&gt; /etc/issue
+/usr/bin/cowsay "Hello World" &gt;&gt; /etc/issue
+echo -e $COLOR1"Gentoo"$COLOR2 "Linux"$COLOR_RESET "$RELEASE" "(\l)" &gt;&gt;/etc/issue
+echo "Kernel $(uname -r) on an $(uname -m)" &gt;&gt; /etc/issue
+echo -e $COLOR3"Welcome to the My Linux World!" &gt;/etc/issue 
+echo &gt;&gt;/etc/issue
+cp -f /etc/issue /etc/issue.net
+</pre>
+
+<pre caption="修改权限">
+chmod +x /etc/init.d/issue
+</pre>
+
+<p>
+添加x属性，加入 default 运行级或<path>local.start</path>脚本执行：
+</p>
+
+<pre>
+# rc-update add issue default
+<codenote>或者</codenote>
+# echo /etc/init.d/issue >> /etc/conf.d/local.start
+</pre>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>总结</title>
+<body>
+
+<p>
+至此，我想我们可以基本上放弃X了，因为我们已经有了一个不亚于X的漂亮的工作环境。如果你喜欢用<path>vi</path>超过<path>gedit</path>,喜欢<path>mpg123</path>超过<path>xmms</path>,喜欢总是把手指放在键盘上，而不是拿着鼠标晃来晃去，那么你会从这篇文档得到享受！
+</p>
+
+</body>
+</chapter>
+<chapter>
+<title>译者注</title>
+<section>
+<title>原始出处</title>
+<body>
+
+<p>
+原始文章出处：<uri>http://forums.gentoo.org/viewtopic.php?t=49036</uri>
+</p>
+
+</body>
+</section>
+<section>
+<title>说明</title>
+<body>
+
+<p>
+本文只部分翻译，并加入了其它内容。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

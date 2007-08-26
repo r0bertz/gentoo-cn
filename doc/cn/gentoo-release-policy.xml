@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-release-policy.xml,v 1.12 2004/02/19 15:03:46 swift Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/gentoo-release-policy.xml">
+<title>Gentoo Linux 发行策略</title>
+<author title = "Author">
+<mail link = "drobbins@gentoo.org">Daniel Robbins</mail></author>
+<author title = "Author">
+<mail link = "avenj@gentoo.org">Jon Portnoy</mail></author>
+<author title = "Editor"><!-- zhen@gentoo.org -->
+  John P. Davis
+</author>
+<author title = "Translator">
+<mail link="joanphan@gmail.com">Hans Joanphan</mail></author>
+
+<abstract>
+官方的Gentoo Linux发行策略
+</abstract>
+
+<license/>
+
+<version>1.2</version>
+<date>11 July 2003</date>
+
+<chapter>
+		<title>初步的概念和问题</title>
+		<section>
+			<title>Gentoo Linux的发行过程是怎样的？</title>
+			<body>
+			<p>Gentoo Linux的发行过程是一个明文规定和清晰定义的程序，Gentoo Linux的开发团队使用这个程序来创建新的候选发行和新的Gentoo Linux的发行版。实际工作上，这是完全基于团队的包括开发队伍所有成员的协调努力上的。
+			</p>
+			</body>
+		</section>
+
+		<section>
+			<title>谁“负责”Gentoo Linux的发行过程？</title>
+			<body>
+			<p>发行过程是由发行协调人和releng团队协调，但过程本身是一个团队的努力。没有一个人可以负责所有甚至是大部分的工作。但发行协调人负责将整个团队融入这个过程中，他们会通过在核心邮件列表发布普通的更新信息让每个人知道当前发行的状态，通过和管理编译stage档案包和GRP软件包的和进行QA测试的负责人协调来完成这个工作。
+			</p>
+			</body>
+		</section>
+
+		<section>
+			<title>Gentoo Linux发行过程的目标</title>
+			<body>
+			<ul>
+			<li>及时的发行一个Gentoo Linux的候选发行或者完全新的版本。 </li>
+
+			<li>新发行版上合理的QA测试。</li>
+
+			<li>将稳定的改变融入发行的机会。</li>
+
+			<li>让新的发行作一次团队合作的过程。</li>
+
+			<li>确保Gentoo Linux的新的官方发行已经准备面向大众。 </li>
+			</ul>
+			</body>
+		</section>
+	</chapter>
+	
+	<chapter>
+		<title>Gentoo Linux的发行过程是怎样的？</title>
+		<section>
+			<title>初步的决定</title>
+			<body>
+			<p>发行的过程是从官方决定发行一个新的Gentoo Linux版本开始，这个决定是由高层的管理团队作出，然后通告大家：
+			</p>
+		        
+			<ul>
+			<li>一个发行的清楚的时间表，包括所有的重大事情和截止日期。</li>
+
+			<li>这个发行的一个置顶的目标列表（可选）。</li>
+			</ul>
+		
+			<p>
+			发行协调人然后知道这个发行过程，确保基层的发行结构能够在其位置集中起作用。发行协调人然后在马上就要到来的下一步阶段开始时通知所有的开发人员。
+			</p>
+			</body>
+		</section>
+
+		<section>
+			<title>编译和测试</title>
+			<body>
+			<p>在这个阶段，每个架构指定的编译员使用一个当前的Portage快照编译一个“通用CPU”的stage包，并提交/修正/创建编译时发现的相关的bug。并且，我们的初步QA测试员会使用这些stage，并报告发现的实时运行bug。
+			</p>
+
+			<p>既然这些stage包的新的bug已经找到和修复了，新的stage包就发行并推出来了。这些stage包会发放到公众可以访问的网络地址，这样开发者和应征QA测试的用户将会进行测试。
+			</p>
+
+			<p>开始后一周，这个“编译和测试”阶段从使用当前的CVS树转到使用官方的CVS树的GENTOO_x.y_SNAP_YYYYMMDDAB快照。这里将会解决所有的优秀的编译/实时问题。修复bug后，就创建出新的GENTOO_x.y_SNAP_YYYYMMDDAB（一个新的日期）标签，这些快照将用于编译新的修复bug后的stage包。
+			</p>
+
+			<p>从这个“编译和测试”阶段开始十天后，就回决定下一个发行是官方正式发行还是候选发行。每个架构的开发领头人、发行协调人、开发管理员和首席设计师将会在此做一个最终的统一的决定。
+			</p>
+
+			<p>如果不能获得它应有的功能，下一个发行将会是候选发行。如果质量不错的话，这个发行的所有目标都能实现并且主要的问题已经解决或者可以在合理的时间内解决，那么下一个发行将会是一个官方的正式发行。
+			</p>
+
+			<p>最新的GENTOO_x.y_SNAP_YYYYMMDDAB快照用于这个发行版。带着这个快照的通用Stage包，下一个阶段就开始了……
+			</p>
+			</body>
+		</section>
+
+		<section>
+			<title>发行的编译和测试</title>
+			<body>
+
+			<p>马上，一个大面积范围内的协调的分布式编译开始编译一个完全的Gentoo Linux新发行版或者候选发行版，也包括GRP软件包系列。如果是候选发行版，可能就只选择一个较小范围的系列的系统变量（如i686或者一两个给x86用的）而不是一个“完全”的编译。在这个编译的过程中，即使是任何一个最后发现的突发问题都得到解决。安装文档已经更新准备给新的发行使用，发行通过也已经写好，但是还并未公开。还有最后发行的二进制的秘密QA测试也会在完成编译后立即开始。这是我们发行前最后一次QA测试。
+			</p>
+
+			<p>整个这个过程，包含LiveCD的创建和上传到镜像，都应该在四天之内完成。
+			</p>
+			</body>
+		</section>
+
+		<section>
+			<title>发行</title>
+			<body>
+			
+			<p>Gentoo Linux的新的版本或者候选发行版本发行出去，并在相关的地方发布公告。
+			</p>
+
+			</body>
+		</section>
+	</chapter>
+</guide>
+			
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			

@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- Suggestions >> plasmaroo@gentoo.org -->
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/devrel/handbook/hb-introduction-becoming-a-dev.xml,v 1.1 2004/08/24 21:07:26 plasmaroo Exp $ -->
+
+<sections>
+<section>
+<title>Introduction</title>
+<body>
+
+<p>
+There are many ways to become a Gentoo developer, which this section
+discusses. There are also various steps that new "recruits" have to
+go through before they become official developers.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Helping out</title>
+<body>
+
+<p>
+Firstly; to be asked to become a developer you should either apply
+to an opening, or just help out whether in the form of user support
+or filing bug reports - we notice frequent contributors making
+contributions to Gentoo and we attempt to reward them by giving
+them the chance to become a Gentoo developer. Gentoo has many
+paths, and the Gentoo Developer Relations Recruitment
+Team is always looking out not just for developers - documentation
+writers and infrastructure maintainers are just as important too for
+our distribution to run smoothly.
+</p>
+
+<p>
+You should look out for openings for developers in the GWN, as well as
+the /topic of #gentoo-bugs on irc.freenode.net - if you feel you could fill
+in one of those positions, try to find a mentor who is willing to sponsor you,
+or contact the <mail link="recruiters@gentoo.org">Gentoo Recruiters</mail> who
+may be able to find a mentor for you. Please do not file "New Developer" bugs
+on yourself since this task is designated for the mentor and any such bugs will be
+closed.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Mentoring</title>
+<body>
+
+<p>
+All new developers must have a mentor, who is an existing Gentoo
+developer responsible for guiding a new developer as well as 
+offering to help the developer later after the developer
+has passed through the recruitment process.
+</p>
+
+<p>
+A mentor should assist you by helping you with any
+questions you might have, as well as outlining your Gentoo
+responsibilities, especially those in relation to what you
+would initially work on.
+</p>
+
+<p>
+Once a developer agrees to mentor a new developer, the mentor should file a
+bug and assign it to the Gentoo Recruiters - the
+<uri link="/proj/en/devrel/recruiters">Gentoo Recruiters</uri>
+page explains in detail what information should be filed.
+</p>
+
+<note>
+The Gentoo Recruiters reserve the right to assign a developer a new mentor if
+the initial mentor is idle to queries about the new developer or if the mentor
+files the bug but then does not assist the new developer through the rest of
+the process.
+</note>
+
+</body>
+</section>
+
+<section>
+<title>Waiting</title>
+<body>
+
+<p>
+All new developers pass through a waiting period of one or two
+weeks, depending on how ready the mentor thinks the developer is as well as
+feedback from any other related staff. During this time, the new
+developer should complete the quiz which would be reviewed by the developer's
+mentor and the Gentoo Recruiters to ensure that the developer is "ready".
+In special cases, the waiting period is determined by
+the Recruiters and/or Gentoo Developer Relations leads.
+</p>
+
+<p>
+Two quizzes are offered: the
+<uri link="/proj/en/devrel/quiz/ebuild-quiz.txt">ebuild
+quiz</uri>, and the 
+<uri link="/proj/en/devrel/quiz/staff-quiz.txt">staff
+quiz</uri>. Developers who will be working purely on
+infrastructure, GLSAs or other non-ebuild areas should
+take the staff quiz, any developers who require commit
+access to the Portage tree should take the ebuild quiz.
+</p>
+
+<p>
+Once a new developer has completed the quiz, the developer should send it off to
+the mentor who is responsible for reviewing it in conjunction with
+the <uri link="/proj/en/devrel/recruiters">Gentoo Recruiters</uri>.
+If the quiz answers are deemed to be to of a sufficient standard, then
+the recruitment process would continue. Otherwise, a new developer can
+redo the quiz again, providing that it is completed in the waiting
+period.
+</p>
+
+<p>
+Additionally, new developers should be responsive to any members of
+the Recruiters Team who have any questions - any developers who do
+not reply promptly will have their "New Developer" bug closed, which
+would only be reopened at the discretion of the Gentoo Recruiters.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Jumping the gap</title>
+<body>
+
+<p>
+After your mentor and the Gentoo Recruiters have reviewed your quiz and
+deemed it to be of a suitable standard, you should send it along with
+an SSH2 DSA passworded key to the Gentoo Recruiters. If the Recruiters
+consider your quiz to be of a satisfactory standard, they will set you up
+with the services that you require.
+</p>
+
+<p>
+After this time, you enter a "probationary period" of 30 days during which
+your mentor is responsible for your actions, providing accountability
+- also, Gentoo Recruiters may reject new developers during this time if
+they feel it is appropriate.
+</p>
+
+</body>
+</section>
+</sections>

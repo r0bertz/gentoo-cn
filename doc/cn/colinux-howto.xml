@@ -1,0 +1,444 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/colinux-howto.xml,v 1.3 2004/05/20 23:16:12 avenj Exp $ -->
+
+<guide link="/doc/zh_cn/colinux-howto.xml">
+<title>Gentoo coLinux 配置指南</title>
+<author title="Author">
+  IWBCMAN
+</author>
+<author title="Author">
+  janlaur
+</author>
+<author title="Editor">
+  <mail link="joshua@sungentoo.homeunix.com">Joshua Preston</mail>
+</author>
+<author title="Editor">
+  <mail link="avenj@gentoo.org">Jon Portnoy</mail>
+</author>
+<author title="Translator">
+  <mail link="kuyeboy@hotmail.com">Xuqing Kuang</mail>
+</author>
+<abstract>
+本指南将指导您通过简单的配置之后通过 coLinux 使您在 Windows 中以线程的
+方式运行 Linux。
+</abstract>
+
+<!-- 本文内容以 CC-BY-SA 协议发布 -->
+<!-- 请参看 http://creativecommons.org/licenses/by-sa/1.0 -->
+<license/>
+
+<version>1.1</version>
+<date>2004年5月20日</date>
+
+<chapter>
+<title>导言</title>
+<section>
+<title>什么是 coLinux？</title>
+<body>
+
+<p>
+coLinux 是一个 Windows 的守护程序。它用于以一个 Windows 原生线程的方式运行 Linux
+内核，并在 Windows 中直接运行 Linux 应用程序。
+</p>
+
+<p>
+该软件目前的最大问题应该是性能上的缺陷。X 应用程序的性能非常糟糕，但不管怎么样总算
+能够使用了。而普通的命令行程序已经能够和在真正的 Linux 中运行得一样快了。
+</p>
+
+<warn>
+coLinux 到目前为止还依然处于 alpha 内部测试阶段中。它已经可以运行得很好了，
+但依然还有很多问题有待于进一步解决。
+</warn>
+
+<p>
+本指南基于 IWBCMAN 和 janlaur 在 <uri link="http://forums.gentoo.org">Gentoo 论坛</uri>
+中发表的帖子提取其精华而成。他们的讨论在下面的两个链接里：
+</p>
+
+<ul>
+  <li><uri link="http://forums.gentoo.org/viewtopic.php?t=162420">IWBCMAN 编撰</uri></li>
+  <li><uri link="http://forums.gentoo.org/viewtopic.php?t=163154">janlaur 编撰</uri></li>
+</ul>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>安装</title>
+<section>
+<title>下载 coLinux</title>
+<body>
+
+<warn>
+你必须使用 Windows 2000, 2003, 或者 XP (Home/Professional) 以运行 coLinux。
+</warn>
+
+<p>
+你只需要从 <uri link="http://colinux.org/snapshots/">coLinux.org</uri> 下载最新的
+快照安装包（Snapshot）。
+</p>
+
+<note>
+coLinux-20040417.exe 将在本指南中使用。
+在最新的安装包里修正了以前许多程序漏洞，所以我们希望你使用它们。
+</note>
+
+<p>
+该 .EXE 文件仅仅是一个安装程序，还需要从 SourceForge 下载一份基本的发行版
+镜像(Gentoo/Debian/Fedora)。
+</p>
+
+<p>
+启动 .EXE，如果没有特殊情况可以一路下一步保持默认值，当然，当你选择发行版的那一步里，
+对于本文需要选择 Gentoo。
+</p>
+
+<p>
+将该镜像下载到安装目录并命名为<path>gentoo-i586-ext3-2g-deluxe.bz2</path>。
+</p>
+
+<p>
+这个虚拟分区文件包含了一个 Gentoo stage3 安装文件。
+事实上，这个 stage3 包含了 XFree86、XFCE4、Firefox、GAIM 以及 XChat 等等许多软件。
+该虚拟分区被格式化成 ext3 文件系统。
+</p>
+
+<ul>
+  <li>
+    解压该文件到 Windows 的任何一个剩余空间大于 2G 的驱动器上。
+  </li>
+  <li>那个文件所在的分区剩余空间应该不够了。</li>
+  <li>如果需要，你可以在安装完成之后将 .bz2 删除。</li>
+</ul>
+
+<p>
+你或许需要 Winrar for Windows 来解压它。
+可以看看 <uri link="http://colinux.org/wiki/index.php/NiceTools">关于 coLinux 的小工具</uri>
+页面来下载解压镜像以及创建虚拟交换分区的工具。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>配置</title>
+<section>
+<title>修改配置文件</title>
+<body>
+
+<p>
+只有一个配置文件需要修改：它是位于安装目录名为 <path>default.colinux.xml</path>
+的文件。用你喜欢的编辑器打开它将会看到如下内容：
+</p>
+
+<pre caption="default.colinux.xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;colinux&gt;
+    <comment>&lt;!-- your path may differ slightly. --&gt;</comment>
+    &lt;block_device index="0" path="\DosDevices\e:\gentoo-i586-ext3-2g-deluxe" enabled="true"&gt;&lt;/block_device&gt;
+    &lt;bootparams&gt;root=/dev/cobd0&lt;/bootparams&gt;
+    &lt;image path="vmlinux"&gt;&lt;/image&gt;
+    <comment>&lt;!-- adjust the size to your needs --&gt;</comment>
+    &lt;memory size="256"&gt;&lt;/memory&gt;
+    <comment>&lt;!-- Make sure name= the exact name of the TAP device in your Network Connections!--&gt;</comment>
+    &lt;network index="0" type="tap" name="TAP"&gt;&lt;/network&gt;
+&lt;/colinux&gt;
+</pre>
+
+<p>
+现在只修改配置文件中你解压压缩镜像的路径以及你分配给 coLinux 的内存数量。
+</p>
+
+</body>
+</section>
+<section>
+<title>设置网络</title>
+<body>
+
+<p>
+双击 colinux-daemon.exe 后你现在已经开始启动 coLinux 了，但还有很多人需要使用网络，
+你可以先配置好那个。你需要按进行以下操作来安装虚拟网卡。
+</p>
+
+<ul>
+  <li>在“控制面板”启动“添加/删除硬件”然后单击“下一步”</li>
+  <li>
+    单击“是的，我已经连接好新设备”然后单击“下一步” 
+  </li>
+  <li>
+    拖动滚动条到最列表最底部然后选择“添加一个新的硬件设备”然后单击“下一步”
+  </li> 
+  <li>
+    选择“从列表中手动选择硬件”然后单击“下一步”
+  </li>
+  <li>选择“网络适配器”然后单击下一步</li>
+  <li>
+    单击“从磁盘上安装”并浏览到你的 coLinux 解压缩路径。进入“netdriver”目录。
+    将会出现一个 .inf 文件。
+  </li>
+  <li>选择它并单击“打开”</li>
+</ul>
+
+<p>
+你现在已经安装好虚拟网卡了。你可以像系统中其它网卡一样配置它。
+</p>
+
+<ul>
+  <li>进入“控制面板”->“网络连接”</li>
+  <li>
+    单击你的网络连接，然后 Ctrl + 单击你的新 TAP 网络连接。
+  </li>
+  <li>右击它，然后单击“桥连接”</li>
+</ul>
+
+<p>
+Windows 应该创建了一个网络桥。如果你已经在 Windows 中激活了网络连接。
+它现在应该已经在正常工作中了。
+</p>
+
+</body>
+</section>
+<section>
+<title>启动</title>
+<body>
+
+<p>
+现在，你可以启动 colinux-daemon.exe 了。你现在引导进了一个简单的 Gentoo
+安装向导中了，你可以配置 XFree86、XFCE4、GAIM、kernel-2.4.26 
+或者其它基本程序了。
+</p>
+
+<p>
+进入之后，你需要首先做一些小事情：
+</p>
+
+<ul>
+  <li>以 root 帐号及空密码登陆设置 root 密码</li>
+  <li>检查网络运行情况</li>
+  <li>
+    启动 sshd，然后通过 Putty 登陆（或者使用你的终端类型的 Cygwin）
+  </li>
+</ul>
+
+<p>
+你大概想升级你的系统了，让我们现在开始做：
+</p>
+
+<pre caption="完成安装">
+# <i>emerge sync</i>
+# <i>env-update &amp;&amp; source /etc/profile</i>
+<comment>（如果你喜欢用 VNC）</comment>
+# <i>emerge tightvnc</i>
+</pre>
+
+<p>
+现在你需要配置 X。你可以将已经安装好的 Linux 上的 <path>/etc/X11/XF86Config</path>
+拷贝到 coLinux 中即可（如果可能的话）
+</p>
+
+<note>
+你只需要使用 X 默认提供的驱动程序（不是 nvidia-glx/kernel）即可，它目前仅能使用16
+位色深，所以你不需要过多编辑配置文件。请记住你不能直接在 Windows 中访问视频
+硬件设备，所以你只能从其它地方拷贝这个文件或者自己手动创建它。比方说你可以用
+Knoppix 启动电脑并使用 Knoppix 创建的 <path>XF86Config</path>。
+</note>
+
+<p>
+最后一步是创建 <path>~/.vnc/xstartup</path>：
+</p>
+
+<pre caption="~/.vnc/xstartup 范例">
+startxfce4 &amp;
+</pre>
+
+<p>
+现在只需要运行 <c>vncserver</c> 并配以你需要的参数。你将被提示输入一个密码，
+创建后请牢记它。
+</p>
+
+<pre caption="启动 vncserver">
+$ <i>vncserver -geometry "1024x768" -depth 16</i>
+</pre>
+
+<p>
+现在你需要下载一个 VNC for Windows，运行 <c>vncviewer</c>，然后输入你的虚拟
+网卡的IP 地址以及你的密码。如果一切正常 vncviewer 将为你展现一个 XFCE4 的桌面
+－这非常有趣！
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>高级话题</title>
+<section>
+<title>添加一个交换分区</title>
+<body>
+
+<p>
+从 <uri link="http://gniarf.nerim.net/colinux/swap/">这里</uri> 下载一个交换文件（文件名中包含了
+交换分区大小。将它解压缩到包含 <path>default.colinux.xml</path> 的路径中去：
+</p>
+
+<pre caption="添加一个交换设备">
+    <comment>&lt;-- index="1" 意味着它将映射到 /dev/cobd1 --&gt;</comment>
+    &lt;block_device index="1" path="\DosDevices\e:\swap-file" enabled="true"&gt;&lt;/block_device&gt;
+</pre>
+
+<p>
+现在（重新）启动 coLinux，然后运行 <c>mkswap</c>：
+</p>
+
+<pre caption="创建交换分区">
+# <i>mkswap /dev/cobd1</i>
+</pre>
+
+<p>
+你现在需要修改你的 <path>/etc/fstab</path> 并添加下面一行内容：
+</p>
+
+<pre caption="添加到 /etc/fstab">
+/dev/cobd1	none	swap	sw	0 0
+</pre>
+
+<p>
+现在不重启电脑启用交换分区！
+</p>
+
+<pre caption="启动交换分区">
+# <i>swapon -a</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>在 coLinux 中访问你现有的 Linux 分区</title>
+<body>
+
+<p>
+coLinux 网站提供了一份相关文档在<uri link="http://colinux.org/wiki/index.php/coLinuxFAQ#A3">这里</uri>。
+阅读完后请按自身情况对配置文件进行修改使之接近于以下内容：
+</p>
+
+<pre caption="新的 default.colinux.xml">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;colinux&gt;
+    &lt;block_device index="0" path="\DosDevices\e:\gentoo-i586-ext3-2g-deluxe" enabled="true"&gt;&lt;/block_device&gt;
+    &lt;block_device index="1" path="\DosDevices\e:\swap-file" enabled="true"&gt;&lt;/block_device&gt;
+    <comment>&lt;!-- Your path may differ based on your disk layout, etc --&gt;</comment>
+    &lt;block_device index="2" path="\Device\Harddisk0\Partition5" enabled="true"&gt;&lt;/block_device&gt; 
+    &lt;bootparams&gt;root=/dev/cobd0&lt;/bootparams&gt;
+    &lt;image path="vmlinux"&gt;&lt;/image&gt;
+    &lt;memory size="256"&gt;&lt;/memory&gt;
+    &lt;network index="0" type="tap" name="TAP"&gt;&lt;/network&gt;
+&lt;/colinux&gt;
+</pre>
+
+
+<p>
+你现在需要（重新）启动 coLinux 使修改生效。你现在应该已经可以在 coLinux 中通过
+/dev/cobd2  访问 Windows 中的 “\Device\Harddisk0\Partition5”设备。
+</p>
+
+<pre caption="加载">
+# <i>mount /dev/cobd2 /mnt/linux</i>
+</pre>
+
+<impo>
+请不要忘记这种方式只能在 Windows 没有使用该分区的时候使用，如果 Windows
+也在使用该分区，你可以通过 smbfs 来访问它。
+</impo>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Q&amp;A</title>
+<section>
+<title>我需要定义什么特殊的 USE 变量吗？</title>
+<body>
+
+<p>
+你可以像在一个真实的系统中定义你的 USE 变量。
+</p>
+
+</body>
+</section>
+<section>
+<title>我可以共享我的拨号网络链接吗？</title>
+<body>
+
+<p>
+它使用了网络连接共享连接使 Linux 网络连接到外部网络，所以你可以通过 TAP 桥接
+到你的 PPP 连接上。
+</p>
+
+</body>
+</section>
+<section>
+<title>Linux 内核能直接访问硬件吗？</title>
+<body>
+
+<p>
+coLinux 已经可以模拟很多类型的硬件。你可以模拟磁盘访问，网络等等。但目前还不能模拟 USB，
+直接写屏和声卡。好消息是 coLinux 现在正在致力于 USB 设备支持（包括 USB 键盘和鼠标）。
+</p>
+
+</body>
+</section>
+<section>
+<title>还有其它类似 coLinux 的软件可供使用吗？</title>
+<body>
+
+<p>
+是的!
+</p>
+
+<ul>
+<li><uri link="http://www.vmware.com/">VMWare</uri></li>
+<li><uri link="http://bochs.sourceforge.net/">Bochs</uri></li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>coLinux 中可以使用 2.6 内核吗？</title>
+<body>
+
+<p>
+到本文截至日期为止还不行，它使用了一个打过补丁的 2.4 内核使模拟的设备与 Windows
+中的设备共享资源。
+</p>
+
+</body>
+</section>
+<section>
+<title>为什么 X 还无法运行？</title>
+<body>
+
+<p>
+目前真正的 X 还不被支持。你只能使用 vnc 或者 Cygwin/X 中的一个。
+本指南中已经介绍了相关内容。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>结语</title>
+<section>
+<body>
+
+<p>
+coLinux 出现十分让人惊喜。你可以直接在 coLinux 中运行 Apache, Samba,
+DHCP, mail, distcc, NFS 等<e>你需要的</e>服务。设备支持和磁盘访问的无误
+能够使你感受到在 Windows 中运行 Linux 是多么使人惊喜的事情。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

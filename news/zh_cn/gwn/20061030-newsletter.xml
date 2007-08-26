@@ -1,0 +1,1441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061030-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年10月30日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author>
+
+<author title="Author">
+<mail link="phnix@fastmail.net">Kyle Bishop</mail>
+</author>
+
+<author title="Author">
+<mail link="theology@gmail.com">Zeth Green</mail>
+</author>
+
+<author title="Author">
+<mail link="flameeyes@gentoo.org">Diego Pettenò</mail>
+</author>
+
+<author title="Author">
+<mail link="neddyseagoon@gentoo.org">Roy Bamford</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<abstract>这是2006年10月30日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 44</version>
+<date>2006-10-30</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>XMMS将要移除</title>
+<body>
+
+<p>许多人可能已经注意到了，XMMS下个月将从Portage树中移除。XMMS有很多的bug，需要大量补丁。上游开发和bug修复已经终止，取而代之的是即将到来的XMMS2，并且XMMS没有Gentoo维护者。Audacious和现有的主题兼容，许多的Audacious开发者已和Gentoo社区协作以使过渡更加容易。</p>
+
+<p>关于此变更的详情请见<uri link="/proj/en/desktop/sound/xmms.xml">XMMS页面</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>新管理下的#gentoo-uk</title>
+<body>
+
+<p>随着近期Gentoo开发人员Tim Yamin(plasmaroo)的退休，#gentoo-uk IRC频道开始由<mail link="NeddySeagoon@gentoo.org">Roy Bamford</mail>接管。#gentoo-uk IRC频道是一套主要用来讨论Gentoo，Linux和其他计算机相关主题的英语聊天频道。因为频道规模较小，依频道当前关注的内容不同，聊天话题也常常轻松愉快。不过，在过去的一年中，#gentoo-uk的规模几乎扩大了25%，结果，人们开启了#gentoo-chat频道，并将之定位为“补充频道”。该频道允许用户发起或接续讨论非相关话题，而在#gentoo-uk，大家只讨论相关话题。迄今为止，这种做法收到了良好效果，多数用户会彼此提醒到#gentoo-chat讨论非相关话题，从而使主频道成为专门讨论相关主题的地方。</p>
+
+<p>加入频道或成为座上客不需任何条件——频道已有数个来自各大洲的贡献者。由于#gentoo-uk比#gentoo英语主频道要安静许多，新IRC用户或许会发现这儿比#gentoo更加合适——比如，您可以熟悉您的IRC客户端软件，在一个气氛友好的小圈子里即使偶尔犯点小错也没有太大影响。在这里也有利于解决一些繁琐的问题，因为频道里分散注意力的内容很少。</p>
+
+<p>请来看看并问候一下，待上一会儿，或者干脆把我们加入你的auto-join列表吧！</p>
+
+</body>
+</section>
+
+<section>
+<title>CJK团队寻求帮助</title>
+<body>
+
+<p>由于Gentoo CJK组人员不足，在portage树里绝大多数的包都是旧的，长期得不到维护（只是在Gentoo里）。由于对CJK语言的支持是Gentoo不愿意失去的，Diego Pettenò (Flameeyes)让对维护这些包有兴趣的人联系CJK组，这样就可以为这些包指定代理维护者（最终有可能成为gentoo开发者）。</p>
+
+<p>如果你对维护portage里现有的包感兴趣或者希望添加一些新的包来替换已有的，那么请联系<mail link="cjk@gentoo.org">CJK团队</mail>。</p>
+
+</body>
+</section>
+
+<section>
+<title>Scheme组需要你的帮助</title>
+<body>
+
+<p>Gentoo Scheme组现在严重短缺人手。感兴趣的人不仅马上可以成为Gentoo的开发人员，而且将会以开发人员的身份维护这些包。</p>
+
+<p>如果你对Scheme和Gentoo项目感兴趣，我们鼓励你联系<mail>recruiters@gentoo.org</mail>并从此努力工作，成为一名开发人员。</p>
+
+</body>
+</section>
+
+<section>
+<title>土耳翻译组寻求你的帮助</title>
+<body>
+
+<p>新组建的GWN土耳其翻译组正在寻找人员来翻译每周的GWN。感兴趣的人需要比较出色的书面英语能力以及土耳其语，还需要有时间来完成每周的计划工作。如果你对帮助该工作组有兴趣，请联系GWN的<mail>gwn-feedback@gentoo.org</mail>获取更多信息。同时有一个土耳其IRC频道，#gentoo-tr，这里主要提供给一些土耳其语的来客，当然也是用来交流翻译的好地方。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<section>
+<title>gentoo-user</title>
+<body>
+
+<p><b>emerge日志里的日期</b></p>
+
+<p>Jorge Almeida想知道他的emerge日志里每一行开头的神秘数字（比如“1161911504”）是否代表日期，如果是的话，怎么样把它变成可读的形式。Harm Geerts证实了这个数字是Unix时间（“从UTC时间1970年1月1日0点开始到现在所经历的秒数，不计闰秒”）并建议用Python来翻译它。</p>
+
+<pre caption="用python转换UNIX时间">
+$ python -c "import time; print time.ctime(1161911504)"
+</pre>
+
+<p>Bo Ørsted Andresen建议转用awk。</p>
+
+<pre caption="用awk转换UNIX时间 #1">
+$ tail /var/log/emerge.log | awk -F: '{print strftime("%D %X %Z", $1),$2}'
+</pre>
+
+<p>Peter Ruskin把它改短了，并且消除了输出的国际歧义。</p>
+
+<pre caption="用awk转换UNIX时间 #2">
+$ tail /var/log/emerge.log | awk -F: '{print strftime("%c", $1),$2}'
+</pre>
+
+<p>最后一个而且是最适合Jorge的方法是Richard Fish提供的。</p>
+
+<pre caption="用date转换UNIX时间">
+$ date -d @1161911504
+</pre>
+
+<p>也有人提出了专门针对portage的解决方案：Neil Bothwick建议emerge <c>app-portage/genlop</c>，这是一个emerge日志解析程序。Harm Geerts推荐了<c>qlop</c>，这是<c>app-portage/portage-utils</c>包的一部分。</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_102804.xml</uri></li>
+</ul>
+
+<p><b>resolv.conf的问题／编辑/etc/init.d/net.eth0来给dhcpcd传递参数</b></p>
+
+<p>有两位用户在使用dhcpd和resolv.conf时都遇到了类似的问题，Matthew Lee的系统一启动完，他的resolv.conf文件就被一个不含DNS域名服务器的版本所覆盖；Michael Sullivan也希望dhcpd不要覆盖他的resolv.conf。</p>
+
+<p>Richard Fish建议Michael看看/etc/conf.d/net.example。他指出，如果Michael想要完全控制dhcp的选项，可以使用类似dhcpd_INTERFACE="DHCP PARAMETERS"这样的方法。不过，最好能有一个形如dccp_INTERFACE="nodns"这样通用化（generic）的传参形式。</p>
+
+<p>Novensiles divi Flamen也为Matthew提供了同样的建议，而Vikas Kumar则建议使用dns_servers_INTERFACE=( "DNS SERVER 1 IP" "DNS SERVER 2 IP" )。</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_102822.xml</uri></li>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_102834.xml</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-dev -->
+
+<!-- gentoo-catalyst -->
+
+<section>
+<title>gentoo-catalyst</title>
+<body>
+
+<p><b>终于能用Catalyst构建Gentoo的live CD啦</b></p>
+
+<p>Ed Borasky要构建一个基于Gentoo的live CD以用于高级应用数学（参见<uri>http://rubyforge.org/cgi-bin/viewvc.cgi/Rameau/Rameau.pdf?root=cougar&amp;view=co</uri>）。构建过程中，他得解除Portage对Gentoo安装程序<c>sys-apps/gli</c>的屏蔽。他想知道这做法是否正确，以及怎样能创建live CD而不要安装程序。</p>
+
+<p>关于第一个问题，Andrew Gaffney建议在spec文件中使用portage_overlay，或者去除Ed的快照中的gli的屏蔽。要创建非安装的live CD的话，gli应该被彻底从spec文件中去除。</p>
+
+<p>Ed还想知道如何安装测试包以及make.conf是否有overlay。Chris Gianelloni说设计上没有(因为catalyst的目的是创建发型版，因而不能用不稳定的软件)。尽管如此，Ed还是可以在他的快照中将任何他想要的包标记成稳定。</p>
+
+<p>Ed回应说因为他只想要几个不稳定包，这个方法正适合他。</p>
+
+</body>
+</section>
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+</chapter>
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<chapter>
+<title>Gentoo媒体</title>
+
+<section>
+<title>EngadgetHD (2006年10月26日)</title>
+<body>
+
+<p>作者Ben Drawbaugh详细说明了如何升级Series3 TiVo中的硬盘。他建议用什么软件复制你的数据到你闪亮的新硬盘上？为什么？当然是Gentoo。Drawbaugh描述使用最小安装CD和<c>dd</c>来复制数据。</p>
+
+<ul>
+<li><uri>http://www.engadgethd.com/2006/10/26/how-to-upgrade-your-series3-drive/</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li>Emanuele Giaquinta (exg)</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Christian Faulhammer (opfer) emacs/x86</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>OpenSSL：多个漏洞</title>
+<body>
+
+<p>OpenSSL出现多个漏洞，包括可能远程执行任意代码。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200610-11.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Apache mod_tcl：格式化字符串漏洞</title>
+<body>
+
+<p>Apache mod_tcl中被发现存在一个格式话字符串漏洞，将可能导致远程任意代码被执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200610-12.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Cheese Tracker：缓冲区溢出</title>
+<body>
+
+<p>Cheese Tracker包含一个缓冲区溢出的漏洞可导致远程任意代码被执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200610-13.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>PHP：整数溢出漏洞</title>
+<body>
+
+<p>PHP存在整数溢出的漏洞可导致远程执行任意代码。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200610-14.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Upcoming package removals -->
+
+<chapter>
+<title>即将移除的包</title>
+
+<section>
+<body>
+
+<p>这个列表里的包是已经宣布将来会被删除的。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。</p>
+
+</body>
+</section>
+
+<section>
+<title>最后的仪式</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>app-laptop/xpmumon</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>media-gfx/radiance</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-mail/cvm-vmailmgr</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-cdr/cdrx</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-emacs/liece</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-analyzer/tptest</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-wireless/aircrack</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/aesop</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-crypt/outguess</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-util/sashxb</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-editors/cute</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gkrellm-newsticker</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-misc/pms</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-misc/largorecipes</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/winki</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gkrellm-giFT</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/qadsl</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/libaudiooss</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/daaplib</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/minisip</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="gustavoz@gentoo.org">Gustavo Zacarias</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/libmutil</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="gustavoz@gentoo.org">Gustavo Zacarias</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/libmnetutil</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="gustavoz@gentoo.org">Gustavo Zacarias</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/libmikey</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="gustavoz@gentoo.org">Gustavo Zacarias</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/libmsip</ti>
+<ti>2006年11月27日</ti>
+<ti><mail link="gustavoz@gentoo.org">Gustavo Zacarias</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-drivers/kyro-drivers</ti>
+<ti>2006年11月26日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-java/bluej-bin</ti>
+<ti>2006年11月26日</ti>
+<ti><mail link="beandog@gentoo.org">Steve Dibb</mail></ti>
+</tr>
+
+<tr>
+<ti>net-www/netscape-plugger</ti>
+<ti>2006年11月25日</ti>
+<ti><mail link="cardoe@gentoo.org">Doug Goldstein</mail></ti>
+</tr>
+
+<tr>
+<ti>games-fps/quake3-tremulous</ti>
+<ti>2006年11月24日</ti>
+<ti><mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<section>
+<title>XMMS及其相关的包</title>
+<body>
+
+<p>因为XMMS相关的包大量的被屏蔽，因此将它们单列为一个章节。这样可以保证它们得到足够的曝光，因为它们影响到了很多人，是讨论的焦点。</p>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>dev-perl/Xmms-Perl</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-python/pyxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>gnome-extra/gxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/dumb-xmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/efxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/eq-xmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/modplugxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xalbumlist</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmmplayer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-adplug</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-alarm</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-arts</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-blursk</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-btexmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-cdcover</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-cdread</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-coverviewer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-crossfade</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-crystality</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-dflowers</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-dscope</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-dspectogram</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-dspectral</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-extra</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-fc</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-find</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-finespectrum</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-fmradio</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-gdancer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-goom</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-idcin</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-imms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-infinity</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-infopipe</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-iris</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-itouch</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-jack</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-jess</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-kde</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-kjofol</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-ladspa</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-libvisual</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-lirc</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-liveice</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-liveplugin</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-lyrc</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-mad</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-midi</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-morestate</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-mp3cue</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-musepack</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-nas</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-nebulus</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-null</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-oggre</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-outpost</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-pipe</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-realrandom</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-repeatit</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-scrobbler</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-shell</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-shn</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-sid</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-smpeg</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-sndfile</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-spc</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-speex</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-tfmx</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-volnorm</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-wakeup</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-wma</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-wmdiscotux</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-xf86audio</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-xmmsd</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-xmmsmplayer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/ctrlxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/longplayer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/madman</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/xmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-xmms-remote</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-themes/xmms-themes</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-synaesthesia</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-ir</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/desklet-cornerxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-mpg123</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-crossfade</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-nsf</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-status-plugin</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/xmmsctrl</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gkrellmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/wmalbum</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/wmusic</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/wmxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>rox-extra/roxmms</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-cdaudio</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-mpg123</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-opengl-spectrum</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-vorbis</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-alsa</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-blur-scope</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-disk-writer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-echo</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-esd</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-joystick</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-mikmod</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-oss</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-sanalyzer</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-song-change</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-stereo</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-tonegen</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-voice</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/xmms-wav</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>app-misc/livetools</ti>
+<ti>2006年11月23日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/noxmms</ti>
+<ti>2006年11月23日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>xfce-extra/xfce4-xmms</ti>
+<ti>2006年11月23日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>xfce-extra/xfce4-xmms-controller</ti>
+<ti>2006年11月23日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bug-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年10月22日到2006年10月29日，这个站点记录下了：</p>
+
+<ul>
+<li>913个在这段时间内被发现的新bug</li>
+<li>559个在这段时间内被修正或解决的bug</li>
+<li>36个先前修复了的但在这段时间重现的bug</li>
+<li>180个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>192个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的11128个bug里面：32个被标记为"blocker"，116个被标记为"critical"，还有536个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，30个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=sound@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="neysx@gentoo.org">Xavier Neys</mail>，20个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=neysx@gentoo.org">被修正的bug</uri></li>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，18个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=maintainer-wanted@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，24个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="treecleaner@gentoo.org">树清理者项目</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=treecleaner@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="net-p2p@gentoo.org">Gentoo net-p2p团队</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=net-p2p@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+<li><mail link="net-mail@gentoo.org">Net-Mail Packages</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=net-mail@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-22&amp;chfieldto=2006-10-29&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的职员是由为之提交想法和文章的志愿者和社区成员组成的。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者只是有点想法或文章要提交给GWN，请你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<!-- <li>
+<uri link="/news/tr/gwn/gwn.xml">Turkish</uri>
+</li> -->
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

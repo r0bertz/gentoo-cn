@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060612-newsletter.xml" lang="zh_cn">
+  <title>Gentoo Weekly Newsletter</title>
+  <subtitle>2006年6月12日</subtitle>
+  <author title="Editor">
+    <mail link="plate@gentoo.org">Ulrich Plate</mail>
+  </author>
+  <author title="Author">
+    <mail link="patrick@gentoo.org">Patrick Lauer</mail>
+  </author>
+  <author title="Author">
+    <mail link="christel@gentoo.org">Christel Dahlskjaer</mail>
+  </author>
+  <author title="Author">
+    <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+  </author>
+  <author title="Author">
+    <mail link="mark_alec@gentoo.org">Mark Kowarsky</mail>
+  </author>
+  <author title="Author">
+    <mail link="tcort@gentoo.org">Thomas Cort</mail>
+  </author>
+  <author title="Author">
+    <mail link="beandog@gentoo.org">Steve Dibb</mail>
+  </author>
+  <author title="Author">
+    <mail link="antarus@gentoo.org">Alec Warner</mail>
+  </author>
+  <author title="Author">
+    <mail link="solar@gentoo.org">Ned Ludd</mail>
+  </author>
+  <author title="Author">
+    <mail link="pylon@gentoo.org">Lars Weiler</mail>
+  </author>
+  <author title="Translator">
+    <mail link="robert.zhangle@gmail.com">张乐</mail>
+  </author>
+  <author title="Translator">
+    <mail link="nkeric@gmail.com">许艺华</mail>
+  </author>
+  <author title="Translator">
+    <mail link="dundask@gmail.com">邓京晶</mail>
+  </author>
+  <author title="Translator">
+    <mail link="delimy@gmail.com">李帅</mail>
+  </author>
+  <author title="Translator">
+    <mail link="jeffkyjin@gmail.com">金涛</mail>
+  </author>
+  <abstract>这是2006年6月12日的Gentoo Weekly Newsletter。</abstract>
+  <summary/>
+  <version>Volume 5, Issue 21</version>
+  <date>2006-06-12</date>
+  <!-- Gentoo News -->
+  <chapter>
+    <title>Gentoo新闻</title>
+    <section>
+      <title>Portage 2.1发布</title>
+      <body>
+        <p>在经历了几个月的开发之后，Portage开发团队终于发布了Portage-2.1。这个发布包含了很多新特性，修复了很多bug，且有性能提升。详细的更动描述可以在<uri link="http://sources.gentoo.org/viewcvs.py/portage/main/trunk/RELEASE-NOTES?view=markup">发行注记</uri>和<uri link="http://sources.gentoo.org/viewcvs.py/portage/main/trunk/NEWS?view=markup">NEWS文件</uri>中找到。其中的亮点包括：</p>
+        <ul>
+          <li><b>confcache整合</b>：结合<path>dev-util/confcache</path>软件包，用户将可以从缓存了的configure检查结果中获利，在一次编译多个软件包的时候，速度将会加快。</li>
+          <li><b>新的缓存架构</b>：Portage缓存经历了一次彻底翻修，将使得同步过后更新缓存的速度获得显著提升，其他方面的速度也有提高。</li>
+          <li><b>新的elog函数</b>：过去，ebuild的重要信息是通过<c>einfo</c>、<c>ewarn</c>和<c>eerror</c>函数传递的，它们会把信息打印到标准输出。不过，在一次安装多个软件包的时候，往往持续时间较长，这使得ebuild的信息很容易丢失。新的<c>elog</c>函数允许它们被集中起来放在一个地方以便日后检查，这样可以使一次升级多个软件包的过程变得轻松许多。</li>
+          <li><b>新的扩展机制</b>：现在使用<path>/etc/portage/bashrc</path>，用户可以定义一些bash函数，让它们在任意指定的ebuild阶段前后执行。这可以用来对编译环境进行任意的定制。之前的Portage不具备这个功能。对于需要它的人来说，它是个强大的工具。</li>
+          <li><b>摘要的改进</b>：Portage在原有MD5的基础上新增了SHA256和RMD160两种新的摘要(digest)方式以校验下载文件的完整性。这个发布同时引入了对Manifest2格式的支持，该格式可将现有的Manifest与digest-*多个文件合并成单一的更为精简高效的文件格式。</li>
+          <li><b>增强的调试支持</b>：既想拥有stripped二进制文件的性能，又想在出问题的时候能找到必要的调试信息？使用FEATURES="splitdebug"让该需求成为可能，这将有助于用户更容易地提交有效的bug报告。（注：*nix下有一个名为strip的工具，它可以对编译好的二进制文件进行清理，去除掉诸如调试信息一类的数据使之瘦身而清爽以提升程序运行性能；但这同时导致程序在出问题的时候不易调试。）</li>
+          <li><b>颜色调配</b>：你现在可以通过修改<path>/etc/portage/color.map</path>文件以调配Portage输出文字的颜色啦！想过让你的Portage换上可爱的粉色感觉？改这个文件就可以！</li>
+          <li><b>增强的配置功能</b>：现在，一些特定的配置文件可以构建成目录形式以方便管理（如，<path>/etc/portage/package.unmask/kde</path>，<path>/etc/portage/package.unmask/xorg</path>，可起到与原来的 <path>/etc/portage/package.unmask</path>相同的效果）。而<path>/etc/portage</path>自身亦可从其他地方加载，这使得一些特定任务变得简单许多。</li>
+          <li><b>其他的增强功能</b>：一些二进制文件的安全问题现可被自动修复。特定条件下Portage模块的初始化导入变快了，这意味着导入Portage模块的外部脚本应能看到速度的提升。Emerge现已支持-q即'超级安静模式(really quiet mode)'选项，这可让emerge的输出信息减至最少。</li>
+        </ul>
+        <p>这有个关于Portage稳定性的<uri link="https://bugs.gentoo.org/show_bug.cgi?id=136198">bug</uri>报告，你可以据此了解跟踪该新版本进入稳定版（stable tree）的进度。截至发稿时，x86，Sparc，HPPA以及PPC体系平台的稳定版用户可使用到该版本；其他体系平台亦将跟进。</p>
+        <p>非常感谢<mail link="antarus@gentoo.org">Alec Warner</mail>和<mail link="solar@gentoo.org">Ned Ludd</mail>花费宝贵的时间向Gentoo周报细述这次版本发布情况！</p>
+      </body>
+    </section>
+    <section>
+      <title>状态报告：Gentoo/Alpha</title>
+      <body>
+        <p>Gentoo/Alpha团队肩负着让Gentoo在Alpha架构上平滑运行的职责。该团队新近增加了<mail link="tcort@gentoo.org">Thomas Cort</mail>与<mail link="christel@gentoo.org">Christel Dahlskjaer</mail>两位成员。我们过去数月的工作很见成效。<mail link="spb@gentoo.org">Stephen Bennett</mail>继续为SELinux辛勤劳作。hardened-sources目前已加入alpha关键字（keyworded for alpha）。感谢<mail link="stefaan@gentoo.org">Stefaan De Roeck</mail>与其他朋友的付出，模块化版本的X已加入alpha关键字且运作流畅。同时，Gentoo/Alpha团队非常高兴地宣布──我们已让gnome-2.12.3与kde-3.5.2成为稳定版本。</p>
+        <p>Thomas Cort撰写了两份文档：Alpha Porting指引与Gentoo/Alpha常见问题集；另一份关于如何使用SRM控制台的文档亦在写作之中。<mail link="yoswink@gentoo.org">Jose Luis Rivero</mail>，<mail link="ferdy@egntoo.org">Fernando Pereda</mail>，以及Gentoo/Alpha团队的其他成员协力让项目主页一番旧貌换新颜。Fernando Pereda则正忙于建立Alpha Arch测试者项目。如果你想更多的了解这一可为Gentoo做贡献的机会，请务必查看<uri link="http://www.gentoo.org/proj/en/base/alpha/AT/index.xml">Alpha Arch测试者项目主页</uri> :)</p>
+      </body>
+    </section>
+    <section>
+      <title>Tetex变更</title>
+      <body>
+        <p>Tetex的上游维护者Thomas Esser已宣布日后不再会有新的版本释出。这将对Gentoo上tetex的维护产生一些中长期的影响。Gentoo开发人员<mail link="ehmsen@gentoo.org">Martin Ehmsen</mail>提出了一些可能的解决办法──尽管目前尚无定案，变动却是必然。请静候结果……</p>
+        <ul>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38615">Tetex变更声明</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>shadow和pam-login的冲突</title>
+      <body>
+        <p>很多用户可能已经见到了新版本的pam-login和shadow互相阻挡。这是因为由于历史的原因<path>/bin/login</path>曾经一度是由pam-login提供的。但是shadow从4.0开始也提供这个文件了，也就是说这个文件现在是由shadow提供的了。pam-login里其余的部分也被包含入了shadow里，所以当你看到这两个软件包互相阻挡时，请卸载pam-login并安装更新了的shadow软件包。</p>
+        <p>详情可以在<mail link="flameeyes@gentoo.org">Diego Pettenò的</mail>的weblog里找到：</p>
+        <ul>
+          <li>
+            <uri link="http://farragut.flameeyes.is-a-geek.org/articles/2006/06/01/refreshing-the-pam-login-and-shadow-problem">Shadow和pam-loging的冲突</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>乌克兰IRC频道</title>
+      <body>
+        <p>相对较新且小的乌克兰Gentoo社区已经开了官方的IRC频道：irc.freenode.net上的<c>#gentoo-ua</c>频道。如果你想用乌克兰语讨论有关Gentoo的话题或者想给本地化工作帮个手，请加入以<mail link="george@gentoo.org">George Shapovalov</mail>为核心的团队。目前尚无乌克兰语子论坛，但是如果他们的社区持续发展下去的话，那么离那一天也就不远了。现在要以乌克兰语提问请去“其他语言”子论坛。</p>
+      </body>
+    </section>
+    <section>
+      <title>Gentoo 女人</title>
+      <body>
+        <p>极客女孩只属于传奇。30%的普通电脑用户是女性，女性Linux用户更少，只有2%。</p>
+        <p>但是为什么会这样呢？此中原因和使用Linux的女性本人一样难以捉摸——每一次调查结果都有人说她们没有得到平等的机会，但也有些人的说法是正好相反的。但在这个争论中，一个事实却被忽略了。那就是为增强计算机、Linux或者Gentoo对女性的吸引力，人们做的很少，如果说真的有人做了什么的话。</p>
+        <p>类似Debian项目这样的组织正在尝试去改变这一现状。Debian女人，建立于2004年，目的是为了鼓励女性更多的参与到Linux中去。这个小组维护着一个IRC频道和一个邮件列表以供讨论，同时也会例行出席一些Linux相关的会议和事件。他们还运行着一个计划，这个计划里每个女性用户和一个顾问配对，后者将会花时间来解决她们提出的问题，帮助她们了解这个发行版、社区和Linux。这个顾问计划为这个过程增添了人的元素，能帮助人们更高效的使用Linux。但是不幸的是，正如这个计划的名字所示，他们只是鼓励他们的成员使用Debian而已。</p>
+        <p>最近有人提议为Gentoo的女性用户也搞一个类似的项目，我们希望听到您对这个提议的看法。这个项目在社区里会受到欢迎么？人们能从中得益么？你希望这个项目做什么，怎么做？你会贡献出你的时间和金钱来鼓励人们，不只是女人，来使用Gentoo么？会愿意帮助他们么？</p>
+        <p>所有的组织，不管它们是怎么来的，都需要补充“新鲜血液”——总是会有成员离开的，如果没有成员源源不断的加入，一个组织是会随时间而消逝的。如果我们不主动的接触社区，我们会错失很多好的想法和很多有天赋的人。让我们来努力的达成这件事，而不要甘于现状，不思进取。</p>
+        <ul>
+          <li>
+            <uri link="http://forums.gentoo.org/viewtopic-p-3375197.html#3375197">Gentoo女人论坛帖子</uri>
+          </li>
+          <li>
+            <mail link="userrel@gentoo.org">Gentoo用户关系邮件地址别名</mail>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+  <chapter>
+    <title>代码之夏——更新</title>
+    <section>
+      <title>代码之夏——已经一个月了</title>
+      <body>
+        <p>今年的代码之夏已经开始了一个月了，Gentoo的项目进展的非常迅速。我们的学生正在努力的工作于他们的项目，进展良好。代码之夏一开始是在<uri link="http://www.gentoo.org/news/en/gwn/20060501-newsletter.xml#doc_chap1">在5月1日的GWN里</uri>里提到的。如果你想知道这到底是怎么回事，请继续读下去。</p>
+        <p>目前已经进入了第二个年头的<uri link="http://code.google.com/soc">代码之夏</uri>，是google所运营的一个计划。目的是为了资助学生在暑假期间参与一些开源项目。去年的计划取得了很大的成功，在这个长长的<uri link="http://code.google.com/soc-results.html">成果</uri>列表里还包括了很多重要的项目。今年这个计划的规模更大，参与其中的顾问组织是去年的2倍，学生的数量也成倍的增加。</p>
+        <p>今年Gentoo也参与其中，成为一个顾问组织。而且我们很幸运的被分配到14个项目，包括今年最受欢迎的学生——Anant Narayanan的申请获得了共计4个组织的接受，但是他最终选了我们而不是其他组织。曾经有一段时间，我们并不确定我们是否被google所接受，因为已经被接受的其他Linux发行版和操作系统已经很多了，但最终我们被选中了，并且被分配到的项目数量超平均水平。</p>
+        <p>“我欣赏Gentoo可以在这么短的时间里围绕发行版建立起了这样一个社区。对于我来说，这是一个好的社区的典范，也是代码之夏为开源软件开发者提供顾问所需要的”来自Google的Greg Stein在解释为什么他在诸多候选项目中选择了Gentoo的时候说到。“作为一个例子，Gentoo被这个计划所接受是因为我很欣赏他们是如何从一无所有发展到目前最强大的Linux发行版之一的过程。在现存的一千多个发行版里，他们在很短的时间里就成了其中最重要的之一。我相信这是因为他们对社区的重视，我认为这对于一个代码之夏组织来说正是有好处的。</p>
+        <p>Gentoo所被接受的申请及其简述的完全列表可以在<uri link="http://code.google.com/soc/gentoo/about.html">Google的Gentoo页面</uri>找到。很多项目的更多更新可以在学生们的blog里找到。这些blog被聚合起来成了<uri link="http://planet.gentoo.org">Planet Gentoo</uri>的一部分，同时也是<uri link="http://planet.gentoo.org/soc/">Planet Gentoo SoC</uri>的一部分。这里，我们要列出一些项目，包括有关它们的一些信息和它们目前的状态。</p>
+        <p><uri link="http://www.pioto.org/~pioto/gentoo/soc2006/blog/">Michael Kelly</uri> 正在忙于实现一个统一的用户和组的管理架构，目的是使得它和Gentoo的包管理系统融为一体并且实现<uri link="http://www.gentoo.org/proj/en/glep/glep-0027.html">GLEP 27</uri>，后者先前早已活得了批准但还未实现。他的代码放在他公开的Subversion代码仓库中，可以利用<uri link="http://svn.pioto.org/viewvc">ViewVC</uri>经Web访问。就像他的初始<uri link="http://svn.pioto.org/viewvc/glep27-proposal.txt?view=co">倡议书</uri>中提到的，这个架构会很大的改进ebuild处理用户和组账户的方式。目前的系统，虽然在大多数情况下可正常工作，但在扩展性和能力方面有一定的局限。目前这个管理架构的代码正处于完善过程之中。当它完成的时候，包管理系统等就拥有了一个简单，灵活，便携的管理用户和组的方式。</p>
+        <p><uri link="http://unleashed.amule.org/soc/">Alex Martinez</uri> 一直致力于将 Gentoo的“sandbox”功能移植到FreeBSD系统中去。<uri link="http://www.gentoo.org/proj/en/gentoo-alt/bsd/index.xml">Gentoo/*BSD 项目</uri>项目在最近的几周中越来越活跃，并且正迅速的转变为可用于实际应用的平台。但是，由于FreeBSD和GNU的C库存在很大的差异，主要用于ebuildQA目的的sandbox工具，仍然不能正常运行。于是Alex的SoC项目就应运而生了。这个项目将通过研究系统最基本的库来设法找出问题的根源。由于目前临近期末考试时间，这个项目暂时搁置，之前的进度还是非常理想的。当这个项目完成之后，将会使得诸多Gentoo/*BSD系统的移植更接近于拥有Gentoo Linux上的所有的包管理功能，从而成为其发展进程中的一个里程碑。</p>
+        <p>总而言之，“代码之夏”活动对学生们来说是一个绝佳的参与他们喜爱的开源项目的机会，这可以让他们在暑假中不受干扰地享受编程的乐趣。当然，这个计划也会给开源项目带来好的代码和潜在的程序开发者。Gentoo的“代码之夏”管理联系人Christel Dahlskjaer在这个月早前的GWN中回应了这种意见：“我竭尽所能的确保我们给学生们提供他们所需要的帮助，我们同样致力于让今年夏天成为他们的快乐时光，我们希望在他们的“实习”结束之时不仅给我们带来代码方面的贡献，还能立志成为Gentoo的正式开发者。“</p>
+      </body>
+    </section>
+  </chapter>
+  <chapter>
+    <title>倾听社区</title>
+    <section>
+      <title>论坛</title>
+      <body>
+        <p>
+          <b>Genetic - 一个新的Portage前端</b>
+        </p>
+        <p>在过去的两周里，围绕着新的ncurses和wxWidgets的portage前端，论坛中展开了讨论。这个项目仍然处于初生阶段，并且寻求XML/Python/Ncurses方面的专家给予帮助。</p>
+        <ul>
+          <li>
+            <uri link="http://forums.gentoo.org/viewtopic-t-463518.html">Genetic论坛帖子</uri>
+          </li>
+          <li>
+            <uri link="http://genetic.sourceforge.net/">Genetic主页</uri>
+          </li>
+        </ul>
+        <p>
+          <b>GEMS - Gentoo企业管理系统</b>
+        </p>
+        <p>一个新的类似于”红帽子网络“的Gentoo管理系统在论坛里发布公告宣告了它的诞生。它的目的是简化管理大量Gentoo电脑系统的工作，目前它的功能包括：显示已安装软件的详细目录，有关的GLSA，监察安装进度等等。GEMS采取了GPL许可发布，可以从其网站中免费下载。</p>
+        <ul>
+          <li>
+            <uri link="http://forums.gentoo.org/viewtopic-t-468071.html">GEMS论坛帖子</uri>
+          </li>
+          <li>
+            <uri link="http://www.gamehound.net/gems/index.php">GEMS主页</uri>
+          </li>
+        </ul>
+        <p>
+          <b>减少在安装Gentoo系统过程中出现错误的机会</b>
+        </p>
+        <p>一位叫做new_to_non_X86的论坛用户指出，使用目前handbook里面的安装方式，用户很容易犯诸如打错字和忽略某个步骤之类的简单错误。您认为应如何提高Gentoo文档的质量以减少类似错误的发生呢？</p>
+        <ul>
+          <li>
+            <uri link="https://forums.gentoo.org/viewtopic-t-469616.html">论坛帖子</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>gentoo-dev</title>
+      <body>
+        <p>
+          <b>GLEP 49 - 第二版(take 2)</b>
+        </p>
+        <p>经过上几周的关于备选包管理器的大量讨论之后，<mail link="pauldv@gentoo.org">Paul de Vrieze</mail>和<mail link="g2boojum@gentoo.org">Grant Goodyear</mail>提供了两个GLEP以供讨论。这两个GLEP定义了一个足以获得支持的包管理器应该具备的能力，许可协议和其他管理上的事宜。因此未来关于portage替代品的讨论将着重于技术而非社会问题。</p>
+        <ul>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38476">GLEP 49 - 第二版(take 2)</uri>
+          </li>
+        </ul>
+        <p>
+          <b>Security/QA春季清理工作</b>
+        </p>
+        <p>人们总是会时不时的发现安全相关的问题。当这个问题影响到了Gentoo的软件包的时候，我们将发布一个GLSA，但是这个软件包此时并没有被从相关关键字中剔除或者从Portage树中被删除。这就会遗留下一些有漏洞的ebuild，所以<mail link="solar@gentoo.org">Ned Ludd</mail>和<mail link="ferringb@gmail.com">Brian Harring</mail>的组合已经据此开始展开了针对portage树清理。这个行动不会影响用户，只有存在安全漏洞、没有被维护的ebuild才会被删除。</p>
+        <ul>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38472">Security/QA 春季清理工作</uri>
+          </li>
+        </ul>
+        <p>
+          <b>春季清理工作，第二部分</b>
+        </p>
+        <p>一个针对无人维护以及毁坏的ebuild的清理活动正在展开。因为这一类的软件已知无法运行，所以对于用户来说没有功能上的损失。这是用来提升Gentoo系统总体质量的QA策略的一部分。</p>
+        <ul>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38698">app-editors/gnotepad+</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38685">ipkg-utils</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38661">media-libs/nurbs++</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38657">dev-libs/nana</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38641">sys-fs/convertfs</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38640">net-misc/powerd</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38636">www-client/prozilla</uri>
+          </li>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38633">sys-libs/ldetect{,-lst}</uri>
+          </li>
+        </ul>
+        <p>
+          <b>［RFC Maintainer-Wanted Bug及清理］</b>
+        </p>
+        <p>对于由用户提交的和无人维护的ebuild，我们创立了Maintainer-Wanted这个别名。这本应是个好主意，可是事实看来并非如此。因为目前已有近2000个bug分派给这个别名，但是其中大多数没有发生过任何变化。<mail link="antarus@gentoo.org">Alec Warner</mail>想大家征求将来如何处理这些bug的建议。在下面这个帖子里中讨论了一些办法，如将这些ebuild集中置于一个overlay中，或者预设一个时间限制，将超期未解决的bug关闭。不过还没有找到最终的解决方案。</p>
+        <ul>
+          <li>
+            <uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38663">［RFC Maintainer-Wanted Bug及清理］</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>planet.gentoo.org</title>
+      <body>
+        <p>
+          <b>Gentoo Overlays项目需要logo</b>
+        </p>
+        <p><uri link="http://www.gentoo.org/proj/en/overlays/">Gentoo Overlays</uri>是用来给Gentoo提供社会工作区的项目。它给Gentoo项目和开发人员提供主机来存放他们的overlay。如果您可以帮助Overlays项目创建logo，请来irc.freenode.net上的<c>#gentoo-overlays</c>频道坐坐。</p>
+        <ul>
+          <li>
+            <uri link="http://blog.stuartherbert.com/gentoo.php/2006/06/03/gentoo_overlays_project_needs_a_logo">Gentoo Overlays项目需要logo</uri>
+          </li>
+        </ul>
+        <p>
+          <b>KDE3.5.3被解除屏蔽</b>
+        </p>
+        <p>KDE3.5.3已经被解除了屏蔽。新的KDE启动更加迅速，并解决了800多个小问题。Akregator、KMail以及KAlarm也添加了一些新功能。</p>
+        <ul>
+          <li>
+            <uri link="http://farragut.flameeyes.is-a-geek.org/articles/2006/06/02/unmasked">KDE3.5.3被解除屏蔽</uri>
+          </li>
+        </ul>
+        <p>
+          <b>net-setup得到了增强</b>
+        </p>
+        <p>Live系统和已安装的Gentoo系统在网络接口的命名上有时会不同。为方便网络接口的配置<c>net-setup</c>新增了两个对话框用于显示接口名、接口标题和附加信息。新的<c>net-setup</c>将包含在下一版本的<c>livecd-tools</c>里。</p>
+        <ul>
+          <li>
+            <uri link="http://www.reactivated.net/weblog/archives/2006/06/net-setup-enhancements/">net-setup得到了增强</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+  <!-- Gentoo in the press -->
+  <chapter>
+    <title>Gentoo国际</title>
+    <section>
+      <title>Gentoo英国2006</title>
+      <body>
+        <p>尽管比预期的稍晚，“Gentoo英国2006用户和开发人员会议”的组织工作已接近尾声。会议定于七月八日星期六在伦敦中心举办，届时将有Gentoo开发人员的讲话，还可能有来宾发言。围绕此次会议还将举办其他一些社交活动。</p>
+        <p>因为名额有限，我们需要您用姓名和邮件地址提前登记（免费）。登记现已开始。</p>
+        <p>详情请见<uri link="http://dev.gentoo.org/~dsd/gentoo-uk-2006/">会议网站</uri>。我们期待着您的出现！</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- Tips and Tricks -->
+  <chapter>
+    <title>心得技巧</title>
+    <section>
+      <title>使用eix搜索portage树</title>
+      <body>
+        <p><c>eix</c>是个方便的工具，可以索引并快速搜索您的portage树。最新稳定版本为0.55，兼容Portage 2.1中新的元数据后端。</p>
+        <p>首先安装软件包，然后建立索引：</p>
+	<pre caption="Installing eix">
+# <i>emerge eix</i> 
+# <i>update-eix</i>
+	</pre>
+        <p>除了主portage目录树，<c>update-eix</c>也将会对你的<c>PORTDIR_OVERLAY</c>目录的ebuild建立索引。</p>
+        <p>完成之后，你就可以进行搜索了。可以用<c>eix foo</c>来搜索程序包，或者用<c>eix -S bar</c>来搜索程序包的简介。如果要搜索一个特定的程序包，可以使用<c>eix -e packagename</c>。默认的，你也可以在搜索的参数中使用正则表达式。</p>
+        <p><c>eix</c>输出显示软件包的每个可用版本号。有<c>~</c>前缀的版本号表示该版本不稳定，<c>!</c>则表示该版本被完全屏蔽。</p>
+	<pre caption="eix firefox">
+$ <i>eix firefox</i> 
+* www-client/mozilla-firefox 
+Available versions: 1.0.7-r4 ~1.0.8 ~1.5-r9 ~1.5-r11 ~1.5.0.1-r2 ~1.5.0.1-r3 ~1.5.0.1-r4 1.5.0.2 ~1.5.0.2-r1 1.5.0.3 1.5.0.4 
+Installed: none 
+Homepage: http://www.mozilla.org/projects/firefox/ 
+Description: Firefox Web Browser 
+
+* www-client/mozilla-firefox-bin 
+Available versions: 1.0.7 ~1.0.8 1.5.0.2 1.5.0.3 1.5.0.4 
+Installed: 1.5.0.3
+Homepage: http://www.mozilla.org/projects/firefox 
+Description: Firefox Web Browser 
+
+Found 2 matches
+	</pre>
+        <p>最后一点提示，如果你希望一次执行<c>emerge --sync</c>和<c>update-eix</c>这两个命令，运行<c>eix-sync</c>就好了。</p>
+        <note>如果你有一些心得技巧希望与Gentoo社区分享，请发邮件到<mail link="gwn-feedback@gentoo.org">gwn-feedback@gentoo.org</mail>。</note>
+      </body>
+    </section>
+  </chapter>
+  <!-- Gentoo developer moves -->
+  <chapter>
+    <title>人员变更</title>
+    <section>
+      <title>离开</title>
+      <body>
+        <p>下列开发者最近离开Gentoo项目：</p>
+        <ul>
+          <li>Dan Armak</li>
+          <li>Ryan Phillips</li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>加入</title>
+      <body>
+        <p>下列开发者最近加入Gentoo项目：</p>
+        <ul>
+          <li>Chris Parrott (haskell)</li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>变更</title>
+      <body>
+        <p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+        <ul>
+          <li>
+            <e>本周没有</e>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+  <!-- Gentoo security -->
+<chapter>
+<title>Gentoo安全</title>
+<!-- paste from the script -->
+<section>
+<title>CherryPy：遍历目录漏洞</title>
+<body>
+<p>受一个漏洞影响，在遍历目录时，CherryPy将允许攻击者读取任何文件。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200605-16.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>libTIFF：多个漏洞</title>
+<body>
+<p>在libTIFF中的多个漏洞可导致任意代码的执行或引起拒绝服务。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200605-17.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Opera：多个缓冲区溢出</title>
+<body>
+<p>Opera中包含的一个整数符号性错误，将导致缓冲区溢出，这可能会允许远程侵入者执行任意代码。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-01.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>shadow：升级权限</title>
+<body>
+<p>在shadow中的一个安全问题允许本地用户运行某些权限较高的操作。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-02.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Dia: 格式化字符串漏洞</title>
+<body>
+<p>Dia的格式化字符串漏洞可导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-03.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Tor：多个漏洞</title>
+<body>
+<p>Tor受影响于数个漏洞，包括一个可能的缓冲区溢出，一个拒绝服务，以及信息泄露。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-04.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Pound：HTTP请求走私</title>
+<body>
+<p>Pound受一个HTTP请求走私漏洞的影响，可以被利用来避过安全限制或对网页缓存落毒。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-05.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>AWStats：远程任意代码的执行</title>
+<body>
+<p>AWStats在处理输入参数部分有一个bug，这会导致远程任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-06.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Vixie：升级权限</title>
+<body>
+<p>Vixie Cron允许本地用于以root身份执行程序。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-07.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>WordPress：任意指令执行</title>
+<body>
+<p>WordPress不能对缓存的用户名数据作足够的检查。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-08.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>SpamAssassin：任意代码的执行</title>
+<body>
+<p>当SpamAssassin以某些选项运行时，可能允许本地甚至远程攻击者执行任意代码，甚至可能是以root身份。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-09.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Cscope：多个缓冲区溢出</title>
+<body>
+<p>Cscope受多个缓冲区溢出漏洞影响，这可能导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-10.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>JPEG库：拒绝服务</title>
+<body>
+<p>JPEG库受影响于一个拒绝服务漏洞。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-11.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Mozilla Firefox：多个漏洞</title>
+<body>
+<p>Mozilla Firefox的几个漏洞可以允许JavaScript代码的权限提升，跨站点脚本攻击，HTTP回应走私，并且可能导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-12.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>MySQL：SQL注入</title>
+<body>
+<p>MySQL受影响于多字节编码处理时的一个SQL注入漏洞。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-13.xml">GLSA声明</uri></p>
+</body>
+</section>
+</chapter>
+  <!-- Bugzilla -->
+  <!-- paste from the script -->
+<chapter>
+<title>Bugzilla</title>
+<section>
+<title>总结</title>
+<body>
+     <ul>
+          <li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+          <li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+          <li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+     </ul>
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+     <p>Gentoo社区使用Bugzilla(<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug，提示，建议以及其他和开发团队之间的互动。从2006年5月28日到2006年6月11日，这个站点记录下了：</p>
+     <ul>
+          <li>1756个在这段时间内被发现的新bug</li>
+          <li>812个在这段时间内被修正或解决的bug</li>
+          <li>54个先前修复了的但在这段时间重现的bug</li>
+     </ul>
+     <p>在当前还未被修正的10196个bug里面：53个被标记为“blocker”，144个被标记为“critical”，还有549个被标记为“major”。</p>
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+     <p>在这段时间内修复最多bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="games@gentoo.org">Gentoo Games</mail>，49个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="security@gentoo.org">Gentoo安全</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="printing@gentoo.org">打印团队</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=printing@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="apache-bugs@gentoo.org">Apache团队——Bugzilla报告</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=apache-bugs@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="base-system@gentoo.org">Gentoo 核心系统软件包团队</mail>，25个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="dev-portage@gentoo.org">Portage团队</mail>，21个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修复的bug</uri></li>
+      <li><mail link="flameeyes@gentoo.org">Diego Pettenò</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;resolution=FIXED&amp;assigned_to=flameeyes@gentoo.org">被修复的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+     <p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，54个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+      <li><mail link="mozilla@gentoo.org">Mozilla Gentoo团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=mozilla@gentoo.org">新bug</uri></li>
+      <li><mail link="games@gentoo.org">Gentoo Games</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+      <li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+      <li><mail link="flameeyes@gentoo.org">Diego Pettenò</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=flameeyes@gentoo.org">新bug</uri></li>
+      <li><mail link="chriswhite@gentoo.org">Chris White</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=chriswhite@gentoo.org">新bug</uri></li>
+      <li><mail link="amd64@gentoo.org">AMD64项目</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+      <li><mail link="kde@gentoo.org">Gentoo KDE 团队</mail>， 12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-05-28&amp;chfieldto=2006-06-11&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+</chapter>
+  <!-- GWN feedback information -->
+  <chapter>
+    <title>周报反馈</title>
+    <section>
+      <body>
+        <p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- GWN subscription information -->
+  <chapter>
+    <title>周报订阅</title>
+    <section>
+      <body>
+        <p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p>
+        <p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- Other Languages -->
+  <chapter>
+    <title>其他语言</title>
+    <section>
+      <body>
+        <p>Gentoo周报还被翻译为以下几种语言文字：</p>
+        <ul>
+	  <li>
+	    <uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+	  </li>
+          <li>
+            <uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+          </li>
+          <li>
+            <uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/en/gwn/gwn.xml">英文</uri>
+          </li>
+          <li>
+            <uri link="/news/de/gwn/gwn.xml">德文</uri>
+          </li>
+          <li>
+            <uri link="/news/fr/gwn/gwn.xml">法文</uri>
+          </li>
+          <li>
+            <uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+          </li>
+          <li>
+            <uri link="/news/ja/gwn/gwn.xml">日文</uri>
+          </li>
+          <li>
+            <uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+          </li>
+          <li>
+            <uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+          </li>
+          <li>
+            <uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+          </li>
+          <li>
+            <uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+          </li>
+          <li>
+            <uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+          </li>
+          <li>
+            <uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+</guide>

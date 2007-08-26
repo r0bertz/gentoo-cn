@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/devrel/handbook/hb-introduction-whatyouget.xml,v 1.3 2004/07/20 08:54:34 plasmaroo Exp $ -->
+
+<sections>
+<section>
+<title>Introduction</title>
+<body>
+
+<p>
+Gentoo provides developers with all the necessary services which they
+might need for their development efforts. If you require anything
+else, please do not hesitate to contact the Infrastructure Team!
+</p>
+
+<p>
+Once you are an authorized developer, your recruiter should organize
+the following services.  If you experience any problems, please see
+your recruiter or the mentioned staff with access to the required
+service.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Bugzilla</title>
+<body>
+
+<p>
+Developers are able to change all aspects of bugs in Bugzilla. If you
+have an existing account the email address should be changed to your
+Gentoo address by a Bugzilla administrator.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>CVS</title>
+<body>
+
+<p>
+Not all developers receive CVS access - if you require Portage access
+to the gentoo, gentoo-projects, or gentoo-x86 tree get someone on the
+recruiters team to do this for you. You may need to justify your need
+for this to happen, however.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>IRC</title>
+<body>
+
+<p>
+When you are a developer, you will receive operator status on
+#gentoo-dev signifying that you are a developer. Please contact
+Developer Relations if you do not. Additionally, team leads may decide
+to give you operator status on specialized channels such as
+#gentoo-hardened, for example. Abuse of operator powers on #gentoo-dev
+may lead to your operator powers being removed instantly along with
+the possible removal of your developership. If you are given operator powers,
+we ask that you use them constructively to benefit everybody when either
+developers or users break up the cleanliness of the channels.
+</p>
+
+<p>
+Operator status on #gentoo is given at discretion by Developer
+Relations; it does not in any way signify that the user is a developer.
+</p>
+
+<p>
+"Special" Gentoo channels such as #gentoo-hardened and #gentoo-server are
+given to people at the discretion of the team - in this case, the hardened
+and server teams.
+</p>
+
+<p>
+IRC Channels are owned by their relevant project leads, whether strategical
+or operational and the owner has the discretion of voicing or unvoicing
+members of the public. If you believe that those powers are being abused or
+are being used with wrong considerations; then speak to the Gentoo Linux
+Developer Relations team, or the Ombudsman.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Forums [Optional]</title>
+<body>
+
+<p>
+Ask one of the forums administrators to update your forum status on
+the Gentoo Forums, if needed. Forum accounts are not mandatory.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Mail</title>
+<body>
+
+<p>
+All developers are provided with a developer@gentoo.org mail address
+for Gentoo use.
+</p>
+
+<p>
+Please see <uri>http://www.gentoo.org/proj/en/infrastructure/dev-email.xml</uri> 
+for more details.
+</p>
+</body>
+</section>
+
+<section>
+<title>Mailing lists</title>
+<body>
+
+<p>
+All developers should be subscribed on the gentoo-core and gentoo-dev mailing
+lists. Contact the someone on the recruiters team to subscribe you to
+the gentoo-core developer-only mailing list or if you have any
+trouble.  If you are subscribed on any other Gentoo mailing lists, you
+should unsubscribe and resubscribe with your new mail address.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Shell access</title>
+<body>
+
+<p>
+Developers currently get a shell account on dev.gentoo.org (
+toucan.gentoo.org ) - this provides mail storage, SMTP relaying and also
+an IRC tunnel for developers to use to access freenode.
+</p>
+
+<p>
+To ensure security, access is only available through SSH keys, which
+your mentor should place on your account and allow you to log in:
+please see <uri>http://www.gentoo.org/proj/en/infrastructure/cvs-sshkeys.xml</uri>
+for more details regarding SSH keys..
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Service usage policies</title>
+<body>
+<p>
+Services provided by Gentoo should only be used for Gentoo development
+work. Infrastructure has the right to disable any accounts which are a
+security risk, these include inactive accounts which will be
+suspended by the infrastructure team if you are presumed idle, 
+and your IRC #gentoo-dev status would also be voiced.
+</p>
+<p>
+If any files in your account are found to be harmful towards other developers
+or users on the box, or pose a risk to the Gentoo project (such as illegal
+.torrents), Gentoo Infrastructure will suspend your account which would only
+be unlocked after investigation from Gentoo Developer Relations. In most cases,
+your developership may be suspended if such files are found. The same
+policies also apply to Gentoo CVS and other Gentoo-provided services you may
+be offered.
+</p>
+</body>
+</section>
+
+</sections>

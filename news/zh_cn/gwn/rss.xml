@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone='yes'?>
+<?xml-stylesheet href="/xsl/gwnfeed.xsl" type="text/xsl"?>
+<!DOCTYPE gwnfeed [<!ELEMENT gwnfeed EMPTY>]>
+<gwnfeed/>

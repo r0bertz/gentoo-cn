@@ -1,0 +1,432 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86-kernel.xml,v 1.5 2004/05/09 12:38:54 swift Exp $ -->
+
+<sections>
+<section>
+<title>时区</title>
+<body>
+
+<p>
+你首先需要选择你的时区，这样你的系统知道起所在位置。在<path>/usr/share/zoneinfo</path>里查看你的时区，然后使用<c>ln</c>做一个符号链接到<path>/etc/localtime</path>：
+</p>
+
+<pre caption="设定时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设你要使用GMT）</comment>
+# <i>ln -sf /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择一个内核</title>
+<body>
+
+<p>
+各个发行版的核心部分就是linux内核。这是处于用户程序和系统硬件之间的一层。Gentoo给其用户提供了几个可能的内核源码。你可以在<uri link="/doc/gentoo-kernel.xml">Gentoo内核指南</uri>中得到一个全面的有关列表和描述。
+</p>
+
+<p>
+对于我们已有的x86架构的系统，在其他内核当中，<c>vanilla-sources</c>（linux内核开发者用作开发的默认内核源码）、<c>gentoo-sources</c>（带很多增强性能补丁的内核源码）、<c>gentoo-dev-sources</c>（带增强性能补丁和改进的2.6版本的内核源码）、<c>xfs-sources</c>（带最新XFS支持的内核源码）、<c>gs-sources</c>（用作服务器的内核源码）、<c>gaming-sources</c>（优化改进游戏性能的内核源码）、<c>development-sources</c>（2.6版本的vanlla内核源码），……
+</p>
+
+<p>
+如果你使用的是对网络依赖很小的安装，你不可以选择所有的上述版本，因为我们只提供其中的一部分。如果是这种情况，你被限制而只能使用<c>gentoo-sources</c>、<c>vanilla-sources</c>、<c>development-sources</c>或<c>gentoo-dev-sources</c>。
+</p>
+
+<p>
+选择你的内核源码，并用<c>emerge</c>安装。
+</p>
+
+<pre caption="安装一个内核源码">
+# <i>emerge gentoo-sources</i>
+</pre>
+
+<p>
+当你到<path>/usr/src</path>里看一下，你应该可以看到一个叫做<path>linux/</path>的符号链接指向你的内核源码：
+</p>
+
+<pre caption="查看内核源码的符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; linux-2.4.25-gentoo
+</pre>
+
+<p>
+如果不是这样（比如，符号链接指向一个不同的内核源码），在继续之前改变这个符号链接：
+</p>
+
+<pre caption="改变内核源码的符号链接">
+# <i>rm /usr/src/linux</i>
+# <i>cd /usr/src</i>
+# <i>ln -s linux-2.4.25-gentoo linux</i>
+</pre>
+
+<p>
+现在该到配置和编译你的内核源码的时候了。你可以使用<c>genkernel</c>来做，这个会编译出一个同liveCD相似的通用内核。我们先来解释一下“手动”配置，因为这是优化你的系统环境的最好方法。
+</p>
+
+<p>
+如果你要手动配置你的内核，现在我们就可以从<uri link="#manual">默认：手动配置</uri>继续。如果你要使用<c>genkernel</c>，那你则应该读读<uri link="#genkernel">另一个选择：使用genkernel</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="manual">
+<title>默认：手动配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核常常被看作是每个Linux用户最难的一课。然而事实并非如此，配置完几次内核后，你甚至都不记得这麻烦;)
+</p>
+
+<p>
+但是，有件事<e>是</e>真的：在手动配置你的内核之前，你必须对你的系统很了解。大部分的信息可以通过查看<path>/proc/pci</path>里的内容收集到（如果可以也可用<c>lspci</c>）。你也可以运行<c>lsmod</c>来看看LiveCD使用的内核模块（这会给你选择启用模块时一个非常好的提示）。
+</p>
+
+<p>
+现在，进入你的内核源码所在文件夹，并执行<c>make menuconfig</c>。这会启动一个基于ncurses的配置菜单。
+</p>
+
+<pre caption="运用menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+你会看到几个配置选项。首先我们列出一些必须启用的选项（否则Gentoo不会运作，或者在没有其他办法下无法正常的运作）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>激活必须的选项</title>
+<body>
+
+<p>
+首先，激活development and experimental code/drivers的使用。你需要这个，否则一些非常重要的代码／驱动无法显示出来：
+</p>
+
+<pre caption="选择experimental code/drivers">
+Code maturity level options ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+确认是使用正确的处理器类型编译：
+</p>
+
+<pre caption="选择正确的处理器类型">
+Processor type and features ---&gt;
+  Subarchitecture Type (<i>PC Compatible</i>) ---&gt;
+  <comment>（根据你的系统改变）</comment>
+  Processor family (<i>Athlon/Duron/K7</i>) ---&gt;
+</pre>
+
+<p>
+现在，到<c>File Systems</c>里，选择你使用的文件系统的支持。<e>不要</e>将他们编译为模块，否则你的Gentoo系统无法挂载你的分区。另外，也选上<c>Virtual memory</c>、<c>/proc file system</c>、<c>/dev file system</c>和<c>Automatically mount at boot</c>：
+</p>
+
+<pre caption="选择必须的文件系统">
+File systems ---&gt;
+  [*] Virtual memory file system support (former shm fs)
+  [*] /proc file system support
+  [*] /dev file system support (EXPERIMENTAL)
+  [*]   Automatically mount at boot
+
+<comment>（除非你使用2.6内核，否则去掉下面这个）</comment>
+  [ ] /dev/pts file system for Unix98 PTYs
+
+<comment>（选择下面你系统所需的一个或多个的选项）</comment>
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; Ext3 journalling file system support
+  &lt;*&gt; JFS filesystem support
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; XFS filesystem support
+</pre>
+
+<note>
+2.6内核的用户将会在<c>Pseudo filesystems</c>（<c>File systems</c>的一部分）里找到上面提到的一些选项。
+</note>
+
+<p>
+如果你使用PPPoE连接到因特网，或者你使用一个拨号的调制解调器，你将需要选中内核中的下面选项：
+</p>
+
+<pre caption="选择PPPoE所需的驱动">
+Network device support ---&gt;
+  &lt;*&gt; PPP (point-to-point protocol) support
+  &lt;*&gt;   PPP support for async serial ports
+  &lt;*&gt;   PPP support for sync tty ports
+</pre>
+
+<note>
+2.6内核的用户将会在<c>Networking suport</c>（<c>Device Drivers</c>的一部分）中找到上面提到的选项。
+</note>
+
+<p>
+这两个压缩选项并什么害处，但也不是绝对的需要，选项<c>PPP over Ethernet</c>也是这样的，它可能只会在配置为内核模式的PPPoE时被<c>rp-pppoe</c>用到。
+</p>
+
+<p>
+如果你需要它，不要忘了在你的内核中包含对你网卡的支持。
+</p>
+
+<p>
+如果你有一个支持多线程的Intel CPU，或者你有一个多CPU系统，你应该启用"Symmetric muti-processing support"：
+</p>
+
+<pre caption="启用SMP支持">
+Processor type and features  ---&gt;
+  [*] Symmetric multi-processing support
+</pre>
+
+<p>
+如果你已经配置完内核，从<uri link="#compiling">编译和安装</uri>继续。
+</p>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译和安装</title>
+<body>
+
+<p>
+既然你的内核已经配置完了，该到编译和安装它的时候了。退出配置，并运行<c>make dep &amp;&amp; make bzImage modules 
+modules_install</c>：
+</p>
+
+<pre caption="编译内核">
+<comment>（对于2.4内核）</comment>
+# <i>make dep &amp;&amp; make bzImage modules modules_install</i>
+
+<comment>（对于2.6内核）</comment>
+# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<p>
+内核编译完成后，将内核的镜像拷贝到<path>/boot</path>：
+</p>
+
+<pre caption="安装内核">
+# <i>cp arch/i386/boot/bzImage /boot/kernel-2.4.25-gentoo</i>
+# <i>cp System.map /boot/System.map-2.4.25-gentoo</i>
+</pre>
+
+<p>
+将你的内核配置文件也拷贝到<path>/boot</path>也是很明智的，以防万一 :)
+</p>
+
+<pre caption="备份你的内核配置">
+# <i>cp .config /boot/config-2.4.25-gentoo</i>
+</pre>
+
+<p>
+现在从<uri link="#kernel_modules">安装不同的内核模块</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="genkernel">
+<title>另一个选择：使用genkernel</title>
+<body>
+
+<p>
+如果你正在读这个章节，你已经选择使用我们的<c>genkernel</c>脚本来给你配置内核。
+</p>
+
+<p>
+既然你的内核源码树已经安装，可以用我们的<c>genkernel</c>脚本来为你自动编译一个内核。<c>genkernel</c>配置内核就同我们的LiveCD内核的配置几乎一样。这意味着你使用<c>genkernel</c>来编译你的内核，你的系统将会在启动时检测出你所有的硬件，这就同LiveCD一样。因为<c>genkernel</c>不需要任何内核手动配置，这对于一些不大适应编译自己内核的用户来说，是一个绝好的处理办法。
+</p>
+
+<p>
+现在，让我们来看看如何使用genkernel。首先，安装genkernel：
+</p>
+
+<pre caption="安装genkernel">
+# <i>emerge genkernel</i>
+</pre>
+
+<p>
+现在，运行<c>genkernel all</c>来编译你的内核。这里我们要注意到，因为<c>genkernel</c>编译一个支持几乎所有硬件的内核，编译的完成将会占用很长的时间。
+</p>
+
+<p>
+注意到，如果你的boot分区没有使用ext2或者ext3作为文件系统，你需要用<c>genkernel --menuconfig all</c>来手动配置你的内核，并在内核<e>中</e>加上你的文件系统的支持（<e>不要</e>编译为模块）。
+</p>
+
+<pre caption="运行genkernel">
+# <i>genkernel all</i>
+</pre>
+
+<p>
+一旦<c>genkernel</c>完成，一个模块很全的内核和一个<e>initial root disk</e>（initrd）将会被创建。我们将在文档后面的配置启动程序时使用这个内核和initrd。在写启动程序的配置文件时，就直接写下这个内核和initrd的名字。initrd将会在机器启动后和“真实”系统启动前运行，执行硬件的自动检测（就同LiveCD一样）。
+</p>
+
+<pre caption="检查新创建的内核镜像和initrd的名字">
+# <i>ls /boot/kernel* /boot/initrd*</i>
+</pre>
+
+<p>
+现在，让我们再来执行一个步骤－－安装<c>hotplug</c>，使得我们的系统更像LiveCD。当initrd自动检测到系统启动需要的硬件时，<c>hotplug</c>会自动检测到其他所有的东西。安装和启用<c>hotplug</c>，输入以下命令：
+</p>
+
+<pre caption="安装和启用hotplug">
+# <i>emerge hotplug</i>
+# <i>rc-update add hotplug default</i>
+</pre>
+
+</body>
+</section>
+<section id="kernel_modules">
+<title>安装不同的内核模块</title>
+<subsection>
+<title>安装额外的模块</title>
+<body>
+
+<p>
+如果准确的话，你应该给你系统其他的硬件安装ebuilds。这里有一些你可以安装的内核相关的ebuilds：
+</p>
+
+<table>
+<tcolumn width="1in"/>
+<tcolumn width="4in"/>
+<tcolumn width="2in"/>
+<tr>
+  <th>Ebuild</th>
+  <th>目的</th>
+  <th>命令</th>
+</tr>
+<tr>
+  <ti>nvidia-kernel</ti>
+  <ti>给XFree86提供NVIDIA图形加速</ti>
+  <ti><c>emerge nvidia-kernel</c></ti>
+</tr>
+<tr>
+  <ti>nforce-net</ti>
+  <ti>NVIDIA NForce(2)主板集成的网卡</ti>
+  <ti><c>emerge nforce-net</c></ti>
+</tr>
+<tr>
+  <ti>nforce-audio</ti>
+  <ti>NVIDIA NForce(2)主板集成的声卡</ti>
+  <ti><c>emerge nforce-audio</c></ti>
+</tr>
+<tr>
+  <ti>e100</ti>
+  <ti>Intel e100 Fast Ethernet Adapters</ti>
+  <ti><c>emerge e100</c></ti>
+</tr>
+<tr>
+  <ti>e1000</ti>
+  <ti>Intel e1000 Gigabit Ethernet Adapters</ti>
+  <ti><c>emerge e1000</c></ti>
+</tr>
+<tr>
+  <ti>emu10k1</ti>
+  <ti>Creative Sound Blaster Live!/Audigy支持</ti>
+  <ti><c>emerge emu10k1</c></ti>
+</tr>
+<tr>
+  <ti>ati-drivers</ti>
+  <ti>给XFree86提供ATI Radeon 8500+/FireGL图形加速</ti>
+  <ti><c>emerge ati-drivers</c></ti>
+</tr>
+<tr>
+  <ti>ati-drivers-extra</ti>
+  <ti>ATI图形化工具</ti>
+  <ti><c>emerge ati-drivers-extra</c></ti>
+</tr>
+</table>
+
+<p>
+可能会意识到，其中的一些ebuilds会出现比较大的依赖性问题。为确认安装一个ebuilds需要什么软件包，可以使用<c>emerge --pretend</c>。比如，对于<c>emu10k1</c>软件包：
+</p>
+
+<pre caption="查看全面的软件包安装列表">
+# <i>emerge --pretend emu10k1</i>
+</pre>
+
+<p>
+如果你不喜欢要安装的软件包，使用<c>emerge --pretend --verbose</c>来看看检查依赖性时所用的USE参数：
+</p>
+
+<pre caption="查看USE参数的使用">
+# <i>emerge --pretend --verbose emu10k1</i>
+<comment>...</comment>
+[ebuild  N    ] media-sound/aumix-2.8  +gpm +nls +gtk +gnome +alsa -gtk2
+</pre>
+
+<p>
+在前面这个例子中，你可以看到，<c>emu10k1</c>的一个依赖的软件包（<c>aumix</c>）使用了<c>gtk</c>和<c>gnome</c>这两个USE参数，而gtk（依赖于XFree）也得跟着一起编译。
+</p>
+
+<p>
+如果你不想所有的这些都被编译，取消所有的USE参数选择，如：
+</p>
+
+<pre caption="取消所有的USE参数来安装emu10k1">
+# <i>USE="-gpm -nls -gtk -gnome -alsa" emerge --pretend emu10k1</i>
+</pre>
+
+<p>
+如果你对所得的结果满意，去掉<c>--pretend</c>来开始安装<c>emu10k1</c>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>配置模块</title>
+<body>
+
+<p>
+你应该在<path>/etc/modules.autoload.d/kernel-2.4</path>（或者<path>kernel-2.6</path>）中列出你要自动加载的模块。如果你需要，也可以给这些模块添加额外的选项。
+</p>
+
+<p>
+查看所有已有的模块，可以运行下面的<c>find</c>命令。不要忘了将"&lt;kernel version&gt;"换成你刚编译的内核的版本：
+</p>
+
+<pre caption="查看所有已有的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+比如，为自动加载<c>3c59x.o</c>模块，编辑<path>kernel-2.4</path>或者<path>kernel-2.6</path>文件，并输入模块的名字。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.4">
+<comment>（2.4内核的例子）</comment>
+# <i>nano -w /etc/modules.autoload.d/kernel-2.4</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.4 或者 kernel-2.6">
+3c59x
+</pre>
+
+<p>
+现在运行<c>modules-update</c>来提交对<path>/etc/modules.conf</path>文件的修改：
+</p>
+
+<pre caption="运行modules-update">
+# <i>modules-update</i>
+</pre>
+
+<p>
+从<uri link="?part=1&amp;chap=8">配置你的系统</uri>继续安装。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

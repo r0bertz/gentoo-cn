@@ -1,0 +1,282 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-working-use.xml,v 1.16 2004/07/07 19:19:26 neysx Exp $ -->
+
+<sections>
+<section>
+<title>USE参数是什么？</title>
+<subsection>
+<title>USE参数背后的故事</title>
+<body>
+
+<p>
+你安装Gentoo（或者其他的发行版，甚至或者是其他的操作系统）时，你根据你所工作的环境来作出选择。服务器的安装就同工作站的安装不一样，游戏机的安装也同3D工作站的不一样。
+</p>
+
+<p>
+这不仅对于你要选择安装什么软件如此，也对安装某一软件需要什么特性也如此。如果你不需要OpenGL，为什么就需要安装OpenGL和将OpenGL支持编译进你的许多的软件包？如果你不使用KDE，如果软件不需要，为什么要编译进KDE的支持？
+</p>
+
+<p>
+为帮助用户决定什么需要安装/激活，什么不需要，我们需要用户可以用一种简单的方法来设定他/她的环境。这使得用户可以决定他们真正需要什么，简便Portage（我们的管理系统）的过程，方便作出有用的选择。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>一个USE参数的定义</title>
+<body>
+
+<p>
+输入USE参数。这样的一个参数是概括某一概念的支持和依赖性信息的关键词。如果你定义一个特定的USE参数，Portage将会知道你要添加对于选定关键词的支持。当然，这也改变了一个软件包的依赖性信息。
+</p>
+
+<p>
+让我们来看一看一个特定的例子：关键词<c>kde</c>。如果在你的<c>USE</c>变量中没有这个关键词，所有的有对KDE<e>可选</e>支持的软件包将在编译时<e>不</e>带上KDE支持。所有带有<e>可选</e>KDE支持的软件包都不会安装KDE的库（以依赖性方式）。如果你定义了关键词<c>kde</c>，那么这些软件包<e>将</e>会编译进KDE的支持，并且KDE的库文件也会以依赖性方式安装。
+</p>
+
+<p>
+通过准确的定义这些关键词，你将会得到根据你的需要度身定做的系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>USE参数用在哪里？</title>
+<body>
+
+<p>
+目前有两种USE参数：<e>全局的</e>和<e>局部的</e>USE参数。
+</p>
+
+<ul>
+  <li>
+    一个<e>全局的</e>USE参数用于多个软件包，属于系统范围的。这是绝大多数人所看到的USE参数。
+  </li>
+  <li>
+    一个<e>局部的</e>USE参数用于单个的软件包，用作对特定的软件包进行设定。
+  </li>
+</ul>
+
+<p>
+目前已有的全局的USE参数可以在<uri link="/dyn/use-index.xml">在线</uri>或者在本地的<path>/usr/portage/profiles/use.desc</path>中找到。一个简短的摘要如下（<e>非常</e>不完全）：
+</p>
+
+<pre caption="已有的USE参数的简短片段">
+gtk     - 添加对x11-libs/gtk+的支持（The GIMP Tookit的简称）
+gtk2    - 使用gtk+-2.0.0而不是gtk+-1.2，以防一个软件包同时需要两者的情况
+gtkhtml - 添加对gnome-extra/gtkhtml的支持
+guile   - 添加对dev-util/guile的支持（Scheme的解释器）
+icc     - 如果软件包支持，使用Intel的C++编译器
+icc-pgo - 使用icc时，启用PGO数据生成或使用
+imap    - 添加对IMAP的支持
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>使用USE参数</title>
+<subsection>
+<title>声明永久的USE参数</title>
+<body>
+
+<p>
+我们希望你能意识到USE参数的重要性，我们将告诉你怎样声明USE参数。
+</p>
+
+<p>
+就同前面所提起的，所有的USE参数是在<c>USE</c>变量中声明的。为方便用户搜索和选择USE参数，我们已经提供了一个<e>默认</e>的USE设置。这个设置是我们认为Gentoo用户通常会使用到的USE参数的集合。这个默认的设置是在<path>/etc/make.profile/make.defaults</path>文件中声明的。让我们来看看这个默认设置：
+</p>
+
+<pre caption="/etc/make.profile/make.defaults中用于x86系统的USE变量">
+USE="x86 oss apm arts avi berkdb crypt cups encode foomaticdb gdbm gif gpm
+     gtk gtk2 imlib jpeg kde gnome libg++ libwww mad mikmod motif mpeg ncurses
+     nls oggvorbis opengl pam pdflib png python qt quicktime readline sdl
+     slang spell ssl svga tcpd truetype X xml2 xmms xv zlib"
+</pre>
+
+<p>
+就同你看到的，这个变量已经包含了很多的关键词。千万<b>不要</b>根据你的需要改变<path>/etc/make.profile/make.defaults</path>的<c>USE</c>变量：当你更新Portage时将会覆盖这个修改。
+</p>
+
+<p>
+要改变默认的设置，你需要对<c>USE</c>变量添加或者删减关键词。这个是在<path>/etc/make.conf</path>文件中全局定义<c>USE</c>变量完成的。在这个变量中，你添加你需要的USE参数，或者删减你不需要的USE参数。后者通过在关键词的前面加上一个负号（"-"）的前缀即可。
+</p>
+
+<p>
+比如说，删掉对KDE和QT的支持，并添加对ldap的支持，下面的<c>USE</c>变量可以在<path>/etc/make.conf</path>中定义：
+</p>
+
+<pre caption="/etc/make.conf中一个USE变量设置的例子">
+USE="-kde -qt ldap"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>声明临时的USE参数</title>
+<body>
+
+<p>
+有时候你需要设定只使用一次的USE设置。你可以只以环境变量的形式声明这个USE变量，而不需要编辑<path>/etc/make.conf</path>两次（修改和恢复）。
+</p>
+
+<p>
+作为一个例子，我们将在mozilla的安装过程中暂时从USE设置中去掉java。
+</p>
+
+<note>
+有关<c>emerge</c>命令将会在<uri link="?part=2&amp;chap=2">Portage和软件</uri>进行更彻底的讨论。
+</note>
+
+<pre caption="以环境变量的形式使用USE">
+# <i>USE="-java" emerge mozilla</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>继承USE参数</title>
+<body>
+
+<p>
+一些软件不仅仅服从USE参数，也提供USE参数。当你安装这样的一个软件包时，它所提供的USE参数将会添加到你的USE设定中。查看<path>/etc/make.profile/use.defaults</path>看看提供USE参数的软件包的列表：
+</p>
+
+<pre caption="/etc/make.profile/use.defaults的一个片段">
+gnome           gnome-base/gnome
+gtk             x11-libs/gtk+
+qt              x11-libs/qt
+kde             kde-base/kdebase
+motif           x11-libs/openmotif
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>优先权</title>
+<body>
+
+<p>
+当然这里有一个优先权的问题，那个设置有对USE设置有优先权。你不需要去声明<c>USE="-java"</c>仅仅是看到<c>java</c>通过某种方式声明了。USE设置的优先权如下（在前的优先权较低）：
+</p>
+
+<ol>
+  <li>
+    在<path>/etc/make.profile/make.defaults</path>声明的默认USE设置
+  </li>
+  <li>
+    如果<path>/etc/make.profile/use.defaults</path>中的一个软件包安装后继承的USE设置
+  </li>
+  <li>
+    用户在<path>/etc/make.conf</path>定义的USE设置
+  </li>
+  <li>
+    用户以环境变量形式定义的USE设置
+  </li>
+</ol>
+
+<p>
+运行<c>emerge info</c>来查看最后用于Portage的<c>USE</c>设置。这会列出所有和Portage相关连的变量（包含<c>USE</c>变量）。
+</p>
+
+<pre caption="运行emerge info">
+# <i>emerge info</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>调整你的整个系统到新的USE参数</title>
+<body>
+
+<p>
+如果你已改变你的USE参数，并想更新你的整个系统都使用这个新的USE设置，你可以尝试用下面的步骤完成。注意，这些步骤将会花很长的是件来完成，并且这个工作将会调整Portage以使得动作更快和自动完成。
+</p>
+
+<p>
+首先，使用新的USE参数重新编译你的整个系统：
+</p>
+
+<pre caption="重新编译你的整个系统">
+# <i>emerge --emptytree world</i>
+</pre>
+
+<p>
+然后，运行Portage的<c>depclean</c>来去掉旧系统已有但被新的USE参数废弃的可选依赖性。
+</p>
+
+<warn>
+运行<c>emerge depclean</c>是一个危险的操作，处理时要小心。反复检查废弃的软件包的列表，以确认它不会删掉你需要的软件包。在下面的例子中，我们添加<c>-p</c>参数，切换到只列出这些软件包，而没有删掉它们。
+</warn>
+
+<pre caption="删掉废弃的软件包">
+# <i>emerge -p depclean</i>
+</pre>
+
+<p>
+当depclean完成后，你的系统就是在使用新的USE参数设置。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>软件包所特定的USE参数</title>
+<subsection>
+<title>查看所有的USE参数</title>
+<body>
+
+<p>
+在下一章<uri link="?part=2&amp;chap=2">Portage和软件</uri>中，我们将会解释到怎样管理你安装的软件和怎样使用<c>emerge</c>。但是，我们将会通过向你展示如何查看一个软件包使用到的USE参数来给个<c>emerge</c>的入门。
+</p>
+
+<p>
+让我们以<c>mozilla</c>举个例子：它将会遵守哪些USE参数呢？我们使用<c>emerge</c>并带上<c>--pretend</c>（假装要做）和<c>--verbose</c>（获得更多信息）选项找到：
+</p>
+
+<pre caption="查看要用到的USE参数">
+# <i>emerge --pretend --verbose mozilla</i>
+These are the packages that I would merge, in order:
+
+Calculating dependencies ...done!
+[ebuild  N    ] net-www/mozilla-1.5-r1 +java +crypt -ipv6 -gtk2 +ssl +ldap 
++gnome -debug +mozcalendar -mozaccess -mozxmlterm -moznoirc -moznomail
+-moznocompose -moznoxft 
+</pre>
+
+<p>
+<c>emerge</c>并不是这个工作的唯一工具。实际上，我们有一个致力于提供软件包信息的名叫<c>etcat</c>（在<c>gentookit</c>软件包里）的工具。首先，安装<c>gentookit</c>：
+</p>
+
+<pre caption="安装gentoolkit">
+# <i>emerge --usepkg gentoolkit</i>
+</pre>
+
+<p>
+然后运行<c>etcat</c>，并带上<c>uses</c>参数，来查看一个特定软件包的USE参数。比如说，对于<c>gnumeric</c>软件包：
+</p>
+
+<pre caption="使用etcat查看USE参数">
+# <i>etcat uses gnumeric</i>
+[ Colour Code : <i>set</i> <comment>unset</comment> ]
+[ Legend      : (U) Col 1 - Current USE flags        ]
+[             : (I) Col 2 - Installed With USE flags ]
+
+ U I [ Found these USE variables in : app-office/gnumeric-1.2.0 ]
+ - - <comment>libgda</comment>  : Adds GNU Data Access (CORBA wrapper) support for gnumeric
+ - - <comment>gnomedb</comment> : unknown
+ + + <i>python</i>  : Adds support/bindings for the Python language
+ + + <i>bonobo</i>  : Adds support for gnome-base/bonobo (Gnome CORBA interfaces)
+</pre>
+
+</body>
+</subsection>
+</section>
+</sections>

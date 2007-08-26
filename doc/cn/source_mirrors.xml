@@ -1,0 +1,178 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/source_mirrors.xml">
+<title>Gentoo Linux 源码镜像方针</title>
+
+<author title="Author"><mail link="klieber@gentoo.org">Kurt Lieber</mail></author>
+
+<author title="Translator"><mail link="liqiang@iscas.cn">Zhang Liqiang</mail></author>
+
+<version>1.1</version>
+<date>2003年2月17日</date>
+
+<chapter>
+<title>要求</title>
+<section>
+<title>最小带宽</title>
+<body>
+
+<p>
+要开办一个源码镜像，你需要最少5Mbps的上行带宽。  
+一般来讲，ADSL和线缆连接难以满足distfile主机的要求，它们上行的性能有限。
+</p>
+</body>
+</section>
+<section>
+<title>最小用户数</title>
+<body>
+
+<p>
+我们要求你支持最少15个并发连接，有30个就更好了。
+</p>
+</body>
+</section>
+<section>
+<title>更新周期</title>
+<body>
+
+<p>
+所有的镜像必须每4小时同步一次，从你本地时区的午夜开始。
+这有助于将负载分散，而不是所有的镜像站点同时同步。
+</p>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>实现细节</title>
+<section>
+<body>
+
+<p>
+我们将会按照下面的程序处理新的镜像申请：
+</p>
+
+<p>
+使你的服务器同 www.ibiblio.org::gentoo建立rsync连接。
+当你有了那台服务器的完整镜像，请你向bugs.gentoo.org中的"rsync"类提出一个bug报告，
+声明你已经有了一个新的镜像并且希望加入到官方镜像列表。
+</p>
+
+<p>
+我们将会确认镜像是否已经存在，是否可以正确的连接。
+然后，在接下来的48－72小时里我们会决定你的镜像是否正确的同步，是否与本方针一致。
+</p>
+
+<p>
+如果一切都顺利的话，
+我们接下来会把你的服务器加入主站点的 
+<uri link="http://www.gentoo.org/main/en/mirrors.xml">下载镜像</uri>。
+我们也会向你提供我们的私有首要distfile镜像登录信息，这只提供给Gentoo Linux 官方源码镜像。
+</p> 
+
+<p>
+另外，你，作为镜像管理员会被加入到gentoo-mirrors邮件列表（小流量）中，
+以便了解到与源码镜像相关的议题。
+</p>
+
+<note>
+谢谢对Gentoo Linux用户和开发者的帮助！ :)如果有镜像管理方面的争论或问题，
+请联系 <mail link="mirror-admin@gentoo.org">mirror-admin@gentoo.org</mail>.
+</note>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>简洁的FAQ</title>
+<section>
+<title>问：有关新的镜像或者我要将镜像加入到 Gentoo 网站，要和谁联系？</title>
+<body>
+
+<p>
+答：请到 bugs.gentoo.org 的 rsync 分类下填写 bug 报告。</p>
+</body>
+</section>
+<section>
+<title>问： 谁会考虑关于镜像的议题和维护？</title>
+<body>
+
+<p>
+答： 请到 bugs.gentoo.org 的 rsync 分类下填写 bug 报告。
+</p> 
+</body>
+</section>
+<section>
+<title>问：我为自己的公司运行一个私有的镜像，我可以访问私有首要源码镜像么？</title>
+<body>
+
+<p>
+答：由于我们的资源有限， Because our resources are limited, we need to ensure we allocate them in such a way
+to provide the maximum amount of benefit to our users.  As such, we limit connections
+to our master rsync and distfile mirrors to public mirrors only.  Users are welcome to use our regular mirror system to establish a private source mirror.
+</p>
+</body>
+</section>
+
+<section>
+<title>问：我怎么找到与我最近的镜像？</title>
+<body>
+
+<p>
+答： mirrorselect 设计为给你你解决这个问题。
+运行 <c>emerge mirrorselect</c> 如果你还没有的话。
+然后运行： <c>mirrorselect</c>。会显示一个基于字符的菜单，允许你选择一个离你最近的镜像。
+</p>
+</body>
+</section>
+<section>
+<title>问：一个完整的镜像需要多少空间？</title>
+<body>
+
+<p>
+答：现在，一个完整的镜像需要30GB到40GB磁盘空间，包含下面几个目录：
+</p>
+<ul>
+
+<li>/release</li>
+<li>/experimental</li>
+<li>/distfiles</li>
+<li>/snapshots</li>
+</ul>
+
+<p>
+为了成为一个完整的 Gentoo Linux 源码镜像，我们要求你完整的镜像这四个目录。
+</p>
+</body>
+</section>
+<section>
+<title>问：我没有足够的磁盘空间。我可以镜像源码的一部分么？</title>
+<body>
+
+<p>
+答：可以，如果你不能镜像我们全部的源码，你可以选择只镜像下面两个目录：
+</p>
+
+<ul>
+<li>/distfiles</li>
+<li>/snapshots</li>
+</ul>
+
+<p>
+这两个目录大约需要20GB空间，你的镜像会被加到 distfiles-only 列表。
+</p>
+</body>
+</section>
+<section>
+<title>问：我需要为通过HTTP的镜像提供目录索引服务么？</title>
+<body>
+
+<p>
+答：只是在 /releases 和 /experimental目录中需要目录索引。如果你愿意可以关闭其他目录的索引服务。
+</p>
+</body>
+</section>
+</chapter>
+</guide>

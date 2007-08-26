@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-tools.xml,v 1.19 2004/04/19 17:32:37 swift Exp $ -->
+
+<sections>
+<section>
+<title>系统日志工具</title>
+<body>
+
+<p>
+前面我们提到什么是<e>stage3</e>时，我们说过它包含了所有的必须的系统工具，以至于我们不能给我们的用户一个选择。我们也说过我们以后将会安装一些别的工具。现在，我们就准备开始了:)
+</p>
+
+<p>
+你需要决定安装的第一个工具是给你的系统提供日志事务。Unix和Linux有非常优秀的日志能力的历史，只要你愿意，你可以在日志文件里记下你系统上发生的所有事情。这个通过<e>系统日志工具</e>来实现。
+</p>
+
+<p>
+Gentoo提供了几个系统日志工具供你选择。这里有<c>sysklogd</c>（传统的系统日志伺服器）、<c>syslog-ng</c>（一个高级的系统日志工具）、<c>metalog</c>（一个可以高度配置的系统日志工具）。其他的也可能通过Portage得到，我们的软件包几乎每天都会有所增加。
+</p>
+
+<p>
+如果你不知道选哪个，就使用<c>syslog-ng</c>，因为这个很强大，并且自带非常好的默认设置。
+</p>
+
+<p>
+安装你选择的系统日志工具，只需<c>emerge</c>它，然后用<c>rc-update</c>添加其到默认的运行级别。下面这个例子就是安装<c>syslog-ng</c>。当然你可以换成你的系统日志工具：
+</p>
+
+<pre caption="安装一个系统日志工具">
+# <i>emerge syslog-ng</i>
+# <i>rc-update add syslog-ng default</i>
+｀</pre>
+
+</body>
+</section>
+<section>
+<title>可选：Cron伺服器</title>
+<body>
+
+<p>
+下一个就是cron伺服器。虽然这个只是可选，也不是你系统必须的，但是安装一个是个不错的选择。但是什么是cron伺服器呢？伺服器执行计划的命令。如果你要有规律（比如说每天、每周或每月）的执行一些命令，这个将会很方便。
+</p>
+
+<p>
+Gentoo提供了三个可选的cron伺服器：<c>dcron</c>、<c>fcron</c>和<c>vixie-cron</c>。就同安装一个系统日志工具一样安装其中一个。但是，<c>dcron</c>和<c>fcron</c>需要额外的配置命令，也就是<c>crontab /etc/crontab</c>。如果你不知道选择哪个，就使用<c>vixie-cron</c>。
+</p>
+
+<p>
+我们对无网络安装只提供了<c>vixie-cron</c>。如果你需要安装其他的cron伺服器，你必须等会儿，在以后安装上。
+</p>
+
+<pre caption="安装一个cron伺服器">
+# <i>emerge vixie-cron</i>
+# <i>rc-update add vixie-cron default</i>
+<comment>（只在使用dcron或fcron时需要）</comment> # <i>crontab /etc/crontab</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>文件系统工具</title>
+<body>
+
+<p>
+根据你使用的文件系统，你需要安装一个必须的文件系统工具（检测文件系统的完整性，创建额外的文件系统等）。
+</p>
+
+<p>
+下面这个表列出了你使用一个特定的文件系统所需要的工具：
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>工具</th>
+  <th>安装命令</th>
+</tr>
+<tr>
+  <ti>XFS</ti>
+  <ti>xfsprogs</ti>
+  <ti><c>emerge xfsprogs</c></ti>
+</tr>
+<tr>
+  <ti>ReiserFS</ti>
+  <ti>reiserfsprogs</ti>
+  <ti><c>emerge reiserfsprogs</c></ti>
+</tr>
+<tr>
+  <ti>JFS</ti>
+  <ti>jfsutils</ti>
+  <ti><c>emerge jfsutils</c></ti>
+</tr>
+</table>
+
+<!-- TODO reactivate when LVM2 instructions are boarded
+<p>
+If you are an LVM user, you also need to install <c>lvm-user</c>:
+</p>
+
+<pre caption="Installing LVM utilities">
+# <i>emerge - -usepkg lvm-user</i>
+</pre>
+-->
+
+<p>
+如果你不需要用<c>rp-pppoe</c>来连接到因特网上，从<uri link="?part=1&amp;chap=11">结束你的Gentoo安装</uri>继续。否则从<uri link="#doc_chap4">可选：网络工具</uri>继续。
+</p>
+
+</body>
+</section>
+<section>
+<title>可选：网络工具</title>
+<body>
+
+<p>
+如果你要使用<c>rp-pppoe</c>连接到因特网，你需要安装它。
+</p>
+
+<pre caption="安装rp-pppoe">
+# <i>USE="-X" emerge rp-pppoe</i>
+</pre>
+
+<p>
+使用<c>USE="-x"</c>将会阻止因为依赖性（<c>rp-pppoe</c>有一个可视化工具；如果你需要这些，你可以稍后在XFree安装后重新编译<c>rp-pppoe</c>，而安装和编译XFree将会花掉很长的时间）而安装XFree。
+</p>
+
+<p>
+现在从<uri link="?part=1&amp;chap=11">结束你的Gentoo安装</uri>继续。
+</p>
+
+</body>
+</section>
+</sections>

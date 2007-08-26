@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060821-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年8月21日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<abstract>这是2006年8月21日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 34</version>
+<date>2006-08-21</date>
+
+<!-- Gentoo News -->
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>Linux World会展——旧金山</title>
+<body>
+
+<p><uri link="http://foundation.gentoo.org">Gentoo基金会</uri>在今年旧金山的<uri link="http://www.linuxworldexpo.com/live/12/events/12SFO06A">Linux World会展</uri>上亮相了。摊位位于著名的“.Org展蓬”，在KDE和GNOME基金会之间，Slashdot摊位正对面。感谢<mail link="vapier@gentoo.org">Mike Frysinger</mail>，<mail link="dostrow@gentoo.org">Daniel Ostrow</mail>和<mail link="iluxa@gentoo.org">Ilya Volynets</mail>，Gentoo的几个系统结构才得以出现于陈列架上，其中包括一个64位的4核PowerPC，一个Athlon64 X1，一个SuperH提供支持的LanTank，一个ARM提供支持的NetWinder和一个AlphaServer DS10。</p>
+
+<p>
+一些开发者以及无数的Gentoo用户和其他开源社区的成员出现于这次盛会。除了前面提到的几个之外，出席的开发者还有<mail
+link="nichoj@gentoo.org">Josh Nichols</mail>，<mail
+link="wolf31o2@gentoo.org">Chris Gianelloni</mail>，<mail
+link="blackace@gentoo.org">Nicholas Wolfwood</mail>和<mail
+link="wltjr@gentoo.org">William
+Thomson</mail>。参观Gentoo摊位的人们对Gentoo的很多事情都很感兴趣，从安装程序里的LVM支持，到<uri
+link="/proj/en/base/embedded/">嵌入式</uri>和<uri
+link="/proj/en/hardened/">强化</uri>项目。
+</p>
+
+<figure link="/images/gwn/20060821_lwe.jpg" short="LWE" caption="8个Gentoo开发者中的5个"/>
+
+<note>从左至右依次是：wltjr，vapier，nichoj，dostrow，wolf31o2</note>
+
+<p>Gentoo还与<uri link="http://www.eff.org">电子前沿基金会</uri>，<uri link="http://www.debian.org">Debian</uri>，<uri link="http://www.ubuntu.com">Ubuntu</uri>一同参与了.Org Pavilion（译注：参见http://www.linuxworldexpo.com/live/12/events/12SFO06A/exposition/CC999813）的秘钥签署活动。</p>
+
+</body>
+</section>
+
+<section>
+<title>招募斯洛伐克语翻译人员</title>
+<body>
+
+<p><uri link="/news/sk/gwn.xml">斯洛伐克语</uri>版的Gentoo周报正在寻找更多的翻译人员。该团队刚刚成立，急需人手。如果你有兴趣为Gentoo做贡献，能流畅书写英文与斯洛伐克语，且每周有空闲时间可供支配，敬请联系<mail link="gwn-feedback@gentoo.org">GWN staff</mail>！</p>
+
+</body>
+</section>
+
+<section>
+<title>招募希腊语翻译人员</title>
+<body>
+
+<p>把周报翻译成希腊语的工作已经开始了。这项翻译工作需要帮助。和斯洛伐克语翻译一样，需要有流利的英语和希腊语。要获知更多信息，请联系<mail link="gwn-feedback@gentoo.org">GWN staff</mail>。</p>
+
+</body>
+</section>
+
+<section>
+<title>GCC 4.1.1和glibc 2.4进入稳定版</title>
+<body>
+
+<p>从标题可以看出，Gentoo <uri link="/proj/en/base">base</uri>项目已经宣布，因为被即将到来的2006.1发行版所采用的缘故，<c>sys-devel/gcc-4.1.1</c>和<c>sys-libs/glibc-2.4-r3</c>将会在<c>amd64</c>和<c>x86</c>上于本周进入稳定版。其他架构正在迎头赶上，并将在稍后时间切换过来。这对Gentoo来说是一个主要的里程碑，因为它标志着从glibc的之前已被淘汰的<uri link="http://pauillac.inria.fr/~xleroy/linuxthreads">LinuxThreads</uri>到<uri link="http://en.wikipedia.org/wiki/Native_POSIX_Thread_Library">Native POSIX Thread Library</uri>(NTPL)的过渡。对老版本LinuxThreads版glibc在x86平台上将仍然会有有限的支持。然而，以后上游的glibc将不再支持LinuxThreads，所以不太可能会有错误或安全修复。<uri link="http://people.redhat.com/drepper/nptl-design.pdf">白皮书</uri> (PDF)里有关于NPTL设计的更多信息。在<uri link="http://www-128.ibm.com/developerworks/linux/library/l-threading.html?ca=dgr-lnxw06LinuxThreadsAndNPTL">IBM DeveloperWorks</uri>上有一个写得很好的LinuxThreads和NPTL的比较。</p>
+
+<p>希望继续使用LinuxThreads的x86用户需要转换到default-linux的"no-nptl" profile，或者转换到hardened profile。</p>
+
+<warn>hardened profile比您惯常使用的default-linux profile要小得多，转换到hardened profile可能需要您在<c>make.conf</c>里加入更多的USE标志来保留原有功能。</warn>
+
+<pre caption="转换到no-nptl profile">
+# <i>cd /etc</i>
+# <i>rm -f make.profile </i>
+# <i>ln -sf ../usr/portage/profiles/default-linux/x86/no-nptl</i>
+</pre>
+
+<note>此外还有一个2.4的子profile，使用2.4的内核和头文件。</note>
+
+<p>
+这也标志着Gentoo上的GNU Compiler Collection
+(GCC)将进行一次重大升级，至版本4.1.1。此次升级要求用户执行<uri
+link="/doc/en/gcc-upgrading.xml">GCC升级指南</uri>中列出的任务。该指南近期已更新，为Gentoo用户加入了有关GCC
+4.1.1的信息。
+</p>
+
+<p>不希望升级到GCC 4.1.1的用户需要执行一些额外的步骤来确保您的系统不会被升级。</p>
+
+<pre caption="屏蔽GCC 4.1.1">
+# <i>mkdir -p /etc/portage</i>
+# <i>echo "&gt;=sys-devel/gcc-4.0" &gt;&gt; /etc/portage/package.mask</i>
+</pre>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<chapter>
+<title>本周开发者</title>
+
+<section>
+<title>“如果你做的玩意儿简单到傻瓜也会用，那么也只有傻瓜才用。”</title>
+<body>
+
+<figure link="/images/gwn/20060821_tcort.jpg" short="tcort" caption="Thomas Cort (tcort)"/>
+
+<p>Thomas Cort出生在佛蒙特州的柏林敦（Burlington, Vermont），在South Barre长大。如果您要去那一带，他强烈推荐您到蒙皮立（Montpelier, VT）的Hubbard Park塔去看看，那里风景棒极了。他22岁，最近刚刚订婚——祝贺Thomas Cort和Bridget Brimacombe。Thomas在毕晓普氏大学（Bishop's University）获得计算机科学理学士学位，还辅修数学方面学科。</p>
+
+<p>Thomas宣称自己有个非同寻常的爱好：独轮车！在上Bishop's大学时，他是学校独轮车俱乐部的副主席。至于在他音乐方面的喜好，他最中意的艺术家是John Mayer，一位他曾经在蒙特利尔遇见过的人。他称自己听所有的音乐，从爵士乐到摇滚乐再到古典音乐。</p>
+
+<p>Thomas是在2003年从朋友chutzpah那里听说Gentoo的。他那时为Bishop's大学计算机科协维护着一台Sun Ultra I，恰巧系统需要重装，自然而然地他在上面安装了Gentoo(1.4)。系统运行良好，最终他在自己的电脑上装了Gentoo。</p>
+
+<p>到了2004年，虽然他有兴趣成为一个开发人员，但无奈他得将学业放在首位。随着一些来自自愿融入开发社区的朋友们的鼓励，到2005年底，Thomas开始为Alpha组贡献自己的力量了。今年4月份，伴着metalgod的指导，他加入了sound组和Alpha组。</p>
+
+<p>Tcort是<uri link="/proj/en/userrel/adopt-a-dev">帮助开发者项目</uri>的带头人。这是一个相对较新的项目，目的在于为合适的开发人员获取捐献资源。Thomas还是Alpha架构，AMD64架构，dotnet和sound团队的成员，同时他负责为sunrise项目复查ebuilds。他还花时间维护大量的其他软件包。</p>
+
+<p>Thomas同时也维护一些非官方社区网站，除了之前提到的<uri link="http://larrythecow.com">Gentoo链接目录</uri>和<uri link="http://larrythecow.net">Gentoo新闻站点</uri>，还有维护<uri link="https://savannah.nongnu.org/projects/proccpuinfo">libproccpuinfo</uri>（一个用来读取<c>/proc/cpuinfo</c>文件的开发库），并在<uri link="http://www.southern-storm.com.au/libjit.html">libjit</uri>的Alpha部门工作。</p>
+
+<p>Thomas拥有多种类型的个人电脑，包括一台AMD64 Acer的笔记本，多台Alpha (API Networks CS20, PWS 433au, PWS 500au, AlphaServer 1000 4/233, AlphaStation 500)，一台Apple G3,一台Compaq Presario S6000NX，以及一组SPARC工作站。他的第一台电脑是Apple IIGS。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Heard in the community -->
+
+<!-- <chapter>
+<title>Heard in the community</title> -->
+
+<!-- forums -->
+
+<!-- planet.gentoo.org -->
+
+<!-- </chapter> -->
+
+<!-- Gentoo International-->
+<chapter>
+<title>Gentoo国际</title>
+
+<section>
+<title>2006德国Gentoo夏令营</title>
+<body>
+
+<p>又到了一年一次的德国Gentoo夏令营时间。该活动是非技术性的Gentoo社区成员集会。今年，活动将于8月26日到27日在Lower Saxony的"Grosses Meer"举行。针对活动的更多消息你可以在官方<uri link="http://gsc2006.nachtnebelnelken.de">forums</uri>找到。对于不会讲德语的人来说甚至还有一个国际论坛。</p>
+
+</body>
+</section>
+
+<section>
+<title>2006俄罗斯Gentoo夏令营</title>
+<body>
+
+<p>由于去年GSC(Gentoo夏令营)在德国的成功，社区中一些俄罗斯人组织起了他们自己国内的Gentoo夏令营。活动将会在Bologoe附近举办,它坐落在莫斯科与圣彼得堡之间，时间也定在了8月26日到27日。想知道更多消息，请访问官方<uri link="http://gentoo.ru/node/3917">声明</uri>(俄语)。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo in the press -->
+
+<chapter>
+<title>Gentoo媒体</title>
+
+<section>
+<title>LXer.com（2006年8月18日）</title>
+<body>
+
+<p><uri link="http://lxer.com">LXer.com</uri>发布了一篇文章，标题为《<uri link="http://lxer.com/module/newswire/view/67635/">grep 'Reboot The User' FOSSBiz</uri>》。这篇文章是对Reboot The User的所有者的采访。Reboot The User是一个出售Linux系统和支持的商店。这个商店提供支持最多的和使用最多的发行版是Gentoo Linux。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>William Thomson (wltjr) Java</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>Ruby on Rails：多个漏洞</title>
+<body>
+
+<p>Ruby on Rails有一些弱点，可能导致拒绝服务和远程执行任意的Ruby脚本。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-20.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+<li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+<li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年8月13日到2006年8月20日，这个站点记录下了：</p>
+
+<ul>
+<li>748个在这段时间内被发现的新bug</li>
+<li>347个在这段时间内被修正或解决的bug</li>
+<li>29个先前修复了的但在这段时间重现的bug</li>
+</ul>
+
+<p>在当前还未被修正的10982个bug里面：47个被标记为"blocker"，141个被标记为"critical"，还有530个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，25个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，24个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=maintainer-needed@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，18个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+<li><mail link="printing@gentoo.org">打印团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=printing@gentoo.org">被修正的bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=java@gentoo.org">被修正的bug</uri></li>
+<li><mail link="lu_zero@gentoo.org">Luca Barbato</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;resolution=FIXED&amp;assigned_to=lu_zero@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，43个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="python@gentoo.org">Python Gentoo团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=python@gentoo.org">新bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+<li><mail link="xen@gentoo.org">Gentoo Xen开发者</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=xen@gentoo.org">新bug</uri></li>
+<li><mail link="vapier@gentoo.org">SpanKY</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=vapier@gentoo.org">新bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-13&amp;chfieldto=2006-08-20&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

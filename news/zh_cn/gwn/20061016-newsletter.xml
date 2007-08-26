@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061016-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年10月16日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="nichoj@gentoo.org">Josh Nichols</mail>
+</author>
+
+<author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author>
+
+<author title="Author">
+<mail link="phnix@fastmail.net">Kyle Bishop</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<abstract>这是2006年10月16日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 42</version>
+<date>2006-10-16</date>
+
+<!-- Gentoo News -->
+
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>新的Java系统标记为稳定版本</title>
+<body>
+
+<p><uri link="/proj/en/java">Gentoo/Java团队</uri>很高兴的宣布了新的Java系统在所有的体系结构下标记为稳定版本，这些Java支持的平台包括amd64，ia64，ppc， ppc64，和x86。作为这一年开发的顶峰，这也是Java在Gentoo上前进的一大步。</p>
+
+<p>如果你错过了先前宣布的内容，这里是新的Java系统的简要介绍：</p>
+
+<ul>
+<li>能够在运行中切换当前VM</li>
+<li>用户和系统VM的改变会即时生效，并不会与shell环境绑定，这意味着你在切换系统VM的时候不再需要运行<c>env-update</c>和<c>source /etc/profile</c>。</li>
+<li>新引入的一个概念是“构建VM”，它是在emerge包时使用的，它的配置和系统VM是彼此独立的。</li>
+<li>对于每一个Java版本，也就是1.4，1.5等等，build VM都可以按照VM供应商和版本号来配置。</li>
+<li>在emerge的时候可以根据配置实时切换VM和包的依赖关系。比如有些包不能用1.5版来编译，那么编译时就会选用1.4版。</li>
+<li>Java 1.5已经被标记为稳定。</li>
+<li>使用eselect来配置VM和浏览器插件</li>
+<li>我们已为十二月释出的Java 1.6做好准备</li>
+</ul>
+
+<p>最新的用户文档在这里<uri>http://www.gentoo.org/doc/en/java.xml</uri></p>
+
+<p>更新系统的文档在这里<uri>http://www.gentoo.org/proj/en/java/java-upgrade.xml</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>KDE 3.5.5发布</title>
+<body>
+
+<p>Gentoo<uri link="/proj/en/desktop/kde">KDE团队</uri>宣布KDE 3.5.5正式发布，portage树中已解除对其屏蔽。Gentoo KDE用户会看到的最大的变化是<c>kde-base/kopete</c>已取代<c>net-im/kopete</c>，它以后只和主线的KDE一起发布。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<section>
+<title>gentoo-user</title>
+<body>
+
+<p><b>aislerot跑哪儿去啦？</b></p>
+
+<p>Darren Kirby将他最喜欢的GNOME里消磨时间的接龙应用程序<c>aislerot</c>放错了地方。他安装了<c>gnome-games</c>包，但是aislerot二进制文件找不到了。</p>
+
+<p>Michael Sullivan过来救援。Sullivan指出需要打开guile USE标记。Kirby重新编译并且报告问题获得解决。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.user/172009</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-dev -->
+
+<section>
+<title>gentoo-dev</title>
+<body>
+
+<p><b>GLEP: RESTRICT=interactive</b></p>
+
+<p>理论上，ebuild在编译过程中应该不需要用户的互动。现实中，有时可能需要互动，比如有些游戏需要插入CD。</p>
+
+<p>Marius Mauch希望提交一份关于向portage增加RESTRICT="interactive"选项的GLEP，用来标示需要互动的ebuild。用户在编译的时候会被警告，所以他们可以在整夜无人看管的编译过程中去除那些违规的包。</p>
+
+<p>GLEP的草案可以在<uri>http://dev.gentoo.org/~genone/docs/interactive-restrict-glep.html</uri>上找到</p>
+
+<p>有些评述者指出所有其他的标识都是以“RESTRICT=你不想要的”的形式表示的。所以意见似乎更倾向于以“RESTRICT=unattended”标志来表达，以和其他的RESTRICT标识保持一致的风格。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.devel/43195</uri></li>
+</ul>
+
+<p><b>是时候轮到bash 3了吗？</b></p>
+
+<p>Donnie Berkholz收到了一个mesa ebuild的补丁，这个补丁使用了某些bash3中的新功能。Berkholz认为不需要在ebuild一级加入相依性，而是应该在gentoo基础profile中加入所需要的最低版本的bash包。因为自从baselayout要求使用bash 3以来已经有两年的时间，大部分的用户很可能已经拥有了bash 3，所以这个改变不会带来什么问题和麻烦。这将使得bash 3的功能可以被所有的ebuild使用。</p>
+
+<p>Marius Mauch和Vlastimil Babka注意到了对于没有做出改变的用户，将bash 3包含入系统是没有作用的。Mauch提议了一些其他解决这个问题的方法，比如使用强力（bruteforce）的方式，或者其他复杂的方式来。另外，Babka指出Mac OS X可能仍在使用bash的2.59版本。</p>
+
+<p>Berkholz说他是实现不可知论者（implementation agnostic），他只是想要做出改变。Mike Frysinger说至少在他最后一次尝试使用bash 2 system portage时系统是彻底崩溃了，因此简单改一下base profile挺好的。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.devel/43174</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-embedded -->
+
+<section>
+<title>gentoo-embedded</title>
+<body>
+
+<p><b>用NSLU2做DNS服务器</b></p>
+
+<p>wireless发信到gentoo-embedded列表询问用<uri link="http://www.nslu2-linux.org">Linksys NSLU2</uri>做个轻量的DNS服务器是否可行。他担心仅32MB内存无法达到目的，他想知道是否有办法增添内存或者有没有别的内存更大的设备。然而，gentoo-embedded上的很多人，无视这所谓的“限制”，建议他用dnsmasq作为其他更大的DNS解决方案的轻量级替代。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.embedded/1107</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-security -->
+
+<section>
+<title>gentoo-security</title>
+<body>
+
+<p><b>让dhcpcd（客户端）更安全</b></p>
+
+<p>7v5w7go9ub0o写信给gentoo-security，谈到他在热点区使用笔记本上用root权限运行的dhcpcd进程的安全问题。下面谈到了给dhcpcd打补丁（同其他发行版本中已经出现的dhcpcd补丁类似）以使其降低权限的方法，并谈到了使用有此功能的替代软件。</p>
+
+<ul>
+<li><uri>http://thread.gmane.org/gmane.linux.gentoo.security/2911</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<chapter>
+<title>Gentoo媒体</title>
+
+<section>
+<title>SearchOpenSource.com（2006年10月11日）</title>
+<body>
+
+<p>作者Patrick Green谈论运行在64位刀片服务器上的Linux系统。他建议购买者接受选择挑战前确保有适当的软硬件搭配。Green接着谈到不同的Linux发行版本和各种注意事项。他解释了商业版本和社区版本在技术支持方面的主要差别。他拿Gentoo说事？</p>
+
+<p>"嗯，当你安装和配置Gentoo时可不要昏厥；但一旦设置完毕，Gentoo的Portage和Emerge可使你远离麻烦。难道是先苦后甜？太美妙了！"</p>
+
+<p>我们不得不同意，Patrick。</p>
+
+<ul>
+<li><uri>http://searchopensource.techtarget.com/tip/0,289483,sid39_gci1222912,00.html</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li>Thierry Carrez (Koon)</li>
+<li>Gerald J. Normandin Jr. (gerrynjr)</li>
+<li>D.M.D. Ljungmark (Spider)</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>David Shakaryan (omp) desktop-misc/commonbox</li>
+<li>Alexis Ballier (aballier) media-sound/media-video</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<!-- <chapter>
+<title>Gentoo security</title> -->
+
+<!-- paste from the script -->
+
+<!-- </chapter> -->
+
+<!-- Upcomfing package removals -->
+
+<chapter>
+<title>即将移除的包</title>
+
+<section>
+<body>
+
+<p>这个列表里的包是已经宣布将来会被删除的。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。</p>
+
+</body>
+</section>
+
+<section>
+<title>最后的仪式</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>sys-fs/ocfs-tools</ti>
+<ti>2006年11月09日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/kopete*</ti>
+<ti>2006年11月12日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/universalkopete</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="antarus@gentoo.org">Alec Warner</mail></ti>
+</tr>
+
+<tr>
+<ti>app-admin/sus</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>app-admin/linup</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/gltt</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>media-radio/xastir</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>app-misc/gpsdrive</ti>
+<ti>2006年11月14日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+</table>
+
+<p>*Kopete仍然是kde-base的一部分，只是net-im类别里的ebuild被移除了。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+<li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+<li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年10月8日到2006年10月15日，这个站点记录下了：</p>
+
+<ul>
+<li>978个在这段时间内被发现的新bug</li>
+<li>535个在这段时间内被修正或解决的bug</li>
+<li>44个先前修复了的但在这段时间重现的bug</li>
+<li>149个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>156个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的11099个bug里面：35个被标记为"blocker"，122个被标记为"critical"，还有503个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="desktop-misc@gentoo.org">桌面杂项团队</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=desktop-misc@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，25个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，20个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=netmon@gentoo.org">被修正的bug</uri></li>
+<li><mail link="cjk@gentoo.org">CJK团队</mail>，20个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=cjk@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+<li><mail link="dev-portage@gentoo.org">Portage团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修正的bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;resolution=FIXED&amp;assigned_to=java@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，33个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=base-system@gentoo.org">新bug</uri></li>
+<li><mail link="python@gentoo.org">Python Gentoo团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=python@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+<li><mail link="robbat2@gentoo.org">Robin Johnson</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=robbat2@gentoo.org">新bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-08&amp;chfieldto=2006-10-15&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<!-- <li>
+<uri link="/news/tr/gwn/gwn.xml">Turkish</uri>
+</li> -->
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /doc/zh_cn/ebuild-fuq.xml v 0.1 2004/07/30 joanphan Exp $ -->
+
+<guide link="/doc/zh_cn/ebuild-fuq.xml">
+<title>Gentoo Ebuild FUQ</title>
+
+<author title="Author">
+  <mail link="">Lucida</mail>
+</author>
+<author title="Editor">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<abstract>
+</abstract>
+
+<license/>
+
+<version>0.1</version>
+<date>2004年7月30日</date>
+
+<chapter>
+<title>定位ebuild</title>
+<body>
+
+<p>
+基础知识，比如：
+</p>
+
+<pre>
+$emerge -s gcal
+* app-misc/gcal
+Latest version available: 3.01
+Latest version installed: [ Not Installed ]
+Size of downloaded files: 2,315 kB
+Homepage: http://www.gnu.org/software/gcal/gcal.html
+Description: The GNU Calendar - a replacement for cal
+
+那么gcal这个软件的ebuild就在/usr/portage/app-misc/gcal/下面
+在这个目录下，一般能看到很多ebuild文件，分别对应不同版本号
+</pre>
+
+</body>
+</chapter>
+<chapter>
+<title>怎么继续前次的ebuild操作?</title>
+<body>
+
+<p>
+比如，emerge到一半，发现一个错误，你google去论坛搜了一圈，找出了解决办法，难道非要从头开始么? 解决办法其实很多了，说几个最常用的
+</p>
+
+<section>
+<title>a. 使用ccache</title>
+<body>
+
+<p>
+每个人都应该把它打开。<c>emerge ccache</c>之后，在<path>/etc/make.conf</path>里面找到FEATURES设置，加上
+</p>
+
+<pre>
+FEATURES="ccache"
+以及CCACHE_SIZE="2G"
+</pre>
+
+<p>
+默认好像是2G，我觉得如果硬盘空间足够，多多益善。下次emerge的时候，你会发现编译的速度快了很多。这样间接起到了中断继续的效果。个人推荐这个方法，最简单。
+</p>
+
+</body>
+</section>
+<section>
+<title>b.继续make</title>
+<body>
+
+<p>
+emerge也就是一个用源码编译/安装的过程，而gnu make系统也保证了它实际上是可以"断点续传"的。而gentoo的portage系统在每次开始新的emerge的时候，会自己删掉以前的临时目录，重新生成，造成中断的emerge过程不可恢复。
+</p>
+
+<p>
+你只要进入到临时目录，一般是<path>/var/tmp/portage/ebuild</path>名称<path>/work/ebuild</path>名称下继续make，然后<c>make install</c>就行。
+</p>
+
+<p>
+不用怀疑，这样已经装好了。。但是，这样安装的软件包不会被记载在portage的world file里面。。所以，更优雅的办法是
+</p>
+
+<ol>
+<li>找到ebuild文件，比如abc-1.0.1.ebuild</li>
+<li><c>ebuild abc-1.0.1.ebuild compile</c></li>
+<li><c>ebuild abc-1.0.1.ebuild install</c></li>
+<li><c>ebuild abc-1.0.1.ebuild qmerge</c></li>
+</ol>
+
+</body>
+</section>
+</body>
+</chapter>
+<chapter>
+<title>作自己的ebuild</title>
+<body>
+
+<p>
+ebuild文件只是按照一定规律写的shell script而已，一般来说，它们是非常简单的(只限于100行以内条理清晰的 xfree的ebuild就是个很好的例外 ) 可以看看gentoo的<uri link="http://www.gentoo.org/doc/en/gentoo-howto.xml">ebuild guide</uri>。
+</p>
+
+<p>
+大概而言，只要知道$A/$P等几个变量的含义就可以了。从头写ebuild还是有点麻烦的，对于一个普通用户来说也没必要，但是对于大多数软件的版本升级，你只要复制+改名+做digest就可以了。比如stardict最近出了2.2.1，但是ebuild只到2.2.0
+</p>
+
+<pre>
+# cp stardict-2.2.0.ebuild stardict-2.2.1.ebuild
+# ebuild stardict-2.2.1.ebuild digest
+>>> Downloading ftp://ftp.ussg.iu.edu/pub/linux/gentoo/distfiles/stardict-2.2.1.tar.bz2
+--22:26:57--  ftp://ftp.ussg.iu.edu/pub/linux/gentoo/distfiles/stardict-2.2.1.tar.bz2
+           =&gt; `/usr/portage/distfiles/stardict-2.2.1.tar.bz2'
+Resolving ftp.ussg.iu.edu... done.
+Connecting to ftp.ussg.iu.edu[129.79.6.12]:21... connected.
+Logging in as anonymous ... Logged in!
+==&gt; SYST ... done.    ==&gt; PWD ... done.
+==&gt; TYPE I ... done.  ==&gt; CWD /pub/linux/gentoo/distfiles ... done.
+==&gt; PASV ... done.    ==&gt; RETR stardict-2.2.1.tar.bz2 ...
+No such file `stardict-2.2.1.tar.bz2'.
+
+&gt;&gt;&gt; Downloading http://aleron.dl.sourceforge.net/sourceforge/stardict/stardict-2.2.1.tar.bz2
+--22:26:58--  http://aleron.dl.sourceforge.net/sourceforge/stardict/stardict-2.2.1.tar.bz2
+           => `/usr/portage/distfiles/stardict-2.2.1.tar.bz2'
+Resolving aleron.dl.sourceforge.net... done.
+Connecting to aleron.dl.sourceforge.net[204.157.3.229]:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 608,829 [application/x-bzip2]
+
+100%[====================================&gt;] 608,829      144.56K/s    ETA 00:00
+
+22:28:02 (144.56 KB/s) - `/usr/portage/distfiles/stardict-2.2.1.tar.bz2' saved [608829/608829]
+
+&gt;&gt;&gt; Generating digest file...
+&lt;&lt;&lt; stardict-2.2.1.tar.bz2
+&gt;&gt;&gt; Generating manifest file...
+&lt;&lt;&lt; stardict-2.0.0.ebuild
+&lt;&lt;&lt; stardict-2.2.1.ebuild
+&lt;&lt;&lt; stardict-2.2.0.ebuild
+&lt;&lt;&lt; ChangeLog
+&lt;&lt;&lt; files/stardict-gentoo.patch
+&lt;&lt;&lt; files/stardict-config.sh
+&lt;&lt;&lt; files/digest-stardict-2.0.0
+&lt;&lt;&lt; files/digest-stardict-2.2.0
+&lt;&lt;&lt; files/digest-stardict-2.2.1
+&gt;&gt;&gt; Computed message digests.
+</pre>
+
+<p>
+然后试着<c>emerge stardict-2.2.1.ebuild</c>看看?
+</p>
+
+<p>
+当然大多数时候，没有这么简单，可能会做一些小修改。我的标准步骤是
+</p>
+
+<ol>
+<li><c>cp xxx.1.ebuild xxx.2.ebuild</c></li>
+<li><c>ebuild xxx.2.ebuild digest</c></li>
+<li><c>ebuild xxx.2.ebuild unpack</c></li>
+</ol>
+
+<p>
+如果到这里一帆风顺，那么估计后面也没问题了，否则，仔细检查，看看是哪里出错了。出错的原因很多，但是一般都是因为几个变量的写法，或者是下载地址变更，再就是老的ebuild里的patch，在新版本上无法使用。总之，看看ebuild guide，自己多熟悉一下，升级软件真的很简单。
+</p>
+
+</body>
+</chapter>
+<chapter>
+<title>加patch</title>
+<body>
+
+<p>
+做法有两种，参考前面提到的介绍
+</p>
+
+<section>
+<title>在临时目录里面修改</title>
+<body>
+
+<p>
+从前面知道，临时文件在<path>/var/tmp/portage/</path>下面以fontconfig 2.2.1+firefly的patch为例
+</p>
+
+<pre>
+fancyworld superkaramba # emerge -p fontconfig
+
+These are the packages that I would merge, in order:
+
+Calculating dependencies ...done!
+[ebuild    N ] media-libs/fontconfig-2.2.0-r2
+
+# cd /usr/portage/media-libs/fontconfig/
+# ebuild fontconfig-2.2.1.ebuild unpack
+# ebuild fontconfig-2.2.1.ebuild unpack
+&gt;&gt;&gt; md5 src_uri ;-) fontconfig-2.2.1.tar.gz
+&gt;&gt;&gt; Unpacking source...
+&gt;&gt;&gt; Unpacking fontconfig-2.2.1.tar.gz to /var/tmp/portage/fontconfig-2.2.1/work
+ * Applying fontconfig-2.1-slighthint.patch...                            [ ok ]
+ * Applying fontconfig-2.2-local_fontdir-r1.patch...                      [ ok ]
+ * Applying fontconfig-2.2-blacklist.patch...                             [ ok ]
+ * Applying fontconfig-2.2-remove_subpixel_test.patch...                  [ ok ]
+&gt;&gt;&gt; Source unpacked.
+# cd /var/tmp/portage/fontconfig-2.2.1/work/fontconfig-2.2.1/
+# wget http://firefly.idv.tw/setfont-xft/p...-20030618.patch http://firefly.idv.tw/setfont-xft/p...030626.patch.gz http://firefly.idv.tw/setfont-xft/p...-20030617.patch
+
+# patch -p1 &lt; fontconfig-2.2.1-fclang-miss_1_percent-20030617.patch
+patching file src/fclang.c
+
+.............
+</pre>
+
+<p>
+然后
+</p>
+
+<pre>
+fancyworld fontconfig-2.2.1 # ebuild /usr/portage/media-libs/fontconfig/fontconfig-2.2.1.ebuild merge
+</pre>
+
+<p>
+这个merge操作会保留临时目录，在这个基础上进行<c>./configure, make, make install</c>的动作
+</p>
+
+</body>
+</section>
+<section>
+<title>修改ebuild</title>
+<body>
+
+<p>
+gentoo的portage系统恐怕是最适合patch 的包管理系统了。还是以上为例
+</p>
+
+<pre>
+# cd /usr/portage/media-libs/fontconfig/files/
+<notecomment>下载patch</notecomment>
+# wget http://firefly.idv.tw/setfont-xft/p...-20030618.patch http://firefly.idv.tw/setfont-xft/p...030626.patch.gz http://firefly.idv.tw/setfont-xft/p...-20030617.patch
+<notecomment>解压.gz(特例，因为这个patch太大了，所以firefly把它打包了一下)</notecomment>
+# gunzip fontconfig-2.2.1-include_CJK_charmaps-20030626.patch.gz
+<notecomment>得到fontconfig-2.2.1-include_CJK_charmaps-20030626.patch</notecomment>
+<notecomment>回到上一级，修改ebuild</notecomment>
+# cd ..
+# vi fontconfig-2.2.1.ebuild
+<notecomment>可以看到</notecomment>
+src_unpack() {
+    unpack ${A}
+    cd ${S}
+
+    local PPREFIX="${FILESDIR}/patch/${PN}"
+
+    # Some patches from Redhat
+    epatch ${PPREFIX}-2.1-slighthint.patch
+    # Add our local fontpaths (duh dont forget!)
+    epatch ${PPREFIX}-2.2-local_fontdir-r1.patch
+    # Blacklist some fonts that break fontconfig
+    epatch ${PPREFIX}-2.2-blacklist.patch
+    # Remove the subpixel test from local.conf (#12757)
+    epatch ${PPREFIX}-2.2-remove_subpixel_test.patch
+
+    # The date can be troublesome
+    sed -i "s:\`date\`::" configure
+}
+</pre>
+
+<p>
+这里的${FILESDIR}就等于 /usr/portage/media-libs/fontconfig/files/目录
+${P}表示的是完整软件名+版本号，这里是fontconfig-2.2.1
+${PN}就只是单纯的软件名，这里是fontconfig
+注意 epatch ${PPREFIX}-2.2-local_fontdir-r1.patch
+和 firefly的patch部分冲突，把它去掉。
+为了避免不必要的困扰，你的ebuild没有必要写的那么漂亮，所以，修改如下
+</p>
+
+<pre>
+src_unpack() {
+unpack ${A}
+cd ${S}
+
+local PPREFIX="${FILESDIR}/patch/${PN}"
+
+# Some patches from Redhat
+epatch ${PPREFIX}-2.1-slighthint.patch
+# Add our local fontpaths (duh dont forget!)
+# epatch ${PPREFIX}-2.2-local_fontdir-r1.patch
+# Blacklist some fonts that break fontconfig
+epatch ${PPREFIX}-2.2-blacklist.patch
+# Remove the subpixel test from local.conf (#12757)
+epatch ${PPREFIX}-2.2-remove_subpixel_test.patch
+
+
+# CJK font patch by firefly
+epatch ${FILESDIR}/fontconfig-2.2.1-fclang-miss_1_percent-20030617.patch
+epatch ${FILESDIR}/fontconfig-2.2.1-include_CJK_charmaps-20030626.patch
+epatch ${FILESDIR}/fontconfig-2.2.1-multifamily-20030618.patch
+
+# The date can be troublesome
+sed -i "s:\`date\`::" configure
+}
+</pre>
+
+<p>
+epatch是个eclass，它的特点就是屏蔽了patch的细节，让你无需考虑patch的参数问题。最后直接emerge这个修改过的ebuild文件就行了。
+</p>
+
+</body>
+</section>
+
+<p>
+这一部分说起来有点长，自己做一次就知道其实非常简单了。
+</p>
+
+</body>
+</chapter>
+<chapter>
+<title>其他要注意的。。</title>
+<section>
+<title><c>emerge gentoolkit</c></title>
+<body>
+
+<p>
+我不知道为什么没把它作为基本系统的一部分，但是里面的qpkg工具绝对是gentoo必备的，它提供了各种对已安装package的查询，列表等功能，具体的自己man一下
+</p>
+
+</body>
+</section>
+<section>
+<title>尽量减小编译带来的影响</title>
+<body>
+
+<p>
+新的portage系统已经引入优先级设置了，在<path>/etc/make.conf</path>里面，<c>PORTAGE_NICENESS=10</c>。我一般用10，这样在emerge 的时候基本没什么感觉了。这个比较适合基本系统已经完成的情况，否则可以把这个数值设成0甚至-10，然后看看滚屏，也很有成就感。
+</p>
+
+</body>
+</section>
+<section>
+<title>只编译需要的部分</title>
+<body>
+
+<p>
+比如koffice里面包括kword, kspread, kexi, kchat等等，我不需要kword kchat，可以这样
+</p>
+
+<pre>
+export DO_NOT_COMPILE="kword kchat"
+emerge koffice
+</pre>
+
+</body>
+</section>
+<section>
+<title>善用sudo</title>
+<body>
+
+<p>
+用visudo，我把下面的一些命令都加到/etc/sudoers里面了
+</p>
+
+<pre>
+lucida fancyworld=NOPASSWD: /usr/bin/emerge
+lucida fancyworld=NOPASSWD: /usr/bin/ebuild
+lucida fancyworld=NOPASSWD: /usr/bin/make
+lucida fancyworld=NOPASSWD: /usr/bin/vi
+</pre>
+
+<p>
+要装软件，直接sudo emerge xxx就行，或者make, sudo make install。。。在日常操作中避免用root而又不损失方便性，sudo是个很好的解决办法。
+</p>
+
+</body>
+</section>
+<section>
+<title>查看use变量</title>
+<body>
+
+<pre>
+emerge -pv xxx
+</pre>
+
+<p>
+顺便说一下，ebuild被mask其实是有两个可能的。一个是ebuild文件本身，如果里面有<c>KEYWORDS="~x86"</c>，那么<c>ACCEPT_KEYWORDS＝"~x86" emerge xxx</c>就行。另外一个是<path>/usr/portage/profiles/package.mask</path>文件，这个列表里面的东东只能<c>emerge xxx.ebuild</c>才行，或者直接修改文件，去掉黑名单
+</p>
+
+</body>
+</section>
+<section>
+<title>多看看info</title>
+<body>
+
+<p>
+info提供的内容比man丰富的多，可以<c>emerge pinfo</c>，然后<c>pinfo xxx</c>, 它支持彩色，看起来更加舒服。或者用konqueror，试试在地址栏输入<c>info:/gcc</c>
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>一些有用的站点</title>
+<body>
+
+<p>
+<uri>http://www.breakmygentoo.net/</uri>。这里有很多软件的非官方ebuild。
+</p>
+
+<p>
+<uri>http://cvs.gentoo.org/~danarmak/kde-cvs.html</uri>。kde的cvs版ebuild(我一直在用的)。
+</p>
+
+<p>
+大概来说，在<path>/etc/make.conf</path>里面加上<c>PORTDIR_OVERLAY=/usr/local/portage</c>，然后把下载的ebuild解压到这个目录下面就可以了。
+它会和正常的portage tree整合在一起，唯一的区别是emerge sync的时候，这个目录下面的内容会得以保留。
+</p>
+
+</body>
+</chapter>
+</guide>

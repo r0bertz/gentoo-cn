@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/nvidia-guide.xml,v 1.2 2004/05/18 16:15:25 swift Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/nvidia-guide.xml">
+<title>Gentoo Linux nVidia 指南</title>
+
+<author title="Author">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="Translator">
+  <mail link="dragonnapalm@163.com">dragonnapalm</mail>
+</author>
+
+
+<abstract>
+许多使用Gentoo的用户都在使用nVidia显卡。 nVidia则为这些用户提供了特别的驱动程序以帮助他们在Linux系统上增强
+显卡的性能。本指南提供了安装配置nVidia显卡驱动程序的方法。
+</abstract>
+
+<license/>
+
+<version>1.0</version>
+<date>May 18, 2004</date>
+
+<chapter>
+<title>配置你的显卡</title>
+<section>
+<title>安装合适的驱动程序</title>
+<body>
+
+<p>
+nVidia驱动程序包含了一些内核模块，它们必须被整合到你的当前内核中。要完成这项工作，
+你的内核必须要有对可加载模块的支持。如果你曾经使用了<c>genkernel</c>来配置你的内核，
+那么你就不必为此操心了。如果没有，那么再次检查你的内核配置以确保这项支持已被开启。
+</p>
+
+<pre caption="让内核可以加载模块">
+Loadable module support ---&gt;
+  [*] Enable loadable module support
+</pre>
+
+<p>
+nVidia驱动程序的所有模块和库文件放在了这两个软件包中：<c>nvidia-glx</c>和<c>nvidia-kernel</c>。
+前者是X11 GLX库文件，而后者则是内核模块。它们都是你必不可少的，因此马上就来安装这些软件包吧。
+</p>
+
+<pre caption="安装nVidia模块">
+# <i>emerge nvidia-glx nvidia-kernel</i>
+</pre>
+
+<p>
+安装完成后，运行<c>modprobe nvidia</c>来把内核模块加载到内存中。
+</p>
+
+<pre caption="加载内核模块">
+# <i>modprobe nvidia</i>
+</pre>
+
+<p>
+你也许需要在每次启动计算机时让系统自动完成这一工作，那么就编辑
+<path>/etc/modules.autoload.d/kernel-2.6</path> (或者 <path>kernel-2.4</path>)，
+将<c>nvidia</c>加入到里面。在这之后不要忘记运行<c>modules-update</c>!
+</p>
+
+<pre caption="运行modules-update">
+# <i>modules-update</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>配置你的X服务器</title>
+<body>
+
+<p>
+一旦你安装好了恰当的驱动程序，你便需要配置你的X服务器(XFree86或者Xorg)以便用<c>nvidia</c>
+驱动程序来代替默认的<c>nv</c>驱动程序。
+</p>
+
+<p>
+用你最常用的编辑器(比如<c>nano</c>或者<c>vim</c>)打开<path>/etc/X11/XF86Config</path> 
+(或者 <path>/etc/X11/xorg.conf</path>)。找到<c>Device</c>段落后修改<c>Driver</c>
+这一行。
+</p>
+
+<pre caption="在X服务器配置文件中将nv更改为nvidia">
+Section "Device"
+  Identifier "nVidia Inc. GeForce2"
+  <i>Driver     "nvidia"</i>
+  VideoRam   65536
+EndSection
+</pre>
+
+<p>
+运行<c>opengl-update</c>以便X服务器可以使用nVidia GLX库文件:
+</p>
+
+<pre caption="运行 opengl-update">
+# <i>opengl-update nvidia</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>测试你的显卡</title>
+<body>
+
+<p>
+要测试你的nVidia显卡，你可以启动X后运行<c>glxinfo | grep direct</c>，然后你应该可以看到
+“直接渲染被激活”的提示。
+</p>
+
+<pre caption="检查直接渲染是否被开启">
+$ <i>glxinfo | grep direct</i>
+direct rendering: Yes
+</pre>
+
+<p>
+要测试你的显卡的FPS, 请运行<c>glxgears</c>. 
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

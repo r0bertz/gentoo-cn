@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20061106-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年11月6日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="thirtyyearswar@mindspring.com">Chris Atkinson</mail>
+</author>
+
+<author title="Author">
+<mail link="phnix@fastmail.net">Kyle Bishop</mail>
+</author>
+
+<author title="Author">
+<mail link="deadhead@wooow.it">Andrea Perotti</mail>
+</author>
+
+<author title="Author">
+<mail link="riklaunim@gmail.com">Piotr Maliński</mail>
+</author>
+
+<author title="Author">
+<mail link="nightmorph@gentoo.org">Josh Saddler</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="dundask@gmail.com">邓京晶</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="liwenqiu@gmail.com">李文秋</mail>
+</author>
+<abstract>这是2006年11月6日的Gentoo周报。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 45</version>
+<date>2006-11-06</date>
+
+<!-- Gentoo News -->
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<chapter>
+<title>倾听社区</title>
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<section>
+<title>gentoo-user</title>
+<body>
+
+<p><b>与XP的双启动(安装Gentoo后安装XP)</b></p>
+
+<p>James在gentoo-user频道内询问大家安装Gentoo之后再安装Windows XP双启动的可能性. 他担心安装Windows后会覆盖原本的MBR,使得Gentoo无法被引导.Gentoo的用家回复他的时候表示这并不是问题,只需从Live CD启动,然后重新安装GRUB.Mark Shields发了帖子总结了在Live CD环境中相应的步骤.</p>
+
+<pre caption="从LiveCD里重新安装GRUB">
+# <i>mount /dev/rootpart /mnt/gentoo</i>
+# <i>mount /dev/bootpart /mnt/gentoo/boot</i>
+# <i>mount -t proc none /mnt/gentoo/proc</i>
+# <i>mount -o bind /dev /mnt/gentoo/dev</i>
+# <i>chroot /mnt/gentoo /bin/bash</i>
+# <i>env-update &amp;&amp; source /etc/profile</i>
+# <i>grep -v rootfs /proc/mounts &gt; /etc/mtab</i>
+<comment>(假设你的硬盘是 /dev/hda)</comment>
+# <i>grub-install /dev/hda</i>
+</pre>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-user/msg_103029.xml</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-dev -->
+
+<section>
+<title>gentoo-dev</title>
+<body>
+
+<p><b>每月的Gentoo会议提醒(十一月)</b></p>
+
+<p>对大家的一个小小的提醒:即将到来的IRC会议将讨论Gentoo的本质和关于如何在企业环境中安装Gentoo的课程.</p>
+
+<p>Steve Long提议Gentoo利用开发者在维护工作中编译的那些二进制包，为数量有限的一些特色应用（SOHO，中型和大型企业）创建纯二进制软件仓库。他认为这是表明Gentoo重视企业应用的最好方式。</p>
+
+<p>Grant Goodyear反驳Steve的观点，认为他低估了这么做的难度，也高估了开发者对于维护一个二进制软件仓库的兴趣。相反地，Gentoo应将其强大的功能建立在元发行版基础之上，以允许用户使用Catalyst构建并部署他们自定义的发行版。</p>
+
+<p>Stuart Herbert表示他和其他人愿意向“Seeds”项目提供二进制包以使企业采用这些“特色版本”更加容易。并且，纯二进制的发行版和基于源代码的发行版出现破损的概率是一样的。</p>
+
+<p>Robin Johnson指出他作为开发者编译的那些包对别人几乎没有用处，因为有太多方面都是他的系统特有的。他还提供了自己在企业环境中使用Gentoo的一些感悟。他解释说企业需要企业级别的定制，他们可能在整个企业范围内使用LDAP或Kerberos或任何类似东西。他们也需要在企业内部署标准化的二进制包。他的办法是使用一台“种子(tinderbox)”机器来编译，再将编译好的二进制包部署到整个企业。他使用Catalyst和自定义specfile完成这一工作。他用这种方式做的最大规模的部署由令人印象深刻的一组机器组成。</p>
+
+<ul>
+<li>集群节点 [128 台] </li>
+<li>集群主机 [1 台]</li>
+<li>web服务器 [大概60台机器]</li>
+<li>ldap服务器 [2台机器]</li>
+<li>专门的文件服务器(网络home目录) [4台机器]</li>
+<li>基础设施管理 [3台机器]</li>
+<li>桌面系统 [大概60台机器]</li>
+</ul>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-dev/msg_140734.xml</uri></li>
+</ul>
+
+<p><b>请求移除Gnome 1.4</b></p>
+
+<p>Doug Goldstein提出移除Gnome已经废旧的1.4版本，并且列出<uri link="http://bugs.gentoo.org/154102">bug 154102</uri>中要移除的软件包</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-dev/msg_140785.xml</uri></li>
+</ul>
+
+<p><b>可使系统瘦身的FEATURES</b></p>
+
+<p>John Jawed已经使用Gentoo构建了一个initrd，用来在PXE中通过网络引导系统。initrd文件的大小问题一直为人所批评，因为大文件将导致内核错误。他删除了所有的手册和文档页面来精简initrd。然后他提供一个portage的补丁</p>
+
+<p>回复者提醒说此功能已经出现在/etc/make.conf中。</p>
+
+<p>Christian Heim建议John添加"noman"和"nodoc" FEATURES标志，Tobias Scherbaum建议添加"noinfo" FEATURES标志。Brian Jackson指出INSTALL_MASK标志可以防止其所指定的文件被拷贝到系统里去，指定的文件彼此间用空格隔开，这样可以允许用户过滤出诸如HACKING.gz和TODO.gz之类的文件。</p>
+
+<ul>
+<li><uri>http://archives.gentoo.org/gentoo-dev/msg_140812.xml</uri></li>
+</ul>
+
+</body>
+</section>
+
+<!-- gentoo-catalyst -->
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+</chapter>
+
+<!-- Gentoo International-->
+
+<chapter>
+<title>Gentoo国际</title>
+
+<section>
+<title>意大利：Genova的Linux Day</title>
+<body>
+
+<p>意大利开源运动团体在十月28日组织了全国性的<uri link="http://www.linux.it/LinuxDay">Linux Day</uri>。这是发展中的意大利Gentoo用户社区第四次进行义务活动。今年，全国性的会议命名为<uri link="http://www.gechi.it/node/32">Gentoo Day</uri>，同时由<uri link="http://genova.linux.it">GLUG (Genuense Linux用户组)</uri>共同组织。感谢Genova当地有关部门的配合帮助，活动在Palazzo Ducale和Piazza De Ferrari顺利举行。</p>
+
+<p>勇敢的传教士们，<uri link="http://www.gechi.it">Gentoo意大利频道(GeCHI)</uri>协会的所有成员，为家庭用户和专业用户做了很多<uri link="http://genova.linux.it/Linux_Day_2006">讲座</uri>。其中一些讲座的主题是：“使用开源软件来管理照片”，“让你的Ipod变得自由：使用RockBox”，“XGL为了乐趣和利益”，和“商业环境中Gentoo的实际应用”。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo in the press -->
+
+<chapter>
+<title>Gentoo媒体</title>
+
+<section>
+<title>LinuxHardware.com（2006年11月2日）</title>
+<body>
+
+<p>作者（同时也是Gentoo开发者）Kris Kersey评论了Intel的第一个4核处理器，Core 2 Extreme QX6700。这个评论使用了64位Gentoo Linux来作所有的评测。这个新CPU的得分给人印象非常深刻：在使用了MAKEOPTS="-j5"的情况下<c>emerge mozilla-firefox</c>只用了8分钟。如果你想要买钱可以买到的最好的桌面CPU，这个CPU无疑是目前的不二之选。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Tips and Tricks -->
+
+<chapter>
+<title>心得技巧</title>
+
+<section>
+<title>在本地没有的overlay里搜索ebuild</title>
+<body>
+
+<p>面对着社区里现存的这么多不同的overlay，人们可能面临的一个问题是，怎样才能找到含有想要的那个包的overlay。不幸的是，portage默认的搜索能力只能搜已经装在系统里的overlay。Stefan Schweizer本周在他的Gentoo星球blog里写了一篇非常好的文章，文章里详细写了一个工具的使用方法，它可以使搜索远程overlay这项任务比以往任何时候都简单。</p>
+
+<p>完成这项任务的包是<c>app-portage/eix</c>。你需要解除它的屏蔽来获得所有最新的最强大的功能：</p>
+
+<pre caption="安装app-portage/eix">
+# <i>echo app-portage/eix &gt;&gt; /etc/portage/package.keywords</i>
+# <i>emerge eix</i>
+</pre>
+
+<p>然后，为了确保eix拥有它所需要的有关可用overlay的所有信息，你可以执行下面的命令来更新它：</p>
+
+<pre caption="更新eix的全局overlay列表">
+# <i>update-eix</i>
+# <i>update-eix-remote update</i>
+</pre>
+
+<p>eix现在既可以在官方portage树中查找软件包，也可以在layman所列的所有overlays中查找。</p>
+
+<pre caption="搜索包">
+# <i>eix -e xmms</i>
+
+[D] media-sound/xmms
+Available versions:  [M]1.2.8-r5[2] [M]1.2.10-r6[2] [M]1.2.10-r8[2]
+[M]1.2.10-r14 [M]1.2.10-r14[3] [M]1.2.10-r15 [M]1.2.10-r15[3]
+[M]1.2.10-r16 [M]1.2.10-r16[3] [M]20101010[1]
+Installed:           1.2.10-r15[01:54:46 08/29/06][nls esd mmx
+vorbis 3dnow mikmod -directfb alsa oss arts -jack -sndfile -lirc
+-flac mad mp3]
+Homepage:            http://xmms.org
+Description:         X Multimedia System
+
+[1] (layman/fluidportage)
+[2] (layman/gentoojp)
+[3] (layman/zugaina)
+</pre>
+
+<p>想了解更多信息，请查看eix的手册页，以及下述博客链接。</p>
+
+<ul>
+<li>
+<uri>http://planet.gentoo.org/developers/genstef/2006/11/03/searching_for_ebuilds_in_overlays_that_a</uri>
+</li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>以64位的kmplayer使用32位的mplayer</title>
+<body>
+
+<p>amd64系统上，要播放需32位编解码器（win32codecs）解码的多媒体文件，你可以使用<c>media-video/mplayer-bin</c>，不过它看起来没有原生版本（译注：native version，专门为amd64编译的版本）好，且和系统整合不佳。KDE用户可以安装kmplayer──一个基于KDE的“前端”。如果你有konqueror，kmplayer还会为它添加一个播放插件。这一技巧的步骤如下，首先如果有的话请先卸载原生版本的mplayer。然后，装上kmplayer，并创建<path>/usr/bin/mplayer</path>符号链接：</p>
+
+<pre caption="创建mplayer link">
+ln -sf /usr/bin/mplayer-bin /usr/local/bin/mplayer
+</pre>
+
+<p>这样，原生版本的kmplayer就可以播放wmv文件，且可以在konqueror中“预览”它们了。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li>Jon Portnoy (avenj)</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Naoaki Shindo（shindo）日本文档团队</li>
+<li>Hans de Graaff (graaff) Xemacs</li>
+<li>Dimitry Bradt (diox) 荷兰语文档领导人</li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>Asterisk：多个漏洞</title>
+<body>
+
+<p>Asterisk受到远程执行任意代码和拒绝服务攻击的威胁。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200610-15.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Screen： UTF-8字符处理漏洞</title>
+<body>
+
+<p>Screen的UTF-8处理代码含有一个允许远程拒绝服务攻击或远程执行任意代码的错误。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-01.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Qt： 整数溢出漏洞</title>
+<body>
+
+<p>Qt的pixmap处理中包含的整型溢出缺陷可能导致拒绝服务攻击或者远程执行任意代码。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200611-02.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Upcoming package removals -->
+
+<chapter>
+<title>即将移除的包</title>
+
+<section>
+<body>
+
+<p>这个列表里的包是已经宣布将来会被删除的。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。</p>
+
+</body>
+</section>
+
+<section>
+<title>最后的仪式：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>x11-misc/commonbox-utils</ti>
+<ti>2006年11月29日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>games-strategy/magnant</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="mr_bones_@gentoo.org">Michael Sterrett</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/allegttf</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="mr_bones_@gentoo.org">Michael Sterrett</mail></ti>
+</tr>
+
+<tr>
+<ti>games-action/phobiaiii</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="mr_bones_@gentoo.org">Michael Sterrett</mail></ti>
+</tr>
+
+<tr>
+<ti>games-action/phobiaiii</ti>
+<ti>2006年11月28日</ti>
+<ti><mail link="mr_bones_@gentoo.org">Michael Sterrett</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/bpmdj</ti>
+<ti>2006年11月30日</ti> 
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/janus</ti>
+<ti>2006年12月4日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>net-analyzer/tcpick</ti>
+<ti>2006年12月4日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/qvwm</ti>
+<ti>2006年12月4日</ti>
+<ti><mail link="phreak@gentoo.org">Christian Heim</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/jpeg-mmx</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="vapier@gentoo.org">Mike Frysinger</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-libs/nucleo</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/aewm++</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/aewm++-goodies</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/golem</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/integrity</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/lwm</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/metisse</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/papuawm</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/pawm</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/pwm</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/trswm</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/wmi</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/xpde</ti>
+<ti>2006年12月5日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bug-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla(<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年10月29日到2006年11月05日，这个站点记录下了：
+</p>
+
+<ul>
+<li>866个在这段时间内被发现的新bug</li>
+<li>546个在这段时间内被修正或解决的bug</li>
+<li>19个先前修复了的但在这段时间重现的bug</li>
+<li>154个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>200个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的10999个bug里面：30个被标记为"blocker"，107个被标记为"critical"，还有514个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，33个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，24个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=sound@gentoo.org">被修正的bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=netmon@gentoo.org">被修正的bug</uri></li>
+<li><mail link="emacs@gentoo.org">GNU Emacs Herd</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=emacs@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;resolution=FIXED&amp;assigned_to=maintainer-needed@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，24个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=java@gentoo.org">新bug</uri></li>
+<li><mail link="net-mail@gentoo.org">Net-Mail Packages</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=net-mail@gentoo.org">新bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=base-system@gentoo.org">新bug</uri></li>
+<li><mail link="seemant@gentoo.org">Seemant Kulleen</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-10-29&amp;chfieldto=2006-11-05&amp;assigned_to=seemant@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的职员是由为之提交想法和文章的志愿者和社区成员组成的。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者只是有点想法或文章要提交给GWN，请你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<!-- <li>
+<uri link="/news/tr/gwn/gwn.xml">Turkish</uri>
+</li> -->
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

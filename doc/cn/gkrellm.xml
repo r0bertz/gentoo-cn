@@ -1,0 +1,303 @@
+﻿<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/metadata.xml,v 1.4 2004/03/07 12:12:53 swift Exp $ -->
+
+<guide link="/doc/zh_cn/gkrellm.xml">
+<title>利用 lm_sensors 和 gkrellm 检视 CPU 温度</title>
+
+<author title="Author">
+  <mail link=""></mail>
+</author>
+<author title="Translator">
+  <mail link="">Kuye</mail>
+</author>
+<author title="Editor">
+  <mail link="liongate@sina.com">Pop</mail>
+</author>
+
+<abstract>
+利用 lm_sensors 和 gkrellm 检视 CPU 温度
+</abstract>
+
+<license/>
+
+<version>0.1</version>
+<date>2004年7月22日</date>
+
+<chapter>
+<title>前言</title>
+<body>
+
+<p>
+本文所介绍技巧已经在一台 Athlon XP 1800+ 和一块使用威盛 KT266A 芯片组
+的磐英 8KHA+ 主板上实验成功，如果你的实验结果与我不同，请阅读后面其它朋友
+及其系统的跟帖。我并没有打算成为一个在 CPU 主板散热方面的问题专家，我只是
+在两小时内整理出了一篇介绍自己经验的文章。如果你在 lm-sensors 或者其它
+平台上有任何问题，可以在我的一张技术支持帖里回帖咨询：
+<uri>http://forums.gentoo.org/viewtopic.php?p=326081</uri>
+</p>
+
+</body>
+</chapter>
+<chapter>
+<title>开始</title>
+<body>
+
+<p>
+当你编译内核时请在字符设备（Character Devices）里启用 I2C 支持，I2C 接
+口设备支持以及 I2C /proc 界面，如果你像我一样有一块 tvtuner 卡，应该已经启用
+了这些选项了，如果你还未启用他们请这样做以后并进行下面操作：
+</p>
+
+<pre>
+#make modules 
+#make modules_install
+</pre>
+
+<p>
+编译完内核后请继续：
+</p>
+
+<pre>
+#emerge i2c lm-sensors gkrellm 
+</pre>
+
+<p>
+如果你使用 kde 你可以使用 ksensors 代替 gkrellm。
+</p>
+
+<pre>
+# emerge ksensors
+</pre>
+
+<p>
+然后运行sensors-detect 探测
+</p>
+
+<pre>
+#sensors-detect
+</pre>
+
+<p>
+请你在得到下面提示后按下[回车]键继续
+</p>
+
+<p>
+你将得到以下信息：
+</p>
+
+<pre>
+Driver `eeprom' (should be inserted):   
+Detects correctly:   
+* Bus `bt848 #0' (Bit-shift algorithm)    
+Busdriver `UNKNOWN', I2C address 0x50    
+Chip `Serial EEPROM (SDRAM DIMM)' (confidence: 8)  
+* Bus `SMBus Via Pro adapter at 5000' (Non-I2C SMBus adapter)    
+Busdriver `i2c-viapro', I2C address 0x50     
+Chip `Serial EEPROM (SDRAM DIMM)' (confidence: 8)  
+* Bus `SMBus Via Pro adapter at 5000' (Non-I2C SMBus adapter)    
+Busdriver `i2c-viapro', I2C address 0x51    
+Chip `Serial EEPROM (SDRAM DIMM)' (confidence: 8) 
+Driver `w83781d' (should be inserted):   Detects correctly:   
+* ISA bus address 0x0290 (Busdriver `i2c-isa')    
+Chip `Winbond W83697HF' (confidence: 8) 
+我现在将键入一些命令以加载 I2C 模块，有时芯片可以同时使用于 ISA 总线和I2C 总线上。
+ISA 总线存取速度稍快，但你需要为它加载一些附加驱动模块。你是否希望 选择 ISA 总线
+或者说 I2C/SMBus(ISA/smbus)呢？ 
+
+警告！如果你将某些功能编译进了内核， 而下面的列表是假设你将所有功能都编译为 内核时
+产生的，它包含了所有所需模块。
+
+请根据你的自身实际情况取消掉部分模块。 所有功能全部需要，请将它们添加到 /etc/rc* 
+下的某些启动脚本里。 
+</pre>
+
+<note>
+译者注：其实这一步有多余的嫌疑，这些模块没必要开机便加载，
+当 gkrellm 启动 并 Call 温度模块中函数时 
+Linux 内核会自动加载这些模块的， 
+/etc/modules.autoload 也是比 rc 脚本相对更加实用的选择.
+不过我更倾向于直接将 I2C 编译进内核，这样这一步更有理由省下了
+</note>
+
+<pre> 
+#----剪切开始---- 
+#I2C adapter drivers 
+# modprobe unknown adapter bt848 #0 using Bit-shift algorithm 
+# modprobe unknown adapter bt848 #0 using Bit-shift algorithm 
+modprobe i2c-viapro 
+modprobe i2c-isa 
+# I2C chip drivers 
+modprobe eeprom 
+modprobe w83781d 
+#----剪切结束---- 
+</pre>
+
+<note>
+为了使温度模块工作正常，以下内容需要添加到 /etc/modules.conf 或者 /etc/conf.modules： 
+</note>
+
+<pre>
+#----剪切开始---- 
+#I2C module options 
+alias char-major-89 i2c-dev 
+#----剪切结束---- 
+</pre>
+
+</body>
+</chapter>
+<chapter>
+<title>最后的工作</title>
+<body>
+
+<p>
+添加 i2c-viapro, i2c-isa, eeprom 和 w83791d 到 /etc/modules.autoload
+</p>
+
+<pre>
+#nano -w /etc/modules.autoload/你的内核
+</pre>
+
+<pre>
+# emerge sync
+</pre>
+
+<note>
+确认你的/etc/modules.conf文件中包含alias char-major-89 i2c-dev
+</note>
+
+<p>
+使 lm_sensors 在开机时加载：
+</p>
+
+<pre>
+# rc-update add lm_sensors default
+</pre>
+
+<p>
+作为 Linux 用户我们不需要重新启动计算机，只需要直接加载所需模块：
+</p>
+
+<pre>
+# modprobe i2c-viapro 
+# modprobe i2c-isa 
+# modprobe eeprom 
+# modprobe w83781d
+</pre>
+
+<p>
+让我们来启动 lm_sensors：
+</p>
+
+<pre>
+# /etc/init.d/lm_sensors start
+</pre>
+
+<p>
+你可以通过下面命令来检查是否工作正常：
+</p>
+
+<pre>
+# sensors
+</pre>
+
+<p>
+你将得到一个类似下面的输出：
+</p>
+
+<pre>
+eeprom-i2c-0-50 
+Adapter: bt848 #0 
+Algorithm: Bit-shift algorithm 
+
+eeprom-i2c-1-50 
+Adapter: SMBus Via Pro adapter at 5000 
+Algorithm: Non-I2C SMBus adapter 
+Memory type:            DDR SDRAM DIMM SPD 
+SDRAM Size (MB):        256 
+eeprom-i2c-1-51 
+Adapter: SMBus Via Pro adapter at 5000 
+Algorithm: Non-I2C SMBus adapter 
+Memory type:            DDR SDRAM DIMM SPD 
+SDRAM Size (MB):        256 
+w83697hf-isa-0290 
+Adapter: ISA adapter 
+Algorithm: ISA algorithm 
+VCore:     +1.76 V  (min =  +0.00 V, max =  +0.00 V) 
++3.3V:     +1.52 V  (min =  +2.97 V, max =  +3.63 V) 
++5V:       +4.89 V  (min =  +4.50 V, max =  +5.48 V) 
++12V:     +12.58 V  (min = +10.79 V, max = +13.11 V) 
+-12V:      +2.10 V  (min = -13.21 V, max = -10.90 V) 
+-5V:       +0.58 V  (min =  -5.51 V, max =  -4.51 V) 
+V5SB:      +5.53 V  (min =  +4.50 V, max =  +5.48 V) 
+VBat:      +3.13 V  (min =  +2.70 V, max =  +3.29 V) 
+fan1:        0 RPM  (min = 3000 RPM, div = 2) 
+fan2:        0 RPM  (min = 3000 RPM, div = 2) 
+temp1:       +28C  (limit =  +60C)   sensor = thermistor             
+
+                              
+temp2:     +41.5C  (limit =  +60C, hysteresis =  +50C) sensor = 
+
+thermistor                        
+alarms: beep_enable:          
+Sound alarm disabled 
+</pre>
+
+<p>
+现在，我想我的输出内容并不完全正常，但你的未必如此。 
+例如：我并没有使用一个普通的3口插头 CPU 风扇，我使用了一个80毫米的巨型水冷散热器，我也知道我的核心温度并不是1.52伏。这些是可修正的：
+</p>
+
+<pre>
+#nano -w /etc/sensors.conf
+</pre>
+
+</body>
+</chapter>
+<chapter>
+<title>结束</title>
+<body>
+
+<p>
+现在你可以运行 gtkrellm2了，在 gkrellm 中按下 F1 键。展开内置菜单并单击温度（ 
+sensors）。在这里你可以设置你想在 gkrellm 中查看哪些设备的温度。一个小
+技巧是 因为我在美国所以可以在选项页里选择华氏温度计量方式。Ksensors 页可以同
+样在右键属性窗口中设置。
+</p>
+
+<p>
+介于本教程中使用主板的特殊性质（希望新教程正在撰写中），但是你可以
+在下面主页中找到更多关于你主板的内容：
+</p>
+
+<ul>
+<li><uri>http://www2.lm-sensors.nu/~lm78/cvs/lm_sensors2/doc/lm_sensors-FAQ.html</uri></li>
+<li><uri>http://www2.lm-sensors.nu/~lm78/cvs/lm_sensors2/etc/sensors.conf.eg</uri></li>
+</ul>
+
+</body>
+</chapter>
+<chapter>
+<title>译者注</title>
+<section>
+<title>原始出处</title>
+<body>
+
+<p>
+原始文章出处：<uri>http://forums.gentoo.org/viewtopic.php?t=52815</uri>
+</p>
+
+</body>
+</section>
+<section>
+<title>说明</title>
+<body>
+<p>
+前一段时间我卖了块 Celeron 566 给 winme，并帮助他超频到 850Mhz，winme 问起我如何在 Linux 上检视 CPU 温度，遂翻译此文以献给他。 
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

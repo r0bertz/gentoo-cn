@@ -1,0 +1,1514 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/metadata.xml,v 1.4 2004/03/07 12:12:53 swift Exp $ -->
+
+<guide link="/doc/zh_cn/llfaq.xml">
+<title>Gentoo另类FAQ集锦</title>
+
+<author title="Editor">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<abstract>
+一些简短的Gentoo常见问题、文章、笔记等，方便大家的使用。
+</abstract>
+
+<license/>
+
+<version>0.1</version>
+<date>2004年7月22日</date>
+
+<chapter>
+<title>目录</title>
+<body>
+
+<ul>
+  <li>安装相关</li>
+  <ul>
+    <li><uri link="#doc_chap2">[ebuild N]代表什么意思</uri></li>
+    <li><uri link="#doc_chap15">正确使用Portage</uri></li>
+    <li><uri link="#doc_chap3">如何知道自己安装的软件</uri></li>
+    <li><uri link="#doc_chap4">我不能执行<c>emerge &lt;package-name&gt;</c>, 提示xx config文件需要更新。我该怎么做</uri></li>
+    <li><uri link="#doc_chap5">emerge不行了我该怎么办</uri></li>
+    <li><uri link="#doc_chap10">使用psyco加速emerge</uri></li>
+    <li><uri link="#doc_chap6">如果world文件不合法或者被完全删除，我该怎么办</uri></li>
+    <li><uri link="#doc_chap11">清理你的world文件</uri></li>
+  </ul>
+  <li>内核相关</li>
+  <ul>
+    <li><uri link="#doc_chap7">对比直接编译进内核和模块形式</uri></li>
+    <li><uri link="#doc_chap8">升级内核，但可以用我旧的内核设定吗</uri></li>
+    <li><uri link="#doc_chap9">我编译内核错误后我的电脑无法真确引导了，我该怎么办？</uri></li>
+  </ul>
+  <li>系统相关</li>
+  <ul>
+    <li><uri link="#doc_chap12">为什么我不能用<c>su</c>转换成ROOT</uri></li>
+    <li><uri link="#doc_chap16">保持系统新而安全的方法</uri></li>
+  </ul>
+  <li>网络相关</li>
+  <ul>
+    <li><uri link="#doc_chap17">Gentoo收取hotmail邮件攻略</uri></li>
+  </ul>
+  <li>软件相关</li>
+  <ul>
+    <li><uri link="#doc_chap13">在linux下自动关闭显示器</uri></li>
+    <li><uri link="#doc_chap18">让你的 Linux 开口和你说话</uri></li>
+  </ul>
+  <li>其他</li>
+  <ul>
+    <li><uri link="#doc_chap14">如何在其他发行版中安装PORTAGE</uri></li>
+  </ul>
+</ul>
+
+</body>
+</chapter>
+
+
+<!--chap2: [ebuild N]代表什么意思-->
+
+
+<chapter>
+<title>[ebuild N]代表什么意思</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=26640</uri></li>
+<li>译者：cabrio</li>
+</ul>
+
+<p>
+Gentoo基本知识1：[ebuild N]代表什么意思？
+</p>
+
+<p>
+Portage 2.0.48帮助页写到 ：
+</p>
+
+<p>
+当使用emerge并且加入pretend或verbose参数时，屏幕上的输出可能会有一点难以理解。 本文将解释那些缩写的文字所表示的意思。
+</p>
+
+<section>
+<title>[blocks B ] app-text/dos2unix (from pkg app-text/hd2u-0.8.0)</title>
+<body>
+
+<p>
+Dos2unix阻止了hd2u的安装(emerge)。互斥者(Blockers)被定义为两个软件包会破坏对方文件或是对您的系统造成损坏。事实上互斥者并不需要都被安装，它们通常提供了相同功能。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild N ] app-games/qstat-25c</title>
+<body>
+
+<p>
+Qstat对您的系统而言是一个新软件包，它将第一次被安装。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild R ] sys-apps/sed-4.0.5</title>
+<body>
+
+<p>
+sed 4.0.5已经被安装了，但是如果您运行这一命令则指定的软件包将会被重新安装(re-emerge)(在本例中是sed这个软件包)
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild F ] media-video/realplayer-8-r6</title>
+<body>
+
+<p>
+realplayer软件包需要您手动下载。当您试图安装一个软件包但它的来源找不到时，portage将会停止并要您提供如何找到所需文件的指令。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild U ] net-fs/samba-2.2.8_pre1 [2.2.7a]</title>
+<body>
+
+<p>
+Samba 2.2.7a已经被安装了，且可升级到版本2.2.8_pre1。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild UD] media-libs/libgd-1.8.4 [2.0.11]</title>
+<body>
+
+<p>
+Libgd 2.0.11已经被安装了，但是如果您运行这一命令portage将会为您下载版本1.8.4。这可能是由于一个软件包的新版本在自身损坏或者会在您的系统上产生安全漏洞或者它的一个修补包还没有发布等情况下被屏蔽掉了(masked)。另外可能的原因是您正试图安装的软件包需要一个老版本的软件包来保证安装成功。在本例中，libgd 2.x与libgd 1.x不兼容。这意味着libgd 1.x创建的软件包不能与libgd 2.x一起编译，在它们可以安装之前libgd必须先降级(downgrade)。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild U-] x11-base/xfree-4.3.0 [4.2.99.902]</title>
+<body>
+
+<p>
+表示Xfree缺乏SLOT信息，这可能是由于前一个版本的安装被抛开了(injected)(请查看inject以获取更多信息)，或是版本过时得厉害(太老了以致于SLOT信息根本不存在)。不管怎样还是有一个新版本的Xfree您可以愉快地升级。
+</p>
+
+</body>
+</section>
+<section>
+<title>[ebuild U ] net-analyzer/nmap-3.15_beta2 [3.15_beta1] -gtk -gnome</title>
+<body>
+
+<p>
+gtk和-gnome反应了nmap安装时USE变量的状态。这里我们看到nmap可以使用USE变量gtk和gnome，但是您目前的设定禁用了 gtk和gnome。因此当您安装时对gtk和gnome的可选支持将不会起作用。*注意：USE状态只会在您使用了--pretend和-- verbose选项时显示。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</section>
+</body>
+</chapter>
+
+
+<!--chap3: 如何只到自己安装的软件-->
+
+
+<chapter>
+<title>如何知道自己安装的软件</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=30608</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+如何得到我安装软件包的清单？qpkg 工具简单的解决了这个工作。你可能需要先emerge gentoolkit。
+</p>
+
+<p>
+步骤如下：
+</p>
+
+<section>
+<title>qpkg -I</title>
+<body>
+
+<p>
+这样可以列出已安装的软件包， 但不会表明它的版本。
+</p>
+
+<pre caption="范例">
+# qpkg -I glib
+dev-libs/glib *
+gnome-extra/glibwww *
+sys-libs/glibc *
+</pre>
+
+</body>
+</section>
+<section>
+<title>qpkg -I -v</title>
+<body>
+
+<p>
+这个命令会以文本格式列出已安装的软件包，并且列出一个软件包的多个版本。
+</p>
+
+<pre caption="范例">
+# qpkg -I -v glib
+sys-libs/glibc-2.2.5-r7 *
+dev-libs/glib-1.2.10-r4 *
+dev-libs/glib-2.0.7 *
+gnome-extra/glibwww-0.2-r2 *
+</pre>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</section>
+</body>
+</chapter>
+
+
+<!--chap4: 我不能执行“emerge<package-name>”, 提示xx config文件需要更新。我该怎么做？-->
+
+
+<chapter>
+<title>我不能执行<c>emerge &lt;package-name&gt;</c>, 提示xx config文件需要更新。我该怎么做？</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=23475</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+我不能执行<c>emerge &lt;package-name&gt;</c>, 提示xx config文件需要更新。我该怎么做？
+</p>
+
+<p>
+你看到如下的讯息：
+</p>
+
+<pre>
+* Regenerating GNU info directory index...
+* Processed 70 info files.
+* IMPORTANT: 40 config files in /etc need updating.
+* Type emerge --help config to learn how to update config files.
+</pre>
+
+<p>
+如果我们执行<c>emerge --help config</c>, 我们将看到:
+</p>
+
+<pre>
+**Config file management support (preliminary)
+
+Portage has a special feature called "config file protection". The purpose of
+this feature is to prevent new package installs from clobbering existing
+configuration files. By default, config file protection is turned on for /etc
+and the KDE configuration dirs; more may be added in the future.
+
+When Portage installs a file into a protected directory tree like /etc, any
+existing files will not be overwritten. If a file of the same name already
+exists, Portage will change the name of the to-be- installed file from 'foo' to
+'._cfg0000_foo'. If '._cfg0000_foo' already exists, this name becomes
+'._cfg0001_foo', etc. In this way, existing files are not overwritten,
+allowing the administrator to manually merge the new config files and avoid any
+unexpected changes.
+
+In addition to protecting overwritten files, Portage will not delete any files
+from a protected directory when a package is unmerged. While this may be a
+little bit untidy, it does prevent potentially valuable config files from being
+deleted, which is of paramount importance.
+
+Protected directories are set using the CONFIG_PROTECT variable, normally
+defined in /etc/make.globals. Directory exceptions to the CONFIG_PROTECTed
+directories can be specified using the CONFIG_PROTECT_MASK variable. To find
+files that need to be updated in /etc, type:
+
+# find /etc -iname '._cfg????_*'
+
+You can disable this feature by setting CONFIG_PROTECT="-*" in /etc/make.conf.
+Then, Portage will mercilessly auto-update your config files. Alternatively,
+you can leave Config File Protection on but tell Portage that it can overwrite
+files in certain specific /etc subdirectories. For example, if you wanted
+Portage to automatically update your rc scripts and your wget configuration,
+but didn't want any other changes made without your explicit approval, you'd
+add this to /etc/make.conf:
+
+CONFIG_PROTECT_MASK="/etc/wget /etc/rc.d"
+</pre>
+
+<note>
+译者注：如上一段输出在本段后面有翻译。
+</note>
+
+<p>
+以上解释了发生了什么事情。 我就不重复说明了。下一步， 我们将用find指令找寻我们需要更行的清单（find /etc/ -iname '/_cg????_*'). 比如以下的源码：
+</p>
+
+<pre>
+# find /etc -iname '._cfg????_*'
+/etc/conf.d/._cfg0000_net
+/etc/init.d/._cfg0000_clock
+/etc/init.d/._cfg0000_bootmisc
+/etc/init.d/._cfg0000_checkfs
+/etc/skel/._cfg0000_.bash_profile
+/etc/skel/._cfg0000_.bashrc
+/etc/._cfg0000_fstab
+/etc/._cfg0000_hosts
+/etc/._cfg0000_modules.autoload
+</pre>
+
+<note>
+输出文件是根据你的系统和你安装的软件包而不同的。作为参考， 以上的只是你安装完baselayout后的一部分清单。
+</note>
+
+<p>
+如果你并没有修改任何文件， 那么更新将是安全进行的。两个更新配置文件（config)的办法：用“diff”指令或者用“etc-update”指令。
+</p>
+
+<section>
+<title>使用DIFF指令的解决办法：</title>
+<body>
+
+<p>
+/etc/init.d/bootmisc是一个你还没有修改的文件。如果我们用diff来执行这些文件，以下是他的输出样本
+</p>
+
+<pre>
+# diff bootmisc ._cfg0000_bootmisc
+3,4c3,4
+&lt; # Distributed under the terms of the GNU General Public License, v2 or later
+&lt; # $Header: /home/cvsroot/gentoo-src/rc-scripts/init.d/bootmisc,v 1.22 2002/11/04 14:51:07 azarah Exp $
+---
+&gt; # Distributed under the terms of the GNU General Public License v2
+&gt; # $Header: /home/cvsroot/gentoo-src/rc-scripts/init.d/bootmisc,v 1.23 2002/11/18 13:07:02 azarah Exp $
+</pre>
+
+<p>
+以上的例子中，只有“Distributed”和“Header”这两行有差异。这几行并不是很重要， 所以我们可以将新的文件（my.-cfg0000_bootmisc.bootmisc)来更换旧的文件。
+</p>
+
+</body>
+</section>
+<section>
+<title>使用etc-update解决办法：</title>
+<body>
+
+<p>
+需要指令。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置文件的管理支持（初稿）</title>
+<body>
+
+<p>
+Portage有一个很特别的功能被称作“配置文件保护功能”。这个功能的目的是为了防止新版软件安装时覆盖了现有的配置文件（configuration files)。默认情况下，<path>/etc/</path>里的配置文件和KDE的配置文件目录（dirs)是被启动的。更多的配置保护也会在以后不断加入。
+</p>
+
+<p>
+当PORTAGE把文件安装到被保护的目录下（如etc), 任何现有的文件都不会被覆写。如果现有的文件名已经存在（如“foo”)， PORTAGE会自动将安装的文件名“foo”改成“._cfg0000_foo ”, 如果 “._cfg0000_foo”也存在了，那么将由“._cfg0001_foo”代替， 以此类推。这种办法可以避免现有文件被覆些，同时也允许管理人员手动merge新的配置文件从而避免了任何无法预测的改变。
+</p>
+
+<p>
+除了防止覆写外， 当软件包被删除的时候PORTAGE不会删除任何在保护目录下的配置文件。虽然这个看上去有点杂乱， 但确实有效的保护了那些有价值并且相当重要的配置文件不被删除。
+</p>
+
+<p>
+被保护目录是通过CONIG_PROTECT的变量被设定的，一般是被定义在<path>/etc/make.globals</path>里。目录对于被CONFIG_PROTECT的例外可以通过CONIG_PROTECT_MASK变量来被指定。想要找寻哪些/etc里的配置文件需要更新， 输入：
+</p>
+
+<pre>
+# find /etc -iname '._cfg????_*'
+</pre>
+
+<p>
+你可以通过设定<c>CONFIG_PROTECT="-*"</c>in<path>/etc/make.conf</path>来关闭这个功能。那么以后PORTAGE将会自动更新你的配置文件并覆写现有的文件。另外， 你可以将配置文件保护功能开启，但告诉PORTAGE可以覆写到指定的几个<path>/etc/</path>里的子目录里。比如， 如果你想要PORTAGE自动更新你的rc脚本和wget配置文件，但是你又不想在没有你的允许下作任何其他的修改， 你可以在<path>/etc/make.conf</path>里加上这行：
+</p>
+
+<pre>
+CONFIG_PROTECT_MASK="/etc/wget /etc/rc.d"
+</pre>
+
+<note>
+译者注：这是上面输出的翻译。
+</note>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</section>
+</body>
+</chapter>
+
+
+<!--chap5: emerge不行了我该怎么办-->
+
+
+<chapter>
+<title>emerge不能执行了， 我该怎么办？</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=53807</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+阅读一下<path>/usr/portage/sys-apps/portage/files/README.RESCUE</path>, 然后从<path>/usr/portage/sys-apps/portage/files/</path>里找一个portage 急救tar-ball来让portage重新运作。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap6: 如果world文件不合法或者被完全删除， 我该怎么办-->
+
+
+<chapter>
+<title>如果world文件不合法或者被完全删除， 我该怎么办？</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=136627</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+如果world文件不合法或者被完全删除， 我该怎么办？如果你执行emerge -p world发现你安装的软件包遗失。
+</p>
+
+<pre>
+emerge -p world
+</pre>
+
+<p>
+检查<path>/var/cache/edb/world</path>文件是否有那些软件包。如果没有或者完全空的， 你可以用ROOT身份通过执行以下命令来修复：
+</p>
+
+<pre>
+regenworld
+</pre>
+
+<p>
+以上的是利用你的<path>/var/log/emerge.log</path>来再次建立你的word文件。如果你的log文件已经被删除或者你正在使用一个不稳定的PORTAGE系统， 那么这个方法可能没有用。假如真的这样，有个间接的方法， 就是利用gentoolkit里的qpkg：
+</p>
+
+<pre>
+qpkg -I -nc > /var/cache/edb/world
+</pre>
+
+<p>
+以上的方法可以重新建立一个world文件， 里面会列出所有已经安装的软件。你需要在删除文件后编辑world文件， 这个可以手动， 也可以用pruneworld的脚本来完成。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap7: 对比直接编译进内核和模块形式-->
+
+
+<chapter>
+<title>对比直接编译进内核和模块形式</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=58790</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+你有两个方法将功能加载到内核：直接将功能内建在内核使他变成内核的一部分或者以模块形式加入。
+</p>
+
+<section>
+<title>内建形式</title>
+<body>
+
+<p>
+将功能内建在内核里可以确保此功能永远都开启。但缺点就是增加你内核的“体积”从而拖慢了你开启引导的时间， 并且这个“变大”的内核需要更多的内存。如果你是打算将内核编译到软盘， 从急救软盘开启引导的话， 空间将成为一个不容忽视的问题。
+</p>
+
+</body>
+</section>
+<section>
+<title>模块形式</title>
+<body>
+
+<p>
+将功能编成模块可以让此功能在需要的时候加载在内存里而不需要的时候可以卸载，这样， 你的内核可以保持一个比较小的“体积”。如果你是经常将硬件“交换”（swap in and out)进出的话， 这个方式是很有用的。你可以将很多支持的硬件编成模块形式比如你的声卡，这样理论上系统会将此驱动正常的在硬件安装的时候挂载上去。
+</p>
+
+<p>
+另一个编成模块形式的优点就是当你要在系统出错的时候， 模块形式可以允许你加入你自己的参数， 从而使得出错工作简单化。
+</p>
+
+<p>
+当你要编成模块形式的时候几个问题要考虑进去。 首先是考虑到加载和卸载模块的时间，当然这个问题并不是很严重。有一些功能是需要在开机引导的时候就要的而他们是不可以编成模块形式。当系统被加入在内存后，这些功能就必须要加载了。比如支持ext2/ext3/reiserfs的功能是需要内建在内核里的这样你的分区才能被系统读到。另外我还有一个例子，我有一个PCMCIA的网卡， 如果我将PCMCIA编入到内核使他可以在开机引导的时候就正确挂载的话， 我的网路可以启动运作，但相反如果我用模块形式的话， 网路无法正确启动， 这是因为PCMCIA是需要在刚启动系统的时候就要挂载上去的原因。
+</p>
+
+</body>
+</section>
+<section>
+<title>一般编译方案</title>
+<body>
+
+<p>
+我判断是否要将功能编成内建形式是判断此功能是否是我一直都需要并且是否我经常在用。如果这个功能我平时用的很多的话， 我会直接讲它编到内核里，不然就变成模块。再我不断的重新编译内核的时候， 我开始将许多功能转成模块， 老实说， 我没有觉得这样会让系统效率下降。另一方面，我的硬件功能也不多， 就是一个笔记本电脑， 唯一的硬件选择项目就是我要不要将USB的滑鼠插到系统上。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</section>
+</body>
+</chapter>
+
+
+<!--chap8: 升级内核， 但可以用我旧的内核设定吗-->
+
+
+<chapter>
+<title>我升级内核， 但可以用我旧的内核设定吗？</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=35323</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+我升级内核， 但可以用我旧的内核设定吗？如果可以， 该怎么用
+</p>
+
+<p>
+当你安装新的内核但又想要保留你的旧内核的设定：
+</p>
+
+<ul>
+<li>先复制/usr/src/linux/.config到你的新内核目录下</li>
+<li>然后删除LINUX这个字符连接</li>
+<li>再重新创立LINUX的字符连接到你新的内核目录</li>
+<li>再到你的新内核目录下</li>
+<li>执行 make oldconfig</li>
+<li>这样你可以保留你旧的内核设定，你会要求选择关于新内核的选项（如果你不知道要不要选这些选项的话， 你就摁<path>&lt;return&gt;</path>, 这个等于选择“No”。当你完成了这步，你就可以执行<c>make menuconfig</c>或者<c>xconfig</c></li>
+<li>仔细的检查各个选项， 包括文件系统（file systems), 打印机安装，USB安装和SCSI EMULATION</li>
+</ul>
+
+<p>
+完成这些后就可以编译并且安装你的新内核了
+</p>
+
+<ul>
+<li><c>cp /usr/src/linux/.config /usr/src/linux-2.x.xx-yyyyyy/.config</c></li>
+<li><c>cd /usr/src</c></li>
+<li><c>rm linux</c></li>
+<li><c>ln -s linux-2.x.xx-yyyyyy linux</c></li>
+<li><c>cd /usr/src/linux</c></li>
+<li><c>make oldconfig</c></li>
+<li><c>make menuconfig</c>或者<c>make xconfig</c></li>
+<li><c>make dep clean bzImage modules modules_install</c></li>
+<li><c>mount /boot</c> (<path>/boot</path>是<path>/etc/fstab</path>里的一条值，正常使用下应该不会挂载)</li>
+<li><c>mv /boot/bzImage /boot/bzImage.old</c></li>
+<li><c>cp /usr/src/linux/arch/i386/boot/bzImage /boot/bzImage</c></li>
+<li>编辑<path>/boot/grub/menu.lst</path>，添加指向新编译的内核的记录。</li>
+<li>如果你使用nvidia显卡，<c>emerge nivdia-kernel</c></li>
+<li>如果你要使用alsa，<c>emerge alsa-driver</c></li>
+<li>编辑<path>/etc/modules.autoload</path>，加上需要自动启动的模块。</li>
+<li><c>unmount /boot</c>（或者<c>umount /boot</c>）</li>
+<li><c>shutdown -hr now</c></li>
+</ul>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap9: 我编译内核错误后我的电脑无法真确引导了， 我该怎么办？ -->
+
+
+<chapter>
+<title>我编译内核错误后我的电脑无法真确引导了， 我该怎么办？</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=23734</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+我编译内核错误后我的电脑无法真确引导了， 我该怎么办？
+</p>
+
+<p>
+首先， 这不是什么大问题， 需要冷静哦。你不需要重新安装GENTOO， 通常修复系统错误不是什么很麻烦的问题。
+</p>
+
+<p>
+第一个可行的解决办法是先用LIVE－CD（安装CD）来引导， 然后用chroot来更换到你现有的GENTOO的系统下，这样你可以重新编译内核。先用选择CDROM引导，用GENTOO的引导CD引导，记住必须在BIOS下修改你的引导装置的顺序。当CD完成引导后，你可以用以下的命令来查阅GENTOO的安装指南。
+</p>
+
+<pre>
+#less /install.txt
+</pre>
+
+<p>
+现在你当然不需要重新来过，我们只要集中在GENTOO挂载并运行你的硬盘这一块上。当然如果你下载了不同的内核， 你需要重新设置你的网路，所以你必须先要按照正常安装指南的第三章正确的挂载相应的内核模块， 如果你有笔记本电脑， 可能要参照到第四章，一直到第五章关于设定网路结束。接着， 你可以略过一直到第七章， 将你的分区重新挂载。当一切就绪后，你可以跳到第九章尾，然后照指南说明<c>chroot</c>，（跳过所有解压缩TARBALL的步骤）。完成后， 你已经进入GENTOO的正式安装程序里了。
+</p>
+
+<p>
+另外一个可行的解决方案可以用， 但是先决条件是在你编译新内核之前你已经在<path>/boot</path>备份了你旧内核的bzImage（备份可以是<path>bzImage.old</path>). 这样你仍然可以通过编辑GRUB的引导装置用旧的内核引导。据我所知， LILO不支持引导时配置。
+</p>
+
+<p>
+此方案的执行步骤是先让系统正常开机引导， 当GRUB出现菜单时， 选择GENTOO的选项然后摁 “e“键。现在， 用上标和下标键反白以下相似的那行
+</p>
+
+<pre>
+kernel /boot/bzImage root=/dev/hda3
+</pre>
+
+<p>
+然后再摁 “e”键。修改此行， 将现在不能运行的bzImage改成你旧的bzImage.old(或者其他你备份的名字）。接着摁Esc键，再摁b键，这样系统应该会引导你旧的内核了。还有一件事情要注意，开机引导时修改GRUB不是永恒的。除非你之后将你旧的备份改成<path>bzImage</path>或者手动修改<path>menu.lst</path>文件， 不然GRUB在开机引导的时候会一直引导那个不能运行的内核。当你完成上面任何一个方案后， 你的系统可以正常运作了，你可以再次编译你的内核。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap10: 使用psyco加速emerge-->
+
+
+<chapter>
+<title>使用psyco加速emerge</title>
+<body>
+
+<ul>
+<li>作者：alec</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=153921</uri></li>
+<li>译者：<uri mail="joanphan@gmail.com">Hans Joanphan</uri></li>
+</ul>
+
+<p>
+这个小技巧是基于几天前gentoo用户组的一篇文章，在此对Gregory P. Smith表示感谢。
+</p>
+
+<pre caption="引用">
+   我最近正试用psyco(python的类x86系统的编译器），我认为我将可以试试用他来emerge，看看有什么效用。
+   emerge受输入输出流束缚很厉害，因此在刚开始时加载缓冲时，效果并不明显。
+   但是以后一旦缓冲已被加载后再运行，我发现在emerge中使用psyco，'emerge search xfs'提速大于20％，
+'emerge -pU world'提速大约35％。我是在我的celery333上使用psyco1.2测试。
+</pre>
+
+<pre caption="代码">
+try:
+    import psyco
+    psyco.full()
+except ImportError:
+    pass 
+</pre>
+
+<pre caption="引用">
+   任何安装了psyco（通过ebuild安装）的人，都会从更快的搜索和依赖性计算中感觉到甜头。
+   我也观察了运行时的内存使用。不使用psyco进行emerge消耗内存为7.5-10Mb，而相对使用psyco要消耗内存9-13Mb。
+</pre>
+
+<p>
+我感觉这样<path>emerge</path>更快了，一些在用户组中回复的人们也有相同的结果，没有人表示这做这个有难度。
+</p>
+
+<p>
+编者按：请往下查看这篇文章的两到三个有关怎么把这个代码放进<path>/usr/bin/emerge</path>的回复。这只会加速<path>emerge</path>这个程序，而不会加快编译速度。如果你更新了portage你将需要再次做一下这个。另外，在他的信息总并不是很明确，但是你需要<c>emerge psyco</c>来安装这个。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap11: 清理你的world文件-->
+
+
+
+<chapter>
+<title>清理你的world文件</title>
+<body>
+
+<ul>
+<li>作者：ecatmur</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=142475</uri></li>
+<li>译者：<uri mail="joanphan@gmail.com">Hans Joanphan</uri></li>
+</ul>
+
+<p>
+编者按：这个脚本现在也包含了一个可以实际工作的<c>emerge depclean</c>（译者注：从emerge的manpage中可知，depclean意为：定出系统安装的而没有明确理由存在的软件包。emerge将会生成一个通过检查系统软件包列表和world文件而期望安装的软件包列表。然后将这个列表和实际安装的软件包的列表对比，不同的地方将列出为建议删除的不需要的软件包。），一个可以查看你系统依赖性的<c>emerge prune</c>，和一个不是非常不完整的<c>qpkg -q</c>。
+</p>
+
+<p>
+world文件（<path>/var/cache/edb/world</path>）中包含太多的记录是不利于保持系统干净和运行流畅的。当然你就需要现在仔细查看这个文件，并且删除掉你不需要的程序。但是，如果这里面包含尽可能少的额外包（如那些对别的包有依赖性的包）时，这个工作将会简单得多。
+</p>
+
+<p>
+下载地址：<uri>http://home.jesus.ox.ac.uk/~ecatmur/my-bin/pruneworld</uri>
+</p>
+
+<p>
+参数：
+</p>
+
+<ul>
+<li>不带参数，程序将会仔细查看你的world文件，并列出需要的记录和冗余的记录。</li>
+<li>带一个包或版本作为参数，程序将会列出系统对该包或版本的依赖性。</li>
+<li>-P:‘仔细的修剪’，删除那些系统对其没有依赖性的重复包（Slotted packages）。</li>
+<li>-d:‘积极的depclean’，在上面的基础上再作一次depclean。</li>
+<li>-c:程序pruneworld将不会考虑编译时的依赖性，而只有实时和以前安装的依赖性。</li>
+</ul>
+
+<p>
+下面有一些样本输出：
+</p>
+
+<pre>
+      #prunewolrd
+      !!!REDUNDANT!!! app-admin/gkrellm depended on by:
+              x11-plugins/gkrellflynn-0.6
+              x11-plugins/gkrellmoon-0.6
+              x11-plugins/gkrellmss-2.3
+      app-admin/syslog-ng
+      !!!REDUNDANT!!! app-editors/gvim depended on by:
+              app-text/vim-latex-1.5_rc1
+              app-vim/info-1.7-r1
+      app-editors/nano
+      app-emulation/wine
+      ...
+      x11-themes/mplayer-skins
+      x11-themes/nautilus-themes
+ 
+      145 packages in worldfile: 137 valid, 8 redundant; 70 packages in system.
+      563 packages installed: 12% in system, 25% in world, 63% deps.
+</pre>
+
+<p>
+如果运行时不带任何参数，修剪过的包的列表将会在stdout中输出，而那些系统依赖性（“depended on by”）信息和最后的汇总将会在stderr中输出。这样的情况下你可以这样做：
+</p>
+
+<pre>
+pruneworld > newworld; mv newworld /var/cache/edb/world
+</pre>
+
+<p>
+虽然我从不亲自这样做，因为这样太不安全了。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap12: 为什么我不能用<c>su</c>转换成ROOT-->
+
+
+<chapter>
+<title>为什么我不能用<c>su</c>转换成ROOT</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=23378</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+为什么我不能用<c>su</c>转换成ROOT
+</p>
+
+<p>
+我已经加了非ROOT的用户， 但当我试着输入<c>su</c>指令的时候， 却不成功， 错误讯息是<c>Permission denied</c>。 怎么会这样， 我要怎么修复。
+</p>
+
+<p>
+回答：为了安全起见， GENTOO的默认设定了用户必须是WHEEL组群的才能使用SU指令。你可以通过几种方法来将用户加到WHEEL组群。首先可以用usemod －G来加：
+</p>
+
+<pre>
+# usermod -G users,wheel username
+
+<codenote>任何多余的组群将会被删除， 所以如果你想保留USER在AUDIO组群的话， 你要指定如下：</codenote>
+# usermod -G users,wheel,audio username
+</pre>
+
+<p>
+你也可以利用vigr指令来编辑<path>/etc/group</path>， 将WHEEL组群这行变成以下格式：
+</p>
+
+<pre>
+wheel::10:root,username
+</pre>
+
+<p>
+我已经将用户加入WHEEL组群， 但仍然不能用SU。我的错误讯息有一点不同了“Authentication Failure.”则可以检查/bin/su的权限：
+</p>
+
+<pre>
+$ ls -l /bin/su
+</pre>
+
+<p>
+它应该是这样的：
+</p>
+
+<pre>
+-rwsr-xr-x 1 root root
+</pre>
+
+<p>
+用以下的命令修改：
+</p>
+
+<pre>
+# chown root.root /bin/su
+# chmod 4755 /bin/su
+</pre>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap13: 在linux下自动关闭显示器-->
+
+
+<chapter>
+<title>在linux下自动关闭显示器</title>
+<body>
+
+<ul>
+<li>作者：Nick Brown</li>
+<li>来源：</li>
+<li>译者：cabrio</li>
+</ul>
+
+<p>
+我为我的linux系统买了一台新的LCD显示器，但是我很在意显示器的背光灯管会不会烧坏，因为linux在系统不使用时只是让显示器处于空白显示状态而不是象windows那样完全将显示器关掉。经过一番搜索，我发现linux下实现同样的效果非常简单，只要以下几个步骤就可以了：
+</p>
+
+<section>
+<title>编译您的内核使其支持ACPI</title>
+<body>
+
+<p>
+我使用的是Gentoo linux，默认的内核已经是支持的了。如需检查您是否已经编译了ACPI支持，请查看文件<path>/proc/acpi/info</path>是否存在。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装和运行acpid</title>
+<body>
+
+<p>
+在Gentoo上，您可以键入命令<c>emerge acpid</c>来安装。然后通过<c>rc-update add acpid default</c>命令使其开机自动运行。现在您不必重启，只需通过命令<c>/etc/init.d/acpid start</c>手动启动acpid程序。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置XFree86使用DPMS</title>
+<body>
+
+<p>
+编辑<path>/etc/X11/XF86Config</path>文件，在<e>Monitor段(section)</e>添加一行<e>Option “DPMS”</e>，在<e>ServerLayout’段(section)</e>添加<e>Option "OffTime" "20"</e>。数字20表示在显示器关掉之前的非活动状态分钟数。如果您使用了鼠标或键盘显示器将重新开启。另外，您还可以使用<e>StandbyTime</e>来最小化节电(power saving)，使用<e>SuspendTime</e>使节电程度保持在中等水平。我在我的LCD上使用<e>SuspendTime</e>，因为它可以关掉背光灯，而其他两个会在最初的几分钟里报告信号丢失(Lost Signal)。
+</p>
+
+<p>
+如果您想测试一切是否正常，不必重启X并等上20分钟，在xterm中键入命令<c>xset dpms force off</c>就可以了。在这个命令中您也可以使用<c>standby</c>或<c>suspend</c>来替代<c>off</c>。
+</p>
+
+<p>
+如果想获知更多的详细信息，请参考位于<uri>http://www.tldp.org/HOWTO/Battery-Powered/</uri>上的电池驱动的<e>linux(Battery Powered Linux Mini-HOWTO)</e>一文。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</section>
+</body>
+</chapter>
+
+
+<!--chap14:如何在其他发行版中安装PORTAGE-->
+
+
+<chapter>
+<title>如何在其他发行版中安装PORTAGE</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri>http://forums.gentoo.org/viewtopic.php?t=28559</uri></li>
+<li>译者：小劲鸭</li>
+</ul>
+
+<p>
+我可以在其他发行版上安装PORTAGE吗？
+是的， 不但可以而且运作很好。我曾经冒险在我稳定的LINUX下做了这个实验， 现在我仍然在用。
+</p>
+
+<p>
+需求：
+</p>
+
+<pre>
+Python 2.2.x
+Development Packages (gcc, binutils, automake, autoconf, libtool, etc)
+Patience
+</pre>
+
+<p>
+去GENTOO的镜像下载PORTAGE的TARBALL， 解压缩后， 照以下步骤进行：
+</p>
+
+<pre>
+cd bin/
+cp * /usr/bin
+cd ../pym
+cp * /usr/lib/python2.2/site-packages
+cd ../man
+cp *.1 /usr/man/man1
+cp *.5 /usr/man/man5
+cd ../src/missingos
+./setup.py install
+cd ../sandbox-1.1
+make &amp;&amp; make install
+cd ../../cnf
+cp * /etc
+cd ..
+cp make.profile/ /etc
+</pre>
+
+<p>
+现在一个基本的PORTAGE安装已经准备就绪了。用ROOT身份<c>emerge sync</c>。 这样就可以安装portage tree了。现在你可以定做你的东西了。先到<path>/usr/portage/profiles</path>，接着就是复制正确的profile。如果你是用<path>gcc-3.2</path>，请用1.4 profiles(在你的arch目录下）。如果不是， 请用默认的。
+</p>
+
+<p>
+现在编辑你的<path>/etc/make.conf</path>并且编辑你所需的USE变量，请参考<path>/usr/portage/use.desc</path>来取得更多的信息。如果你是用gcc-3.2, 请在make.conf里加上<e>COMPILER="gcc3"</e> 。
+</p>
+
+<p>
+现在如果你要emerge软件包的话， 系统会就依赖性出现问题。 按照下列所示的解决glibc的依赖问题：
+</p>
+
+<pre>
+emerge inject sys-libs/glibc-version.
+emerge inject sys-devel/gcc-version
+</pre>
+
+<p>
+emerge软件包系统可能会也可能不会出现关于tar的问题。如果出现了， 请到<path>ebuild.sh</path>里按照问题讯息所显示的行数里修改所有关于-no-same-owner 和 -same-owner的参数。然后<c>emerge tar</c>。
+</p>
+
+<pre>
+emerge tar
+emerge sed
+emerge bash
+emerge pmake
+emerge sys-apps/baselayout
+emerge portage
+</pre>
+
+<p>
+现在你可以放心执行portage了， 我已经成功emerge新版的gcc和其他的系统工具。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap15:正确的使用Portage-->
+
+<chapter>
+<title>正确的使用Portage</title>
+<body>
+
+<ul>
+<li>作者：GaMMa</li>
+<li>来源：<uri link="">http://forums.gentoo.org/viewtopic.php?t=171464</uri></li>
+<li>译者：gen2</li>
+</ul>
+
+<section>
+<title>简述</title>
+<body>
+
+<p>
+Gentoo的portage系统如果使用得当可说是无往而不利。而不当的使用则会导致无法追踪的包、破损的world文件以及臃肿的系统。遵照本指南，您将拥有更加完美的系统。
+</p>
+
+</body>
+</section>
+<section>
+<title>Emerge包</title>
+<body>
+
+<p>
+建议以如下方式emerge不稳定的包:
+</p>
+
+<pre>
+#emerge foo
+</pre>
+
+<note>
+不要使用ACCEPT_KEYWORDS="~x86" 因为它会emerge你可能不想要的标记为~x86的依赖包。
+</note>
+
+<p>
+建议你首先尝试emerge该ebuild, 如果提示ebuild为非稳定版，采取如下的适当行动。解决了这个问题后试着再次emerge该包，这时可能会提示另外某个依赖包有问题。重复上面的步骤直到emerge完该包。是的，看起来确实难受，不过起码你知道都有哪些不稳定的包塞进了你的系统。
+</p>
+
+<warn>
+直接emerge一个ebuild文件 (<c>emerge foo.ebuild</c>) 给某些用户产生国麻烦，不可采用。一些情况些包没有写入world文件。另外使用本方法，如果有下新的该包的不稳定的发行版，你不会被提示，哪怕其中包含有重要的安全问题的修订。
+</warn>
+
+</body>
+</section>
+<section>
+<title>维护包</title>
+<body>
+
+<p>
+有时运行<c>emerge -u world</c> ，portage会降级某些包。如果想避免这些包被降级， 创建<path>/etc/portage</path>目录［如果还没有的话］。
+</p>
+
+<pre>
+#mkdir /etc/portage
+</pre>
+
+<p>
+在<path>/etc/portage/package.keywords</path>文件中增加该包的完整名称，后面跟~x86. 例如如果想在系统中保有Gaim的不稳定版本，输入这行命令:
+</p>
+
+<pre>
+#echo net-im/gaim ~x86 >> /etc/portage/package.keywords
+</pre>
+
+<p>
+对所有你不想降级的包如法炮制。
+</p>
+
+<p>
+还可许可某个包的特定非稳定版本，这样该包新的不稳定版本冒出来时系统不会自动升级。 语法如下:
+</p>
+
+<pre>
+#echo =app-misc/foo-version ~x86>> /etc/portage/package.keywords
+</pre>
+
+<p>
+这行只允许emerge app-misc包的foo-version版。然而，revision bumps［修订升级］仍将被标记为~arch。若想在特定版本外还允许revision bumps［修订升级］ 标记为稳定，使用如下代码:
+</p>
+
+<pre>
+#echo ~app-misc/foo-version ~x86>> /etc/portage/package.keywords
+</pre>
+
+<p>
+这里version是不带-rX的版本。
+</p>
+
+<note>
+如果保持该清单按字母排序，找起包来比较容易。
+</note>
+
+<warn>
+<c>emerge -U world</c>可能给系统造成麻烦，不可使用。Earthwings在本帖中有详细讨论<uri>http://forums.gentoo.org/viewtopic.php?t=1673233</uri>
+</warn>
+
+<p>
+Portage有时还是会降级某些包。通常而言这样做有其道理。然而有时也会有例外，比如我有2.6.x的内核，可是linux-headers总想退回到2.4.x。Linux-headers 是唯一应该使用本方法的包，对其他包还是应该采用前面的办法，换句话说放任他们降级。在<path>/etc/portage/package.keywords</path>增加一行，或者运行:
+</p>
+
+<pre>
+#echo sys-kernel/linux-headers -* >> /etc/portage/package.keywords
+</pre>
+
+<p>
+有时不需要的包会试图溜进我们的系统。xorg-x11的用户可能已经注意到xfree总想挤进来。要搞定这个问题，可在<path>/etc/portage/package.mask</path>中加一行或者键入:
+</p>
+
+<pre>
+#echo x11-base/xfree >> /etc/portage/package.mask
+</pre>
+
+<p>
+有时包会被硬屏蔽，比如我知道的有realone。该包有一个会导致系统不安全的漏洞，所以被屏蔽。如果你还是想安装realone, package.unmask文件可助你一臂之力。输入该命令:
+</p>
+
+<pre>
+#echo media-video/realone >> /etc/portage/package.unmask
+</pre>
+
+<p>
+另外如果你不想某个包包含某个USE标志，可利用<path>package.use</path>文件。创建<path>/etc/portage/package.use</path>文件，在终端中输入类似如下的命令:
+</p>
+
+<pre>
+#echo net-p2p/bittorrent -X >> /etc/portage/package.use
+</pre>
+
+<p>
+这会通知portage在<c>emerge bittorrent</c>时不要包含对X的支持。
+</p>
+
+</body>
+</section>
+<section>
+<title>维护world文件</title>
+<body>
+
+<p>
+有时因为种种原因包没有加入world文件。要修理world文件加入这些包，敲入:
+</p>
+
+<pre>
+#regenworld
+</pre>
+
+<p>
+如果<c>regenworld</c>还搞不定，这还有一帖讨论world文件修复问题：<uri>http://forums.gentoo.org/viewtopic.php?t=1366277</uri>
+</p>
+
+</body>
+</section>
+<section>
+<title>结论</title>
+<body>
+
+<p>
+使用本法，可让<c>emerge -u world</c>成为现实。你将拥有一个顶尖的稳定系统。
+</p>
+
+<pre>
+#emerge -uDav world
+</pre>
+
+<p>
+这是升级系统的不二良方。u表示升级, D表示深度审查依赖树, a代表emerge前征求你的意见 而 v 表示详细的提示信息，它会告诉你每个包将采用的USE标志。
+</p>
+
+<p>
+推荐采用ecatmur的cruft脚本，它将让你的安装干净整洁! <uri>http://forums.gentoo.org/viewtopic.php?t=1526181</uri>
+</p>
+
+</body>
+</section>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!-- chap16:保持系统新而安全的方法 -->
+
+<chapter>
+<title>保持系统新而安全的方法</title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri link=""></uri></li>
+<li>译者：gen2</li>
+</ul>
+
+<p>
+预备工作：在portage之外， 还需要gentoolkit
+</p>
+
+<pre>
+#emerge gentoolkit
+</pre>
+
+<p>
+更新portage树
+</p>
+
+<pre>
+#emerge sync
+</pre>
+
+<p>
+升级包
+</p>
+
+<pre>
+#emerge -uDav world
+</pre>
+
+<p>
+清除［可能］不需要的包
+</p>
+
+<pre>
+#emerge -v depclean
+</pre>
+
+<p>
+会提示这是危险动作，但是我的经验，一般没问题
+</p>
+
+<p>
+重建依赖关系树，挽救上一步可能误杀的好人
+</p>
+
+<pre>
+#revdep-rebuild -v
+</pre>
+
+<p>
+修补安全漏洞
+</p>
+
+<pre>
+#glsa-check -f all
+</pre>
+
+<note>
+glsa是Gentoo Linux Security Advisor的缩写。 glsa-check的功能在通过测试考验后最终会被加入portage中，以后你将可以使用类似 emerge security的语法来完成同样的工作。
+</note>
+
+<p>
+如果你在意系统安全，这一步也是必不可少的。
+</p>
+
+<p>
+使用这样的步骤来保养你的系统，可保江山永固。
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!-- chap17:收取hotmail邮件攻略 -->
+
+
+<chapter>
+<title>Gentoo 收取 hotmail 邮件攻略</title>
+<body>
+
+<ul>
+<li>作者：maxzhongcn</li>
+<li>来源：<uri link=""></uri></li>
+</ul>
+
+<section>
+<title>安装配置邮件系统</title>
+<body>
+
+<p>
+首先你需要建立自己的邮件服务器，我采用的是 Postfix＋Courier-imap＋Cyrus-sasl＋Fetchmail＋Mutt＋ SquirrelMail。可以参考 Gentoo 上的这篇文章<uri>http://www.gentoo.org/doc/en/virt-mail-howto.xml</uri>完成。同时你还要安装 xinetd 以支持 hotwayd 守护进程。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装配置hotwayd</title>
+<body>
+
+<p>
+确认你的邮件系统正常运转后，下一步是安装 hotwayd。
+</p>
+
+<pre>
+#emerge hotwayd
+</pre>
+
+<p>
+修改<path>/etc/xinetd.d/hotwayd</path>如下：
+</p>
+
+<pre>
+service hotwayd
+{
+        only_from           = localhost
+        type                   = unlisted
+        protocol               = tcp
+        socket_type         = stream
+        wait                    = no
+        user                    = nobody
+        port                    = 555
+        server                  = /usr/sbin/hotwayd
+#       server_args             = -s
+#       log_on_success          += USERID
+#       log_on_failure          += USERID
+        disable                 = no
+}
+</pre>
+
+<p>
+修改 /etc/services，加入下面一行：
+</p>
+
+<pre>
+hotwayd         555/tcp                         # Added for hotwayd
+</pre>
+
+<p>
+然后让 xinetd 重新装载配置：
+</p>
+
+<pre>
+#/etc/init.d/xinetd reload      ［OK]
+</pre>
+
+</body>
+</section>
+<section>
+<title>修改/etc/fetchmailrc加入hotmail</title>
+<body>
+
+<pre>
+poll localhost
+        proto   pop3
+        port    555
+        user "yourname@hotmail.com"  你的 hotmail 帐户 
+        pass "your hotmail pass"  你的 hotmail 密码 
+        is localusrname  本地收取邮件用户名
+        fetchall
+</pre>
+
+<p>
+重启 fetchmail：
+</p>
+
+<pre>
+#/etc/init.d/fetchmail restart      [OK]
+</pre>
+
+</body>
+</section>
+
+<p>
+OKEY！接下来就是坐下来等着 fetchmail 将 hotmail 邮件收取下来啦！如果你在 gkrellm 里设置好了 mailer ，你就可以看到你的小企鹅欢快地跳起来了，赶快登录你的 SquirrelMail 查看新邮件吧！
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+
+<!--chap18:让你的 Linux 开口和你说话 -->
+
+
+<chapter>
+<title>让你的 Linux 开口和你说话</title>
+<body>
+
+<ul>
+<li>作者：maxzhongcn</li>
+<li>来源：<uri link=""></uri></li>
+</ul>
+
+<p>
+安装 speechd 和 festival：
+</p>
+
+<pre>
+#emerge speechd
+</pre>
+
+<p>
+只要 emerge speechd 会同时把 festival 一起装上。
+</p>
+
+<p>
+emerge 完毕后键入：
+</p>
+
+<pre>
+#ebuild /var/db/pkg/media-sound/speechd-0.56/speechd-0.56.ebuild config 
+</pre>
+
+<p>
+这会在<path>/dev</path>中建立 speech 设备。
+</p>
+
+<p>
+OK！ 现在让我们来测试一下：(as root 同时把你的音箱打开音量调到最大 )
+</p>
+
+<pre>
+#speechd &amp;
+#echo "Hello my Linux" > /dev/speech
+</pre>
+
+<p>
+听到了什么？呵呵...
+</p>
+
+<p>
+最后的设置：如果要其他用户也能使用 speech，需要修改<path>/etc/group</path>将该用户名加入 speech 组。要想让你开机进入系统后你的电脑对你说出什么的话，只要利用<path>local.start</path>就可以了，比如加入下面两行：
+</p>
+
+<pre>
+speech &amp;
+echo "Hello my Master, your gentoo box is up and running now, please log in" > /dev/speech
+</pre>
+
+<p>
+有了 speech 是不是更期待系统启动的那一刻了？ 
+</p>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+
+</guide>
+<!--
+<chapter>
+<title></title>
+<body>
+
+<ul>
+<li>作者：</li>
+<li>来源：<uri link=""></uri></li>
+<li>译者：</li>
+</ul>
+
+<p>
+<uri link="#doc_chap1">回到目录</uri>
+</p>
+
+</body>
+</chapter>
+-->

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide link="/doc/zh_cn/gentoo-mips-install.xml">
+<title>Gentoo MIPS Installation Guide</title>
+
+<author title="Author">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="Translator">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<abstract>
+安装指南的替代文档。
+</abstract>
+
+<license/>
+
+<version>1.0</version>
+<date>March 6th, 2004</date>
+
+<chapter>
+<title>Gentoo MIPS安装指南</title>
+<section>
+<body>
+
+<p>
+从2004.0版本开始，由于新的（扩展的）<uri link="/doc/zh_cn/handbook/handbook-mips.xml">Gentoo手册</uri>，不同架构的安装指南已经被废弃掉了。更多的信息请查看<uri link="/doc/en/handbook">Gentoo手册项目</uri>页面。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

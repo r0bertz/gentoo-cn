@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<sections>
+<section>
+<title>Introduction</title>
+<body>
+
+<p>
+This section aims to explain the Gentoo development hierachy and gives
+developers an insight to how Gentoo Linux development management is
+structured.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>The Top-Level management structure</title>
+<body>
+
+<p>
+The purpose of the new management structure was to solve chronic
+management, coordination and communication issues in the Gentoo
+project. In particular, we had no clearly defined top-level management
+structure, and no official, regular meetings to communicate status
+updates between developers serving in critical roles. In general, most
+communication took place on IRC and irregularly via email. There was
+also little to no accountability, even at a high level, to complete
+projects on time.
+</p>
+
+<p>
+Because of this prior state of affairs, it was difficult to set goals
+and track the status of projects. This lack of communication and
+coordination also made it difficult for top-level developers to manage
+their own projects. In addition, we had other chronic problem of not
+having clearly-defined roles and scopes of executive decision-making
+authority for top-level developers, which resulted in many top-level
+developers doubting that they even have the authority to manage their
+own projects and sub-projects. While this had *never* been the
+intention of top-level developers, it is the unfortunate result of an
+unstructured development process: no one knew what was going on, and
+everyone deferred to the Chief Architect for all executive decisions.
+</p>
+
+<p>
+Clearly, a plan was needed to swiftly and permanently address these
+issues by increasing communication, coordination, and
+accountability. Roles and scopes of executive decision-making
+authority needed to be defined for top developers so that they have a
+clear mandate as well as accountability to manage their projects and
+thus ensure their projects completed their appointed work efficiently
+and on-schedule.
+</p>
+
+<p>
+The following list outlines the system:
+</p>
+
+<ul>
+  <li><b>Top level leads</b>: decide on development efforts</li>
+  <li><b>Sub project leads</b>: correlate development efforts with teams</li>
+  <li><b>Team leads</b>: head their team and ensure its productiveness</li>
+  <li><b>Developers</b>: develop and improve Gentoo Linux!</li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>Top-Level and sub-project leads</title>
+<body>
+
+<p>
+Top level leads work on leading major aspects of development such as
+release coordination and also are responsible for outlining where
+development efforts should go and how Gentoo should improve using user
+and developer feedback.
+</p>
+
+<p>
+Sub project leads are responsible for coordinating the wishes of the
+top-level leads and the Gentoo community to their teams: for example,
+new guidelines for the X86 architecture might involve the base-system
+team and also the kernel teams which would be coordinated by a sub project
+leader.
+</p>
+
+<p>
+Sub project leads are optional, and so are top level leads: however, in
+most circumstances your team would usually end up working under the
+recommendation of the arhitecture leads.
+</p>
+</body>
+</section>
+
+<section>
+<title>Team leads</title>
+<body>
+<p>
+Team leads are responsible for organizing the developer in their team
+and coordinating releases and also resolving issues within the team,
+as well as improving products on the basis of feedback from the community.
+</p>
+
+<p>
+Teams are not required to have team leads, and some teams often work
+on a we-fix-it-when-we-get it basis and this may be a better solution
+than having a team lead in certain circumstances. However, this is up
+to the team to decide.
+</p>
+
+<p>
+Most teams are part of a herd, which is an effort to organize
+development efforts. Please see the Metadata Project page for more details.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Developers</title>
+<body>
+
+<p>
+Developers are responsible for developing the distribution and working
+on their relevant projects. Some developers may be part of a team,
+while others may work on a project which is not part of a team, or herd.
+</p>
+
+<p>
+If developers have any issues, they should speak with their team
+leads, top level leads, or alternatively you may mail the gentoo-dev
+or gentoo-core mailing lists with requests for advice or comments.
+</p>
+
+</body>
+</section>
+
+<!-- FIXME TODO...
+
+<section>
+<title>Decision making</title>
+<body>
+<p>
+Currently, GLEPs (Gentoo Linux Enhancement Proposals) can be approved
+or rejected by the appropriate top-level manager under which the GLEP
+falls. If there is no clearly-defined manager under which the GLEP
+falls, the GLEP will be voted upon by the Managers and Chief
+Architect, and must be approved unanimously. In all cases, a public,
+written explanation must be provided detailing why the GLEP was
+approved or rejected, either by the manager who approved/rejected it,
+or the head of the GLEP sub-project (Grant Goodyear) if the GLEP was
+voted upon by the management team. This summary is meant to reflect
+the decision that was made by some of the managers at an early manager
+meeting.
+</p>
+
+<p>
+Currently, there is no formal general voting procedure in place. In
+the interim, any item to be voted upon must be approved by "votable"
+by the Chief Architect. Before voting takes place, all managers must
+have an opportunity to present their ideas before the other managers,
+with the general originator(s) of the idea having the opportunity to
+present first. After that, the Chief Architect and Managers can
+present their ideas, with the Chief Architect having the opportunity
+to present last. After this has happened, voting can take place, and
+the item will be approved on an unanimous vote. Managers or the Chief
+Architect can choose to abstain from voting, and the vote can still
+pass with abstainers as long as at least 50% of the members have
+voted. The voting must take place at an official managers
+meeting. Non-attending managers are allowed to vote via email. The
+vote must be officially tallied and posted to the managers list.
+</p>
+
+<p>
+The reason for the "Chief Architect approval" clause it to prevent the
+voting process from being abused by allowing voting items that make no
+sense, such as those that begin with a "Should we continue to," where
+a "nay" result would result in a change in existing policy, as well as
+preventing managers for requesting that every small decision be voted
+upon. We currently have no clear policy to determine what is a
+"votable" item, and without this policy there needs to be some method
+to determine what is "votable" and what affects some immutable part of
+Gentoo.
+</p>
+
+<p>
+This section is subject to additional clarification and refinement in
+the future, as is the rest of this document. The purpose of this
+section is to document our currently-existing procedures rather than
+define ideal or "final" procedures.
+</p>
+</body>
+</section>
+-->
+
+</sections>

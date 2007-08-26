@@ -1,0 +1,543 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86-disk.xml,v 1.4 2004/07/26 09:04:42 dertobi123 Exp $ -->
+
+<sections>
+<section>
+<title>块设备的介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们将来看看Gentoo Linux和Linux上磁盘相关方面的问题，包括文件系统、分区和块设备。然后，只有你熟悉了磁盘和文件系统的细节，你才将可以在Gentoo Linux的安装中正确的设置分区和文件系统哦。
+</p>
+
+<p>
+我们将从介绍<e>块设备</e>开始。最为人所知的块设备很可能是Linux系统的第一个IDE驱动器，也就是<path>/dev/hda</path>。如果你的系统使用SCSI驱动器，那么你的第一个硬盘驱动器就是<path>/dev/sda</path>。
+</p>
+
+<p>
+上面的块设备其实是磁盘的接口的抽象概念。用户编程时不需要担心你的驱动器是IDE、SCSI或者别的什么，也可以使用这些块设备和你的磁盘交流。程序可以简单的以一连串连续和随机存取的512字节块来定位存储。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分区</title>
+<body>
+
+<p>
+虽然理论上是可以用整个磁盘来放置你的Linux系统，但是实际的操作几乎很少如此。反而，整个磁盘将会被分为几个更小更方便管理的块设备。在x86系统上，它们被称作为<e>分区</e>。
+</p>
+
+<p>
+分区分为三种：<e>主分区</e>、<e>扩展分区</e>和<e>逻辑分区</e>。
+</p>
+
+<p>
+一个<e>主分区</e>是在MBR（主引导记录）上有其记录信息的分区。因为MBR很小（512字节），所以只能定义三个主分区（比如<path>/dev/hda1</path>到<path>/dev/hda4</path>。
+</p>
+
+<p>
+一个<e>扩展分区</e>是一种特别的主分区（也就是扩展分区必须是四个可能主分区中的一个），它能包含更多的分区。这样的一个分区实际上并不存在，但是因为四个分区实在太少，为扩展分区表而又不会失去向后兼容能力，就引入了这个概念。
+</p>
+
+<p>
+一个<e>逻辑分区</e>是扩展分区里的一个分区。它们的定义不是放在MBR里，但是在扩展分区里声明的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>高级存储</title>
+<body>
+
+<p>
+x86的LiveCD提供了对EVMS和LVM2的支持。EVMS和LVM2可以增加对你的分区设置的灵活性。在这个安装说明中，我们将集中于“常规”分区，但是了解可以支持EVMS和LVM2也是很有用的。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区表</title>
+<subsection>
+<title>默认的分区策略</title>
+<body>
+
+<p>
+如果你对为你的系统设计一个分区策略没什么兴趣的话，你可以使用我们在这本书里介绍的分区策略：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>文件系统</th>
+  <th>大小</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><path>/dev/hda1</path></ti>
+  <ti>ext2</ti>
+  <ti>32M</ti>
+  <ti>启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/hda2</path></ti>
+  <ti>(swap)</ti>
+  <ti>512M</ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/hda3</path></ti>
+  <ti>ext3</ti>
+  <ti>Rest of the disk</ti>
+  <ti>根分区</ti>
+</tr>
+</table>
+
+<p>
+如果你感兴趣于一个分区应该多大，或者你需要多少分区，继续读下去。否则从<uri link="#fdisk">使用fdisk对你的磁盘分区</uri>继续。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>多少？多大？</title>
+<body>
+
+<p>
+分区的数量主要根据你的环境所定。比如说，如果你有多个用户，你将会愿意使<path>/home</path>单独出来，这样不仅增加了安全性还方便备份。如果你安装Gentoo是用作邮件服务器，你的<path>/var</path>应该单独出来，因为它里面存储了所有的邮件。然后文件系统的选择将会提高系统的性能。游戏服务器将有一个单独的<path>/pot</path>，因为绝大多数的游戏服务器都安装在此，原因同<path>/home</path>的一样：安全性和备份。
+</p>
+
+<p>
+就同你看到的，这很大程度上取决于你要达到的目标。单独的分区或者卷有如下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每个分区或者卷选择最好的文件系统
+</li>
+<li>
+  如果一个废弃的工具连续的向一个分区或者卷写入文件，这个系统不会用光所有的磁盘空间
+</li>
+<li>
+  如果需要，文件系统的检查的是件可以减少，因此多个检查可以并行进行（虽然这个优势在多磁盘比多分区中明显的多）
+</li>
+<li>
+  通过只读、nosuid（可以忽略setuid的特性）、noexec（可以忽略可执行的特性）等挂载一些分区或者卷，可以增强安全性。
+</li>
+</ul>
+
+<p>
+但是，多分区也有一个很大的缺点：如果没有合理配置，你可能导致在一个系统里导致一个分区过多的剩余空间而另一个分区没有空间。
+</p>
+
+<p>
+作为分区的一个样例，我们给你看看一个示范笔记本（包含网站服务器、邮件服务器、gnome……）上20Gb磁盘的分区表：
+</p>
+
+<pre caption="文件系统使用样例">
+Filesystem    Type    Size  Used Avail Use% Mounted on
+/dev/hda5     ext3    509M  132M  351M  28% /
+/dev/hda2     ext3    5.0G  3.0G  1.8G  63% /home
+/dev/hda7     ext3    7.9G  6.2G  1.3G  83% /usr
+/dev/hda8     ext3   1011M  483M  477M  51% /opt
+/dev/hda9     ext3    2.0G  607M  1.3G  32% /var
+/dev/hda1     ext2     51M   17M   31M  36% /boot
+/dev/hda6     swap    516M   12M  504M   2% &lt;not mounted&gt;
+<comment>（还有2Gb的未分区空间留作后用）</comment>
+</pre>
+
+<p>
+这里<path>/usr</path>用的很充分（使用了83%），但是一旦所有的软件都已经安装了，<path>/usr</path>就不会继续增长下去了。对于<path>/var</path>来说，人们可能认为分配的空间太多了。但是，Gentoo是在<path>/var/tmp/portage</path>里编译所有的软件，因此你至少应该让<path>/var</path>在不编译大软件的情况下留有1G的剩余空间，而在编译KDE和OpenOffice.org时则需要3G的剩余空间才可以对你不会造成问题。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="fdisk">
+<title>使用fdisk对磁盘分区</title>
+<subsection>
+<body>
+
+<p>
+下面的部分将会解释怎样创建前面提到的样例分区表，也就是：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><path>/dev/hda1</path></ti>
+  <ti>启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/hda2</path></ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/hda3</path></ti>
+  <ti>根分区</ti>
+</tr>
+</table>
+
+<p>
+根据你自己的意愿来改变你的分区表。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>查看当前分区布局</title>
+<body>
+
+<p>
+<c>fdisk</c>是用来对磁盘进行分区的很流行和强大的一个工具。在你的系统中输入<c>fdisk</c>（在我们的例子中，我们将使用<path>/dev/hda</path>）：
+</p>
+
+<pre caption="开始fdisk">
+# <i>fdisk /dev/hda</i>
+</pre>
+
+<p>
+一旦进入<c>fdisk</c>后，你将会看到如下的提示符：
+</p>
+
+<pre caption="fdisk提示符">
+Command (m for help): 
+</pre>
+
+<p>
+输入<c>p</c>来查看你硬盘上的当前分区设置：
+</p>
+
+<pre caption="一个分区配置的样例">
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 240 heads, 63 sectors, 2184 cylinders
+Units = cylinders of 15120 * 512 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+/dev/hda1             1        14    105808+  83  Linux
+/dev/hda2            15        49    264600   82  Linux swap
+/dev/hda3            50        70    158760   83  Linux
+/dev/hda4            71      2184  15981840    5  Extended
+/dev/hda5            71       209   1050808+  83  Linux
+/dev/hda6           210       348   1050808+  83  Linux
+/dev/hda7           349       626   2101648+  83  Linux
+/dev/hda8           627       904   2101648+  83  Linux
+/dev/hda9           905      2184   9676768+  83  Linux
+
+Command (m for help): 
+</pre>
+
+<p>
+这个已分区的磁盘配置用来放置七个Linux文件系统（每个都有一个相对应的分区，以“Linux”出现）和一个交换分区（以“Linux swap”出现）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>删除所有分区</title>
+<body>
+
+<p>
+首先，我们将从这个磁盘上删掉所有已有的分区。输入<c>d</c>来删掉一个分区。比如，删掉已有的分区<path>/dev/hda1</path>：
+</p>
+
+<pre caption="删除一个分区">
+Command (m for help): <i>d</i>
+Partition number (1-4): <i>1</i>
+</pre>
+
+<p>
+这个分区已经准备删除。在你输入<c>p</c>以后将不再出现，但是直到你做的这些修改保存了，它才回被真正删除掉。如果你犯了点小失误，不想保存任何修改就退出，立即输入<c>q</c>并输入enter，你的分区就不会删除了。
+</p>
+
+<p>
+现在，假设你确实要删掉你系统上所有的分区，重复的输入<c>p</c>来列出分区然后输入<c>d</c>和标号来删掉分区。最后，你将会得到一个什么都没有的分区表：
+</p>
+
+<pre caption="一个空的分区表">
+Disk /dev/hda: 30.0 GB, 30005821440 bytes
+240 heads, 63 sectors/track, 3876 cylinders
+Units = cylinders of 15120 * 512 = 7741440 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+
+Command (m for help):
+</pre>
+
+<p>
+现在，在内存中的分区表已经空了，我们将准备创建分区。我们将使用前面讨论过的默认分区策略。当然，如果你不想使用相同的分区策略，不要死板的按照这些说明来做！
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>创建启动分区</title>
+<body>
+
+<p>
+我们首先来创建一个小的启动分区。输入<c>n</c>来创建一个新的分区，然后输入<c>p</c>选择一个主分区，接着输入<c>1</c>来选择第一个主分区。当提示第一个扇区时，点击enter。当提示最后的扇区时，输入<c>+32M</c>来创建一个大小为32Mbyte的分区。
+</p>
+
+<pre caption="创建启动分区">
+Command (m for help): <i>n</i>
+Command action
+  e   extended
+  p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>1</i>
+First cylinder (1-3876, default 1): <comment>(Hit Enter)</comment>
+Using default value 1
+Last cylinder or +size or +sizeM or +sizeK (1-3876, default 3876): <i>+32M</i>
+</pre>
+
+<p>
+现在，当你输入<c>p</c>时，你应该可以看到如下的分区：
+</p>
+
+<pre caption="已创建的启动分区">
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 30.0 GB, 30005821440 bytes
+240 heads, 63 sectors/track, 3876 cylinders
+Units = cylinders of 15120 * 512 = 7741440 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+/dev/hda1          1        14    105808+  83  Linux
+</pre>
+
+<p>
+我们需要这个分区可以启动。输入<c>a</c>在这个分区上切换可启动标签。如果你再输入<c>p</c>，你将会注意到在“Boot”栏有一个<path>*</path>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>创建交换分区</title>
+<body>
+
+<p>
+现在我们来创建交换分区。要做这个，输入<c>n</c>创建一个新分区，然后输入<c>p</c>来告诉fdisk你需要一个主分区。然后输入<c>2</c>来创建第二个主分区，在这里也就是<path>/dev/hda2</path>。当提示第一个扇区时，点击enter。当提示最后一个扇区时，输入<c>+512M</c>来创建一个大小为512MB的交换分区。做完这些之后，输入<c>t</c>来设定分区类型，<c>2</c>来选择你刚才创建的分区，然后输入<c>82</c>将分区类型设置为“Linux Swap”。完成这些步骤后，输入<c>p</c>应该可以看到类似如下的分区表：
+</p>
+
+<pre caption="创建一个交换分区后的分区表">
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 30.0 GB, 30005821440 bytes
+240 heads, 63 sectors/track, 3876 cylinders
+Units = cylinders of 15120 * 512 = 7741440 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+/dev/hda1 *        1        14    105808+  83  Linux
+/dev/hda2         15        81    506520   82  Linux swap
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建根分区</title>
+<body>
+
+<p>
+最后，让我们来创建根分区。要做这个，输入<c>n</c>创建一个信分区，然后输入<c>p</c>来告诉fdisk你需要一个主分区。然后输入<c>3</c>来创建第三个主分区，在这里也就是<path>/dev/hda3</path>。当提示第一个扇区时，点击enter。当提示最后一个扇区时，点击enter来创建一个使用磁盘剩下所有剩余空间的分区。完成这些步骤后，输入<c>p</c>应该可以看到类似如下的分区表：
+</p>
+
+<pre caption="创建根分区后的分区表">
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 30.0 GB, 30005821440 bytes
+240 heads, 63 sectors/track, 3876 cylinders
+Units = cylinders of 15120 * 512 = 7741440 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+/dev/hda1 *        1        14    105808+  83  Linux
+/dev/hda2         15        81    506520   82  Linux swap
+/dev/hda3         82      3876  28690200   83  Linux
+</pre>
+
+
+</body>
+</subsection>
+<subsection>
+<title>保存分区表</title>
+<body>
+
+<p>
+输入<c>w</c>保存分区表和退出<c>fdisk</c>。
+</p>
+
+<pre caption="保存并退出fdisk">
+Command (m for help): <i>w</i>
+</pre>
+
+<p>
+现在你的分区已经创建完成，你可以从<uri link="#filesystems">创建文件系统</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>简介</title>
+<body>
+
+<p>
+现在分区已创建完成，该到给它们文件系统的时候了。如果你并不关心要选择什么样的文件系统，对本书中的默认设置很满意的话，从<uri link="#filesystems-apply">给分区创建文件系统</uri>继续。否则，继续读下去，学习已有文件系统的相关知识……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+Linux内核支持各种各样的文件系统，我们着里将解释ext2、ext3、ReiserFS、XFS和JFS，因为这些文件系统在Linux系统中很常见的。
+</p>
+
+<p>
+<b>ext2</b>是一个可靠的真正的文件系统，但不支持元数据日志功能，这意味着启动时的日常文件系统检查将会消耗比较多的时间。现在已经有了很多新一代的日志文件系统可供选择，它们在稳定性检查时非常快，在和同等的非日志文件系统比较中越来越受到大家的喜爱。在启动系统时碰巧文件系统处于不稳定状态时，日志式文件系统可以防止出现长时间的延迟。
+</p>
+
+<p>
+<b>ext3</b>就是ext2文件系统的日志式版本，提供了用于快速恢复的元数据日志功能和其他的增强日志模式（如全数据和顺序数据日志）。ext3是一个很好的可靠的文件系统，它有一个额外的杂乱b-tree检索选项，使得在几乎任何情况下都可以有很高的性能。一句话，ext3确实是个很优秀的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是一个基于B*-tree的文件系统，在处理小文件（小于4k的文件）时，相比较ext2和ext3来说，有极其优秀的表现，常常是它们的10到15倍的性能表现。ReiserFS调整能力极强，也由元数据日志功能。对于高于2.4.18版本的内核来说，ReiserFS是一个可靠和有用的文件系统，可以同时用于多种用途和如大文件系统、小文件很多、大文件和包含极大量文件的文件夹等极端例子中。
+</p>
+
+<p>
+<b>XFS</b>是一个具有稳定和对可伸缩性加强的元数据日志功能的文件系统。我们只在使用高端SCSI和/或纤维通道存储（fibre channel storage）和不稳定电源供应这些情况下推荐使用这个。因为XFS在RAM中进行了强劲的流量缓冲，设计不合理的程序（那些在往磁盘写入文件时没有进行合理预测危险的程序，现在很多程序都属于此类）在系统不稳定时会对数据处理失去控制。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能的日志式文件系统。它最近在商品应用中已经准备就绪，但是在主动或者被动注释这一点上都没有足够的轨道记录。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>给分区创建文件系统</title>
+<body>
+
+<p>
+要对一个分区或者卷创建文件系统，对于每一个文件系统来说都有一些工具：
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+比如，我们要将启动分区（在我们例子中是<path>/dev/hda1</path>）设为ext2文件系统，而根分区（在我们的例子中是<path>/dev/hda3</path>）为ext3文件系统，你可以使用：
+</p>
+
+<pre caption="给分区创建文件系统">
+# <i>mke2fs /dev/hda1</i>
+# <i>mke2fs -j /dev/hda3</i>
+</pre>
+
+<p>
+现在为你新创建的分区（或者扩展卷）创建文件系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是用来初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区标识">
+# <i>mkswap /dev/hda2</i>
+</pre>
+
+<p>
+使用<c>swapon</c>来激活这个交换分区：
+</p>
+
+<pre caption="激活交换分区">
+# <i>swapon /dev/hda2</i>
+</pre>
+
+<p>
+现在已经创建并激活交换空间了。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区已经初始化并都使用了一个文件系统，该到挂在这些分区的时候了。使用<c>mount</c>命令来做这个。当然不要忘了给每个你创建的分区创建必要的挂载文件夹。作为一个例子，我们来挂载根分区和启动分区：
+</p>
+
+<pre caption="挂载分区">
+# <i>mount /dev/hda3 /mnt/gentoo</i>
+# <i>mkdir /mnt/gentoo/boot</i>
+# <i>mount /dev/hda1 /mnt/gentoo/boot</i>
+</pre>
+
+<note>
+如果你要你的<path>/tmp</path>为一个单独的分区，确认在挂载后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。对于<path>/var/tmp</path>也应该如此。
+</note>
+
+<p>
+我们也需要挂载proc文件系统（一个和内核的虚拟接口）到<path>/proc</path>。我们首先创建挂载点<path>/mnt/gentoo/proc</path>，然后挂载上这个文件系统：
+</p>
+
+<pre caption="创建挂载点 /mnt/gentoo/proc">
+# <i>mkdir /mnt/gentoo/proc</i>
+# <i>mount -t proc none /mnt/gentoo/proc</i>
+</pre>
+
+<p>
+现在从<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>继续。
+</p>
+
+</body>
+</section>
+</sections>

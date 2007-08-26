@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060710-newsletter.xml" lang="zh_cn">
+  <title>Gentoo Weekly Newsletter</title>
+  <subtitle>2006年7月10日</subtitle>
+  <author title="Editor">
+    <mail link="plate@gentoo.org">Ulrich Plate</mail>
+  </author>
+  <author title="Author">
+    <mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+  </author>
+  <author title="Author">
+    <mail link="mark_alec@gentoo.org">Mark Kowarsky</mail>
+  </author>
+  <author title="Author">
+    <mail link="musikc@charter.net">Chrissy Fullam</mail>
+  </author>
+  <author title="Translator">
+    <mail link="robert.zhangle@gmail.com">张乐</mail>
+  </author>
+  <author title="Translator">
+    <mail link="nkeric@gmail.com">许艺华</mail>
+  </author>
+  <author title="Translator">
+    <mail link="neville.lyh@gmail.com">李颖颢</mail>
+  </author>
+  <author title="Translator">
+    <mail link="dundask@gmail.com">邓京晶</mail>
+  </author>
+  <author title="Translator">
+    <mail link="delimy@gmail.com">李帅</mail>
+  </author>
+  <author title="Translator">
+    <mail link="jeffkyjin@gmail.com">金涛</mail>
+  </author>
+<!--  <author title="Author">
+    <mail link="nichoj@gentoo.org">Josh Nichols</mail>
+  </author>
+  <author title="Author">
+    <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+  </author>
+  <author title="Author">
+    <mail link="anpereir@gentoo.org">Andrés Pereira</mail>
+  </author> -->
+  <abstract>这是2006年7月10日的Gentoo Weekly Newsletter。</abstract>
+  <summary/>
+  <version>Volume 5, Issue 25</version>
+  <date>2006-07-10</date>
+  
+  <!-- Gentoo News -->
+  <chapter>
+    <title>Gentoo新闻</title>
+    <section>
+      <title>GNOME 2.14稳定版</title>
+      <body>
+      <p>Gentoo <uri link="/proj/en/desktop/gnome">GNOME</uri>团队已经要求GNOME 2.14.2被标记为稳定版。这是对目前GNOME 2.12稳定版的一个升级。如果你想知道稳定化的进展，您可以看看<uri link="http://bugs.gentoo.org/show_bug.cgi?id=139612">bug 139612</uri>。</p>
+      </body>
+    </section>
+
+    <section>
+      <title>新的VDR项目</title>
+      <body>
+      <p>Gentoo<uri link="/proj/en/desktop/video/vdr">碟式录像机</uri>（VDR）项目作为非官方项目已存在有一段时间了。而今它已正式成为桌面/视频（类别）下一个子项目，负责<uri link="http://www.cadsoft.de/vdr">VDR</uri>程序与Gentoo的紧密整合。</p>
+
+      <p>VDR是一套用以构建全功能机顶盒进行数码视频广播（DVB）以及ATSC（Advanced Television Systems Committee）接收的解决方案。尽管如此，它并不局限于数码输入。装上analogtv插件，它就能使用模拟信号的电视捕捉卡。</p>
+
+      <p>VDR可通过插件扩展出诸多强劲的功能。要获取详尽的插件列表，请访问linuxtv.org的<uri link="http://www.linuxtv.org/vdrwiki/index.php/Plugins">插件</uri>栏目，或德国VDR <uri link="http://www.vdr-wiki.de/wiki/index.php/Plugins">Wiki</uri>──这里的内容更新。目前已有将近90个插件的ebuild。</p>
+
+      <p>这些插件可以：</p>
+
+      <ul>
+        <li>支持各种新式输入设备（如带或不带硬件MPEG编码器的模拟信号捕捉卡）</li>
+        <li>除支持全功能DVB卡所带的硬件MPEG解码器之外，还支持其他多种输出（如价格便宜的DXR3卡，softdevice, xine）</li>
+        <li>多种方式查看各频道之节目时间表</li>
+        <li>电视电报/字幕</li>
+        <li>从因特网上下载天气信息</li>
+        <li>更多</li>
+      </ul>
+
+      <p>GentooVDR项目提供：</p>
+
+      <ul>
+        <li>主程序，外加可用多个USE标示控制的补丁集</li>
+        <li>插件ebuild</li>
+        <li>相关的eclass</li>
+        <li>一组有VDR插件扩展的复杂init脚本</li>
+        <li>其他软件包</li>
+      </ul>
+      </body>
+    </section>
+
+  </chapter>
+
+  <!-- Developer of the Week -->
+  <chapter>
+    <title>本周开发者</title>
+    <section>
+      <title>“我归咎于松果(I blame the pinecones)”——Andrew Gaffney，又称agaffney</title>
+      <body>
+      <figure link="/images/gwn/20060710_agaffney.jpg" short="agaffney" caption="Andrew Gaffney, aka agaffney"/>
+
+      <p>开发员Andrew Gaffney，也就是agaffney，大部分时间住在美国的密苏里州。他和他的妻子Angela，一位托儿所的老师，他们的宠物猫Puddy，一位太阳浴爱好者，一起生活。</p>
+
+      <p>这位22岁的老资格开发员在Creative Communications公司独立支撑IT部门的运作。一个典型的工作日可能会包括以下内容：编程，管理数据库以及网络，不过当然，还有技术支持的活！他非常自豪的告诉我们，他让几乎所有他能碰到的物体都运行Gentoo操作系统。</p>
+
+      <p>当然，繁杂的工作内容、Gentoo、婚姻生活都不够，Andrew会找时间游游泳或者打打短柄墙球（类似壁球）……或者之类的球类活动。他每天都浏览的网站有thedailywtf.com和penny-arcade.com。如果问到agaffney的音乐品位，他说他几乎喜欢所有的类型……如果他能听得懂歌词的话（Andrew在我们谈话的时候听的是Nirvana乐队的现场专辑）。</p>
+
+      <p>Andrew喜欢Gentoo的原因是你可以不必被拘束于操作系统任何的演化方向，并且可以让系统按照你的喜好随意的定制。他记得自己两年前开始使用Gentoo，在IRC频道里边和愿意倾听他的人分享自己的意见，还强迫他人看他的代码直到他终于被任命为官方的开发人员。Agaffney不仅是Installer（安装项目）组的领衔人物，也是x86架构接着下来2006。1版本的发布协调人员……以及其他更多的工作，如果发布工程项目顺利进行下去的话。</p>
+
+      <p>那么他家里的机器都是什么状况呢?他的一天从打开urxvt，openssh，amarok开始。Agaffney的自豪还来自他所拥有的各种不同的架构集合：HP C3600(hppa)，HP 715/75 (hppa)，SGI Octane (mips)，dual-processor G4 tower (ppc)，333MHz iMac (ppc)，Netra t1125 (sparc)，Athlon64 X2 4200+ w/2GB memory (x86_64)，以及另外几台x86的机器。他的主工作站，Kagome，是一台x86_64的家伙。他的主服务器则是一台叫做Ryoko的sparc机器，运行着apache，mysql和postfix系统。</p>
+      </body>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>倾听社区</title>
+    <!-- forums -->
+    <section>
+      <title>forums</title>
+      <body>
+      <p><b>Gentoo社区站点</b></p>
+      <p>Gentoo开发人员<mail link="tcort@gentoo.org">Thomas Cort</mail>正搜集一个包含各种Gentoo社区网站的目录,他还希望大家能够将他遗漏掉的网站网址贴出来,以便使得目录更加的完整.</p>
+
+      <ul>
+        <li><uri link="http://forums.gentoo.org/viewtopic-t-478457.html">Gentoo社区站点</uri></li>
+        <li><uri link="http://larrythecow.com/">http://larrythecow.com</uri></li>
+      </ul>
+
+      <p><b>是二进制驱动使得X.Org 7.1仍在测试中？</b></p>
+      <p>论坛里的veteran R!tman询问x86和amd64体系结构上的Xorg 7.1没有标为稳定是否仅仅因为与nVidia和ATI的二进制驱动不兼容。他思索这么做是否正确，因为这看起来像是Gentoo被商业的、封闭源代码的软件拖了后腿。</p>
+
+      <ul>
+        <li><uri link="http://forums.gentoo.org/viewtopic-t-477702.html">是二进制驱动使得x86/amd64体系结构上的X.Org 7.1仍在测试中？</uri></li>
+      </ul>
+      </body>
+    </section>
+
+    <!-- planet.gentoo.org -->
+
+  </chapter>
+
+  <!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+  <chapter>
+    <title>人员变更</title>
+    <section>
+      <title>离开</title>
+      <body>
+        <p>下列开发者最近离开Gentoo项目：</p>
+        <ul>
+          <li>Jory Pratt（Anarchy）</li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>加入</title>
+      <body>
+        <p>下列开发者最近加入Gentoo项目：</p>
+        <ul>
+          <li><e>本周没有</e></li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>变更</title>
+      <body>
+        <p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+        <ul>
+          <li><e>本周没有</e></li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+
+<!-- Gentoo security -->
+  <chapter>
+    <title>Gentoo安全</title>
+  <!-- paste from the script -->
+<section>
+<title>mpg123：堆溢出</title>
+<body>
+<p>在mpg123里发现了一个堆溢出漏洞，可能导致执行任意代码。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200607-01.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>FreeType：多处整数溢出</title>
+<body>
+<p>FreeType中发现了多个可远程攻击的缓冲区溢出漏洞，可导致执行任意代码。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200607-02.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>libTIFF：多个缓冲区溢出</title>
+<body>
+<p>libTIFF中存在的缓冲区溢出可能导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200607-03.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>PostgreSQL：SQL注入</title>
+<body>
+<p>多字节字符处理中存在的缺陷允许任意SQL语句执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200607-04.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>SHOUTcast server：多种漏洞</title>
+<body>
+<p>SHOUTcast服务器中存在文件泄露隐患以及多种XSS漏洞。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200607-05.xml">GLSA声明</uri></p>
+</body>
+</section>
+
+  </chapter>
+  <!-- Bugzilla -->
+  <!-- paste from the script -->
+<chapter>
+<title>Bugzilla</title>
+<section>
+<title>总结</title>
+<body>
+     <ul>
+          <li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+          <li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+          <li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+     </ul>
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+     <p>Gentoo社区使用Bugzilla(<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug，提示，建议等形式的和开发团队之间的交流。从2006年7月02日到2006年7月09日，这个站点记录下了：</p>
+     <ul>
+          <li>921个在这段时间内被发现的新bug</li>
+          <li>454个在这段时间内被修正或解决的bug</li>
+          <li>25个先前修复了的但在这段时间重现的bug</li>
+     </ul>
+     <p>在当前还未被修正的10411个bug里面：51个被标记为"blocker"，136个被标记为"critical"，还有525个被标记为"major"。</p>
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+     <p>在这段时间内修复最多bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="net-im@gentoo.org">Gentoo net-im团队</mail>，26个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=net-im@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="perl@gentoo.org">Perl Devs @ Gentoo</mail>，23个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=perl@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="amd64@gentoo.org">AMD64项目</mail>，23个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="dev-portage@gentoo.org">Portage团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="media-video@gentoo.org">media-video团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=media-video@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="java@gentoo.org">Java团队</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=java@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;resolution=FIXED&amp;assigned_to=sound@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+     <p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，28个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+      <li><mail link="java@gentoo.org">Java团队</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=java@gentoo.org">新bug</uri></li>
+      <li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+      <li><mail link="media-video@gentoo.org">media-video团队</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=media-video@gentoo.org">新bug</uri></li>
+      <li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=x11-drivers@gentoo.org">新bug</uri></li>
+      <li><mail link="x11@gentoo.org">Gentoo X-windows维护者</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=x11@gentoo.org">新bug</uri></li>
+      <li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+      <li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-07-02&amp;chfieldto=2006-07-09&amp;assigned_to=base-system@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+</chapter>
+
+  <!-- GWN feedback information -->
+  <chapter>
+    <title>周报反馈</title>
+    <section>
+      <body>
+        <p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- GWN subscription information -->
+  <chapter>
+    <title>周报订阅</title>
+    <section>
+      <body>
+        <p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+        <p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+      </body>
+    </section>
+  </chapter>
+  
+  <!-- Other Languages -->
+  <chapter>
+    <title>其他语言</title>
+    <section>
+      <body>
+        <p>Gentoo周报还被翻译为以下几种语言文字：</p>
+        <ul>
+	  <li>
+	    <uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+	  </li>
+          <li>
+            <uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+          </li>
+          <li>
+            <uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/en/gwn/gwn.xml">英文</uri>
+          </li>
+          <li>
+            <uri link="/news/de/gwn/gwn.xml">德文</uri>
+          </li>
+          <li>
+            <uri link="/news/fr/gwn/gwn.xml">法文</uri>
+          </li>
+          <li>
+            <uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+          </li>
+          <li>
+            <uri link="/news/ja/gwn/gwn.xml">日文</uri>
+          </li>
+          <li>
+            <uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+          </li>
+          <li>
+            <uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+          </li>
+          <li>
+            <uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+          </li>
+          <li>
+            <uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+          </li>
+          <li>
+            <uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+          </li>
+          <li>
+            <uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+</guide>

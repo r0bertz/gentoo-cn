@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/guide-localization.xml,v 1.14 2004/04/11 13:50:26 swift Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/guide-localization.xml">
+<title>Gentoo Linux语言环境指南</title>
+<author title="Author">
+  <mail link="holler@gentoo.de">Alexander Holler</mail>
+</author>
+<author title="Translator/Editor">
+  <mail link="slucy@uchicago.edu">Steven Lucy</mail>
+</author>
+<author title="Editor">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="Editor">
+  <mail link="pylon@gentoo.org">Lars Weiler</mail>
+</author>
+<author title="Translator">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<abstract>
+这个向导可以帮助用户将他们的Gentoo Linux发行版本地化到任何欧洲语言北京。因为这是从德语文档翻译过来的，就用德语作为一个案例学习。包括欧洲货币符号的使用的配置。
+</abstract>
+
+<version>1.10</version>
+<date>2004年4月11日</date>
+
+<chapter>
+<title>时区</title>
+<section>
+<body>
+
+<p>
+为保证时间准确，<path>/etc/localtime</path>必须指向正确的时区数据文件。看看<path>/usr/share/zoneinfo/</path>，并选择你的时区或者附近的一个大城市。
+</p>
+
+<pre caption="设定时区">
+# <i>ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime</i>
+# <i>date</i>
+Sun Feb 16 08:26:44 CET 2003
+</pre>
+
+<note>
+确认时区的那三个字母（在这个例子中是“CET”）是准确指向你的地区。
+</note>
+
+<note>
+你可以在你的shell配置文件（对于bash是<path>.bash_profile</path>）中<c>TZ</c>的值设为<path>/usr/share/zoneinfo</path>里的任何值，这是一个用户级的设定。在这个例子中是，<c>TZ="Europe/Berlin"</c>。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>系统时间</title>
+<section>
+<body>
+
+<p>
+在大部分Gentoo Linux的安装过程中，你的系统时钟将会设定为UTC（或者格林威治时间GMT），然后你的时区将会负责决定实际的本地时间。如果因为某些原因，你需要将你的系统时钟不设为UTC，你将需要编辑<path>/etc/rc.conf</path>并改变<c>CLOCK</c>的值。
+</p>
+
+<pre caption="本地时间对比GMT时间">
+<codenote>推荐：</codenote>
+CLOCK="UTC"
+<codenote>或者：</codenote>
+CLOCK="local"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>POSIX环境</title>
+<section>
+<title>使用已有的语言环境</title>
+<body>
+
+<p>
+下一步就是设置shell变量<c>LANG</c>，你的shell和窗口管理器（和一些其他的程序）将会使用到。你可以在<path>/usr/share/locale</path>里找到正确的值，一般都是ab_CN的形式，其中<c>ab</c>是两位你的语言的代码，<c>CD</c>是两位的国家和地区代码。如果你的语言是一个国家或地区的唯一（或主要）语言，<c>_CD</c>可以省略掉。如果作用于整个系统，在<path>/etc/profile</path>里设置<c>LANG</c>，或者在<path>~/.bashrc</path>里设置作为用户个人设置。
+</p>
+
+<pre caption="设置POSIX语言环境">
+export LANG="de_DE@euro"
+</pre>
+
+<note>
+如果你要使用新的欧洲货币符号（&#8364;），在你的语言设置后面加上<c>@euro</c>。
+</note>
+
+</body>
+</section>
+<section>
+<title>生成特定的语言环境</title>
+<body>
+
+<p>
+如果你使用一个默认不存在的语言环境，你可以使用<c>localedef</c>来生成你的语言环境。比如：
+</p>
+
+<pre caption="使用localedef生成一个语言环境">
+# <i>localedef -c -i en_US -f ISO-8859-15 en_US.ISO-8859-15</i>
+</pre>
+
+<p>
+你生成这个语言环境后，你可以按照你需要的设置变量LANG。
+</p>
+
+<pre caption="设定变量LANG">
+# <i>export LANG="en_US.ISO-8859-15"</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>终端下的键盘布局</title>
+<section>
+<body>
+
+<p>
+终端下的键盘布局在<path>/etc/rc.conf</path>里通过变量<c>KEYMAP</c>设定。你可以在<path>/usr/share/keymaps/<c>{arch}</c></path>里找到正确的该变量的值。<path>i386</path>分的更细（<path>qwerty/</path>，<path>azerty/</path>，等等）。一些语言可能有多个选项，因此你可能需要实验几次来决定哪个最适合你。
+</p>
+
+<pre caption="设定终端的键盘">
+KEYMAP="de"
+KEYMAP="de-latin1"
+KEYMAP="de-latin1-nodeadkeys"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>X服务器的键盘布局</title>
+<section>
+<body>
+
+<p>
+用于X服务器的键盘布局是在<path>/etc/X11/XF86Config</path>里通过选项<c>XkbLayout</c>来设定的。
+</p>
+
+<pre caption="设定X下的键盘">
+ Section "InputDevice"
+     Identifier  "Keyboard1"
+     ...
+     Option "XkbLayout"    "de"
+     # Option "XkbVariant"  "nodeadkeys"
+     ...
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>KDE</title>
+<section>
+<body>
+
+<p>
+对于KDE来说，你必须安装设置准确的LINGUAS环境变量的kde-i18n软件包。
+</p>
+
+<pre caption="安装本地化的KDE">
+# <i>LINGUAS="de" emerge kde-i18n</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>终端下的欧洲符号</title>
+<section>
+<body>
+
+<p>
+为了让你的终端能显示欧洲符号，你需要在<path>/etc/rc.conf</path>设置<c>CONSOLEFONT</c>为<path>/usr/share/consolefonts/</path>里的一个文件（不带后缀<c>.psfu.gz</c>）。<c>lat9w-16</c>包含有欧洲符号。
+</p>
+
+<pre caption="设定终端字体">
+CONSOLEFONT="lat9w-16"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>X下的欧洲符号</title>
+<section>
+<title>绝大部分的程序</title>
+<body>
+
+<p>
+要让欧洲符号在X下准确的工作有点麻烦。首先要做的是在<path>/usr/X11R6/lib/X11/fonts/misc/fonts.alias</path>里的<c>fixed</c>和<c>variable</c>的定义从<c>iso8859-1</c>结尾改为<c>iso8859-15</c>结尾。
+</p>
+
+<pre caption="设定默认的X字体">
+fixed        -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-15
+variable     -*-helvetica-bold-r-normal-*-*-120-*-*-*-*-iso8859-15
+</pre>
+
+<p>
+一些程序使用他们自己的字体，你也将需要分别的告诉他们使用带有欧洲符号的字体。你可以在<path>.Xdefaults</path>（你可以将这个文件拷贝到<path>/etc/skel/</path>给新用户使用）做用户级的设置，和在<path>/usr/X11R6/lib/X11/app-defaults/</path>（如xterm）里的一个资源配置文件进行全局范围的设置。在这些文件里，一般情况下你只需改变已有的行，最好不要新加一行。如，为改变我们的xterm的字体：
+</p>
+
+<pre caption="设定xterm的字体">
+<codenote>(在你的Home文件夹里)</codenote>
+# <i>echo 'XTerm*font: fixed' >> .Xresources </i>
+# <i>xrdb -merge .Xresources</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>(X)Emacs中的欧洲符号</title>
+<body>
+
+<p>
+要在(X)Emacs里使用欧洲符号，将下面几行添加到<path>.Xdefaults</path>：
+</p>
+
+<pre caption="设定emacs的字体">
+Emacs.default.attributeFont: -*-courier-medium-r-*-*-*-120-*-*-*-*-iso8859-15
+</pre>
+
+<p>
+对于XEmacs（不是普通的Emacs），你还需要再做一些修改。在<path>/home/user/.xemacs/init.el</path>文件里添加：
+</p>
+
+<pre caption="设定xemacs的字体">
+(define-key global-map '(EuroSign) '[&#8364;])
+</pre>
+
+<note>
+在[]里的符号是欧洲符号。
+</note>
+
+</body>
+</section>
+<section>
+<title>OpenOffice的语言设置</title>
+<body>
+
+<note>
+可自定义设置的语言环境在openoffice-bin的ebuild不存在，openoffice-bin的默认语言是ENUS。
+</note>
+
+<p>
+OpenOffice的默认语言设定为“ENUS”（01）。如果你要改变OpenOffice的默认语言，检查默认语言代码的ebuild。
+</p>
+
+<pre caption="使用需要的默认语言来安装openoffice">
+# <i>LANGUAGE="01" emerge openoffice</i>
+<comment>01是openoffice的ENUS语言代码</comment>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+</guide>

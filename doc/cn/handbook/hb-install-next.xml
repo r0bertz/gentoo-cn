@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-next.xml,v 1.11 2004/04/25 14:56:43 swift Exp $ -->
+
+<sections>
+<section>
+<title>文档</title>
+<subsection>
+<body>
+
+<p>
+恭喜恭喜！你现在已经有了一个可运作的Gentoo系统。但是下一步我们该做什么呢？你的选择是什么呢？我们从那开始探索？Gentoo给它的用户提供了很多的可行性和因此而有的很多已经提供文档（很少没有）的特性。
+</p>
+
+<p>
+你绝对应该看看Gentoo手册的下一部分，名为<uri link="?part=2&amp;chap=0">在Gentoo上工作</uri>，这里解释了怎样保持软件更新、怎样安装更多的的软件、USE参数分别都是什么、Gentoo是怎样初始化系统工作的等等。
+</p>
+
+<p>
+如果你有兴趣为桌面应用进行优化，或者你想学习怎样将你的系统配置成一个全面的桌面应用系统，查阅我们较全面的<uri link="/doc/zh_cn/desktop.xml">桌面配置指南</uri>。
+</p>
+
+<p>
+为得到一个全面的我们已有文档的列表，请查看我们的<uri link="/doc/zh_cn/index.xml">文档资源</uri>页面。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>Gentoo在线资源</title>
+<body>
+
+<p>
+我们当然也欢迎你到我们的<uri link="http://forums.gentoo.org">Gentoo论坛</uri>或者我们许多的<uri link="/main/en/irc.xml">Gentoo IRC频道</uri>的一个中来。
+</p>
+
+<p>
+我们还有几个<uri link="/main/en/lists.xml">邮件列表</uri>向所有我们的用户开放。加入邮件列表的信息也在那个页面中。
+</p>
+
+<p>
+我们该说完了，你就尽情享受你的安装:)
+</p>
+
+</body>
+</section>
+</sections>

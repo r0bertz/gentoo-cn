@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- lang="__" is required for the rss feed -->
+<guide type="newsletter" link="gwn.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<author title="Author">
+<mail link="klieber@gentoo.org">Kurt Lieber</mail>
+</author>
+<author title="Author">
+<mail link="carlos@gentoo.org">Yuji Carlos Kosugi</mail>
+</author>
+<author title="Author">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+<author title="Translator">
+<mail link="gentoo-china@googlegroups.com">GWN简体中文翻译团队</mail>
+</author>
+<abstract>Gentoo Weekly Newsletter主索引</abstract>
+<version>1.2</version>
+<date>2006-10-24</date>
+<chapter>
+<title>Gentoo Weekly Newsletter概述</title>
+<section>
+<body>
+
+<p>Gentoo周报的目的是为了给Gentoo的用户一个有关Gentoo的信息源。GWN用简明的形式总结了Gentoo项目每周的重要事件。GWN包含了一般新闻、安全、bug、portage等章节，这些信息对于每个人应该都会有些用处的。GWN的最新版可以在<uri link="current.xml">这里</uri>找到。</p>
+
+<p>目前，GWN是通过web和邮件列表的形式发行的。我们会考虑读者的反馈以增加新的发行方式。要订阅GWN邮件列表，请发送email到<mail link="gentoo-gwn-subscribe@gentoo.org">gentoo-gwn-subscribe@gentoo.org</mail>。您也可以通过监视我们的<uri link="rss.xml"><img src="/images/xml.gif"/></uri> <uri link="rss.xml">rss种子</uri>来得到最新的GWN。经志愿者的翻译，GWN也有了其他语言的版本。</p>
+
+<p>最后，我们要感谢众多的志愿者，从贡献者到翻译者到幕后英雄，所有这些给你带来GWN的人们。没有他们，GWN就不可能实现每周发行。如果你有兴趣加入GWN团队，请发email至<mail link="gwn-feedback@gentoo.org">gwn-feedback@gentoo.org</mail>。</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo Weekly Newsletter档案</title>
+<section>
+<body>
+<table>
+<tr>
+  <th>日期</th>
+  <th>摘要</th>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070730-newsletter.xml">2007年07月30日</uri></ti>
+  <ti>
+    NVIDIA驱动升级，Portato概览，代码之夏2007 Planet和GUADEC 2007
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070723-newsletter.xml">2007年07月23日</uri></ti>
+  <ti>
+    Gentoo实时性指南，编译优化指南，美化项目寻求帮助，Alpha项目状态更新
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070716-newsletter.xml">2007年07月16日</uri></ti>
+  <ti>
+    GWN回来了，议会／理事会提名，PAM和cracklib变动，内核安全团队寻求帮助，GNOME 2.18稳定化
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070709-newsletter.xml">2007年07月09日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070702-newsletter.xml">2007年07月02日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070625-newsletter.xml">2007年06月25日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070618-newsletter.xml">2007年06月18日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070611-newsletter.xml">2007年06月11日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070604-newsletter.xml">2007年06月04日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070528-newsletter.xml">2007年05月28日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070521-newsletter.xml">2007年05月21日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070514-newsletter.xml">2007年05月14日</uri></ti>
+  <ti>
+    GWN统计信息发布
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070507-newsletter.xml">2007年05月07日</uri></ti>
+  <ti>
+    Gentoo Linux 2007.0发布，有关最近的coreutils升级的信息
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070430-newsletter.xml">2007年04月30日</uri></ti>
+  <ti>
+    Ant 1.7.0进入稳定分支，Apache 1.x将被移除，意大利翻译团队寻求帮助
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070423-newsletter.xml">2007年04月23日</uri></ti>
+  <ti>
+    来自GWN工作人员的谢意，本周开发者（jokey）
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070416-newsletter.xml">2007年04月16日</uri></ti>
+  <ti>
+    GWN寻找作者，四月Gentoo议会例会，AppleTV上的Gentoo
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070409-newsletter.xml">2007年04月09日</uri></ti>
+  <ti>
+    本周开发者（cam），心得技巧
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070402-newsletter.xml">2007年04月02日</uri></ti>
+  <ti>
+    移除virtual/x11，Gentoo媒体
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070326-newsletter.xml">2007年03月26日</uri></ti>
+  <ti>
+    本周开发者（dsd），CCC的Gentoo村 
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070319-newsletter.xml">2007年03月19日</uri></ti>
+  <ti>
+    Dell Linux调查，Gentoo/Java变动，Firefox 1.5即将移除，本周开发者（welp）
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070312-newsletter.xml">2007年03月12日</uri></ti>
+  <ti>
+    Gentoo/FreeBSD 6.2 stage，更新的Playstation 3 stage，Gentoo文档项目寻求帮助
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070305-newsletter.xml">2007年03月05日</uri></ti>
+  <ti>
+    Opengear捐赠两台CM4008，Xfce成为官方项目，本周开发者(nightmorph)， FOSDEM，开姆尼茨人Linux-Tage，Linuxforum 07
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070226-newsletter.xml">2007年02月26日</uri></ti>
+  <ti>
+    GWN需要您的帮助，倾听社区，Gentoo媒体
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070219-newsletter.xml">2007年02月19日</uri></ti>
+  <ti>
+    即将到来的ALSA变更，Gentoo媒体
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070212-newsletter.xml">2007年02月12日</uri></ti>
+  <ti>
+    时区更新，测试新freetype，NSS/NSPR的问题，来自KDE团队的感谢，Adopt-a-Dev更新
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070205-newsletter.xml">2007年02月05日</uri></ti>
+  <ti>
+    KDE团队寻求帮助，移除mail-mta/qmail，zzam的采访
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070129-newsletter.xml">2007年01月29日</uri></ti>
+  <ti>
+    Xfce 4.4正式发布，Gentoo论坛（荷兰）2周年纪念
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070122-newsletter.xml">2007年01月22日</uri></ti>
+  <ti>
+    Flash Player 9发布，Adopt-a-dev项目进展，KBase项目结束
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070115-newsletter.xml">2007年01月15日</uri></ti>
+  <ti>
+    征gentoo-sources-2.4的维护者，简体中文翻译团队寻求帮助，MIT的Gentoo课程
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070108-newsletter.xml">2007年01月08日</uri></ti>
+  <ti>
+    新Bugzilla服务器，HP iPAQ hx4700上的Gentoo，SCALE要举行开源界女性小型会议，对GNi的Derek Wise的采访
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20070101-newsletter.xml">2007年01月01日</uri></ti>
+  <ti>
+    新年快乐，2007年第一个Bugday，俄国Gentoo会议
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061225-newsletter.xml">2006年12月25日</uri></ti>
+  <ti>
+    一个特殊（简短）的节日版
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061218-newsletter.xml">2006年12月18日</uri></ti>
+  <ti>
+    EFIKA overlay开张了，Quickstart 0.3
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061211-newsletter.xml">2006年12月11日</uri></ti>
+  <ti>
+    EFIKA板子到手，dbus的新闻，Core/Core 2应该用的CFLAGS
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061204-newsletter.xml">2006年12月04日</uri></ti>
+  <ti>
+    Playstation 3上的Gentoo Linux，SCALE 5X开始注册，新的用户代表已经选出
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061127-newsletter.xml">2006年11月27日</uri></ti>
+  <ti>
+    新的x86/i586 stages，实验性质的Alpha/PPC LiveCD镜像，GNOME 2.16进入稳定版，新的virtual/mysql
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061120-newsletter.xml">2006年11月20日</uri></ti>
+  <ti>
+    新的Bugzilla bug追踪器，gentoo-user总结，关于一个有5,832个CPU的集群gentoo集群信息
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061113-newsletter.xml">2006年11月13日</uri></ti>
+  <ti>
+    匿名CVS和SVN服务，基于Gentoo的Ruby on Rails服务，gentoo-user邮件列表的总结
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061106-newsletter.xml">2006年11月06日</uri></ti>
+  <ti>
+    来自社区的声音，意大利的Linux日，有关搜索overlay和在64位kmplayer里使用32位mplayer的技巧
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061030-newsletter.xml">2006年10月30日</uri></ti>
+  <ti>
+    移除XMMS，有关#gentoo-uk的信息，CJK/Scheme/Turkish GWN翻译等团队寻求帮助
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061023-newsletter.xml">2006年10月23日</uri></ti>
+  <ti>
+    Sun T1000/T2000上的Gentoo Linux，论坛和邮件列表总结
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061016-newsletter.xml">2006年10月16日</uri></ti>
+  <ti>
+    新Java系统稳定了，KDE 3.5.5，邮件列表总结
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061009-newsletter.xml">2006年10月9日</uri></ti>
+  <ti>
+    X.Org 7.1在amd64/x86上稳定了，安全的CFLAGS设定，dostrow的采访
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20061002-newsletter.xml">2006年10月2日</uri></ti>
+  <ti>
+    Gentoo商店里2006.1上架，Openoffice.org模板/剪贴画比赛，LinuxParty.sk照片
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060925-newsletter.xml">2006年9月25日</uri></ti>
+  <ti>
+    2006.1介质更新，NASA在机器人上使用Gentoo，使用GNU screen
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060918-newsletter.xml">2006年9月18日</uri></ti>
+  <ti>
+    一些openssl选项，portage 2.1.1发布，清理autotool包装器
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060911-newsletter.xml">2006年9月11日</uri></ti>
+  <ti>
+    Gentoo议会选举结果，来自Cloanto的捐赠，不再对Monolithic X提供支持
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060904-newsletter.xml">2006年9月04日</uri></ti>
+  <ti>
+    多个包被移除，英国Linux大奖，自由Linux光盘项目基金募集者，以及GWN寻找作者
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060828-newsletter.xml">2006年8月28日</uri></ti>
+  <ti>
+    Gentoo 2006.1发布，GCC 4.1.1/glibc 2.4稳定了，Gentoo夏令营
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060821-newsletter.xml">2006年8月21日</uri></ti>
+  <ti>
+    Linux World后记，斯洛伐克文和希腊文翻译，GCC/glibc新闻
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060814-newsletter.xml">2006年8月14日</uri></ti>
+  <ti>
+    Linux World会展，OSL Rackathon，PyBugz
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060807-newsletter.xml">2006年8月7日</uri></ti>
+  <ti>
+    帮助开发者，PowerPC CELL处理器支持，PDA/KDE/Ruby招募
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060731-newsletter.xml">2006年7月31日</uri></ti>
+  <ti>
+    Catalyst 2.0发布，Bugday 3周年，Gentoo/Java开发者招募
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060724-newsletter.xml">2006年7月24日</uri></ti>
+  <ti>
+    Sun捐赠了硬件，Ethereal改名，用户代表选举
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060717-newsletter.xml">2006年7月17日</uri></ti>
+  <ti>
+    VDR项目寻求帮助，本周开发者，会议信息
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060710-newsletter.xml">2006年7月10日</uri></ti>
+  <ti>
+    GNOME 2.14稳定了，新的VDR项目，本周开发者
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060703-newsletter.xml">2006年7月3日</uri></ti>
+  <ti>
+    模块化的X.Org稳定了，新的KBase项目，Java升级，西班牙翻译者
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060626-newsletter.xml">2006年6月26日</uri></ti>
+  <ti>
+    发布测试者，x86架构测试者，ALSA信息，Java升级
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060619-newsletter.xml">2006年6月19日</uri></ti>
+  <ti>
+    用户代表提名，Sunrise项目，Java 1.5
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060612-newsletter.xml">2006年6月12日</uri></ti>
+  <ti>
+    Portage 2.1发布，Gentoo/Alpha状态报告，Tetex变动，Gentoo女人
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060529-newsletter.xml">2006年5月29日</uri></ti>
+  <ti>
+    对上周GCC 4.1文章的更正，GnuPG 1.9稳定了，rsync服务器howto被重写了
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060522-newsletter.xml">2006年5月22日</uri></ti>
+  <ti>本周GCC 4.1将会被解除屏蔽，代码之夏的进展，旧式风格的PHP包将会被移除出Portage树，来自米兰和Graz的报道，使用<c>layman</c>来管理overlay。</ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060515-newsletter.xml">2006年5月15日</uri></ti>
+  <ti>Portage模块移除，GWN翻译，意大利、奥地利和挪威的Gentoo盛事。</ti>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gwn/20060508-newsletter.xml">2006年5月8日</uri></ti>
+  <ti>Portage对Ada的支持得到了更新和增强，Gnome 2.14的屏蔽被解除。</ti>
+</tr>
+</table>
+</body>
+</section>
+</chapter>
+<chapter>
+<title>Gentoo周报的其他语言版本</title>
+<section>
+<body>
+<table>
+<tr>
+<th>种子</th>
+<th>语言</th>
+</tr>
+<tr>
+<ti><uri link="/news/zh_cn/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/da/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/da/gwn/gwn.xml">丹麦文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/nl/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/nl/gwn/gwn.xml">荷兰文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/en/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/en/gwn/gwn.xml">英文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/fr/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/fr/gwn/gwn.xml">法文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/de/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/de/gwn/gwn.xml">德文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/it/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/it/gwn/gwn.xml">意大利文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/ja/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/ja/gwn/gwn.xml">日文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/ko/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/ko/gwn/gwn.xml">韩文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/pl/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/pl/gwn/gwn.xml">波兰文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/pt_br/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/pt/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/ru/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/ru/gwn/gwn.xml">俄文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/sk/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri></ti>
+</tr>
+<tr>
+<ti><uri link="/news/es/gwn/rss.xml"><img src="/images/xml.gif"/></uri></ti>
+<ti><uri link="/news/es/gwn/gwn.xml">西班牙文</uri></ti>
+</tr>
+</table>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Gentoo周报迷你FAQ</title>
+<section>
+<title>为什么没有&lt;某个语言&gt;的GWN？</title>
+<body>
+<p>GWN是依靠志愿者来翻译的。如果你想帮我们把GWN翻译成某种语言（包括已提供翻译的语言），请联系我们<mail link="gwn-feedback@gentoo.org">gwn-feedback@gentoo.org</mail>。有鉴于GWN是周刊而且往往篇幅较长，我们希望能有每个语言版本都能有多人参与翻译。这样能有助于分散工作负担，并且翻译过程不会因一两个人的休假而打断。</p>
+</body>
+</section>
+<section>
+<title>增样订阅或取消订阅GWN邮件列表？</title>
+<body>
+<p>请看<uri link="/main/en/lists.xml">Gentoo邮件列表订阅指南</uri></p>
+</body>
+</section>
+</chapter>
+</guide>
+
+

@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060619-newsletter.xml" lang="zh_cn">
+  <title>Gentoo Weekly Newsletter</title>
+  <subtitle>2006年6月19日</subtitle>
+  <author title="Editor">
+    <mail link="plate@gentoo.org">Ulrich Plate</mail>
+  </author>
+  <author title="Author">
+    <mail link="patrick@gentoo.org">Patrick Lauer</mail>
+  </author>
+  <author title="Author">
+    <mail link="christel@gentoo.org">Christel Dahlskjaer</mail>
+  </author>
+  <author title="Author">
+    <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+  </author>
+  <author title="Author">
+    <mail link="mark_alec@gentoo.org">Mark Kowarsky</mail>
+  </author>
+  <author title="Author">
+    <mail link="jokey@gentoo.org">Markus Ullmann</mail>
+  </author>
+  <author title="Author">
+    <mail link="beandog@gentoo.org">Steve Dibb</mail>
+  </author>
+  <author title="Author">
+    <mail link="lucas.chiesa@gmail.com">Lucas Chiesa</mail>
+  </author>	
+  <author title="Author">
+    <mail link="pylon@gentoo.org">Lars Weiler</mail>
+  </author>
+  <author title="Translator">
+    <mail link="robert.zhangle@gmail.com">张乐</mail>
+  </author>
+  <author title="Translator">
+    <mail link="nkeric@gmail.com">许艺华</mail>
+  </author>
+  <author title="Translator">
+    <mail link="neville.lyh@gmail.com">李颖颢</mail>
+  </author>
+  <author title="Translator">
+    <mail link="dundask@gmail.com">邓京晶</mail>
+  </author>
+  <author title="Translator">
+    <mail link="delimy@gmail.com">李帅</mail>
+  </author>
+  <author title="Translator">
+    <mail link="jeffkyjin@gmail.com">金涛</mail>
+  </author>
+  <abstract>这是2006年6月19日的Gentoo Weekly Newsletter。</abstract>
+  <summary/>
+  <version>Volume 5, Issue 22</version>
+  <date>2006-06-19</date>
+  
+  <!-- Gentoo News -->
+  <chapter>
+    <title>Gentoo新闻</title>
+    <section>
+      <title>用户关系项目（Userrel）需要你！——用户代表提名</title>
+      <body>
+        <p>作为当前的主要发行版之一，Gentoo的组织形式可能已复杂到难于理解，也让人难于知道怎么样才能够帮的上忙。针对此种情况，我们创建了“用户代表”（user representative）这个职位。借此机会，我们将对这个角色作一番解释。</p>
+
+        <p>“了解你的用户”是人们的共识，通常我们通过咨询一个或多个用户来达到这个目的。人们往往错误的理解统计学里的“中等用户（average user）”的含义，以为他们可以代表所有人。虽然这是一种简单而且往往有效的寻找用户代表的方式，但是只有在用户群体的日常工作环境比较单一时，以这种方式统计出结果才有意义。如果日常工作环境相差较大，那么这种方式将导致某些用户得不到应有的支持，最终的产品也将不能满足他们的需要。这种方式严重依赖于我们能否选取出对于取样和咨询来说最具重要性的用户，可以导致我们误以为知道了中等用户的特征而不需要再做咨询。在这种情况下，它会令我们不去怀疑我们的假设，可能导致我们失去可能避免翻错的宝贵信息来源。</p>
+        
+        <p>用户关系项目着眼于在开发者社区和用户社区之间的构建一座桥梁，积极地寻找增进二者之间交流的方式，并鼓励用户的参与。项目的目的在于保持高标准，并且和其他关注用户的项目通力合作，为使用者创造最好的发行版。为了达到这个目的，我们正在寻找用户代表来助我们一臂之力。</p>
+        
+        <p>项目决定5个用户代表将足够提供足够多样的意见和兴趣，同时可以避免带来过多的问题。提名现已开始；请看<uri link="http://forums.gentoo.org/viewtopic-t-470136.html">这个论坛帖子</uri>以获得更多信息，并提名你认为适合担当这个角色的用户。</p>
+        
+        <p><b>用户代表要做些什么呢？</b></p>
+        
+        <p>做一名用户代表需要花费一些时间、精力和承担一些义务，但是也会给你带来回报。用户代表的角色包括：</p>
+        <ul>
+          <li>表达我们不同的用户群体的观点和兴趣。</li>
+          <li>作用户关系项目的诤友，提供不同的参考意见和观点，适时的提出对一些假定的质疑。</li>
+          <li>积极接触开发者和Gentoo项目</li>
+          <li>广泛接触不同的团体和个人以了解我们的用户所想的和他们所希望看到的。</li>
+          <li>为项目献计献策，以使其他用户也参与到项目里来，包括参与项目计划和传递信息等等。</li>
+          <li>传递会议决议和会议记录信息给用户。</li>
+        </ul>
+        
+        <p>如果你作了用户代表，你将不会孤单。用户关系项目会支持你，将会指派给你一个开发者作为联络点。你可以和他讨论任何问题或者对你的角色乃至整个团队的忧虑。</p>
+        
+        <p><b>为什么要作用户代表？</b></p>
+        <ul>
+          <li>你将有机会影响到信息、新闻和支持将会以何种方式传递给用户，并保证它们以最有利于我们的所有用户的方式被组织在一起。</li>
+          <li>你将会获得作为用户社区的支持者的经验，以及可以应用于生活中其他领域的有用的知识和技能。</li>
+          <li>这是个回馈社区的绝好方式，对于一个用户来说也是参与社区活动的绝好机会。</li>
+          <li>你将会有机会见到和认识其他用户和开发者。</li>
+        </ul>
+        
+        <p><b>怎样才是一个好的用户代表？</b></p>
+        
+        <p>理想的用户代表应该：</p>
+        <ul>
+          <li>愿意与来源广泛的其他用户建立联系。</li>
+          <li>正如其他人所见到的，这样会使人的观点会更加开放，变得不再主观判断（non-judgemental），并对可能形成的难题保持敏感。</li>
+          <li>与开发者和工作人员一起建设性的工作。不要被开发者吓到，他们不过是尽其所能去追求他们心中的最美好事物的人们。如果有必要向他们提出异议，请尽可能以有帮助性的方式提出。</li>
+          <li>在某种特定情况下具备协商的能力，能适当的作出妥协。</li>
+          <li>不执成见，善表异议。</li>
+          <li>勇于表达用户观点，发现并指出项目相关工作或角色中存在的问题。</li>
+        </ul>
+        
+        <p><b>我想知道更多？</b></p>
+        
+        <p>我们希望上文已解答了大部分的问题，如果你有兴趣了解更多，请通过下述方式之一与我们的用户关系团队联系：</p>
+        <ul>
+          <li>gentoo-userrel邮件列表──若想订阅，请发送一份空白邮件至<c>gentoo-userrel+subscribe@gentoo.org</c>；（订阅成功后）可发送邮件至<c>gentoo-userrel@gentoo.org</c>参与讨论。</li>
+          <li>发送邮件至<c>userrel@gentoo.org</c></li>
+          <li>IRC频道：irc.freenode.net。</li>
+        </ul>
+        
+        <p><b>其他参与方式</b></p>
+        <p>有兴趣的用户可以通过其他多种方式为Gentoo作出自己的贡献：</p>
+        <ul>
+          <li><b>Gentoo Linux开发团队</b>：我们鼓励想成为开发者的人积极参与<uri link="http://bugs.gentoo.org">Bugzilla</uri>。因为bug报告是由开发招聘人员管理的，如果你希望自己能够引起别人注意，那就开始消灭bug吧:)</li>
+          <li><b>Gentoo Bugdays</b>：每月的第一个周六，开发人员与用户们都会聚集到<uri link="irc://irc.freenode.net/gentoo-bugs">#gentoo-bugs</uri>与<uri link="http://irc.freenode.net">irc.freenode.net</uri>上参与bug的测试，讨论与解决。Bugdays为开发人员与用户间的交流搭起了沟通的桥梁。同时亦是有开发潜力的你被发现的极好机会。欲知详情请联系<uri link="http://bugday.gentoo.org/">Bugday团队</uri>。</li>
+          <li><b>Gentoo Linux文档团队</b>：该团队旨在为用户提供简明精要的文档。它的组成包括写作人/编辑以及各个语言版本的翻译者。有意参与者请参看<uri link="http://www.gentoo.org/proj/en/gdp/doc/doc-policy.xml">Gentoo Linux文档策略</uri>。</li>
+          <li><b>Gentoo Weekly Newsletter</b>：如果你有兴趣成为Gentoo周报团队的一员（为其作贡献或翻译），请参看Gentoo周报综述部分获取联系信息。</li>
+          <li><b>#gentoo IRC频道</b>：如果你有丰富的知识，请不吝莅临irc.freenode.net上的<uri link="irc://irc.freenode.net/gentoo">#gentoo</uri>频道为其他用户提供帮助。</li>
+          <li><b>#gentoo-dev-help IRC频道</b>：有兴趣了解更多关于ebuild的编写或Gentoo相关开发工作的朋友欢迎到Freenode上的<uri link="irc://irc.freenode.net/gentoo-dev-help">#gentoo-dev-help</uri>上提问，这里有众多的开发人员与其他用户随时为你解惑！</li>
+        </ul>
+      </body>
+    </section>
+
+    <section>
+      <title>Sunrise项目——Gentoo用户Overlay</title>
+      <body>
+        <p>上周我们发布了完全由用户提交的ebuild构成的overlay。该overlay旨在协助用户能找到并使用原本仅贴在Gentoo Bugzilla上的一些ebuild，同时促使这些ebuild能达到质量标准。而且，这也将会是一个从用户社区中发现新的ebuild开发者的极佳场所。</p>
+        <p>赋予受信任用户向这个库提交的权限引来了激烈争论，主要围绕恶意用户可能带来的问题以及针对他们的策略。在6月16日的议会会议中认为这个构思不错但是执行欠佳。</p>
+        <p>结果是Sunrise overlay被从官方Gentoo硬件中中断了。不过它仍然作为非官方项目在<uri link="http://gentoo-sunrise.org">gentoo-sunrise.org</uri>上继续存在。</p>
+        <p>Sunrise正在寻求更多用户从bugzilla向overlay添加ebuild。你可以在<uri link="http://www.gentoo.org/proj/en/sunrise">项目页面</uri>，<uri link="http://gentoo-sunrise.org/cgi-bin/trac.cgi/wiki/SunriseFaq">FAQ</uri>以及<uri link="http://gentoo-sunrise.org/cgi-bin/trac.cgi/browser">overlay。</uri>上找到关于Sunrise及其目标的更多信息。欢迎访问IRC频道——irc.freenode.net上的<uri link="irc://irc.freenode.net/gentoo-sunrise">#gentoo-sunrise</uri>等着你。</p>
+      </body>
+    </section>
+
+    <section>
+      <title>Java 1.5进度和Java处理的变化</title> 
+      <body>
+        <p>有些人可能注意到，Java 1.5已经在package.masked里一段时间了。有不少随1.5而来的问题致使它一直呆在package.mask里。详情请看<uri link="http://www.gentoo.org/proj/en/java/tiger-faq.xml">Java 1.5 FAQ</uri>。</p>
+        <p>大约一年以前，我们开始着手改进构建系统（注：Java相关的eclasses和我们的java-config工具），使它更加灵活通用，而且针对性地解决已知问题。完全开发用了大约六个月。不幸的是， 新的系统还不能立刻取代旧的系统。所以从那时开始到现在，对如何从现有系统理性地迁移到新系统一直未有定论。</p>
+        <p>不过现在我们准备好转到新系统上了。</p>
+        <p>新系统的亮点：</p>
+        <ul>
+          <li>随时切换当前虚拟机的能力</li>
+          <li>对用户和系统虚拟机做的改变立刻生效，不再受制于shell环境（比如切换系统虚拟机之后不再需要运行<c>env-update &amp;&amp; source /etc/profile</c>）。</li>
+          <li>现在还有”构建虚拟机“的概念，它可以用来emerge包，和系统虚拟机独立配置</li>
+          <li>对每个Java版本，比如1.3，1.4，1.5，等等，构建虚拟机可以按照厂商和版本配置。</li>
+          <li>在emerge的时候虚拟机可以按照配置即时切换。包之间的依赖关系也是。比如，有些包不能用1.5编译。这种情况下，1.4虚拟机会在构建时启用。</li>
+          <li>用ant构建的Java包的build.xml在构建时会被重写，以确保编译出正确版本的Java字节码。</li>
+          <li>我们很快就会取消Java 1.5的屏蔽，然后腾出手来应付这个秋天将会出来的Java 1.6。</li>
+        </ul>
+        <p>人们正在<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/39547">gentoo-dev邮件列表上讨论</uri>新的系统，假如没有大问题出现，将会在今后的几周内进入portage树中。</p>
+      </body>
+    </section>
+
+    <section>
+      <title>nss_ldap破损以及如何预防</title>
+      <body>
+        <p>升级到nss_ldap-249或更高版本之后，很多用户发现他们的系统几乎不可用。启动可能需要超长时间（最长一个小时）才有登陆提示。这是系统行为的一个小变化造成的。原来超时时间是固定的，现在是登录尝试次数是可设置的，并且两次尝试之间的时间增加了。以下是如何修复这个问题的信息：</p>
+        <ul>
+          <li><uri link="http://robbat2.livejournal.com/199841.html">升级/使用nss_ldap/nss_mysql/nss_nis/nss……并不损换你的系统</uri></li>
+        </ul>
+      </body>
+    </section>
+
+    <section>
+      <title>匈牙利语GWN翻译</title>
+      <body>
+        <p>最近正在考虑匈牙利语GWN翻译。现在我们正在寻找翻译帮手——如果你有兴趣请发信给<mail link="gwn-feedback@gentoo.org">gwn-feedback@gentoo.org</mail>。非常感谢！</p>
+      </body>
+    </section>
+  </chapter>
+  
+  <chapter>
+    <title>倾听社区</title>
+    <section>
+      <title>planet.gentoo.org</title>
+      <body>
+        
+        <p>
+          <b>Gentoo多媒体FAQ</b>
+        </p>
+        
+        <p>在看过许多类似的Gentoo论坛帖子和<c>#gentoo</c> IRC频道之后，Steve Dibb开始制作了一个关于多媒体方面的FAQ。如果你想在他的FAQ里看到一些常见问题的解答，请<mail link="beandog@gentoo.org">告诉他</mail>。</p>
+        
+        <ul>
+          <li>
+            <uri link="http://wonkabar.org/blog/?p=96">Gentoo多媒体FAQ</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+      
+    <section>
+      <title>gentoo-dev</title>
+      <body>
+        <p><b>Sunrise 项目</b></p>
+        <p><mail link="genstef@gentoo.org">Stefan Schweizer</mail>和<mail link="jokey@gentoo.org">Markus Ullmann</mail>的用户Overlay项目吸引了众多的讨论，现在项目暂时被中止。以下的帖子源于这个公告。</p>
+        <ul>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38898">［公告］Sunrise项目——Gentoo用家Overlay</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39002">Sunrice项目：架构团队的观点</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39013">“官方”的含义是什么？</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39043">Sunrise项目——贴出未解决问题的要求</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39166">Sunrise项目——建议</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39250">Sunrise项目的overlay被暂时中止并等待委员会的决议</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39301">异端的想法？祝Sunrise项目好运</uri></li>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39512">Sunrise项目：展望，半官方以及评估</uri></li>
+        </ul>
+        
+        <p><b>Tree的重新定义: 一个GLEP草案</b></p>
+        <p>上周，<mail link="spb@gentoo.org">Stephen Bennett</mail>曾发起了一个源起于关于”备选包管理系统“的帖子的讨论。被经常讨论的问题是缺乏ebuild的正式规格、环境以及诸多其他细节。所以如果得到足够的支持，Stephen倾向于和portage小组以及其他感兴趣的开发人员共同撰写一个完整的规格，毫无疑问的，这个主意得到了广泛的正面回应。</p>
+        <ul>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39259">Tree的重新定义: 一个GLEP草案</uri></li>
+        </ul>
+
+        <p><b>Profiles的第二部分</b></p>
+        <p>两周前我们提到过的<uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/38016">Paludis和Profile</uri>帖子里发生了冗长且激烈的讨论，因此为了给树中的备选包管理器提供方便，<mail link="spb@gentoo.org">Stephen Bennett</mail>向列表发布了一个新的提案。这个版本的提案叫package-manager-agnostic，获得了众多的正面回应和几乎为零的反对意见。因此它将会在2006.1发行版之后被实现。</p>
+        <ul><li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39249">Profiles的第二部分</uri></li></ul>
+        
+        <p><b>GLEP 42重新启动</b></p>
+        <p>GLEP 42，即“紧急新闻通告”系统，在其开发者离开Gentoo项目组之后一直处于一种被忘却的状态。不过，Stephen Bennett现在接手了这个项目，并且把它再次发到邮件列表。这个GLEP拥有着非常广泛的支持，并且会在不久的将来被送交Gentoo委员会审议。</p>
+        <ul><li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39258">GLEP 42（新闻）重新起动</uri></li></ul>
+        
+        <p><b>GWN事务</b></p>
+        <p><mail link="christel@gentoo.org">Christel Dahlskjaer</mail>使用了一个不太直观的标题”七月委员会会议：要求包含的议程内容“，发起了关于Gentoo周报目前状态的讨论。过去的周报存在一些问题，特别是因<mail link="plate@gentoo.org">Ulrich Plate</mail>的时间和精力有限而代来的问题。这个讨论带来的一个积极的副作用就是，Christel和其他的开发人员因此决定加入周报的工作并尽量的做出贡献。</p>
+        <ul>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39141">七月委员会会议：要求包括的议程内容</uri></li>
+        </ul>
+
+        <p><b>［RFC］i18n项目</b></p>
+        <p><mail link="flameeyes@gentoo.org">Diego 'Flameeyes' Pettenò</mail>征求对于他的关于国际化(i18n)项目想法的意见，目标是让所有的非英语用户更容易使用，包括翻译Gentoo开发的软件的错误信息以及其man帮助文档，具体的范围待定。</p>
+        <ul>
+          <li><uri link="http://thread.gmane.org/gmane.linux.gentoo.devel/39131">［RFC］i18n项目</uri></li>
+        </ul>
+        
+      </body>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Gentoo国际</title>
+    <section>
+      <title>德国：FrOSCon，Bonn/Rhein-Sieg</title>
+      <body>
+        
+        <p>Gentoo开发员<mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>将在首届<uri link="http://www.froscon.org">自由软件和开源软件会议</uri>上做两个演讲，会议在下周末于Applied Sciences Bonn-Rhein-Sieg大学举办。他的第一个演讲是对Gentoo的介绍，包括Gentoo的历史、现状及未来发展。第二个演讲包括了Gentoo在商业环境中的使用和对Gentoo强大功能的示范，也提到Gentoo在哪些方面仍需发展。详情请见<uri link="http://programm.froscon.org">FrOSCon演讲网站</uri>。</p>
+        
+      </body>
+    </section>
+
+    <section>
+      <title>Gentoo夏令营2006</title>
+      <body>
+        <p>第二届Gentoo夏令营将于8月26和27号两天在下萨克森（Lower Saxony）第四大湖“Grosses Meer”附近的一个营地举办。虽然号称Gentoo夏令营，但以论坛主席<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=18822">Uwe Hölzel</uri>为核心的组织团队主要专注于社交方面。打迷你高尔夫、吃烤肉或者干脆游山玩水更多过写程序。对于任何有兴趣参加的人，GSC团队已经设立了一个<uri link="http://gsc2006.nachtnebelnelken.de/">网页</uri>，提供了更多信息和一个论坛。</p>
+      </body>
+    </section>
+  </chapter>
+        
+  <!-- Gentoo in the press -->
+  <chapter>
+    <title>Gentoo媒体</title>
+    <section>
+      <title>gentoo.de：Portage 2.1指南（2006年6月13日）</title>
+      <body>
+        
+        <p>德国社区网站gentoo.de上发表了一篇关于<uri link="http://www.gentoo.de/main/de/portage-2.1.xml">Portage 2.1</uri>中新特性和行为变化的文章。作者<mail link="tobias.scherbaum@gentoo-ev.org">Tobias Scherbaum</mail>加入了概述，还给出了一些实用的例子，教您如何利用这些新特性增强您的Gentoo体验。此文章现在只有德文版，如果有人感兴趣的话，一接到通知我们马上就把它译成英文。</p>
+        
+      </body>
+    </section>
+    <section>
+      <title>使用QtRuby快速开发GUI</title>
+          <body>
+          <p>Gentoo开发员<mail link="caleb@gentoo.org">Caleb Tennis</mail>最近出版了一本叫《使用QtRuby快速开发GUI》的书。此书的PDF版可以在<uri link="http://pragmaticprogrammer.com/titles/ctrubyqt/index.html">实用主义程序员网站</uri>获得。虽然书中假定读者有基础的Ruby使用知识，但全书意欲通俗易懂，甚至对Qt尚不熟悉的读者亦可从中获益。</p>
+          <p>尽管并非Gentoo专有的，此书中所有程序的测试都在Gentoo上进行。QtRuby绑定可用<c>emerge qtruby</c>安装，KDE扩展Korundum可用<c>emerge korundum</c>安装，所以对Gentoo用户来说，想试试这些程序是极为容易的。</p>
+          <p>Caleb Tennis已经做了三年的Gentoo开发员，现在是Ruby，Qt和KDE团队的一员。</p>
+        </body>
+      </section>
+    </chapter>
+    
+    <!-- Tips and Tricks -->
+    <chapter>
+      <title>心得技巧</title>
+      <section>
+        <title>探索portage特性</title>
+        <body>
+          <p>新的Portage 2.1版本带来了许多特性和改进。尽管其中的大多数都在make.conf例样和portage手册页中有说明，但大多数用户可能还不太明白。所以我们将展示如何使用其中的一些特性。</p>
+          <p>所有的特性都要在<path>/etc/make.conf</path>中设置。</p>
+          <p>Portage现能够在编译的同时下载其他软件包了，这在安装多个软件包时能节省很多时间。不必在正常emerge时另外运行<c>emerge --fetchonly</c>了，您只需要添加如下选项：</p>
+	  <pre caption="Setting parallel-fetch in /etc/make.conf">
+FEATURES="parallel-fetch"
+	  </pre>
+          <p>这个特性在某些Portage 2.1版本里失效，但是很快就会修复。</p>
+          <p>另一个可以进一步缩短安装时间的新选择是confcache。利用这一新特性，portage可以缓存很多配置脚本所做测试的结果，使得执行更加快速。这也带来了小小的风险，有可能缓存错误值。提醒您注意，这项特性有一些bug。目前这个软件包已在大多数架构中有关键字，启用的必要步骤为：</p>
+	  <pre caption="Enabling confcache">
+<comment>将其加入/etc/make.conf</comment> 
+FEATURES="confcache"
+<comment>在安装之前先要解除屏蔽</comment>
+echo "=dev-utils/confcache-0.4.2-r1 ~arch" &gt;&gt; /etc/portage/package.keywords
+<comment>安装confcache</comment>
+emerge -av confcache 
+<comment>在以后的安装中，您将看到类似如下内容：</comment> 
+checking for i686-pc-linux-gnu-gcc... (cached) i686-pc-linux-gnu-gcc 
+checking whether we are using the GNU C compiler...(cached) yes 
+checking whether i686-pc-linux-gnu-gcc accepts -g... (cached) yes
+	  </pre>
+        <p>另外一个很重要的新特性是记录ebuild打印的所有信息。要记录的信息内容以及如何处理记录都是可配置的。比如，我们可以将安装某个软件包时的警告以及错误信息保存到一个特定文件，添加配置如下：</p>
+	<pre caption="Configuring logging features in /etc/make.conf">
+<comment>此处设置记录的内容</comment> 
+PORTAGE_ELOG_CLASSES="warn error log" 
+<comment>此处显示如何处理记录</comment>
+PORTAGE_ELOG_SYSTEM="save"
+	</pre>
+        <p>还有许多的选项设置，比如通过电子邮件发送消息记录。请查看make.conf.example以获得更多的信息。</p>
+      </body>
+    </section>
+  </chapter>
+
+<!-- Gentoo developer moves -->
+  <chapter>
+    <title>Gentoo开发者变更</title>
+    <section>
+      <title>离开</title>
+      <body>
+        <p>下面的开发者最近离开了Gentoo项目：</p>
+        <ul>
+          <li><e>Chris White*</e></li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>加入</title>
+      <body>
+        <p>下面开发者最近加入了Gentoo项目：</p>
+        <ul>
+          <li><e>Chris White (chriswhite) (random stuff)*</e></li>
+        </ul>
+      </body>
+    </section>
+    <section>
+      <title>变更</title>
+      <body>
+        <p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+        <ul>
+          <li>本周没有</li>
+        </ul>
+        <p>注释：Chris White辞职但很快又收回了自己的辞职信。为了说明这一情况，我们认为他同时是辞职和新加入的开发人员。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- Gentoo security -->
+  <chapter>
+    <title>Gentoo安全</title>
+  <!-- paste from the script -->
+
+<section>
+<title>GDM：权限提升</title>
+<body>
+<p>GDM中的一个身份认证错误可能会允许用户提升权限。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-14.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Asterisk：IAX2视频帧缓冲区溢出</title>
+<body>
+<p>Asterisk的IAX2通道驱动上包含了一个bug，这会引起远程任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-15.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>DokuWiki：PHP代码注入</title>
+<body>
+<p>DokuWiki拼写检查器的一个漏洞允许任意PHP命令的执行，甚至不需要特定的权限。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-16.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>OpenLDAP：缓冲区溢出</title>
+<body>
+<p>OpenLDAP复制服务器slurpd包含了一个缓冲区溢出，这可能会导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-17.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>PAM-MySQL：多个漏洞</title>
+<body>
+<p>PAM-MySQL中的漏洞会导致拒绝服务，从而使得不能够登录主机。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-18.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Sendmail：拒绝服务</title>
+<body>
+<p>有问题的multipart MIME消息会引起fork生成的Sendmail进程崩溃。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-19.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Typespeed：远程任意代码的执行 </title>
+<body>
+<p>Typespeed的网络代码中存在缓冲区溢出，这将导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-20.xml">GLSA声明</uri></p>
+</body>
+</section>
+<section>
+<title>Mozilla Thunderbird：多个漏洞</title>
+<body>
+<p>在Mozilla Thunderbird中的多处漏洞允许跨站点脚本，JavaScript代码的权限提升，并且可能导致任意代码的执行。</p>
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200606-21.xml">GLSA声明</uri></p>
+</body>
+</section>
+  </chapter>
+  <!-- Bugzilla -->
+
+<chapter>
+<title>Bugzilla</title>
+<section>
+<title>总结</title>
+<body>
+     <ul>
+          <li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+          <li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+          <li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+     </ul>
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+     <p>Gentoo社区使用Bugzilla(<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug，提示，建议等形式的和开发团队之间的交流。从2006年6月12日到2006年6月19日，这个站点记录下了：</p>
+     <ul>
+          <li>710个在这段时间内被发现的新bug</li>
+          <li>366个在这段时间内被修正或解决的bug</li>
+          <li>21个先前修复了的但在这段时间重现的bug</li>
+     </ul>
+     <p>在当前还未被修正的10298个bug里面：54个被标记为"blocker"，138个被标记为"critical"，还有554个被标记为"major"。</p>
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+     <p>在这段时间内修复最多bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="dev-portage@gentoo.org">Portage团队</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，19个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="amd64@gentoo.org">AMD64项目</mail>，18个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="security@gentoo.org">Gentoo安全</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="games@gentoo.org">Gentoo游戏</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="neysx@gentoo.org">Xavier Neys</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=neysx@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+      <li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+</ul>
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+     <p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+     <ul>
+      <li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，35个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+      <li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，22个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+      <li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=base-system@gentoo.org">新bug</uri></li>
+      <li><mail link="squinky86@gentoo.org">Jon Hood</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=squinky86@gentoo.org">新bug</uri></li>
+      <li><mail link="sound@gentoo.org">Gentoo声音团队</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=sound@gentoo.org">新bug</uri></li>
+      <li><mail link="games@gentoo.org">Gentoo游戏</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=games@gentoo.org">新bug</uri></li>
+      <li><mail link="sci@gentoo.org">Gentoo科学相关软件包</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=sci@gentoo.org">新bug</uri></li>
+      <li><mail link="netmon@gentoo.org">Netmon团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-06-12&amp;chfieldto=2006-06-19&amp;assigned_to=netmon@gentoo.org">新bug</uri></li>
+</ul>
+</body>
+</section>
+</chapter>
+  <!-- paste from the script -->
+
+  <!-- GWN feedback information -->
+  <chapter>
+    <title>周报反馈</title>
+    <section>
+      <body>
+        <p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+      </body>
+    </section>
+  </chapter>
+  <!-- GWN subscription information -->
+  <chapter>
+    <title>周报订阅</title>
+    <section>
+      <body>
+        <p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+        <p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+      </body>
+    </section>
+  </chapter>
+  
+  <!-- Other Languages -->
+  <chapter>
+    <title>其他语言</title>
+    <section>
+      <body>
+        <p>Gentoo周报还被翻译为以下几种语言文字：</p>
+        <ul>
+	  <li>
+	    <uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+	  </li>
+          <li>
+            <uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+          </li>
+          <li>
+            <uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/en/gwn/gwn.xml">英文</uri>
+          </li>
+          <li>
+            <uri link="/news/de/gwn/gwn.xml">德文</uri>
+          </li>
+          <li>
+            <uri link="/news/fr/gwn/gwn.xml">法文</uri>
+          </li>
+          <li>
+            <uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+          </li>
+          <li>
+            <uri link="/news/ja/gwn/gwn.xml">日文</uri>
+          </li>
+          <li>
+            <uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+          </li>
+          <li>
+            <uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+          </li>
+          <li>
+            <uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+          </li>
+          <li>
+            <uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+          </li>
+          <li>
+            <uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+          </li>
+          <li>
+            <uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+          </li>
+          <li>
+            <uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+          </li>
+        </ul>
+      </body>
+    </section>
+  </chapter>
+</guide>

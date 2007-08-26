@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20060814-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2006年8月14日</subtitle>
+
+<author title="Editor">
+<mail link="plate@gentoo.org">Ulrich Plate</mail>
+</author>
+
+<author title="Author">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<author title="Translator">
+<mail link="robert.zhangle@gmail.com">张乐</mail>
+</author>
+<author title="Translator">
+<mail link="nkeric@gmail.com">许艺华</mail>
+</author>
+<author title="Translator">
+<mail link="neville.lyh@gmail.com">李颖颢</mail>
+</author>
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<abstract>这是2006年8月14日的Gentoo周报。</abstract>
+<summary/>
+
+<version>Volume 5, Issue 33</version>
+<date>2006-08-14</date>
+
+<!-- Gentoo News -->
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>Linux World会展──旧金山</title>
+<body>
+
+<p><uri link="http://www.linuxworldexpo.com/live/12/events/12SFO06A">Linux World会展</uri>于本周在旧金山开幕。与往常一样，Gentoo会在.Org大棚里有摊位。摊位位于GNOME和KDE项目摊位之间。Gentoo将展示即将发布的2006.1发行版和不同系统架构。这是和几位美国Gentoo开发人员见面的好机会。</p>
+
+<p>展览会从2006年8月15日至8月17日之间开放。</p>
+
+</body>
+</section>
+
+<section>
+<title>OSL Rackathon</title>
+<body>
+
+<p>俄勒冈州立大学<uri link="http://osuosl.org">开源实验室</uri>正在举办名为<uri link="http://osuosl.org/contribute/rackathon">Rackathon</uri>的基金募捐活动，为项目筹集资金。OSL托管了大部分的Gentoo基础设施，几台开发电脑，还提供Gentoo主镜像。他们也托管了很多其它开源项目。Gentoo是OSL的第一个客户，也是最大的几个客户之一。筹集到的资金将用来支付这免费的主机托管以及项目承担的其他开销。捐赠20美元就可以将您的名字留在OSL的机柜上一整年！</p>
+
+<p>捐助给OSL可以为Gentoo将来的托管提供资金，也可以帮助其他的开源项目。</p>
+
+</body>
+</section>
+
+<section>
+<title>PyBugz——Bugzilla的Python接口</title>
+<body>
+
+<p>Gentoo开发人员<mail link="liquidx@gentoo.org">Alastair Tse</mail>已经为Bugzilla事件追踪系统创建了一套基于Python的命令行接口。最初设计为加速Gentoo开发人员工作流程的工具的<uri link="http://www.liquidx.net">PyBugz</uri>目前在XenSource和GNOME Bugzilla追踪器上也经过了测试。</p>
+
+<p>Gentoo用户可简单使用<c>emerge pybugz</c>安装PyBugz。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<!-- <chapter>
+<title>Heard in the community</title> -->
+
+<!-- forums -->
+
+<!-- planet.gentoo.org -->
+
+<!-- </chapter> -->
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<chapter>
+<title>Gentoo媒体</title>
+
+<section>
+<title>Linux.com（2006年8月11日）</title>
+<body>
+
+<p><uri link="http://www.linux.com">Linux.com</uri>发表了一篇文章，名为“<uri link="http://www.linux.com/article.pl?sid=06/08/07/1952207">Gentoo Portage的秘密</uri>”。文章给出了一些关于如何利用portage 2.1新特性来优化Gentoo使用的有益忠告。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Tips and Tricks -->
+
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<chapter>
+<title>Gentoo安全</title>
+
+<!-- paste from the script -->
+
+<section>
+<title>x11vnc：在LibVNCServer代码中包含绕过密码验证的漏洞</title>
+<body>
+
+<p>用x11vnc建立的VNC服务器可以接受不安全的协议类型，即便是在服务器不提供该类型的情况下。这可以导致未经授权的访问服务器。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-12.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>ClamAV：堆溢出</title>
+<body>
+
+<p>ClamAV中存在的堆缓冲溢出，将会导致拒绝服务以及潜在任意代码被远程执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-13.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>DUMB：堆溢出</title>
+<body>
+
+<p>在DUMB中的堆缓冲溢出可能会导致任意代码的执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-14.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>MIT Kerberos 5：多个本地权限提升漏洞</title>
+<body>
+
+<p>随MIT Kerberos 5发布的几个程序有本地权限提升漏洞。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-15.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Warzone 2100 Resurrection：多个缓冲区溢出</title>
+<body>
+
+<p>Warzone 2100 Resurrection 服务器和客户端分别有不同的缓冲区溢出漏洞，可能引起远程代码执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-16.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>libwmf：缓冲区溢出漏洞</title>
+<body>
+
+<p>libwmf含有一个整数溢出漏洞，可导致任意代码执行。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-17.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>Net::Server：格式化字符串漏洞</title>
+<body>
+
+<p>据报告Net::Server中含有一个格式化字符串漏洞，该漏洞可导致拒绝服务。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-18.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+<section>
+<title>WordPress：权限提升</title>
+<body>
+
+<p>WordPress里的一个漏洞可以导致已经注册的用户提升权限。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200608-19.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+
+<!-- paste from the script -->
+
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#doc_chap1_sect2">统计信息</uri></li>
+<li><uri link="#doc_chap1_sect3">被修复的bug排行榜</uri></li>
+<li><uri link="#doc_chap1_sect4">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2006年8月6日到2006年8月13日，这个站点记录下了：</p>
+
+<ul>
+<li>780个在这段时间内被发现的新bug</li>
+<li>385个在这段时间内被修正或解决的bug</li>
+<li>32个先前修复了的但在这段时间重现的bug</li>
+</ul>
+
+<p>在当前还未被修正的10879个bug里面：47个被标记为"blocker"，138个被标记为"critical"，还有539个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，29个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="games@gentoo.org">Gentoo游戏</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=games@gentoo.org">被修正的bug</uri></li>
+<li><mail link="dev-portage@gentoo.org">Portage团队</mail>，16个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=dev-portage@gentoo.org">被修正的bug</uri></li>
+<li><mail link="emacs@gentoo.org">GNU Emacs团队</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=emacs@gentoo.org">被修正的bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=amd64@gentoo.org">被修正的bug</uri></li>
+<li><mail link="neysx@gentoo.org">Xavier Neys</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=neysx@gentoo.org">被修正的bug</uri></li>
+<li><mail link="spock@gentoo.org">Michal Januszewski</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=spock@gentoo.org">被修正的bug</uri></li>
+<li><mail link="perl@gentoo.org">Perl Devs @ Gentoo</mail>，11个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;resolution=FIXED&amp;assigned_to=perl@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，46个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，14个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="java@gentoo.org">Java团队</mail>，12个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=java@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，10个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+<li><mail link="maintainer-needed@gentoo.org">孤立软件包的默认受托人</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=maintainer-needed@gentoo.org">新bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，7个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=kde@gentoo.org">新bug</uri></li>
+<li><mail link="perl@gentoo.org">Perl Devs @ Gentoo</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=perl@gentoo.org">新bug</uri></li>
+<li><mail link="x11-drivers@gentoo.org">X11外部驱动维护者</mail>，5个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2006-08-06&amp;chfieldto=2006-08-13&amp;assigned_to=x11-drivers@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>请把你的意见或建议<mail link="gwn-feedback@gentoo.org">反馈</mail>给我们，这样可以帮助我们把GWN做的更好。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<li>
+<uri link="/news/da/gwn/gwn.xml">丹麦文</uri>
+</li>
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>

@@ -1,0 +1,576 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-x86-medium.xml,v 1.17 2004/08/08 10:12:39 swift Exp $ -->
+
+<sections>
+<section>
+<title>硬件需求</title>
+<subsection>
+<title>简介</title>
+<body>
+
+<p>
+在开始之前，我们首先列出在你的机器上成功安装Gentoo所需的硬件要求。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>x86架构</title>
+<body>
+
+<ul>
+<li>
+  你需要至少1Gb的磁盘剩余空间
+</li>
+<li>
+  如果你不使用预编译软件包，你需要至少300Mb的缓冲存储（RAM和交换空间）
+</li>
+<li>
+  你需要486以上的处理器和至少64M的内存
+</li>
+</ul>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>做出你的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+还是有兴趣尝试Gentoo吧？那好，我们先来选择你要使用的安装介质。对，你有这个选择权，虽然它们不完全一样，但是结果都将一样：获得一个Gentoo基本系统。
+</p>
+
+<p>
+我们这里将描述的安装介质有：
+</p>
+
+<ul>
+<li>Gentoo 小型 LiveCD</li>
+<li>Gentoo 通用 LiveCD</li>
+</ul>
+
+<p>
+每种介质都有它自己的优缺点。我们将从正反两方面介绍这些安装介质，这样你可以为做出一个正确的选择收集更多的信息。但是开始之前，让我们先来解释一下三个stage的安装。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>三个stage</title>
+<body>
+
+<p>
+Gentoo Linux可以使用三个<e>stage</e>包中的一个来安装。这是根据你自己要编译系统的多少内容决定的。<e>stage1</e>包用于你要开机就从最底层开始编译整个系统。<e>stage2</e>包用于从一个已经bootstrap的“半编译”状态的开始编译整个系统。<e>stage3</e>包已经包含了一个已经为你编译好的基本的Gentoo Linux系统。我们后面将会解释到，你可以不用编译任何东西（除开内核和一些可选的软件包）来安装Gentoo。如果你要这样做，你必须使用<e>stage3</e>包。
+</p>
+
+<p>
+现在你要选择哪个stage？
+</p>
+
+<p>
+从<e>stage1</e>开始，你可以完全控制优化设置和在你的系统初始化时启动一些可选的编译实时功能。这使得<e>stage1</e>特别适合知道自己在做什么的高级用户。对于那些想了解更多Gentoo Linux的内部工作机制的用户，这也是一个非常不错的安装方法。
+</p>
+
+<p>
+<e>stage1</e>的安装必须在有网络连接的工作环境中执行。
+</p>
+
+<table>
+<tr>
+  <th>Stage1</th>
+  <th>优缺点</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>你可以完全控制优化设置和在你的系统初始化时启动一些可选的编译实时功能</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>适合知道自己做什么的高级用户</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>你可以学到更多Gentoo的内部机制</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>安装完成需要很长的时间</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>如果你不打算调节这些设置，这很可能是浪费时间</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>不适合于无网络安装</ti>
+</tr>
+</table>
+
+<p>
+<e>stage2</e>的安装允许你跳过bootstrap这个过程，如果你对我们为你的特别的<e>stage2</e>包所选的优化设置满意的话，它会做的很好。
+</p>
+
+<p>
+<e>stage2</e>的安装只能在有网络连接的工作环境中执行。
+</p>
+
+<table>
+<tr>
+  <th>Stage2</th>
+  <th>优缺点</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>你不需要bootstrap</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>比从stage1开始快</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>你可以调节你的设置</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>你不能和stage1一样调节更多的设置</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>这不是安装Gentoo最快的方法</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>你必须我们为bootstrap所选的优化选项</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>不适合于无网络安装</ti>
+</tr>
+</table>
+
+<p>
+选择从<e>stage3</e>开始是安装Gentoo的最快的方法，但是意味着你的基本系统的优化选项是由我们为你选择的（当然，这些选项是很好的配置，我们在维护其稳定性同时选择用来增强其性能）。如果你要使用预编译软件包安装或者无网络安装，你也必须使用<e>stage3</e>。
+</p>
+
+<table>
+<tr>
+  <th>Stage3</th>
+  <th>优缺点</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>安装Gentoo基本系统最快的方法</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>适合于无网络安装</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>你不可以调节基本系统，因为它已经编译好了</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>你不能为使用stage1或者stage2吹牛了:)</ti>
+</tr>
+</table>
+
+<p>
+我想你可能有兴趣知道，如果你在安装完Gentoo后使用不同的优化选项，你可以使用这些新的优化选项重新编译你的整个系统。
+</p>
+
+<p>
+现在让我们来看看已有的一些安装介质。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Gentoo的LiveCD</title>
+<body>
+
+<p>
+<e>Gentoo的LiveCD</e>是包含了可使用的Gentoo环境的启动CD。它们允许你们从CD启动Linux。在启动过程中，它们会自动检测你的硬件和加载准确的驱动。它们是由Gentoo开发者维护的。
+</p>
+
+<p>
+所有的LiveCD都允许你启动、设置网络、初始化分区和从因特网上开始安装Gentoo。但是，一些LiveCD还包含了必须的源代码，这样你可以在一个无网络的条件下也可以安装Gentoo。
+</p>
+
+<p>
+现在看看这些LiveCD里包含了些什么？
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Gentoo的小型LiveCD</title>
+<body>
+
+<p>
+这是一个小而实用的启动CD，只用来启动系统、准备网络和让Gentoo的安装可以继续。它不包含任何stage（或者有时候只包含一个stage1文件）、源代码或者预编译软件包。比如，对于x86架构的LiveCD可以在<path>universal</path>的子文件夹里找到，名为<c>install-x86-minimal-2004.2.iso</c>。
+</p>
+
+<table>
+<tr>
+  <th>小型LiveCD</th>
+  <th>优缺点</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>下载量最小</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>适合所有的子架构</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>你可以从网上下载stage1、stage2或者stage3来进行任何一种安装</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>不包含stage、portage快照、GRP软件包，因此不适合无网络安装</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+<subsection>
+<title>Gentoo的通用LiveCD</title>
+<body>
+
+<p>
+Gentoo的通用LiveCD是适合于无网络安装Gentoo的启动CD。它包含了一个stage1包和几个stage3包（为不同的子架构进行优化）。比如，对于x86架构的LiveCD来说，就叫做<c>install-x86-universal-2004.2.iso</c>，也可以在<path>universal</path>子文件夹中找到。
+</p>
+
+<p>
+如果你仔细查看<path>/releases/x86/2004.2</path>，你会发现我们也提供了<e>Gentoo软件包CD</e>（在文件夹<path>packagecd/</path>里）。这种CD（不能用于启动）只包含了预编译软件包，在成功安装Gentoo后可以用来安装软件。要是安装Gentoo的话，你只需要通用LiveCD，但是你需要OpenOffice.org、Mozilla、KDE、GNOME等，但又不想编译所有这些软件包，那么你也需要这些软件盘。比如i686（x86的一个子架构）软键盘就叫做<c>packages-i686-2004.2.iso</c>，可以在类似的子文件夹中找到（i686）。
+</p>
+
+<p>
+如果你要从stage执行GRP安装，你只需要这些软件盘。
+</p>
+
+<table>
+<tr>
+  <th>通用LiveCD和软件盘</th>
+  <th>优缺点</th>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>软件盘根据子架构进行了优化</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>软件盘提供了用于快速Gentoo安装所需的预编译软件包</ti>
+</tr>
+<tr>
+  <th>+</th>
+  <ti>包含所有你需要的东西。你甚至可以进行无网络安装</ti>
+</tr>
+<tr>
+  <th>-</th>
+  <ti>下载量很大</ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>下载、刻录Gentoo的LiveCD，从LiveCD启动</title>
+<subsection>
+<title>下载和刻录这些LiveCD</title>
+<body>
+
+<p>
+你已经选择使用了一种Gentoo LiveCD。我们首先下载和刻录这张LiveCD。前面我们提到过几个LiveCD，那我们怎们找到它们呢？
+</p>
+
+<p>
+你可以从我们的<uri link="/main/en/mirrors.xml">镜像</uri>中下载任何一个LiveCD（如果需要，还有软件盘）。LiveCD都放置在文件夹<path>/releases/x86/2004.2/livecd</path>里，而软件盘都放在文件夹<path>releases/x86/2004.2/packagecd</path>里。
+</p>
+
+<p>
+在这些文件夹里你可以找到一些ISO文件，这些都是你可以在CD-R上刻录的CD镜像。
+</p>
+
+<p>
+如果你想知道下载的文件是否可用，你可以检查它的MD5码，冰河我们提供的MD5码（如<path>install-x86-minimal-2004.2.iso.md5</path>）进行比较。你可以在Linux/Unix下使用<c>md5sum</c>或者在Windows下使用<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5码。
+</p>
+
+<p>
+另外一种检查下载文件的正确性的方法是使用GnuPG来确认我们提供的密匙签名（以<path>.asc</path>结尾）。下载这些密匙文件。并获得公共密匙。
+</p>
+
+<pre caption="获得公共密匙">
+$ <i>gpg --keyserver pgp.mit.edu --recv-keys 17072058</i>
+</pre>
+
+<p>
+现在来确认密匙：
+</p>
+
+<pre caption="确认密匙签名">
+$ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
+</pre>
+
+<p>
+要刻录这些下载的ISO文件，你必须选择原始刻录。刻录方法和你选择的软件关系很大。我们这里将讨论<c>cdrecord</c>和<c>K3B</c>；更多的信息可以在我们的<uri link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
+</p>
+
+<ul>
+  <li>
+    对于cdrecord来说，你只需简单的输入<c>cdrecord dev=/dev/hdc</c>（使用你的CD-RW设备的路径来代替<path>/dev/hdc</path>），并带上这个ISO文件的路径为参数 :)
+  </li>
+  <li>
+    对于K3B来说，顺序选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn Image</c>。然后你可以将你的ISO文件放入“Image to Burn”区域。最后点击<c>Start</c>。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>启动LiveCD</title>
+<body>
+
+<impo>
+继续之前先读完整个这一节，因为你可能没有时间边读边做。
+</impo>
+
+<p>
+安装CD刻录好后，就可以用来启动了。从光驱中取出所有的光盘，重启系统并进入BIOS，一般情况下根据你的BIOS不同敲击DEL键，F1键或者ESC键就可以了。在这里面，将启动顺序改为CD-ROM的启动在硬盘启动之前。这个选项一般在“CMOS Setup”里能找到。如果你不这样做的话，你的系统重启后仍然从硬盘启动，而忽略了CD-ROM。
+</p>
+
+<p>
+现在将安装CD放入光驱，然后再次重启机器。你将会看到一个带有Gentoo Linux的logo的漂亮启动界面。在这个界面中，你可以敲击Enter键使用默认的启动选项来启动LiveCD，或者通过在自定义的启动选项后指定内核来启动LiveCD。
+</p>
+
+<p>
+指定一个内核？是的，在LiveCD里我们提供了几个内核，默认的是<c>gentoo</c>。其他的内核分别是<c>smp</c>（激活对多CPU系统的支持）和<c>-nofb</c>（不使用framebuffer）。
+</p>
+
+<p>
+如果你要在一个2.4的内核上安装Gentoo，我们建议你选择内核<c>gentoo</c>或者<c>gentoo-nofb</c>；如果你要在一个2.6的内核上安装Gentoo Linux，我们建议你使用<c>smp</c>或者<c>smp-nofb</c>。否则你会遇到不兼容问题。
+</p>
+
+<p>
+在下面你可以看到已有内核的一个简短的概述：
+</p>
+
+<table>
+<tr>
+  <th>内核</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>gentoo</ti>
+  <ti>默认2.4内核，支持framebuffer</ti>
+</tr>
+<tr>
+  <ti>smp</ti>
+  <ti>2.4内核，支持多CPU系统</ti>
+</tr>
+<tr>
+  <ti>gentoo-nofb</ti>
+  <ti>同<c>gentoo</c>一样，但不支持framebuffer</ti>
+</tr>
+<tr>
+  <ti>smp-nofb</ti>
+  <ti>同<c>smp</c>一样，但不支持framebuffer</ti>
+</tr>
+<tr>
+  <ti>memtest86</ti>
+  <ti>测试本地RAM，用于检错</ti>
+</tr>
+</table>
+
+<p>
+你也可以使用内核参数。他们代表了一些你可以激活/取消的可选设置。下面的列表就同在启动界面里敲击F2所看到的一样。
+</p>
+
+<pre caption="传递给你选择的内核的已有参数">
+- agpgart       加载agpgart（在有图形问题、锁屏的情况下使用）
+- doscsi        扫描scsi设备（会中断网卡）
+- nodetect      产生hwsetup/kudzu，兵器不运行hotplug
+- dofirewire    检测initrd里的firewire模块（用于firewire光驱等）
+- nousb         从initrd里取消使用usb模块的加载，取消hotplug
+- nodhcp        如故检测到nic，不自动运行dhcp
+- doataraid     从initrd里加载ide磁盘阵列模块
+- dopcmcia      启动pcmcia设备
+- noapm         取消加载apm模块
+- noraid        取消加载evms模块
+- nohotplug     取消加载hotplug设备
+- ide=nodma     对非ide设备强行关掉dma
+- docache       在ram里对这个实时的cd部分进行缓冲，允许你卸载/mnt/cdrom去用于挂载其他的光驱
+- dokeymap      对于非US标准键盘，启动键盘选择
+- noapic        取消apic（如果有硬件问题、nics、scsi等情况下尝试）
+- hdx=stroke    （仅用于smp/smp-nofb内核）即使BIOS不支持大驱动器，也可以对整个硬盘驱动器分区
+</pre>
+
+<p>
+现在启动你的光盘，选择一个内核（如果你乐意使用默认的<c>gentoo</c>内核）和启动参数。作为一个例子，我们告诉你怎样使用<c>dopcmcia</c>作为内核参数启动内核<c>gentoo</c>：
+</p>
+
+<pre caption="启动一个LiveCD">
+boot: <i>gentoo dopcmcia</i>
+</pre>
+
+<p>
+然后你会进入另外一个启动界面，并看到一个进度条。一旦启动完成，你将自动以“root”身份登录这个&quot;Live; Gentoo Linux系统中。在当前终端下，你将看到一个超级用户的提示符，你也可以通过按 Alt-F2、Alt-F3、Alt-F4切换到其他的终端，按Alt-F1回到你开始的那个终端。
+</p>
+
+<p>
+如果你在一个使用非US标准键盘的系统上安装Gentoo，确认启动LiveCD时已经加上<c>dokeymap</c>启动选项。
+</p>
+
+<p>
+现在从<uri link="#hardware">额外的硬件配置</uri>继续。
+</p>
+
+</body>
+</subsection>
+<subsection id="hardware">
+<title>额外的硬件配置</title>
+<body>
+
+<p>
+但LiveCD启动时，它会尝试检测所有的硬件设备和加载准确的内核模块来支持这些硬件。大部分情况下，它会做的很好。但是，有些情况下（SPARC架构下的LiveCD甚至不会自动检测），它可能没有自动加载你需要的内核模块。如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载准确的内核模块。
+</p>
+
+<p>
+在下面的例子中，我们尝试加载<c>8139too</c>模块（支持某些类型的网卡）：
+</p>
+
+<pre caption="加载内核模块">
+# <i>modprobe 8139too</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：调节硬盘性能</title>
+<body>
+
+<p>
+如果你是一个高级用户，你可能想通过使用<c>hdparm</c>来调节IDE硬盘的性能。使用<c>-tT</c>参数来测试你的硬盘的性能（多执行几次以获得更加准确的结果）：
+</p>
+
+<pre caption="测试硬盘性能">
+# <i>hdparm -tT /dev/hda</i>
+</pre>
+
+<p>
+你可以使用下面的任何一个样例（或自己实验）来调节，这些例子的硬盘为<path>/dev/hda</path>（用你的硬盘来替换）：
+</p>
+
+<pre caption="调节硬盘性能">
+<comment>激活DMA：</comment>                          # <i>hdparm -d 1 /dev/hda</i>
+<comment>激活DMA，并附上安全性能增强选项：</comment>  # <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="useraccounts">
+<title>可选：用户帐号</title>
+<body>
+
+<p>
+如果你打算给其他的人提供你的安装环境的访问权限，或者你不想通过超级用户权限（因为安全原因）使用<c>irssi</c>聊天，你需要创建必须的用户帐号，并改变超级用户的密码。
+</p>
+
+<p>
+使用<c>passwd</c>命令来修改超级用户密码：
+</p>
+
+<pre caption="修改超级用户密码">
+# <i>passwd</i>
+New password: <comment>(Enter your new password)</comment>
+Re-enter password: <comment>(Re-enter your password)</comment>
+</pre>
+
+<p>
+创建一个用户帐号，首先输入他们的用户名，再接上他的密码。我们可以使用<c>useradd</c>和<c>passwd</c>来完成这些工作。在下面的例子中，我们将创建一个名为“john”的用户。
+</p>
+
+<pre caption="创建一个用户帐号">
+# <i>useradd john</i>
+# <i>passwd john</i>
+New password: <comment>(Enter john's password)</comment>
+Re-enter password: <comment>(Re-enter john's password)</comment>
+</pre>
+
+<p>
+你可以使用<c>su</c>从超级用户环境下切换到新建的用户：
+</p>
+
+<pre caption="改变用户id">
+# <i>su john -</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：边安装边看文档</title>
+<body>
+
+<p>
+如果在安装过程中你想查看Gentoo手册（从CD中或者在线查看），确认你已经创建好了一个用户帐号（查看<uri link="#useraccouts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>进入一个新的终端和登录进入。
+</p>
+
+<p>
+如果你想查看CD里的文档，运行<c>links2</c>来阅读：
+</p>
+
+<pre caption="查看CD里的文档">
+# <i>links2 /mnt/cdrom/docs/html/index.html</i>
+</pre>
+
+<p>
+但是，首选的还应该是在线查看Gentoo手册，因为这比光盘里提供的要新一些。你也可以使用<c>links2</c>，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
+</p>
+
+<pre caption="查看在线文档">
+# <i>links2 http://www.gentoo.org/doc/en/handbook/handbook-x86.xml</i>
+</pre>
+
+<p>
+你可以通过按<c>Alf-F1</c>回到原来的终端。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：启动SSH伺服器</title>
+<body>
+
+<p>
+如果在Gentoo的安装过程中，你允许别的用户登录你的电脑（可能别的用户愿意帮助你安装Gentoo，或者是你自己想这样做），你需要为他们创建一个用户帐号，甚至提供超级用户的密码（<e>只</e>在你<b>完全信任</b>这位用户的<e>情况</e>下）。
+</p>
+
+<p>
+执行下面的命令来启动SSH伺服器：
+</p>
+
+<pre caption="启动SSH伺服器">
+# <i>/etc/init.d/sshd start</i>
+</pre>
+
+<p>
+在使用sshd之前，你首先必须设置好你的网络。这样从<uri link="?part=1&amp;chap=3">配置网络</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

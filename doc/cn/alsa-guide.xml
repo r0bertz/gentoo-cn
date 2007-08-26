@@ -1,0 +1,473 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/alsa-guide.xml,v 1.36 2004/05/21 12:06:53 cam Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link = "/doc/en/alsa-guide.xml">
+<title>Gentoo Linux ALSA 指南</title>
+<author title="Author">
+  <mail link="zu@pandora.be">Vincent Verleye</mail>
+</author>
+<author title="Author">
+  <mail link="g2boojum@gentoo.org">Grant Goodyear</mail>
+</author>
+<author title="Author">
+  <mail link="agenkin@gentoo.org">Arcady Genkin</mail>
+</author>
+<author title="Author">
+  <mail link="eradicator@gentoo.org">Jeremy Huddleston</mail>
+</author>
+<author title="Editor"><!-- zhen@gentoo.org -->
+	John P. Davis
+</author>
+<author title="Editor">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="Editor">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="Editor">
+  <mail link="blubber@gentoo.org">Tiemo Kieft</mail>
+</author>
+<author title="Editor">
+  <mail link="erwin@gentoo.org">Erwin</mail>
+</author>
+<author title="Translator">
+  <mail link="dragonnapalm@163.com">dragonnapalm</mail>
+</author>
+
+<abstract>
+本指南将会指导你如何在Gentoo Linux上设置ALSA（Advanced Linux Sound Architecture，高级Linux声音构架）。
+作为Gentoo Linux 桌面配置指南的补充，本教程将会在这个主题上为你提供更多的信息。
+</abstract>
+
+<license/>
+
+<version>1.5.0</version>
+<date>May 18, 2004</date>
+
+<chapter>
+<title>高级Linux声音构架</title>
+<section>
+<title>什么是ALSA?</title>
+<body>
+
+<p>
+ALSA，<e>高级Linux声音构架</e>, 是一个致力于开发高质量Linux声音子系统的软件项目。在2.6系列内核中，
+它已经替换OSS(<e>Open Sound System，开放声音系统</e>)作为默认的声音子系统。
+</p>
+
+<p>
+ALSA为所有类型的音频接口提供高效的支持，它完全模块化，支持对称多处理（SMP），具有多线程安全性，
+并且提供名为<e>alsa-lib</e>高质量的用户空间库以简化应用程序编程。ALSA同样提供OSS的向下兼容层。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>安装 ALSA</title>
+<section>
+<title>USE 标签</title>
+<body>
+
+<p>
+Gentoo 提供了<c>alsa</c> USE 标签，为了允许使用ALSA支持来编译需要的软件包，你应该在
+<path>/etc/make.conf</path> 中设置这个标签。如果你在USE变量中同时也设置了<c>oss</c> 
+标签，ALSA将会在编译过程中提供OSS的向下兼容。
+</p>
+
+</body>
+</section>
+<section>
+<title>内核模块</title>
+<body>
+
+<p>
+在你继续之前，请确保你的<e>Sound Card Support</e>内核选项已经打开。如果你使用的是
+<c>genkernel</c>命令编译内核的话，这个选项已经被自动打开了，否则请重新内配置你的内核。
+</p>
+
+<p>
+如果你使用的是2.6系列的内核，你可以跳过以下的部分然后直接转到<uri link="#alsa-utils">安装 ALSA Utils</uri>
+章节，因为2.6系列内核中已经包含了必要的ALSA驱动程序。当然，在你配置内核的时候请不要忘记为你的声卡打开相应的支持。 
+</p>
+
+<p>
+如果你是2.4系列内核的用户，你则需要为你的声卡安装必要的ALSA驱动程序。首先请找到你所使用的声卡型号。
+这里有一个小技巧：你可以在<path>/proc/pci</path>中查找 "audio" 设备。
+</p>
+
+<pre caption="查找你的声卡型号">
+# <i>grep -i audio /proc/pci</i>
+Multimedia audio controller: VIA Technologies, Inc. VT82C686 AC97 Audio 
+Controller (rev 64).
+</pre>
+
+<p>
+现在打开<uri link="http://www.alsa-project.org/alsa-doc">ALSA Soundcard
+Matrix（ALSA声卡阵列）</uri> 然后查找你的声卡。在上面的例子中，你应该转到名为"VIA"的制造商。
+你将会看到一个包含了该制造商的已知芯片型号的表格。上面例子中的芯片型号为 "via82c686"，而"Details"
+超链接则提示你相应驱动程序的名称为<path>via82xx</path>。
+</p>
+
+<p>
+基于这些信息现在可以为我们的声卡安装<c>alsa-driver</c>了。首先编辑<path>/etc/make.conf</path>
+然后<e>添加</e>一个名为ALSA_CARDS的新选项。在这个变量中你需要指明你所使用的声卡驱动程序。
+</p>
+
+<pre caption="编辑 /etc/make.conf，加入ALSA_CARDS选项">
+ALSA_CARDS="via82xx"
+</pre>
+
+<p>
+现在安装<c>alsa-driver</c>:
+</p>
+
+<pre caption="安装 ALSA Drivers">
+# <i>emerge alsa-driver</i>
+</pre>
+
+<impo>
+当你编译或者重新编译完毕你的内核之后，ALSA驱动程序可能会被覆盖，因此我们建议你在编译或者重新编译
+完毕内核并且用新内核重新启动<e>之后</e>重新运行<c>emerge alsa-driver</c>。
+</impo>
+
+</body>
+</section>
+<section id="alsa-utils">
+<title>安装 ALSA Utils</title>
+<body>
+
+<p>
+如果你需要OSS的向下兼容支持，那么你应该安装<c>alsa-oss</c>:
+</p>
+
+<pre caption="安装ALSA OSS兼容层">
+# <i>emerge alsa-oss</i>
+</pre>
+
+<p>
+现在在你的系统上安装ALSA Utils(必须执行):
+</p>
+
+<pre caption="安装 ALSA Utils">
+# <i>emerge alsa-utils</i>
+</pre>
+
+<p>
+utils已经安装好了, 现在可以开始配置ALSA了...
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>配置ALSA</title>
+<section>
+<title>自动加载内核模块</title>
+<body>
+
+<p>
+如果你在使用一个模块化的内核（比如使用<c>genkernel</c>命令编译内核），你则需要编辑
+<path>/etc/modules.d/alsa</path>以便在启动的时候激活必要的模块。比如，对于我们例子中的声卡：
+</p>
+
+<pre caption="/etc/modules.d/alsa">
+alias snd-card-0 snd-via82xx
+<comment># 下面的内容只是在你需要OSS兼容支持的情况下才添加</comment>
+alias sound-slot-0 snd-card-0
+alias /dev/mixer snd-mixer-oss
+alias /dev/dsp snd-pcm-oss
+alias /dev/midi snd-seq-oss
+</pre>
+
+<p>
+现在运行<c>modules-update</c>命令把你对<path>alsa</path>文件做的修改保存到
+<path>/etc/modules.conf</path>中：
+</p>
+
+<pre caption="运行 modules-update">
+# <i>modules-update</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>验证设备文件</title>
+<body>
+
+<p>
+如果你使用DevFS（Gentoo安装过程中会将它作为默认选项），请确保<path>/etc/devfsd.conf</path>中的
+ALSA设备以及权限已经被正确设置：
+</p>
+
+<pre caption="/etc/devfsd.conf">
+# ALSA/OSS stuff
+# Comment/change these if you want to change the permissions on
+# the audio devices
+LOOKUP          snd          MODLOAD ACTION snd
+LOOKUP          dsp          MODLOAD
+LOOKUP          mixer        MODLOAD
+LOOKUP          midi         MODLOAD
+REGISTER        sound/.*     PERMISSIONS root.audio 660
+REGISTER        snd/.*       PERMISSIONS root.audio 660
+</pre>
+
+</body>
+</section>
+<section>
+<title>在启动时激活ALSA</title>
+<body>
+
+<p>
+要想在启动时激活ALSA支持，请将<c>alsasound</c> init脚本加入到启动运行级：
+</p>
+
+<pre caption="将alsasound加入到启动运行级">
+# <i>rc-update add alsasound boot</i>
+# <i>/etc/init.d/alsasound start</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>打开声道</title>
+<body>
+
+<p>
+在默认情况下所有的声道都处于关闭状态。要修改这个默认设置，请运行<c>amixer</c>:
+</p>
+
+<pre caption="运行amixer">
+# <i>amixer</i>
+</pre>
+
+<p>
+如果你在在运行<c>amixer</c>后得到了很多运行结果，这说明现在你可以打开声道了。
+但如果你得到的是一个错误，请检查你的声卡模块是否已经被加载。
+</p>
+
+<p>
+现在打开<e>Master</e> 和 <e>PCM</e> 声道.如果你觉得这还不够的话，
+你还可以打开<e>Center</e>和<e>Surround</e>声道。
+</p>
+
+<pre caption="打开声道">
+# <i>amixer set Master 100 unmute</i>
+# <i>amixer set PCM 100 unmute</i>
+<comment>(如果你还想打开其他声道:)</comment>
+# <i>amixer set Center 100 unmute</i>
+# <i>amixer set Surround 100 unmute</i>
+</pre>
+
+<p>
+现在你可以试着播放一个波形文件（使用 <c>aplay</c>)、mp3文件（使用<c>mpg123</c> 或者 <c>mplayer</c>)，
+或者其他的音频文件来检查你的声卡是否可以正常工作。
+</p>
+
+<p>
+你可以使用<c>alsamixer</c>程序来对声道进行优化调整。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>激活 MIDI 支持</title>
+<section>
+<title>安装必需的组件</title>
+<body>
+
+<p>
+某些声卡附带了板载MIDI合成器。要使用它们，你首先必须安装<c>awesfx</c>软件包：
+</p>
+
+<pre caption="安装 awesfx 软件包">
+# <i>emerge awesfx</i>
+</pre>
+
+<p>
+如果你有一些音色库的话，你可以把它们放在<path>/usr/share/sfbank</path>下面。比如SBLive声卡
+有一个名叫<path>8MBGMSFX.SF2</path> 或者 <path>CT4GMSFX.SF2</path>的音色库。
+</p>
+
+<p>
+完成了音色库的复制后，你可以使用<c>sfxload</c>来对它们进行选择和加载：
+</p>
+
+<pre caption="加载音色库">
+# <i>sfxload /usr/share/sfbank/8MBGMSFX.SF2</i>
+</pre>
+
+<p>
+在每次启动系统后你都需要重新运行这个命令，因此我们建议你将这个命令添加到<path>/etc/conf.d/local.start</path>
+下面。
+</p>
+
+<p>
+如果你在你的声卡驱动盘里面找不到音色库的话，也许你可以从这里找到一些：
+<uri>http://www.parabola.demon.co.uk/alsa/awe64.html</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>Timidity++ Virtual Synthesizer（Timidity++ 虚拟音频合成器）</title>
+<body>
+
+<p>
+如果你的声卡没有硬件音频合成器的话（或者你不想使用它），你可以使用名为<c>timidity++</c>的
+虚拟音频合成器。你只需要简单的emerge一下这个软件包即可：
+</p>
+
+<pre caption="安装 Timidity++">
+# <i>emerge timidity++</i>
+</pre>
+
+<p>
+<path>/usr/share/timidity/config/timidity.cfg</path>是一个配置文件范例，
+如果你还没有对timidity++ 进行设置，那么使用这个文件就行了。
+</p>
+
+<pre caption="使用默认的Timidity++ 配置文件">
+# <i>cp /usr/share/timidity/config/timidity.cfg /usr/share/timidity</i>
+</pre>
+
+<p>
+timidity还需要音色库才能播放声音，如果你没有的话，安装<c>timidity-eawpatches</c>
+可以为你提供一些音色库。
+</p>
+
+<pre caption="安装 timidity-eawpatches">
+# <i>emerge timidity-eawpatches</i>
+</pre>
+
+<p>
+不要忘记将<c>timidity</c>加入到默认运行级.
+</p>
+
+<pre caption="将timidity加入到默认运行级">
+# <i>rc-update add timidity default</i>
+# <i>/etc/init.d/timidity start</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>测试 MIDI 支持</title>
+<body>
+
+<p>
+你可以使用<c>pmidi</c>来测试你的MIDI配置:
+</p>
+
+<pre caption="安装 pmidi">
+# <i>emerge pmidi</i>
+</pre>
+
+<p>
+要查看你的系统中哪些MIDI端口可用，请使用<c>-l</c>参数：
+option:
+</p>
+
+<pre caption="查看MIDI输出端口">
+# <i>pmidi -l</i>
+</pre>
+
+<p>
+如果看起来没什么问题的话，你可以试着播放一个MIDI文件看看是否一切都可以正常工作了。
+你可以使用 <c>-p</c> 参数来定义你想使用的MIDI端口。
+</p>
+
+<pre caption="播放MIDI文件">
+# <i>pmidi -p 65:0 "Final Fantasy 7 - Aerith' Theme.mid"</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>最后的建议</title>
+<section>
+<title>工具和Firmware</title>
+<body>
+
+<p>
+<c>alsa-tools</c>和<c>alsa-firmware</c>软件包可以为某些特定的声卡提升性能。
+如果你想使用<c>alsa-tools</c>的话，请在<path>/etc/make.conf</path>中为
+ALSA_TOOLS变量定义你所需要的工具。比如：
+</p>
+
+<pre caption="Selecting ALSA Tools in /etc/make.conf">
+ALSA_TOOLS="as10k1 ac3dec"
+</pre>
+
+<p>
+接下来安装 <c>alsa-tools</c> (以及/或者 <c>alsa-firmware</c>) 软件包:
+</p>
+
+<pre caption="安装 ALSA Tools">
+# <i>emerge alsa-tools</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>激活摇杆支持</title>
+<body>
+
+<p>
+如果你的声卡有一个摇杆接口，你也许会想要激活它。如果是这样的话，首先验证你的声卡驱动程序中已经包含了
+joystick参数。要完成这项工作，请针对你的内核运行<c>modinfo</c>。比如，对于<c>snd-via82xx</c>:
+</p>
+
+<pre caption="运行 modinfo">
+# <i>modinfo snd-via82xx</i>
+filename:    /lib/modules/2.4.22-ck2/snd-via82xx.o
+description: "VIA VT82xx audio"
+author:      "Jaroslav Kysela &lt;perex@suse.cz&gt;"
+license:     "GPL"
+parm:        index int array (min = 1, max = 8), description "Index value for
+             VIA 82xx bridge."
+parm:        id string array (min = 1, max = 8), description "ID string for VIA
+             82xx bridge."
+parm:        enable int array (min = 1, max = 8), description "Enable audio part
+             of VIA 82xx bridge."
+parm:        mpu_port long array (min = 1, max = 8), description "MPU-401 port.
+             (VT82C686x only)"
+<i>parm:        joystick int array (min = 1, max = 8), description "Enable
+             joystick. (VT82C686x only)"</i>
+parm:        ac97_clock int array (min = 1, max = 8), description "AC'97 codec 
+             clock (default 48000Hz)."
+parm:        dxs_support int array (min = 1, max = 8), description "Support for 
+             DXS channels (0 = auto, 1 = enable, 2 = disable, 3 = 48k only, 4 = 
+             no VRA)
+</pre>
+
+<p>
+如果你的驱动程序中已经包含了<c>joystick</c>参数，请在<path>/etc/modules.d/alsa</path>中的
+<c>options</c>行添加<c>joystick=1</c>。比如：
+</p>
+
+<pre caption="添加joystick参数">
+alias snd-card-0 snd-via82xx
+options snd-via82xx joystick=1
+</pre>
+
+</body>
+</section>
+<section>
+<title>资源</title>
+<body>
+
+<ul>
+  <li><uri link="http://www.alsa-project.org"> ALSA 软件项目</uri></li>
+  <li><uri link="http://www.djcj.org">ALSA Howto's and FAQs（ALSA指南以及常见问题解答）</uri></li>
+  <li><uri link="http://linux-sound.org">Linux 声音/MIDI 软件</uri></li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>

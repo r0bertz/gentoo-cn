@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/devrel/handbook/hb-guide-ebuild-maintaining.xml,v 1.1 2004/08/24 21:07:26 plasmaroo Exp $ -->
+
+<sections>
+<section>
+<title>Introduction</title>
+<body>
+
+<p>
+This guide aims to explain common everyday ebuild maintenance
+routines, as well as other rarer maintenance routines which
+developers may not be familiar with.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Stabilizing ebuilds</title>
+<body>
+
+<p>
+When adding a new ebuild, you should only include <c>KEYWORDS</c> for
+architectures on which you have actually tested the ebuild, confirming
+that it works as it should and that <c>USE</c> flags are properly
+honoured in the resulting package which would be installed. If
+possible, you should give the actual library or application thorough
+testing as well, since you would be responsible for any breakages for
+your architecture(s). Minimal testing such as checking that the
+application starts up without any errors should always be performed.
+</p>
+
+<p>
+If you are adding a user-submitted ebuild, do not assume that the
+submitter has done testing on various architectures: often, <c>KEYWORDS</c>
+are cloned across packages or generated from documentation in the
+source packages, which does not signify that the package does indeed
+work on those architectures.
+</p>
+
+<p>
+Ebuilds should only be stabilized, i.e. placed from "<c>~arch</c>" into
+"<c>arch</c>" when the maintainer, or an architecture maintainer deems the
+ebuild to be stable. You should <e>never</e> stabilize packages on
+architectures for which you cannot test and instead you should file a bug to
+the relevant architecture team, such as <mail link="sparc@gentoo.org">
+sparc@gentoo.org</mail> asking them to stabilize the
+ebuild. Alternatively, you may be able to find Gentoo developers on
+IRC who could help you with your request.
+</p>
+
+<p>
+It is best to not use <mail link="arch-maintainers@gentoo.org">
+arch-maintainers@gentoo.org</mail>, adding architecture teams onto a
+bug's CC list individually instead. That way teams can remove
+themselves from the list when they are done, giving a clear indication
+of which teams still have to stabilize a package.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Upgrading ebuilds</title>
+<body>
+
+<p>
+New ebuilds should rarely go in with "<c>arch</c>" keywords and even if they do
+not, the package <e>must</e> be tested on any architectures listed in the
+<c>KEYWORDS</c> variable of the new ebuild.
+</p>
+
+<p>
+Exceptions to the no "<c>arch</c>" rule are major bug fixes, or
+security fixes. If the previous version of the ebuild
+contains <c>KEYWORDS</c> which you cannot test for, you should
+downgrade them: turn any "<c>arch</c>" keyword to "<c>~arch</c>". If you
+think that your package may not work at all even on "<c>~arch</c>"
+then it is best to leave the keyword out and request testing from the
+relevant team: if you are to do this, you must file a bug to the team
+in question.
+</p>
+
+<p>
+If a new version introduces new dependencies which are not available
+on some architectures, then you should file a bug or ask on IRC before
+you upgrade the package. If you really need to get the ebuild added in
+a hurry, for example, for a security fix, then you should drop
+any <c>KEYWORDS</c> which are causing problems and CC the relevant
+architectures on the bug - you should file a new bug to the
+architecture in question regarding this if no bug is already
+available.
+</p>
+
+<p>
+If there are no new dependencies, do not remove keywords if your
+commit fails with repoman - please try a full <c>cvs update</c> and if
+you still have problems, then commit with <c>repoman -I</c> and file a
+bug to the broken architecture, noting it in your CVS commit message.
+</p>
+
+<warn>
+When committing, make sure that you reference any bugs in the
+ChangeLog as well as the CVS message. Failing to do so is considered
+to be in very poor taste and may result in disciplinary action.
+</warn>
+
+</body>
+</section>
+
+<section>
+<title>Moving ebuilds</title>
+<body>
+
+<p>
+Moving ebuilds is a two-step process:
+</p>
+
+<p>
+Firstly, you need to move the ebuild in CVS. To do this, you should
+copy the ebuild to its new location and commit that as you would with
+a <uri link="?part=1&amp;chap=3">new ebuild</uri>.
+</p>
+
+<p>
+After this, you should change any ebuilds which <c>DEPEND</c> on the
+old ebuild to depend on the new one. Only after this, you should
+remove each of the files with <c>cvs remove</c> in the old location
+and commit the changes there.
+</p>
+
+<note>
+CVS cannot destroy directories: it will simply not re-create them if
+they are blank, providing you use CVS with the <c>-P</c> flag.
+</note>
+
+<p>
+Alternatively; you can use <c>epkgmove</c> which will do this for
+you:
+</p>
+
+<pre>
+epkgmove net-old/package net-new/package
+</pre>
+
+<p>
+Once moved, you should add an entry to the latest file
+in <path>profiles/updates/</path> in the Portage tree in the
+following format:
+</p>
+
+<pre>
+move net-misc/fwbuilder net-firewall/fwbuilder
+</pre>
+
+<p>
+This example would transparently move <path>net-misc/fwbuilder</path> to
+<path>net-firewall/fwbuilder</path> if users have it installed. This
+way, users would now automatically receive updates
+for <path>net-firewall/fwbuilder</path> when they are available.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>Removing ebuilds</title>
+<body>
+
+<p>
+When removing an ebuild make sure that no dependencies in Portage are broken
+due to the removal - additionally, your CVS commit message should explain
+clearly why the ebuild is being removed from CVS.
+</p>
+
+<p>
+If you need to remove ebuilds, make sure you do not accidentally remove
+the newest/only stable ebuild for any architecture. If you would like to
+get a newer version marked stable, then please file a bug or ask on IRC.
+</p>
+
+<p>
+You should also not cause an unnecessary downgrade for any "<c>~arch</c>"
+when removing ebuilds - instead, it is best to get the newest version
+marked "<c>~arch</c>" first and then remove redundant versions of the ebuild.
+</p>
+
+</body>
+</section>
+
+</sections>

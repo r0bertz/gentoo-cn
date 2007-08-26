@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-install-about.xml,v 1.25 2004/08/04 08:46:30 swift Exp $ -->
+
+<sections>
+<section>
+<title>介绍</title>
+<subsection>
+<title>欢迎！</title>
+<body>
+
+<p>
+首先，<e>欢迎</e>使用Gentoo Linux系统！你将进入选择和性能的世界中。Gentoo处处给用户提供选择。当安装Gentoo时，这点你会经常感受到。你可以选择自己编译多少软件，可以选择怎样安装Gentoo，可以选择使用什么系统日志程序等等。
+</p>
+
+<p>
+Gentoo是一个快速和现代的半发行版，设计理念干净灵活。Gentoo是由无数的自由软件编译而成，决不会向用户隐瞒什么。Portage，Gentoo使用的软件包管理系统，是用Python编码而成，方便你简单的查看和修改源代码。Gentoo的软件包管理系统使用源代码（虽然也包括对预编译软件包的支持），在配置系统行为时采用普通文本文件。换句话说，处处都是向你开放的。
+</p>
+
+<p>
+理解Gentoo中的面向用户的选择理念是很重要的。我们不会强迫你作任何你不喜欢的事情，如果你觉的我有的话，请<uri link="http://bugs.gentoo.org">告诉</uri>我们。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装过程的步骤如何？</title>
+<body>
+
+<p>
+Gentoo的安装可以看成是一个需要10步的程序，分别对应第2章到第11章，每一步都会带领你到一个新的状态：
+</p>
+
+<ul>
+<li>
+  第一步后，你处于一个准备安装Gentoo的工作环境中
+</li>
+<li>
+  第二步后，你的网络连接已经准备好（在某些情况下这步是可选的）
+</li>
+<li>
+  第三步后，你的硬盘已经初始化完毕，准备好了Gentoo的小窝
+</li>
+<li>
+  第四步后，你的安装环境已经准备好了，并准备chroot到一个新的系统环境中
+</li>
+<li>
+  第五步后，在所有Gentoo安装中相同的核心的软件包已经安装完毕
+</li>
+<li>
+  第六步后，你已经编译好了你的Linux内核
+</li>
+<li>
+  第七步后，你已经写好绝大多数的Gentoo系统配置文件
+</li>
+<li>
+  第八步后，必要的系统工具（你可以从列表中选择）已经安装完毕
+</li>
+<li>
+  第九步后，你选择的启动程序已经安装和配置好，你可以登录进入你新的Gentoo系统中
+</li>
+<li>
+  第十步后，你可以在你新的Gentoo系统环境中遨游了
+</li>
+</ul>
+
+<p>
+每次你准备作出特定的选择时，我们都会尽力从正反两方面向你解释这些选择。我们也会从一个默认的选择继续，这将会在标题中以“默认：”来标识出来。千万<e>不要</e>认为默认的选择是我们推荐的选择，这些之是我们认为绝大多数用户会采纳的选择。
+</p>
+
+<p>
+有些时候从一个可选的步骤继续下去，这样的步骤我们在标题中以“可选：”表示出来，也就是说它们不是安装Gentoo必须的。但是，一些可选的步骤是根据你前面的选择决定的，这种情况下，我们在你作出那个选择和这个可选步骤的前面都告诉你一声。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>我的选择是什么？</title>
+<body>
+
+<p>
+你可以采用不同的方法来安装Gentoo。你可以下载我们的LiveCD（安装CD）开始安装，从一个已有发行版中安装，从一个启动CD（如Knoppix）中安装，从一个网络启动环境中安装，从一个启动软盘中安装……这篇文档覆盖了使用我们的LiveCD和一些情况下的网络启动等安装方法。对于其他安装方法，请阅读<uri link="/doc/en/altinstall.xml">替代安装方案</uri>中获得帮助。如果你觉的这篇安装指南太详细了，那么请使用我们在<uri link="/doc/en/index.xml">文档资源</uri>里的与你的架构相关的快速安装指南。
+</p>
+
+<p>
+你还有几种可能：你可以从底层编译你的整个系统，或者快速安装预编译软件包得到你的Gentoo系统。当然，你还可以有个折衷的处理，就是从一个初步准备好的系统开始，而不需要编译所有的东西。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>困难？</title>
+<body>
+
+<p>
+如果你在安装（或者安装文档）中发现问题，请查看我们<uri link="/proj/en/relang">Gentoo发行工程项目</uri>的勘误，访问我们<uri link="http://bugs.gentoo.org">bug跟踪系统</uri>并检查这个bug是否已经提交。如果没有，请提交一份bug报告，这样我们可以注意到这个问题。不要惧怕负责（你的）bug的开发人员，通常情况下他们不会吃人的:-)
+</p>
+
+<p>
+虽然你已经注意到了，这篇文档现在已经根据架构分开了，但是它也会包含对其他架构的引用。这是由于Gentoo手册的大部分使用源代码，而这些源代码在所有的架构中是通用的（防止重复工作和开发资源紧缺）。我们将尽可能小的避免混淆用户。
+</p>
+
+<p>
+如果你不确认这个问题是否是一个用户相关的问题（尽管已经仔细阅读文档你仍然犯的一些错误）或者软件相关的问题（尽管已经仔细测试安装/文档我们仍然犯的一些错误），你可以随时加入irc.gentoo.net里的#gentoo频道参加讨论。当然，我们任何时候都欢迎你 :)
+</p>
+
+<p>
+如果你有与Gentoo相关的问题，请查看我们<uri link="/doc/en/">文档资源</uri>里的<uri link="/doc/en/faq.xml">常见问题问答</uri>。你也可以查看我们<uri link="http://forums.gentoo.org">论坛</uri>里的<uri link="http://forums.gentoo.org/viewforum.php?f=40">FAQs</uri>。如果你仍然找不到答案，你可以去在irc.freenode.net上的#gentoo频道讨论。 我们中的一些人可是一直坐在IRC里的异形哦 :-)
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>预编译还是编译所有的？</title>
+<subsection>
+<title>Gentoo的参考平台是什么？</title>
+<body>
+
+<p>
+Gentoo参考平台，从小型的到GRP，都是用户（也就是你喽！）在Gentoo安装过程中可以用来加快安装进程的预编译软件包的一个快照。GRP包含了一个可以完全正常工作的Gentoo安装时所需要的所有软件包。它们不仅在安装基本系统时可以加快速度，并且所有的大型编译（如KDE、xorg-x11、GNOME、OpenOffice、Mozilla……）也都有GRP软件包。
+</p>
+
+<p>
+但是，Gentoo发行版永远都不会去维护这些预编译软件包。它们只在每个Gentoo发行时随带发行的快照，只是用于在短时间内安装出一个功能完整的系统环境。你然后可以在你的Gentoo环境中工作的同时后台更新你的系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Portage是怎样处理GRP软件包的</title>
+<body>
+
+<p>
+你的Portage树（一系列的<e>ebuilds</e>，也就是包含一个软件包的所有信息的文件，如软件包的描述、主页、源代码网址、编译说明、依赖性等）必须和GRP系列同步：已有ebuilds的版本必须和它们相对应的GRP软件包相符合。
+</p>
+
+<p>
+由于这个原因，如果你要使用GRP的安装方法，你将必须使用一个Portage快照，而不是和最新的Portage树同步更新。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>有可用的GRP软件包吗？</title>
+<body>
+
+<p>
+不是所有的架构都提供GRP软件包。这并不意味着GRP不支持这些架构，只是我们没有足够的资源来编译和测试这些GRP软件包。
+</p>
+
+<p>
+现在，我们只提供如下架构的GRP软件包：
+</p>
+
+<ul>
+  <li>
+    <b>x86</b>架构（x86，i686，pentium3，pentium4，athlon-xp）。注意：x86和i686的GRP软件包（比如packages-x86-2004.2.iso）在我们的镜像中能找到，但是pentium3，pentium4和athlon-xp的GRP软件包只能通过bittorent获得。
+  </li>
+  <li>
+    <b>amd64</b>架构（amd64）
+  </li>
+  <li>
+    <b>sparc</b>架构（sparc32，sparc64）
+  </li>
+  <li>
+    <b>ppc</b>架构（G3，G4，G5）
+  </li>
+  <li>
+    <b>alpha</b>架构（alpha，alphaev5，alphaev56，alphaev6）
+  </li>
+  <li>
+    <b>mips</b>架构
+  </li>
+  <li>
+    <b>hppa</b>架构
+  </li>
+</ul>
+
+<p>
+如果你的架构（或者子架构）不在这个列表中，那么你将不能使用GRP安装。
+</p>
+
+<p>
+现在这个介绍已经结束了，让我们从<uri link="?part=1&amp;chap=2">选择正确的安装介质</uri>继续。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

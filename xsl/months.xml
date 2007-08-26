@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE datedata [
+  <!ELEMENT datedata (months+)>
+    <!ELEMENT months (month+)>
+    <!ATTLIST months lang CDATA #REQUIRED>
+      <!ELEMENT month (#PCDATA)>
+]>
+<datedata>
+  <months lang="en">
+    <month>January</month>
+    <month>February</month>
+    <month>March</month>
+    <month>April</month>
+    <month>May</month>
+    <month>June</month>
+    <month>July</month>
+    <month>August</month>
+    <month>September</month>
+    <month>October</month>
+    <month>November</month>
+    <month>December</month>
+  </months>
+  <months lang="fr">
+    <month>janvier</month>
+    <month>février</month>
+    <month>mars</month>
+    <month>avril</month>
+    <month>mai</month>
+    <month>juin</month>
+    <month>juillet</month>
+    <month>août</month>
+    <month>septembre</month>
+    <month>octobre</month>
+    <month>novembre</month>
+    <month>décembre</month>
+  </months>
+  <months lang="el">
+  <month>Ιανουάριος</month>
+  <month>Φεβρουάριος</month>
+  <month>Μάρτιος</month>
+  <month>Απρίλιος</month>
+  <month>Μάιος</month>
+  <month>Ιούνιος</month>
+  <month>Ιούλιος</month>
+  <month>Αύγουστος</month>
+  <month>Σεπτέμβριος</month>
+  <month>Οκτώβριος</month>
+  <month>Νοέμβριος</month>
+  <month>Δεκέμβριος</month>
+  </months>
+  <months lang="de">
+  <month>Januar</month>
+  <month>Februar</month>
+  <month>März</month>
+  <month>April</month>
+  <month>Mai</month>
+  <month>Juni</month>
+  <month>Juli</month>
+  <month>August</month>
+  <month>September</month>
+  <month>Oktober</month>
+  <month>November</month>
+  <month>Dezember</month>
+  </months>
+  <months lang="nl">
+  <month>januari</month>
+  <month>februari</month>
+  <month>maart</month>
+  <month>april</month>
+  <month>mei</month>
+  <month>juni</month>
+  <month>juli</month>
+  <month>augustus</month>
+  <month>september</month>
+  <month>oktober</month>
+  <month>november</month>
+  <month>december</month>
+  </months>
+  <months lang="id">
+  <month>Januari</month>
+  <month>Pebruari</month>
+  <month>Maret</month>
+  <month>April</month>
+  <month>Mei</month>
+  <month>Juni</month>
+  <month>Juli</month>
+  <month>Agustus</month>
+  <month>September</month>
+  <month>Oktober</month>
+  <month>November</month>
+  <month>Desember</month>
+  </months>
+  <months lang="da">
+  <month>januar</month>
+  <month>februar</month>
+  <month>marts</month>
+  <month>april</month>
+  <month>maj</month>
+  <month>juni</month>
+  <month>juli</month>
+  <month>august</month>
+  <month>september</month>
+  <month>oktober</month>
+  <month>november</month>
+  <month>december</month>
+  </months>
+  <months lang="es">
+  <month>enero</month>
+  <month>febrero</month>
+  <month>marzo</month>
+  <month>abril</month>
+  <month>mayo</month>
+  <month>junio</month>
+  <month>julio</month>
+  <month>agosto</month>
+  <month>septiembre</month>
+  <month>octubre</month>
+  <month>noviembre</month>
+  <month>diciembre</month>
+  </months>
+  <months lang="fi">
+  <month>tammikuuta</month>
+  <month>helmikuuta</month>
+  <month>maaliskuuta</month>
+  <month>huhtikuuta</month>
+  <month>toukokuuta</month>
+  <month>kesäkuuta</month>
+  <month>heinäkuuta</month>
+  <month>elokuuta</month>
+  <month>syyskuuta</month>
+  <month>lokakuuta</month>
+  <month>marraskuuta</month>
+  <month>joulukuuta</month>
+  </months>
+  <months lang="hu">
+  <month>január</month>
+  <month>február</month>
+  <month>március</month>
+  <month>április</month>
+  <month>május</month>
+  <month>június</month>
+  <month>július</month>
+  <month>augusztus</month>
+  <month>szeptember</month>
+  <month>október</month>
+  <month>november</month>
+  <month>december</month>
+  </months>
+  <months lang="it">
+  <month>gennaio</month>
+  <month>febbraio</month>
+  <month>marzo</month>
+  <month>aprile</month>
+  <month>maggio</month>
+  <month>giugno</month>
+  <month>luglio</month>
+  <month>agosto</month>
+  <month>settembre</month>
+  <month>ottobre</month>
+  <month>novembre</month>
+  <month>dicembre</month>
+  </months>
+  <months lang="pt_br">
+  <month>janeiro</month>
+  <month>fevereiro</month>
+  <month>março</month>
+  <month>abril</month>
+  <month>maio</month>
+  <month>junho</month>
+  <month>julho</month>
+  <month>agosto</month>
+  <month>setembro</month>
+  <month>outubro</month>
+  <month>novembro</month>
+  <month>dezembro</month>
+  </months>
+  <months lang="ro">
+  <month>Ianuarie</month>
+  <month>Februarie</month>
+  <month>Martie</month>
+  <month>Aprilie</month>
+  <month>Mai</month>
+  <month>Iunie</month>
+  <month>Iulie</month>
+  <month>August</month>
+  <month>Septembrie</month>
+  <month>Octombrie</month>
+  <month>Noiembrie</month>
+  <month>Decembrie</month>
+  </months>
+  <months lang="ru">
+  <month>января</month>
+  <month>февраля</month>
+  <month>марта</month>
+  <month>апреля</month>
+  <month>мая</month>
+  <month>июня</month>
+  <month>июля</month>
+  <month>августа</month>
+  <month>сентября</month>
+  <month>октября</month>
+  <month>ноября</month>
+  <month>декабря</month>
+  </months>
+  <months lang="sv">
+  <month>januari</month>
+  <month>februari</month>
+  <month>mars</month>
+  <month>april</month>
+  <month>maj</month>
+  <month>juni</month>
+  <month>juli</month>
+  <month>augusti</month>
+  <month>september</month>
+  <month>oktober</month>
+  <month>november</month>
+  <month>december</month>
+  </months>
+  <months lang="tr">
+  <month>Ocak</month>
+  <month>Şubat</month>
+  <month>Mart</month>
+  <month>Nisan</month>
+  <month>Mayıs</month>
+  <month>Haziran</month>
+  <month>Temmuz</month>
+  <month>Ağustos</month>
+  <month>Eylül</month>
+  <month>Ekim</month>
+  <month>Kasım</month>
+  <month>Aralık</month>
+  </months>
+<months lang="pl">
+  <month>stycznia</month>
+  <month>lutego</month>
+  <month>marca</month>
+  <month>kwietnia</month>
+  <month>maja</month>
+  <month>czerwca</month>
+  <month>lipca</month>
+  <month>sierpnia</month>
+  <month>września</month>
+  <month>października</month>
+  <month>listopada</month>
+  <month>grudnia</month>
+</months>
+<months lang="vi">
+  <month>Tháng một</month>
+  <month>Tháng hai</month>
+  <month>Tháng ba</month>
+  <month>Tháng tư</month>
+  <month>Tháng năm</month>
+  <month>Tháng sáu</month>
+  <month>Tháng bảy</month>
+  <month>Tháng tám</month>
+  <month>Tháng chín</month>
+  <month>Tháng mười</month>
+  <month>Tháng mười một</month>
+  <month>Tháng mười hai</month>
+</months>
+<months lang="cs">
+  <month>leden</month>
+  <month>únor</month>
+  <month>březen</month>
+  <month>duben</month>
+  <month>květen</month>
+  <month>červen</month>
+  <month>červenec</month>
+  <month>srpen</month>
+  <month>září</month>
+  <month>říjen</month>
+  <month>listopad</month>
+  <month>prosinec</month>
+</months>
+<months lang="ca">
+  <month>gener</month>
+  <month>febrer</month>
+  <month>març</month>
+  <month>abril</month>
+  <month>maig</month>
+  <month>juny</month>
+  <month>juliol</month>
+  <month>agost</month>
+  <month>setembre</month>
+  <month>octubre</month>
+  <month>novembre</month>
+  <month>decembre</month>
+</months>
+<months lang="lt">
+  <month>sausio</month>
+  <month>vasario</month>
+  <month>kovo</month>
+  <month>balandžio</month>
+  <month>gegužės</month>
+  <month>birželio</month>
+  <month>liepos</month>
+  <month>rugpjūčio</month>
+  <month>rugsėjo</month>
+  <month>spalio</month>
+  <month>lapkričio</month>
+  <month>gruodžio</month>
+</months>
+<months lang="sr">
+  <month>Januar</month>
+  <month>Februar</month>
+  <month>Mart</month>
+  <month>April</month>
+  <month>Maj</month>
+  <month>Jun</month>
+  <month>Jul</month>
+  <month>Avgust</month>
+  <month>Septembar</month>
+  <month>Oktobar</month>
+  <month>Novembar</month>
+  <month>Decembar</month>
+</months>
+</datedata>

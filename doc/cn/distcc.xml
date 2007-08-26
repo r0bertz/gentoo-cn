@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/distcc.xml">
+
+<title>Gentoo Distcc 文档</title>
+
+<author title="Author">
+<mail link="lisa@gentoo.org">Lisa Seelye</mail>
+</author>
+
+<author title="Editor">
+<mail link="vapier@gentoo.org">Mike Frysinger</mail>
+</author>
+
+<author title="Editor">
+<mail link="erwin@gentoo.org">Erwin</mail>
+</author>
+
+<author title="Reviewer">
+<mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+
+<author title="Reviewer">
+<mail link="blubber@gentoo.org">Tiemo Kieft</mail>
+</author>
+
+<author title="Translator">
+<mail link="liqiang@iscas.cn">Zhang Liqiang</mail></author>
+<license/>
+
+<version>1.2.1</version>
+<date>2003年9月30日</date>
+
+<abstract>
+本文档是一篇解决在 Gentoo 中使用 distcc 的 HOWTO。
+</abstract>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>什么是 distcc？</title>
+<body>
+
+<p>
+Distcc 是一个程序，设计为将编译任务分布到网络中的参与主机。
+它包含一个服务器，<c>distccd</c> 和一个客户程序，<c>distcc</c>。Distcc 能够和 
+<uri link="http://ccache.samba.org">ccache</uri> 透明的工作，也能和 portage 配合进行一些安装。
+</p>
+</body>
+</section>
+<section>
+<title>依赖性</title>
+<body>
+
+<pre caption="Distcc 依赖性">
+&gt;=sys-apps/portage-2.0.46-r11
+&gt;=sys-devel/gcc-config-1.3.1
+sys-apps/shadow
+<codenote>当你的 USE 标签中有 gtk 时，distcc 有下面可选的依赖性（在版本 2.8）</codenote>
+&gt;=x11-libs/gtk+-2.2.1
+</pre>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>配置</title>
+<section>
+<title>配置 Portage 使用 Distcc</title>
+<body>
+
+<p>
+使用 portage 配置 distcc 非常简单。在你想要使用 distcc 的每台计算机上执行下面的步骤：
+</p>
+
+<pre caption="整合 Distcc 和 Portage">
+# <i>emerge distcc</i>
+# <i>nano -w /etc/make.conf</i>
+</pre>
+
+<note>
+编辑你的 FEATURES 标签来包含 &quot;distcc&quot;
+</note>
+
+<note>
+设置 <c>DISTCC_DIR=${PORTAGE_TMPDIR}/portage/.distcc</c>
+</note>
+
+<note>
+你应当取消 DISTCC_TMPDIR 行注释。
+</note>
+                        
+<p>
+接下来你要指定你将使用什么主机。要做这个，你可以使用 <c>distcc-config</c> 命令来设置主机列表。
+这有一个包含几个主机的例子，也许在你的列表中也一样：
+</p>
+
+<pre caption="主机定义示例">
+192.168.0.1        192.168.0.2                     192.168.0.3
+192.168.0.1/2      192.168.0.2                     192.168.0.3/10
+192.168.0.1:4000/2 192.168.0.2/1                   192.168.0.3:3632/4
+@192.168.0.1       @192.168.0.2:/usr/bin/distccd   192.168.0.3
+</pre>
+
+<p>
+可能看起来都很难懂，但是在许多情况下行 1，2的变体都会工作。
+每一行的解释是： 行 1 仅仅是任何事都使用缺省的空间范围主机列表。
+行 2 是一个指定在给定时间（由 <c>/n</c>指定）发给主机最大任务数（通过使用 /N）的主机列表。
+因为大多数人都不会使用行 3或行 4，我会 <uri link="http://distcc.samba.org/man/distcc_1.html">
+指示你</uri> distcc 文档来获得更多信息。
+</p>
+
+<p>
+设置主机示例命令（行 1）：
+</p>
+
+<pre caption="设置主机的示例命令">
+# <i>/usr/bin/distcc-config --set-hosts "192.168.0.1 192.168.0.2 192.168.0.3"</i>
+</pre>
+
+<p>
+把 distcc 整合到 Portage 的最终步骤是重打开你的 <path>/etc/make.conf</path> 并编辑
+ <c>MAKEOPTS</c> 来包含 <c>-jN</c> （其中 N 是一个整数）。
+代表行的，你会想把这设置为你网络中处理器的总数加一。
+</p>
+
+<pre caption="make.conf 中的最后步骤">
+# <i>nano -w /etc/make.conf</i>
+MAKEOPTS=-jN
+</pre>
+
+<impo>
+别忘了启动 distcc 守护进程 <c>/etc/init.d/distccd start</c>
+</impo>
+
+</body>
+</section>
+<section>
+<title>设置 Distcc 来同 Automake 一起工作</title>
+<body>
+
+<p>
+有些情况下这比设置 Portage 更简单。你所要做的就是更新你的 <c>PATH</c> 环境变量，
+在 gcc（<path>/usr/bin</path>）之前包含 <path>/usr/lib/distcc/bin</path>。
+然而，有一点警告。如果你使用 ccache，你要把 distcc 放在 ccache 部分之后。像这样：
+</p>
+
+<pre caption="设置你的路径">
+# <i>export PATH="/usr/lib/ccache/bin:/usr/lib/distcc/bin:${PATH}"</i>
+</pre>
+
+<p>
+然后，像你以前通常键入 <c>make</c>，你要键入 <c>make -jN</c> （其中的 N 是一个整数）。
+N的安全取值取决于你的网络和你用来编译的机器的类型。
+对于我，我有一台双处理器 P3，一台 K6-2/400 来编译我桌面（一台 1200MHz Athlon Thunderbird）的一切，所以我用 -j5。
+测试你自己的设置来找出恰当的数值。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>交叉编译</title>
+<section>
+<title>交叉编译笔记</title>
+<body>
+
+<p>
+交叉编译是使用一种体系结构来构造其它体系结构的程序。
+这可能就是简单的使用 Athlon (i686) 来为 K6-2 (i586) 构造程序，或者使用 Sparc 来为 ppc 构造程序。
+</p>
+
+</body>
+</section>
+<section>
+<title>交叉编译个人笔记</title>
+<body>
+
+<p>
+我喜欢能够在 Gentoo 上 help out 交叉编译成果，但是我并没有任何非x86的机器。
+我能从<e>理论上</e>创建一些东西，但是我要依靠别人来测试我所写的。
+那样达到了一定的程度，不过它是健壮的。
+</p>
+
+<p>
+我希望在不久的将来能够得到一台 Sparc 装上 Gentoo，我就可以在家进行了。
+</p>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>使用 Distcc Bootstrap</title>
+<section>
+<title>步骤 1： 构造打包 Tarball</title>
+<body>
+
+<p>
+如果你要在 Gentoo 的安装过程中使用 Distcc，这一部分会是有帮助的。
+出人意料的是这并不那么困难。
+你所需要的仅仅是另一台运行 Gentoo 的机器，一种方式来传输打包到你的新系统（我使用 scp）。
+</p>
+
+<p>
+首先，你要构造一个 Distcc 打包，并包含一个 <path>/usr/lib/libpopt.so.*</path> 库。
+</p>
+
+<pre caption="构造打包">
+# <i>USE='-gtk -selinux' emerge --buildpkg distcc</i>
+# <i>mkdir -p /tmp/distcc/usr/lib</i>
+# <i>cp /usr/portage/packages/sys-devel/distcc-DISTCC_VERSION.tbz2 /tmp/distcc/</i>
+# <i>cp /usr/lib/libpopt.so.* /tmp/distcc/usr/lib</i>
+# <i>cd /tmp/distcc</i>
+# <i>tar cfzv distcc.tar.gz *</i>
+<codenote>确定你用 distcc版本更换了 DISTCC_VERSION，<i>像 2.10-r1</i></codenote>
+</pre>
+</body>
+</section>
+<section>
+<title>步骤 2：设置新盒子</title>
+<body>
+
+<impo>
+别忘了为 LiveCD 启动 sshd 并且重置 root 密码！
+</impo>
+
+<p>
+下一步，你要从 Gentoo Linux LiveCD 引导你的新盒子，然后所有的步骤直到 bootstrapping。
+然后在新的盒子上进行初步的设置。
+</p>
+
+<pre caption="初步设置">
+<codenote>在这我们增加 distcc 到 FEATURES</codenote>
+# <i>echo "FEATURES=\"\${FEATURES} distcc\"" &gt;&gt; /etc/make.conf</i>
+<codenote>你也可以使用 <i>nano</i> 编辑 <path>/etc/make.conf</path> 
+来手动增加 distcc 到 FEATURES。</codenote>
+# <i>echo "MAKEOPTS=\"\${MAKEOPTS} -jN\"" &gt;&gt; /etc/make.conf</i>
+<codenote>就像上面的一样，你可以使用 <i>nano</i> 
+编辑 <path>/etc/make.conf</path> 来手动修改 MAKEOPTS。</codenote>
+</pre>
+
+<p>
+接着增加 distcc 到你的 <path>/etc/passwd</path>：
+</p>
+
+<pre caption="向 /etc/passwd 增加 distcc 用户">
+# <i>echo "distcc:x:240:2:distccd:/dev/null:/bin/false" &gt;&gt;/etc/passwd</i>
+<codenote>别忘了‘<i>&gt;&gt;</i>’</codenote>
+</pre>
+</body>
+</section>
+<section>
+<title>步骤 3： 复制打包</title>
+<body>
+
+<p>
+接下来你会复制你刚刚做好的 distcc 打包。
+</p>
+
+<pre caption="复制打包到新盒子">
+<codenote>在“旧”盒子上执行</codenote>
+# <i>scp /tmp/distcc/distcc.tar.gz root@ip.of.new.box:/mnt/gentoo/</i>
+<codenote>以你新盒子的 IP 替换 <i>ip.of.new.box</i></codenote>
+</pre>
+
+</body>
+</section>
+
+<section>
+<title>步骤 4：解压打包</title>
+<body>
+
+<pre caption="解压打包">
+# <i>tar xvfz distcc.tar.gz</i>
+# <i>tar xvfjp distcc-DISTCC_VERSION.tbz2</i>
+<codenote>确定你用 distcc版本更换了 DISTCC_VERSION，<i>像 2.10-r1</i></codenote>
+</pre>
+
+</body>
+</section>
+	
+<section>
+<title>步骤 5：设置 Distcc 本身</title>
+<body>
+
+<p>
+现在设置 distcc 本身...
+</p>
+
+<pre caption="最后 distcc 设置">
+# <i>/usr/bin/distcc-config --install</i>
+# <i>/usr/bin/distcc-config --set-hosts "localhost host1 host2 host3 ..."</i>
+</pre>  
+
+<p>
+distcc 现在要设置为 bootstrap！继续官方安装指南，
+别忘了在 <c>emerge system</c> 之后重新 emerge distcc。
+</p>
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Distcc 已知问题</title>
+<section>
+<title>Mozilla 和 Xfree</title>
+<body>
+
+<p>
+当你 emerge 各种软件包的时候，你会注意到他们没有被分布的编译（而且确实没有并行的构建）。
+这是因为 Mozilla 和 Xfree 的开发者。
+ebuild 系统（文件）禁止了并行构建，因为已经知道那将会导致问题。这并不一定是 distcc 的问题。
+</p>
+
+<p>
+那并不是说，distcc 有时会导致软件包编译错误。
+</p>
+</body>
+</section>
+<section>
+<title>混合增强的gcc和非增强gcc是不完善的。</title>
+<body>
+
+<p>
+与这样长的标题相比，任何解释都将是文不对题。
+然而，如果你计划在 distcc 主机系统中使用带有
+<uri link="http://www.gentoo.org/proj/en/hardened/etdyn-ssp.xml">PaX/增强-gcc</uri>
+的主机和没有增强的主机，你将会遇到问题。
+</p>
+
+<p>
+解决需要你有一些远见；你要在带有 PaX/增强-gcc的主机上运行 <c>hardened-gcc -R</c>，
+或者你在你的内核中使用 PaX 保护并且 <c>emerge hardened-gcc</c>。
+两个都是很好的，因为对于大多数部分两个包提供的保护是不错的，并且是用户透明的。
+</p>
+
+</body>
+</section>
+<section>
+<title>混合 GCC 版本</title>
+<body>
+
+<p>
+如果在你的主机上有不同版本的 GCC，将会有非常奇异的问题。
+解决方法就是使所有的主机使用相同的 GCC 版本。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Distcc 附加</title>
+<section>
+<title>Distcc 监视器</title>
+<body>
+
+<p>
+Distcc 携带了两个监视器。基于文本的总是内置，叫做 <c>distccmon-text</c>。
+第一次运行可能会令人糊涂，不过它真的是使用简单。
+如果你无参数的运行它，它会运行一次。不过，如果你传递一个数值，它会每 N 秒钟更新一次，
+其中的 N 是你传递的参数。
+</p>
+
+<p>
+只有当你的 <c>USE</c> 标签中加进了 <c>gtk</c>，另一个监视器才会启用。
+这一个基于 GTK+ ，运行在 X 环境，而且它很可爱。
+</p>
+
+<p>
+有一个使用程序的注意，如果你要监视任何 emerge，你必须这样启动监视器：
+</p>
+
+<pre caption="启动监视器">
+# <i>DISTCC_DIR=/path/to/distccdir portage distccmon-text N</i>
+<codenote>或者你可以启动图形监视器...</codenote>
+# <i>DISTCC_DIR=/path/to/distccdir portage distccmon-gnome</i>
+</pre>
+
+<note>
+如果你不使用 Portage ，你没有必要指定 DISTCC_DIR （例如，只键入，distccmon-text N）。
+</note>
+
+<impo>
+如果你使用 Portage 并且使用上面的例子，这个会是 <c>DISTCC_DIR=/var/tmp/portage/.distcc</c>。
+</impo>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Distcc 和 Gentoo 的未来计划</title>
+<section>
+<title>distcc-subnetscan</title>
+<body>
+
+<p>
+<c>distcc-subnetscan</c> 是一个开发中的 perl 程序，用来扫描子网找到参与的 distcc 守护进程。
+这个甚至可以增强，以测试远程主机守护进程是否具有特定的 <c>CHOST</c> 设置，使得交叉编译更容易。
+</p>
+
+<p>
+perl 脚本就在 
+<uri link="http://dev.gentoo.org/~lisa/distcc/distcc-subnetscan/distcc-subnetscan.pl">
+这里</uri> 直到找到更加正规的居所。
+</p>
+</body>
+</section>
+<section>
+<title>distcc-config</title>
+
+<body>
+
+<p>
+<c>distcc-config</c>，distcc 已经过时的用户方配置工具。
+很快就会重写来bring up 当前版本 distcc。
+</p>
+</body>
+</section>
+</chapter>
+
+</guide>

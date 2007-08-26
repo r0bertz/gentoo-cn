@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/tw/cvs-tutorial.xml,v 1.5 2004/05/15 07:00:38 bennyc Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link = "/doc/zh_cn/cvs-tutorial.xml">
+<title>Gentoo Linux CVS 教学</title>
+<author title="Chief Architect">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="Translator">
+  <mail link="u010232@mbox.hchs.hc.edu.tw">ccpz</mail>
+</author>
+<author title="Reviewer,Translator">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+
+<!-- rev 1.10 by ccpz -->
+
+<abstract>
+这分文件教导使用者使用 CVS(the Concurrent Versions System，版本协调系统)，让全世
+界程式发展者可以以共同合作的方式来开发软体。对 CVS 的新手来说，这分教学可以让一
+般使用者或是发展者很快就上手。不管你是想用来取得某个软体的最新的原始码，或是你想
+成为资深的发展者，这分文件对你都很合适。
+</abstract>
+
+<version>1.4</version>
+<date>2004年2月4号</date>
+
+<chapter>
+<title>简介</title>
+<section>
+<title>教学大纲</title>
+<body>
+
+<p>
+这分文件包含两个部份。首先是一般使用者如使用 CVS。例如如何透过 CVS 取得最新的原
+始码，并且更新到最近的档案。另一部份就是如何用 CVS 来共同开发程式，包括修改、新
+增、移除 CVS 上的档案。建议你先阅读第一部份，然后再接著读第二部份。如果你之前已
+经有一些 CVS 的使用经验，但是你第一次以 CVS 来开发程式，你可以在第二部份找到所有
+的资料，但或许你可以看看的一部份来复习。
+</p>
+
+</body>
+</section>
+<section>
+<title>CVS是什么？他是作什么用的？</title>
+<body>
+
+<p>
+CVS 是一个主从架构的系统，让发展者可以藉它存放他们的专案在叫做储藏库(repository)
+的地方。发展者可以藉著 CVS 客户端工具来修改储藏库内的档案，CVS 会追踪每个档案的
+改变，并且建立这个专案完整的发展过程。发展者可以取得专案中某个档案的较旧的版本，
+看修改纪录，或是作其他有用的工作。
+</p>
+
+</body>
+</section>
+<section>
+<title>CVS 的作用</title>
+<body>
+
+<p>
+许多的自由软体有他们自己的 CVS 伺服器，当作程式发展者主要储存的地方。发展者常常
+会每天对程式作一些改进，而且他们通常是散布在世界各地，因此 CVS 提供一个让所有人
+联系起来的机制。CVS 建立一种团队的联系让开发人员改进程式码而不会盖掉其他人的修改
+，也不会遗失重要的资料或是重要的更新。
+</p>
+
+</body>
+</section>
+<section>
+<title>CVS -- 最新的原始码</title>
+<body>
+
+<p>
+当程式发展差不多的时候，他们就会把 CVS 上目前的档案压缩成 .tar.gz 然后以新的版本
+发表。然而，因为各种原因，最近的发表版本未必是最新的档案。在这分教学的第一部份将
+会教你如何用 CVS 取得最新的程式码来使用。
+</p>
+
+</body>
+</section>
+<section>
+<title>CVS -- 你装了吗?</title>
+<body>
+
+<p>
+在你使用 CVS 之前，你需要先安装它。确认你的系统装了 CVS 的最简单方法是：
+</p>
+
+<pre>
+# <i>cvs</i>
+</pre>
+
+<p>
+如果有找到 cvs 指令，那你就可以开始使用了。不然的话，你必须要安装符合你的 Linux 
+ 版本的执行档，或是从原始码来安装。从原始码安装 CVS 相当的容易，我接下来就要示范
+如何用原始码安装。
+</p>
+
+</body>
+</section>
+<section>
+<title>从原始码安装 CVS</title>
+<body>
+
+<p>
+从原始码安装 CVS 相当容易。首先，先从 
+<uri>ftp://ftp.cvshome.org/pub/cvs-1.11/cvs-1.11.tar.gz</uri>
+取得 cvs-1.11.tar.gz 压缩档(如果在<uri link="ftp://ftp.cvshome.org/pub/">这里
+</uri>有新的版本，你最好是抓新的版本)，然后执行下面的步骤(执行的结果为了简洁而省
+略)：
+</p>
+
+<pre>
+# <i>tar xzvf cvs-1.11.tar.gz</i>
+# <i>cd cvs-1.11</i>
+# <i>./configure</i>
+# <i>make</i>
+# <i>make install</i>
+</pre>
+
+<p>
+现在你已经安装好了。
+</p>
+
+</body>
+</section>
+<section>
+<title>从套件管理系统安装 CVS</title>
+<body>
+
+<p>
+许多版本都有提供简单的安装方法。举例来说，Gentoo 提供 
+<c>emerge</c> 的指令。要安装 CVS，只需要输入 
+<c>emerge cvs</c>。
+</p>
+
+<pre caption="使用 emerge 安装 CVS">
+# <i>emerge cvs</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>CVSROOT 环境变数</title>
+<body>
+
+<p>
+在开始之前，有一些 CVS 的基础你必须要先知道。首先，为了和 CVS 连接，你必须要先知
+道一个叫 "CVSROOT" 的路径。CVSROOT 是一个类似网址的字串，告诉cvs程式远端的伺服器
+储藏库位置以及连线方式。根据位置在本机或远端，以及你连线的方式，为了让生活精彩点
+，CVSROOT 有许多不同的格式。底下是各种格式的范例以及它的说明。
+</p>
+
+</body>
+</section>
+<section>
+<title>本机的 CVSROOT</title>
+<body>
+
+<pre>CVSROOT=/home/cvsroot</pre>
+
+<p>
+这是一个本机的 CVSROOT 路径范例，你可能会用像这样的路径连到本机上位於
+ /home/cvsroot 的储藏库，或是经由 NFS 挂上 /home/cvsroot 的储藏库。
+</p>
+
+</body>
+</section>
+<section>
+<title>远端密码伺服器的 CVSROOT</title>
+<body>
+
+<pre>CVSROOT=:pserver:cvs@foo.bar.com:/home/cvsroot</pre>
+
+<p>
+这是一个连接到 foo.bar.com 上位於 /home/cvsroot 储藏库的例子。开头的 ":pserver:"
+告诉程式使用包含在 CVS 内的 CVS 密码伺服器协定连接。一般而言，公开的 CVS 使用这
+种协定让匿名使用者存取。
+</p>
+
+</body>
+</section>
+<section>
+<title>远端的 rsh/ssh CVSROOT</title>
+<body>
+
+<pre>
+CVSROOT=drobbins@foo.bar.com:/data/cvs
+</pre>
+
+<p>
+这是一个使用 RSH 或 SSH 协定连接的例子，在这个范例中，CVS伺服器尝试用
+ drobbins 帐号来存取放在 foo.bar.com 上的储藏库。如果 CVS_RSH 环境变数设定成
+  "ssh"，cvs客户端将会以 ssh 来连线，否则就使用 rsh。ssh连线方法在注重安全时相当
+受欢迎。RSH 或 SSH 也可以让匿名使用者存取。如果想使用这种方法，你必须在 
+foo.bar.com 有一个登入帐号。
+</p>
+
+</body>
+</section>
+<section>
+<title>一些其他的事情</title>
+<body>
+
+<p>
+除了 CVSROOT 之外，你必须要知道你要你要下载软你的模组(程式码的集合)名称，就算你
+以匿名的密码伺服器方式连接时也是一样。不像匿名的 FTP，匿名使用者的密码并没有一定
+的格式，所以你必须要从软体的网站或发展者那得到密码。一但你知道这些资讯以后，就可
+以准备开始了。
+</p>
+
+</body>
+</section>
+<section>
+<title>使用 CVS，第一部份</title>
+<body>
+
+<p>
+取得原始码包括两阶段的过程。首先，先登入密码伺服器。然后再以 <c>checkout</c> 指
+令取得原始码。底下是一个取得最新的 Samba 原始码范例：
+</p>
+
+<pre>
+# <i>export CVSROOT=:pserver:cvs@pserver.samba.org:/cvsroot</i>
+</pre>
+
+<p>
+第一行的指令设定 CVSROOT 环境变数。如果你没有设定的话，你必须要在 <c>cvs</c>
+指令后加上 <c>-d:pserver:cvs@pserver.samba.org:/cvsroot</c>，设定 CVSROOT
+可以减少需多打字的时间。
+</p>
+
+</body>
+</section>
+<section>
+<title>使用 CVS，第二部份</title>
+<body>
+
+<p>
+接下来是取得最新的原始码。你或许需要跳到下一部份取得这些指令的说明，
+然后再回头看：
+</p>
+
+<pre>
+# <i>cvs login</i>
+(登入 to cvs@pserver.samba.org)
+CVS password: <comment>(在这里输入密码)</comment>
+
+# <i>cvs -z5 co samba</i>
+U samba/COPYING
+U samba/Manifest
+U samba/README
+U samba/Read-Manifest-Now
+U samba/Roadmap
+U samba/WHATSNEW.txt
+<comment>(这只是 cvs co 输出的片段)</comment>
+</pre>
+
+</body>
+</section>
+<section>
+<title>连接 CVS -- 说明</title>
+<body>
+
+<p>
+上方的第一行指令登入 CVS，然后第二行告诉cvs客户端下载 (check out，co) samba模组
+，并且用 gzip 第五级的压缩 ("-z5") 来加速下载。任何会在本机建立的新档案，cvs 标
+示"U [path]" 表示本机上的档案已经被更新了。
+</p>
+
+</body>
+</section>
+<section>
+<title>下载完毕</title>
+<body>
+
+<p>
+一旦 checkout 命令完成之后，你会在你目前的目录下看到包含最新原始码的 "samba" 目
+录。你也会注意到每个目录底下都有一个名为 "CVS" 的目录，这个目录被用来存放一些 
+CVS 的资料，你可以安全的忽略他。接下来，你并不用担心是否设定了 CVSROOT 环境变数
+，因为这些资讯已经被纪录在 "CVS" 目录中。记得：你只需要在第一次登入及下载时指定 
+CVSROOT。
+</p>
+
+</body>
+</section>
+<section>
+<title>更新原始码</title>
+<body>
+
+<p>
+好了，现在你就有最新的程式码了！现在你可以去编译、安装、观看原始码、或是作任何你
+想作的事情。
+</p>
+
+<p>
+有时候，你也许要更新到 CVS 上最新的原始码。首先，你要先登入到伺服器，你的所有认
+证资料都存在 "CVS" 目录中，先进入要下载的目录中(这个例子中为 samba)，接著打：
+</p>
+
+<pre>
+# <i>cvs update -dP</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>"cvs update" 说明，第一部份</title>
+<body>
+
+<p>
+如果有任何新的档案，cvs 会在那一个项目显示 "U [path]"。而且，如果你已经编译过的
+话，你可能会看到 "? [path]"，因为编译时产生的目的档 cvs 并不能从远端找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>"cvs update" 说明，第二部份</title>
+<body>
+
+<p>
+然后注意到我们在命令列加在 "cvs update" 的参数，"-d" 告诉 cvs 建立任何远端储藏库
+新增的目录(他预设不这么作)，"-P" 则是移除本机原始码中任何空的目录，因为 cvs 顷向
+保留任何曾经使用过，但是现在不再被使用的目录。
+</p>
+
+<p>
+当你轻松的取得最新的原始码以后，你就完成了。接下来看如何以 CVS 协助开发程式。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>以 CVS 协助开发程式</title>
+<section>
+<title>修改档案</title>
+<body>
+
+<p>
+身为一个发展者，你常常会需要修改 CVS 上的档案。修改时，你只需要修改本机上从储藏
+库下载的档案。你在档案上做的改变并不会加到远端的档案，直到你告诉 cvs 去"提交
+(commit)"修改。当你确认过你的修改没有问题后，作底下两个步骤。首先，在原始码的目
+录中输入下列指令更新原始码：
+</p>
+
+<pre>
+# <i>cvs update -dP</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>CVS 合并其他的改变</title>
+<body>
+
+<p>
+如同我们之前所看到的，"cvs update" 将会更新你的原始码到最新的状态--但是我作的修
+改呢？不用担心，他们并没有被覆盖。如果另一位开发者在本机上不存在的档案作修改，本
+机上的档案将会被更新到储藏库中的版本。
+</p>
+
+<p>
+此外，如果你修改了本机档案的 1-10 行，而另一位开发者删除了 40-50 行，在档案结尾
+新增 20 行，修改 30-40 行，而且在你之前就提交了他的修改，cvs 会聪明的在本机上的
+档案加入这些改变，而且你的所有修改并不会遗失。这让两个以上的发展者可以同时修改同
+一个档案。
+</p>
+
+</body>
+</section>
+<section>
+<title>合并并不完美</title>
+<body>
+
+<p>
+然而，如果有多个发展者在修改<c>档案中同一部份</c>，那事情就变得有点复杂。
+当他发生时，cvs 会告诉你有冲突发生。之前作的改变并不会遗失，但是
+当 cvs 要求你做一些调整时，你必须要手动作一些修改。
+</p>
+
+</body>
+</section>
+<section>
+<title>提交</title>
+<body>
+
+<p>
+我们将会稍微看一下冲突如何解决，但是现在我们假设在你输入 "cvs update -dP" 时，
+并没有冲突发生。你的程式码目前已经是最新的，接下来就在目录中输入下列的指令来
+提交你的修改：
+</p>
+
+<pre>
+# <i>cvs commit</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>提交时做了什么？</title>
+<body>
+
+<p>
+"cvs commit" 不<c>仅仅</c>是让储藏库中的档案接受你的修改，cvs 会启动预设的编辑器
+让你输入一些针对修改的说明。一但你输入指令，储存档案并且离开编辑器，你的改变(包
+括说明)会被加入远端的储藏库中，并且可以让团队中的其他人看到。
+</p>
+
+</body>
+</section>
+<section>
+<title>检视纪录</title>
+<body>
+
+<p>
+要看特定档案(包括所有人作改变时加入的说明)的完整纪录相当的容易，要查看这些资讯，
+输入：
+</p>
+
+<pre>
+# <i>cvs log myfile.c</i>
+</pre>
+
+<p>
+"cvs log" 是递回的，所以你只要输入下列的指令就可以看所有档案的纪录：
+</p>
+
+<pre>
+# <i>cvs log | less</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>提交选项</title>
+<body>
+
+<p>
+你或许会想在输入 "cvs commit" 时使用其他的编辑器。只要设定 EDITOR 环境变数为你要
+用的编辑器名称，在你的 ~/.bashrc 中放入下面这一行会是一个好点子：
+</p>
+
+<pre>
+export EDITOR=jpico
+</pre>
+
+<p>
+除此之外，你也可以在命令列中直接以参数加入说明，如此 cvs 就不用载入任何的编辑器
+：
+</p>
+
+<pre>
+# <i>cvs commit -m 'I fixed a few silly bugs in portage.py'</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>.cvsrc 档案</title>
+<body>
+
+<p>
+在继续介绍更多的指令之前，我建议先设定 ~/.cvsrc。在你的家目录中设定这个档案之后
+，可以告诉 cvs 预设的指令参数，而不用去记得每次都要输入他。底下建议一个 .cvsrc 
+的设定：
+</p>
+
+<pre>
+cvs -q
+diff -u -b -B
+checkout -P
+update -d -P
+</pre>
+
+</body>
+</section>
+<section>
+<title>.cvsrc 档案，续</title>
+<body>
+
+<p>
+除了设定一系列 cvs 命令有用的参数，.cvsrc 第一行的指令让 cvs 进入安静模式，这会
+让 "cvs update" 输出比较一致且容易阅读的文字，而且当你设定了 .cvsrc 之后，可以只
+打 "cvs update" 取代 "cvs update -dP"。
+</p>
+
+</body>
+</section>
+<section>
+<title>在储藏库中新增档案</title>
+<body>
+
+<p>
+首先，用你喜欢的编辑器新增档案，然后输入下列的文字：
+</p>
+
+<pre>
+# <i>cvs add myfile.c</i>
+cvs server: use 'cvs commit' to add this file permanently
+</pre>
+
+<p>
+这会告诉 cvs 在下一次执行 "cvs commit" 时新增这个档案。在那之前，其他的发展者并
+不会看到。
+</p>
+
+</body>
+</section>
+<section>
+<title>在储藏库中新增档案</title>
+<body>
+
+<p>
+加入目录的过程也很类似：
+</p>
+
+<pre>
+# <i>mkdir foo</i>
+# <i>cvs add foo</i>
+Directory /home/cvsroot/mycode/foo added to the repository
+</pre>
+
+<p>
+不像新增档案，当你加入一个目录后他会立即在储藏库中显示出来，一旦你将本机的目录加
+入 cvs 后，你会发现 "CVS" 目录会在那个目录内产生来储存 cvs 的资料。因此，你可以
+靠看里面有没有 "CVS" 目录来判断这个目录是否加入 CVS 了。
+</p>
+
+</body>
+</section>
+<section>
+<title>"cvs add" 注解</title>
+<body>
+
+<p>
+对了，跟你猜的一样，在把目录或当案加入储藏库前，你要确定他的上层目录已经加到 CVS
+ 中。否则，你会得到像这样的错误：
+</p>
+
+<pre>
+# <i>cvs add myfile.c</i>
+cvs add: cannot open CVS/Entries for reading: No such file or directory
+cvs [add aborted]: no repository
+</pre>
+
+</body>
+</section>
+<section>
+<title>熟悉 "cvs update"，第一部份</title>
+<body>
+
+<p>
+在了解如何处理冲突之前，先来了解 "cvs update" 输出内容。如果你的 ~/.cvsrc 中有 "
+cvs -q" 你会发现 "cvs update" 的输出结果很容易阅读，"cvs update" 靠输出一个字母
+，空白，或是档名来告诉你他作什么以及观察到什么，如同底下的例子：
+</p>
+
+<pre>
+# <i>cvs update -dP</i>
+? distfiles
+? packages
+? profiles
+</pre>
+
+</body>
+</section>
+<section>
+<title>熟悉 "cvs update"，第二部份</title>
+<body>
+
+<p>
+"cvs update" 用 "?" 告诉你关於那个档案他并不知道任何事，那并不是在储藏库中的档案
+，也尚未被安排加到储藏库中，底下是所有 CVS 所使用的单一字元的列表：
+</p>
+
+<pre>
+U [path]
+</pre>
+
+<p>
+当有一个档案在本机上的储藏库被建立，或是一个你尚未建立的档案被更新时使用这个字元
+。
+</p>
+
+<pre>
+A [path]
+</pre>
+
+<p>
+这个档案已经被安排要加入并且将会在执行 "cvs commit" 时被加入。
+</p>
+
+</body>
+</section>
+<section>
+<title>熟悉 "cvs update"，第三部份</title>
+<body>
+
+<pre>
+R [path]
+</pre>
+
+<p>
+这个跟 "A" 差不多，"R" 告诉你这个档案已经被安排要删除了，当你执行 "cvs commit" 
+时，这个档案将会从储藏库中移除。
+</p>
+
+<pre>
+M [path]
+</pre>
+
+<p>
+这代表这个档案已经被你修改过。此外，这也可能是储藏库中作的改变已经成功的加到这个
+档案。
+</p>
+
+<pre>
+C [path]
+</pre>
+
+<p>
+"C" 字元指出这个档案有冲突，而且你必须要在你作 "cvs commit" 之前手动作一些调整。
+</p>
+
+</body>
+</section>
+<section>
+<title>冲突解决介绍</title>
+<body>
+
+<p>
+现在我们来看看如何解决冲突。我参与 Gentoo Linux 计画，而我们在 cvs.gentoo.org
+ 设立我们自己的 cvs 伺服器，发展者花了大部份的时间修改 "gentoo-x86" 模组里面的原
+始码。在这个模组里面，有一个叫做 "ChangeLog" 的档案(你大概猜到)存放在这个储藏库
+里面所有档案的修改说明。
+</p>
+
+</body>
+</section>
+<section>
+<title>冲突的范例</title>
+<body>
+
+<p>
+因为几乎每位发展者在 CVS 上做修改时都会去修改这个档案，这是主要的冲突来源。
+底下是一个冲突的范例，假设我在 ChangeLog 的顶端加入下面几行：
+</p>
+
+<pre>
+date 25 Feb 2001
+
+这是我自己加入的东西
+</pre>
+
+<p>
+然而，假设在我可以提交之前，另一位发展者在 ChangeLog 的顶端加入下面几行并且提交
+了他的修改：
+</p>
+
+<pre>
+date 25 Feb 2001
+
+这是另一位发展者加入的部份
+</pre>
+
+</body>
+</section>
+<section>
+<title>冲突的范例，续</title>
+<body>
+
+<p>
+现在当我执行 "cvs update -dP" (提交前你应该都做这个动作)，cvs 并不能够把他的修改
+合并到我的档案当中，因为我们都加在这的档案的相同部份 -- cvs 如何判断使用那一个版
+本？所以，我得的了底下的错误：
+</p>
+
+<pre>
+RCS file: /home/cvsroot/gentoo-x86/ChangeLog,v
+retrieving revision 1.362
+retrieving revision 1.363
+Merging differences between 1.362 and 1.363 into ChangeLog
+rcsmerge: warning: conflicts during merge
+cvs server: conflicts found in ChangeLog
+C ChangeLog
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决冲突，第一部份</title>
+<body>
+
+<p>
+唉--有冲突！幸好这很容易修正。如果我用编辑器打开这个档案，我在档案顶端看到下列的
+文字：
+</p>
+
+<pre>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; ChangeLog
+date 25 Feb 2001
+
+这是我自己加入的东西
+
+=======
+date 25 Feb 2001
+
+这是另一位发展者加入的部份
+ 
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 1.363
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决冲突，第二部份</title>
+<body>
+
+<p>
+cvs 不是以一个版本盖掉另一个版本，而是在 ChangeLog 档案中加入两个版本，并且以特
+殊的分隔符号清楚的标记冲突的地方。现在，由你决定在这部份<c>应该</c>出现的内容，
+在这个范例中，取代后的文字并不是两个版本中的一个，而是合并两者：
+</p>
+
+<pre>
+date 25 Feb 2001
+
+这是我自己加入的东西
+
+这是另一位发展者加入的部份
+</pre>
+
+<p>
+现在我已经用上列的文字取代冲突的部份(并且移除了 "=======" 之类的标记)，我现在可
+以毫无问题的提交我的修改。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决冲突的技巧</title>
+<body>
+
+<p>
+当你需要去编辑冲突的档案时，确认你已经看过整个档案来找到所有的冲突，如果有冲突你
+忘了修改，cvs 在你修改前并不允许你提交。移除 cvs 加到档案中的标记也相当重要。还
+有另一个技巧，如果你在修正时犯了错误并且意外的储存了，你可以在 
+".#filename.version" 档案中找到原始的备份版本。
+</p>
+
+</body>
+</section>
+<section>
+<title>移除档案</title>
+<body>
+
+<p>
+现在是学习 CVS 技能最后一项--移除储藏库中的档案。移除档案是两阶段的过程。首先，
+删除在本机上的档案，然后执行 "cvs remove" 指令：
+</p>
+
+<pre>
+# <i>rm myoldfile.c</i>
+# <i>cvs remove myoldfile.c</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>移除档案，续</title>
+<body>
+
+<p>
+这个档案会被预定在下一次提交时从储藏库中删除。一旦提交之后，档案将会储藏库中移除
+，但是 cvs 不会把他丢弃，而会保存完整的内容及修改纪录，以便未来当你需要时可以找
+到。这是 cvs 保护你的原始码的其中一个方法。
+</p>
+
+<p>
+"cvs remove" 是递回的，这代表你可以删除一系列的档案，然后执行 "cvs remove" 而不
+需要外加其他的参数。这样的话会让所有被删除的档案在下次提交时删除。
+</p>
+
+</body>
+</section>
+<section>
+<title>移除目录</title>
+<body>
+
+<p>
+如果你想要移除整个目录，我建议你依照下列的步骤。首先，删除在这个目录中的所有档案
+：
+</p>
+
+<pre>
+# <i>rm *.c</i>
+# <i>cvs remove</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>移除目录，续</title>
+<body>
+
+<p>
+然后，执行提交：
+</p>
+
+<pre>
+# cvs commit
+</pre>
+
+<p>
+这里有一个技巧。执行下列的步骤删除目录：
+</p>
+
+<pre>
+# <i>cd ..</i>
+# <i>cvs remove mydir</i>
+# <i>rm -rf mydir</i>
+</pre>
+
+<p>
+注意这里移除目录并不用执行提交，目录立即从储藏库中移除。
+</p>
+
+</body>
+</section>
+
+<section>
+<title>完成！</title>
+<body>
+
+<p>
+CVS 的介绍已经完毕了，我希望这份教学很有用。有更多关於 CVS 的资料我可以加到这篇
+教学中，但是感谢这里有许多很棒的 CVS 资源让你可以获得更多 CVS 的知识：
+</p>
+
+<ul>
+  <li>
+    <uri>http://www.cvshome.org</uri> CVS 计画的网站,并且提供许多 CVS 文件，包括
+    <uri link="http://www.cvshome.org/docs/manual">线上官方文件</uri>。
+  </li>
+  <li>
+    <uri link="http://www.durak.org/cvswebsites/">CVS Version Control for Web 
+    Site Projects site</uri> 对於如何使用 CVS发展网站有详细的资讯。
+  </li>
+  <li>
+    Karl Fogel 写了一本书叫做 <uri link="http://cvsbook.red-bean.com/">Open 
+    Source Development with CVS</uri>。大部份的内容可以在网站上免费阅读。
+  </li>
+  <li>
+    <uri link="http://freebsd.org/projects/cvsweb.html">cvsweb</uri>
+    是一个相当棒的 CGI script ，提供一个 CVS 的网页介面，浏览起来非常棒。
+  </li>
+  <li>
+    <uri link="http://www.loria.fr/~molli/cvs-index.html">CVS Bubbles</uri> 这个
+    网站有许多有用的资源，包括常见问题集。
+  </li>	
+</ul>
+
+</body>
+</section>
+<section>
+<title>关於这分文件</title>
+<body>
+
+<p>
+这分文件的原始版本是发表在 IBM developerWorks，所有权属於 Westtech Information 
+Services。这分文件是从他的原始版本修改而来，并且包含许多 Gentoo Linux 文件团队做
+的改进。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>	

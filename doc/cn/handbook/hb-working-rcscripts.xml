@@ -1,0 +1,561 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/handbook/hb-working-rcscripts.xml,v 1.14 2004/07/26 09:39:39 swift Exp $ -->
+
+<sections>
+<section>
+<title>运行级别</title>
+<subsection>
+<title>启动你的系统</title>
+<body>
+
+<p>
+当你启动你的系统时，你会发现有很多的文字信息输出。如果你仔细观察的话，你会发现这些文字信息每次启动时都一样。这些动作的顺序称作为<e>启动顺序</e>，并且差不多是固定的。
+</p>
+
+<p>
+首先，你的启动程序会加载你在启动程序配置文件中定义的内核镜像到内存中，当然这是在CPU运行内核之后。当内核加载和运行后，它初始化所有内核相关的相关工作，并开始进程<c>init</c>。
+</p>
+
+<p>
+这个进程然后确认所有的文件系统（在<path>/etc/fstab</path>）中定义的）已经挂载准备使用了。然后它会执行在<path>/etc/init.d</path>里几个脚本，这些脚本按照顺序启动了你需要的一些服务，使得系统成功启动。
+</p>
+
+<p>
+最后，所有的脚本执行后，<c>init</c>激活终端（绝大多数情况下是一些虚拟终端，可以用<c>Alt-F1</c>、<c>Alt-F2</c>等激活）并附加了一个叫做<c>agetty</c>的特殊进程。这个进程将确保你可以通过运行<c>login</c>来从这些终端登录。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>初始化脚本</title>
+<body>
+
+<p>
+现在<c>init</c>不会随机的执行<path>/etc/init.d</path>里的脚本，甚至不会执行<path>/etc/init.d</path>里的所有脚本。它只执行那些让它执行的脚本。这些是由<path>/etc/runlevels</path>来决定要执行的脚本。
+</p>
+
+<p>
+首先，<c>init</c>运行所有<path>/etc/init.d</path>里链接到<path>/etc/runlevels/boot</path>的脚本。通常情况下，它会安装字母顺序执行这些脚本，但是有些脚本有依赖性，它们会告诉系统另外的一个脚本必须在它们之前运行。
+</p>
+
+<p>
+当所有<path>/etc/runlevels/boot</path>所指向的脚本已经运行，<c>init</c>继续运行和<path>/etc/runlevels/default</path>有符号链接的脚本。同样，它会按照字母顺序执行这些脚本，除非一个脚本有依赖性并提供了一个准确的启动顺序。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Init是怎样工作的？</title>
+<body>
+
+<p>
+当然<c>init</c>不会自己决定一切，它需要一个给它指定行为的配置文件，这个配置文件就是<path>/etc/inittab</path>。
+</p>
+
+<p>
+如果你还记得我们前面刚解释的启动顺序，你会记得<c>init</c>首先要做的是挂载所有的文件系统。这个是由<path>/etc/inittab</path>里的下面一行定义的：
+</p>
+
+<pre caption="/etc/inittab里的系统初始化行">
+si::sysinit:/sbin/rc sysinit
+</pre>
+
+<p>
+这一行告诉<c>init</c>必须去执行<c>/sbin/rc sysinit</c>来初始化系统。<path>/sbin/rc</path>脚本是用来负责初始化的，因此你可能认为<c>init</c>并没有什么可做的，实际上它只不过将初始化系统的任务交付给了另外一个进程。
+</p>
+
+<p>
+其次，<c>init</c>执行所有和<path>/etc/runlevels/boot</path>有符号链接的脚本，这个是由下面一行定义的：
+</p>
+
+<pre caption="系统初始化，继续">
+rc::bootwait:/sbin/rc boot
+</pre>
+
+<p>
+同样，脚本<c>rc</c>来执行必要的工作。注意到给<c>rc</c>的参数（<c>boot</c>）就是<path>/etc/runlevels</path>中要使用到的子文件夹。
+</p>
+
+<p>
+然后<c>init</c>继续检查它的配置文件，看看还有什么需要<e>runlevel</e>来运行的。要决定这个，它将会读入<path>/etc/inittab</path>里的下面一行：
+</p>
+
+<pre caption="initdefault行">
+id:3:initdefault:
+</pre>
+
+<p>
+在这种情况下（绝大部分Gentoo用户将使用的），<e>runlevel</e>的级别为3。根据这个信息，<c>init</c>会查看启动<e>runlevel 3</e>需要运行哪些程序：
+</p>
+
+<pre caption="运行级别的定义">
+l0:0:wait:/sbin/rc shutdown
+l1:S1:wait:/sbin/rc single
+l2:2:wait:/sbin/rc nonetwork
+l3:3:wait:/sbin/rc default
+l4:4:wait:/sbin/rc default
+l5:5:wait:/sbin/rc default
+l6:6:wait:/sbin/rc reboot
+</pre>
+
+<p>
+定义了级别3的行再一次掉用了<c>rc</c>脚本来开始这些服务（现在使用参数<e>default</e>）。同样我们也注意到<c>rc</c>使用的参数是<path>/etc/runlevels</path>里我们要用到的子文件夹。
+</p>
+
+<p>
+当<c>rc</c>完成后，<c>init</c>将会决定要激活什么虚拟终端和对每个终端运行什么程序：
+</p>
+
+<pre caption="虚拟终端的定义">
+c1:12345:respawn:/sbin/agetty 38400 tty1 linux
+c2:12345:respawn:/sbin/agetty 38400 tty2 linux
+c3:12345:respawn:/sbin/agetty 38400 tty3 linux
+c4:12345:respawn:/sbin/agetty 38400 tty4 linux
+c5:12345:respawn:/sbin/agetty 38400 tty5 linux
+c6:12345:respawn:/sbin/agetty 38400 tty6 linux
+</pre>
+
+
+</body>
+</subsection>
+<subsection>
+<title>什么是运行级别？</title>
+<body>
+
+<p>
+你应该注意到<c>init</c>使用一种数字策略来决定要激活的<e>运行级别</e>。一个<e>运行级别</e>是一种你系统运行的状态，包含了你进入和退出这个运行级别要执行的一系列的脚本（运行级别脚本或者<e>initscripts</e>）。
+</p>
+
+<p>
+在Gentoo里定义了7个运行级别：3个内部运行级别和四个供用户定义的运行级别。这些内部运行级别分别叫做<e>sysinit</e>、<e>shutdown</e>和<e>reboot</e>，所做的就同它们名字一样：初始化系统、关机和重启机器。
+</p>
+
+<p>
+用户定义的运行级别都在<path>/etc/runlevels</path>中有个附带的子文件夹：<path>boot</path>、<path>default</path>、<path>nonetwork</path>和<path>single</path>。运行级别<path>boot</path>启动所有其他运行级别要使用的系统服务。其余的三个运行级别主要不同在它们要启动的服务：<path>default</path>是用作日常工作的，<path>nonetwork</path>是在网络不需要的情况下使用，还有<path>single</path>是用来给你修复系统的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>初始化脚本的工作</title>
+<body>
+
+<p>
+进程<c>rc</c>启动的脚本都叫做<e>初始化脚本</e>。在<path>/etc/init.d</path>里的每个脚本都可以执行时带上参数<e>start</e>、<e>stop</e>、<e>restart</e>、<e>pause</e>、<e>zap</e>、<e>status</e>、<e>ineed</e>、<e>iuse</e>、<e>needsme</e>、<e>usesme</e>或者<e>broken</e>。
+</p>
+
+<p>
+要启动、停止或者重启一个服务（和所有的独立的服务），应该是用到参数<c>start</c>、<c>stop</c>和<c>restart</c>：
+</p>
+
+<pre caption="启动Postfix">
+# <i>/etc/init.d/postfix start</i>
+</pre>
+
+<note>
+只要这个给定服务所需要的服务会停止或这重启，其他的独立的服务（那些<e>使用</e>这个服务，但并不需要它的）将不会改变。
+</note>
+
+<p>
+如果你要停止一个服务，但不停止那些依赖于它的服务，你可以使用参数<c>pause</c>：
+</p>
+
+<pre caption="停止Postfix，但是保持依赖于它的服务继续运行">
+# <i>/etc/init.d/postfix pause</i>
+</pre>
+
+<p>
+如果你要查看一个服务的状态（启动，停止，暂停……），你可以使用参数<c>status</c>：
+</p>
+
+<pre caption="postfix的状态信息">
+# <i>/etc/init.d/postfix status</i>
+</pre>
+
+<p>
+如果状态信息告诉你服务正在运行，但是你知道实际上不是，然后你可以使用参数<c>zap</c>刷新状态信息为“stopped”：
+</p>
+
+<pre caption="刷新postfix的状态信息">
+# <i>/etc/init.d/postfix zap</i>
+</pre>
+
+<p>
+要询问这个服务的依赖性，你可以使用参数<c>iuse</c>或者<c>ineed</c>。使用<c>ineed</c>你可以查看这个服务正常工作真正所需要的服务，而<c>iuse</c>将会显示这个服务要使用到的服务，但并不是为正常工作所必须的。
+</p>
+
+<pre caption="询问Postfix所必须依赖的服务列表">
+# <i>/etc/init.d/postfix ineed</i>
+</pre>
+
+<p>
+同样，你可以询问哪些服务需要这个服务（<c>neesme</c>）或者哪些服务可以用到这个服务（<c>usesme</c>）：
+</p>
+
+<pre caption="询问需要Postfix的服务列表">
+# <i>/etc/init.d/postfix needsme</i>
+</pre>
+
+<p>
+最后，你可以询问这个服务所需要的但又缺失的依赖性：
+</p>
+
+<pre caption="询问Postfix所缺失的依赖性">
+# <i>/etc/init.d/postfix broken</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>rc-update的工作</title>
+<subsection>
+<title>什么是rc-update？</title>
+<body>
+
+<p>
+Gentoo的初始化系统使用依赖树（dependency-tree）来决定什么服务会首先启动。因为这是个很沉闷的工作，我们不会让我们的用户去手动来作，我们创建了简化运行级别和初始化脚本的管理的工具。
+</p>
+
+<p>
+使用<c>rc-update</c>你可以从一个运行级别中添加或删除初始化脚本。工具<c>rc-update</c>然后会自动要求<c>depscan.sh</c>脚本来重新创建依赖树。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>添加和删除服务</title>
+<body>
+
+<p>
+在Gentoo的安装过程中你已经添加启动脚本到“default”运行级别。那个时候你可能还不清楚“default”是用作什么的，但是现在你应该知道了。脚本<c>rc-update</c>需要由第二个参数来决定其行为：<e>add</e>、<e>del</e>或者<e>show</e>。
+</p>
+
+<p>
+要添加或删除一个初始化脚本，只需要给<c>rc-update</c>参数<c>add</c>或者<c>del</c>，并随后附上初始化脚本和运行级别。比如：
+</p>
+
+<pre caption="将Postfix从默认运行级别中删除">
+# <i>rc-update del postfix default</i>
+</pre>
+
+<p>
+命令<c>rc-update show</c>将会显示所有已有的初始化脚本，并列出它们在哪个运行级别中运行：
+</p>
+
+<pre caption="获得初始化脚本的信息">
+# <i>rc-update show</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>配置服务</title>
+<subsection>
+<title>为什么需要额外的配置？</title>
+<body>
+
+<p>
+初始化脚本有时候很复杂。因此让用户自己编辑初始化脚本没有什么意思，这样会让脚本错误百出。因此很重要的一点就是可以配置这样的一个服务。比如说，你可能想给这个服务更多的选项。
+</p>
+
+<p>
+在初始化脚本之外配置的另一个原因也可以是不用担心你的配置在更新初始化脚本时被覆盖。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件夹/etc/conf.d</title>
+<body>
+
+<p>
+Gentoo提供了一个简单的方法来配置这样的一个服务：每一个可以配置的初始化脚本在<path>/etc/conf.d</path>里有一个文件。比如说，apache2的初始化脚本（叫做<path>/etc/init.d/apache2</path>）有一个配置文件叫<path>/etc/conf.d/apache2</path>，它包含了Apache 2服务起启动时你要给它的选项：
+</p>
+
+<pre caption="/etc/conf.d/apache2中定义的变量">
+APACHE2_OPTS="-D PHP4"
+</pre>
+
+<p>
+这样的一个配置文件包含了变量并且只有变量（就同<path>/etc/make.conf</path>一样），使得配置服务非常简便。它还允许我们提供更多有关这个变量的信息（以注释形式）。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>书写初始化脚本</title>
+<subsection>
+<title>我必须如此吗？</title>
+<body>
+
+<p>
+当然不是。自己书写一个脚本通常情况下不是必须的，因为Gentoo给所有提供的服务提供了一个可以使用的初始化脚本。但是，你可能没有通过Portage来安装一个服务，这种情况下你将需要创建一个初始化脚本。
+</p>
+
+<p>
+如果服务提供的脚本不是特定写给Gentoo的，不要使用：Gentoo的初始化脚本和其他发行版的初始化脚本不兼容！
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>布局</title>
+<body>
+
+<p>
+一个初始化脚本的基本布局如下。
+</p>
+
+<pre caption="一个初始化脚本的基本布局">
+#!/sbin/runscript
+
+depend() {
+  <comment>（依赖性信息）</comment>
+}
+
+start() {
+  <comment>（启动服务所需的命令）</comment>
+}
+
+stop() {
+  <comment>（停止服务所需的命令）</comment>
+}
+
+restart() {
+  <comment>（重启服务所需的命令）</comment>
+}
+</pre>
+
+<p>
+每个初始化脚本都<e>需要</e>定义函数<c>start()</c>，其他所有的函数都是可选的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>依赖性</title>
+<body>
+
+<p>
+这里有两种依赖性你可以定义：<c>use</c>和<c>need</c>。我们前面提过，依赖性<c>need</c>比<c>use</c>要严格的多。根据依赖性的类型，你需要输入你要依赖的服务或者<e>虚拟</e>依赖性。
+</p>
+
+<p>
+<e>虚拟</e>依赖性是由一个服务提供的依赖性，但不仅仅只由那个服务提供。你的初始化脚本可以依赖于一个系统日志服务，但是我们有很多系统日志程序（metalogd、syslog-ng、sysklogd……）。因为你不能同时<c>需要</c>它们中的每一个（没有一个系统会同时安装和运行这些系统日志程序），但我们确认所有的这些服务<c>提供</c>一个虚拟依赖性。
+</p>
+
+<p>
+让我们来看看postfix服务的依赖性信息。
+</p>
+
+<pre caption="Postfix的依赖性信息">
+depend() {
+  need net
+  use logger dns
+  provide mta
+}
+</pre>
+
+<p>
+就同你看到的，postfix服务：
+</p>
+
+<ul>
+  <li>
+    需要（虚拟）依赖性<c>net</c>（比如由<path>/etc/init.d/net.eth0</path>提供）
+  </li>
+  <li>
+    使用（虚拟）依赖性<c>logger</c>（比如由<path>/etc/init.d/syslog-ng</path>提供）
+  </li>
+  <li>
+    使用（虚拟）依赖性<c>dns</c>（比如由<path>/etc/init.d/named</path>提供）
+  </li>
+  <li>
+    提供（虚拟）依赖性<c>mta</c>（这点和所有的mail服务器一样）
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>控制顺序</title>
+<body>
+
+<p>
+在一些情况下你可能并不需要一个服务，但是需要你的服务在另一个在系统中存在的服务（注意条件，这里再也没有别的依赖性）前面（或者后面）启动过，并且这两个服务同时在相同的运行级别中（注意条件，只有在同一运行级别的服务才包括）。你可以使用<c>before</c>或者<c>after</c>设置来提供这个信息。
+</p>
+
+<p>
+作为一个例子，我们来看看服务Portmap的设置：
+</p>
+
+<pre caption="The depend() function in the Portmap service">
+depend() {
+  need net
+  before inetd
+  before xinetd
+}
+</pre>
+
+<p>
+你也可以使用“*”来代替相同运行级别的所有服务，但是这个不是推荐使用。
+</p>
+
+<pre caption="在运行级别中第一个运行的初始化脚本">
+depend() {
+  before *
+}
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>标准函数</title>
+<body>
+
+<p>
+紧随函数<c>depend</c>，你也需要定义函数<c>start</c>。这个包含了所有初始化这个服务所需要的命令。我们推荐使用函数<c>ebegin</c>和<c>eend</c>来告诉用户所发生的事情：
+</p>
+
+<pre caption="函数start()样例">
+start() {
+  ebegin "Starting my_service"
+  start-stop-daemon --start --quiet --exec /path/to/my_service
+  eend $?
+}
+</pre>
+
+<p>
+如果你需要有关函数<c>start()</c>的更多例子，请阅读在你的文件夹<path>/etc/init.d</path>里已有的初始化脚本。对于<c>start-stop-daemon</c>，如果你需要更多的信息，这里提供了一个非常好的手册：
+</p>
+
+<pre caption="获得start-stop-daemon的手册">
+# <i>man start-stop-daemon</i>
+</pre>
+
+<p>
+其他你可以定义的函数有<c>stop()</c>和<c>restart</c>。你不是必须要定义这些函数！如果你使用<c>start-stop-daemon</c>，我们的初始化系统有足够的能力来自动完成这些函数。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>添加自定义的选项</title>
+<body>
+
+<p>
+如果你想你的初始化脚本支持更多的选项，而不仅仅是我们已经遇到过的那些，你可以添加这些选项到变量<c>opts</c>，并且创建一个和这个选项同名的函数。比如，要支持一个名为<c>restartdelay</c>的选项：
+</p>
+
+<pre caption="支持选项restartdelay">
+opts="${opts} restartdelay"
+
+restartdelay() {
+  stop()
+  sleep 3    <comment># 在再次启动前等候三秒钟</comment>
+  start()
+}
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>服务配置中的变量</title>
+<body>
+
+<p>
+对于支持<path>/etc/conf.d</path>里的配置文件，你不需要作任何事情：如果你的初始化脚本执行，下面的文件将会自动读取（比如可以使用的变量）：
+</p>
+
+<ul>
+  <li><path>/etc/conf.d/&lt;你的初始化脚本&gt;</path></li>
+  <li><path>/etc/conf.d/basic</path></li>
+  <li><path>/etc/rc.conf</path></li>
+</ul>
+
+<p>
+还有，如果你的初始化脚本提供了一个虚拟依赖性（如<c>net</c>），和这个依赖性相关的文件（如<path>/etc/conf.d/net</path>也会被读取。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>改变运行级别的行为</title>
+<subsection>
+<title>谁将得益于此？</title>
+<body>
+
+<p>
+许多笔记本用户了解这个情况：在家时你需要启动<c>net.eth0</c>，而在路上你就不需要启动<c>net.eth0</c>（因为没有网络可用）。对于Gentoo，你可以根据你的意愿来改变运行级别的行为。
+</p>
+
+<p>
+比如，你可以创建另一个“default”运行级别，联系有其他的初始化脚本。然后在启动时你可以选择你要使用哪个default运行级别。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>使用SOFTLEVEL</title>
+<body>
+
+<p>
+首先，给你的另一个“default”运行级别创建文件夹，作为一个例子我们创建<path>offline</path>运行级别：
+</p>
+
+<pre caption="创建一个运行级别文件夹">
+# <i>mkdir /etc/runlevels/offline</i>
+</pre>
+
+<p>
+给新建的运行级别添加必须的初始化脚本。比如，如果你需要一个同你当前的<c>default</c>运行级别一模一样的设置，只是没有<c>net.eth0</c>：
+</p>
+
+<pre caption="添加必须的初始化脚本">
+# <i>ls /etc/runlevels/default</i>
+acpid  domainname  local  net.eth0  netmount  postfix  syslog-ng  vixie-cron
+# <i>rc-update add acpid offline</i>
+# <i>rc-update add domainname offline</i>
+# <i>rc-update add local offline</i>
+# <i>rc-update add syslog-ng offline</i>
+# <i>rc-update add vixie-cron offline</i>
+</pre>
+
+<p>
+现在编辑你的系统启动程序配置文件，并为<c>offline</c>运行级别添加一个新的记录。比如，在<path>/boot/grub/grub.conf</path>：
+</p>
+
+<pre caption="给offline运行级别添加一条记录">
+title Gentoo Linux Offline Usage
+  root (hd0,0)
+  kernel (hd0,0)/kernel-2.4.25 root=/dev/hda3 <i>softlevel=offline</i>
+</pre>
+
+<p>
+现在所有的都设置好了。如果你启动你的系统并在启动时选择新添的记录，将会使用运行级别<c>offline</c>而不是<c>default</c>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>使用BOOTLEVEL</title>
+<body>
+
+<p>
+使用<c>bootlevel</c>和<c>softlevel</c>几乎完全相似。唯一的不同是你定义一个新的“boot”运行级别而不是新的“default”运行级别。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

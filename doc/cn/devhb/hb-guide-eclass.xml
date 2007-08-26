@@ -1,0 +1,790 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+
+<!-- This document was last synched to:
+     cvs://gentoo/gentoo/xml/htdocs/doc/en/eclass-howto.xml :: R1.17.
+-->
+
+<sections>
+<section>
+<title>Eclass的介绍</title>
+<subsection>
+<title>Eclass的思维</title>
+<body>
+      
+<p>
+eclass是共享代码的模块。它们是用bash写的，和普通的ebuilds有相同的语法格式，并是从ebuilds和其他的eclasses继承过来的，提供默认的设置和很多功能上相似的ebuilds。
+</p>
+
+<p>
+它是用来在相似的ebuilds中实现尽可能多的代码重用。
+</p>
+
+<p>
+第一章就简单的描述怎样写一个结合了使用在已有eclass上的窍门和技巧上的eclass。第二章则是kde classes的一个概述。第三章解释了使用kde组的eclass来写一个KDE ebuild。
+</p>
+      
+</body>
+</subsection>
+<subsection>
+<title>一个简单eclass的例子</title>
+<body>
+
+<p>
+这是一个虚构的sourceforge.eclass，设计用来提供托管于sourceforge.net的项目的主页和下载位置。
+</p>
+
+<pre caption = "样例：sourceforge.eclass">
+# Copyright 2003 Gentoo Technologies, Inc.
+# Distributed under the terms of the GNU General Public License, v2 or later
+# Author Dan Armak &lt;danarmak@gentoo.org&gt;
+# $Header: /var/www/www.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/eclass-howto.xml,v 1.17 2004/04/11 10:52:16 cam Exp $
+ECLASS=sourceforge
+INHERITED="$INHERITED $ECLASS"
+# This eclass sets $HOMEPAGE and $SRC_URI to the standard vaules for
+# sourceforge.net - hosted projects.
+
+HOMEPAGE=&quot;http://${PN}.sourceforge.net/&quot;
+SRC_URI=&quot;http://download.sourceforge.net/${PN}/${P}.tar.gz&quot;
+</pre>
+			
+<note>
+ECLASS= 和 INHERITED= 行帮助portage处理eclass的依赖性；它们必须存在于任何一个eclass中，否则就不会有效。$ECLASS也可被EXPORT_FUNCTION()使用。这些变量可能以后被废弃不用，会被portage在inherit()中自动设定。
+</note>
+
+<p>
+前面四行是头文件，就同任何一个ebuild的一样。接下来的两行是这个eclass的简短描述。剩下的代码才能真正起作用，设定了SRC_URI和HOMEPAGE。
+</p>
+
+<p>
+大部分eclass不仅仅是设定变量和提供帮助的函数；他们包含了特定ebuild函数的默认版本（src_unpack、src_compile等）。在一个eclass写一个默认的函数之前，你应该知道默认的函数已经包含在ebuild.sh里了。如果你没有吧某些函数放入你的ebuild（也不是通过eclass放入），这些函数会被排除出去；默认的src_unpack()是常常能用上的。如果你还没用上，去看看ebuild.sh里的默认使用。
+</p>
+			
+<p>
+这就是你实际写eclass需要知道的。将你新写的eclass放到<path>$PORTDIR/eclass</path>里，并把下面一行放到你的ebuild的第一行上：
+</p>
+
+<pre caption ="怎样继承eclass">
+inherit sourceforge
+</pre>
+
+<p>
+这样eclass的内容将会被引用。记住，在eclass定义的任何变量和函数都可以在ebuild中重写，因为ebuild执行时排在eclass之后。因此，你应该尽量在你的eclass里放入尽可能多的默认设定和通用代码。其他任何不标准的设置和修改就可以放在ebuild里了。
+</p>
+
+<p>
+好，你可以同时继承多个eclass，只需要输入：
+</p>
+
+<pre caption = "继承多个eclass">
+inherit eclass1 eclass2 [...]
+</pre>
+
+<p>
+……但是看看他们的顺序！记住，eclass可以互相继承并可以覆盖其他的设置，因此，在处理多个可能互相影响的eclass时一定要很小心。
+</p>
+
+<p>
+我们下面将在把实际的eclass放入portage前学学eclass编写的窍门。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>inherit()</title>
+<body>
+
+<p>
+这是ebuild.sh里的一个函数，用来处理eclass的继承（源码引用）。它使用时带上一系列的eclass名字即可：inherit &lt;eclass1&gt; [eclass2 eclass3...].
+</p>
+
+<p>
+除开引用eclass文件的代码，它还设定了ECLASS和INHERITED变量，这些变量被Portage用来缓冲eclass的修改时间戳。变量INHERITED可能在编写eclass用到：它包含了这个时候一系列按顺序排列的继承（引用）的eclass。因此一个eclass可以用这个变量来决定是否从其他的eclass引用它。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>EXPORT_FUNCTIONS</title>
+<body>
+
+<p>
+一个好的eclass的预定义函数应该常常做它应该做的；然后ebuild里面之需要包含很少的代码（这就很好）。有时候，虽然eclass里的函数并不是你需要的。你可以在你的ebuild里写一个新的函数，来覆盖eclass里的这个函数的定义。但是，这会减少代码重用的优点。因此我们因该尝试去“扩展”eclass的函数。
+</p>
+
+<p>
+假设你要扩展函数src_compile()。你可以在你的ebuild里写一个src_compile()的定义，这个函数只会包含eclass中src_compile()里没有的部分。那么你应该在你定义的函数的代码里调用eclass src_compile()。
+</p>
+
+<p>
+但是，如果你编写一个新的函数叫做src_compile()，bash将会忘记掉旧的那个，你也不能调用旧的那个！这就是宏EXPORT_FUNCTIONS可以有所作为的地方了。
+</p>
+
+<p>
+我们再花点时间看看另一个问题。假设foo.eclass和bar.eclass都定义了src_compile()。如果你同时继承foo和bar，根据继承顺序的不同你将得到不同的src_compile()。就是这个样子；你应该留意你继承的顺序。但是你可能明显只需要继承调用其中的一个而已。
+</p>
+
+<p>
+因此，每个eclass在它的函数前会定义一个前缀。比如说，foo.elcass定一个函数叫做foo_src_compile()，而bar.eclass定一个叫做bar_src_compile()。这样，ebuild可以调用任何一个，也会知道它调用的是那个。
+</p>
+
+<p>
+但是，我们也需要某一默认的函数就叫src_compile()，或者说ebuild需要定义一个。而宏EXPORT_FUNCTIONS同时就同处理这个问题和先前的那个问题。
+</p>
+
+<pre caption = "EXPORT_FUNCTIONS() （在ebuild.sh里）">
+EXPORT_FUNCTIONS() {
+	while [ &quot;$1&quot; ]; do
+		eval &quot;$1() { ${ECLASS}_$1 ; }&quot; &gt; /dev/null
+		shift
+	done
+}
+</pre>
+
+<p>
+源码引用一个eclass之前，函数inherit()设定$ECLASS为这个eclass的名字。这个eclass然后在它的最后调用函数EXPORT_FUNCTION()，将一系列他提供的默认函数传递过来作为参数。举个例子，如果你调用
+</p>
+
+<pre>
+EXPORT_FUNCTIONS src_compile src_install
+</pre>
+
+<p>
+那么EXPORT_FUNCTIONS将会在下面的字符串中调用函数eval()：
+</p>
+
+<pre>
+src_unpack() { foo_src_compile() ; }
+src_compile() { foo_src_compile() ; }
+</pre>
+
+<p>
+现在，最后一个继承的eclass将会定义默认的函数src_compile()，但是如果需要两个函数都可以直接调用。
+</p>
+			
+<p>
+你也可以通过在你的函数里调用eclass的函数来扩展默认的src_compile()函数。然后你必须使用默认函数的全名foo_src_compile。举个例子：
+</p>
+
+<pre caption="在你的ebuild里扩展eclass提供的默认函数">
+#in foo.eclass:
+foo_src_compile() {
+	[default code here]
+}
+
+EXPORT_FUNCTIONS src_compile
+#end eclass code
+
+#in an ebuild:
+inherit foo
+
+src_compile() {
+	[custom code here]
+	foo_src_compile
+	[more custom code]
+}
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>函数切割（function subsections）</title>
+<body>
+
+<p>
+有时候，在不是一团糟的情况下通过提前执行代码可以扩展默认的函数。如处理几个很长和复杂的函数时，你经常会需要让你定义的代码在这些函数之间运行。
+</p>
+
+<p>
+函数切割（Function subsections）就可以提供这里需要的充足的灵活性。他们将函数分成几个部分，并允许在任何两个部分之间运行代码。
+</p>
+
+<p>
+这个实现方法很简单。让我们看看base.eclass（注：现在已经没有了，但却是一个很好的例子）里src_compile()函数的一个例子。它看起来就同下面这样：
+</p>
+
+<pre caption = "原先的base.eclass里的例子">
+base_src_compile() {
+    ./configure || die
+    emake || die
+}
+</pre>
+
+<p>
+着里有一个同样的函数，分成了几个部分：
+</p>
+
+<pre caption = "分成几个部分的同样的函数">
+base_src_compile() {
+ 
+    [ -z &quot;$1&quot; ] &amp;&amp; base_src_compile all
+ 
+    while [ &quot;$1&quot; ]; do
+        case $1 in
+            configure)
+                ./configure || die;;
+            make)
+                emake || die;;
+            all)
+                base_src_compile configure make;;
+        esac
+    shift
+    done
+ 
+}
+</pre>
+			
+<p>
+代码被分成两个部分：<c>configure</c>和<c>make</c>。在我们的这个简单的例子里，他们对应原来函数里的两个命令。
+</p>
+
+<p>
+在这个新函数的中间是一个while;case...esac;shift;done代码块。这个代码块根据定义的部分的名称对应函数的参数，并执行相对应的几行代码。
+</p>
+
+<p>
+特殊情况下，<c>all</c>根据顺序循环调用同样函数的一系列部分。这就是eclass的作者来维持这一列的部分了。
+</p>
+
+<p>
+在这个代码块前面的一行是说调用时不加任何参数应该处理为带参数<c>all</c>调用。就像你看到的，这个函数经常循环。但是注意，函数调用<c>base_src_compile configure all make</c>是合法的；它将会执行<c>base_src_compile configure configure make make</c>。
+</p>
+
+<p>
+现在，在你的继承自base.elcass的ebuild（或者eclass）里，你获得了主函数src_compile，这个函数又不带任何参数调用了base_src_compile。这使得base_src_compile来执行<c>all</c>，也就是说，他们所有部分。你可以就这样做。如果你希望扩展它，你可以定义一个新的src_compile和每次调用base_src_compile的一部分：
+</p>
+
+<pre caption = "使用分割的src_compile()">
+src_compile() {
+    run_my_code1
+    base_src_compile configure
+    run_my_code2
+    base_src_compile make
+    run_my_code3
+}
+</pre>
+
+<p>
+就同你看到的，这个函数切割增加了灵活性，你也因此可以在两个部分之间插入代码，也可以按照不同的顺序运行这些部分或者只运行提供的部分中的一些。这可以非常好的对代码进行重用。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>函数debug-print-*</title>
+<body>
+
+<p>
+这些是ebuild.sh提供的多个函数。他们给eclass提供了更多的debug输出信息，允许你跟踪他们执行过程而不是阅读bash的长长的debug模式跟踪信息。我所有的eclass都常常调用这些函数。
+</p>
+
+<p>
+debug-print()输出其所有的参数，并带上前缀'debug:'。任何值得放入debug日志的地方都可以调用这个函数。
+</p>
+
+<p>
+debug-print-function() 输出 'debug: entering function $1, parameters: $2 [$3 ....] 它在一个函数的开始调用。
+</p>
+
+<p>
+debug-print-subsection() 输出 'debug: now in subsection $1'。它在一个函数的一部分（subsection）的开始调用。
+</p>
+
+<p>
+debug的输出经常经常保存在$T/eclass-debug.log里。你可以设置ECLASS_DEBUG_OUTPUT环境变量（在make.globals/conf或者环境里），这样输出就会保存到这个新的地方。你也可以将它设定为简单的值'on'，这只是将输出和其他的emerge信息一起送到stdout上。
+</p>
+
+<p>
+让我们给我们的样例函数增加几个典型的debug输出语句：
+</p>
+
+<pre caption = "添加debug语句">
+base_src_compile() {
+ 
+    debug-print function $FUNCNAME $*
+    [ -z &quot;$1&quot; ] &amp;&amp; base_src_compile all
+ 
+    while [ &quot;$1&quot; ]; do
+        case $1 in
+            configure)
+                debug-print-subsection configure
+                ./configure || die;;
+            make)
+                debug-print-subsection make
+                make || die;;
+            all)
+                debug-print-subsection all
+                base_src_compile configure make;;
+        esac
+    shift
+    done
+ 
+    debug-print &quot;$FUNCNAME: result is $RESULT&quot;
+}
+</pre>
+
+<p>
+就如你知道的，$FUNCTION是一个bash builtin，用来返回当前函数的名称。
+</p>
+
+</body>
+</subsection>
+<!--
+<subsection>
+<title>newdepend()</title>
+<body>
+
+<p>
+This ebuild.sh function simply adds all its parameters to both DEPEND and RDEPEND, saving you the trouble of writing and maintaining two lists of dependencies.
+</p>
+
+<p>
+If called with a special parameter, it adds predefined dependencies. I don't think this is very elegant (anymore), I rather prefer explicit dependancies now; so you can consider this slightly deprecated ;-)
+</p>
+
+<p>
+These special parameters exist as of now:
+</p>
+
+<p>
+newdepend /autotools: add sys-devel/autoconf sys-devel/automake sys-devel/make to DEPEND (but not RDEPEND).
+</p>
+
+<p>
+newdepend /c: add virtual/glibc sys-devel/ld.so to both DEPEND and RDEPEND. Also, add sys-devel/gcc to DEPEND.
+</p>
+
+</body>
+</subsection>
+  -->
+</section>
+
+<section>
+<title>已有的eclasses</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+大部分的eclass很简单，你只需简单的读读这些eclass和看看一些使用它们的ebuilds，就可以理解它们是怎样工作的了。还有，大部分的eclass注释很详细，因此你最好也读读这些注释。
+</p>
+
+<p>
+这一章介绍了kde*一系列eclass的关系。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>base.eclass</title>
+<body>
+
+<p>
+这个eclass定义了一些默认的变量和函数，就同一个你可以默认获得的非继承的ebuild（这些在ebuild.sh定义）相似。你很可能没兴趣直接使用他们，但是会通过一个继承它的kde eclass使用到它。
+</p>
+
+<p>
+它提供的一个有趣的功能是自动打补丁的能力。如果你在你的使用base_src_unpack()（或者kde_src_unpack）的ebuild里设定PATCHES变量为一系列的文件，源代码将会打上这些文件提供的补丁。如果从$S运行，这些补丁必须可以在带参数-p0的条件下使用。
+</p>
+
+<p>
+注意你可以在你的ebuild里不定义一个定制的src_unpack()设定PATCHES！这就是它应该做的。
+</p>
+
+<p>
+在eutils.eclass里的新的epatch()函数更加强大，他支持压缩过的补丁、补丁文件夹和补丁系列，还会自动检测补丁的等级。我就打算以后使用它来自动打补丁。
+</p>
+
+<p>
+我们注意到，base_src_unpack()的<c>patch</c>部分已经被废弃了，并将很快去掉。如果你看到有使用它的ebuild，它需要转还为<c>autopatch</c>风格。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>kde-functions.eclass</title>
+<body>
+
+<p>
+这个eclass包含了所有KDE相关的帮助函数.其中的一些你在一个ebuild里用于都不会直接用到；这些在这里就不提起了，源代码里应该有比较详细相关的注释。
+</p>
+
+<p>
+注意到，我说“帮助函数”（helper functions）是说它们不是特定的ebuild函数（src_unpack()等等）。所有的包含这些特殊函数的kde的eclass都继承了kde函数。
+</p>
+
+<p>
+kde-functions.eclass（在获得源代码时运行）里唯一在所有函数之外的是一个决定这个ebuild是否来自kde-base的代码块。如果是的话，将会设定KDEBASE=ture。这个变量在不同的逻辑测试时常常用到，也很方便给它一个集中的测试。
+</p>
+
+<p>
+<b>当前的多kde文件夹方案</b>
+</p>
+
+<p>
+一个有关Genoo管理多个KDE版本的方法的简短解释：
+</p>
+
+<p>
+一个KDE（也就是kde-base里的东西）是放在/usr/kde/${major-version}.${minor-version}。因此，KDE 3.1.x放在/usr/kde/3.1里。但是这个方案是在KDE 3.0发行后才建立的，因此旧版本位于并不统一的地方：KDE 3.0.x放在/usr/kde/3（并不是/usr/kde/3.0），还有KDE 2.2.2（我们有的唯一一个2.x的版本）放在/usr/kde/2。我维护的cvs版本的ebuilds就安装在/usr/kde/cvs。
+</p>
+
+<p>
+因此，任何多个不同版本的KDE可以共存。kde-base软件包有一个majro.minor（如3.0，3.1）的SLOT。
+</p>
+
+<p>
+既然QT版本在不同的minor version中可以完全向前兼容，我们对于每一个主要版本的QT只安装一个，并只提供一个不同的slot；它们就放在/usr/qt/$major里。
+</p>
+
+<p>
+一个非kde-base的ebuild一般都装在/usr里。kde-env软件包在env.d里设置KDEDIRS=/usr，使得这些程序可以正常的运行。这些程序编译并连接可以找到的最新的KDE库；eclass根据向下的顺序在标准的位置 -- /usr/kde/cvs，然后/usr/kde/3.1，然后/usr/kde/3中检查。（kde-base的ebuilds将会一直连接它们自己版本的kdelibs）这当然根据传递给need-kde()函数的参数来决定（看下面）。
+</p>
+					
+<p>
+这里有一些你可以设置来改变这个系统的默认设置的特殊变量。它们的主要用途是根据一个你安装用于测是的特定的KDE来编译一个ebuild，但是你也可以使用它们来将一个KDE安装在一个非标准的位置，并且正是如此，KDE 3.0.1和KDE 3.0.2都是一步步的安装的。这个用于测试和开发也是非常有用的。
+</p>
+
+<p>
+如果设定$KDEPREFIX的华，所有的KDE程序（基于或者非基于）都将安装到这里。它将会在eclass里覆盖所有的逻辑测试。
+</p>
+
+<p>
+如果设定$KDELIBDIR的华，每个KDE程序（甚至是一个kde-base的）将试图连接到安装在这个位置的kdelibs。如果失败了，它将会返回到默认的最新kdelibs的逻辑位置（或者kde-base版本的合适版本）。
+</p>
+
+<p>
+<b>need-kde(), need-qt(), set-kdedir(), set-qtdir()</b>
+</p>
+
+<p>
+kde-functions.eclass提供了两对函数：need-kde()，need-qt()和sed-kdedir()，set-qtdir。这些函数是用来具体的处理多KDE和QT的安装的。
+</p>
+
+<p>
+函数need-kde()调用时需要带上一个必须的kdelibs的最小版本号作为参数。它会添加合适的依赖性到DEPEND、RDEPEND和调用函数set-kdedir()。如果没有传递给它任何参数，将会默认使用版本号0，也就是说任何版本都能满足其依赖性。need-kde()也会为这个版本的KDE调用函数need-autoconf()和need-automake()时使用正确的参数。
+</p>
+
+<p>
+函数set-kdedir()然后安装的前缀以及你的ebuild应该使用的kdelibsdir的位置。这些都将分别传递给$PREFIX和$KDEDIR（在kde.eclass中将会自动处理这些）。注意没有一个ebuild可以直接设置$KDEPREFIX或者$KDELIBSDIR。
+</p>
+
+<p>
+need-kde()也会从一个表格中寻找这个版本的kdelibs所需要的最小版本的QT。然后它将用这个版本来调用need-qt()。一个只依赖于qt（如非kde）程序的ebuild常常是直接调用need-qt，绕过了need-kde。
+</p>
+					
+<p>
+函数need-qt()添加需要的QT的版本到DEPENT、RDEPEND和使用这个版本来调用函数set-qtdir()。函数set-qtdir()设置QTDIR为这个版本的QT的默认位置。不像set-kdedir()，set-qtdir()实际上不检查是否QT已经安装在这里。
+</p>
+
+<p>
+need-kde()（或者need-qt()）需要从ebuild的主要部分（也就是说不是从一个函数里）调用，这样任何对DEPEND和RDEPEND的改变都会影响到emerge过程。
+</p>
+
+<p>
+<b>need-autoconf(), need-automake()</b>
+</p>
+			
+<p>
+这些函数设定必须的环境变脸，以使得需要的版本的autoconf或者automake运行。他们也对以前设定的这些变量重新设定。比如说，调用'need-automake 1.4'将会设置NEED_AUTOMAKE_1_4=1并重新设定恰的WANT_AUTOMAKE*变量。有关更多的信息，你可以查看函数的源码和/usr/bin/auto{conf,make}（一个Gentoo系统上的）开始的注释。
+</p>
+			
+<p>
+<b>kde_sandbox_patch()</b>
+</p>
+
+<p>
+有一些KDE的makefiles是坏的。他们在安装时在PREFIX里chmod或者chown文件，但是却没有关联到DESTDIR（$D）。比如说，安装的时候，他们建一个文件正确的复制到 $DESTDIR/$PREFIX/path/foo，但是然后他们试图chomod +x到目前文件系统可能并不存在的文件 $PREFIX/path/foo。如果他不存在的话，这个sandbox将会阻止这个操作。
+</p>
+
+<p>
+这个函数在makefiles运行一个通用的sed程序，差不多可以解决已知所有的这种问题。调用时带上要处理的文件夹作为参数，然后处理这些文件夹里的Makefile、Makefile.in和Makefile.am。如：
+</p>
+
+<pre caption = "处理">
+src_unpack() {
+    base_src_unpack
+    kde_sandbox_patch ${S}/dir1 ${S}/dir2/dir3
+}
+</pre>
+
+<p>
+<b>kde_remove_flag()</b>
+</p>
+
+<p>
+这些是用来出去已知对软件包有损坏的编译参数。在解开软件包到$S的子文件夹后，你使用$S作为第一个参数、要除去的编译参数作为第二个参数来调用这个函数。注意，这个函数是不会循环的。举个例子："kde_remove_flag foodir/barfoo -fomit-frame-pointer"。
+</p>
+			
+<p>
+<b>kde_remove_dir() and $KDE_REMOVE_DIR</b>
+</p>
+
+<p>
+这个函数在完成后删除特定的子文件夹。它删除这个子文件夹和所有相关这些子文件夹的文件、configure和makefiles的东西。注意，现在它只对$S的子文件夹有效，并不对第二级文件夹有用。你可以通过传递一系列需要删除的子文件夹来调用这个函数；它将按照顺序一个一个来处理。
+</p>
+
+<p>
+你也可以直接调用它，但是必须防止自己定制一个src_unpack()来做这个，你可以设置KDE_REMOVE_DIR为一系列要删除的子文件夹就可以了。kde_src_unpack()将会在解开后调用'kde_remove_dir $KDE_REMOVE_DIR'。就同你看到的，进一步我这样做是为了防止在一个ebuild里定义一个额外的函数，因为这样可以让ebuilds更加简洁和方便阅读。
+</p>
+			
+</body>
+</subsection>
+<subsection>
+<title>kde.eclass</title>
+<body>
+
+<p>
+这个是主要的KDE eclass。它包含了绝大部分的KDE相关的代码。不管采用什么方式，所有的KDE ebuilds都要继承它。KDE的eclass继承基本部分和kde函数。
+</p>
+
+<p>
+就同其他的eclass一样，阅读一下它的代码，找出它是做什么的。大部分来说都是很明显的。这里有一个简短的摘要：
+</p>
+			
+<p>
+这个eclass的global部分（也就是继承它需要执行的部分）在kde-env、automake、autoconf、make和perl上添加正确的依赖性（最后一个是被标准的configure脚本用来快速产生makefile的）。它也将设定默认值 SLOT="0"。
+</p>
+			
+<p>
+kde_src_unpack()基本上只是调用base_src_unpack()，可以传递给它任何参数（如需要执行的部分）然后，她会添加kde-specific选项。它会接触到解开的源代码里的所有.ui文件，并重新生成已经旧了的.cpp和.h文件。如果变量$KDE_REMOVE_DIR设定了的话，它还带上它来调用kde_remove_dir()（看上面有关kde-functions的部分）
+</p>
+			
+<p>
+kde_src_compile()也有几个修正。其中的一个是输出 kde_widgetdir="$KDEDIR/lib/kde3/plugins/designer"，避开了旧的kde里acinclude.m4.in里的一个bug。另外一个是设定 HOME="$T/fakehome"，这样对$HOME/.kde和$HOME/.qt的访问都不会被sandbox所中止了，也不会影响到用户的home文件夹。这是一个uic的bug（或者说是缺点），常常会到这些位置访问配置文件。
+</p>
+
+<p>
+kde_src_compile()分成了几个部分。<c>myconf</c>给$myconf添加上默认的configure脚本的参数，如 --prefix=${PREFIX}（记住，$PREFIX是由set-kdedir()来设定的）。你可以在这个部分的前面或者后面加上你自己的值；只需要记住千万不要覆盖了旧的值，因为用户可以要求在shell里设定$myconf来添加一些东西到ebuild要使用的configure参数里。
+</p>
+
+<p>
+<c>configure</c>部分在$S里运行configure脚本，并将$myconf传递给它。如果configure脚本不存在，它将会试图运行<c>make -f Makefile.cvs</c>或者<c>make -f admin/Makefile.common</c>来创建一个。因此编译这个过程（cvs快照或者要打补丁的eduilds如configure.in是需要这个的）也是可以自动完成的。
+</p>
+
+<p>
+<c>make</c>部分只是简单的运行<c>emake || die</c>。最后，这还有一个可以运行上面所有部分的<c>all</c>部分。
+</p>
+
+<p>
+最后，kde_src_install()有一个可以运行<c>make install</c>的<c>make</c>部分和一个在$S里的标准文档（如README和COPYING）名字上运行dodoc的<c>dodoc</c>部分。
+</p>
+			
+</body>
+</subsection>
+<subsection>
+<title>kde-base.eclass</title>
+<body>
+
+<p>
+这个eclass现在已经废弃不用了，程序应该继承kde来代替。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>kde.org.eclass</title>
+<body>
+
+<p>
+这个eclass也废弃不用了，它所有的代码都已经转移到kde-dist.eclass里。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>kde-dist.eclass</title>
+<body>
+
+<p>
+这个eclass是给在kde-base/*里的核心发行包的。它要从kde继承。
+</p>
+
+<p>
+它设置正确的DESCRIPTION和HOMEPAGE，并调用函数need-kde $PV。简单情况下，较小的kde-base/ 软件包（如kdetoys）并不需要对它作任何改变；他们中的大部分只需要添加依赖性和补丁就可以了。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>kde-i18n.eclass</title>
+<body>
+
+<p>
+这个eclass是给kde-i18n-*软件包使用的。实际上，所有的kde-i18n ebuild都很典型，因此它们所需要做的就只是继承这个eclass。其余的变量$P、$PV可以处理剩余的事情。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>koffice-i18n.eclass</title>
+<body>
+
+<p>
+这个eclass顾名思义就是给koffice-i18n-*软件包使用的，并且和kde-i18n.eclass很象。这里再重复一下，所有的kde-i18n ebuild都是很典型的，它们因此需要做的只是继承这个eclass。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>cvs.eclass</title>
+<body>
+		
+<p>
+这个eclass提供了可以在线创建cvs ebuilds的功能。这些ebuilds在解开软件包时从一个特定cvs server取得源代码，因此一直都可以从上面获得最新的bug和修复。
+</p>
+
+<p>
+但是，给live cvs ebuilds的必须的支持（版本等）并没有添加到portage里。它们可以用这个eclass工作，但是在很多方面并不方便。在创建一个live cvs ebuild时先多想想；可能一个普通的cvs快照可能更好点。如果你打算往portage里添加这样一个ebuild，一定要留意开发者指南中的cvs ebuild准则。
+</p>
+
+<p>
+在继承cvs.eclass之前，将任意的非默认设置都可以设定为你喜欢的（至少服务器的地址和模块的名称可以）。查看一下在cvs.eclass的开始处标记为'ebuild-configurable settings'的可配置的设置和默认值的列表。
+</p>
+
+<p>
+然后，事情差不多都可以自动完成。它还会提供一个cvs_src_unpack()（没有分割的）。如果你想知道更多，看看这个eclass的内容。
+</p>
+			
+</body>
+</subsection>
+<subsection>
+<title>kde-source.eclass</title>
+<body>
+
+<p>
+这个eclass在cvs.class的上一层工作，就是添加一些kde-specific功能。比如说，它自动从kde cvs的kde-commmon模块取得<path>admin/</path>文件夹。读读这个eclass，你会找到更多，其中包括你可以传递给它的<path>kde-cvs-specific</path>设置。
+</p>
+			
+</body>
+</subsection>
+</section>
+<section>
+<title>编写KDE ebuilds</title>
+<subsection>
+<title>介绍</title>
+<body>
+		
+<p>
+这一章解释了怎样编写标准的KDE ebuild。这里所有所说的大部分只是上面有关eclass信息的一个重复。如果有什么疑问，看看其他的ebuild和eclass，或者问问。
+</p>
+			
+</body>
+</subsection>
+<subsection>
+<title>一个典型的KDE ebuild</title>
+<body>
+
+<p>
+下面这些代码明显是在看完这篇手册后完成的：
+</p>
+
+<pre caption = "一个简单的KDE ebuild, #1">
+&lt;header lines&gt;
+inherit kde
+</pre>
+
+<p>
+一些ebuild正是就这样结束了。其他的一些还需要做一些用户定制。
+</p>
+
+<p>
+下一步就是添加额外的依赖性。记住：<e>永远</e>是扩展变量，而不是覆盖它！
+</p>
+
+<p>
+因为我们的目标是尽可能的防止出现自己定义ebuild函数，当然除非一定需要如此；我们要的是直接从ebuild的主要部分设定我们可以设定的设置，调用可以调用的帮助函数。记住，虽然如此，在主要部分的代码是有限制的；比如说，它绝对不能产生任何输出（当然debug-print()输出很可能不算在内）。
+</p>
+
+<pre caption = "一个简单的KDE ebuild, #2: 添加额外的依赖性" >
+DEPEND=&quot;foo/bar&quot;
+RDEPEND=&quot;bar/foo&quot;
+</pre>
+
+<p>
+我们也要给myconf添加额外的一些参数，这些可以然后传递给configure（假设我们使用kde_src_compile的configure部分）：
+</p>
+
+<pre caption = "一个简单的KDE ebuild, #4: 给configure传递参数" >
+myconf=&quot;$myconf --with-foobar&quot;
+</pre>
+
+<p>
+我们还要加上一个补丁。如果你可以在$S使用<c>-p0</c>用上它，我们可以使用base_src_unpack的<c>autopatch</c>部分。记住，kde_src_unpack()将调用base_src_unpack，并传递给它任何你已给的参数。
+</p>
+
+<pre caption = "一个简单的KDE ebuild, #5: 自动打补丁" >
+PATCHES=&quot;$FILESDIR/$P-myfix.diff&quot;
+</pre>
+
+<p>
+最后，我们要扩展src_install()来放入一些文档：
+</p>
+
+<pre caption = "一个简单的KDE ebuild, #6: 扩展src_install()" >
+src_unpack() {
+    kde_src_install
+    dodoc $S/doc/*
+}
+</pre>
+
+<p>
+看看我们在这个例子里创建的ebuild：
+</p>
+
+<pre caption = "一个简单的KDE ebuild - 完全的列表" >
+&lt;header lines&gt;
+inherit kde
+
+# add deps
+DEPEND=&quot;foo/bar&quot;
+RDEPEND=&quot;bar/foo&quot;
+
+# always enable foobar
+myconf=&quot;$myconf --with-foobar&quot;
+
+# fix terrible bug
+PATCHES=&quot;$FILESDIR/$P-myfix.diff&quot;
+
+src_unpack() {
+    kde_src_install
+	# install some extra docs not included in make install's targets
+    dodoc $S/doc/*
+}
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>一个有可选KDE功能的典型ebuild</title>
+<body>
+
+<p>
+在给一个已有的ebuild添加kde(eclass)功能时，，你应该简单的在每句kde-specific的语句前面加上<c>use kde &amp;&amp;</c>，或者创建一个<c>if [ -n "`use kde`" ]; then; fi</c>代码块。
+</p>
+
+<p>
+一般情况下，加上下面内容（当然只用于USE kde已经设定了）；
+</p>
+
+<pre caption = "可选KDE支持 - ebuild的主要部分" >
+    inherit kde-functions
+	# this will add kdelibs, kde-env to your dep strings and set $KDEDIR
+	# to the correct value:
+    need-kde $version # minimal version of kde your app needs
+
+	# add anything else you need for kde support:
+	use kde &amp;&amp; myconf=&quot;$myconf --with-my-parameter&quot;
+</pre>
+
+<p>
+然后，在调用need-kde()后告诉你的程序在已有的$KDEDIR设置中寻找KDE。如果你不想加上kdelibs这个依赖性，调用set-kdedir()来代替need-kde()。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
