@@ -1,0 +1,444 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/lvm2.xml,v 1.22 2007/02/26 08:58:04 nightmorph Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/lvm2.xml">
+<title>Gentoo LVM2 安装指南</title>
+
+<author title="作者">
+  <mail link="avi@CFFtechnologies.com">Avi Schwartz</mail>
+</author>
+<author title="Contributor">
+  <mail link="rajiv@gentoo.org">Rajiv Manglani</mail>
+</author>
+<author title="编辑">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="翻译">
+  <mail link="palatis@gentoo.tw">Victor Tseng</mail>
+</author>
+<author title="翻译">
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+该指南讲述该如何在你的Gentoo系统中使用逻辑卷管理器第二版（LVM2）
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>2.5</version>
+<date>2007年2月26日</date>
+
+<chapter>
+<title>简介</title>
+<section>
+<body>
+
+<p>
+本指南使用两个IDE硬盘做范例。这表示你极可能需要根据自己的需求，对磁盘、分区名以及分区大小等信息做些更改。
+</p>
+
+<warn>
+本文并不想成为一篇LVM2学习指南。它只是一个小笔记，作为<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1"Gentoo安装手册（第一部分）</uri>的补充。请<e>务必</e>在你动手安装之前<e>阅读</e>Gentoo安装手册。
+</warn>
+
+<note>
+完整的LVM HOWTO在这里：<url>http://tldp.org/HOWTO/LVM-HOWTO</uri>
+</note>
+
+</body>
+</section>
+<section>
+<title>系统需求</title>
+<body>
+
+<p>
+如果你是全新安装gentoo系统，你需要有一张带LVM2支持的启动光盘，如Gentoo安装光盘。你可以在我们<uri link="/main/en/mirrors.xml">镜像站</uri>的<path>/releases/x86/current/installcd</path>下找到x86架构的Gentoo安装光盘。在其他的架构下也应该会有很好的支持。
+</p>
+
+<p>
+如果你在一个有着空闲硬盘空间、正在运行着的系统上安装LVM2，你需要启用LVM2模块（<path>dm-mod</path>）。这个模块已内置于<path>gentoo-sources</path>。如何编译你的内核以便LVM2能正常工作，会在稍后提及。
+</p>
+
+<p>
+并非所有Gentoo 提供的2.4内核都支持LVM2！
+</p>
+
+<warn>
+在2005.0安装光盘中的LVM2被错误地动态链接到一个函数库（libgpm），而这个函数库位于<path>/usr</path>。这表示，你不能将<path>/usr</path>放在LVM环境中。请更新到最新版本，或安装2.0.33（沒有-r1），它们都是静态链接的版本。
+</warn>
+
+</body>
+</section>
+<section>
+<title>分区</title>
+<body>
+
+<p>
+在我们的范例系统中有两个IDE硬盘，它们的分区是这样的：
+</p>
+
+<ul>
+  <li>/dev/hda1 -- /boot</li>
+  <li>/dev/hda2 -- (交换分区)</li>
+  <li>/dev/hda3 -- /</li>
+  <li>将被用作LVM2</li>
+  <li>将被用作LVM2</li>
+</ul>
+
+<impo>
+请特别注意分区名字，毕竟a和b常常被看错，那些数字也很容易被混淆。一个小失误将导致某个分区被错误地覆盖掉。我们警告过你了！
+</impo>
+
+<p>
+ok，开始吧……
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装</title>
+<section>
+<body>
+
+<p>
+先照着安装手册做，直到<e>第4章──准备磁盘</e>
+</p>
+
+<p>
+使用安装手册上提及的<c>fdisk</c>，不过将分区划分成上面范例中的那样。它<e>只是个范例</e>，请调整它以符合自己的需求。
+</p>
+
+<p>
+创建建一个小小的<path>/boot<path>分区(hda1)。在这个例子中，<path>/boot</path>不会被LVM2管理。这个分区里存放着内核和引导程序。相信一个64M的分区够存放不少内核的了。
+</p>
+
+<p>
+创建一个交换分区（hda2）。
+</p>
+
+<p>
+创建根（root）分区（hda3）。如果你有兴趣尝试把根分区到LVM下管理（虽然我们不建议这样做），你可以参考本文末尾列出的资源。那里有一个mini-howto会告诉该如何做。如果将<path>/opt /usr /home /var</path>和<path>/tmp</path>都放在LVM2卷组（vg）中的话，根分区也不用太大。在我们的例子中，1GB就足够了。
+</p>
+
+<note>
+我们<b>不建议</b>将下列目录放在LVM2分区上：<path>/etc /lib /mnt /proc /bin /sbin /dev /root</path>。这样做的好处是，当有什么糟糕的事情（系统严重受损，但是对root来说还有点用）发生的时候，你还可以登入系统。
+</note>
+
+<p>
+假如<path>/boot</path>，交换分区和根分区还没能用完整个硬盘，可以创建第四个分区，并把它的类型设为8e（Linux LVM）。如果你还有其他供LVM使用的硬盘，请在每个硬盘上都创建一个分区，并把分区类型设为8e。
+</p>
+
+<note>
+由于现在的硬盘都非常大，你也许想将你的硬盘分成几个小分区，而不是一个大的，然后全部添加到LVM2卷组。LVM2让分区扩充容量变得很简单，所以你可以留下一些未配置的分区，天知道你以后会不会在LVM2以外的地方用到它们。简而言之，在还没有确定拿分区做什么用之前，别先把它们用光了。举例来说吧，我们的一位投稿者就将他的160GB硬盘分成了8个20GB的分区来用。
+</note>
+
+<p>
+按照安装手册的步骤，建立分区<path>/dev/hda1</path>和<path>/dev/hda3</path>的文件系统，并建立且激活交换分区<path>/dev/hda2</path>。
+</p>
+
+<p>
+加载LVM2模块<path>dm-mod</path>。
+</p>
+
+<pre caption="加载LVM2模块">
+# <i>modprobe dm-mod</i>
+</pre>
+
+<p>
+
+你可能要在扫描并激活LVM之前先编辑<path>/etc/lvm/lvm.conf</path>文件，把一些设备排除在外。因为默认情况下，LVM2会扫描所有的设备，包括会产生错误信息的光驱。在下面的例子中，我们替换掉了允许扫描所有设备的那行，改为除两个IDE硬盘外，不扫描其他任何设备。
+</p>
+
+<pre caption="起用LVM">
+<comment>（避免扫描除硬盘外的所有设备）</comment>
+# <i>nano -w /etc/lvm/lvm.conf</i>
+<comment>（查找下面的行）</comment>
+    filter = [ "a/.*/" ]
+<comment>（用下面内容来替换，保证只扫描
+/dev/hda和/dev/hdb）</comment>
+    filter = [ "a|/dev/hd[ab]|", "r/.*/" ]
+<comment>（保存文件并退出nano）</comment>
+# <i>vgscan</i>
+  Reading all physical volumes.  This may take a while...
+  No volume groups found
+<comment>（启用之前创建的卷组）</comment>
+# <i>vgchange -a y</i>
+</pre>
+
+<p>
+准备磁盘分区
+</p>
+
+<pre caption="准备磁盘分区">
+# <i>pvcreate /dev/hda4 /dev/hdb1</i>
+  No physical volume label read from /dev/hda4
+  Physical volume "/dev/hda4" successfully created
+  No physical volume label read from /dev/hdb1
+  Physical volume "/dev/hdb1" successfully created
+</pre>
+
+<p>
+创建一个卷组。卷组是一些物理单元的逻辑集合。
+</p>
+
+<p>
+范例中<path>/dev/hda1</path>，<path>/dev/hda2</path>和<path>/dev/hda3</path>分别是<path>/boot<path>，交换分区和根分区。所以我们需要合并的是<path>/dev/hda4</path>和<path>/dev/hdb1</path>。尽管这用一个命令就可以完成，作为示范，我们还是先创建一个卷组，然后再扩充它。
+</p>
+
+<pre caption="创建和扩充卷组">
+<comment>（创建一个名为vg的卷组）</comment>
+# <i>vgcreate vg /dev/hda4</i>
+  /etc/lvm/backup: fsync failed: Invalid argument <comment>（忽略此警告）</comment>
+  Volume group "vg" successfully created
+<comment>（扩充已有的卷组）</comment>
+# <i>vgextend vg /dev/hdb1</i>
+  /etc/lvm/backup: fsync failed: Invalid argument <comment>（再次忽略这个警告，以后也请继续忽略）</comment>
+  Volume group "vg" successfully extended
+</pre>
+
+<p>
+创建逻辑卷。逻辑卷类似于在非LVM2环境中用fdisk创建的磁盘分区。在这个例子中，我们创建了如下分区：
+</p>
+
+<table>
+<tr>
+  <th>目录</th>
+  <th>大小</th>
+</tr>
+<tr>
+  <ti>/usr</ti>
+  <ti>10 GB</ti>
+</tr>
+<tr>
+  <ti>/home</ti>
+  <ti>5 GB</ti>
+</tr>
+<tr>
+  <ti>/opt</ti>
+  <ti>5 GB</ti>
+</tr>
+<tr>
+  <ti>/var</ti>
+  <ti>10 GB</ti>
+</tr>
+<tr>
+  <ti>/tmp</ti>
+  <ti>2 GB</ti>
+</tr>
+</table>
+
+<p>
+由于我们正要使用的是LVM2，所以不必太在意分区的大小，因为扩充容量很容易。
+</p>
+
+<note>
+正如Terje Kvernes所评述的，增加分区的大小要比缩小它容易得多。我想你可能会想要从小分区开始，然后在需要的时候才扩充它们。
+</note>
+
+<pre caption="创建和扩充逻辑卷">
+# <i>lvcreate -L10G -nusr  vg</i>
+  Logical volume "usr" created <comment>（以后的类似信息就不显示了）</comment>
+# <i>lvcreate -L5G  -nhome vg</i>
+# <i>lvcreate -L5G  -nopt  vg</i>
+# <i>lvcreate -L10G -nvar  vg</i>
+# <i>lvcreate -L2G  -ntmp  vg</i>
+<comment>（作为范例，让我们增加一个额外的5GB逻辑卷）</comment>
+# <i>lvextend -L+5G /dev/vg/home</i>
+</pre>
+
+<p>
+在逻辑卷中创建文件系统的步骤和在普通分区中相同。我们以使用ext3为例，当然你选用其他文件系统也行：
+</p>
+
+<pre caption="创建文件系统">
+# <i>mke2fs -j /dev/vg/usr</i>
+# <i>mke2fs -j /dev/vg/home</i>
+# <i>mke2fs -j /dev/vg/opt</i>
+# <i>mke2fs -j /dev/vg/var</i>
+# <i>mke2fs -j /dev/vg/tmp</i>
+</pre>
+
+<p>
+按照安装手册中挂载分区的方法挂载你创建的LVM2逻辑卷，但请将<path>/dev/hdxx</path>替换为<path>/dev/vg/逻辑卷名</path>。
+</p>
+
+<pre caption="挂载逻辑卷">
+<comment>（请如安装手册所述，先挂载根分区）</comment>
+# <i>mkdir /mnt/gentoo/usr</i>
+# <i>mount /dev/vg/usr /mnt/gentoo/usr</i>
+# <i>mkdir /mnt/gentoo/home</i>
+# <i>mount /dev/vg/home /mnt/gentoo/home</i>
+# <i>mkdir /mnt/gentoo/opt</i>
+# <i>mount /dev/vg/opt /mnt/gentoo/opt</i>
+# <i>mkdir /mnt/gentoo/var</i>
+# <i>mount /dev/vg/var /mnt/gentoo/var</i>
+# <i>mkdir /mnt/gentoo/tmp</i>
+# <i>mount /dev/vg/tmp /mnt/gentoo/tmp</i>
+</pre>
+
+<note>
+接下来的步骤跟安装手册中提到的差不多，在这里我们只列出一些有差异的地方。
+</note>
+
+<p>
+请在配置内核时确认已启用了LVM2支持（并非所以2.4内核都支持）。选择下列LVM2模块：
+</p>
+
+<pre caption="在2.4.x内核中选择LVM2模块">
+Multi-device support (RAID and LVM)  ---&gt;
+  [*] Multiple devices driver support (RAID and LVM)
+  &lt; &gt;  RAID support
+<comment>（注意我们故意不选LVM，这是给LVM1用的）</comment>
+  &lt; &gt;  Logical volume manager (LVM) support
+  &lt;M&gt;  Device-mapper support
+  &lt; &gt;   Mirror (RAID-1) support
+</pre>
+
+<pre caption="在2.6.x内核中选择LVM2模块">
+Device Drivers  ---&gt;
+ Multi-device support (RAID and LVM)  ---&gt;
+   [*] Multiple devices driver support (RAID and LVM)
+   &lt; &gt;   RAID support
+   &lt;M&gt;   Device mapper support
+</pre>
+
+<p>
+编译好的模块叫做<path>dm-mod.ko</path>
+</p>
+
+<p>
+在编译好内核并安装完模块之后，将下面这行加入你的<path>/etc/modules.autoload.d/kernel-{KV}</path>中，其中{KV}表示你的内核版本（2.4或2.6），以便在开机时自动加载LVM2：
+</p>
+
+<pre caption="在/etc/modules.autoload.d/kernel-2.6中添加LVM2模块">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+<comment>（增加底下这行）</comment>
+dm-mod
+</pre>
+
+<p>
+现在，安装lvm2包。
+</p>
+
+<impo>
+请确定已将你的<path>/usr/src/linux</path>链接到了你现在使用的内核源代码，因为lvm2 ebuild所依赖的device-mapper ebuild会用到<path>/usr/src/linux/include/linux</path>下的源文件。
+</impo>
+
+<pre caption="emerging lvm2 软件包">
+# <i>emerge lvm2</i>
+</pre>
+
+<p>
+按照<uri link="#doc_chap2_pre2">前面</uri>的方法编辑文件<path>/etc/lvm/lvm.conf</path>。你先前修改过的那个配置文件是宿主系统中的文件，重启之后就不存在了。你得在新安装的Gentoo系统中再重新编辑一次。
+</p>
+
+<p>
+在编辑<path>/etc/fstab</path>文件时，照着安装手册上说的，加入你的LVM2逻辑卷。重申一下，以下内容是我们范例中所必需的：
+</p>
+
+<pre caption="/etc/fstab的部分内容">
+/dev/hda1     /boot   ext3    noauto,noatime 1 2
+/dev/hda2     none    swap    sw             0 0
+/dev/hda3     /       ext3    noatime        0 1
+# Logical volumes
+/dev/vg/usr   /usr    ext3    noatime        0 2
+/dev/vg/home  /home   ext3    noatime        0 2
+/dev/vg/opt   /opt    ext3    noatime        0 2
+/dev/vg/var   /var    ext3    noatime        0 2
+/dev/vg/tmp   /tmp    ext3    noatime        0 2
+</pre>
+
+<p>
+当你来到安装手册中最后的安装步骤时，最好不要忘了卸载你所有的LVM2逻辑卷，并在重启前执行以下命令：
+</p>
+
+<pre caption="关闭LVM2">
+# <i>vgchange -a n</i>
+</pre>
+
+<p>
+重新开机，所有的分区都应该被挂载好了。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>重启后如何继续</title>
+<section>
+<body>
+
+<p>
+如果你在某处中断了Gentoo的安装又想继续的话，你需要先创建分区节点：
+</p>
+
+<pre caption="重新启用分区">
+# <i>vgscan --mknodes</i>
+</pre>
+
+<p>
+在缺少最新工具的安装光盘中，很可能需要用如下方法来重新启用分区：
+</p>
+
+<pre caption="重新启用分区">
+<comment>（先将所有分区复位）</comment>
+# <i>vgchange -a n</i>
+<comment>（导出所有分区）</comment>
+# <i>vgexport -a vg</i>
+<comment>（导入所有分区）</comment>
+# <i>vgimport -a vg</i>
+<comment>（重新启用所有分区）</comment>
+# <i>vgchange -a y</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>相关资源</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    官方网页<uri link="http://sources.redhat.com/lvm2">LVM2 home page</uri>
+  </li>
+  <li>
+    <uri link="http://tldp.org/HOWTO/LVM-HOWTO">LVM Howto</uri>
+  </li>
+  <li>
+    Daniel Robbins写在IBM DeveloperWorks上的关于LVM的文章：<uri link="/doc/zh_cn/articles/lvm-p1.xml"第一部分</uri>以及<uri link="http://doc/zh_cn/articles/lvm-p2.xml">第二部分</uri>
+  </li>
+  <li>
+    如何启动你在LVM1上的根分区：<uri>http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>特别感谢</title>
+<section>
+<body>
+
+<p>
+感谢<mail link="bangert@gentoo.org">Thilo Bangert</mail>以及<mail link="terjekv@math.uio.no">Terje Kvernes</mail>为本文提供的帮助和建议。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
