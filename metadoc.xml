@@ -225,7 +225,7 @@
     <file id="2007.0-hb-install-gli-medium">/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml</file>
     <file id="2007.0-hb-install-gtkfe">/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml</file>
     <file id="2007.0-index">/doc/zh_cn/handbook/2007.0/index.xml</file>
-    <file id="lvm2">/doc/en/lvm2.xml</file>
+    <file id="lvm2">/doc/zh_cn/lvm2.xml</file>
     <file id="gentoo-kernel">/doc/en/gentoo-kernel.xml</file>
     <file id="gentoo-ppc-faq">/doc/en/gentoo-ppc-faq.xml</file>
     <file id="alsa-guide">/doc/zh_cn/alsa-guide.xml</file>
