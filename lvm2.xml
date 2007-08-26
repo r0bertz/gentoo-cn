@@ -3,7 +3,7 @@
 <!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/lvm2.xml,v 1.22 2007/02/26 08:58:04 nightmorph Exp $ -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/zh_cn/lvm2.xml">
+<guide link="/doc/zh_cn/lvm2.xml" lang="zh_cn">
 <title>Gentoo LVM2 安装指南</title>
 
 <author title="作者">
@@ -45,11 +45,11 @@
 </p>
 
 <warn>
-本文并不想成为一篇LVM2学习指南。它只是一个小笔记，作为<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1"Gentoo安装手册（第一部分）</uri>的补充。请<e>务必</e>在你动手安装之前<e>阅读</e>Gentoo安装手册。
+本文并不想成为一篇LVM2学习指南。它只是一个小笔记，作为<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1">Gentoo安装手册（第一部分）</uri>的补充。请<e>务必</e>在你动手安装之前<e>阅读</e>Gentoo安装手册。
 </warn>
 
 <note>
-完整的LVM HOWTO在这里：<url>http://tldp.org/HOWTO/LVM-HOWTO</uri>
+完整的LVM HOWTO在这里：<uri>http://tldp.org/HOWTO/LVM-HOWTO</uri>
 </note>
 
 </body>
@@ -67,7 +67,7 @@
 </p>
 
 <p>
-并非所有Gentoo 提供的2.4内核都支持LVM2！
+并非所有Gentoo提供的2.4内核都支持LVM2！
 </p>
 
 <warn>
@@ -118,7 +118,7 @@ ok，开始吧……
 </p>
 
 <p>
-创建建一个小小的<path>/boot<path>分区(hda1)。在这个例子中，<path>/boot</path>不会被LVM2管理。这个分区里存放着内核和引导程序。相信一个64M的分区够存放不少内核的了。
+创建建一个小小的<path>/boot</path>分区(hda1)。在这个例子中，<path>/boot</path>不会被LVM2管理。这个分区里存放着内核和引导程序。相信一个64M的分区够存放不少内核的了。
 </p>
 
 <p>
@@ -191,7 +191,7 @@ ok，开始吧……
 </p>
 
 <p>
-范例中<path>/dev/hda1</path>，<path>/dev/hda2</path>和<path>/dev/hda3</path>分别是<path>/boot<path>，交换分区和根分区。所以我们需要合并的是<path>/dev/hda4</path>和<path>/dev/hdb1</path>。尽管这用一个命令就可以完成，作为示范，我们还是先创建一个卷组，然后再扩充它。
+范例中<path>/dev/hda1</path>，<path>/dev/hda2</path>和<path>/dev/hda3</path>分别是<path>/boot</path>，交换分区和根分区。所以我们需要合并的是<path>/dev/hda4</path>和<path>/dev/hdb1</path>。尽管这用一个命令就可以完成，作为示范，我们还是先创建一个卷组，然后再扩充它。
 </p>
 
 <pre caption="创建和扩充卷组">
@@ -418,7 +418,7 @@ dm-mod
     <uri link="http://tldp.org/HOWTO/LVM-HOWTO">LVM Howto</uri>
   </li>
   <li>
-    Daniel Robbins写在IBM DeveloperWorks上的关于LVM的文章：<uri link="/doc/zh_cn/articles/lvm-p1.xml"第一部分</uri>以及<uri link="http://doc/zh_cn/articles/lvm-p2.xml">第二部分</uri>
+    Daniel Robbins写在IBM DeveloperWorks上的关于LVM的文章：<uri link="/doc/zh_cn/articles/lvm-p1.xml">第一部分</uri>以及<uri link="http://doc/zh_cn/articles/lvm-p2.xml">第二部分</uri>
   </li>
   <li>
     如何启动你在LVM1上的根分区：<uri>http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt</uri>
