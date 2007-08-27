@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+<guide link="/doc/zh_cn/mysql-upgrading.xml" lang="zh_cn">
+<title>MySQL4.*或5.0.*的升级指南</title>
+
+<author title="作者">
+  <mail link="citizen428@gentoo.org">Michael Kohl</mail>
+</author>
+<author title="作者">
+  <mail link="vivo@gentoo.org">Francesco Riosa</mail>
+</author>
+<author title="译者">
+  <mail link="jjj3112000@126.com">Zezhou Jiang</mail>
+</author>
+
+<abstract>
+MySQL团队很荣幸地宣布MySQL5.0很快就要出现在Gentoo稳定的软件包树里了。这个指南描述了如何升级到MySQL4.*或5.0.*。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.17</version>
+<date>2007-06-04</date>
+
+<chapter>
+<title>直接升级，建议从4.1 =&gt; 5.0移动</title>
+<section>
+<body>
+
+<p>
+4.1的myisam存储引擎已经足够成熟了，它允许直接升级到下一个MySQL的主版本。
+</p>
+
+<note>
+对于MERGE表来说不是这样。如果你尝试直接升级这种很少用的表类型你可能会陷入麻烦。你应该清除并重建这些表，并且在升级过程中把他们的内容储存起来。如果你不太确定，你应该从 <uri link="#doc_chap2">Upgrading
+from old versions of MySQL</uri> 开始。
+</note>
+
+<p>
+在这一步需要两个命令行，因为lock属于mysql会话。
+</p>
+
+<pre caption="直接从4.1升级至5.0.*">
+# <i>quickpkg dev-db/mysql</i>
+# <i>alias MYSQL="mysql --user=root --password=</i><comment>'your_password'</comment><i>"</i>
+# <i>DATADIR=$(MYSQL --batch --raw --silent --skip-column-names \</i>
+     <i>--execute='SHOW variables LIKE "datadir";' \</i>
+     <i>| sed -e 's|datadir[ \t]||')</i>
+
+<comment>（下一步应该在第二个命令行下做）</comment>
+# <i>mysql --user=root --password=</i><comment>'your_password'</comment>
+mysql&gt; <i>FLUSH TABLES WITH READ LOCK;</i>
+
+<comment>（回到第一个命令行来运行这个命令）</comment>
+# <i>tar -cjpvf ~/mysql.$(date +%F"T"%H-%M).tar.bz2 \</i>
+     <i>/etc/conf.d/mysql /etc/mysql/my.cnf "${DATADIR}"</i>
+
+<comment>（接下来的命令应该在第二个命令行下做）</comment>
+mysql&gt; <i>UNLOCK TABLES;</i>
+mysql&gt; <i>quit</i>
+
+<comment>（回到第一个命令行来完成接下来的升级）</comment>
+# <i>tar -tjvf ~/mysql.*.tar.bz2</i>
+# <i>emerge -av "&gt;dev-db/mysql-5.0"</i>
+# <i>dispatch-conf</i>
+# <i>revdep-rebuild</i>
+# <i>/etc/init.d/mysql restart</i>
+# <i>mysql_upgrade_shell --user=root --password=</i><comment>'your_password'</comment><i> \</i>
+     <i>--protocol=tcp --datadir="${DATADIR}"</i>
+# <i>/etc/init.d/mysql restart</i>
+# <i>unset DATADIR</i>
+# <i>unalias MYSQL</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>从旧的MySQL版本升级</title>
+<section>
+<body>
+
+<p>
+用户从老的MySQL版本（&lt;4.0.24）升级需要现安装MySQL 4.0.25。如果你已有一个更新的版本，你可以跳过这一区域，并从 <uri 
+link="#backup">next one</uri> 继续。
+</p>
+
+<pre caption="简单升级">
+# <i>emerge -av --buildpkg "&lt;mysql-4.1"</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="backup">
+<title>为你当前的数据做备份</title>
+<section>
+<body>
+
+<impo>
+在不同的MySQl版本中主键的值的处理方式是不一样的，请参见 <uri link="http://bugs.gentoo.org/108502">bug #108502</uri> 来得到更多信息，极其推荐你扫描 "0" (zero)
+ 或更小的值，并且升级它们到一个大于等于 "1" 的值。
+</impo>
+
+<p>
+所有数据库管理员必须做的最重要的任务之一就是备份数据，那我们就开始吧：
+</p>
+
+<pre caption="所有数据库的dump">
+# <i>mysqldump \</i>
+  <i>-uroot \</i>
+  <i>--password=</i><comment>'your_password'</comment><i> \</i>
+  <i>-hlocalhost \</i>
+  <i>--all-databases \</i>
+  <i>--opt \</i>
+  <i>--allow-keywords \</i>
+  <i>--flush-logs \</i>
+  <i>--hex-blob \</i>
+  <i>--master-data \</i>
+  <i>--max_allowed_packet=16M \</i>
+  <i>--quote-names \</i>
+  <i>--result-file=BACKUP_MYSQL_4.0.SQL</i>
+</pre>
+
+<p>
+现在一个叫做 <path>BACKUP_MYSQL_4.0.SQL</path> 
+的文件应该存在，它可以在后面你重建数据时起到作用。数据是被SQL的MySQL语言描述的，它是一种结构化查询语言。
+</p>
+
+<p>
+现在是检查你的备份是否正常工作的好时间了。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>从最近的MySQL版本升级</title>
+<section>
+<body>
+
+<p>
+如果你跳过了step #1，你现在必须创建一个最近安装的版本的备份包（是数据服务的，不是数据的）：
+</p>
+
+<pre caption="二进制包备份">
+# <i>quickpkg dev-db/mysql</i>
+</pre>
+
+<p>
+现在是时间吧最近的版本和它所有的数据清理干净了：
+</p>
+
+<pre caption="卸载MySQL">
+# <i>/etc/init.d/mysql stop</i>
+# <i>emerge -C mysql</i>
+# <i>tar cjpvf ~/mysql.$(date +%F"T"%H-%M).tar.bz2 /etc/mysql/my.cnf /var/lib/mysql/</i>
+# <i>ls -l ~/mysql.*</i>
+# <i>rm -rf /var/lib/mysql/ /var/log/mysql</i>
+</pre>
+
+<note>
+现在两个不同的备份应该存在：SQL的一个，这个在不同版本间是轻便的，另一个允许你快速恢复你的数据库。更多的细节将会在后面提到。
+</note>
+
+<p>
+当你摆脱了旧的MySQl安装后，你现在可以安装新的版本了。记住必须用 <c>revdep-rebuild</c> 
+来rebuild与MySQL有联系的包。
+</p>
+
+<pre caption="升级二进制包">
+# <i>emerge -av "&gt;mysql-4.1"</i>
+<comment>（你也可以用dispatch-conf来升级你的配置文件）</comment>
+# <i>etc-update</i>
+# <i>revdep-rebuild</i>
+</pre>
+
+<p>
+现在配置新安装的MySQl版本并重启实例：
+</p>
+
+<pre caption="配置MySQL4.1的基本安装">
+# <i>emerge --config =mysql-4.1.<comment>&lt;micro_version&gt;</comment></i>
+# <i>/etc/init.d/mysql start</i>
+</pre>
+
+<p>
+最后你可以导入在step #2所创建的备份。
+</p>
+
+<impo>
+默认的 <path>/etc/mysql/my.cnf</path> 文件默认设置了二进制的登陆（ <c>log-bin</c> ）。它会记录每一个对数据的修改操作。如果你运行一个非常大的数据库（大于等于1GB），它会创建极大的文件，并且迅速地用掉磁盘空间。如果你空间不够，禁用二进制登陆会是个好主意。
+</impo>
+
+<impo>
+在MySQL4.1和之前的版本默认的编码是 <c>utf8</c> 。如果数据包含了 <e>non</e>-ASCII 编码，你可能想要保持数据库默认的编码设置，通过使用在 <path>/etc/mysql/my.cnf</path>  文件里的 <c>latin1</c> 替换所有的 <c>utf8</c> 的东西。在 <uri link="#On_charset_conversion">Charset
+conversion</uri> 这一章可以找到更多的信息。
+</impo>
+
+<impo>
+管理的 <c>mysql</c> 数据库包括用户名、密码之间的其它东西 <b>must</b> 被编码为utf8
+</impo>
+
+<p>
+当一个未知的键被包含时，较老的mysqldump组件可能会使用错误的指令来导出表。为了解决这个问题，用一下声明来包住SQL：
+</p>
+
+<pre caption="修复foreign key checks">
+SET FOREIGN_KEY_CHECKS=0
+SET FOREIGN_KEY_CHECKS=1
+</pre>
+
+<p>
+接下来，导入备份
+</p>
+
+<pre caption="导入MySQL备份">
+# <i>cat BACKUP_MYSQL_4.0.SQL \</i>
+     <i>| mysql \</i>
+     <i>-uroot \</i>
+     <i>--password=</i><comment>'your_password'</comment><i> \</i>
+     <i>-hlocalhost \</i>
+     <i>--max_allowed_packet=16M</i>
+
+# <i>mysql_fix_privilege_tables \</i>
+     <i>--defaults-file=/etc/mysql/my.cnf \</i>
+     <i>--user=root \</i>
+     <i>--password=</i><comment>'your_password'</comment><i></i>
+</pre>
+
+<p>
+如果你现在重启MySQL服务并且所有的事都按预料进行，你就有了一个完全运行的4.1.x的MySQL版本。
+</p>
+
+<pre caption="重启MySQL实例">
+# <i>/etc/init.d/mysql restart</i>
+</pre>
+
+<p>
+如果当你在升级时遇到任何问题，请把它们报告到 <uri link="http://bugs.gentoo.org">Bugzilla</uri> 。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>恢复旧的MySQL4.0安装</title>
+<section>
+<body>
+
+<p>
+如果你不喜欢MySQL4.1，你可以回到MySQL4.0。
+</p>
+
+<pre caption="恢复到上一个版本">
+# <i>/etc/init.d/mysql stop</i>
+# <i>emerge -C mysql</i>
+# <i>rm -rf /var/lib/mysql/ /var/log/mysql</i>
+# <i>emerge --usepkgonly "&lt;mysql-4.1"</i>
+<comment>（使用创建备份时的那个来代替 &lt;timestamp&gt 。）</comment>
+# <i>tar -xjpvf mysql.&lt;timestamp&gt;.tar.bz2 -C /</i>
+# <i>/etc/init.d/mysql start</i>
+</pre>
+
+<impo>
+如果依据这个指南 <c>dev-db/mysql</c> 以外的包被编译安装了，你必须运行 <c>revdep-rebuild</c> 来确保每一个客户端使用了正确的mysql客户端共享组件。
+</impo>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="On_charset_conversion">
+<title>字符转换：</title>
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+这一章并不打算成为一个如何做这样的转换的详尽的指南，反倒要成为一个读者可以推敲的短小的提示列表。
+</p>
+
+<p>
+转换一个数据库可能是一个复杂的任务，并且难度随着数据的不同而增加。像serialized 
+object和blobs是一个例子来说明把碎片弄在一起是很难的。
+</p>
+
+</body>
+</section>
+<section>
+<title>索引</title>
+<body>
+
+<p>
+每个utf-8字符连索引在内一共占3Byte。MySQL里的索引可以达到1000Byte那么长（767Byte是InnoDB表）。请记住限制使用Byte来衡量的，然而卷的长度是用字符的数量来解释的。
+</p>
+
+<p>
+MySQL也可以在column的一部分创建索引，这可能有些帮助。下面是一些例子：
+</p>
+
+<pre caption="使用prefixes索引">
+$ <i>mysql -uroot -p'<comment>your_password</comment>' test</i>
+
+mysql> <i>SHOW variables LIKE "version" \G</i>
+*************************** 1. row ***************************
+Variable_name: version
+    Value: <comment>5.0.24-log</comment>
+1 row in set (0.00 sec)
+
+mysql> <i>CREATE TABLE t1 (</i>
+  ->   <i>c1 varchar(255) NOT NULL default '',</i>
+  ->   <i>c2 varchar(255) NOT NULL default ''</i>
+  ->   <i>) ENGINE=MyISAM DEFAULT CHARSET=utf8;</i>
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> <i>ALTER TABLE t1</i>
+  ->   <i>ADD INDEX idx1 ( c1 , c2 );</i>
+<comment>ERROR 1071 (42000): Specified key was too long; max key length is 1000 bytes</comment>
+
+mysql> <i>ALTER TABLE t1</i>
+  ->   <i>ADD INDEX idx1 ( c1(165) , c2(165) );</i>
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> <i>CREATE TABLE t2 (</i>
+  ->   <i>c1 varchar(255) NOT NULL default '',</i>
+  ->   <i>c2 varchar(255) NOT NULL default ''</i>
+  ->   <i>) ENGINE=MyISAM DEFAULT CHARSET=sjis;</i>
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> <i>ALTER TABLE t2</i>
+  ->   <i>ADD INDEX idx1 ( c1(250) , c2(250) );</i>
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> <i>CREATE TABLE t3 (</i>
+  ->   <i>c1 varchar(255) NOT NULL default '',</i>
+  ->   <i>c2 varchar(255) NOT NULL default ''</i>
+  ->   <i>) ENGINE=MyISAM DEFAULT CHARSET=latin1;</i>
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> <i>ALTER TABLE t3</i>
+  ->   <i>ADD INDEX idx1 ( c1 , c2 );</i>
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+</pre>
+
+</body>
+</section>
+<section>
+<title>环境</title>
+<body>
+
+<p>
+系统必须配置成支持UTF-8编码。你会在我们的 <uri link="/doc/en/utf-8.xml">Using UTF-8 with 
+Gentoo</uri> 和 <uri link="/doc/en/guide-localization.xml">Localization 
+Guide</uri> 文档里发现更多信息。
+</p>
+
+<p>
+在这个例子里，我们设置一些在 <path>/etc/env.d/02locale</path> 文件里的环境变量来利用英文的UTF-8编码：
+</p>
+
+<pre caption="/etc/env.d/02locale">
+LC_ALL=en_US.UTF-8
+LANG=en_US.UTF-8
+</pre>
+
+<p>
+接下来请确定运行 <c>env-update &amp;&amp; source /etc/profile</c> 。
+</p>
+
+</body>
+</section>
+<section>
+<title>iconv</title>
+<body>
+
+<p>
+由 <c>sys-libs/glibc</c> 提供的 <c>iconv</c> 是用来将文本文件从一个编码转换到另一个编码的工具。你也可以使用 
+<c>app-text/recode</c> 。
+</p>
+
+<pre caption="使用iconv">
+<comment>（从latin1到utf8）</comment>
+$ <i>iconv -f ISO-8859-15 -t UTF-8 file1.sql &gt; file2.sql</i>
+
+<comment>（从日语到utf8）</comment>
+$ <i>iconv -f ISO2022JP -t UTF-8 file1.sql &gt; file2.sql</i>
+</pre>
+
+<p>
+ <c>iconv</c> 可以在环境不是设置成utf8时记录一个sql的dump
+</p>
+
+</body>
+</section>
+<section>
+<title>SQL矫正</title>
+<body>
+
+<p>
+你可以使用 <c>CONVERT()</c> 和 <c>CAST()</c> 这两个MySQL函数来转换在你的SQL脚本中的数据。
+</p>
+
+</body>
+</section>
+<section>
+<title>Apache（web服务器）</title>
+<body>
+
+<p>
+为了apache使用utf8，你必须调节以下在 <path>httpd.conf</path> 
+文件里的变量：AddDefaultCharset，CharsetDefault和CharsetSourceEnc。如果你的html文件源码没有用utf8编码，那它们必须 <b>must</b> 被 <c>iconv</c> 或者 <c>recode</c> 转换
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
