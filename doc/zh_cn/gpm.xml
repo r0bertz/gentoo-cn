@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/en/gpm.xml">
+<guide link="/doc/zh_cn/gpm.xml" lang="zh_cn">
 <title>在命令行下用鼠标</title>
 
 <author title="作者">
   <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
+<author title="译者">
+  <mail link="jjj3112000@126.com">Zezhou Jiang</mail>
+</author>
+
 
 <abstract>
 这个指南将给你展示如何在命令行界面下建立并使用GPM（the General Purpose Mouse 
 server）。这个在你新安装Gentoo或者你的系统无法或不用X服务时是非常有用的。
 </abstract>
 
-
-
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
 <version>1.2</version>
@@ -163,5 +167,4 @@ APPEND="-l \"a-zA-Z0-9_.:~/\300-\326\330-\366\370-\377\""
 </body>
 </section>
 </chapter>
-
 </guide>
