@@ -369,7 +369,7 @@
     <file id="sudo-guide">/doc/en/sudo-guide.xml</file>
     <file id="freebsd-guide">/doc/en/gentoo-freebsd.xml</file>
     <file id="mips-faq">/doc/en/gentoo-mips-faq.xml</file>
-    <file id="mysql-upgrading">/doc/en/mysql-upgrading.xml</file>
+    <file id="mysql-upgrading">/doc/zh_cn/mysql-upgrading.xml</file>
     <file id="mysql-upgrade-slotted">/doc/en/mysql-upgrade-slotted.xml</file>
     <file id="gcc-upgrading">/doc/en/gcc-upgrading.xml</file>
     <file id="x86-at-faq">/proj/en/base/x86/arch-testers-faq.xml</file>
