@@ -1,0 +1,206 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/gnome-config.xml" lang="zh_cn">
+
+<title>GNOME配置指南</title>
+
+<author title="作者">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="编辑">
+  <mail link="lars@strojny.net">Lars Strojny</mail>
+</author>
+<author title="译者">
+ <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+<author title="译者">
+ <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+
+<abstract>
+GNOME是一个常用的桌面环境。本指南尝试描述所有关于GNOME的方方面面，包括安装、配置、使用……
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.16</version>
+<date>2007-07-05</date>
+
+<chapter>
+<title>GNOME是什么？</title>
+<section>
+<title>项目</title>
+<body>
+
+<p>
+<uri 
+link="http://www.gnome.org">GNOME</uri>是一个Unix/Linux桌面套件及开发平台，GNOME项目是专注于GNOME开发的自由软件项目。<uri link="http://foundation.gnome.org">GNOME基金会</uri>负责协调GNOME项目开发和其他相关事务。
+</p>
+
+</body>
+</section>
+<section>
+<title>软件</title>
+<body>
+
+<p>
+GNOME是一个桌面环境，也是一个开发平台。这份自由软件是众多行业领军者的首选桌面。他同时面向商业用户、家庭用户和开发人员。
+</p>
+
+</body>
+</section>
+<section>
+<title>社区</title>
+<body>
+
+<p>
+与任何一款大型自由软件项目一样，GNOME拥有广泛的用户和开发群。<uri link="http://www.gnomedesktop.org">Footnotes</uri>中为用户提供GNOME桌面的新闻，<uri link="http://planet.gnome.org">GnomePlanet</uri>面向热心人/贡献者的，而<uri link="http://developer.gnome.org">Developer.Gnome.Org</uri>是面向GNOME开发人员的。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>安装GNOME</title>
+<section>
+<title>您需要什么？</title>
+<body>
+
+<p>
+开始安装GNOME之前，您可能要编辑一下USE变量。确保你的/etc/make.conf中列出的USE变量包含<c>gtk</c>和<c>gnome</c>。如果您想支持<c>hald</c>——硬件抽象层守护进程，请添加<c>hal</c>到你的USE标记中。USE变量<c>avahi</c>为GNOME提供DNS检测（类似Mac OS X下的Rendevouz）。如果您不想支持KDE（另一个大型桌面环境），去掉<c>qt*</c>、<c>arts</c>和<c>kde</c>变量。
+</p>
+
+<pre caption="/etc/make.conf中USE范例">
+USE="-qt3 -qt4 -arts -kde gtk gnome hal avahi"
+</pre>
+
+<p>
+您可以添加<c>branding</c>USE标记来获得一个可爱的“Gentoo牌”启动画面，取代默认的Gnome启动画面：
+</p>
+
+<pre caption="启用Gentoo品牌">
+# <i>echo "gnome-base/gnome-session branding" &gt;&gt; /etc/portage/package.use</i>
+</pre>
+
+<p>
+完成之后，通过emerge <c>gnome</c>来开始安装GNOME：
+</p>
+
+<pre caption="安装GNOME">
+# <i>emerge gnome</i>
+</pre>
+
+<p>
+您也可以选择使用<c>gnome-light</c>进行最小化的Gnome安装：
+</p>
+
+<pre caption="安装一个最小化的GNOME环境">
+# <i>emerge gnome-light</i>
+</pre>
+
+<p>
+这将花费一点时间，因此您可以先读一读从前妈妈给你买的而你却从未翻过的那些书本。装完了？很好，现在更新你的环境变量：
+</p>
+
+<pre caption="更新环境变量">
+# <i>env-update &amp;&amp; source /etc/profile</i>
+</pre>
+
+<p>
+如果您认真观察前面<c>emerge</c>命令的输出，会注意到它建议使用<c>gamin</c>让nautilus和gnome-vfs监视文件的变动：
+</p>
+
+<pre caption="安装gamin，一个文件变更监视器">
+# <i>emerge gamin</i>
+</pre>
+
+<impo>
+如果您是从<c>fam</c>（一个老旧过时的文件监视器）转换到<c>gamin</c>，那么您必须从所有的启动级别中删除<c>famd</c>然后将它卸载：
+</impo>
+
+<pre caption="可选：从fam转换到gamin">
+# <i>rc-update del famd</i>
+# <i>emerge --unmerge app-admin/fam</i>
+</pre>
+
+<p>
+接下来我们做完剩余的服务。
+</p>
+
+<pre caption="将hald和avahi-dnsconfd添加到默认启动级别">
+# <i>/etc/init.d/hald start</i>
+# <i>rc-update add hald default</i>
+
+# <i>/etc/init.d/avahi-dnsconfd start</i>
+# <i>rc-update add avahi-dnsconfd default</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>第一印象</title>
+<body>
+
+<p>
+让我们先看一看刚刚所安装的。退出root shell并以普通用户登录。我们将配置一下会话，然后发出<c>startx</c>命令启动GNOME（参考<uri link="/doc/zh_cn/xorg-config.xml">X服务器配置指南</uri>中的<uri link="/doc/zh_cn/xorg-config.xml#using_startx">使用startx</uri>）：
+</p>
+
+<pre caption="设定GNOME为默认桌面环境">
+$ <i>echo "exec gnome-session" &gt; ~/.xinitrc</i>
+</pre>
+
+<p>
+现在请执行<c>startx</c>以启动图形环境：
+</p>
+
+<pre caption="启动GNOME">
+$ <i>startx</i>
+</pre>
+
+<p>
+如果一切正常，您将受到GNOME的欢迎问候。祝贺你。现在让我们看看如何配置GNOME以迎合您的需求。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>配置GNOME</title>
+<section>
+<title>GNOME的图形登录管理器</title>
+<body>
+
+<p>
+如果您想让GNOME显示管理器（GDM）在开机时自动运行（那样就可以通过图形界面登录），必须将<c>xdm</c>启动脚本添加到默认的运行级别：
+</p>
+
+<pre caption="将xdm添加到默认运行级别">
+# <i>rc-update add xdm default</i>
+</pre>
+
+<p>
+现在编辑<path>/etc/conf.d/xdm</path>并修改DISPLAYMANAGER变量。
+</p>
+
+<pre caption="编辑/etc/conf.d/xdm">
+DISPLAYMANAGER="gdm"
+</pre>
+
+<p>
+如果您现在重启，GNOME显示管理器就会提示您输入用户名和密码，并且将默认使用GNOME作为桌面环境（尽管肯定会有一个选项让您可以从<path>/usr/share/xsessions/</path>中选择另一个可用的）。这样的话，如果您使用GDM，就不需要编辑<path>~/.xinitrc</path>了。
+</p>
+
+<p>
+要使用<c>hald</c>的功能，只需启动<c>gnome-volume-manager</c>然后编辑它的选项。并且，需要将您的用户添加到<c>plugdev</c>组。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
