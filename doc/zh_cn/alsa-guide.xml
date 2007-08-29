@@ -13,6 +13,9 @@
 <author title="贡献者">
   <mail link="flameeyes@gentoo.org">Diego Pettenò</mail>
 </author>
+<author title="译者">
+  <mail link="kunxi@kunxi.org">奚焜</mail>
+</author>
 
 <abstract>
 本文档可以帮助用户在Gentoo Linux上设置ALSA
