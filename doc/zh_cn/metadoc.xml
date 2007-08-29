@@ -270,7 +270,7 @@
     <file id="gentoo-x86-tipsntricks">/doc/en/gentoo-x86-tipsntricks.xml</file>
     <file id="gentoo-sparc-netboot-howto">/doc/en/gentoo-sparc-netboot-howto.xml</file>
     <file id="gentoo-sparc-obpreference">/doc/en/gentoo-sparc-obpreference.xml</file>
-    <file id="gnome-config">/doc/en/gnome-config.xml</file>
+    <file id="gnome-config">/doc/zh_cn/gnome-config.xml</file>
     <file id="gnome-upgrade">/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml</file>
     <file id="gpm">/doc/zh_cn/gpm.xml</file>
     <file id="gentoo-security">/doc/en/gentoo-security.xml</file>
