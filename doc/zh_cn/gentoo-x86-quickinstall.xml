@@ -1,9 +1,7 @@
 <?xml version='1.0' encoding="UTF-8"?>
-
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/en/gentoo-x86-quickinstall.xml" lang="en">
+<guide link="/doc/en/gentoo-x86-quickinstall.xml" lang="zh_cn">
 <title>Gentoo Linux x86快速安装指南</title>
 
 <author title="作者">
@@ -14,7 +12,7 @@
 </author>
 <author title="作者">Steven Wagner</author>
 <author title="译者">
- <mail link="tysnoo@gmail.com">叶宝泰</mail>
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
 </author>
 
 <abstract>
@@ -71,8 +69,7 @@ MemTotal:       509248 kB
 </p>
 
 <p>
-<uri 
-link="/doc/en/faq.xml#isoburning">刻制</uri>光盘，用它引导机器。
+<uri link="/doc/en/faq.xml#isoburning">刻制</uri>光盘，用它引导机器。
 </p>
 
 </body>
@@ -89,7 +86,7 @@ link="/doc/en/faq.xml#isoburning">刻制</uri>光盘，用它引导机器。
 Gentoo Linux Installation LiveCD                     http://www.gentoo.org
 Enter to Boot; F1 for kernels  F2 for options.
 boot: <i>gentoo-nofb</i>
-  <comment>（或在有问题的情况下）</comment>
+<comment>（或在有问题的情况下）</comment>
 boot: <i>gentoo-nofb nodetect</i>
 </pre>
 
