@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-
-
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/gnome-config.xml" lang="zh_cn">
@@ -39,8 +36,7 @@ GNOME是一个常用的桌面环境。本指南尝试描述所有关于GNOME的�
 <body>
 
 <p>
-<uri 
-link="http://www.gnome.org">GNOME</uri>是一个Unix/Linux桌面套件及开发平台，GNOME项目是专注于GNOME开发的自由软件项目。<uri link="http://foundation.gnome.org">GNOME基金会</uri>负责协调GNOME项目开发和其他相关事务。
+<uri link="http://www.gnome.org">GNOME</uri>是一个Unix/Linux桌面套件及开发平台，GNOME项目是专注于GNOME开发的自由软件项目。<uri link="http://foundation.gnome.org">GNOME基金会</uri>负责协调GNOME项目开发和其他相关事务。
 </p>
 
 </body>

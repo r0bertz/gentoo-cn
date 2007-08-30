@@ -3,7 +3,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/vdr-guide.xml" lang="zh_cn">
-<title>Gentoo Linux VDR 指南</title>
+<title>Gentoo Linux VDR指南</title>
 
 <author title="作者">
   <mail link="ng@zcat.de">Norman Golisz</mail>
@@ -30,7 +30,7 @@
 <license/>
 
 <version>1.4</version>
-<date>2007年1月2日</date>
+<date>2007-01-02</date>
 
 <chapter>
 <title>DVB简介</title>
@@ -39,14 +39,10 @@
 <body>
 
 <p>
-<e>DVB</e>是<e>Digital Video Broadcasting， 
-数字视频广播</e>的简称。 
-DVB描述了如何传播电视，广播和交互服务，比如MHP（多媒体家庭平台），EPG（数字节目向导）和teletext。采用MPEG-2数据压缩技术（HDTV采用H.264），使得在同一个频带上传输多路电视信号成为可能。数据压缩率越高，能够传输的频道越多，同时图像质量的损失也越大。
-</p>
+<e>DVB</e>是<e>Digital Video Broadcasting，数字视频广播</e>的简称。DVB描述了如何传播电视，广播和交互服务，比如MHP（多媒体家庭平台），EPG（数字节目向导）和teletext。采用MPEG-2数据压缩技术（HDTV采用H.264），使得在同一个频带上传输多路电视信号成为可能。数据压缩率越高，能够传输的频道越多，同时图像质量的损失也越大。</p>
 
 <p>
-DVB可以通过多种方法传播。末尾的字母标志了传播的方式，比如DVB-<e>T</e>是陆基传播。此外还有其他的传播方式： 
- 
+DVB可以通过多种方法传播。末尾的字母标志了传播的方式，比如DVB-<e>T</e>是陆基传播。此外还有其他的传播方式：
 </p>
 
 <ul>
@@ -55,7 +51,7 @@ DVB可以通过多种方法传播。末尾的字母标志了传播的方式，�
   <li>DVB-H是面向移动设备的传播（陆基）</li>
   <li>DVB-IPI是通过基于IP网络的传播，比如互联网</li>
   <li>
-    DVB-RC(S/C/T) 指定了用于传输数据服务的回馈频道，比如宽带互联网
+    DVB-RC(S/C/T)指定了用于传输数据服务的回馈频道，比如宽带互联网
   </li>
 </ul>
 
@@ -67,9 +63,7 @@ DVB可以通过多种方法传播。末尾的字母标志了传播的方式，�
 <body>
 
 <p>
-除了根据DVB流的接收方式外，DVB卡还根据输出分为两类。第一类卡内置了解码器，可以通过<path>/dev/video</path>直接访问视频流，我们称其为<e>全功能卡</e>。另外一类卡没有解码器，需要主机提供软件解码，即<e>简装版卡</e>。这通常意味着较高的系统需求。您的计算机至少要配备600MHz主频以上的CPU， 
-256MB以上的内存。<uri 
-link="http://linuxtv.org/wiki/index.php/DVB_Card_Vendors">此表</uri>可以帮助您找到您的板卡。
+除了根据DVB流的接收方式外，DVB卡还根据输出分为两类。第一类卡内置了解码器，可以通过<path>/dev/video</path>直接访问视频流，我们称其为<e>全功能卡</e>。另外一类卡没有解码器，需要主机提供软件解码，即<e>简装版卡</e>。这通常意味着较高的系统需求。您的计算机至少要配备600MHz主频以上的CPU，256MB以上的内存。<uri link="http://linuxtv.org/wiki/index.php/DVB_Card_Vendors">此表</uri>可以帮助您找到您的板卡。
 </p>
 
 </body>
@@ -83,8 +77,7 @@ link="http://linuxtv.org/wiki/index.php/DVB_Card_Vendors">此表</uri>可以帮�
 <body>
 
 <p>
-首先，我们必须保证您的内核支持DVB以及您的DVB设备。 
-自2.6系列内核起，所需的驱动已经包含在内核源代码中。检查您的内核配置，保证下列的选项被编译进内核或者模块。
+首先，我们必须保证您的内核支持DVB以及您的DVB设备。自2.6系列内核起，所需的驱动已经包含在内核源代码中。检查您的内核配置，保证下列的选项被编译进内核或者模块。
 </p>
 
 <pre caption="需要的内核选项">
@@ -99,8 +92,7 @@ Digital Video Broadcasting Devices ---&gt;
 </pre>
 
 <p>
-此外，我们还需要为您的硬件选择合适的驱动。为了找出您的卡的正确驱动，我们将所有的驱动都编译成模块。如果您使用的是PCI设备，请安装<c>pciutils</c>。如果您希望将驱动编入内核或者您没有PCI卡，您可以跳过这个步骤，前进至  
-<uri link="#kernel_output">检查内核输出</uri>。
+此外，我们还需要为您的硬件选择合适的驱动。为了找出您的卡的正确驱动，我们将所有的驱动都编译成模块。如果您使用的是PCI设备，请安装<c>pciutils</c>。如果您希望将驱动编入内核或者您没有PCI卡，您可以跳过这个步骤，前进至<uri link="#kernel_output">检查内核输出</uri>。
 </p>
 
 <pre caption="安装pciutils">
@@ -123,8 +115,7 @@ nvidiafb
 </pre>
 
 <p>
-在这种情况下，我们需要加载内核模块<c>b2c2-flexcop-pci</c>。我们在<path>/etc/modules.autoload.d/kernel-2.6</path> 
-里加入这个驱动模块名。
+在这种情况下，我们需要加载内核模块<c>b2c2-flexcop-pci</c>。我们在<path>/etc/modules.autoload.d/kernel-2.6</path>里加入这个驱动模块名。
 </p>
 
 <pre caption="加入驱动模块名">
@@ -180,8 +171,7 @@ input: TerraTec/qanu USB2.0 Highspeed DVB-T Receiver remote control as /class/in
 <body>
 
 <p>
-有两种方法可以通过红外遥控您的VDR。如果您的电视卡内置支持红外接收器，您可以用<c>vdr-remote</c>。否则，您很有可能需要LIRC。 
- 
+有两种方法可以通过红外遥控您的VDR。如果您的电视卡内置支持红外接收器，您可以用<c>vdr-remote</c>。否则，您很有可能需要LIRC。
 </p>
 
 </body>
@@ -214,11 +204,7 @@ input: TerraTec/qanu USB2.0 Highspeed DVB-T Receiver remote control as /class/in
 <body>
 
 <p>
-如果您的卡支持遥控（但是您无法或者不愿意使用<c>vdr-remote</c>），您也许希望配置LIRC。LIRC会分析按下的键，为每一个键返回一个名字。支持LIRC的程序会等待键盘信息，然后运行配置文件中指定的动作，配置文件大多保存在可执行文件的配置目录中（比如，<c>mplayer</c>加载 
-<path>~/.mplayer/lircrc</path>）。安装LIRC之前，您先要把<c>lirc</c>加入到您的USE标记中，并在<path>/etc/make.conf</path>加入一个新的条目： 
-<c>LIRC_DEVICES</c>。 用 <uri 
-link="http://www.lirc.org/html/table.html">下表</uri> 
-来找到这个选项的合适参数。  
+如果您的卡支持遥控（但是您无法或者不愿意使用<c>vdr-remote</c>），您也许希望配置LIRC。LIRC会分析按下的键，为每一个键返回一个名字。支持LIRC的程序会等待键盘信息，然后运行配置文件中指定的动作，配置文件大多保存在可执行文件的配置目录中（比如，<c>mplayer</c>加载<path>~/.mplayer/lircrc</path>）。安装LIRC之前，您先要把<c>lirc</c>加入到您的USE标记中，并在<path>/etc/make.conf</path>加入一个新的条目：<c>LIRC_DEVICES</c>。用<uri link="http://www.lirc.org/html/table.html">下表</uri>来找到这个选项的合适参数。
 </p>
 
 <pre caption="安装LIRC">
@@ -230,9 +216,7 @@ USE="lirc"
 </pre>
 
 <p>
-首先，我们要为每个键值定义一个名字。大多数支持的遥控器已经正确的配置了。请参考<uri 
-link="http://lirc.sourceforge.net/remotes/">遥控器列表</uri>，下载所需的文件，保存为<path>/etc/lircd.conf</path>。然后，我们要找出用什么设备来访问我们的遥控器。运行下述命令来获得当前的输入设备列表（请确保您的设备在运行中）。
-</p>
+首先，我们要为每个键值定义一个名字。大多数支持的遥控器已经正确的配置了。请参考<uri link="http://lirc.sourceforge.net/remotes/">遥控器列表</uri>，下载所需的文件，保存为<path>/etc/lircd.conf</path>。然后，我们要找出用什么设备来访问我们的遥控器。运行下述命令来获得当前的输入设备列表（请确保您的设备在运行中）。</p>
 
 <pre caption="当前的输入设备列表">
 # <i>cat /proc/bus/input/devices</i>
@@ -246,13 +230,11 @@ B: KEY=108fc210 2043 0 0 0 0 8000 2080 1 9e1680 0 0 ffc
 </pre>
 
 <p>
-本例中的设备是Terratec Cinergy T2，所以我们可以通过 
-<path>/dev/input/event1</path>来访问设备。用您的输出中相应的设备来替换<c>event1</c>。
+本例中的设备是Terratec Cinergy T2，所以我们可以通过<path>/dev/input/event1</path>来访问设备。用您的输出中相应的设备来替换<c>event1</c>。
 </p>
 
 <p>
-<c>lircd</c>需要知道设备名。加入此行到<path>/etc/conf.d/lirc.conf</path>。请用您的实际驱动名和设备名替换<c>devinput</c>和<c>event1</c> 
-。
+<c>lircd</c>需要知道设备名。加入此行到<path>/etc/conf.d/lirc.conf</path>。请用您的实际驱动名和设备名替换<c>devinput</c>和<c>event1</c>。
 </p>
 
 <pre caption="加入lircd选项">
@@ -317,8 +299,7 @@ IR_CTRL="lirc"
 <body>
 
 <p>
-使用这些昂贵的高档卡的用户不需要额外安装任何软件，您可以前进至<uri 
-link="#channel_list">配置您的频道列表</uri>。
+使用这些昂贵的高档卡的用户不需要额外安装任何软件，您可以前进至<uri link="#channel_list">配置您的频道列表</uri>。
 </p>
 
 </body>
@@ -340,8 +321,6 @@ link="#channel_list">配置您的频道列表</uri>。
 em8300模块需要根据卡的版本号作一些配置。
 </p>
 
-
-
 <p>
 继续 <uri link="#channel_list">配置您的频道列表</uri>。
 </p>
@@ -349,12 +328,11 @@ em8300模块需要根据卡的版本号作一些配置。
 </body>
 </section>
 <section id="vdr-pvr350">
-<title>硬解压：PVR350 卡</title>
+<title>硬解压：PVR350卡</title>
 <body>
 
 <p>
-既然PVR350卡配备了板载的MPEG解码芯片，我们当然希望用到它。我们需要安装<c>vdr-prv350</c>插件。如果<c>ivtv-driver</c>还没有安装，emerge会自动为您安装它。 
-我们把ivtv加入到<path>/etc/modules.autoload.d/kernel-2.6</path>使得它在每次启动时自动加载：
+既然PVR350卡配备了板载的MPEG解码芯片，我们当然希望用到它。我们需要安装<c>vdr-prv350</c>插件。如果<c>ivtv-driver</c>还没有安装，emerge会自动为您安装它。我们把ivtv加入到<path>/etc/modules.autoload.d/kernel-2.6</path>使得它在每次启动时自动加载：
 </p>
 
 <pre caption="安装PVR350插件">
@@ -386,20 +364,14 @@ em8300模块需要根据卡的版本号作一些配置。
 </p>
 
 <p>
-到此为止，我们只介绍了shm（"shared 
-memory"，共享内存）的方案。安装的配置文件（设置SOFTDEVICE_VIDEO_OUT）已经启用此选项。稍后您需要启动<c>ShmClient</c>打开观看窗口。 
- 
+到此为止，我们只介绍了shm（"shared memory"，共享内存）的方案。安装的配置文件（设置SOFTDEVICE_VIDEO_OUT）已经启用此选项。稍后您需要启动<c>ShmClient</c>打开观看窗口。
 </p>
 
 <note>
-如果您不希望采用一个独立的键盘布局来控制softdevice/shm的VDR， 您可以用Matthias
- Schwarzott的<uri
- link="http://dev.gentoo.org/~zzam/remote.softdevice-shm.conf">devspace</uri>。复制上述文件到<path>/etc/vdr/remote.conf</path>，对其运行<c>chown
- vdr:vdr</c>使其能正常工作。
-</note>
+如果您不希望采用一个独立的键盘布局来控制softdevice/shm的VDR，您可以用Matthias Schwarzott的<uri link="http://dev.gentoo.org/~zzam/remote.softdevice-shm.conf">devspace</uri>。复制上述文件到<path>/etc/vdr/remote.conf</path>，对其运行<c>chown vdr:vdr</c>使其能正常工作。</note>
 
 <p>
-继续 <uri link="#channel_list">配置您的频道列表</uri>。
+继续<uri link="#channel_list">配置您的频道列表</uri>。
 </p>
 
 </body>
@@ -418,8 +390,7 @@ memory"，共享内存）的方案。安装的配置文件（设置SOFTDEVICE_VI
 </pre>
 
 <p>
-加入下列命令行参数对于xinliboutput的运行至关重要。更多的选项清参考<c>vdr 
---help</c>。
+加入下列命令行参数对于xinliboutput的运行至关重要。更多的选项清参考<c>vdr --help</c>。
 </p>
 
 <pre caption="加入命令行参数到/etc/conf.d/vdr.xineliboutput">
@@ -439,13 +410,11 @@ _EXTRAOPTS="--local=none --remote=37890"
 </pre>
 
 <p>
-如果您只需要在运行VDR的计算机上用<c>vdr-xineliboutput</c>观看，您可以继续<uri 
-link="#channel_list">配置您的频道列表</uri>。
+如果您只需要在运行VDR的计算机上用<c>vdr-xineliboutput</c>观看，您可以继续<uri link="#channel_list">配置您的频道列表</uri>。
 </p>
 
 <p>
-否则， 您只需要在您的客户端<c>emerge 
-media-plugins/vdr-xineliboutput</c>：
+否则，您只需要在您的客户端<c>emerge media-plugins/vdr-xineliboutput</c>：
 </p>
 
 <pre caption="客户端设置">
@@ -453,12 +422,11 @@ media-plugins/vdr-xineliboutput</c>：
 </pre>
 
 <p>
-在启动VDR后，您可以用<c>vdr-sxfe 
-xvdr://hostname</c>命令来连接VDR，观看图像和屏幕显示。  
+在启动VDR后，您可以用<c>vdr-sxfe xvdr://hostname</c>命令来连接VDR，观看图像和屏幕显示。
 </p>
 
 <p>
-继续 <uri link="#channel_list">配置您的频道列表</uri>。
+继续<uri link="#channel_list">配置您的频道列表</uri>。
 </p>
 
 <note>
@@ -475,8 +443,7 @@ xvdr://hostname</c>命令来连接VDR，观看图像和屏幕显示。
 <body>
 
 <p>
-要使得VDR真正有用，您还需要创建合适的频道列表。除了下载以外，还有多种方法来获得一个可用的频道列表。默认的安装包含了Astra 
-19.2°E的DVB-S频道列表。
+要使得VDR真正有用，您还需要创建合适的频道列表。除了下载以外，还有多种方法来获得一个可用的频道列表。默认的安装包含了Astra 19.2°E的DVB-S频道列表。
 </p>
 
 </body>
@@ -523,9 +490,7 @@ $ <i>dvbscan -o vdr /usr/share/dvb/scan/dvb-t/de-Nuernberg &gt; /etc/vdr/channel
 <body>
 
 <p>
-您也许在此要设置您的频道列表。如果您安装了&gt;=<c>media-plugins/vdr-analogtv-1.0.00-r1</c>，VDR项目在 
-<path>/usr/share/doc/vdr-analogtv-$version/examples/</path> 
-提供了一些例子。
+您也许在此要设置您的频道列表。如果您安装了&gt;=<c>media-plugins/vdr-analogtv-1.0.00-r1</c>，VDR项目在<path>/usr/share/doc/vdr-analogtv-$version/examples/</path>提供了一些例子。
 </p>
 
 </body>
@@ -616,8 +581,7 @@ VDR最有用的键是：
 <body>
 
 <note>
-如果您需要任何帮助，您可以在<uri
- link="irc://irc.freenode.org/gentoo-vdr">#gentoo-vdr</uri>发问，或者查看我们的<uri link="http://forums.gentoo.org/">论坛</uri>。
+如果您需要任何帮助，您可以在<uri link="irc://irc.freenode.org/gentoo-vdr">#gentoo-vdr</uri>发问，或者查看我们的<uri link="http://forums.gentoo.org/">论坛</uri>。
 </note>
 
 </body>

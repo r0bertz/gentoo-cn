@@ -3,7 +3,7 @@
 
 
 <guide link="/doc/zh_cn/mysql-upgrading.xml" lang="zh_cn">
-<title>MySQL4.*或5.0.*的升级指南</title>
+<title>MySQL 4.*或5.0.*的升级指南</title>
 
 <author title="作者">
   <mail link="citizen428@gentoo.org">Michael Kohl</mail>

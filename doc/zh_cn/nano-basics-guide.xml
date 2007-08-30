@@ -4,7 +4,7 @@
 
 <guide link="/doc/zh_CN/nano-basics-guide.xml">
 
-<title>基本 Nano 指南</title>
+<title>Nano基础指南</title>
 
 <author title="Gentoo Doc Editor">
   <!-- meekrob@gentoo.org -->
@@ -17,21 +17,20 @@ Sherman Boyd
   <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 <abstract>
-这是篇 nano 简明使用指南，能帮助你尽快了解 nano 的基本用法。
+这是篇nano简明使用指南，能帮助你尽快了解nano的基本用法。
 </abstract>
 
 <version>1.6</version>
-<date>2006年1月5日</date>
+<date>2006-01-05</date>
 
 <chapter>
-<title>基本的 Nano</title>
+<title>Nano基础</title>
 <section>
 <title>目的</title>
 <body>
 
 <p>
-这是篇 nano 简明使用指南，帮助你快速了解 nano 
-的基本用法。如想获取更多的帮助信息，请参阅：
+这是篇nano简明使用指南，帮助你快速了解nano的基本用法。如想获取更多的帮助信息，请参阅：
 </p>
 
 <p>
@@ -45,7 +44,7 @@ Sherman Boyd
 <body>
 
 <p>
-使用 nano 打开或新建文件，只需键入：
+使用nano打开或新建文件，只需键入：
 </p>
 
 <pre caption="打开或新建文件">
@@ -53,10 +52,7 @@ Sherman Boyd
 </pre>
 
 <p>
-Nano 
-是一种单模式编辑器，你可以直接输入文字。如果你要编辑一个像 
-<path>/etc/fstab</path> 一样的配置文件，请使用 <c>-w</c> 
-参数，例如：
+Nano是一种单模式编辑器，你可以直接输入文字。如果你要编辑一个像<path>/etc/fstab</path>一样的配置文件，请使用<c>-w</c>参数，例如：
 </p>
 
 <pre caption="禁用自动换行">
@@ -64,8 +60,7 @@ Nano
 </pre>
 
 <warn>
-这非常重要。如果在编辑配置文件时忘了加 <c>-w</c> 
-参数，可能会导致你的系统无法起动或产生别的异常。
+这非常重要。如果在编辑配置文件时忘了加<c>-w</c>参数，可能会导致你的系统无法起动或产生别的异常。
 </warn>
 
 </body>
@@ -75,17 +70,11 @@ Nano
 <body>
 
 <p>
-如果你要保存所做的修改，按下 
-<c>Ctrl+O</c>。想要退出，按下 
-<c>Ctrl+X</c>。如果你退出前没有保存所做的修改，它会提示你是否要保存。如果不要，请按 
-<c>N</c>，反之，则按 
-<c>Y</c>。然后它会让你确认要保存的文件名，确认或修改后按 
-<c>Enter</c> 即可。
+如果你要保存所做的修改，按下<c>Ctrl+O</c>。想要退出，按下<c>Ctrl+X</c>。如果你退出前没有保存所做的修改，它会提示你是否要保存。如果不要，请按<c>N</c>，反之，则按<c>Y</c>。然后它会让你确认要保存的文件名，确认或修改后按<c>Enter</c>即可。
 </p>
 
 <p>
-如果你没有修改好而不小心按了保存键，您可以在请求确认文件名时按 
-<c>Ctrl+C</c> 来取消。
+如果你没有修改好而不小心按了保存键，您可以在请求确认文件名时按<c>Ctrl+C</c>来取消。
 </p>
 
 </body>
@@ -95,20 +84,11 @@ Nano
 <body>
 
 <p>
-要剪切一整行，请用 <c>Ctrl+K</c>（按住 <c>Ctrl</c> 
-不放，再按下 <c>K</c> 
-键）。光标所在的行便消失了。要粘贴它，只需把光标移动到您所要粘贴的位置，然后按 
-<c>Ctrl+U</c> 即可。要移动多行，只需多按几次 <c>Ctrl+K</c> 
-把需要移动内容都剪切下来，然后按一次 <c>Ctrl+U</c> 
-就可以把刚剪切的内容全部粘贴上来。
+要剪切一整行，请用<c>Ctrl+K</c>（按住<c>Ctrl</c>不放，再按下<c>K</c>键）。光标所在的行便消失了。要粘贴它，只需把光标移动到您所要粘贴的位置，然后按<c>Ctrl+U</c>即可。要移动多行，只需多按几次<c>Ctrl+K</c>把需要移动内容都剪切下来，然后按一次<c>Ctrl+U</c>就可以把刚剪切的内容全部粘贴上来。
 </p>
 
 <p>
-如果你想使用更精确的剪切控制，则需要给文本做标记。移动光标到需要剪切文本的开头，按下 
-<c>Ctrl+6</c>（或者 
-<c>Alt+A</c>）。然后移动光标到待剪切文本的末尾：被做了标记的文本便会反白。要撤消文本标记，只需再按一次 
-<c>Ctrl+6</c>。用 <c>Ctrl+K</c> 来剪切被标记的文本，用 
-<c>Ctrl+U</c> 来粘贴。
+如果你想使用更精确的剪切控制，则需要给文本做标记。移动光标到需要剪切文本的开头，按下<c>Ctrl+6</c>（或者<c>Alt+A</c>）。然后移动光标到待剪切文本的末尾：被做了标记的文本便会反白。要撤消文本标记，只需再按一次<c>Ctrl+6</c>。用<c>Ctrl+K</c>来剪切被标记的文本，用<c>Ctrl+U</c>来粘贴。
 </p>
 
 </body>
@@ -118,18 +98,11 @@ Nano
 <body>
 
 <p>
-当你想搜索某特定文字时，只要想成 <e>"WhereIs"</e> 而不是 
-<e>"Search"</e>，事情就简单了。只要按下 
-<c>Ctrl+W</c>，键入你要搜索的字符串，再按 <c>Enter</c> 
-就可以了。想再次搜索相同的字符串，可以直接按 
-<c>Alt+W</c>。
+当你想搜索某特定文字时，只要想成<e>"WhereIs"</e>而不是<e>"Search"</e>，事情就简单了。只要按下<c>Ctrl+W</c>，键入你要搜索的字符串，再按<c>Enter</c>就可以了。想再次搜索相同的字符串，可以直接按<c>Alt+W</c>。
 </p>
 
 <note>
-在nano帮助文档里，Ctrl-键被表示为一个脱字符（<c>^</c>），因此 
-<c>Ctrl+W</c> 被写成了 <c>^W</c>，等等。Alt-键被表示为一个 
-<c>M</c>（从 "Meta" 而来），因此 <c>Alt+W</c> 被写成了 
-<c>M-W</c>。
+在nano帮助文档里，Ctrl-键被表示为一个脱字符（<c>^</c>），因此<c>Ctrl+W</c>被写成了<c>^W</c>，等等。Alt-键被表示为一个<c>M</c>（从"Meta"而来），因此<c>Alt+W</c>被写成了<c>M-W</c>。
 </note>
 
 </body>
@@ -139,8 +112,7 @@ Nano
 <body>
 
 <p>
-如果你有兴趣调整nano设置，一定去看看 
-<path>/etc/nanorc</path>。
+如果你有兴趣调整nano设置，一定去看看<path>/etc/nanorc</path>。
 </p>
 
 </body>
@@ -150,9 +122,7 @@ Nano
 <body>
 
 <p>
-就这样子吧！感谢#gentoo频道里的 kiyose 和 
-quazion。再次提醒你，要了解更多的 nano 信息，请参阅：
-</p>
+就这样子吧！感谢#gentoo频道里的kiyose和quazion。再次提醒你，要了解更多的nano信息，请参阅：</p>
 
 <p>
 <uri>http://www.nano-editor.org</uri>
@@ -162,5 +132,3 @@ quazion。再次提醒你，要了解更多的 nano 信息，请参阅：
 </section>
 </chapter>
 </guide>
-
- 

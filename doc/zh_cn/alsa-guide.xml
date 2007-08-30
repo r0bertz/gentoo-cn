@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/alsa-guide.xml" lang="zh_cn">
-<title>Gentoo Linux ALSA 指南</title>
+<title>Gentoo Linux ALSA指南</title>
 
 <author title="作者">
   <mail link="fox2mike@gentoo.org">Shyam Mani</mail>

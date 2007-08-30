@@ -3,7 +3,7 @@
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/ltsp.xml,v 1.3 2005/04/06 09:45:41 neysx Exp $ -->
 
 <guide link="/doc/zh_cn/ltsp.xml">
-<title>Gentoo - LTSP 指南</title>
+<title>Gentoo - LTSP指南</title>
 
 <author title="Author">
 <mail link="lanius@gentoo.org">Heinrich Wendel</mail>
