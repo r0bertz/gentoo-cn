@@ -265,7 +265,7 @@ SET FOREIGN_KEY_CHECKS=1
 # <i>emerge -C mysql</i>
 # <i>rm -rf /var/lib/mysql/ /var/log/mysql</i>
 # <i>emerge --usepkgonly "&lt;mysql-4.1"</i>
-<comment>（使用创建备份时的那个来代替 &lt;timestamp&gt 。）</comment>
+<comment>（使用创建备份时的那个来代替 &lt;timestamp&gt;。）</comment>
 # <i>tar -xjpvf mysql.&lt;timestamp&gt;.tar.bz2 -C /</i>
 # <i>/etc/init.d/mysql start</i>
 </pre>
