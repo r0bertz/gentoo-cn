@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gnome-config.xml,v 1.19 2007/07/04 23:17:39 jkt Exp $ -->
+
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/gnome-config.xml" lang="zh_cn">

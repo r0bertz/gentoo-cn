@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/portage-utils.xml,v 1.5 2007/05/23 10:57:01 rane Exp $ -->
 
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
 <guide link="/doc/zh_cn/portage-utils.xml" lang="zh_cn">
 
 <title>Portage-utils</title>
@@ -17,7 +19,6 @@
 <author title="译者">
   <mail link="jjj3112000@126.com">Zezhou Jiang</mail>
 </author>
-
 
 <abstract>
 这个指南涵盖了一些普通的portage-utils用法，portage-utils是一套用C写的快速Portage帮助程序。

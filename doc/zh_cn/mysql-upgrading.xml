@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/mysql-upgrading.xml,v 1.21 2007/06/04 11:03:51 rane Exp $ -->
 
 <guide link="/doc/zh_cn/mysql-upgrading.xml" lang="zh_cn">
 <title>MySQL 4.*或5.0.*的升级指南</title>

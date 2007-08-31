@@ -1,4 +1,6 @@
 <?xml version='1.0' encoding="utf-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/alsa-guide.xml,v 1.80 2007/05/19 03:00:29 nightmorph Exp $ -->
+
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/alsa-guide.xml" lang="zh_cn">

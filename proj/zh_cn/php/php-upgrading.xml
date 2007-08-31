@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/php/php-upgrading.xml,v 1.5 2007/08/11 08:19:44 nightmorph Exp $ -->
 
-<guide link="php-upgrading.xml" lang="zh_cn">
+<guide link="/proj/zh_cn/php/php-upgrading.xml" lang="zh_cn">
 <title>升级PHP</title>
 
 <author title="作者">
@@ -10,7 +11,6 @@
 <author title="译者">
  <mail link="jjj3112000@126.com">Zezhou Jiang</mail>
 </author>
-
 
 <abstract>
 这个文档描述了程序终端用户需要跟随的安全升级PHP的步骤。
