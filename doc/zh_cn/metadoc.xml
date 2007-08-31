@@ -109,7 +109,7 @@
     <file id="ati-faq">/doc/en/ati-faq.xml</file>
     <file id="cvs-tutorial">/doc/en/cvs-tutorial.xml</file>
     <file id="devfs-guide">/doc/en/devfs-guide.xml</file>
-    <file id="distcc">/doc/zh_cn/distcc.xml</file>
+    <file id="distcc">/doc/en/distcc.xml</file>
     <file id="cross-distcc">/doc/en/cross-compiling-distcc.xml</file>
     <file id="dri-howto">/doc/en/dri-howto.xml</file>
     <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
@@ -231,7 +231,7 @@
     <file id="alsa-guide">/doc/zh_cn/alsa-guide.xml</file>
     <file id="xorg-config">/doc/en/xorg-config.xml</file>
     <file id="quick-samba-howto">/doc/en/quick-samba-howto.xml</file>
-    <file id="ltsp">/doc/zh_cn/ltsp.xml</file>
+    <file id="ltsp">/doc/en/ltsp.xml</file>
     <file id="gentoolkit">/doc/en/gentoolkit.xml</file>
     <file id="gentoo-sparc-quickinstall">/doc/en/gentoo-sparc-quickinstall.xml</file>
     <file id="gnupg-user">/doc/en/gnupg-user.xml</file>
@@ -383,7 +383,7 @@
     <file id="kernel-config">/doc/en/kernel-config.xml</file>
     <file id="zsh">/doc/en/zsh.xml</file>
     <file id="change-chost">/doc/en/change-chost.xml</file>
-    <file id="xfce-config">/doc/en/xfce-config.xml</file>
+    <file id="xfce-config">/doc/zh_cn/xfce-config.xml</file>
     <file id="gcc-optimization">/doc/en/gcc-optimization.xml</file>
     <file id="vpnc-howto">/doc/en/vpnc-howto.xml</file>
     <file id="qa-autofailure">/proj/en/qa/autofailure.xml</file>
