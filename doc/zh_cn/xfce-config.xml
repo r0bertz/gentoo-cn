@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding='UTF-8'?>
-
-
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/xfce-config.xml" lang="zh_cn">
@@ -34,9 +31,7 @@
 <body>
 
 <p>
-"<uri 
-link="http://www.xfce.org">Xfce</uri>是类Unix操作系统上的一个快捷、轻量级的桌面环境。它是为生产力而设计的，并且具备很好的可配置性，同时还符合<uri 
-link="http://www.freedesktop.org">Freedesktop</uri>的规范。
+<uri link="http://www.xfce.org">Xfce</uri>是类Unix操作系统上的一个快捷、轻量级的桌面环境。它是为生产力而设计的，并且具备很好的可配置性，同时还符合<uri link="http://www.freedesktop.org">Freedesktop</uri>的规范。
 </p>
 
 <p>
@@ -48,8 +43,7 @@ link="http://www.freedesktop.org">Freedesktop</uri>的规范。
 </p>
 
 <p>
-另外，本指南还将向你说明如何从4.2版本<uri 
-link="#upgrade">升级</uri>到4.4版本。
+另外，本指南还将向你说明如何从4.2版本<uri link="#upgrade">升级</uri>到4.4版本。
 </p>
 
 </body>
@@ -63,8 +57,7 @@ link="#upgrade">升级</uri>到4.4版本。
 <body>
 
 <p>
-首先，确定你已经按照<uri 
-link="/doc/zh_cn/xorg-config.xml">如何配置X服务器</uri>所说的安装好了Xorg。
+首先，确定你已经按照<uri link="/doc/zh_cn/xorg-config.xml">如何配置X服务器</uri>所说的安装好了Xorg。
 </p>
 
 <p>
@@ -89,8 +82,7 @@ link="/doc/zh_cn/xorg-config.xml">如何配置X服务器</uri>所说的安装好
 </table>
 
 <p>
-你可以自由地装上任何其它你想要软件包，但从现在开始，我们将坚持建议你安装一个快捷最小化的工作环境。请反复检查<path>/etc/make.conf</path>中的USE标记；你可能至少需要<c>USE="dbus 
--gnome hal startup-notification"</c>。
+你可以自由地装上任何其它你想要软件包，但从现在开始，我们将坚持建议你安装一个快捷最小化的工作环境。请反复检查<path>/etc/make.conf</path>中的USE标记；你可能至少需要<c>USE="dbus -gnome hal startup-notification"</c>。
 </p>
 
 <p>
@@ -102,9 +94,7 @@ link="/doc/zh_cn/xorg-config.xml">如何配置X服务器</uri>所说的安装好
 </pre>
 
 <p>
-然后，把你系统上的一般用户加到<c>plugdev</c>, 
-<c>cdrom</c>,<c>cdrw</c>, 
-和<c>usb</c>组里，这样他/她们便能充分使用<c>hal</c>来挂载和使用照相机、光驱和U盘等之类的设备。
+然后，把你系统上的一般用户加到<c>plugdev</c>，<c>cdrom</c>,<c>cdrw</c>和<c>usb</c>组里，这样他/她们便能充分使用<c>hal</c>来挂载和使用照相机、光驱和U盘等之类的设备。
 </p>
 
 <pre caption="把用户加入硬件组">
@@ -166,9 +156,7 @@ $ <i>startx</i>
 <body>
 
 <p>
-你可能注意到在桌面上点击鼠标右键将弹出一个菜单，上面有你所有的应用程序。这是非常有用的，但是一旦你打开了多个窗口，你的桌面将很容易被完全掩盖住，这样启动一个新的程序便变得很不方便了。所以，你所希望的第一件事就是在你的面板上添加一个便捷的应用程序菜单。右击面板，然后选择"Add 
-New Item"。滚动选项列表，选择 "Xfce 
-Menu"。你可以自己指定它在面板上的位置。当你点击它时,它会显示应用/选择菜单，上面给出了一个很好的分类清单，清单里包含了你已安装的程序。
+你可能注意到在桌面上点击鼠标右键将弹出一个菜单，上面有你所有的应用程序。这是非常有用的，但是一旦你打开了多个窗口，你的桌面将很容易被完全掩盖住，这样启动一个新的程序便变得很不方便了。所以，你所希望的第一件事就是在你的面板上添加一个便捷的应用程序菜单。右击面板，然后选择"Add New Item"。滚动选项列表，选择"Xfce Menu"。你可以自己指定它在面板上的位置。当你点击它时,它会显示应用/选择菜单，上面给出了一个很好的分类清单，清单里包含了你已安装的程序。
 </p>
 
 </body>
@@ -178,15 +166,11 @@ Menu"。你可以自己指定它在面板上的位置。当你点击它时,它�
 <body>
 
 <p>
-如果你已经（或者打算）安装一些流行的Gnome或KDE软件，比如<c>k3b</c>、<c>nautilus</c>、<c>kmail</c>、<c>evolution</c>等等，那么你要确定Xfce在启动时为这些程序启动了相应的服务。依次点击Menu 
---> Settings --> Sessions &amp; Startup。在 
-"Advanced"标签里面，选择相应的复选框。这样可能会稍微增加Xfce启动的时间，但是会减少加载KDE和Gnome应用程序的时间。
+如果你已经（或者打算）安装一些流行的Gnome或KDE软件，比如<c>k3b</c>、<c>nautilus</c>、<c>kmail</c>、<c>evolution</c>等等，那么你要确定Xfce在启动时为这些程序启动了相应的服务。依次点击Menu --> Settings --> Sessions &amp; Startup。在"Advanced"标签里面，选择相应的复选框。这样可能会稍微增加Xfce启动的时间，但是会减少加载KDE和Gnome应用程序的时间。
 </p>
 
 <p>
-Xfce能够保存你每次会话所做设置和运行的程序，这根据你在Sessions 
-&amp; 
-Startup菜单的"General"标签页的设置而定。当你退出登录时，既可以让Xfce自动保存也可以让Xfce每次都提示你是否要保存。当你想撤销错误的设置时这项功能尤其有用。意外关闭了面板该怎么办？只要在被问到是否要保存当前会话时选择否，那么下次你启动Xfce时，你原来的桌面就又回来了。想要在下次登录时自动加载你打开的浏览器、终端和邮件客户端吗？只要在退出时保存你的会话。
+Xfce能够保存你每次会话所做设置和运行的程序，这根据你在Sessions &amp; Startup菜单的"General"标签页的设置而定。当你退出登录时，既可以让Xfce自动保存也可以让Xfce每次都提示你是否要保存。当你想撤销错误的设置时这项功能尤其有用。意外关闭了面板该怎么办？只要在被问到是否要保存当前会话时选择否，那么下次你启动Xfce时，你原来的桌面就又回来了。想要在下次登录时自动加载你打开的浏览器、终端和邮件客户端吗？只要在退出时保存你的会话。
 </p>
 
 <p>
@@ -208,10 +192,7 @@ Startup菜单的"General"标签页的设置而定。当你退出登录时，既�
 </p>
 
 <p>
-Portage里面已经有许多可用的面板插件了；你用<c>emerge 
---search 
-xfce</c>自己看看。尽管这些插件的名字中大部分都是带有自我解释含义的，但是有一些插件还是值得引起我们注意的，因为它们非常有用。要使用它们，只要简单的<c>emerge</c>它们。当你右击面板时便能看到它们已经被加到“Add 
-New Item”菜单里的“Available Items”列表里面。
+Portage里面已经有许多可用的面板插件了；你用<c>emerge --search xfce</c>自己看看。尽管这些插件的名字中大部分都是带有自我解释含义的，但是有一些插件还是值得引起我们注意的，因为它们非常有用。要使用它们，只要简单的<c>emerge</c>它们。当你右击面板时便能看到它们已经被加到“Add New Item”菜单里的“Available Items”列表里面。
 </p>
 
 <ul>
@@ -219,7 +200,7 @@ New Item”菜单里的“Available Items”列表里面。
     <c>xfce4-mount</c>让你可以通过点击鼠标，便能方便地获得<path>/etc/fstab</path>中已挂载的设备的列表。
   </li>
   <li>
-    <c>xfce4-battery</c> 对于笔记本用户来说，是非常完美的。它可以显示电池的使用率、剩余时间、电源（交流电还是电池）、风扇状态、警告，甚至可以被配置在一定的电能水平下执行命令。当电池快耗尽时，这个功能可以让笔记本进入休眠状态。
+    <c>xfce4-battery</c>对于笔记本用户来说，是非常完美的。它可以显示电池的使用率、剩余时间、电源（交流电还是电池）、风扇状态、警告，甚至可以被配置在一定的电能水平下执行命令。当电池快耗尽时，这个功能可以让笔记本进入休眠状态。
   </li>
   <li>
     <c>verve</c>是嵌在面板上的一个小命令行。当你想运行一个命令时，用它会比另外打开一个终端还快。
@@ -240,8 +221,7 @@ New Item”菜单里的“Available Items”列表里面。
 <body>
 
 <p>
-Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>、<c>orage</c>和<c>mousepad</c>。注意：如果你安装<c>xfce4</c> 
-时用了<c>minimal</c>这个USE标记，那后3个程序将不会安装。然而，这些都是很小但却非常棒的程序，它们都很值得装上试试。
+Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>、<c>orage</c>和<c>mousepad</c>。注意：如果你安装<c>xfce4</c> 时用了<c>minimal</c>这个USE标记，那后3个程序将不会安装。然而，这些都是很小但却非常棒的程序，它们都很值得装上试试。
 </p>
 
 <p>
@@ -272,8 +252,7 @@ Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>
 </p>
 
 <p>
-尽管<c>mousepad</c>已经是相当好了，但如果你需要一个功能齐全的文字处理器，同时又不想要臃肿的OpenOffice，那么装上<c>abiword</c>试试。<uri 
-link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与业界标准文档类型完全互通的文字处理工具。
+尽管<c>mousepad</c>已经是相当好了，但如果你需要一个功能齐全的文字处理器，同时又不想要臃肿的OpenOffice，那么装上<c>abiword</c>试试。<uri link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与业界标准文档类型完全互通的文字处理工具。
 </p>
 
 <pre caption="加入一个文档处理器">
@@ -285,8 +264,7 @@ link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与�
 </p>
 
 <p>
-在网上聊天方面，<c>irssi</c>是一个优秀的IRC客户端，它运行于终端里，小巧并且配置性极好。如果你更倾向于想要一个包含了所有聊天协议的客户端，那么你可能想要<c>emerge 
-gaim</c>。
+在网上聊天方面，<c>irssi</c>是一个优秀的IRC客户端，它运行于终端里，小巧并且配置性极好。如果你更倾向于想要一个包含了所有聊天协议的客户端，那么你可能想要<c>emerge gaim</c>。
 </p>
 
 <p>
@@ -294,8 +272,7 @@ gaim</c>。
 </p>
 
 <p>
-最后，你还需要一个网页浏览器。几乎所有的图形化网页浏览器都要比你大多数的桌面应用程序占用更多的资源。尽管如此，<c>mozilla-firefox</c>（或者 
-<c>mozilla-firefox-bin</c>）依然是一个很好的选择。除此之外，你可能发现<c>opera</c>速度也是相当快的。但是<c>opera</c>并不像<c>mozilla-firefox</c>一样可用于这么多种架构的处理器，并且它有更多的依赖关系，除非你用USE标记忽略它们。
+最后，你还需要一个网页浏览器。几乎所有的图形化网页浏览器都要比你大多数的桌面应用程序占用更多的资源。尽管如此，<c>mozilla-firefox</c>（或者 <c>mozilla-firefox-bin</c>）依然是一个很好的选择。除此之外，你可能发现<c>opera</c>速度也是相当快的。但是<c>opera</c>并不像<c>mozilla-firefox</c>一样可用于这么多种架构的处理器，并且它有更多的依赖关系，除非你用USE标记忽略它们。
 </p>
 
 <pre caption="添加一个网页浏览器">
@@ -344,7 +321,7 @@ gaim</c>。
 然后在<path>/etc/conf.d/xdm</path>中编辑DISPLAYMANAGER变量：
 </p>
 
-<pre caption="编辑 /etc/conf.d/xdm">
+<pre caption="编辑/etc/conf.d/xdm">
 DISPLAYMANAGER="xdm"
 </pre>
 
@@ -364,7 +341,7 @@ DISPLAYMANAGER="xdm"
 接着，把DISPLAYMANAGER变量的值改为<c>gdm</c>而不是<c>xdm</c>：
 </p>
 
-<pre caption="编辑 /etc/conf.d/xdm">
+<pre caption="编辑/etc/conf.d/xdm">
 DISPLAYMANAGER="gdm"
 </pre>
 
@@ -379,22 +356,15 @@ DISPLAYMANAGER="gdm"
 </p>
 
 <p>
-<uri link="/main/en/graphics.xml">Gentoo 
-website</uri>上面已收集了一批包含了各种分辨率的漂亮的Gentoo壁纸。如果你在寻找图标集和完整的Xfce主题，那到<uri 
-link="http://www.xfce-look.org/">Xfce-Look</uri>这里来，这上面有很多。还有件重要的事情要记住，对于你下载的任何第三方美化包，通常需要先解压，然后再安装到合适的目录里。如果你想让你系统上所有的用户都能使用这些主题和图标集，那么把图标集安装到<path>/usr/share/icons/</path>，主题安装到<path>/usr/share/themes/</path>。如果仅供当前用户使用，那么把主题和图标集分别安装到<path>~/.themes/</path>和<path>~/.icons/</path>。
+<uri link="/main/en/graphics.xml">Gentoo website</uri>上面已收集了一批包含了各种分辨率的漂亮的Gentoo壁纸。如果你在寻找图标集和完整的Xfce主题，那到<uri link="http://www.xfce-look.org/">Xfce-Look</uri>这里来，这上面有很多。还有件重要的事情要记住，对于你下载的任何第三方美化包，通常需要先解压，然后再安装到合适的目录里。如果你想让你系统上所有的用户都能使用这些主题和图标集，那么把图标集安装到<path>/usr/share/icons/</path>，主题安装到<path>/usr/share/themes/</path>。如果仅供当前用户使用，那么把主题和图标集分别安装到<path>~/.themes/</path>和<path>~/.icons/</path>。
 </p>
 
 <p>
-如果你安装了GDM作为你的显示管理器，那看一下<uri 
-link="http://www.gnome-look.org">Gnome-Look</uri>这上面的许多GDM主题。安装它们，你既可以在命令行下把它们解压到<path>/usr/share/gdm/themes/</path>，也可以以 <b>root</b> 身份运行<c>gdmsetup</c>，然后把归档文件（压缩包）拖放到GDM窗口。这里还有一些<uri 
-link="http://gnome-look.org/content/show.php?content=45575">非常好的</uri>Gentoo<uri 
-link="http://gnome-look.org/content/show.php?content=20071">主题</uri>。
+如果你安装了GDM作为你的显示管理器，那看一下<uri link="http://www.gnome-look.org">Gnome-Look</uri>这上面的许多GDM主题。安装它们，你既可以在命令行下把它们解压到<path>/usr/share/gdm/themes/</path>，也可以以<b>root</b>身份运行<c>gdmsetup</c>，然后把归档文件（压缩包）拖放到GDM窗口。这里还有一些<uri link="http://gnome-look.org/content/show.php?content=45575">非常好的</uri>Gentoo<uri link="http://gnome-look.org/content/show.php?content=20071">主题</uri>。
 </p>
 
 <p>
-最后，Xfce还拥有自己内建的混色工具来管理窗口的透明化。你可以在Menu 
---> Settings --> Window 
-Manager这里找到这个选项。为了达到最好的效果，你需要让你的显卡使用支持硬件加速渲染的驱动。确认你安装<c>xfwm4</c>时加入了<c>xcomposite</c>USE标记。接着，你需要在<path>/etc/X11/xorg.conf</path>中打开混色开关，加入一下片断：
+最后，Xfce还拥有自己内建的混色工具来管理窗口的透明化。你可以在Menu --> Settings --> Window Manager这里找到这个选项。为了达到最好的效果，你需要让你的显卡使用支持硬件加速渲染的驱动。确认你安装<c>xfwm4</c>时加入了<c>xcomposite</c>USE标记。接着，你需要在<path>/etc/X11/xorg.conf</path>中打开混色开关，加入一下片断：
 </p>
 
 <pre caption="打开xorg.conf中的混色开关">
@@ -404,8 +374,7 @@ EndSection
 </pre>
 
 <p>
-这仅仅是Xfce和Xorg-X11所要求的最低限度配置。但是，对硬件加速的设置则取决于你自己的显卡，这已经超出本文讨论的范围了。请阅读<uri 
-link="/doc/zh_cn/index.xml?catid=desktop">桌面文档资源</uri>列表中的其它指南，来学会如何配置让你的显卡实现硬件加速。
+这仅仅是Xfce和Xorg-X11所要求的最低限度配置。但是，对硬件加速的设置则取决于你自己的显卡，这已经超出本文讨论的范围了。请阅读<uri link="/doc/zh_cn/index.xml?catid=desktop">桌面文档资源</uri>列表中的其它指南，来学会如何配置让你的显卡实现硬件加速。
 </p>
 
 </body>
@@ -423,20 +392,15 @@ link="/doc/zh_cn/index.xml?catid=desktop">桌面文档资源</uri>列表中的�
 </p>
 
 <p>
-首先，更新你的Portage树（<c>emerge 
---sync</c>），然后看看Xfce有哪些组件可以升级（<c>emerge 
--pvtuD world</c>）。
+首先，更新你的Portage树（<c>emerge --sync</c>），然后看看Xfce有哪些组件可以升级（<c>emerge -pvtuD world</c>）。
 </p>
 
 <p>
-你会注意到有一些包阻止了你的升级，因为大多数4.2的包是不能与4.4的包共存的。这里有个直截了当的办法：只要像<uri 
-link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=1">Portage手册</uri>和<c>man 
-emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续了。
+你会注意到有一些包阻止了你的升级，因为大多数4.2的包是不能与4.4的包共存的。这里有个直截了当的办法：只要像<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=1">Portage手册</uri>和<c>man emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续了。
 </p>
 
 <p>
-接着，你可能需要重建某些包，如跟 
-<c>dbus</c>挂钩的应用程序。首先你需要安装<c>gentoolkit</c>。一旦<c>gentoolkit</c>安装好了，运行：
+接着，你可能需要重建某些包，如跟<c>dbus</c>挂钩的应用程序。首先你需要安装<c>gentoolkit</c>。一旦<c>gentoolkit</c>安装好了，运行：
 </p>
 
 <pre caption="重建包">
@@ -450,9 +414,7 @@ emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续�
 </note>
 
 <p>
-一旦重建完成，再一次运行<c>revdep-rebuild 
--p</c>，这一次只是确定你已经有了一个干净可靠的系统。如果还出现任何出错信息，继续<c>revdep-rebuild 
--p</c>和<c>revdep-rebuild</c>直到再也没有关于有包被损坏的消息出现。由于Xfce相当广泛地使用了<c>dbus</c>，所以大多数的升级问题都源于<c>dbus</c>。
+一旦重建完成，再一次运行<c>revdep-rebuild -p</c>，这一次只是确定你已经有了一个干净可靠的系统。如果还出现任何出错信息，继续<c>revdep-rebuild -p</c>和<c>revdep-rebuild</c>直到再也没有关于有包被损坏的消息出现。由于Xfce相当广泛地使用了<c>dbus</c>，所以大多数的升级问题都源于<c>dbus</c>。
 </p>
 
 <p>
@@ -479,21 +441,15 @@ emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续�
 <body>
 
 <p>
-确定你熟悉了新Settings 
-Manager里面所有的新选项。在桌面屏幕上进行操作是我们感兴趣的地方；Xfce现在可以管理你的桌面并且在上面安放图标了。
+确定你熟悉了新Settings Manager里面所有的新选项。在桌面屏幕上进行操作是我们感兴趣的地方；Xfce现在可以管理你的桌面并且在上面安放图标了。
 </p>
 
 <p>
-还有一个Window Manager 
-Tweaks窗口，在那里你可以调整窗口、工作区间还有透明化（如果支持的话）的属性值。Xfce4.4稍微改变了工作区间与焦点活动窗口之间的默认行为。如果你发现在一个工作区间里点击一个超链接，却把你在另外一个区间里的浏览器调了过来（或者类似烦人的窗口聚焦行为），那么设置Settings 
---> Window Manager Tweaks --> Focus --> Activate Focus Stealing 
-Prevention试试。
+还有一个Window Manager Tweaks窗口，在那里你可以调整窗口、工作区间还有透明化（如果支持的话）的属性值。Xfce4.4稍微改变了工作区间与焦点活动窗口之间的默认行为。如果你发现在一个工作区间里点击一个超链接，却把你在另外一个区间里的浏览器调了过来（或者类似烦人的窗口聚焦行为），那么设置Settings --> Window Manager Tweaks --> Focus --> Activate Focus Stealing Prevention试试。
 </p>
 
 <p>
-确定你阅读了<uri 
-link="http://www.xfce.org/documentation/">Xfce文档</uri>并且通过<uri 
-link="http://www.xfce.org/about/tour">Xfce历程</uri>了解了更多关于4.4的信息和学到了更多配置它的方法。
+确定你阅读了<uri link="http://www.xfce.org/documentation/">Xfce文档</uri>并且通过<uri link="http://www.xfce.org/about/tour">Xfce历程</uri>了解了更多关于4.4的信息和学到了更多配置它的方法。
 </p>
 
 </body>
