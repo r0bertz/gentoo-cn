@@ -1,0 +1,534 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/xfce-config.xml" lang="zh_cn">
+
+<title>Xfce配置指南</title>
+
+<author title="作者">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+
+<author title="译者">
+  <mail link="wcw8410@gmail.com">吴传文</mail>
+</author>
+
+<abstract>
+本指南对Xfce进行了广泛的介绍。Xfce是一个快捷的、轻量级的，功能齐全的桌面环境。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.6</version>
+<date>2007年7月21号</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>Xfce桌面环境</title>
+<body>
+
+<p>
+"<uri 
+link="http://www.xfce.org">Xfce</uri>是类Unix操作系统上的一个快捷、轻量级的桌面环境。它是为生产力而设计的，并且具备很好的可配置性，同时还符合<uri 
+link="http://www.freedesktop.org">Freedesktop</uri>的规范。
+</p>
+
+<p>
+不像Gnome和KDE等这些比较臃肿的桌面环境，Xfce占用的系统资源要少得多。另外，它拥有更好的模块性和更少的依赖性；它将占用你更少的磁盘空间和更少的安装时间。
+</p>
+
+<p>
+这篇指南将不仅向你说明如何安装和配置一个最小化的Xfce环境，并且还将探索一些可用方案来创建一个功能齐全的桌面环境，保持与Xfce设计思想的一致：轻巧，快速和模块化。
+</p>
+
+<p>
+另外，本指南还将向你说明如何从4.2版本<uri 
+link="#upgrade">升级</uri>到4.4版本。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装Xfce</title>
+<section>
+<title>基础</title>
+<body>
+
+<p>
+首先，确定你已经按照<uri 
+link="/doc/zh_cn/xorg-config.xml">如何配置X服务器</uri>所说的安装好了Xorg。
+</p>
+
+<p>
+在我们安装功能齐全的最小化桌面之前，让我们花点时间来回顾一下我们将要安装的基本软件包。
+</p>
+
+<table>
+<tr>
+  <th>名称</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>xfce4</ti>
+  <ti>基本的Xfce桌面环境</ti>
+</tr>
+<tr>
+  <ti>xscreensaver</ti>
+  <ti>
+    带省电功能的屏保,并能够锁定屏幕安全
+  </ti>
+</tr>
+</table>
+
+<p>
+你可以自由地装上任何其它你想要软件包，但从现在开始，我们将坚持建议你安装一个快捷最小化的工作环境。请反复检查<path>/etc/make.conf</path>中的USE标记；你可能至少需要<c>USE="dbus 
+-gnome hal startup-notification"</c>。
+</p>
+
+<p>
+现在，让我们开始安装Xfce。
+</p>
+
+<pre caption="安装Xfce">
+# <i>emerge -avt xfce4 xscreensaver</i>
+</pre>
+
+<p>
+然后，把你系统上的一般用户加到<c>plugdev</c>, 
+<c>cdrom</c>,<c>cdrw</c>, 
+和<c>usb</c>组里，这样他/她们便能充分使用<c>hal</c>来挂载和使用照相机、光驱和U盘等之类的设备。
+</p>
+
+<pre caption="把用户加入硬件组">
+<comment>（用你真实的用户名来代替username）</comment>
+# <i>for x in plugdev cdrom cdrw usb ; do gpasswd -a username $x ; done</i>
+</pre>
+
+<p>
+接着，更新你的环境变量：
+</p>
+
+<pre caption="更新环境变量">
+# <i>env-update &amp;&amp; source /etc/profile</i>
+</pre>
+
+<p>
+现在启动<c>hald</c>并且把它加到default运行级别：
+</p>
+
+<pre caption="启动hald">
+# <i>/etc/init.d/hald start</i>
+# <i>rc-update add hald default</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>配置Xfce</title>
+<section>
+<title>启动Xfce</title>
+<body>
+
+<p>
+现在Xfce已经安装完毕了，接着我们将把它设置成我们默认的桌面环境，一旦我们执行<c>startx</c>便可进入。将你的root用户退出然后以普通用户的身份登录。
+</p>
+
+<pre caption="设置Xfce作为默认的桌面环境">
+$ <i>echo "exec startxfce4" > ~/.xinitrc</i>
+</pre>
+
+<p>
+现在敲入<c>startx</c>来启动你的图形环境：
+</p>
+
+<pre caption="启动Xfce">
+$ <i>startx</i>
+</pre>
+
+<p>
+恭喜！欢迎你进入Xfce桌面环境。继续看下去，再扩展一点。接下去的部分将教你如何根据自己的要求来配置Xfce。
+</p>
+
+</body>
+</section>
+<section>
+<title>程序启动</title>
+<body>
+
+<p>
+你可能注意到在桌面上点击鼠标右键将弹出一个菜单，上面有你所有的应用程序。这是非常有用的，但是一旦你打开了多个窗口，你的桌面将很容易被完全掩盖住，这样启动一个新的程序便变得很不方便了。所以，你所希望的第一件事就是在你的面板上添加一个便捷的应用程序菜单。右击面板，然后选择"Add 
+New Item"。滚动选项列表，选择 "Xfce 
+Menu"。你可以自己指定它在面板上的位置。当你点击它时,它会显示应用/选择菜单，上面给出了一个很好的分类清单，清单里包含了你已安装的程序。
+</p>
+
+</body>
+</section>
+<section>
+<title>Sessions &amp; startup</title>
+<body>
+
+<p>
+如果你已经（或者打算）安装一些流行的Gnome或KDE软件，比如<c>k3b</c>、<c>nautilus</c>、<c>kmail</c>、<c>evolution</c>等等，那么你要确定Xfce在启动时为这些程序启动了相应的服务。依次点击Menu 
+--> Settings --> Sessions &amp; Startup。在 
+"Advanced"标签里面，选择相应的复选框。这样可能会稍微增加Xfce启动的时间，但是会减少加载KDE和Gnome应用程序的时间。
+</p>
+
+<p>
+Xfce能够保存你每次会话所做设置和运行的程序，这根据你在Sessions 
+&amp; 
+Startup菜单的"General"标签页的设置而定。当你退出登录时，既可以让Xfce自动保存也可以让Xfce每次都提示你是否要保存。当你想撤销错误的设置时这项功能尤其有用。意外关闭了面板该怎么办？只要在被问到是否要保存当前会话时选择否，那么下次你启动Xfce时，你原来的桌面就又回来了。想要在下次登录时自动加载你打开的浏览器、终端和邮件客户端吗？只要在退出时保存你的会话。
+</p>
+
+<p>
+你已经安装并配置了一个基本的工作环境。但如果你还有兴趣动手做更多的事情，请接着下去！
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>附加的应用程序</title>
+<section>
+<title>面板插件</title>
+<body>
+
+<p>
+在这一小节里面，我们将讨论一些在Xfce里面每天都会用到的有用插件和应用软件。
+</p>
+
+<p>
+Portage里面已经有许多可用的面板插件了；你用<c>emerge 
+--search 
+xfce</c>自己看看。尽管这些插件的名字中大部分都是带有自我解释含义的，但是有一些插件还是值得引起我们注意的，因为它们非常有用。要使用它们，只要简单的<c>emerge</c>它们。当你右击面板时便能看到它们已经被加到“Add 
+New Item”菜单里的“Available Items”列表里面。
+</p>
+
+<ul>
+  <li>
+    <c>xfce4-mount</c>让你可以通过点击鼠标，便能方便地获得<path>/etc/fstab</path>中已挂载的设备的列表。
+  </li>
+  <li>
+    <c>xfce4-battery</c> 对于笔记本用户来说，是非常完美的。它可以显示电池的使用率、剩余时间、电源（交流电还是电池）、风扇状态、警告，甚至可以被配置在一定的电能水平下执行命令。当电池快耗尽时，这个功能可以让笔记本进入休眠状态。
+  </li>
+  <li>
+    <c>verve</c>是嵌在面板上的一个小命令行。当你想运行一个命令时，用它会比另外打开一个终端还快。
+  </li>
+  <li>
+    <c>xfce4-mixer</c>是音量控制器。它能控制ALSA和OSS声音程序。
+  </li>
+</ul>
+
+<p>
+如果在这些为Xfce定做的插件里找不到你想要的，那么尝试在Gnome面板插件的列表里寻找！是的，先安装<c>xfce4-xfapplet</c>，然后你就可以安装和运行Gnome里的插件。
+</p>
+
+</body>
+</section>
+<section>
+<title>有用的程序</title>
+<body>
+
+<p>
+Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>、<c>orage</c>和<c>mousepad</c>。注意：如果你安装<c>xfce4</c> 
+时用了<c>minimal</c>这个USE标记，那后3个程序将不会安装。然而，这些都是很小但却非常棒的程序，它们都很值得装上试试。
+</p>
+
+<p>
+<c>orage</c>是一个简便易用的日历。<c>mousepad</c>是一个十分精简的文本编辑器，它的启动速度非常快。<c>terminal</c>则远比xterm更好配置更好用，它支持Unicode文本和伪透明，并通过Xfce内建的混色工具加快了透明化的速度，达到了即开即透明的效果。只是有一点你要确定下，你面板上的终端启动器默认运行的命令是<path>/usr/bin/Terminal</path>而不是xterm。右击该终端启动器然后选择"Properties"来改变它的命令。
+</p>
+
+<p>
+<c>thunar</c>是Xfce内建的一个图形化文件管理器。它更快但功能却更强大，能通过插件来实现更多的功能；只需通过<c>emerge</c>来安装。让我们来看一看：
+</p>
+
+<ul>
+  <li>
+    <c>thunar-archive</c>让你可以通过右击菜单来创建和解开归档（压缩）文件。如果它与<c>xarchiver</c>结合，则更加好用。<c>xarchiver</c>是一个为刚刚为Xfce开发的图形化归档<uri link="http://www.foo-projects.org/~benny/projects/thunar-archive-plugin/">工具</uri>。
+  </li>
+  <li>
+    <c>thunar-media-tags</c>让你可以一次性智能地对多个媒体文件进行重命名，并且让你能<uri link="http://thunar.xfce.org/pwiki/projects/thunar-media-tags-plugin">编辑</uri>这些文件的标签（tags)信息,例如id3标签。
+  </li>
+  <li>
+    <c>thunar-thumbnailers</c>让你可以在Thunar里面<uri link="http://goodies.xfce.org/projects/thunar-plugins/thunar-thumbnailers">预览</uri>某些类型的文件，像图片和字体。
+  </li>
+  <li>
+    <c>thunar-volman</c>自动<uri link="http://foo-projects.org/~benny/projects/thunar-volman/">管理</uri>即插即用的媒体设备和驱动器。
+  </li>
+</ul>
+
+<p>
+接着，我们加进一些有用的轻量级桌面应用程序，来与Xfce的设计思想保持一致。
+</p>
+
+<p>
+尽管<c>mousepad</c>已经是相当好了，但如果你需要一个功能齐全的文字处理器，同时又不想要臃肿的OpenOffice，那么装上<c>abiword</c>试试。<uri 
+link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与业界标准文档类型完全互通的文字处理工具。
+</p>
+
+<pre caption="加入一个文档处理器">
+# <i>emerge -avt abiword</i>
+</pre>
+
+<p>
+你想要一个好用的电子邮件客户端／新闻广播员，但又不要求要像<c>mozilla-thunderbird</c>或者<c>evolution</c>，有什么好办法呢？装上<c>sylpheed-claws</c>或者<c>claws-mail</c>试试。
+</p>
+
+<p>
+在网上聊天方面，<c>irssi</c>是一个优秀的IRC客户端，它运行于终端里，小巧并且配置性极好。如果你更倾向于想要一个包含了所有聊天协议的客户端，那么你可能想要<c>emerge 
+gaim</c>。
+</p>
+
+<p>
+如果你需要电影和音乐播放器，那没有比<c>mplayer</c>和<c>audacious</c>更好的了。几乎所有格式的多媒体文件它们都能很好地播放，它们还有很多现成的插件可以用来扩展更多的功能。
+</p>
+
+<p>
+最后，你还需要一个网页浏览器。几乎所有的图形化网页浏览器都要比你大多数的桌面应用程序占用更多的资源。尽管如此，<c>mozilla-firefox</c>（或者 
+<c>mozilla-firefox-bin</c>）依然是一个很好的选择。除此之外，你可能发现<c>opera</c>速度也是相当快的。但是<c>opera</c>并不像<c>mozilla-firefox</c>一样可用于这么多种架构的处理器，并且它有更多的依赖关系，除非你用USE标记忽略它们。
+</p>
+
+<pre caption="添加一个网页浏览器">
+<comment>（安装Mozilla Firefox）</comment>
+# <i>emerge mozilla-firefox</i>
+<comment>（安装Opera）</comment>
+# <i>echo "www-client/opera qt-static" >> /etc/portage/package.use</i>
+# <i>emerge opera</i>
+</pre>
+
+<p>
+到这里，我们已经提出一些很好的建议来丰富你的桌面应用，接着，看看我们还可以做些什么来提升你的Xfce体验。
+</p>
+
+</body>
+</section>
+<section>
+<title>图形界面登录</title>
+<body>
+
+<p>
+还记得我们添加<c>startxfce4</c>到<path>~/.xinitrc</path>文件中吗？要进入你的桌面，你所需要做的就是在登录以后敲入<c>startx</c>。这种方法是很好的，如果你喜欢完全基于文本启动和登录的话。否则，让我们使用一个显示管理器，它会在你系统引导后自动启动Xfce（这样你就能用图形化界面登录）。
+</p>
+
+<p>
+首先，让我们确定下系统启动后加载了Xfce：
+</p>
+
+<pre caption="添加xdm到default运行级别">
+# <i>rc-update add xdm default</i>
+</pre>
+
+<p>
+这还远没有结束。我们还要挑选一个显示管理器然后设置一些合适的变量。尽管在Portage中有若干显示管理器可以选择，但在这篇指南中，我们将坚持两个选择：<c>xdm</c>和<c>gdm</c>。
+</p>
+
+<p>
+<c>xdm</c>速度很快而且是轻量级的，但是它不够美观，并且定制性不好。如果你想要使用它，那先<c>emerge</c>它：
+</p>
+
+<pre caption="安装XDM">
+# <i>emerge -avt xdm</i>
+</pre>
+
+<p>
+然后在<path>/etc/conf.d/xdm</path>中编辑DISPLAYMANAGER变量：
+</p>
+
+<pre caption="编辑 /etc/conf.d/xdm">
+DISPLAYMANAGER="xdm"
+</pre>
+
+<p>
+把XSESSION="Xfce4"添加到<path>/etc/rc.conf</path>，这样<c>xdm</c>就能自动启动你的Xfce了。
+</p>
+
+<p>
+在你选择坚持用（相当难看的）<c>xdm</c>的同时，为什么不试一下<c>gdm</c>呢？配置它要容易得多，并且它要远远漂亮得多。首先，<c>emerge</c>它。注意到虽然它依赖一些软件，但这些软件都很很小，而且数量也比其它显示管理器所依赖的软件数量少。
+</p>
+
+<pre caption="安装GDM">
+# <i>emerge -avt gdm</i>
+</pre>
+
+<p>
+接着，把DISPLAYMANAGER变量的值改为<c>gdm</c>而不是<c>xdm</c>：
+</p>
+
+<pre caption="编辑 /etc/conf.d/xdm">
+DISPLAYMANAGER="gdm"
+</pre>
+
+</body>
+</section>
+<section>
+<title>美化你的桌面</title>
+<body>
+
+<p>
+对桌面外观稍微设置下是大有裨益的。Xfce拥有所有你期望从现代桌面系统得到的设置选项，字体反锯齿设置、颜色模板、大量的窗体装饰物、主题，等等还有很多。如果这还不够，那安装第三方的主题、图标集、鼠标光标主题还有壁纸也很容易。
+</p>
+
+<p>
+<uri link="/main/en/graphics.xml">Gentoo 
+website</uri>上面已收集了一批包含了各种分辨率的漂亮的Gentoo壁纸。如果你在寻找图标集和完整的Xfce主题，那到<uri 
+link="http://www.xfce-look.org/">Xfce-Look</uri>这里来，这上面有很多。还有件重要的事情要记住，对于你下载的任何第三方美化包，通常需要先解压，然后再安装到合适的目录里。如果你想让你系统上所有的用户都能使用这些主题和图标集，那么把图标集安装到<path>/usr/share/icons/</path>，主题安装到<path>/usr/share/themes/</path>。如果仅供当前用户使用，那么把主题和图标集分别安装到<path>~/.themes/</path>和<path>~/.icons/</path>。
+</p>
+
+<p>
+如果你安装了GDM作为你的显示管理器，那看一下<uri 
+link="http://www.gnome-look.org">Gnome-Look</uri>这上面的许多GDM主题。安装它们，你既可以在命令行下把它们解压到<path>/usr/share/gdm/themes/</path>，也可以以 <b>root</b> 身份运行<c>gdmsetup</c>，然后把归档文件（压缩包）拖放到GDM窗口。这里还有一些<uri 
+link="http://gnome-look.org/content/show.php?content=45575">非常好的</uri>Gentoo<uri 
+link="http://gnome-look.org/content/show.php?content=20071">主题</uri>。
+</p>
+
+<p>
+最后，Xfce还拥有自己内建的混色工具来管理窗口的透明化。你可以在Menu 
+--> Settings --> Window 
+Manager这里找到这个选项。为了达到最好的效果，你需要让你的显卡使用支持硬件加速渲染的驱动。确认你安装<c>xfwm4</c>时加入了<c>xcomposite</c>USE标记。接着，你需要在<path>/etc/X11/xorg.conf</path>中打开混色开关，加入一下片断：
+</p>
+
+<pre caption="打开xorg.conf中的混色开关">
+Section "Extensions"
+    Option  "Composite"  "Enable"
+EndSection
+</pre>
+
+<p>
+这仅仅是Xfce和Xorg-X11所要求的最低限度配置。但是，对硬件加速的设置则取决于你自己的显卡，这已经超出本文讨论的范围了。请阅读<uri 
+link="/doc/zh_cn/index.xml?catid=desktop">桌面文档资源</uri>列表中的其它指南，来学会如何配置让你的显卡实现硬件加速。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="upgrade">
+<title>升级</title>
+<section>
+<title>从4.2升级到4.4</title>
+<body>
+
+<p>
+把Xfce从4.2升级到4.4并不麻烦，它就跟大多数的升级一样简单。在4.4版本里面，许多过时的软件包不是被淘汰就是它们的功能已经以其它方式被包含进桌面了。
+</p>
+
+<p>
+首先，更新你的Portage树（<c>emerge 
+--sync</c>），然后看看Xfce有哪些组件可以升级（<c>emerge 
+-pvtuD world</c>）。
+</p>
+
+<p>
+你会注意到有一些包阻止了你的升级，因为大多数4.2的包是不能与4.4的包共存的。这里有个直截了当的办法：只要像<uri 
+link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=1">Portage手册</uri>和<c>man 
+emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续了。
+</p>
+
+<p>
+接着，你可能需要重建某些包，如跟 
+<c>dbus</c>挂钩的应用程序。首先你需要安装<c>gentoolkit</c>。一旦<c>gentoolkit</c>安装好了，运行：
+</p>
+
+<pre caption="重建包">
+# <i>revdep-rebuild -p</i>
+<comment>（如果你在输出看到了任何关于有包被破坏的信息，那么运行下一条命令）</comment>
+# <i>revdep-rebuild</i>
+</pre>
+
+<note>
+更多的信息，请参考<c>man revdep-rebuild</c>和<uri link="/doc/zh_cn/gentoolkit.xml">Gentoolkit指南</uri>。
+</note>
+
+<p>
+一旦重建完成，再一次运行<c>revdep-rebuild 
+-p</c>，这一次只是确定你已经有了一个干净可靠的系统。如果还出现任何出错信息，继续<c>revdep-rebuild 
+-p</c>和<c>revdep-rebuild</c>直到再也没有关于有包被损坏的消息出现。由于Xfce相当广泛地使用了<c>dbus</c>，所以大多数的升级问题都源于<c>dbus</c>。
+</p>
+
+<p>
+接着，重启<c>dbus</c>和／或<c>hal</c>。
+</p>
+
+<pre caption="重启dbus和hal">
+# <i>/etc/init.d/dbus restart</i>
+# <i>/etc/init.d/hald restart</i>
+</pre>
+
+<p>
+最后，给你自己一个全新的环境。
+</p>
+
+<pre caption="更新环境变量">
+# <i>env-update &amp;&amp; source /etc/profile</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>设置</title>
+<body>
+
+<p>
+确定你熟悉了新Settings 
+Manager里面所有的新选项。在桌面屏幕上进行操作是我们感兴趣的地方；Xfce现在可以管理你的桌面并且在上面安放图标了。
+</p>
+
+<p>
+还有一个Window Manager 
+Tweaks窗口，在那里你可以调整窗口、工作区间还有透明化（如果支持的话）的属性值。Xfce4.4稍微改变了工作区间与焦点活动窗口之间的默认行为。如果你发现在一个工作区间里点击一个超链接，却把你在另外一个区间里的浏览器调了过来（或者类似烦人的窗口聚焦行为），那么设置Settings 
+--> Window Manager Tweaks --> Focus --> Activate Focus Stealing 
+Prevention试试。
+</p>
+
+<p>
+确定你阅读了<uri 
+link="http://www.xfce.org/documentation/">Xfce文档</uri>并且通过<uri 
+link="http://www.xfce.org/about/tour">Xfce历程</uri>了解了更多关于4.4的信息和学到了更多配置它的方法。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>总结</title>
+<section>
+<body>
+
+<p>
+祝贺你已经走到这么远了！你已经为你的计算需要安装配置了快捷的桌面环境和可靠的应用套件。
+</p>
+
+</body>
+</section>
+<section>
+<title>资源</title>
+<body>
+
+<p>
+对于配置和使用Xfce你还需要其它的帮助吗？还想得到更多轻量级应用程序的建议？试试到这里找找：
+</p>
+
+<ul>
+  <li><uri link="http://forums.gentoo.org">The Gentoo forums</uri></li>
+  <li>#irc.freenode.net上的xfce频道</li>
+  <li>
+    <path>/usr/share/xfce4/doc/C/index.html</path>这里提供了Xfce的安装帮助文档和其它文档。把你的浏览器对准这里开始阅读。甚至还有许多配置选项的细节“隐藏”在这些帮助文档里面。
+  </li>
+  <li><uri link="http://www.xfce.org">Xfce's home page</uri></li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
