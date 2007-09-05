@@ -56,7 +56,7 @@
     <file id="art-bash-ex-p1">/doc/en/articles/bash-by-example-p1.xml</file>
     <file id="art-bash-ex-p2">/doc/en/articles/bash-by-example-p2.xml</file>
     <file id="art-bash-ex-p3">/doc/en/articles/bash-by-example-p3.xml</file>
-    <file id="art-mk-distro-p1">/doc/en/articles/making-the-distro-p1.xml</file>
+    <file id="art-mk-distro-p1">/doc/zh_cn/articles/making-the-distro-p1.xml</file>
     <file id="art-mk-distro-p2">/doc/en/articles/making-the-distro-p2.xml</file>
     <file id="art-mk-distro-p3">/doc/en/articles/making-the-distro-p3.xml</file>
     <file id="art-lpi-101-fundamentals-p1">/doc/en/articles/lpi-101-fundamentals-p1.xml</file>
@@ -116,7 +116,7 @@
     <file id="gentoo-upgrading">/doc/en/gentoo-upgrading.xml</file>
     <file id="2.6-migration">/doc/en/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
-    <file id="faq">/doc/en/faq.xml</file>
+    <file id="faq">/doc/zh_cn/faq.xml</file>
     <file id="gentoo-alpha-faq">/doc/en/gentoo-alpha-faq.xml</file>
     <file id="gentoo-amd64-faq">/doc/en/gentoo-amd64-faq.xml</file>
     <file id="handbook-alpha">/doc/zh_cn/handbook/handbook-alpha.xml</file>
