@@ -1,0 +1,1288 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/faq.xml,v 1.106 2006/11/29 15:48:57 nightmorph Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/faq.xml" lang="zh_cn">
+<title>Gentoo Linux Frequently Asked Questions</title>
+<author title="Author">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="Reviewer">
+  Colin Morey
+</author>
+<author title="Editor"><!-- zhen@gentoo.org -->
+  John P. Davis
+</author>
+<author title="Editor">
+  <mail link="stocke2@gentoo.org">Eric Stockbridge</mail>
+</author>
+<author title="Editor">
+  <mail link="zhware@gentoo.org">Stoyan Zhekov</mail>
+</author>
+<author title="Editor">
+  <mail link="carl@gentoo.org">Carl Anderson</mail>
+</author>
+<author title="Editor">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="Editor">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="Editor">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="Editor">
+  <mail link="smithj@gentoo.org">Jonathan Smith</mail>
+</author>
+<author title="Translator">
+  <mail link="linuxfans.linky@gmail.com">范华</mail>
+</author>
+
+<abstract>
+This FAQ is a collection of questions and answers collected from the gentoo-dev 
+mailing list and from IRC.
+
+这个FAQ是重gentoo-dev邮件列表和IRC中的一些问题和解答的集合.
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>3.6</version>
+<date>2006-02-13</date>
+
+<chapter>
+<title>问题:</title>
+<section>
+<title>让我们开始</title>
+<body>
+
+<p>
+Please note that many of these questions are answered within the official
+Gentoo documents and guides. This is simply a list of common questions. Please
+read the documentation and/or man pages to gain a greater understanding of how
+Gentoo and GNU/Linux works, and for answers to questions which may not be
+answered here.
+
+请注意很多问题都在官方的Gentoo文档和指南中给出来解答。这里只是简单
+列出一些通常会碰到的问题。为了对Gentoo和GNU/Linux的工作机制有个更
+深入的理解，请您阅读一下文档或者是man page，对那些这里没有作出解答
+的问题，我们欢迎您提出。
+</p>
+
+<ul>
+  <li>
+    <uri link="#pronunciation">Gentoo这个词该如何发音，它有什么意义吗？</uri>
+  </li>
+  <li>
+    <uri link="#differences">Gentoo有什么与众不同的地方?</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>安装</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#optimizations">当我使用了"-O9 -ffast-math -fomit-frame-pointer"优化选项后系统变的很不稳定,请问有什么解决办法吗?</uri>
+  </li>
+  <li>
+    <uri link="#password">如何才能更改root(或是其他用户)的密码?</uri>
+  </li>
+  <li>
+    <uri link="#useradd">如何添加一个普通用户?</uri>
+  </li>
+  <li>
+    <uri link="#su">为什么一个用户无法通过su来变成root?</uri>
+  </li>
+  <li>
+    <uri link="#devfs">我如何做才能禁用掉devfs?</uri>
+  </li>
+  <li>
+    <uri link="#upgrade">我能把Gentoo从一个版本升级到另一个版本而不去重装吗?</uri>
+  </li>
+  <li>
+    <uri link="#bootrescue">我的内核无法启动,我现在该怎么办?</uri>
+  </li>
+  <li>
+    <uri link="#proxy">我的代理服务器需要认证,我该怎么办?</uri>
+  </li>
+  <li>
+    <uri link="#isoburning">怎样刻录一个ISO文件?</uri>
+  </li>
+  <li>
+    <uri link="#cpus">我该为自己的CPU选择哪一个CD/stage?</uri>
+  </li>
+  <li>
+    <uri link="#dhcp">我无法在重启后连接到网络,哪里出错了呢?</uri>
+  </li>
+  <li>
+    <uri link="#dualboot">我想从grub或是lilo启动Windows,但是黑屏了,我该怎么办呢? </uri>
+  </li>
+  <li>
+    <uri link="#stage12">我该怎样使用Stage1或Stage2的tarball来安装Gentoo?</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>软件 包管理系统</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#ebuilds">软件包是以什么样的格式被存储的?</uri>
+  </li>
+  <li>
+    <uri link="#configure">我想自己执行./configure这步,可以吗?</uri>
+  </li>
+  <li>
+    <uri link="#firewall">我该怎样做才能在放火墙后使用emerge?</uri>
+  </li>
+  <li>
+    <uri link="#norsync">如果我的rsync不工作了,该怎么办?</uri>
+  </li>
+  <li>
+    <uri link="#manualdownload">我家中使用的是很慢的modem连接.我能在其他地方下载源文件后再把它
+们加入到自己的系统中吗?</uri>
+  </li>
+  <li>
+    <uri link="#distfiles">源文件的tarbal集中l存放在/usr/portage/distfiles/中.把这些文件删除安全
+吗?</uri>
+  </li>
+  <li>
+    <uri link="#tmpportage">在/var/tmp/portage中有什么? 把这个文件夹中的文件和目录删除安全吗?</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>使用方法</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#intkeyboard">我怎么样才能建立一个国际话的键盘布局?</uri>
+  </li>
+  <li>
+    <uri link="#rootdns">DNS名字解析只对root用户起作用.</uri>
+  </li>
+  <li>
+    <uri link="#crontab">为什么我的用户没办法使用他们自己的crontab?</uri>
+  </li>
+  <li>
+    <uri link="#numlock">在启动时我该如何使numlock起作用?</uri>
+  </li>
+  <li>
+    <uri link="#clear">当我登出的时候如何对我的终端清屏?</uri>
+  </li>
+  <li>
+    <uri link="#suinx">我无法用su得到的root帐户启动X应用程序</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>维护</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#filecorruption">ReiserFS和文件系统出现错误--如何才能修复它们,等等.</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>开发</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#reportbugs">我在哪里报告错误?</uri>
+  </li>
+  <li>
+    <uri link="#releases">每隔多久会推出一个新版本?</uri>
+  </li>
+  <li>
+    <uri link="#beeping">我的扬声器像发疯似的乱叫,怎么做才能禁用终端想铃?</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>资源</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="#resources">我在哪里能找到Gentoo Linux更多的信息?</uri>
+  </li>
+  <li>
+    <uri link="#buycd">我能买到Gentoo Linux的CD吗?</uri>
+  </li>
+  <li>
+    <uri link="#help">This FAQ hasn't answered my question. What do I
+    do now?</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>让我们开始</title>
+
+<section id="pronunciation">
+<title>Gentoo这个词该如何发音，它有什么意义吗？</title>
+<body>
+
+<p>
+A <e>Gentoo</e> is a species of a small, fast penguin, pronounced "gen-too" (the
+"g" in "Gentoo" is a soft "g", as in "gentle"). The scientific name of the Gentoo 
+penguin is <e>Pygoscelis papua</e>. The name <e>Gentoo</e> has been given to the
+penguin by the inhabitants of the Falkland Islands (Islas Malvinas).
+
+<e>Gentoo</e>是一种体型较小的，行动快速的企鹅，读音为"gen-too"
+("Gentoo"中的"g"不发重音,它类似于"gentle"中的"g"),Gentoo企鹅的学名是
+<e>Pygoscelis papua</e>. 这个名字是芬克兰岛的住民(Islas Malvinas)给它们取
+的.
+</p>
+
+</body>
+</section>
+<section id="differences">
+<title>Gentoo有什么与众不同的地方?</title>
+<body>
+
+<p>
+Gentoo uses a BSD ports-like system called <uri 
+link="/proj/en/portage">Portage</uri>. Portage is a package management system
+that allows great flexibility while installing and maintaining software on a
+Gentoo system. It provides compile-time option support (through <uri
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE flags</uri>),
+conditional dependencies, pre-package installation summary, safe installation 
+(through sandboxing) and uninstallation of software, system profiles, <uri 
+link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=2#doc_chap3">configuration 
+file protection</uri> amongst several other <uri 
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=1">features</uri>.
+
+Gentoo使用了一个类似于BSD ports的系统, 它被称作<uri link="/proj/en/portage">Portage</uri>.
+Portage是一个软件包管理系统,在Gentoo系统上安装和维护软件时它带来了很大的弹性.
+它为用户提供了与编译时间相关的选项(通过设置 <uri
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE flags</uri>),前提
+条件所需要的依赖性,预编译软件包的安装摘要,安全的安装(通过sandboxing)和卸载软件,系
+统文件等,一些其他的参考信息包含在<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=1">features</uri>之中的
+<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=2#doc_chap3">配置文件
+的保护措施</uri>,
+</p>
+
+<p>
+With Gentoo you can build your entire system from source, using your choice of
+optimizations. You have complete control over what packages are or aren't
+installed. Gentoo provides you with numerous choices, so you can install Gentoo
+to your own preferences, which is why Gentoo is called a <e>meta-distribution</e>.
+
+有了Gentoo的相伴,你可以通过源代码构建一个完整的系统,并且可以使用你自己的
+优化选项.对于什么软件包需要安装、什么软件包不需要安装,你可以拥有完全的
+控制权.Gentoo为你提供了多样化的选择,你可以按照你自己的参数选择来安装Gentoo,
+而这也是为什么Gentoo会被称作<e>元发行版</e>的原因.
+</p>
+
+<p>
+Gentoo is actively developed. The entire distribution uses a rapid pace
+development style: patches to the packages are quickly integrated in the
+mainline tree, documentation is updated on daily basis, Portage features are
+added frequently, and official releases occur twice per year.
+
+Gentoo是一个活跃的发行版,整个版本使用的是一个快速的开发模型:补丁被迅速
+的整合进主流的开发树,文档的更新速度是以天来计算的,而Portage的功能上的增加
+也很频繁,并且官方版本的发行是一年两次.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装</title>
+<section id="optimizations">
+<title>
+  当我使用了"-O9 -ffast-math -fomit-frame-pointer"优化选项后系统变的很不稳定,请问有什么解决办法吗?
+</title>
+<body>
+
+<p>
+Don't bother using anything higher than <c>-O3</c> since it isn't supported by 
+current versions of gcc.  Very aggressive optimizations sometimes cause the 
+compiler to streamline the assembly code to the point where it doesn't quite 
+do the same thing anymore. 
+
+请不要自寻麻烦的使用高于<c>-O3</c>的优化选项,对于现有版本的gcc来说它并
+不支持这些.太激进的优化选项有时会使编译器的编译流程产生的汇编代码做出
+完全不同的事.
+
+</p>
+
+<p>
+Please try to compile with CFLAGS <c>-O2 -march=&lt;your_arch&gt;</c> before
+reporting a bug.
+
+在你提交一个bug之前,请尝试使用CFLAGS <c>-O2 -march=&lt;your_arch&gt;</c>编译.
+
+</p>
+
+</body>
+</section>
+<section id="password">
+<title>如何才能更改root(或是其他用户)的密码?</title>
+<body>
+
+<p>
+You can use <c>passwd</c> to change the password for the user you are logged 
+into. As root, you can change any user password by issuing the command
+<c>passwd username</c> For extra options and setting, please <c>man passwd</c>.
+
+你可以使用 <c>passwd</c>命令改变你登录用户的密码.作为root来讲,你可以通过<c>passwd username</c>
+命令改变任何一个用户的密码.如要获取进一步的信息,请参考 <c>man passwd</c>.
+</p>
+
+</body>
+</section>
+<section id="useradd">
+<title>如何添加一个普通用户?</title>
+<body>
+
+<p>
+The command <c>adduser username</c> will add a user called "username". However,
+this method does not give the user many of the rights you might want to grant
+him, so the following command is preferred:
+
+使用命令<c>adduser username</c>将会添加一个名为"username"的用户,然而这样做
+不会提供给这个用户很多你想给他的权限.所以请首选使用如下的命令:
+</p>
+
+<pre caption="添加用户">
+# <i>useradd -m -G users,audio,wheel username</i>
+</pre>
+
+<p>
+This will add a user named "username". The option <c>audio</c> adds them to the
+<c>audio</c> group and allows the user to access sound devices. The option
+<c>wheel</c> adds the user to the <c>wheel</c> group, which allows the user to
+execute the command <c>su</c>, which in turn allows them to gain the
+privileges of the <c>root</c> user.
+
+这将会在系统中添加一个名为"username"的用户.<c>audio</c>选项把他们添加到 了
+<c>audio</c> 组以便他们可以获得声音设备的访问权.<c>wheel</c>选项把他们添加
+到了<c>wheel</c>组中,它允许用户使用 <c>su</c>命令来获得<c>root</c>用户的权限.
+</p>
+
+</body>
+</section>
+<section id="su">
+<title>为什么一个用户无法通过su来变成root?</title>
+<body>
+
+<p>
+For security reasons, users may only <c>su</c> to root if they belong to the 
+wheel group. To add a username to the wheel group, issue the following command
+as root:
+
+因为安全上的原因,只有wheel组的成员才可以通过 <c>su</c>命令变成root,为了把一个
+用户加入wheel组,你可以使用下面的命令.
+</p>
+
+<pre caption="把用户添加进wheel组">
+# <i>gpasswd -a username wheel</i>
+</pre>
+
+</body>
+</section>
+<section id="devfs">
+<title>我如何做才能禁用掉devfs?</title>
+<body>
+
+<p>
+Gentoo can work with devfs kernel support, udev userland support or static
+<path>/dev</path>. With the advent of the 2.6 kernel being stable on most
+archs, udev is recommended. Please see the <uri
+link="/doc/en/udev-guide.xml">udev guide</uri> for information on configuring
+udev.
+
+Gentoo可以和devfs内核级的支持、udev用户层的支持或者静态的<path>/dev</path>
+协同工作.随着2.6版本内核的来临以及在各个架构平台上的逐渐稳定,udev成为被推荐的
+一个.请查看<uri 
+link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信息. 
+</p>
+
+<p>
+If you want to use the static <path>/dev</path>, please set
+<c>RC_DEVICES="static"</c> in <path>/etc/conf.d/rc</path>.
+
+如果你想要使用静态的<path>/dev</path>,请在<path>/etc/conf.d/rc</path>中设置
+<c>RC_DEVICES="static"</c>.
+</p>
+
+</body>
+</section>
+<section id="upgrade">
+<title>
+  我能把Gentoo从一个版本升级到另一个版本而不去重装吗?
+</title>
+<body>
+
+<p>
+In fact, there is no difference between the various releases after they have
+been installed. Gentoo 1.4 and later are <c>glibc-2.3.x</c> based. As such,
+running <c>emerge --sync &amp;&amp; emerge -uDN world</c> will bring your
+entire system up to speed with the "latest Gentoo". The differences between
+individual releases lie in the installation medium and pre-compiled packages.
+See the <uri link="/doc/en/gentoo-upgrading.xml">Gentoo Upgrading Guide</uri>
+for more information about profiles and their role in upgrading.
+
+实际上,不同的版本安装好以后没有什么不同.Gentoo 1.4和之后的版本都是基于<c>glibc-2.3.x</c>.
+使用命令<c>emerge --sync &amp;&amp; emerge -uDN world</c> 可以使你的整个系统
+升级到"最新的Gentoo".每个单独版本的区别只是在于安装媒介和预编译包的不同.请阅
+读 <uri 
+link="/doc/en/gentoo-upgrading.xml">Gentoo升级指南</uri>获得profiles和它们在升级
+过程中所扮演角色的更多信息.
+</p>
+
+</body>
+</section>
+<section id="bootrescue">
+<title>我的内核无法启动,我现在该怎么办?</title>
+<body>
+
+<p>
+You don't need to redo every step of the installation, but investigating the
+kernel and all associated steps is necessary. Suppose you have installed Gentoo
+on <path>/dev/hda1</path> (/boot) and <path>/dev/hda3</path> (/) with
+<path>/dev/hda2</path> being the swap space:
+
+你不必重新按照安装时的步骤重新做一遍,只需要检查一下内核和所有与之相关联的步
+骤是否必须重来就可以了.假设你的Gentoo的安装是 <path>/dev/hda1</path> (/boot)、
+<path>/dev/hda3</path> (/)、 <path>/dev/hda2</path>为swap：
+</p>
+
+<pre caption = "重新配置内核">
+<comment>启动安装光盘直到你得到了一个提示符</comment>
+<comment>我们首先挂载所有的分区:</comment>
+# <i>mount /dev/hda3 /mnt/gentoo</i>
+# <i>mount /dev/hda1 /mnt/gentoo/boot</i>
+# <i>swapon /dev/hda2</i>
+# <i>mount -t proc none /mnt/gentoo/proc</i>
+<comment>然后我们chroot进入Gentoo的环境并配置内核:</comment>
+# <i>chroot /mnt/gentoo /bin/bash</i>
+# <i>env-update &amp;&amp; source /etc/profile</i>
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+<comment>现在选择(取消)那些在以前步骤中被选(未选)的选项</comment>
+<comment>接着退出并编译你的内核:</comment>
+# <i>make &amp;&amp; make modules_install</i>
+<comment>现在拷贝你的bzImage文件覆盖掉以前的那个:</comment>
+# <i>cp arch/i386/boot/bzImage /boot/&lt;kernel_name&gt;</i>
+<comment>如果你使用的是LILO,重新运行一下lilo -- GRUB用户可以跳过这步s:</comment>
+# <i>/sbin/lilo</i>
+<comment>现在退出chroot环境并重新启动.</comment>
+# <i>exit</i>
+# <i>umount /mnt/gentoo/proc /mnt/gentoo/boot /mnt/gentoo</i>
+# <i>reboot</i>
+</pre>
+
+<p>
+If, on the other hand, the problem lies with your bootloader configuration,
+follow the same steps, but instead of configuring/compiling your kernel, you
+should reconfigure your bootloader (recompilation isn't necessary).
+
+如果从另一个方面来说,问题是出在你的bootloader的配置上,那么可以使用相同的步
+骤,只不过用重新配置你的bootloader(不需要重新编译)这一步取代配置/编译内核
+就可以了.
+</p>
+
+</body>
+</section>
+<section id="proxy">
+<title>我的代理服务器需要认证,我该怎么办?</title>
+<body>
+
+<p>
+To have Portage automatically use this scheme, define it in
+ 要让Portage在这样的情况下自动使用,可以在<path>/etc/make.conf</path>中这样定义:
+</p>
+
+<pre caption = "/etc/make.conf">
+HTTP_PROXY="http://username:password@yourproxybox.org:portnumber"
+FTP_PROXY="ftp://username:password@yourproxybox.org:portnumber"
+RSYNC_PROXY="rsync://username:password@yourproxybox.server:portnumber"
+</pre>
+
+</body>
+</section>
+<section id="isoburning">
+<title>怎样刻录一个ISO文件?</title>
+<body>
+
+<p>
+You need to burn the file in raw mode. This means that you should <e>not</e>
+just place the file on the CD, but interpret the file as an entire CD.
+
+你需要使用raw模式刻录这个文件.这意味着你<e>不能</e>将这个文件简单的放
+置在CD上,而是需要把它视作一张完整的CD.
+</p>
+
+<p>
+There are lots of CD burning tools available; covering them all would be a
+Sisyphean problem. However, describing a few popular tools never hurts:
+
+你有很多CD刻录工具可以使用,要一个一个的介绍它们是很徒劳无益的,然而介绍
+几个比较普及的工具并没有什么害处.
+</p>
+
+<ul>
+  <li>
+    With EasyCD Creator you select <c>File</c>, <c>Record CD
+    from CD image</c>. Then you change the <c>Files of type</c> to <c>ISO image
+    file</c>. Then locate the ISO file and click <c>Open</c>. When you click on
+    <c>Start recording</c> the ISO image will be burned correctly onto the CD-R.
+
+    使用EasyCD Creator的话,你需要选择<c>File</c>,<c>Record CD
+    from CD image</c>.然后把<c>Files of type</c>改成<c>ISO image
+    file</c>.然后定位到ISO文件并单击<c>Open</c>.当你单击<c>Start recording</c>
+    时,ISO的镜像将被正确的刻录到CD-R上.
+  </li>
+  <li>
+    With Nero Burning ROM, cancel the wizard which automatically pops up and
+    select <c>Burn Image</c> from the <c>File</c> menu. Select the image you
+    want to burn and click <c>Open</c>. Now hit the <c>Burn</c> button and watch
+    your brand new CD being burnt.
+
+    使用Nero Burning ROM的话,你需要取消掉开始自动会弹出的向导并在<c>File</c>菜
+    单中选择<c>Burn Image</c>.选择好你需要刻录的镜像文件后单击<c>Open</c>.现
+    在单击<c>Burn</c>按钮后就可以看到新的CD开始刻录了.
+  </li>
+  <li>
+    With cdrecord, you simply type <c>cdrecord dev=/dev/hdc</c> (replace
+    <path>/dev/hdc</path> with your CD-RW drive's device path) followed
+    by the path to the ISO file :)
+
+    使用cdrecord的话,你只需要简单的输入<c>cdrecord dev=/dev/hdc</c>(用你自己的
+    CD-RW驱动器的设备路径替换 <path>/dev/hdc</path>.
+  </li>
+  <li>
+    With K3B, select <c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn CD Image</c>.
+    Then you can locate your ISO file within the 'Image to Burn' area. Finally
+    click <c>Start</c>.
+
+    使用K3B的话,依此选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn CD Image</c>.
+    然后在'Image to Burn'的对话框中定位到你的ISO文件.最后单击<c>Start</c>就可以了.
+  </li>
+  <li>
+    With Mac OS X Panther, launch <c>Disk Utility</c> from
+    <path>Applications/Utilities</path>, select <c>Open</c> from the
+    <c>Images</c> menu, select the mounted disk image in the main window and
+    select <c>Burn</c> in the <c>Images</c> menu.
+
+    使用Mac OS X Panther的话,在<path>Applications/Utilities</path>中启动<c>Disk Utility</c>
+    接着在<c>Images</c>菜单中选择<c>Open</c>,然后在主窗口中选择已经挂载好的镜像
+    文件并在<c>Images</c>菜单中选择<c>Burn</c>就可以了.
+  </li>
+  <li>
+    With Mac OS X Jaguar, launch <c>Disk Copy</c> from
+    <path>Applications/Utilities</path>, select <c>Burn Image</c> from the
+    <c>File</c> menu, select the ISO and click the <c>Burn</c> button.
+
+    使用Mac OS X Jaguar后,在<path>Applications/Utilities</path>启动<c>Disk Copy</c>,
+    在<c>File</c>菜单里选择<c>Burn Image</c>后选取ISO文件并点击<c>Burn</c>按钮即可.
+  </li>
+</ul>
+
+
+</body>
+</section>
+<section id="cpus">
+<title>我该为自己的CPU选择哪一个CD/stage?</title>
+<body>
+
+<p>
+First you need to find our what CPU you use. Suppose it's a Pentium-M. Then you
+need to find out what CPU it is, instruction-wise, compatible with. You may
+need to consult the CPU's vendor website for this, although <uri
+link="http://www.google.com">Google</uri> is at least as efficient :-).
+
+首先,你需要找出你使用的是什么CPU.假设它是一块Pentium-M.接着你需要找出这
+块CPU的通用指令集是什么,和什么指令集相兼容.你可以在CPU的生产厂商的网站
+上寻求答案,然而<uri
+link="http://www.google.com">Google</uri>也同样很有效率:-).
+</p>
+
+<p>
+If you are uncertain, take a "lower" CD/stage file, for instance a i686 or even
+generic x86 (or the equivalent in your arch). This will ensure that your system
+will work, but may not be as fast as further optimizations.
+
+如果你还是无法肯定的话,选择一个"低级点"点的CD/stage,像是i686甚至是x86(或者
+是等价于你所使用的架构).这可以确保你的系统可以工作,但是可能比那些进一步优化
+过的系统会慢一些.
+</p>
+
+<p>
+Please note that many more options exist than those for which Gentoo builds 
+binary stages. Please see the <uri
+link="http://gcc.gnu.org/onlinedocs/gcc-3.4.4/gcc/i386-and-x86_002d64-Options.html#i386-and-x86_002d64-Options">gcc
+guide</uri> for setting <c>-march</c>.
+
+请注意相对于Gentoo建立的二进制的stage,还有非常多的的选项可以使用.请看一下<uri
+link="http://gcc.gnu.org/onlinedocs/gcc-3.4.4/gcc/i386-and-x86_002d64-Options.html#i386-and-x86_002d64-Options">gcc指南</uri>中的配置<c>-march</c>.
+</p>
+
+</body>
+</section>
+<section id="dhcp">
+<title>我无法在重启后连接到网络,哪里出错了呢?</title>
+<body>
+
+<p>
+First you need to check if your network card is discovered properly by the
+kernel. Run <c>ifconfig -a</c> and look for eth0 or wlan0 (in case of
+certain wireless network cards). You might need to load specific kernel modules
+for the kernel to properly detect the network card. If that is the case, make
+sure that these kernel modules are listed in
+<path>/etc/modules.autoload.d/kernel-2.6</path> (or <path>kernel-2.4</path> if
+you are still using a 2.4 kernel).
+
+首先你需要检查一下内核是否找到了你的网卡.使用命令<c>ifconfig -a</c>并
+看一下eth0或是wlan0(在确认有无线网卡的情况下).你可能会需要加载特定的内核模块
+使得内核能够正确的监测到网卡.如果是这种情况的话,请确认这些内核模块在
+<path>/etc/modules.autoload.d/kernel-2.6</path>(或是仍然使用2.4内核时的
+<path>kernel-2.4</path>)中列出了.
+</p>
+
+<p>
+If you have forgotten to include support for your network card in your kernel,
+you will need to reconfigure your kernel.
+
+如果你忘记了在内核中加入对你网卡的支持,你需要重新配置一次内核. 
+</p>
+
+<p>
+If your network card is found by your kernel, but you have set your networking
+configuration to use DHCP, you might have forgotten to
+<c>emerge dhcpcd</c>. You will need to reboot with your installation CD to
+install <c>dhcpcd</c>.
+
+如果你的网卡已经被内核识别,但是你使用DHCP来配置网络的话,有可能是你忘记
+<c>emerge dhcpcd</c>了.你需要用安装CD重新启动你的电脑并安装<c>dhcpcd</c>.
+</p>
+
+<p>
+Information on how to rescue your system using the installation CD is <uri
+link="#bootrescue">available</uri> as well.
+
+如何使用安装CD修复你的系统的相关信息请参考<uri
+link="#bootrescue">可用性</uri>.
+</p>
+
+</body>
+</section>
+<section id="dualboot">
+<title>
+我想从grub或是lilo启动Windows,但是黑屏了,我该怎么办呢? 
+</title>
+<body>
+
+<p>
+This is a known problem. Windows refuses to boot when it isn't installed on the
+first hard drive and shows a black/blank screen. To handle this, you will have
+to "fool" Windows into believing that it is installed on the first hard drive
+with a little tweak in your boot loader configuration. Please note that in the
+below example, Gentoo is installed on <path>hda</path> (first disk) and Windows
+on <path>hdb</path> (second one). Adjust your config as needed.
+
+这是一个已知的问题.Windows在当它不是安装在第一个硬盘时会拒绝启动.要搞定这个,
+你需要在引导管理器的配置文件中作一些小改进来"欺骗"一下Windows并让它相信它是
+安装在第一个硬盘上的.请注意在下面的例子中,Gentoo安装在<path>hda</path>(第一
+个硬盘),Windows安装在 <path>hdb</path>(第二个硬盘).安照你的需要改变配置文件.
+</p>
+
+<pre caption="grub.conf中关于Windows双重启动条目的例子">
+title Windows XP
+     map (hd1) (hd0)
+     map (hd0) (hd1)
+     rootnoverify (hd1,0)
+     chainloader +1
+</pre>
+
+<pre caption="lilo.conf中关于Windows双重启动条目的例子">
+other=/dev/hdb1
+     label=WindowsXP
+     table=/dev/hdb
+     map-drive = 0x80
+     to = 0x81
+     map-drive = 0x81
+     to = 0x80
+</pre>
+
+<p>
+This will make Windows believe it is installed on the first hard drive and boot
+without problems. More information can be found in the <uri
+link="http://www.gnu.org/software/grub/manual/html_node/DOS_002fWindows.html">GRUB
+documentation</uri> and in <c>man lilo.conf</c>, depending on the boot loader
+you're using.
+
+这会使Windows相信它安装在第一个硬盘上并且会没有疑问的启动.更多的信息可以参考
+<uri
+link="http://www.gnu.org/software/grub/manual/html_node/DOS_002fWindows.html">GRUB文档</uri>
+
+</p>
+
+</body>
+</section>
+<section id="stage12">
+<title>我该怎样使用Stage1或Stage2的tarball来安装Gentoo?</title>
+<body>
+
+<p>
+The Gentoo Handbook only describes a Gentoo installation using a stage3 tarball.
+However, Gentoo still provides stage1 and stage2 tarballs. This is for
+development purposes (the Release Engineering team starts from a stage1 tarball
+to obtain a stage3) but shouldn't be used by users: a stage3 tarball can very
+well be used to bootstrap the system. You do need a working Internet connection.
+
+Gentoo的安装手册只是描述了如何使用stage3的tarball来安装Gentoo的过程.然而,Gentoo
+还是提供了stage1和stage2的tarball,它们是为开发所预备的(stage3的tarball是由
+Release Engineering team使用stage1的tarball得来的),但是它们不应该被用户所使用:一
+个stage1的tarball可以很好的被用来bootstrap一个系统.为此你必须有一个可用的Internet
+连接.
+</p>
+
+<p>
+Bootstrapping means building the toolchain (the C library and compiler) for 
+your system after which you install all core system packages. To bootstrap the
+system, perform a stage3 installation. Before you start the chapter on 
+<e>Configuring the Kernel</e>, modify the <path>bootstrap.sh</path> script to
+suit your needs and then run it:
+
+Bootstrapping的意思是在为你的系统建立一个toolchain(C库和编译器)后再安装所有
+核心的系统软件包.bootstrap一个系统可以从stage3的完成安装后开始.在你开始
+<e>配置内核</e>之前,修改一下<path>bootstrap.sh</path>以便它适合你的需要,接着
+就运行它.
+</p>
+
+<pre caption="Bootstrapping系统">
+# <i>cd /usr/portage/scripts</i>
+# <i>vi bootstrap.sh</i>
+
+# <i>./bootstrap.sh</i>
+</pre>
+
+<p>
+Next, rebuild all core system packages with the newly built toolchain. We need
+to rebuild them since the stage3 tarball already offers them:
+
+下一步,使用新建的toolchain重新建立所有的核心系统软件包.尽管stage3的taball已经
+提供了它们,我们还是需要重新建立它们.
+</p>
+
+<pre caption="重建所有的核心系统包">
+# <i>emerge -e system</i>
+</pre>
+
+<p>
+Now you can continue with <e>Configuring the Kernel</e>. You can not use the
+prebuilt GRP packages anymore though.
+
+现在你可以继续<e>配置内核</e>.并且你将不能再使用预编译的GRP软件包了.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>软件包管理系统</title>
+<section id="ebuilds">
+<title>软件包是以什么样的格式被存储的?</title>
+<body>
+
+<p>
+Packages aren't "stored" per se. Instead, Gentoo provides a set of scripts
+which can resolve dependencies, fetch source code, and compile a version of the
+package specifically for your needs. We generally only build binaries for
+releases and snapshots. The <uri
+link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Gentoo Ebuild
+HOWTO</uri> covers the contents of an ebuild script in detail.
+
+软件包就其本身来说并不是"被存储的".作为替代的是,Gentoo提供了一组可以决定相关
+依赖性、获得源代码并为你所需编译某个软件包的某个版本这样的一组脚本.我们通常
+只为快照或是某个版本建立二进制文件.文档 <uri
+link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Gentoo Ebuild
+HOWTO</uri>从各个方面交代了ebuild脚本里的细节.
+</p>
+
+<p>
+For full ISO releases, we create a full suite of binary packages in an enhanced
+<c>.tbz2</c> format, which is <c>.tar.bz2</c> compatible with meta-information
+attached to the end of the file. These can be used to install a working (though
+not fully optimized) version of the package quickly and efficiently.
+
+对于完整的ISO发行版,我们使用<c>.tbz2</c>的格式建立了完整的一套二进制软件包,这种
+格式使用它们文件最后附加的元-信息实现对于<c>.tar.bz2</c>格式的兼容性.我们可以通
+过它们来快速高效地安装一个可以工作的(虽然是没有完全优化过的)某个版本的软件包.
+
+</p>
+
+<p>
+It is possible to create RPMs (Redhat package manager files) using Gentoo's
+Portage, but it is not currently possible to use already existing RPMs to
+install packages.
+
+使用Gentoo的Portage建立RPM包(Redhat package manager文件)也是可行的,但是目前来
+说还是无法使用RPM软件包在Gentoo上安装软件包.
+</p>
+
+</body>
+</section>
+<section id="configure">
+<title>我想自己执行./configure这步,可以吗?</title>
+<body>
+
+<p>
+Yes, but it is not trivial, nor is it recommended. Since the method to do this
+requires a good understanding of Portage internals and commands, it is instead
+recommended that you patch the ebuild to do whatever it is that you want and
+place it in the Portage overlay (that's why it exists). This is <e>much</e>
+better for maintainability, and usually easier. See the <uri
+link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild
+HOWTO</uri> for more information.
+
+可以的,但是这么做既没有重要的影响,也不是推荐的做法.因为做这一步需要对Portage的
+内部机制和命令有很好的理解,用来取代推荐步骤的是由你自己为ebuild打补丁并让它为你
+做你想要的任何事,然后再把它放进Portage overlay里(这也是为什么它会存在的道理).这
+样做对管理来说<e>大大地</e>有好处,并且这样可以兼顾到易用性.请查看一下<uri
+link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild
+HOWTO</uri>了解更多详情.
+</p>
+
+</body>
+</section>
+<section id="firewall">
+<title>我该怎样做才能在放火墙后使用emerge?</title>
+<body>
+
+<p>
+See the questions on <uri link="#proxy">proxies</uri>, <uri
+link="#norsync">rsync</uri>, and <uri link="#manualdownload">downloading source
+files manually</uri>.
+
+关于这个问题请看一下<uri link="#proxy">proxies</uri>,<uri
+link="#norsync">rsync</uri>, 和<uri link="#manualdownload">手动下载源代码文件</uri>.
+</p>
+
+</body>
+</section>
+<section id="norsync">
+<title>如果我的rsync不工作了,该怎么办?</title>
+<body>
+
+<p>
+If you're behind a firewall that doesn't permit rsync traffic, then you can use 
+<c>emerge-webrsync</c> which will fetch and install a Portage snapshot for you 
+through regular HTTP. See the <uri link="#proxy">proxy section</uri> of this
+document for information on downloading source files and Portage snapshots via
+a proxy.
+
+如果你在处在放火墙的后面并且屏蔽了rsync的流量,你可以使用<c>emerge-webrsync</c>
+通过普通的HTTP请求来获取并安装一个Portage的快照.请查看一下<uri link="#proxy">proxy section</uri>
+文档中的关于通过proxy下载源文件和Portage快照的相关信息.
+</p>
+
+</body>
+</section>
+<section id="manualdownload">
+<title>
+我家中使用的是很慢的modem连接.我能在其他地方下载源文件后再把它们加入到自己的
+系统中吗?
+</title>
+<body>
+
+<p>
+Definitely. You can run <c>emerge --pretend package</c> to see what programs
+are going to be installed. To find out the sources for those packages and where 
+to download the sources from, you can run <c>emerge -fp package</c>. Download 
+sources and bring them on any media home. Put the sources into 
+<path>/usr/portage/distfiles/</path> and then simply run <c>emerge package</c>.
+Be warned, however, that this is a tedious process.
+
+当然可以,你可以运行<c>emerge --pretend package</c>查看一下系统将会安装什么程序,
+为了找到那些软件包和在哪里能下载到它们,你可以运行<c>emerge -fp package</c>.
+下载源文件并存放在任何媒介中后带回家里.把源文件放到<path>/usr/portage/distfiles/</path>
+后简单地运行<c>emerge package</c>就可以了.预告一下,这是一个冗长的过程.
+</p>
+
+</body>
+</section>
+<section id="distfiles">
+<title>
+  源文件的tarbal集中l存放在/usr/portage/distfiles/中.把这些文件删除安全吗?
+</title>
+<body>
+
+<p>
+Deleting these files will have no negative impact on day-to-day performance.
+However, it might be wise to keep the most recent version of the files; often
+several ebuilds will be released for the same version of a specific piece of
+software. If you have deleted the archive and you upgrade the software it will
+be necessary to download them from the internet again. There are programs which
+<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">users have
+developed</uri> to clean out all but the most recent version of sourcefiles.
+Note that while this seems to work, it is <e>not</e> officially maintained. Use
+at your own risk.
+
+
+</p>
+删除这些文件对于日常的性能来说没有什么负面的影响.然而,保留最近版本的文件还是明
+智的;一些ebuilds发布的是某个软件中相同版本的一块.如果删除了压缩档,那么在你下次升
+级的时候还是必须从internet上重新下载它们.有些程序可以帮你打扫干净并保留那些最进
+版本的源文件.<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">用户的
+开发成果</uri>
+</body>
+</section>
+<section id="tmpportage">
+<title>
+  在/var/tmp/portage中有什么? 把这个文件夹中的文件和目录删除安全吗?
+</title>
+<body>
+
+<p>
+During compilation, Gentoo saves the sources of the package in 
+<path>/var/tmp/portage</path>. These files and folder are usually deleted upon
+a successful merge, but this sometimes fails. It is safe to clean out all
+contents of this directory <e>if</e> emerge is not running. Just to be sure,
+always <c>pgrep emerge</c> before cleaning out this directory.
+
+在编译的过程中,Gentoo在<path>/var/tmp/portage</path>中放置的是软件包的源代码.
+这些文件和文件夹在一次成功地merge之后通常是会被删除掉的,然后有时候还是会出错.
+<e>当</e>emerge没有运行的时候删除其目录中所有的条目是安全的.只需要确认的是,在
+清空这个目录之前运行一下<c>pgrep emerge</c>就可以了.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>使用方法</title>
+<section id="intkeyboard">
+<title>我怎么样才能建立一个国际键盘布局(International Keyboard Layout)?</title>
+<body>
+
+<p>
+Edit the <c>KEYMAP</c> variable in <path>/etc/conf.d/keymaps</path>. To have
+console working correctly with extended characters in your keymap you might
+also need to set up variables <c>CONSOLETRANSLATION</c> and <c>CONSOLEFONT</c>
+in your <path>/etc/conf.d/consolefont</path> (for further information on
+localising your environment, refer to <uri 
+link="/doc/en/guide-localization.xml">our localisation guide</uri>).
+Then, either <c>reboot</c>, or restart the keymaps and consolefont scripts:
+
+修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量.为使终端在你的键盘
+布局里并在使用扩展字符的情况下工作正常,需要在<path>/etc/conf.d/consolefont</path>
+之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>,想要了解更多如何本
+地化定义你的使用环境的详情,请参考<uri 
+link="/doc/en/guide-localization.xml">本地化指南</uri>)
+</p>
+
+<pre caption="重新启动keymaps">
+# <i>/etc/init.d/keymaps restart</i>
+# <i>/etc/init.d/consolefont restart</i>
+</pre>
+
+</body>
+</section>
+<section id="rootdns">
+<title>DNS名字解析只对root用户起作用.</title>
+<body>
+
+<p>
+<path>/etc/resolv.conf</path> has the wrong permissions; <c>chmod</c> it as 
+follows:
+
+<path>/etc/resolv.conf</path>被定义了错误的权限;如下所示使用<c>chmod</c>:
+</p>
+
+<pre caption="改变/etc/resolv.conf的权限">
+# <i>chmod 0644 /etc/resolv.conf</i>
+</pre>
+
+</body>
+</section>
+<section id="crontab">
+<title>为什么我的用户没办法使用他们自己的crontab?</title>
+<body>
+
+<p>
+You need to add that user to the <c>cron</c> group.
+
+你需要把用户加入<c>cron</c>组.
+</p>
+
+</body>
+</section>
+<section id="numlock">
+<title>启动时我该如何使numlock起作用?</title>
+<body>
+
+<p>
+If you work in command line, you only need to <c>rc-update add 
+numlock default &amp;&amp;/etc/init.d/numlock start</c>.
+
+如果你使用命令行工作,你只需运行命令<c>rc-update add 
+numlock default &amp;&amp;/etc/init.d/numlock start</c>.
+</p>
+
+<p>
+Each GUI provides different tools for this sort of thing; please check the help
+section or online manuals for assistance.
+
+每个GUI提供了不同的工具来做这类事;请查看一下相关的在线手册或是帮助获得相关信息.
+</p>
+
+</body>
+</section>
+<section id="clear">
+<title>当我登出的时候如何对我的终端清屏?</title>
+<body>
+
+<p>
+To have your terminal cleared, add <c>clear</c> to your
+<path>~/.bash_logout</path> script:
+
+为了得到一个干净的终端界面,在<path>~/.bash_logout</path>脚本中加入 <c>clear</c>
+</p>
+
+<pre caption = "在登出时候对终端进行清屏">
+$ <i>echo clear &gt;&gt; ~/.bash_logout</i>
+</pre>
+
+<p>
+If you want this to happen automatically when you add a new
+user, do the same for the <path>/etc/skel/.bash_logout</path>:
+
+如果你想在添加一个新用户时自动加入这个的话,在<path>/etc/skel/.bash_logout</path>
+中添加相同的内容.
+</p>
+
+<pre caption = "使新用户在登出时清屏">
+# <i>echo clear &gt;&gt; /etc/skel/.bash_logout</i></pre>
+</body>
+
+</section>
+<section id="suinx">
+<title>我无法用su得到的root帐户启动X应用程序</title>
+<body>
+
+<p>
+This issue seems only to occur when you log on graphically. <c>startx</c> users
+don't have this behaviour. The problem is a <uri
+link="http://bugs.gentoo.org/show_bug.cgi?id=14560">bug</uri> in Gentoo's PAM, 
+the solution however is quite simple: add the following line to 
+<path>/etc/profile</path>.
+
+这种情况只发生在当你是通过图形界面登录的时候.<c>startx</c>的用户没有这个特点.
+这个问题<uri
+link="http://bugs.gentoo.org/show_bug.cgi?id=14560">bug</uri>出在Gentoo的PAM,
+解决方法也相当简单:在<path>/etc/profile</path>中添加下面这一行.
+</p>
+
+<pre caption="声明XAUTHORITY">
+export XAUTHORITY="${HOME}/.Xauthority"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>维护</title>
+<section id="filecorruption">
+<title>ReiserFS和文件系统出现错误--如何才能修复它们,等等.</title>
+<body>
+
+<p>
+If your ReiserFS partition is corrupt, try booting the Gentoo Install CD and
+run <c>reiserfsck --rebuild-tree</c> on the corrupted filesystem.  This should
+make the filesystem consistent again, although you may have lost some files or
+directories due to the corruption.
+
+如果ReiserFS磁盘分区出现错误,你可以尝试使用Gentoo安装光盘启动并在损坏的文件系统上
+运行命令<c>reiserfsck --rebuild-tree</c>.虽然你可能会因为文件系统错误丢失一些文件或
+是目录,但是这么做可以使你的文件系统重新可用.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>开发</title>
+<section id="reportbugs">
+<title>我在哪里报告错误?</title>
+<body>
+
+<p>
+Use our <uri link="https://bugs.gentoo.org">Bugzilla</uri>. If you are unsure if
+your problem is an actual bug, you can visit <c>#gentoo</c> on the <uri
+link="http://www.freenode.net">FreeNode</uri> IRC network.
+
+请您使用我们的<uri link="https://bugs.gentoo.org">Bugzilla</uri>.如果你不能肯定你
+的问题是某个现存bug造成的,你可以加入<uri
+link="http://www.freenode.net">FreeNode</uri>IRC网络中的<c>#gentoo</c>频道
+了解一下.
+</p>
+
+</body>
+</section>
+<section id="releases">
+<title>每隔多久会推出一个新版本?</title>
+<body>
+
+<p>
+Gentoo's packages are usually updated shortly after the main authors release
+new code. As for when Gentoo itself makes new stage/profile/ISO releases, check
+our <uri link="/proj/en/releng">Release Engineering Project</uri> page. New
+releases are announced on the <uri
+link="/main/en/lists.xml">gentoo-announce</uri> mailing list. See the question
+on <uri link="#upgrade">upgrading</uri> for more information.
+
+Gentoo的软件包通常会在主要的作者释出新的代码后不久就进行更新.至于何时Gentoo本
+身会作好新的stage/profile/ISO,请查看 <uri 
+link="/proj/en/releng">Release Engineering Project</uri>网页.新的版本会宣布在<uri
+link="/main/en/lists.xml">gentoo-announce</uri>邮件列表中.你可以查看一下问题
+ <uri link="#upgrade">upgrading</uri>获得更多信息.
+</p>
+
+</body>
+</section>
+<section id="beeping">
+<title>
+  我的扬声器像发疯似的乱叫,怎么做才能禁用终端想铃?
+</title>
+<body>
+
+<p>
+Console beeps can be turned off using setterm, like this:
+
+终端响铃声可以通过使用setterm关闭,如下所示:
+</p>
+
+<pre caption="使用setterm">
+# <i>setterm -blength 0</i>
+</pre>
+
+<p>
+If you would like to turn off the console beeps on boot, you need to put this
+command in <path>/etc/conf.d/local.start</path>. However, this only disables
+beeps for the current terminal. To disable beeps for other terminals, pipe the
+command output to the target terminal, like this: 
+
+如果想在启动时就关闭终端响铃,你要把这条命令加入<path>/etc/conf.d/local.start</path>
+之中.然而,这只是禁用掉了现在正在使用终端的这个功能.想要在其他的终端上禁用响铃的话,
+把这条命令用管道的方式输出到目标终端去即可,如下所示:
+</p>
+
+<pre caption="使用setterm (bis)">
+# <i>setterm -blength 0 >/dev/vc/1</i>
+</pre>
+
+<p>
+You need to replace /dev/vc/1 with the terminal you would like to disable 
+console beeps for.
+
+你需要用想要禁用响铃的那个终端号来替换/dev/vc/1.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>资源</title>
+<section id="resources">
+<title>我在哪里能找到Gentoo Linux更多的信息?</title>
+<body>
+
+<p>
+The official Gentoo documentation can be found at
+<uri>http://www.gentoo.org/doc/en/</uri>.
+
+在<uri>http://www.gentoo.org/doc/en/</uri>里,你可以找到Gentoo的官方文档.
+</p>
+
+</body>
+</section>
+<section id="buycd">
+<title>我能买到Gentoo Linux的CD吗?</title>
+<body>
+
+<p>
+Install CDs for all supported architectures are available on our <uri
+link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>. When you
+purchase a CD from our store, you are also supporting our development. So,
+please consider buying from our store if possible.
+
+每一个可支持硬件架构的安装CD在我们的 <uri
+link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>上都能找到.
+当你在我们的商店中购买了CD,你也同时能支持我们的开发工作.所以,如果有可能的话,请
+您在联系我们的商店并购买CD.
+</p>
+
+<p>
+You can also find fresh CDs from various resellers listed on our <uri
+link="/main/en/where.xml">Get Gentoo!</uri> page.
+
+你也可以在我们的 <uri
+link="/main/en/where.xml">Get Gentoo!</uri>中找到一些新版CD的转卖者.
+</p>
+
+</body>
+</section>
+<section id="help">
+<title>这个FAQ没有关于我的问题的解答,我现在该怎么做呢?</title>
+<body>
+
+<p>
+A good first step is to browse through the relevant <uri
+link="/doc/en/index.xml">documentation</uri>, failing that, the various Gentoo
+Linux mailing lists listed on <uri link="http://www.google.com">Google</uri>.
+To search through the Gentoo mailing lists, just enter "lists.gentoo.org foo"
+to search for "foo".  If all else fails, or you just want to hang out with
+Gentoo folks, visit us on irc: <c>#gentoo</c> on <c>irc.freenode.net</c>.
+
+首先,浏览一下相应的<uri
+link="/doc/en/index.xml">documentation</uri>是个很好的开始,如果失败了,你可以参考
+一些在<uri link="http://www.google.com">Google</uri>中列出的邮件列表.当你想要通
+过邮件列表查找的时候,比如查找"foo"只需要键入"lists.gentoo.org foo"就可以了.如果所
+有这一切都失败了,或是你想在Gentoo的开发者面前提出的话,请加入我们的irc:
+<c>irc.freenode.net</c>上的<c>#gentoo</c>频道.
+
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
