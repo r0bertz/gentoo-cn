@@ -42,6 +42,12 @@
   <th>摘要</th>
 </tr>
 <tr>
+  <ti><uri link="/news/zh_cn/gwn/20070806-newsletter.xml">2007年08月06日</uri></ti>
+  <ti>
+    Baselayout-2稳定化计划和本周开发者（phreak）
+  </ti>
+</tr>
+<tr>
   <ti><uri link="/news/zh_cn/gwn/20070730-newsletter.xml">2007年07月30日</uri></ti>
   <ti>
     NVIDIA驱动升级，Portato概览，代码之夏2007 Planet和GUADEC 2007
