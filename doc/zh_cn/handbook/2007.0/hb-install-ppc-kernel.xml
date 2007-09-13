@@ -3,11 +3,11 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml,v 1.15 2007/05/21 04:06:25 josejx Exp $ -->
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml,v 1.16 2007/05/21 04:06:25 josejx Exp $ -->
 <sections>
 
-<version>8.3</version>
-<date>2007-07-29</date>
+<version>8.4</version>
+<date>2007-08-12</date>
 
 <section>
 <title>时区</title>
@@ -279,11 +279,11 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </p>
 
 <p>
-要查看所有可用的模块，运行如下的命令：
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
 </p>
 
 <pre caption="查看所有可用的模块">
-# <i>modprobe -l</i>
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
 </pre>
 
 <p>
