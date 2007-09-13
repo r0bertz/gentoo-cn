@@ -437,11 +437,11 @@
   </tr>
   <tr>
     <ti>hb-install-config.xml</ti>
-    <ti><uri link="/doc/en/handbook/2007.0/hb-install-config.xml">v 1.12</uri></ti>
-    <ti>2007/05/20</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-config.xml">v 1.13</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/04</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-config.xml">v 1.12</uri></ti>
     <ti>2007/08/04</ti>
@@ -514,11 +514,11 @@
   </tr>
   <tr>
     <ti>hb-install-hppa-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-kernel.xml">v 1.10</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-hppa-kernel.xml">v 1.11</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="gnuguys@gmail.com">yangke</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml">v 1.10</uri></ti>
     <ti>2007/08/03</ti>
@@ -580,11 +580,11 @@
   </tr>
   <tr>
     <ti>hb-install-ppc64-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.11</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.12</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml">v 1.11</uri></ti>
     <ti>2007/08/03</ti>
@@ -624,11 +624,11 @@
   </tr>
   <tr>
     <ti>hb-install-ppc-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.15</uri></ti>
-    <ti>2007/07/29</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.16</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml">v 1.15</uri></ti>
     <ti>2007/08/03</ti>
@@ -668,11 +668,11 @@
   </tr>
   <tr>
     <ti>hb-install-sparc-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-kernel.xml">v 1.11</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/2007.0/hb-install-sparc-kernel.xml">v 1.12</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/05</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml">v 1.11</uri></ti>
     <ti>2007/08/05</ti>
@@ -1303,11 +1303,11 @@
   </tr>
   <tr>
     <ti>hb-install-x86+amd64-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-kernel.xml">v 1.16</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-x86+amd64-kernel.xml">v 1.17</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="dongbin.lou@gmail.com">Amorous</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml">v 1.16</uri></ti>
     <ti>2007/08/03</ti>
@@ -1501,11 +1501,11 @@
   </tr>
   <tr>
     <ti>hb-install-alpha-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-alpha-kernel.xml">v 1.43</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-alpha-kernel.xml">v 1.44</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-alpha-kernel.xml">v 1.43</uri></ti>
     <ti>2007/08/03</ti>
@@ -1545,11 +1545,11 @@
   </tr>
   <tr>
     <ti>hb-install-arm-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-arm-kernel.xml">v 1.10</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-arm-kernel.xml">v 1.11</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="tysnoo@gmail.com">tell</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-arm-kernel.xml">v 1.10</uri></ti>
     <ti>2007/08/03</ti>
@@ -1589,11 +1589,11 @@
   </tr>
   <tr>
     <ti>hb-install-hppa-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-hppa-kernel.xml">v 1.43</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-hppa-kernel.xml">v 1.44</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-hppa-kernel.xml">v 1.43</uri></ti>
     <ti>2007/08/03</ti>
@@ -1622,11 +1622,11 @@
   </tr>
   <tr>
     <ti>hb-install-ia64-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-ia64-kernel.xml">v 1.11</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ia64-kernel.xml">v 1.12</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-ia64-kernel.xml">v 1.11</uri></ti>
     <ti>2007/08/03</ti>
@@ -1666,11 +1666,11 @@
   </tr>
   <tr>
     <ti>hb-install-mips-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-mips-kernel.xml">v 1.29</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-mips-kernel.xml">v 1.30</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-mips-kernel.xml">v 1.29</uri></ti>
     <ti>2007/08/03</ti>
@@ -1732,11 +1732,11 @@
   </tr>
   <tr>
     <ti>hb-install-ppc-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-ppc-kernel.xml">v 1.55</uri></ti>
-    <ti>2007/07/29</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc-kernel.xml">v 1.56</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/05</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc-kernel.xml">v 1.55</uri></ti>
     <ti>2007/08/03</ti>
@@ -1776,11 +1776,11 @@
   </tr>
   <tr>
     <ti>hb-install-ppc64-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-ppc64-kernel.xml">v 1.32</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-ppc64-kernel.xml">v 1.33</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="chenjun.shen@gmail.com">Patrick</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-ppc64-kernel.xml">v 1.32</uri></ti>
     <ti>2007/08/03</ti>
@@ -1820,11 +1820,11 @@
   </tr>
   <tr>
     <ti>hb-install-sparc-kernel.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-install-sparc-kernel.xml">v 1.31</uri></ti>
-    <ti>2007/08/03</ti>
+    <ti><uri link="/doc/en/handbook/hb-install-sparc-kernel.xml">v 1.32</uri></ti>
+    <ti>2007/08/13</ti>
     <ti><mail link="druggo@gmail.com">Druggo</mail></ti>
-    <ti>T</ti>
-    <ti>2007/08/03</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="robert.zhangle@gmail.com">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-install-sparc-kernel.xml">v 1.31</uri></ti>
     <ti>2007/08/03</ti>
@@ -1842,11 +1842,11 @@
   </tr>
   <tr>
     <ti>hb-working-portage.xml</ti>
-    <ti><uri link="/doc/en/handbook/hb-working-portage.xml">v 1.63</uri></ti>
-    <ti>2007/03/25</ti>
+    <ti><uri link="/doc/en/handbook/hb-working-portage.xml">v 1.64</uri></ti>
+    <ti>2007/08/23</ti>
     <ti><mail link="daqiehexigua@gmail.com">FroggeRay</mail></ti>
-    <ti>T</ti>
-    <ti>2007/06/08</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
     <ti><uri link="/doc/zh_cn/handbook/hb-working-portage.xml">v 1.63</uri></ti>
     <ti>2007/06/08</ti>
