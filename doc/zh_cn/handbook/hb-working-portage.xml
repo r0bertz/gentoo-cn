@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-portage.xml,v 1.63 2006/11/12 21:28:30 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-working-portage.xml,v 1.64 2006/11/12 21:28:30 nightmorph Exp $ -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本章节阐述了一些“简单”的步骤，这些步骤是用户要维护自己系统中的软件所必须知道的。
 </abstract>
 
-<version>1.57</version>
-<date>2007-03-25</date>
+<version>1.58</version>
+<date>2007-08-23</date>
 
 <section>
 <title>欢迎使用Portage</title>
@@ -363,7 +363,7 @@ Ebuilds文件中包含了特定的字段，里面为Portage提供了此软件的
 - lm-sensors/lm-sensors-2.8.7 (masked by: <i>-sparc keyword</i>)
 - sys-libs/glibc-2.3.4.20040808 (masked by: <i>-* keyword</i>)
 - dev-util/cvsd-1.0.2 (masked by: <i>missing keyword</i>)
-- media-video/ati-gatos-4.3.0 (masked by: <i>package.mask</i>)
+- games-fps/unreal-tournament-451 (masked by: <i>package.mask</i>)
 - sys-libs/glibc-2.3.2-r11 (masked by: <i>profile</i>)
 </pre>
 
