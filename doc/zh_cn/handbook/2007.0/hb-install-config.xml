@@ -5,13 +5,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-config.xml,v 1.12 2007/05/20 20:32:23 nightmorp
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/2007.0/hb-install-config.xml,v 1.13 2007/05/20 20:32:23 nightmorp
 h Exp $ -->
 
 <sections>
 
-<version>8.2</version>
-<date>2007-05-15</date>
+<version>8.3</version>
+<date>2007-08-13</date>
 
 <section>
 <title>文件系统信息</title>
@@ -89,11 +89,11 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 <body>
 
 <p test="not(func:keyval('arch')='SPARC')">
-增加符合你分区方案的规则，为<path>/proc</path>、<c>tmpfs</c>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们加上）添加挂载规则。
+增加符合你分区方案的规则，为你的光驱（当然，如果你有其他分区或者驱动器，也为它们）添加挂载规则。
 </p>
 
 <p test="func:keyval('arch')='SPARC'">
-增加符合你分区方案的规则，为<path>/proc/openprom</path>、<path>/proc</path>、<c>tmpfs</c>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们加上）添加挂载规则。
+增加符合你分区方案的规则，为<path>/proc/openprom</path>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们）添加挂载规则。
 </p>
 
 <p>
@@ -105,9 +105,6 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 /dev/sda3   none         swap    sw                   0 0
 /dev/sda4   /            ext3    noatime              0 1
 
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
-
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
 
@@ -115,9 +112,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 <keyval id="/boot"/>   /boot        ext2    defaults,noatime     1 2
 /dev/sda2   none         swap    sw                   0 0
 /dev/sda3   /            ext3    noatime              0 1
-
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
@@ -131,9 +125,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 
 openprom    /proc/openprom  openpromfs  defaults             0 0
 
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
-
 /dev/cdrom  /mnt/cdrom      auto        noauto,user          0 0
 </pre>
 
@@ -144,9 +135,6 @@ shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 <pre caption="/etc/fstab的一个完整例子" test="func:keyval('arch')='PPC'">
 /dev/hda4   /            ext3    noatime              0 1
 /dev/hda3   none         swap    sw                   0 0
-
-proc        /proc        proc    nodev,nosuid,noexec  0 0
-shm         /dev/shm     tmpfs   nodev,nosuid,noexec  0 0
 
 /dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
 </pre>
