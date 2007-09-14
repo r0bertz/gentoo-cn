@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-x86.xml,v 1.161 2007/01/18 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-x86.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
 
 <book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn">
 <title>Gentoo Linux x86手册</title>

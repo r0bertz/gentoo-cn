@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-finalise.xml,v 1.48 2006/12/03 23:05:54 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-finalise.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
 
 <sections>
 

@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/handbook-mips.xml,v 1.121 2006/11/29 15:35:24 nightmorph Exp $ -->
-<book link="/doc/en/handbook/handbook-mips.xml" lang="zh_cn">
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-mips.xml,v 1.2 2007/09/14 17:37:35 r0bertz Exp $ -->
+<book link="/doc/zh_cn/handbook/handbook-mips.xml" lang="zh_cn">
 <title>Gentoo Linux/MIPS手册</title>
 
 <values>

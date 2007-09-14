@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/xsl/guide.xsl" ?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.71 2007/01/18 15:35:24 nightmorph Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
 <title>Gentoo手册</title>

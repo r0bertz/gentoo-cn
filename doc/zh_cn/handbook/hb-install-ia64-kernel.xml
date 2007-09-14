@@ -1,9 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/en/handbook/hb-install-ia64-kernel.xml,v 1.12 2007/05/20 20:32:23 nightmorph Exp $ -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ia64-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
+
 <sections>
 
 <version>8.4</version>
@@ -200,7 +202,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-当您完成了内核配置之后，请点击<uri ink="#compiling">编译与安装</uri>。
+当您完成了内核配置之后，请点击<uri link="#compiling">编译与安装</uri>。
 </p>
 
 </body>
