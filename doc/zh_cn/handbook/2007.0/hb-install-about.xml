@@ -8,8 +8,8 @@
 
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>8.2</version>
+<date>2007-06-02</date>
 
 <section>
 <title>介绍</title>
@@ -183,13 +183,10 @@ Gentoo参考平台，以下缩写为GRP，它是一个预构建好的软件包�
 
 <ul>
   <li>
-    The <b>alpha</b> 架构 (alpha) 
-  </li>
-  <li>
     The <b>amd64</b> 架构 (amd64)。 注意：目前这些软件包可以在安装程序LiveCD中获得。
   </li>
   <li>
-    The <b>ppc</b> 架构 (ppc32, ppc64) 
+    The <b>ppc</b> 架构 (ppc32) 
   </li>
   <li>
     The <b>sparc</b> 架构 (sparc64) 
