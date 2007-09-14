@@ -1,0 +1,388 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/articles/making-the-distro-p3.xml,v 1.4 2005/10/09 17:13:23 rane Exp $ -->
+
+<guide link="/doc/zh_cn/articles/making-the-distro-p3.xml" disclaimer="articles">
+<title>Making the distribution, Part 3</title>
+
+<author title="Author">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="Translator">
+  <mail link="linuxfans.linky@gmail.com">范华</mail>
+</author>
+
+<abstract>
+这篇文章是他整个故事的结尾部份---讲述了Daniel是怎样完成他自己创建的名为
+Gentoo Linux这个发行版的过程.他告诉了我们他是如何离开Linux世界并转场去
+FreeBSD的,又是怎么样用一个全新的视角重新开始Gentoo Linux的开发的等等一系
+列的过程.Danial除了在一些领域里比较了Linux和FreeBSD之外,他还描述了如今
+Gentoo Linux的开发进程并展望了未来新的版本.
+</abstract>
+
+<!-- The original version of this article was first published on IBM 
+developerWorks, and is property of Westtech Information Services. This 
+document is an updated version of the original article, and contains
+various improvements made by the Gentoo Linux Documentation team -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.2</version>
+<date>2005-10-09</date>
+
+<chapter>
+<title>作者对于Linux的迷失与回归</title>
+<section>
+<body>
+
+<p>
+在前一篇文章<uri link ="/doc/zh_cn/articles/making-the-distro-p2.xml">前一篇文章</uri>的
+结尾部分，我说到因为新升级的双Celeron主板（Abit BP6）存在一个古怪的空闲时
+死锁的问题导致Gentoo开发停止。虽然解决问题的办法就是更换主板，但是我现在
+已经没有更多的资金用于重新更换主板了，这件事同时也打击了我对Linux的信心并
+使我决定中断Gentoo的开发并转向FreeBSD。我需要的是一个可以正常运转的系统，
+而Linux在这个时候的表现并不尽如人意（一天到晚的死锁），在那个当口我觉得是
+好好接触接触BSD操作系统的时候了，接着便在机器上安装了FreeBSD,然后就开始了
+又一次的捣腾，在接下去的几个月中，我也几乎没有再碰过Linux一个指头。
+</p>
+
+</body>
+</section>
+<section>
+<title>FreeBSD之印象</title>
+<body>
+
+<p>
+首先，我真的很喜欢FreeBSD。我感觉这个操作系统是一个组合的很完美的系统，它
+几乎每一个部分都同样精巧，而这种精巧的在Linux世界中几乎不存在。我的满意实
+质上是来源于那些FreeBSD中非常充足的man page，这可不像Linux里那些只有
+GNU info文档的很多软件那样让人根本没法用。
+</p>
+
+<p>
+最最重要的是我对FreeBSD中维护与升级系统的ports系统印象非常深刻。与Linux
+维护与升级的方法不同，ports使用的不是二进制的软件包而是直接去原始的软件
+站点下载所需要的源代码并编译。不管你是安装Samba或是升级核心,系统都是在
+你的机器上用源代码编译而成。这样的实现方法和我在 Gentoo Linux中建立的那
+套机制有着异曲同工之处。从这点和其他许多方面来说，FreeBSD的这种设计符合
+我作为一个开发人员和一个系统管理员所期望的那种感觉。就这样，FreeBSD为我
+营造了整整几个月舒适的工作环境，同样我也很乐意于花些时间在这个出色的操作
+系统中探求与获取知识。
+</p>
+
+</body>
+</section>
+<section>
+<title>FreeBSD的优点</title>
+<body>
+
+<p>
+很多Linux和FreeBSD之间的不同点都是源自与它们本身开发架构的不同。Linux的开
+发架构非常松散，我们只是依靠不同的发行版把分散在 Internet上呈离散状态的很
+多部分组合成一个完整的Linux，而FreeBSD和其他BSD系统（OpenBSD和NetBSD）都
+有一个唯一的核心小组来确保源代码的单一性和协调性，这样至少每一种BSD自身都
+拥有一套统一的源代码设置。这是一件挺棒的事情，也是FreeBSD感觉上和 Linux那种
+“patch集合”有所不同的主要原因。
+</p>
+
+<p>
+接下来，我们在纯技术方面再作个比较。很多FreeBSD的粉丝都声称FreeBSD比Linux
+更合适用作服务器上跑的操作系统，他们会告许你在高负载情况下FreeBSD表现得更
+好，而且它的TCP/IP栈相对出色一些（如果你用Linux 2.2或更早版本的内核和FreeBSD
+作比较，我同意这个说法）。FreeBSD确实是一个很好的服务器操作系统，这点勿庸置
+疑，但是这只是 FreeBSD相对Linux 2.2或更早的内核版本时的情况。作为一个新版本内
+核的粉丝，我早就在我的电脑上用上了2.4测试版的内核，它确是也很棒，从出色的
+TCP/IP栈到整个重新设计的“netfilter”系统都是。我觉得在不久的将来，新的性能
+标准将会由Linux来定义，而“free UNIX”将会在商业领域面对Linux强有力的挑战。
+</p>
+
+</body>
+</section>
+<section>
+<title>FreeBSD的不足</title>
+<body>
+
+<p>
+与服务器领域的应用不同，在桌面应用上，Linux占有绝对份额上的优势（仅相对BSD
+来说，Linux不管是对Win还是对MAC都完全处于下风）。所有最新的桌面应用软件一
+定是先在Linux上出现、在3D加速和声卡的支持方面，Linux也比BSD走在了前面。随着
+2.4版本内核的临近，Linux 在这块地盘上还是会继续保持它的优势地位。
+</p>
+
+<p>
+我对FreeBSD采用的UFS文件系统并不喜欢，虽然UFS相对Linux的ext2文件系统来说更
+健壮，但是付出的代价却是那个另人昏昏欲睡的龟速。现在也有一个UFS文件系统的
+扩展叫“soft update”，它是把小块的IO操作聚合成大的文件块后再写入物理硬盘以
+提高文件系统的速度，就算“soft update”这套机制大幅提高了UFS文件系统的性能，
+我也没法就说在所有方面的比较中UFS都比ext2优秀。当然，UFS和“soft update”更
+加可靠，FreeBSD也可能会在文件系统的战争中击败Linux，但是请不要忘记，输给
+FreeBSD的仅仅只是现在的2.2版本或者更旧版本的Linux，这不代表将来的对决也会
+是同样的结果。
+</p>
+
+<p>
+现在，我们把话题转变一下，我们比较的双方是现今的Linux 2.2版本、2.4版本和FreeBSD。
+Reiserfs（一个新的日志型文件系统）已经给我们带来了一阵惊喜，而Linux还有蓄势待发
+的ext3、 IBM的JFS和XFS文件系统，这些文件系统都在提供高可靠性的同时提供了优秀的
+性能。Reiserfs给了Linux在文件系统上超越FreeBSD 的一个契机，这也是我认为Linux 2.4
+版本会上演大逆转的原因，FreeBSD的传统强项在未来2.4内核面前可能会荡然无存。
+</p>
+
+</body>
+</section>
+<section>
+<title>回到Gentoo的开发</title>
+<body>
+
+<p>
+几个月之后决定重新回到Linux世界的我在一台新的机器上又装上了Gentoo。首先，回到
+Gentoo的开发中来是一个事业性的决定－－我已经花费了很多时间使自己成为一个Linux
+万事通，而现在怀抱着BSD就等于是把以前学到的知识都浪费掉了，这样做我觉得不是很
+值得。而且在更新Gentoo Linux后那么一段很短的时间内，我为“为什么再次回到Linux怀
+抱”找到了几个新的理由，也就是前面提到过的kernel以及文件系统的改进等等。 FreeBSD
+是一个宁静的家园，但是这样的宁静太安静了点，这样的宁静也包含着困惑。相反Linux世
+界充满着活力，发展也是日新月异。如果你所寻找的是一个兴奋和创新的地方，那么毫无
+疑问Linux就是你所向往的世外桃源。
+</p>
+
+<p>
+Linux从2.0进步到2.2给我的感觉就是满失望的，但是2.4时代是绝对值得去守候着的，为
+此Gentoo Linux重新回到了我们面前，那种兴奋的感觉也重新又回到了我的心中。
+</p>
+
+<p>
+Gentoo Linux重生的另一个关键因素是我们开发团队的领导者－－Achim Gottinger。我想
+花一点篇幅对他所给予的帮助（使我我重新开始了Gentoo Linux的开发）致以最诚挚的感
+谢。我在回到Linux世界之前就开始与Achim Gottinger有了电子邮件上的往来，在几乎每一
+封他的电子邮件中，我都可以看到一些新的.ebuild或者是些迫切需要修复的bug。在我回到
+ Linux世界并重新开始了Gentoo的开发之后，Achim继续贡献着他的时间和精力使这个发行
+版步入正轨。直到最近，Achim和我都是 Gentoo Linux仅有的两个开发者，这也是出于选择
+的结果。因为我们都使用几乎相同的发行版，也因为Achim的技术，我们可以轻松的完成非
+常巨大的工作量以至于我觉得加入第三名开发者并不会对我们的进展有什么帮助。现在Achim
+是Gentoo Linux开发组的负责人，几乎每天Gentoo的都会有基础部分中主要的提高。我们
+已经走到了这里，也已经准备好了CVS树为后来者提供一个协同开发平台，并且小心翼翼的逐
+步扩大Gentoo开发队伍的工作也开始付诸实施。
+</p>
+
+</body>
+</section>
+<section>
+<title>新的版本</title>
+<body>
+
+<p>
+我没有觉得花在BSD上的时间是在浪费。实际上，它给了我一个很好的机会来反省一下整个
+Linux社区存在的问题和Gentoo Linux应该做点什么来改进这些短处。
+</p>
+
+<p>
+在新版本的Gentoo Linux中，我下决定不再使用pgcc或者什么非常优化的参数来编译所有的
+软件包，因为稳定性还是要放在第一位的，我们默认将会使用合理的优化选项（" -O2 -mpentium"），
+但也同时向用户提供了可以简单自定义的优化选项来满足了一些同胞希望得到最“bleed edge”
+的系统（通过我们的自动化系统完成）这么个愿望。
+</p>
+
+<p>
+FreeBSD给了我一个关于“自动化定制系统如何工作？”这个问句一个很好的提示。我决定
+在我们的自动化定制系统（现在叫做Portage）中加入一些FreeBSD的特性来制作一个新一代
+的ports系统。 
+</p>
+
+<p>
+Portage 可以说是Gentoo Linux的心脏，它所具备的东西远远超过一个简单的包管理机制或
+是一个系统管理机制。Portage通过包含其中的对于制作工具的设置和制作脚本可以使你从
+源代码构建一个完整的发行版系统。但对我来说更重要的是，Portage给用户提供了一个可
+以完全接触Gentoo Linux构建智慧的途径。对我们开发者来说，这意味着当Gentoo Linux不
+断发展的同时我们也记录下了一个发行版制作的过程。Portage的易用性和可读性也为越来
+越多的人提供了一个窥探Linux内部的窗口，它也为后来者贡献他们的代码和脚本打开了方
+便之门。
+</p>
+
+<p>
+Portage是我们为他人展示Linux技术和原理的一条途径，通过学习自动化制作脚本，你可以
+看到大量各不相同的包是怎么互相适应并结合成一个整体的。如果你需要，你也可以从我们
+的站点上攫取整个CVS树然后自己hack并制作个人的Linux发行版。我们坚信这是一件好事
+情－－我们希望把知识交给渴望这些知识的人们以便他们可以把Linux带入一个新的领域。
+</p>
+
+</body>
+</section>
+<section>
+<title>商业上的关注</title>
+<body>
+
+<p>
+起初，有许多拥有不同背景的人们加入了Gentoo的开发中来。因为这个，我们的开发人员
+对于如何最终在Gentoo上获得经济利益也有许多各不相同的打算，对此我并没有太多的诧
+异。基本上有这么两种类型的开发人员：一类群体反对用Gentoo来追名逐利，另一类群体
+则对使Gentoo Linux成为一个成功的商业产品非常感兴趣。这是一个预料中会存在分歧的地
+方，第一类群体认为商业化的运作包含着腐化等不良的影响，而第二类群体则认为没有这么
+多的负面因素。
+</p>
+
+<p>
+在以前还是Enoch的那段时光中，我对商业成份究竟有利还是有弊这点也很难做个了断。我
+验证过的是像Debian这样的Linux发行版真正忠于“自由”这样的事实，我喜欢这样。对比
+其他商业化的发行版，他们给用户带来的易用性包括了在各自的网站上提供一份完整的安
+装说明，这也是一个我想去借鉴的好东西。
+</p>
+
+<p>
+同样，我也真心希望Gentoo Linux能够成为一个成功的商业版本，为了这个目的，我努力
+想在商业和开源之间找到一个平衡点，可是直到最近我还是没有能够找到这么一个黄金
+分割点。
+</p>
+
+</body>
+</section>
+<section>
+<title>该做些什么?</title>
+<body>
+
+<p>
+我们该怎么做才能在商业化和非商业化中取得平衡呢？关键的一点是一定不能忘记我们的
+基楚和根本－－－Gentoo Linux 作为一个开源软件的基础和根本。所有我们作出的努力都
+必须遵循这个基础，这不仅仅是肯定开源软件或只是使用开源软件，还是对开源软件和开
+源发行版开发的鼓励和支持，我们也不会反对用它来获取商业回报。更重要的是，我们绝
+不会采用商业化的模型，因为这样做对于其他发行版使用我们的源代码有阻碍作用。我们
+的开发团队对所有人来说都会是开放的和可接近的，而Gentoo Linux这个自由发行版不仅
+仅可以被大家接受还会因为很多人的鼓励而继续走下去。我们必会成为开源运动的倡导者，
+一个把这个理念贯彻到行动中而不是停留在文字层面上的倡导者。
+</p>
+
+<p>
+如果某公司需要为一个商业化的基于Linux技术的需求使用Gentoo Linux，他们可以从我们
+的CVS树中攫取这些代码并马上开始使用它们，因为所有我们的分散的工作都是基于GPL。
+我们在确信所有基于Gentoo Linux的衍生产物都遵循GNU Public License的前提下是不会在
+任何地方限制别人使用我们的代码的。
+</p>
+
+<p>
+我们希望有尽可能多的人们从我们的工作中受益，但是我们也希望尽可能多的能从你对
+Gentoo Linux的提高中获益。如果你公司的产品有很大一部份是基于Gentoo Linux的话，
+希望你可以把所有可分类的修改和提高发送给我们，便于我们可以加入到CVS树中使得
+更多的人可以从中获益。在继续保管和改进你提交的修改之后，你也能从我们所做的修
+改中受益。我们也鼓励商业实体和非商业实体之间的合作，举个例子来说：不管是在他
+的ISP中使用Gentoo Linux的系统管理员还是用Gentoo Linux构建商业服务器的公司都能
+从彼此对Gentoo Linux的改进中获益。是时候来促进在人们之间的自由代码交换了，这
+也只有开源软件可以做到。
+</p>
+
+</body>
+</section>
+<section>
+<title>将来要走的路</title>
+<body>
+
+<p>
+现在离Gentoo Linux 1.0 的发布已经很近了（在你在developerWorks上读这篇文章的
+时候它可能已经发布了，想想现在的2007.0是不是大家有种沧海桑田的感觉^-^??）。
+但是Gentoo Linux将来的方向会是怎么样的呢？
+</p>
+
+<p>
+当我们逐步迈向2.0版本时，我希望继续提升Portage作为Gentoo Linux核心的性能，因
+为任何关于Gentoo Linux主要的进步都会从Portage的进步开始。主要代码从bash转换
+到python的过程我也会继续下去，因为这么做可以让新的设计逐渐加入进来（比如为
+全自动构造系统设计的面向对象的新东东）。
+</p>
+
+<p>
+除了Portage的修改，我还希望小心谨慎的寻找技术出色并且和我们使用相同版本的开
+发者加入我们的开发团队。在扩大了开发团队之后，我们可以为 Gentoo Linux的加入
+更多的自动化定制脚本。比这更重要的是，适当扩大的开发团队可以使Gentoo Linux始
+终站在Linux技术的尖锋之上，这才是乐趣所在嘛：）
+</p>
+
+<p>
+我们也希望商业化的Linux技术公司可以把Gentoo Linux作为他们产品的基础。现在我们
+已经有了这样一个关系，将来也会出现更多。而这样的协作承诺充满着乐趣并对于Gentoo Linux
+的用户非常有益。
+</p>
+
+<p>
+最后我要说的是，我们主要的目标是为Linux社区提供有意义的贡献。虽然可选择的发行
+版很多，但是Gentoo Linux还是拥有许多其他版本所没有的东西。我们对未来Gentoo Linux
+的发展充满着信心，我们希望你也有同样的感觉。
+</p>
+
+</body>
+</section>
+<section>
+<title>资源</title>
+<body>
+
+<ul>
+  <li>
+    我故事的开端是"Making the distribution", <uri
+    link="/doc/zh_cn/articles/making-the-distro-p1.xml"> Part 1</uri>, 和<uri
+    link="/doc/zh_cn/articles/making-the-distro-p2.xml">Part 2</uri>. 
+  </li>
+  <li>
+    请访问<uri link="/index.xml">Gentoo Linux</uri>获取更多这个发行版信息.
+  </li>
+  <li>
+     阅读详细资料在<uri
+    link="http://www.freebsd.org/">FreeBSD</uri>.
+  </li>
+  <li>
+  攻读文章<uri link="http://www.gnu.org/copyleft/gpl.html">GPL</uri>.
+  </li>
+  <li>
+    请看一下官方的<uri link="http://www.stampede.org/">Stampede
+    站点</uri>.
+  </li>
+  <!--<li>
+  Hang out on <uri
+  link="http://irc.openprojects.net/">irc.openprojects.net</uri>.
+  </li>-->
+  <li>
+    请访问<uri link="http://www.xfree86.org/">Free X86
+    Project</uri>.
+  </li>
+  <li>
+    查看<uri link="http://developer.gnome.org/doc/API/gtk/">GTK+ Reference
+    文档</uri>.
+  </li>
+  <li>
+    查看<uri link="http://www.xmms.org/">XMultiMedia System</uri>, 一个
+    基于X11/gtk+的 MP3/CD播放器.
+  </li>
+  <li>
+    线程的相关资料请阅读亚利桑那大学的<uri
+    link="http://www.math.arizona.edu/swig/pthreads/threads.html">POSIX Threads
+    教程</uri>.
+  </li>
+  <li>
+    最新的消息请参考<uri link="http://www.rpm.org/">RPM 打包工具</uri>.
+  </li>
+  <li>
+  访问友好的<uri link="http://www.debian.org/">Debian</uri>.
+  </li>
+  <li>
+  查看官方的<uri link="http://gcc.gnu.org/">GCC</uri> site.
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>关于作者About the author</title>
+<body>
+
+<p>
+Daniel Robbins居住在美国新墨西哥洲中部大城Albuquerque。他是Gentoo Technologies Inc.
+的董事长兼CEO、Gentoo Progect的首席架构师，他还是MacMillan出版过的一些书的贡献作家，
+这些书有：Caldera OpenLinux Unleashed, SuSE Linux Unleashed和Samba Unleashed等等。
+在二年级的时候，自从迷上了Logo语言和Pac Man游戏后，渐渐Daniel融入了计算机的世界。
+这在某种程度上也解释了他后来为什么会成为SONY Electronic Publishing/Psygnosis的首席图形
+艺术家。Daniel喜欢和他的妻子Mary、他的小女儿Hadassah一起享受生活。你可以通过这个邮件
+地址联系到Daniel。<mail link="drobbins@gentoo.org">drobbins@gentoo.org</mail>.
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
+
