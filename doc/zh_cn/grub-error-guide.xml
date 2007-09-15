@@ -2,6 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
+<!-- English CVS version: 1.14 -->
 
 <guide link="/doc/en/grub-error-guide.xml">
 <title>Gentoo Grub错误集锦</title>
@@ -18,10 +19,8 @@
 这个错误集锦的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
 </abstract>
 
-
-
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
 <version>1.8</version>
