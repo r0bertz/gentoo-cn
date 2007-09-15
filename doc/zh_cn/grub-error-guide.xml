@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+
+<guide link="/doc/en/grub-error-guide.xml">
+<title>Gentoo Grub错误集锦</title>
+
+<author title="上下文">Hartwig Brandl</author>
+<author title="编辑">
+  <mail link="deathwing00@gentoo.org">Ioannis Aslanidis</mail>
+</author>
+<author title="编辑">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+
+<abstract>
+这个错误集锦的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.8</version>
+<date>2005-12-21</date>
+
+<chapter>
+<title>篇首语</title>
+
+<section>
+<title>致谢</title>
+<body>
+
+<p>
+感谢<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=18420">Earthwings</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=41638">loyaltonone</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=4980">pilla</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=13816">nephros</uri>, 
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=25859">yamakawa</uri> 
+和其他所有在原始<uri 
+link="http://forums.gentoo.org/viewtopic.php?t=122656">基线</uri>上的建议。
+</p>
+
+</body>
+</section>
+
+<section>
+<title>免责声明</title>
+<body>
+
+<p>
+示例中提供的仅是例子，请务必确保根据系统说明改变分区号及类似情况。遵照本文档中所提供的解决方案须自己承担风险。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub loading, please wait..</title>
+<section>
+<title>状态</title>
+<body>
+
+<pre caption="Grub输出">
+GRUB loading stage 1.5
+GRUB loading, please wait...
+</pre>
+
+<p>
+出现这段信息之后，系统停止。如果你试图用grub软盘引导系统，这种问题就会消失。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+根据<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3134">The_Bell</uri> 
+你可以改变你BIOS中的引导命令。
+</p>
+
+<p>
+调整你的BIOS使它不要首先从软盘启动。
+</p>
+
+<p>
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri> 
+上说这可能是由于错误的CFLAGS设定引起的。尽管现在的grub 
+ebuild过滤掉了<c>-fstack-protector</c>，如果其他的不起作用运用干净的CFLAG重新编译grub也不会有问题。
+</p>
+
+<pre caption="使用干净的CFLAG重构GRUB">
+# <i>CFLAGS="-O2 -march=i686 -fomit-frame-pointer -pipe" emerge grub</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>GRUB错误12</title>
+<section>
+<title>状态</title>
+<body>
+
+<pre caption="Grub输出">
+12：无效设备请求
+</pre>
+
+<p>
+如果设备字符串语法正确也会返回这个错误，另外这种错误的出现又不属于任何其它的错误。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+当你通过交互命令在你的引导设备中安装grub时,你是否在grub命令提示符后执行下面两行呢？
+</p>
+
+<pre caption="交互安装命令">
+grub&gt; <i>root (hd0,0)</i>
+grub&gt; <i>setup (hd0)</i>
+</pre>
+
+<p>
+(hd0,0)应该用你的引导分区替换，而(hd0)用你选择的HDD替换。谨记(hd0)将安装引导管理器到你的第一块硬盘（即主引导盘）的主引导记录(MBR)中。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub错误15</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+这个错误可能会发生在GRUB配置的两个不同阶段，或是在初始化配置期间（将GRUB安装在主引导记录中）抑或是在引导系统和试图连接Linux时（也或者是其它情况）。
+</p>
+
+<pre caption="Grub输出-初始化配置">
+grub&gt; <i>root (hd0,0)</i>
+ Filesystem type is xfs, partition type 0x83
+
+grub&gt; <i>setup (hd0)</i>
+ Checking if "/boot/grub/stage1" exists... no
+ Checking if "/grub/stage1" exists... no
+
+Error 15: File not found
+</pre>
+
+<pre caption="Grub输出──引导一条记录">
+Booting 'gentoo Linux'
+
+root (hd0,0)
+Filesystem type is ext2fs, partition type 0x83
+kernel (hd0,0)/boot/kernel-2.4.20 root=/dev/hda3 vga=792
+
+Error 15: File not found
+Press any key to continue...
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案──初始化配置</title>
+<body>
+
+<p>
+如果特定的文件名没有找到而其它的（诸如磁盘和分区信息）是正确的将返回这一错误。
+</p>
+
+<p>
+幸运的是，这条错误标明了缺少一个内核映像文件。你要确保你的引导分区中存在以上提到的相关的文件。
+</p>
+
+<p>
+为了找到你的内核的精确命名，从一个安装光盘中启动，挂载你的根分区和引导分区（如果可用的话）。然后，切换到你的Gentoo系统并列出所有可用的文件,看哪一个内核映像是你要启用的：
+</p>
+
+<pre caption="调整存在的内核映像">
+# <i>cd /boot</i>
+# <i>ls</i>
+</pre>
+
+<p>
+这将列出所有在你的引导分区所获得的内核。如果你的内核不存在，请确保你已经编译了一个内核（用<c>genkernel</c>或是手工编译）：
+</p>
+
+<pre caption="重新编译内核">
+# <i>cd /usr/src/linux/</i>
+# <i>make menuconfig</i>
+# <i>make</i>
+</pre>
+
+<p>
+并将它复制到你的引导分区：
+</p>
+
+<pre caption="复制内核">
+# <i>cp /usr/src/linux/arch/i386/boot/bzImage /boot</i>
+</pre>
+
+<p>
+调整内核的名字使其和你的<path>grub.conf</path>文件中定义的相同。另外还要确保你的<path>grub.conf</path>文件中关于<c>内核</c>的行关联到那个分区（相对的或绝对的）。
+</p>
+
+<p>
+另外一个报告的错误是BIOS忽略了内核或grub 
+stages所在的盘。除此之外，grub保存它stages的分区不应使用RAID-5（或其它的剥离技术）设定。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案──引导一个选项</title>
+<body>
+
+<p>
+首先，调整你所用的<c>root</c>和<c>setup</c>行是正确的。
+</p>
+
+<p>
+如果你确定它们是可用的，那么你<e>可能</e>用了有缺陷的GRUB版本（0.93.20031222）。请升级你的Portage树或是屏蔽此版的grub：
+</p>
+
+<pre caption="屏蔽Grub">
+<comment>（在chrooted环境下执行这些）</comment>
+# <i>echo "=sys-boot/grub-0.93.20031222" &gt;&gt; /etc/portage/package.mask</i>
+# <i>emerge grub -p</i>
+</pre>
+
+<p>
+你同样可以用由GRUB作者所推荐的<c>grub-install</c>脚本：
+</p>
+
+<pre caption="运用grub-install">
+<comment>(如果你使用一个单独的引导分区你则还需要--root-directory选项，否则就不用管它）</comment>
+# <i>grub-install --root-directory=/boot /dev/hda</i>
+</pre>
+
+<p>
+如果这些都失败了，你的引导分区可能已经损坏。请检查分区错误：
+</p>
+
+<pre caption="检查分区错误">
+<comment>（确保引导分区，在此处是/dev/hda1，</comment>
+# <i>fsck -y /dev/hda1</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub错误17</title>
+<section>
+<title>状态</title>
+<body>
+
+<pre caption="Grub输出">
+root (hd0,0)
+filesystem type unknown partition type 0x7
+
+Error 17 : Cannot mount selected partition
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+如果分区请求存在而文件系统类型不能被GRUB识别将返回此错误信息。
+</p>
+
+<p>
+请一定检查你的root(x,y)在你的grub.conf中已经设置。
+</p>
+
+<p>
+另外，如果你要引导Windows，请确保你的<path>grub.conf</path>文件中有<c>root 
+(hdX,Y)</c>（或<c>rootnoverify (hdX,Y)</c>）和<c>chainloader (hdX,Y)+1</c>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub错误18</title>
+<section>
+<title>状态</title>
+<body>
+
+<pre caption="Grub输出">
+kernel (hd1,4)/bzImage root=/dev/hdb7
+
+Error 18: Selected cylinder exceeds max supported by BIOS
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+当试图读取的线性块地址在BIOS可转换区之外时返回这个错误。这通常出现在如果你的硬盘大于BIOS可以控制（旧机器上(E)IDE硬盘的512MB和通常状况下高于8G）。
+</p>
+
+<p>
+试试升级你的BIOS或将你的引导分区移动到前面（或至少到恰当的范围内）。 
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>GRUB GRUB GRUB GRUB GRUB ...</title>
+<section>
+<title>状态</title>
+<body>
+
+<pre caption="Grub输出">
+GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB
+  GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB
+...
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+通过<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri> 
+可以知道这可能是由让你的bios自动检测你的硬盘引起的。试试将你的bios选项设定成User Type HDD。 
+</p>
+
+<p>
+另外一种可能是你将Grub装在主引导分区上和试图将它重新安装（例如是因为更换硬盘）但是运用了错误的<c>setup</c>和<c>root</c>命令。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>检查设备推测BIOS驱动。这可能要花费很长时间。</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+当你试图安装grub，它在显示下面几行后挂起：
+</p>
+
+<pre caption="Grub输出">
+# <i>grub</i>
+
+Probing devices to guess BIOS drives. This may take a long time.
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+一个报告的原因是由外来的硬盘设备配置文件引起的，如在一条线上有多个ultra/non-ultra DMA硬盘。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装Grub时，系统挂起</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+安装Grub时，系统挂起
+</p>
+
+<pre caption="Grub输出">
+# <i>grub</i>
+<comment>（在这一步，安装停止）</comment>
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+如果你没有软盘设备，你是否使用了--no-floppy开关？
+</p>
+
+<pre caption="使用--no-floppy开关安装grub">
+# <i>grub --no-floppy</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Uncompressing Linux... Ok, booting the kernel.</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+出现下面的行后系统挂起：
+</p>
+
+<pre caption="Linux输出">
+Uncompressing Linux... Ok, booting the kernel.
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+严格来讲，这并不是grub错误。一种可能的原因是ACPI没有正常工作但是在内核中却已经将它启用。请尝试在bios中禁用它。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub只显示一个Grub提示符</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+当引导系统时，返回一个grub命令提示符而非一个你在<path>grub.conf</path>文件中所定义的选单。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+挂载你的引导分区并检查<path>grub/grub.conf</path>，如果它存在。
+</p>
+
+<pre caption="挂载和检查">
+# <i>mount /dev/hda1 /mnt/gentoo/boot</i>
+# <i>cat /mnt/gentoo/boot/grub/grub.conf</i>
+</pre>
+
+<p>
+同时确定 <path>menu.lst</path> 的符号链接存在：
+</p>
+
+<pre caption="检查符号链接">
+# <i>ls -l /mnt/gentoo/boot/grub/menu.lst</i>
+lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.conf
+</pre>
+
+<p>
+如果没有，请重新建立符号链接：
+</p>
+
+<pre caption="重新建立menu.lst的符号链接">
+# <i>cd /mnt/gentoo/boot/grub</i>
+# <i>ln -snf grub.conf menu.lst</i>
+</pre>
+
+<p>
+如果是这种情况，请重新安装grub：
+</p>
+
+<pre caption="重新安装Grub">
+<comment>（在chrooted环境下运行）</comment>
+# <i>grub-install --root-directory=/boot /dev/hda</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>在/boot/boot找不到设备：找不到或没有块设备</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+当运行<c>grub-install</c>安装GRUB时，获得以下错误：
+</p>
+
+<pre caption="Grub输出">
+# <i>grub-install --root-directory=/boot /dev/hda</i>
+在/boot/boot找不到设备：找不到或没有块设备
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+检查你是否忘记了以下的：
+</p>
+
+<pre caption="更新mtab文件">
+# <i>cp /proc/mounts /etc/mtab</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>在Grub菜单中点击回车后系统重新启动</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+系统启动时在Grub菜单中点击回车，系统重新启动。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+请尝试禁用内核中的帧缓冲支持。如果这样做不起作用，禁用APM和ACPI。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>在Grub菜单中点击回车，出现黑屏</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+系统引导过程中，在Grub菜单中点击回车，出现黑屏，但是系统却仍有响应（例如，你的numlock指示灯还可切换。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+禁用帧缓冲（通常是从你的<path>grub.conf</path>中移除<c>vga=XYZ</c>）并检查你的内核配置中的处理器架构。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub Image缺失</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+系统启动时看不到Gentoo闪屏。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+首先检查<path>grub.conf</path>中的闪屏文件确实存在。如果存在，再检查grub 
+ebuild。可能是你所用的版本的闪屏图像的补丁被注释掉了。 
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>选择Windows选项后，系统从第二个硬盘中启动Windows失败，</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+选择了Windows选项以后，系统拒绝引导而且没有明显的原因。
+</p>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+<uri 
+link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=14595">cyrillic</uri> 
+提示我们你可以用不同的命令"映射"你的硬盘像下面一样改变<path>grub.conf</path>中的Windows选项：
+</p>
+
+<pre caption="硬盘映射">
+title Windows XP
+  map (hd0) (hd1)
+  map (hd1) (hd0)
+  chainloader (hd1,0)+1
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Grub segfaults when trying to install</title>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+这种状况经下面的解释说是只与现在将grub安装到引导分区的grub-0.95.x相关联的。
+</p>
+
+<pre caption="安装Grub">
+grub&gt; root (hd0,0)
+
+grub&gt; setup (hd0)
+
+Segmentation fault
+</pre>
+
+</body>
+</section>
+<section>
+<title>解决方案</title>
+<body>
+
+<p>
+与此相关的是一个知名bug而且在grub 0.96中已经确定。同时grub 0.94 r1和grub
+0.94 r2应该能正常工作。如果它同样失败了，你可以试着emerge已经在amd64下稳
+定和在x86下还不稳定（~x86）的grub-static。要获得附加信息请参考bug <uri
+link="http://bugs.gentoo.org/show_bug.cgi?id=79378">#79378</uri>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
