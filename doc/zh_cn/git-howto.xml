@@ -37,8 +37,12 @@
 <title>安装git</title>
 <body>
 
-<pre caption="通过emerge获取git">
-$ <i>emerge dev-util/git</i>
+<note>
+如果你希望使用gitk工具，请加上tk USE标记。
+</note>
+
+<pre caption="安装git">
+$ <i>emerge -av dev-util/git</i>
 </pre>
 
 </body>
@@ -53,7 +57,7 @@ $ <i>emerge dev-util/git</i>
 
 <pre caption="获取现有的主拷贝">
 $ <i>cd /path/to/work</i>
-$ <i>git clone http://zhangle.is-a-geek.org/zh_cn.git</i>
+$ <i>git clone http://gentoo-cn.org/.git</i>
 </pre>
 
 <p>
@@ -75,7 +79,7 @@ $ <i>gitk --all</i>
 <body>
 
 <p>
-git的每个递交都会关联作者的email信息。在最新版的git（1.5.2.2）中，可以使用<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
+git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
 </p>
 
 <pre caption="设置自己的姓名和email地址">
@@ -102,7 +106,7 @@ $ <i>git-config --global sendemail.smtpserver 'smtp.i-cable.com'</i>
 </p>
 
 <pre caption="在工作目录中添加一个文件">
-$ <i>cd zh_cn</i>
+$ <i>cd gentoo-cn.org</i>
 $ <i>echo "this is a test" > new_file.xml</i>
 </pre>
 
@@ -161,7 +165,7 @@ $ <i>git status</i>
 </p>
 
 <pre caption="提交你的修改">
-$ <i>git commit -a</i>
+$ <i>git commit -a -s</i>
 Created commit 96ffadde5682bc9b3d96582822bc4e75e8dccdca
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 new_file.xml
@@ -216,7 +220,7 @@ index 90bfcb5..030e90b 100644
 @@ -1 +1,2 @@
  this is a test
 +this is the second line
-$ <i>git commit -a -m "some more log"</i>
+$ <i>git commit -a -s -m "some more log"</i>
 Created commit 1958506a599d1bcecd38fb4879b3483545226ef4
  1 files changed, 1 insertions(+), 0 deletions(-)
 $ <i>git whatchanged HEAD^^..HEAD</i>
@@ -335,7 +339,7 @@ index 0000000..030e90b
 </pre>
 
 <pre caption="用git send-email发送邮件">
-$ <i>git send-email 0001-Added-file-new_file_xml.patch --to xudong.guan@gmail.com</i>
+$ <i>git send-email 0001-Added-file-new_file_xml.patch --to gentoo-china@googlegroups.com</i>
 Who should the emails appear to be from? [Xudong Guan &lt;xudong.guan@gmail.com&gt;] 
 Emails will be sent from: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 Message-ID to be used as In-Reply-To for the first email? 
@@ -347,7 +351,7 @@ Sendmail: /usr/sbin/sendmail
 From: Xudong Guan &lt;xudong.guan@gmail.com&gt;
 Subject: [PATCH] Added file new_file_xml
 Cc: Xudong Guan &lt;xudong.guan@gmail.com&gt;
-To: xudong.guan@gmail.com
+To: gentoo-china@googlegroups.com
 
 Result: OK
 </pre>
