@@ -56,8 +56,8 @@
     <ti><uri link="/doc/en/faq.xml">v 1.106</uri></ti>
     <ti>2006/11/29</ti>
     <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
-    <ti>T</ti>
-    <ti>2007/09/06</ti>
+    <ti>W</ti>
+    <ti></ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/faq.xml">v 1.106</uri></ti>
     <ti>N/A</ti>
@@ -89,8 +89,8 @@
     <ti><uri link="/doc/en/articles/making-the-distro-p3.xml">v 1.4</uri></ti>
     <ti>2005/10/09</ti>
     <ti><mail link="linuxfans.linky@gmail.com">linky_fan</mail></ti>
-    <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/09/14</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/articles/making-the-distro-p3.xml"></uri></ti>
     <ti>N/A</ti>
@@ -346,6 +346,17 @@
     <ti>2007/09/15</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/grub-error-guide.xml">v 1.14</uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>gnome-2.18-upgrade.xml</ti>
+    <ti><uri link="/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml">v 1.13</uri></ti>
+    <ti>2007/08/18</ti>
+    <ti><mail link="">jjj311</mail></ti>
+    <ti>W</ti>
+    <ti>2007/09/23</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
