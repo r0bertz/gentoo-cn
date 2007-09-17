@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/portage-utils.xml,v 1.5 2007/05/23 10:57:01 rane Exp $ -->
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.5 -->
 
 <guide link="/doc/zh_cn/portage-utils.xml" lang="zh_cn">
 
@@ -37,25 +38,19 @@
 <body>
 
 <p>
- <c>portage-utils</c> 是一套使用C写的非常快速的程序集，对于 <c>gentoolkit</c> 
-来说，它是意在提供一个快速但选择有限的副本。请记住 <c>portage-utils</c> 不是打算代替 <c>gentoolkit</c> 
-。虽然它的组件比同等的 <c>gentoolkit</c> 的组件更有效率，而且也许在需要重复地调用Portage时更适于用于脚本，但是 
-<c>portage-utils</c> 不提供同样的函数。它重来不考虑eclass，并且不提供像 <c>revdep-rebuild</c> 和 
-<c>glsa-check</c> 之类的工具。
+<c>portage-utils</c>是一套使用C写的非常快速的程序集，对于<c>gentoolkit</c>来说，它是意在提供一个快速但选择有限的副本。请记住<c>portage-utils</c>不是打算代替<c>gentoolkit</c>。虽然它的组件比同等的<c>gentoolkit</c>的组件更有效率，而且也许在需要重复地调用Portage时更适于用于脚本，但是<c>portage-utils</c>不提供同样的函数。它重来不考虑eclass，并且不提供像<c>revdep-rebuild</c>和<c>glsa-check</c>之类的工具。
 </p>
 
 <p>
-你可以在 <uri link="/doc/en/gentoolkit.xml">Gentoolkit</uri> 指南里找到更多有关 
-<c>gentoolkit</c> 的信息。
+你可以在<uri link="/doc/en/gentoolkit.xml">Gentoolkit</uri>指南里找到更多有关<c>gentoolkit</c>的信息。
 </p>
 
 <p>
-你可以键入 <c>man q</c> or <c>q --help</c> 来得到 <c>portage-utils</c> 
-里的所有程序的列表。请阅读提到的所有的软件的man页，因为这个指南只是对这些最有用的函数进行一个简要的介绍，并且不包括每一个程序的所有信息。
+你可以键入<c>man q</c> or <c>q --help</c>来得到<c>portage-utils</c>里的所有程序的列表。请阅读提到的所有的软件的man页，因为这个指南只是对这些最有用的函数进行一个简要的介绍，并且不包括每一个程序的所有信息。
 </p>
 
 <p>
-使用 <c>portage-utils</c> 的第一步是安装包文件：
+使用<c>portage-utils</c>的第一步是安装包文件：
 </p>
 
 <pre caption="安装portage-utils">
@@ -73,7 +68,7 @@
 <body>
 
 <p>
-用<c>qfile</c> 找一个文件属于的包：
+用<c>qfile</c>找一个文件属于的包：
 </p>
 
 <pre caption="找到一个文件属于的包">
@@ -90,7 +85,7 @@ sys-apps/kbd (/usr/share/keymaps/atari/atari-uk-falcon.map.gz)
 <body>
 
 <p>
-如果你想要检查被某些包安装的文件的MD5或者是mtimes，你可以使用 <c>qcheck</c> 应用程序：
+如果你想要检查被某些包安装的文件的MD5或者是mtimes，你可以使用<c>qcheck</c>应用程序：
 </p>
 
 <pre caption="检查包的完整性">
@@ -110,8 +105,7 @@ Checking app-portage/portage-utils-0.1.13 ...
 <body>
 
 <p>
-当然那里也有能让你列出某些包依赖的所有的包。这你可以使用 <c>qdepends</c> 来达到。使用 <c>-a</c> 
-选项来显示某个包所有的DEPEND，RDEPEND和PDEPEND信息。
+当然那里也有能让你列出某些包依赖的所有的包。这你可以使用<c>qdepends</c>来达到。使用<c>-a</c>选项来显示某个包所有的DEPEND，RDEPEND和PDEPEND信息。
 </p>
 
 <pre caption="列出依赖于某些包的包文件">
@@ -137,7 +131,7 @@ virtual/opengl dev-python/pyopengl &gt;=x11-libs/gtkglarea-1.99
 <body>
 
 <p>
-<c>qlist</c> 给你属于一个ebuild的所有文件的列表
+<c>qlist</c>给你属于一个ebuild的所有文件的列表
 </p>
 
 <pre caption="列出属于一个ebuild文件的文件">
@@ -158,7 +152,7 @@ $ <i>qlist vim</i>
 <body>
 
 <p>
-使用 <c>quse</c> 来做这事，它必须使用root用户来运行。当第一次建立/更新ebuild缓存时可能需要一些时间。
+使用<c>quse</c>来做这事，它必须使用root用户来运行。当第一次建立/更新ebuild缓存时可能需要一些时间。
 </p>
 
 <pre caption="寻找带有“firefox”USE标记的包">
@@ -176,7 +170,7 @@ dev-java/swt/swt-3.1-r1.ebuild accessibility cairo firefox gnome
 <body>
 
 <p>
-使用 <c>qsize</c> 程序来做这件事是想要多简单就有多简单：
+使用<c>qsize</c>程序来做这件事是想要多简单就有多简单：
 </p>
 
 <pre caption="找到包的大小">
@@ -194,8 +188,7 @@ app-editors/vim-core-6.4: 1024 files, 68 non-files, 10950.984 KB
 <body>
 
 <p>
- <c>portage-utils</c> 的最强大的工具之一是 <c>qsearch</c> 。这个工具允许你比默认的 <c>emerge 
--s</c> 更快地搜索Portage树。
+<c>portage-utils</c>的最强大的工具之一是<c>qsearch</c>。这个工具允许你比默认的<c>emerge -s</c>更快地搜索Portage树。
 </p>
 
 <p>
@@ -230,8 +223,7 @@ x11-themes/psi-themes Iconsets for Psi, a QT 3.x Jabber Client
 <body>
 
 <p>
-那里也有一个允许你从你的 <path>emerge.log</path> 文件里提取有用信息的工具。它叫做 <c>qlop</c> 
-，并且当你想要评估包的编译时间或者和你的朋友比较谁的电脑比较快时它会很有用。它也能让你现在正在编译什么和要多长时间，这当你在命令行下并打算检查它时很方便。
+那里也有一个允许你从你的<path>emerge.log</path>文件里提取有用信息的工具。它叫做<c>qlop</c>，并且当你想要评估包的编译时间或者和你的朋友比较谁的电脑比较快时它会很有用。它也能让你现在正在编译什么和要多长时间，这当你在命令行下并打算检查它时很方便。
 </p>
 
 <pre caption="用qlop阅读emerge的log文件">
