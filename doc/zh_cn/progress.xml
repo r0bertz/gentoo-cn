@@ -356,7 +356,62 @@
     <ti>W</ti>
     <ti>2007/09/23</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
-    <ti><uri link="/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml"></uri></ti>
+    <ti><uri link="/proj/zh_cn/desktop/gnome/howtos/gnome-2.18-upgrade.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>gentoo-mips-faq.xml</ti>
+    <ti><uri link="/doc/en/gentoo-mips-faq.xml">v 1.13</uri></ti>
+    <ti>2007/08/25</ti>
+    <ti><mail link="me.tinow@gmail.com">吴雪山</mail></ti>
+    <ti>W</ti>
+    <ti>2007/09/19</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/gentoo-mips-faq.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>bash-by-example-p1.xml</ti>
+    <ti><uri link="/doc/en/articles/bash-by-example-p1.xml">v 1.7</uri></ti>
+    <ti>2006/01/29</ti>
+    <ti><mail link="night2008@gmail.com">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/07</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/bash-by-example-p1.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>bash-by-example-p2.xml</ti>
+    <ti><uri link="/doc/en/articles/bash-by-example-p2.xml">v 1.6</uri></ti>
+    <ti>2006/04/25</ti>
+    <ti><mail link="night2008@gmail.com">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/07</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/bash-by-example-p2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>bash-by-example-p3.xml</ti>
+    <ti><uri link="/doc/en/articles/bash-by-example-p3.xml">v 1.5</uri></ti>
+    <ti>2005/10/09</ti>
+    <ti><mail link="night2008@gmail.com">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/07</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/bash-by-example-p3.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>sudo-guide.xml</ti>
+    <ti><uri link="/doc/en/sudo-guide.xml">v 1.11</uri></ti>
+    <ti>2006/11/29</ti>
+    <ti><mail link="lyanry@gmail.com">李延瑞</mail></ti>
+    <ti>W</ti>
+    <ti>2007/09/25</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/sudo-guide.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
