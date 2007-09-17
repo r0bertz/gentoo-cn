@@ -4,10 +4,10 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.14 -->
 
-<guide link="/doc/en/grub-error-guide.xml">
+<guide link="/doc/zh_cn/grub-error-guide.xml" lang="zh_cn">
 <title>Gentoo Grub错误集锦</title>
 
-<author title="上下文">Hartwig Brandl</author>
+<author title="审校">Hartwig Brandl</author>
 <author title="编辑">
   <mail link="deathwing00@gentoo.org">Ioannis Aslanidis</mail>
 </author>
@@ -34,22 +34,7 @@
 <body>
 
 <p>
-感谢<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=18420">Earthwings</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=41638">loyaltonone</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=4980">pilla</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=13816">nephros</uri>, 
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=25859">yamakawa</uri> 
-和其他所有在原始<uri 
-link="http://forums.gentoo.org/viewtopic.php?t=122656">基线</uri>上的建议。
+感谢<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=18420">Earthwings</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=41638">loyaltonone</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=4980">pilla</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=13816">nephros</uri>，<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=25859">yamakawa</uri> 和其他所有人在原<uri link="http://forums.gentoo.org/viewtopic.php?t=122656">帖</uri>上发表的建议。
 </p>
 
 </body>
@@ -60,7 +45,7 @@ link="http://forums.gentoo.org/viewtopic.php?t=122656">基线</uri>上的建议�
 <body>
 
 <p>
-示例中提供的仅是例子，请务必确保根据系统说明改变分区号及类似情况。遵照本文档中所提供的解决方案须自己承担风险。
+示例中提供的仅是例子，请务必确保根据你的系统的实际情况改变分区号及类似信息。遵照本文档中所提供的解决方案须自己承担风险。
 </p>
 
 </body>
@@ -70,7 +55,7 @@ link="http://forums.gentoo.org/viewtopic.php?t=122656">基线</uri>上的建议�
 <chapter>
 <title>Grub loading, please wait..</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <pre caption="Grub输出">
@@ -89,9 +74,7 @@ GRUB loading, please wait...
 <body>
 
 <p>
-根据<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3134">The_Bell</uri> 
-你可以改变你BIOS中的引导命令。
+根据<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3134">The_Bell</uri>你可以改变你BIOS中的引导命令。
 </p>
 
 <p>
@@ -99,10 +82,7 @@ link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3134">The_Bell
 </p>
 
 <p>
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri> 
-上说这可能是由于错误的CFLAGS设定引起的。尽管现在的grub 
-ebuild过滤掉了<c>-fstack-protector</c>，如果其他的不起作用运用干净的CFLAG重新编译grub也不会有问题。
+<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=39305">penetrode</uri>上说这可能是由于错误的CFLAGS设定引起的。尽管现在的grub ebuild过滤掉了<c>-fstack-protector</c>，如果其他的不起作用运用干净的CFLAG重新编译grub也不会有问题。
 </p>
 
 <pre caption="使用干净的CFLAG重构GRUB">
@@ -116,7 +96,7 @@ ebuild过滤掉了<c>-fstack-protector</c>，如果其他的不起作用运用�
 <chapter>
 <title>GRUB错误12</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <pre caption="Grub输出">
@@ -153,7 +133,7 @@ grub&gt; <i>setup (hd0)</i>
 <chapter>
 <title>Grub错误15</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -228,8 +208,7 @@ Press any key to continue...
 </p>
 
 <p>
-另外一个报告的错误是BIOS忽略了内核或grub 
-stages所在的盘。除此之外，grub保存它stages的分区不应使用RAID-5（或其它的剥离技术）设定。
+另外一个报告的错误是BIOS忽略了内核或grub stages所在的盘。除此之外，grub保存它stages的分区不应使用RAID-5（或其它的剥离技术）设定。
 </p>
 
 </body>
@@ -277,7 +256,7 @@ stages所在的盘。除此之外，grub保存它stages的分区不应使用RAID
 <chapter>
 <title>Grub错误17</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <pre caption="Grub输出">
@@ -302,8 +281,7 @@ Error 17 : Cannot mount selected partition
 </p>
 
 <p>
-另外，如果你要引导Windows，请确保你的<path>grub.conf</path>文件中有<c>root 
-(hdX,Y)</c>（或<c>rootnoverify (hdX,Y)</c>）和<c>chainloader (hdX,Y)+1</c>。
+另外，如果你要引导Windows，请确保你的<path>grub.conf</path>文件中有<c>root (hdX,Y)</c>（或<c>rootnoverify (hdX,Y)</c>）和<c>chainloader (hdX,Y)+1</c>。
 </p>
 
 </body>
@@ -313,7 +291,7 @@ Error 17 : Cannot mount selected partition
 <chapter>
 <title>Grub错误18</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <pre caption="Grub输出">
@@ -333,7 +311,7 @@ Error 18: Selected cylinder exceeds max supported by BIOS
 </p>
 
 <p>
-试试升级你的BIOS或将你的引导分区移动到前面（或至少到恰当的范围内）。 
+试试升级你的BIOS或将你的引导分区移动到前面（或至少到恰当的范围内）。
 </p>
 
 </body>
@@ -343,7 +321,7 @@ Error 18: Selected cylinder exceeds max supported by BIOS
 <chapter>
 <title>GRUB GRUB GRUB GRUB GRUB ...</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <pre caption="Grub输出">
@@ -359,9 +337,7 @@ GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB GRUB
 <body>
 
 <p>
-通过<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri> 
-可以知道这可能是由让你的bios自动检测你的硬盘引起的。试试将你的bios选项设定成User Type HDD。 
+通过<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead</uri>可以知道这可能是由让你的bios自动检测你的硬盘引起的。试试将你的bios选项设定成User Type HDD。
 </p>
 
 <p>
@@ -375,7 +351,7 @@ link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=3139">airhead<
 <chapter>
 <title>检查设备推测BIOS驱动。这可能要花费很长时间。</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -405,7 +381,7 @@ Probing devices to guess BIOS drives. This may take a long time.
 <chapter>
 <title>安装Grub时，系统挂起</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -438,7 +414,7 @@ Probing devices to guess BIOS drives. This may take a long time.
 <chapter>
 <title>Uncompressing Linux... Ok, booting the kernel.</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -466,7 +442,7 @@ Uncompressing Linux... Ok, booting the kernel.
 <chapter>
 <title>Grub只显示一个Grub提示符</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -522,7 +498,7 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 <chapter>
 <title>在/boot/boot找不到设备：找不到或没有块设备</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -555,7 +531,7 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 <chapter>
 <title>在Grub菜单中点击回车后系统重新启动</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -579,11 +555,11 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 <chapter>
 <title>在Grub菜单中点击回车，出现黑屏</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
-系统引导过程中，在Grub菜单中点击回车，出现黑屏，但是系统却仍有响应（例如，你的numlock指示灯还可切换。
+系统引导过程中，在Grub菜单中点击回车，出现黑屏，但是系统却仍有响应（例如，你的numlock指示灯还可切换）。
 </p>
 
 </body>
@@ -603,7 +579,7 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 <chapter>
 <title>Grub Image缺失</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -617,8 +593,7 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 <body>
 
 <p>
-首先检查<path>grub.conf</path>中的闪屏文件确实存在。如果存在，再检查grub 
-ebuild。可能是你所用的版本的闪屏图像的补丁被注释掉了。 
+首先检查<path>grub.conf</path>中的闪屏文件确实存在。如果存在，再检查grub ebuild。可能是你所用的版本的闪屏图像的补丁被注释掉了。
 </p>
 
 </body>
@@ -628,7 +603,7 @@ ebuild。可能是你所用的版本的闪屏图像的补丁被注释掉了。
 <chapter>
 <title>选择Windows选项后，系统从第二个硬盘中启动Windows失败，</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -642,9 +617,7 @@ ebuild。可能是你所用的版本的闪屏图像的补丁被注释掉了。
 <body>
 
 <p>
-<uri 
-link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=14595">cyrillic</uri> 
-提示我们你可以用不同的命令"映射"你的硬盘像下面一样改变<path>grub.conf</path>中的Windows选项：
+<uri link="http://forums.gentoo.org/profile.php?mode=viewprofile&amp;u=14595">cyrillic</uri>提示我们你可以用不同的命令"映射"你的硬盘像下面一样改变<path>grub.conf</path>中的Windows选项：
 </p>
 
 <pre caption="硬盘映射">
@@ -661,7 +634,7 @@ title Windows XP
 <chapter>
 <title>Grub segfaults when trying to install</title>
 <section>
-<title>状态</title>
+<title>状况</title>
 <body>
 
 <p>
@@ -683,10 +656,7 @@ Segmentation fault
 <body>
 
 <p>
-与此相关的是一个知名bug而且在grub 0.96中已经确定。同时grub 0.94 r1和grub
-0.94 r2应该能正常工作。如果它同样失败了，你可以试着emerge已经在amd64下稳
-定和在x86下还不稳定（~x86）的grub-static。要获得附加信息请参考bug <uri
-link="http://bugs.gentoo.org/show_bug.cgi?id=79378">#79378</uri>。
+与此相关的是一个知名bug而且在grub 0.96中已经确定。同时grub 0.94 r1和grub 0.94 r2应该能正常工作。如果它同样失败了，你可以试着emerge已经在amd64下稳定和在x86下还不稳定（~x86）的grub-static。要获得附加信息请参考bug <uri link="http://bugs.gentoo.org/show_bug.cgi?id=79378">#79378</uri>。
 </p>
 
 </body>
