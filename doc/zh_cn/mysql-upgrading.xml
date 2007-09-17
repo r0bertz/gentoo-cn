@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/mysql-upgrading.xml,v 1.21 2007/06/04 11:03:51 rane Exp $ -->
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.21 -->
 
 <guide link="/doc/zh_cn/mysql-upgrading.xml" lang="zh_cn">
 <title>MySQL 4.*或5.0.*的升级指南</title>
@@ -16,7 +18,7 @@
 </author>
 
 <abstract>
-MySQL团队很荣幸地宣布MySQL5.0很快就要出现在Gentoo稳定的软件包树里了。这个指南描述了如何升级到MySQL4.*或5.0.*。
+MySQL团队很荣幸地宣布MySQL 5.0很快就要出现在Gentoo稳定的软件包树里了。这个指南描述了如何升级到MySQL 4.*或5.0.*。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -36,8 +38,7 @@ MySQL团队很荣幸地宣布MySQL5.0很快就要出现在Gentoo稳定的软件�
 </p>
 
 <note>
-对于MERGE表来说不是这样。如果你尝试直接升级这种很少用的表类型你可能会陷入麻烦。你应该清除并重建这些表，并且在升级过程中把他们的内容储存起来。如果你不太确定，你应该从 <uri link="#doc_chap2">Upgrading
-from old versions of MySQL</uri> 开始。
+对于MERGE表来说不是这样。如果你尝试直接升级这种很少用的表类型你可能会陷入麻烦。你应该清除并重建这些表，并且在升级过程中把他们的内容储存起来。如果你不太确定，你应该从<uri link="#doc_chap2">Upgrading from old versions of MySQL</uri> 开始。
 </note>
 
 <p>
@@ -86,8 +87,7 @@ mysql&gt; <i>quit</i>
 <body>
 
 <p>
-用户从老的MySQL版本（&lt;4.0.24）升级需要现安装MySQL 4.0.25。如果你已有一个更新的版本，你可以跳过这一区域，并从 <uri 
-link="#backup">next one</uri> 继续。
+用户从老的MySQL版本（&lt;4.0.24）升级需要现安装MySQL 4.0.25。如果你已有一个更新的版本，你可以跳过这一区域，并从<uri link="#backup">next one</uri>继续。
 </p>
 
 <pre caption="简单升级">
@@ -104,8 +104,7 @@ link="#backup">next one</uri> 继续。
 <body>
 
 <impo>
-在不同的MySQl版本中主键的值的处理方式是不一样的，请参见 <uri link="http://bugs.gentoo.org/108502">bug #108502</uri> 来得到更多信息，极其推荐你扫描 "0" (zero)
- 或更小的值，并且升级它们到一个大于等于 "1" 的值。
+在不同的MySQl版本中主键的值的处理方式是不一样的，请参见<uri link="http://bugs.gentoo.org/108502">bug #108502</uri>来得到更多信息，极其推荐你扫描“0”（zero）或更小的值，并且升级它们到一个大于等于“1”的值。
 </impo>
 
 <p>
@@ -129,8 +128,7 @@ link="#backup">next one</uri> 继续。
 </pre>
 
 <p>
-现在一个叫做 <path>BACKUP_MYSQL_4.0.SQL</path> 
-的文件应该存在，它可以在后面你重建数据时起到作用。数据是被SQL的MySQL语言描述的，它是一种结构化查询语言。
+现在一个叫做<path>BACKUP_MYSQL_4.0.SQL</path>的文件应该存在，它可以在后面你重建数据时起到作用。数据是被SQL的MySQL语言描述的，它是一种结构化查询语言。
 </p>
 
 <p>
@@ -171,8 +169,7 @@ link="#backup">next one</uri> 继续。
 </note>
 
 <p>
-当你摆脱了旧的MySQl安装后，你现在可以安装新的版本了。记住必须用 <c>revdep-rebuild</c> 
-来rebuild与MySQL有联系的包。
+当你摆脱了旧的MySQl安装后，你现在可以安装新的版本了。记住必须用<c>revdep-rebuild</c>来rebuild与MySQL有联系的包。
 </p>
 
 <pre caption="升级二进制包">
@@ -196,16 +193,15 @@ link="#backup">next one</uri> 继续。
 </p>
 
 <impo>
-默认的 <path>/etc/mysql/my.cnf</path> 文件默认设置了二进制的登陆（ <c>log-bin</c> ）。它会记录每一个对数据的修改操作。如果你运行一个非常大的数据库（大于等于1GB），它会创建极大的文件，并且迅速地用掉磁盘空间。如果你空间不够，禁用二进制登陆会是个好主意。
+默认的<path>/etc/mysql/my.cnf</path>文件默认设置了二进制的登陆（<c>log-bin</c>）。它会记录每一个对数据的修改操作。如果你运行一个非常大的数据库（大于等于1GB），它会创建极大的文件，并且迅速地用掉磁盘空间。如果你空间不够，禁用二进制登陆会是个好主意。
 </impo>
 
 <impo>
-在MySQL4.1和之前的版本默认的编码是 <c>utf8</c> 。如果数据包含了 <e>non</e>-ASCII 编码，你可能想要保持数据库默认的编码设置，通过使用在 <path>/etc/mysql/my.cnf</path>  文件里的 <c>latin1</c> 替换所有的 <c>utf8</c> 的东西。在 <uri link="#On_charset_conversion">Charset
-conversion</uri> 这一章可以找到更多的信息。
+在MySQL4.1和之前的版本默认的编码是<c>utf8</c>。如果数据包含了<e>non</e>-ASCII编码，你可能想要保持数据库默认的编码设置，通过使用在<path>/etc/mysql/my.cnf</path>文件里的<c>latin1</c>替换所有的<c>utf8</c>的东西。在<uri link="#On_charset_conversion">Charset conversion</uri>这一章可以找到更多的信息。
 </impo>
 
 <impo>
-管理的 <c>mysql</c> 数据库包括用户名、密码之间的其它东西 <b>must</b> 被编码为utf8
+管理的<c>mysql</c>数据库包括用户名、密码之间的其它东西<b>must</b>被编码为utf8。
 </impo>
 
 <p>
@@ -244,7 +240,7 @@ SET FOREIGN_KEY_CHECKS=1
 </pre>
 
 <p>
-如果当你在升级时遇到任何问题，请把它们报告到 <uri link="http://bugs.gentoo.org">Bugzilla</uri> 。
+如果当你在升级时遇到任何问题，请把它们报告到<uri link="http://bugs.gentoo.org">Bugzilla</uri> 。
 </p>
 
 </body>
@@ -252,12 +248,12 @@ SET FOREIGN_KEY_CHECKS=1
 </chapter>
 
 <chapter>
-<title>恢复旧的MySQL4.0安装</title>
+<title>恢复旧的MySQL 4.0安装</title>
 <section>
 <body>
 
 <p>
-如果你不喜欢MySQL4.1，你可以回到MySQL4.0。
+如果你不喜欢MySQL 4.1，你可以回到MySQL 4.0。
 </p>
 
 <pre caption="恢复到上一个版本">
@@ -271,7 +267,7 @@ SET FOREIGN_KEY_CHECKS=1
 </pre>
 
 <impo>
-如果依据这个指南 <c>dev-db/mysql</c> 以外的包被编译安装了，你必须运行 <c>revdep-rebuild</c> 来确保每一个客户端使用了正确的mysql客户端共享组件。
+如果依据这个指南<c>dev-db/mysql</c>以外的包被编译安装了，你必须运行<c>revdep-rebuild</c>来确保每一个客户端使用了正确的mysql客户端共享组件。
 </impo>
 
 </body>
@@ -289,8 +285,7 @@ SET FOREIGN_KEY_CHECKS=1
 </p>
 
 <p>
-转换一个数据库可能是一个复杂的任务，并且难度随着数据的不同而增加。像serialized 
-object和blobs是一个例子来说明把碎片弄在一起是很难的。
+转换一个数据库可能是一个复杂的任务，并且难度随着数据的不同而增加。像serialized object和blobs是一个例子来说明把碎片弄在一起是很难的。
 </p>
 
 </body>
@@ -361,13 +356,11 @@ Records: 0  Duplicates: 0  Warnings: 0
 <body>
 
 <p>
-系统必须配置成支持UTF-8编码。你会在我们的 <uri link="/doc/en/utf-8.xml">Using UTF-8 with 
-Gentoo</uri> 和 <uri link="/doc/en/guide-localization.xml">Localization 
-Guide</uri> 文档里发现更多信息。
+系统必须配置成支持UTF-8编码。你会在我们的<uri link="/doc/en/utf-8.xml">Using UTF-8 with Gentoo</uri>和<uri link="/doc/en/guide-localization.xml">Localization Guide</uri>文档里发现更多信息。
 </p>
 
 <p>
-在这个例子里，我们设置一些在 <path>/etc/env.d/02locale</path> 文件里的环境变量来利用英文的UTF-8编码：
+在这个例子里，我们设置一些在<path>/etc/env.d/02locale</path>文件里的环境变量来利用英文的UTF-8编码：
 </p>
 
 <pre caption="/etc/env.d/02locale">
@@ -376,7 +369,7 @@ LANG=en_US.UTF-8
 </pre>
 
 <p>
-接下来请确定运行 <c>env-update &amp;&amp; source /etc/profile</c> 。
+接下来请确定运行<c>env-update &amp;&amp; source /etc/profile</c>。
 </p>
 
 </body>
@@ -386,8 +379,7 @@ LANG=en_US.UTF-8
 <body>
 
 <p>
-由 <c>sys-libs/glibc</c> 提供的 <c>iconv</c> 是用来将文本文件从一个编码转换到另一个编码的工具。你也可以使用 
-<c>app-text/recode</c> 。
+由<c>sys-libs/glibc</c>提供的<c>iconv</c>是用来将文本文件从一个编码转换到另一个编码的工具。你也可以使用<c>app-text/recode</c>。
 </p>
 
 <pre caption="使用iconv">
@@ -399,7 +391,7 @@ $ <i>iconv -f ISO2022JP -t UTF-8 file1.sql &gt; file2.sql</i>
 </pre>
 
 <p>
- <c>iconv</c> 可以在环境不是设置成utf8时记录一个sql的dump
+<c>iconv</c>可以在环境不是设置成utf8时记录一个sql的dump。
 </p>
 
 </body>
@@ -409,7 +401,7 @@ $ <i>iconv -f ISO2022JP -t UTF-8 file1.sql &gt; file2.sql</i>
 <body>
 
 <p>
-你可以使用 <c>CONVERT()</c> 和 <c>CAST()</c> 这两个MySQL函数来转换在你的SQL脚本中的数据。
+你可以使用<c>CONVERT()</c>和<c>CAST()</c>这两个MySQL函数来转换在你的SQL脚本中的数据。
 </p>
 
 </body>
@@ -419,8 +411,7 @@ $ <i>iconv -f ISO2022JP -t UTF-8 file1.sql &gt; file2.sql</i>
 <body>
 
 <p>
-为了apache使用utf8，你必须调节以下在 <path>httpd.conf</path> 
-文件里的变量：AddDefaultCharset，CharsetDefault和CharsetSourceEnc。如果你的html文件源码没有用utf8编码，那它们必须 <b>must</b> 被 <c>iconv</c> 或者 <c>recode</c> 转换
+为了apache使用utf8，你必须调节以下在<path>httpd.conf</path>文件里的变量：AddDefaultCharset，CharsetDefault和CharsetSourceEnc。如果你的html文件源码没有用utf8编码，那它们必须<b>must</b>被<c>iconv</c>或者<c>recode</c>转换。
 </p>
 
 </body>
