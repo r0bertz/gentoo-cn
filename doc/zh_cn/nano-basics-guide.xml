@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding="UTF-8"?>
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/nano-basics-guide.xml,v 1.25 2006/11/29 15:48:57 nightmorph Exp $ -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.25 -->
 
 <guide link="/doc/zh_cn/nano-basics-guide.xml" lang="zh_cn">
 
