@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gpm.xml,v 1.4 2006/02/17 19:01:06 nightmorph Exp $ -->
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
 
 <guide link="/doc/zh_cn/gpm.xml" lang="zh_cn">
 <title>在命令行下用鼠标</title>
@@ -13,8 +15,7 @@
 </author>
 
 <abstract>
-这个指南将给你展示如何在命令行界面下建立并使用GPM（the General Purpose Mouse 
-server）。这个在你新安装Gentoo或者你的系统无法或不用X服务时是非常有用的。
+这个指南将给你展示如何在命令行界面下建立并使用GPM（the General Purpose Mouse server）。这个在你新安装Gentoo或者你的系统无法或不用X服务时是非常有用的。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -30,8 +31,7 @@ server）。这个在你新安装Gentoo或者你的系统无法或不用X服务�
 <body>
 
 <p>
-如果你刚装好Gentoo，你很可能还没有把你的鼠标设置成能在命令行界面下工作。或者可能你不用或不需要X服务，但是你仍需要使用鼠标。解决方法很简单： 
-<c>gpm</c> ，通用目的鼠标服务。
+如果你刚装好Gentoo，你很可能还没有把你的鼠标设置成能在命令行界面下工作。或者可能你不用或不需要X服务，但是你仍需要使用鼠标。解决方法很简单：<c>gpm</c>，通用目的鼠标服务。
 </p>
 
 <p>
@@ -64,11 +64,7 @@ server）。这个在你新安装Gentoo或者你的系统无法或不用X服务�
 </pre>
 
 <p>
-对于我来说， 我有一个在 <path>/dev/input/mouse0</path> 的鼠标。 所以，我解除了 
-<path>/dev/input/mice</path> 的注释， 因为这是一个为系统中的所有鼠标准备的一个通用设备和协议。试着在使用 
-<path>/dev/psaux</path> 之前使用 <path>/dev/input/mice</path> 
-，因为前者在最新的2.6内核中已经不被推荐而且被禁用了。如果 <path>/dev/input/mice</path> 
-失败了，然后回去试试别的设备。这是我的例子 <path>/etc/conf.d/gpm</path> ：
+对于我来说，我有一个在<path>/dev/input/mouse0</path>的鼠标。所以，我解除了<path>/dev/input/mice</path>的注释，因为这是一个为系统中的所有鼠标准备的一个通用设备和协议。试着在使用<path>/dev/psaux</path>之前使用<path>/dev/input/mice</path>，因为前者在最新的2.6内核中已经不被推荐而且被禁用了。如果<path>/dev/input/mice</path>失败了，然后回去试试别的设备。这是我的例子<path>/etc/conf.d/gpm</path>：
 </p>
 
 <pre caption="GPM配置实例">
@@ -81,19 +77,17 @@ MOUSEDEV=/dev/input/mice
 </pre>
 
 <p>
-如果你有一个滚轮鼠标，你将会希望用imps2协议，所以取消那行的注释。如果imps2和ps2都无法为你工作，请参考GPM信息页（ <c>info 
-gpm</c> ）来找到其他可尝试的协议。同时，如果你想要在终端中点击超链接去导航到一个网站，那么跟着 <c>/etc/conf.d/gpm</c> 
-里的提示是一个好主意：
+如果你有一个滚轮鼠标，你将会希望用imps2协议，所以取消那行的注释。如果imps2和ps2都无法为你工作，请参考GPM信息页（<c>info gpm</c>）来找到其他可尝试的协议。同时，如果你想要在终端中点击超链接去导航到一个网站，那么跟着<c>/etc/conf.d/gpm</c>里的提示是一个好主意：
 </p>
 
 <pre caption="其他选项">
-<comment>（如果你要GPM理解在URL或名字里的 ~ 或者 ： 字符，请取消这一行的注释。把它开启将会是一个好主意！）</comment>
+<comment>（如果你希望GPM能理解URL中使用的字符集或里面含有~或者:字符的名字，请取消这一行的注释。把它开启将会是一个好主意！）</comment>
 
 APPEND="-l \"a-zA-Z0-9_.:~/\300-\326\330-\366\370-\377\""
 </pre>
 
 <p>
-剩下的conf.d文件包含了一些你使用鼠标服务的其他建议；解除各种你所需要的选项的注释。请参见 <c>man gpm</c> 来得到更多的信息。
+剩下的conf.d文件包含了一些你使用鼠标服务的其他建议；解除各种你所需要的选项的注释。请参见<c>man gpm</c>来得到更多的信息。
 </p>
 
 </body>
@@ -114,8 +108,7 @@ APPEND="-l \"a-zA-Z0-9_.:~/\300-\326\330-\366\370-\377\""
 </pre>
 
 <p>
-你应该能看见一个块状的指针出现。记住只有root才能运行GPM的init脚本。然而，要避免每次你启动一个新对话的时候都要运行 <c>su</c> 
-然后再运行脚本，为什么不在你每次开启你的电脑时都启动GPM呢？
+你应该能看见一个块状的指针出现。记住只有root才能运行GPM的init脚本。然而，要避免每次你启动一个新对话的时候都要运行<c>su</c>然后再运行脚本，为什么不在你每次开启你的电脑时都启动GPM呢？
 </p>
 
 <pre caption="把GPM加入到默认运行程级">
@@ -137,8 +130,7 @@ APPEND="-l \"a-zA-Z0-9_.:~/\300-\326\330-\366\370-\377\""
 <body>
 
 <p>
-用鼠标服务来复制和粘贴大块的文本会十分简单。只要简单地用鼠标左键把文本高亮标记起来（当你放开鼠标时它仍会保留高亮），如果你希望的话，切换到一个不同的终端，用鼠标指针定位，然后按下鼠标中键来在你的指针所指的位置粘贴文本。记住，你也可以在不离开你开启的终端时使用复制粘贴。这将使发送显示出的错误信息到 
-<uri link="http://forums.gentoo.org">Gentoo Forums</uri> 变得及其简单。
+用鼠标服务来复制和粘贴大块的文本会十分简单。只要简单地用鼠标左键把文本高亮标记起来（当你放开鼠标时它仍会保留高亮），如果你希望的话，切换到一个不同的终端，用鼠标指针定位，然后按下鼠标中键来在你的指针所指的位置粘贴文本。记住，你也可以在不离开你开启的终端时使用复制粘贴。这将使发送显示出的错误信息到<uri link="http://forums.gentoo.org">Gentoo Forums</uri>变得及其简单。
 </p>
 
 </body>
@@ -152,8 +144,7 @@ APPEND="-l \"a-zA-Z0-9_.:~/\300-\326\330-\366\370-\377\""
 </p>
 
 <p>
-虽然讨论文本浏览器有些超出指南的范围，但是不可避免地用户会需要找一个兼容的命令行浏览器。虽然 <c>lynx</c> 
-可能是最老也是构建最好的浏览器，它的界面却没有鼠标支持和识别。相反，试试用 <c>links</c> 吧，它有出色的鼠标整合。
+虽然讨论文本浏览器有些超出指南的范围，但是不可避免地用户会需要找一个兼容的命令行浏览器。虽然<c>lynx</c>可能是最老也是构建最好的浏览器，它的界面却没有鼠标支持和识别。相反，试试用<c>links</c>吧，它有出色的鼠标整合。
 </p>
 
 <pre caption="得到links">
