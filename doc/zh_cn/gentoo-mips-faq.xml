@@ -1,0 +1,441 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-mips-faq.xml,v 1.3 2007/08/25 09:49:21 neysx Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide link="/doc/zh_cn/gentoo-mips-faq.xml" lang="zh_cn">
+
+<title>Gentoo Linux/MIPS Frequently Asked Questions</title>
+
+<author title="作者">
+  <mail link="redhatter@gentoo.org">Stuart Longland</mail>
+</author>
+
+<author title="译者">
+  <mail link="me.tinow@gmail.com">吴雪山(Tinow ME)</mail>
+</author>
+
+<abstract>
+本FAQ旨在回答一些涉及到Gentoo/MIPS和Linux/MIPS的常见问题。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.1</version>
+<date>2005-09-08</date>
+
+<faqindex>
+<title>关于这篇文档</title>
+<section>
+<title>简介</title>
+<body>
+
+<p>
+本FAQ旨在回答一些关于Gentoo/MIPS和Linux/MIPS的常见问题，这些问题都接收自大量的用户。本FAQ适用于新用户同样也适用于有经验的用户。本FAQ已经分类以使导航更容易。
+</p>
+
+<p>
+如果您想为此FAQ作贡献，或者看了本指南还有我们没有回答的问题，尽管<uri 
+link="http://mips.gentoo.org">联系我们</uri>。
+</p>
+
+</body>
+</section>
+</faqindex>
+
+<chapter>
+<title>关于Gentoo/MIPS项目</title>
+<section id="what">
+<title>什么是Gentoo/MIPS？</title>
+<body>
+
+<p>
+Gentoo/MIPS是隶属于Gentoo基金会的一个小项目，负责维护Gentoo 
+Linux在MIPS体系上的移移工作。我们目前主要维护MIPS家族的两种子体系：Silicon Graphics系统和基于MIPS的Cobalt服务器。
+</p>
+
+</body>
+</section>
+<section id="why">
+<title>为什么要在MIPS上安装Gentoo Linux？</title>
+<body>
+
+<p>
+当然，在当今的计算机市场中，基于MIPS的机器不是最快的。虽然MIPS体系结构已经存在了很多年，显得有些老，但是仍然有很多非常有用的基于MIPS的机器在市场中出现。比如说Cobalt 
+Qube 
+2可以做成非常好的宽带因特网路由器，也可以用来架设web网站、电子邮件和IRC等很多种应用的服务器。有很多理由让人想在这些硬件上安装Linux。
+</p>
+
+<ul>
+  <li>
+    通过给予您一个其他的选择，让您了解很多计算机硬件知识。
+  </li>
+  <li>
+    您可以利用现有硬件就实现想要的功能，而不用另买一套系统。
+  </li>
+  <li>
+    地位的象征：现在在x86的机器上安装使用Linux太平常了，缺乏乐趣。相对而言，在MIPS上运行Linux要罕见的多，可以做为炫耀的资本。
+  </li>
+</ul>
+
+</body>
+</section>
+<section id="port">
+<title>为什么不向NetBSD/MIPS或者IRIX移植Gentoo呢？</title>
+<body>
+
+<p>
+嗯，这是个好主意。不幸的是，维护Linux/MIPS和其他一些事务已经让很多Gentoo/MIPS团队忙得底朝天了。所以，您的参与将很受欢迎。或许我应该先在<uri 
+link="http://forums.gentoo.org/viewforum-f-32.html">Gentoo论坛</uri>提出这个问题，看看大家的兴趣如何。论坛上也有些帖子讨论向其他平台上移植Gentoo，比如<uri 
+link="http://forums.gentoo.org/viewtopic-t-113387.html">Solaris/SPARC</uri>，<uri 
+link="http://forums.gentoo.org/viewtopic-t-319607.html">IBM OS/2</uri>和<uri 
+link="http://forums.gentoo.org/viewtopic-t-319691.html">Microsoft Services 
+For 
+Unix</uri>。这些帖子对移植提供了很多有价值的提示，通过它们可以了解如何进行移植。如果您通过努力得到一些线索，其他一些开发者很可能将您的工作继续下去或者帮助您进入下一阶段。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>MIPS硬件FAQ</title>
+<section id="hw-what">
+<title>什么是MIPS？</title>
+<body>
+
+<p>
+<uri link="http://www.mips.com">MIPS Technologies</uri>公司制造的RISC 
+CPU内核中，有一部分实现了MIPS指令集构架。这些处理器在小型嵌入式设备到大型服务器领域都有应用。
+</p>
+
+<p>
+很巧合的是，MIPS是“每秒钟运行百万指令数”(<b>M</b>illions of <b>I</b>nstructions <b>P</b>er 
+<b>S</b>econd)的缩写。
+</p>
+
+</body>
+</section>
+<section id="hardware">
+<title>哪种硬件使用MIPS处理器？</title>
+<body>
+
+<p>
+问题提得好。简单的说……有很多。貌似各种类型的设备里都能找到MIPS处理器的身影，小到PDA（比如卡西欧早期运行Windows 
+CE的PDA）、X终端（比如Tektronix TekXPress XP330系列），大到像Silicon Graphics 
+Indy和O2甚至更高端的如Silicon Graphics Origin 2000这样的服务器。
+</p>
+
+<p>
+下面是一些现役著名的基于MIPS的系统的列表。更详细的列表在<uri 
+link="http://www.linux-mips.org/wiki/index.php/Systems">Linux/MIPS站点</uri>
+</p>
+
+<table>
+<tr>
+  <th>Sony游戏机</th>
+  <ti>
+    <uri link="http://www.linux-mips.org/wiki/index.php/PS1"> PlayStation</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/PS2"> PlayStation 
+2</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/PSP"> PlayStation 
+Pocket</uri>
+  </ti>
+</tr>
+<tr>
+  <th>任天堂游戏机</th>
+  <ti>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Nintendo_64"> Nintendo 
+64 </uri>
+  </ti>
+</tr>
+<tr>
+  <th>Silicon Graphics系统</th>
+  <ti>
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP12"> Iris Indigo</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP19"> Challenge</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP19"> Onyx</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP22"> Indy</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP22"> Indigo 2</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP22"> Challenge S</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP27"> Origin 200</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP27"> Origin 2000</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP27"> Onyx 2</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP30"> Octane</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP30"> Octane 2</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP32"> O2</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP34"> Fuel</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP35"> Origin 3000</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP45"> Origin 300</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP53"> Origin 350</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/IP53"> Tezro</uri>
+  </ti>
+</tr>
+<tr>
+  <th>DEC工作站</th>
+  <ti>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Deskstation_rPC44"> 
+rPC44</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/Deskstation_Tyne"> 
+Tyne</uri>
+  </ti>
+</tr>
+<tr>
+  <th>Cobalt微型服务器</th>
+  <ti>
+    <uri link="http://www.linux-mips.org/wiki/index.php/Cobalt"> Qube 2700</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/Cobalt"> Qube 2800</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/Cobalt"> RaQ</uri><br />
+    <uri link="http://www.linux-mips.org/wiki/index.php/Cobalt"> RaQ 2</uri>
+  </ti>
+</tr>
+<tr>
+  <th>
+    基于Broadcom的802.11g<br />
+    无线宽带因特网路由器
+  </th>
+  <ti>
+    <uri link="http://openwrt.org/">Linksys WRT54G</uri>
+  </ti>
+</tr>
+</table>
+
+<p>
+……这些只是一小部分而已。这些机器应用广泛，种类多样，其中很多目前并不运行Linux。如果您乐意，我们非常欢迎您将Gentoo/MIPS移植到任何基于MIPS的机器上，但是我们只对一小部分机器提供支持。这些机器中的一些同时也是<uri 
+link="http://embedded.gentoo.org">嵌入式Gentoo项目</uri>的核心内容，比如Linksys WRT54G。
+</p>
+
+</body>
+</section>
+<section id="supported">
+<title>Gentoo/MIPS支持我的机器吗？</title>
+<body>
+
+<p>
+这个问题很难回答。您的机器可能是下面三种类型之一：
+</p>
+
+<ul>
+  <li>Gentoo/MIPS支持您的机器</li>
+  <li>Linux/MIPS支持您的机器，但是Gentoo/MIPS现在不支持</li>
+  <li>Linux/MIPS不支持您的机器</li>
+</ul>
+
+<p>
+对于第一种情况，最简单就是到<uri 
+link="/doc/en/mips-requirements.xml">Gentoo/MIPS系统要求</uri>查看您的机器理论上是否能够运行Gentoo/MIPS。Stuart也写了一个<uri 
+link="http://stuartl.longlandclan.hopto.org/gentoo/mips/">硬件支持数据库</uri>用来收集用户体验。这有助于评价Gentoo/MIPS在某种机器上运行的如何。
+</p>
+
+<p>
+如果这里没有列出您的机器，您可以到<uri 
+link="http://www.linux-mips.org/wiki/index.php/Systems">Linux/MIPS网站</uri>查找。在很大程度上，您必须自己动手为您的硬件配置内核，准备起动介质，所以安装过程不会一帆风顺。鉴于此，我们自然会尽量为您提供帮助。
+</p>
+
+</body>
+</section>
+<section id="support_X">
+<title>为什么你们不对某种机器提供支持</title>
+<body>
+
+<p>
+如果您查阅Gentoo/MIPS硬件要求页面，您将看到很多机器是不被我们支持的。就拿SGI的硬件来说，很少人了解这些硬件，更不要说成功的将Linux移植了。
+</p>
+
+<p>
+如果您设法使Linux工作在被列为<e>不支持</e>的机器上，请尽快告知我们，我们对此非常有兴趣。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>MIPS软件FAQ</title>
+<section id="stage">
+<title>哪个stage tarball适合我？</title>
+<body>
+
+<p>
+这要看您的系统用什么CPU了。stage文件以下列规则命名：
+</p>
+
+<pre caption="Stage Tarball命名规则">
+  stage3-mipsel4-2005.0.tar.bz2
+  \____/ \_____/ \____/
+     |      |       |
+     |      |       `--- Gentoo 版本 (例如 1.4, 2004.3, 2005.0)
+     |      |
+     |      `----------- Endianness和ISA级别
+     |                     mips   ==> Big Endian
+     |                     mipsel ==> Little Endian
+     |
+     |                     R3xxx和更早期的:   ISA级别1
+     |                     R4xxx系列:         ISA级别3
+     |                     R5000和更先进的:   ISA级别4
+     |
+     `------------------ Stage Tarball类型: 1, 2 or 3.
+</pre>
+
+<p>
+例如您使用R4000类型的CPU，应该使用<c>mips3</c>或者<c>mipsel3</c>的stage tarball。
+</p>
+
+<p>
+对于R5000或者更新的CPU，应该使用<c>mips4</c>或者<c>mipsel4</c>的stage tarball。
+</p>
+
+<p>
+有的tarball文件名有<c>n32</c>或<c>n64</c>字样，这表示此tarball是为64位用户层准备的。目前，对于64位用户层的支持还很不稳定，很多软件包也不能正常工作。除非您非常有勇气也不怕历经坎坷，我不建议您使用这些tarball。
+</p>
+
+</body>
+</section>
+<section id="chroot">
+<title>我在chroot的时候遇到错误："Illegal Instruction"或"Cannot Execute Binary File"。我是哪做错了？</title>
+<body>
+
+<p>
+一般来说，这是因为您用错了stage tarball。如果您在<c>mips3</c> 
+CPU上运行<c>mips4</c>的tarball，您将遇到<e>illegal instruction</e>错误信息。同样，如果您试图在Big 
+Endian的CPU上运行Little Endian的代码，您将遇到<e>cannot execute binary file</e>错误。
+</p>
+
+<p>
+解决这个问题很容易……清空这个分区，然后换成正确的tarball并解压。什么？哪个tarball是该用的？看看前面FAQ的目录吧。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>关于Silicon Graphics的FAQ</title>
+<section id="netboot">
+<title>为什么我的SGI机器不能从网络启动？</title>
+<body>
+
+<p>
+引发这个问题的元音很多，有可能只是网线的问题，也有可能是服务器的问题。查出问题所在的最佳方法是排除法……
+</p>
+
+<ol>
+  <li>
+    您将SGI机器（以及服务器）接入正确的网络接口了吗？<br />
+    确保网络接入正确，也要知道一些机器有特殊要求。例如Challenge S在Linux不能从UTP接口正确获取网络，您得通过转换器使用AUI接口代替。
+  </li>
+  <li>
+    <b>如果有防火墙该怎么办？</b><br />
+    确保您的防火墙没有阻止DHCP/BOOTP请求（UDP的67和68端口）或者TFTP（UDP的69端口）。<br />
+    <c>iptables -I INPUT 1 -p udp --dport 67:69 -j ACCEPT</c>这个命令将解决上述问题。
+  </li>
+  <li>
+    <b>是否禁用了MTU包侦测同时设定了端口范围？</b><br />
+    SGI的机器需要<path>/proc/sys/net/ipv4/ip_no_pmtu_disc</path> = 
+1并且<path>/proc/sys/net/ipv4/ip_local_port_range</path> = "2048 32767"。详见<uri 
+link="/doc/en/handbook/handbook-mips.xml?part=1&amp;chap=2#doc_chap4">Gentoo/MIPS手册</uri>。
+  </li>
+  <li>
+    服务器上的BOOTP给出了正确的详细信息吗？<br />
+    双击您的<path>/etc/dhcp/dhcpd.conf</path>。除非给机器指定一个固定的地址，ISC的dhcpd不会显示由BOOTP获取的地址信息。
+  </li>
+  <li>
+    <b>您使用哪个TFTP服务程序？</b><br />
+    已知的可用服务程序有<c>tftp-hpa</c>和<c>netkit-tftp</c>。<c>atftp</c>是一个高级很多的服务程序，有可能造成问题。如果不确定，尝试安装<c>tftp-hpa</c>或许能消除问题。
+  </li>
+  <li>
+    <b>Daemon程序在运行吗？</b><br />
+    <c>ps 
+ax</c>的输出结果中应该有<c>dhcpd</c>。TFTP情况有些不同，要看TFTP是单独运行的还是由<c>(x)inetd</c>运行的。<c>tftp-hpa</c>的进程名是<c>in.tftpd</c>。如果<c>ps 
+ax</c>的输出结果没有某些必须的进程，那么将它们启动。
+  </li>
+  <li>
+    <b><path>/tftpboot</path>中有内核吗？</b><br />
+    确保内核镜像被放在这个目录中并且为任何人可读(<c>chmod 644 
+/tftpboot/foo</c>)。同时，对于<path>/etc/dhcp/dhcpd.conf</path>，要注意如果您使用<c>tftp-hpa</c>，内核的路径是相对于<path>/tftpboot</path>的。
+  </li>
+  <li>
+    <b>有没有清除<c>netaddr</c>和<c>dlserver</c> PROM变量？</b><br />
+    尝试运行<c>unsetenv netaddr</c>和<c>unsetenv dlserver</c>。
+  </li>
+</ol>
+
+</body>
+</section>
+<section id="serial">
+<title>机器下载完内核后就停止响应了（使用显示器和键盘--不是串口控制台）</title>
+<body>
+
+<p>
+不幸的是，目前并不是所有的frame 
+buffers图形设备都是被Linux支持的。这并不意为着您不能使用这台机器……只不过您得弄条零调制解调器串口线和它交互。其实这台机器很可能在运行，只不过在向串口控制台输出信息而不是显示器。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>关于Cobalt的FAQ</title>
+<section id="cobaltboot">
+<title>为什么我的Cobalt机器不能启动？</title>
+<body>
+
+<p>
+很多原因能引发这种情况。最简单易行的解决方法就是按照列表一个个的检查，确保一切工作正常。
+</p>
+
+<ol>
+  <li>
+    <b>您把Cobalt机器（以及服务器）接对网络接口了吗？</b><br />
+    确保网络接入正确。另外提醒一下，Cobalt固件只能通过主网络接口启动。
+  </li>
+  <li>
+    <b>如果有防火墙该怎么办？</b><br />
+    确保您的防火墙没有阻止DHCP/BOOTP请求（UDP的67和68端口）或者RPC/Portmap（UDP和TCP的111端口）。<br />
+    <c>iptables -I INPUT 1 -p udp --dport 67:68 -j ACCEPT</c><br />
+    <c>iptables -I INPUT 1 -p udp --dport 111 -j ACCEPT</c><br />
+    <c>iptables -I INPUT 1 -p tcp --dport 111 -j ACCEPT</c>将解决上述问题。
+  </li>
+  <li>
+    服务器上的BOOTP给出了正确的详细信息吗？<br />
+    双击您的<path>/etc/dhcp/dhcpd.conf</path>。除非机器被指定了固定的地址，ISCs 
+dhcpd将不会显示由BOOTP获取的地址信息。
+  </li>
+  <li>
+    <b>您在<path>/etc/exports</path>中开放<path>/nfsroot</path>了吗？</b><br />
+    确保您向Cobalt机器开放了这个目录。它需要有可读权限。在编辑这个文件之后请不要忘记运行<c>exportfs -av</c>。
+  </li>
+  <li>
+    <b>Daemon程序在运行吗？</b><br />
+    <c>ps ax</c>的输出结果中应有<c>dhcpd</c>、<c>portmap</c>和其他RPC 
+daemon。下列命令将帮您确保这些daemon的运行：<br />
+    <c>/etc/init.d/dhcp start</c><br />
+    <c>/etc/init.d/nfs start</c>
+  </li>
+  <li>
+    <b>内核在<path>/nfsroot</path>中吗？</b><br />
+    确保这个目录中的内核镜像是全局可读的(<c>chmod 644 /nfsroot/foo</c>)。
+  </li>
+</ol>
+
+</body>
+</section>
+<section id="qube2700">
+<title>你们为什么不支持Qube 2700呢？</title>
+<body>
+
+<p>
+Qube 
+2700是Cobalt推出的第一代服务器。虽然它们是很优秀的机器，却没有串口。换言之，任何于这种机器的交互都要通过网络。虽然我们正在为支持这种机器的计划努力，但是目前我们的网络启动镜像还不支持这种启动。
+</p>
+
+</body>
+</section>
+
+</chapter>
+</guide>
