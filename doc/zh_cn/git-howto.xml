@@ -370,11 +370,11 @@ Result: OK
 </p>
 
 <p>
-首先你需要把补丁邮件接收到本地，并保存邮件全文到一个文件，比如tmp.txt。然后你可以使用<c>git applymbox</c>。
+首先你需要把补丁邮件接收到本地，并保存邮件全文到一个文件，比如tmp.txt。然后你可以使用<c>git am</c>。
 </p>
 
 <pre caption="接收他人工作">
-$ <i>git applymbox tmp.txt me</i>
+$ <i>git am -s tmp.txt</i>
 1 patch(es) to process.
 
 Applying 'Added file new_file_xml'
