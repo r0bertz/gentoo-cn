@@ -266,7 +266,7 @@
     <file id="gentoo-sparc-install">/doc/en/gentoo-sparc-install.xml</file>
     <file id="gentoo-hppa-install">/doc/en/gentoo-hppa-install.xml</file>
     <file id="gentoo-alpha-install">/doc/en/gentoo-alpha-install.xml</file>
-    <file id="gentoo-mips-install">/doc/en/gentoo-mips-install.xml</file>
+    <file id="gentoo-mips-install">/doc/zh_cn/gentoo-mips-install.xml</file>
     <file id="udev-guide">/doc/en/udev-guide.xml</file>
     <file id="gentoo-x86-tipsntricks">/doc/en/gentoo-x86-tipsntricks.xml</file>
     <file id="gentoo-sparc-netboot-howto">/doc/en/gentoo-sparc-netboot-howto.xml</file>
