@@ -297,7 +297,7 @@ Gentoo/MIPS是隶属于Gentoo基金会的一个小项目，负责维护Gentoo Li
 
 <ol>
   <li>
-    您将SGI机器（以及服务器）接入正确的网络接口了吗？<br />
+    <b>您将SGI机器（以及服务器）接入正确的网络接口了吗？</b><br />
     确保网络接入正确，也要知道一些机器有特殊要求。例如Challenge S在Linux不能从UTP接口正确获取网络，您得通过转换器使用AUI接口代替。
   </li>
   <li>
@@ -368,7 +368,7 @@ Gentoo/MIPS是隶属于Gentoo基金会的一个小项目，负责维护Gentoo Li
     <c>iptables -I INPUT 1 -p tcp --dport 111 -j ACCEPT</c>将解决上述问题。
   </li>
   <li>
-    服务器上的BOOTP给出了正确的详细信息吗？<br />
+    <b>服务器上的BOOTP给出了正确的详细信息吗？</b><br />
     双击您的<path>/etc/dhcp/dhcpd.conf</path>。除非机器被指定了固定的地址，ISCs dhcpd将不会显示由BOOTP获取的地址信息。
   </li>
   <li>
