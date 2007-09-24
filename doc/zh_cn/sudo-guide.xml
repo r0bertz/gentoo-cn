@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!--$Header$-->
+<!--English CVS version 1.11-->
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/sudo-guide.xml" lang="zh_cn">
+<title>Gentoo Sudo(ers) 指南</title>
+
+<author title="Author">
+    <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+
+<author title="译者">
+    <mail link="lyanry@gmail.com">李延瑞</mail>
+</author>
+
+<abstract>
+你想让一些人在你的系统中执行一些管理员权限操作，但又不想把全部的 root 权限授予他，此时使用 sudo 是最好的选择。使用 sudo，你可以决定让哪个用户可以执行哪些操作。本篇指南将对这个奇妙的工具的用法给出简要介绍。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.6</version>
+<date>2006-07-14</date>
+
+<chapter>
+<title>关于 Sudo</title>
+<section>
+<title>授予权限</title>
+<body>
+
+<p>
+<c>app-admin/sudo</c> 包允许系统管理员授予其他用户执行一些程序的权限，正常情况下，非系统管理员用户不具备这些程序的执行权限。与设置程序 <e>setuid</e> 位域方式不同的是，<c>sudo</c> 在谁具有某条命令的执行权限以及何时执行方面可以实现更为严密地控制。
+</p>
+
+<p>
+使用 <c>sudo</c> 可以制作一份清晰的列表来申明哪些用户具有执行哪一个程序的权限。而如果采取设置程序 setuid 位的方式，则任何用户（或者某一组内任意用户，这依赖于所用的权限位的设置）都可以拥有这一程序的权限。 使用 <c>sudo</c> ，可以在用户运行某一程序时进行口令验证，并且也可以基于用户所在位置（位于本机或通过 SSH 远程登录的计算机）进行微调。
+</p>
+
+</body>
+</section>
+<section>
+<title>活动记录</title>
+<body>
+
+<p>
+<c>sudo</c> 还有一个额外的功能，它可以记录任何使用 <c>sudo</c> 运行某一程序的尝试（无论是否成功）。这在追踪是谁导致系统致命性错误之时很有帮助，所谓的系统致命行错误是指那种让你耗费 10 个小时来修正的错误 :)
+</p>
+
+</body>
+</section>
+<section>
+<title>配置 Sudo</title>
+<body>
+
+<p>
+<c>sudo</c> 的配置是由 <path>/etc/sudoers</path> 文件管理的。该文件无法直接由 <c>nano&nbsp;/etc/sudoers</c> 或者 <c>vim&nbsp;/etc/sudoers</c> 或者其他一些你喜欢的编辑器。要想修改这份文件，应当使用 <c>visudo</c>。
+</p>
+
+<p>
+<c>visudo</c> 可以：确保不会有两位系统管理员同时编辑 <c>/etc/sudoers</c> 文件；维持该文件的操作权限；提供对该文件的语法检查，防止手误而导致致命性错误。
+</p>
+
+</body>
+</section>
+<section>
+<title>关于这份指南</title>
+<body>
+
+<p>
+这份指南只对 <c>sudo</c> 的使用给出快速的入门指导，<c>sudo</c> 包的功能远不止本指南所讲述的，譬如它具有让当前用户以其他用户的身份编辑文件 (sudoedit)，在非交互式脚本中以超级用户的身份来运行某些程序（sudo 程序在后台读取标准输入中的密码，而不是接受来自键盘的输入）等特殊功能。
+</p>
+
+<p>
+要获得更多有关 <c>sudo</c> 与 <c>sudoers</c> 的知识，请查阅 man。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Sudoers 语法</title>
+<section>
+<title>基本语法</title>
+<body>
+
+<p>
+<c>sudo</c> 最难掌握的地方是 <path>/etc/sudoers</path> 语法，其基本语法如下：
+</p>
+
+<pre caption="基本 /etc/sudoers 语法">
+user  host = commands
+</pre>
+
+<p>
+    这一语法告诉 <c>sudo</c> 这样一些信息：用户，以 <e>user</e> 标识；所登录主机 <e>host</e>；<e>commands</e> 表示 root 用户可以执行的任何一组命令列表。基于实例来讲会更清晰一些，譬如使得用户 <e>swift</e> 可以在本地系统（非 SSH 远程登录）上执行 <c>emerge</c> 的语法如下：
+</p>
+
+<pre caption="示例 /etc/sudoers examples">
+swift  localhost = /usr/bin/emerge
+</pre>
+
+<p>
+警示：不要允许用户运行可以提升其操作权限的命令。譬如，若允许用户可以像 root 用户那样执行 <c>emerge</c>，实际上就是授予了该用户完全的系统控制权限，因为他可以利用 <c>emerge</c> 来修改那些可以限制用户权限的文件系统。所以，如果你对你的 <c>sudo</c> 用户不是完全的放心，就不要授予他们任何权限。
+</p>
+
+<!--
+  Wrappers are no real advantage here either, see #71750
+-->
+
+<p>
+配置文件中的用户 (user) 名可以替换为用户组 (group) 名，这时，应当在组名之前加上 <c>%</c> 前缀。譬如，要允许 <c>wheel</c> 组内任一用户可以执行 <c>emerge</c>，配置语句应写为：
+</p>
+
+<pre caption="允许 wheel 组员运行 emerge">
+%wheel  localhost = /usr/bin/emerge
+</pre>
+
+<p>
+在一行配置语句中可以让一个用户拥有多条命令的 root 执行权限（不必每条命令只对应一个用户或组）。譬如，要允许同一个用户具有 <c>emerge</c>、<c>ebuild</c>、<c>emerge-webrsync</c> 命令的 root 执行权限，配置语法为：
+</p>
+
+<pre caption="同一用户对应多条命令">
+swift  localhost = /usr/bin/emerge, /usr/bin/ebuild, /usr/sbin/emerge-webrsync
+</pre>
+
+<p>
+可以更精确的设定命令，而不是仅仅光秃秃的一个命令。这样可以限制某一命令的一些选项的使用。在 sudoers 文件中，<c>sudo</c> 工具容许在路径名或命令行参数中使用 shell 风格的通配符，但它们并非正则表达式。
+</p>
+
+<p>
+现在来测试一下：
+</p>
+
+<pre caption="尝试以普通用户身份使用 sudo 更新系统">
+$ <i>sudo emerge -uDN world</i>
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+Password: <comment>(Enter the user password, not root!)</comment>
+</pre>
+
+<p>
+<c>sudo</c> 所需要输入执行 <c>sudo</c> 命令的用户自身的口令，而非 root 用户口令。这样，即使你偶尔离开，但终端依然不会被居心险恶的人利用。
+</p>
+
+<p>
+必须要清楚 <c>sudo</c> 不会修改 <c>${PATH}</c> 变量：<c>sudo</c> 之后尾随的任何命令都是基于当前用户环境运行的。譬如，如果想让普通用户运行 <path>/sbin</path> 目录下的命令，应当在 <c>sudo</c> 命令行中给出完整路径：
+</p>
+
+<pre caption="使用完整路径执行程序">
+$ <i>sudo /usr/sbin/emerge-webrsync</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>使用别名</title>
+<body>
+
+<p>
+在更大一些的环境中，不得不频繁键入各个用户名（主机或命令列表），这可能是令人畏惧的任务。为了简化 <path>/etc/sudoers</path> 的管理，你可以定义一些 <e>别名 (alias)</e>。定义别名的语法相当简单：
+</p>
+
+<pre caption="在 /etc/sudoers 中定义别名">
+Host_Alias hostalias = hostname1, hostname2, ...
+User_Alias useralias = user1, user2, ...
+Cmnd_Alias cmndalias = command1, command2, ...
+</pre>
+
+<p>
+在任何位置都可以使用的一个通用的别名是 <c>ALL</c>（为了区分别名与非别名文本，建议将别名的字母都大写）。顾名思义，<c>ALL</c> 别名表示所有可能的设置。
+</p>
+
+<p>
+一个有关 <c>ALL</c> 别名的简单示例是容许所有用户都可以在本机上执行 <c>shutdown</c> 命令：
+</p>
+
+<pre caption="允许任何用户执行 shutdown">
+ALL  localhost = /sbin/shutdown
+</pre>
+
+<p>
+另一个例子是无论用户 <c>swift</c> 从哪里登录本机，都允许他可以像 root 用户那样执行 <c>emerge</c>：
+</p>
+
+<pre caption="允许一名用户运行程序，而无论他从哪里登录本机">
+swift   ALL = /usr/bin/emerge
+</pre>
+
+<p>
+更有趣的例子是定义一组用户，让他们可以运行一些软件包管理程序（譬如 <c>emerge</c> 和 <c>ebuild</c>）；再定义一组系统管理员，让他们可以修改除 root 用户之外的所有用户的密码。如下：
+</p>
+
+<pre caption="用户与命令的别名">
+User_Alias  <i>SOFTWAREMAINTAINERS</i> = swift, john, danny
+User_Alias  <i>PASSWORDMAINTAINERS</i> = swift, sysop
+Cmnd_Alias  <i>SOFTWARECOMMANDS</i>    = /usr/bin/emerge, /usr/bin/ebuild
+Cmnd_Alias  <i>PASSWORDCOMMANDS</i>    = /usr/bin/passwd [a-zA-Z0-9_-]*, !/usr/bin/passwd root
+
+<i>SOFTWAREMAINTAINERS</i>  localhost = <i>SOFTWARECOMMANDS</i>
+<i>PASSWORDMAINTAINERS</i>  localhost = <i>PASSWORDCOMMANDS</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>非 root 用户身份切换</title>
+<body>
+
+<p>
+让一名用户像其他用户（非 root 用户）那样地运行程序是可行的。这非常有趣，你可以使用另一个用户（譬如网络服务器 <c>apache</c>）的身份来运行程序或执行一些系统管理操作（比如杀死僵死进程）。
+</p>
+
+<p>
+在 <path>/etc/sudoers</path> 文件中，在命令列表之前，可以在 <c>(</c>&nbsp;与&nbsp;<c>)</c> 之间列举需要改变身份的用户。
+</p>
+
+<pre caption="非 root 用户命令执行权限语法">
+users  hosts = (run-as) commands
+</pre>
+
+<p>
+譬如要设定允许 <c>swift</c> 可以像 <c>apache</c> 或 <c>gorg</c> 用户那样执行 <c>kill</c> 命令，语法如下：
+</p>
+
+<pre caption="非 root 用户命令执行权限示例">
+Cmnd_Alias KILL = /bin/kill, /usr/bin/pkill
+
+swift   ALL = (apache, gorg) KILL
+</pre>
+
+<p>
+使用这一设定，用户可以运行 <c>sudo&nbsp;-u</c> 来选择他想担当的角色：
+</p>
+
+<pre caption="像 apache 用户那样运行 pkill">
+$ <i>sudo -u apache pkill apache</i>
+</pre>
+
+<p>
+可以使用 <c>Runas_Alias</c> 指令为这些要切换身份的用户设置别名，它的用法与前面所讲的别名设置指令的用法相似。
+</p>
+
+</body>
+</section>
+<section>
+<title>密码与默认设置</title>
+<body>
+
+<p>
+默认情况下，<c>sudo</c> 要求用户提供自己的系统登录口令来验证其身份。一旦输入了相应口令（密码），<c>sudo</c> 会记忆它 5 分钟，用户要把任务集中在这段时间内来完成，否则就要每 5 分钟重复输入一次口令。
+</p>
+
+<p>
+当然，这种默认行为是可以改变的：可以在 <path>/etc/sudoers</path> 中设定 <c>Defaults：</c> 指令来修改一名用户的默认行为。
+</p>
+
+<p>
+例如，要将默认的 5 分钟修改为 0 分钟（即不记忆所输入口令）：
+</p>
+
+<pre caption="更改时限">
+Defaults:swift  timestamp_timeout=0
+</pre>
+
+<p>
+如果将 timestamp_timeout 设置为 <c>-1</c>，<c>sudo</c> 会永远记住用户口令，直至系统重新启动。
+</p>
+
+<p>
+有一个设置可以在使用 <c>sudo</c> 时要输入所执行命令的所属用户口令，而不是执行 <c>sudo</c> 命令的用户口令。这一功能可由 <c>runaspw</c> 指令进行设定。下面示例演示了 <c>runaspw</c> 的用法，同时也演示了重复输入口令次数限制的设定方法：
+</p>
+
+<pre caption="需要 root 口令而非用户 john 的口令">
+Defaults:john   runaspw, passwd_tries=2
+</pre>
+
+<p>
+还有一个有趣的功能是保持 <c>DISPLAY</c> 变量不变，这样就可以运行一些 X Window 工具了：
+</p>
+
+<pre caption="Keeping the DISPLAY variable alive">
+Defaults:john env_keep=DISPLAY
+</pre>
+
+<p>
+使用 <c>Defaults:</c> 指令可以更改许多默认设置，要知详情，可在 <c>sudo</c> 手册中搜索 <c>Defaults</c>。
+</p>
+
+<p>
+如果很想允许一名用户使用 <c>sudo</c> 运行一些程序时无需输入任何口令，应当在命令列表前冠以 <c>NOPASSWD:</c>，例如：
+</p>
+
+<pre caption="允许像 root 那样使用 emerge，而无需口令">
+swift     localhost = NOPASSWD: /usr/bin/emerge
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>使用 sudo</title>
+<section>
+<title>列出权限</title>
+<body>
+
+<p>
+运行 <c>sudo&nbsp;-l</c> 可以查看当前用户的 <c>sudo</c> 权限：
+</p>
+
+<pre caption="列出权限">
+$ <i>sudo -l</i>
+User swift may run the following commands on this host:
+    (root)   /usr/libexec/xfsm-shutdown-helper
+    (root)   /usr/bin/emerge
+    (root)   /usr/bin/passwd [a-zA-Z0-9_-]*
+    (root)   !/usr/bin/passwd root
+    (apache) /usr/bin/pkill
+    (apache) /bin/kill
+</pre>
+
+<p>
+若在 <path>/etc/sudoers</path> 中设定了任何命令都不需要输入口令，那么在使用 <c>sudo&nbsp;-l</c> 时也不需要输入口令。否则，在口令未被 <c>sudo</c> 记忆时，依然要输入相应口令。
+</p>
+
+</body>
+</section>
+<section>
+<title>延长口令时限</title>
+<body>
+
+<p>
+默认情况下，<c>sudo</c> 的验证口令会维持在 5 分钟内有效。如果用户想延长这一时间，可以运行 <c>sudo&nbsp;-v</c> 重设时间戳，这样就会又开始一个 5 分钟口令记忆时间。
+</p>
+
+<pre caption="sudo 口令时限延长">
+$ <i>sudo -v</i>
+</pre>
+
+<p>
+相反，若要停掉当前时间戳，可使用 <c>sudo&nbsp;-k</c>.
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
