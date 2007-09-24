@@ -367,7 +367,7 @@
     <file id="apache-troubleshooting">/doc/en/apache-troubleshooting.xml</file>
     <file id="apache-upgrading">/doc/en/apache-upgrading.xml</file>
     <file id="apache-developer">/doc/en/apache-developer.xml</file>
-    <file id="sudo-guide">/doc/en/sudo-guide.xml</file>
+    <file id="sudo-guide">/doc/zh_cn/sudo-guide.xml</file>
     <file id="freebsd-guide">/doc/en/gentoo-freebsd.xml</file>
     <file id="mips-faq">/doc/en/gentoo-mips-faq.xml</file>
     <file id="mysql-upgrading">/doc/zh_cn/mysql-upgrading.xml</file>
