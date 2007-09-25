@@ -1,0 +1,670 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+
+
+<!--$Header$-->
+<!--English CVS version:1.32 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/kde-config.xml" lang="zh_cn">
+
+<title>KDE设置指南</title>
+
+<author title="作者:">
+  <mail link="swift@gentoo.org\">Sven Vermeulen</mail>
+</author>
+<author title="编辑:">
+  <mail link="greg_g@gentoo.org\">Gregorio Guidi</mail>
+</author>
+<author title="译者">
+  <mail link="fideas@126.com">fideas</mail>
+</author>
+
+
+<abstract>
+KDE是应用最为广泛的桌面环境之一。本指南将全面向你介绍关于KDE的安装、设置和使用方面的技巧。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license--> 
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.22</version>
+<date>2007-06-23</date>
+
+<chapter>
+<title>什么是KDE桌面环境?</title>
+<section>
+<title>KDE项目</title>
+<body>
+
+<p>
+<uri link="http://www.kde.org\">KDE项目</uri>是围绕KDE(一种运行于Linux/Unix平台上的开源图形桌面环境)的开发而成立的一个自由软件开发项目。该项目组的成员包括来自全球各地数百名热衷于开源软件事业的软件工程师。详细信息请参阅<uri link="http://www.kde.org/whatiskde/project.php\">什么是KDE项目</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>关于KDE</title>
+<body>
+
+<p>
+KDE是一个简单易用的桌面环境。它基于先进的框架技术而构建，这一技术使得它上面的程序可以很好地协同工作。KDE桌面所集成的程序提供了很全面的应用解决方案。例如：文件管理，浏览互联网，办公套件，收发电子邮件....这些需求全部都可以在KDE中实现。
+</p>
+
+<p>
+KDE当前已经可以支持70多种语言，它拥有庞大的用户群。如果你有兴趣，可以在这里找到很多KDE的<uri link="http://www.kde.org/screenshots/\">屏幕截图</uri>。关于KDE的更多信息，你可以浏览<uri link="http://www.kde.org\">KDE.org</uri>上面的<uri link="http://www.kde.org/whatiskde/\">什么是KDE？</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>KDE社区</title>
+<body>
+
+<p>
+与KDE主题相关的社区数量很多，在<uri link="http://www.kdenews.org\">KDEnews.org</uri>你可以找到最新的KDE常规信息; <uri link="http://www.kdedevelopers.org\">KDEdevelopers.org</uri>是一个关注于KDE开发方面信息的站点;<uri link="http://www.kde-forum.org\">KDE-forum</uri>站点则更多关注于KDE重大信息。你可以在 <uri link="http://www.kde.org/family/\">KDE Family page</uri>上找到更多的社区。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>安装KDE</title>
+<section>
+<title>你需要什么？</title>
+<body>
+
+<p>
+如果你有兴趣安装KDE或是希望系统提供对KDE的支持,请先确认在已经在USE变量中添加了<c>kde</c>这个标记以及<c>qt3</c>或<c>qt4</c>(当然你可以两项都添加)。Qt是KDE所采用的图形开发库，在USE变量中添加<c>qt3</c>标记你装会安装该库的3.x版本，加入<c>qt4</c>变量则会安装更新的4.x版本。虽然这两者并非安装KDE所必须的，但在KDE环境下的很多软件都提供了对<c>qt3</c>或<c>qt4</c>的支持。
+</p>
+
+<p>
+如果你希望KDE能够自动挂载<uri link="#kde_device_mounting\">KDE设备挂载管理</uri>上的这些设备，就需要在USE变量中添加<c>hal</c>标记。
+</p>
+
+<p>
+如果你不希望在任何多媒体程序中使用<uri link="http://www.arts-project.org/\">aRts</uri>，那就在USE标记中去掉aRts这个标记(默认情况下是包含的)。
+</p>
+
+<note>
+Gentoo 
+2006.1中引入了较多的profile，其中包括<c>desktop</c>子profile。如果你的系统架构中有这一项，你也许希望切换到这一profile。因为它包含了许多默认的USE标记设置。请参阅<uri link="/doc/en/gentoo-upgrading.xml\">Gentoo Upgrading Guide</uri>来学习如何切换profile。
+</note>
+
+</body>
+</section>
+<section>
+<title>拆分安装KDE</title>
+<body>
+
+<note>
+我们推荐选择我们在下面所提到的拆分方式来安装KDE（而不是完整地安装，当然这两种安装方法都是可行的）。
+</note>
+
+<p>
+只要你愿意，你还可以更进一步地控制KDE的安装，比如你可以选择仅仅安装你所需要的某几个KDE程序。关于KDE下独立程序ebuild的详细信息，请参阅<uri link="/doc/en/kde-split-ebuilds.xml\">Split Ebuilds HOWTO</uri>。
+</p>
+
+<p>
+使用KDE拆分ebuild进行安装时,分清应该安装什么，不需要安装什么是件难度较大的事。幸运的是Gentoo为我们准备了一些预设的安装方案。这些方案可以让我们轻松地安装具有既定软件的KDE环境。
+</p>
+
+<ul>
+  <li>
+    如果你想安装一个完整的KDE环境，请安装<c>kde-meta</c>。使用该包进行安装会将所有的KDE程序及其依赖包。 
+  </li>
+  <li>
+    如果你想安装一个基本的KDE环境，请安装<c>kdebase-startkde</c>。然后你可以在这个基础上选择安装其他所需要的KDE程序。
+  </li>
+  <li>
+    如果你想安装一个介于<c>kde-meta</c>和<c>kdebase-startkde</c>之间的KDE环境，请安装<c>kdebase-meta</c>。这会加装一些额外的软件，例如<c>konsole</c>和<c>kdm</c>。
+  </li>
+</ul>
+
+<p>
+当然，这三种安装方案都有一定的局限性。你也许更希望能安全地安装某两种方案的混合。为了使你能更轻松地作出选择，下面的表格简要列出了这些安装选项所包含的主要的KDE组件(不是全部)。
+</p>
+
+<p>
+下面这些包<e>没有</e>包含在<c>kdebase-startkde</c>中
+</p>
+
+<table>
+<tr>
+  <th>Ebuild名称</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>akregator</c></ti>
+  <ti>
+    该程序可以轻松管理和阅读互联网RSS新闻。
+  </ti>
+</tr>
+<tr>
+  <ti>juk</ti>
+  <ti>
+    一个具有强大播放列表功能的媒体播放程序，外观和操作上与苹果的iTunes极为相似。
+  </ti>
+</tr>
+<tr>
+  <ti>kate</ti>
+  <ti>
+    <uri link="http://kate.kde.org/\">KDE高级文本编辑器(kate)</uri>，一个具有多文档视图、语法加亮、代码折叠等很多特性的文本编辑程序。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kmail</c></ti>
+  <ti>
+    使用<uri link="http://kmail.kde.org/\">Kmail</uri>，你可以高效地管理你的电子邮件。
+  </ti>
+</tr>
+<tr>
+  <ti><c>knetattach</c></ti>
+  <ti>
+    使用KNetAttach(也被称作<e>网络文件夹向导</e>)，你可以轻松地在KDE桌面上添加网络共享文件夹。
+  </ti>
+</tr>
+<tr>
+  <ti><c>knode</c></ti>
+  <ti>
+    KNode是一款功能强大的KDE新闻阅读程序。
+  </ti>
+</tr>
+<tr>
+  <ti><c>konsole</c></ti>
+  <ti>
+    <uri link="http://konsole.kde.org/\">Konsole</uri>是KDE下的终端模拟程序。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kontact</c></ti>
+  <ti>
+    <uri link="http://kontact.kde.org/\">Kontact</uri>是KDE下个人信息管理程序。它可以使你与他人的沟通更加快捷，能快速、集中地管理你在工作中的很多信息。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kopete</c></ti>
+  <ti>
+    <uri link="http://kopete.kde.org/index.php\">Kopete</uri>是KDE下的一款即时通讯软件，几乎支持所有流行的通信协议。
+  </ti>
+</tr>
+<tr>
+  <ti><c>korganizer</c></ti>
+  <ti>
+    <uri link="http://korganizer.kde.org/\">Korganizer</uri>是KDE下的一款日程与计划管理软件。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kpdf</c></ti>
+  <ti>
+    使用<uri link="http://kpdf.kde.org/\">KPDF</uri>，你可以阅读PDF文档，该程序的一些独有特性可以极大地提高你的阅读乐趣。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kscd</c></ti>
+  <ti>
+    kscd是KDE下一款图形界面的CD播放程序。
+  </ti>
+</tr>
+<tr>
+  <ti><c>ksnapshot</c></ti>
+  <ti>
+    你可以使用ksnapshot截取屏幕图像。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kuickshow</c></ti>
+  <ti>
+    KDE下支持多种格式的图像浏览程序。
+  </ti>
+</tr>
+</table>
+
+<p>
+这里所列举的只是冰山一角。如果你想了解更多KDE下可用程序的信息，请参阅<uri link="http://packages.gentoo.org/packages/?category=kde-base\">kde-base 
+分类</uri>，上面对各个软件及其功能作出了描述。
+</p>
+
+<p>
+使用<c>emerge -p</c>可以预览将要安装的软件包，记得带上<c>less</c>这个参数，否则可能无法浏览到全部的待安装包信息。
+</p>
+
+<pre caption="预览KDE安装">
+<comment>(请替换成你所选择的安装包)</comment>
+# <i>emerge -p kdebase-startkde | less</i>
+</pre>
+
+<p>
+如果你对列举出来的内容感觉满意，则去掉参数<c>-p</c>。KDE的安装过程较为漫长，因为KDE是一个大型的应用。所以你的命令提交后没有马上运行完毕，千万不要惊讶。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装完整的KDE</title>
+<body>
+
+<p>
+虽然我们推荐使用KDE组件的ebuilds来安装，但你也可以选择使用完整的ebuilds来安装KDE。
+</p>
+
+<p>
+KDE项目在发布新版本的KDE桌面环境时将它分为16个大的软件包，每一个包都包含一系列的软件(这也它们被称为“完整”的原因)，因此你需要决定自己需要安装其中的哪些包。
+</p>
+
+<p>
+如果你想知道把这所有的包都安装上去是什么样子，那就亲身去试验一下吧。
+</p>
+
+<pre caption="列举出安装KDE所需要安装的所有软件包">
+# <i>emerge --pretend kde | less</i>
+</pre>
+
+<p>
+如果你不希望安装所有列出的包，可以单个地安装你需要的包。你真的需要的可能只是<c>kdebase</c>这个包，它包含了KDE的基本包和相依的依赖包。下面列出的这些包可供你安装。
+</p>
+
+<table>
+<tr>
+  <th>软件包</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>辅助工具-kdeaccessibility</ti>
+  <ti>
+    辅助功能相关的程序集，由<uri link="http://accessibility.kde.org\">KDE Accessibility Project</uri>维护。
+  </ti>
+</tr>
+<tr>
+  <ti>系统管理工具-kdeadmin</ti>
+  <ti>
+    KDE下的系统管理相关工具，比如<c>KCron</c>(计划任务管理)、<c>KUser</c>(用户管理)和<c>KDat</c>(备份管理)。
+  </ti>
+</tr>
+<tr>
+  <ti>艺术美化包-kdeartwork</ti>
+  <ti>
+    与屏幕保护程序和外观主题相关的艺术美化包，参阅<uri link="http://www.kde-artists.org/\">www.kde-artists.org</uri>获取更多与KDE艺术相关的信息。
+  </ti>
+</tr>
+<tr>
+  <ti>教育教学-kdeedu</ti>
+  <ti>
+    KDE下针对3岁到18岁之的青少年开发的教学软件，更多信息请参阅<uri link="http://edu.kde.org\">KDE Edu Project</uri>。
+  </ti>
+</tr>
+<tr>
+  <ti>游戏-kdegames</ti>
+  <ti>
+    KDE下的一些游戏，可以在<uri link="http://games.kde.org\">KDE Games Center</uri>上找到更多的说明信息。
+  </ti>
+</tr>
+<tr>
+  <ti>图像处理-kdegraphics</ti>
+  <ti>
+    KDE下图像处理相关程序，包括<c>KSnapshot</c>(截图程序),<c>KolourPaint</c>(小巧的图像编辑程序)<c>Kpdf</c>(PDF文档阅读程序)<c>KIconEdit</c>(图标编辑程序),<c>KPovModeler</c>(3D建模程序)。
+  </ti>
+</tr>
+<tr>
+  <ti>多媒体-kdemultimedia</ti>
+  <ti>
+    KDE下多媒体处理程序，包括CD，MP3，DVD等音频和视频播放程序。了解更多信息请参阅<uri link="http://multimedia.kde.org\">KDE Multimedia Project</uri>。
+  </ti>
+</tr>
+<tr>
+  <ti>网络工具-kdenetwork</ti>
+  <ti>
+    KDE下的网络应用程序集，例如<c>Kopete</c>(支持多协议的即时通讯程序),<c>kppp</c>(拔号程序)<c>KSirc</c>(一款IRC客户端程序)。需要注意的是<c>konqueror</c>(文件管理器<e>和</e>网络游览器)是包含在<c>kdebase</c>中的。
+  </ti>
+</tr>
+<tr>
+  <ti>个人信息管理-kdepim</ti>
+  <ti>
+    个人信息管理程序，例如<c>KOrganizer</c>(日程管理)、<c>KAddressbook</c>(地址簿管理器)、<c>Kontact</c>(信息管理群集)、<c>KMail</c>(电子邮件)。更多信息请参阅<uri link="http://pim.kde.org\">KDE PIM Project</uri>网站。
+  </ti>
+</tr>
+<tr>
+  <ti>开发工具-kdesdk</ti>
+  <ti>
+    编程开发工具，包括 <c>KBabel</c> (翻译工具)、<c>KBugBuster</c> (漏洞跟踪前端)和<c>Kompare</c>(两个文件之间差异对比)。
+  </ti>
+</tr>
+<tr>
+  <ti>一些小玩具-kdetoys</ti>
+  <ti>
+    一些用来在你等待pizza送到时消磨时间的小游戏。你可以找到类似<c>eyesapplet</c>和<c>fifteenapplet</c>这样的小组件，其中不失像<c>amor</c>这样的精品。这些程序对系统资源的要求极低。
+  </ti>
+</tr>
+<tr>
+  <ti>杂类工具-kdeutils</ti>
+  <ti>
+    图形界面的系统工具，比如<c>kcalc</c>(计算器)、<c>kdessh</c>(SSH终端)、<c>kfloppy</c>(软盘管理相关的工具)等等。
+  </ti>
+</tr>
+<tr>
+  <ti>语言包-kde-i18n</ti>
+  <ti>
+    KDE国际化相关的文件，其中包括了翻译的文档。更多信息请参阅<uri link="http://i18n.kde.org\">KDE i18n project</uri>。
+  </ti>
+</tr>
+</table>
+
+<p>
+更高级别的定制安装，比如只安装KDE的网络组件和系统管理相关程序。
+</p>
+
+<pre caption="单独安装KDE组件的示例">
+# <i>emerge kdebase kdenetwork kdeadmin</i>
+</pre>
+
+<p>
+你不要惊讶：编译KDE真的很慢。
+</p>
+
+</body>
+</section>
+<section>
+<title>更多的KDE程序</title>
+<body>
+
+<p>
+KDE下的程序远远不止官方发布的这些。事实上还有成千上万的程序是基于KDE框架及其库的，以下列出的这些就很流行。
+</p>
+
+<table>
+<tr>
+  <th>Ebuild名称</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>koffice</c></ti>
+  <ti>
+    <uri link="http://www.koffice.org/\">KOffice</uri>是一个高度集成的办公套件。其中包括专门的文档处理程序(KWord)、电子表格处理程序(KSpread)、幻灯片演示程序(KPrensenter)、图像处理程序(Krita)、数据库管理程序(Kexi)、以及很多其他方面的功能。和KDE可以通过<c>kde</c>或<c>kde-meta</c>来安装类似，你也可以将Koffice作为一个完整的包进行安装(<c>koffice</c>)或者选择这组程序中的某一部分进行安装(<c>koffice-meta</c>)。
+  </ti>
+</tr>
+<tr>
+  <ti><c>amarok</c></ti>
+  <ti>
+    在<uri link="http://amarok.kde.org/\">amaroK</uri>上，你可以了解到一个Unix/Linux下强大的音频播放软件。
+  </ti>
+</tr>
+<tr>
+  <ti><c>k3b</c></ti>
+  <ti>
+    <uri link="http://www.k3b.org/\">K3B</uri>是一个专业的CD/DVD刻录软件，支持音频光盘的刻录。用它来制作CD光盘是件很轻松的事。
+  </ti>
+</tr>
+<tr>
+  <ti><c>kaffeine</c></ti>
+  <ti>
+    <uri link="http://kaffeine.sourceforge.net/\">Kaffeine</uri>是KDE下一个功能全面的多媒体播放器。
+  </ti>
+</tr>
+</table>
+
+</body>
+</section>
+<section>
+<title>第一印象</title>
+<body>
+
+<p>
+现在，让我们来看看努力的成果吧。你的妈妈也许告诫过你决不要以管理员身份去用KDE，所以我们还是以普通用户的身份来试用它吧。用你的帐号登录系统，并设置好环境，在<path>~/.xinitrc</path>中加入<c>exec startkde</c>，然后你就可以用<c>startx</c>这个命令来启动KDE了。(请参阅<uri link="/doc/en/xorg-config.xml\">X Server Configuration Howto</uri>)中的<uri link="/doc/en/xorg-config.xml#using_startx\">Using startx</uri>。
+</p>
+
+<pre caption="设置本地环境">
+$ <i>echo \"exec startkde\" &gt; ~/.xinitrc</i>
+</pre>
+
+<p>
+然后通过运行命令<c>startx</c>来启动你的图形界面。
+</p>
+
+<pre caption="启动KDE">
+$ <i>startx</i>
+</pre>
+
+<p>
+恭喜你！你现在所看到的是一个名为<c>KPersonalizer</c>的程序，接下来让我们看看该如何来设置KDE。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>设置KDE</title>
+<section>
+<title>KPersonalizer</title>
+<body>
+
+<p>
+KPersonalizer是一个用于帮助你设置KDE的程序。这是个用处很大的配置向导，在它的帮助下你可以快速地按你的需求对KDE进行设置。在你第一次运行KDE时，KPersonalizer将会自动运行。
+</p>
+
+<p>
+KPersonalizer首先会要求你选择所在的国家及你希望使用的语言。由于我们没有安装需要的语言包，所以可用语言的选单上选项会很少，甚至只有一个英语可供选择。不过你不用担心，我们将在后面进行语言的设置(前提是你所希望使用的语言已经得到支持)。
+</p>
+
+<p>
+第二项要你做出的选择是<e>System 
+Behavior</e>。包括窗体行为、鼠标选择行为等。在你选中某一行为时，它的描述可以帮你判断该行为方案是否符合你的需求。如果你不能确定使用何种行为方案，不必担心--你可以随时更改行为选项。
+</p>
+
+<p>
+下一步，KPersonalizer会询问你希望开启哪些视觉效果。你开启的效果越多，你的KDE看起来就越时髦。当然，你的CPU负担也就越重。很难想像在一台CPU频率为600Mhz，内存为128Mb的计算机上开启这些效果是什么情景。将全部的视觉效果打开可能会导致你的系统反应迟钝。
+</p>
+
+<p>
+最后,KPersonalizer会询问你使用何种风格。风格定义了窗体装饰、主题、按钮布局等。你可以多偿试几种风格以找到你所喜欢的。我们前面不是告诉过你KDE的定制性是很强的？
+</p>
+
+<p>
+现在，坐下来慢慢享受--KDE即将启动。在你面前的将是一个美观、整洁、功能强大的桌面应用环境。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装语言包</title>
+<body>
+
+<p>
+如果英语不是你的母语，或者你喜欢在KDE中使用其他国家的语言，请继续阅读本文。接下去我们将向你讲述如何在KDE中安装你想使用的语言对应的语言包。
+</p>
+
+<p>
+语言包被放置在名为<c>kde-i18n</c>的包中。为了安装你希望使用的语言(可以是多种)，你需要设置相应的<c>LINGUAS</c>变量。推荐的做法是在<path>/etc/make.conf</path>中进行设置，这样你每次更新系统时就可以保留这些设置了。
+</p>
+
+<pre caption="在/etc/make.conf中设置语言选项">
+# <i>nano -w /etc/make.conf</i>
+<comment>(以安装荷兰(nl)和法国(fr)语言为例)</comment>
+LINGUAS=\"nl fr\"
+</pre>
+
+<p>
+然后，运行<c>emerge kde-i18n</c>来安装这些指定的语言包。安装完成之后启动(重新启动)KDE，进入KDE控制中心(菜单&gt;->控制中心)。在<e>这个程序</e>里，你几乎可以对KDE所有方面进行设置,比KPersonalizer的全面多了。
+</p>
+
+<p>
+要更改你的语言，进入<c>区域</c>，<c>国家/地区&amp;语言</c>，然后后自己的需求加入相应的语言。注销重新登录KDE之后就可以得到一个完全的你所选择的语言环境了，希望你会喜欢。
+</p>
+
+</body>
+</section>
+<section>
+<title>图形登录</title>
+<body>
+
+<p>
+如果你想使用图形登录界面<c>kdm</c>(即不需要每次先登录终端，然后运行<c>startx</c>来启动)。首先要做的当然就是安装它了，然后编辑对应的配置文件，让系统启动完毕后自动进入图形界面，这些我们稍后将会讲到。
+</p>
+
+<note>
+由于多种因原，很可能你的系统中已经安装了<c>kdm</c>。如果你得到<c>kde-base/kdm</c>被阻挡的错误，请参阅下一节的内容。
+</note>
+
+<pre caption="安装KDM">
+# <i>emerge --ask kdm</i>
+</pre>
+
+<p>
+修改<path>/etc/conf.d/xdm</path>，将<c>DISPLAYMANAGER</c> 改成<c>kdm</c>。
+</p>
+
+<pre caption="设置/etc/conf.d/xdm中的DISPLAYMANAGER">
+# <i>nano -w /etc/conf.d/xdm</i>
+<comment>(在这个地方进行修改)</comment>
+DISPLAYMANAGER=\"kdm\"
+</pre>
+
+<p>
+最后把<c>xdm</c>加入到default runlevel:
+</p>
+
+<pre caption="将 xdm加入 default runlevel">
+# <i>rc-update add xdm default</i>
+</pre>
+
+<p>
+重启系统，将会自动进入KDE图形登录界面。
+</p>
+
+<p>
+KDE会提供很多会话供你选择，包括KDE(废话)和其你系统中安装的所有会话，这些会话是KDE在你的系统路径<path>/usr/share/xsessions/</path>中找到的。如果你使用KDM，就不需要要设置<path>~/.xinitrc</path>文件了。
+</p>
+
+</body>
+</section>
+<section id="kde_device_mounting">
+<title>设置KDE的设备加载</title>
+<body>
+
+
+
+<!-- TODO add pmount package when pmount is in arch.
+
+     Also, add pmount to the default runlevel -->
+<p>
+在KDE下，你可以在图形界面中通过简单的鼠标点击来实现加载光驱,USB设备等。要实现这一功能，你必须在KDE的编译选项中加入<c>hal</c>这一USE标记，还需要安装<c>dbus</c>和<c>hald</c>并将这两项加入到你的default runlevel中.同时,你必须将自己的帐户添加到<c>plugdev</c>组中。
+</p>
+
+<pre caption="设备加载设置">
+# <i>emerge --ask dbus hal</i>\n
+# <i>rc-update add dbus default</i>\n
+# <i>rc-update add hald default</i>
+<comment>将 &lt;用户&gt;加入到plugdev组中</comment>
+# <i>gpasswd -a &lt;user&gt; plugdev</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>管理KDE安装</title>
+<section>
+<title>安装多个版本的KDE</title>
+<body>
+
+<p>
+在Gentoo的KDE管理机制中，当有一个更高于你系统中当前版本出现(比如3.5.x系列,而你的系统中安装的为3.4.x系列)，新版本的安装不会覆盖你当前的版本，两者并存。也就是说如果你已经安装了KDE3.4,然后又安装KDE3.5，你就会有两个版本的KDE，一个安装在<path>/usr/kde/3.4/</path>中，另一个在<path>/usr/kde/3.5/</path>中。
+</p>
+
+<p>
+需要注意的是，不同版本的KDE配置文件也是保存在你的根目录中不同的位置的，KDE3.4的配置保存在目录<path>/home/&lt;user&gt;/.kde3.4</path>中。当你第一次运行KDE3.5时，系统会自动读取KDE3.4的设置目录，迁移到<path>/home/&lt;user&gt;/.kde3.5</path>，并将它作为设置和数据的保存目录。
+</p>
+
+<p>
+另外很重要一点要注意：进行KDE的版本升级时，你所安装的额外软件(例如<c>koffice</c>，<c>amarok</c>或<c>k3b</c>)可能会出现问题。解决办法是在新的KDE下重新编译这些软件以更新库的指向。
+</p>
+
+</body>
+</section>
+<section>
+<title>删除旧版本</title>
+<body>
+
+<p>
+当你安装了多个版本的KDE之后，随之而来的一个问题是：当你明确已经不需要旧版的了，要如何删除它呢？不幸的是，portage并不支持通过一条简单的命令来删除某软件及其所依赖的包。也就是说，你运行<c>emerge --unmerge kde</c>是无法真正删除KDE的。
+</p>
+
+<p>
+删除KDE(以KDE 3.4为例)，必须删除下面这些包：
+</p>
+
+<pre caption="删除KDE 3.4">
+# <i>emerge --unmerge =arts-3.4* =kdelibs-3.4* =kdebase-3.4* ...</i>
+</pre>
+
+<p>
+毫无疑问，如果你安装了很多的KDE相关包，这样做是件很伤神的事。幸好有很多办法可以自动处理这些操作，下面举几个例子。
+</p>
+
+<p>
+首先，我们通过<c>equery</c>这个命令列出希望删除的包。该命令包含在<c>app-portage/gentoolkit</c>这个包里。
+</p>
+
+<pre caption="列出将要删除的包">
+<comment>(列出所有安装的KDE包)</comment>
+# <i>equery list kde-base/</i>
+<comment>(列出所有安装的KDE相关包并提取出属于KDE 3.4的)</comment>
+# <i>equery list kde-base/ | grep 3\\.4</i>
+</pre>
+
+<p>
+然后仔细核对这些列出的待删除包。确认之后，将该列表加入到<c>emerge --unmerge</c>之后。
+</p>
+
+<pre caption="删除选择的包">
+# <i>equery list kde-base/ | grep 3\\.4 | xargs emerge --unmerge --pretend</i>
+</pre>
+
+<p>
+再次核对列出的包清单，确认无误后去掉参数 <c>--pretend</c>重新运行该命令，开始删除。
+</p>
+
+<p>
+删除任务完成之后，<path>/usr/kde/3.4/</path>目录中可能还有部份文件剩余(主要是一些配置文件，portage的管理机制中是严格禁止触及配置文件的)。你可以安全地删除<path>/usr/kde/3.4/</path>目录及其所包含的KDE3.4残余文件。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>集中问题</title>
+<section>
+<title>KDE启动缓慢</title>
+<body>
+
+<p>
+确认你的<path>/etc/hosts</path>文件没有错误：
+</p>
+
+<ul>
+  <li>
+    如果你有一个固定的IP地址，确认你在该文件中指明了FQDN和主机名，例如<c>192.168.0.10 tux.mydomain tux</c>。
+  </li>
+  <li>
+    如果你使用动态IP或是没有网络设备，在localhost语句后加上你的主机名，例如<c>127.0.0.1 localhost tux</c>。
+  </li>
+</ul>
+
+<p>
+检查是否开启了硬盘的DMA
+</p>
+
+<pre caption="更改DMA设置">
+# <i>hdparm /dev/hda</i>
+<comment>(...)</comment>
+using_dma       = 1 (on)
+<comment>(...)</comment>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+</guide>
