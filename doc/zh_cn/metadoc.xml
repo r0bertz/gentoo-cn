@@ -242,7 +242,7 @@
     <file id="uml">/doc/en/uml.xml</file>
     <file id="java">/doc/en/java.xml</file>
     <file id="openafs">/doc/en/openafs.xml</file>
-    <file id="kde-config">/doc/en/kde-config.xml</file>
+    <file id="kde-config">/doc/zh_cn/kde-config.xml</file>
     <file id="nano-basics-guide">/doc/zh_cn/nano-basics-guide.xml</file>
     <file id="shoutcast-config">/doc/en/shoutcast-config.xml</file>
     <file id="vdr-guide">/doc/zh_cn/vdr-guide.xml</file>
