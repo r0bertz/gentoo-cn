@@ -218,7 +218,7 @@ Gentoo 2006.1中引入了较多的profile，其中包括<c>desktop</c>子profile
 </table>
 
 <p>
-这里所列举的只是冰山一角。如果你想了解更多KDE下可用程序的信息，请参阅<uri link="http://packages.gentoo.org/packages/?category=kde-base">kde-base 分类</uri>，上面对各个软件及其功能作出了描述。
+这里所列举的只是冰山一角。如果你想了解更多KDE下可用程序的信息，请参阅<uri link="http://packages.gentoo.org/packages/?category=kde-base">kde-base分类</uri>，上面对各个软件及其功能作出了描述。
 </p>
 
 <p>
@@ -266,79 +266,79 @@ KDE项目在发布新版本的KDE桌面环境时将它分为16个大的软件包
   <th>描述</th>
 </tr>
 <tr>
-  <ti>辅助工具——kdeaccessibility</ti>
+  <ti>辅助工具<br />kdeaccessibility</ti>
   <ti>
     辅助功能相关的程序集，由<uri link="http://accessibility.kde.org">KDE Accessibility Project</uri>维护。
   </ti>
 </tr>
 <tr>
-  <ti>系统管理工具——kdeadmin</ti>
+  <ti>系统管理工具<br />kdeadmin</ti>
   <ti>
     KDE下的系统管理相关工具，比如<c>KCron</c>(计划任务管理)、<c>KUser</c>(用户管理)和<c>KDat</c>(备份管理)。
   </ti>
 </tr>
 <tr>
-  <ti>艺术美化包——kdeartwork</ti>
+  <ti>艺术美化包<br />kdeartwork</ti>
   <ti>
     与屏幕保护程序和外观主题相关的艺术美化包，参阅<uri link="http://www.kde-artists.org/">www.kde-artists.org</uri>获取更多与KDE艺术相关的信息。
   </ti>
 </tr>
 <tr>
-  <ti>教育教学——kdeedu</ti>
+  <ti>教育教学<br />kdeedu</ti>
   <ti>
     KDE下针对3岁到18岁之的青少年开发的教学软件，更多信息请参阅<uri link="http://edu.kde.org">KDE Edu Project</uri>。
   </ti>
 </tr>
 <tr>
-  <ti>游戏——kdegames</ti>
+  <ti>游戏<br />kdegames</ti>
   <ti>
     KDE下的一些游戏，可以在<uri link="http://games.kde.org">KDE Games Center</uri>上找到更多的说明信息。
   </ti>
 </tr>
 <tr>
-  <ti>图像处理——kdegraphics</ti>
+  <ti>图像处理<br />kdegraphics</ti>
   <ti>
     KDE下图像处理相关程序，包括<c>KSnapshot</c>(截图程序),<c>KolourPaint</c>(小巧的图像编辑程序)<c>Kpdf</c>(PDF文档阅读程序)<c>KIconEdit</c>(图标编辑程序),<c>KPovModeler</c>(3D建模程序)。
   </ti>
 </tr>
 <tr>
-  <ti>多媒体——kdemultimedia</ti>
+  <ti>多媒体<br />kdemultimedia</ti>
   <ti>
     KDE下多媒体处理程序，包括CD，MP3，DVD等音频和视频播放程序。了解更多信息请参阅<uri link="http://multimedia.kde.org">KDE Multimedia Project</uri>。
   </ti>
 </tr>
 <tr>
-  <ti>网络工具——kdenetwork</ti>
+  <ti>网络工具<br />kdenetwork</ti>
   <ti>
     KDE下的网络应用程序集，例如<c>Kopete</c>(支持多协议的即时通讯程序),<c>kppp</c>(拔号程序)<c>KSirc</c>(一款IRC客户端程序)。需要注意的是<c>konqueror</c>(文件管理器<e>和</e>网络游览器)是包含在<c>kdebase</c>中的。
   </ti>
 </tr>
 <tr>
-  <ti>个人信息管理——kdepim</ti>
+  <ti>个人信息管理<br />kdepim</ti>
   <ti>
     个人信息管理程序，例如<c>KOrganizer</c>(日程管理)、<c>KAddressbook</c>(地址簿管理器)、<c>Kontact</c>(信息管理群集)、<c>KMail</c>(电子邮件)。更多信息请参阅<uri link="http://pim.kde.org">KDE PIM Project</uri>网站。
   </ti>
 </tr>
 <tr>
-  <ti>开发工具——kdesdk</ti>
+  <ti>开发工具<br />kdesdk</ti>
   <ti>
     编程开发工具，包括 <c>KBabel</c> (翻译工具)、<c>KBugBuster</c> (漏洞跟踪前端)和<c>Kompare</c>(两个文件之间差异对比)。
   </ti>
 </tr>
 <tr>
-  <ti>一些小玩具——kdetoys</ti>
+  <ti>小玩具<br />kdetoys</ti>
   <ti>
     一些用来在你等待pizza送到时消磨时间的小游戏。你可以找到类似<c>eyesapplet</c>和<c>fifteenapplet</c>这样的小组件，其中不失像<c>amor</c>这样的精品。这些程序对系统资源的要求极低。
   </ti>
 </tr>
 <tr>
-  <ti>杂类工具——kdeutils</ti>
+  <ti>工具<br />kdeutils</ti>
   <ti>
     图形界面的系统工具，比如<c>kcalc</c>(计算器)、<c>kdessh</c>(SSH终端)、<c>kfloppy</c>(软盘管理相关的工具)等等。
   </ti>
 </tr>
 <tr>
-  <ti>语言包——kde-i18n</ti>
+  <ti>语言包<br />kde-i18n</ti>
   <ti>
     KDE国际化相关的文件，其中包括了翻译的文档。更多信息请参阅<uri link="http://i18n.kde.org">KDE i18n project</uri>。
   </ti>
