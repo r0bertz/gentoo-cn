@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_CN/articles/lvm-p2.xml,v 1.4 2006/01/22 04:06:10 fox2mike Exp $ -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
 
-<guide link="/doc/zh_CN/articles/lvm-p2.xml" disclaimer="articles" lang="zh_CN">
+<guide link="/doc/zh_cn/articles/lvm-p2.xml" disclaimer="articles" lang="zh_cn">
 <title>学习Linux LVM，第2部分</title>
 
 <author title="作者">
@@ -14,7 +15,7 @@
 </author>
 
 <author title="编辑">
-	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 
 <!-- xmlified by: Joshua Saddler (jackdark@gmail.com) -->
@@ -22,8 +23,11 @@
 在本文中，Daniel向您介绍了Linux LVM（逻辑卷管理）背后的概念，并告诉您如何将最新的内核补丁和工具安装到您的系统上。LVM可以让您在除机器上的物理存储资源以外创建逻辑卷。不过，与物理卷不同，逻辑卷可以在系统仍处于运行状态时扩充和缩减，这样就为Linux系统管理员提供了他们梦寐以求的存储器灵活性。
 </abstract>
 
-<!-- 本文的原始文档最初发表在IBM DeveloperWorks上，所有权属于Westtech Information Services。本文是原文的升级版，包含了Gentoo Linux文档组所做的各种修改。
-本文未被动态维护-->
+<!-- The original version of this article was first published on IBM 
+developerWorks, and is property of Westtech Information Services. This 
+document is an updated version of the original article, and contains
+various improvements made by the Gentoo Linux Documentation team -->
+
 <version>1.2</version>
 <date>2006-01-22</date>
 
@@ -34,7 +38,7 @@
 <body>
 
 <p>
-在<uri link="/doc/zh_CN/articles/lvm-p1.xml">我前一篇LVM文章</uri>中，我解释了LVM背景知识。现在该是发挥LVM作用的时候了。在本文中，我将在官方Gentoo Linux web cvs服务器（cvs.gentoo.org）上设置LVM。尽管cvs.gentoo.org只有一个硬盘，但灵活性很强的LVM仍然令人难以置信地提供了比标准静态分区方法好得多的改进。我将为您介绍LVM转换过程的的所有步骤，这样，如果您有兴趣，可以在自己的机器上执行类似的转换。
+在<uri link="/doc/zh_cn/articles/lvm-p1.xml">我前一篇LVM文章</uri>中，我解释了LVM背景知识。现在该是发挥LVM作用的时候了。在本文中，我将在官方Gentoo Linux web cvs服务器（cvs.gentoo.org）上设置LVM。尽管cvs.gentoo.org只有一个硬盘，但灵活性很强的LVM仍然令人难以置信地提供了比标准静态分区方法好得多的改进。我将为您介绍LVM转换过程的的所有步骤，这样，如果您有兴趣，可以在自己的机器上执行类似的转换。
 </p>
 
 <warn>
@@ -334,7 +338,7 @@ Filesystem           1k-blocks      Used Available Use% Mounted on
 
 <ul>
   <li>
-    有关LVM的概念和如何在系统上安装最新的内核补丁和工具的建议，请参阅我的前一篇文章，<uri link="/doc/zh_CN/articles/lvm-p1.xml">学习LVM，第1部分</uri>。
+    有关LVM的概念和如何在系统上安装最新的内核补丁和工具的建议，请参阅我的前一篇文章，<uri link="/doc/zh_cn/articles/lvm-p1.xml">学习LVM，第1部分</uri>。
   </li>
   <li>
     从RedHat下载<uri link="ftp://sources.redhat.com/pub/lvm2">LVM源代码包</uri>。
@@ -370,10 +374,10 @@ Filesystem           1k-blocks      Used Available Use% Mounted on
     <uri link="http://www.namesys.com">ReiserFS</uri>是一种非常好的文件系统（特别在与LVM结合使用时）。如果使用的是ReiserFS，需要获取reiserfs-utils tar文件，它包含了一个称为<c>reiserfs_resize</c>的程序──允许对ReiserFS文件系统联机调整大小。
   </li>
   <li>
-    有关设置Linux Software RAID卷的详细信息，请参阅Daniel在developerWorks上有关Software RAID系列的<uri link="/doc/zh_CN/articles/software-raid-p1.xml">第1部分</uri>和<uri link="/doc/zh_CN/articles/software-raid-p2.xml">第2部分</uri>。
+    有关设置Linux Software RAID卷的详细信息，请参阅Daniel在developerWorks上有关Software RAID系列的<uri link="/doc/zh_cn/articles/software-raid-p1.xml">第1部分</uri>和<uri link="/doc/zh_cn/articles/software-raid-p2.xml">第2部分</uri>。
   </li>
   <li>
-    如果想进行回顾，请参阅Daniel的<uri link="/doc/zh_CN/articles/linux-kernel-compiling.xml">Linux内核编译教程</uri>。
+    如果想进行回顾，请参阅Daniel的<uri link="/doc/zh_cn/articles/linux-kernel-compiling.xml">Linux内核编译教程</uri>。
   </li>
 </ul>
 
