@@ -414,6 +414,105 @@
     <ti><uri link="/doc/zh_cn/sudo-guide.xml">v 1.11</uri></ti>
     <ti>N/A</ti>
   </tr>
+  <tr>
+    <ti>doc-tipsntricks.xml</ti>
+    <ti><uri link="/proj/en/gdp/doc/doc-tipsntricks.xml">v 1.25</uri></ti>
+    <ti>2007/07/17</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/gdp/doc/doc-tipsntricks.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-redesign-1.xml</ti>
+    <ti><uri link="/doc/en/articles/l-redesign-1.xml">v 1.4</uri></ti>
+    <ti>2005/10/10</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-redesign-1.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-redesign-2.xml</ti>
+    <ti><uri link="/doc/en/articles/l-redesign-2.xml">v 1.2</uri></ti>
+    <ti>2005/10/10</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-redesign-2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-redesign-3.xml</ti>
+    <ti><uri link="/doc/en/articles/l-redesign-3.xml">v 1.2</uri></ti>
+    <ti>2005/10/10</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-redesign-3.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-redesign-4.xml</ti>
+    <ti><uri link="/doc/en/articles/l-redesign-4.xml">v 1.2</uri></ti>
+    <ti>2005/10/10</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-redesign-4.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-awk1.xml</ti>
+    <ti><uri link="/doc/en/articles/l-awk1.xml">v 1.6</uri></ti>
+    <ti>2005/10/09</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-awk1.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-awk2.xml</ti>
+    <ti><uri link="/doc/en/articles/l-awk2.xml">v 1.6</uri></ti>
+    <ti>2006/09/27</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-awk2.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>l-awk3.xml</ti>
+    <ti><uri link="/doc/en/articles/l-awk3.xml">v 1.6</uri></ti>
+    <ti>2005/10/31</ti>
+    <ti><mail link="zm3345@gmail.com">zhou3345</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/articles/l-awk3.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>keychain-guide.xml</ti>
+    <ti><uri link="/doc/en/keychain-guide.xml">v 1.3</uri></ti>
+    <ti>2007/04/29</ti>
+    <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/keychain-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
 </table>
 </body>
 </section>
