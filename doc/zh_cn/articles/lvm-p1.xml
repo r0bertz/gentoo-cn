@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/zh_CN/articles/lvm-p1.xml,v 1.4 2006/01/22 04:06:10 fox2mike Exp $ -->
+
+<guide link="/doc/zh_CN/articles/lvm-p1.xml" disclaimer="articles" lang="zh_CN">
+<title>学习Linux LVM，第1部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<!-- xmlified by: Joshua Saddler (jackdark@gmail.com) -->
+<abstract>
+在本文中，Daniel向您介绍了Linux LVM（逻辑卷管理）背后的概念，并告诉您如何将最新的内核补丁和工具安装到您的系统上。LVM可以让您在除机器上的物理存储资源以外创建逻辑卷。不过，与物理卷不同，逻辑卷可以在系统仍处于运行状态时扩充和缩减，这样就为Linux系统管理员提供了他们梦寐以求的存储器灵活性。
+</abstract>
+
+<!-- 本文的原始文档最初发表在IBM DeveloperWorks上，所有权属于Westtech Information Services。本文是原文的升级版，包含了Gentoo Linux文档组所做的各种修改。
+本文未被动态维护-->
+
+<version>1.2</version>
+<date>2006-01-22</date>
+
+<chapter>
+<title>逻辑卷管理器的存储管理魔术</title>
+<section>
+<title>LVM介绍</title>
+<body>
+
+<p>
+在这一系列中，我要向您介绍如何安装和使用新的内置在Linux 2.4内核中的“逻辑卷管理”支持。如果您以前从未使用过任何形式的LVM，那么您得好好学一学；它是一种非常棒的技术。在我们真正设置和运行LVM之前，我要解释一下它究竟是什么以及它是如何工作的。然后，我们准备对LVM做一些测试来充分了解它。
+</p>
+
+<p>
+如果您象我一样，那么您对UNIX和Linux的体验是从PC平台，而不是从大型的商业UNIX服务器和工作站上开始的。在一台pc裸机上，我们总是不得不对硬盘驱动器执行分区。使用PC的人通常相当了解<c>fdisk</c>这样的在硬盘上创建和删除主要分区和扩展分区的工具。硬盘分区是一种令人厌烦，但公认是使操作系统设置和运行进程不可或缺的一部分。
+</p>
+
+<p>
+硬盘分区可能是非常烦人的事，如果要把它分好，确实需要精确地估计每个分区需要多少空间。如果估计得不准确，Linux系统很可能会顾此失彼──为解决这个问题，您甚至可能需要执行整个系统备份、将硬盘清除干净，然后将所有数据恢复到新的（可能比原来好一些）分区布局中。讨厌！这正是系统管理员在一开始就竭力避免的情况。
+</p>
+
+<p>
+一直以来我们的分区都是一些大小固定的存储区域，但值得庆幸的是，我们现在有许多PC重新分区工具（PowerQuest的Partition Magic产品就是最流行的一种）。这些工具可以让您用一个特殊磁盘来引导系统，并可以动态地重新调整分区和文件系统的大小。重新引导后，您就拥有了重新调整过大小的新分区，这样就有望将您从存储器困境中解脱出来。这些重新调整分区大小的工具很有效，并从某种程度上解决了一些存储器管理问题。但它们是不是就完美了呢？不一定。
+</p>
+
+<p>
+象Partition Magic这样的工具对于工作站来说非常有效，但对服务器来说就不合适了。首先，它们需要重启系统。而这正是大多数系统管理员想尽量避免的。如果在每次需要调整存储器（例如每周都需要动态调整的存储器）时就是不能重启机器怎么办？如果需要扩充文件系统使它能跨越多个硬盘驱动器会发生什么，或者如果在允许Apache继续提供Web服务的同时需要动态扩充或缩减分区的存储容量，您该怎么做？在一个使用率高、机动性强的环境中，原始的分区大小调整工具无法满足这些要求。对于这样一些和其它一些情况，“逻辑卷管理”是一种非常出色（如果还算不上完美）的解决方案。
+</p>
+
+</body>
+</section>
+<section>
+<title>走进LVM</title>
+<body>
+
+<p>
+现在，让我们看看LVM是如何解决这些问题的。我们执行下面的三步骤来创建LVM逻辑卷。首先，我们需要选择用于LVM的物理存储器资源。这些通常是标准分区，但也可以是我们已创建的Linux Software RAID卷。如果使用LVM术语，这些存储器资源称为物理卷”。设置LVM的第一步是正确初始化这些分区以使它们可以被LVM系统识别。如果添加物理分区，它还包括设置正确的分区类型，以及运行pvcreate命令。
+</p>
+
+<p>
+在初始化LVM使用的一个或多个物理卷后，可以继续进行第二步──创建卷组。您可以把卷组看作是由一个或多个物理卷所组成的存储器池。在LVM运行时，我们可以向卷组添加物理卷，亦或移除它们。不过，我们不能直接在卷组上安装或创建文件系统。而是告诉LVM使用我们的卷组存储器池创建一个或多个“逻辑卷”：
+</p>
+
+<figure link="/images/docs/l-lvm-1.gif" caption="在物理卷上创建卷组"/>
+
+<p>
+创建LVM逻辑卷非常容易，而且一旦创建它以后，我们就可以把文件系统放在它上面、安装它，然后开始使用卷来存储文件。使用“lvcreate”命令来创建逻辑卷，指定新卷的名称、所希望的卷的大小，以及希望这个特定逻辑卷所属的卷组。然后，LVM系统从我们指定的卷组中分配存储量来创建准备使用的新卷。创建新卷后，可以将ext2或ReiserFS文件系统放在上面、安装它，然后照我们喜欢的方式使用它。
+</p>
+
+<figure link="/images/docs/l-lvm-2.gif" caption="从现有卷组创建两个逻辑卷"/>
+
+</body>
+</section>
+<section>
+<title>范围</title>
+<body>
+
+<p>
+在幕后，LVM系统以大小相等的“块”（称为“范围”）为单位分配存储量。我们可以指定在创建卷组时使用的特定的范围大小。范围的大小缺省为4Mb，这对于大多数情况来说相当理想。LVM的一个好处是在已经安装了逻辑卷并在使用逻辑卷的情况下，可以动态地改变逻辑卷使用的范围的物理存储位置（换句话说，就是存储它们所在的磁盘）。LVM系统确保逻辑卷在管理员物理地改变存储位置的同时能够继续正常操作。
+</p>
+
+<p>
+当然，因为所有事物都是在大小相等的范围之上创建的，所以要为已存在的逻辑卷分配一些额外的范围实际上很容易──换句话说，动态“增长”卷：
+</p>
+
+<figure link="/images/docs/l-lvm-3.gif" caption="从卷组添加额外的范围，
+扩展逻辑卷的大小"/>
+
+<p>
+一旦扩充了逻辑卷，接下来就可以扩充ext2或ReiserFS文件系统来利用这一新的磁盘空间。如果使用例如<c>resize_reiserfs</c>这样的程序，也可以在已安装和正使用卷时扩充文件系统！真正令人称奇的是──使用LVM和联机文件系统扩充实用程序，可以在改变存储器配置时不再需要重新引导系统，甚至不需要降低到运行级别1。
+</p>
+
+<p>
+唯一需要关闭系统的情况是在需要添加新的物理磁盘时。添加了新磁盘后，可以将这些新的物理卷添加到卷组中来创建新的范围补给。
+</p>
+
+</body>
+</section>
+<section>
+<title>设置LVM</title>
+<body>
+
+<p>
+好，让我们开始安装LVM。LVM由两部分组成：内核部分和一套用户空间工具。为了开始，先跳到主要LVM页面（请参阅本文稍后部分的<uri link="#resources">参考资料</uri>）并下载可以找到的最新版本的LVM tar文件（当前是lvm_0.9.1_beta3.tar.gz）。LVM tar文件包含了所有用户空间工具以及一组内核补丁程序。这正是令人感兴趣的地方。
+</p>
+
+<p>
+如果已经安装了2.4系列内核，则系统上已有LVM支持，如果没有，很简单，只需要重新编译内核来启用LVM支持即可。不过，您可能不希望使用自带的（或发行版提供的）2.4内核所包括的LVM支持。如果希望使用最新的LVM版本，要将LVM tar文件中的补丁程序应用到当前的2.4内核源码树。以下是执行方法。
+</p>
+
+<p>
+为了开始，进入内核源码目录 (<path>/usr/src/linux</path>) 并创建一个称为<path>extras</path>的目录。然后进入该目录并解压LVM tar文件：
+</p>
+
+<pre caption="解压补丁包">
+# <i>cd /usr/src/linux</i>
+# <i>mkdir extras</i>
+# <i>cd extras</i>
+# <i>tar xzvf /path/to/location/of/lvm_0.9.1_beta3.tar.gz</i>
+</pre>
+
+<p>
+执行完这一步后，您会注意到在extras中有一个称之为<path>LVM</path>的目录，它包含了另一个根据您刚刚解包的LVM版本命名的目录。进入这两个目录找到LVM源码：
+</p>
+
+<pre caption="获取LVM源代码">
+# <i>cd LVM/0.9.1_beta3</i>
+# <i>ls</i>
+ABSTRACT      COPYING      INSTALL     Makefile     README    autoconf      config.status  kernel         make.tmpl.in
+CHANGELOG     COPYING.LIB  KNOWN_BUGS  Makefile.in  TODO      config.cache  configure      lvm_input_msg  scripts
+CONTRIBUTORS  FAQ          LVM-HOWTO   PATCHES      WHATSNEW  config.log    configure.in   make.tmpl      tools
+</pre>
+
+<p>
+您将看到几个文本文件、脚本和源目录。您会在<path>INSTALL</path>文件中找到安装指令；我将指导您完成这一过程。首先，我们希望运行配置脚本，如下：
+</p>
+
+<pre caption="配置LVM源代码">
+# <i>./configure --prefix=/ --mandir=/usr/man</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>修补</title>
+<body>
+
+<p>
+执行完这条命令后，将创建并配置Makefile，以在<path>/sbin</path>中安装所有LVM工具，在<path>/usr/man</path>中安装帮助页面。如果您的帮助页面位于<path>/usr/share/man</path>中（按照FHS2.1），则对上述路径作相应的调整。如果内核源码不在<path>/usr/src/linux</path>中，还需要将<c>--with-kernel_dir=/path/to/usr/src/linux</c>选项添加到一行中。配置脚本完成后，我们就可以准备安装这些工具并生成当前内核的补丁了。让我们首先对内核加以修补。进入<path>PATCHES</path>目录：
+</p>
+
+<pre caption="切换文件夹">
+# <i>cd PATCHES</i>
+</pre>
+
+<p>
+现在输入<c>make</c>。makefile将生成专用于特定2.4系列内核源码的补丁：
+</p>
+
+<pre caption="创建patch">
+# <i>make</i>
+</pre>
+
+<p>
+补丁名为<c>lvm-[lvmversion]-[kernelversion].patch</c>。例如，因为我使用的是版本0.9.1_beta3的LVM和内核2.4.0-ac11，所以补丁名为<c>lvm-0.9.1_beta3-2.4.0-ac11.patch</c>。您可以在当前目录中找到它。现在该应用补丁了。要应用补丁，需要将目录切换到内核源码所在的位置，然后使用patch命令：
+</p>
+
+<pre caption="patch命令">
+# <i>cd /usr/src/linux</i>
+# <i>patch -l -p1 &lt; /usr/src/linux/extras/LVM/0.9.1_beta3/PATCHES/lvm-0.9.1_beta3-2.4.0-ac11.patch</i>
+</pre>
+
+<p>
+虽然LVM INSTALL文档并没有提到，但我通常将<c>-l</c>选项传递给patch。该选项让补丁程序补偿空白中的任何变化（例如细微的缩排变化），这些变化一般会造成补丁的某些部分失败。如果上述命令完成时没有任何带有"FAILED"的行，那么就可以准备安装用户磁盘空间工具了。如果不是这样，您需要审视<path>/usr/src/linux</path>目录来查找<c>.rej</c>文件，然后使用文本编辑器手工将被拒绝的部分插入到源码中──真麻烦！不过，在大多数情况下，应用补丁都很顺利，您可以迅速使用它。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置、编译和安装</title>
+<body>
+
+<p>
+好，现在有了一个经过修补的内核，因此它具有最新可用的LVM代码。现在需要配置内核来启用LVM支持。我建议您直接将LVM支持编译到内核中而不是将它配置成作为一个模块编译。启动您喜爱的Linux内核配置方法：
+</p>
+
+<pre caption="配置内核">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+您在 "Multi-device support (RAID and LVM)" 部分中可以找到LVM选项。一旦启用了第一个选项：
+</p>
+
+<pre caption="RAID与LVM支持">
+[*] Multiple devices driver support (RAID and LVM)
+</pre>
+
+<p>
+. . .您将看到以下选项，您也应该启用它们：
+</p>
+
+<pre caption="启用LVM支持">
+&lt;*&gt;   Logical volume manager (LVM) support
+</pre>
+
+<p>
+根据您使用的LVM版本，可能还有其它一些希望启用的与LVM相关的选项。完成后，保存内核配置，并执行标准内核编译例程，然后重新引导。恭喜──您现已启用了内核LVM支持；现在，我们需要编译和安装用户磁盘空间工具。这一步很简单：
+</p>
+
+<pre caption="安装用户磁盘空间工具">
+# <i>cd /usr/src/linux/extras/LVM/0.9.1_beta3</i>
+# <i>make</i>
+# <i>make install</i>
+</pre>
+
+<p>
+另外还有一步，它是可选的。如果您要做的不仅是测试LVM，还需要将以下几行添加到startup rc脚本中：
+</p>
+
+<pre caption="编辑startup rc脚本">
+/sbin/vgscan
+/sbin/vgchange -a y
+</pre>
+
+<p>
+这些行将浏览所有可用的卷组并激活它们。然后，将以下这行添加到shutdown rc脚本中，并确保它在卸装了所有文件系统后执行：
+</p>
+
+<pre caption="编辑shutdown rc脚本">
+/sbin/vgchange -a n
+</pre>
+
+
+<p>
+如果只是测试LVM，可以跳过这些步骤。只是要记住，在每次重新引导后，在逻辑卷可以使用前，需要以root输入<c>vgscan</c>和<c>vgchange -a y</c>。
+</p>
+
+<p>
+以上就是这篇文章的内容。在下一篇文章中，我将介绍如何创建您自己的逻辑卷，以及如何发挥LVM的威力。到时候再见！
+</p>
+
+
+</body>
+</section>
+<section id="resources">
+<title>参考资料</title>
+<body>
+
+<ul>
+  <li>
+    从RedHat下载<uri link="ftp://sources.redhat.com/pub/lvm2">LVM源代码包</uri>。
+  </li>
+  <li>
+    等不及的读者可以查看<uri link="http://www.linux.org/docs/ldp/howto/LVM-HOWTO.html">Heinz Mauelshagen的LVM HOWTO</uri>，它介绍了如何设置物理卷、卷组和逻辑卷。这是我将在下一篇文章中涉及的内容。
+  </li>
+  <li>
+    另外还有一个有意思的HOWTO，告诉您<uri link="http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt">如何在逻辑卷上设置根文件系统</uri>。
+  </li>
+  <li>
+    Andreas Dilger参与了Linux LVM项目，他有一个看上去不错的<e>联机</e><uri link="http://www-mddsp.enel.ucalgary.ca/People/adilger/online-ext2/">ext2文件系统大小调整器</uri>。
+  </li>
+  <li>
+    <uri link="http://www.namesys.com">ReiserFS</uri>是一种非常好的文件系统（特别在与LVM结合使用时）。如果使用的是ReiserFS，需要获取reiserfs-utils tar文件，它包含了一个称为<c>reiserfs_resize</c>的程序──允许对ReiserFS文件系统联机调整大小。
+  </li>
+  <li>
+    有关设置Linux Software RAID卷的详细信息，请参阅Daniel在developerWorks上有关Software RAID 系列的<uri link="/doc/zh_CN/articles/software-raid-p1.xml">第1部分</uri>和<uri link="/doc/zh_CN/articles/software-raid-p2.xml">第2部分</uri>。
+  </li>
+  <li>
+    如果想进行回顾，请参阅Daniel的<uri link="/doc/zh_CN/articles/linux-kernel-compiling.xml">Linux内核编译教程</uri>。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>

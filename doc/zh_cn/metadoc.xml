@@ -82,8 +82,8 @@
     <file id="partitioning-p2">/doc/en/articles/partitioning-p2.xml</file>
     <file id="partition-planning-tips">/doc/en/articles/partition-planning-tips.xml</file>
     <file id="maximum-swappage">/doc/en/articles/maximum-swappage.xml</file>
-    <file id="lvm-p1">/doc/en/articles/lvm-p1.xml</file>
-    <file id="lvm-p2">/doc/en/articles/lvm-p2.xml</file>
+    <file id="lvm-p1">/doc/zh_cn/articles/lvm-p1.xml</file>
+    <file id="lvm-p2">/doc/zh_cn/articles/lvm-p2.xml</file>
     <file id="software-raid-p1">/doc/en/articles/software-raid-p1.xml</file>
     <file id="software-raid-p2">/doc/en/articles/software-raid-p2.xml</file>
     <file id="linux-kernel-compiling">/doc/en/articles/linux-kernel-compiling.xml</file>

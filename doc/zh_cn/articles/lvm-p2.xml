@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_CN/articles/lvm-p2.xml,v 1.4 2006/01/22 04:06:10 fox2mike Exp $ -->
+
+<guide link="/doc/zh_CN/articles/lvm-p2.xml" disclaimer="articles" lang="zh_CN">
+<title>学习Linux LVM，第2部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<!-- xmlified by: Joshua Saddler (jackdark@gmail.com) -->
+<abstract>
+在本文中，Daniel向您介绍了Linux LVM（逻辑卷管理）背后的概念，并告诉您如何将最新的内核补丁和工具安装到您的系统上。LVM可以让您在除机器上的物理存储资源以外创建逻辑卷。不过，与物理卷不同，逻辑卷可以在系统仍处于运行状态时扩充和缩减，这样就为Linux系统管理员提供了他们梦寐以求的存储器灵活性。
+</abstract>
+
+<!-- 本文的原始文档最初发表在IBM DeveloperWorks上，所有权属于Westtech Information Services。本文是原文的升级版，包含了Gentoo Linux文档组所做的各种修改。
+本文未被动态维护-->
+<version>1.2</version>
+<date>2006-01-22</date>
+
+<chapter>
+<title>cvs.gentoo.org升级</title>
+<section>
+<title>简介</title>
+<body>
+
+<p>
+在<uri link="/doc/zh_CN/articles/lvm-p1.xml">我前一篇LVM文章</uri>中，我解释了LVM背景知识。现在该是发挥LVM作用的时候了。在本文中，我将在官方Gentoo Linux web cvs服务器（cvs.gentoo.org）上设置LVM。尽管cvs.gentoo.org只有一个硬盘，但灵活性很强的LVM仍然令人难以置信地提供了比标准静态分区方法好得多的改进。我将为您介绍LVM转换过程的的所有步骤，这样，如果您有兴趣，可以在自己的机器上执行类似的转换。
+</p>
+
+<warn>
+在开始之前有一个告诫。因为实现LVM是对系统进行的一项重要的变动（包括创建新分区和其它一些潜在的冒险操作），所以在开始这一过程之前备份整个系统不失为一个好主意。如果您不想进行备份，我希望您能使用一台没有什么重要数据的测试机器。应该说我在转换到LVM时并没有遇到任何问题，但最好做好准备以防万一。
+</warn>
+
+<p>
+那么，让我们继续。在开始转换过程之前，我对cvs.gentoo.org进行了升级，让它使用下列软件包。在我执行LVM转换的时候，这些是当时的最新版本（请参阅本文稍后部分的<uri link="#resources">参考资料</uri>）：
+</p>
+
+<ul>
+  <li>Linux kernel 2.4.1-ac19</li>
+  <li>LVM 0.9.1_beta5</li>
+  <li>reiserfs-utils 3.6.25</li>
+</ul>
+
+<p>
+现在轮到硬盘驱动器了。cvs.gentoo.org有一个不错的新的IBM 45GB硬盘驱动器；不过，当我在cvs上安装Gentoo Linux时，我只对驱动器中的10GB进行了分区，而将余下的35GB留作“将来的分区”使用。这些是在不使用LVM时耍的一点小计谋──将部分驱动器保留不分区是一种为今后的扩充作准备的简单但有效的方式。不过，如果使用LVM，会有更好的方法。
+</p>
+
+</body>
+</section>
+<section>
+<title>空间问题</title>
+<body>
+
+<p>
+在过去的几个星期中，我注意到我的ReiserFS根分区在被缓慢地填满，这可以从下面的<c>df</c>输出中看出：
+</p>
+
+<pre caption="日见缩小的空闲空间">
+Filesystem           1k-blocks      Used Available Use% Mounted on
+/dev/hda3              9765200   6989312   2775888  72% /
+tmpfs                   269052         0    269052   0% /dev/shm
+</pre>
+
+<p>
+现在，72%被占满的根分区并不构成什么危机，但也决不是一种良好的状况。ReiserFS和许多其它文件系统一样，随着它的越来越满而越来越慢，根文件系统被完全填满、文件系统的性能遭到重创只是个时间问题。
+</p>
+
+<p>
+我决定在硬盘驱动器的结尾处使用LVM，从35GB的当前未分区空间中创建新逻辑卷来解决这一问题。然后，我会在这个卷上创建一个文件系统，并将<path>/dev/hda3</path>的大部分内容转移到其中。
+</p>
+
+<p>
+如果您考虑在自己的机器上进行类似的转换，首先需要做的就是在根文件系统上找一个合适的部分转移到逻辑卷上。对我来说，选择很容易──我的<path>/home</path>树占用了大约5.7GB。将<path>/home</path>转移到它自己的LVM逻辑卷之后，我的根分区只占用了20%的容量。因为大多数新数据将被添加到<path>/home</path>，所以我根分区的使用量将保持在20%左右──一种非常健康的状态。
+</p>
+
+</body>
+</section>
+<section>
+<title>开始前的准备</title>
+<body>
+
+<p>
+在开始转换之前，首先在硬盘驱动器的结尾处对未使用的空间进行分区。我使用<c>cfdisk</c>创建了一个35GB的分区(<path>/dev/hda5</path>)，然后将分区的分区类型设置成"8E"（正规LVM分区类型）。在这一更改后，我进行了重新引导以强制重新读取分区表。在重新引导后，我的分区表如下：
+</p>
+
+<pre caption="新的分区表">
+# <i>sfdisk -l</i>
+Disk /dev/hda: 89355 cylinders, 16 heads, 63 sectors/track
+Units = cylinders of 516096 bytes, blocks of 1024 bytes, counting from 0
+   Device Boot Start     End   #cyls   #blocks   Id  System
+/dev/hda1   *      0+    247     248-   124960+  83  Linux
+/dev/hda2        248     743     496    249984   82  Linux swap
+/dev/hda3        744   20119   19376   9765504   83  Linux
+/dev/hda4      20120   89354   69235  34894440    5  Extended
+/dev/hda5      20120+  89354   69235- 34894408+  8e  Linux LVM
+</pre>
+
+<p>
+既然有了空的35GB的分区，我就准备为LVM初始化它。以下是过程──首先，我将35GB初始化成<e>物理卷</e>；然后，使用这个物理卷创建一个<e>卷组</e>，最后，在卷组上分配一些范围，创建将包含新文件系统并存放当前<path>/home</path>中所有文件的<e>逻辑卷</e>。
+</p>
+
+<p>
+为开始这个过程，我使用<c>pvcreate</c>命令将<path>/dev/hda5</path>初始化成物理卷：
+</p>
+
+<pre caption="创建物理卷">
+# <i>pvcreate /dev/hda5</i>
+pvcreate -- physical volume "/dev/hda5" successfully created
+</pre>
+
+<p>
+<c>pvcreate</c>在<path>/dev/hda5</path>上设置一个特殊的“记帐”区域，称作VGDA（“卷组描述符区域”）。LVM使用该区域来记录物理范围是如何分配的，以及其它一些操作。
+</p>
+
+<p>
+下一步是创建卷组并向该卷组添加<path>/dev/hda5</path>。卷组将充当范围池（许多存储块）。创建卷组之后，创建所需数量的逻辑卷。我决定将卷组称为"main"：
+</p>
+
+<pre caption="创建卷组">
+# <i>vgcreate main /dev/hda5</i>
+vgcreate -- INFO: using default physical extent size 4 MB
+vgcreate -- INFO: maximum logical volume size is 255.99 Gigabyte
+vgcreate -- doing automatic backup of volume group "main"
+vgcreate -- volume group "main" successfully created and activated
+</pre>
+
+<p>
+<c>vgcreate</c>命令执行几个操作。除了创建"main"卷组以外，它还设置<path>/dev/hda5</path>，使它使用4MB的范围，4MB是缺省范围大小。这意味着在卷组上创建的所有逻辑卷都可以以4MB为增量单位来进行扩充或缩减。
+</p>
+
+<p>
+由于内核限制的原因，范围大小决定了逻辑卷的最大大小。您可以从上面的输出中看出，4MB的范围大小决定了逻辑卷大小限制为256GB，如果您向卷组添加几个高容量驱动器，这是很容易达到的逻辑卷组大小。如果每一个卷最后都大于256GB，我建议您在运行<c>vgcreate</c>时指定更大一些的范围大小。范围的大小可以是从8KB到512MB之间的任何值，并且必须总是2的倍数。通过将范围大小增加到4MB以上，最大的物理卷大小将相应地增加到最大为1Petabyte（尽管当今现实世界中，x86系统上的大小限制是2Terabytes）。例如，如果希望使用32MB的范围创建卷组，我会输入：
+</p>
+
+<pre caption="一个更大的范围大小">
+# <i>vgcreate -s 32M main /dev/hda5</i>
+</pre>
+
+<p>
+32MB是个合适的范围大小，因为32MB的颗粒度仍然便于管理，并将引导的最大逻辑卷大小增加到2TB。创建卷组之后，可以通过输入"vgdisplay"来查看其信息：
+</p>
+
+<pre caption="查看卷信息">
+# <i>vgdisplay</i>
+--- Volume group ---
+VG Name               main
+VG Access             read/write
+VG Status             available/resizable
+VG #                  0
+MAX LV                256
+Cur LV                0
+Open LV               0
+MAX LV Size           255.99 GB
+Max PV                256
+Cur PV                1
+Act PV                1
+VG Size               33.28 GB
+PE Size               4 MB
+Total PE              8519
+Alloc PE / Size       0 / 0
+Free  PE / Size       8519 / 33.28 GB
+VG UUID               2qC2H2-iA8s-qW6F-cwXx-JVIh-I6VC-VVCGmn
+</pre>
+
+<p>
+既然有了自己的卷组，我准备创建逻辑卷。我决定在最初时将它的大小设置为8GB，并称它作"lv_home"：
+</p>
+
+<pre caption="创建逻辑卷">
+# <i>lvcreate -L8G -nlv_home main</i>
+lvcreate -- doing automatic backup of "main"
+lvcreate -- logical volume "/dev/main/lv_home" successfully created
+</pre>
+
+<p>
+然后，在逻辑卷上创建文件系统：
+</p>
+
+<pre caption="文件系统的创建">
+# <i>mkreiserfs /dev/main/lv_home</i>
+
+
+  &lt;----------- MKREISERFSv2 -----------&gt;
+
+   Block size 4096 bytes
+   Block count 2097152
+   Used blocks 8275
+           Journal - 8192 blocks (18-8209), journal header is in block 8210
+           Bitmaps: 17, 32768, 65536, 98304, 131072, 163840,
+           196608, 229376, 262144, 294912, 327680, 360448,
+           393216, 425984, 458752, 491520, 524288, 557056,
+           589824, 622592, 655360, 688128, 720896, 753664,
+           786432, 819200, 851968, 884736, 917504, 950272,
+           983040, 1015808, 1048576, 1081344, 1114112,
+           1146880, 1179648, 1212416, 1245184, 1277952,
+           1310720, 1343488, 1376256, 1409024, 1441792,
+           1474560, 1507328, 1540096, 1572864, 1605632,
+           1638400, 1671168, 1703936, 1736704, 1769472,
+           1802240, 1835008, 1867776, 1900544, 1933312,
+           1966080, 1998848, 2031616, 2064384
+   Root block 8211
+Hash function "r5"
+ATTENTION: ALL DATA WILL BE LOST ON '/dev/main/lv_home'! (y/n)y
+journal size 8192 (from 18)
+Initializing journal - 0%....20%....40%....60%....80%....100%
+Syncing..done.
+</pre>
+
+<p>
+既然创建了文件系统，我就可以在<path>/mnt/newhome</path>上安装它：
+</p>
+
+<pre caption="挂载新卷">
+# <i>mkdir /mnt/newhome</i>
+# <i>mount /dev/main/lv_home /mnt/newhome</i>
+# <i>df</i>
+Filesystem           1k-blocks      Used Available Use% Mounted on
+/dev/hda3              9765200   6989840   2775360  72% /
+tmpfs                   291388         0    291388   0% /dev/shm
+/dev/main/lv_home      8388348     32840   8355508   1% /mnt/newhome
+</pre>
+
+<p>
+您可以从上面看出，我几乎准备复制<path>/home</path>中的所有数据。在开始之前，我把系统降低到运行级别1以确保在复制<path>/home</path>中的文件时，没有用户或进程能够访问或修改它们：
+</p>
+
+<pre caption="运行级别1">
+# <i>init 1</i>
+</pre>
+
+<p>
+然后，开始复制文件：
+</p>
+
+<pre caption="复制文件到新文件夹">
+# <i>cp -avx /home/* /mnt/newhome</i>
+</pre>
+
+<p>
+复制操作需要大约10分钟的时间完成。然后，我将原始<path>/home</path>备份成<path>/home.old</path>，这只是为在复制过程中有任何错误而准备的。创建一个新的安装点，然后在<path>/home</path>上重新安装新home：
+</p>
+
+<pre caption="新的挂载点">
+# <i>cd /</i>
+# <i>mv home home.old</i>
+# <i>mkdir home</i>
+# <i>umount /mnt/newhome</i>
+# <i>mount /dev/main/lv_home /home</i>
+</pre>
+
+<p>
+然后，应该设置服务器以使我的新<path>/home</path>分区可以在每次启动机器时使用。首先修改<path>/etc/fstab</path>以使它包括新的<path>/home</path>项：
+</p>
+
+<pre caption="编辑fstab">
+<comment>
+#fs                 mountpoint       type         opts          dump/pass</comment>
+/dev/hda3           /                reiserfs     defaults      1 1
+/dev/main/lv_home   /home            reiserfs     defaults      2 2
+/dev/hda2           none             swap         sw            0 0
+/dev/hda1           /boot            reiserfs     noauto        0 0
+/dev/cdrom          /mnt/cdrom       iso9660      noauto,ro     0 0
+proc                /proc            proc         defaults      0 0
+none                /dev/pts         devpts       mode=620      0 0
+tmpfs               /dev/shm         tmpfs        defaults      0 0
+</pre>
+
+<p>
+然后，我对初始化脚本进行了一些小小改动。我修改了"checkroot"启动脚本，使以下命令可以在根分区重新安装读／写后立即运行：
+</p>
+
+<pre caption="修改启动脚本">
+/sbin/vgscan
+/sbin/vgchange -a y
+</pre>
+
+<p>
+接下来，我修改了在关机时运行的文件系统卸装脚本，使以下命令在卸装了所有文件系统后立即运行：
+</p>
+
+<pre caption="修改关机脚本">
+/sbin/vgchange -a n
+</pre>
+
+<p>
+完成了这些步骤后，我重新引导了机器，让我高兴的是一切都工作正常。在接下去的一天左右的时间里完全没有问题，随后我删除了<path>/home.old</path>以释放根文件系统上的一些空间。太棒了！到LVM的转换成功了。
+</p>
+
+</body>
+</section>
+<section>
+<title>LVM的优点</title>
+<body>
+
+<p>
+虽然到LVM的转换有些痛苦，但一旦转换完成之后，管理文件系统就变得非常简单。例如，我决定重新调整新的<path>/home</path>逻辑卷大小，向文件系统结尾添加大约2GB的空间。首先，我向"lv_home"逻辑卷添加了额外的容量，然后使用<c>resize_reiserfs</c>实用程序来扩充文件系统，使它可以使用额外的容量。以下是执行所有这些操作的两个命令：
+</p>
+
+<pre caption="新增空间">
+# <i>lvextend -L+2G /dev/main/lv_home</i>
+# <i>resize_reiserfs -f /dev/main/lv_home</i>
+</pre>
+
+<p>
+在大约一秒钟的时间里，我将<path>/home</path>文件系统扩大了2GB；令人惊奇的是，我不需要重新引导、降低到运行级别1，甚至不需要卸载<path>/home</path>来执行大小调整。一切都照常工作。是不是很了不起？下面是我的文件系统的当前状态：
+</p>
+
+<pre caption="文件系统空间">
+# <i>df</i>
+Filesystem           1k-blocks      Used Available Use% Mounted on
+/dev/hda3              9765200   1413340   8351860  15% /
+/dev/main/lv_home     10485436   5609836   4875600  54% /home
+</pre>
+
+<p>
+您可以看出LVM的确可以让管理员的工作轻松许多。我希望在今后能将根文件系统的其它部分转移到LVM，最终甚至将我的根文件系统转换成LVM逻辑卷。下面的参考资料可以帮助您了解有关LVM的更多知识。
+</p>
+
+</body>
+</section>
+<section id="resources">
+<title>参考资料</title>
+<body>
+
+<ul>
+  <li>
+    有关LVM的概念和如何在系统上安装最新的内核补丁和工具的建议，请参阅我的前一篇文章，<uri link="/doc/zh_CN/articles/lvm-p1.xml">学习LVM，第1部分</uri>。
+  </li>
+  <li>
+    从RedHat下载<uri link="ftp://sources.redhat.com/pub/lvm2">LVM源代码包</uri>。
+  </li>
+
+  <!-- Comment out Sistina links, Bug #119882
+
+  <li>
+
+    Sistina now has an excellent <uri  link="http://www.sistina.com/lvm/doc/lvm_howto/index.html">LVM HOWTO</uri>
+
+    available (it's closer to a full-blown manual than a simple HOWTO).
+
+  </li>
+
+  <li>
+
+    Be sure to check out the <uri  link="http://www.sistina.com/cgi-bin/lvm-faqprocessor.cgi">Linux LVM FAQ</uri>.
+
+  </li>
+
+-->
+<li>
+    等不及的读者可以查看<uri link="http://www.linux.org/docs/ldp/howto/LVM-HOWTO.html">Heinz Mauelshagen的LVM HOWTO</uri>，它包含更多设置物理卷、卷组和逻辑卷的例子。
+  </li>
+  <li>
+    另外还有一个有意思的HOWTO，告诉您<uri link="http://www.the-infinite.org/archive/docs/lvm/howto-boot-off-root-lv.txt">如何在逻辑卷上设置根文件系统</uri>。
+  </li>
+  <li>
+    Andreas Dilger参与了Linux LVM项目，他有一个看上去不错的<e>联机</e><uri link="http://www-mddsp.enel.ucalgary.ca/People/adilger/online-ext2/">ext2文件系统大小调整器</uri>。
+  </li>
+  <li>
+    <uri link="http://www.namesys.com">ReiserFS</uri>是一种非常好的文件系统（特别在与LVM结合使用时）。如果使用的是ReiserFS，需要获取reiserfs-utils tar文件，它包含了一个称为<c>reiserfs_resize</c>的程序──允许对ReiserFS文件系统联机调整大小。
+  </li>
+  <li>
+    有关设置Linux Software RAID卷的详细信息，请参阅Daniel在developerWorks上有关Software RAID系列的<uri link="/doc/zh_CN/articles/software-raid-p1.xml">第1部分</uri>和<uri link="/doc/zh_CN/articles/software-raid-p2.xml">第2部分</uri>。
+  </li>
+  <li>
+    如果想进行回顾，请参阅Daniel的<uri link="/doc/zh_CN/articles/linux-kernel-compiling.xml">Linux内核编译教程</uri>。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
