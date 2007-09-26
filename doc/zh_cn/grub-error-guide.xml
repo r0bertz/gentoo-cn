@@ -5,7 +5,7 @@
 <!-- English CVS version: 1.14 -->
 
 <guide link="/doc/zh_cn/grub-error-guide.xml" lang="zh_cn">
-<title>Gentoo Grub错误集锦</title>
+<title>Gentoo Grub错误汇总</title>
 
 <author title="审校">Hartwig Brandl</author>
 <author title="编辑">
@@ -16,7 +16,7 @@
 </author>
 
 <abstract>
-这个错误集锦的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
+这个错误汇总的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
