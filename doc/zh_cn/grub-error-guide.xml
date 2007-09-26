@@ -5,7 +5,7 @@
 <!-- English CVS version: 1.14 -->
 
 <guide link="/doc/zh_cn/grub-error-guide.xml" lang="zh_cn">
-<title>Gentoo Grub错误集锦</title>
+<title>Gentoo Grub错误汇总</title>
 
 <author title="审校">Hartwig Brandl</author>
 <author title="编辑">
@@ -16,7 +16,7 @@
 </author>
 
 <abstract>
-这个错误集锦的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
+这个错误汇总的目的在于列出人们可能会遇到的GRUB的问题和错误。所有这些解决方案是由很多Gentoo论坛中的使用者而获得的。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -53,7 +53,7 @@
 </chapter>
 
 <chapter>
-<title>Grub loading, please wait..</title>
+<title>Grub loading, please wait...</title>
 <section>
 <title>状况</title>
 <body>
@@ -100,7 +100,7 @@ GRUB loading, please wait...
 <body>
 
 <pre caption="Grub输出">
-12：无效设备请求
+12：Invalid device requested.
 </pre>
 
 <p>
@@ -140,7 +140,7 @@ grub&gt; <i>setup (hd0)</i>
 这个错误可能会发生在GRUB配置的两个不同阶段，或是在初始化配置期间（将GRUB安装在主引导记录中）抑或是在引导系统和试图连接Linux时（也或者是其它情况）。
 </p>
 
-<pre caption="Grub输出-初始化配置">
+<pre caption="Grub输出──初始化配置">
 grub&gt; <i>root (hd0,0)</i>
  Filesystem type is xfs, partition type 0x83
 
@@ -245,7 +245,7 @@ Press any key to continue...
 </p>
 
 <pre caption="检查分区错误">
-<comment>（确保引导分区，在此处是/dev/hda1，</comment>
+<comment>（确保引导分区，在此处是/dev/hda1）</comment>
 # <i>fsck -y /dev/hda1</i>
 </pre>
 
