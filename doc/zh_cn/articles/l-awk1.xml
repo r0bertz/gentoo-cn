@@ -1,0 +1,368 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-awk1.xml,v 1.6 2005/10/09 17:13:23 rane Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/articles/l-awk1.xml" disclaimer="articles" lang="zh_cn">
+<title>Awk实例，第1部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+Awk是一种非常好的语言，同时有一个非常奇怪的名称。在本系列（共三篇文章）的第一篇文章中，Daniel Robbins将使您迅速掌握awk编程技巧。随着本系列的进展，将讨论更高级的主题，最后将演示一个真正的高级awk演示程序。
+</abstract>
+
+
+
+<!-- The original version of this article was published on IBM developerWorks,
+
+and is property of Westtech Information Services. This document is an updated
+
+version of the original article, and contains various improvements made by the
+
+Gentoo Linux Documentation team -->
+<version>1.3</version>
+<date>2005年10月9日</date>
+
+<chapter>
+<title>一种名称很奇特的优秀语言介绍</title>
+<section>
+<title>捍卫awk</title>
+<body>
+
+<p>
+在本系列文章中，我将使您成为精通awk的编码人员。我承认，awk并没有一个非常好听且又非常“时髦”的名字。awk的GNU版本（叫作gawk）听起来非常怪异。那些不熟悉这种语言的人可能听说过“awk”，并可能认为它是一组落伍且过时的混乱代码。它甚至会使最博学的UNIX权威陷于错乱的边缘（使他不断地发出“kill -9!”命令，就象使用咖啡机一样）。
+</p>
+
+<p>
+的确，awk没有一个动听的名字。但它是一种很棒的语言。awk适合于文本处理和报表生成，它还有许多精心设计的特性，允许进行需要特殊技巧程序设计。与某些语言不同，awk的语法较为常见。它借鉴了某些语言的一些精华部分，如C语言、python和bash（虽然在技术上，awk比python和bash早创建）。awk是那种一旦学会了就会成为您战略编码库的主要部分的语言。
+</p>
+
+</body>
+</section>
+<section>
+<title>第一个awk</title>
+<body>
+
+<p>
+您将会见到<path>/etc/passwd</path>文件的内容出现在眼前。现在，解释awk做了些什么。调用awk时，我们指定<path>/etc/passwd</path>作为输入文件。执行awk时，它依次对<path>/etc/passwd</path>中的每一行执行print命令。所有输出都发送到stdout，所得到的结果与与执行catting <path>/etc/passwd</path>完全相同。
+</p>
+
+<p>
+现在，解释{ print 
+}代码块。在awk中，花括号用于将几块代码组合到一起，这一点类似于C语言。在代码块中只有一条print命令。在awk中，如果只出现print命令，那么将打印当前行的全部内容。
+</p>
+
+<pre caption="屏显当前行">
+$ <i>awk '{ print $0 }' /etc/passwd</i>
+$ <i>awk '{ print "" }' /etc/passwd</i>
+</pre>
+
+<p>
+在awk中，$0变量表示整个当前行，所以print和print $0的作用完全一样。
+</p>
+
+<pre caption="用一些文字把屏幕填满">
+$ <i>awk '{ print "hiya" }' /etc/passwd</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>多个字段</title>
+<body>
+
+<pre caption="print $1">
+$ <i>awk -F":" '{ print $1 $3 }' /etc/passwd</i>
+halt7
+operator11
+root0
+shutdown6
+sync5
+bin1
+<comment>....etc.</comment>
+</pre>
+
+<pre caption="print $1 $3">
+$ <i>awk -F":" '{ print $1 " " $3 }' /etc/passwd</i>
+</pre>
+
+<pre caption="$1$3">
+$ <i>awk -F":" '{ print "username: " $1 "\t\tuid:" $3 }' /etc/passwd</i>
+username: halt          uid:7
+username: operator      uid:11
+username: root          uid:0
+username: shutdown      uid:6
+username: sync          uid:5
+username: bin           uid:1
+<comment>....etc.</comment>
+</pre>
+
+</body>
+</section>
+<section>
+<title>外部脚本</title>
+<body>
+
+<pre caption="示例脚本">
+BEGIN { FS=":" }
+{ print $1 }
+</pre>
+
+<p>
+这两个方法的差别在于如何设置字段分隔符。在这个脚本中，字段分隔符在代码自身中指定（通过设置FS变量），而在前一个示例中，通过在命令行上向awk传递-F":"选项来设置FS。通常，最好在脚本自身中设置字段分隔符，只是因为这表示您可以少输入一个命令行自变量。我们将在本文的后面详细讨论FS变量。
+</p>
+
+</body>
+</section>
+<section>
+<title>BEGIN和END块</title>
+<body>
+
+<p>
+通常，对于每个输入行，awk都会执行每个脚本代码块一次。然而，在许多编程情况中，可能需要在awk开始处理输入文件中的文本之前执行初始化代码。对于这种情况，awk允许您定义一个BEGIN块。我们在前一个示例中使用了BEGIN块。因为awk在开始处理输入文件之前会执行BEGIN块，因此它是初始化FS（字段分隔符）变量、打印页眉或初始化其它在程序中以后会引用的全局变量的极佳位置。
+</p>
+
+<p>
+awk还提供了另一个特殊块，叫作END块。awk在处理了输入文件中的所有行之后执行这个块。通常，END块用于执行最终计算或打印应该出现在输出流结尾的摘要信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>正则表达式和块</title>
+<body>
+
+<pre caption="正则表达式和块">
+/foo/ { print }
+/[0-9]+\.[0-9]*/ { print }
+</pre>
+
+</body>
+</section>
+<section>
+<title>表达式和块</title>
+<body>
+
+<pre caption="fredprint">
+$1 == "fred" { print $3 }
+</pre>
+
+<pre caption="root">
+$5 ~ /root/ { print $3 }
+</pre>
+
+</body>
+</section>
+<section>
+<title>条件语句</title>
+<body>
+
+<pre caption="if">
+{ 
+    if ( $5 ~ /root/ ) { 
+        print $3 
+    }
+}
+</pre>
+
+<p>
+这两个脚本的功能完全一样。第一个示例中，布尔表达式放在代码块外面。而在第二个示例中，将对每一个输入行执行代码块，而且我们使用if语句来选择执行print命令。这两个方法都可以使用，可以选择最适合脚本其它部分的一种方法。
+</p>
+
+<pre caption="if if">
+{
+    if ( $1 == "foo" ) {
+        if ( $2 == "foo" ) {
+            print "uno"
+        } else {
+            print "one"
+        }
+    } else if ($1 == "bar" ) {
+        print "two"
+    } else {
+        print "three"
+    }
+}
+</pre>
+
+<pre caption="if">
+! /matchme/ { print $1 $3 $4 }
+</pre>
+
+<pre caption="if">
+{
+    if ( $0 !~ /matchme/ ) {
+        print $1 $3 $4
+    }
+}
+</pre>
+
+<p>
+这两个脚本都只输出不包含matchme字符序列的那些行。此外，还可以选择最适合您的代码的方法。它们的功能完全相同。
+</p>
+
+<pre caption="打印字段等于foo且等于bar的行">
+( $1 == "foo" ) &amp;&amp; ( $2 == "bar" ) { print } 
+</pre>
+
+<p>
+这个示例只打印第一个字段等于foo且第二个字段等于bar的那些行。
+</p>
+
+</body>
+</section>
+<section>
+<title>数值变量！</title>
+<body>
+
+<p>
+在BEGIN块中，将整数变量x初始化成零。然后，awk每次遇到空白行时，awk将执行x=x+1语句，递增x。处理完所有行之后，执行END块，awk将打印出最终摘要，指出它找到的空白行数量。
+</p>
+
+</body>
+</section>
+<section>
+<title>字符串化的变量</title>
+<body>
+
+<pre caption="示例字段">
+2.01
+</pre>
+
+<pre caption="1.01x$( )1.01">
+{ print ($1^2)+1 }
+</pre>
+
+<p>
+如果做一个小实验，就可以发现如果某个特定变量不包含有效数字，awk在对数学表达式求值时会将该变量当作数字零处理。
+</p>
+
+</body>
+</section>
+<section>
+<title>众多的运算符</title>
+<body>
+
+<p>
+awk的另一个优点是它有完整的数学运算符集合。除了标准的加、减、乘、除，awk还允许使用前面演示过的指数运算符“^”、模（余数）运算符“%”和其它许多从C语言中借入的易于使用的赋值操作符。
+</p>
+
+<p>
+这些运算符包括前后加减（ i++ 、 --foo ）、加／减／乘／除赋值运算符（ a+=3 、 b*=2 、 c/=2.2 、 d-=6.2 ）。不仅如此──我们还有易于使用的模／指数赋值运算符（ a^=2 、 b%=4 ）。
+</p>
+
+</body>
+</section>
+<section>
+<title>字段分隔符</title>
+<body>
+
+<p>
+awk有它自己的特殊变量集合。其中一些允许调整awk的运行方式，而其它变量可以被读取以收集关于输入的有用信息。我们已经接触过这些特殊变量中的一个，FS。前面已经提到过，这个变量让您可以设置awk要查找的字段之间的字符序列。我们使用<path>/etc/passwd</path>作为输入时，将FS设置成":"。当这样做有问题时，我们还可以更灵活地使用FS。
+</p>
+
+<pre caption="另一个字段分隔符">
+FS="\t+"
+</pre>
+
+<p>
+以上示例中，我们使用特殊 "+" 规则表达式字符，它表示“一个或多个前一字符”。
+</p>
+
+<pre caption="将FS设置成space">
+FS="[[:space:]+]"
+</pre>
+
+<p>
+这个赋值表达式也有问题，它并非必要。为什么？因为缺省情况下，FS设置成单一空格字符，awk将这解释成表示“一个或多个空格或tab”。在这个特殊示例中，缺省FS设置恰恰是您最想要的！
+</p>
+
+<pre caption="字段分隔符示例">
+FS="foo[0-9][0-9][0-9]"
+</pre>
+
+</body>
+</section>
+<section>
+<title>字段数量</title>
+<body>
+
+<pre caption="字段数量">
+{
+    if ( NF > 2 ) {
+        print $1 " " $2 ":" $3 
+    }
+}
+</pre>
+
+</body>
+</section>
+<section>
+<title>记录号</title>
+<body>
+
+<pre caption="记录号">
+{
+    <comment>#skip header</comment>
+    if ( NR > 10 ) {
+        print "ok, now for the real information!"
+    }
+}
+</pre>
+
+<p>
+awk提供了适合各种用途的附加变量。我们将在以后的文章中讨论这些变量。
+</p>
+
+<p>
+现在已经到了初次探索awk的尾声。随着本系列的开展，我将演示更高级的awk功能，我们将用一个真实的awk应用程序作为本系列的结尾。同时，如果急于学习更多知识，请参考以下列出的参考资料。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>参考资料</title>
+<section>
+<title>实用链接</title>
+<body>
+
+<ul>
+  <li>
+    请阅读Daniel在developerWorks上的其他awk文章：通用线程：Awk实例，<uri link="l-awk2.xml">第2部分</uri>和<uri link="l-awk3.xml">第3部分</uri>。
+  </li>
+  <li>
+    如果想看好的老式书籍，O'Reilly 的<uri link="http://www.oreilly.com/catalog/sed2/">sed &amp; awk, 2ndEdition</uri>是极佳选择。
+  </li>
+  <li>
+    请参考<uri link="http://www.faqs.org/faqs/computer-lang/awk/faq/">comp.lang.awk FAQ</uri>。它还包含许多附加awk链接。
+  </li>
+  <li>
+    Patrick Hartigan的<uri link="http://sparky.rice.edu/~hartigan/awk.html">awk tutorial</uri>还包括了实用的 awk 脚本。
+  </li>
+  <li>
+    <uri link="http://www.tasoft.com/tawk.html">Thompson's TAWK Compiler</uri>将awk脚本编译成快速二进制可执行文件。可用版本有Windows版、OS/2版、DOS版和UNIX版。
+  </li>
+  <li>
+    <uri link="http://www.gnu.org/software/gawk/manual/gawk.html">GNUAwk用户指南</uri>可用于在线参考。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+</guide>
+

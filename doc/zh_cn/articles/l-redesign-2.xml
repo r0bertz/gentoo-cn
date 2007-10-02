@@ -1,0 +1,285 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-redesign-2.xml,v 1.2 2005/10/10 20:22:44 rane Exp $ -->
+<guide link="/doc/zh_cn/articles/l-redesign-2.xml" disclaimer="articles">
+<title>gentoo.org重新设计，第2部分：一个重生的站点</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+您是否曾经在某天清晨醒来，意识到自己的个人开发网站其实并不那么好？如果是这样，那么您现在找对地方了。在本系列中，Daniel Robbins共享了它在使用诸如XML、XSLT和Python之类的技术重新设计www.gentoo.org网站时得到的经验。在此过程中，您也许还会发现一些优秀的方法适合于您的下一次网站重新设计。在这第2部分中，Daniel演示新文档系统并建立了一个日常CVS日志邮件列表。
+</abstract>
+
+
+
+<!-- The original version of this article was first published on IBM
+
+developerWorks, and is property of Westtech Information Services. This
+
+document is an updated version of the original article, and contains
+
+various improvements made by the Gentoo Linux Documentation team -->
+<version>1.0</version>
+<date>2005年10月10日</date>
+
+<chapter>
+<title>文档系统</title>
+<section>
+<body>
+
+<p>
+如果您已经阅读了我撰写的“gentoo.org 重新设计”系列的<uri 
+link="/doc/zh_cn/articles/l-redesign-1.xml">第一部分</uri>，那么您就知道我是Gentoo Linux的首席设计师，我要对Gentoo Linux网站负责。目前，这个站点还有许多不足。是的，它确实看似漂亮，但除了漂亮的图形之外，您会发现它实际上并没有满足主要预期用户──Gentoo Linux开发人员、用户和潜在用户──的需要。
+</p>
+
+<p>
+上一次，我使用了以用户为中心的设计方法来为站点创建了一组优先级，然后使用这些优先级为重建gentoo.org创建行动计划。有两件事位于优先级列表的顶部：新的开发人员文档和用于向开发人员传达对CVS资源库所作更改的新邮件列表。虽然添加新的CVS邮件列表相对容易（可是，您会看到，它比我想象更困难），但新的开发人员文档却需要很多规划和工作。
+</p>
+
+<p>
+我不仅需要创建一些实际文档（我长期以来一直忽略的任务），还必须选择新的主要文档要使用的正式XML语法。您知道，在几周之前，我还在创建原始HTML格式的文档。这的确是件麻烦事，因为如果这样做，那么内容（实际信息）将和显示（与显示相关的HTML标记）混合在一起。结果如何呢？一团糟，就是那样。编辑实际文档很困难，而改进整个站点的HTML尤其困难。
+</p>
+
+<p>
+在本文中，我将自豪地演示这个站点新的灵活的XML文档解决方案。但首先，我将简要重述将CVS日志邮件列表添加到站点的经验。
+</p>
+
+</body>
+</section>
+<section>
+<title>添加CVS日志邮件列表</title>
+<body>
+
+<p>
+CVS日志邮件列表的目的是通知开发人员：已经对CVS资源库做了新的提交。由于我已经安装了邮差邮件列表管理器（请参阅<uri link="#resources">参考资料</uri>），我认为创建这个新列表很容易。首先，我将只创建邮件列表，然后将正确的“hook”添加到CVS资源库，这样就会自动生成并发送出电子邮件，这些电子邮件描述了对源码的更改。
+</p>
+
+<p>
+我首先开始研究资源库的CVSROOT中一个名为“loginfo”的特殊文件。理论上，通过修改这个文件，我可以指示CVS在对资源库执行任何提交（因此也做了修改）时执行一个脚本。因此，我创建了一个特殊loginfo脚本，并将它插入现有资源库。每当对源码进行修改时，它确实会向新的“gentoo-cvs”邮件列表发送电子邮件。
+</p>
+
+<p>
+遗憾的是，这个解决方案并不完全如我所愿。首先，它生成了许多电子邮件消息──每个被修改的文件都有一条消息──其次，这些消息含义不清，有时甚至是空的！我迅速除去了loginfo脚本，并中断了gentoo-cvs邮件列表项目。很明显，CVS的loginfo hook不适合我的需要，我费了很大劲来搜寻可以帮助我解决问题的任何与loginfo相关的文档。
+</p>
+
+</body>
+</section>
+<section>
+<title>cvs2cl.pl</title>
+<body>
+
+<p>
+几周之后，我开始寻找loginfo的替代物。这次，我做了一件聪明事，找到了<uri>freshmeat.net</uri>。在那里，我很快找到了自己要寻找的东西：来自<uri>red-bean.com</uri>的绝佳的cvs2cl.pl perl脚本（请参阅<uri link="#resources">参考资料</uri>）。<path>cvs2cl.pl</path>使用<c>cvs log</c>命令来直接连接到资源库并抽取适当的相关日志信息，而不是使用loginfo hook。此外，它并不生成相对含糊的CVS日志消息，而是将所有东西都重新格式化成可读的“更改日志（ChangeLog）”格式：
+</p>
+
+<pre caption="cvs2cl.pl生成的输出">
+2001-04-09 20:58  drobbins
+      * app-doc/gentoo-web/files/xml/dev.xml: new fixes
+2001-04-09 20:47  drobbins
+      * app-doc/gentoo-web/: gentoo-web-1.0.ebuild, 
+      files/pyhtml/index.pyhtml, files/xml/gentoo-howto.xml: new gentoo-howto
+      fixes
+2001-04-09 20:03  drobbins
+      * app-doc/gentoo-web/files/xml/dev.xml: typo fix
+2001-04-09 20:02  drobbins
+      * app-doc/gentoo-web/files/pyhtml/index.pyhtml: little update
+</pre>
+
+<p>
+还可以指示<path>cvs2cl.pl</path>生成 XML 格式的输出，在下一篇文章中，我会利用这种技术将最新的“更改日志”结合到站点中新的开发人员部分。
+</p>
+
+</body>
+</section>
+<section>
+<title>cvslog.sh脚本</title>
+<body>
+
+<p>
+以下是我现在用于生成日常“更改日志”电子邮件的脚本。首先，它将当前工作目录更改成已检出CVS资源库的位置。然后，它创建$yesterday和$today环境变量，它们包含了相应的RFC822格式的日期。请注意：这两个日期变量都将时间设置成“00:00”或午夜。然后，使用这些变量创建$cvsdate 变量，并将其传送给cvs2cl.pl以指定我感兴趣的日期范围──从昨天午夜到今天午夜的时间跨度。这样，$cvsdate变量就包含了一个日期规范，它通知cvs2cl.pl只对昨天的更改做日志，而不对其它更改做日志。
+</p>
+
+<p>
+此外，我还创建了$nicedate变量（在邮件主题行中使用），并使用mutt邮件程序（以mailx兼容模式［请参阅<uri link="#resources">参考资料</uri>］）将电子邮件发送到gentoo-cvs邮件列表：
+</p>
+
+<pre caption="cvslog.sh脚本">
+#!/bin/bash
+cd /usr/portage
+cvs -q update -dP
+yesterday=`date -d "1 day ago 00:00" -R`
+today=`date -d "00:00" -R`
+cvsdate=-d\'${yesterday}\&lt;${today}\'
+nicedate=`date -d yesterday +"%d %b %Y %Z (%z)"`
+/home/drobbins/gentoo/cvs2cl.pl -f /home/drobbins/gentoo/cvslog.txt -l "${cvsdate}" 
+mutt -x gentoo-cvs -s "cvs log for $nicedate" &lt;\
+/home/drobbins/gentoo/cvslog.txt
+</pre>
+
+<p>
+通过使用cron，我在每晚午夜时运行这个脚本。多亏有<path>cvs2cl.pl</path>，我的开发人员现在可以得到准确且可读的每日的CVS更新。
+</p>
+
+</body>
+</section>
+<section>
+<title>文档项目</title>
+<body>
+
+<p>
+现在，讨论Gentoo 
+Linux文档项目。新的文档系统涉及两组人或预期用户目录：文档创建人和文档读者。创建人需要不给创建带来妨碍的精心设计的XML语法；而根本不关心XML的读者想要生成的HTML文档既具功能性又具观赏性。实现的难点是如何创建一个满足这两种观众需要的完整系统。哦，我假设还有第三种“用户”──我，Web管理员和设计新系统的人。由于我打算在站点升级时与新的文档系统交互，因此我需要它可靠且灵活。
+</p>
+
+</body>
+</section>
+<section>
+<title>The Web-ready HTML</title>
+<body>
+
+<p>
+First, let's talk a bit about the Web-ready HTML that'll be generated from 
+my master XML files. To make great, readable documentation, I'll need to 
+have support for the proper XML tags. For example, the ability to insert 
+notes, important messages, and warnings into the body of the document (and 
+have them prominently displayed in the resultant HTML) is a must. Also, I 
+must be able to insert blocks of code, and it would be great if actual user 
+input could somehow be offset from program output. I could even add tags 
+that highlight the source code comments in an alternate color so that the 
+code blocks are more readable.
+</p>
+
+<p>
+The documents should have a table of contents (with hyperlinks to the 
+appropriate chapters), a synopsis, a revision date, version, and an authors 
+list at the top of the document. And, of course, every document should have 
+a header at the extreme top of the page containing a small Gentoo Linux 
+logo.  Clicking on this logo should bring you back to the main Gentoo Linux 
+page. Last but not least, every document should have a footer that contains 
+copyright information, along with a contact e-mail address.
+</p>
+
+</body>
+</section>
+<section>
+<title>漂亮的新徽标</title>
+<body>
+
+<p>
+有大量要求需要满足，而我决定首先将精力集中在最有趣的部分，即出现在每个Gentoo Linux文档左上角的新Gentoo Linux徽标。我使用主页面上“gentoo”图形（使用优秀且免费的Blender 3D程序［请参阅<uri link="#resources">参考资料</uri>］创建的）中的“g”作为新的小徽标的基础图形。我略微调整了一下挤压设置，并添加了镀铬环境映射。最后，我安置了灯光和照相机，新的徽标就完成了。在将它导入Xara X（请参阅<uri link="#resources">参考资料</uri>）并添加了一些文本之后，就得到了以下结果：
+</p>
+
+<figure link="/images/docs/l-redesign-02.gif" caption="新的Gentoo Linux徽标"/>
+
+<p>
+我使用这个新徽标作为HTML颜色方案的其余部分的灵感，因此全部都使用略带紫色的主题。我大量使用级联样式表（CSS）来控制字体属性和间隔。一旦我有了象样的HTML原型，我开始将精力集中到新文档的内部──新的XML语法。我想要语法尽可能简单，因此我只创建了恰好足够多的XML标记，以允许正确组织文档，但没有多余标记。然后，我开始使用XSLT将XML转换成目标HTML。
+</p>
+
+</body>
+</section>
+<section>
+<title>结果！</title>
+<body>
+
+<p>
+在许多次调整和从我的一个开发人员处获取大量反馈意见之后，新的文档系统达到了可以使用的地步。我立即开始了我们第一部新的开发指南“The Gentoo Linux Documentation Guide”（xml-guide.html）的工作，它包含了新XML格式的完整描述。这不仅允许其他开发人员开始使用新样式的文档，而且它是实际使用中的新文档系统的优秀示例。请务必阅读了该指南，并且完全理解新的XML语法。
+</p>
+
+</body>
+</section>
+<section>
+<title>DocBook vs. Guide</title>
+<body>
+
+<p>
+如果您正在致力于自己的文档解决方案，那么您也许还应该考虑DocBook XML和SGML格式（请参阅<uri link="#resources">参考资料</uri>）。DocBook十分适合大型文档和书籍项目，它非常灵活，而且有许多（也许太多）功能。此外，有许多现有软件包可用于将DocBook XML/SGML转换成帮助页面、texinfo 文件、PostScript、PDF，当然，还有HTML格式。
+</p>
+
+<p>
+我<e>没有</e>选择DocBook，因为轻量级XML语法最适合Gentoo的需要。目前，我们的XML guide语法有大约20个标记和大约10个属性。有限的标记集合使guide XML易于转换成其它格式，如HTML，而且还确保了在整个文档集中保持一定程度的一致性，因为格式是如此简单。由于已经有了自己的XML格式，我可以根据需要用新的标记扩展格式。我喜欢那个程度的控制。我将XML看作是一种人们应该用于以他们认为最实用的方法来构造数据的技术。换句话说，定义自己的元素和属性的能力是很宝贵的，我应该充分利用它。毕竟，它是XML的定义功能。
+</p>
+
+<p>
+当然，创建自己的XML语法并不总是最佳解决方案，尤其是当数据互换对于您非常重要时。在所有的XML宣传中，有一件事通常会被忽略，那就是<e>不同XML格式之间的转换极其困难</e>。在许多情况下，两种格式不会100%兼容，而您将不得不违心地选择弃用数据和／或元数据，从而避免使用某些元素或属性，或者创建一种“超级格式”，它将容纳这两种XML格式的数据和元数据。在文档世界中，DocBook是作为“超级格式”的理想选择，因为它非常灵活；它可以轻易地容纳从各种源码导入的文档。
+</p>
+
+<p>
+但是，DocBook的丰富性和灵活性也可能造成问题。例如，也许会有几百个您可能永远不需要的标记，而在XSLT中支持所有这些标记可能会使转换成其它格式变得更困难。因此，虽然DocBook对于转换自其它格式的文档来说是一个非常好的容器，但您自己的最简单XML语法却几乎始终更易于转换成其它格式。
+</p>
+
+<p>
+最重要的事就是在牢记目标观众的需要的同时，认真评估所有潜在的解决方案。
+</p>
+
+</body>
+</section>
+<section>
+<title>结束语</title>
+<body>
+
+<p>
+创建好新的文档系统之后，我将所有文档都转换成新的格式，并将新文档张贴到现有站点上。此外，我还创建了到gentoo-cvs邮件列表订阅页面的链接。这里的关键是我将这些功能都集成到现有站点，因此用户可以立即从这些改进中受益。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="resources">
+<title>参考资料</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    请参阅使用XML，XSLT和Python等技术重新设计www.gentoo.org网站系列文章的其他部分：
+    <ul>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-1.xml">第1部分</uri>中，Daniel向读者演示了如何创建以用户为中心的行动计划，并介绍了pytext，这是一种嵌入式Python解释器。
+      </li>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-3.xml">第3部分</uri>中，他将给网站一个新的外观（2001年7月）。
+      </li>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-4.xml">第4部分</uri>中，Daniel完成了到XML/XSLT的转换，修复了Netscape 4.x浏览器的访问bug，还为网站添加了自动生成的XML Changelog（2001年8月）。
+      </li>
+    </ul>
+  </li>
+  <li>
+    如果您还没有开始使用 Python，那您只是在自找麻烦。在<uri>http://www.python.org</uri>上可以找到它。
+  </li>
+  <li>
+    请查看Xara X的主页<uri link="http://www.xara.com/">Xara.com</uri>──Xara X是一款极佳的Windows下的向量绘图软件包。它几乎没有一点多余功能，却有惊人的速度，建议您使用该软件。
+  </li>
+  <li><uri>http://www.xslt.com</uri>上可以学到关于XSLT的更多知识。</li>
+  <li>
+    当您从清晨醒来，不妨看看Sablotron，这是一个又快又好的XSLT处理器，可以从<uri link="http://www-gingerall.com">Gingerall</uri>获得。
+  </li>
+  <li>
+    在<uri link="http://www.red-bean.com/">Red-Bean</uri>上可以找到奇妙的<uri link="http://www.red-bean.com/cvs2cl/">cvs2cl.pl</uri>“CVS-to-ChangeLog”脚本。
+  </li>
+  <li>请在<uri>http://www.docbook.org</uri>上了解有关DocBook的更多信息。</li>
+  <li>
+    如果您在寻找好的邮件列表管理器，请一定要访问<uri link="http://www.list.org">Mailman</uri>。
+  </li>
+  <li>
+    请访问<uri link="http://www.mutt.org">www.mutt.org</uri>，以获取Mutt电子邮件客户机的最新版本。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>

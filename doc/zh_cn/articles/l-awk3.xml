@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-awk3.xml,v 1.6 2005/10/31 13:47:46 neysx Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/articles/l-awk3.xml" disclaimer="articles" lang="zh_cn">
+<title>Awk实例，第3部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+在这篇awk系列的总结中，Daniel向您介绍awk重要的字符串函数，以及演示了如何从头开始编写完整的支票簿结算程序。在这个过程中，您将学习如何编写自己的函数，并使用awk的多维数组。学完本文之后，您将掌握更多awk经验，可以让您创建功能更强大的脚本。
+</abstract>
+
+
+
+<!-- The original version of this article was published on IBM developerWorks,
+
+and is property of Westtech Information Services. This document is an updated
+
+version of the original article, and contains various improvements made by the
+
+Gentoo Linux Documentation team -->
+<version>1.4</version>
+<date>2005年10月31日</date>
+
+<chapter>
+<title>字符串函数和……支票簿？</title>
+<section>
+<title>格式化输出</title>
+<body>
+
+<p>
+虽然大多数情况下awk的print语句可以完成任务，但有时我们还需要更多。在那些情况下，awk提供了两个我们熟知的老朋友printf()和sprintf()。是的，如同其它许多awk部件一样，这些函数等同于相应的C语言函数。printf()会将格式化字符串打印到stdout，而sprintf()则返回可以赋值给变量的格式化字符串。如果不熟悉printf()和sprintf()，介绍C语言的文章可以让您迅速了解这两个基本打印函数。在Linux系统上，可以输入"man 3 printf"来查看printf()帮助页面。
+</p>
+
+<p>
+以下是一些awk sprintf()和printf()的样本代码。可以看到，它们几乎与C语言完全相同。
+</p>
+
+<pre caption="awk sprintf()和printf()样本代码">
+x=1
+b="foo"
+printf("%s got a %d on the last test\n","Jim",83)
+myout=("%s-%d",b,x)
+print myout
+</pre>
+
+<p>
+此代码将打印：
+</p>
+
+<pre caption="代码输出">
+Jim got a 83 on the last test
+foo-1
+</pre>
+
+</body>
+</section>
+<section>
+<title>字符串函数</title>
+<body>
+
+<p>
+awk有许多字符串函数，这是件好事。在awk中，确实需要字符串函数，因为不能象在其它语言（如C、C++和Python）中那样将字符串看作是字符数组。例如，如果执行以下代码：
+</p>
+
+<pre caption="代码示例">
+mystring="How are you doing today?"
+print mystring[3]
+</pre>
+
+<p>
+将会接收到一个错误，如下所示：
+</p>
+
+<pre caption="代码错误信息">
+awk: string.gawk:59: fatal: attempt to use scalar as array
+</pre>
+
+<p>
+噢，好吧。虽然不象Python的序列类型那样方便，但awk的字符串函数还是可以完成任务。让我们来看一下。
+</p>
+
+<p>
+首先，有一个基本length()函数，它返回字符串的长度。以下是它的使用方法：
+</p>
+
+<pre caption="length()函数示例">
+print length(mystring)
+</pre>
+
+<p>
+此代码将打印值：
+</p>
+
+<pre caption="打印值">
+24
+</pre>
+
+<p>
+好，继续。下一个字符串函数叫作index，它将返回子字符串在另一个字符串中出现的位置，如果没有找到该字符串则返回0。使用mystring，可以按以下方法调用它：
+</p>
+
+<pre caption="index()函数示例">
+print index(mystring,"you")
+</pre>
+
+<p>
+awk会打印：
+</p>
+
+<pre caption="函数输出">
+9
+</pre>
+
+<p>
+让我们继续讨论另外两个简单的函数，tolower()和toupper()。与您猜想的一样，这两个函数将返回字符串并且将所有字符分别转换成小写或大写。请注意，tolower()和toupper()返回新的字符串，不会修改原来的字符串。这段代码：
+</p>
+
+<pre caption="将字符转换成大写或小写">
+print tolower(mystring)
+print toupper(mystring)
+print mystring
+</pre>
+
+<p>
+……将产生以下输出：
+</p>
+
+<pre caption="输出">
+how are you doing today?
+HOW ARE YOU DOING TODAY?
+How are you doing today?
+</pre>
+
+<p>
+到现在为止一切不错，但我们究竟如何从字符串中选择子串，甚至单个字符？那就是使用substr()的原因。以下是substr()的调用方法：
+</p>
+
+<pre caption="substr()函数示例">
+mysub=substr(mystring,startpos,maxlen)
+</pre>
+
+<p>
+mystring应该是要从中抽取子串的字符串变量或文字字符串。startpos应该设置成起始字符位置，maxlen应该包含要抽取的字符串的最大长度。请注意，我说的是最大长度；如果length(mystring)比startpos+maxlen短，那么得到的结果就会被截断。substr()不会修改原始字符串，而是返回子串。以下是一个示例：
+</p>
+
+<pre caption="另一个示例">
+print substr(mystring,9,3)
+</pre>
+
+<p>
+awk将打印：
+</p>
+
+<pre caption="awk的打印结果">
+you
+</pre>
+
+<p>
+如果您通常用于编程的语言使用数组下标访问部分字符串（以及不使用这种语言的人），请记住substr()是awk代替方法。需要使用它来抽取单个字符和子串；因为awk是基于字符串的语言，所以会经常用到它。
+</p>
+
+<p>
+现在，我们讨论一些更耐人寻味的函数，首先是match()。match()与index()非常相似，它与index()的区别在于它并不搜索子串，它搜索的是规则表达式。match()函数将返回匹配的起始位置，如果没有找到匹配，则返回0。此外，match()还将设置两个变量，叫作RSTART和RLENGTH。RSTART包含返回值（第一个匹配的位置），RLENGTH指定它占据的字符跨度（如果没有找到匹配，则返回-1）。通过使用RSTART、RLENGTH、substr()和一个小循环，可以轻松地迭代字符串中的每个匹配。以下是一个match()调用示例：
+</p>
+
+<pre caption="match()调用示例">
+print match(mystring,/you/), RSTART, RLENGTH
+</pre>
+
+<p>
+awk将打印：
+</p>
+
+<pre caption="上面函数的输出">
+9 9 3
+</pre>
+
+</body>
+</section>
+<section>
+<title>字符串替换</title>
+<body>
+
+<p>
+现在，我们将研究两个字符串替换函数，sub()和gsub()。这些函数与目前已经讨论过的函数略有不同，因为它们确实修改原始字符串。以下是一个模板，显示了如何调用sub()：
+</p>
+
+<pre caption="sub()函数模板">
+sub(regexp,replstring,mystring)
+</pre>
+
+<p>
+调用sub()时，它将在mystring中匹配regexp的第一个字符序列，并且用replstring替换该序列。sub()和gsub()用相同的自变量；唯一的区别是sub()将替换第一个regexp匹配（如果有的话），gsub()将执行全局替换，换出字符串中的所有匹配。以下是一个sub()和gsub()调用示例：
+</p>
+
+<pre caption="sub()和gsub()函数调用示例">
+sub(/o/,"O",mystring)
+print mystring
+mystring="How are you doing today?"
+gsub(/o/,"O",mystring)
+print mystring
+</pre>
+
+<p>
+必须将mystring复位成其初始值，因为第一个sub()调用直接修改了mystring。在执行时，此代码将使awk输出：
+</p>
+
+<pre caption="awk输出">
+HOw are you doing today?
+HOw are yOu dOing tOday?
+</pre>
+
+<p>
+当然，也可以是更复杂的规则表达式。我把测试一些复杂规则表达式的任务留给您来完成。
+</p>
+
+<p>
+通过介绍函数split()，我们来汇总一下已讨论过的函数。split()的任务是“切开”字符串，并将各部分放到使用整数下标的数组中。以下是一个split()调用示例：
+</p>
+
+<pre caption="split()调用示例">
+numelements=split("Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",mymonths,",")
+</pre>
+
+<p>
+调用split()时，第一个自变量包含要切开文字字符串或字符串变量。在第二个自变量中，应该指定split()将填入片段部分的数组名称。在第三个元素中，指定用于切开字符串的分隔符。split()返回时，它将返回分割的字符串元素的数量。split()将每一个片段赋值给下标从1开始的数组，因此以下代码：
+</p>
+
+<pre caption="代码示例">
+print mymonths[1],mymonths[numelements]
+</pre>
+
+<p>
+……将打印：
+</p>
+
+<pre caption="示例输出">
+Jan Dec
+</pre>
+
+</body>
+</section>
+<section>
+<title>特殊字符串形式</title>
+<body>
+
+<p>
+简短注释──调用length()、sub()或gsub()时，可以去掉最后一个自变量，这样awk将对$0（整个当前行）应用函数调用。要打印文件中每一行的长度，使用以下awk脚本：
+</p>
+
+<pre caption="打印文件中每一行的长度">
+{
+    print length() 
+}
+</pre>
+
+</body>
+</section>
+<section>
+<title>财务上的趣事</title>
+<body>
+
+<p>
+几星期前，我决定用awk编写自己的支票簿结算程序。我决定使用简单的tab定界文本文件，以便于输入最近的存款和提款记录。其思路是将这个数据交给awk脚本，该脚本会自动合计所有金额，并告诉我余额。以下是我决定如何将所有交易记录到"ASCII 
+checkbook"中：
+</p>
+
+<pre caption="ASCII checkbox的交易记录">
+
+23 Aug 2000    food    -    -    Y    Jimmy's Buffet    30.25
+</pre>
+
+<p>
+此文件中的每个字段都由一个或多个tab分隔。在日期（字段1，$1）之后，有两个字段叫做“费用分类帐”和“收入分类帐”。以上面这行为例，输入费用时，我在费用字段中放入四个字母的别名，在收入字段中放入"-"（空白项）。这表示这一特定项是“食品费用”。:) 以下是存款的示例：
+</p>
+
+<pre caption="存款示例">
+
+23 Aug 2000    -    inco    -    Y    Boss Man        2001.00
+</pre>
+
+<p>
+在这个实例中，我在费用分类帐中放入"-"（空白），在收入分类帐中放入"inco"。"inco"是一般（薪水之类）收入的别名。使用分类帐别名让我可以按类别生成收入和费用的明细分类帐。至于记录的其余部分，其它所有字段都是不需加以说明的。“是否付清？”字段（"Y"或"N"）记录了交易是否已过帐到我的帐户；除此之外，还有一个交易描述，和一个正的美元金额。
+</p>
+
+<p>
+用于计算当前余额的算法不太难。awk只需要依次读取每一行。如果列出了费用分类帐，但没有收入分类帐（为"-"），那么这一项就是借方。如果列出了收入分类帐，但没有费用分类帐（为"-"），那么这一项就是贷方。而且，如果同时列出了费用和收入分类帐，那么这个金额就是“分类帐转帐”；即，从费用分类帐减去美元金额，并将此金额添加到收入分类帐。此外，所有这些分类帐都是虚拟的，但对于跟踪收入和支出以及预算却非常有用。
+</p>
+
+</body>
+</section>
+<section>
+<title>代码</title>
+<body>
+
+<p>
+现在该研究代码了。我们将从第一行（BEGIN块和函数定义）开始：
+</p>
+
+<pre caption="balance，第1部分">
+#!/usr/bin/env awk -f
+BEGIN {
+    FS="\t+"
+    months="Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec"
+}
+
+function monthdigit(mymonth) {
+    return (index(months,mymonth)+3)/4
+}
+</pre>
+
+<p>
+首先执行"chmod +x myscript"命令，那么将第一行"#!..."添加到任何awk脚本将使它可以直接从shell中执行。其余行定义了BEGIN块，在awk开始处理支票簿文件之前将执行这个代码块。我们将FS（字段分隔符）设置成"\t+"，它会告诉awk字段由一个或多个tab分隔。另外，我们定义了字符串months，下面将出现的monthdigit()函数将使用它。
+</p>
+
+<p>
+最后三行显示了如何定义自己的awk。格式很简单──输入"function"，再输入名称，然后在括号中输入由逗号分隔的参数。在此之后，"{ 
+}"代码块包含了您希望这个函数执行的代码。所有函数都可以访问全局变量（如months变量）。另外，awk提供了"return"语句，它允许函数返回一个值，并执行类似于C和其它语言中"return"的操作。这个特定函数将以3个字母字符串格式表示的月份名称转换成等价的数值。例如，以下代码：
+</p>
+
+<pre caption="monthdigit()调用示例">
+print monthdigit("Mar")
+</pre>
+
+<p>
+……将打印：
+</p>
+
+<pre caption="monthdigit()调用示例">
+3
+</pre>
+
+<p>
+现在，让我们讨论其它一些函数。
+</p>
+
+</body>
+</section>
+<section>
+<title>财务函数</title>
+<body>
+
+<p>
+以下是其它三个执行簿记的函数。我们即将见到的主代码块将调用这些函数之一，按顺序处理支票簿文件的每一行，从而将相应交易记录到awk数组中。有三种基本交易，贷方(doincome)、借方(doexpense)和转帐(dotransfer)。您会发现这三个函数全都接受一个自变量，叫作mybalance。mybalance是二维数组的一个占位符，我们将它作为自变量进行传递。目前，我们还没有处理过二维数组；但是，在下面可以看到，语法非常简单。只须用逗号分隔每一维就行了。
+</p>
+
+<p>
+我们将按以下方式将信息记录到"mybalance"中。数组的第一维从0到12，用于指定月份，0代表全年。第二维是四个字母的分类帐，如"food"或"inco"；这是我们处理的真实分类帐。因此，要查找全年食品分类帐的余额，应查看mybalance[0,"food"]。要查找6月的收入，应查看mybalance[6,"inco"]。
+</p>
+
+<pre caption="查找出入信息">
+                
+function doincome(mybalance) {
+    mybalance[curmonth,$3] += amount
+    mybalance[0,$3] += amount        
+}
+
+function doexpense(mybalance) {
+    mybalance[curmonth,$2] -= amount
+    mybalance[0,$2] -= amount        
+}
+
+function dotransfer(mybalance) {
+    mybalance[0,$2] -= amount
+    mybalance[curmonth,$2] -= amount
+    mybalance[0,$3] += amount
+    mybalance[curmonth,$3] += amount
+}
+</pre>
+
+<p>
+调用doincome()或任何其它函数时，我们将交易记录到两个位置──mybalance[0,category]和mybalance[curmonth, category]，它们分别表示全年的分类帐余额和当月的分类帐余额。这让我们稍后可以轻松地生成年度或月度收入／支出明细分类帐。
+</p>
+
+<p>
+如果研究这些函数，将发现在我的引用中传递了mybalance引用的数组。另外，我们还引用了几个全局变量：curmonth，它保存了当前记录所属的月份的数值，$2（费用分类帐），$3（收入分类帐）和金额（$7，美元金额）。调用doincome()和其它函数时，已经为要处理的当前记录（行）正确设置了所有这些变量。
+</p>
+
+</body>
+</section>
+<section>
+<title>主块</title>
+<body>
+
+<p>
+以下是主代码块，它包含了分析每一行输入数据的代码。请记住，由于正确设置了FS，可以用$1引用第一个字段，用$2引用第二个字段，依次类推。调用doincome()和其它函数时，这些函数可以从函数内部访问curmonth、$2、$3和金额的当前值。请先研究代码，在代码之后可以见到我的说明。
+</p>
+
+<pre caption="balance，第3部分">
+                
+{
+    curmonth=monthdigit(substr($1,4,3))
+    amount=$7
+      
+    #record all the categories encountered
+    if ( $2 != "-" )
+        globcat[$2]="yes"
+    if ( $3 != "-" )
+        globcat[$3]="yes"
+
+    #tally up the transaction properly
+    if ( $2 == "-" ) {
+        if ( $3 == "-" ) {
+            print "Error: inc and exp fields are both blank!"
+            exit 1
+        } else {
+            #this is income
+            doincome(balance)
+            if ( $5 == "Y" )
+                doincome(balance2)
+        }
+    } else if ( $3 == "-" ) {
+        #this is an expense 
+        doexpense(balance)
+        if ( $5 == "Y" ) 
+            doexpense(balance2)
+    } else {
+        #this is a transfer
+        dotransfer(balance)
+        if ( $5 == "Y" ) 
+            dotransfer(balance2)
+    }                        
+}
+</pre>
+
+<p>
+在主块中，前两行将curmonth设置成1到12之间的整数，并将金额设置成字段7（使代码易于理解）。然后，是四行有趣的代码，它们将值写到数组globcat中。globcat，或称作全局分类帐数组，用于记录在文件中遇到的所有分类帐──"inco"、"misc"、"food"、"util"等。例如，如果$2 == "inco"，则将globcat["inco"]设置成"yes"。稍后，我们可以使用简单的"for (x in globcat)"循环来迭代分类帐列表。
+</p>
+
+<p>
+在接着的大约二十行中，我们分析字段$2和$3，并适当记录交易。如果$2=="-"且$3!="-"，表示我们有收入，因此调用doincome()。如果是相反的情况，则调用doexpense()；如果$2和$3都包含分类帐，则调用dotransfer()。每次我们都将"balance"数组传递给这些函数，从而在这些函数中记录适当的数据。
+</p>
+
+<p>
+您还会发现几行代码说“if ( $5 == "Y" )，那么将同一个交易记录到balance2中”。我们在这里究竟做了些什么？您将回忆起$5包含"Y"或"N"，并记录交易是否已经过帐到帐户。由于仅当过帐了交易时我们才将交易记录到balance2，因此balance2包含了真实的帐户余额，而"balance"包含了所有交易，不管是否已经过帐。可以使用balance2来验证数据项（因为它应该与当前银行帐户余额匹配），可以使用"balance"来确保没有透支帐户（因为它会考虑您开出的尚未兑现的所有支票）。
+</p>
+
+</body>
+</section>
+<section>
+<title>生成报表</title>
+<body>
+
+<p>
+主块重复处理了每一行记录之后，现在我们有了关于比较全面的、按分类帐和按月份划分的借方和贷方记录。现在，在这种情况下最合适的做法是只须定义生成报表的END块：
+</p>
+
+<pre caption="生成最终报表">
+END {
+    bal=0
+    bal2=0        
+    for (x in globcat) {
+        bal=bal+balance[0,x]
+        bal2=bal2+balance2[0,x]    
+    }
+    printf("Your available funds: %10.2f\n", bal)
+    printf("Your account balance: %10.2f\n", bal2)        
+}
+</pre>
+
+<p>
+这个报表将打印出汇总，如下所示：
+</p>
+
+<pre caption="最终报表">
+Your available funds:    1174.22
+Your account balance:    2399.33
+</pre>
+
+<p>
+在END块中，我们使用"for (x in globcat)"结构来迭代每一个分类帐，根据记录在案的交易结算主要余额。实际上，我们结算两个余额，一个是可用资金，另一个是帐户余额。要执行程序并处理您在文件"mycheckbook.txt"中输入的财务数据，将以上所有代码放入文本文件"balance"执行"chmod +x balance"，然后输入"./balance mycheckbook.txt"。然后balance脚本将合计所有交易，打印出两行余额汇总。
+</p>
+
+</body>
+</section>
+<section>
+<title>升级</title>
+<body>
+
+<p>
+我使用这个程序的更高级版本来管理我的个人和企业财务。我的版本（由于篇幅限制不能在此涵盖）会打印出收入和费用的月度明细分类帐，包括年度总合、净收入和其它许多内容。它甚至以HTML格式输出数据，因此我可以在Web浏览器中查看它。:) 如果您认为这个程序有用，我建议您将这些特性添加到这个脚本中。不必将它配置成要记录任何附加信息；所需的全部信息已经在balance和balance2里面了。只要升级END块就万事具备了！
+</p>
+
+<p>
+我希望您喜欢本系列。有关awk的详细信息，请参考以下列出的参考资料。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>参考资料</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    请阅读Daniel在developerWorks上的其他awk文章：通用线程：Awk实例，<uri link="l-awk1.xml">第1部分</uri>和<uri link="l-awk2.xml">第2部分</uri>。
+  </li>
+  <li>
+    如果想看好的老式书籍，O'Reilly 的<uri link="http://www.oreilly.com/catalog/sed2/">sed &amp; awk, 2ndEdition</uri>是极佳选择。
+  </li>
+  <li>
+    请参考<uri link="http://www.faqs.org/faqs/computer-lang/awk/faq/">comp.lang.awk FAQ</uri>。它还包含许多附加awk链接。
+  </li>
+  <li>
+    Patrick Hartigan的<uri link="http://sparky.rice.edu/~hartigan/awk.html">awk tutorial</uri>还包括了实用的awk脚本。
+  </li>
+  <li>
+    <uri link="http://www.tasoft.com/tawk.html">Thompson's TAWK Compiler</uri>将awk脚本编译成快速二进制可执行文件。可用版本有Windows版、OS/2版、DOS版和UNIX版。
+  </li>
+  <li>
+    <uri link="http://www.gnu.org/software/gawk/manual/gawk.html">GNUAwk用户指南</uri>可用于在线参考。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+</guide>

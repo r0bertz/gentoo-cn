@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-awk2.xml,v 1.6 2006/09/27 18:14:34 neysx Exp $ -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/articles/l-awk2.xml" disclaimer="articles" lang="zh_cn">
+<title>Awk实例，第2部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+在这篇awk简介的续集中，Daniel Robbins继续探索awk（一种很棒但有怪异名称的语言）。Daniel将演示如何处理多行记录、使用循环结构，以及创建并使用awk数组。阅读完本文后，您将精通许多awk的功能，而且可以编写您自己的功能强大的awk脚本。
+</abstract>
+
+
+
+<!-- The original version of this article was published on IBM developerWorks,
+
+and is property of Westtech Information Services. This document is an updated
+
+version of the original article, and contains various improvements made by the
+
+Gentoo Linux Documentation team -->
+<version>1.4</version>
+<date>2005年10月31日</date>
+
+<chapter>
+<title>记录、循环和数组</title>
+<section>
+<title>多行记录</title>
+<body>
+
+<p>
+awk是一种用于读取和处理结构化数据（如系统的<path>/etc/passwd</path>文件）的极佳工具。<path>/etc/passwd</path>是UNIX用户数据库，并且是用冒号定界的文本文件，它包含许多重要信息，包括所有现有用户帐户和用户标识，以及其它信息。在我的<uri link="/doc/zh_cn/articles/l-awk1.xml">前一篇文章</uri>中，我演示了awk如何轻松地分析这个文件。我们只须将FS（字段分隔符）变量设置成":"。
+</p>
+
+<p>
+正确设置了FS变量之后，就可以将awk配置成分析几乎任何类型的结构化数据，只要这些数据是每行一个记录。然而，如果要分析占据多行的记录，仅仅依靠设置FS是不够的。在这些情况下，我们还需要修改RS记录分隔符变量。RS变量告诉awk当前记录什么时候结束，新记录什么时候开始。
+</p>
+
+<p>
+譬如，让我们讨论一下如何完成处理“联邦证人保护计划”所涉及人员的地址列表的任务：
+</p>
+
+<pre caption="“联邦证人保护计划”所涉及人员的地址列表">
+Jimmy the Weasel
+100 Pleasant Drive
+San Francisco, CA 12345
+
+Big Tony
+200 Incognito Ave.
+Suburbia, WA 67890
+</pre>
+
+<p>
+理论上，我们希望awk将每3行看作是一个独立的记录，而不是三个独立的记录。如果awk将地址的第一行看作是第一个字段($1)，街道地址看作是第二个字段($2)，城市、州和邮政编码看作是第三个字段$3，那么这个代码就会变得很简单。以下就是我们想要得到的代码：
+</p>
+
+<pre caption="从地址新建一个字段">
+BEGIN {
+    FS="\n"
+    RS=""
+}
+</pre>
+
+<p>
+在上面这段代码中，将FS设置成"\n"告诉awk每个字段都占据一行。通过将RS设置成""，还会告诉awk每个地址记录都由空白行分隔。一旦awk知道是如何格式化输入的，它就可以为我们执行所有分析工作，脚本的其余部分很简单。让我们研究一个完整的脚本，它将分析这个地址列表，并将每个记录打印在一行上，用逗号分隔每个字段。
+</p>
+
+<pre caption="完整的脚本">
+BEGIN {
+    FS="\n"
+    RS=""
+}
+{ print $1 ", " $2 ", " $3 }
+</pre>
+
+
+<p>
+如果这个脚本保存为address.awk，地址数据存储在文件address.txt 中，可以通过输入"awk -f address.awk address.txt"来执行这个脚本。此代码将产生以下输出：
+</p>
+
+<pre caption="脚本输出">
+Jimmy the Weasel, 100 Pleasant Drive, San Francisco, CA 12345
+Big Tony, 200 Incognito Ave., Suburbia, WA 67890
+</pre>
+
+</body>
+</section>
+<section>
+<title>OFS和ORS</title>
+<body>
+
+<p>
+在address.awk的print语句中，可以看到awk会连接（合并）一行中彼此相邻的字符串。我们使用此功能在同一行上的三个字段之间插入一个逗号和空格(", ")。这个方法虽然有用，但比较难看。与其在字段间插入","字符串，倒不如让通过设置一个特殊awk变量OFS，让awk完成这件事。请参考下面这个代码片断。
+</p>
+
+<pre caption="示例代码片断">
+print "Hello", "there", "Jim!"
+</pre>
+
+<p>
+这行代码中的逗号并不是实际文字字符串的一部分。事实上，它们告诉awk，"Hello"、"there"和"Jim!"是单独的字段，并且应该在每个字符串之间打印OFS变量。缺省情况下，awk产生以下输出：
+</p>
+
+<pre caption="awk产生的输出">
+Hello there Jim!
+</pre>
+
+<p>
+这是缺省情况下的输出结果，OFS被设置成" "，单个空格。不过，我们可以方便地重新定义OFS，这样awk将插入我们中意的字段分隔符。以下是原始address.awk程序的修订版，它使用OFS来输出那些中间的", 
+"字符串：
+</p>
+
+<pre caption="重新定义OFS">
+BEGIN {
+    FS="\n"
+    RS=""
+    OFS=", "
+}
+{ print $1, $2, $3 }
+</pre>
+
+<p>
+awk还有一个特殊变量ORS，全称是“输出记录分隔符”。通过设置缺省为换行 ("\n") 的OFS，我们可以控制在print语句结尾自动打印的字符。缺省ORS值会使awk在新行中输出每个新的print语句。如果想使输出的间隔翻倍，可以将ORS设置成"\n\n"。或者，如果想要用单个空格分隔记录（而不换行），将ORS设置成""。
+</p>
+
+</body>
+</section>
+<section>
+<title>将多行转换成用tab分隔的格式</title>
+<body>
+
+<p>
+假设我们编写了一个脚本，它将地址列表转换成每个记录一行，且用tab定界的格式，以便导入电子表格。使用稍加修改的address.awk之后，就可以清楚地看到这个程序只适合于三行的地址。如果awk遇到以下地址，将丢掉第四行，并且不打印该行：
+</p>
+
+<pre caption="Sample entry">
+Cousin Vinnie
+Vinnie's Auto Shop
+300 City Alley
+Sosueme, OR 76543
+</pre>
+
+<p>
+要处理这种情况，代码最好考虑每个字段的记录数量，并依次打印每个记录。现在，代码只打印地址的前三个字段。以下就是我们想要的一些代码：
+</p>
+
+<pre caption="改进后的代码">
+BEGIN { 
+    FS="\n" 
+    RS="" 
+    ORS="" 
+} 
+ 
+{  
+    x=1 
+    while ( x&lt;NF ) { 
+        print $x "\t" 
+        x++ 
+    } 
+    print $NF "\n" 
+} 
+</pre>
+
+<p>
+首先，将字段分隔符FS设置成"\n"，将记录分隔符RS设置成""，这样awk可以象以前一样正确分析多行地址。然后，将输出记录分隔符ORS设置成""，它将使print语句在每个调用结尾不输出新行。这意味着如果希望任何文本从新的一行开始，那么需要明确写入print "\n"。
+</p>
+
+<p>
+在主代码块中，创建了一个变量x来存储正在处理的当前字段的编号。起初，它被设置成1。然后，我们使用while循环（一种awk循环结构，等同于C语言中的while循环），对于所有记录（最后一个记录除外）重复打印记录和tab字符。最后，打印最后一个记录和换行；此外，由于将ORS设置成""，print将不输出换行。程序输出如下，这正是我们所期望的：
+</p>
+
+<pre caption="我们想要的输出。不算漂亮，但用tab定界，以便于导入电子表格">
+Jimmy the Weasel        100 Pleasant Drive      San Francisco, CA 12345 
+Big Tony        200 Incognito Ave.      Suburbia, WA 67890
+Cousin Vinnie   Vinnie's Auto Shop      300 City Alley  Sosueme, OR 76543
+</pre>
+
+</body>
+</section>
+<section>
+<title>循环结构</title>
+<body>
+
+<p>
+我们已经看到了awk的while循环结构，它等同于相应的C语言while循环。awk还有"do...while"循环，它在代码块结尾处对条件求值，而不象标准while循环那样在开始处求值。它类似于其它语言中的"repeat...until"循环。以下是一个示例：
+</p>
+
+<pre caption="do...while示例">
+{
+    count=1
+    do {
+        print "I get printed at least once no matter what" 
+    } while ( count != 1 )
+}
+</pre>
+
+<p>
+与一般的while循环不同，由于在代码块之后对条件求值，"do...while"循环永远都至少执行一次。换句话说，当第一次遇到普通while循环时，如果条件为假，将永远不执行该循环。
+</p>
+
+</body>
+</section>
+<section>
+<title>for循环</title>
+<body>
+
+<p>
+awk允许创建for循环，它就象while循环，也等同于C语言的for循环：
+</p>
+
+<pre caption="循环示例">
+for ( initial assignment; comparison; increment ) {
+    code block
+}
+</pre>
+
+<p>
+以下是一个简短示例：
+</p>
+
+<pre caption="简短示例：">
+for ( x = 1; x &lt;= 4; x++ ) {
+    print "iteration",x
+}
+</pre>
+
+<p>
+此段代码将打印：
+</p>
+
+<pre caption="上面代码的输出信息">
+iteration 1
+iteration 2
+iteration 3
+iteration 4
+</pre>
+
+</body>
+</section>
+<section>
+<title>break和continue</title>
+<body>
+
+<p>
+此外，如同C语言一样，awk提供了break和continue语句。使用这些语句可以更好地控制awk的循环结构。以下是迫切需要break语句的代码片断：
+</p>
+
+<pre caption="break语句所需的代码片断">
+while (1) {
+    print "forever and ever..."
+}
+</pre>
+
+<p>
+while死循环1永远代表是真，这个while循环将永远运行下去。以下是一个只执行十次的循环：
+</p>
+
+<pre caption="只执行10次的循环">
+x=1
+while(1) {
+    print "iteration",x
+    if ( x == 10 ) {
+        break
+    }
+    x++
+}
+</pre>
+
+<p>
+这里，break语句用于“逃出”最深层的循环。"break"使循环立即终止，并继续执行循环代码块后面的语句。
+</p>
+
+<p>
+continue语句补充了break，其作用如下：
+</p>
+
+<pre caption="补充break的continue语句">
+x=1
+while (1) {
+    if ( x == 4 ) {
+        x++
+        continue
+    }
+    print "iteration",x
+    if ( x > 20 ) {
+        break
+    }
+    x++
+}
+</pre>
+
+<p>
+这段代码打印"iteration 1"到"iteration 21"，"iteration 4"除外。如果迭代等于4，则增加x并调用continue语句，该语句立即使awk开始执行下一个循环迭代，而不执行代码块的其余部分。如同break一样，continue语句适合各种awk迭代循环。在for循环主体中使用时，continue将使循环控制变量自动增加。以下是一个等价循环：
+</p>
+
+<pre caption="等价循环">
+for ( x=1; x&lt;=21; x++ ) {
+    if ( x == 4 ) {
+        continue
+    }
+    print "iteration",x
+}
+</pre>
+
+<p>
+在while循环中时，在调用continue之前没有必要增加x，因为for循环会自动增加x。
+</p>
+
+</body>
+</section>
+<section>
+<title>数组</title>
+<body>
+
+<p>
+如果您知道awk可以使用数组，您一定会感到高兴。然而，在awk中，数组下标通常从1开始，而不是0：
+</p>
+
+<pre caption="awk数组示例">
+myarray[1]="jim"
+myarray[2]=456
+</pre>
+
+<p>
+当awk遇到第一个赋值语句时，它将创建myarray，并将元素myarray[1]设置成"jim"。在执行了第二个赋值语句后，数组就有两个元素了。
+</p>
+
+<p>
+定义之后，awk有一个便利的机制来迭代数组元素，如下所示：
+</p>
+
+<pre caption="数组迭代">
+for ( x in myarray ) {
+    print myarray[x]
+}
+</pre>
+
+<p>
+这段代码将打印数组myarray中的每一个元素。当对于for使用这种特殊的"in"形式时，awk将myarray的每个现有下标依次赋值给x（循环控制变量），每次赋值以后都循环一次循环代码。虽然这是一个非常方便的awk功能，但它有一个缺点──当awk在数组下标之间轮转时，它不会依照任何特定的顺序。那就意味着我们不能知道以上代码的输出是：
+</p>
+
+<pre caption="以上代码的输出">
+jim
+456
+</pre>
+
+<p>
+还是
+</p>
+
+<pre caption="上面代码的另一种输出">
+456
+jim
+</pre>
+
+<p>
+套用阿甘（Forrest Gump）的话来说，迭代数组内容就像一盒巧克力──您永远不知道将会得到什么。因此有必要使awk数组“字符串化”，我们现在就来研究这个问题。 
+</p>
+
+</body>
+</section>
+<section>
+<title>数组下标字符串化</title>
+<body>
+
+<p>
+在我的<uri 
+link="/doc/zh_cn/articles/l-awk1.xml">前一篇文章</uri>中，我演示了awk实际上以字符串格式来存储数字值。虽然awk要执行必要的转换来完成这项工作，但它却可以使用某些看起来很奇怪的代码：
+</p>
+
+<pre caption="奇怪的代码">
+a="1"
+b="2"
+c=a+b+3
+</pre>
+
+<p>
+执行了这段代码后，c等于6。由于awk是“字符串化”的，添加字符串"1"和"2"在功能上并不比添加数字1和2难。这两种情况下，awk都可以成功执行运算。awk的“字符串化”性质非常可爱──您可能想要知道如果使用数组的字符串下标会发生什么情况。例如，使用以下代码：
+</p>
+
+<pre caption="示例代码">
+myarr["1"]="Mr. Whipple"
+print myarr["1"]
+</pre>
+
+<p>
+可以预料，这段代码将打印"Mr. Whipple"。但如果去掉第二个"1"下标中的引号，情况又会怎样呢？
+</p>
+
+<pre caption="去掉引号的代码">
+myarr["1"]="Mr. Whipple"
+print myarr[1]
+</pre>
+
+
+<p>
+猜想这个代码片断的结果比较难。awk将myarr["1"]和myarr[1]看作数组的两个独立元素，还是它们是指同一个元素？答案是它们指的是同一个元素，awk将打印"Mr. Whipple"，如同第一个代码片断一样。虽然看上去可能有点怪，但awk在幕后却一直使用数组的字符串下标！
+</p>
+
+<p>
+了解了这个奇怪的真相之后，我们中的一些人可能想要执行类似于以下的古怪代码：
+</p>
+
+<pre caption="古怪的代码">
+myarr["name"]="Mr. Whipple"
+print myarr["name"]
+</pre>
+
+<p>
+这段代码不仅不会产生错误，而且它的功能与前面的示例完全相同，也将打印"Mr. Whipple"！可以看到，awk并没有限制我们使用纯整数下标；如果我们愿意，可以使用字符串下标，而且不会产生任何问题。只要我们使用非整数数组下标，如myarr["name"]，那么我们就在使用关联数组。从技术上讲，如果我们使用字符串下标，awk的后台操作并没有什么不同（因为即便使用“整数”下标，awk还是会将它看作是字符串）。但是，应该将它们称作关联数组──它听起来很酷，而且会给您的上司留下印象。字符串化下标是我们的小秘密。;) 
+</p>
+
+</body>
+</section>
+<section>
+<title>数组工具</title>
+<body>
+
+<p>
+谈到数组时，awk给予我们许多灵活性。可以使用字符串下标，而且不需要连续的数字序列下标（例如，可以定义myarr[1]和myarr[1000]，但不定义其它所有元素）。虽然这些都很有用，但在某些情况下，会产生混淆。幸好，awk提供了一些实用功能有助于使数组变得更易于管理。
+</p>
+
+<p>
+首先，可以删除数组元素。如果想要删除数组fooarray的元素1 ，输入：
+</p>
+
+<pre caption="删除数组元素">
+delete fooarray[1]
+</pre>
+
+<p>
+而且，如果想要查看是否存在某个特定数组元素，可以使用特殊的"in"布尔运算符，如下所示：
+</p>
+
+<pre caption="查看是否存在某个特定数组元素">
+if ( 1 in fooarray ) {
+    print "Ayep!  It's there."
+} else {
+    print "Nope!  Can't find it."
+}
+</pre>
+
+</body>
+</section>
+<section>
+<title>下一篇</title>
+<body>
+
+<p>
+本文中，我们已经讨论了许多基础知识。下一篇中，我将演示如何使用awk的数学运算和字符串函数，以及如何创建您自己的函数，使您完全掌握awk知识。我还将指导您创建支票簿结算程序。那时，我会鼓励您编写自己的awk程序。请查阅以下参考资料。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>参考资料</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    请阅读Daniel在developerWorks上的其他awk文章：通用线程：Awk实例，<uri link="l-awk1.xml">第1部分</uri>和<uri link="l-awk3.xml">第3部分</uri>。
+  </li>
+  <li>
+    如果想看好的老式书籍，O'Reilly 的<uri link="http://www.oreilly.com/catalog/sed2/">sed &amp; awk, 2ndEdition</uri>是极佳选择。
+  </li>
+  <li>
+    请参考<uri link="http://www.faqs.org/faqs/computer-lang/awk/faq/">comp.lang.awk FAQ</uri>。它还包含许多附加awk链接。
+  </li>
+  <li>
+    Patrick Hartigan的<uri link="http://sparky.rice.edu/~hartigan/awk.html">awk tutorial</uri>还包括了实用的 awk 脚本。  
+  </li>
+  <li>
+    <uri link="http://www.tasoft.com/tawk.html">Thompson's TAWK Compiler</uri>将awk脚本编译成快速二进制可执行文件。可用版本有Windows版、OS/2版、DOS版和UNIX版。
+  </li>
+  <li>
+    <uri link="http://www.gnu.org/software/gawk/manual/gawk.html">GNUAwk用户指南</uri>可用于在线参考。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+</guide>
+

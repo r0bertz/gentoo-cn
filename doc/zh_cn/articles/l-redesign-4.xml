@@ -1,0 +1,414 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-redesign-4.xml,v 1.2 2005/10/10 22:28:53 rane Exp $ -->
+<guide link="/doc/zh_cn/articles/l-redesign-4.xml" disclaimer="articles" lang="zh_cn">
+<title>gentoo.org重新设计，第4部分：一个重生的站点</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+您是否曾在某个清晨醒来，突然意识到自己开发的那个很酷的小网站实际上并不那么棒？如果是这样，别担心，很多人都是这样。在这个系列中，Daniel 
+Robbins将与您共享他用XML、XSLT和Python等技术重新设计www.gentoo.org网站的经验。在本文中，Daniel完成了到XML／XSLT的转换，修复了一些 
+Netscape 4.x浏览器兼容性错误，并向该站点添加了一个自动生成的“XML更改日志”。
+</abstract>
+
+
+
+<!-- The original version of this article was first published on IBM
+
+developerWorks, and is property of Westtech Information Services. This
+
+document is an updated version of the original article, and contains
+
+various improvements made by the Gentoo Linux Documentation team -->
+<version>1.1</version>
+<date>2005年10月10日</date>
+
+<chapter>
+<title>最后一番润色</title>
+<section>
+<title>有了新外观，但是……</title>
+<body>
+
+<p>
+在上一篇文章的末尾，Gentoo 
+Linux网站有了一副全新的面孔，但是还有一些工作没有完成。在本文（也是本系列的最后一部分）中，我最终对这个站点进行最后一番润色，结果产生一个功能完备、考究和模块化且便于日后修改的基于XML的站点。这是接上一篇文章中关于站点未讨论完的部分：
+</p>
+
+</body>
+</section>
+<section>
+<title>尚需处理的问题</title>
+<body>
+
+<p>
+首先，虽然该站点有了一个全新外观，但只有站点的文档部分是基于XML的。主“类别”页面仍然是原始的HTML格式，需要将其转换成XML／XSLT方案，以使它们更便于维护和扩充。
+</p>
+
+<p>
+另外，我的开发人员还发现几个原始HTML本身的问题。当用Netscape 
+4.77浏览时，站点看起来特别难看──显然，这是个问题。另外，在更多现代浏览器中还有其它一些较小的显示问题，其中最讨厌的是有一条细竖线没有完全向下延展到整个页面，从而破坏了我们的飞碟好手正在讲述主内容区这样一个感觉。另外，我们的文档页与具有更考究外观的新主类别页没有完全配合好──很明显需要更新一些东西。
+</p>
+
+</body>
+</section>
+<section>
+<title>目标</title>
+<body>
+
+<p>
+这是Gentoo 
+Linux站点的最后修改计划。首先，我们将完全修改主页HTML，保持总体外观不变，但使该页面与浏览器更兼容。同时，还会做几项访问者所建议的、与显示有关的改进，并且还会修复现有“guide”文档系统的浏览器兼容性问题。
+</p>
+
+<p>
+下一步，将把站点完全转变为XML和XSLT。在本文最后，对站点所做的的任何更改都将通过修改 
+XML和XSLT而不是直接编辑HTML来完成，现在，这可以在xsltproc（请参阅 
+参考资料）的帮助下自动生成。这将极大简化站点的维护工作。因为Gentoo 
+Linux是一个由社区开发的项目，所以，反过来这将允许我们的开发人员（和我）按照需要维护和改进站点。我确实对此感到兴奋，因为它将节省我一些时间，并确保以最新内容欢迎我们的访问者。
+</p>
+
+</body>
+</section>
+<section>
+<title>兼容性问题</title>
+<body>
+
+<p>
+虽然Netscape 
+4.x仍然是一个使用非常广泛的浏览器，但我很难确定：为了使站点在这种浏览器中显示得好一些，究竟需要克服多少困难。我应该只确保站点可读（没有任何重大错误）呢？还是应该尽我所能以使该站点在Netscape 
+4.x中看起来绝对完美──即使那样做需要少使用或不使用CSS并向现有HTML中添加奇怪的兼容性方法？
+</p>
+
+<p>
+最后，我决定对HTML做几项重大更改，以便站点在Netscape 
+4.x中看起来仍然很好，而不是过于关注与表间距和字体显示问题相关的较小错误。这里是对该站点的HTML所作的一些更改，以使所有内容都与4.x兼容。（Gentoo 
+Linux开发小组已经提交了几个这样的修正。）
+</p>
+
+<p>
+首先，Netscape 4.x有一个错误，可导致块元素的CSS背景色被错误显示。例如，下面是指南文档的某个特定部分 期望的显示效果：
+</p>
+
+<figure link="/images/docs/l-redesign-07.gif" caption="IE5中的一个样本指南文档"/>
+
+<p>
+下面是使用CSS指定了背景色时，用Netscape 4.x显示同一部分的效果：
+</p>
+
+<figure link="/images/docs/l-redesign-08.gif" caption="Netscape 4.7中的一个样本指南文档；尚需一些修正"/>
+
+<p>
+这很难看。要修复它，将现有块级的元素（例如这个……）
+</p>
+
+<pre caption="段落样本">
+&lt;p class="note"&gt;This paragraph doesn't look so good in 4.x&lt;/p&gt;
+</pre>
+
+<p>
+……用下面的表来替换：
+</p>
+
+<pre caption="表格样本">
+&lt;table width="100%" border="0" cellpadding="0" cellspacing="0"&gt;
+        &lt;tr&gt;
+                &lt;td bgcolor="#ddffff"&gt;&lt;p class="note"&gt;
+                This looks a whole lot better in 4.x&lt;/p&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+&lt;/table&gt;
+</pre>
+
+<p>
+这种方法修复背景显示问题。然而，这种“修复”还需要在HTML中包括颜色信息，这首先就破坏了使用CSS的好处。这是一种不幸的情况，特别是对于象我这样的CSS爱好者，但是Netscape 
+4.x兼容性需要这样做。
+</p>
+
+</body>
+</section>
+<section>
+<title>重建HTML</title>
+<body>
+
+<p>
+现在该处理那条不总是一直延伸到屏幕底部的黑色竖线的问题了。我无法找到一个方案来解决这个问题，使之既能在4.x又在5.x浏览器中工作；每一个5.x版本都会触发Netscape 
+4.x中的错误，而每一个与4.x兼容的版本在5.x浏览器中看起来都很糟糕。因此，我决定简单地除去整条黑线：最后，该站点可以在很多浏览器中工作。下一步，我将创建一个类似于guide的语法以创建主页。
+</p>
+
+</body>
+</section>
+<section>
+<title>着手XML</title>
+<body>
+
+<p>
+我没有为主页实现全新标记集，相反，我认为使用尽可能多的“guide”XML文档标记是个好主意（有关guide 
+XML格式的详细信息，请参阅本系列的第2部分）。因此，我除去了一些新的XSL，而使用我的guide 
+XSL作为我的工作模板。一两个小时之后，我就得到了一个功能齐备的、用于将类似于guide的语法变成HTML主页的XSL变换集。新主页的修订版2看起来类似于：
+</p>
+
+<figure link="/images/docs/l-redesign-09.gif" caption="新主页修订版"/>
+
+<p>
+既然主页使用一个新的XML／XSLT后端，我就将我的注意力转移到“guide”系统的HTML输出。我不仅需要修复很多Netscape 
+4.7兼容性错误，而且还要进一步更新生成的HTML和图形，以便它们能与那些新修改的主页很好地配合。这时我想到了一个主意：为什么不简单地对我的新主页XML／XSL进行略微调整，以便它还可以为我的文档生成HTML？毕竟，我刚刚添加了对几乎每一个“guide”XML标记的支持，以便它们可用于主页内容。
+</p>
+
+<p>
+结果这个解决方案确实很容易实现。我仅仅调整了新的XSLT文件，以便它可以除去左边的“链接栏”并在处理文档页面时对输出HTML作其它几点较小的更改。既然大多数XSLT仍然相同，我可以对guide文档和类别页面使用一个主XSLT模板集。
+</p>
+
+<figure link="/images/docs/l-redesign-10.gif" caption="新XSL的工作原理"/>
+
+<p>
+现在，我不仅只维护一个XSLT模板集，而且因为两种输出HTML风格都基于同一主文档，它们现在还共享同一CSS样式表。这意味者无需在两个截然不同的样式表和输出HTML集之间“同步外观”。并且您可以看到，新的文档HTML与新主页配合得很完美。
+</p>
+
+<figure link="/images/docs/l-redesign-11.gif" caption="新文档页面与新主页完美配合"/>
+
+</body>
+</section>
+<section>
+<title>XML实现</title>
+<body>
+
+<p>
+实际的实现相当简单；我现有的guide 
+XML语法要求每个文档都是单一主&lt;guide&gt;元素的一部分。为添加对主类别页面的支持，我创建了一个新的主元素：&lt;mainpage&gt;。为创建主类别页面，我将所有内容都放在&lt;mainpage&gt;元素中、而不是&lt;guide&gt;元素中，并且XSLT对输出作了适当更改。除此之外，唯一需要的重大更改是添加可选的&lt;sidebar&gt;元素，该元素用于指定主类别页面上浮动表的内容。现有的&lt;guide&gt;XSLT模板看起来类似于：
+</p>
+
+<pre caption="XSLT模板">
+&lt;xsl:template match="/guide"&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+                guide header goes here
+        &lt;/head&gt;
+        &lt;body&gt;
+                top part of guide body HTML content goes here
+&lt;!--next, we insert our content--&gt;
+                &lt;xsl:apply-templates select="chapter" /&gt;
+                bottom part of guide body HTML content goes here
+        &lt;/body&gt;
+        &lt;/html&gt;
+&lt;/xsl:template&gt;
+</pre>
+
+<p>
+如果您不是很熟悉XSLT，则这个模板告诉XSLT处理程序用HTML文档的外壳替换&lt;guide&gt;&lt;/guide&gt;标记，并且将模板重复应用到&lt;guide&gt;元素内的任何&lt;chapter&gt;元素（开始／结束标记对）并将产生的结果输出插入到HTML外壳中间。
+</p>
+
+<p>
+这样，为了添加对主类别页面的支持，我需要指定：如果所有内容都恰巧包括在单一&lt;mainpage&gt;元素中，应该使用一个不同的HTML外壳。要做到这点，我添加了一个新的模板，如下所示：
+</p>
+
+<pre caption="新模板">
+&lt;xsl:template match="/mainpage"&gt;
+        &lt;html&gt;
+        &lt;head&gt;
+                mainpage header goes here
+        &lt;/head&gt;
+        &lt;body&gt;
+                top part of mainpage body HTML content goes here
+&lt;!--next, we insert our content--&gt;
+                &lt;xsl:apply-templates select="chapter" /&gt;
+                bottom part of mainpage body HTML content goes here
+        &lt;/body&gt;
+        &lt;/html&gt;
+&lt;/xsl:template&gt;
+</pre>
+
+<p>
+因为几乎每一个其它的XML元素（从&lt;chapter&gt;开始之后的所有元素）都为guide和主类别页面产生相同的HTML输出，所以几乎每一个其它的XSLT模板都可以为这两种类型的页面所共享。因此，我们只需使用一个指定两种“HTML外壳”的XSLT文件和一个从XML转换到HTML的公用XSLT模板集就可以很好地完成任务。象往常一样，代码重用无疑是个好东西。
+</p>
+
+</body>
+</section>
+<section>
+<title>“更改日志”页面</title>
+<body>
+
+<p>
+您可能记得，在本系列的“第2部分”中，我提到过cvs2cl.pl“CVS 更改日志”生成脚本（请参阅<uri 
+link="#resources">参考资料</uri>）可以产生XML输出，并且我最终要使用这个特性作为每天都会出现在新网站上的“CVS 
+更改日志”页面的基础。现在，有了新的XML后端的支持，添加新的“更改日志”不过是小菜一碟。这是cvslog.sh脚本的增强版本，它还负责处理从XML到HTML的转换：
+</p>
+
+<pre caption="升级的cvslog.sh脚本">
+#!/bin/bash
+#various paths
+HOMEDIR=/home/drobbins
+CVSDIR=${HOMEDIR}/gentoo/gentoo-x86
+OUTLOG=${HOMEDIR}/gentoo/xmlcvslog.txt
+OUTMAIL=${HOMEDIR}/gentoo/cvslog.txt
+WEBDIR=/usr/local/httpd/htdocs
+XSLTP=/opt/gnome/bin/xsltproc
+TMPFILE=${HOMEDIR}/gentoo/xmlcvslog.tmp
+USER=drobbins
+#if $CVSMAIL is undefined, set it to "yes"
+if [ -z "$CVSMAIL" ]
+then
+        export CVSMAIL="yes"
+fi
+#the main script
+cd $CVSDIR 
+cvs -q update -dP
+yesterday=`date -d "1 day ago 00:00" -R`
+today=`date -d "00:00" -R`
+cvsdate=-d\'${yesterday}\&lt;${today}\'
+nicedate=`date -d yesterday +"%d %b %Y %Z (%z)"`
+#generate cvs2cl.pl XML output
+/usr/bin/cvs2cl.pl --xml -f $OUTLOG -l "${cvsdate}" 
+#use sed to remove "xmlns=" from cvs2cl.pl output
+/usr/bin/sed -e 's/xmlns=".*"//' $OUTLOG > ${OUTLOG}.2
+#convert cvs2cl.pl XML output to guide format using $XLSTP
+$XSLTP ${WEBDIR}/xsl/cvs.xsl ${OUTLOG}.2 > $TMPFILE
+#convert guide XML output to HTML format using $XLSTP
+$XSLTP ${WEBDIR}/xsl/guide-main.xsl 
+$TMPFILE > ${WEBDIR}/index-changelog.html
+#fix perms
+chmod 0644 ${WEBDIR}/index-changelog.html
+#automatically send cvs mail if $CVSMAIL is set to "yes"
+if [ "$CVSMAIL" = "yes" ]
+then
+        /usr/bin/cvs2cl.pl -f ${OUTMAIL} -l "${cvsdate}" 
+        mutt -x gentoo-cvs -s "cvs log for $nicedate" > ${OUTMAIL} 
+fi
+</pre>
+
+<p>
+虽然该脚本看起来比以前的版本复杂得多，但它实际上只添加了四个或五个关键行；其余添加的行不是注释就是环境变量定义。
+</p>
+
+<p>
+以下是cvslog.sh脚本中与XML相关的新部分的工作原理。首先，我们调用cvs2cl.pl，然后指使它生成一个基于XML、并包含昨天修改过的所有文件的“更改日志”。然后，通过sed运行这个XML输出，以从XML中除去一个不需要的xmlns=属性。下一步，我们将这个作过轻微改动的XML传递给xsltproc，并告诉它应用在cvs.xsl中发现的处理指令；这些指令将来自cvs2cl.pl的XML输出变换成正确的guide 
+XML文档。最后，我们再次使用xsltproc将这个guide 
+XML文档转换成可在Web上发布的HTML，该HTML被管道输出至Web服务器的htdocs目录。生成的“HTML更改日志”是完整的，这就是结果：
+</p>
+
+<figure link="/images/docs/l-redesign-12.gif" caption="自动生成的“更改日志”页面"/>
+
+<p>
+您可能对包含在cvs.xsl中的 
+XSLT的简单性感到惊讶。其中，我们为&lt;changelog&gt;、&lt;entry&gt;和&lt;file&gt;指定了三个模板。我们还引用了源XML中的其它几个标记，包括&lt;date&gt;、&lt;author&gt;和&lt;msg&gt;（cvs2cl.pl使用它们来指定提交者的注释）。考虑到它大约只有35行，cvs.xsl做得已经相当多了。
+</p>
+
+<pre caption="cvs.xsl">
+&lt;?xml version='1.0' encoding="iso-8859-1"?&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+&lt;xsl:output encoding="iso-8859-1" method="xml" indent="yes"/&gt;
+&lt;xsl:template match="/changelog"&gt;
+        &lt;mainpage id="changelog"&gt;
+        &lt;title&gt;Gentoo Linux Development Changelog for &lt;xsl:value-of select="entry/date"/&gt;&lt;/title&gt;
+        &lt;author title="script"&gt;cvs-xml.xsl&lt;/author&gt;
+        &lt;standout&gt;
+                &lt;title&gt;About the Development Changelog&lt;/title&gt;
+                &lt;body&gt;
+                        This page contains a daily Changelog, listing all modifications made to our
+                        CVS tree on &lt;xsl:value-of select="entry/date"/&gt; (yesterday).
+                &lt;/body&gt;
+        &lt;/standout&gt;
+        &lt;version&gt;1.0.0&lt;/version&gt;
+        &lt;date&gt;&lt;xsl:value-of select="entry/date"/&gt;&lt;/date&gt;
+        &lt;chapter&gt;
+                &lt;xsl:apply-templates select="entry"/&gt;
+        &lt;/chapter&gt;
+        &lt;/mainpage&gt;
+&lt;/xsl:template&gt;
+&lt;xsl:template match="entry"&gt;
+        &lt;section&gt;
+                &lt;title&gt;Files modified by &lt;xsl:value-of select="author"/&gt; at 
+                                        &lt;xsl:value-of select="time"/&gt;
+                &lt;/title&gt;
+                &lt;body&gt;
+                        &lt;note&gt;&lt;xsl:value-of select="msg"/&gt;&lt;/note&gt;
+                        &lt;ul&gt;
+                                &lt;xsl:apply-templates select="file"/&gt;
+                        &lt;/ul&gt;
+                &lt;/body&gt;
+        &lt;/section&gt;
+&lt;/xsl:template&gt;
+&lt;xsl:template match="file"&gt;
+        &lt;li&gt;&lt;path&gt;&lt;xsl:value-of select="name"/&gt;&lt;/path&gt;, &lt;xsl:value-of select="revision"/&gt;&lt;/li&gt;
+&lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;
+</pre>
+
+</body>
+</section>
+<section>
+<title>项目完成！</title>
+<body>
+
+<p>
+从开始重新设计Gentoo 
+Linux网站，我们就创建了一个以用户为中心的行动计划，设计了一个新的基于XML的文档系统，一个新的徽标，一个新的站点外观，将所有剩余部分转换成XML，并添加了新的基于XML的“更改日志”页面。 
+唷！我希望您在随我进行的过程中得到欢乐，并从中发现很多好主意和灵感。我已经收到了几个关于对更多信息和与重新设计相关的代码的请求，因此，我建立了一个特殊的<uri 
+link="http://www.gentoo.org/proj/en/site.xml">Gentoo Linux 
+XML项目</uri>页面，该页面包含www.gentoo.org所使用的最新的XML、XSLT、脚本和文档。除了访问“项目”页面之外，请务必查看以下所列的有价值资源。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>参考资料</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    如果您有兴趣使用Gentoo Linux guide XML系统为基础开发自己的项目，请访问<uri 
+link="http://www.gentoo.org/proj/en/site.xml">Gentoo Linux 
+XML项目</uri>页面。所有最新的XML/XSLT文档都能在这里找到。
+  </li>
+  <li>
+    请参阅使用XML，XSLT和Python等技术重新设计www.gentoo.org网站系列文章的其他部分：
+    <ul>
+      <li>
+        在<uri 
+link="/doc/zh_cn/articles/l-redesign-1.xml">第1部分</uri>中，Daniel向读者演示了如何创建以用户为中心的行动计划，并介绍了pytext，这是一种嵌入式Python解释器（2001年3月）。
+      </li>
+      <li>
+        在<uri 
+link="/doc/zh_cn/articles/l-redesign-2.xml">第2部分</uri>中，Daniel将展示新的文档系统以及建立一个CVS-log邮件日志列表（2001年3月）。
+      </li>
+      <li>
+        在<uri 
+link="/doc/zh_cn/articles/l-redesign-3.xml">第3部分</uri>中，他将给网站一个新的外观（2001年7月）。
+      </li>
+    </ul>
+  </li>
+  <li>
+    访问“万维网联盟”（或 W3C）中的<uri 
+link="http://www.w3.org/Style/CSS/">CSS页面</uri>来了解有关CSS（级联样式表）的更多信息。您可以找到有关<uri 
+link="http://www.w3.org/XML">XML</uri>和<uri 
+link="http://www.w3.org/TR/xslt">XSLT</uri>的更多信息以及大量其它技术。
+  </li>
+  <li>
+    请查看Xara X的主页<uri link="http://www.xara.com/">Xara.com</uri>──Xara 
+X是一款极佳的Windows下的向量绘图软件包。它几乎没有一点多余功能，却有惊人的速度，建议您使用该软件。
+  </li>
+  <li><uri>http://www.xslt.com</uri>上可以学到关于XSLT的更多知识。</li>
+  <li>
+    当您清醒过来，不妨看看Sablotron，这是一个又快又好的XSLT处理器，可以从<uri 
+link="http://www-gingerall.com">Gingerall</uri>获得。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>

@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-redesign-1.xml,v 1.4 2005/10/10 20:22:44 rane Exp $ -->
+<guide link="/doc/zh_cn/articles/l-redesign-1.xml" disclaimer="articles" lang="zh_cn">
+<title>gentoo.org重新设计，第1部分：一个重生的站点</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="developerWorks@ibm.com">IBM developerWorks</mail>
+</author>
+
+<author title="编辑">
+	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+</author>
+
+<abstract>
+您是否曾在某个清晨醒来，突然意识到自己开发的那个很酷的小网站实际上并不那么棒？如果是这样，那么您现在找对地方了。在本系列中，DanielRobbins共享了它在使用诸如XML、XSLT和Python之类的技术重新设计www.gentoo.org网站时得到的经验。在此过程中，您也许还会发现一些优秀的方法适合于您的下一次网站重新设计。在本文中，Daniel创建了一个以用户为中心的行动计划，而且还介绍了pytext，这是一种嵌入式Python解释器。
+</abstract>
+
+
+
+<!-- The original version of this article was first published on IBM
+
+developerWorks, and is property of Westtech Information Services. This
+
+document is an updated version of the original article, and contains
+
+various improvements made by the Gentoo Linux Documentation team -->
+<version>1.0</version>
+<date>2005-10-10</date>
+
+<chapter>
+<title>任性的人</title>
+<section>
+<body>
+
+<p>
+软件开发人员，我能问您一个问题吗？虽然我们中有许多人都非常熟悉Web技术，如HTML、CGI、Perl、Python、Java技术和XML，但为什么我们自己的网站──那些专用于我们珍爱的开发项目的网站──却看似由一大群任性活泼的12孩子胡乱拼凑起来的呢？为什么，为什么会这样？
+</p>
+
+<p>
+难道是因为在大多数时间里，我们对自己的网站放任不管，而挥霍了宝贵的时间来修改我们的自由软件项目？答案，至少在我的个案中，是最明确的：“是的”。
+</p>
+
+<p>
+当我不为IBM developerWorks撰写文章或刚作爸爸时，我和我那组技术高超的志愿者疯狂地投入了Gentoo Linux下一个发行版的工作中。是的，Gentoo Linux有其自己的网站（请参阅<uri link="#resources">参考资料</uri>）。目前（2001年3月），我们的网站还没那么特别；那是因为我们没有花很多时间在它上面，因为我们通常将精力都投入到改进Gentoo Linux上。的确，我们的站点有几个我用Xara X（请参阅<uri link="#resources">参考资料</uri>）很快设计出的、公认的可爱徽标，但在这赏心悦目的外观之下，我们的站点还有许多不足之处。也许您的站点也是这样。如果是这样，那么我有句话要对您说──欢迎来到俱乐部。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>www.gentoo.org</title>
+<section>
+<body>
+
+<p>
+在我们的案例中，由于项目在成长，而网站却没有，因而使网站陷入了进退两难的局面。现在，Gentoo Linux正准备出1.0发行版（当它可以正式向非开发人员发布时），而且日趋普及，我们需要开始认真地研究网站如何能够更好地为其用户服务。以下是www.gentoo.org的快照：
+</p>
+
+<figure link="/images/docs/l-redesign-01.gif" caption="www.gentoo.org当时（2001年3月）的情形"/>
+
+<p>
+可以看到，我们有了所有最基本的要素──Gentoo Linux的描述、功能部件列表、每日“更改日志”（由Python自动更新），以及许多重要链接（链接到下载站点、邮件列表注册页面和cvsWeb）。我们还有到三个文档资源的链接──Gentoo Linux安装指南和开发指南，以及Christian Zander的NVIDIA故障排除指南。
+</p>
+
+<p>
+然而，虽然站点看起来不错，但我们遗漏了很多东西。最明显的是文档──我们的安装和开发指南需要大量工作。然后，我们需要添加FAQ、新链接、新用户信息……这个清单是没完没了的。
+</p>
+
+</body>
+</section>
+<section>
+<title>内容 vs. 显示</title>
+<body>
+
+<p>
+现在，我们讨论第二个问题。目前，所有工作都以原始HTML格式完成；我不断修改index.html文件，直到它看上去让我满意为止。更糟的是，我们的Web文档都是以原始HTML格式编写的。从开发角度看，这并不是件好事，因为原始内容（包括段落、章、节）与许多与显示相关的HTML标记混合在一起。当然，这会使更改内容和站点外观变得更困难。虽然这种方法目前还有用，但在我们的站点继续成长时，它必定会引起某些问题。
+</p>
+
+<p>
+显然，我们需要在后台使用更好的技术。我们需要使用类似于XML、XSLT和Python的东西，而不是直接使用HTML。目标是尽可能多地采用自动化，这样我们就可以轻松添加和扩充站点。如果我们很好地完成了任务，那么将来对站点的重大更改应该会相对没有痛苦。
+</p>
+
+</body>
+</section>
+<section>
+<title>策略！</title>
+<body>
+
+<p>
+显然，我们还需要做大量工作。实际上，有许多工作要完成，而我却不知道从哪里开始。正当我尝试理清头绪时，无意中发现了Laura Wonnacott的“Site Savvy”InfoWorld专栏（请参阅<uri link="#resources">参考资料</uri>）。在这个专栏中，她说明了“以用户为中心”设计的概念──如何在关注目标观众（在此案例中是指Gentoo Linux用户和开发人员）需要的同时改进网站。阅读这篇文章并查看该文章中的“以用户为中心设计手册”链接（请参阅<uri link="#sources">参考资料</uri>）帮助我制订重新设计的策略──行动计划：
+</p>
+
+<ol>
+  <li>
+    首先，明确定义网站的正式目标──把它“写”下来：其目的是什么？它应该做什么？
+  </li>
+  <li>
+    区分访问您网站的不同用户类型──您预期的访问者。按优先级别给他们排序：哪些人对您来说是最重要的？
+  </li>
+  <li>
+    建立一个用户反馈系统，您可以从他们那里得知做得对还是不对。
+  </li>
+  <li>
+    分析反馈信息，并得出结论：哪些站点是需要改进和重新设计的。应该优先考虑高级用户的意见。
+  </li>
+  <li>
+    一旦选定了站点中要整改的部分，立马去做吧！在实施期间，要确定新的内容与设计符合您目标用户的需求，并且修复了所有已知的不足。
+  </li>
+  <li>
+    当完成了部分重新设计时，即使它看来与当前站点有着明显差别，也应将它添加到正在运转的站点。这样，您的用户可以立即开始受益于最近重新设计的部分。如果重新设计有问题，您可以更快得到用户反馈。最后，不断改进站点（而不是重建整个站点，然后突然推出它──令人吃惊！）有助于防止用户对（可能是巨大的）站点更改产生陌生感。
+  </li>
+  <li>完成了第6步之后，跳到第4步，然后重复。</li>
+</ol>
+
+</body>
+</section>
+<section>
+<title>任务说明</title>
+<body>
+
+<p>
+我很高兴地发现我们已经完成了第3步。我们已经接收到了几封来自站点访问者的电子邮件建议，而我们的开发人员邮件列表也提供了一种交换建议和意见的方法。然而，我还没有真正完成步骤1和2。虽然答案也许看似明显，但我确实发现真正坐下写出任务说明很有帮助：
+</p>
+
+<p>
+www.gentoo.org是为了帮助使用和开发Gentoo Linux的人们而存在的，它提供了关于Gentoo Linux和一般Linux的最新信息，主要关注与Gentoo Linux安装、使用、管理和开发有关的主题。作为有关Gentoo所有事情的主要中心，该站点还应该提供与Gentoo Linux用户和开发人员相关的重要新闻。除了迎合Gentoo Linux用户和开发人员，www.gentoo.org还有第二个目的，那就是满足潜在Gentoo Linux用户的需要，它提供了这些用户确定Gentoo Linux是否适合他们所需的信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>使用人群</title>
+<body>
+
+<p>
+到目前为止，一切顺利。现在，到了第2步──明确访问对象：
+</p>
+
+<p>
+www.gentoo.org有三种访问对象──Gentoo Linux开发人员、使用者和潜在的用户。虽然没有一组肯定比另一组拥有更高的优先级，但目前Gentoo Linux开发人员的需要是我们的最高优先级，其次是Gentoo Linux用户，然后是潜在用户。这是因为Gentoo Linux当前处于预先发行状态。当Gentoo Linux达到版本1.0时，Gentoo Linux用户和潜在用户也将得到优先级。
+</p>
+
+</body>
+</section>
+<section>
+<title>意见和建议</title>
+<body>
+
+<p>
+O.K.，现在该分析我们收集的建议和意见了：
+</p>
+
+<p>
+在过去的几个月中，我们收到了许多来自网站访问者的建议。绝大多数时候，人们都要求更好的文档──无论是开发人员还是用户。有一些开发人员询问我们是否可以创建一个邮件列表，它将专用于描述CVS提交。
+</p>
+
+<p>
+有趣的是，我们还接收到一些电子邮件，询问Gentoo Linux是商业产品还是免费产品。我猜想那是因为我们的主徽标上铭刻了“Gentoo Technologies, Inc.”（我们的法定公司名称），人们认为我们有商业目的。修改徽标，以使它显示“Gentoo Linux”，并在主页面上添加小的起始段落以说明我们是自由软件项目，这样会有所帮助。
+</p>
+
+</body>
+</section>
+<section>
+<title>改进列表</title>
+<body>
+
+<p>
+O.K.，现在让我们将这些建议转变成可行的改进列表：
+</p>
+
+<ul>
+  <li>重建主页面
+    <ul>
+      <li>实现：更新徽标并添加自由软件简介</li>
+      <li>目的：明确说明我们是自由软件项目</li>
+      <li>目标人群：潜在的用户</li>
+      <li>难度：中等</li>
+    </ul>
+  </li>
+  <li>改进基本用户文档
+    <ul>
+      <li>实现：新的XML/XSLT系统，详细文档</li>
+      <li>目的：使用户安装 Gentoo Linux 更容易</li>
+      <li>目标人群：新用户</li>
+      <li>难度：中等</li>
+    </ul>
+  </li>
+  <li>改进／创建开发人员文档
+    <ul>
+      <li>实现：新的XML/XSLT系统、CVS指南、开发系统、移植指南</li>
+      <li>目的：帮助开发人员出色地完成工作</li>
+      <li>目标人群：开发人员</li>
+      <li>难度：大</li>
+    </ul>
+  </li>
+  <li>添加CVS邮件列表
+    <ul>
+      <li>实现：使用现有邮差邮件列表管理器</li>
+      <li>目的：更好地通知开发人员</li>
+      <li>目标人群：开发人员</li>
+      <li>难度：小</li>
+    </ul>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>选择！</title>
+<body>
+
+<p>
+出于不同的原因，列表中有两件事引人注意。第一件是CVS邮件列表──这件事无须费神，因为它很容易实现。通常，首先实现最简单的更改比较合理，这样用户可以立即从中获益。
+</p>
+
+<p>
+列表中第二件值得注意的事就是开发人员文档的需要。这是一个长期项目，会需要很多工作。根据我与其他开发人员的交谈，我们都认同某种XML/XSL方法是正确的解决方案。
+</p>
+
+</body>
+</section>
+<section>
+<title>XML/XSL原型</title>
+<body>
+
+<p>
+为了帮助启动过程，我开发了原型XML语法，以用于所有在线文档。通过使用这个XML语法（称作“guide”），文档将明确地组织成段落、章和节（使用类似于&lt;section&gt;, &lt;chapter&gt;等的XML标记），而同时不包含任何与显示相关的标记。为了创建在站点上显示的HTML，我创建了XSL转换的原型集合。通过使用诸如Sablotron的XSLT处理器，guide XML文件可以按以下方式转换成HTML：
+</p>
+
+<pre caption="将guide XML文件转换成HTML">
+devguide.xml + guide.xsl ---XSLT processor---> devguide.html
+</pre>
+
+<p>
+这个XML/XSLT方法的优点是它将原始内容（XML）与guide.xsl（XSLT）文件中的与显示相关的信息隔离开。如果需要更新Web页面的外观，只需修改guide.xsl文件并通过XSLT处理器（Sablotron）运行所有XML，就能创建更新的HTML页面。或者，如果需要向开发指南添加几章，则可以修改devguide.xml。完成之后，通过Sablotron运行XML，就会生成完全格式化的devguide.html文件，其中包含了添加的几章。将XML看作是内容，将SLT看作是与显示相关的格式化宏。
+</p>
+
+<p>
+虽然整个小组都相信XML/XSLT是正确方法，但我们对正式XML语法还没有达成一致意见。Achim，我们的开发领导，建议我们使用docbook来代替使用我们自己的XML语法。然而，原型指南XML格式已经促使我们开始了决策过程。因为我们开发人员每天都会使用XML/XSL，因此选择一个我们都感到满意且满足我们所有需要的解决方案至关重要。在下一篇文章中，我将向您演示有效的XML/XSL文档系统。
+</p>
+
+</body>
+</section>
+<section>
+<title>技术演示：pytext</title>
+<body>
+
+<p>
+一般情况下，我们的当前网站不使用值得一提的任何新的或超酷的技术。然而，这里有一个例外值得注意──我们的小pytext，这是一个嵌入式Python解释器。
+</p>
+
+<p>
+就象你们中的许多人一样，我是个超级Python爱好者，在所有脚本语言中我最喜欢它，因此当向网站添加一些动态内容时，我当然想要使用Python。您也许知道，在编码动态HTML内容时，与其它方法相比，通常将语言命令嵌入到HTML内部更为方便。因此，需要一个嵌入式Python解释器，它可以接受如下文档：
+</p>
+
+<pre caption="源码文档">
+&lt;p&gt;
+Yeah, sure; I got some questions:&lt;br&gt;
+&lt;!--code
+names=["bob","jimmy","ralph"]
+items=["socks","lunch","accordion"]
+for x in items:
+for y in names:
+print "Anyone seen",y+"'s",x+"?&lt;br&gt;"
+--&gt;
+See, told you so.
+</pre>
+
+<p>
+……然后将它转换成：
+</p>
+
+<pre caption="目标文档">
+&lt;p&gt;
+Yeah, sure; I got some questions:&lt;br&gt;
+Anyone seen bob's socks?&lt;br&gt;
+Anyone seen jimmy's socks?&lt;br&gt;
+Anyone seen ralph's socks?&lt;br&gt;
+Anyone seen bob's lunch?&lt;br&gt;
+Anyone seen jimmy's lunch?&lt;br&gt;
+Anyone seen ralph's lunch?&lt;br&gt;
+Anyone seen bob's accordion?&lt;br&gt;
+Anyone seen jimmy's accordion?&lt;br&gt;
+Anyone seen ralph's accordion?&lt;br&gt;
+See, told you so.
+</pre>
+
+<p>
+下面是pytext的源代码：
+</p>
+
+<pre caption="pytext嵌入式Python解释器">
+#!/usr/bin/env python
+
+# pytext 2.1
+# Copyright 1999-2001 Daniel Robbins
+# Distributed under the GPL
+
+import sys
+
+def runfile(myarg):
+   "interprets a text file with embedded elements"
+   mylocals={}
+   try:
+      a=open(myarg,'r')
+   except IOError:
+      sys.stderr.write("!!! Error opening "+myarg+"!\n")
+      return
+   mylines=a.readlines()
+   a.close()
+   pos=0
+   while pos&lt;len(mylines):
+      if mylines[pos][0:8]=="&lt;!--code":
+  mycode=""
+  pos=pos+1
+  while (pos&lt;len(mylines)) and (mylines[pos][0:3]!="--&gt;"):
+       mycode=mycode+mylines[pos]
+       pos=pos+1
+  exec(mycode,globals(),mylocals)
+       else:
+  sys.stdout.write(mylines[pos])
+       pos=pos+1
+
+if len(sys.argv)&gt;1:
+   for x in sys.argv[1:]:
+       runfile(x)
+   sys.exit(0)
+else:
+   sys.stderr.write
+     ("pytext 2.1 -- Copyright 1999-2001 Daniel Robbins. ")
+   sys.stderr.write
+     ("Distributed under the\nGNU Public License\n\n")
+   sys.stderr.write
+     ("Usage: "+sys.argv[0]+" file0 [file1]...\n")
+   sys.exit(1)
+</pre>
+
+</body>
+</section>
+<section>
+<title>pytext工作原理</title>
+<body>
+
+<p>
+这里说明它是如何工作的。它会扫描每一个输入行，而且在大多数时间里，每个输入行都只是回显到标准输出。但是，如果pytext遇到以&lt;!--code开头的行，那么直到第一行以--&gt;开头的每一行的内容都会被附加到称作mycode的字符串中。然后pytext使用内置exec()函数执行mycode字符串，从而有效地创建嵌入式Python解释器。
+</p>
+
+<p>
+关于这个特殊的实现，确实有一些美妙的东西──我们以这种方式调用exec()，这样会保存对全局和本地名称空间的所有修改。这样，就可以导入模块或在某嵌入块中定义变量，然后在以后创建的块中访问这个先创建的对象，如以下示例明确演示的那样：
+</p>
+
+<pre caption="示例代码">
+&lt;!--code
+import os
+foo=23
+--&gt;
+
+Hello
+
+&lt;!--code
+print foo
+if os.path.exists("/tmp/mytmpfile"):
+print "it exists"
+else:
+print "I don't see it"
+--&gt;
+</pre>
+
+<p>
+很方便，是吗？pytext服务是Python强大功能的极佳演示，并且对于Python爱好者来说是极其有用的工具。对于当前站点，我们从cron作业中调用pytext，使用它定期为主页面“更改日志”生成HTML代码：
+</p>
+
+<pre caption="主页HTML代码的生成">
+pytext index.ehtml > index.html
+</pre>
+
+<p>
+就写到这吧；下次见面时，我会讨论www.gentoo.org重新设计的第一阶段！
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="resources">
+<title>参考资料</title>
+<section>
+<body>
+
+<ul>
+  <li>
+    请参阅用XML，XSLT和Python等技术重新设计www.gentoo.org网站系列文章的其他部分：
+    <ul>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-2.xml">第2部分</uri>中，Daniel将展示新的文档系统以及建立一个CVS-log邮件日志列表（2001年3月）。
+      </li>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-3.xml">第3部分</uri>中，他将给网站一个新的外观（2001年7月）。
+      </li>
+      <li>
+        在<uri link="/doc/zh_cn/articles/l-redesign-4.xml">第4部分</uri>中，Daniel完成了到XML/XSLT的转换，修复了Netscape 4.x浏览器的访问bug，还为网站添加了自动生成的XML Changelog（2001年8月）。
+      </li>
+    </ul>
+  </li>
+  <li>
+    如果您还没有开始使用 Python，那您只是在自找麻烦。在<uri>http://www.python.org</uri>上可以找到它。
+  </li>
+  <li>
+    Laura Wonnacott的<uri link="http://www.infoworld.com/articles/op/xml/01/03/05/010305opsavvy.xml">Site Savvy专栏</uri>会定期出现在<uri>InfoWorld.com</uri>。
+  </li>
+  <li>
+    请查看Xara X的主页<uri link="http://www.xara.com/">Xara.com</uri>──Xara X是一款极佳的Windows下的向量绘图软件包。它几乎没有一点多余功能，却有惊人的速度，建议您使用该软件。
+  </li>
+  <li><uri>http://www.xslt.com</uri>上可以学到关于XSLT的更多知识。</li>
+  <li>
+    弄明白之后，请查看Sablotron，这是一个又快又好的XSLT处理器，可以从<uri link="http://www-gingerall.com">Gingerall</uri>获得。
+ </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
