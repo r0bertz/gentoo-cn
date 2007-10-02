@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-redesign-1.xml,v 1.4 2005/10/10 20:22:44 rane Exp $ -->
 <guide link="/doc/zh_cn/articles/l-redesign-1.xml" disclaimer="articles" lang="zh_cn">
 <title>gentoo.org重新设计，第1部分：一个重生的站点</title>
 
@@ -15,22 +16,18 @@
 </author>
 
 <author title="编辑">
-	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 
 <abstract>
-您是否曾在某个清晨醒来，突然意识到自己开发的那个很酷的小网站实际上并不那么棒？如果是这样，那么您现在找对地方了。在本系列中，DanielRobbins共享了它在使用诸如XML、XSLT和Python之类的技术重新设计www.gentoo.org网站时得到的经验。在此过程中，您也许还会发现一些优秀的方法适合于您的下一次网站重新设计。在本文中，Daniel创建了一个以用户为中心的行动计划，而且还介绍了pytext，这是一种嵌入式Python解释器。
+您是否曾在某个清晨醒来，突然意识到自己开发的那个很酷的小网站实际上并不那么棒？如果是这样，那么您现在找对地方了。在本系列中，Daniel Robbins共享了它在使用诸如XML、XSLT和Python之类的技术重新设计www.gentoo.org网站时得到的经验。在此过程中，您也许还会发现一些优秀的方法适合于您的下一次网站重新设计。在本文中，Daniel创建了一个以用户为中心的行动计划，而且还介绍了pytext，这是一种嵌入式Python解释器。
 </abstract>
 
-
-
 <!-- The original version of this article was first published on IBM
-
 developerWorks, and is property of Westtech Information Services. This
-
 document is an updated version of the original article, and contains
-
 various improvements made by the Gentoo Linux Documentation team -->
+
 <version>1.0</version>
 <date>2005-10-10</date>
 

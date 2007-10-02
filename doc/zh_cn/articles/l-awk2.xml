@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="utf-8"?>
-
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-awk2.xml,v 1.6 2006/09/27 18:14:34 neysx Exp $ -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header$ -->
+<!-- English CVS version: 1.6 -->
 
 <guide link="/doc/zh_cn/articles/l-awk2.xml" disclaimer="articles" lang="zh_cn">
 <title>Awk实例，第2部分</title>
@@ -15,24 +15,20 @@
 </author>
 
 <author title="编辑">
-	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 
 <abstract>
 在这篇awk简介的续集中，Daniel Robbins继续探索awk（一种很棒但有怪异名称的语言）。Daniel将演示如何处理多行记录、使用循环结构，以及创建并使用awk数组。阅读完本文后，您将精通许多awk的功能，而且可以编写您自己的功能强大的awk脚本。
 </abstract>
 
-
-
 <!-- The original version of this article was published on IBM developerWorks,
-
 and is property of Westtech Information Services. This document is an updated
-
 version of the original article, and contains various improvements made by the
-
 Gentoo Linux Documentation team -->
+
 <version>1.4</version>
-<date>2005年10月31日</date>
+<date>2005-10-31</date>
 
 <chapter>
 <title>记录、循环和数组</title>

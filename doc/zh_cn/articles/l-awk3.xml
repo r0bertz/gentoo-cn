@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="utf-8"?>
-
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-awk3.xml,v 1.6 2005/10/31 13:47:46 neysx Exp $ -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header$ -->
+<!-- English CVS version: 1.6 -->
 
 <guide link="/doc/zh_cn/articles/l-awk3.xml" disclaimer="articles" lang="zh_cn">
 <title>Awk实例，第3部分</title>
@@ -15,24 +15,20 @@
 </author>
 
 <author title="编辑">
-	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 
 <abstract>
 在这篇awk系列的总结中，Daniel向您介绍awk重要的字符串函数，以及演示了如何从头开始编写完整的支票簿结算程序。在这个过程中，您将学习如何编写自己的函数，并使用awk的多维数组。学完本文之后，您将掌握更多awk经验，可以让您创建功能更强大的脚本。
 </abstract>
 
-
-
 <!-- The original version of this article was published on IBM developerWorks,
-
 and is property of Westtech Information Services. This document is an updated
-
 version of the original article, and contains various improvements made by the
-
 Gentoo Linux Documentation team -->
+
 <version>1.4</version>
-<date>2005年10月31日</date>
+<date>2005-10-31</date>
 
 <chapter>
 <title>字符串函数和……支票簿？</title>

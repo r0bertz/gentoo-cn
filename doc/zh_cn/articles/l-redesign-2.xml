@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/articles/l-redesign-2.xml,v 1.2 2005/10/10 20:22:44 rane Exp $ -->
 <guide link="/doc/zh_cn/articles/l-redesign-2.xml" disclaimer="articles">
 <title>gentoo.org重新设计，第2部分：一个重生的站点</title>
 
@@ -15,24 +16,20 @@
 </author>
 
 <author title="编辑">
-	<mail link="zm3345@gmail.com">Zhou Mi</mail>
+  <mail link="zm3345@gmail.com">Zhou Mi</mail>
 </author>
 
 <abstract>
 您是否曾经在某天清晨醒来，意识到自己的个人开发网站其实并不那么好？如果是这样，那么您现在找对地方了。在本系列中，Daniel Robbins共享了它在使用诸如XML、XSLT和Python之类的技术重新设计www.gentoo.org网站时得到的经验。在此过程中，您也许还会发现一些优秀的方法适合于您的下一次网站重新设计。在这第2部分中，Daniel演示新文档系统并建立了一个日常CVS日志邮件列表。
 </abstract>
 
-
-
 <!-- The original version of this article was first published on IBM
-
 developerWorks, and is property of Westtech Information Services. This
-
 document is an updated version of the original article, and contains
-
 various improvements made by the Gentoo Linux Documentation team -->
+
 <version>1.0</version>
-<date>2005年10月10日</date>
+<date>2005-10-10</date>
 
 <chapter>
 <title>文档系统</title>
@@ -40,8 +37,7 @@ various improvements made by the Gentoo Linux Documentation team -->
 <body>
 
 <p>
-如果您已经阅读了我撰写的“gentoo.org 重新设计”系列的<uri 
-link="/doc/zh_cn/articles/l-redesign-1.xml">第一部分</uri>，那么您就知道我是Gentoo Linux的首席设计师，我要对Gentoo Linux网站负责。目前，这个站点还有许多不足。是的，它确实看似漂亮，但除了漂亮的图形之外，您会发现它实际上并没有满足主要预期用户──Gentoo Linux开发人员、用户和潜在用户──的需要。
+如果您已经阅读了我撰写的“gentoo.org 重新设计”系列的<uri link="/doc/zh_cn/articles/l-redesign-1.xml">第一部分</uri>，那么您就知道我是Gentoo Linux的首席设计师，我要对Gentoo Linux网站负责。目前，这个站点还有许多不足。是的，它确实看似漂亮，但除了漂亮的图形之外，您会发现它实际上并没有满足主要预期用户──Gentoo Linux开发人员、用户和潜在用户──的需要。
 </p>
 
 <p>
@@ -98,7 +94,7 @@ CVS日志邮件列表的目的是通知开发人员：已经对CVS资源库做�
 </pre>
 
 <p>
-还可以指示<path>cvs2cl.pl</path>生成 XML 格式的输出，在下一篇文章中，我会利用这种技术将最新的“更改日志”结合到站点中新的开发人员部分。
+还可以指示<path>cvs2cl.pl</path>生成XML格式的输出，在下一篇文章中，我会利用这种技术将最新的“更改日志”结合到站点中新的开发人员部分。
 </p>
 
 </body>
@@ -139,8 +135,7 @@ mutt -x gentoo-cvs -s "cvs log for $nicedate" &lt;\
 <body>
 
 <p>
-现在，讨论Gentoo 
-Linux文档项目。新的文档系统涉及两组人或预期用户目录：文档创建人和文档读者。创建人需要不给创建带来妨碍的精心设计的XML语法；而根本不关心XML的读者想要生成的HTML文档既具功能性又具观赏性。实现的难点是如何创建一个满足这两种观众需要的完整系统。哦，我假设还有第三种“用户”──我，Web管理员和设计新系统的人。由于我打算在站点升级时与新的文档系统交互，因此我需要它可靠且灵活。
+现在，讨论Gentoo Linux文档项目。新的文档系统涉及两组人或预期用户目录：文档创建人和文档读者。创建人需要不给创建带来妨碍的精心设计的XML语法；而根本不关心XML的读者想要生成的HTML文档既具功能性又具观赏性。实现的难点是如何创建一个满足这两种观众需要的完整系统。哦，我假设还有第三种“用户”──我，Web管理员和设计新系统的人。由于我打算在站点升级时与新的文档系统交互，因此我需要它可靠且灵活。
 </p>
 
 </body>
