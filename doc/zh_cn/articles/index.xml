@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xsl/metadoc.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.1 -->
+
+<!DOCTYPE dynamic SYSTEM "/dtd/metadoc.dtd">
+
+<dynamic metadoc="/doc/zh_cn/metadoc.xml">
+<title>文章</title>
+<intro>
+
+<section>
+<!--<title>Previously published articles</title>-->
+<body>
+
+<p>
+我们的开发者曾经为Linux社区写过的一些文章。为了方便您阅读，我们重新发布了它们。
+</p>
+
+</body>
+</section>
+
+</intro>
+
+<catid>articles</catid>
+
+</dynamic>
