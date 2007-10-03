@@ -141,29 +141,15 @@ mutt -x gentoo-cvs -s "cvs log for $nicedate" &lt;\
 </body>
 </section>
 <section>
-<title>The Web-ready HTML</title>
+<title>就绪的HTML页面</title>
 <body>
 
 <p>
-First, let's talk a bit about the Web-ready HTML that'll be generated from 
-my master XML files. To make great, readable documentation, I'll need to 
-have support for the proper XML tags. For example, the ability to insert 
-notes, important messages, and warnings into the body of the document (and 
-have them prominently displayed in the resultant HTML) is a must. Also, I 
-must be able to insert blocks of code, and it would be great if actual user 
-input could somehow be offset from program output. I could even add tags 
-that highlight the source code comments in an alternate color so that the 
-code blocks are more readable.
+首先，让我们讨论一下将根据我的主XML文件生成的已准备好待发布的HTML页面。要生成好的、可读的文档，我需要正确的XM标记的支持。例如，必须要有将注释、重要消息和警告插入文档主体（而且使它们在结果HTML中突出显示）的能力。此外，我必须要能插入几段代码，如果实际用户的输入可以以某种方式由程序输出得到补偿，那就太棒了。我甚至可以在源代码注释中加入语法高亮标签，使不同的代码用不同的颜色来显示，这样代码块就更易读了。
 </p>
 
 <p>
-The documents should have a table of contents (with hyperlinks to the 
-appropriate chapters), a synopsis, a revision date, version, and an authors 
-list at the top of the document. And, of course, every document should have 
-a header at the extreme top of the page containing a small Gentoo Linux 
-logo.  Clicking on this logo should bring you back to the main Gentoo Linux 
-page. Last but not least, every document should have a footer that contains 
-copyright information, along with a contact e-mail address.
+文档顶部应该有目录表（含有指向相应章节的超链接）、摘要、修订日期、版本和作者清单。当然，每个文档在其页面的最上部应该有一个页眉，该页眉包含了一个小的Gentoo Linux徽标。单击此徽标应该将您带到Gentoo Linux主页面。最后，很重要的一点是，每个文档都应该有一个页脚，它包含了版权信息和一个方便联系的电子邮箱地址。
 </p>
 
 </body>
