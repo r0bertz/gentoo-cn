@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.13 -->
+
+<guide link="/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml" lang="zh_cn">
+
+<title>Gnome 2.18 Upgrade Guide</title>
+<author title="作者">
+  <mail link="dang@gentoo.org">Daniel Gryniewicz</mail>
+</author>
+<author title="编辑">
+<mail link="leio@gentoo.org">Mart Raudsepp</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="编辑">
+  <mail link="cla@gentoo.org">Dawid Węgliński</mail>
+</author>
+<author title="译者">
+ <mail link="jjj3112000@126.com">Zezhou Jiang</mail>
+</author>
+
+<abstract>
+这是一个从GNOME 2.16.x升级到GNOME 2.18.x的指南。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.5</version>
+<date>2007-08-18</date>
+
+<chapter>
+<title>主要改变</title>
+<section>
+<title>系统声音和ESD</title>
+<body>
+
+<p>
+Upstream已经决定移除ESD的autospawn功能，因为他们是破碎的而且导致了很多问题。这意味着如果你使用系统声音，你需要使esound启动服务运行起来。就像这样启动：
+</p>
+
+<pre caption="在启动时启用esound">
+# <i>rc-update add esound default</i>
+</pre>
+
+<p>
+请记住这将在一次重启以后才会有用，所以为了现在就启动它，用这个：
+</p>
+
+<pre caption="在正在运行的系统中启动esound">
+# <i>/etc/init.d/esound start</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>Totem没有“xine”USE标记！</title>
+<body>
+
+<p>
+我们决定移除xine 
+backend因为多种问题我们无法轻易解决。我们知道这使播放dvd变得很困难。然而，你仍然可以播放dvd。确保你有用<c>dvd</c>这个USE标记来编译<c>media-video/totem</c>，然后运行：
+</p>
+
+<pre caption="使用Totem播放DVD">
+# <i>totem dvd://</i>
+</pre>
+
+<p>
+这会播放主要的特性。那里没有菜单支持，抱歉。
+</p>
+
+<p>
+我们在观察是否可能把xine backend做到totem里面，依赖于gstreamer，然后让xine 
+backend能够在命令行下有选择的作为非默认的。然而这仍将会不被支持，而且这只不过提供了一个方便而已。我们应该感谢coding 
+help使得这个能够更快发生。
+</p>
+
+</body>
+</section>
+<section>
+<title>Totem的浏览器插件USE标记改变了！现在我得到了seamonkey！</title>
+<body>
+
+<p>
+Totem的“gecko”USE标志已经被重新安排了。以前它默认为seamonkey并依赖于标志选择firefox或者xulrunner，它现在默认为firefox并依赖于标志选择xulrunner或者seamonkey。这是因为两个原因。首先，因为seamonkey不能在所有平台上运行，所以它必须作为一个USE标记以便于禁用。第二点，为了把totem与一些其他的Gnome 
+apps（比如epiphany）做协调。这里是一些可能的USE标记组合，和它们对于totem来说现在意味着什么：
+</p>
+
+<table>
+<tr>
+  <th colspan="2">Totem浏览器插件USE标记组合</th>
+</tr>
+<tr>
+  <th>USE标记</th>
+  <th>结果</th>
+</tr>
+<tr>
+  <ti>USE="<c>-nsplugin</c>"</ti>
+  <ti>禁用浏览器插件；gecko不会被卷进来</ti>
+</tr>
+<tr>
+  <ti>USE="<c>nsplugin -xulrunner -seamonkey</c>"</ti>
+  <ti>
+    编译依赖于firefox的插件。这是在所有配置文件里默认的。
+  </ti>
+</tr>
+<tr>
+  <ti>USE="<c>nsplugin xulrunner -seamonkey</c>"</ti>
+  <ti>编译依赖于xulrunner的插件</ti>
+</tr>
+<tr>
+  <ti>USE="<c>nsplugin xulrunner seamonkey</c>"</ti>
+  <ti>编译依赖于xulrunner的插件。（xulrunner与seamonkey冲突。）</ti>
+</tr>
+<tr>
+  <ti>USE="<c>nsplugin -xulrunner seamonkey</c>"</ti>
+  <ti>编译依赖于seamonkey的插件</ti>
+</tr>
+</table>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>已知的问题</title>
+<section>
+<title>任务栏图标消失（特定的gnome-power-manager）</title>
+<body>
+
+<p>
+那里有一个已知的bug在gnome2.18里，就是为了在你的会话里启动的东西的任务栏图标有时候不会出现在任务栏里。程序在运行，但是图标没了。在很多情况下，这发生在gnome-power-manager上。我们希望在将来解决这问题，但同时workaround将会在会话启动时重启程序，然后图标就会在剩余的会话中显示了。对于gnome-power-manager，打开一个终端，然后跟着这些步骤：
+</p>
+
+<pre caption="使gnome-power-manager任务栏图标回来">
+# <i>killall gnome-power-manager</i>
+# <i>gnome-power-manager</i>
+</pre>
+
+<p>
+这将会使你的g-p-m任务栏图标回来。
+</p>
+
+</body>
+</section>
+<section>
+<title>当使用tracker时Deskbar-applet在登陆时出错</title>
+<body>
+
+<p>
+那里有一个已知的bug在trackerd里，当trackerd在运行时，它会在登录时导致一个race，然后deskbar-applet试着通过它的dbus界面来启动它。这将导致deskbar-applet的出错。为了是deskbar-applet在一次工作（同tracker一起），打开一个终端，跟着做：
+</p>
+
+<pre caption="使deskbar-applet工作起来">
+# <i>killall deskbar-applet</i>
+</pre>
+
+<p>
+然后，当对话出现，并要求重启它时，选择"Reload"。
+</p>
+
+<p>
+这必须在已登录时就被完成。Deskbar-applet将会为剩下的会话而运行。
+</p>
+
+</body>
+</section>
+<section>
+<title>编译因为XML::错误结束，另一个编译记下</title>
+<body>
+
+<p>
+这个之所以会发生，是因为<c>expat</c>在Gnome 
+2.18推出的同时被移动到了stable。只要expat被升级了，你就需要重新编译一切链接到它的东西，这通常是升级过程的开始。为了做这个，运行：
+</p>
+
+<pre caption="修复expat的破坏">
+# <i>revdep-rebuild -X</i>
+</pre>
+
+<p>
+这会重新编译被expat破坏的所有东西，也会升级其他的东西。只要它完成了，你应该能够完成剩下的gnome的升级。
+</p>
+
+<p>
+只要2.18的升级全部完成，你需要运行<c>revdep-rebuild</c>多次，直到没有出现信息了，这标志着gnome和它的依赖被正确地编译了。在那之后，别忘了运行<c>dispatch-conf</c>！
+</p>
+
+<p>
+最后，如果dbus和hal在升级时正在运行，则他们需要重启：
+</p>
+
+<pre caption="重启服务">
+# <i>/etc/init.d/dbus restart</i>
+# <i>/etc/init.d/hald restart</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+</guide>
