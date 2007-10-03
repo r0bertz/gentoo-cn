@@ -4,9 +4,9 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.13 -->
 
-<guide link="/proj/en/desktop/gnome/howtos/gnome-2.18-upgrade.xml" lang="zh_cn">
+<guide link="/proj/zh_cn/desktop/gnome/howtos/gnome-2.18-upgrade.xml" lang="zh_cn">
 
-<title>Gnome 2.18 Upgrade Guide</title>
+<title>Gnome 2.18升级指南</title>
 <author title="作者">
   <mail link="dang@gentoo.org">Daniel Gryniewicz</mail>
 </author>
