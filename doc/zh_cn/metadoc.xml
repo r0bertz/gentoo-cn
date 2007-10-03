@@ -68,9 +68,9 @@
     <file id="art-ct-l-sed-p1">/doc/en/articles/l-sed1.xml</file>
     <file id="art-ct-l-sed-p2">/doc/en/articles/l-sed2.xml</file>
     <file id="art-ct-l-sed-p3">/doc/en/articles/l-sed3.xml</file>
-    <file id="art-ct-l-awk-p1">/doc/en/articles/l-awk1.xml</file>
-    <file id="art-ct-l-awk-p2">/doc/en/articles/l-awk2.xml</file>
-    <file id="art-ct-l-awk-p3">/doc/en/articles/l-awk3.xml</file>
+    <file id="art-ct-l-awk-p1">/doc/zh_cn/articles/l-awk1.xml</file>
+    <file id="art-ct-l-awk-p2">/doc/zh_cn/articles/l-awk2.xml</file>
+    <file id="art-ct-l-awk-p3">/doc/zh_cn/articles/l-awk3.xml</file>
     <file id="art-ct-l-posix-p1">/doc/en/articles/l-posix1.xml</file>
     <file id="art-ct-l-posix-p2">/doc/en/articles/l-posix2.xml</file>
     <file id="art-ct-l-posix-p3">/doc/en/articles/l-posix3.xml</file>
@@ -94,10 +94,10 @@
     <file id="samba-p1">/doc/en/articles/samba-p1.xml</file>
     <file id="samba-p2">/doc/en/articles/samba-p2.xml</file>
     <file id="samba-p3">/doc/en/articles/samba-p3.xml</file>
-    <file id="l-redesign-1">/doc/en/articles/l-redesign-1.xml</file>
-    <file id="l-redesign-2">/doc/en/articles/l-redesign-2.xml</file>
-    <file id="l-redesign-3">/doc/en/articles/l-redesign-3.xml</file>
-    <file id="l-redesign-4">/doc/en/articles/l-redesign-4.xml</file>
+    <file id="l-redesign-1">/doc/zh_cn/articles/l-redesign-1.xml</file>
+    <file id="l-redesign-2">/doc/zh_cn/articles/l-redesign-2.xml</file>
+    <file id="l-redesign-3">/doc/zh_cn/articles/l-redesign-3.xml</file>
+    <file id="l-redesign-4">/doc/zh_cn/articles/l-redesign-4.xml</file>
     <file id="autotools-practices">/doc/en/articles/autotools-practices.xml</file>
     <file id="bugzie-howto">/doc/en/bugzilla-howto.xml</file>
     <file id="mysql-howto">/doc/en/mysql-howto.xml</file>
