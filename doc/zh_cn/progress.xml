@@ -504,13 +504,13 @@
   </tr>
   <tr>
     <ti>keychain-guide.xml</ti>
-    <ti><uri link="/doc/en/keychain-guide.xml">v 1.3</uri></ti>
+    <ti><uri link="/doc/en/keychain-guide.xml">v 1.4</uri></ti>
     <ti>2007/04/29</ti>
     <ti><mail link="bookstack@gmail.com">bookstack</mail></ti>
-    <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>T</ti>
+    <ti>2007/10/03</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/keychain-guide.xml"></uri></ti>
+    <ti><uri link="/doc/zh_cn/keychain-guide.xml">v 1.4</uri></ti>
     <ti>N/A</ti>
   </tr>
   <tr>

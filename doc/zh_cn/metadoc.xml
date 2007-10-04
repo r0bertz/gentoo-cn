@@ -338,7 +338,7 @@
     <file id="security-coordination">/security/en/coordinator_guide.xml</file>
     <file id="security-recruitment">/security/en/padawans.xml</file>
     <file id="security-bugs">/security/en/bug-searching.xml</file>
-    <file id="keychain-guide">/doc/en/keychain-guide.xml</file>
+    <file id="keychain-guide">/doc/zh_cn/keychain-guide.xml</file>
     <file id="metadoc-guide">/proj/en/gdp/doc/metadoc-guide.xml</file>
     <file id="hpc-howto">/doc/en/hpc-howto.xml</file>
     <file id="gnap-userguide">/proj/en/base/embedded/gnap-userguide.xml</file>
