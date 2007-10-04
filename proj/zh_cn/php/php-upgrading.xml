@@ -42,7 +42,7 @@
 </p>
 
 <note>
-新的PHP包需要新的Apache界面，所以如果你还没升级，请看看 <uri link="/doc/en/apache-upgrading.xml">Upgrading Apache</uri> 。
+新的PHP包需要新的Apache界面，所以如果你还没升级，请看看<uri link="/doc/en/apache-upgrading.xml">升级Apache</uri>。
 </note>
 
 </body>
@@ -56,7 +56,7 @@
 <body>
 
 <p>
-所有的PHP的ebuild <c>dev-php/php</c> ， <c>dev-php/php-cgi</c>和<c>dev-php/mod_php</c>已经整合成一个ebuild了：<c>dev-lang/php</c> 。 
+所有的PHP的ebuild <c>dev-php/php</c>，<c>dev-php/php-cgi</c>和<c>dev-php/mod_php</c>已经整合成一个ebuild了：<c>dev-lang/php</c>。
 </p>
 
 <p>
@@ -64,10 +64,10 @@
 </p>
 
 <ul>
-  <li><c>cgi</c> - 编译和安装 <path>/usr/bin/php-cgi</path></li>
-  <li><c>cli</c> - 编译和安装 <path>/usr/bin/php</path></li>
-  <li><c>apache</c> - 编译和安装 <c>mod_php</c> for Apache 1.3（新界面）</li>
-  <li><c>apache2</c> - 编译和安装 <c>mod_php</c> for Apache 2.0（新界面）</li>
+  <li><c>cgi</c>——编译和安装<path>/usr/bin/php-cgi</path></li>
+  <li><c>cli</c>——编译和安装<path>/usr/bin/php</path></li>
+  <li><c>apache</c>——编译和安装Apache 1.3的<c>mod_php</c>（新布局）</li>
+  <li><c>apache2</c>——编译和安装Apache 2.0的<c>mod_php</c>（新布局）</li>
 </ul>
 
 <p>
@@ -92,7 +92,7 @@
 <note>
 USE标记不能像这样设，请使用<path>/etc/portage/package.use</path>，这个稍后会说。
 </note>
-  
+
 </body>
 </section>
 
@@ -248,7 +248,7 @@ PHP扩展，像
 我们对Gentoo下的PHP做了很多改变。你必须在安装新的包前完全移除你的旧的PHP包：
 </p>
 
-<pre caption="移除旧的包 （示例）">
+<pre caption="移除旧的包（示例）">
 <comment>（反安装PHP包）</comment>
 <i>emerge --unmerge php mod_php</i>
 
@@ -283,7 +283,7 @@ dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mys
 </pre>
 
 <note>
-<c>-*</c>将会禁用所有的USE标记（它甚至会禁用一些PHP基本的特性像Session-，PCRE-，gd-和MySQL支持），所以你必须特别地为一些你想要的扩展或特性指定USE标记。请参看<uri link="http://overlays.gentoo.org/proj/php/wiki/ManagingExtensions">Managing Extensions</uri>来获取更多细节。你必须为以上默认的设置USE标记像这些：如果你想用<c>pcre</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefPcre">preg_* Functions</uri>，或者你想用<c>session</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefSession">Session Handling Functions</uri>。
+<c>-*</c>将会禁用所有的USE标记（它甚至会禁用一些PHP基本的特性像Session-，PCRE-，gd-和MySQL支持），所以你必须特别地为一些你想要的扩展或特性指定USE标记。请参看<uri link="http://overlays.gentoo.org/proj/php/wiki/ManagingExtensions">管理扩展</uri>来获取更多细节。你必须为以上默认的设置USE标记像这些：如果你想用<c>pcre</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefPcre">preg_*函数</uri>，或者你想用<c>会话</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefSession">会话处理函数</uri>。
 </note>
 
 <p>
@@ -296,8 +296,7 @@ dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mys
 </pre>
 
 <note>
-你可以在<uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions">Recommend USE flags</uri>里找到推荐的USE标记列表。在overlay的维基百科<uri link="http://overlays.gentoo.org/proj/php/wiki/NewUseFlags">USE flags table</uri>里你能找到PHP能用的USE标记的列表。
-</note>
+你可以在<uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions">推荐的USE标记</uri>里找到推荐的USE标记列表。在overlay的维基百科<uri link="http://overlays.gentoo.org/proj/php/wiki/NewUseFlags">USE标记列表</uri>里你能找到PHP能用的USE标记的列表。</note>
 
 </body>
 </section>
@@ -434,7 +433,7 @@ dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mys
 </pre>
 
 <note>
-请记住<c>php-select</c>只改变默认的版本。如果你PHP4和PHP5的cgi/cli都装了，你可以用直接路径像<path>/usr/lib/php4/bin/php</path>和<path>/usr/lib/php5/bin/php</path>来运行你个特定版本的PHP脚本。你可以在相同的Apache实例中使用PHP4和PHP5的cgi，但是你不能在相同的Apache实例中使用两个不同的PHP的Apache模块，参见<uri link="php4-php5-configuration.xml">PHP4 and PHP5 Configuration Guide</uri> 来得到更多细节。
+请记住<c>php-select</c>只改变默认的版本。如果你PHP4和PHP5的cgi/cli都装了，你可以用直接路径像<path>/usr/lib/php4/bin/php</path>和<path>/usr/lib/php5/bin/php</path>来运行你个特定版本的PHP脚本。你可以在相同的Apache实例中使用PHP4和PHP5的cgi，但是你不能在相同的Apache实例中使用两个不同的PHP的Apache模块，参见<uri link="php4-php5-configuration.xml">PHP4和PHP5配置指南</uri>来得到更多细节。
 </note>
 
 </body>
@@ -499,7 +498,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 <body>
 
 <p>
-新的PHP包不会在<path>php.ini</path>里存储共享的PHP扩展的配置指令。这些指令会被存储在每一个扩展的在<path>/etc/php/*/ext</path>目录里的自己的配置文件里。如果要启用/禁用共享的扩展，<path>/etc/php/*/ext-active</path>的链接被使用了。如果你想要启动一个扩展，创建<path>/etc/php/*/ext-active</path>的链接到<path>/etc/php/*/ext/</path>目录里的适当的 <path>[EXTENSION].ini</path>文件上。如果你想要禁用扩展，只要移除链接就好。
+新的PHP包不会在<path>php.ini</path>里存储共享的PHP扩展的配置指令。这些指令会被存储在每一个扩展的在<path>/etc/php/*/ext</path>目录里的自己的配置文件里。如果要启用/禁用共享的扩展，<path>/etc/php/*/ext-active</path>的链接被使用了。如果你想要启动一个扩展，创建<path>/etc/php/*/ext-active</path>的链接到<path>/etc/php/*/ext/</path>目录里的适当的<path>[EXTENSION].ini</path>文件上。如果你想要禁用扩展，只要移除链接就好。
 </p>
 
 <p>
@@ -540,7 +539,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </p>
 
 <p>
-我们创建了<uri link="php4-php5-configuration.xml">PHP4 and PHP5 Configuration Guide</uri>来解释一些可能的解决方案。
+我们创建了<uri link="php4-php5-configuration.xml">PHP4和PHP5配置指南</uri>来解释一些可能的解决方案。
 </p>
 
 </body>
@@ -567,12 +566,12 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
     在irc.freenode.net上的#gentoo-php；这是一个overlay的正式作者经常逛的聊天室。我们很希望在那见到你！
   </li>
   <li>
-    <uri link="http://forums.gentoo.org/">Gentoo Forums</uri>这里是寻求帮助的好地方。这里有很多每时每刻都阅读论坛的其他Gentoo用户，如果你急需得到帮助，这里是个好地方。
+    <uri link="http://forums.gentoo.org/">Gentoo论坛</uri>这里是寻求帮助的好地方。这里有很多每时每刻都阅读论坛的其他Gentoo用户，如果你急需得到帮助，这里是个好地方。
   </li>
 </ul>
 
 <p>
-对于新的包的实行细节，你可以看看<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">Stuart's Posting on gentoo-dev</uri>。你也许觉得<uri link="http://blog.stuartherbert.com/php/">Stuart's PHP Blog</uri>也很有趣。
+对于新的包的实行细节，你可以看看<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">gentoo-dev上Stuart的邮件</uri>。你也许觉得<uri link="http://blog.stuartherbert.com/php/">Stuart的PHP博客</uri>也很有趣。
 </p>
 
 <p>
