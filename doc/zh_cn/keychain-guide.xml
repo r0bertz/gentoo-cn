@@ -1,0 +1,286 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_CN/keychain-guide.xml" lang="zh_cn">
+<title>Gentoo Linux Keychain指南</title>
+
+<author title="作者">
+  <mail link="eric.brown@dnbrown.net">Eric Brown</mail>
+</author>
+<author title="编者">
+ <mail link="vanquirius@gentoo.org">Marcelo Góes</mail>
+</author>
+<author title="译者">
+ <mail link="bookstack@gmail.com">Kun Xi</mail>
+</author>
+
+<abstract>
+本文档描述了如何使用keychain程序来共享ssh私钥。我们假设读者有公共密钥加密的基础知识。
+</abstract>
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/> 
+
+<version>1.3</version>
+<date>2007-04-29</date>
+
+<chapter>
+<title>背景</title>
+<section>
+<title>手边的难题</title>
+<body>
+
+<p>
+您终于让所有那些可爱的Gentoo机器都运行sshd了，但是每次登录都需要输入密码却有点不方便，对吧？或者您有一个脚本或cron任务需要一个更加方便快捷的方式进行ssh连接。不管怎样，我们有一个方案可以解决这个难题，它基于公共密钥认证。
+</p>
+
+</body>
+</section>
+<section>
+<title>公共密钥认证是怎么工作的？</title>
+<body>
+
+<p>
+假设我们有一个客户需要连接到服务器的sshd。该客户首先产生一组公钥／私钥对，然后把公钥提交给服务器。此后，每当该客户试图连接的时候，服务器就用公钥加密一个随机数，发给客户。只有相应的私钥持有者（该客户）才能解密，和您猜想的一样，正确的回复意味着成功的认证。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>如何使用公钥认证</title>
+<section>
+<title>生成您的公钥／私钥对</title>
+<body>
+
+<p>
+第一步是生成您的公钥／私钥对。我们可以运行<c>ssh-keygen</c>，命令如下：
+</p>
+
+<pre caption="生成公钥／私钥对">
+$ <i>ssh-keygen -t dsa</i>
+<comment>（接受默认值，请确保输入一个强密码）</comment>
+</pre>
+
+<warn>
+请确保输入一个强密码，尤其是用于root登录的私钥！
+</warn>
+
+<p>
+您现在有一个私钥<path>~/.ssh/id_dsa</path>以及公钥<path>~/.ssh/id_dsa.pub</path>。我们现在可以复制公钥到远程的主机上。
+</p>
+
+</body>
+</section>
+<section>
+<title>准备服务器</title>
+<body>
+
+<p>
+我们复制<path>~/.ssh/id_dsa.pub</path>到运行sshd的服务器。我们要将它加入到该用户在服务器上相应帐号的<path>~/.ssh/authorized_keys</path>中。以下是一个例子，我们假设您已经可以用ssh访问服务器。
+</p>
+
+<pre caption="复制公钥到服务器">
+$ <i>scp ~/.ssh/id_dsa.pub server_user@server:~/myhost.pub</i>
+$ <i>ssh server_user@server "cat ~/myhost.pub >> ~/.ssh/authorized_keys"</i>
+$ <i>ssh server_user@server "cat ~/.ssh/authorized_keys"</i>
+</pre>
+
+<p>
+最后一行的输出显示了<path>~/.ssh/authorized_keys</path>文件的内容。请确保它看起来是正确的
+</p>
+
+</body>
+</section>
+<section>
+<title>测试设置</title>
+<body>
+
+<p>
+理论上，如果一切工作正常，并且服务器端的ssh守护进程允许的话，无需密码，我们就可以通过ssh访问服务器。在客户端，我们还是需要用上面提到的密码来解密私钥，但是这不同于服务器端的用户密码，请勿混淆。
+</p>
+
+<pre caption="测试密钥">
+$ <i>ssh server_user@server</i>
+</pre>
+
+<p>
+幸运的话，它会提示您输入id_dsa的密码，您就可以通过ssh，用server_user帐户来访问服务器了。否则，用server_user登录服务器，确保<path>~/.ssh/authorized_keys</path>的每个条目是独立的一行。您也许还需要检查sshd的设置以确保它优先使用公共密钥认证。 
+ 
+</p>
+
+<p>
+此时，您也许会想，“这有什么用呢？用一个密码替换另一个密码？” 
+放轻松，下一节我们会向您展示如何用这个技术来节约您宝贵的时间。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>让公共密钥认证更加方便</title>
+<section>
+<title>使用ssh-agent密钥管理的典型案例</title>
+<body>
+
+<p>
+如果您跟随我们的脚步，您也许会想，如果用某种方法解密我们的私钥一次，然后无需密码，就可以自由的使用ssh，那该多好啊。 
+好运气属于您， 这正是<c>ssh-agent</c>所要做的。
+</p>
+
+<p>
+应用程序<c>ssh-agent</c>通常在您开始X会话或者加载shell启动脚本时启动，比如<path>~/.bash_profile</path>。它先创建一个unix套接字，然后注册相应的环境变量，随后的所有应用程序就可以通过连接到这个套接字来使用这项服务。很明显，如果您想在此后的X应用程序里使用解密的私钥的话。 
+您应该在X会话的父进程里启动它。
+</p>
+
+<pre caption="准备ssh-agent">
+$ <i>ssh-agent</i>
+</pre>
+
+<note>
+ssh-agent会一直持有解密的私钥直到您杀掉ssh-agent进程。如果您希望为私钥设定一个生命周期，您可以用-t选项，详情请参考<c>man
+ ssh-agent</c>。
+</note>
+
+<p>
+在您运行ssh-agent时，它会告诉您运行的ssh-agent的PID，并且设置一些环境变量，如<c>SSH_AUTH_SOCK</c>和<c>SSH_AGENT_PID</c>。它还应该自动把<path>~/.ssh/id_dsa</path>加入收藏，并询问相应的密码。如果您希望让运行的ssh-agent管理其他私钥，您可以运行<c>ssh-agent</c>如下：
+</p>
+
+<pre caption="加入更多的私钥到ssh-agent">
+$ <i>ssh-add somekeyfile</i>
+</pre>
+
+<p>
+现在到了表演魔术的时候了。既然您已经准备好了解密的私钥，您应该可以无需密码登录服务器。
+</p>
+
+<pre caption="无需密码的ssh">
+$ <i>ssh server</i>
+</pre>
+
+<p>
+如果我们知道如何在必要的时候关闭ssh-agent就更好了，不是吗？
+</p>
+
+<pre caption="关闭ssh-agent">
+$ <i>ssh-agent -k</i>
+</pre>
+
+<note>
+如果您无法正常使用ssh-agent，它可能已经正在运行，你可以像强制退出其他进程一样，<c>killall ssh-agent</c>。
+</note>
+
+<p>
+如果您希望更多的便利，请前进至下节关于keychain的使用。如果您打算这么作的话，请确保在上例中所有的ssh-agent都被杀掉。
+</p>
+
+</body>
+</section>
+<section>
+<title>从ssh-agent中榨出最后一滴便利</title>
+<body>
+
+<p>
+keychain可以允许您在登录过程中重用ssh-agent，并且可选地在每次用户登录后提示输入密码。在我们继续之前，然我们先emerge它。
+</p>
+
+<pre caption="安装keychain">
+# <i>emerge keychain</i>
+</pre>
+
+<p>
+如果成功的话，我们就可以自由的使用keychain。在您的<path>~/.bash_profile</path>中启动它：
+</p>
+
+<pre caption="在.bash_profile里启用keychain">
+keychain ~/.ssh/id_dsa
+. ~/.keychain/$HOSTNAME-sh
+</pre>
+
+<note>
+您可以用命令行加入更多的私钥。同时，如果您希望在开启一个新的shell的时候提示输入密码，您可以加入--clear
+选项。
+</note>
+
+<note>
+如果您不使用bash，请查看<c>man keychain</c> <b>EXAMPLES</b> 一节关于使用其他shell的例子。关键在于每次您使用shell的时候都必须运行上述命令。
+</note>
+
+<p>
+让我们测试一下。首先确保杀掉上节中所有ssh-agent的进程，开启一个新的shell，通常您可以重新登录或者开启一个新的控制台。它会在命令行里提醒您输入每个私钥的密码。此后所有的shell都可以重用ssh-agent，使得您可以不断的无密码登录ssh。
+</p>
+
+</body>
+</section>
+<section>
+<title>在KDE里使用keychain</title>
+<body>
+
+<p>
+如果您是KDE用户，除了使用<path>~/.bash_profile</path>，您也可以让KDE为您管理ssh-agent。您要做的就是编辑<path>/usr/kde/${KDE_VERSION}/env/agent-startup.sh</path>，它在启动时被读取；以及<path>/usr/kde/${KDE_VERSION}/shutdown/agent-shutdown.sh</path>它在KDE退出是运行，${KDE_VERSION}代表了您安装的KDE版本的头两位数字，比如您使用的是KDE 
+3.5.1, ${KDE_VERSION}就是3.5。以下是如何编辑这些文件：
+</p>
+
+<pre caption="编辑/usr/kde/3.5/env/agent-startup.sh">
+if [ -x /usr/bin/ssh-agent ]; then
+  eval "$(/usr/bin/ssh-agent -s)"
+fi
+</pre>
+
+<pre caption="编辑/usr/kde/3.5/shutdown/agent-shutdown.sh">
+if [ -n "${SSH_AGENT_PID}" ]; then
+  eval "$(ssh-agent -k)"
+fi
+</pre>
+
+<p>
+现在您所要做的就是启动任意一个控制台，比如Konsole，加载所要的私钥。比如：
+</p>
+
+<pre caption="加载ssh私钥">
+keychain ~/.ssh/id_dsa
+<comment>（输入您的私钥密码）</comment>
+</pre>
+
+<p>
+您的私钥会一直保留，直到您结束KDE会话或者手动杀掉ssh-agent
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>结论</title>
+<section>
+<title>安全的考量</title>
+<body>
+
+<p>
+当然，使用ssh-agent会使您的系统有少许的不安全。如果当您在洗手间的时候，其他的用户使用您的shell，他不需密码就可以登录到所有您的服务器。这对于您所连接的服务器是一个隐患，您应该垂询相关的安全策略。如果您使用它，请确保您的会话的安全。
+</p>
+
+</body>
+</section>
+<section>
+<title>排错</title>
+<body>
+
+<p>
+大部分情况应该工作正常，但是如果您碰到问题，您肯定希望得到一些有用的帮助。
+</p>
+
+<ul>
+  <li>
+    如果您不用ssh-agent也无法连接，考虑使用ssh时加入-vvv选项，看看到底发生了什么。有时服务器没有配置使用公共密钥认证，有时它被配置为本地密码无论如何总是需要的！如果是上述情况，您可以用ssh的-o选项，或者更改服务器的sshd_config。
+  </li>
+  <li>
+    如果您无法使用ssh-agent或者keychain，有可能正在使用的的shell不懂您使用的命令。请垂询ssh-agent和keychain的man页，了解和其他shell打交道的细节。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
