@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding="utf-8"?>
-
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
 
-<guide link="/doc/zh_CN/keychain-guide.xml" lang="zh_cn">
+<guide link="/doc/zh_cn/keychain-guide.xml" lang="zh_cn">
 <title>Gentoo Linux Keychain指南</title>
 
 <author title="作者">
@@ -16,8 +17,9 @@
 </author>
 
 <abstract>
-本文档描述了如何使用keychain程序来共享ssh私钥。我们假设读者有公共密钥加密的基础知识。
+本文档描述了如何通过keychain程序来使用ssh秘钥。我们假设读者有公钥加密的基础知识。
 </abstract>
+
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/> 
@@ -32,13 +34,13 @@
 <body>
 
 <p>
-您终于让所有那些可爱的Gentoo机器都运行sshd了，但是每次登录都需要输入密码却有点不方便，对吧？或者您有一个脚本或cron任务需要一个更加方便快捷的方式进行ssh连接。不管怎样，我们有一个方案可以解决这个难题，它基于公共密钥认证。
+您终于让所有那些可爱的Gentoo机器都运行sshd了，但是每次登录都需要输入密码却有点不方便，对吧？或者您有一个脚本或cron任务需要一个更加方便快捷的方式进行ssh连接。不管怎样，我们有一个方案可以解决这个难题，它基于公钥认证。
 </p>
 
 </body>
 </section>
 <section>
-<title>公共密钥认证是怎么工作的？</title>
+<title>公钥认证是怎么工作的？</title>
 <body>
 
 <p>
@@ -111,27 +113,24 @@ $ <i>ssh server_user@server</i>
 </p>
 
 <p>
-此时，您也许会想，“这有什么用呢？用一个密码替换另一个密码？” 
-放轻松，下一节我们会向您展示如何用这个技术来节约您宝贵的时间。
+此时，您也许会想，“这有什么用呢？用一个密码替换另一个密码？”放轻松，下一节我们会向您展示如何用这个技术来节约您宝贵的时间。
 </p>
 
 </body>
 </section>
 </chapter>
 <chapter>
-<title>让公共密钥认证更加方便</title>
+<title>让公钥认证更加方便</title>
 <section>
 <title>使用ssh-agent密钥管理的典型案例</title>
 <body>
 
 <p>
-如果您跟随我们的脚步，您也许会想，如果用某种方法解密我们的私钥一次，然后无需密码，就可以自由的使用ssh，那该多好啊。 
-好运气属于您， 这正是<c>ssh-agent</c>所要做的。
+如果您跟随我们的脚步，您也许会想，如果用某种方法解密我们的私钥一次，然后无需密码，就可以自由的使用ssh，那该多好啊。好运气属于您，这正是<c>ssh-agent</c>所要做的。
 </p>
 
 <p>
-应用程序<c>ssh-agent</c>通常在您开始X会话或者加载shell启动脚本时启动，比如<path>~/.bash_profile</path>。它先创建一个unix套接字，然后注册相应的环境变量，随后的所有应用程序就可以通过连接到这个套接字来使用这项服务。很明显，如果您想在此后的X应用程序里使用解密的私钥的话。 
-您应该在X会话的父进程里启动它。
+应用程序<c>ssh-agent</c>通常在您开始X会话或者加载shell启动脚本时启动，比如<path>~/.bash_profile</path>。它先创建一个unix套接字，然后注册相应的环境变量，随后的所有应用程序就可以通过连接到这个套接字来使用这项服务。很明显，如果您想在此后的X应用程序里使用解密的私钥的话。您应该在X会话的父进程里启动它。
 </p>
 
 <pre caption="准备ssh-agent">
@@ -178,7 +177,7 @@ $ <i>ssh-agent -k</i>
 </body>
 </section>
 <section>
-<title>从ssh-agent中榨出最后一滴便利</title>
+<title>从ssh-agent中榨取最后一滴便利</title>
 <body>
 
 <p>
@@ -204,7 +203,7 @@ keychain ~/.ssh/id_dsa
 </note>
 
 <note>
-如果您不使用bash，请查看<c>man keychain</c> <b>EXAMPLES</b> 一节关于使用其他shell的例子。关键在于每次您使用shell的时候都必须运行上述命令。
+如果您不使用bash，请查看<c>man keychain</c> <b>EXAMPLES</b>一节关于使用其他shell的例子。关键在于每次您使用shell的时候都必须运行上述命令。
 </note>
 
 <p>
@@ -218,8 +217,9 @@ keychain ~/.ssh/id_dsa
 <body>
 
 <p>
-如果您是KDE用户，除了使用<path>~/.bash_profile</path>，您也可以让KDE为您管理ssh-agent。您要做的就是编辑<path>/usr/kde/${KDE_VERSION}/env/agent-startup.sh</path>，它在启动时被读取；以及<path>/usr/kde/${KDE_VERSION}/shutdown/agent-shutdown.sh</path>它在KDE退出是运行，${KDE_VERSION}代表了您安装的KDE版本的头两位数字，比如您使用的是KDE 
-3.5.1, ${KDE_VERSION}就是3.5。以下是如何编辑这些文件：
+如果您是KDE用户，除了使用<path>~/.bash_profile</path>，您也可以让KDE为您管理
+ssh-agent。您要做的就是编辑
+<path>/usr/kde/${KDE_VERSION}/env/agent-startup.sh</path>，它在启动时被读取；以及<path>/usr/kde/${KDE_VERSION}/shutdown/agent-shutdown.sh</path>它在KDE退出是运行，${KDE_VERSION}代表了您安装的KDE版本的头两位数字，比如您使用的是KDE 3.5.1，${KDE_VERSION}就是3.5。以下是如何编辑这些文件：
 </p>
 
 <pre caption="编辑/usr/kde/3.5/env/agent-startup.sh">
