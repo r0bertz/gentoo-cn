@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/proj/en/php/php-upgrading.xml,v 1.5 2007/08/11 08:19:44 nightmorph Exp $ -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.5 -->
 
 <guide link="/proj/zh_cn/php/php-upgrading.xml" lang="zh_cn">
 <title>升级PHP</title>
@@ -13,7 +14,7 @@
 </author>
 
 <abstract>
-这个文档描述了程序终端用户需要跟随的安全升级PHP的步骤。
+这个文档描述了最终用户安全升级PHP时所需要做的步骤。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -55,8 +56,7 @@
 <body>
 
 <p>
-所有的PHP的ebuild <c>dev-php/php</c> ， <c>dev-php/php-cgi</c> 和 
-<c>dev-php/mod_php</c> 已经整合成一个ebuild了： <c>dev-lang/php</c> 。 
+所有的PHP的ebuild <c>dev-php/php</c> ， <c>dev-php/php-cgi</c>和<c>dev-php/mod_php</c>已经整合成一个ebuild了：<c>dev-lang/php</c> 。 
 </p>
 
 <p>
@@ -71,7 +71,7 @@
 </ul>
 
 <p>
-你可以混合并且组合这些USE标记；除了你不能同时开启 <c>apache</c> 和 <c>apache2</c> 两个USE标记。
+你可以混合并且组合这些USE标记；除了你不能同时开启<c>apache</c>和<c>apache2</c>两个USE标记。
 </p>
 
 <p>
@@ -90,7 +90,7 @@
 </pre>
 
 <note>
-USE标记不能像这样设，请使用 <path>/etc/portage/package.use</path> ，这个稍后会说。
+USE标记不能像这样设，请使用<path>/etc/portage/package.use</path>，这个稍后会说。
 </note>
   
 </body>
@@ -101,17 +101,14 @@ USE标记不能像这样设，请使用 <path>/etc/portage/package.use</path> �
 <body>
 
 <p>
-新的PHP的ebuild已经从 <c>dev-php</c> 被移到 <c>dev-lang/php</c> 
-下了。为了独立地安装PHP4和PHP5，两个新的Portage分类已经被创建了： <c>dev-php4</c> 和 <c>dev-php5</c> 
-。这些分类主要被用于PECL包像 <c>pecl-pdo</c> ， <c>pecl-apc</c> ， <c>php-java-bridge</c> 
-或 <c>xdebug</c>。
+新的PHP的ebuild已经从<c>dev-php</c>被移到<c>dev-lang/php</c>下了。为了独立地安装PHP4和PHP5，两个新的Portage分类已经被创建了：<c>dev-php4</c>和<c>dev-php5</c>。这些分类主要被用于PECL包像<c>pecl-pdo</c>，<c>pecl-apc</c>，<c>php-java-bridge</c>或<c>xdebug</c>。
 </p>
 
 <p>
-安装 <c>pecl-apc</c> ：
+安装<c>pecl-apc</c>：
 </p>
 
-<pre caption="安装PHP扩展像PECL::APC （示例）">
+<pre caption="安装PHP扩展像PECL::APC（示例）">
 <comment>（只为PHP4安装APC）</comment>
 <i>emerge dev-php4/pecl-apc</i>
 
@@ -130,9 +127,9 @@ USE标记不能像这样设，请使用 <path>/etc/portage/package.use</path> �
 <body>
 
 <ul>
-  <li>这些ebuild会将他们的内容安装到 <path>/usr/lib/php4</path> 和 <path>/usr/lib/php5</path> 下（Apache的模块被安装到相应的Apache目录里）</li>
-  <li>PEAR包和其他的PHP库文件将会被安装到 <path>/usr/share/php</path> （之前是 <path>/usr/lib/php</path> ）</li>
-  <li>PECL包已经不再往 <path>php.ini</path> 配置文件下添加配置知道了，但添加一个 <path>[PACKAGE].ini</path> 文件到 <path>/etc/php/[SAPI]/ext</path> 目录下。</li>
+  <li>这些ebuild会将他们的内容安装到<path>/usr/lib/php4</path>和<path>/usr/lib/php5</path>下（Apache的模块被安装到相应的Apache目录里）</li>
+  <li>PEAR包和其他的PHP库文件将会被安装到<path>/usr/share/php</path>（之前是<path>/usr/lib/php</path>）</li>
+  <li>PECL包已经不再往<path>php.ini</path>配置文件下添加配置知道了，但添加一个<path>[PACKAGE].ini</path>文件到<path>/etc/php/[SAPI]/ext</path>目录下。</li>
 </ul>
 
 </body>
@@ -151,11 +148,7 @@ USE标记不能像这样设，请使用 <path>/etc/portage/package.use</path> �
 </pre>
 
 <p>
-ebuild将会在 <path>/usr/bin</path> 
-里为你安装的最后一个PHP版本建立链接，在这个例子中PHP5在PHP4后面装好。如果你想要 <path>/usr/bin/php</path> 或者 
-<path>/usr/bin/php-cgi</path> 指向PHP4，或者其中一个指向PHP4另一个指向PHP5，你可以使用来自 
-<c>app-admin/php-toolkit</c> 的 <uri link="#doc_chap3_sect5">use the 
-php-select tool</uri> 。 <c>php-select</c> 将会使链接正确的二进制库变得十分简单。
+ebuild将会在<path>/usr/bin</path>里为你安装的最后一个PHP版本建立链接，在这个例子中PHP5在PHP4后面装好。如果你想要<path>/usr/bin/php</path>或者<path>/usr/bin/php-cgi</path>指向PHP4，或者其中一个指向PHP4另一个指向PHP5，你可以使用来自<c>app-admin/php-toolkit</c>的<uri link="#doc_chap3_sect5">use the php-select tool</uri>。<c>php-select</c>将会使链接正确的二进制库变得十分简单。
 </p>
 
 </body>
@@ -169,8 +162,7 @@ php-select tool</uri> 。 <c>php-select</c> 将会使链接正确的二进制库
 <body>
 
 <p>
-首先你要想好你要升级哪些包。你可以使用 <c>equery</c> 工具来达到目的，它是 <c>app-portage/gentoolkit</c> 
-包的一部分： 
+首先你要想好你要升级哪些包。你可以使用<c>equery</c>工具来达到目的，它是<c>app-portage/gentoolkit</c>包的一部分：
 </p>
 
 <pre caption="列出在dev-php中已安装的包">
@@ -207,8 +199,7 @@ PHP扩展，像
 </ul>
 
 <p>
-已经被分为两个Portage分类： <c>dev-php4</c> 和 
-<c>dev-php5</c>，来使它能够为两个PHP版本独立地使用它们。还有，这些包的大部分已经被重命名过了：
+已经被分为两个Portage分类：<c>dev-php4</c>和<c>dev-php5</c>，来使它能够为两个PHP版本独立地使用它们。还有，这些包的大部分已经被重命名过了：
 </p>
 
 <p>
@@ -243,7 +234,7 @@ PHP扩展，像
 </table>
 
 <note>
-在重新编译安装这些扩展前，你必须到 <path>/usr/portage</path> 下找出那些包是如何被重命名的。
+在重新编译安装这些扩展前，你必须到<path>/usr/portage</path>下找出那些包是如何被重命名的。
 </note>
 
 </body>
@@ -276,42 +267,36 @@ PHP扩展，像
 <body>
 
 <p>
-因为我们已经添加了一些新的USE标记，你可能想要重新看看它们，并且添加适当的行到 
-<path>/etc/portage/package.use</path> 里（如果不存在的话需要被创建） 
+因为我们已经添加了一些新的USE标记，你可能想要重新看看它们，并且添加适当的行到<path>/etc/portage/package.use</path>里（如果不存在的话需要被创建）
 </p>
 
 <note>
- <path>/etc/portage/package.use</path> 将会为你的PHP安装设置USE标记，并且不通过修改 <path>make.conf</path> 来记录他们。
+ <path>/etc/portage/package.use</path>将会为你的PHP安装设置USE标记，并且不通过修改<path>make.conf</path>来记录他们。
 </note>
 
 <p>
-请根据你要安装的PHP支持来设置USE标记（推荐至少要设置 <c>cli</c> 这个USE标记）：
+请根据你要安装的PHP支持来设置USE标记（推荐至少要设置<c>cli</c>这个USE标记）：
 </p>
 
-<pre caption="dev-lang/php 的USE标记 （示例）">
+<pre caption="dev-lang/php的USE标记（示例）">
 dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mysql nls pcre pic pdo reflection session simplexml sockets spl ssl tokenizer truetype unicode xml xsl zlib
 </pre>
 
 <note>
- <c>-*</c> 将会禁用所有的USE标记（它甚至会禁用一些PHP基本的特性像Session-，PCRE-，gd-和MySQL支持），所以你必须特别地为一些你想要的扩展或特性指定USE标记。请参看 <uri link="http://overlays.gentoo.org/proj/php/wiki/ManagingExtensions"> Managing
-Extensions</uri> 来获取更多细节。你必须为以上默认的设置USE标记像这些：如果你想用 <c>pcre</c>  参看 <uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefPcre">preg_*
-Functions</uri> ，或者你想用<c>session</c> 参看 <uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefSession">Session Handling
-Functions</uri> 。 
+<c>-*</c>将会禁用所有的USE标记（它甚至会禁用一些PHP基本的特性像Session-，PCRE-，gd-和MySQL支持），所以你必须特别地为一些你想要的扩展或特性指定USE标记。请参看<uri link="http://overlays.gentoo.org/proj/php/wiki/ManagingExtensions">Managing Extensions</uri>来获取更多细节。你必须为以上默认的设置USE标记像这些：如果你想用<c>pcre</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefPcre">preg_* Functions</uri>，或者你想用<c>session</c>参看<uri link="http://overlays.gentoo.org/proj/php/wiki/PhpRefSession">Session Handling Functions</uri>。
 </note>
 
 <p>
-如果你想安装同时PHP4和PHP5，你可以为每个不同版本加入不同的USE标记： 
+如果你想安装同时PHP4和PHP5，你可以为每个不同版本加入不同的USE标记：
 </p>
 
-<pre caption="PHP4和PHP5 USE标记的不同 （示例）">
+<pre caption="PHP4和PHP5 USE标记的不同（示例）">
 =dev-lang/php-4* -* cli cgi apache2 ctype expat fastbuild force-cgi-redirect ftp gd iconv ipv6 memlimit mysql nls pcre pic posix session sockets ssl tokenizer truetype unicode xml xsl zlib
 =dev-lang/php-5* -* cli cgi apache2 ctype fastbuild force-cgi-redirect ftp gd hash iconv ipv6 memlimit mysql nls pcre pic posix pdo reflection session simplexml soap sockets spl sqlite ssl tokenizer truetype unicode xml xmlreader xmlwriter xsl zlib
 </pre>
 
 <note>
-你可以在 <uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions"> Recommend USE
-flags</uri> 里找到推荐的USE标记列表。在overlay的维基百科 <uri link="http://overlays.gentoo.org/proj/php/wiki/NewUseFlags">USE flags
-table</uri> 里你能找到PHP能用的USE标记的列表。
+你可以在<uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions">Recommend USE flags</uri>里找到推荐的USE标记列表。在overlay的维基百科<uri link="http://overlays.gentoo.org/proj/php/wiki/NewUseFlags">USE flags table</uri>里你能找到PHP能用的USE标记的列表。
 </note>
 
 </body>
@@ -322,16 +307,14 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 <body>
 
 <p>
-现在选择单独安装PHP4或单独安装PHP5，还可以同时安装。如果你要单独安装PHP4你必须emerge <c>=dev-lang/php-4*</c> 
-，单独安装PHP5（最新）你可以用 <c>dev-lang/php</c> ，如果要同时安装的话，你必须emerge 
-<c>=dev-lang/php-4*</c> 和 <c>=dev-lang/php-5*</c> 。
+现在选择单独安装PHP4或单独安装PHP5，还可以同时安装。如果你要单独安装PHP4你必须emerge <c>=dev-lang/php-4*</c>，单独安装PHP5（最新）你可以用<c>dev-lang/php</c>，如果要同时安装的话，你必须emerge <c>=dev-lang/php-4*</c>和<c>=dev-lang/php-5*</c>。
 </p>
 
 <p>
 检查USE标记设置：
 </p>
 
-<pre caption="检查USE标记 （示例）">
+<pre caption="检查USE标记（示例）">
 <comment>（检查PHP4包）</comment>
 <i>emerge --pretend --verbose '=dev-lang/php-4*'</i>
 
@@ -352,7 +335,7 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 如果一切都好了，请编译安装PHP：
 </p>
 
-<pre caption="编译安装新的包 （示例）">
+<pre caption="编译安装新的包（示例）">
 <comment>（编译PHP4包）</comment>
 <i>emerge '=dev-lang/php-4*'</i>
 
@@ -377,23 +360,15 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 <body>
 
 <p>
-在你编译安装后你将会有在 <path>/usr/lib/php4/bin</path> 和/或  
-<path>/usr/lib/php5/bin</path> 里的 <c>cli</c> 和/或 <c>cgi</c> 
-的二进制包。如果你把PHP4和PHP5都装了，那么Portage不能为你决定哪一个应该被作为默认的版本，所以它总是把你安装在 
-<path>/usr/bin</path> 的最后一个版本作为默认的。所以如果你最后装了PHP5，你将会看到 
-<path>/usr/bin/php</path> 被链接到了 <path>/usr/lib/php5/bin/php</path> 。所以一个 
-<c>cli</c> 和/或 <c>cgi</c> 的二进制包和 <c>php-devel</c> （为建立使用 <c>phpize</c> 和 
-<c>php-config</c> 的PHP扩展）必须被链接（在 <path>/usr/bin</path> 里），这可以很简单地用 
-<c>app-admin/php-toolkit</c> 的一部分 <c>php-select</c> 来完成。
+在你编译安装后你将会有在<path>/usr/lib/php4/bin</path>和/或<path>/usr/lib/php5/bin</path>里的<c>cli</c>和/或<c>cgi</c>的二进制包。如果你把PHP4和PHP5都装了，那么Portage不能为你决定哪一个应该被作为默认的版本，所以它总是把你安装在<path>/usr/bin</path>的最后一个版本作为默认的。所以如果你最后装了PHP5，你将会看到<path>/usr/bin/php</path>被链接到了<path>/usr/lib/php5/bin/php</path>。所以一个<c>cli</c>和/或<c>cgi</c>的二进制包和<c>php-devel</c>（为建立使用<c>phpize</c>和<c>php-config</c>的PHP扩展）必须被链接（在<path>/usr/bin</path>里），这可以很简单地用<c>app-admin/php-toolkit</c>的一部分<c>php-select</c>来完成。
 </p>
 
 <note>
- <c>dev-lang/php</c> 包依赖于 <c>app-admin/php-toolkit</c> 所以 <c>app-admin/php-toolkit</c> 应该能够在编译安装担心的PHP包以后自动启用。
+<c>dev-lang/php</c>包依赖于<c>app-admin/php-toolkit</c>所以<c>app-admin/php-toolkit</c>应该能够在编译安装担心的PHP包以后自动启用。
 </note>
 
 <p>
-假如你已经编译安装了 <c>=dev-lang/php-4*</c> 或 <c>=dev-lang/php-5*</c> ，输入如下命令 
-<c>php-select</c> 来看看最近选择的PHP版本：
+假如你已经编译安装了<c>=dev-lang/php-4*</c>或<c>=dev-lang/php-5*</c>，输入如下命令<c>php-select</c>来看看最近选择的PHP版本：
 </p>
 
 <pre caption="列出最近选择的PHP版本">
@@ -417,9 +392,7 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 </pre>
 
 <p>
-这意味着默认的PHP的cli二进制包路径 <path>/usr/bin/php</path> 被链接到PHP5的二进制包路径 
-<path>/usr/lib/php5/bin/php</path> 下了。所以PHP脚本使用的 <path>/usr/bin/php</path> 
-会被PHP5运行。
+这意味着默认的PHP的cli二进制包路径<path>/usr/bin/php</path>被链接到PHP5的二进制包路径<path>/usr/lib/php5/bin/php</path>下了。所以PHP脚本使用的<path>/usr/bin/php</path>会被PHP5运行。
 </p>
 
 </body>
@@ -430,7 +403,7 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 <body>
 
 <p>
-如果你不喜欢你在最后一章找出的默认版本设置，你可以再次使用 <c>php-select</c> 来选择一个想要的版本：
+如果你不喜欢你在最后一章找出的默认版本设置，你可以再次使用<c>php-select</c>来选择一个想要的版本：
 </p>
 
 <pre caption="选择想要得到的版本">
@@ -445,7 +418,7 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 </pre>
 
 <note>
-请输入 <c>php-select -h</c> 来得到更多 <c>php-select</c> 可以做的事的细节。
+请输入<c>php-select -h</c>来得到更多<c>php-select</c>可以做的事的细节。
 </note>
 
 <p>
@@ -461,8 +434,7 @@ table</uri> 里你能找到PHP能用的USE标记的列表。
 </pre>
 
 <note>
-请记住 <c>php-select</c> 只改变默认的版本。如果你PHP4和PHP5的cgi/cli都装了，你可以用直接路径像 <path>/usr/lib/php4/bin/php</path> 和 <path>/usr/lib/php5/bin/php</path> 来运行你个特定版本的PHP脚本。你可以在相同的Apache实例中使用PHP4和PHP5的cgi，但是你不能在相同的Apache实例中使用两个不同的PHP的Apache模块，参见 <uri link="php4-php5-configuration.xml">
-PHP4 and PHP5 Configuration Guide</uri> 来得到更多细节。
+请记住<c>php-select</c>只改变默认的版本。如果你PHP4和PHP5的cgi/cli都装了，你可以用直接路径像<path>/usr/lib/php4/bin/php</path>和<path>/usr/lib/php5/bin/php</path>来运行你个特定版本的PHP脚本。你可以在相同的Apache实例中使用PHP4和PHP5的cgi，但是你不能在相同的Apache实例中使用两个不同的PHP的Apache模块，参见<uri link="php4-php5-configuration.xml">PHP4 and PHP5 Configuration Guide</uri> 来得到更多细节。
 </note>
 
 </body>
@@ -475,7 +447,7 @@ PHP4 and PHP5 Configuration Guide</uri> 来得到更多细节。
 <body>
 
 <p>
-Gentoo的PHP包在 <path>/etc/php</path> 下存储配置文件，它包括每个不同PHP版本的每个SAPI的一个子目录：
+Gentoo的PHP包在<path>/etc/php</path>下存储配置文件，它包括每个不同PHP版本的每个SAPI的一个子目录：
 </p>
 
 <pre caption="列出PHP配置目录">
@@ -487,7 +459,7 @@ cli-php5
 </pre>
 
 <p>
-每个子目录包含一个自己的 <path>php.ini</path> ，像旧的包一样。
+每个子目录包含一个自己的<path>php.ini</path>，像旧的包一样。
 </p>
 
 </body>
@@ -498,14 +470,11 @@ cli-php5
 <body>
 
 <p>
-你应该使用  <c>etc-update</c> 或者 <c>dispatch-conf</c> 然后看看在 <path>php.ini</path> 
-里的新旧配置的不同。两个规则你必须明确的是 <c>include_path</c> 和 <c>extension_dir</c> 
-。但是在这里请小心，<c>extension_dir</c> 在两个不同的PHP版本间是不同的（在5.0和5.1间也一样！）。
+你应该使用<c>etc-update</c>或者<c>dispatch-conf</c>然后看看在<path>php.ini</path>里的新旧配置的不同。两个规则你必须明确的是<c>include_path</c>和<c>extension_dir</c>。但是在这里请小心，<c>extension_dir</c>在两个不同的PHP版本间是不同的（在5.0和5.1间也一样！）。
 </p>
 
 <p>
-PHP5.1在 <path>/etc/php/apache2-php5/php.ini</path> 和 
-<path>/etc/php/cli-php5/php.ini</path> 的示例：
+PHP5.1在<path>/etc/php/apache2-php5/php.ini</path>和<path>/etc/php/cli-php5/php.ini</path>的示例：
 </p>
 
 <pre caption="php.ini的旧配置">
@@ -519,7 +488,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </pre>
 
 <warn>
-确保你使用了 <c>etc-update</c> 或者 <c>dispatch-conf</c> 来查看所有文件的正确设置。
+确保你使用了<c>etc-update</c>或者<c>dispatch-conf</c>来查看所有文件的正确设置。
 </warn>
 
 </body>
@@ -530,24 +499,15 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 <body>
 
 <p>
-新的PHP包不会在 <path>php.ini</path> 里存储共享的PHP扩展的配置指令。这些指令会被存储在每一个扩展的在 
-<path>/etc/php/*/ext</path> 目录里的自己的配置文件里。如果要启用/禁用共享的扩展， 
-<path>/etc/php/*/ext-active</path> 的链接被使用了。如果你想要启动一个扩展，创建 
-<path>/etc/php/*/ext-active</path> 的链接到 <path>/etc/php/*/ext/</path> 目录里的适当的  
-<path>[EXTENSION].ini</path> 文件上。如果你想要禁用扩展，只要移除链接就好。
+新的PHP包不会在<path>php.ini</path>里存储共享的PHP扩展的配置指令。这些指令会被存储在每一个扩展的在<path>/etc/php/*/ext</path>目录里的自己的配置文件里。如果要启用/禁用共享的扩展，<path>/etc/php/*/ext-active</path>的链接被使用了。如果你想要启动一个扩展，创建<path>/etc/php/*/ext-active</path>的链接到<path>/etc/php/*/ext/</path>目录里的适当的 <path>[EXTENSION].ini</path>文件上。如果你想要禁用扩展，只要移除链接就好。
 </p>
 
 <p>
-如果你之前已经装了 <c>dev-php/PECL-apc</c> ，APC配置文件已经储存在你的 <path>php.ini</path> 
-里了。如果你重新编译安装了型的 <c>dev-php5/pecl-apc</c> 包，默认的APC配置文件将会被写到 
-<path>/etc/php/*5/ext/apc.ini</path> 里。
+如果你之前已经装了<c>dev-php/PECL-apc</c>，APC配置文件已经储存在你的<path>php.ini</path>里了。如果你重新编译安装了型的<c>dev-php5/pecl-apc</c>包，默认的APC配置文件将会被写到<path>/etc/php/*5/ext/apc.ini</path>里。
 </p>
 
 <p>
-所以你必须从 <path>/etc/php/*5/php.ini</path> 移动你的APC配置规则到 
-<path>/etc/php/*5/ext/apc.ini</path> ，然后创建一个符号链接从 
-<path>/etc/php/*5/ext-active/apc.ini</path> 到 
-<path>/etc/php/*5/ext/apc.ini</path> 。
+所以你必须从<path>/etc/php/*5/php.ini</path>移动你的APC配置规则到<path>/etc/php/*5/ext/apc.ini</path>，然后创建一个符号链接从<path>/etc/php/*5/ext-active/apc.ini</path>到<path>/etc/php/*5/ext/apc.ini</path>。
 </p>
 
 <note>
@@ -559,13 +519,12 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </chapter>
 
 <chapter>
-<title>配置Apache来与PhP4 和/或 PHP5一起工作</title>
+<title>配置Apache来与PhP4和/或PHP5一起工作</title>
 <section>
 <body>
 
 <p>
-为了配置Apache来加载PHP4或PHP5模块（mod_php），你应该分别添加 <c>-D PHP4</c> 和  <c>-D PHP5</c> 
-到在 <path>/etc/conf.d/apache2</path> 文件里的 <c>APACHE2_OPTS</c> 变量里。
+为了配置Apache来加载PHP4或PHP5模块（mod_php），你应该分别添加<c>-D PHP4</c>和<c>-D PHP5</c>到在<path>/etc/conf.d/apache2</path>文件里的<c>APACHE2_OPTS</c>变量里。
 </p>
 
 <pre caption="配置Apache来加载mod_php">
@@ -581,8 +540,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </p>
 
 <p>
-我们创建了 <uri link="php4-php5-configuration.xml">PHP4 and PHP5 Configuration 
-Guide</uri> 来解释一些可能的解决方案。
+我们创建了<uri link="php4-php5-configuration.xml">PHP4 and PHP5 Configuration Guide</uri>来解释一些可能的解决方案。
 </p>
 
 </body>
@@ -600,30 +558,25 @@ Guide</uri> 来解释一些可能的解决方案。
 
 <ul>
   <li>
-    <uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions">常见问题</uri> 关于Gentoo上的PHP
+    关于Gentoo上的PHP的<uri link="http://overlays.gentoo.org/proj/php/wiki/CommonQuestions">常见问题</uri>
   </li>
   <li>
-    <uri link="http://overlays.gentoo.org/proj/php/">Development-Page of the PHP
-    Overlay</uri>
+    <uri link="http://overlays.gentoo.org/proj/php/">PHP Overlay的开发页面</uri>
   </li>
   <li>
     在irc.freenode.net上的#gentoo-php；这是一个overlay的正式作者经常逛的聊天室。我们很希望在那见到你！
   </li>
   <li>
-    <uri link="http://forums.gentoo.org/">Gentoo Forums</uri> 这里是寻求帮助的好地方。这里有很多每时每刻都阅读论坛的其他Gentoo用户，如果你急需得到帮助，这里是个好地方。
+    <uri link="http://forums.gentoo.org/">Gentoo Forums</uri>这里是寻求帮助的好地方。这里有很多每时每刻都阅读论坛的其他Gentoo用户，如果你急需得到帮助，这里是个好地方。
   </li>
 </ul>
 
 <p>
-对于新的包的实行细节，你可以看看 <uri 
-link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">Stuart's 
-Posting on gentoo-dev</uri> 。你也许觉得 <uri 
-link="http://blog.stuartherbert.com/php/">Stuart's PHP Blog</uri> 也很有趣。
+对于新的包的实行细节，你可以看看<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">Stuart's Posting on gentoo-dev</uri>。你也许觉得<uri link="http://blog.stuartherbert.com/php/">Stuart's PHP Blog</uri>也很有趣。
 </p>
 
 <p>
-在 <uri link="http://overlays.gentoo.org/proj/php/">Development-Page</uri> 
-上面，你将会发现很多文档和最近的ebuild， 这些将会迟一些才被移到官方的Portage树。
+在<uri link="http://overlays.gentoo.org/proj/php/">开发页面</uri>上，你将会发现很多文档和最近的ebuild，这些将会迟一些才被移到官方的Portage树。
 </p>
 
 </body>
