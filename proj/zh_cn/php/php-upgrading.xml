@@ -30,7 +30,7 @@
 <body>
 
 <p>
-在过去有许多要求为什么在Portage里PHP5还没有被标记成稳定。问题不是PHP5包自身，PHP5没有被标记成稳定的主要原因是在Portage里的许多应用程序、PHP扩展和包还无法在PHP5下工作，但是我们毫无办法。PHP5不是100%地向后兼容PHP4，而且不是所有的PHP4程序可以被移植到PHP5上运行。很长一段时间许多用户仍需要PHP4的支持。
+在过去有许多要求为什么在Portage里PHP5还没有被标记成稳定。问题不是PHP5包自身，PHP5没有被标记成稳定的主要原因是在Portage里的许多应用程序、PHP扩展和包还无法在PHP5下工作，但是我们毫无办法。PHP5不是100%地向后兼容PHP4，而且不是所有的PHP4程序可以被移植到PHP5上运行。在未来的很长一段时间内许多用户仍需要PHP4的支持。
 </p>
 
 <p>
@@ -38,7 +38,7 @@
 </p>
 
 <p>
-这个文档的细节描述如何在不中断你的系统的情况下升级。
+这个文档详细描述了如何在不中断你的系统的情况下升级。
 </p>
 
 <note>
@@ -267,7 +267,7 @@ PHP扩展，像
 <body>
 
 <p>
-因为我们已经添加了一些新的USE标记，你可能想要重新看看它们，并且添加适当的行到<path>/etc/portage/package.use</path>里（如果不存在的话需要被创建）
+因为我们已经添加了一些新的USE标记，你可能想要重新看看它们，并且添加适当的USE标记到<path>/etc/portage/package.use</path>里（如果不存在的话需要创建）
 </p>
 
 <note>
@@ -355,7 +355,7 @@ dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mys
 </section>
 
 <section>
-<title>PHP4和PHP5的相似点：选择使用哪个cli/cgi二进制包</title>
+<title>PHP4和PHP5的相似之处：选择使用哪个cli/cgi二进制包</title>
 <body>
 
 <p>
@@ -417,7 +417,7 @@ dev-lang/php -* cli apache2 ctype expat fastbuild ftp gd hash iconv memlimit mys
 </pre>
 
 <note>
-请输入<c>php-select -h</c>来得到更多<c>php-select</c>可以做的事的细节。
+请输入<c>php-select -h</c>来详细了解更多<c>php-select</c>功能的细节。
 </note>
 
 <p>
@@ -469,7 +469,7 @@ cli-php5
 <body>
 
 <p>
-你应该使用<c>etc-update</c>或者<c>dispatch-conf</c>然后看看在<path>php.ini</path>里的新旧配置的不同。两个规则你必须明确的是<c>include_path</c>和<c>extension_dir</c>。但是在这里请小心，<c>extension_dir</c>在两个不同的PHP版本间是不同的（在5.0和5.1间也一样！）。
+你应该使用<c>etc-update</c>或者<c>dispatch-conf</c>，然后看看在<path>php.ini</path>里的新旧配置的不同。两个规则你必须明确的是<c>include_path</c>和<c>extension_dir</c>。但是在这里请小心，因为<c>extension_dir</c>在两个不同的PHP版本间是不同的（在5.0和5.1间也一样！）。
 </p>
 
 <p>
@@ -481,7 +481,7 @@ include_path = ".:/usr/lib/php"
 extension_dir = "/usr/lib/php/extensions/no-debug-non-zts-20050617/"
 </pre>
 
-<pre caption="php.ini中的新设置">
+<pre caption="php.ini的新设置">
 include_path = ".:/usr/share/php"
 extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </pre>
@@ -494,7 +494,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </section>
 
 <section>
-<title>改变了的PHP的扩展的配置</title>
+<title>改变了的PHP扩展的配置</title>
 <body>
 
 <p>
@@ -539,7 +539,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </p>
 
 <p>
-我们创建了<uri link="php4-php5-configuration.xml">PHP4和PHP5配置指南</uri>来解释一些可能的解决方案。
+我们创建了<uri link="php4-php5-configuration.xml">PHP4和PHP5配置指南</uri>来提供一些可能的解决方案。
 </p>
 
 </body>
@@ -552,7 +552,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 <body>
 
 <p>
-如果你在使用新的Gentoo的PHP包时陷入麻烦，你可以在这里找到帮助：
+如果你在使用新的Gentoo的PHP包时遇到麻烦，你可以在这里找到帮助：
 </p>
 
 <ul>
@@ -571,7 +571,7 @@ extension_dir = "/usr/lib/php5/lib/php/extensions/no-debug-non-zts-20050617/"
 </ul>
 
 <p>
-对于新的包的实行细节，你可以看看<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">gentoo-dev上Stuart的邮件</uri>。你也许觉得<uri link="http://blog.stuartherbert.com/php/">Stuart的PHP博客</uri>也很有趣。
+对于新的包的细节，你可以看看<uri link="http://article.gmane.org/gmane.linux.gentoo.devel/30050">gentoo-dev上Stuart的邮件</uri>。你也许觉得<uri link="http://blog.stuartherbert.com/php/">Stuart的PHP博客</uri>也很有趣。
 </p>
 
 <p>
