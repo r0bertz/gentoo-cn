@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding="UTF-8"?>
 
 <!-- $Header -->
-<!-- English CVS version 1.7 --> 
+<!-- English CVS version 1.7 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/zh_CN/articles/bash-by-example-p1.xml" disclaimer="articles">
+<guide link="/doc/zh_cn/articles/bash-by-example-p1.xml" disclaimer="articles" lang="zh_cn">
 <title>Bash示例，第一部分</title>
 
 <author title="作者">
@@ -12,20 +12,14 @@
 </author>
 <author title="译者">
   <mail link="night2008@gmail.com">苏永恒</mail>
-</author> 
+</author>
 <abstract>
-通过学习如何运用bash脚本语言进行编程，你每天和linux的交互将变的更有意思和有生产力，同时你也将能够构建那些你所知和喜欢的标准UNIX概念（诸如管道和重定向）。在这三部分的系列中，Daniel 
-Robbins将教你如何通过bash例程进行编程。他将讲述非常基本的内容（这使它成为入门者优秀的系列）并在后续的系列中引入更加高级的特征。
+通过学习如何运用bash脚本语言进行编程，你每天和linux的交互将变的更有意思和有生产力，同时你也将能够构建那些你所知和喜欢的标准UNIX概念（诸如管道和重定向）。在这三部分的系列中，Daniel Robbins将教你如何通过bash例程进行编程。他将讲述非常基本的内容（这使它成为入门者优秀的系列）并在后续的系列中引入更加高级的特征。
 </abstract>
 
-
-
 <!-- The original version of this article was published on IBM developerWorks,
-
 and is property of Westtech Information Services. This document is an updated
-
 version of the original article, and contains various improvements made by the
-
 Gentoo Linux Documentation team -->
 <version>1.3</version>
 <date>2005-10-09</date>
@@ -47,8 +41,7 @@ Gentoo Linux Documentation team -->
 <body>
 
 <p>
-如果检查一下，你可能将会发现你现在正在运行bash。即使你改变了你默认的shell，bash也可能仍在你系统的某个地方运行，因为它是标准的Linux 
-shell并被用做多种用途。由于bash已经运行，你运行的任何附加的bash脚本拥有固有的内存高效性，这是因为它们和任何已经运行的bash进程共享内存。如果你已经运行了些东西来做这项工作，并且做的很好，那还为什么要载入一个500K的解释器呢？
+如果检查一下，你可能将会发现你现在正在运行bash。即使你改变了你默认的shell，bash也可能仍在你系统的某个地方运行，因为它是标准的Linux shell并被用做多种用途。由于bash已经运行，你运行的任何附加的bash脚本拥有固有的内存高效性，这是因为它们和任何已经运行的bash进程共享内存。如果你已经运行了些东西来做这项工作，并且做的很好，那还为什么要载入一个500K的解释器呢？
 </p>
 
 </body>
@@ -58,8 +51,7 @@ shell并被用做多种用途。由于bash已经运行，你运行的任何附�
 <body>
 
 <p>
-不仅是因为你已经运行了bash，另外你还在每天的基本工作中与bash进行交互。它就在那里，所以学习如何最大限度的使用它就变得很有意义。这么做将是你的bash之旅更加有意思和具有创制性。但是为什么你应该学习bash编程呢？很简单，因为你已经在思考运行命令，复制粘贴文件，以及管道和重定向输出。那你是否应该学习这种语言，以便使用和利用那些已熟悉和喜爱的强大省时的概念呢？命令shell开启了UNIX系统的潜能，而bash就是Linux 
-shell。它是你和机器之间的高等级的纽带。随着你的bash知识的增长，同时你将能自动的增加你在Linux和UNIX下的生产力──就是这么简单。
+不仅是因为你已经运行了bash，另外你还在每天的基本工作中与bash进行交互。它就在那里，所以学习如何最大限度的使用它就变得很有意义。这么做将是你的bash之旅更加有意思和具有创制性。但是为什么你应该学习bash编程呢？很简单，因为你已经在思考运行命令，复制粘贴文件，以及管道和重定向输出。那你是否应该学习这种语言，以便使用和利用那些已熟悉和喜爱的强大省时的概念呢？命令shell开启了UNIX系统的潜能，而bash就是Linux shell。它是你和机器之间的高等级的纽带。随着你的bash知识的增长，同时你将能自动的增加你在Linux和UNIX下的生产力──就是这么简单。
 </p>
 
 </body>
@@ -69,9 +61,7 @@ shell。它是你和机器之间的高等级的纽带。随着你的bash知识�
 <body>
 
 <p>
-通过错误的方法学习bash会是一个非常困惑的过程。很多新手敲入<c>man 
-bash</c>来查看bash的man页，但令人头疼的是只面临一些shell函数特别简明和科技性的解释。其他人通过敲入<c>info 
-bash</c>（来查看GNU的信息文档），但可能是man页的翻版，也可能（如果他们幸运的话）仅是一些稍微友好的信息文档出现。
+通过错误的方法学习bash会是一个非常困惑的过程。很多新手敲入<c>man bash</c>来查看bash的man页，但令人头疼的是只面临一些shell函数特别简明和科技性的解释。其他人通过敲入<c>info bash</c>（来查看GNU的信息文档），但可能是man页的翻版，也可能（如果他们幸运的话）仅是一些稍微友好的信息文档出现。
 </p>
 
 <p>
@@ -101,18 +91,15 @@ $ <i>myvar='This is my environment variable!'</i>
 </pre>
 
 <p>
-上面的命令定义了一个叫"myvar"的环境变量并包含"This is my environment 
-variable!"字符串。上面有很多是需要我们注意的：首先，在"="号两侧没有空格，任何空格都将导致一个错误产生（可以试一下看看）。第二要注意的是虽然在定义一个词时我们可以省略引号，但当环境变量的值多于一个词（包含空格或制表符）时，引号却是必须的。
+上面的命令定义了一个叫"myvar"的环境变量并包含"This is my environment variable!"字符串。上面有很多是需要我们注意的：首先，在"="号两侧没有空格，任何空格都将导致一个错误产生（可以试一下看看）。第二要注意的是虽然在定义一个词时我们可以省略引号，但当环境变量的值多于一个词（包含空格或制表符）时，引号却是必须的。
 </p>
 
 <note>
-要想获得关于如何在bash中使用引号的更加详尽的信息，请参考bash 
-man页中\"QUOTING\"一节。特殊字符序列由其它值\"扩展\"（替换）确实使 bash 中字符串的处理变得复杂。本系列将只讲述最常用的引用功能。
+要想获得关于如何在bash中使用引号的更加详尽的信息，请参考bash man页中"QUOTING"一节。特殊字符序列由其它值"扩展"（替换）确实使 bash 中字符串的处理变得复杂。本系列将只讲述最常用的引用功能。
 </note>
 
 <p>
-第三，当我们通常可以用双引号代替单引号，在上面的例子中这样做会导致一个错误。为什么呢？因为用单引号禁用了一个bash称为扩展的特性，其中特殊字符和字符序列的值可以互换。比如，\"!\"字符是历史扩展字符，它通常由之前敲入的命令所替换。（在这个系列的文章中，我们不能讲述历史扩展，那是在我们bash编程中不常用到它。要获得相关的更多信息，请看bash 
-man页中的\"HISTORY EXPANSION\"部分。）尽管这个类似于宏的功能很便利，但我们现在只想在环境变量后面加上一个简单的感叹号，而不是宏。
+第三，当我们通常可以用双引号代替单引号，在上面的例子中这样做会导致一个错误。为什么呢？因为用单引号禁用了一个bash称为扩展的特性，其中特殊字符和字符序列的值可以互换。比如，"!"字符是历史扩展字符，它通常由之前敲入的命令所替换。（在这个系列的文章中，我们不能讲述历史扩展，那是在我们bash编程中不常用到它。要获得相关的更多信息，请看bash man页中的"HISTORY EXPANSION"部分。）尽管这个类似于宏的功能很便利，但我们现在只想在环境变量后面加上一个简单的感叹号，而不是宏。
 </p>
 
 <p>
@@ -125,7 +112,7 @@ This is my environment variable!
 </pre>
 
 <p>
-通过在我们的环境变量前加上一个$，我们可以使bash来用myvar的值来取代它。在bash的术语中，这被成为\"变量扩展\"。但是，如果我们试过下面的会怎样：
+通过在我们的环境变量前加上一个$，我们可以使bash来用myvar的值来取代它。在bash的术语中，这被成为"变量扩展"。但是，如果我们试过下面的会怎样：
 </p>
 
 <pre caption="首先使用变量扩展">
@@ -147,7 +134,7 @@ fooThis is my environment variable!bar
 </p>
 
 <p>
-还记的我们还提到过我们可以\"导出\"变量。当我们导出一个环境变量时，它将自动的可以在任何随后执行或可执行的脚本中使用。Shell脚本可以运用shell的内建环境变量支持\"获取\"环境变量，而C程序可以运用getenv()函数来调用。这里是一些你应该敲入并编译的C代码的例子──它都可以使我们从C的视角来理解环境变量：
+还记的我们还提到过我们可以"导出"变量。当我们导出一个环境变量时，它将自动的可以在任何随后执行或可执行的脚本中使用。Shell脚本可以运用shell的内建环境变量支持"获取"环境变量，而C程序可以运用getenv()函数来调用。这里是一些你应该敲入并编译的C代码的例子──它都可以使我们从C的视角来理解环境变量：
 </p>
 
 <pre caption="myvar.c──一个C程序环境变量的例子">
@@ -222,19 +209,18 @@ $ <i>./myenv</i>
 <body>
 
 <p>
-拆分字符串──它是将原始字符串拆分成小一点的，切片──是一个在你平常每天的shell脚本执行中的任务。很多时候，shell脚本需要采用全限定路径，并找到结束的文件或目录。虽然可以用 bash 编码实现（而且有趣），但标准<c>basename</c>UNIX 
-可执行程序可以极好地完成此工作：
+拆分字符串──它是将原始字符串拆分成小一点的，切片──是一个在你平常每天的shell脚本执行中的任务。很多时候，shell脚本需要采用全限定路径，并找到结束的文件或目录。虽然可以用bash编码实现（而且有趣），但标准<c>basename</c> UNIX可执行程序可以极好地完成此工作：
 </p>
 
 <pre caption="运用basename">
-$ <i>basename /usr/local/share/doc/foo/foo.txt</i>\n
-foo.txt\n
-$ <i>basename /usr/home/drobbins</i>\n
+$ <i>basename /usr/local/share/doc/foo/foo.txt</i>
+foo.txt
+$ <i>basename /usr/home/drobbins</i>
 drobbins
 </pre>
 
 <p>
-<c>basename</c>是一个拆分字符串的及其简便的工具。与它相关的被称为<c>dirname</c>返回<c>basename</c>丢弃的\"另\"一部分路径。
+<c>basename</c>是一个拆分字符串的及其简便的工具。与它相关的被称为<c>dirname</c>返回<c>basename</c>丢弃的"另"一部分路径。
 </p>
 
 <pre caption="运用dirname">
@@ -269,8 +255,8 @@ $ <i>echo $MYDIR</i>
 </p>
 
 <pre caption="交互命令替换语法">
-$ <i>MYDIR=$(dirname /usr/local/share/doc/foo/foo.txt)</i>\n
-$ <i>echo $MYDIR</i>\n
+$ <i>MYDIR=$(dirname /usr/local/share/doc/foo/foo.txt)</i>
+$ <i>echo $MYDIR</i>
 /usr/local/share/doc/foo
 </pre>
 
@@ -279,8 +265,8 @@ $ <i>echo $MYDIR</i>\n
 </p>
 
 <pre caption="管道命令替换">
-$ <i>MYFILES=$(ls /etc/| grep pa)</i>\n
-$ <i>echo $MYFILES</i>\n
+$ <i>MYFILES=$(ls /etc/| grep pa)</i>
+$ <i>echo $MYFILES</i>
 pam.d passwd
 </pre>
 
@@ -291,37 +277,37 @@ pam.d passwd
 <body>
 
 <p>
-尽管<c>basename</c>和<c>dirname</c>是很棒的工具，但我们可能时常需要更加专业的字符串\"拆分\"操作而不是仅仅的标准的路径名处理。当我们需要更强的说服力时，我们可以利用bash内建的变量扩展功能。我们已经使用了标准的变量扩展，就像：${MYVAR}。但是bash还可以自己执行一些便利的字符串拆分。请看一下这些例子：
+尽管<c>basename</c>和<c>dirname</c>是很棒的工具，但我们可能时常需要更加专业的字符串"拆分"操作而不是仅仅的标准的路径名处理。当我们需要更强的说服力时，我们可以利用bash内建的变量扩展功能。我们已经使用了标准的变量扩展，就像：${MYVAR}。但是bash还可以自己执行一些便利的字符串拆分。请看一下这些例子：
 </p>
 
 <pre caption="字符串拆分示例">
-$ <i>MYVAR=foodforthought.jpg</i>\n
-$ <i>echo ${MYVAR##*fo}</i>\n
-rthought.jpg\n
+$ <i>MYVAR=foodforthought.jpg</i>
+$ <i>echo ${MYVAR##*fo}</i>
+rthought.jpg
 $ <i>echo ${MYVAR#*fo}</i>
 odforthought.jpg
 </pre>
 
 <p>
-在第一个例子中，我们敲入${MYVAR##*fo}。那么它确切的意思是什么呢？基本上，在${ }中，我们敲入环境变量的名字，两个##和一个通配符（\"*fo\"）。然后，bash获取<c>MYVAR</c>，从字符串\"foodforthought.jpg\"的起始处查找匹配通配符\"*fo\"的最长的子串并将其从字符串的开始处拆分。刚开始这有一点难以掌握，为了感受一下这个特殊的\"##\"选项是如何工作的，让我们一步步探讨bash是如何完成这个扩展的。首先，它从\"foodforthought.jpg的开始处开始搜索匹配\"*fo\"通配符的子串。这里是它检查到的子串：
+在第一个例子中，我们敲入${MYVAR##*fo}。那么它确切的意思是什么呢？基本上，在${ }中，我们敲入环境变量的名字，两个##和一个通配符（"*fo"）。然后，bash获取<c>MYVAR</c>，从字符串"foodforthought.jpg"的起始处查找匹配通配符"*fo"的最长的子串并将其从字符串的开始处拆分。刚开始这有一点难以掌握，为了感受一下这个特殊的"##"选项是如何工作的，让我们一步步探讨bash是如何完成这个扩展的。首先，它从"foodforthought.jpg的开始处开始搜索匹配"*fo"通配符的子串。这里是它检查到的子串：
 </p>
 
 <pre caption="子串检查">
-f       \n
-fo              MATCHES *fo\n
-foo     \n
-food\n
-foodf           \n
-foodfo          MATCHES *fo\n
-foodfor\n
-foodfort        \n
-foodforth\n
-foodfortho      \n
-foodforthou\n
-foodforthoug\n
-foodforthought\n
-foodforthought.j\n
-foodforthought.jp\n
+f       
+fo              MATCHES *fo
+foo     
+food
+foodf           
+foodfo          MATCHES *fo
+foodfor
+foodfort        
+foodforth
+foodfortho      
+foodforthou
+foodforthoug
+foodforthought
+foodforthought.j
+foodforthought.jp
 foodforthought.jpg
 </pre>
 
@@ -330,23 +316,23 @@ foodforthought.jpg
 </p>
 
 <p>
-上面的第二种形式的变量扩展和第一种表现的完全相同，只是它只运用一个\"#\"──并且bash执行了一个几乎相同的过程。正如我们的第一个例子一样，它检查乐同样的一些子串，除了bash从我们的原始字符串中移除了最短匹配并返回结果。所以，它一检查到\"fo\"子串，它就从我们的字符串中移除\"fo\"并返回\"odforthought.jpg\"。
+上面的第二种形式的变量扩展和第一种表现的完全相同，只是它只运用一个"#"──并且bash执行了一个几乎相同的过程。正如我们的第一个例子一样，它检查乐同样的一些子串，除了bash从我们的原始字符串中移除了最短匹配并返回结果。所以，它一检查到"fo"子串，它就从我们的字符串中移除"fo"并返回"odforthought.jpg"。
 </p>
 
 <p>
-这看起来很神秘，所以我们将向你展示一个简单的方法去记住这个功能。当搜索最长匹配时，运用##（因为##比#要长）。当搜索最短匹配时，用#。看，也并不是那么难去记忆！等等，怎样记住应该使用'#'字符来从字符串起始处移除呢？很简单！注意一下在US键盘上，shift-4是\"$\"，它是bash变量扩展字符。在键盘上，紧靠在\"$\"左边是\"#\"。所以，你可以看到\"#\"是在\"$\"的\"起始处的\"，因此（根据我们的记忆法），\"#\"从字符串的起始处移除字符。你可能还想知道如何从字符串的末尾移除字符。如果猜到我们用的字符是US键盘上紧靠在\"$\"右边的\"%\"，正确！这里有几个简单的例子来解释如何拆分字符串的末尾部分：
+这看起来很神秘，所以我们将向你展示一个简单的方法去记住这个功能。当搜索最长匹配时，运用##（因为##比#要长）。当搜索最短匹配时，用#。看，也并不是那么难去记忆！等等，怎样记住应该使用'#'字符来从字符串起始处移除呢？很简单！注意一下在US键盘上，shift-4是"$"，它是bash变量扩展字符。在键盘上，紧靠在"$"左边是"#"。所以，你可以看到"#"是在"$"的"起始处的"，因此（根据我们的记忆法），"#"从字符串的起始处移除字符。你可能还想知道如何从字符串的末尾移除字符。如果猜到我们用的字符是US键盘上紧靠在"$"右边的"%"，正确！这里有几个简单的例子来解释如何拆分字符串的末尾部分：
 </p>
 
 <pre caption="">
-$ <i>MYFOO=\"chickensoup.tar.gz\"</i>\n
-$ <i>echo ${MYFOO%%.*}</i>\n
-chickensoup\n
-$ <i>echo ${MYFOO%.*}</i>\n
+$ <i>MYFOO="chickensoup.tar.gz"</i>
+$ <i>echo ${MYFOO%%.*}</i>
+chickensoup
+$ <i>echo ${MYFOO%.*}</i>
 chickensoup.tar
 </pre>
 
 <p>
-正如你所见，除了将匹配通配符从字符串末尾去除之外，%和%%变量扩展的选项和#和##没有什么不同。注意：如果你希望从末尾移除一个特殊的子串，则不能运用\"*\"字符：
+正如你所见，除了将匹配通配符从字符串末尾去除之外，%和%%变量扩展的选项和#和##没有什么不同。注意：如果你希望从末尾移除一个特殊的子串，则不能运用"*"字符：
 </p>
 
 <pre caption="从末尾移去字符">
@@ -356,7 +342,7 @@ chicken
 </pre>
 
 <p>
-在这个例子中，既然只有一个匹配，我们使用\"%%\"或\"%\"也就不重要了。同时记住，如果你忘记了是使用\"#\"还是\"%\"，请看键盘上的3,4,5键并猜出来。
+在这个例子中，既然只有一个匹配，我们使用"%%"或"%"也就不重要了。同时记住，如果你忘记了是使用"#"还是"%"，请看键盘上的3,4,5键并猜出来。
 </p>
 
 <p>
@@ -382,7 +368,7 @@ abunga
 <body>
 
 <p>
-现在我们已经学了拆分字符串的所有内容，让我们写一个简单的小shell脚本。我们的脚本将接受单个文件作为参数并打印出它是否是一个压缩档，它将在文件的结尾寻找模式\".tar\"。下面就是：
+现在我们已经学了拆分字符串的所有内容，让我们写一个简单的小shell脚本。我们的脚本将接受单个文件作为参数并打印出它是否是一个压缩档，它将在文件的结尾寻找模式".tar"。下面就是：
 </p>
 
 <pre caption="mytar.sh──一个示例脚本">
@@ -408,11 +394,11 @@ At first glance, this does not appear to be a tarball.
 </pre>
 
 <p>
-好，它工作了，但是它不是很实用。在我们将它变得实用之前，先让我们看看上面用的\"if\"语句。其中，我们有一个布尔表达式。在bash中，\"=\"比较操作检查字符串是否相等。但是这布尔表达式真正测试的是什么呢？让我们看看左边。通过我们所学习的字符串拆分，\"${1##*.}\"将从包含环境变量\"1\"的字符串起始处移除\"*.\"的最长匹配，并返回结果。这将返回文件中最后一个\".\"之后的所有部分。很明显，如果一个文件以\".tar\"结尾，我们将获取\"tar\"作为结果，条件也就为真。
+好，它工作了，但是它不是很实用。在我们将它变得实用之前，先让我们看看上面用的"if"语句。其中，我们有一个布尔表达式。在bash中，"="比较操作检查字符串是否相等。但是这布尔表达式真正测试的是什么呢？让我们看看左边。通过我们所学习的字符串拆分，"${1##*.}"将从包含环境变量"1"的字符串起始处移除"*."的最长匹配，并返回结果。这将返回文件中最后一个"."之后的所有部分。很明显，如果一个文件以".tar"结尾，我们将获取"tar"作为结果，条件也就为真。
 </p>
 
 <p>
-你可能会吃惊环境变量\"1\"是在第一个位置。非常简单──$1是这个脚本的第一个命令行参数，$2是第二个，如此等等。好的，现在我们已经回顾乐这个函数，我们可以看一下\"if\"语句了。
+你可能会吃惊环境变量"1"是在第一个位置。非常简单──$1是这个脚本的第一个命令行参数，$2是第二个，如此等等。好的，现在我们已经回顾乐这个函数，我们可以看一下"if"语句了。
 </p>
 
 </body>
@@ -422,7 +408,7 @@ At first glance, this does not appear to be a tarball.
 <body>
 
 <p>
-像大多语言一样，bash有它自己的条件类型。当使用它们时，请准照上面的格式;它是使\"if\"和\"then\"在不同的行，\"else\"和结束处必须的\"fi\"和它们水平对齐。这使代码易于阅读和调试。除了\"if,else\"形式，\"if\"语句还有很多其它形式：
+像大多语言一样，bash有它自己的条件类型。当使用它们时，请准照上面的格式;它是使"if"和"then"在不同的行，"else"和结束处必须的"fi"和它们水平对齐。这使代码易于阅读和调试。除了"if,else"形式，"if"语句还有很多其它形式：
 </p>
 
 <pre caption="if语句的基本结构">
@@ -433,12 +419,12 @@ fi
 </pre>
 
 <p>
-只有当condition为真的，它才会执行一个动作，否则它不执行任何动作并继续执行直到\"fi\"的行。
+只有当condition为真的，它才会执行一个动作，否则它不执行任何动作并继续执行直到"fi"的行。
 </p>
 
 <pre caption="在继续fi之后的命令之前检查状况">
 if [ condition ]
-then 
+then
         action
 elif [ condition2 ]
 then
@@ -455,7 +441,7 @@ fi
 </pre>
 
 <p>
-上面的\"elif\"序列将连续测试每一个condition并执行第一个真的condition所相应的动作。如果没有condition是真，它将执行\"else\"动作，如果有一个为真，它将继续执行所有接下来的\"if,elif,else\"语句。
+上面的"elif"序列将连续测试每一个condition并执行第一个真的condition所相应的动作。如果没有condition是真，它将执行"else"动作，如果有一个为真，它将继续执行所有接下来的"if,elif,else"语句。
 </p>
 
 </body>
@@ -480,10 +466,10 @@ fi
 
 <ul>
   <li>
-    请阅读<uri link="http://www.gentoo.org/doc/zh_CN/articles/bash-by-example-p2.xml">Bash示例:第二部分</uri>
+    请阅读<uri link="http://www.gentoo.org/doc/zh_cn/articles/bash-by-example-p2.xml">Bash示例:第二部分</uri>
   </li>
   <li>
-    请阅读<uri link="http://www.gentoo.org/doc/zh_CN/articles/bash-by-example-p3.xml">Bash示例:第三部分</uri>
+    请阅读<uri link="http://www.gentoo.org/doc/zh_cn/articles/bash-by-example-p3.xml">Bash示例:第三部分</uri>
   </li>
   <li>
     访问<uri link="http://www.gnu.org/software/bash/bash.html">GUN's bash home page</uri>
