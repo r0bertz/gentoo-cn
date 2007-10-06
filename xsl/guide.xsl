@@ -1540,7 +1540,27 @@
     </td>
     </tr>
     <tr>
-    <td align="center" class="topsep"/>
+    <td align="center" class="topsep">
+    <script type="text/javascript">&lt;!--
+	    google_ad_client = "pub-3740337540082957";
+	    google_ad_width = 120;
+	    google_ad_height = 600;
+	    google_ad_format = "120x600_as";
+	    google_ad_type = "text_image";
+	    //2007-10-06: HomeRightSkyscpIsAGeek
+	    google_ad_channel = "1077535397";
+	    google_color_border = "CCCCCC";
+	    google_color_bg = "CCCCCC";
+	    google_color_link = "000000";
+	    google_color_text = "333333";
+	    google_color_url = "666666";
+	    google_ui_features = "rc:0";
+	    //-->
+    </script>
+    <script type="text/javascript"
+	      src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+    </td>
     </tr>
   </table>
 </xsl:template>
