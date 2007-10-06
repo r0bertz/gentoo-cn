@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" link="20070910-newsletter.xml" lang="zh_cn">
+<title>Gentoo Weekly Newsletter</title>
+<subtitle>2007年9月10日</subtitle>
+
+<author title="Editor">
+<mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+
+<author title="Editor">
+<mail link="musikc@gentoo.org">Chrissy Fullam</mail>
+</author>
+
+<author title="Author">
+<mail link="cla@gentoo.org">Dawid Weglinski</mail>
+</author>
+
+<author title="Author">
+<mail link="wltjr@gentoo.org">William Thomson</mail>
+</author>
+
+<!-- Be sure to add yourself if you write an article -->
+<author title="Translator">
+<mail link="delimy@gmail.com">李帅</mail>
+</author>
+
+<author title="Translator">
+<mail link="jeffkyjin@gmail.com">金涛</mail>
+</author>
+
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<author title="Translater">
+<mail link="wcw8410@gmail.com">吴传文</mail>
+</author>
+
+<abstract>这是2007年9月10日的Gentoo Weekly Newsletter。</abstract>
+<summary/>
+
+<version>Volume 6, Issue 37</version>
+<date>2007-09-10</date>
+
+<!-- Gentoo News -->
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>给2007届议会投票</title>
+
+<body>
+
+<p>GWN的工作人员提醒所有的Gentoo开发者注意，距投票截止日期所剩时间已不多。2007届Gentoo议会选举将于UTC时间9月17日零点结束。对某些开发者来说，这可能是您的第一次投票。不要被这些程序吓到；当您开始做时就会发现投票相当的简单。请不要弃权，让您的声音变得有价值！</p>
+
+<pre caption="怎样投票">
+$ ssh dev.gentoo.org
+<comment>（创建您的选票）</comment>
+$ votify --new council2007
+<comment>（编辑您的选票，依照您的期望对候选人进行排序）</comment>
+$ ${EDITOR} .ballot-council2007
+<comment>（验证您的选票）</comment>
+$ votify --verify council2007
+<comment>（投票）</comment>
+$ votify --submit council2007
+</pre>
+
+<note>请按顺序排列您的选择，第一位的放最上面，末位的放最底下。您还可以把多个选择放在一行来表示排名不分先后。任何您略掉的选择会自动添加到末尾。</note>
+
+<p>您在回忆要投票给谁？回顾一下候选人<uri link="http://www.gentoo.org/proj/en/council/voting-logs/council-2007-nominees.xml">声明</uri>或者GWN<uri link="http://www.gentoo.org/news/en/gwn/20070820-newsletter.xml">访问</uri>。</p>
+
+</body>
+</section>
+
+<section>
+<title>屏幕截图竞赛获胜者</title>
+
+<body>
+
+<p>Gentoo屏幕截图大赛已经结束了，最后我们选出了胜者。由四位Gentoo开发者（<mail link="dav_it@gentoo.org">Davide Italiano</mail>，<mail link="opfer@gentoo.org">Christian Faulhammer</mail>，<mail link="angelos@gentoo.org">Christoph Mende</mail>和<mail link="cla@gentoo.org">Dawid Weglinski</mail>）组成的评审团从超过40幅作品中选出了7幅优胜截图。尽管这些作品都非常优秀，足以放到Gentoo<uri link="/main/en/shots.xml">屏幕截图</uri>页面中，但评审团只奖励给前三名。每位评委分别根据各自观点给每幅截图打分，分数从0到10；所有分数汇总计算得到获胜者。他们是：</p>
+
+<ul>
+<li>第一名，每人获得了36分，获得者Bartek Stalewski，获奖截图为<uri link="/images/shots/gnome.png">GNOME</uri>,获得者Mikolaj Klimek，获奖截图为<uri link="/images/shots/rash.png">KDE</uri>，还有一位获奖选手Robert Gerus，获奖截图为<uri link="/images/shots/sshotpw4.png">KDE</uri>。</li>
+<li>第二名，每人获得了35分，获奖选手Alexander Schumacher，获奖截图为漂亮的Gentoo样式的<uri link="/images/shots/Bildschirmfoto.png">截图</uri>，获奖选手Massimiliano Morvillo，获奖截图<uri link="/images/shots/darkgentoo2sf2.png">KDE</uri>。</li>
+<li>第三名，同样是并列得奖，得分为33分。获奖者Bartek Stalewski，获奖作品<uri link="/images/shots/fluxbox.jpg">fluxbox</uri>，这个作品是所有获奖选手中唯一的一个fluxbox截图；还有另外一个兄弟，获奖作品是一个别名为'紫'的截图<uri link="/images/shots/snapshotzi4.png">KDE</uri>。</li>
+</ul>
+
+<p>祝贺所有获奖选手！</p>
+
+</body>
+</section>
+
+</chapter>
+<!-- Developer of the Week -->
+
+<!-- Heard in the community -->
+
+<!-- forums.gentoo.org -->
+
+<!-- planet.gentoo.org -->
+
+<!-- gentoo-user -->
+
+<!-- gentoo-dev -->
+
+<!-- gentoo-catalyst -->
+
+<!-- gentoo-cluster -->
+
+<!-- gentoo-embedded -->
+
+<!-- gentoo-security -->
+
+<!-- Gentoo International-->
+
+<!-- Gentoo in the press -->
+
+<!-- Tips and Tricks -->
+<chapter>
+<title>心得技巧</title>
+
+<section>
+<title>Synergy</title>
+
+<body>
+
+<p>本周秘笈终于轮到Synergy了。它是一个很容易上手的软件KVM，允许你在多个带有独立显示器的主机上使用同一套键盘和鼠标。Synergy甚至可以在Linux，OS X和Windows之间跨平台工作（可以拷贝和粘贴）。</p>
+
+<p>Synergy的配置和使用非常的简单而且直接。选一台机器作为你的主鼠标和键盘应用机，这台机器将被配置为服务器而其他的机器将被配置为客户机。</p>
+
+<p><c>Tip:</c>当在一台带有多个显示设备的机器（例如配有外置显示器的笔记本）上运行synergyc（客户端）时，你需要多个synergyc实例。在每个显示设备上运行一个实例，并通过名称来指定0:0以后的显示设备。</p>
+
+<p><c>Trick:</c>  一旦连接到服务器，Synergyc便采用本机的主机名。因此当显示器连接到服务器时，任何超过0:0的显示器，都可以通过在主机名后添加数字来指定。在每个显示器上使用相同的规则，并从每个显示器启动synergc。两个显示器，两个synergc实例，没有指定名称的那个运行在0:0上，另外一个有名称的则运行在0:1上。</p>
+
+<p>这有一个配置举例，用来说明如何在一台带有双显示器的机器上启动实例。我们把该机器称为wlt，服务器称为ws2，另外一台工作站称为ws1。请记住，Windows上的安装包含了GUI，但在OS X和Linux上只有一个简单的文本文件被创建。这个例子就是该文本文件。</p>
+
+<pre caption="示例配置">
+# List the computer names that Synergy will run on
+section: screens
+ wlt:
+ wlt1:
+ ws2:
+ ws1:
+end
+
+# For each system, state how it correlates to the other systems
+section: links
+ ws2:
+    left  = wlt
+    right = ws1
+ ws1:
+    left  = ws2
+ wlt:
+    right = ws2
+    left = wlt1
+ wlt1:
+    right = wlt
+end
+</pre>
+
+<p>Synergy通常运行在后台。它从终端分离出来并没有一个可见的窗口，实际上是不可见的。在未能保证配置正确之前，你应该使用命令行参数-f"在前端"启动synergy。</p>
+
+<pre caption="启动Synergy">
+<comment>在synergy服务器端上：</comment>
+$ synergys -f --config synergy.conf
+
+<comment>在synergy客户端上：</comment>
+$ synergyc -f server-host-name
+</pre>
+
+<note>如果synergys或者synergyc不在你的PATH中，使用绝对路径名。</note>
+
+<pre caption="在有双显示器的wlt机器上像这样启动：">
+On wlt 0:0: $ synergyc -f ws2
+On wlt 0:1: $ synergyc -n wlt1 -f ws2
+</pre>
+
+<p>这仅仅是一个概要性的讲述，如果需要更多信息，请查看Synergy<uri link="http://synergy2.sourceforge.net/">站点</uri>。</p>
+
+</body>
+</section>
+
+</chapter>
+<!-- Gentoo developer moves -->
+
+<chapter>
+<title>人员变更</title>
+
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li><e>本周没有</e></li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo security -->
+
+<!-- paste from the script -->
+<chapter>
+<title>Gentoo安全</title>
+
+<section>
+<title>MIT Kerberos 5：多个漏洞</title>
+<body>
+
+<p>MIT Kerberos 5中找到了两个漏洞，它们可能会允许远程未认证用户以root权限执行任意代码。</p>
+
+<p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200709-01.xml">GLSA声明</uri></p>
+
+</body>
+</section>
+
+</chapter>
+<!-- Gentoo package moves -->
+
+<chapter>
+<title>软件增减</title>
+
+<section>
+<body>
+
+<p>这一章节列出了已经被移除或加入到portage里的，以及已经发布"最后仪式"声明的即将被移除的包。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners">树清理者项目</uri>和众多的开发者。列在最后仪式一节里的大部分包需要有人来维护，如果有人可以承担下维护的责任的话，它们可以得以继续保留在portage树里。</p>
+
+</body>
+</section>
+
+<!-- Add/removes then last rites, paste from the script -->
+<section>
+<title>已经移除：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker-configurator</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker-dcop</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker-i18n</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker-resources</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-misc/kxdocker-trayiconlogger</ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="dragonheart@gentoo.org">Daniel Black</mail></ti>
+</tr>
+
+<tr>
+<ti>net-firewall/fireflier</ti>
+<ti>2007年9月05日</ti>
+<ti><mail link="jokey@gentoo.org">Markus Ullmann</mail></ti>
+</tr>
+
+<tr>
+<ti>www-apache/mod_xslt</ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ruby/switchtower</ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="graaff@gentoo.org">Hans de Graaff</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<section>
+<title>已经加入：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>加入日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-www;name=swfdec-mozilla">net-www/swfdec-mozilla</uri></ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="pclouds@gentoo.org">Nguyen Thai Ngoc Duy</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=media-libs;name=swfdec">media-libs/swfdec</uri></ti>
+<ti>2007年9月03日</ti>
+<ti><mail link="pclouds@gentoo.org">Nguyen Thai Ngoc Duy</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-firewall;name=shorewall-shell">net-firewall/shorewall-shell</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="jokey@gentoo.org">Markus Ullmann</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-firewall;name=shorewall-common">net-firewall/shorewall-common</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="jokey@gentoo.org">Markus Ullmann</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=sci-geosciences;name=josm">sci-geosciences/josm</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-vim;name=tt2-syntax">app-vim/tt2-syntax</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="hawking@gentoo.org">Ali Polatel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-libs;name=libgssglue">net-libs/libgssglue</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="vapier@gentoo.org">Mike Frysinger</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=sci-geosciences;name=gebabbel">sci-geosciences/gebabbel</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=sci-geosciences;name=josm-plugins">sci-geosciences/josm-plugins</uri></ti>
+<ti>2007年9月06日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-vim;name=nerdcommenter">app-vim/nerdcommenter</uri></ti>
+<ti>2007年9月07日</ti>
+<ti><mail link="hawking@gentoo.org">Ali Polatel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-fs;name=mount-cifs">net-fs/mount-cifs</uri></ti>
+<ti>2007年9月07日</ti>
+<ti><mail link="dev-zero@gentoo.org">Tiziano Müller</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=x11-drivers;name=xf86-video-xgi">x11-drivers/xf86-video-xgi</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=x11-libs;name=pixman">x11-libs/pixman</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_whatkilledus">www-apache/mod_whatkilledus</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_backtrace">www-apache/mod_backtrace</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_wsgi">www-apache/mod_wsgi</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_authnz_external">www-apache/mod_authnz_external</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_loadavg">www-apache/mod_loadavg</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_tidy">www-apache/mod_tidy</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_cplusplus">www-apache/mod_cplusplus</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_spin">www-apache/mod_spin</uri></ti>
+<ti>2007年9月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_ap2_snmp">www-apache/mod_ap2_snmp</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-libs;name=libhome">dev-libs/libhome</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=x11-drivers;name=xf86-video-amd">x11-drivers/xf86-video-amd</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=x11-drivers;name=xf86-video-vermilion">x11-drivers/xf86-video-vermilion</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_vhs">www-apache/mod_vhs</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_dnssd">www-apache/mod_dnssd</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=www-apache;name=mod_evasive">www-apache/mod_evasive</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-util;name=portatosourceview">dev-util/portatosourceview</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="jokey@gentoo.org">Markus Ullmann</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=app-portage;name=portato">app-portage/portato</uri></ti>
+<ti>2007年9月09日</ti>
+<ti><mail link="jokey@gentoo.org">Markus Ullmann</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<section>
+<title>最后仪式：</title>
+<body>
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=net-dialup;name=bpalogin">net-dialup/bpalogin</uri></ti>
+<ti>2007年10月02日</ti>
+<ti><mail link="genstef@gentoo.org">Stefan Schweizer</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=dev-python;name=logging">dev-python/logging</uri></ti>
+<ti>2007年10月06日</ti>
+<ti><mail link="hawking@gentoo.org">Ali Polatel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/packages/?category=sys-auth;name=tfm-fingerprint">sys-auth/tfm-fingerprint</uri></ti>
+<ti>2007年10月08日</ti>
+<ti><mail link="vapier@gentoo.org">Mike Frysinger</mail></ti>
+</tr>
+
+</table>
+
+<!-- End: paste from the script -->
+</body>
+</section>
+
+</chapter>
+<!-- Bugzilla -->
+<chapter>
+<title>Bugzilla</title>
+<!-- paste from the script -->
+<section>
+<title>总结</title>
+<body>
+
+<ul>
+<li><uri link="#bugs-stats">统计信息</uri></li>
+<li><uri link="#bugs-closed">被修复的bug排行榜</uri></li>
+<li><uri link="#bugs-new">新bug排行榜</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bugs-stats">
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2007年9月02日到2007年9月08日，这个站点记录下了：</p>
+
+<ul>
+<li>428个在这段时间内被发现的新bug</li>
+<li>287个在这段时间内被修正或解决的bug</li>
+<li>12个先前修复了的但在这段时间重现的bug</li>
+<li>99个在这段时间内以NEEDINFO/WONTFIX/CANTFIX/INVALID/UPSTREAM的形式被关闭的bug</li>
+<li>88个bug在这段时间被标记为重复</li>
+</ul>
+
+<p>在当前还未被修正的9769个bug里面：10个被标记为"blocker"，104个被标记为"critical"，还有341个被标记为"major"。</p>
+
+</body>
+</section>
+
+<section id="bugs-closed">
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，17个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=base-system@gentoo.org">被修正的bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，13个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=netmon@gentoo.org">被修正的bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，9个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=gnome@gentoo.org">被修正的bug</uri></li>
+<li><mail link="fonts@gentoo.org">Gentoo Fonts Team</mail>，8个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=fonts@gentoo.org">被修正的bug</uri></li>
+<li><mail link="security@gentoo.org">Gentoo安全</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=security@gentoo.org">被修正的bug</uri></li>
+<li><mail link="python@gentoo.org">Python Gentoo团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=python@gentoo.org">被修正的bug</uri></li>
+<li><mail link="ppc@gentoo.org">PPC移植人员</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=ppc@gentoo.org">被修正的bug</uri></li>
+<li><mail link="kde@gentoo.org">Gentoo KDE团队</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=RESOLVED&amp;bug_status=CLOSED&amp;chfield=bug_status&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;resolution=FIXED&amp;assigned_to=kde@gentoo.org">被修正的bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="bugs-new">
+<title>新bug排行榜</title>
+<body>
+
+<p>在这段时间内被分配得到最多的新bug的开发者和团队有：</p>
+
+<ul>
+<li><mail link="maintainer-wanted@gentoo.org">新软件包的默认受托人</mail>，15个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=maintainer-wanted@gentoo.org">新bug</uri></li>
+<li><mail link="kernel@gentoo.org">Gentoo内核维护者</mail>，6个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=kernel@gentoo.org">新bug</uri></li>
+<li><mail link="vapier@gentoo.org">SpanKY</mail>，5个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=vapier@gentoo.org">新bug</uri></li>
+<li><mail link="amd64@gentoo.org">AMD64项目</mail>，5个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=amd64@gentoo.org">新bug</uri></li>
+<li><mail link="gnome@gentoo.org">Gentoo Linux Gnome桌面团队</mail>，4个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=gnome@gentoo.org">新bug</uri></li>
+<li><mail link="base-system@gentoo.org">Gentoo核心系统软件包团队</mail>，4个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=base-system@gentoo.org">新bug</uri></li>
+<li><mail link="netmon@gentoo.org">Netmon团队</mail>，3个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=netmon@gentoo.org">新bug</uri></li>
+<li><mail link="mips@gentoo.org">mips团队</mail>，3个<uri link="http://bugs.gentoo.org/buglist.cgi?bug_status=NEW&amp;bug_status=ASSIGNED&amp;bug_status=REOPENED&amp;chfield=assigned_to&amp;chfieldfrom=2007-09-02&amp;chfieldto=2007-09-08&amp;assigned_to=mips@gentoo.org">新bug</uri></li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+<!-- GWN feedback information -->
+
+<chapter>
+
+<title>周报反馈</title>
+<section>
+<body>
+
+<p>GWN的工作人员包括为GWN出谋划策和提交文章的志愿者和社区成员。如果你有兴趣成为GWN的作者，对我们发布的文章有意见建议，或者哪怕只是有点想法或文章要提交给GWN，都请把你的<mail link="gwn-feedback@gentoo.org">反馈</mail>发给我们以帮助我们把GWN做的更好。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- GWN subscription information -->
+
+<chapter>
+
+<title>周报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo周报，请发一封空邮件到<mail link="gentoo-gwn+subscribe@gentoo.org">gentoo-gwn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo周报，请从你订阅的邮箱发一封空邮件到<mail link="gentoo-gwn+unsubscribe@gentoo.org">gentoo-gwn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Other Languages -->
+
+<chapter>
+
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo周报还被翻译为以下几种语言文字：</p>
+
+<ul>
+<li>
+<uri link="/news/zh_cn/gwn/gwn.xml">简体中文</uri>
+</li>
+<!-- <li>
+<uri link="/news/da/gwn/gwn.xml">Danish</uri>
+</li> -->
+<li>
+<uri link="/news/nl/gwn/gwn.xml">荷兰文</uri>
+</li>
+<li>
+<uri link="/news/en/gwn/gwn.xml">英文</uri>
+</li>
+<li>
+<uri link="/news/de/gwn/gwn.xml">德文</uri>
+</li>
+<li>
+<uri link="/news/el/gwn/gwn.xml">希腊文</uri>
+</li>
+<li>
+<uri link="/news/fr/gwn/gwn.xml">法文</uri>
+</li>
+<li>
+<uri link="/news/ko/gwn/gwn.xml">韩文</uri>
+</li>
+<li>
+<uri link="/news/ja/gwn/gwn.xml">日文</uri>
+</li>
+<li>
+<uri link="/news/it/gwn/gwn.xml">意大利文</uri>
+</li>
+<li>
+<uri link="/news/pl/gwn/gwn.xml">波兰文</uri>
+</li>
+<li>
+<uri link="/news/pt_br/gwn/gwn.xml">葡萄牙文（巴西）</uri>
+</li>
+<li>
+<uri link="/news/pt/gwn/gwn.xml">葡萄牙文（葡萄牙）</uri>
+</li>
+<li>
+<uri link="/news/ru/gwn/gwn.xml">俄文</uri>
+</li>
+<li>
+<uri link="/news/sk/gwn/gwn.xml">斯洛伐克文</uri>
+</li>
+<li>
+<uri link="/news/es/gwn/gwn.xml">西班牙文</uri>
+</li>
+<li>
+<uri link="/news/tr/gwn/gwn.xml">土耳其文</uri>
+</li>
+</ul>
+
+</body>
+
+</section>
+
+</chapter>
+
+</guide>
