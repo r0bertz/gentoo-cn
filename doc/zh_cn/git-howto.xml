@@ -20,6 +20,14 @@
   <mail link="fengguang.wu@gmail.com">Wu Fengguang</mail>
 </author>
 
+<author title="贡献者">
+  <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+</author>
+
+<author title="贡献者">
+  <mail link="night2008@gmail.com">苏永恒</mail>
+</author>
+
 <abstract>
 本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布到gentoo-china@googlegroups.com邮件列表上，供维护人员评阅和采纳。
 </abstract>
@@ -38,12 +46,60 @@
 <body>
 
 <note>
-如果你希望使用gitk工具，请加上tk USE标记。
+请加上curl和tk USE标记。前者可以让你获取http协议的仓库，后者可以让你使用gitk工具。
 </note>
 
 <pre caption="安装git">
+$ <i>euse -E curl tk</i>
 $ <i>emerge -av dev-util/git</i>
 </pre>
+
+</body>
+</section>
+<section>
+<title>配置git</title>
+<body>
+
+<p>
+git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来设定自己的个人信息。设定之前首先我们还是来安装和配置smtp程序。这里我们介绍是msmtp。
+</p>
+
+<pre caption="安装msmtp">
+$ <i>emerge msmtp</i>
+</pre>
+
+<p>
+然后你就可以设置msmtp了，修改~/.msmtprc并设定权限：
+</p>
+
+<pre caption="修改~/.msmtprc并设定权限">
+$ <i>cat > ~/.msmtprc</i>
+defaults
+tls on
+account gmail
+host smtp.gmail.com
+from yourname@gmail.com
+auth on
+user yourname@gmail.com
+password yourpassword
+port 587
+account default:gmail
+$ <i>chmod u=rw ~/.msmtprc</i>
+</pre>
+
+<p>
+请用你的email地址和密码代替上面的yourname@gmail.com和yourpassword。下面我们用git-config来设定git的一些全局变量。
+</p>
+
+<pre caption="设置自己的姓名、email地址及smtp服务器程序">
+$ <i>git-config --global user.name 'Your Name'</i>
+$ <i>git-config --global user.email 'yourname@gmail.com'</i>
+$ <i>git-config --global sendemail.smtpserver "/usr/bin/msmtp"</i>
+</pre>
+
+<p>
+同样，用你自己的名字、email地址代替上面的值，但smtpserver的值要和上面一样。如此设置后，这些信息就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
+</p>
 
 </body>
 </section>
@@ -71,26 +127,6 @@ $ <i>git clone http://gentoo-cn.org/.git</i>
 <pre caption="使用gitk --all可以通过图形方式查看项目的所有分支结构和历史修改">
 $ <i>gitk --all</i>
 </pre>
-
-</body>
-</section>
-<section>
-<title>设定全局变量</title>
-<body>
-
-<p>
-git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来标明自己的身份。此外我们还需要指定我们使用的SMTP服务器地址。
-</p>
-
-<pre caption="设置自己的姓名和email地址">
-$ <i>git-config --global user.name 'Denis Cheng'</i>
-$ <i>git-config --global user.email 'crquan@gmail.com'</i>
-$ <i>git-config --global sendemail.smtpserver 'smtp.i-cable.com'</i>
-</pre>
-
-<p>
-用你自己的名字、email和SMTP服务器地址代替上面的值。这样设置一次后就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
-</p>
 
 </body>
 </section>
@@ -355,78 +391,6 @@ To: gentoo-china@googlegroups.com
 
 Result: OK
 </pre>
-
-</body>
-</section>
-<section>
-<title>关于“发布你的修改”的一点补充（使用msmtp发送patch）</title>
-<body>
-
-<p>
-这个补充的方法是当你使用gmail等一些邮件服务器时最佳的发送方式，它将解决一些有关SMTP服务器的问题。这个设置在前文中有提到，如果你使用以下的设置，在前文的“git-config --global sendemail.smtpserver 'smtp.i-cable.com'”时，你可以不必执行这条语句，当然如果执行了，也没什么关系，因为后面还会设置的。
-</p>
-
-<p>
-首先确定你在编译git的时候加上了<c>curl</c>这个USE标记，否则你无法通过网络使用git！
-</p>
-
-<p>
-现在你先要安装msmtp这个软件：
-</p>
-
-<pre caption="安装msmtp">
-$ <i>emerge msmtp</i>
-</pre>
-
-<p>
-然后你就可以设置msmtp了，修改~/.msmtprc：
-</p>
-
-<pre caption="修改~/.msmtprc">
-$ <i>nano -w ~/.msmtprc</i>
-
-defaults
-tls on
-account gmail
-host smtp.gmail.com
-from yourem...@gmail.com
-auth on
-user yourem...@gmail.com
-password yourpassword
-port 587
-account default:gmail
-
-</pre>
-
-<p>
-请根据以上的提示以及你的情况修改相应项！并记住，请修改~/.msmtprc的权限为不超过user可读写（我的小技巧:如果你是root，那么把所有的权限改成禁止就行了）。否这会出现下面的错误：
-</p>
-
-<pre caption="出错">
-msmtp: /root/.msmtprc: must have no more than user read/write permissions
-</pre>
-
-<p>
-设定你在git里使用的账号：
-</p>
-
-<pre caption="设置git">
-$ <i>git config --global user.name "Your Name"</i>
-$ <i>git config --global user.email "Your Mail Address"</i>
-$ <i>git-config --global sendemail.smtpserver "/usr/bin/msmtp"</i>
-</pre>
-
-<p>
-然后你就可以发送补丁到gentoo-china@googlegroups.com了：
-</p>
-
-<pre caption="发送补丁">
-$ <i>git send-email ******.patch --to gentoo-china@googlegroups.com</i>
-</pre>
-
-<p>
-这个补充说明到现在就结束了，在此感谢FELove的整理！祝大家使用愉快！
-</p>
 
 </body>
 </section>
