@@ -54,7 +54,7 @@
     <file id="inserts">/doc/zh_cn/inserts.xml</file>
     <file id="name-logo">/main/en/name-logo.xml</file>
     <file id="art-prompt-magic">/doc/en/articles/prompt-magic.xml</file>
-    <file id="art-bash-ex-p1">/doc/en/articles/bash-by-example-p1.xml</file>
+    <file id="art-bash-ex-p1">/doc/zh_cn/articles/bash-by-example-p1.xml</file>
     <file id="art-bash-ex-p2">/doc/en/articles/bash-by-example-p2.xml</file>
     <file id="art-bash-ex-p3">/doc/en/articles/bash-by-example-p3.xml</file>
     <file id="art-mk-distro-p1">/doc/zh_cn/articles/making-the-distro-p1.xml</file>
@@ -374,7 +374,7 @@
     <file id="mysql-upgrade-slotted">/doc/en/mysql-upgrade-slotted.xml</file>
     <file id="gcc-upgrading">/doc/en/gcc-upgrading.xml</file>
     <file id="x86-at-faq">/proj/en/base/x86/arch-testers-faq.xml</file>
-    <file id="php-upgrade">/proj/en/php/php-upgrading.xml</file>
+    <file id="php-upgrade">/proj/zh_cn/php/php-upgrading.xml</file>
     <file id="jffnms">/doc/en/jffnms.xml</file>
     <file id="conky">/doc/en/conky-howto.xml</file>
     <file id="ldapdns">/doc/en/ldapdns-guide.xml</file>
