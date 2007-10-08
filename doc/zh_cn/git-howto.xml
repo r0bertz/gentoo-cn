@@ -84,7 +84,7 @@ user yourname@gmail.com
 password yourpassword
 port 587
 account default:gmail
-$ <i>chmod u=rw ~/.msmtprc</i>
+$ <i>chmod 600 ~/.msmtprc</i>
 </pre>
 
 <p>
