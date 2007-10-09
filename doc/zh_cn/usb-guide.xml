@@ -9,7 +9,7 @@
   <mail link="fox2mike@gentoo.org">Shyam Mani</mail>
 </author>
 <author title="译者">
-    <mail link="lyanry@gmail.com">李延瑞</mail>
+  <mail link="lyanry@gmail.com">李延瑞</mail>
 </author>
 
 <abstract>
@@ -30,11 +30,11 @@
 <body>
 
 <p>
-USB 的意思是通用串行总线(Universal Serial Bus)，是一种扩展接口标准，主要用于不同计算机或其周边设备之间的通信。一些大众化的USB设备有键盘、鼠标、U盘、数码相机、CD &amp; DVD外接读写器、打印机等。
+USB的意思是通用串行总线(Universal Serial Bus)，是一种扩展接口标准，主要用于不同计算机或其周边设备之间的通信。一些大众化的USB设备有键盘、鼠标、U盘、数码相机、CD和DVD外接读写器、打印机等。
 </p>
 
 <p>
-目前USB标准有两种版本：USB 1.1 与USB 2.0。由于USB的前一版总是向后兼容的，所以USB 2.0兼容USB 1.1。最新的USB设备通常都是支持USB 2.0。USB 2.0支持的最大数据传输速率为 480 MBps 与 60 MBps，这分别是USB 2.0与其所兼容的USB 1.1的数据传输速率。USB还具有支持设备热插拔的优点，这意味着不必重启系统即可使用USB设备。
+目前USB标准有两种版本：USB 1.1 与USB 2.0。由于USB的前一版总是向后兼容的，所以USB 2.0兼容USB 1.1。最新的USB设备通常都是支持USB 2.0。USB 2.0支持的最大数据传输速率为480 MBps与60 MBps，这分别是USB 2.0与其所兼容的USB 1.1的数据传输速率。USB还具有支持设备热插拔的优点，这意味着不必重启系统即可使用USB设备。
 </p>
 
 </body>
@@ -152,7 +152,7 @@ USB设备可以有单独的驱动程序，也可以使用系统提供的驱动�
 本文档示例只针对一些基本的USB支持，当然这也是大多数人所需要的，譬如USB块存储设备（数码相机与U盘驱动）。若对一些特殊的USB设备进行配置，请参考设备的用户手册，或者在网上搜索一下内核是否已经实现了对这些设备的支持，再或者使用你所能找到的对应驱动程序。请注意，本文为了简化问题，所有的示例配置都是编译到内核中去的，如果你希望使用内核的模块机制，在确认要编译哪些模块时，相应地调整一下内核配置文件。
 </note>
 
-<pre caption="2.6 kernels的make menuconfig选项">
+<pre caption="2.6 kernel的make menuconfig选项">
 Device Drivers  ---&gt;
   SCSI device support  ---&gt;
 
@@ -213,7 +213,7 @@ USB Serial Converter support  ---&gt;
 本文档示例只针对一些基本的USB支持，当然这也是大多数人所需要的，譬如USB块存储设备（数码相机与U盘驱动）。若对一些特殊的USB设备进行配置，请参考设备的用户手册，或者在网上搜索一下内核是否已经实现了对这些设备的支持，再或者使用你所能找到的对应驱动程序。请注意，本文为了简化问题，所有的示例配置都是编译到内核中去的，如果你希望使用内核的模块机制，在确认要编译哪些模块时，相应地调整一下内核配置文件。
 </note>
 
-<pre caption="2.4 kernels的make menuconfig选项" >
+<pre caption="2.4 kernel的make menuconfig选项" >
 <comment>(此处配置只针对那些拥有USB输入设备的用户，Input core support在下面设置USB HID时是必需的)</comment>
 Input core support  ---&gt;
    &lt;*&gt; Input core support
@@ -271,10 +271,10 @@ USB Serial Converter support  ---&gt;
 </p>
 
 <note>
-<c>dmesg</c>在显示我们所需要的信息之前会输出大量的冗余信息，因为它要读取内核的环缓冲区 (ring buffer)，会输出许多启动信息。下面示例中的输出信息只给出了一部分信息，为了更好的阅读，还添加了一些空行。使用<c>dmesg | more</c>或<c>dmesg | less</c>来查看输出信息会更好一些。
+<c>dmesg</c>在显示我们所需要的信息之前会输出大量的冗余信息，因为它要读取内核的环缓冲区(ring buffer)，会输出许多启动信息。下面示例中的输出信息只给出了一部分信息，为了更好的阅读，还添加了一些空行。使用<c>dmesg | more</c>或<c>dmesg | less</c>来查看输出信息会更好一些。
 </note>
 
-<pre caption="dmesg output for Memory Stick">
+<pre caption="记忆棒的dmesg输出">
 <comment>(先将U盘插入可用的USB端口，然后...)</comment>
 # <i>dmesg | less</i>
 
@@ -383,7 +383,7 @@ Bus 001 Device 002: ID 046d:c00e Logitech, Inc. Optical Mouse
 Bus 001 Device 001: ID 0000:0000
 </pre>
 
-<p>    
+<p>
 如果你喜欢看大量的输出信息，运行<c>lsusb -v</c>就可以满足你的这一欲望。<c>lsusb</c>另一个有用的选项是给出当前USB物理层次的树状信息，这可以更容易让你准确理解设备体系结构，这个命令就是<c>lsusb -t</c>，例如：
 </p>
 
