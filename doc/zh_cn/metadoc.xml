@@ -55,7 +55,7 @@
     <file id="name-logo">/main/en/name-logo.xml</file>
     <file id="art-prompt-magic">/doc/en/articles/prompt-magic.xml</file>
     <file id="art-bash-ex-p1">/doc/zh_cn/articles/bash-by-example-p1.xml</file>
-    <file id="art-bash-ex-p2">/doc/en/articles/bash-by-example-p2.xml</file>
+    <file id="art-bash-ex-p2">/doc/zh_cn/articles/bash-by-example-p2.xml</file>
     <file id="art-bash-ex-p3">/doc/en/articles/bash-by-example-p3.xml</file>
     <file id="art-mk-distro-p1">/doc/zh_cn/articles/making-the-distro-p1.xml</file>
     <file id="art-mk-distro-p2">/doc/en/articles/making-the-distro-p2.xml</file>
