@@ -14,10 +14,13 @@
 <author title="译者">
   <mail link="night2008@gmail.com">苏永恒</mail>
 </author>
+
 <abstract>
 在他那篇关于bash的介绍性的文章中，Daniel Robbins描述了脚本语言的一些基本概念和使用bash的原因。在本篇中，即第二部分，Daniel接着前面的讲述继续讨论bash的诸如条件（if-then）语句，循环语句等等bash的基本结构。
 </abstract>
+
 <!-- The original version of this article was published on IBM developerWorks,and is property of Westtech Information Services. This document is an updated version of the original article, and contains various improvements made by the Gentoo Linux Documentation team -->
+
 <version>1.4</version>
 <date>2005-10-09</date>
 
@@ -32,8 +35,7 @@
 </p>
 
 <p>
-在前面的<uri 
-link="/doc/zh_cn/articles/bash-by-example-p1.xml">介绍性的文章</uri>的示例程序中。我们使用了环境变量“$1”，他引用第一个命令行参数。类似的，你可以使用“$2”，“$3”等等来引用传入你的脚本中的第二个和第三个参数。下面是一个例子：
+在前面的<uri link="/doc/zh_cn/articles/bash-by-example-p1.xml">介绍性的文章</uri>的示例程序中。我们使用了环境变量“$1”，他引用第一个命令行参数。类似的，你可以使用“$2”，“$3”等等来引用传入你的脚本中的第二个和第三个参数。下面是一个例子：
 </p>
 
 <pre caption="引用传入脚本的参数">
@@ -128,15 +130,15 @@ fi
 在上面的例子中，如果myvar等于“foo”，代码将正常运行而且不会打印出任何东西。然而，如果myvar等于“foo bar oni”，代码将出错并返回以下错误：
 </p>
 
-<pre caption="变量包含空格错误">
-[: 太多参数
+<pre caption="变量包含空格导致的错误">
+[: too many arguments
 </pre>
 
 <p>
-在这种情况下，“$myvar”（等于“foo bar oni”）中的空格使bash混淆了。在bash扩展了“$myvar”，比较结果如下：
+在这种情况下，“$myvar”（等于“foo bar oni”）中的空格使bash混淆了。在bash扩展了“$myvar”之后，这个比较变成了：
 </p>
 
-<pre caption="末尾比较">
+<pre caption="最终的比较">
 [ foo bar oni = "foo bar oni"
 </pre>
 
@@ -173,7 +175,7 @@ fi
 #!/usr/bin/env bash
 
 for x in one two three four
-do 
+do
    echo number $x
 done
 
@@ -192,7 +194,7 @@ number four
 #!/usr/bin/env bash
 
 for myfile in /etc/r*
-do 
+do
      if [ -d "myfile" ]
      then
        echo "$myfile (dir)"
@@ -218,7 +220,7 @@ done
 
 <pre caption="多通配符和环境变量">
 for x in /etc/r??? /var/lo* /home/drobbins/mystuff/* /tmp/${MYPATH}/*
-do 
+do
      cp $x /mnt/mydira
 done
 </pre>
@@ -257,7 +259,7 @@ done
 #!/usr/bin/env bash
 
 for thing in "$@"
-do 
+do
     echo you typed ${thing}.
 done
 
@@ -488,8 +490,7 @@ echo $myvar $x
 </pre>
 
 <p>
-此函数将输出“hello”──没有覆盖全局变量“$myvar”，“$x”在myfunc之外也不会继续存在。在函数的第一行中，我们创建了以后要使用的局部变量x，而在第二个例子(local 
-myvar="one two three")中，我们创建了局部变量 myvar并为它赋值。既然我们不能使用"for local x in $myvar"，用第一种形式来将循环控制变量定义为局部变量是很方便的。此函数不影响任何全局变量，所以使用这种方法设计所有的函数是值得鼓励的。只有当你在明确希望要修改全局变量时，才不应该使用“local”.
+此函数将输出“hello”──没有覆盖全局变量“$myvar”，“$x”在myfunc之外也不会继续存在。在函数的第一行中，我们创建了以后要使用的局部变量x，而在第二个例子(local myvar="one two three")中，我们创建了局部变量 myvar并为它赋值。既然我们不能使用"for local x in $myvar"，用第一种形式来将循环控制变量定义为局部变量是很方便的。此函数不影响任何全局变量，所以使用这种方法设计所有的函数是值得鼓励的。只有当你在明确希望要修改全局变量时，才不应该使用“local”.
 </p>
 
 </body>
