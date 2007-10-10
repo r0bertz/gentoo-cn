@@ -1,0 +1,530 @@
+<?xml version='1.0' encoding="UTF-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version 1.6 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/articles/bash-by-example-p2.xml" disclaimer="articles" lang="zh_cn">
+<title>Bash示例，第二部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+
+<author title="译者">
+  <mail link="night2008@gmail.com">苏永恒</mail>
+</author>
+<abstract>
+在他那篇关于bash的介绍性的文章中，Daniel Robbins描述了脚本语言的一些基本概念和使用bash的原因。在本篇中，即第二部分，Daniel接着前面的讲述继续讨论bash的诸如条件（if-then）语句，循环语句等等bash的基本结构。
+</abstract>
+<!-- The original version of this article was published on IBM developerWorks,and is property of Westtech Information Services. This document is an updated version of the original article, and contains various improvements made by the Gentoo Linux Documentation team -->
+<version>1.4</version>
+<date>2005-10-09</date>
+
+<chapter>
+<title>更多bash编程基础</title>
+<section>
+<title>接收参数</title>
+<body>
+
+<p>
+让我们从一个操作命令行参数的基本技巧开始，然后再看bash的基本编程结构。
+</p>
+
+<p>
+在前面的<uri 
+link="/doc/zh_cn/articles/bash-by-example-p1.xml">介绍性的文章</uri>的示例程序中。我们使用了环境变量“$1”，他引用第一个命令行参数。类似的，你可以使用“$2”，“$3”等等来引用传入你的脚本中的第二个和第三个参数。下面是一个例子：
+</p>
+
+<pre caption="引用传入脚本的参数">
+#!/usr/bin/env/bash
+
+echo name of script is $0
+echo first argument is $1
+echo second argumeng is $2
+echo seventeenth argument is $17
+echo number of argument is $#
+</pre>
+
+<p>
+这个例子有两个小的细节需要解释。第一，“$0”将扩展成从命令行调用的脚本的名称，而“$#”则将扩展成传入脚本的参数的数量。试验上面的脚本，并通过传入不同类型的命令行参数理解它是怎样工作的。
+</p>
+
+<p>
+有时候一次引用所有的命令行参数是很有用的。为了达到此目的，bash实现了“$@”变量，它扩展了所有用空格隔开的命令行参数。我们在稍后的“for”循环中，我们将看到使用它的例子。
+</p>
+
+</body>
+</section>
+<section>
+<title>Bash编程结构</title>
+<body>
+
+<p>
+如果你曾用过诸如C，Pascal，Python或Perl过程语言编程，那么你对像“if”语句，“for”循环和此类的标准的编程结构应该比较熟悉。对于大多数这些标准结构，Bash也有自己的版本。在下面的几段中，我将介绍一些bash结构并演示这些结构与它们在其他你所熟知的编程语言中的不同之处。
+</p>
+
+</body>
+</section>
+<section>
+<title>方便的条件语句</title>
+<body>
+
+<p>
+如果你用C语言编写过文件相关的代码，你应该知道比较一个特定的文件是否比另一个要新通常要花费很大气力。这是因为C语言没有用来执行这种比较的内建语法;那么两个stat()的调用和两个stat结构体就应该用来手工执行这种比较了。相反，bash有标准的内建文件比较操作符，所以确定“<path>/tmp/myfile</path>是否可读”和判断“<c>$myvar</c>是否大于4”一样容易。
+</p>
+
+<p>
+下表中列出了大多数常用的bash比较操作符。你将还可以找到如何正确使用每一个选项的例子。例子要紧跟在“if”语句后面。例如：
+</p>
+
+<pre caption="Bash比较操作符">
+if [ -z "$myvar" ]
+then
+        echo "myvar is not defined"
+fi
+</pre>
+
+<p>
+有时一种特定的比较操作可以有很多不同的方法来实现。例如，下面的两段代码实现了同样的功能：
+</p>
+
+<pre caption="进行比较的两种方法">
+if [ "$myvar" -eq 3 ]
+then
+     echo "myvar equals 3"
+fi
+
+if [ "$myvar" = "3" ]
+then
+     echo "$myvar" = "3" ]
+then
+     echo "myvar equals 3"
+fi
+</pre>
+
+<p>
+上面两个比较做了同样的事情，但是第一个使用了算术比较操作符，然而第二个则使用了字符串比较操作符。
+</p>
+
+</body>
+</section>
+<section>
+<title>字符串比较说明</title>
+<body>
+
+<p>
+大多数时候你可以不使用括起字符串和字符串变量的双引号，但这并非是个好主意。为什么呢？因为你的环境变量刚好有个空格或制表符在里面，这时bash将不能区分。从而导致代码运行异常。这里是一个糟糕的比较的例子。
+</p>
+
+<pre caption="糟糕的比较的例子">
+if [ $myvar = "foo bar oni" ]
+then
+      echo "yes"
+fi
+</pre>
+
+<p>
+在上面的例子中，如果myvar等于“foo”，代码将正常运行而且不会打印出任何东西。然而，如果myvar等于“foo bar oni”，代码将出错并返回以下错误：
+</p>
+
+<pre caption="变量包含空格错误">
+[: 太多参数
+</pre>
+
+<p>
+在这种情况下，“$myvar”（等于“foo bar oni”）中的空格使bash混淆了。在bash扩展了“$myvar”，比较结果如下：
+</p>
+
+<pre caption="末尾比较">
+[ foo bar oni = "foo bar oni"
+</pre>
+
+<p>
+因为环境变量没有放在双引号中，bash认为你方括号中参数太多。你可以通过用双引号将字符串参数括起来轻松的解决这个问题。记住，如果你习惯于在所有的字符参数和环境变量都用双引号括起来，你将能解决很多类似的编程错误。“foo bar oni”比较应该这样些：
+</p>
+
+<pre caption="正确的比较书写的方法">
+if [ "$myvar" = "foo bar oni" ]
+then
+     echo "yes"
+fi
+</pre>
+
+<p>
+以上的代码将如期运行并不会有什么不快的意外结果出现。
+</p>
+
+<note>
+如果你希望你的环境变量被扩展，你应该将它们括在双引号里面，而不是单引号里。单引号是禁用变量（和历史）扩展的。
+</note>
+
+</body>
+</section>
+<section>
+<title>循环结构</title>
+<body>
+
+<p>
+好，我们已经讲述了条件结构，现在浏览一下bash的循环结构。我们将从一个标准的“for”循环开始。下面是一个基本的例子：
+</p>
+
+<pre caption="基本的例子">
+#!/usr/bin/env bash
+
+for x in one two three four
+do 
+   echo number $x
+done
+
+<comment>输出：</comment>
+number one
+number two
+number three
+number four
+</pre>
+
+<p>
+这是怎么发生的呢？在“for”循环中的“for x”部分我们定义了一个叫“$x”的新的环境变量（又称循环控制变量），它被成功的设定为值“one”，“two”，“there”和“four”。在每一次赋值之后，循环的主体（在“do”和“done”之间的代码）将立即执行。在循环主体中，与其他环境变量一样，我们使用标准的变量扩展句法来引用循环控制变量“$x”。还应该注意的是“for”循环总是接收在“in”语句之后的某种类型的字符表。在这里我们指定了四个英文单词，但是字符表也能引用也能引用磁盘文件甚至文件通配符。请看下面演示如何使用标准shell通配符的例子：
+</p>
+
+<pre caption="使用标准的shell通配符">
+#!/usr/bin/env bash
+
+for myfile in /etc/r*
+do 
+     if [ -d "myfile" ]
+     then
+       echo "$myfile (dir)"
+     else
+       echo "$myfile"
+     fi
+done
+输出：
+
+/etc/rc.d (dir)
+/etc/resolv.conf
+/etc/resolv.conf
+/etc/rpc
+</pre>
+
+<p>
+上面的代码遍历了<path>/etc</path>下所有以“r”开头的文件。为了这么做，bash首先获取通配符/etc/r*并将它扩展，然后在执行循环之前将它用字符串<path>/etc/rc.d</path><path>/etc/resolv.conf</path> <path>/etc/resolv.conf~</path><path>/etc/rpc</path>替换。每一次循环，“-d”条件操作符就会被用来执行两个不同的操作来确定myfile是一个文件夹不是。如果是，则在输出行后加一个“(dir)”。
+</p>
+
+<p>
+在字符表中我们同样可以使用多通配符甚至多环境变量：
+</p>
+
+<pre caption="多通配符和环境变量">
+for x in /etc/r??? /var/lo* /home/drobbins/mystuff/* /tmp/${MYPATH}/*
+do 
+     cp $x /mnt/mydira
+done
+</pre>
+
+<p>
+Bash将在所有正确的位置上进行通配符和变量扩展，并可能建立一个很长的字符表。
+</p>
+
+<p>
+虽然我们所有的通配符扩展的例子都使用绝对路径，但是你同样像下面一样可以使用相对路径：
+</p>
+
+<pre caption="使用相对路径">
+for x in ../* mystuff/*
+do
+      echo $x is a silly file
+done
+</pre>
+
+<p>
+在上例中，bash演示了相对与当前目录的通配符扩展，也即在命令行中使用相对路径。仔细研究一下通配符扩展你会发现如果你在你的通配符中使用绝对路径，bash将把你的通配符扩展成一串却对路径。相反，bash将在随后的字符序列中使用相对路径。如果你只是简单的引用当前目录下的文件（例如，如果你敲入<c>for x in *</c>），文件的结果列表中不会附加任何路径信息。记住前面的路径信息可以通过执行<c>basename</c>剥除，如下所示：
+</p>
+
+<pre caption="用basename剥除前面的路径">
+for x in /var/log/*
+do
+     echo `basename $x` is a file living in /var/log
+done
+</pre>
+
+<p>
+当然，在脚本的命令行参数上执行循环通常是很方便的。正如文章开始提到的，这是一个如何使用“$@”变量的例子：
+</p>
+
+<pre caption="使用$@变量的例子">
+#!/usr/bin/env bash
+
+for thing in "$@"
+do 
+    echo you typed ${thing}.
+done
+
+<comment>输出</comment>
+
+$ allargs hello there you silly
+you typed hello.
+you typed three.
+you typed you.
+you typed silly.
+</pre>
+
+</body>
+</section>
+<section>
+<title>Shell算术</title>
+<body>
+
+<p>
+在学习第二中循环结构之前，我们最好先熟悉如何执行shell算术。是的，你可以用shell结构来执行简单的整数运算。只需将特定的算术表达式用一个“$((”和一个“))”括起来即可，然后bash将计算这个表达式。下面是例子：
+</p>
+
+<pre caption="bash中的计算">
+$ <i>echo $(( 100 / 3 ))</i>
+33
+$ <i>myvar="56"</i>
+$ <i>echo $(( $myvar + 12 ))</i>
+68
+$ <i>echo $(( $myvar - $myvar ))</i>
+0
+$ <i>myvar=$(( $myvar + 1 ))</i>
+$ <i>echo $myvar</i>
+57
+</pre>
+
+<p>
+现在你已经熟悉算术操作的执行了，也是时间介绍其他两个循环结构，“while”和“until”。
+</p>
+
+</body>
+</section>
+<section>
+<title>更多循环结构：“while”和“until”</title>
+<body>
+
+<p>
+只有当特定的条件为真，“while”语句将执行，其格式如下：
+</p>
+
+<pre caption="While条件模板">
+while [ condition ]
+do
+     statements
+done
+</pre>
+
+<p>
+“While”语句通常用来循环特定次数，就如下面的例子中循环了10次：
+</p>
+
+<pre caption="语句循环10次">
+myvar=0
+while [ $myvar -ne 10 ]
+do
+    echo $myvar
+    myvar=$(( $myvar + 1 ))
+done
+</pre>
+
+<p>
+我们可以看到算术扩展的使用导致条件语句为假，并使循环结束。
+</p>
+
+<p>
+“Until”语句提供了和“While”语句相反的功能：它们不断重复执行直到一个特定的条件为假。下面是一个实现和前面“while”循环同样功能的“until”循环：
+</p>
+
+<pre caption="Until循环示例">
+myvar=0
+until [ $myvar -eq 10 ]
+do
+     echo $myvar
+     myvar=$(( $myvar + 1 ))
+done
+</pre>
+
+</body>
+</section>
+<section>
+<title>Case语句</title>
+<body>
+
+<p>
+“Case”语句是另外一个简便的条件结构。这是一个示例片断：
+</p>
+
+<pre caption="Case语句示例片断">
+case "${x##*.}" in
+      gz)
+            gzunpack ${SROOT}/${x}
+            ;;
+      bz2)
+            bz2unpack ${SPOOT}/{x}
+      *)
+            echo "Archive format not recognized.
+            exit
+            ;;
+esac
+</pre>
+
+<p>
+上面，bash首先扩展了“${x##*.}”。在代码中，“$x”是一个文件名，而“${x##*.}”则剥去了文件名除句末除最后点号后面之外的文本。然后，bash用所得的结果与“)”后列出的值进行比较。此时，“${x##*.}”和“gz”进行比较，然后是“bz2”最后和“*”。如果“${x##*.}”与这些之中的字符串或模式比配，在“)”之后的行将马上执行，直到“;;”，然后bash就继续执行末尾“esac”之后的行。如果没有模式或字符串与之匹配，代码将不被执行;然而在这个特定的代码片断中，至少会又一个代码区域将被执行，因为“*”模式将获取任何不匹配“gz”或“bz2”的模式。
+</p>
+
+</body>
+</section>
+<section>
+<title>函数与命名空间</title>
+<body>
+
+<p>
+在bash中，和其他诸如Pascal和C等过程语言一样，你甚至可以定义函数。在bash中，函数甚至可以接收参数，使用的是一个和脚本接收命令行参数类似的系统。让我们看一个函数定义的例子，然后再从那里继续：
+</p>
+
+<pre caption="函数定义的例子">
+tarview() {
+    echo -n "Displaying contents of $1 "
+    if [ ${1##*.} = tar ]
+    then
+        echo "(uncompressed tar)"
+        tar tvf $1
+    elif [ ${1##*.} =gz ]
+    then
+        echo "(gzip-compressed tar)
+        tar tzvf $1
+    elif [ ${1##*.} =bz2 ]
+    then
+        echo "(bzip2-compressed tar)"
+        cat $1 | bzip2 -d | tar tvf -
+    fi
+}
+</pre>
+
+<note>
+另外，上面的代码还可以使用一个“case”语句编写，你能把它写出来吗？
+</note>
+
+<p>
+上面，我们定义了一个叫“tarview”的函数，它接收一个参数，某种类型的压缩档文件。当这个函数执行时，它判断这个参数是压缩档的哪种类型（是没有解压缩的gzip压缩档还是bzip压缩档），并打印出一行信息然后列出压缩档的目录。上面的函数应该如此调用（在敲入，粘贴或找到该函数后，可以从脚本或是命令行调用它）：
+</p>
+
+<pre caption="调用上面的函数">
+$ <i>tarview shorten.tar.gz</i>
+Displaying contents of shorten.tar.gz (gzip-compressed tar)
+drwxr-xr-x ajr/abbot         0 1999-02-27 16:17 shorten-2.3a/
+-rw-r--r-- ajr/abbot      1143 1997-09-04 04:06 shorten-2.3a/Makefile
+-rw-r--r-- ajr/abbot      1199 1996-02-04 12:24 shorten-2.3a/INSTALL
+-rw-r--r-- ajr/abbot       839 1996-05-29 00:19 shorten-2.3a/LICENSE
+....
+</pre>
+
+<p>
+正如你所见，参数可以通过使用与引用命令行参数同样的机制在函数定义内部引用。此外，“$#”宏将被扩展成包含的参数的数目。唯一可能不完全相同的是变量“$0”，它将被扩展成字符串“bash”（如果通过shell交互运行函数）或调用函数的脚本名称。
+</p>
+
+<note>
+交互的使用它们：不要忘了像上面那样的函数可以放在你的~/.bashrc或~/.bash_profile中，以便你可以使用bash的任何时候都能使用它。
+</note>
+
+</body>
+</section>
+<section>
+<title>命名空间</title>
+<body>
+
+<p>
+通常状况下，你需要在函数内部建立环境变量。但同时，也有一个技巧需要知道。在大多数的编译语言（像C），当你在函数中建立变量时，它会被放置在单独的命名空间中。所以，如果你要在C中定义一个叫myfunction的函数，并定义一个叫“x”的变量，任何叫作“x”的全局（函数之外的）变量将不会受它影响，从而消除了侧面影响。
+</p>
+
+<p>
+虽然这在C中是正确的，但在bash中却是不对的。在bash中，无论你是否是在函数内部定义了一个环境变量，它都会被加入到全局的命名空间中。这意味着它将覆盖函数之外的其他全局变量，甚至在函数退出后它还依然存在：
+</p>
+
+<pre caption="bash中的变量操纵">
+#!/usr/bin/env bash
+
+myvar="hello"
+
+myfunc(){
+
+     myvar="one two three"
+     for x in $myvar
+     do
+         echo $x
+     done
+}
+
+myfunc
+
+echo $myvar $x
+</pre>
+
+<p>
+当这个脚本运行后，它将输出“one two three three”，从而展示了在函数中定义的“$myvar”是如何替代全局变量“$myvar”的和循环控制变量“$x”是如何在函数退出之后继续存在的（并且会替代任何之前定义的全局的“$x”）。
+</p>
+
+<p>
+在这个简单的例子中，这个错误很容易可以找到，并能通过使用其它变量名来改正。然而，这不是正确的方法，解决此问题的最好方法是通过使用“local”命令，在一开始就预防影响全局变量的可能性。当我们使用“local”在函数内部创建变量时，它们将被放在局部的命名空间中，并且不会影响任何全局变量。这里演示了如何实现上述代码，以便不会覆盖全局变量：
+</p>
+
+<pre caption="确保没有全局变量将被覆盖">
+#!/usr/bin/env bash
+
+myvar="hello"
+
+myfunc() {
+     local x
+     local myvar="one two three"
+     for x in $myvar
+     do
+         echo $x
+     done
+}
+
+myfunc
+
+echo $myvar $x
+</pre>
+
+<p>
+此函数将输出“hello”──没有覆盖全局变量“$myvar”，“$x”在myfunc之外也不会继续存在。在函数的第一行中，我们创建了以后要使用的局部变量x，而在第二个例子(local 
+myvar="one two three")中，我们创建了局部变量 myvar并为它赋值。既然我们不能使用"for local x in $myvar"，用第一种形式来将循环控制变量定义为局部变量是很方便的。此函数不影响任何全局变量，所以使用这种方法设计所有的函数是值得鼓励的。只有当你在明确希望要修改全局变量时，才不应该使用“local”.
+</p>
+
+</body>
+</section>
+<section>
+<title>结语</title>
+<body>
+
+<p>
+现在我们已经学了bash大部分基本功能，现在要看一下如何开发基于bash的应用程序。到时再见！
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>资源</title>
+<section>
+<title>有用的链接</title>
+<body>
+
+<ul>
+  <li>
+    请阅读<uri link="/doc/zh_cn/articles/bash-by-example-p1.xml">Bash示例：第一部分</uri>。
+  </li>
+  <li>
+    请阅读<uri link="/doc/zh_cn/articles/bash-by-example-p3.xml">Bash示例：第三部分</uri>。
+  </li>
+  <li>
+    请访问<uri link="http://www.gnu.org/software/bash/bash.html">GNU的bash首页</uri>"
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
