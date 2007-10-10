@@ -230,7 +230,7 @@
     <file id="gentoo-kernel">/doc/en/gentoo-kernel.xml</file>
     <file id="gentoo-ppc-faq">/doc/en/gentoo-ppc-faq.xml</file>
     <file id="alsa-guide">/doc/zh_cn/alsa-guide.xml</file>
-    <file id="xorg-config">/doc/en/xorg-config.xml</file>
+    <file id="xorg-config">/doc/zh_cn/xorg-config.xml</file>
     <file id="quick-samba-howto">/doc/en/quick-samba-howto.xml</file>
     <file id="ltsp">/doc/en/ltsp.xml</file>
     <file id="gentoolkit">/doc/en/gentoolkit.xml</file>
