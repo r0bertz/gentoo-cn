@@ -530,9 +530,20 @@
     <ti>2007/06/26</ti>
     <ti><mail link="jjj3112007@gmail.com">jjj311</mail></ti>
     <ti>W</ti>
-    <ti>N/A</ti>
+    <ti>2007/10/31</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/gentoolkit.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>liveusb.xml</ti>
+    <ti><uri link="/doc/en/liveusb.xml">v 1.13</uri></ti>
+    <ti>2007/05/10</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/17</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/liveusb.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
