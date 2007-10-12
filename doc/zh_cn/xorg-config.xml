@@ -30,7 +30,7 @@ Xorg是一个允许用户通过简单的设置来使用图形界面环境的X Wi
 <date>2007-06-20</date>
 
 <chapter>
-<title>什么是X Window 服务器？</title>
+<title>什么是X Window服务器？</title>
 <section>
 <title>图形界面 vs 命令行</title>
 <body>
@@ -44,7 +44,7 @@ Xorg是一个允许用户通过简单的设置来使用图形界面环境的X Wi
 </p>
 
 <p>
-由于标准的重要性，有人为窗口的绘制和移动、通过鼠标的移动和键盘实现程序和用户间的互动，以及其它重要的方面创建了一种标准，这种标准就叫做<e>X Window 系统</e>，它通常缩写为<e>X11</e> 或者<e>X</e>。它广泛应用于Unix，Linux，以及其他类Unix操作系统上。
+由于标准的重要性，有人为窗口的绘制和移动、通过鼠标的移动和键盘实现程序和用户间的互动，以及其它重要的方面创建了一种标准，这种标准就叫做<e>X Window系统</e>，它通常缩写为<e>X11</e>或者<e>X</e>。它广泛应用于Unix，Linux，以及其他类Unix操作系统上。
 </p>
 
 <p>
@@ -54,7 +54,7 @@ Xorg是一个允许用户通过简单的设置来使用图形界面环境的X Wi
 </body>
 </section>
 <section>
-<title>X.org 项目</title>
+<title>X.org项目</title>
 <body>
 
 <p>
@@ -84,7 +84,7 @@ Xorg在你的硬件和你想运行的图形界面软件之间提供了一个接�
 </p>
 
 <p>
-第一个变量是<c>VIDEO_CARDS</c>。用来设置你所使用的显示驱动，通常这由你的显卡牌子和类型决定。最普通的设置是Nvidia显卡使用<c>nvidia</c>而ATI Radeon 显卡使用<c>fglrx</c>。这些都是针对Nvidia和ATI的专门驱动。如果你希望使用开源版本，使用<c>nv</c>替代<c>nvidia</c>，但恐怕该驱动没有3D加速支持。ATI显卡的<c>radeon</c>开源驱动在老的Radeon显卡上可以完全支持3D加速，但在新的显卡上行不通。变量<c>VIDEO_CARDS</c>可以包含多个驱动，如果需要请用空格分开。
+第一个变量是<c>VIDEO_CARDS</c>。用来设置你所使用的显示驱动，通常这由你的显卡牌子和类型决定。最普通的设置是Nvidia显卡使用<c>nvidia</c>而ATI Radeon显卡使用<c>fglrx</c>。这些都是针对Nvidia和ATI的专门驱动。如果你希望使用开源版本，使用<c>nv</c>替代<c>nvidia</c>，但恐怕该驱动没有3D加速支持。ATI显卡的<c>radeon</c>开源驱动在老的Radeon显卡上可以完全支持3D加速，但在新的显卡上行不通。变量<c>VIDEO_CARDS</c>可以包含多个驱动，如果需要请用空格分开。
 </p>
 
 <p>
@@ -95,7 +95,7 @@ Xorg在你的硬件和你想运行的图形界面软件之间提供了一个接�
 现在你需要确定使用的驱动并在<path>/etc/make.conf</path>文件中添加相应的设置：
 </p>
 
-<pre caption="make.conf 选项例举">
+<pre caption="make.conf选项例举">
 <comment>（对鼠标于键盘的支持）</comment>
 INPUT_DEVICES="keyboard mouse"
 <comment>（对Nvidia显卡）</comment>
@@ -134,7 +134,7 @@ VIDEO_CARDS="nvidia -apm -ark -chips -cirrus -cyrix -dummy -epson -fbdev -fglrx
 设置完所有需要的变量后你就可以进行安装Xorg。
 </p>
 
-<pre caption="安装 Xorg">
+<pre caption="安装Xorg">
 # <i>emerge xorg-x11</i>
 </pre>
 
@@ -151,9 +151,9 @@ VIDEO_CARDS="nvidia -apm -ark -chips -cirrus -cyrix -dummy -epson -fbdev -fglrx
 </section>
 </chapter>
 <chapter>
-<title>配置 Xorg</title>
+<title>配置Xorg</title>
 <section>
-<title>xorg.conf 文件</title>
+<title>xorg.conf文件</title>
 <body>
 
 <p>
@@ -171,7 +171,7 @@ Xorg的配置文件<path>xorg.conf</path>，在<path>/etc/X11</path>。Xorg-X11�
 </body>
 </section>
 <section>
-<title>默认操作: 自动创建xorg.conf</title>
+<title>默认操作：自动创建xorg.conf</title>
 <body>
 
 <p>
@@ -197,7 +197,7 @@ Xorg可以自动为你配置好大多数的选项。在多数情况下，你只�
 </body>
 </section>
 <section>
-<title>可选操作: 半自动创建xorg.conf</title>
+<title>可选操作：半自动创建xorg.conf</title>
 <body>
 
 <p>
@@ -212,7 +212,7 @@ Xorg提供了一个名叫<c>xorgconfig</c>的工具，它将询问你有关系�
 Xorg提供的另一个工具，是<c>xorgcfg</c>，它首先会尝试运行<c>Xorg -configure</c>然后启动X服务器进行更多的调整。
 </p>
 
-<pre caption="使用 xorgcfg">
+<pre caption="使用xorgcfg">
 # <i>xorgcfg</i>
 <comment>(如果X崩溃或者配置失败，试试:)</comment>
 # <i>xorgcfg -textmode</i>
@@ -235,7 +235,7 @@ Xorg提供的另一个工具，是<c>xorgcfg</c>，它首先会尝试运行<c>Xo
 </body>
 </section>
 <section id="using_startx">
-<title>使用 startx</title>
+<title>使用startx</title>
 <body>
 
 <p>
@@ -254,7 +254,7 @@ Xorg提供的另一个工具，是<c>xorgcfg</c>，它首先会尝试运行<c>Xo
   </li>
 </ul>
 
-<pre caption="启动 X">
+<pre caption="启动X">
 # <i>startx</i>
 </pre>
 
@@ -266,7 +266,7 @@ Xorg提供的另一个工具，是<c>xorgcfg</c>，它首先会尝试运行<c>Xo
 </section>
 </chapter>
 <chapter>
-<title>调整 xorg.conf</title>
+<title>调整xorg.conf</title>
 <section>
 <title>设置分辨率</title>
 <body>
@@ -302,7 +302,7 @@ EndSection
 </pre>
 
 <p>
-运行X (<c>startx</c>)，看它是否启用了你所需要的分辨率:)
+运行X（<c>startx</c>），看它是否启用了你所需要的分辨率:)
 </p>
 
 </body>
@@ -405,7 +405,7 @@ EndSection
 </p>
 
 <p>
-更多的有关如何配置不同软件包在X环境下工作的信息可以在这里<uri link="/doc/en/?catid=desktop">Gentoo Desktop Documentation Resources</uri>找到。
+更多的有关如何配置不同软件包在X环境下工作的信息可以在这里<uri link="/doc/zh_cn/?catid=desktop">Gentoo桌面文档资源</uri>找到。
 </p>
 
 </body>
