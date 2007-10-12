@@ -396,7 +396,7 @@ eth0      IEEE 802.11-DS  ESSID:"GentooNode"
 # <i>iwconfig eth0 key 1234123412341234abcd</i>
 
 <comment>（这里设置一个ASCII密钥——以"s:"作为前缀)</comment>
-# <i>iwconfig eth0 key s:某某密码</i>
+# <i>iwconfig eth0 key s:某密钥</i>
 </pre>
 
 <p>
