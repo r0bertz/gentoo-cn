@@ -44,7 +44,7 @@
 </author>
 
 <abstract>
-这个FAQ是从gentoo-dev邮件列表和IRC中的一些问题和解答的集合。
+这个FAQ是gentoo-dev邮件列表和IRC中的一些问题和解答的集合。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -61,10 +61,7 @@
 <body>
 
 <p>
-请注意很多问题都在官方的Gentoo文档和指南中给出来解答。这里只是简单
-列出一些通常会碰到的问题。为了对Gentoo和GNU/Linux的工作机制有个更
-深入的理解，请您阅读一下文档或者是man page，对那些这里没有作出解答
-的问题，我们欢迎您提出。
+请注意很多问题都已经在官方的Gentoo文档和指南中给出了答案。这里只是简单列出一些常见问题。对那些这里没有作出解答的问题，同时为了对Gentoo和GNU/Linux的工作机制有个更深入的理解，请您阅读一下文档或者是man page。
 </p>
 
 <ul>
@@ -680,7 +677,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 </section>
 <section id="manualdownload">
 <title>
-我家中使用的是很慢的modem连接。我能在其他地方下载源文件后再把它们加入到自己的
+我家里使用的是很慢的modem连接。我能在其他地方下载源文件后再把它们加入到自己的
 系统中吗？
 </title>
 <body>
@@ -696,46 +693,30 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 </section>
 <section id="distfiles">
 <title>
-  源文件的tarball集中存放在/usr/portage/distfiles/中。把这些文件删除安全吗？
+源文件的tarball集中存放在/usr/portage/distfiles/中。把这些文件删除安全吗？
 </title>
 <body>
 
 <p>
-Deleting these files will have no negative impact on day-to-day performance。
-However， it might be wise to keep the most recent version of the files; often
-several ebuilds will be released for the same version of a specific piece of
-software。 If you have deleted the archive and you upgrade the software it will
-be necessary to download them from the internet again。 There are programs which
-<uri link="http://forums。gentoo.org/viewtopic-t-337074.html">users have
-developed</uri> to clean out all but the most recent version of sourcefiles。
-Note that while this seems to work， it is <e>not</e> officially maintained。 Use
-at your own risk。
-
 删除这些文件对于日常的性能来说没有什么负面的影响。然而，保留最近版本的文件还是明
-智的;一些ebuilds发布的是某个软件中相同版本的一块。如果删除了压缩档，那么在你下次升
-级的时候还是必须从internet上重新下载它们。有些程序可以帮你打扫干净并保留那些最进
-版本的源文件。<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">用户的
-开发成果</uri>
+智的；我们经常为某个软件的同一个版本发布好几个ebuild。如果删除了这些文件，那么在你下次升
+级的时候还是必须从网上重新下载它们。<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">用户已经开发了</uri>
+一些程序可以用来帮你删除旧版本只保留最近版本的源文件。注意虽然这个工具看起来管用
+，不过它<e>不是</e>官方维护的。如果使用您要自己担负风险。
 </p>
 </body>
 </section>
 <section id="tmpportage">
 <title>
-  在/var/tmp/portage中有什么？把这个文件夹中的文件和目录删除安全吗？
+在/var/tmp/portage中有什么？把这个文件夹中的文件和目录删除安全吗？
 </title>
 <body>
 
 <p>
-During compilation， Gentoo saves the sources of the package in 
-<path>/var/tmp/portage</path>。 These files and folder are usually deleted upon
-a successful merge， but this sometimes fails。 It is safe to clean out all
-contents of this directory <e>if</e> emerge is not running。 Just to be sure，
-always <c>pgrep emerge</c> before cleaning out this directory。
-
-在编译的过程中，Gentoo在<path>/var/tmp/portage</path>中放置的是软件包的源代码。
+在编译的过程中，Gentoo把软件包的源代码保存在<path>/var/tmp/portage</path>中。
 这些文件和文件夹在一次成功地merge之后通常是会被删除掉的，然后有时候还是会出错。
-<e>当</e>emerge没有运行的时候删除其目录中所有的条目是安全的。只需要确认的是，在
-清空这个目录之前运行一下<c>pgrep emerge</c>就可以了。
+<e>当</e>emerge没有运行的时候删除其目录中所有的条目是安全的。为了确保没有问题，在
+清空这个目录之前请一定先运行一下<c>pgrep emerge</c>。
 </p>
 
 </body>
@@ -745,23 +726,14 @@ always <c>pgrep emerge</c> before cleaning out this directory。
 <chapter>
 <title>使用方法</title>
 <section id="intkeyboard">
-<title>我怎么样才能建立一个国际键盘布局(International Keyboard Layout)？</title>
+<title>我怎么样才能建立一个国际键盘布局？</title>
 <body>
 
 <p>
-Edit the <c>KEYMAP</c> variable in <path>/etc/conf。d/keymaps</path>. To have
-console working correctly with extended characters in your keymap you might
-also need to set up variables <c>CONSOLETRANSLATION</c> and <c>CONSOLEFONT</c>
-in your <path>/etc/conf。d/consolefont</path> (for further information on
-localising your environment， refer to <uri 
-link="/doc/en/guide-localization.xml">our localisation guide</uri>).
-Then， either <c>reboot</c>， or restart the keymaps and consolefont scripts:
-
-修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量.为使终端在你的键盘
-布局里并在使用扩展字符的情况下工作正常，需要在<path>/etc/conf.d/consolefont</path>
-之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>，想要了解更多如何本
-地化定义你的使用环境的详情，请参考<uri 
-link="/doc/en/guide-localization.xml">本地化指南</uri>)
+修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量。为使终端能正确显示你
+的键盘布局里的扩展字符，你还需要在<path>/etc/conf.d/consolefont</path>
+之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>（想要了解更多如何本
+地化你的使用环境的详情，请参考<uri link="/doc/en/guide-localization.xml">我们的本地化指南</uri>）。
 </p>
 
 <pre caption="重新启动keymaps">
@@ -772,14 +744,11 @@ link="/doc/en/guide-localization.xml">本地化指南</uri>)
 </body>
 </section>
 <section id="rootdns">
-<title>DNS名字解析只对root用户起作用。</title>
+<title>DNS域名解析只对root用户起作用。</title>
 <body>
 
 <p>
-<path>/etc/resolv.conf</path> has the wrong permissions; <c>chmod</c> it as 
-follows:
-
-<path>/etc/resolv.conf</path>被定义了错误的权限;如下所示使用<c>chmod</c>:
+<path>/etc/resolv.conf</path>的权限不正确；使用<c>chmod</c>来修正：
 </p>
 
 <pre caption="改变/etc/resolv.conf的权限">
@@ -793,30 +762,21 @@ follows:
 <body>
 
 <p>
-You need to add that user to the <c>cron</c> group。
-
-你需要把用户加入<c>cron</c>组。
+你需要把那个用户加入<c>cron</c>组。
 </p>
 
 </body>
 </section>
 <section id="numlock">
-<title>启动时我该如何使numlock起作用？</title>
+<title>怎样让numlock在启动时自动打开？</title>
 <body>
 
 <p>
-If you work in command line， you only need to <c>rc-update add 
-numlock default &amp;&amp;/etc/init.d/numlock start</c>.
-
-如果你使用命令行工作，你只需运行命令<c>rc-update add 
-numlock default &amp;&amp;/etc/init.d/numlock start</c>.
+如果你在命令行环境下工作，你只需运行命令<c>rc-update add numlock default &amp;&amp;/etc/init.d/numlock start</c>.
 </p>
 
 <p>
-Each GUI provides different tools for this sort of thing; please check the help
-section or online manuals for assistance。
-
-每个GUI提供了不同的工具来做这类事;请查看一下相关的在线手册或是帮助获得相关信息。
+每个GUI提供了不同的工具来做这件事；请查看一下相关的在线手册或是帮助获得相关信息。
 </p>
 
 </body>
@@ -826,25 +786,18 @@ section or online manuals for assistance。
 <body>
 
 <p>
-To have your terminal cleared， add <c>clear</c> to your
-<path>~/。bash_logout</path> script:
-
-为了得到一个干净的终端界面，在<path>~/.bash_logout</path>脚本中加入 <c>clear</c>
+要把你的终端清屏，在<path>~/.bash_logout</path>脚本中加入<c>clear</c>：　
 </p>
 
-<pre caption = "在登出时候对终端进行清屏">
+<pre caption="在登出时候对终端进行清屏">
 $ <i>echo clear &gt;&gt; ~/.bash_logout</i>
 </pre>
 
 <p>
-If you want this to happen automatically when you add a new
-user， do the same for the <path>/etc/skel/。bash_logout</path>:
-
-如果你想在添加一个新用户时自动加入这个的话，在<path>/etc/skel/.bash_logout</path>
-中添加相同的内容。
+如果你想新添加的用户自动拥有这个功能的话，在<path>/etc/skel/.bash_logout</path>中添加相同的内容。
 </p>
 
-<pre caption = "使新用户在登出时清屏">
+<pre caption="使新用户在登出时清屏">
 # <i>echo clear &gt;&gt; /etc/skel/.bash_logout</i></pre>
 </body>
 
@@ -854,19 +807,13 @@ user， do the same for the <path>/etc/skel/。bash_logout</path>:
 <body>
 
 <p>
-This issue seems only to occur when you log on graphically。 <c>startx</c> users
-don't have this behaviour。 The problem is a <uri
-link="http://bugs。gentoo.org/show_bug.cgi？id=14560">bug</uri> in Gentoo's PAM， 
-the solution however is quite simple: add the following line to 
-<path>/etc/profile</path>。
-
-这种情况只发生在当你是通过图形界面登录的时候。<c>startx</c>的用户没有这个特点.
-这个问题<uri
-link="http://bugs.gentoo.org/show_bug.cgi？id=14560">bug</uri>出在Gentoo的PAM，
-解决方法也相当简单:在<path>/etc/profile</path>中添加下面这一行。
+这种情况只发生在当你是通过图形界面登录的时候。<c>startx</c>的用户没有这个问题。
+这个问题是Gentoo的PAM里的一个<uri
+link="http://bugs.gentoo.org/show_bug.cgi？id=14560">bug</uri>，
+解决方法也相当简单：在<path>/etc/profile</path>中添加下面这一行。
 </p>
 
-<pre caption="声明XAUTHORITY">
+<pre caption="export XAUTHORITY">
 export XAUTHORITY="${HOME}/.Xauthority"
 </pre>
 
@@ -877,18 +824,11 @@ export XAUTHORITY="${HOME}/.Xauthority"
 <chapter>
 <title>维护</title>
 <section id="filecorruption">
-<title>ReiserFS和文件系统出现错误--如何才能修复它们，等等。</title>
+<title>ReiserFS和文件系统损坏问题——如何才能修复它们，等等</title>
 <body>
 
 <p>
-If your ReiserFS partition is corrupt， try booting the Gentoo Install CD and
-run <c>reiserfsck --rebuild-tree</c> on the corrupted filesystem。  This should
-make the filesystem consistent again， although you may have lost some files or
-directories due to the corruption。
-
-如果ReiserFS磁盘分区出现错误，你可以尝试使用Gentoo安装光盘启动并在损坏的文件系统上
-运行命令<c>reiserfsck --rebuild-tree</c>。虽然你可能会因为文件系统错误丢失一些文件或
-是目录，但是这么做可以使你的文件系统重新可用。
+如果ReiserFS磁盘分区损坏了，你可以尝试使用Gentoo安装光盘启动并运行命令<c>reiserfsck --rebuild-tree</c>来检查损坏的文件系统。这么做可以使你的文件系统重新可用，虽然你可能会因为文件系统损坏而丢失一些文件或目录。
 </p>
 
 </body>
@@ -902,14 +842,7 @@ directories due to the corruption。
 <body>
 
 <p>
-Use our <uri link="https://bugs.gentoo.org">Bugzilla</uri>. If you are unsure if
-your problem is an actual bug， you can visit <c>#gentoo</c> on the <uri
-link="http://www。freenode.net">FreeNode</uri> IRC network.
-
-请您使用我们的<uri link="https://bugs.gentoo.org">Bugzilla</uri>.如果你不能肯定你
-的问题是某个现存bug造成的，你可以加入<uri
-link="http://www.freenode.net">FreeNode</uri>IRC网络中的<c>#gentoo</c>频道
-了解一下。
+请您使用我们的<uri link="https://bugs.gentoo.org">Bugzilla</uri>.如果你不能肯定你的问题确实是个bug，你可以加入<uri link="http://www.freenode.net">FreeNode</uri>IRC网络中的<c>#gentoo-cn</c>或<c>#gentoo</c>频道询问一下。
 </p>
 
 </body>
@@ -919,32 +852,19 @@ link="http://www.freenode.net">FreeNode</uri>IRC网络中的<c>#gentoo</c>频道
 <body>
 
 <p>
-Gentoo's packages are usually updated shortly after the main authors release
-new code。 As for when Gentoo itself makes new stage/profile/ISO releases， check
-our <uri link="/proj/en/releng">Release Engineering Project</uri> page。 New
-releases are announced on the <uri
-link="/main/en/lists.xml">gentoo-announce</uri> mailing list. See the question
-on <uri link="#upgrade">upgrading</uri> for more information。
-
-Gentoo的软件包通常会在主要的作者释出新的代码后不久就进行更新。至于何时Gentoo本
-身会作好新的stage/profile/ISO，请查看 <uri 
-link="/proj/en/releng">Release Engineering Project</uri>网页。新的版本会宣布在<uri
-link="/main/en/lists.xml">gentoo-announce</uri>邮件列表中.你可以查看一下问题
- <uri link="#upgrade">upgrading</uri>获得更多信息。
+Gentoo的软件包通常会在主要的作者释出新的代码后不久就进行更新。至于何时Gentoo本身会发布新的stage/profile/ISO，请查看<uri link="/proj/en/releng">Release Engineering项目</uri>主页。新的版本会在<uri link="/main/en/lists.xml">gentoo-announce</uri>邮件列表中宣布。你可以查看一下有关<uri link="#upgrade">升级</uri>的问题以获得更多信息。
 </p>
 
 </body>
 </section>
 <section id="beeping">
 <title>
-  我的扬声器像发疯似的乱叫，怎么做才能禁用终端想铃？
+我的扬声器像发疯似的乱叫，怎么做才能禁用终端响铃？
 </title>
 <body>
 
 <p>
-Console beeps can be turned off using setterm， like this:
-
-终端响铃声可以通过使用setterm关闭，如下所示:
+终端响铃声可以使用setterm关闭，如下所示:
 </p>
 
 <pre caption="使用setterm">
@@ -952,14 +872,9 @@ Console beeps can be turned off using setterm， like this:
 </pre>
 
 <p>
-If you would like to turn off the console beeps on boot， you need to put this
-command in <path>/etc/conf。d/local.start</path>. However， this only disables
-beeps for the current terminal。 To disable beeps for other terminals， pipe the
-command output to the target terminal， like this: 
-
 如果想在启动时就关闭终端响铃，你要把这条命令加入<path>/etc/conf.d/local.start</path>
-之中。然而，这只是禁用掉了现在正在使用终端的这个功能.想要在其他的终端上禁用响铃的话，
-把这条命令用管道的方式输出到目标终端去即可，如下所示:
+之中。然而，这只是禁用掉了现在正在使用终端的响铃。想要在其他的终端上禁用响铃的话，
+把这条命令的输出重定向到目标终端去即可，如下所示:
 </p>
 
 <pre caption="使用setterm (bis)">
@@ -967,10 +882,7 @@ command output to the target terminal， like this:
 </pre>
 
 <p>
-You need to replace /dev/vc/1 with the terminal you would like to disable 
-console beeps for。
-
-你需要用想要禁用响铃的那个终端号来替换/dev/vc/1.
+你需要用想要禁用响铃的那个终端来替换/dev/vc/1.
 </p>
 
 </body>
@@ -984,10 +896,7 @@ console beeps for。
 <body>
 
 <p>
-The official Gentoo documentation can be found at
-<uri>http://www。gentoo.org/doc/en/</uri>.
-
-在<uri>http://www.gentoo.org/doc/en/</uri>里，你可以找到Gentoo的官方文档.
+在<uri>http://www.gentoo.org/doc/zh_cn/</uri>里，你可以找到Gentoo的官方文档。
 </p>
 
 </body>
@@ -997,23 +906,13 @@ The official Gentoo documentation can be found at
 <body>
 
 <p>
-Install CDs for all supported architectures are available on our <uri
-link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>. When you
-purchase a CD from our store， you are also supporting our development。 So，
-please consider buying from our store if possible。
-
-每一个可支持硬件架构的安装CD在我们的 <uri
-link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>上都能找到.
-当你在我们的商店中购买了CD，你也同时能支持我们的开发工作。所以，如果有可能的话，请
-您在联系我们的商店并购买CD。
+每一个我们所支持的架构的安装CD在我们的<uri link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>上都能找到。
+当你在我们的商店中购买了CD，你也同时在支持我们的开发工作。所以，如果有可能的话，
+请考虑从我们的商店购买CD。
 </p>
 
 <p>
-You can also find fresh CDs from various resellers listed on our <uri
-link="/main/en/where.xml">Get Gentoo!</uri> page.
-
-你也可以在我们的 <uri
-link="/main/en/where.xml">Get Gentoo!</uri>中找到一些新版CD的转卖者.
+你也可以从我们的<uri link="/main/en/where.xml">Get Gentoo!</uri>网页中列出的代销商那里得到崭新的CD。
 </p>
 
 </body>
@@ -1023,19 +922,7 @@ link="/main/en/where.xml">Get Gentoo!</uri>中找到一些新版CD的转卖者.
 <body>
 
 <p>
-A good first step is to browse through the relevant <uri
-link="/doc/en/index.xml">documentation</uri>， failing that， the various Gentoo
-Linux mailing lists listed on <uri link="http://www。google.com">Google</uri>.
-To search through the Gentoo mailing lists， just enter "lists。gentoo.org foo"
-to search for "foo"。  If all else fails， or you just want to hang out with
-Gentoo folks， visit us on irc: <c>#gentoo</c> on <c>irc。freenode.net</c>.
-
-首先，浏览一下相应的<uri
-link="/doc/en/index.xml">documentation</uri>是个很好的开始，如果失败了，你可以参考
-一些在<uri link="http://www.google.com">Google</uri>中列出的邮件列表.当你想要通
-过邮件列表查找的时候，比如查找"foo"只需要键入"lists.gentoo.org foo"就可以了.如果所
-有这一切都失败了，或是你想在Gentoo的开发者面前提出的话，请加入我们的irc:
-<c>irc.freenode.net</c>上的<c>#gentoo</c>频道.
+首先，应该浏览一下相关的<uri link="/doc/zh_cn/index.xml">文档</uri>，这是个好的起步。如果失败了，你可以参考一些在<uri link="http://www.google.com">Google</uri>中列出的Gentoo Linux邮件列表。如果你要在邮件列表里搜索东西，比如搜索“foo”只需要键入“lists.gentoo.org foo”就可以了。如果所有这一切都失败了，或是你只是想和其他Gentoo用户待在一起，请加入我们的irc：<c>irc.freenode.net</c>上的<c>#gentoo-cn</c>和<c>#gentoo</c>频道.
 
 </p>
 
