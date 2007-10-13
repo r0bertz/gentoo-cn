@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.30 --> 
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/gentoolkit.xml" lang="zh_cn">
+<title>Gentoo工具包（GentooKit）</title>
+
+<author title="作者">
+  <mail link="mbutcher@aleph-null.tv">Matt Butcher</mail>
+</author>
+<author title="编辑">
+  <!-- zhen@gentoo.org -->
+John P. Davis
+</author>
+<author title="编辑">
+  <mail link="erwin@gentoo.org">Erwin</mail>
+</author>
+<author title="编辑">
+  <mail link="fox2mike@gentoo.org">Shyam Mani</mail>
+</author>
+<author title="编辑">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="编辑">
+  <mail link="karltk@gentoo.org">Karl Trygve</mail>
+</author>
+<author title="编辑">
+  <mail link="yoswink@gentoo.org">José Luis Rivero</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者">
+<mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+</author>
+
+<abstract>
+Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个文档涵盖了一些现在在Gentoo工具包里的工具的一些基本概述。
+</abstract>
+
+
+
+<!-- Licensed under GFDL -->
+<version>1.12</version>
+<date>2007-06-25</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>什么是Gentoolkit？</title>
+<body>
+
+<p>
+Gentoo是一个少见的发行版，并且存在一些别的发行版没有的复杂的东西。因为Gentoo开发者和贡献者们发现了这些复杂的东西，同时，他们也写了一些工具来帮助用户和管理员来使用他们。这些工具中的很大一部分已经被贡献到了Gentoo 
+project，并且被整合到了一个叫<c>app-portage/gentoolkit</c>的包里。
+</p>
+
+<note>
+到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。然而前者包含了管理脚本，后者包含了一些帮助在Gentoo上开发的特殊的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本包含到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
+</note>
+
+<p>
+Gentoolkit包含了一整串有用的工具来帮助你管理你的软件包和留意在你的系统上发生了什么。大部分的用户，特别是经常升级系统的用户，将会从安装gentoolkit里受益。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装</title>
+<body>
+
+<p>
+就像其他的Gentoo软件包一样，安装就只是简单地emerge。
+</p>
+
+<pre caption="得到gentoolkit">
+# <i>emerge gentoolkit</i>
+</pre>
+
+<note>
+许多gentoolkit里的工具可能会显示一些有关于你的系统的信息或者需要root授权的重要信息。因为这个原因，一些程序可能只能在一个用户获得root许可以后才能被运行（或者是特定的函数）。
+</note>
+
+</body>
+</section>
+<section>
+<title>查找文档</title>
+<body>
+
+<p>
+一个程序可能有的任何的文档（除了man页）是被存储在<path>/usr/share/doc/gentoolkit-[版本]/[程序名]/</path>里面的。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>equery</title>
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+<c>equery</c>是一个显示大量有关于在你系统上的软件包的有用的信息和其他的一些东西。<c>equery 
+--help</c>能给你所有的选项的列表。
+</p>
+
+<note>
+不是所有的<c>equery 
+--help</c>列出的特性都被应用了。没有被应用的特性都被很清楚地提到了。你也可以看见一个选项的简略形式，比如说<c>b</c>而不是<c>belongs</c>。
+</note>
+
+<note>
+你要知道最近如果equery通过一个管道发送输出信息，它会改变输出信息的格式。那个被限制的格式被认为更容易被工具格式化，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要equery的脚本，你需要了解这个。
+</note>
+
+</body>
+</section>
+<section>
+<title>查找一个文件来自于哪个软件包</title>
+<body>
+
+<p>
+<c>equery</c>也提供了寻找一个文件来自于哪个软件包的功能，使用<c>belongs</c>命令（或只是<c>b</c>）。
+</p>
+
+<pre caption="查找安装一个已给文件的ebuild">
+# <i>equery belongs /usr/bin/audacious</i>
+[ Searching for file(s) /usr/bin/audacious in *... ]
+media-sound/audacious-1.1.2 (/usr/bin/audacious)
+</pre>
+
+<p>
+通过使用<c>-f</c>选项，你可以搜索符合任意的正规短语的文件所属的软件包。<c>-e</c>选项能够在一个符合的软件包找到后终止寻找。
+</p>
+
+</body>
+</section>
+<section>
+<title>验证软件包的完整性</title>
+<body>
+
+<p>
+有时候检查一个软件包的完整性是很有用的。<c>equery</c>可以通过验证md5 sums和时间戳来检验一个软件包是否被破坏、替换或是移除。
+</p>
+
+<pre caption="确认软件包的完整性">
+# <i>equery check gentoolkit</i>
+[ Checking app-portage/gentoolkit-0.2.0 ]
+ * 54 out of 54 files good
+</pre>
+
+<p>
+请记住，如果你在安装完成后改变了配置文件，这些可能会被报告为 "not good"。
+</p>
+
+</body>
+</section>
+<section>
+<title>列出所有依赖的软件包……</title>
+<body>
+
+<p>
+<c>equery</c>能够列出符合一个软件包的所有直接依赖关系。我们能够简单地使用<c>depends</c>函数来做这件事： 
+</p>
+
+<pre caption="使用pygtk来查找软件包依赖关系">
+# <i>equery depends pygtk</i>
+[ Searching for packages depending on pygtk... ]
+app-office/dia-0.93
+dev-python/gnome-python-2.0.0-r1
+gnome-extra/gdesklets-core-0.26.2
+media-gfx/gimp-2.0.4
+x11-libs/vte-0.11.11-r1
+</pre>
+
+</body>
+</section>
+<section>
+<title>依赖关系图表</title>
+<body>
+
+<p>
+<c>equery</c>可以向我们给出一个软件包的依赖性图表。依赖性图表向我们展示了被考察的软件包的一系列直接或间接相关软件包的列表
+</p>
+
+<pre caption="cdrtools的依赖关系树">
+# <i>equery depgraph cdrtools</i>
+Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
+`-- app-cdr/cdrtools-2.01_alpha37
+ `-- sys-libs/glibc-2.3.4.20040808 (virtual/libc)
+  `-- sys-kernel/linux-headers-2.4.22 (virtual/os-headers)
+   `-- sys-apps/baselayout-1.10.4
+    `-- sys-apps/sysvinit-2.85-r1
+     `-- sys-apps/gawk-3.1.3-r1
+      `-- sys-apps/util-linux-2.12-r4
+          `-- sys-apps/sed-4.0.9
+        `-- sys-libs/ncurses-5.4-r4
+            `-- sys-apps/pam-login-3.14
+            `-- sys-libs/pam-0.77-r1
+                 `-- sys-libs/cracklib-2.7-r10
+               `-- sys-apps/miscfiles-1.3-r1
+              `-- app-arch/gzip-1.3.5-r1
+              `-- sys-apps/portage-2.0.50-r10
+</pre>
+
+<p>
+比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，<c>cdrtools</c>事实上是被写到需要virtual/libc的，而不是sys-libs/glibc，但是在例子里被提供的系统上sys-libs/glibc提供了virtual/libc。 
+</p>
+
+</body>
+</section>
+<section>
+<title>列出属于一个ebuild的软件包</title>
+<body>
+
+<p>
+<c>equery</c>能够列出所有属于一个已安装的ebuild的文件。如果我不知道Gentoolkit在系统上安装了哪些文件，我可以使用<c>equery</c>来把它们列出来。
+</p>
+
+<pre caption="列出文件">
+# <i>equery files gentoolkit</i>
+[ Searching for packages matching gentoolkit... ]
+app-portage/gentoolkit-0.2.0
+* Contents of app-portage/gentoolkit-0.2.0:
+/usr
+/usr/bin
+/usr/bin/equery
+/usr/bin/etcat
+/usr/bin/euse
+/usr/bin/glsa-check
+/usr/bin/qpkg
+/usr/bin/revdep-rebuild
+/usr/lib
+/usr/lib/gentoolkit
+/usr/lib/gentoolkit/pym
+/usr/lib/gentoolkit/pym/gentoolkit
+/usr/lib/gentoolkit/pym/gentoolkit/__init__.py
+/usr/lib/gentoolkit/pym/gentoolkit/gentoolkit.py
+/usr/lib/gentoolkit/pym/gentoolkit/pprinter.py
+/usr/lib/gentoolkit/pym/glsa.py
+/usr/sbin
+/usr/share
+/usr/share/doc
+/usr/share/doc/gentoolkit-0.2.0_pre10
+
+[...]
+</pre>
+
+<p>
+<c>equery</c>的<c>files</c>命令提供了一些用来修改输出信息的选项。你可以在<c>equery</c>的man页中找到它们。
+</p>
+
+</body>
+</section>
+<section>
+<title>查找使用某个特定USE标记的软件包</title>
+<body>
+
+<p>
+如果你想要寻找在你的系统上使用某个特定USE标记的软件包，<c>equery</c>用一个叫做<c>hasuse</c>的函数能够帮助你。
+</p>
+
+<pre caption="查找使用firefox这个USE标记的软件包">
+# <i>equery hasuse firefox</i>
+[ Searching for USE flag firefox in all categories among: ]
+ * installed packages
+[I--] [  ] dev-python/gnome-python-extras-2.14.0-r1 (0)
+[I--] [  ] media-video/totem-2.16.4 (0)
+</pre>
+
+</body>
+</section>
+<section>
+<title>列出软件包</title>
+<body>
+
+<p>
+<c>equery</c>拥有一个强大的特性，它能够列出在portage里属于我们的系统的软件包，甚至在overlay里的软件包也行。让我们试试看：
+</p>
+
+<pre caption="使用equery来列出软件包">
+# <i>equery list gentoolkit</i>
+[ Searching for package 'gentoolkit' in all categories among: ]
+ * installed packages
+[I--] [  ] app-portage/gentoolkit-0.2.0 (0)
+</pre>
+
+<p>
+标准的查询会查询符合给定名字的已安装的软件包。如果找到了，下面的信息会被显示出来：在第一个括号里的是软件包位置（I代表已安装，P代表Portage，O代表Overlay），在第二个括号里的是可能的mask（~是keyword的禁用，-是主机平台的禁用，M是硬性禁用），然后是分类和完整的名字，最后是软件包储存的位置。
+</p>
+
+<p>
+另一个例子，这次我们要使用本地选项来寻找在我们的portage树和overlay里的软件包。
+</p>
+
+<pre caption="通过equery来使用本地选项">
+# <i>equery list -p -o vim</i>
+[ Searching for package 'vim' in all categories among: ]
+ * installed packages
+[I--] [  ] app-editors/vim-6.3-r4 (0)
+ * Portage tree (/usr/portage)
+[-P-] [M~] app-editors/vim-7.0_alpha20050126 (0)
+[-P-] [M~] app-editors/vim-7.0_alpha20050201 (0)
+[-P-] [  ] app-editors/vim-6.3-r2 (0)
+[-P-] [M~] app-editors/vim-7.0_alpha20050122 (0)
+[-P-] [M~] app-editors/vim-core-7.0_alpha20050126 (0)
+[-P-] [  ] app-editors/vim-core-6.3-r3 (0)
+[-P-] [M~] app-editors/vim-core-7.0_alpha20050122 (0)
+[-P-] [M~] app-editors/vim-core-7.0_alpha20050201 (0)
+[-P-] [  ] app-editors/vim-core-6.3-r4 (0)
+ * overlay tree (/opt/ebuilds)
+</pre>
+
+</body>
+</section>
+<section>
+<title>查找软件包大小</title>
+<body>
+
+<p>
+甚至想知道一个软件包占用多少空间？因为一个软件包可以在许多目录有它的文件，通常使用<c>du 
+-hc</c>不能给你正确的数字。别着急，<c>equery</c>来拯救你了！
+</p>
+
+<pre caption="包的大小">
+# <i>equery size openoffice-bin</i>
+* app-office/openoffice-bin-1.1.2
+     Total Files : 2908
+     Total Size  : 223353.31 KiB
+</pre>
+
+<p>
+正如你所见的，<c>equery</c>以KB为单位打印出了全部的已用空间，并且它也列出了那个软件包有的所有的文件数列表。
+</p>
+
+</body>
+</section>
+<section>
+<title>USE标记的Package-wise列表</title>
+<body>
+
+<p>
+<c>equery</c>可以被用来给我们有关一个特定的软件包使用的USE标记的信息。它也可以告诉我们一个软件包正在使用的USE标记和可以使用的USE标记。
+</p>
+
+<pre caption="设置和取消USE标记">
+# <i>equery uses wireshark</i>
+[ Colour Code : set unset ]
+[ Legend    : (U) Col 1 - Current USE flags        ]
+[           : (I) Col 2 - Installed With USE flags ]
+
+ U I [ Found these USE variables in : net-analyzer/wireshark-0.99.4 ]
+ - - adns      : Adds support for the adns DNS client library
+ + + gtk       : Adds support for x11-libs/gtk+ (The GIMP Toolkit)
+ - - ipv6      : Adds support for IP version 6
+ - - kerberos  : Adds kerberos support
+ - - portaudio : Adds support for the crossplatform portaudio audio API
+ - - selinux   : !!internal use only!! Security Enhanced Linux support, this must be set by the selinux profile or breakage will occur
+ - - snmp      : Adds support for the Simple Network Management Protocol if available
+ + + ssl       : Adds support for Secure Socket Layer connections
+ - - threads   : Adds threads support for various packages. Usually pthreads
+</pre>
+
+<p>
+我安装了wireshark，但仅仅使用了gtk和ssl两个USE标记，但是那里还有一些其他的wireshark可以使用的USE标记。请参考<uri 
+link="/doc/en/handbook/">Gentoo Handbook</uri>里的<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE 
+Flags</uri>这一章来得到更多信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>ebuild在哪儿？</title>
+<body>
+
+<p>
+我们也可以使用<c>equery</c>来找出一个特定的软件包所使用的ebuild文件。你可以使用<c>equery 
+which</c>来达到目的，这是一个显示一个ebuild文件完整路径的命令。
+</p>
+
+<pre caption="显示ebuild路径">
+# <i>equery which cdrtools</i>
+/usr/portage/app-cdr/cdrtools/cdrtools-2.01_alpha37.ebuild
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>euse</title>
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+<c>euse</c>是一个用来在多个地方查看、设置和取消USE标记的工具。请参考<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE 
+Flags</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮助和所有的选项。
+</p>
+
+</body>
+</section>
+<section>
+<title>查看，设置和取消USE标记</title>
+<body>
+
+<p>
+<c>euse -a</c>命令读取当前激活的USE标记并把它们显示出来。
+</p>
+
+<note>
+<c>euse</c>用5列的输出信息来显示一个USE标记被设置或取消和在哪里被设置或取消。那些列分别显示+/-(激活活取消）、在环境里的设置、在make.conf里的设置、在make.Defaults里的设置和在make.Globals里的设置。输出的信息就像这样[+ECDG]。 
+</note>
+
+<pre caption="常看所有活跃的USE标记">
+# <i>euse -a</i>
+X                   [+ CD ]
+aalib               [+    ]
+acpi                [+ C  ]
+alsa                [+ C  ]
+apache2             [+ C  ]
+apm                 [+  D ]
+avi                 [+  D ]
+berkdb              [+  D ]
+bitmap-fonts        [+  D ]
+bonobo              [+    ]
+cdr                 [+ C  ]
+crypt               [+ CD ]
+cscope              [+ C  ]
+cups                [+ CD ]
+curl                [+    ]
+emboss              [+  D ]
+encode              [+  D ]
+esd                 [+    ]
+fam                 [+    ]
+fbcon               [+ C  ]
+firefox             [+ C  ]
+font-server         [+  D ]
+foomaticdb          [+  D ]
+fortran             [+  D ]
+gd                  [+ C  ]
+gdbm                [+  D ]
+gif                 [+ CD ]
+gimpprint           [+ C  ]
+gnome               [+ CD ]
+gphoto2             [+    ]
+gpm                 [+ CD ]
+gstreamer           [+ C  ]
+gtk                 [+  D ]
+gtkhtml             [+ C  ]
+guile               [+    ]
+imagemagick         [+    ]
+imlib               [+ CD ]
+innodb              [+    ]
+ipv6                [+  D ]
+javascript          [+ C  ]
+jpeg                [+ CD ]
+kde                 [+  D ]
+ldap                [+    ]
+libg++              [+ CD ]
+libwww              [+ CD ]
+mad                 [+ CD ]
+mbox                [+ C  ]
+md5sum              [+ C  ]
+mikmod              [+ CD ]
+mmx                 [+ C  ]
+motif               [+ CD ]
+mp3                 [+    ]
+mpeg                [+ CD ]
+mpeg4               [+ C  ]
+mysql               [+ C  ]
+ncurses             [+ CD ]
+nls                 [+  D ]
+nvidia              [+ C  ]
+odbc                [+    ]
+offensive           [+    ]
+ogg                 [+ CD ]
+opengl              [+ CD ]
+oss                 [+  D ]
+pam                 [+ CD ]
+pdflib              [+ CD ]
+perl                [+ CD ]
+png                 [+ CD ]
+python              [+ CD ]
+qt                  [+  D ]
+quicktime           [+ CD ]
+readline            [+ CD ]
+ruby                [+    ]
+sdl                 [+ CD ]
+slang               [+  D ]
+spell               [+ CD ]
+sse                 [+ C  ]
+ssl                 [+ CD ]
+svga                [+ CD ]
+tcltk               [+ C  ]
+tcpd                [+  D ]
+tiff                [+ C  ]
+truetype            [+ CD ]
+usb                 [+ C  ]
+vanilla             [+ C  ]
+x86                 [+ C  ]
+xml                 [+    ]
+xosd                [+ C  ]
+xv                  [+ CD ]
+xvid                [+ C  ]
+zlib                [+ CD ]
+</pre>
+
+<p>
+相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a 
+-l</c>命令只显示活跃的本地USE标记。<c>-g</c> &amp; 
+<c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
+</p>
+
+<pre caption="查看活跃的本地USE标记">
+# <i>euse -a -l</i>
+bitmap-fonts        [+  D ]
+font-server         [+  D ]
+fortran             [+  D ]
+gimpprint           [+ C  ]
+md5sum              [+ C  ]
+mpeg4               [+ C  ]
+nvidia              [+ C  ]
+offensive           [+    ]
+truetype            [+ CD ]
+</pre>
+
+<p>
+我们也可以使用<c>euse</c>来设置或取消USE标记。命令是这样的：<c>euse -E 
+flagname</c>（启用一个USE标记）和<c>euse -D flagname</c>（禁用一个USE标记）。
+</p>
+
+<warn>
+请不要单独使用<c>euse -E</c>或<c>euse 
+-D</c>命令（就是没有USE标记的情况）。它会设置/取消所有在<c>/etc/make.conf</c>里的USE标记。虽然一个备份被保存在了<path>/etc/make.conf.euse_backup</path>里，但是在使用<c>euse 
+-E</c>或<c>euse -D</c>的时候请小心。
+</warn>
+
+<pre caption="设置和取消USE标记">
+<comment>（启用一个USE标记）</comment>
+# <i> euse -E 3dfx</i>
+/etc/make.conf was modified, a backup copy has been placed at /etc/make.conf.euse_backup
+
+<comment>（在那个命令后的/etc/make.conf）</comment>
+USE="alsa acpi apache2 -arts cups cdr crypt cscope -doc fbcon \
+     firefox gd gif gimpprint gnome gpm gstreamer gtkhtml imlib \
+     innodb -java javascript jpeg libg++ libwww mad mbox md5sum \
+     mikmod mmx motif mpeg mpeg4 mysql ncurses nvidia \
+     ogg odbc offensive opengl pam pdflib perl png python \
+     quicktime readline sdl spell sse ssl svga tcltk tiff truetype usb \
+     vanilla X xosd xv xvid x86 zlib 3dfx"
+
+<comment>（禁用USE标记）</comment>
+# <i> euse -D 3dfx</i>
+/etc/make.conf was modified, a backup copy has been placed at /etc/make.conf.euse_backup
+
+<comment>（在那个命令后的/etc/make.conf）</comment>
+USE="alsa acpi apache2 -arts cups cdr crypt cscope -doc fbcon \
+     firefox gd gif gimpprint gnome gpm gstreamer gtkhtml imlib \
+     innodb -java javascript jpeg libg++ libwww mad mbox md5sum \
+     mikmod mmx motif mpeg mpeg4 mysql ncurses nvidia \
+     ogg odbc offensive opengl pam pdflib perl png python \
+     quicktime readline sdl spell sse ssl svga tcltk tiff truetype usb \
+     vanilla X xosd xv xvid x86 zlib -3dfx"
+</pre>
+
+<note>
+<c>euse</c>不是物理地从make.conf里移除USE标记。它只是在USE标记前叫了一个-（减号）来取消它。你可能要手动地清理你的make.conf来避免不想要的变量。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>其他工具</title>
+<section>
+<title>revdep-rebuild</title>
+<body>
+
+<p>
+这个工具是Gentoo's Reverse 
+Dependency的重建者。它可以通过扫描一个ebuild文件来告诉你一个软件包是否因为一次升级或是一个依赖于它们的软件包而被破坏。它可以为你emerge这些软件包，但是它也可能使一个给定的软件包在当前的依赖环境下无法再工作，在那种情况下你应该升级这些软件包到一个更新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
+</p>
+
+<pre caption="在假使模式下（pretend mode）运行revdep-rebuild">
+# <i>revdep-rebuild -p</i>
+
+Checking reverse dependencies...
+Packages containing binaries and libraries broken by any package update,
+will be recompiled.
+
+Collecting system binaries and libraries... done.
+  (/root/.revdep-rebuild.1_files)
+
+Collecting complete LD_LIBRARY_PATH... done.
+  (/root/.revdep-rebuild.2_ldpath)
+
+Checking dynamic linking consistency...
+  broken /usr/lib/ao/plugins-2/libarts.so (requires libartsc.so.0)
+  broken /usr/lib/kde3/libkpresenterpart.so (requires libartskde.so.1 libqtmcop.so.1
+         libsoundserver_idl.so.1 libkmedia2_idl.so.1 libartsflow.so.1 libartsflow_idl.so.1 libmcop.so.1)
+  broken /usr/lib/ruby/site_ruby/1.8/i686-linux/fox.so (requires libFOX-1.0.so.0)
+  broken /usr/lib/xine/plugins/1.0.0/xineplug_ao_out_arts.so (requires libartsc.so.0)
+  broken /usr/lib/perl5/vendor_perl/5.8.0/i686-linux/auto/SDL_perl/SDL_perl.so (requires libSDL_gfx.so.0)
+  broken /usr/lib/libloudmouth-1.so.0.0.0 (requires libgnutls.so.10)
+  broken /usr/bin/k3b (requires libartskde.so.1 libqtmcop.so.1 libsoundserver_idl.so.1 libkmedia2_idl.so.1
+         libartsflow.so.1 libartsflow_idl.so.1 libmcop.so.1)
+  broken /usr/bin/lua (requires libhistory.so.4)
+  broken /usr/bin/lyx (requires libAiksaurus-1.0.so.0)
+  broken /usr/bin/luac (requires libhistory.so.4)
+  broken /usr/bin/avidemux2 (requires libartsc.so.0)
+  broken /usr/bin/pptout (requires libxml++-0.1.so.11)
+  broken /usr/bin/xml2ps (requires libxml++-0.1.so.11)
+ done.
+  (/root/.revdep-rebuild.3_rebuild)
+
+Assigning files to ebuilds... done.
+  (/root/.revdep-rebuild.4_ebuilds)
+
+Evaluating package order... done.
+  (/root/.revdep-rebuild.5_order)
+
+All prepared. Starting rebuild...
+emerge --oneshot --nodeps -p =app-cdr/k3b-0.11.14 =app-office/koffice-1.3.2 =app-office/lyx-1.3.4 \
+       =app-office/passepartout-0.2 =dev-lang/lua-5.0.2 =dev-ruby/fxruby-1.0.29 =media-libs/libao-0.8.5 \
+       =media-libs/xine-lib-1_rc5-r3 =media-video/avidemux-2.0.26 =net-libs/loudmouth-0.16 
+
+These are the packages that I would merge, in order:
+
+Calculating dependencies ...done!
+[ebuild   R   ] app-cdr/k3b-0.11.14  
+[ebuild   R   ] app-office/koffice-1.3.2  
+[ebuild   R   ] app-office/lyx-1.3.4  
+[ebuild   R   ] app-office/passepartout-0.2  
+[ebuild   R   ] dev-lang/lua-5.0.2  
+[ebuild   R   ] dev-ruby/fxruby-1.0.29  
+[ebuild   R   ] media-libs/libao-0.8.5  
+[ebuild   R   ] media-libs/xine-lib-1_rc5-r3  
+[ebuild   R   ] media-video/avidemux-2.0.26  
+[ebuild   R   ] net-libs/loudmouth-0.16  
+
+Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
+</pre>
+
+<p>
+如果你需要重新编译一些软件包，你可以在没有<c>-p</c>标志的情况下运行<c>revdep-rebuild</c>，然后被列出的软件包就会被重新emerge。
+</p>
+
+</body>
+</section>
+<section>
+<title>glsa-check</title>
+<body>
+
+<p>
+<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory（Gentoo 
+Linux安全建议）），并且最后被统一到<c>emerge</c>和<c>equery</c>去了。请访问<uri 
+link="/proj/en/portage/glsa-integration.xml">Portage GLSA Integration 
+Page</uri>来得到更多信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>eread</title>
+<body>
+
+<p>
+<c>eread</c>是一个用来显示>=<c>portage-2.1</c>的portage产生的elog文件的简单组件。你可以通过设置<path>/etc/make.conf</path>里的一些变量来设置elog文件的存储。
+</p>
+
+<pre caption="Enabling elog in /etc/make.conf">
+PORTAGE_ELOG_CLASSES="log"
+PORTAGE_ELOG_SYSTEM="save"
+</pre>
+
+<note>
+这只是存储elog信息的其中一条途径。请参考在<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage 
+Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
+</note>
+
+<p>
+一旦你配置了eread，只要运行<c>eread</c>就能查看你的log文件了。
+</p>
+
+<pre caption="使用eread">
+$ <i>eread</i>
+
+This is a list of portage log items. Choose a number to view that file or type q to quit.
+
+1) app-portage:gentoolkit-0.2.4_pre2:20070320-000256.log
+2) app-portage:gentoolkit-0.2.4_pre2:20070320-000258.log
+3) app-portage:gentoolkit-0.2.4_pre2:20070320-000319.log
+4) app-portage:gentoolkit-0.2.3:20070320-000408.log
+Choice?
+</pre>
+
+<p>
+选择一个数字，然后文件就会通过在PAGER环境变量里特定的页面系统而被显示。如果PAGER变量没有被设置，它会使用<c>less</c>。
+</p>
+
+<p>
+在显示elog项目后，如果你想要删除文件你就会被提醒。
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
