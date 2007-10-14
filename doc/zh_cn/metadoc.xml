@@ -107,7 +107,7 @@
     <file id="cron-guide">/doc/en/cron-guide.xml</file>
     <file id="ldap-howto">/doc/en/ldap-howto.xml</file>
     <file id="nvidia-guide">/doc/en/nvidia-guide.xml</file>
-    <file id="ati-faq">/doc/zh_cn/ati-faq.xml</file>
+    <file id="ati-faq">/doc/en/ati-faq.xml</file>
     <file id="cvs-tutorial">/doc/en/cvs-tutorial.xml</file>
     <file id="devfs-guide">/doc/en/devfs-guide.xml</file>
     <file id="distcc">/doc/en/distcc.xml</file>
@@ -117,7 +117,7 @@
     <file id="gentoo-upgrading">/doc/en/gentoo-upgrading.xml</file>
     <file id="2.6-migration">/doc/en/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
-    <file id="faq">/doc/en/faq.xml</file>
+    <file id="faq">/doc/zh_cn/faq.xml</file>
     <file id="gentoo-alpha-faq">/doc/en/gentoo-alpha-faq.xml</file>
     <file id="gentoo-amd64-faq">/doc/en/gentoo-amd64-faq.xml</file>
     <file id="handbook-alpha">/doc/zh_cn/handbook/handbook-alpha.xml</file>
