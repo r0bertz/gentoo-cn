@@ -541,9 +541,141 @@
     <ti>2007/05/10</ti>
     <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
     <ti>W</ti>
-    <ti>2007/10/17</ti>
+    <ti>2007/10/20</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/doc/zh_cn/liveusb.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>about.xml</ti>
+    <ti><uri link="/main/en/about.xml">v 1.39</uri></ti>
+    <ti>2007/09/18</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/about.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>contact.xml</ti>
+    <ti><uri link="/main/en/contact.xml">contact.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/contact.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>contract.xml</ti>
+    <ti><uri link="/main/en/contract.xml">contract.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/contract.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>graphics.xml</ti>
+    <ti><uri link="/main/en/graphics.xml">v 1.35</uri></ti>
+    <ti>2007/09/04</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/graphics.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>irc.xml</ti>
+    <ti><uri link="/main/en/irc.xml">v 1.107</uri></ti>
+    <ti>2007/09/03</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/irc.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>lists.xml</ti>
+    <ti><uri link="/main/en/lists.xml">v 1.99</uri></ti>
+    <ti>2007/09/07</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/lists.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>name-logo.xml</ti>
+    <ti><uri link="/main/en/name-logo.xml">v 1.9</uri></ti>
+    <ti>2005/12/11</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/name-logo.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>philosophy.xml</ti>
+    <ti><uri link="/main/en/philosophy.xml">v 1.11</uri></ti>
+    <ti>2007/03/16</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/philosophy.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>shots.xml</ti>
+    <ti><uri link="/main/en/shots.xml">shot.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/shots.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>sponsors.xml</ti>
+    <ti><uri link="/main/en/sponsors.xml">v 1.47</uri></ti>
+    <ti>2007/03/16</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/sponsors.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>support.xml</ti>
+    <ti><uri link="/main/en/support.xml">support.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/support.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>where.xml</ti>
+    <ti><uri link="/main/en/where.xml">v 1.107</uri></ti>
+    <ti>2007/05/07</ti>
+    <ti><mail link="lyanry@gmail.com">lyanry</mail></ti>
+    <ti>W</ti>
+    <ti>2007/10/20</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/main/zh_cn/where.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
