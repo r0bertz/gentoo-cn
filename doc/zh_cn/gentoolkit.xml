@@ -33,13 +33,12 @@ John P. Davis
   <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
 <author title="译者">
-<mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+  <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
 </author>
 
 <abstract>
-Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个文档涵盖了一些现在在Gentoo工具包里的工具的一些基本概述。
+Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个文档介绍了一些Gentoolkit里的工具的一些基本使用方法。
 </abstract>
-
 
 
 <!-- Licensed under GFDL -->
@@ -53,16 +52,15 @@ Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个�
 <body>
 
 <p>
-Gentoo是一个少见的发行版，并且存在一些别的发行版没有的复杂的东西。因为Gentoo开发者和贡献者们发现了这些复杂的东西，同时，他们也写了一些工具来帮助用户和管理员来使用他们。这些工具中的很大一部分已经被贡献到了Gentoo 
-project，并且被整合到了一个叫<c>app-portage/gentoolkit</c>的包里。
+Gentoo是一个独一无二的发行版，并且存在一些别的发行版没有的复杂的东西。Gentoo开发者和贡献者们发现了这些复杂的东西，于是他们写了一些工具来帮助用户和管理员来使用他们。这些工具中的很大一部分已经被贡献到了Gentoo项目，并且被整合到了一个叫<c>app-portage/gentoolkit</c>的包里。
 </p>
 
 <note>
-到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。然而前者包含了管理脚本，后者包含了一些帮助在Gentoo上开发的特殊的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本包含到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
+到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。然而前者包含了管理脚本，后者包含了一些专门帮助Gentoo开发的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本被收录到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
 </note>
 
 <p>
-Gentoolkit包含了一整串有用的工具来帮助你管理你的软件包和留意在你的系统上发生了什么。大部分的用户，特别是经常升级系统的用户，将会从安装gentoolkit里受益。
+Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和留意在你的系统上发生了什么。大部分的用户，特别是经常升级系统的用户，将会从安装gentoolkit里受益。
 </p>
 
 </body>
@@ -104,13 +102,11 @@ Gentoolkit包含了一整串有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-<c>equery</c>是一个显示大量有关于在你系统上的软件包的有用的信息和其他的一些东西。<c>equery 
---help</c>能给你所有的选项的列表。
+<c>equery</c>是一个显示大量有关于在你系统上的软件包的有用的信息和其他的一些东西。<c>equery --help</c>能给你所有的选项的列表。
 </p>
 
 <note>
-不是所有的<c>equery 
---help</c>列出的特性都被应用了。没有被应用的特性都被很清楚地提到了。你也可以看见一个选项的简略形式，比如说<c>b</c>而不是<c>belongs</c>。
+不是所有的<c>equery --help</c>列出的特性都被应用了。没有被应用的特性都被很清楚地提到了。你也可以看见一个选项的简略形式，比如说<c>b</c>而不是<c>belongs</c>。
 </note>
 
 <note>
