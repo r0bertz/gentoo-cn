@@ -135,7 +135,7 @@
     <uri link="#configure">我想自己执行./configure这步，可以吗？</uri>
   </li>
   <li>
-    <uri link="#firewall">我该怎样做才能在放火墙后使用emerge？</uri>
+    <uri link="#firewall">我该怎样做才能在防火墙后使用emerge？</uri>
   </li>
   <li>
     <uri link="#norsync">如果我不能用rsync，该怎么办？</uri>
@@ -159,7 +159,7 @@
 
 <ul>
   <li>
-    <uri link="#intkeyboard">我怎么样才能建立一个国际化的键盘布局？</uri>
+    <uri link="#intkeyboard">怎样设置国际化键盘布局？</uri>
   </li>
   <li>
     <uri link="#rootdns">DNS域名解析只对root用户起作用。</uri>
@@ -631,7 +631,7 @@ HOWTO</uri>了解更多详情。
 </body>
 </section>
 <section id="firewall">
-<title>我该怎样做才能在放火墙后使用emerge？</title>
+<title>我该怎样做才能在防火墙后使用emerge？</title>
 <body>
 
 <p>
@@ -646,7 +646,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-如果你在处在屏蔽了rsync的放火墙的后面，你可以使用<c>emerge-webrsync</c>
+如果你在处在屏蔽了rsync的防火墙的后面，你可以使用<c>emerge-webrsync</c>
 通过普通的HTTP请求来获取并安装一个Portage的快照。请查看一下<uri link="#proxy">代
 理部分</uri>
 文档中的关于通过proxy下载源文件和Portage快照的相关信息。
@@ -705,7 +705,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <chapter>
 <title>使用方法</title>
 <section id="intkeyboard">
-<title>我怎么样才能建立一个国际键盘布局？</title>
+<title>怎样设置国际化键盘布局？</title>
 <body>
 
 <p>
