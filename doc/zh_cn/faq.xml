@@ -252,10 +252,7 @@ Gentoo使用了一个类似于BSD ports的系统，叫作<uri link="/proj/en/por
 </p>
 
 <p>
-使用Gentoo，你可以通过源代码构建一个完整的系统，并且可以使用你自己的
-优化选项。对于什么软件包需要安装、什么软件包不需要安装，你可以拥有完全的
-控制权。Gentoo为你提供了多样化的选择，你可以按照你自己的参数选择来安装Gentoo，
-而这也是为什么Gentoo会被称作<e>元发行版</e>的原因。
+使用Gentoo，你可以通过源代码构建一个完整的系统，并且可以使用你自己的优化选项。对于什么软件包需要安装、什么软件包不需要安装，你可以拥有完全的控制权。Gentoo为你提供了多样化的选择，你可以按照你自己的参数选择来安装Gentoo，而这也是为什么Gentoo会被称作<e>元发行版</e>的原因。
 </p>
 
 <p>
@@ -275,9 +272,7 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 <body>
 
 <p>
-请不要自寻麻烦的使用高于<c>-O3</c>的优化选项，对于现有版本的gcc来说它并
-不支持这些。太激进的优化选项有时会使编译器的编译流程产生的汇编代码做出
-完全不同的事。
+请不要自寻麻烦的使用高于<c>-O3</c>的优化选项，对于现有版本的gcc来说它并不支持这些。太激进的优化选项有时会使编译器的编译流程产生的汇编代码做出完全不同的事。
 
 </p>
 
@@ -292,8 +287,7 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 <body>
 
 <p>
-你可以使用<c>passwd</c>命令改变你登录用户的密码。作为root来讲，你可以通过<c>passwd username</c>
-命令改变任何一个用户的密码。如要获取进一步的信息，请参考<c>man passwd</c>.
+你可以使用<c>passwd</c>命令改变你登录用户的密码。作为root来讲，你可以通过<c>passwd username</c>命令改变任何一个用户的密码。如要获取进一步的信息，请参考<c>man passwd</c>.
 </p>
 
 </body>
@@ -303,8 +297,7 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 <body>
 
 <p>
-使用命令<c>adduser username</c>将会添加一个名为“username”的用户，然而这样做
-不会提供给这个用户很多你想给他的权限。所以请最好使用如下的命令:
+使用命令<c>adduser username</c>将会添加一个名为“username”的用户，然而这样做不会提供给这个用户很多你想给他的权限。所以请最好使用如下的命令:
 </p>
 
 <pre caption="添加用户">
@@ -314,15 +307,9 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 <p>
 这将会在系统中添加一个名为“username”的用户。<c>audio</c>选项把他们添加到了<c>audio</c>组以便他们可以获得声音设备的访问权。<c>wheel</c>选项把他们添加到了<c>wheel</c>组中，它允许用户使用<c>su</c>命令来获得<c>root</c>用户的权限。</p>
 
-</body>
-</section>
-<section id="su">
-<title>为什么一个用户无法通过su来变成root？</title>
-<body>
+</body> </section> <section id="su"> <title>为什么一个用户无法通过su来变成root？</title> <body>
 
-<p>
-因为安全上的原因，只有wheel组的成员才可以通过<c>su</c>命令变成root，为了把一个
-用户加入wheel组，你可以使用下面的命令。
+<p>因为安全上的原因，只有wheel组的成员才可以通过<c>su</c>命令变成root，为了把一个用户加入wheel组，你可以使用下面的命令。
 </p>
 
 <pre caption="把用户添加进wheel组">
@@ -336,14 +323,11 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 <body>
 
 <p>
-Gentoo可以使用内核级的devfs、用户层的udev或者静态的<path>/dev</path>目录。
-随着2.6版本内核的来临以及在各个架构平台上的逐渐稳定，我们推荐使用udev。请查看<uri 
-link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信息。 
+Gentoo可以使用内核级的devfs、用户层的udev或者静态的<path>/dev</path>目录。随着2.6版本内核的来临以及在各个架构平台上的逐渐稳定，我们推荐使用udev。请查看<uri link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信息。 
 </p>
 
 <p>
-如果你想要使用静态的<path>/dev</path>，请在<path>/etc/conf.d/rc</path>中设置
-<c>RC_DEVICES="static"</c>。
+如果你想要使用静态的<path>/dev</path>，请在<path>/etc/conf.d/rc</path>中设置<c>RC_DEVICES="static"</c>。
 </p>
 
 </body>
@@ -355,12 +339,7 @@ link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信
 <body>
 
 <p>
-实际上，不同的版本安装好以后没有什么不同。Gentoo 1.4和之后的版本都是基于
-<c>glibc-2.3.x</c>。
-使用命令<c>emerge --sync &amp;&amp; emerge -uDN world</c>可以使你的整个系统
-升级到“最新的Gentoo”。每个版本之间的区别只在于安装媒介和预编译包的不同。请阅读
-<uri link="/doc/en/gentoo-upgrading.xml">Gentoo升级指南</uri>以获得更多有关profile和它们在升级
-过程中所扮演角色的信息。
+实际上，不同的版本安装好以后没有什么不同。Gentoo 1.4和之后的版本都是基于<c>glibc-2.3.x</c>。使用命令<c>emerge --sync &amp;&amp; emerge -uDN world</c>可以使你的整个系统升级到“最新的Gentoo”。每个版本之间的区别只在于安装媒介和预编译包的不同。请阅读<uri link="/doc/en/gentoo-upgrading.xml">Gentoo升级指南</uri>以获得更多有关profile和它们在升级过程中所扮演角色的信息。
 </p>
 
 </body>
@@ -370,9 +349,7 @@ link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信
 <body>
 
 <p>
-你不必重新按照安装时的步骤重新做一遍，只需要检查一下内核和所有与之相关联的步
-骤是否必须重来就可以了。假设你的Gentoo的安装是<path>/dev/hda1</path> （/boot）、
-<path>/dev/hda3</path> （/）、 <path>/dev/hda2</path>为swap：
+你不必重新按照安装时的步骤重新做一遍，只需要检查一下内核和所有与之相关联的步骤是否必须重来就可以了。假设你的Gentoo的安装是<path>/dev/hda1</path> （/boot）、<path>/dev/hda3</path> （/）、 <path>/dev/hda2</path>为swap：
 </p>
 
 <pre caption="重新配置内核">
@@ -427,44 +404,31 @@ RSYNC_PROXY="rsync://username:password@yourproxybox.server:portnumber"
 <body>
 
 <p>
-你需要使用raw模式刻录这个文件。这意味着你<e>不能</e>将这个文件简单的放
-置在CD上，而是需要把它视作一张完整的CD。
+你需要使用raw模式刻录这个文件。这意味着你<e>不能</e>将这个文件简单的放置在CD上，而是需要把它视作一张完整的CD。
 </p>
 
 <p>
-你有很多CD刻录工具可以使用，要一个一个的介绍它们是很徒劳无益的，然而介绍
-几个比较普及的工具并没有什么害处。
+你有很多CD刻录工具可以使用，要一个一个的介绍它们是很徒劳无益的，然而介绍几个比较普及的工具并没有什么害处。
 </p>
 
 <ul>
   <li>
-    使用EasyCD Creator的话，你需要选择<c>File</c>，<c>Record CD
-    from CD image</c>。然后把<c>Files of type</c>改成<c>ISO image
-    file</c>。然后定位到ISO文件并单击<c>Open</c>。当你单击<c>Start recording</c>
-    时，ISO的镜像将被正确的刻录到CD-R上。
+    使用EasyCD Creator的话，你需要选择<c>File</c>，<c>Record CD from CD image</c>。然后把<c>Files of type</c>改成<c>ISO image file</c>。然后定位到ISO文件并单击<c>Open</c>。当你单击<c>Start recording</c>时，ISO的镜像将被正确的刻录到CD-R上。
   </li>
   <li>
-    使用Nero Burning ROM的话，你需要取消掉开始自动会弹出的向导并在<c>File</c>菜
-    单中选择<c>Burn Image</c>。选择好你需要刻录的镜像文件后单击<c>Open</c>。现
-    在单击<c>Burn</c>按钮后就可以看到新的CD开始刻录了。
+    使用Nero Burning ROM的话，你需要取消掉开始自动会弹出的向导并在<c>File</c>菜单中选择<c>Burn Image</c>。选择好你需要刻录的镜像文件后单击<c>Open</c>。现在单击<c>Burn</c>按钮后就可以看到新的CD开始刻录了。
   </li>
   <li>
-    使用cdrecord的话，你只需要简单的输入<c>cdrecord dev=/dev/hdc</c>(用你自己的
-    CD-RW驱动器的设备路径替换<path>/dev/hdc</path>）后面跟着ISO文件的路径。
+    使用cdrecord的话，你只需要简单的输入<c>cdrecord dev=/dev/hdc</c>(用你自己的CD-RW驱动器的设备路径替换<path>/dev/hdc</path>）后面跟着ISO文件的路径。
   </li>
   <li>
-    使用K3B的话，依此选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn CD Image</c>。
-    然后在'Image to Burn'的对话框中定位到你的ISO文件。最后单击<c>Start</c>就可以
-    了。
+    使用K3B的话，依此选择<c>Tools</c> &gt; <c>CD</c> &gt; <c>Burn CD Image</c>。然后在'Image to Burn'的对话框中定位到你的ISO文件。最后单击<c>Start</c>就可以了。
   </li>
   <li>
-    使用Mac OS X Panther的话，在<path>Applications/Utilities</path>中启动<c>Disk Utility</c>
-    接着在<c>Images</c>菜单中选择<c>Open</c>，然后在主窗口中选择已经挂载好的镜像
-    文件并在<c>Images</c>菜单中选择<c>Burn</c>就可以了。
+    使用Mac OS X Panther的话，在<path>Applications/Utilities</path>中启动<c>Disk Utility</c>接着在<c>Images</c>菜单中选择<c>Open</c>，然后在主窗口中选择已经挂载好的镜像文件并在<c>Images</c>菜单中选择<c>Burn</c>就可以了。
   </li>
   <li>
-    使用Mac OS X Jaguar后，在<path>Applications/Utilities</path>启动<c>Disk Copy</c>，
-    在<c>File</c>菜单里选择<c>Burn Image</c>后选取ISO文件并点击<c>Burn</c>按钮即可。
+    使用Mac OS X Jaguar后，在<path>Applications/Utilities</path>启动<c>Disk Copy</c>，在<c>File</c>菜单里选择<c>Burn Image</c>后选取ISO文件并点击<c>Burn</c>按钮即可。
   </li>
 </ul>
 
@@ -502,8 +466,7 @@ RSYNC_PROXY="rsync://username:password@yourproxybox.server:portnumber"
 </p>
 
 <p>
-如果你的网卡已经被内核识别，但是你使用DHCP来配置网络的话，有可能是你忘记
-<c>emerge dhcpcd</c>了。你需要用安装CD重新启动你的电脑并安装<c>dhcpcd</c>.
+如果你的网卡已经被内核识别，但是你使用DHCP来配置网络的话，有可能是你忘记<c>emerge dhcpcd</c>了。你需要用安装CD重新启动你的电脑并安装<c>dhcpcd</c>.
 </p>
 
 <p>
@@ -519,10 +482,7 @@ RSYNC_PROXY="rsync://username:password@yourproxybox.server:portnumber"
 <body>
 
 <p>
-这是一个已知的问题。Windows在当它不是安装在第一个硬盘时会拒绝启动。要搞定这个，
-你需要在引导管理器的配置文件中作一些小改进来“欺骗”一下Windows并让它相信它是
-安装在第一个硬盘上的。请注意在下面的例子中，Gentoo安装在<path>hda</path>（第一
-个硬盘），Windows安装在<path>hdb</path>（第二个硬盘）。根据你的需要改变配置文件。
+这是一个已知的问题。Windows在当它不是安装在第一个硬盘时会拒绝启动。要搞定这个，你需要在引导管理器的配置文件中作一些小改进来“欺骗”一下Windows并让它相信它是安装在第一个硬盘上的。请注意在下面的例子中，Gentoo安装在<path>hda</path>（第一个硬盘），Windows安装在<path>hdb</path>（第二个硬盘）。根据你的需要改变配置文件。
 </p>
 
 <pre caption="grub.conf中关于Windows双重启动条目的例子">
@@ -544,8 +504,7 @@ other=/dev/hdb1
 </pre>
 
 <p>
-这会使Windows相信它安装在第一个硬盘上并且会没有疑问的启动。更多的信息可以参考
-<uri link="http://www.gnu.org/software/grub/manual/html_node/DOS_002fWindows.html">GRUB文档</uri>或<c>man lilo.conf</c>，取决于你使用哪个引导程序。
+这会使Windows相信它安装在第一个硬盘上并且会没有疑问的启动。更多的信息可以参考<uri link="http://www.gnu.org/software/grub/manual/html_node/DOS_002fWindows.html">GRUB文档</uri>或<c>man lilo.conf</c>，取决于你使用哪个引导程序。
 
 </p>
 
@@ -556,11 +515,7 @@ other=/dev/hdb1
 <body>
 
 <p>
-Gentoo的安装手册只是描述了如何使用stage3的tarball来安装Gentoo的过程。不过，Gentoo
-还是提供了stage1和stage2的tarball。但是它们是为开发所预备的(发布工程团队从stage1的
-tarball产生stage3的tarball)，一般用户不应该使用它们：一
-个stage3 tarball可以很好的被用来自举一个系统。为此你必须有一个可用的互联网
-连接。
+Gentoo的安装手册只是描述了如何使用stage3的tarball来安装Gentoo的过程。不过，Gentoo还是提供了stage1和stage2的tarball。但是它们是为开发所预备的(发布工程团队从stage1的tarball产生stage3的tarball)，一般用户不应该使用它们：一个stage3 tarball可以很好的被用来自举一个系统。为此你必须有一个可用的互联网连接。
 </p>
 
 <p>
@@ -575,8 +530,7 @@ tarball产生stage3的tarball)，一般用户不应该使用它们：一
 </pre>
 
 <p>
-下一步，使用新建的工具链重新建立所有的核心系统软件包。尽管stage3的taball已经
-提供了它们，我们还是需要重新建立它们。
+下一步，使用新建的工具链重新建立所有的核心系统软件包。尽管stage3的taball已经提供了它们，我们还是需要重新建立它们。
 </p>
 
 <pre caption="重建所有的核心系统包">
@@ -602,15 +556,12 @@ tarball产生stage3的tarball)，一般用户不应该使用它们：一
 </p>
 
 <p>
-对于完整的ISO发布，我们使用<c>.tbz2</c>的格式建立了一套完整的二进制软件包，这种
-格式是和<c>.tar.bz2</c>格式兼容的，只是文件最后附加了一些元信息。我们可以通
-过它们来快速高效地安装一个可用的 ( 虽然是没有完全优化过的）某个版本的软件包。
+对于完整的ISO发布，我们使用<c>.tbz2</c>的格式建立了一套完整的二进制软件包，这种格式是和<c>.tar.bz2</c>格式兼容的，只是文件最后附加了一些元信息。我们可以通过它们来快速高效地安装一个可用的 ( 虽然是没有完全优化过的）某个版本的软件包。
 
 </p>
 
 <p>
-使用Gentoo的Portage建立RPM包（Redhat package manager文件）也是可能的，但是目前来
-说还是无法使用已有的RPM文件在Gentoo上安装软件。
+使用Gentoo的Portage建立RPM包（Redhat package manager文件）也是可能的，但是目前来说还是无法使用已有的RPM文件在Gentoo上安装软件。
 </p>
 
 </body>
@@ -620,12 +571,7 @@ tarball产生stage3的tarball)，一般用户不应该使用它们：一
 <body>
 
 <p>
-可以的，但是这么做既费事，也不是推荐的做法。因为做这一步需要对Portage的
-内部机制和命令有很好的理解，所以相反我们推荐由你自己为ebuild打补丁并让它为你
-做你想要的任何事，然后再把它放进Portage overlay里（这也是为什么它会存在的道理）。这
-样做对管理来说<e>大</e>有好处，并且这样可以兼顾到易用性。请查看一下<uri
-link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild
-HOWTO</uri>了解更多详情。
+可以的，但是这么做既费事，也不是推荐的做法。因为做这一步需要对Portage的内部机制和命令有很好的理解，所以相反我们推荐由你自己为ebuild打补丁并让它为你做你想要的任何事，然后再把它放进Portage overlay里（这也是为什么它会存在的道理）。这样做对管理来说<e>大</e>有好处，并且这样可以兼顾到易用性。请查看一下<uri link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild HOWTO</uri>了解更多详情。
 </p>
 
 </body>
@@ -635,8 +581,7 @@ HOWTO</uri>了解更多详情。
 <body>
 
 <p>
-关于这个问题请看一下<uri link="#proxy">代理</uri>，<uri
-link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代码文件</uri>。
+关于这个问题请看一下<uri link="#proxy">代理</uri>，<uri link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代码文件</uri>。
 </p>
 
 </body>
@@ -646,10 +591,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-如果你在处在屏蔽了rsync的防火墙的后面，你可以使用<c>emerge-webrsync</c>
-通过普通的HTTP请求来获取并安装一个Portage的快照。请查看一下<uri link="#proxy">代
-理部分</uri>
-文档中的关于通过proxy下载源文件和Portage快照的相关信息。
+如果你在处在屏蔽了rsync的防火墙的后面，你可以使用<c>emerge-webrsync</c>通过普通的HTTP请求来获取并安装一个Portage的快照。请查看一下<uri link="#proxy">代理部分</uri>文档中的关于通过proxy下载源文件和Portage快照的相关信息。
 </p>
 
 </body>
@@ -662,10 +604,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-当然可以，你可以运行<c>emerge --pretend package</c>查看一下系统将会安装什么程序，
-为了找到那些软件包和在哪里能下载到它们，你可以运行<c>emerge -fp package</c>。
-下载源文件并存放在任何媒介中后带回家里。把源文件放到<path>/usr/portage/distfiles/</path>
-后简单地运行<c>emerge package</c>就可以了。预告一下，这是一个冗长的过程.
+当然可以，你可以运行<c>emerge --pretend package</c>查看一下系统将会安装什么程序，为了找到那些软件包和在哪里能下载到它们，你可以运行<c>emerge -fp package</c>。下载源文件并存放在任何媒介中后带回家里。把源文件放到<path>/usr/portage/distfiles/</path>后简单地运行<c>emerge package</c>就可以了。预告一下，这是一个冗长的过程.
 </p>
 
 </body>
@@ -677,11 +616,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-删除这些文件对于日常的性能来说没有什么负面的影响。然而，保留最近版本的文件还是明
-智的；我们经常为某个软件的同一个版本发布好几个ebuild。如果删除了这些文件，那么在你下次升
-级的时候还是必须从网上重新下载它们。<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">用户已经开发了</uri>
-一些程序可以用来帮你删除旧版本只保留最近版本的源文件。注意虽然这个工具看起来管用
-，不过它<e>不是</e>官方维护的。如果使用您要自己担负风险。
+删除这些文件对于日常的性能来说没有什么负面的影响。然而，保留最近版本的文件还是明智的；我们经常为某个软件的同一个版本发布好几个ebuild。如果删除了这些文件，那么在你下次升级的时候还是必须从网上重新下载它们。<uri link="http://forums.gentoo.org/viewtopic-t-337074.html">用户已经开发了</uri>一些程序可以用来帮你删除旧版本只保留最近版本的源文件。注意虽然这个工具看起来管用，不过它<e>不是</e>官方维护的。如果使用您要自己担负风险。
 </p>
 </body>
 </section>
@@ -692,10 +627,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-在编译的过程中，Gentoo把软件包的源代码保存在<path>/var/tmp/portage</path>中。
-这些文件和文件夹在一次成功地merge之后通常是会被删除掉的，然后有时候还是会出错。
-<e>当</e>emerge没有运行的时候删除其目录中所有的条目是安全的。为了确保没有问题，在
-清空这个目录之前请一定先运行一下<c>pgrep emerge</c>。
+在编译的过程中，Gentoo把软件包的源代码保存在<path>/var/tmp/portage</path>中。这些文件和文件夹在一次成功地merge之后通常是会被删除掉的，然后有时候还是会出错。<e>当</e>emerge没有运行的时候删除其目录中所有的条目是安全的。为了确保没有问题，在清空这个目录之前请一定先运行一下<c>pgrep emerge</c>。
 </p>
 
 </body>
@@ -709,10 +641,7 @@ link="#norsync">rsync</uri>， 和<uri link="#manualdownload">手动下载源代
 <body>
 
 <p>
-修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量。为使终端能正确显示你
-的键盘布局里的扩展字符，你还需要在<path>/etc/conf.d/consolefont</path>
-之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>（想要了解更多如何本
-地化你的使用环境的详情，请参考<uri link="/doc/en/guide-localization.xml">我们的本地化指南</uri>）。
+修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量。为使终端能正确显示你的键盘布局里的扩展字符，你还需要在<path>/etc/conf.d/consolefont</path>之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>（想要了解更多如何本地化你的使用环境的详情，请参考<uri link="/doc/en/guide-localization.xml">我们的本地化指南</uri>）。
 </p>
 
 <pre caption="重新启动keymaps">
@@ -786,10 +715,7 @@ $ <i>echo clear &gt;&gt; ~/.bash_logout</i>
 <body>
 
 <p>
-这种情况只发生在当你是通过图形界面登录的时候。<c>startx</c>的用户没有这个问题。
-这个问题是Gentoo的PAM里的一个<uri
-link="http://bugs.gentoo.org/show_bug.cgi？id=14560">bug</uri>，
-解决方法也相当简单：在<path>/etc/profile</path>中添加下面这一行。
+这种情况只发生在当你是通过图形界面登录的时候。<c>startx</c>的用户没有这个问题。这个问题是Gentoo的PAM里的一个<uri link="http://bugs.gentoo.org/show_bug.cgi？id=14560">bug</uri>，解决方法也相当简单：在<path>/etc/profile</path>中添加下面这一行。
 </p>
 
 <pre caption="export XAUTHORITY">
@@ -851,9 +777,7 @@ Gentoo的软件包通常会在主要的作者释出新的代码后不久就进�
 </pre>
 
 <p>
-如果想在启动时就关闭终端响铃，你要把这条命令加入<path>/etc/conf.d/local.start</path>
-之中。然而，这只是禁用掉了现在正在使用终端的响铃。想要在其他的终端上禁用响铃的话，
-把这条命令的输出重定向到目标终端去即可，如下所示:
+如果想在启动时就关闭终端响铃，你要把这条命令加入<path>/etc/conf.d/local.start</path>之中。然而，这只是禁用掉了现在正在使用终端的响铃。想要在其他的终端上禁用响铃的话，把这条命令的输出重定向到目标终端去即可，如下所示:
 </p>
 
 <pre caption="使用setterm (bis)">
@@ -885,9 +809,7 @@ Gentoo的软件包通常会在主要的作者释出新的代码后不久就进�
 <body>
 
 <p>
-每一个我们所支持的架构的安装CD在我们的<uri link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>上都能找到。
-当你在我们的商店中购买了CD，你也同时在支持我们的开发工作。所以，如果有可能的话，
-请考虑从我们的商店购买CD。
+每一个我们所支持的架构的安装CD在我们的<uri link="http://www.cafepress.com/officialgentoo/">Gentoo Store</uri>上都能找到。当你在我们的商店中购买了CD，你也同时在支持我们的开发工作。所以，如果有可能的话，请考虑从我们的商店购买CD。
 </p>
 
 <p>
