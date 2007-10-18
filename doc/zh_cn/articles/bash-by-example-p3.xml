@@ -1,0 +1,623 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version:1.5 -->
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/articles/bash-by-example-p3.xml" disclaimer="articles" lang="zh_cn">
+<title>Bash示例：第三部分</title>
+
+<author title="作者">
+  <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
+</author>
+<author title="译者">
+  <mail link="night2008@gmail.com">苏永恒</mail>
+</author>
+<abstract>
+在Bash示例的最后一部分中，Daniel Robbins深入的讨论了Gentoo Linux的ebuild系统，这是一个展示bash威力的优秀的例子。他逐步的向你演示了ebuild系统是如何实现的，并涉及到很多方便的bash技术和设计理念。在文章的最后，你将能很好的把握如何构建一个成熟的基于bash的应用，并能开始为你自己的自动构建系统编码。
+</abstract>
+
+<!-- The original version of this article was published on IBM developerWorks,and is property of Westtech Information Services. This document is an updated version of the original article, and contains various improvements made by the Gentoo Linux Documentation team -->
+<version>1.3</version>
+<date>2005-10-09</date>
+
+<chapter>
+<title>ebuild系统探究</title>
+<section>
+<title>进入ebuild系统</title>
+<body>
+
+<p>
+我真的一直很期待<e>Bash示例</e>的第三也即最后一部分，因为现在我们已经在<uri link="/doc/zh_cn/articles/bash-by-example-p1.xml">第一部分</uri>和<uri link="/doc/zh_cn/articles/bash-by-example-p2.xml">第二部分</uri>中学习了基本的bash编程，我们可以着重讲述诸如bash应用开发和程序设计之类的更加高级的话题了。在此文中，将通过展示我花了许多时间来编码和细化的项目，Gentoo Linux ebuild 系统，给您带来大量实际的、现实世界的bash开发经验。
+</p>
+
+<p>
+我是下一代Linux系统──Gentoo Linux（现在仍是beta版）的首席设计师。我的主要职责之一就是确保所有的二进制包（RPM包之类的）都能正常的创建并一起工作。你可能会知道，一个标准的Linux系统不是由一个统一的源码体系（像BSD那样）构成的，而实际上是由大约25个以上的协同工作的核心包构成。这些包都包括：
+</p>
+
+<table>
+  <tr>
+    <th>包</th>
+    <th>描述</th>
+  </tr>
+  <tr>
+    <ti>linux</ti>
+    <ti>实际的内核</ti>
+  </tr>
+  <tr>
+    <ti>util-linux</ti>
+    <ti>linux相关程序的汇集</ti>
+  </tr>
+  <tr>
+    <ti>e2fsprogs</ti>
+    <ti>ext2文件系统相关工具的汇集</ti>
+  </tr>
+  <tr>
+    <ti>glibc</ti>
+    <ti>GNU C库</ti>
+  </tr>
+</table>
+
+<p>
+每一个包都位于自己的tar压缩包中，并由独立的开发者和开发团队来维护。为了创建一个发行版，每一个包都要单独下载、编译和打包。每一次要修复，升级或改进包时，都要重复进行编译和打包步骤（他们过时的速度是很快的）。为了消除不断重复创建和更新包的步骤，我创建了ebuild系统，它几乎完全是由bash完成。为了加强你的bash知识，我将逐步的向你展示我是如何实现该ebuild系统的解压和编译部分的。在阐述每一步时，我都会论述为什么决定要做这一设计。在文章的最后，你不但能很好的掌握大型bash编程项目的编写，而且还将实现一个完整自构建系统的很大一部分。
+</p>
+
+</body>
+</section>
+<section>
+<title>为什么是bash？</title>
+<body>
+
+<p>
+Bash是Gentoo Linux ebuild系统的重要组成部分。它被选为ebuild的主要语言有很多原因。首先，它的语法并不复杂，且为人们所熟悉，这特别适合调用外部的程序。自构建系统是自动化外部程序调用的“粘合代码”，而bash非常适合这种类型的应用。第二，Bash对函数的支持使得ebuild系统可以使用模块化，易于理解的代码。第三，ebuild系统发挥了bash对环境变量的支持的优势，允许包拥有者和开发者在运行中就可以轻松的配置它。
+</p>
+
+</body>
+</section>
+<section>
+<title>构建过程回顾</title>
+<body>
+
+<p>
+在我们讨论ebuild系统之前，让我们先回顾一下编译和安装包都涉及到哪些内容。在我们的例子中，先看一个“sed”包，它是一个标准的GUN文本流编辑工具，也是所有Linux发行版的一部分。首先，下载源码包（<path>sed-3.02.tar.gz</path>）（请看<uri link="#resources">资源</uri>）。我们将把这个压缩包保存在<path>/usr/src/distfiles</path>目录下，我们将通过使用环境变量<c>$DISTDIR</c>来引用它。<c>$DISTDIR</c>是我们所有的源码包所在的目录，它是一个大的源码仓库。
+</p>
+
+<p>
+我们下一步是创建一个叫做<path>work</path>的临时目录，它被用来放置没有解压缩的源码。我们在后面将使用<c>$WORKDIR</c>环境变量引用该目录。那么，切换一个我们有写权限的目录并输入以下代码：
+</p>
+
+<pre caption="将sed解压缩到临时文件夹">
+$ <i>mkdir work</i>
+$ <i>cd work</i>
+$ <i>tar xzf /usr/src/distfiles/sed-3.02.tar.gz</i>
+</pre>
+
+<p>
+然后压缩包就被解压出来，并创建了一个包含了所有源码的<path>sed-3.02</path>文件夹。我们以后将使用环境变量<c>$SRCDIR</c>来引用<path>sed-3.02</path>文件夹。要编译这个程序，请输入以下代码：
+</p>
+
+<pre caption="将sed解压缩到临时文件夹">
+$ <i>cd sed-3.02</i>
+$ <i>./configure --prefix=/usr</i>
+<comment>（autoconf自动产生make文件，这将需要一段时间）</comment>
+
+$ <i>make</i>
+
+<comment>（这个包要从源码进行编译，这同样要花点时间）</comment>
+</pre>
+
+<p>
+我们既然已经在本文中讲述了解压和编译的内容，我们就准备跳过“make install”这一步。如果想编写一个bash脚本来实现所有的步骤，代码可能会是这样的：
+</p>
+
+<pre caption="实现解压/编译过程的示例bash脚本">
+#!/usr/bin/env bash
+
+if [ -d work ]
+then
+<comment>#如果存在就移除旧的工作目录</comment>
+      rm -rf work
+fi
+mkdir work
+cd work
+tar zxf /usr/src/distfiles/sed-3.02.tar.gz
+cd sed-3.02
+./configure --prefix=/usr
+make
+</pre>
+
+</body>
+</section>
+<section>
+<title>代码通用化</title>
+<body>
+
+<p>
+尽管这个自动编译脚本可以工作，但是并不灵活。基本上，这个bash脚本只是罗列了输入到命令行上的命令。这种方法虽然可行，但如果能够编写一个仅改变数行就可以快速的配置包的解压和编译通用脚本就更好了。通过那种方法可以减少包的维护者向发行版中添加新包的工作。让我们首先尝试着使用一些环境变量来使我们的构建脚本更加通用：
+</p>
+
+<pre caption="一个新的，更加通用的脚本">
+#!/usr/bin/env bash
+
+<comment>#P是包名称</comment>
+
+P=sed-3.02
+
+<comment>#A是压缩档名称</comment>
+
+A=${P}.tar.gz
+
+export ORIGDIR=`pwd`
+export WORKDIR=${ORIGDIR}/work
+export SRCDIR=${WORKDIR}/${P}
+
+if [ -z "$DISTDIR" ]
+then
+<comment>#如果还没有设置DISTDIR，就设置它指向/usr/src/distfiles</comment>
+        DISTDIR=/usr/src/distfiles
+fi
+export DISTDIR
+
+if [ -d ${WORKDIR} ]
+then    
+<comment>#如果工作目录存在，就移除旧的</comment>
+        rm -rf ${WORKDIR}
+fi
+
+mkdir ${WORKDIR}
+cd ${WORKDIR}
+tar xzf ${DISTDIR}/${A}
+cd ${SRCDIR}
+./configure --prefix=/usr
+make
+</pre>
+
+<p>
+我们已经在代码中添加了很多环境变量，但是它仍基本上做同样的事情。然而，现在要编译任何基于autoconf的标准GUN源码包时，我们可以简单的将这个文件复制成一个新的文件（使用能够反映它编译的新包的名称信息的合适的名字），并改变<c>$A</c>和<c>$P</c>为一个新值即可。所有其他的环境变量将自动的调整成正确的设定，脚本也能如期生效。尽管这样很方便，但是还能对代码进行更多的改进。这个代码要比我们建立的原始“transcript”脚本长的多。既然每一个项目的目标之一都应该是降低用户复杂度，那么我们最好能大幅度的减少代码量或至少能更好的组织一下代码。我们可以通过一个技巧来实现──将代码分放在两个单独的文件中。并将该文件保存为<path>sed-3.02.ebuild</path>：
+</p>
+
+<pre caption="sed-3.02.ebuild">
+<comment>#sed ebuild文件──非常简单！</comment>
+P=sed-3.02
+A=${P}.tar.gz
+</pre>
+
+<p>
+我们的第一个文件不是很重要，它也只包含了在每一个基础软件包中都应该配置的一些环境变量。这里是第二个文件，它包含了这个操作的核心。我们把它保存为“ebuild”，并使它可执行：
+</p>
+
+<pre caption="ebuild脚本">
+#!/usr/bin/env bash
+
+if [ $# -ne 1 ]
+then
+        echo "one argument expected."
+        exit 1
+fi
+
+if [-e "$1" ]
+then
+        source $1
+else
+        echo "ebuild file $1 not found."
+        exit 1
+fi
+
+export ORIGDIR=`pwd`
+export WORKDIR=${ORIGDIR}/work
+export SRCDIR=${WORKDIR}/${P}
+
+if [ -z "$DISTDIR" ]
+then
+        <comment>#设置DISTDIR指向/usr/src/distfiles如果还没有设置</comment>
+        DISTDIR=/usr/src/diskfiles
+fi
+export DISTDIR
+
+if [ -d ${WORKKDIR} ]
+then
+        #如果工作目录存在，就移除旧
+        rm -rf ${WORKDIR}
+fi
+
+mkdir ${WORKDIR}
+cd ${WORKDIR}
+tar xzf ${DISTDIR}/${A}
+cd ${SRCDIR}
+./configure --prefix=/usr
+make
+</pre>
+
+<p>
+现在我们已经将我们的ebuild系统拆分到两个文件中了，我敢打赌你一定在奇怪它要如何执行。简单，要编译sed就输入：
+</p>
+
+<pre caption="测试上面的ebuild">
+$ <i>./ebuild sed-3.02.ebuild</i>
+</pre>
+
+<p>
+当“ebuild”执行时，首先尝试“source”变量<c>$1</c>。这是什么意思呢？正如前一篇文章所讲，<c>$1</c>是第一个命令行参数──此处即sed-3.02.ebuild。在bash中,“source”命令从一个文件中读取bash语句并执行它们，这就好像它们直接出现在“source”命令所在的文件中一样。因此，“source ${1}”使“ebuild”脚本执行“sed-3.02.ebuild”中定义“$P”和“$A”的命令。这种设计的转变确实很方便，因为如果要编译的是另一个程序而不是sed，就可以简单地创建一个新的.ebuild文件，并将其作为参数传递给“ebuild”脚本。通过这种方式，.ebuild文件最终会非常简单，而将ebuild系统复杂的操作部分存放在一处，即“ebuild”脚本中。通过这种方式，只需编辑“ebuild”脚本就可以升级或增强ebuild系统，从而将实现细节保留在ebuild文件之外。这里是一个gzip的示例ebuild文件：
+</p>
+
+<pre caption="gzip-1.2.4a.ebuild">
+<comment>#另一个很简单的ebuild脚本！</comment>
+P=gzip-1.2.4a
+A=${P}.tar.gz
+</pre>
+
+</body>
+</section>
+<section>
+<title>增加功能</title>
+<body>
+
+<p>
+好的，我们已经取得了一些进展。但是，我还想加入某些额外的功能。我想让ebuild脚本接收第二个命令行参数，即是“compile”，“unpack”或是“all”。第二个命令行参数告诉ebuild脚本要执行的是哪个特定的步骤。这样，我就可以告诉ebuild解压一个压缩包而不要去编译它（这时我只要在编译开始之前检查一下源压缩包即可）。为做到这点，我添加了一个case语句来判断变量<c>$2</c>，并根据它的值的不同而做不同的操作。这里是代码的内容：
+</p>
+
+<pre caption="ebuild，第2版">
+#!/usr/bin/env bash
+
+if [ $# -ne 2 ]
+then
+        echo "Please specify two args - .ebuild file and unpack, compile or all"
+        exit 1
+fi
+
+if [ -z "$DISTDIR" ]
+then
+<comment> #如果没有设置DISTDIR，则设置它指向/usr/src/distfiles</comment>
+        DISTDIR=/usr/src/distfiles
+fi
+export
+DISTDIR
+
+ebuild_unpack() {
+        <comment> #确保我们在正确目录下</comment>
+        cd ${ORIGDIR}
+        
+        if [ -d ${WORKDIR} ]
+        then    
+                rm -rf ${WORKDIR}
+        fi
+        tar xzf ${DISTDIR}/${A}
+        echo "Unpacked ${DISTDIR}/${A}."
+        #源代码现在已经正确解压
+}
+
+
+ebuild_compile() {
+        
+        <comment> #确保我们在正确的目录下</comment>
+        cd ${SRCDIR}
+        if [ ! -d "${SRCDIR}" ]
+        then
+                echo "${SRCDIR} does not exist -- please unpack first."
+                exit 1
+        fi
+        ./configure --prefix=/usr
+        make        
+}
+
+
+</pre>
+
+<p>
+我们已经做了很多的改动，那么就让我们回顾一下。首先，我们将编译和解压分放在他们各自的函数中，然后通过<c>ebuild_compile()</c>和<c>ebuild_unpack()</c>单独的调用他们。这是一个大的改进，也使代码变得复杂了，而新的函数又增加了代码的模块化特性，这也使程序更容易组织。在每一个函数的第一行，我都会明确的执行一个<c>cd</c>到想要的目录中，这是因为在我们的代码变得更加模块化而不是线性化时，我们就很容易出错，并错误的在当前工作的目录下执行了某个函数。这个<c>cd</c>命令使我们能够在正确的地方，并防止我们以后犯同样的错误──这是一个重要的步骤──特别是在函数内部执行删除文件的操作时。
+</p>
+
+<p>
+同样，在<c>ebuild_compile()</c>的开头，我还加入了一个实用的检查。它检查<c>$SRCDIR</c>是否存在在，如果不存在，则打印一行错误信息告诉使用者先解压源码包，然后退出。如果你喜欢，你也可以改变这个行为以便即使<c>$SRCDIR</c>不存在时，我们的ebuild脚本也能自动的解压源码包。你可以用下面代码来替换<c>ebuild_compile()</c>：
+</p>
+
+<pre caption="ebuild_compile的一个新的转变">
+ebuild_compile() {
+        <comment>#确保我们在正确的文件夹中</comment>
+        if [ ! -d "${SRCDIR}" ]
+         then
+                ebuild_unpack
+         fi
+         cd ${SRCDIR}
+         ./configure --prefix=/usr
+         make     
+}
+</pre>
+
+<p>
+我们ebuild脚本的第二版中的一个最明显的变化是代码后面那个新的case语句。这个case语句简单的检查了第二个命令行参数并根据它的值执行正确的操作。如果我们输入：
+</p>
+
+<pre caption="默认的动作">
+$ <i>ebuild sed-3.02.ebuild</i>
+</pre>
+
+<p>
+就会得到一条错误信息。现在要告诉ebuild如何做，如下所示：
+</p>
+
+<pre caption="解压缩">
+$ <i>ebuild sed-3.02.ebuild unpack</i>
+</pre>
+
+<p>
+或是：
+</p>
+
+<pre caption="编译">
+$ <i>ebuild sed-3.02.ebuild compile</i>
+</pre>
+
+<p>
+或是：
+</p>
+
+<pre caption="解压缩与编译">
+$ <i>ebuild sed-3.02.ebuild all</i>
+</pre>
+
+<impo>
+如果你提供的第二个命令行参数不是上面所列出来的，你将获得一条错误消息（*那条语句），然后程序退出。
+</impo>
+
+</body>
+</section>
+<section>
+<title>模块化代码</title>
+<body>
+
+<p>
+现在这个代码已经很高级、很实用了，你可能会试图创建更多ebuild脚本来解压缩和编译你喜欢的程序。如果这样，那你迟早会碰到一些不使用autoconf（<c>./configure</c>）或其他标准的编译步骤的源码。我们需要对ebuild系统做更多的改进来适应这些程序。但是在我们这么做之前，最好先想一下该如何去完成它。
+</p>
+
+<p>
+在我们的编译阶段，将编译命令固定写为<c>./configure --prefix=/usr;make</c>的好处是，在一般情况下，它都能正常工作。但是，我们应该让ebuild系统适应不使用autoconf或标准的Makefiles的源码包。为了解决这个问题，我认为我们的ebuild应该默认能做这些事情：
+</p>
+
+<ol>
+  <li>
+    如果在<c>${SRCDIR}</c>中有一个配置文件，就像这样执行它：<c>./configure --prefix=/usr</c>。若没有就跳过这一步。
+  </li>
+  <li>执行下面的命令：make</li>
+</ol>
+
+<p>
+既然ebuild只有在配置存在时才能执行，我们现在要自动适应那些不使用autoconf和标准makefiles的程序。但是如果一个简单的“make”对一些源码不起作用怎么办呢？我们需要一个通过一些特殊代码忽略适当的默认设置的方法来解决这个问题。为了达到这个目的，我们将把我们的<c>ebuild_compile()</c>函数转换成两个函数。第一个函数，它看起来更像一个“父”函数，将还通过<c>ebuild_compile()</c>调用。然而，我们还有一个新函数叫做<c>user_compile()</c>，它只包含我们适当的默认操作：
+</p>
+
+<pre caption="将ebuild_compile()分割成两个函数">
+user_compile() {
+        <comment>#我们已经在${SRCDIR}下了</comment>
+        if [ -e configure ]
+         then
+                #如果存在配置脚本就执行它
+                ./configure --prefix=/usr
+         fi
+         #执行make
+         make
+}
+
+ebuild_compile() {
+        if [ ! -d "${SRCDIR} ]
+        then
+                echo "${SRCDIR} does not exist -- please unpack first."
+                exit 1
+        fi
+        <comment>#确保我们在正确的目录下</comment>
+        cd ${SRCDIR}
+        user_compile
+}
+</pre>
+
+<p>
+我这么做的原因现在可能不是很明显，但是请相信我。虽然这些代码和我们以前ebuild版本同样工作，但是我们现在可以做以前无法做到的事情──在<path>sed-3.02.ebuild</path>中忽略<c>user_compile()</c>。所以，如果默认的<c>user_compile()</c>函数不能满足我们的需要，我们可以在我们的<path>.ebuild</path>文件中定义一个新的包含编译这个包时所需命令函数。比如，这是一个<c>e2fsprogs-1.18</c>的ebuild文件，它需要一个稍微不同的<c>./configure</c>行：
+</p>
+
+<pre caption="e2fsprogs-1.18.ebuild">
+<comment>#这个ebuild文件覆盖了默认的user_compile()</comment>
+P=e2fsprogs-1.18
+A=${P}.tar.gz
+
+user_compile() {
+       ./configure --enable-elf-shlibs
+       make
+}
+</pre>
+
+<p>
+现在，<c>e2fsprogs</c>将按我们希望的方式来进行编译。但是，对于大多数包来说，我们可以省略任何在<path>.ebuild</path>中定制的<c>user_compile()</c>函数，而使用默认的<c>user_compile</c>函数。
+</p>
+
+<p>
+ebuild脚本要怎么才能知道要使用哪些<c>user_compile</c>功能呢？这实际上很简单。在ebuild脚本中，默认的<c>user_compile()</c>函数在<path>e2fsprogs-1.18.ebuild</path>文件被编码之前就已经设定好了。如果在<path>e2fsprogs-1.18.ebuild</path>中已经有了<c>user_compile()</c>，它将覆盖之前定义的版本。如果没有，默认的<c>user_compile()</c>函数将被使用。
+</p>
+
+<p>
+这是个很好的工具;我们已经添加了很多灵活性，而且如果不需要，不必添加任何复杂代码。我们虽然在这里没有提到，但是你同样可以对<c>ebuild_unpack()</c>做同样的修改以便使用户可以忽略缺省的解压缩过程。如果要做任何修补，或文件包含在多个档案中，那就非常方便了。修改解压代码以使它默认识别bzip2压缩包也是个不错的想法。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置文件</title>
+<body>
+
+<p>
+我们已经讲述了很多琐碎的bash技巧，而现在我们要再讲一个。很多情况下，有一个配置文件放置在<path>/etc</path>是很方便的。幸运的是，使用bash来实现也很容易。只需创建下面的文件并把它保存为<path>/etc/ebuild.conf</path>：
+</p>
+
+<pre caption="/etc/ebuild.conf">
+<comment># /etc/ebuild.conf：在这个文件中设置系统级的ebuild选项</comment>
+
+<comment># MAKEOPTS是传递给make的选项</comment>
+MAKEOPTS="-j2"
+</pre>
+
+<p>
+在该例中，只包括了一个配置选项，但是，您可以包括更多。bash的一个妙处就在于：通过执行该文件，就可以对它进行语法分析。在大多数解释型语言中，这都可以使用这个设计技巧。执行/etc/ebuild.conf之后，在ebuild 脚本中定义$MAKEOPTS。我们将利用它允许用户向make传递选项。一般情况下，这个选项用来允许用户告诉ebuild执行并行make。下面是一个说明。
+</p>
+
+<note>
+<b>并行编译是什么呢？</b>为了加快在多处理器系统上的编译速度，make支持并行编译一个程序。这就意味make可以同时编译用户指定数目的源文件（以便使用多处理器系统中的额外处理器），而不是一次只编译一个源文件。通过向make传递<c>-j #</c>选项来启用并行 make，如下所示：<c>make -j4 MAKE="make -j4"</c>。这段代码命令make并发编译四段程序。<c>MAKE="make -j4"</c>参数告诉make来向任何启动的子程序传递<c>-j4</c>选项。
+</note>
+
+<p>
+这里是我们的ebuild系统的最终版：
+</p>
+
+<pre caption="ebuild，最终版">
+#!/usr/bin/env bash
+
+if [ $# -ne 2 ]
+then
+        echo "Please specify ebuild file and unpack,compile or all"
+        exit 1
+fi
+
+source /etc/ebuild.conf
+
+if [ -z "$DISTDIR" ]
+then
+        <comment>#如果没有设置DISTDIR，设置它指向/usr/src/distfiles</comment>
+        DISTDIR=/usr/src/distfiles
+fi
+export
+DISTDIR
+
+ebuild_unpack() {
+        <comment>#确保我们在正确的目录下</comment>
+        cd ${ORIGDIR}
+        
+        if [ -d ${WORKDIR} ]
+        then
+                echo "${DISTDIR}${A} does not exist. Please download first.
+                exit 1
+        fi
+        tar xzf ${DISTDIR}${A}
+        echo "Unpacked ${DISTDIR}${A}.
+        <comment>#源码现在已经正确解压</comment>
+}
+
+user_compile() {
+        <comment>#我们已经在${SRCDIR}下了</comment>
+        if [ -e configure ]
+        then
+                <comment>如果configure脚本存在就执行它</comment>
+                ./configure --prefix=/usr
+        fi
+        <comment>#执行make</comment>
+        make $MAKEOPTS MAKE="make $MAKEOPTS"  
+}
+
+ebuild_compile() {
+        if [ ! -d "${SRCDIR}" ]
+        then
+                echo "${SRCDIR} does not exit -- please unpack first."
+                exit 1
+        fi
+        <comment>#确保我们在正确目录下</comment>
+        cd ${SRCDIR}
+        user_compile
+}
+
+export ORIGDIR=`pwd`
+export WORKDIR=${ORIGDIR}/work
+
+if [ -e "$1" ]
+then
+        source $1
+else
+        echo "Ebuild file $1 not found."
+        exit 1
+fi
+
+export SRCDIR=${WORKDIR}${P}
+
+case "${2}" in
+       unpack)
+              ebuild_unpack
+              ;;
+       compile)
+              ebuild_compile
+              ;;
+       all)
+              ebuild_unpack
+              ebuild_compile
+              ;;
+       *)
+              echo "Please specify unpack,compile or all as the second arg"
+              exit 1
+              ;;
+esac
+</pre>
+
+<p>
+注意：<path>/etc/ebuild.conf</path>是在靠近文件开始处执行的。另外，还要注意，在默认<c>user_compile()</c>函数中我们使用<c>$MAKEOPTS</c>。你可能会奇怪，这管用吗──然而，在执行实际上预先定义的<c>$MAKEOPTS</c>的<path>/etc/ebuild.conf</path>之前，我们引用了<c>$MAKEOPTS</c>。幸运的是，这没有问题，因为只有在执行<c>user_compile()</c>时才发生变量扩展。在执行<c>user_compile()</c>时，<path>/etc/ebuild.conf</path>已经被执行，并且<c>$MAKEOPTS</c>也被设置成正确的值。
+</p>
+
+</body>
+</section>
+<section>
+<title>打包</title>
+<body>
+
+<p>
+在本文中我们已经讲述了很多bash编程技术，但是我们只是触及到了bash能力的一点皮毛而已。比如说，Gentoo Linux ebuild系统不但能自动解压缩和编译每一个包，而且还能：
+</p>
+
+<ul>
+  <li>
+  如果在<c>$DISTDIR</c>中找不到源码就自动下载
+  </li>
+  <li>
+  通过MD5信息摘要检验源码是否有损坏
+  </li>
+  <li>
+     根据请求安装编译好的应用程序到实际的文件系统，并记录所有安装好的文件以便使这些包以后能够容易的卸载。
+  </li>
+  <li>
+    根据请求对编译过的应用程序进行打包（以你喜欢的方式进行压缩）以便以后安装的需要，可以在其它电脑中安装或进行CD安装过程时（如果你构建了一个CD发行版）中用到。
+  </li>
+</ul>
+
+<p>
+此外，ebuild系统还有其它一些全局配置选项，它允许用户自己指定选项，例如编译时使用什么最优化标志，在那些支持它的包中是否应该缺省启用包支持（例如GNOME和slang）。
+</p>
+
+<p>
+bash可以完成的显然远不止文章中提到的这些。我希望你们已经学到了很多，并为使用bash加快和增强你的开发项目而欣喜若狂。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="resources">
+<title>资源</title>
+<section>
+<title>有用的链接</title>
+<body>
+
+<ul>
+  <li>
+     请从<uri>ftp://ftp.gun.org/pub/gnu/sed</uri>下载源码包（<path>sed-3.02.tar.gz</path>）。
+  </li>
+  <li>
+    请阅读<uri link="/doc/zh_cn/articles/bash-by-example-pp1.xml">Bash示例：第一部分</uri>。 
+  </li>
+  <li>
+    请阅读<uri link="/doc/zh_cn/articles/bash-by-example-p2.xml">Bash示例：第二部分</uri>。
+  </li>
+  <li>
+    请访问<uri link="http://gentoo.org">Gentoo项目</uri>
+  </li>
+  <li>
+    请参考<uri link="http://www.gnu.org/software/bash/manual/bash.html">bash在线参考手册</uri>。
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
