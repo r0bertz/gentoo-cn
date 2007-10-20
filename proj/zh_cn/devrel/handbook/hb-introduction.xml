@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+
+
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.1 -->
+<sections>
+<version>1.0.2</version>
+<date>2006-09-05</date>
+
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+这本手册的目的在于罗列出Gentoo的开发规则，并且使<e>您</e>，一位开发者，了解Gentoo认为是我们开发系统中核心价值的规则，标准和过程。
+</p>
+
+<p>
+这本手册并不希望成为一本面面俱到的指导书——敞开给你的机会是无穷的。因而，这本手册旨在教你一些基本的原则，而我们认为这些原则能让你成为一个好的Gentoo开发者——所谓师傅领进门，剩下的修行就要靠你自身了！
+</p>
+
+<p>
+如果你刚刚接触Gentoo开发，或者你是个老手，但对于某部分不确定，你可以在gentoo-dev邮件列表或#gentoo-dev上提问。
+</p>
+
+</body>
+</section>
+<section>
+<title>要求</title>
+<body>
+<p>
+在你开始尝试之前，拥有一个可以工作的Gentoo安装环境对于文档和开发来说都很重要，而且我们也建议你熟悉用户手册中“用Gentoo工作”那一节所提到的主题，这对于你的开发工作有帮助。
+</p>
+<p>
+这本手册的大部分内容是针对开发者的，但如果你只是对Gentoo如何进行开发工作感兴趣，这本手册也会提供同样具有价值的内容。
+</p>
+<p>
+被注意到［并且有可能成为一名Gentoo开发者！］的最好方法就是在<uri link="http://bugs.gentoo.org">Gentoo 
+Bugzilla</uri>上提交准确的bug报告，如果可能的话，附上补丁，并帮助我们，你认为如何让Gentoo变得更好，比如对新的特性提交补丁，提交新的ebuild，或者解决现有的问题。
+</p>
+</body>
+</section>
+</sections>
