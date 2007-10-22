@@ -42,12 +42,17 @@
   <th>摘要</th>
 </tr>
 <tr>
+  <ti><uri link="/news/zh_cn/gwn/20071001-newsletter.xml">2007年10月1日</uri></ti>
+  <ti>
+    Gentoo PPC最新消息
+  </ti>
+</tr>
+<tr>
   <ti><uri link="/news/zh_cn/gwn/20070924-newsletter.xml">2007年09月24日</uri></ti>
   <ti>
     议会选举结果，Sparc小组寻找架构测试者，KDE心得技巧
   </ti>
 </tr>
-
 <tr>
   <ti><uri link="/news/zh_cn/gwn/20070917-newsletter.xml">2007年09月17日</uri></ti>
   <ti>
