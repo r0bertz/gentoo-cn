@@ -1,0 +1,267 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE book SYSTEM "/dtd/book.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.10 -->
+
+<book link="handbook.xml" lang="zh_cn">
+  <title>Gentoo开发者手册</title>
+  
+<!-- Author names only -->
+<!-- Thanks for edits but please only add your name if you added content -->
+<!-- Do not list what you worked on as it's all subject to future changes -->
+
+  <author title="Author">
+      <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="seemant@gentoo.org">Seemant Kulleen</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="fox2mike@gentoo.org">Shyam Mani</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="karltk@gentoo.org">Karl Trygve Kalleberg</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="vapier@gentoo.org">Mike Frysinger</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="liquidx@gentoo.org">Alastair Tse</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="pauldv@gentoo.org">Paul De Vrieze</mail>
+  </author>
+
+  <author title ="Author">
+      <mail link="blackace@gentoo.org">Nicholas D. Wolfwood</mail>
+  </author>
+
+  <author title ="Author">
+      <mail link="genone@gentoo.org">Marius Mauch</mail>
+  </author>
+
+  <author title ="Author">
+      <mail link="dragonheart@gentoo.org">Daniel Black</mail>
+  </author>
+
+  <author title ="Author">
+      <mail link="amne@gentoo.org">Wernfried Haas</mail>
+  </author>
+
+  <author title ="Author">
+      <mail link="musikc@gentoo.org">Chrissy Fullam</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="drobbins@gentoo.org">Daniel Robbins (Retired) </mail>
+  </author>
+
+  <author title="Author">
+      John P. Davis (Retired)
+  </author>
+
+  <author title="Author">
+      Tim Yamin (Retired)
+  </author>
+
+  <author title="Author">
+      Jorge Paulo (Retired)
+  </author>
+
+  <author title="Author">
+      Zack Gilburd (Retired)
+  </author>
+
+  <author title="Author">
+      Benny Chuang (Retired)
+  </author>
+
+  <author title="Author">
+      Erwin (Retired)
+  </author>
+
+  <author title="Author">
+      Jon Portnoy (Retired)
+  </author>
+
+  <author title="Author">
+      Carl Anderson (Retired)
+  </author>
+
+  <author title="Author">
+      Donny Davies (Retired)
+  </author>
+
+  <author title="Author">
+      Peter Gavin (Retired)
+  </author>
+
+  <author title ="Author">
+      Dan Armak (Retired)
+  </author>
+
+  <author title="Author">
+      Owen Stampflee
+  </author>
+
+  <author title="Author">
+      Ciaran McCreesh (Retired)
+  </author>
+
+  <author title="Translater">
+    <mail link="r0bertz@gentoo.org">张乐</mail>	
+  </author>
+
+  <abstract>
+    这是Gentoo开发者手册，本手册搜集了Gentoo开发策略并且概述了Gentoo开发系统和开发过程。
+  </abstract>
+
+  <!-- The content of this document is licensed under the CC-BY-SA license -->
+  <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+  <license/>
+
+  <version>1.0.3</version>
+  <date>2007-08-17</date>
+
+  <part>
+    <title>介绍</title>
+    <abstract>
+      这部分介绍了应用于Gentoo开发的大部分领域的规则。这部分只对Gentoo开发者有用；如果你不是，你可以掠过这部分。
+    </abstract>
+
+    <chapter>
+      <title>介绍</title>
+      <abstract>
+	本节概述了Gentoo开发者手册的目的。
+      </abstract>
+      <include href="hb-introduction.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>成为一个开发者</title>
+      <abstract>
+	本节解释了怎样成为一个Gentoo开发者。
+      </abstract>
+      <include href="hb-introduction-becoming-a-dev.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>你能得到什么</title>
+      <abstract>
+	本节简述了提供给Gentoo开发者的服务。
+      </abstract>
+      <include href="hb-introduction-whatyouget.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>为新开发者提供的帮助</title>
+      <abstract>
+	本节给新开发者提供了帮助和指令。
+      </abstract>
+      <include href="hb-introduction-new-devs.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>开发者等级</title>
+      <abstract>
+	本节简要介绍了Gentoo开发者等级和管理结构
+      </abstract>
+      <include href="hb-introduction-hierarchy.xml"/>
+    </chapter>
+  </part>
+
+  <part>
+    <title>指南</title>
+    <abstract>
+      本部分解释了各种开发流程并为Gentoo开发者提供了开发标准。
+    </abstract>
+
+    <chapter>
+      <title>Ebuild HOWTO</title>
+      <abstract>
+	本节描述了Gentoo Linux Portage系统，怎样为Gentoo创建新的软件包，某种程度上本节应被视为Gentoo开发者的开发标准。本节仍在开发中，内容仍然在不断的变化和更新。本节并没有包含所有的有关开发的内容。你应该将本节和portage提供的手册页（特别是ebuild(5)）和Gentoo Linux开发策略配合使用。
+      </abstract>
+      <include href="hb-guide-ebuild.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>Eclass HOWTO</title>
+      <abstract>
+	本节的目的在于给开发者提供一个详细的讲解eclass的作用和它们应用于ebuild的指南。
+      </abstract>
+      <include href="hb-guide-eclass.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>常见ebuild错误</title>
+      <abstract>
+	本节解释了贡献者和开发者在ebuild编写和提交过程中常犯的错误。
+      </abstract>
+      <include href="hb-guide-common-mistakes.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>Gentoo Metadata</title>
+      <abstract>
+	本节解释了Portage树里使用的metadata.xml的由来和作用。
+      </abstract>
+      <include href="hb-guide-metadata.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>Ebuild维护HOWTO</title>
+      <abstract>
+	本节描述了开发者在维护portage树里的ebuild时怎样完成通常的工作。
+      </abstract>
+      <include href="hb-guide-ebuild-maintaining.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>Manifest签署指南</title>
+      <abstract>
+	本节描述了开发者怎样使用GPG签署Portage树里的Manifest文件。
+      </abstract>
+      <include href="hb-guide-manifest-signing.xml"/>
+    </chapter>
+  </part>
+
+  <part>
+    <title>规则</title>
+    <abstract>
+      这部分包括了我们期望开发者在向CVS检入文件的时候所应遵守的各种规则。　
+    </abstract>
+
+    <chapter>
+      <title>Ebuild规则</title>
+      <abstract>
+	本节概述了Portage里的每一个ebuild应该遵守的ebuild规则。
+      </abstract>
+      <include href="hb-policy-ebuild.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>礼节</title>
+      <abstract>
+	本节概述了每个Gentoo开发者应该遵守的礼节。
+      </abstract>
+      <include href="hb-policy-etiquette.xml"/>
+    </chapter>
+  </part>
+
+<!--
+  <part>
+    <title>Appendix 1: Management</title>
+    <abstract>
+      This part covers managerial policies.
+    </abstract>
+  </part>
+-->
+
+</book>
