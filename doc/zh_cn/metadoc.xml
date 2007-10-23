@@ -284,7 +284,7 @@
     <file id="amd64-howtos-bugs">/proj/en/base/amd64/howtos/bugs.xml</file>
     <file id="amd64-howtos-chroot">/proj/en/base/amd64/howtos/chroot-old.xml</file>
     <file id="amd64-howtos-fpic">/proj/en/base/amd64/howtos/fpic-howto.xml</file>
-    <file id="gentoo-dev-handbook">/proj/en/devrel/handbook/handbook.xml</file>
+    <file id="gentoo-dev-handbook">/proj/zh_cn/devrel/handbook/handbook.xml</file>
     <file id="doc-policy">/proj/en/gdp/doc/doc-policy.xml</file>
     <file id="doc-tipsntricks">/proj/en/gdp/doc/doc-tipsntricks.xml</file>
     <file id="about">/main/en/about.xml</file>
