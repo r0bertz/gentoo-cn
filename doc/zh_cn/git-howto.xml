@@ -117,7 +117,7 @@ $ <i>git clone http://gentoo-cn.org/.git</i>
 </pre>
 
 <p>
-命令成功以后，会创建一个<path>zh_cn</path>目录。里面的有个隐藏的.git目录，称为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由度。
+命令成功以后，会创建一个<path>gentoo-cn.org</path>目录。里面的有个隐藏的.git目录，称为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由度。
 </p>
 
 <p>
