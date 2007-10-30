@@ -529,10 +529,10 @@
     <ti><uri link="/doc/en/gentoolkit.xml">v 1.30</uri></ti>
     <ti>2007/06/26</ti>
     <ti><mail link="jjj3112007@gmail.com">jjj311</mail></ti>
-    <ti>W</ti>
+    <ti>T</ti>
     <ti>2007/10/31</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
-    <ti><uri link="/doc/zh_cn/gentoolkit.xml"></uri></ti>
+    <ti><uri link="/doc/zh_cn/gentoolkit.xml">v 1.30</uri></ti>
     <ti>N/A</ti>
   </tr>
   <tr>
@@ -676,6 +676,138 @@
     <ti>2007/10/20</ti>
     <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
     <ti><uri link="/main/zh_cn/where.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>handbook.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/handbook.xml">v 1.10</uri></ti>
+    <ti>2007/08/17</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti>T</ti>
+    <ti>2007/10/23</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/handbook.xml">v 1.10</uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-introduction-becoming-a-dev.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-introduction-becoming-a-dev.xml">v 1.5</uri></ti>
+    <ti>2006/09/07</ti>
+    <ti><mail link="">Guanqun</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-introduction-becoming-a-dev.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-introduction-hierarchy.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-introduction-hierarchy.xml">hb-introduction-hierarchy.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="">Guanqun</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-introduction-hierarchy.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-introduction-new-devs.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-introduction-new-devs.xml">v 1.9</uri></ti>
+    <ti>2006/09/07</ti>
+    <ti><mail link="">Guanqun</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-introduction-new-devs.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-introduction-whatyouget.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-introduction-whatyouget.xml">v 1.10</uri></ti>
+    <ti>2007/08/17</ti>
+    <ti><mail link="">Guanqun</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-introduction-whatyouget.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-introduction.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-introduction.xml">v 1.3</uri></ti>
+    <ti>2006/09/07</ti>
+    <ti><mail link="">Guanqun</mail></ti>
+    <ti>T</ti>
+    <ti>2007/10/21</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-introduction.xml">v 1.3</uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-policy-ebuild.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-policy-ebuild.xml">hb-policy-ebuild.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-policy-ebuild.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-policy-etiquette.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-policy-etiquette.xml">v 1.13</uri></ti>
+    <ti>2007/03/07</ti>
+    <ti><mail link="">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-policy-etiquette.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>hb-guide-eclass.xml</ti>
+    <ti><uri link="/proj/en/devrel/handbook/hb-guide-eclass.xml">hb-guide-eclass.xml</uri></ti>
+    <ti></ti>
+    <ti><mail link="">FELove</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/devrel/handbook/hb-guide-eclass.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>xen-guide.xml</ti>
+    <ti><uri link="/doc/en/xen-guide.xml">v 1.2</uri></ti>
+    <ti>2007/09/13</ti>
+    <ti><mail link="junmin.h@gmail.com">Junmin</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/xen-guide.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>vserver-howto.xml</ti>
+    <ti><uri link="/proj/en/vps/vserver-howto.xml">v 1.10</uri></ti>
+    <ti>2007/03/29</ti>
+    <ti><mail link="junmin.h@gmail.com">Junmin</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/proj/zh_cn/vps/vserver-howto.xml"></uri></ti>
+    <ti>N/A</ti>
+  </tr>
+  <tr>
+    <ti>home-router-howto.xml</ti>
+    <ti><uri link="/doc/en/home-router-howto.xml">v 1.59</uri></ti>
+    <ti>2007/07/27</ti>
+    <ti><mail link="junmin.h@gmail.com">Junmin</mail></ti>
+    <ti>W</ti>
+    <ti>N/A</ti>
+    <ti><mail link="r0bertz@gentoo.org">r0bertz</mail></ti>
+    <ti><uri link="/doc/zh_cn/home-router-howto.xml"></uri></ti>
     <ti>N/A</ti>
   </tr>
 </table>
