@@ -30,8 +30,7 @@
 </p>
 
 <p>
-你应该在Gentoo周报中寻找给予开发者的空缺职位，或者在irc.freenode.net的#gentoo-bugs频道中利用/topic来寻找空缺的职位——如果你认为你可以胜任其中之一的职位，试着找一个愿意担保你的导师，或者联系<mail 
-link="recruiters@gentoo.org">Gentoo招募者</mail>，他们有可能会帮你找一个导师。请不要自己提交"新开发者"bug，因为这件事是由导师负责完成的，而且任何这样的bug都将会被关闭。
+你应该在Gentoo周报中寻找给予开发者的空缺职位，或者在irc.freenode.net的#gentoo-bugs频道中利用/topic来寻找空缺的职位——如果你认为你可以胜任其中之一的职位，试着找一个愿意担保你的导师，或者联系<mail link="recruiters@gentoo.org">Gentoo招募者</mail>，他们有可能会帮你找一个导师。请不要自己提交"新开发者"bug，因为这件事是由导师负责完成的，而且任何这样的bug都将会被关闭。
 </p>
 
 </body>
@@ -50,8 +49,7 @@ link="recruiters@gentoo.org">Gentoo招募者</mail>，他们有可能会帮你�
 </p>
 
 <p>
-只要一个开发者同意指导一个新的开发者，这个导师就应该提交一个bug，并将它委派给Gentoo招募者——<uri 
-link="/proj/en/devrel/recruiters">Gentoo招募者</uri>页面详细地解释了应该提交哪些信息。
+只要一个开发者同意指导一个新的开发者，这个导师就应该提交一个bug，并将它委派给Gentoo招募者——<uri link="/proj/en/devrel/recruiters">Gentoo招募者</uri>页面详细地解释了应该提交哪些信息。
 </p>
 
 <note>
@@ -70,13 +68,11 @@ Gentoo招募者保留赋予开发者一个新的导师的权力，如果原来�
 </p>
 
 <p>
-测验分两种：<uri link="/proj/en/devrel/quiz/ebuild-quiz.txt">ebuild测验</uri>和<uri 
-link="/proj/en/devrel/quiz/staff-quiz.txt">staff测验</uri>。那些只想工作在基础架构，GLSA或者其他非ebuild部分的开发者应该参加staff测验；任何想对Portage树有commit权限的开发者则应该参加ebuild测验。
+测验分两种：<uri link="/proj/en/devrel/quiz/ebuild-quiz.txt">ebuild测验</uri>和<uri link="/proj/en/devrel/quiz/staff-quiz.txt">staff测验</uri>。那些只想工作在基础架构，GLSA或者其他非ebuild部分的开发者应该参加staff测验；任何想对Portage树有commit权限的开发者则应该参加ebuild测验。
 </p>
 
 <p>
-一旦新的开发者完成了测验，这个开发者应该将它发送给负责审查的导师和<uri 
-link="/proj/en/devrel/recruiters">Gentoo招募者</uri>。如果这个测验的回答足够好，那么这个招募过程将继续下去。否则，新的开发者可以选择重新做这个测验，但要在等待期内完成。
+一旦新的开发者完成了测验，这个开发者应该将它发送给负责审查的导师和<uri link="/proj/en/devrel/recruiters">Gentoo招募者</uri>。如果这个测验的回答足够好，那么这个招募过程将继续下去。否则，新的开发者可以选择重新做这个测验，但要在等待期内完成。
 </p>
 
 <p>
