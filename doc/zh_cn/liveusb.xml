@@ -1,0 +1,292 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version:1.13 -->
+
+<guide link="/doc/en/liveusb.xml">
+<title>Gentoo Linux LiveUSB HOWTO</title>
+
+<author title="Author">
+  <mail link="henrik@brixandersen.dk">Henrik Brix Andersen</mail>
+</author>
+<author title="Editor">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="译者">
+  <mail link="lyanry@gmail.com">李延瑞</mail>
+</author>
+
+<abstract>
+这份指南讲述了如何制作一份Gentoo Linux LiveUSB，或者换句话说就是如何使用一个U盘来模拟一张可运行于x86或AMD64平台的Gentoo Linux LiveCD。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>2</version>
+<date>2007-05-10</date>
+
+<chapter>
+<title>简介</title>
+<section>
+<title>关于LiveUSB</title>
+<body>
+
+<p>
+这份指南讲述了如何制作一份Gentoo Linux LiveUSB，或者换句话说就是如何使用一个U盘来模拟一张可运行于x86或AMD64平台的Gentoo Linux LiveCD。这在一些没有光驱而且又比较时新的笔记本（译者注：要支持USB设备启动）上安装Gentoo Linux时特别有用。
+</p>
+
+<p>
+虽然本指南专注于使用U盘来模拟Gentoo Linux LiveCD，你也可以把这种方法用在其它任意的块存储设备 (block device) 上，只需要将本文的一些指令中的设备名称相应地调整一下即可。
+</p>
+
+</body>
+</section>
+<section>
+<title>硬件需求</title>
+<body>
+
+<p>
+要使用Gentoo Linux LiveUSB，你应具备：
+</p>
+
+<ul>
+  <li>至少1GB容量的U盘，用作启动盘</li>
+  <li>支持USB启动的i686 或 x86_64 架构的计算机</li>
+</ul>
+
+<p>
+要制作一个LiveUSB，你还应当具备：
+</p>
+
+<ul>
+  <li>
+  一台运行Gentoo Linux系统的计算机（其它Linux发行版也可以）
+  </li>
+</ul>
+
+<note>
+如果要制作一个minimal CD的LiveUSB或者要启动一个&lt;i686的系统，应当使用<b>2006.0</b> minimal CD镜像文件，因为现在的一些发行版本中存在一个<uri link="http://bugs.gentoo.org/show_bug.cgi?id=173117">bug</uri>。
+</note>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>准备你的U盘</title>
+<section>
+<title>对U盘进行分区</title>
+<body>
+
+<warn>
+下面的操作将会擦除你所用的这个U盘上所有的数据，因此首先要确认你已经对其中的数据进行了备份。
+</warn>
+
+<impo>
+本指南假定所用的U盘设备路径是<path>/dev/sdc</path>，如果系统中还存在其它SCSI设备，请确认所用U盘的设备路径是正确的。
+</impo>
+
+<p>
+首先要使用<c>fdisk</c>在所用的U盘上创建一个FAT16格式的分区，而且要将其标记为可启动的。下面给出一个分区模式的示例：
+</p>
+
+<note>
+如果所用的U盘是4GB或更大容量的，在分区类型为<c>b</c> (W95 FAT32)。
+</note>
+
+<pre caption="分区模式的示例">
+# <i>fdisk -l /dev/sdc</i>
+
+Disk /dev/sdc: 2063 MB, 2063597056 bytes
+255 heads, 63 sectors/track, 250 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdc1   *           1         250     2008124+   6  FAT16
+</pre>
+
+</body>
+</section>
+<section>
+<title>创建文件系统</title>
+<body>
+
+<p>
+使用<c>mkdosfs</c>在所用U盘上创建一个FAT16格式的文件系统：
+</p>
+
+<note>
+如果所用U盘的容量为4GB或更大容量，使用<c>-F 32</c>来创建一个FAT32格式的文件系统。
+</note>
+
+<pre caption="使用mkdosfs创建文件系统">
+<comment>（确认系统已经安装了sys-fs/dosfstools）</comment>
+# <i>emerge -av sys-fs/dosfstools</i>
+# <i>mkdosfs -F 16 /dev/sdc1</i>
+mkdosfs 2.11 (12 Mar 2005)
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装主引导记录</title>
+<body>
+
+<p>
+从<c>syslinux</c>中将预先编译好主引导记录 (MBR) 安装到U盘上：
+</p>
+
+<pre caption="安装主引导记录">
+<comment>（确认系统已经安装了sys-boot/syslinux-3.00或更新的版本）</comment>
+# <i>emerge -av '>sys-boot/syslinux-3'</i>
+# <i>dd if=/usr/lib/syslinux/mbr.bin of=/dev/sdc</i>
+0+1 records in
+0+1 records out
+304 bytes (304 B) copied, 0.0162317 s, 18.7 kB/s
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>将LiveCD中的文件复制到U盘中</title>
+<section>
+<title>挂载Gentoo Linux安装光盘镜像文件</title>
+<body>
+
+<p>
+在距离你最近的Gentoo Linux<uri link="/main/en/where.xml">镜像</uri>站点，根据你的系统架构选择下载<path>liveced-i686-installer-2007.0.iso</path>或<path>livecd-amd64-installer-2007.0.iso</path>，然后将其挂载至<path>/mnt/cdrom</path>，操作如下：
+</p>
+
+<pre caption="挂载Gentoo Linux安装光盘镜像文件">
+<comment>（如果/mnt/cdrom目录不存在就创建之）</comment>
+# <i>mkdir -p /mnt/cdrom</i>
+# <i>mount -o loop,ro -t iso9660 livecd-i686-installer-2007.0.iso /mnt/cdrom</i>
+</pre>
+
+<note>
+如果在挂在光盘镜像文件时碰到诸如<e>Could not find any loop device</e>一类的错误信息，应当在内核配置中启用<c>Loopback device support</c>，然后重新编译并安装内核。
+</note>
+
+</body>
+</section>
+<section>
+<title>挂在LiveUSB</title>
+<body>
+
+<p>
+将已经格式化完毕的U盘挂载至<path>/mnt/usb</path>，操作如下：
+</p>
+
+<pre caption="挂载U盘">
+<comment>(如果没有/mnt/usb目录，请自行建立)</comment>
+# <i>mkdir -p /mnt/usb</i>
+# <i>mount -t vfat /dev/sdc1 /mnt/usb</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>复制文件</title>
+<body>
+
+<p>
+下面要将Gentoo Linux安装光盘镜像文件中的一些文件复制到LiveUSB中。在复制这些文件时，需要做一些小改动，我们要使用<c>syslinux</c>启动装载程序来替换<c>isolinux</c>程序。
+</p>
+
+<pre caption="复制文件">
+# <i>cp -r /mnt/cdrom/* /mnt/usb</i>
+# <i>mv /mnt/usb/isolinux/* /mnt/usb</i>
+# <i>mv /mnt/usb/isolinux.cfg /mnt/usb/syslinux.cfg</i>
+# <i>rm -rf /mnt/usb/isolinux*</i>
+
+<comment>（为了让系统由syslinux启动，需要对memtest86内核重命名）</comment>
+# <i>mv /mnt/usb/memtest86 /mnt/usb/memtest</i>
+</pre>
+
+<p>
+现在可以取消Gentoo Linux安装光盘镜像文件的挂载：
+</p>
+
+<pre caption="取消安装光盘镜像文件的挂载">
+# <i>umount /mnt/cdrom</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>调整系统启动配置</title>
+<body>
+
+<p>
+下面使用<c>sed</c>调整syslinux配置文件，在配置文件中要添加<c>slowusb</c>参数，主要作用是在系统启动时挂载文件系统之前产生一小段时间的延迟，让系统装载程序可以检测到U盘设备。
+</p>
+
+<pre caption="调整启动参数">
+# <i>sed -i \
+    -e "s:cdroot:cdroot slowusb:" \
+    -e "s:kernel memtest86:kernel memtest:" \
+    /mnt/usb/syslinux.cfg</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装系统装载程序</title>
+<section>
+<title>卸载U盘</title>
+<body>
+
+<p>
+在安装系统装载程序之前要确认已经卸载了U盘。
+</p>
+
+<pre caption="卸载U盘">
+# <i>umount /mnt/usb</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装syslinux</title>
+<body>
+
+<p>
+最后一步要将<c>syslinux</c>程序安装到U盘上:
+</p>
+
+<pre caption="执行syslinux">
+# <i>syslinux /dev/sdc1</i>
+</pre>
+
+<impo>
+在每一次修改<path>syslinux.cfg</path>文件之后都需要重新执行<c>syslinux /dev/sdc1</c>。
+</impo>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>使用LiveUSB</title>
+<section>
+<title>启动</title>
+<body>
+
+<p>
+插入U盘并打开计算机，确认BIOS已经设成自USB启动模式。如果一切都准备就绪，那么你应当可以看到标准的syslinux提示。
+syslinux prompt.
+</p>
+
+<p>
+现在你可以根据<uri link="/doc/zh_cn/handbook">Gentoo Handbook</uri>中讲述的安装步骤来安装Gentoo Linux了。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
