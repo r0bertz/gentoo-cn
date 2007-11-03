@@ -2,7 +2,7 @@
 <!-- $Header$ -->
 <!-- English CVS version:1.16 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<guide link="/doc/en/usb-guide.xml" lang="zh_cn">
+<guide link="/doc/zh_cn/usb-guide.xml" lang="zh_cn">
 <title>Gentoo Linux USB指南</title>
 
 <author title="Author">

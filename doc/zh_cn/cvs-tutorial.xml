@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/cvs-tutorial.xml,v 1.18 2005/05/23 12:06:22 neysx Exp $ -->
-
+<!-- $Header$ -->
+<!-- English CVS version: 1.18 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/en/cvs-tutorial.xml">
+<guide link="/doc/zh_cn/cvs-tutorial.xml" lang="zh_cn">
 
 <title>Gentoo Linux CVS Tutorial</title>
-
 
 <author title="Author">
   <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
@@ -44,7 +43,7 @@
 <body>
 
 <p>
-CVS是一个客户端/服务器(client/server)系统，它可以让开发人员用来把他们的项目存储在一个统一的位置(central location)，这个统一的位置我们称为仓库，通过CVS客户端工具，开发人员可以更改仓库的目录。换句话说，cvs仓库会跟踪每次改变所涉及到所有文件，创建一个关于该开发项目的完整的发展历史。开发人员可以通过请求特定的源文件的旧版本文件，来查看日志的改变，以及执行其他所需的任务。
+CVS是一个客户端/服务器（client/server）系统，它可以让开发人员用来把他们的项目存储在一个统一的位置（central location），这个统一的位置我们称为仓库，通过CVS客户端工具，开发人员可以更改仓库的目录。换句话说，cvs仓库会跟踪每次改变所涉及到所有文件，创建一个关于该开发项目的完整的发展历史。开发人员可以通过请求特定的源文件的旧版本文件，来查看日志的改变，以及执行其他所需的任务。
 </p>
 
 </body>
@@ -60,11 +59,11 @@ CVS是一个客户端/服务器(client/server)系统，它可以让开发人员�
 </body>
 </section>
 <section>
-<title>CVS －－ 获取最新的开发源文件</title>
+<title>CVS——获取最新的开发源文件</title>
 <body>
 
 <p>
-当开发人员们都做好准备后，他们将会在CVS上对现行的工作使用tar.gz文件打包，并放出它作为他们软件一个新的官方版本。但是，最后放出的官方发布版本有时候出于种种原因并不是最新的。在第一章，我将会告诉你如何使用CVS来完成一个目的－－让自己用上最新的并且是最好的开发版本。
+当开发人员们都做好准备后，他们将会在CVS上对现行的工作使用tar.gz文件打包，并放出它作为他们软件一个新的官方版本。但是，最后放出的官方发布版本有时候出于种种原因并不是最新的。在第一章，我将会告诉你如何使用CVS来完成一个目的——让自己用上最新的并且是最好的开发版本。
 </p>
 
 </body>
@@ -88,7 +87,7 @@ CVS是一个客户端/服务器(client/server)系统，它可以让开发人员�
 <body>
 
 <p>
-在开始之前，你需要知道一些基本的CVS常识，第一点是连接到CVS仓库的指令，首先你需要知道一个叫做“CVSROOT”的路径path）.CVSROOT是一个字符串，像URL一样，他是用来告诉cvs命令远程的仓库在哪以及我们是如何连接到它的。为了让办事效率更好，CVS有数种格式，取决于CVS仓库是在本地还是在远程机器上以及所连接到它的方法，这里有一些CVSROOT的例子，参看说明……
+在开始之前，你需要知道一些基本的CVS常识，第一点是连接到CVS仓库的指令，首先你需要知道一个叫做“CVSROOT”的路径path。CVSROOT是一个字符串，像URL一样，他是用来告诉cvs命令远程的仓库在哪以及我们是如何连接到它的。为了让办事效率更好，CVS有数种格式，取决于CVS仓库是在本地还是在远程机器上以及所连接到它的方法，这里有一些CVSROOT的例子，参看说明……
 </p>
 
 </body>
@@ -102,7 +101,7 @@ CVSROOT=/var/cvsroot
 </pre>
 
 <p>
-这是一个本地的 CVSROOT 路径的例子，如果你想使用一个本地连接到存在于/var/csvroot/的仓库；或者是通过NFS挂载方式来连接到/var/cvsroot的话，你可以使用本例。
+这是一个本地的CVSROOT路径的例子，如果你想使用一个本地连接到存在于/var/csvroot/的仓库；或者是通过NFS挂载方式来连接到/var/cvsroot的话，你可以使用本例。
 </p>
 
 </body>
@@ -116,7 +115,7 @@ CVSROOT=:pserver:cvs@foo.bar.com:/var/cvsroot
 </pre>
 
 <p>
-这是一个远程连接的例子，该例是连接到foo.bar.com上的/var/cvsroot目录， ":pserver:"部分是告诉我们的客户端使用CVS password server协议连接到远端的机器，该协议是内置在CVS中的，通常而言，公共 CVS  repositories 使用的password server 协议允许 anonymous用户访问。
+这是一个远程连接的例子，该例是连接到foo.bar.com上的/var/cvsroot目录，":pserver:"部分是告诉我们的客户端使用CVS password server协议连接到远端的机器，该协议是内置在CVS中的，通常而言，公共CVS仓库使用的password server 协议允许 anonymous用户访问。
 </p>
 
 </body>
@@ -139,7 +138,6 @@ CVSROOT=drobbins@foo.bar.com:/data/cvs
 <title>其他注意事项</title>
 <body>
 
-
 <p>
 除了CVSROOT，你还需要知道一个模块（该模块功能是用来搜集源代码）的名字那些你想要验证包括你登录到服务器所提供匿名帐户的密码信息。不同于可匿名登录的FTP，这里没有为匿名用户提供标准的密码，因此你需要从开发者的网站或者是开发人员那里获取指定的密码，一旦你拥有了这些信息，你就可以开始使用CVS了。
 </p>
@@ -151,19 +149,15 @@ CVSROOT=drobbins@foo.bar.com:/data/cvs
 <body>
 
 <p>
-获取源有两个步骤，首先，我们使用密码登录到服务器，然后我们使用<span class="code" dir="ltr">checkout</span>命令获取源，以下是一个关于如何使用命令来检测最新版本的Samba源的例子，SMA是一个流行的 UNIX/Windows integration 项目
-</p>
+获取源有两个步骤，首先，我们使用密码登录到服务器，然后我们使用<c>checkout</c>命令获取源，以下是一个关于如何使用命令来检测最新版本的Samba源的例子，Samba是一个流行的UNIX/Windows integration项目</p>
 
 <pre caption="创建CVSROOT">
 # <i>export CVSROOT=:pserver:cvs@pserver.samba.org:/cvsroot</i>
 </pre>
 
-
 <p>
-第一个命令是设置CVSROOT环境变量，如果你不设置该变量，那么之后的两个命令需要在<c>cvs</c>命令之后追加一个选项 <c>-d
-:pserver:cvs@pserver.samba.org:/cvsroot</c>声明CVSROOT可以节省我们的输入。
+第一个命令是设置CVSROOT环境变量，如果你不设置该变量，那么之后的两个命令需要在<c>cvs</c>命令之后追加一个选项<c>-d :pserver:cvs@pserver.samba.org:/cvsroot</c>声明CVSROOT可以节省我们的输入。
 </p>
-
 
 </body>
 </section>
@@ -193,7 +187,7 @@ U samba/WHATSNEW.txt
 </body>
 </section>
 <section>
-<title>CVS交互 －－ 说明</title>
+<title>CVS交互——说明</title>
 <body>
 
 <p>
@@ -206,11 +200,9 @@ U samba/WHATSNEW.txt
 <title>完成Checkout</title>
 <body>
 
-
 <p>
-一旦命令执行完毕,你将会在当前工作目录看到一个包含最近版本的源文件的“samba”目录。你也会注意到所有的目录都有一个“CVS”目录－－CVS在该目录里统计信息，而且这些文件能够被安全的忽略。从这个角度看，我们不需要关心是否将CVSROOT声明为环境变量或是在命令行中作出了声明。因为CVSROOT现在被缓存到额外的“CVS”目录中。记住 －－你只需要在初始化和检验登录的才需要设置CVSROOT。
+一旦命令执行完毕,你将会在当前工作目录看到一个包含最近版本的源文件的“samba”目录。你也会注意到所有的目录都有一个“CVS”目录——CVS在该目录里统计信息，而且这些文件能够被安全的忽略。从这个角度看，我们不需要关心是否将CVSROOT声明为环境变量或是在命令行中作出了声明。因为CVSROOT现在被缓存到额外的“CVS”目录中。记住——你只需要在初始化和检验登录的才需要设置CVSROOT。
 </p>
-
 
 </body>
 </section>
@@ -218,11 +210,9 @@ U samba/WHATSNEW.txt
 <title>更新你的源文件</title>
 <body>
 
-
 <p>
 OK，现在你就有了新的源码了！对于在你手中的这些源码，你可以阅读，编译和安装他们，或者做任何你想对它做的事。
 </p>
-
 
 <p>
 你可能经常要将自己的版本和CVS同步，如果进行此操作的话，你不需要再登录到pserver；你的验证信息已经被cvs缓存在那些“CVS”目录。首先，进入主验证目录（本例为“samba”），然后输入：
@@ -252,7 +242,6 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 同样地，注意这两个“cvs update”命令行。“-d”告诉cvs创建任何已经添加到仓库的新目录（默认这是不会发生的），“-P”告诉cvs把任何从你自己本地的拷贝的源文件中空目录移除。“-P”是一个好的建议，因为cvs随着时间的推移，会有搜集大量空（曾经使用过，但是现在已经废弃的）目录数的倾向。
 </p>
 
-
 <p>
 以上就是你从CVS获取源文件所要知道的知识， 下面我们来看看作为开发人员如何与CVS交互。
 </p>
@@ -281,11 +270,9 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 <title>CVS能够合并其他人的更改</title>
 <body>
 
-
 <p>
-正如我们之前看到的，“cvs update”将会让你的源文件升级到respository中的最新的版本－－那么，你所做的修改怎么样了呢？不用担心，他们并没有丢失。如果有另一个开发者改变了一个你还没有创建的文件，你的本地文件将会更新来让他的版本与仓库保持一致。
+正如我们之前看到的，“cvs update”将会让你的源文件升级到respository中的最新的版本——那么，你所做的修改怎么样了呢？不用担心，他们并没有丢失。如果有另一个开发者改变了一个你还没有创建的文件，你的本地文件将会更新来让他的版本与仓库保持一致。
 </p>
-
 
 <p>
 此外，如果你改变了一个本地文件的1到10行，另一个开发人员删除了第40-50行，并且在文件的末尾添加了12行，改变了第30-40行然后在你提交到仓库之前提交上去，cvs将会巧妙的将这些改变应用到你本地的副本从而保证了你的改变不会丢失。这个机制允许多个开发人员在相同的时间处理相同文件的不同部分。
@@ -297,7 +284,6 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 <title>合并功能并不总能完美的合并</title>
 <body>
 
-
 <p>
 但是，如果多个开发人员对 <c>相同文件的相同区域</c>作出更改，这种事情会变得有些复杂的。如果发生了这种事情，那么cvs将会告知你此处有一个冲突。所有的任务不会丢失，但是手动介入是必须的，自此cvs需要你输入如何合并相矛盾的改变。
 </p>
@@ -308,10 +294,9 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 <title>关于commit</title>
 <body>
 
-
 <p>
 我们将简单的看一下冲突是如何解决的，但是在开始之前，让我们假定在你输入 “cvs update
--dP”之后是没有冲突的－－这通常是不会发生冲突的。没有冲突的话，你的本地源文件就会更新，然后你可以准备把你的修改提交到仓库，在你的主源文件目录下输入如下命令即可：
+-dP”之后是没有冲突的——这通常是不会发生冲突的。没有冲突的话，你的本地源文件就会更新，然后你可以准备把你的修改提交到仓库，在你的主源文件目录下输入如下命令即可：
 </p>
 
 <pre caption="提交修改">
@@ -342,7 +327,6 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 # <i>cvs log myfile.c</i>
 </pre>
 
-
 <p>
 “cvs log”命令是递归的，因此如果你想查看完整的日志，只需要进入目录然后输入
 </p>
@@ -357,11 +341,9 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 <title>Commit选项</title>
 <body>
 
-
 <p>
 在你输入cvs commit的时候，你可以使用另外的编辑器来取代默认的值，如果你打算这么做的话，你只需要将你的EDITOR环境变量设置成你想要使用的编辑器的名称。在<c>~/.bashrc</c>中设置该变量将是个很好的主意：
 </p>
-
 
 <pre caption="设置我们的编辑器">
 export EDITOR=jpico
@@ -380,7 +362,6 @@ export EDITOR=jpico
 <section>
 <title>关于.cvsrc文件</title>
 <body>
-
 
 <p>
 在我们继续学习更多的cvs命令之前，我建议设置<c>~/.cvsrc</c>文件，在你home目录下的<c>.cvsrc</c>可以告诉cvs使用首选的命令行的默认选项,这样可以让你不需要每次都记住这些命令,下面是我们建议的默认 <c>.cvsrc</c> 文件
@@ -448,7 +429,6 @@ Directory /var/cvsroot/mycode/foo added to the 仓库
 <title>“cvs add”注意事项</title>
 <body>
 
-
 <p>
 Oh，正如你所猜想的，在你添加文件或者添加目录到仓库的时候，你必须要确定他的父目录已经添加到了CVS，否则，你可能会得到一个类似如下的错误：
 </p>
@@ -481,7 +461,6 @@ cvs [add aborted]: no 仓库
 <title>熟悉“cvs update”命令, 第二部分</title>
 <body>
 
-
 <p>
 “cvs update”使用“?”来告诉你他不知道任何关于你在本地仓库副本中找到这些特定的文件的信息。这不是官方仓库的一部分，或者他们还只是预定附加的文件。这里列出了其他所有single-character信息消息的清单。
 </p>
@@ -489,7 +468,6 @@ cvs [add aborted]: no 仓库
 <pre caption="U标志的相关信息">
 U [path]
 </pre>
-
 
 <p>
 该标志会在你的本地仓库有新文件创建时，或者是一个不是通过你创建的文件已经更新的时候出现。
@@ -499,9 +477,8 @@ U [path]
 A [path]
 </pre>
 
-
 <p>
-该标志说明：当前文件预定会被添加，并且在你使用<span class="code" dir="ltr">cvs commit</span>命令的时候添加到官方的仓库
+该标志说明：当前文件预定会被添加，并且在你使用<c>cvs commit</c>命令的时候添加到官方的仓库
 </p>
 
 </body>
@@ -514,9 +491,8 @@ A [path]
 R [path]
 </pre>
 
-
 <p>
-类似于“A”，“R”标志，该标志会通知你该文件将在你使用<span class="code" dir="ltr">cvs commit</span>命令的时候被移除。
+类似于“A”，“R”标志，该标志会通知你该文件将在你使用<c>cvs commit</c>命令的时候被移除。
 </p>
 
 <pre caption="M标志的相关信息">
@@ -534,8 +510,6 @@ C [path]
 “C”标志表示该文件产生了冲突并且在你使用“cvs commit”提交前需要手动修复。
 </p>
 
-
-
 </body>
 </section>
 <section>
@@ -552,9 +526,8 @@ C [path]
 <title>一个冲突的例子</title>
 <body>
 
-
 <p>
-由于我们在对CVS做了主要的更改后都要去修改该档案，这就产生了源文件的一个主要冲突－－这里有一个冲突的例子。我在Changelog文件的顶端添加了如下的行：
+由于我们在对CVS做了主要的更改后都要去修改该档案，这就产生了源文件的一个主要冲突——这里有一个冲突的例子。我在Changelog文件的顶端添加了如下的行：
 </p>
 
 <pre caption="ChangeLog条目">
@@ -567,13 +540,11 @@ This is the thing I added myself
 但是，让在我提交这三行之前，另一个开发人员添加了以下这些行并且提交了他们。
 </p>
 
-
 <pre caption="ChangeLog条目2">
 date 25 Feb 2001
  
 This is the part added by another developer
 </pre> 
-
 
 </body>
 </section>
@@ -581,9 +552,8 @@ This is the part added by another developer
 <title>开始之前，一个冲突的实例</title>
 <body>
 
-
 <p>
-现在，当我运行 <span class="code" dir="ltr">cvs update -dP</span> (你每次提交之前都应该这么做)， cvs不能在我的本地Changelog副本中合并这些改变，因为我们都在相同的位置添加了额外的行－－cvs怎么可能知道我们使用的是哪个版本？因此，CVS会通知我得到了如下错误：
+现在，当我运行<c>cvs update -dP</c>（你每次提交之前都应该这么做）， cvs不能在我的本地Changelog副本中合并这些改变，因为我们都在相同的位置添加了额外的行——cvs怎么可能知道我们使用的是哪个版本？因此，CVS会通知我得到了如下错误：
 </p>
 
 <pre caption="CVS错误信息">
@@ -602,11 +572,9 @@ C ChangeLog
 <title>解决冲突, 第一部分</title>
 <body>
 
-
 <p>
-啊～ －－  出现冲突!  所幸的是，解决该冲突是很简单的.如果当前已激活了editor，那么会在Changelog的顶端看到如下的文本
+啊～——出现冲突！所幸的是，解决该冲突是很简单的。如果当前已激活了editor，那么会在Changelog的顶端看到如下的文本
 </p>
-
 
 <pre caption="ChangeLog冲突">
 &lt;&lt;&lt;&lt;&lt;&lt;&lt; ChangeLog
@@ -622,7 +590,6 @@ This is the part added by another developer
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 1.363
 </pre>
 
-
 </body>
 </section>
 <section>
@@ -630,7 +597,7 @@ This is the part added by another developer
 <body>
 
 <p>
-在这里，CVS并不是用一个版本取代了另一个版本，而是把两个版本都添加到了ChangeLog文件中，使用特殊的分隔符清楚的标记出冲突。现在还得由我来决定哪些<span class="emphasis">应该</span>出现在ChangeLog中;在这种情况下，我们不是对两个版本进行替换，而是将两者合并：
+在这里，CVS并不是用一个版本取代了另一个版本，而是把两个版本都添加到了ChangeLog文件中，使用特殊的分隔符清楚的标记出冲突。现在还得由我来决定哪些<e>应该</e>出现在ChangeLog中;在这种情况下，我们不是对两个版本进行替换，而是将两者合并：
 </p>
 
 <pre caption="ChangeLog新条目">
@@ -645,18 +612,15 @@ This is the part added by another developer
 现在我已经解决了冲突，（并且移除了“=======”等等标记），我现在提交我的修改已经没有任何问题了。
 </p>
 
-
 </body>
 </section>
 <section>
 <title>解决冲突的技巧</title>
 <body>
 
-
 <p>
-每当你编辑你的编辑出现冲突的文件的时候，请确定你已经发现了所有的冲突；如果你漏掉了某个冲突，cvs是不允许你提交它的，直到你把所有的冲突都解决掉才可以提交！移除那些特定的分隔符也是很重要的。另一方面－－如果你在解决冲突的时候发生了错误而且("D'oh!")不小心保存了更改，你可以在“.#filename.version”可以找到你原始的副本。
+每当你编辑你的编辑出现冲突的文件的时候，请确定你已经发现了所有的冲突；如果你漏掉了某个冲突，cvs是不允许你提交它的，直到你把所有的冲突都解决掉才可以提交！移除那些特定的分隔符也是很重要的。另一方面——如果你在解决冲突的时候发生了错误而且("D'oh!")不小心保存了更改，你可以在“.#filename.version”可以找到你原始的副本。
 </p>
-
 
 </body>
 </section>
@@ -665,9 +629,8 @@ This is the part added by another developer
 <body>
 
 <p>
-现在，是我们学习CVS最后的技能的时候了－－从reposityory中移除文件。移除一个文件分两步。首先，从你本地的源文件副本中删除该文件，然后执行<span class="code" dir="ltr">cvs remove</span>命令：
+现在，是我们学习CVS最后的技能的时候了——从reposityory中移除文件。移除一个文件分两步。首先，从你本地的源文件副本中删除该文件，然后执行<c>cvs remove</c>命令：
 </p>
-
 
 <pre caption="移除文件">
 # <i>rm myoldfile.c</i>
@@ -680,7 +643,6 @@ This is the part added by another developer
 <title>移除文件的后续过程</title>
 <body>
 
-
 <p>
 这个文件会预定为从仓库中移除并在你下次commit的时候生效，一旦commit过的话，该文件将会从官方的仓库上移除。但是，cvs不能把这个文件丢弃，他仍然会保持该文件完整的记录和它的历史，万一你在将来会需要他们可以找到他们。这只是CVS保护你宝贵的源代码的诸多方法中的一种而已。
 </p>
@@ -688,8 +650,6 @@ This is the part added by another developer
 <p>
 <c>cvs remove</c>是递归的，它意味着你可以批量删除文件，在父文件目录不调用其他的参数运行<c>cvs remove</c>命令。将会删除在下次commit的时候删除所有的已经标记的文件。
 </p>
-
-
 
 </body>
 </section>
@@ -731,48 +691,34 @@ This is the part added by another developer
 </pre>
 
 <p>
-注意，删除目录不需要再次commit－－目录在添加和移除的时候是实时的。
+注意，删除目录不需要再次commit——目录在添加和移除的时候是实时的。
 </p>
 
 </body>
 </section>
 <section>
-<title>学习完成!</title>
+<title>学习完成！</title>
 <body>
 
-
 <p>
-	对CVS的讲解已经完成 －－  我希望这份指南是有用的，CVS的知识不是这份指南所能全部覆盖的，但是所幸这里有很多的CVS资源可以方便你使用，在将来你可以用它们来扩展你的CVS知识：
+对CVS的讲解已经完成——我希望这份指南是有用的，CVS的知识不是这份指南所能全部覆盖的，但是所幸这里有很多的CVS资源可以方便你使用，在将来你可以用它们来扩展你的CVS知识：
 </p>
-
 
 <ul>
   <li>
-		
-    <uri>http://www.cvshome.org</uri> 是CVS开发官方网站,提供大量的CVS相关的文档，包括<uri 
-    link="http://www.cvshome.org/docs/manual">官方CVS在线文档
-		</uri>
-		
+    <uri>http://www.cvshome.org</uri>是CVS开发官方网站,提供大量的CVS相关的文档，包括<uri link="http://www.cvshome.org/docs/manual">官方CVS在线文档</uri>
   </li>
   <li>
-    <uri link="http://www.durak.org/cvswebsites/">CVS Version Control for 
-    Web Site Projects site</uri> has good info on how to use CVS for developing
-    web sites
-		
-		<uri link="http://www.durak.org/cvswebsites/">WEB网站项目相关的CVS版本控制</uri>为使用CVS做web开发的提供了大量的有用的信息
+    <uri link="http://www.durak.org/cvswebsites/">CVS Version Control for Web Site Projects site</uri> has good info on how to use CVS for developing web sites<uri link="http://www.durak.org/cvswebsites/">WEB网站项目相关的CVS版本控制</uri>为使用CVS做web开发的提供了大量的有用的信息
   </li>
   <li>
-    Karl Fogel 写过一本书叫做 <uri 
-    link="http://cvsbook.red-bean.com/">Open Source Development with CVS</uri>.
-    A number of chapters are available for free from the website.
-		对解放web开发是有帮助的。
+    Karl Fogel写过一本书叫做<uri link="http://cvsbook.red-bean.com/">Open Source Development with CVS</uri>.  A number of chapters are available for free from the website.对解放web开发是有帮助的。
   </li>
   <li>
     <uri link="http://www.freebsd.org/projects/cvsweb.html">cvsweb</uri>为你的CVS resposity提供了一个很好的CGI脚本的web接口；在浏览方面是非常优秀的。
   </li>
   <li>
-    <uri link="http://www.loria.fr/~molli/cvs-index.html">CVS Bubbles</uri> 
-		网站有大量的不错的资源的包括CVS FAQ-o-matic.
+    <uri link="http://www.loria.fr/~molli/cvs-index.html">CVS Bubbles</uri>网站有大量的不错的资源的包括CVS FAQ-o-matic.
   </li>
 </ul>
 
@@ -783,7 +729,7 @@ This is the part added by another developer
 <body>
 
 <p>
-	本指南的原始版本第一次刊登在IBM developerWorks，所有权属于Westtech Information Services. 当前的文档对原指南做了更新, 由Gentoo Linux documentation team做了些许改进.
+本指南的原始版本第一次刊登在IBM developerWorks，所有权属于Westtech Information Services. 当前的文档对原指南做了更新, 由Gentoo Linux documentation team做了些许改进.
 </p>
 
 </body>

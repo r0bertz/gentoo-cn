@@ -4,7 +4,7 @@
 <!-- $Header$ -->
 <!-- English CVS version:1.13 -->
 
-<guide link="/doc/en/liveusb.xml">
+<guide link="/doc/zh_cn/liveusb.xml" lang="zh_cn">
 <title>Gentoo Linux LiveUSB HOWTO</title>
 
 <author title="Author">
