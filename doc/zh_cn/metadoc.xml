@@ -345,7 +345,7 @@
     <file id="kde-split-ebuilds">/doc/en/kde-split-ebuilds.xml</file>
     <file id="grub-error-guide">/doc/zh_cn/grub-error-guide.xml</file>
     <file id="usb-guide">/doc/zh_cn/usb-guide.xml</file>
-    <file id="liveusb">/doc/en/liveusb.xml</file>
+    <file id="liveusb">/doc/zh_cn/liveusb.xml</file>
     <file id="fluxbox-config">/doc/en/fluxbox-config.xml</file>
     <file id="vserver-howto">/proj/en/vps/vserver-howto.xml</file>
     <file id="security-handbook-index">/doc/en/security/index.xml</file>
