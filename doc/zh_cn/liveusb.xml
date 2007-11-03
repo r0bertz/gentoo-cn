@@ -68,7 +68,7 @@
 </ul>
 
 <note>
-如果要制作一个minimal CD的LiveUSB或者要启动一个&lt;i686的系统，应当使用<b>2006.0</b> minimal CD镜像文件，因为现在的一些发行版本中存在一个<uri link="http://bugs.gentoo.org/show_bug.cgi?id=173117">bug</uri>。
+如果要制作一个minimal CD的LiveUSB或者要启动一个&lt;i686的系统，应当使用<b>2006.0</b> minimal CD镜像文件，因为更新的版本中存在一个<uri link="http://bugs.gentoo.org/show_bug.cgi?id=173117">bug</uri>。
 </note>
 
 </body>
@@ -93,7 +93,7 @@
 </p>
 
 <note>
-如果所用的U盘是4GB或更大容量的，在分区类型为<c>b</c> (W95 FAT32)。
+如果所用的U盘是4GB或更大容量的，使用分区类型（Id）<c>b</c> (W95 FAT32)。
 </note>
 
 <pre caption="分区模式的示例">
