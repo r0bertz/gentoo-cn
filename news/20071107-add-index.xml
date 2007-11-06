@@ -1,0 +1,25 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE news SYSTEM "/dtd/guide.dtd">
+
+<news gentoo="yes" category="linux">
+
+<!-- Enter your name here -->
+<poster>张乐</poster>
+
+<!-- Date to be displayed - usually the GWN release date -->
+<date>2007-11-07</date>
+
+<!-- Title of the news item - don't forget to change the date -->
+<title>加入index.xml——2007年11月7日</title>
+<body>
+
+<!-- Alter to your own likings -->
+<p>
+原来的首页只是重定向到<uri link="/doc/zh_cn">文档首页</uri>，其实这个站点还提供
+了很多其他服务。所以还是决定加一个正式的index.xml，以便把其他服务的连接都加上来。
+</p>
+
+</body>
+</news>
+
