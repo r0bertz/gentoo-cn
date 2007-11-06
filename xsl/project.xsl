@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Identity xsl transformation to allow downloading of other documents
-  without the automatic translation kicking in -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output encoding="UTF-8" method="xml" indent="yes" doctype-system="/dtd/guide.dtd"/>
 <xsl:include href="util.xsl"/>
@@ -35,9 +33,9 @@
 		</xsl:if>
 		<chapter>
 			<title>Project Description</title>
-			<section><body><p>
+			<section><body>
 			<xsl:apply-templates select="longdescription"/>
-			</p></body></section>
+			</body></section>
 		</chapter>
 		<xsl:apply-templates select='extrachapter[@position="top"]'/>
 		<!-- here extra chapters would appear-->
@@ -227,6 +225,7 @@
 <xsl:template match="subproject">
 	<xsl:variable name="ref" select='string(@ref)'/>
 	<xsl:for-each select='document($ref)'>
+   <xsl:if test="not(/missing)">
 		<tr><ti>
 		<uri link="{$ref}">
 			<xsl:value-of select="/project/name/text()"/>
@@ -243,6 +242,7 @@
 		</ti>
 		<ti><xsl:value-of select="normalize-space(/project/description/text())"/></ti>
 		</tr>
+   </xsl:if>
 	</xsl:for-each>
 </xsl:template>
 <xsl:template match="resource">
@@ -348,7 +348,7 @@
       <xsl:if test='@finished="yes"'> (finished)</xsl:if>
     </title>
     <body>
-      <p><xsl:value-of select="longdescription"/></p>
+      <xsl:apply-templates select="longdescription"/>
       <table>
         <tr>
 	  <th>Starting date:</th><ti><xsl:value-of select="startdate"/></ti>

@@ -11,6 +11,7 @@
 
 <!-- Selection parameter -->
 <xsl:param name="catid">0</xsl:param>
+<xsl:param name="desc">0</xsl:param>
 
 <xsl:template match="dynamic">
   <xsl:variable name="metadoc"  select="document(@metadoc)"/>
@@ -346,9 +347,25 @@
               <xsl:with-param name="docid"    select="@id"/>
             </xsl:call-template>
           </xsl:variable>
+          <xsl:variable name="docabstract">
+           <xsl:if test="$desc = '1'">
+            <xsl:call-template name="documentabstract">
+              <xsl:with-param name="metadoc"  select="$metadoc"/>
+              <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
+              <xsl:with-param name="lang"     select="$lang"/>
+              <xsl:with-param name="fileid"   select="fileid"/>
+              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
+              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
+              <xsl:with-param name="docid"    select="@id"/>
+            </xsl:call-template>
+           </xsl:if>
+          </xsl:variable>
           <xsl:if test="not($docname='')">
             <li>
               <xsl:copy-of select="$docname"/>
+              <xsl:if test="$desc = '1' and not($docabstract='')">
+              <br/><xsl:value-of select="$docabstract"/>
+              </xsl:if>
             </li>
           </xsl:if>
         </xsl:otherwise>
@@ -452,36 +469,33 @@
   <xsl:variable name="parentfile" select="exslt:node-set($pmetadoc)/metadoc/files/file[@id = $fileid]"/>
   <tr>
   <ti>
-  <xsl:choose>
-  <!-- Add ?glang={$lang} to handbook files, i.e. those with <sections> as a root element
-       because it's the only way they can know what language to use. -->
-    <xsl:when test="exslt:node-set($dfile)/sections">
-      <uri link="{$fileurl}?glang={$lang}"><xsl:value-of select="$fileurl"/></uri>
-    </xsl:when>
-    <xsl:when test="exslt:node-set($dfile)/metadoc">
-      <b><xsl:value-of select="$fileurl"/></b>
-    </xsl:when>
-    <xsl:when test="exslt:node-set($dfile)/inserts">
-      <xsl:value-of select="$fileurl"/>
-    </xsl:when>
-    <xsl:when test="exslt:node-set($dfile)/dynamic">
-      <xsl:value-of select="$fileurl"/>
-    </xsl:when>
-    <xsl:when test="exslt:node-set($dfile)/missing">
-      <brite><xsl:value-of select="exslt:node-set($dfile)/missing/@file"/></brite>
-    </xsl:when>
-    <xsl:otherwise>
-      <uri link="{$fileurl}"><xsl:value-of select="$fileurl"/></uri>
-    </xsl:otherwise>
-  </xsl:choose>
-  <!-- Untranslated file -->
-  <xsl:if test="$parentfile and $parentfile = $fileurl">&#160;¹</xsl:if>
+    <path>
+      <xsl:choose>
+        <xsl:when test="exslt:node-set($dfile)/metadoc">
+          <b><xsl:value-of select="$fileurl"/></b>
+        </xsl:when>
+        <xsl:when test="exslt:node-set($dfile)/inserts">
+          <xsl:value-of select="$fileurl"/>
+        </xsl:when>
+        <xsl:when test="exslt:node-set($dfile)/dynamic">
+          <xsl:value-of select="$fileurl"/>
+        </xsl:when>
+        <xsl:when test="exslt:node-set($dfile)/missing">
+          <brite><xsl:value-of select="exslt:node-set($dfile)/missing/@file"/></brite>
+        </xsl:when>
+        <xsl:otherwise>
+          <uri link="{$fileurl}"><xsl:value-of select="$fileurl"/></uri>
+        </xsl:otherwise>
+      </xsl:choose>
+    </path>
+    <!-- Untranslated file -->
+    <xsl:if test="$parentfile and $parentfile = $fileurl">&#160;¹</xsl:if>
   </ti>
     <xsl:variable name="v"><xsl:value-of select="exslt:node-set($dfile)//version[1]"/></xsl:variable>
     <xsl:variable name="version">
       <xsl:choose>
         <xsl:when test="starts-with($v, '$Id:')">
-          <!-- Extract version from $Id: metadoc.xsl,v 1.33 2006/11/01 21:29:09 neysx Exp $ tag -->
+          <!-- Extract version from $Id: metadoc.xsl,v 1.38 2007/09/14 08:39:08 neysx Exp $ tag -->
           <xsl:value-of select="substring-before(substring-after($v, ',v '),' ')"/>
         </xsl:when>
         <xsl:otherwise>
@@ -504,7 +518,7 @@
             <xsl:variable name="parentversion">
               <xsl:choose>
                 <xsl:when test="starts-with($pv, '$Id:')">
-                  <!-- Extract version from $Id: metadoc.xsl,v 1.33 2006/11/01 21:29:09 neysx Exp $ tag -->
+                  <!-- Extract version from $Id: metadoc.xsl,v 1.38 2007/09/14 08:39:08 neysx Exp $ tag -->
                   <xsl:value-of select="substring-before(substring-after($pv, ',v '),' ')"/>
                 </xsl:when>
                 <xsl:when test="string-length($pv)=0">?!?</xsl:when>
@@ -534,90 +548,6 @@
   </xsl:for-each>
   </table>
 
-  </body>
-  </section>
-  </chapter>
-
-  <chapter id="bugs">
-  <title><xsl:value-of select="func:gettext('bugs', $lang)"/></title>
-  <section id="showstoppers">
-  <title><xsl:value-of select="func:gettext('showstoppers', $lang)"/></title>
-  <body>
-
-  <table>
-  <tr>
-    <th><xsl:value-of select="func:gettext('document', $lang)"/></th>
-    <th><xsl:value-of select="func:gettext('bugid', $lang)"/></th>
-  </tr>
-  <xsl:for-each select="exslt:node-set($metadoc)/metadoc/docs/doc[bugs/bug/@stopper = 'yes']">
-    <tr>
-      <ti>
-        <xsl:call-template name="documentname">
-          <xsl:with-param name="metadoc"  select="$metadoc"/>
-          <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
-          <xsl:with-param name="lang"     select="$lang"/>
-          <xsl:with-param name="fileid"   select="fileid/text()"/>
-          <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-          <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-          <xsl:with-param name="docid"    select="@id"/>
-        </xsl:call-template>
-      </ti>
-      <ti>
-        <xsl:for-each select="bugs/bug[@stopper = 'yes']">
-          <xsl:variable name="bugid" select="text()"/>
-          <uri link="http://bugs.gentoo.org/show_bug.cgi?id={$bugid}">
-            <xsl:value-of select="$bugid"/>
-          </uri>
-          <xsl:if test="@arch">
-              (<xsl:value-of select="@arch"/>)
-          </xsl:if>
-          <xsl:if test="not(position() = last())">, </xsl:if>
-        </xsl:for-each>
-      </ti>
-    </tr>
-  </xsl:for-each>
-  </table>
-
-  </body>
-  </section>
-  <section id="normalbugs">
-  <title><xsl:value-of select="func:gettext('normalbugs', $lang)"/></title>
-  <body>
-
-  <table>
-  <tr>
-    <th><xsl:value-of select="func:gettext('document', $lang)"/></th>
-    <th><xsl:value-of select="func:gettext('bugid', $lang)"/></th>
-  </tr>
-  <xsl:for-each select="exslt:node-set($metadoc)/metadoc/docs/doc[bugs/bug[not(@stopper = 'yes')]]">
-    <tr>
-      <ti>
-        <xsl:call-template name="documentname">
-          <xsl:with-param name="metadoc"  select="$metadoc"/>
-          <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
-          <xsl:with-param name="lang"     select="$lang"/>
-          <xsl:with-param name="fileid"   select="fileid/text()"/>
-          <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-          <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-          <xsl:with-param name="docid"    select="@id"/>
-        </xsl:call-template>
-      </ti>
-      <ti>
-        <xsl:for-each select="bugs/bug[not(@stopper = 'yes')]">
-          <xsl:variable name="bugid" select="text()"/>
-          <uri link="http://bugs.gentoo.org/show_bug.cgi?id={$bugid}">
-            <xsl:value-of select="$bugid"/>
-          </uri>
-          <xsl:if test="@arch">
-            (<xsl:value-of select="@arch"/>)
-          </xsl:if>
-          <xsl:if test="not(position() = last())">, </xsl:if>
-        </xsl:for-each>
-      </ti>
-    </tr>
-  </xsl:for-each>
-  </table>
-
   <xsl:if test="exslt:node-set($pmetadoc)/metadoc">
     <br/><p>¹ <xsl:value-of select="func:gettext('untranslated', $lang)"/></p>
   </xsl:if>
@@ -625,6 +555,98 @@
   </body>
   </section>
   </chapter>
+
+  <xsl:if test="exslt:node-set($metadoc)//bugs/bug">
+    <chapter id="bugs">
+    <title><xsl:value-of select="func:gettext('bugs', $lang)"/></title>
+
+    <xsl:if test="exslt:node-set($metadoc)//bugs/bug[@stopper = 'yes']">
+      <section id="showstoppers">
+      <title><xsl:value-of select="func:gettext('showstoppers', $lang)"/></title>
+      <body>
+
+      <table>
+      <tr>
+        <th><xsl:value-of select="func:gettext('document', $lang)"/></th>
+        <th><xsl:value-of select="func:gettext('bugid', $lang)"/></th>
+      </tr>
+      <xsl:for-each select="exslt:node-set($metadoc)/metadoc/docs/doc[bugs/bug/@stopper = 'yes']">
+        <tr>
+          <ti>
+            <xsl:call-template name="documentname">
+              <xsl:with-param name="metadoc"  select="$metadoc"/>
+              <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
+              <xsl:with-param name="lang"     select="$lang"/>
+              <xsl:with-param name="fileid"   select="fileid/text()"/>
+              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
+              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
+              <xsl:with-param name="docid"    select="@id"/>
+            </xsl:call-template>
+          </ti>
+          <ti>
+            <xsl:for-each select="bugs/bug[@stopper = 'yes']">
+              <xsl:variable name="bugid" select="text()"/>
+              <uri link="http://bugs.gentoo.org/show_bug.cgi?id={$bugid}">
+                <xsl:value-of select="$bugid"/>
+              </uri>
+              <xsl:if test="@arch">
+                  (<xsl:value-of select="@arch"/>)
+              </xsl:if>
+              <xsl:if test="not(position() = last())">, </xsl:if>
+            </xsl:for-each>
+          </ti>
+        </tr>
+      </xsl:for-each>
+      </table>
+
+      </body>
+      </section>
+    </xsl:if>
+
+    <xsl:if test="exslt:node-set($metadoc)//bugs/bug[not(@stopper = 'yes')]">
+      <section id="normalbugs">
+      <title><xsl:value-of select="func:gettext('normalbugs', $lang)"/></title>
+      <body>
+
+      <table>
+      <tr>
+        <th><xsl:value-of select="func:gettext('document', $lang)"/></th>
+        <th><xsl:value-of select="func:gettext('bugid', $lang)"/></th>
+      </tr>
+      <xsl:for-each select="exslt:node-set($metadoc)/metadoc/docs/doc[bugs/bug[not(@stopper = 'yes')]]">
+        <tr>
+          <ti>
+            <xsl:call-template name="documentname">
+              <xsl:with-param name="metadoc"  select="$metadoc"/>
+              <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
+              <xsl:with-param name="lang"     select="$lang"/>
+              <xsl:with-param name="fileid"   select="fileid/text()"/>
+              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
+              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
+              <xsl:with-param name="docid"    select="@id"/>
+            </xsl:call-template>
+          </ti>
+          <ti>
+            <xsl:for-each select="bugs/bug[not(@stopper = 'yes')]">
+              <xsl:variable name="bugid" select="text()"/>
+              <uri link="http://bugs.gentoo.org/show_bug.cgi?id={$bugid}">
+                <xsl:value-of select="$bugid"/>
+              </uri>
+              <xsl:if test="@arch">
+                (<xsl:value-of select="@arch"/>)
+              </xsl:if>
+              <xsl:if test="not(position() = last())">, </xsl:if>
+            </xsl:for-each>
+          </ti>
+        </tr>
+      </xsl:for-each>
+      </table>
+
+      </body>
+      </section>
+    </xsl:if>
+    </chapter>
+  </xsl:if>
 </xsl:template>
 
 </xsl:stylesheet>

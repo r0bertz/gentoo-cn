@@ -1,4 +1,4 @@
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/dtd/glsa.dtd,v 1.11 2004/07/30 11:20:29 plasmaroo Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/dtd/glsa.dtd,v 1.12 2007/10/19 15:25:19 neysx Exp $ -->
 <!ELEMENT glsa  (title,synopsis,product,announced,revised,bug*,access?,affected,background?,description,impact,workaround,resolution,references,license?,metadata*)>
 <!ATTLIST glsa  id  CDATA   #REQUIRED>
 
@@ -187,7 +187,7 @@
 
     Example:      <p>Please update your system</p>
 -->
-<!ELEMENT p (#PCDATA|uri|mail|b|u|i|br)*>
+<!ELEMENT p (#PCDATA|mail|uri|b|i|br)*>
 
 <!--
     Element:      code
@@ -212,7 +212,7 @@
     Description:  Provides a description about the security issue
                   The description element contains only "<p>"s.
 -->
-<!ELEMENT description (p|ul|ol)*>
+<!ELEMENT description (p|ul|ol|code)*>
 
 <!--
     Element:      impact
@@ -284,14 +284,6 @@
     Example:    <b>this is bold</b>
 -->
 <!ELEMENT b             (#PCDATA)>
-
-<!--
-    Element:      u
-    Description:  Underlined text
-
-    Example:      <u>this is underlined</u>
--->
-<!ELEMENT u             (#PCDATA)>
 
 <!--
     Element:      i

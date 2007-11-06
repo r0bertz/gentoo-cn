@@ -2,6 +2,8 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
 
 <xsl:template name="content">
+  <xsl:param name="chapnum"/>
+  <xsl:param name="partnum"/>
   <xsl:if test="local-name() = 'guide'">
     <!-- Inside /guide -->
     <xsl:call-template name="guidecontent" />
@@ -23,7 +25,10 @@
   </xsl:if>
   <xsl:if test="local-name() = 'chapter'">
     <!-- Inside /book/part/chapter -->
-    <xsl:call-template name="bookpartchaptercontent" />
+    <xsl:call-template name="bookpartchaptercontent">
+      <xsl:with-param name="chapnum" select="$chapnum"/>
+      <xsl:with-param name="partnum" select="$partnum"/>
+    </xsl:call-template>
   </xsl:if>
 </xsl:template>
 

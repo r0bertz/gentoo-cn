@@ -314,4 +314,18 @@
   <month>Novembar</month>
   <month>Decembar</month>
 </months>
+<months lang="he">
+ <month>ינואר</month>
+ <month>פברואר</month>
+ <month>מרץ</month>
+ <month>אפריל</month>
+ <month>מאי</month>
+ <month>יוני</month>
+ <month>יולי</month>
+ <month>אוגוסט</month>
+ <month>ספטמבר</month>
+ <month>אוקטובר</month>
+ <month>נובמבר</month>
+ <month>דצמבר</month>
+</months>
 </datedata>

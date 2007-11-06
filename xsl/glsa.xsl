@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output encoding="UTF-8" method="xml" indent="yes"/>
+<xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:exslt="http://exslt.org/common"
+                xmlns:str="http://exslt.org/strings"
+                exclude-result-prefixes="exslt str">
+
+<xsl:output encoding="UTF-8"
+            method="xml"
+            indent="yes"
+            doctype-system="/dtd/guide.dtd"/>
 
 <xsl:template match="glsa">
 <guide>
 <title><xsl:value-of select="title"/></title>
 <author title="Contact Address">
-  <mail link="security@gentoo.org">security@gentoo.org</mail>
+  <mail link="security@gentoo.org">Security Team</mail>
 </author>
 <abstract>
 This is a Gentoo Linux Security Advisory
@@ -75,13 +83,14 @@ Related bugreports:
 <title>Synopsis</title>
 <body>
 
-<xsl:apply-templates select="synopsis"/>
+<p><xsl:apply-templates select="synopsis"/></p>
 
 </body>
 </section>
 </chapter>
 <chapter>
 <title>Impact Information</title>
+<xsl:if test="background">
 <section>
 <title>Background</title>
 <body>
@@ -90,6 +99,7 @@ Related bugreports:
 
 </body>
 </section>
+</xsl:if>
 <section>
 <title>Description</title>
 <body>
@@ -134,14 +144,7 @@ Related bugreports:
 
 <ul>
 <xsl:for-each select="references/uri">
-  <xsl:choose>
-    <xsl:when test="@link">
-      <li><uri link="{@link}"><xsl:value-of select="text()"/></uri></li>
-    </xsl:when>
-    <xsl:otherwise>
-      <li><uri link="{text()}"><xsl:value-of select="text()"/></uri></li>
-    </xsl:otherwise>
-  </xsl:choose>
+ <li><xsl:apply-templates select="."/></li>
 </xsl:for-each>
 </ul>
 
@@ -218,6 +221,18 @@ Related bugreports:
             </xsl:when>
             <xsl:when test="@range = 'ge'">
               &gt;=
+            </xsl:when>
+            <xsl:when test="@range = 'rlt'">
+              revision &lt;
+            </xsl:when>
+            <xsl:when test="@range = 'rle'">
+              revision &lt;=
+            </xsl:when>
+            <xsl:when test="@range = 'rgt'">
+              revision &gt;
+            </xsl:when>
+            <xsl:when test="@range = 'rge'">
+              revision &gt;=
             </xsl:when>
           </xsl:choose>
         <xsl:if test="@name">
@@ -303,8 +318,10 @@ Related bugreports:
 </xsl:template>
 
 <xsl:template match="code">
-<pre>
-<xsl:apply-templates select="text()"/>
+<pre caption="{concat(translate(substring(name(..),1,1),'wrd','WRD'),substring(name(..),2))}">
+<xsl:for-each select="str:tokenize(text(),'&#xA;')">
+ <xsl:value-of select="concat(substring-after(.,'    '), '&#xA;')"/>
+</xsl:for-each>
 </pre>
 </xsl:template>
 
@@ -344,16 +361,31 @@ Related bugreports:
 <b><xsl:apply-templates/></b>
 </xsl:template>
 
-<xsl:template match="u">
-<u><xsl:apply-templates/></u>
-</xsl:template>
-
 <xsl:template match="i">
-<span class="input"><xsl:apply-templates/></span>
+<c><xsl:apply-templates/></c>
 </xsl:template>
 
 <xsl:template match="br">
 <br/>
+</xsl:template>
+
+<xsl:template match="mail|uri">
+ <xsl:element name="{name(.)}">
+  <xsl:choose>
+   <xsl:when test="translate(normalize-space(text()),' ','') = @link">
+    <xsl:value-of select="@link"/>
+   </xsl:when>
+   <xsl:when test="@link">
+    <xsl:attribute name="link">
+     <xsl:value-of select="@link"/>
+    </xsl:attribute>
+    <xsl:value-of select="normalize-space(.)"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <xsl:value-of select="normalize-space(.)"/>
+   </xsl:otherwise>
+  </xsl:choose>
+ </xsl:element>
 </xsl:template>
 
 <xsl:template match="metadata">

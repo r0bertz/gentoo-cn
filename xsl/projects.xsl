@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output encoding="UTF-8" method="xml" indent="yes" doctype-system="/dtd/guide.dtd"/>
+
 <xsl:param name="showlevel">1</xsl:param>
+
 <xsl:template match="/projects">
-<xsl:processing-instruction name="xml-stylesheet">type="text/xsl" href="/xsl/guide.xsl"</xsl:processing-instruction>
-        <guide  link="" type="project">
-                <title>Project Listing</title>
+ <guide>
+  <title>Project Listing</title>
 		<author title="script generated">Gentoo Project</author>
 		<abstract>This is an overview of all current gentoo projects</abstract>
 		<version>1.1</version>
-		<date>2005-05-23</date>
+		<date>today</date>
 		<chapter>
 			<title>Gentoo Projects</title>
 			<section><body>
@@ -72,7 +73,7 @@
     </tr>
   </xsl:if>
   <xsl:for-each select="document(string($ref))">
-    <xsl:if test="($level > 0) and ($level &lt;=$showlevel)">
+    <xsl:if test="($level > 0) and ($level &lt;=$showlevel) and not(/missing)">
       <tr>
         <ti>
        	  <xsl:if test="$level=1">
@@ -80,7 +81,7 @@
        	      <xsl:attribute name="link">
        	        <xsl:value-of select="$ref"/>
        	      </xsl:attribute>
-      	      <xsl:value-of select="project/name/text()"/>
+      	      <xsl:value-of select="normalize-space(project/name/text())"/>
       	    </uri>
           </xsl:if>
         </ti>
@@ -91,7 +92,7 @@
        	        <xsl:attribute name="link">
        	          <xsl:value-of select="$ref"/>
                 </xsl:attribute>
-      	        <xsl:value-of select="project/name/text()"/>
+      	        <xsl:value-of select="normalize-space(project/name/text())"/>
       	      </uri>
       	    </xsl:if>
           </ti>
@@ -103,7 +104,7 @@
                 <xsl:attribute name="link">
                   <xsl:value-of select="$ref"/>
                 </xsl:attribute>
-                <xsl:value-of select="project/name/text()"/>
+                <xsl:value-of select="normalize-space(project/name/text())"/>
               </uri>
             </xsl:if>
           </ti>
@@ -119,18 +120,18 @@
         </ti>
         <ti>
           <xsl:for-each select='project/dev[not(translate(@role,"DEAL","deal")="lead" or text()=preceding-sibling::dev/text())]'>
-            <xsl:sort select="text()"/>
+            <xsl:sort select="normalize-space(text())"/>
             <xsl:value-of select="text()"/>
             <xsl:if test="not(position() = last())">, </xsl:if>
           </xsl:for-each>
         </ti>
         <ti>
-          <xsl:apply-templates select="project/description"/>
+          <xsl:value-of select="normalize-space(project/description)"/>
         </ti>
       </tr>
     </xsl:if>
     <xsl:for-each select="project/subproject">
-      <xsl:sort select="translate(document(string(@ref))/project/name,'QWERTYUIOPLKJHGFDSAZXCVBNM','qwertyuioplkjhgfdsazxcvbnm')"/>
+      <xsl:sort select="translate(normalize-space(document(string(@ref))/project/name),'QWERTYUIOPLKJHGFDSAZXCVBNM','qwertyuioplkjhgfdsazxcvbnm')"/>
       <xsl:call-template name="projlist">
         <xsl:with-param name="ref" select="string(@ref)"/>
         <xsl:with-param name="level" select="$level + 1"/>

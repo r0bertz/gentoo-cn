@@ -267,7 +267,7 @@ pre {
 
 .code {
 	font-family: monospace, "Courier New";
-	color: #0000ff;
+	color: #0000c8;
 	font-size: 1.0em;
 }
 
@@ -278,6 +278,13 @@ pre {
 
 .emphasis {
 	font-style: italic;
+}
+
+.missing-value {
+	font-style: italic;
+  font-weight: lighter;
+  text-decoration: line-through;
+  color: #A06060;
 }
 
 P.note {

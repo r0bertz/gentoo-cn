@@ -114,7 +114,7 @@
 <!-- Part inside a book -->
 <xsl:template match="/book/part">
   <xsl:if test="(($chap != 0) and ($part = position())) or ($full = 1)">
-    <xsl:param name="pos" select="position()"/>
+    <xsl:variable name="pos" select="position()"/>
     <xsl:if test="$full = 1">
       <a name="book_part{$pos}"/>
       <h2><xsl:number level="multiple" format="A. " value="$pos"/><xsl:value-of select="title" /></h2>
@@ -242,19 +242,26 @@
 
 <!-- Chapter inside a part -->
 <xsl:template match="/book/part/chapter">
+  <xsl:param name="partnum"/>
+  <xsl:variable name="pos" select="position()"/>
   <xsl:if test="($chap = position()) and ($full = 0)">
-    <xsl:call-template name="doclayout" />
+    <xsl:call-template name="doclayout">
+      <xsl:with-param name="partnum" select="$partnum"/>
+      <xsl:with-param name="chapnum" select="$pos"/>
+    </xsl:call-template>
   </xsl:if>
   <xsl:if test="$full = 1">
     <xsl:call-template name="bookpartchaptercontent">
-      <xsl:with-param name="partnum"><xsl:value-of select="$partnum" /></xsl:with-param>
+      <xsl:with-param name="partnum" select="$partnum"/>
+      <xsl:with-param name="chapnum" select="$pos"/>
     </xsl:call-template>
   </xsl:if>
 </xsl:template>
 
 <!-- Content of /book/part/chapter -->
 <xsl:template name="bookpartchaptercontent">
-  <xsl:param name="chapnum" select="position()"/>
+  <xsl:param name="partnum"/>
+  <xsl:param name="chapnum"/>
   <xsl:call-template name="menubar" />
   <xsl:if test="@id">
     <a name="{@id}"/>
@@ -291,6 +298,7 @@
     <xsl:otherwise>
       <xsl:apply-templates select="$FILE/sections/section[not(@test) or dyn:evaluate(@test)]">
         <xsl:with-param name="chapnum" select="$chapnum"/>
+        <xsl:with-param name="partnum" select="$partnum"/>
       </xsl:apply-templates>
     </xsl:otherwise>
   </xsl:choose>
@@ -304,7 +312,9 @@
 
 <!-- Section inside a chapter -->
 <xsl:template match="/sections/section">
-  <xsl:param name="pos" select="position()" />
+  <xsl:param name="chapnum"/>
+  <xsl:param name="partnum"/>
+  <xsl:param name="pos" select="position()"/>
   <xsl:choose>
     <xsl:when test="$full = 1">
       <!-- We need two anchors, 1 for internal links, 1 for cross-chapters links -->
@@ -341,7 +351,10 @@
 
 <!-- Subsubsection inside a section -->
 <xsl:template match="/sections/section/subsection">
- <xsl:param name="pos" select="position()"/>
+ <xsl:param name="chapnum" />
+ <xsl:param name="partnum" />
+ <xsl:param name="chpos" />
+ <xsl:variable name="pos" select="position()"/>
   <xsl:if test="not(@test) or dyn:evaluate(@test)">
     <xsl:choose>
       <xsl:when test="$full = 1">

@@ -3,7 +3,10 @@
                 xmlns:func="http://exslt.org/functions" 
                 xmlns:exslt="http://exslt.org/common"
                 xmlns:date="http://exslt.org/dates-and-times"
-                extension-element-prefixes="func date">
+                xmlns:str="http://exslt.org/strings"
+                extension-element-prefixes="func date str">
+
+<xsl:variable name="alllang" select="'|ar|ca|cs|da|de|el|en|es|fi|fr|he|hu|id|it|ko|lt|nl|pl|pt_br|ro|ru|sr|sv|tr|vi|zh_cn|zh_tw|'"/>
 
 <func:function name="func:gettext">
   <xsl:param name="str"/>
@@ -28,7 +31,7 @@
   </xsl:variable>
 
   <xsl:choose>
-    <xsl:when test="contains('|ca|cs|da|de|el|en|es|fi|fr|hu|id|it|ko|lt|nl|pl|pt_br|ro|ru|sr|sv|tr|vi|zh_cn|zh_tw|',concat('|', $LANG,'|'))">
+    <xsl:when test="contains($alllang, concat('|', $LANG,'|'))">
       <xsl:variable name="insert" select="document(concat('/doc/', $LANG, '/inserts.xml'))/inserts/insert[@name=$str]"/>
       <xsl:choose>
         <xsl:when test="$insert">
@@ -73,10 +76,14 @@
   <xsl:param name="lingua" select="//*[1]/@lang"/>
 
   <xsl:variable name="mensis" select="document('/xsl/months.xml')"/>
+
   <xsl:variable name="NormlzD">
     <xsl:choose>
     <xsl:when test="translate(normalize-space($datum),'TODAY','today')='today'">
       <xsl:value-of select="func:today()"/>
+    </xsl:when>
+    <xsl:when test="starts-with($datum,'&#36;Date: ') and 'YES'=func:is-date(translate(substring($datum,8,10),'/','-'))">
+      <xsl:value-of select="translate(substring($datum,8,10),'/','-')"/>
     </xsl:when>
     <xsl:otherwise>
       <xsl:value-of select="normalize-space($datum)"/>
@@ -142,6 +149,11 @@
         <!-- Lithuanian -->
         <xsl:when test="$lingua='lt'">
           <func:result select="concat($Y, ' ', $mensis//months[@lang=$lingua]/month[position()=$M], ' ', $D)"/>
+        </xsl:when>
+
+        <!-- Hebrew -->
+        <xsl:when test="$lingua='he'">
+          <func:result select="concat($D, ' ב', $mensis//months[@lang=$lingua]/month[position()=$M], ', ', $Y)"/>
         </xsl:when>
 
         <!-- Dutch / Greek / Indonesian / Italian / Polish / Romanian / Russian / Swedish / Turkish / Vietnamese -->
@@ -314,21 +326,69 @@
 
 <xsl:template match="keyval">
   <xsl:variable name="id" select="@id"/>
-  <xsl:value-of select="exslt:node-set($VALUES)/values/key[@id=$id]"/>
+  <xsl:choose>
+   <xsl:when test="exslt:node-set($VALUES)/values/key[@id=$id]">
+    <xsl:value-of select="exslt:node-set($VALUES)/values/key[@id=$id]"/>
+   </xsl:when>
+   <xsl:otherwise>
+    <span class="missing-value">${<xsl:value-of select="$id"/>}</span>
+   </xsl:otherwise>
+  </xsl:choose>
+</xsl:template>
+
+
+<!-- Use as many ../ as necessary to go back to / from current dir -->
+<xsl:template name="relative-root">
+<xsl:param name="path"/>
+  <xsl:for-each select="str:tokenize($path, '/')">
+    <xsl:choose>
+      <xsl:when test="position()=1 and position()=last()">
+        <xsl:text>/</xsl:text>
+      </xsl:when>
+      <xsl:when test="position()>1">
+        <xsl:text>../</xsl:text>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:for-each>
 </xsl:template>
 
 
 <!-- Define some globals that can be used throughout the stylesheets -->
 
 <!-- Top element name e.g. "book" -->
-<xsl:param name="TTOP"><xsl:value-of select="name(//*[1])" /></xsl:param>
+<xsl:variable name="TTOP"><xsl:value-of select="name(//*[1])" /></xsl:variable>
 
 <!-- Value of top element's link attribute e.g. "handbook.xml" -->
 <xsl:param name="link"><xsl:value-of select="//*[1]/@link" /></xsl:param>
 
 <!-- Value of top element's lang attribute e.g. "pt_br" -->
-<xsl:param name="glang"><xsl:value-of select="//*[1]/@lang" /></xsl:param>
+<xsl:variable name="glang">
+  <xsl:choose>
+    <xsl:when test="//*[1]/@lang and contains($alllang, concat('|', //*[1]/@lang,'|'))">
+      <xsl:value-of select="//*[1]/@lang" />
+    </xsl:when>
+    <!-- Default to language in path when @lang is undefined -->
+    <xsl:when test="contains($alllang, concat('|', substring-before(substring-after(substring-after($link,'/'),'/'),'/'), '|'))">
+      <xsl:value-of select="substring-before(substring-after(substring-after($link,'/'),'/'),'/')" />
+    </xsl:when>
+    <xsl:otherwise>en</xsl:otherwise>
+  </xsl:choose>
+</xsl:variable>
 
+<xsl:variable name="RTL"><xsl:if test="$glang='he' or $glang='ar'">Y</xsl:if></xsl:variable>
+
+<xsl:variable name="ROOT">
+  <xsl:choose>
+    <xsl:when test="not(starts-with($link, '/errors/'))">
+      <xsl:call-template name="relative-root">
+        <xsl:with-param name="path" select="$link"/>
+      </xsl:call-template>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:text>/</xsl:text>
+    </xsl:otherwise>
+  </xsl:choose>
+</xsl:variable>
 
 <xsl:template match="/">
   <xsl:apply-templates/>
