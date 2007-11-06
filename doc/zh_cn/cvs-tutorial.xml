@@ -53,7 +53,7 @@ CVS是一个客户端/服务器（client/server）系统，它可以让开发人
 <body>
 
 <p>
-有很多开源项目都有他们自己的CVS服务器，该服务器是项目开发者们为他们各项工作而搭建的一个中央资料库（仓库）。开发人员经常日复一日的不断改进他们的仓库里的代码。通常而言，他们的开发者是零落的分散在世界各地的，然而CVS提供了必要的机制将他们的项目都联合成为一个统一的整体。CVS针对特定的源文件（particular source files）创建了“organizational glue”机制，该机制可以允许他们的开发人员在改进他们的代码的时候，不需要考虑其他人的步调，也不用担心损失重要数据或者丢失彼此的重要更新。
+有很多开源项目都有他们自己的CVS服务器，该服务器是项目开发者们为他们各项工作而搭建的一个中央资料库（仓库）。开发人员经常日复一日的不断改进他们的仓库里的代码。通常而言，他们的开发者是零落的分散在世界各地的，然而CVS提供了必要的机制将他们的项目联合成为一个统一的整体。CVS针对特定的源文件（particular source files）创建了“organizational glue”机制，该机制可以允许他们的开发人员在改进他们的代码的时候，不需要考虑其他人的步调，也不用担心损失重要数据或者丢失彼此的重要更新。
 </p>
 
 </body>
@@ -73,7 +73,7 @@ CVS是一个客户端/服务器（client/server）系统，它可以让开发人
 <body>
 
 <p>
-安装cvs, 只需要输入<c>emerge cvs</c>:
+安装cvs，只需要输入<c>emerge cvs</c>:
 </p>
 
 <pre caption="安装CVS">
@@ -87,7 +87,7 @@ CVS是一个客户端/服务器（client/server）系统，它可以让开发人
 <body>
 
 <p>
-在开始之前，你需要知道一些基本的CVS常识，第一点是连接到CVS仓库的指令，首先你需要知道一个叫做“CVSROOT”的路径path。CVSROOT是一个字符串，像URL一样，他是用来告诉cvs命令远程的仓库在哪以及我们是如何连接到它的。为了让办事效率更好，CVS有数种格式，取决于CVS仓库是在本地还是在远程机器上以及所连接到它的方法，这里有一些CVSROOT的例子，参看说明……
+在开始之前，你需要知道一些基本的CVS常识，第一点是连接到CVS仓库的指令，首先你需要知道一个叫做“CVSROOT”的路径。CVSROOT是一个字符串，像URL一样，他是用来告诉cvs命令远程的仓库在哪以及我们是如何连接到它的。为了让办事效率更高，CVSROOT有数种格式，取决于CVS仓库是在本地还是在远程机器上以及所连接到它的方法，这里有一些CVSROOT的例子，参看说明……
 </p>
 
 </body>
@@ -115,7 +115,7 @@ CVSROOT=:pserver:cvs@foo.bar.com:/var/cvsroot
 </pre>
 
 <p>
-这是一个远程连接的例子，该例是连接到foo.bar.com上的/var/cvsroot目录，":pserver:"部分是告诉我们的客户端使用CVS password server协议连接到远端的机器，该协议是内置在CVS中的，通常而言，公共CVS仓库使用的password server 协议允许 anonymous用户访问。
+这是一个远程连接的例子，该例是连接到foo.bar.com上的/var/cvsroot目录，":pserver:"部分是告诉我们的客户端使用CVS password server协议连接到远端的机器，该协议是内置在CVS中的，通常而言，公共CVS仓库使用的password server协议允许匿名用户访问。
 </p>
 
 </body>
@@ -129,7 +129,7 @@ CVSROOT=drobbins@foo.bar.com:/data/cvs
 </pre>
 
 <p>
-这是一个使用RSH/SSH协议的CVSROOT实例；在本例中，CVS服务将使用drobbins帐户试图访问foo.bar.com上的仓库。如果 CVS_RSH环境设置为SSH，那么我们的cvs客户端将会尝试使用ssh连接，否则将会使用rsh。对于关注安全性的用户来说ssh连接方法是很实用的；但是，不要对匿名帐户开放获取源文件的RSH或SSH方法。要想使用这种方法，你必须要在foo.bar.com.上拥有一个可登录的帐户。
+这是一个使用RSH/SSH协议的CVSROOT实例；在本例中，CVS服务将使用drobbins帐户试图访问foo.bar.com上的仓库。如果CVS_RSH环境设置为SSH，那么我们的cvs客户端将会尝试使用ssh连接，否则将会使用rsh。对于关注安全性的用户来说ssh连接方法是很实用的；但是，不要对匿名帐户开放获取源文件的RSH或SSH方法。要想使用这种方法，你必须要在foo.bar.com.上拥有一个可登录的帐户。
 </p>
 
 </body>
@@ -139,17 +139,18 @@ CVSROOT=drobbins@foo.bar.com:/data/cvs
 <body>
 
 <p>
-除了CVSROOT，你还需要知道一个模块（该模块功能是用来搜集源代码）的名字那些你想要验证包括你登录到服务器所提供匿名帐户的密码信息。不同于可匿名登录的FTP，这里没有为匿名用户提供标准的密码，因此你需要从开发者的网站或者是开发人员那里获取指定的密码，一旦你拥有了这些信息，你就可以开始使用CVS了。
+除了CVSROOT，你还需要知道你想要检验（check out）的模块（你所要收集的源代码）名称，以及匿名帐户的密码。不同于可匿名登录的FTP，这里没有为匿名用户提供“标准”的密码，因此你需要从开发者的网站或者是开发人员那里获得指定的密码，一旦你有了这些资料，你就可以开始使用CVS了。
 </p>
 
 </body>
 </section>
 <section>
-<title>CVS交互,第一部分</title>
+<title>CVS交互，第一部分</title>
 <body>
 
 <p>
-获取源有两个步骤，首先，我们使用密码登录到服务器，然后我们使用<c>checkout</c>命令获取源，以下是一个关于如何使用命令来检测最新版本的Samba源的例子，Samba是一个流行的UNIX/Windows integration项目</p>
+获取源有两个步骤，首先，我们使用密码登录到服务器，然后我们使用<c>checkout</c>命令获取源，以下是一个关于如何使用命令来检测最新版本的Samba源的例子，Samba是一个流行的UNIX/Windows integration项目
+</p>
 
 <pre caption="创建CVSROOT">
 # <i>export CVSROOT=:pserver:cvs@pserver.samba.org:/cvsroot</i>
@@ -201,7 +202,7 @@ U samba/WHATSNEW.txt
 <body>
 
 <p>
-一旦命令执行完毕,你将会在当前工作目录看到一个包含最近版本的源文件的“samba”目录。你也会注意到所有的目录都有一个“CVS”目录——CVS在该目录里统计信息，而且这些文件能够被安全的忽略。从这个角度看，我们不需要关心是否将CVSROOT声明为环境变量或是在命令行中作出了声明。因为CVSROOT现在被缓存到额外的“CVS”目录中。记住——你只需要在初始化和检验登录的才需要设置CVSROOT。
+一旦命令执行完毕，你将会在当前工作目录看到一个包含最近版本的源文件的“samba”目录。你也会注意到所有的目录都有一个“CVS”目录——CVS在该目录里统计信息，而且这些文件能够被安全的忽略。从这个角度看，我们不需要关心是否将CVSROOT声明为环境变量或是在命令行中作出了声明。因为CVSROOT现在被缓存到额外的“CVS”目录中。记住——你只需要在初始化和检验登录的才需要设置CVSROOT。
 </p>
 
 </body>
@@ -211,11 +212,11 @@ U samba/WHATSNEW.txt
 <body>
 
 <p>
-OK，现在你就有了新的源码了！对于在你手中的这些源码，你可以阅读，编译和安装他们，或者做任何你想对它做的事。
+OK，现在你就有了新的源码了！对于在你手中的这些源码，你可以阅读，编译或者安装它们，或者做任何你想对它做的事。
 </p>
 
 <p>
-你可能经常要将自己的版本和CVS同步，如果进行此操作的话，你不需要再登录到pserver；你的验证信息已经被cvs缓存在那些“CVS”目录。首先，进入主验证目录（本例为“samba”），然后输入：
+你可能经常要将自己的版本和CVS服务器同步，如果进行此操作的话，你不需要再登录到pserver；你的验证信息已经被cvs缓存在那些“CVS”目录。首先，进入主验证目录（本例为“samba”），然后输入：
 </p>
 
 <pre caption="更新你的源文件">
@@ -225,7 +226,7 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 </body>
 </section>
 <section>
-<title>使用cvs update,第一部分</title>
+<title>使用cvs update，第一部分</title>
 <body>
 
 <p>
@@ -235,7 +236,7 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 </body>
 </section>
 <section>
-<title>使用cvs update,第二部分</title>
+<title>使用cvs update，第二部分</title>
 <body>
 
 <p>
@@ -310,7 +311,7 @@ OK，现在你就有了新的源码了！对于在你手中的这些源码，你
 <body>
 
 <p>
-“cvs commit”不<c>仅仅</c>是将你的修改应用于仓库.
+“cvs commit”不<c>仅仅</c>是将你的修改应用于仓库。
 事实上在把你的修改提交到远程仓库之前， cvs将会激活你默认的编辑器来让你输入对修改的描述。一旦你添加了注解，保存文件并且退出编辑器，你的修改（包括注释）将会在远程的仓库生效并且将会在你团队中的其他开发人员中生效。
 </p>
 
@@ -364,7 +365,7 @@ export EDITOR=jpico
 <body>
 
 <p>
-在我们继续学习更多的cvs命令之前，我建议设置<c>~/.cvsrc</c>文件，在你home目录下的<c>.cvsrc</c>可以告诉cvs使用首选的命令行的默认选项,这样可以让你不需要每次都记住这些命令,下面是我们建议的默认 <c>.cvsrc</c> 文件
+在我们继续学习更多的cvs命令之前，我建议设置<c>~/.cvsrc</c>文件，在你home目录下的<c>.cvsrc</c>可以告诉cvs使用首选的命令行的默认选项，这样可以让你不需要每次都记住这些命令，下面是我们建议的默认 <c>.cvsrc</c> 文件
 </p>
 
 <pre caption="推荐的默认设置">
@@ -377,11 +378,11 @@ update -d -P
 </body>
 </section>
 <section>
-<title>The .cvsrc file, continued</title>
+<title>继续设置.cvsrc文件</title>
 <body>
 
 <p>
-在这一系列有用的选项中, <c>.cvsrc</c>的第一行把cvs设置为安静模式,有利于使 <c>cvs update</c>输出更多的consise以及增强可读性.  同样的，一旦你设置了cvsrc文件，你可以输入<c>cvs update</c>来代替<c>cvs update -dP</c>.
+在这一系列有用的选项中，<c>.cvsrc</c>的第一行把cvs设置为安静模式，有利于使 <c>cvs update</c>输出更多的consise以及增强可读性。同样的，一旦你设置了cvsrc文件，你可以输入<c>cvs update</c>来代替<c>cvs update -dP</c>。
 </p>
 
 </body>
@@ -430,7 +431,7 @@ Directory /var/cvsroot/mycode/foo added to the 仓库
 <body>
 
 <p>
-Oh，正如你所猜想的，在你添加文件或者添加目录到仓库的时候，你必须要确定他的父目录已经添加到了CVS，否则，你可能会得到一个类似如下的错误：
+Oh，正如你所假想的，在你添加文件或者添加目录到仓库的时候，你必须要确定他的父目录已经添加到了CVS，否则，你可能会得到一个类似如下的错误：
 </p>
 
 <pre caption="在添加文件时失败">
@@ -442,8 +443,9 @@ cvs [add aborted]: no 仓库
 </body>
 </section>
 <section>
-<title>熟悉“cvs update”命令,第一部分</title>
+<title>熟悉“cvs update”命令，第一部分</title>
 <body>
+
 <p>
 在我们学习如何解决冲突之前，让我们先熟悉一下“cvs update”命令。如果你创建了~/.cvsrc文件并且在文件中包含了“cvs -q”行，你会发现“cvs update”输出大量简单易读的信息。“cvs update”会把他完成的和正在执行的任务按照一个单独的字符，一个空格加一个文件名的格式输出来通知你，就像下面的例子：
 </p>
@@ -458,7 +460,7 @@ cvs [add aborted]: no 仓库
 </body>
 </section>
 <section>
-<title>熟悉“cvs update”命令, 第二部分</title>
+<title>熟悉“cvs update”命令，第二部分</title>
 <body>
 
 <p>
@@ -478,13 +480,13 @@ A [path]
 </pre>
 
 <p>
-该标志说明：当前文件预定会被添加，并且在你使用<c>cvs commit</c>命令的时候添加到官方的仓库
+该标志说明：当前文件将要被添加，并且在你使用<c>cvs commit</c>命令的时候添加到官方的仓库
 </p>
 
 </body>
 </section>
 <section>
-<title>熟悉“cvs update”命令,第三部分</title>
+<title>熟悉“cvs update”命令，第三部分</title>
 <body>
 
 <pre caption="R标志的相关信息">
@@ -513,11 +515,11 @@ C [path]
 </body>
 </section>
 <section>
-<title>Resolving conflicts intro</title>
+<title>解决冲突概述</title>
 <body>
 
 <p>
-现在，让我们看看如何解决冲突。在gentoo linux项目中这是很头疼的事情，我们在cvs.gentoo.org建立了自己的cvs服务器。我们的开发人员花费了绝大多数的时间去调式它，在gentoo-x86模块中，我们有一个叫做“ChangeLog”的文件，你可以理解为它是用来描述我们在对仓库中作出主要改变的集结地点。
+现在，让我们看看如何解决冲突。在gentoo linux项目中这是很头疼的事情，我们在cvs.gentoo.org建立了自己的cvs服务器。我们的开发人员花费了绝大多数的时间去调试它，在gentoo-x86模块中，我们有一个叫做“ChangeLog”的文件，你可以把它理解为我们描述对仓库中作出主要更改的集结场所。
 </p>
 
 </body>
@@ -569,7 +571,7 @@ C ChangeLog
 </body>
 </section>
 <section>
-<title>解决冲突, 第一部分</title>
+<title>解决冲突，第一部分</title>
 <body>
 
 <p>
@@ -593,7 +595,7 @@ This is the part added by another developer
 </body>
 </section>
 <section>
-<title>解决冲突, 第2部分</title>
+<title>解决冲突，第2部分</title>
 <body>
 
 <p>
@@ -701,21 +703,21 @@ This is the part added by another developer
 <body>
 
 <p>
-对CVS的讲解已经完成——我希望这份指南是有用的，CVS的知识不是这份指南所能全部覆盖的，但是所幸这里有很多的CVS资源可以方便你使用，在将来你可以用它们来扩展你的CVS知识：
+对CVS的讲解已经完成——我希望这份指南是有用的，CVS所涉及的知识不是本指南所能覆盖的，但是所幸这里有很多的CVS资源可以方便你使用，在将来你可以用它们来扩展你的CVS知识：
 </p>
 
 <ul>
   <li>
-    <uri>http://www.cvshome.org</uri>是CVS开发官方网站,提供大量的CVS相关的文档，包括<uri link="http://www.cvshome.org/docs/manual">官方CVS在线文档</uri>
+    <uri>http://www.cvshome.org</uri>是CVS开发官方网站，提供大量的CVS相关的文档，包括<uri link="http://www.cvshome.org/docs/manual">官方CVS在线文档</uri>
   </li>
   <li>
-    <uri link="http://www.durak.org/cvswebsites/">CVS Version Control for Web Site Projects site</uri> has good info on how to use CVS for developing web sites<uri link="http://www.durak.org/cvswebsites/">WEB网站项目相关的CVS版本控制</uri>为使用CVS做web开发的提供了大量的有用的信息
+		<uri link="http://www.durak.org/cvswebsites/">WEB网站项目相关的CVS版本控制</uri>为使用CVS做版本控制的web开发的提供了大量的有用的信息
   </li>
   <li>
-    Karl Fogel写过一本书叫做<uri link="http://cvsbook.red-bean.com/">Open Source Development with CVS</uri>.  A number of chapters are available for free from the website.对解放web开发是有帮助的。
+		Karl Fogel写过一本书叫做<uri link="http://cvsbook.red-bean.com/">Open Source Development with CVS</uri>。有数章对减轻web开发负担是有帮助的。
   </li>
   <li>
-    <uri link="http://www.freebsd.org/projects/cvsweb.html">cvsweb</uri>为你的CVS resposity提供了一个很好的CGI脚本的web接口；在浏览方面是非常优秀的。
+    <uri link="http://www.freebsd.org/projects/cvsweb.html">cvsweb</uri>为你的CVS仓库提供了一个很好的CGI脚本的web接口；在浏览方面是非常优秀的。
   </li>
   <li>
     <uri link="http://www.loria.fr/~molli/cvs-index.html">CVS Bubbles</uri>网站有大量的不错的资源的包括CVS FAQ-o-matic.
