@@ -274,49 +274,40 @@
       <p class="menu">
         <xsl:choose>
           <xsl:when test="/mainpage/@id='about'">
-            <a class="highlight" href="/main/en/about.xml">About</a>
+            <a class="highlight" href="/main/en/about.xml">关于</a>
           </xsl:when>
           <xsl:otherwise>
-            <a class="menulink" href="/main/en/about.xml">About</a>
-          </xsl:otherwise>
-        </xsl:choose>
-        |
-        <xsl:choose>
-          <xsl:when test="/mainpage/@id='projects'">
-            <a class="highlight" href="/proj/en/index.xml?showlevel=1">Projects</a>
-          </xsl:when>
-          <xsl:otherwise>
-            <a class="menulink" href="/proj/en/index.xml?showlevel=1">Projects</a>
+            <a class="menulink" href="/main/en/about.xml">关于</a>
           </xsl:otherwise>
         </xsl:choose>
         |
         <xsl:choose>
           <xsl:when test="/mainpage/@id='docs'">
-            <a class="highlight" href="/doc/en/index.xml">Docs</a>
+            <a class="highlight" href="/doc/zh_cn/index.xml">文档</a>
           </xsl:when>
           <xsl:otherwise>
-            <a class="menulink" href="/doc/en/index.xml">Docs</a>
+            <a class="menulink" href="/doc/zh_cn/index.xml">文档</a>
           </xsl:otherwise>
         </xsl:choose>
-        | <a class="menulink" href="http://forums.gentoo.org">Forums</a>
+        | <a class="menulink" href="http://forums.gentoo.org">论坛</a>
         |
         <xsl:choose>
           <xsl:when test="/mainpage/@id='lists'">
-            <a class="highlight" href="/main/en/lists.xml">Lists</a>
+	    <a class="highlight" href="http://groups.google.com/group/gentoo-china">邮件列表</a>
           </xsl:when>
           <xsl:otherwise>
-            <a class="menulink" href="/main/en/lists.xml">Lists</a>
+	    <a class="menulink" href="http://groups.google.com/group/gentoo-china">邮件列表</a>
           </xsl:otherwise>
         </xsl:choose>
-        | <a class="menulink" href="http://bugs.gentoo.org">Bugs</a>
+        | <a class="menulink" href="http://bugs.gentoo.org">Bug</a>
         | <a class="menulink" href="http://www.cafepress.com/officialgentoo/">Store</a>
         |
         <xsl:choose>
           <xsl:when test="/mainpage/@id='newsletter'">
-            <a class="highlight" href="/news/en/gwn/gwn.xml"> GWN</a>
+            <a class="highlight" href="/news/zh_cn/gwn/gwn.xml">周报</a>
           </xsl:when>
           <xsl:otherwise>
-            <a class="menulink" href="/news/en/gwn/gwn.xml"> GWN</a>
+            <a class="menulink" href="/news/zh_cn/gwn/gwn.xml">周报</a>
           </xsl:otherwise>
         </xsl:choose>
         |
@@ -374,39 +365,39 @@
               <tr>
                 <td valign="top" class="leftmenu" lang="en">
                   <p class="altmenu">
-                    Installation:
+                    安装：
                     <br/>
-                    <a class="altlink" href="/doc/en/handbook/index.xml">Gentoo Handbook</a>
+                    <a class="altlink" href="/doc/zh_cn/handbook/index.xml">Gentoo手册</a>
                     <br/>
-                    <a class="altlink" href="/doc/en/index.xml?catid=install#doc_chap2">Installation Docs</a>
+                    <a class="altlink" href="/doc/zh_cn/index.xml?catid=install#doc_chap2">安装文档</a>
                    <br/><br/>
-                    Documentation:
+                    文档： 
                     <br/>
-                    <a class="altlink" href="/doc/en/">Home</a>
+                    <a class="altlink" href="/doc/zh_cn/">文档首页</a>
                     <br/>
-                    <a class="altlink" href="/doc/en/list.xml">Listing</a>
+                    <a class="altlink" href="/doc/zh_cn/list.xml">文档列表</a>
                     <br/>
-                    <a class="altlink" href="/main/en/about.xml">About Gentoo</a>
+                    <a class="altlink" href="/main/en/about.xml">关于Gentoo</a>
                     <br/>
-                    <a class="altlink" href="/main/en/philosophy.xml">Philosophy</a>
+                    <a class="altlink" href="/main/en/philosophy.xml">Gentoo的哲学</a>
                     <br/>
-                    <a class="altlink" href="/main/en/contract.xml">Social Contract</a>
+                    <a class="altlink" href="/main/en/contract.xml">社会契约</a>
                     <br/><br/>
-                    Resources:
+                    资源：
                     <br/>
-                    <a class="altlink" href="http://bugs.gentoo.org">Bug Tracker</a>
+                    <a class="altlink" href="http://bugs.gentoo.org">Bug跟踪</a>
+		    <!--
                     <br/>
                     <a class="altlink" href="/proj/en/devrel/roll-call/userinfo.xml">Developer List</a>
+		    -->
                     <br/>
-                    <a class="altlink" href="http://forums.gentoo.org">Discussion Forums</a>
+                    <a class="altlink" href="http://forums.gentoo.org">论坛</a>
                     <br/>
-                    <a class="altlink" href="http://torrents.gentoo.org/">Gentoo BitTorrents</a>
+		    <a class="altlink" href="/cgiirc/irc.cgi">IRC频道</a>
                     <br/>
-                    <a class="altlink" href="/proj/en/glep/">Gentoo Linux Enhancement Proposals</a>
-                    <br/>
-                    <a class="altlink" href="/main/en/irc.xml">IRC Channels</a>
-                    <br/>
-                    <a class="altlink" href="/main/en/lists.xml">Mailing Lists</a>
+		    <a class="altlink" href="http://groups.google.com/group/gentoo-china">邮件列表</a>
+		    <br/>
+                    <a class="altlink" href="/gitweb">Git仓库</a>
                     <br/>
                     <a class="altlink" href="/main/en/mirrors.xml">Mirrors</a>
                     <br/>
@@ -417,11 +408,10 @@
                     <a class="altlink" href="/security/en/index.xml">Security Announcements</a>
                     <br/>
                     <a class="altlink" href="/proj/en/devrel/staffing-needs/">Staffing Needs</a>
+		    <!--
                     <br/>
-             		    <a class="altlink" href="http://vendors.gentoo.org/">Supporting Vendors</a>
-		    <br/>
-                    <a class="altlink" href="http://sources.gentoo.org/">View our CVS</a>
-
+		    <a class="altlink" href="http://vendors.gentoo.org/">Supporting Vendors</a>
+		    -->
                     <!--
                     <a class="altlink" href="/dyn/index-cvs.xml">Daily CVS ChangeLog</a>
                     -->
@@ -431,19 +421,15 @@
                     <br/>
                     -->
                     <br/><br/>
-                    Graphics:
+                    美工：
                     <br/>
                     <a class="altlink" href="/main/en/graphics.xml">Logos and themes</a>
                     <br/>
                     <a class="altlink" href="/main/en/shots.xml">ScreenShots</a>
                     <br/><br/>
-                    Miscellaneous Resources:
+                    杂项资源：
                     <br/>
-                    <a class="altlink" href="http://www.cafepress.com/officialgentoo/">Gentoo Linux Store</a>
-                    <br/>
-                    <a class="altlink" href="/main/en/projects.xml">Gentoo-hosted projects</a>
-                    <br/>
-                    <a class="altlink" href="/doc/en/articles/">IBM dW/Intel article archive</a>
+                    <a class="altlink" href="/doc/zh_cn/articles/">IBM dW/Intel归档文章</a>
                     <!-- Moved below news items in main area 
                     <xsl:if test="/mainpage/@id='news'">
                     <br/><br/>
@@ -1498,46 +1484,6 @@
           <input type="image" src="http://images.paypal.com/images/x-click-but21.gif" name="submit" alt="Donate to Gentoo"/>
         </form>
       </td>
-    </tr>
-    <tr lang="en">
-    <td align="center" class="topsep">
-            <a href="http://www.vr.org">
-	    <img src="/images/vr-ad.png" width="125" height="144" alt="Gentoo Centric Hosting: vr.org" border="0"/>
-        </a>
-	    <p class="alttext">
-	      <a href="http://www.vr.org/">VR Hosted</a>
-	    </p>
-    </td>
-    </tr>
-    <tr lang="en">
-      <td align="center" class="topsep">
-      <a href="http://www.tek.net" target="_top">
-        <img src="/images/tek-gentoo.gif" width="125" height="125" alt="Tek Alchemy" border="0"/>
-      </a>
-      <p class="alttext">
-	  <a href="http://www.tek.net/">Tek Alchemy</a>
-      </p>
-      </td>
-    </tr>
-    <tr lang="en">
-    <td align="center" class="topsep">
-      <a href="http://www.sevenl.net" target="_top">
-        <img src="/images/sponsors/sevenl.gif" width="125" height="144" alt="SevenL.net" border="0"/>
-      </a>
-      <p class="alttext">
-	  <a href="http://www.sevenl.net/">SevenL.net</a>
-      </p>
-    </td>
-    </tr>
-    <tr lang="en">
-    <td align="center" class="topsep">
-        <a href="http://www.phparch.com/bannerclick.php?AID=68&amp;BID=1&amp;BT=127929" target="_top">
-          <img src="/images/phpa-gentoo.gif" width="125" height="144" alt="php|architect" border="0"/>
-      </a>
-      <p class="alttext">
-	  <a href="http://www.phparch.com/bannerclick.php?AID=68&amp;BID=1&amp;BT=127929">php|architect</a>
-      </p>
-    </td>
     </tr>
     <tr>
     <td align="center" class="topsep">
