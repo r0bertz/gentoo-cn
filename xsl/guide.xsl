@@ -327,7 +327,7 @@
     <a href="{concat($www,'/')}"><img border="0" src="{concat($ROOT,'images/gtop-www.jpg')}" alt="Gentoo Logo"/></a>
     </td>
     <!-- Top bar menu -->
-    <td valign="bottom" align="left" bgcolor="#000000" colspan="2" lang="en">
+    <td valign="bottom" align="left" bgcolor="#000000" colspan="2" lang="zh_cn">
       <p class="menu">
         <a class="menulink" href="{concat($www,'/main/en/about.xml')}">
          <xsl:choose>
@@ -339,15 +339,15 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/about.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        About</a>
+        关于</a>
         | 
         <a class="menulink" href="{concat($www,'/proj/en/index.xml')}">
           <xsl:if test="starts-with($tpath, '/proj/**/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
           </xsl:if>
-        Projects</a>
+        项目</a>
         |
-        <a class="menulink" href="{concat($www,'/doc/en/index.xml')}">
+        <a class="menulink" href="{concat($www,'/doc/zh_cn/index.xml')}">
          <xsl:choose>
           <xsl:when test="starts-with($tpath, '/doc/**/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
@@ -357,8 +357,8 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        Docs</a>
-        | <a class="menulink" href="http://forums.gentoo.org">Forums</a>
+        文档</a>
+        | <a class="menulink" href="http://forums.gentoo.org">论坛</a>
         |
         <a class="menulink" href="{concat($www,'/main/en/lists.xml')}">
          <xsl:choose>
@@ -370,11 +370,11 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/lists.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        Lists</a>
+        邮件列表</a>
         | <a class="menulink" href="http://bugs.gentoo.org">Bugs</a>
         | <a class="menulink" href="http://www.cafepress.com/officialgentoo/">Store</a>
         |
-        <a class="menulink" href="{concat($www,'/news/en/gwn/gwn.xml')}">
+        <a class="menulink" href="{concat($www,'/news/zh_cn/gwn/gwn.xml')}">
          <xsl:choose>
           <xsl:when test="starts-with($tpath, '/news/**/gwn/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
@@ -384,7 +384,7 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/news/',$glang,'/gwn/gwn.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        GWN</a>
+        周报</a>
         |
         <a class="menulink" href="{concat($www,'/main/en/where.xml')}">
          <xsl:choose>
@@ -450,35 +450,35 @@
             <!--info goes here-->
             <table cellspacing="0" cellpadding="5" border="0">
               <tr>
-                <td valign="top" class="leftmenu" lang="en">
+                <td valign="top" class="leftmenu" lang="zh_cn">
                   <p class="altmenu">
-                   Installation:
+                   安装：
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/en/handbook/index.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/zh_cn/handbook/index.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/handbook/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/handbook/index.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Gentoo&#xA0;Handbook</xsl:text></a>
+                    <xsl:text>Gentoo手册</xsl:text></a>
                     <br/>
-                    <a class="altlink" href="{concat($www,'/doc/en/index.xml?catid=install#doc_chap2')}">
+                    <a class="altlink" href="{concat($www,'/doc/zh_cn/index.xml?catid=install#doc_chap2')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml?catid=install#doc_chap2')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Installation&#xA0;Docs</xsl:text></a>
+                    <xsl:text>安装文档</xsl:text></a>
                    <br/><br/>
-                   Documentation:
+                   文档：
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/en/index.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/zh_cn/index.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Home</xsl:text></a>
+                    <xsl:text>文档首页</xsl:text></a>
                     <br/>
-                    <a class="altlink" href="{concat($www,'/doc/en/list.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/zh_cn/list.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/list.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/list.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Listing</xsl:text></a>
+                    <xsl:text>文档列表</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/about.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/about.xml'))/missing)">
@@ -498,7 +498,7 @@
                       </xsl:if> 
                     <xsl:text>Social&#xA0;Contract</xsl:text></a>
                    <br/><br/>
-                   Resources:
+                   资源：
                    <br/>
                     <a class="altlink" href="http://bugs.gentoo.org">Bug&#xA0;Tracker</a>
                     <br/>
@@ -584,7 +584,7 @@
               <xsl:when test="/mainpage/newsitems">
               <p class="news">
                 <img class="newsicon" src="{concat($ROOT,'images/gentoo-new.gif')}" alt="Gentoo logo"/>
-                <span class="newsitem" lang="en">We produce Gentoo Linux, a special flavor of Linux that
+                <span class="newsitem" lang="zh_cn">We produce Gentoo Linux, a special flavor of Linux that
                 can be automatically optimized and customized for just
                 about any application or need. Extreme performance,
                 configurability and a top-notch user and developer
@@ -601,7 +601,7 @@
               </xsl:for-each>
               <!-- Links to older news below news items -->
               <div class="news">
-               <p class="newshead" lang="en">
+               <p class="newshead" lang="zh_cn">
                 <b>Older News</b>
                </p>
                <ul>
@@ -638,7 +638,7 @@
       <xsl:call-template name="rhcol"/>
     </td>
   </tr>
-  <tr lang="en">
+  <tr lang="zh_cn">
     <td align="right" class="infohead" colspan="3">
      <xsl:call-template name="copyright-footer"/>
     </td>
@@ -1709,7 +1709,7 @@ Copyright 2001-<xsl:value-of select="substring(func:today(),1,4)"/> Gentoo Found
     </tr>
     </xsl:if>
 
-      <tr lang="en">
+      <tr lang="zh_cn">
       <td align="center" class="topsep">
         <p class="alttext">
           <b>Donate</b> to support our development efforts.
@@ -1761,12 +1761,12 @@ Copyright 2001-<xsl:value-of select="substring(func:today(),1,4)"/> Gentoo Found
 <xsl:param name="link"/>
 
   <div class="news">
-    <p class="newshead" lang="en">
+    <p class="newshead" lang="zh_cn">
       <b><xsl:value-of select="$thenews/title"/></b>
       <br/>
       <font size="0.90em">
-      Posted on <xsl:copy-of select="func:format-date($thenews/date)"/>
-      by <xsl:value-of select="$thenews/poster"/>
+      发布于<xsl:copy-of select="func:format-date($thenews/date)"/>
+      作者<xsl:value-of select="$thenews/poster"/>
       </font>
     </p>
     
