@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 <!DOCTYPE mainpage SYSTEM "/dtd/guide.dtd">
-<mainpage>
-	<title>Gentoo Linux News</title>
+<mainpage lang="zh_cn">
+	<title>Gentoo Linux新闻</title>
   <author title="Author">
     <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
   </author>

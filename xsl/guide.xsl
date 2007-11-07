@@ -1765,7 +1765,7 @@ Copyright 2001-<xsl:value-of select="substring(func:today(),1,4)"/> Gentoo Found
       <b><xsl:value-of select="$thenews/title"/></b>
       <br/>
       <font size="0.90em">
-      发布于<xsl:copy-of select="func:format-date($thenews/date)"/>
+      发布于<xsl:copy-of select="func:format-date($thenews/date)"/>，
       作者<xsl:value-of select="$thenews/poster"/>
       </font>
     </p>

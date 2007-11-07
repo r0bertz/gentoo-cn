@@ -2,7 +2,7 @@
 
 <!DOCTYPE news SYSTEM "/dtd/guide.dtd">
 
-<news gentoo="yes" category="linux">
+<news gentoo="yes" category="linux" lang="zh_cn">
 
 <!-- Enter your name here -->
 <poster>张乐</poster>
