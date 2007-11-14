@@ -327,7 +327,7 @@
     <a href="{concat($www,'/')}"><img border="0" src="{concat($ROOT,'images/gtop-www.jpg')}" alt="Gentoo Logo"/></a>
     </td>
     <!-- Top bar menu -->
-    <td valign="bottom" align="left" bgcolor="#000000" colspan="2" lang="zh_cn">
+    <td valign="bottom" align="left" bgcolor="#000000" colspan="2">
       <p class="menu">
         <a class="menulink" href="{concat($www,'/main/en/about.xml')}">
          <xsl:choose>
@@ -450,7 +450,7 @@
             <!--info goes here-->
             <table cellspacing="0" cellpadding="5" border="0">
               <tr>
-                <td valign="top" class="leftmenu" lang="zh_cn">
+                <td valign="top" class="leftmenu">
                   <p class="altmenu">
                    安装：
                    <br/>
@@ -577,7 +577,7 @@
               <xsl:when test="/mainpage/newsitems">
               <p class="news">
                 <img class="newsicon" src="{concat($ROOT,'images/gentoo-new.gif')}" alt="Gentoo logo"/>
-                <span class="newsitem" lang="zh_cn">We produce Gentoo Linux, a special flavor of Linux that
+                <span class="newsitem">We produce Gentoo Linux, a special flavor of Linux that
                 can be automatically optimized and customized for just
                 about any application or need. Extreme performance,
                 configurability and a top-notch user and developer
@@ -594,7 +594,7 @@
               </xsl:for-each>
               <!-- Links to older news below news items -->
               <div class="news">
-               <p class="newshead" lang="zh_cn">
+               <p class="newshead">
                 <b>Older News</b>
                </p>
                <ul>
@@ -631,7 +631,7 @@
       <xsl:call-template name="rhcol"/>
     </td>
   </tr>
-  <tr lang="zh_cn">
+  <tr>
     <td align="right" class="infohead" colspan="3">
      <xsl:call-template name="copyright-footer"/>
     </td>
@@ -1703,7 +1703,7 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
     </tr>
     </xsl:if>
 
-      <tr lang="zh_cn">
+      <tr>
       <td align="center" class="topsep">
         <p class="alttext">
           <b>Donate</b> to support our development efforts.
@@ -1755,7 +1755,7 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 <xsl:param name="link"/>
 
   <div class="news">
-    <p class="newshead" lang="zh_cn">
+    <p class="newshead">
       <b><xsl:value-of select="$thenews/title"/></b>
       <br/>
       <font size="0.90em">
