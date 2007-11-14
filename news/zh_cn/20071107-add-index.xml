@@ -2,16 +2,16 @@
 
 <!DOCTYPE news SYSTEM "/dtd/guide.dtd">
 
-<news gentoo="yes" category="linux" lang="zh_cn">
+<news gentoo="yes" category="linux">
 
 <!-- Enter your name here -->
 <poster>张乐</poster>
 
 <!-- Date to be displayed - usually the GWN release date -->
-<date>2007-11-07</date>
+<date>2007年11月7日</date>
 
 <!-- Title of the news item - don't forget to change the date -->
-<title>加入index.xml——2007年11月7日</title>
+<title>加入首页——2007年11月7日</title>
 <body>
 
 <!-- Alter to your own likings -->
