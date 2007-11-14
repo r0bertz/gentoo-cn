@@ -218,7 +218,7 @@ require valid-user
 &lt;/Directory&gt;
 </pre>
 
-<p>正如你所看到的，你可以简单地浏览发生了什么，而用不着复制和粘贴任何小节:)。</p>
+<p>正如你所看到的，你可以很容易的知道发生了什么，而用不着复制和粘贴任何代码片段:)。</p>
 
 <p>要把它用在Gentoo上，只要emerge mod_macro，并且在/etc/conf.d/apache里用-D MACRO打开这个选项就行了。</p>
 
@@ -296,10 +296,10 @@ require valid-user
 </section>
 
 <section>
-<title>X.Org X服务器：复合（Composite）本地权限提升</title>
+<title>X.Org X服务器：合成（Composite）本地权限提升</title>
 <body>
 
-<p>X.Org X服务器的复合扩展（Composite extension）中发现了一个漏洞，允许本地权限的提升。</p>
+<p>X.Org X服务器的合成扩展（Composite extension）中发现了一个漏洞，允许本地权限的提升。</p>
 
 <p>详情请见<uri link="http://www.gentoo.org/security/en/glsa/glsa-200710-16.xml">GLSA声明</uri></p>
 
