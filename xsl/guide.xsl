@@ -499,28 +499,26 @@
                     <xsl:text>Social&#xA0;Contract</xsl:text></a>
                    <br/><br/>
                    资源：
-                   <br/>
+		   <br/>
+	            <a class="altlink" href="http://www.gentoo-cn.org/gitweb">Git仓库</a>
+                    <br/>
                     <a class="altlink" href="http://bugs.gentoo.org">Bug&#xA0;Tracker</a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/proj/en/devrel/roll-call/userinfo.xml')}">Developer&#xA0;List</a>
                     <br/>
                     <a class="altlink" href="http://forums.gentoo.org">Discussion&#xA0;Forums</a>
                     <br/>
-                    <a class="altlink" href="http://torrents.gentoo.org/">Gentoo&#xA0;BitTorrents</a>
-                    <br/>
-                    <a class="altlink" href="{concat($www,'/proj/en/glep/')}">Gentoo&#xA0;Linux Enhancement Proposals</a>
-                    <br/>
                     <a class="altlink" href="{concat($www,'/main/en/irc.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/irc.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/irc.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>IRC&#xA0;Channels</xsl:text></a>
+                    <xsl:text>IRC&#xA0;频道</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/lists.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/lists.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/lists.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Mailing&#xA0;Lists</xsl:text></a>
+                    <xsl:text>邮件列表</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/mirrors.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/mirrors.xml'))/missing)">
@@ -542,10 +540,7 @@
                     <br/>
                     <a class="altlink" href="{concat($www,'/proj/en/devrel/staffing-needs/')}">Staffing&#xA0;Needs</a>
                     <br/>
-             		    <a class="altlink" href="http://vendors.gentoo.org/">Supporting&#xA0;Vendors</a>
-                    <br/>
-                    <a class="altlink" href="http://sources.gentoo.org/">View&#xA0;our&#xA0;CVS</a>
-                   <br/><br/>
+		   <br/>
                    Graphics:
                    <br/>
                     <a class="altlink" href="{concat($www,'/main/en/graphics.xml')}">
@@ -562,8 +557,6 @@
                    <br/><br/>
                    Miscellaneous Resources:
                    <br/>
-                    <a class="altlink" href="http://www.cafepress.com/officialgentoo/">Gentoo Linux Store</a>
-                    <br/>
                     <a class="altlink" href="{concat($www,'/doc/en/articles/')}">IBM dW/Intel article archive</a>
                   </p>
                   <br/><br />
@@ -664,7 +657,8 @@
     <xsl:otherwise>/main/en/contact.xml</xsl:otherwise>
    </xsl:choose>
   </xsl:variable>
-Copyright 2001-<xsl:value-of select="substring(func:today(),1,4)"/> Gentoo Foundation, Inc. Questions, Comments? <a class="highlight" href="{concat($www, $contact)}">Contact us</a>.
+Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有问
+题和建议请<a class="highlight" href="{concat($www, $contact)}">联系我们</a>.
 </xsl:template>
 
 <!-- Mail template -->
