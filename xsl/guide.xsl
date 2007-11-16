@@ -372,7 +372,6 @@
          </xsl:choose>
         邮件列表</a>
         | <a class="menulink" href="http://bugs.gentoo.org">Bugs</a>
-        | <a class="menulink" href="http://www.cafepress.com/officialgentoo/">Store</a>
         |
         <a class="menulink" href="{concat($www,'/news/zh_cn/gwn/gwn.xml')}">
          <xsl:choose>
@@ -541,23 +540,23 @@
                     <a class="altlink" href="{concat($www,'/proj/en/devrel/staffing-needs/')}">Staffing&#xA0;Needs</a>
                     <br/>
 		   <br/>
-                   Graphics:
+                   图片： 
                    <br/>
-                    <a class="altlink" href="{concat($www,'/main/en/graphics.xml')}">
+		   <a class="altlink" href="{concat('http://www.gentoo.org','/main/en/graphics.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/graphics.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/graphics.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Logos and themes</xsl:text></a>
+                    <xsl:text>标志和主题</xsl:text></a>
                     <br/>
-                    <a class="altlink" href="{concat($www,'/main/en/shots.xml')}">
+		    <a class="altlink" href="{concat('http://www.gentoo.org','/main/en/shots.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/shots.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/shots.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>ScreenShots</xsl:text></a>
+                    <xsl:text>屏幕截图</xsl:text></a>
                    <br/><br/>
-                   Miscellaneous Resources:
+                   其余资源：
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/en/articles/')}">IBM dW/Intel article archive</a>
+                    <a class="altlink" href="{concat($www,'/doc/zh_cn/articles/')}">IBM dW/Intel文章存档</a>
                   </p>
                   <br/><br />
                 </td>
