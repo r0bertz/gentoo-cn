@@ -119,6 +119,10 @@
     <mail link="r0bertz@gentoo.org">张乐</mail>	
   </author>
 
+  <author title="Translater">
+    <mail link="Guanqun.Lu@gmail.com">陆冠群</mail>	
+  </author>
+
   <abstract>
     这是Gentoo开发者手册，本手册搜集了Gentoo开发策略并且概述了Gentoo开发系统和开发过程。
   </abstract>
