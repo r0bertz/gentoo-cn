@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE news SYSTEM "/dtd/guide.dtd">
+
+<news gentoo="yes" category="linux">
+
+<!-- Enter your name here -->
+<poster>张乐</poster>
+
+<!-- Date to be displayed - usually the GWN release date -->
+<date>2007年11月20日</date>
+
+<!-- Title of the news item - don't forget to change the date -->
+<title>本站教育网镜像成立——2007年11月20日</title>
+<body>
+
+<!-- Alter to your own likings -->
+<p>
+镜像地址是<uri link="http://edu.gentoo-cn.org">http://edu.gentoo-cn.org</uri>。这样教育网用户浏览本站和git-pull本站的git仓库就方便多了。感谢<mail link="acevery@gmail.com">余钰炜</mail>为此付出的努力！
+</p>
+
+<p>
+其他更新：首页左侧导航栏加入<uri link="/gitweb">gitweb的连接</uri>。<uri link="/news/zh_cn/gwn/20071015-newsletter.xml">2007年10月15日GWN</uri>翻译完毕。本期GWN看点是<uri link="/news/zh_cn/gwn/20071015-newsletter.xml#doc_chap3">简化Apache配置的技巧——mod_macro</uri>。
+</p>
+
+</body>
+</news>
+
