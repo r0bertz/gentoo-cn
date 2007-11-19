@@ -14,14 +14,14 @@
 		<title><xsl:value-of select="title" /></title>
 		<link><xsl:value-of select="link" /></link>
 		<description><xsl:value-of select="description" /></description>
-		<dc:creator>www@gentoo.org</dc:creator>
-		<dc:language>en-US</dc:language>
-		<admin:errorReportsTo rdf:resource="mailto:www@gentoo.org" />
+		<dc:creator>r0bertz@gentoo.org</dc:creator>
+		<dc:language>zh-CN</dc:language>
+		<admin:errorReportsTo rdf:resource="mailto:r0bertz@gentoo.org" />
 		<items>
 			<rdf:Seq>
 				<xsl:for-each select="document('/dyn/news-index.xml')/uris/uri[position()&lt;11]/text()">
 					<rdf:li>
-						<xsl:attribute name="rdf:resource">http://www.gentoo.org<xsl:value-of select="." /></xsl:attribute>
+						<xsl:attribute name="rdf:resource">http://www.gentoo-cn.org<xsl:value-of select="." /></xsl:attribute>
 					</rdf:li>
 				</xsl:for-each>
 			</rdf:Seq>
@@ -30,9 +30,9 @@
 
 	<xsl:for-each select="document('/dyn/news-index.xml')/uris/uri[position()&lt;11]/text()">
 	<item>
-		<xsl:attribute name="rdf:about">http://www.gentoo.org<xsl:value-of select="." /></xsl:attribute>
+		<xsl:attribute name="rdf:about">http://www.gentoo-cn.org<xsl:value-of select="." /></xsl:attribute>
 		<title><xsl:value-of select="document(.)/news/title" /></title> 
-		<link>http://www.gentoo.org<xsl:value-of select="." /></link>
+		<link>http://www.gentoo-cn.org<xsl:value-of select="." /></link>
 		<dc:subject><xsl:value-of select="document(.)/news/@category" /></dc:subject>
 		<dc:creator><xsl:value-of select="document(.)/news/poster" /></dc:creator>
 		<!-- <dc:date><xsl:value-of select="document(.)/news/date" /></dc:date> -->

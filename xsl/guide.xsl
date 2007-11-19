@@ -283,7 +283,7 @@
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/archives-gentoo-org.xml" title="Gentoo List Archives"/>
   
   <xsl:if test="/mainpage/newsitems">
-    <link rel="alternate" type="application/rss+xml" title="Gentoo Linux News RDF" href="http://www.gentoo.org/rdf/en/gentoo-news.rdf" />
+    <link rel="alternate" type="application/rss+xml" title="Gentoo Linux新闻RDF" href="http://www.gentoo-cn.org/rdf/zh_cn/gentoo-news.rdf" />
   </xsl:if>
   <xsl:choose>
     <xsl:when test="/mainpage | /news">

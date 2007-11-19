@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xsl/rdf.xsl" type="text/xsl"?>
+
+<rdffeed type="news">
+	<title>Gentoo Linux新闻</title> 
+	<link>http://www.gentoo-cn.org/</link>
+	<description>Gentoo Linux新闻</description>
+	<feeditems />
+</rdffeed>
