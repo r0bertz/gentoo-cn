@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.11 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/proj/zh_cn/portage/doc/manually-fixing-portage.xml" lang="zh_cn">
+
+<title>手动修复破损的portage安装</title>
+
+<author>
+  <mail link="genone@gentoo.org">Marius Mauch</mail>
+</author>
+<author title="译者">
+  <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+</author>
+
+<abstract>
+这个文档试图去帮助想要手动修复破损的sys-apps/portage这个软件包的安装的人。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>0.3</version>
+<date>2007-05-31</date>
+
+<chapter>
+<title>手动修复portage</title>
+<section>
+<title>目的</title>
+<body>
+
+<p>
+这个部分将会告诉你如何在你无法运行<c>emerge 
+sys-apps/portage</c>的时候手动升级或修复你的portage安装。虽然这并不难，但是你仍然需要很小心地来完成，所以请正确地跟着下面列出的步骤（在必要的时候用一下常识）。
+</p>
+
+</body>
+</section>
+<section>
+<title>获取一个portage的压缩包</title>
+<body>
+
+<p>
+第一步是获取一个最新版本portage的压缩包。在下面的文章中我们使用<e>portage-2.1.1</e>作为一个例子（因为这是在写这篇文章的时候最新的稳定版本portage），如果可能的话请用在软件包树里最新的版本来替换。 
+</p>
+<warn>
+如果你安装的python的版本小于2.4的话（可以使用<c>python 
+-V</c>查看），你必须选择一个与之相兼容的portage版本。如果你有一个至少2.3版本的python就用<e>portage-2.1.1.tar.bz2</e>，如果你有一个2.2版本的python就用<e>portage-2.0.51.22.tar.bz2</e>。
+</warn>
+
+<p>
+根据你确切的portage不能再为你工作的原因，portage可能还可以为你获取压缩包，所以首先请试着运行<c>emerge --fetchonly 
+sys-apps/portage</c>，只有这个方法行不通的时候，你就必须手动获取压缩包了：
+</p>
+
+<pre caption="使用wget获取portage压缩包">
+# <i>wget -P /usr/portage/distfiles http://distfiles.gentoo.org/distfiles/portage-2.1.1.tar.bz2</i>
+</pre>
+
+<p>
+在那之后你应该能在像<path>/usr/portage/distfiles/portage-2.1.1.tar.bz2</path>的地方找到portage的压缩包。
+</p>
+
+</body>
+</section>
+<section>
+<title>替换已经安装过的版本</title>
+<body>
+
+<p>
+下一步是解压缩那个压缩包到一个临时的位置，如果使用<path>/root/portage-recover</path>作为一个例子，那么完成这个的命令就是：
+</p>
+
+<pre caption="解压缩portage的压缩包">
+# <i>cd /root</i>
+# <i>mkdir portage-recover</i>
+# <i>cd portage-recover</i>
+# <i>tar xfj /usr/portage/distfiles/portage-2.1.1.tar.bz2</i>
+</pre>
+
+<p>
+在你做完这个之后，只是有一个用在压缩包里的文件替换你已经安装的python和bash文件的问题（不管怎样在大多数情况下是这样的）。请运行：
+</p>
+
+<pre caption="替代已经安装的文件">
+# <i>cd /root/portage-recover/portage-2.1.1</i>
+# <i>cp -R pym bin /usr/lib/portage/</i>
+</pre>
+
+<p>
+如果你不是在FreeBSD上使用Gentoo，那么你就要移除sed 
+wrapper脚本，因为它不再需要了，而且就像已经知道的那样它和老的版本的bash在一起会造成许多问题：
+</p>
+
+<pre caption="移除sed wrapper脚本">
+# <i>rm -f /usr/lib/portage/bin/sed</i>
+</pre>
+
+<note>
+如果你之前不小心unmerged了portage或者因为其他原因丢失了<path>/etc/make.globals</path>，你也应该复制<path>cnf/make.globals</path>到<path>/etc</path>，否则portage可能会表现得很奇怪。
+</note>
+<note>
+如果portage的前一个版本是低于2.1的，那么你就需要在继续下一步之前运行<c>emerge 
+--metadata</c>。这是必要的，因为它会把ebuild的metadata转换成portage2.1或以上版本使用的新格式。如果你不确定上一个版本的poratge的版本号，你运行这个命令也没什么关系。
+</note>
+
+<p>
+现在你应该又安装了一个能工作的portage。为了确定现在是一个一致的系统状态，你现在需要立刻再次运行<c>emerge 
+sys-apps/portage</c>。
+</p>
+
+<p>
+当你试着运行<c>emerge</c>的时候，如果你得到一个<e>command not found</e>的错误信息，你必须重新创建链接：
+</p>
+
+<pre caption="重新创建emerge的链接">
+# <i>ln -s ../lib/portage/bin/emerge /usr/bin/emerge</i>
+</pre>
+
+<p>
+如果这些步骤对你的问题比如说不是一个破损的portage安装而是其他的在这个文档范围之外的问题不起作用的话。请重新查看<uri 
+link="/proj/en/portage/doc/common-problems.xml">常见问题列表</uri>，你还可以查看<uri 
+link="http://bugs.gentoo.org">bugzilla</uri>，这里可能有些问题的报告。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
