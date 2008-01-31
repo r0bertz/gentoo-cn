@@ -42,6 +42,12 @@
   <th>摘要</th>
 </tr>
 <tr>
+  <ti><uri link="/news/zh_cn/gwn/20080119-newsletter.xml">2008年1月19日</uri></ti>
+  <ti>
+    仅包含统计信息的特别的一期，向GMN迁移
+  </ti>
+</tr>
+<tr>
   <ti><uri link="/news/zh_cn/gwn/20071015-newsletter.xml">2007年10月15日</uri></ti>
   <ti>
     Planet和论坛摘要，Apache心得技巧
