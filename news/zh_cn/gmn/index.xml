@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- lang="__" is required for the rss feed -->
+<guide type="newsletter" lang="zh_cn">
+
+<title>Gentoo Monthly Newsletter</title>
+
+<author title="Author">
+  <mail>anant</mail>
+</author>
+<author title="Translator">
+  <mail link="gentoo-china@googlegroups.com">GMN简体中文翻译团队</mail>
+</author>
+
+<abstract>Gentoo Monthly Newsletter主索引</abstract>
+
+<license/>
+
+<version>1.0</version>
+<date>2008-01-19</date>
+
+<chapter>
+<title>Gentoo Monthly Newsletter概述</title>
+<section>
+<body>
+
+<p>
+创办Gentoo月报的目的是为了给Gentoo的用户一个有关Gentoo的信息源。GMN用简明的形式总结了Gentoo项目每月的重要事件。
+</p>
+
+<p>
+GMN将会通过网页（HTML）和邮件列表（纯文本）的形式发行。要订阅GMN邮件列表，请发一封空email到<mail>gentoo-gmn+subscribe@gentoo.org</mail>。您也可以通过定阅我们的<uri link="rss.xml"><img src="/images/xml.gif"/></uri><uri link="rss.xml">rss种子</uri>来得到最新的GMN。经志愿者的翻译，GMN也有了其他语言的版本。
+</p>
+
+<p>
+我们征求您对GMN的反馈，请发email到<mail>gmn-feedback@gentoo.org</mail>。如果您有兴趣为GMN些文章，请发email到<mail>gmn-writers@gentoo.org</mail>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Gentoo Monthly Newsletter档案</title>
+<section>
+<body>
+
+<table>
+<tr id="feed-items"> 
+  <th>日期</th>
+  <th>摘要</th>
+</tr>
+<tr>
+  <ti><uri link="/news/zh_cn/gmn/20080121-newsletter.xml">2008年1月21日</uri></ti>
+  <ti>GMN的创刊号，Planet Gentoo摘要，ATI驱动升级……</ti>
+</tr>
+</table>
+</body>
+</section>
+</chapter>
+
+</guide>
