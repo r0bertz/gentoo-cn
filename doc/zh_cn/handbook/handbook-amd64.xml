@@ -2,6 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-amd64.xml,v 1.2 2007/09/14 17:37:35 r0bertz Exp $ -->
+<!-- English CVS version: 1.141 -->
 <book link="/doc/zh_cn/handbook/handbook-amd64.xml" lang="zh_cn">
 <title>Gentoo Linux AMD64手册</title>
 

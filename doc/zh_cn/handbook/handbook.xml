@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.143 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/handbook/handbook.xml" lang="zh_cn">
