@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.192 -->
+<!-- English CVS version: 1.199 -->
 
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-<version>1.115</version>
+<version>1.122</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -45,6 +45,7 @@
     <cat id="project_releng"  parent="project">发布工程项目文档</cat>
     <cat id="project_security" parent="project">安全项目文档</cat>
     <cat id="project_forums"  parent="project">Gentoo论坛文档</cat>
+    <cat id="project_overlays"  parent="project">Gentoo Overlay文档</cat>
   </categories>
   <files>
     <file id="metadoc">/doc/zh_cn/metadoc.xml</file>
@@ -233,7 +234,7 @@
     <file id="xorg-config">/doc/zh_cn/xorg-config.xml</file>
     <file id="quick-samba-howto">/doc/en/quick-samba-howto.xml</file>
     <file id="ltsp">/doc/en/ltsp.xml</file>
-    <file id="gentoolkit">/doc/en/gentoolkit.xml</file>
+    <file id="gentoolkit">/doc/zh_cn/gentoolkit.xml</file>
     <file id="gentoo-sparc-quickinstall">/doc/en/gentoo-sparc-quickinstall.xml</file>
     <file id="gnupg-user">/doc/en/gnupg-user.xml</file>
     <file id="ipv6">/doc/en/ipv6.xml</file>
@@ -253,26 +254,24 @@
     <file id="rsync">/doc/en/rsync.xml</file>
     <file id="qmail-howto">/doc/en/qmail-howto.xml</file>
     <file id="source_mirrors">/doc/en/source_mirrors.xml</file>
-    <file id="gentoo-ppc-install">/doc/en/gentoo-ppc-install.xml</file>
     <file id="gentoo-x86-quickinstall">/doc/zh_cn/gentoo-x86-quickinstall.xml</file>
+    <file id="gentoo-x86-quickinstall-after-reboot">/doc/en/gentoo-x86-quickinstall-after-reboot.xml</file>
+    <file id="gentoo-x86-quickinstall-media">/doc/en/gentoo-x86-quickinstall-media.xml</file>
+    <file id="gentoo-x86-quickinstall-stage">/doc/en/gentoo-x86-quickinstall-stage.xml</file>
+    <file id="gentoo-x86-quickinstall-system">/doc/en/gentoo-x86-quickinstall-system.xml</file>
     <file id="gentoo-x86-quickinstall+raid">/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml</file>
     <file id="vi-guide">/doc/en/vi-guide.xml</file>
     <file id="virt-mail-howto">/doc/en/virt-mail-howto.xml</file>
     <file id="mailfilter-guide">/doc/en/mailfilter-guide.xml</file>
     <file id="genkernel">/doc/en/genkernel.xml</file>
     <file id="gentoo-sparc-faq">/doc/en/gentoo-sparc-faq.xml</file>
-    <file id="gentoo-x86-install">/doc/en/gentoo-x86-install.xml</file>
     <file id="mips-requirements">/doc/en/mips-requirements.xml</file>
-    <file id="gentoo-sparc-install">/doc/en/gentoo-sparc-install.xml</file>
-    <file id="gentoo-hppa-install">/doc/en/gentoo-hppa-install.xml</file>
-    <file id="gentoo-alpha-install">/doc/en/gentoo-alpha-install.xml</file>
-    <file id="gentoo-mips-install">/doc/en/gentoo-mips-install.xml</file>
     <file id="udev-guide">/doc/en/udev-guide.xml</file>
     <file id="gentoo-x86-tipsntricks">/doc/en/gentoo-x86-tipsntricks.xml</file>
     <file id="gentoo-sparc-netboot-howto">/doc/en/gentoo-sparc-netboot-howto.xml</file>
     <file id="gentoo-sparc-obpreference">/doc/en/gentoo-sparc-obpreference.xml</file>
     <file id="gnome-config">/doc/zh_cn/gnome-config.xml</file>
-    <file id="gnome-upgrade">/proj/zh_cn/desktop/gnome/howtos/gnome-2.18-upgrade.xml</file>
+    <file id="gnome-upgrade">/proj/zh_cn/desktop/gnome/howtos/gnome-2.20-upgrade.xml</file>
     <file id="gpm">/doc/zh_cn/gpm.xml</file>
     <file id="gentoo-security">/doc/en/gentoo-security.xml</file>
     <file id="home-router-howto">/doc/en/home-router-howto.xml</file>
@@ -287,6 +286,7 @@
     <file id="gentoo-dev-handbook">/proj/zh_cn/devrel/handbook/handbook.xml</file>
     <file id="doc-policy">/proj/en/gdp/doc/doc-policy.xml</file>
     <file id="doc-tipsntricks">/proj/en/gdp/doc/doc-tipsntricks.xml</file>
+    <file id="handbook-release">/proj/en/gdp/doc/handbook-release.xml</file>
     <file id="about">/main/en/about.xml</file>
     <file id="philosophy">/main/en/philosophy.xml</file>
     <file id="contract">/main/en/contract.xml</file>
@@ -318,7 +318,6 @@
     <file id="infra-cvsssh">/proj/en/infrastructure/cvs-sshkeys.xml</file>
     <file id="infra-machines">/proj/en/infrastructure/dev-machines.xml</file>
     <file id="infra-servers">/proj/en/infrastructure/server-specs.xml</file>
-    <file id="infra-serverstandards">/proj/en/infrastructure/server-standards.xml</file>
     <file id="infra-tenshi">/proj/en/infrastructure/tenshi/index.xml</file>
     <file id="infra-ntp">/proj/en/infrastructure/config-ntp.xml</file>
     <file id="infra-ssh">/proj/en/infrastructure/config-ssh.xml</file>
@@ -392,6 +391,11 @@
     <file id="qa-backtraces">/proj/en/qa/backtraces.xml</file>
     <file id="manually-fixing-portage">/proj/en/portage/doc/manually-fixing-portage.xml</file>
     <file id="xen-guide">/doc/en/xen-guide.xml</file>
+    <file id="overlays-userguide">/proj/en/overlays/userguide.xml</file>
+    <file id="overlays-devguide">/proj/en/overlays/devguide.xml</file>
+    <file id="overlays-policy">/proj/en/overlays/policy.xml</file>
+    <file id="pam-upgrade">/proj/en/base/pam/upgrade-0.99.xml</file>
+    <file id="embedded-handbook">/proj/en/base/embedded/handbook/index.xml</file>
   </files>
   <docs>
     <doc id="name-logo">
@@ -817,6 +821,11 @@
       <memberof>project_gdp</memberof>
       <fileid>doc-tipsntricks</fileid>
     </doc>
+    <doc id="handbook-release">
+      <memberof>gentoodev_docs</memberof>
+      <memberof>project_gdp</memberof>
+      <fileid>handbook-release</fileid>
+    </doc>
     <doc id="cvs-tutorial">
       <memberof>gentoodev_docs</memberof>
       <fileid>cvs-tutorial</fileid>
@@ -1041,10 +1050,6 @@
       <memberof>project_infra</memberof>
       <fileid>infra-servers</fileid>
     </doc>
-    <doc id="infra-serverstandards">
-      <memberof>project_infra</memberof>
-      <fileid>infra-serverstandards</fileid>
-    </doc>
     <doc id="infra-tenshi">
       <memberof>project_infra</memberof>
       <fileid>infra-tenshi</fileid>
@@ -1139,6 +1144,10 @@
     <doc id="gnap-userguide">
       <memberof>project_base</memberof>
       <fileid>gnap-userguide</fileid>
+    </doc>
+    <doc id="embedded-handbook">
+      <memberof>project_base</memberof>
+      <fileid>embedded-handbook</fileid>
     </doc>
     <doc id="mips-requirements">
       <memberof>install_other</memberof>
@@ -1281,6 +1290,26 @@
     <doc id="xen-guide">
       <memberof>sysadmin_specific</memberof>
       <fileid>xen-guide</fileid>
+    </doc>
+    <doc id="overlays-userguide">
+      <memberof>project_overlays</memberof>
+      <memberof>gentoo_portage</memberof>
+      <fileid>overlays-userguide</fileid>
+    </doc>
+    <doc id="overlays-devguide">
+      <memberof>project_overlays</memberof>
+      <memberof>gentdev_docs</memberof>
+      <fileid>overlays-devguide</fileid>
+    </doc>
+    <doc id="overlays-policy">
+      <memberof>project_overlays</memberof>
+      <memberof>gentdev_docs</memberof>
+      <memberof>gentdev_policies</memberof>
+      <fileid>overlays-policy</fileid>
+    </doc>
+    <doc id="pam-upgrade">
+      <memberof>upgrade</memberof>
+      <fileid>pam-upgrade</fileid>
     </doc>
   </docs>
 </metadoc>
