@@ -52,15 +52,15 @@ Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个�
 <body>
 
 <p>
-Gentoo是一个独一无二的发行版，并且存在一些别的发行版没有的复杂的东西。Gentoo开发者和贡献者们发现了这些复杂的东西，于是他们写了一些工具来帮助用户和管理员来使用他们。这些工具中的很大一部分已经被贡献到了Gentoo项目，并且被整合到了一个叫<c>app-portage/gentoolkit</c>的包里。
+Gentoo是一个独一无二的发行版，并且存在一些别的发行版没有的复杂的东西。Gentoo开发者和贡献者们在发现这些复杂的东西的同时写了一些工具来帮助用户和管理员来使用它们。这些工具中的很大一部分已经被贡献到了Gentoo项目，并且被整合到了一个叫<c>app-portage/gentoolkit</c>的包里。
 </p>
 
 <note>
-到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。然而前者包含了管理脚本，后者包含了一些专门帮助Gentoo开发的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本被收录到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
+到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。前者包含了管理脚本，而后者包含了一些专门帮助Gentoo开发的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本被收录到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
 </note>
 
 <p>
-Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和留意在你的系统上发生了什么。大部分的用户，特别是经常升级系统的用户，将会从安装gentoolkit里受益。
+Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和留意在你的系统上发生的事。大部分的用户———特别是经常升级系统的用户，将会从安装gentoolkit里受益。
 </p>
 
 </body>
@@ -73,12 +73,12 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 就像其他的Gentoo软件包一样，安装就只是简单地emerge。
 </p>
 
-<pre caption="得到gentoolkit">
+<pre caption="安装gentoolkit">
 # <i>emerge gentoolkit</i>
 </pre>
 
 <note>
-许多gentoolkit里的工具可能会显示一些有关于你的系统的信息或者需要root授权的重要信息。因为这个原因，一些程序可能只能在一个用户获得root许可以后才能被运行（或者是特定的函数）。
+许多gentoolkit里的工具会显示一些有关于你的系统的信息或者需要root授权的重要信息。所以，一些程序（或是只是特定的函数）可能只能在获得root授权以后才能被运行。
 </note>
 
 </body>
@@ -88,7 +88,7 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-一个程序可能有的任何的文档（除了man页）是被存储在<path>/usr/share/doc/gentoolkit-[版本]/[程序名]/</path>里面的。
+一个程序可能有的任何的文档（除了man页）被存储在<path>/usr/share/doc/gentoolkit-[版本]/[程序名]/</path>里面。
 </p>
 
 </body>
@@ -102,15 +102,15 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-<c>equery</c>是一个显示大量有关于你系统上的软件包的有用信息和其他的一些东西的工具。<c>equery --help</c>能给你所有的选项的列表。
+<c>equery</c>是一个显示大量有关于你系统上的软件包的有用信息和其他许多东西的工具。<c>equery --help</c>能给你完整的选项列表。
 </p>
 
 <note>
-不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你也可以看见一个选项的简略形式，比如说<c>b</c>而不是<c>belongs</c>。
+目前为止不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你也会见到每个命令都有一个缩写，比如说<c>b</c>而不是<c>belongs</c>。
 </note>
 
 <note>
-你要知道最近如果equery通过一个管道发送输出信息，它会改变输出信息的格式。那个被限制的格式被认为更容易被工具格式化，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要equery的脚本，你需要了解这个。
+你要知道最近如果equery通过一个管道发送输出信息，它会改变输出信息的格式。那个通过管道传输的格式被认为更容易被工具格式化，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要equery的脚本，你需要了解这个。
 </note>
 
 </body>
@@ -123,14 +123,14 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <c>equery</c>也提供了寻找一个文件来自于哪个软件包的功能，使用<c>belongs</c>命令（或只是<c>b</c>）。
 </p>
 
-<pre caption="查找安装一个已给文件的ebuild">
+<pre caption="查找安装了某个给定文件的ebuild">
 # <i>equery belongs /usr/bin/audacious</i>
 [ Searching for file(s) /usr/bin/audacious in *... ]
 media-sound/audacious-1.1.2 (/usr/bin/audacious)
 </pre>
 
 <p>
-通过使用<c>-f</c>选项，你可以搜索符合任意的正规短语的文件所属的软件包。<c>-e</c>选项能够在一个符合的软件包找到后终止寻找。
+通过使用<c>-f</c>选项，你可以搜索符合任意的正规短语的文件所属的软件包。<c>-e</c>选项能够在第一个符合的软件包找到后就立即终止寻找。
 </p>
 
 </body>
@@ -163,7 +163,7 @@ media-sound/audacious-1.1.2 (/usr/bin/audacious)
 <c>equery</c>能够列出符合一个软件包的所有直接依赖关系。我们能够简单地使用<c>depends</c>函数来做这件事： 
 </p>
 
-<pre caption="使用pygtk来查找软件包依赖关系">
+<pre caption="查找依赖于pygtk的软件包">
 # <i>equery depends pygtk</i>
 [ Searching for packages depending on pygtk... ]
 app-office/dia-0.93
@@ -180,7 +180,7 @@ x11-libs/vte-0.11.11-r1
 <body>
 
 <p>
-<c>equery</c>可以向我们给出一个软件包的依赖性图表。依赖性图表向我们展示了被考察的软件包的一系列直接或间接相关软件包的列表
+<c>equery</c>可以向我们给出一个特定软件包的依赖关系图表。这个依赖关系图表向我们展示了指定软件包的所有一系列直接或间接相关软件包的列表
 </p>
 
 <pre caption="cdrtools的依赖关系树">
@@ -204,7 +204,7 @@ Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
 </pre>
 
 <p>
-比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，<c>cdrtools</c>事实上是被写到需要virtual/libc的，而不是sys-libs/glibc，但是在例子里被提供的系统上sys-libs/glibc提供了virtual/libc。 
+比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，事实上<c>cdrtools</c>是被编写成需要virtual/libc的，而不是sys-libs/glibc，但是在例子里提到的系统上sys-libs/glibc提供了virtual/libc。
 </p>
 
 </body>
@@ -214,7 +214,7 @@ Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
 <body>
 
 <p>
-<c>equery</c>能够列出所有属于一个已安装的ebuild的文件。如果我不知道Gentoolkit在系统上安装了哪些文件，我可以使用<c>equery</c>来把它们列出来。
+<c>equery</c>能够列出所有属于一个已安装ebuild的文件。如果我不知道Gentoolkit在系统上安装了哪些文件，我将会用<c>equery</c>来把它们列出来。
 </p>
 
 <pre caption="列出文件">
@@ -257,7 +257,7 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-如果你想要寻找在你的系统上使用某个特定USE标记的软件包，<c>equery</c>用一个叫做<c>hasuse</c>的函数能够帮助你。
+如果你想要寻找在你的系统上使用某个特定USE标记的软件包，<c>equery</c>包括了一个叫<c>hasuse</c>的函数。
 </p>
 
 <pre caption="查找使用firefox这个USE标记的软件包">
@@ -275,7 +275,7 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-<c>equery</c>拥有一个强大的特性，它能够列出在portage里属于我们的系统的软件包，甚至在overlay里的软件包也行。让我们试试看：
+<c>equery</c>拥有一个强大的特性，它能够列出属于我们的系统或在Portage里的软件包，甚至在overlay里的软件包也行。让我们试试看：
 </p>
 
 <pre caption="使用equery来列出软件包">
@@ -286,14 +286,14 @@ app-portage/gentoolkit-0.2.0
 </pre>
 
 <p>
-标准的查询会查询符合给定名字的已安装的软件包。如果找到了，下面的信息会被显示出来：在第一个括号里的是软件包位置（I代表已安装，P代表Portage，O代表Overlay），在第二个括号里的是可能的mask（~是keyword的禁用，-是主机平台的禁用，M是硬性禁用），然后是分类和完整的名字，最后是软件包储存的位置。
+标准的查询会搜索符合给定名字的已安装的软件包。如果找到了，下面的信息会被显示出来：在第一个括号里的是软件包位置（I代表已安装，P代表Portage，O代表Overlay），在第二个括号里的是可能的mask（~是keyword的禁用，-是主机平台的禁用，M是硬性禁用），然后是分类和完整的名字，最后是软件包储存的位置。
 </p>
 
 <p>
-另一个例子，这次我们要使用本地选项来寻找在我们的portage树和overlay里的软件包。
+下面是另一个例子，这次我们要使用本地选项来寻找在我们的portage树和overlay里的软件包。
 </p>
 
-<pre caption="通过equery来使用本地选项">
+<pre caption="使用equery的本地选项">
 # <i>equery list -p -o vim</i>
 [ Searching for package 'vim' in all categories among: ]
  * installed packages
@@ -318,11 +318,10 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-甚至想知道一个软件包占用多少空间？因为一个软件包可以在许多目录有它的文件，通常使用<c>du 
--hc</c>不能给你正确的数字。别着急，<c>equery</c>来拯救你了！
+你甚至想知道一个软件包占用多少空间？因为一个软件包可以在许多目录有它的文件，通常使用<c>du -hc</c>可能不能给你正确的数字。别着急，<c>equery</c>来拯救你了！
 </p>
 
-<pre caption="包的大小">
+<pre caption="软件包大小">
 # <i>equery size openoffice-bin</i>
 * app-office/openoffice-bin-1.1.2
      Total Files : 2908
@@ -330,7 +329,7 @@ app-portage/gentoolkit-0.2.0
 </pre>
 
 <p>
-正如你所见的，<c>equery</c>以KB为单位打印出了全部的已用空间，并且它也列出了那个软件包有的所有的文件数列表。
+正如你所见，<c>equery</c>以KB为单位打印出了全部的已用空间，并且它也列出了那个软件包的所有文件数。
 </p>
 
 </body>
@@ -362,10 +361,7 @@ app-portage/gentoolkit-0.2.0
 </pre>
 
 <p>
-我安装了wireshark，但仅仅使用了gtk和ssl两个USE标记，但是那里还有一些其他的wireshark可以使用的USE标记。请参考<uri 
-link="/doc/en/handbook/">Gentoo Handbook</uri>里的<uri 
-link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE 
-Flags</uri>这一章来得到更多信息。
+我安装了wireshark，并且仅仅使用了gtk和ssl两个USE标记，但是那里还有一些其他的wireshark可以使用的USE标记。请参考<uri link="/doc/en/handbook/">Gentoo Handbook</uri>里的<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE Flags</uri>这一章来得到更多信息。
 </p>
 
 </body>
@@ -375,8 +371,7 @@ Flags</uri>这一章来得到更多信息。
 <body>
 
 <p>
-我们也可以使用<c>equery</c>来找出一个特定的软件包所使用的ebuild文件。你可以使用<c>equery 
-which</c>来达到目的，这是一个显示一个ebuild文件完整路径的命令。
+我们也可以使用<c>equery</c>来找出一个特定的软件包所使用的ebuild文件。你可以使用<c>equery which</c>来达到目的，这是一个显示一个ebuild文件完整路径的命令。
 </p>
 
 <pre caption="显示ebuild路径">
@@ -395,9 +390,7 @@ which</c>来达到目的，这是一个显示一个ebuild文件完整路径的�
 <body>
 
 <p>
-<c>euse</c>是一个用来在多个地方查看、设置和取消USE标记的工具。请参考<uri 
-link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE 
-Flags</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮助和所有的选项。
+<c>euse</c>是一个用来在多个地方查看、设置和取消USE标记的工具。请参考<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE Flags</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮助和所有的选项。
 </p>
 
 </body>
@@ -411,7 +404,7 @@ Flags</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮�
 </p>
 
 <note>
-<c>euse</c>用5列的输出信息来显示一个USE标记被设置或取消和在哪里被设置或取消。那些列分别显示+/-(激活活取消）、在环境里的设置、在make.conf里的设置、在make.Defaults里的设置和在make.Globals里的设置。输出的信息就像这样[+ECDG]。 
+<c>euse</c>用5列的输出信息来显示一个USE标记是否被设置或取消和在哪里被设置或取消。那些列分别表示+/-(激活活取消）、是在环境里设置的、是在make.conf里设置的、是在make.Defaults里设置的和是在make.Globals里设置的。输出的信息就像这样[+ECDG]。 
 </note>
 
 <pre caption="常看所有活跃的USE标记">
@@ -509,9 +502,7 @@ zlib                [+ CD ]
 </pre>
 
 <p>
-相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a 
--l</c>命令只显示活跃的本地USE标记。<c>-g</c> &amp; 
-<c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
+相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a -l</c>命令只显示活跃的本地USE标记。<c>-g</c> &amp; <c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
 </p>
 
 <pre caption="查看活跃的本地USE标记">
@@ -528,14 +519,11 @@ truetype            [+ CD ]
 </pre>
 
 <p>
-我们也可以使用<c>euse</c>来设置或取消USE标记。命令是这样的：<c>euse -E 
-flagname</c>（启用一个USE标记）和<c>euse -D flagname</c>（禁用一个USE标记）。
+我们也可以使用<c>euse</c>来设置或取消USE标记。命令是这样的：<c>euse -E flagname</c>（启用一个USE标记）和<c>euse -D flagname</c>（禁用一个USE标记）。
 </p>
 
 <warn>
-请不要单独使用<c>euse -E</c>或<c>euse 
--D</c>命令（就是没有USE标记的情况）。它会设置/取消所有在<c>/etc/make.conf</c>里的USE标记。虽然一个备份被保存在了<path>/etc/make.conf.euse_backup</path>里，但是在使用<c>euse 
--E</c>或<c>euse -D</c>的时候请小心。
+请不要单独使用<c>euse -E</c>或<c>euse -D</c>命令（就是没有USE标记的情况）。它会设置/取消所有在<c>/etc/make.conf</c>里的USE标记。虽然一个备份被保存在了<path>/etc/make.conf.euse_backup</path>里，但是在使用<c>euse -E</c>或<c>euse -D</c>的时候请小心。
 </warn>
 
 <pre caption="设置和取消USE标记">
@@ -581,8 +569,7 @@ USE="alsa acpi apache2 -arts cups cdr crypt cscope -doc fbcon \
 <body>
 
 <p>
-这个工具是Gentoo's Reverse 
-Dependency的重建者。它可以通过扫描一个ebuild文件来告诉你一个软件包是否因为一次升级或是一个依赖于它们的软件包而被破坏。它可以为你emerge这些软件包，但是它也可能使一个给定的软件包在当前的依赖环境下无法再工作，在那种情况下你应该升级这些软件包到一个更新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
+这个工具是Gentoo's Reverse Dependency（Gentoo递归依赖关系）的重建者。它可以通过扫描你已经安装了的ebuild文件来了解软件包是否因为一次它们依赖的软件包的升级而被破坏。它可以为你重新emerge这些软件包。但也可能是给定的软件包在当前的依赖环境下无法再工作了，在这种情况下你应该把这些破损的软件包升级到一个较新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
 </p>
 
 <pre caption="在假使模式下（pretend mode）运行revdep-rebuild">
@@ -656,10 +643,7 @@ Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
 <body>
 
 <p>
-<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory（Gentoo 
-Linux安全建议）），并且最后被统一到<c>emerge</c>和<c>equery</c>去了。请访问<uri 
-link="/proj/en/portage/glsa-integration.xml">Portage GLSA Integration 
-Page</uri>来得到更多信息。
+<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory（Gentoo Linux安全建议）），并且最后被整合到<c>emerge</c>和<c>equery</c>去了。请访问<uri link="/proj/en/portage/glsa-integration.xml">Portage GLSA Integration Page</uri>来得到更多信息。
 </p>
 
 </body>
@@ -669,7 +653,7 @@ Page</uri>来得到更多信息。
 <body>
 
 <p>
-<c>eread</c>是一个用来显示>=<c>portage-2.1</c>的portage产生的elog文件的简单组件。你可以通过设置<path>/etc/make.conf</path>里的一些变量来设置elog文件的存储。
+<c>eread</c>是一个用来显示<c>大于或等于2.1版本</c>的portage产生的elog文件的简单组件。你可以通过设置<path>/etc/make.conf</path>里的一些变量来设置elog文件的存储。
 </p>
 
 <pre caption="Enabling elog in /etc/make.conf">
@@ -678,9 +662,7 @@ PORTAGE_ELOG_SYSTEM="save"
 </pre>
 
 <note>
-这只是存储elog信息的其中一条途径。请参考在<uri 
-link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage 
-Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
+这只是存储elog信息的其中一条途径。请参考在<uri link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
 </note>
 
 <p>
@@ -700,11 +682,11 @@ Choice?
 </pre>
 
 <p>
-选择一个数字，然后文件就会通过在PAGER环境变量里特定的页面系统而被显示。如果PAGER变量没有被设置，它会使用<c>less</c>。
+选择一个数字，然后文件就会通过在“PAGER”环境变量里特定的页面系统（Paging System）而被显示。如果“PAGER”变量没有被设置，它会使用<c>less</c>。
 </p>
 
 <p>
-在显示elog项目后，如果你想要删除文件你就会被提醒。
+在显示了elog项目后，如果你想要删除那个文件你就会被提醒。
 </p>
 
 </body>
