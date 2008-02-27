@@ -361,7 +361,7 @@ app-portage/gentoolkit-0.2.0
 </pre>
 
 <p>
-我安装了wireshark，并且仅仅使用了gtk和ssl两个USE标记，但是那里还有一些其他的wireshark可以使用的USE标记。请参考<uri link="/doc/en/handbook/">Gentoo Handbook</uri>里的<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE Flags</uri>这一章来得到更多信息。
+我安装了wireshark，并且仅仅使用了gtk和ssl两个USE标记，但是那里还有一些其他的wireshark可以使用的USE标记。请参考<uri link="/doc/zh_cn/handbook/">Gentoo手册</uri>里的<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=2">USE标记</uri>这一章来得到更多信息。
 </p>
 
 </body>
@@ -390,7 +390,7 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-<c>euse</c>是一个用来在多个地方查看、设置和取消USE标记的工具。请参考<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE Flags</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮助和所有的选项。
+<c>euse</c>是一个用来在多个地方查看、设置和取消USE标记的工具。请参考<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=2">USE标记</uri>来得到更多信息。请查看<c>euse -h</c>来得到完整的帮助和所有的选项。
 </p>
 
 </body>
@@ -502,10 +502,10 @@ zlib                [+ CD ]
 </pre>
 
 <p>
-相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a -l</c>命令只显示活跃的本地USE标记。<c>-g</c> &amp; <c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
+相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a -l</c>命令只显示活跃的局部USE标记。<c>-g</c> &amp; <c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
 </p>
 
-<pre caption="查看活跃的本地USE标记">
+<pre caption="查看活跃的局部USE标记">
 # <i>euse -a -l</i>
 bitmap-fonts        [+  D ]
 font-server         [+  D ]
@@ -569,10 +569,10 @@ USE="alsa acpi apache2 -arts cups cdr crypt cscope -doc fbcon \
 <body>
 
 <p>
-这个工具是Gentoo's Reverse Dependency（Gentoo递归依赖关系）的重建者。它可以通过扫描你已经安装了的ebuild文件来了解软件包是否因为一次它们依赖的软件包的升级而被破坏。它可以为你重新emerge这些软件包。但也可能是给定的软件包在当前的依赖环境下无法再工作了，在这种情况下你应该把这些破损的软件包升级到一个较新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
+这个工具是Gentoo's Reverse Dependency（Gentoo反向依赖关系）的重建者。它可以通过扫描你已经安装了的ebuild文件来了解软件包是否因为一次它们依赖的软件包的升级而被破坏。它可以为你重新emerge这些软件包。但也可能是给定的软件包在当前的依赖环境下无法再工作了，在这种情况下你应该把这些破损的软件包升级到一个较新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
 </p>
 
-<pre caption="在假使模式下（pretend mode）运行revdep-rebuild">
+<pre caption="假装（pretend mode）运行revdep-rebuild">
 # <i>revdep-rebuild -p</i>
 
 Checking reverse dependencies...
@@ -643,7 +643,7 @@ Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
 <body>
 
 <p>
-<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory（Gentoo Linux安全建议）），并且最后被整合到<c>emerge</c>和<c>equery</c>去了。请访问<uri link="/proj/en/portage/glsa-integration.xml">Portage GLSA Integration Page</uri>来得到更多信息。
+<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory——Gentoo Linux安全建议），并且最后被整合到<c>emerge</c>和<c>equery</c>去了。请访问<uri link="/proj/en/portage/glsa-integration.xml">Portage GLSA整合页面</uri>来得到更多信息。
 </p>
 
 </body>
@@ -656,13 +656,13 @@ Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
 <c>eread</c>是一个用来显示<c>大于或等于2.1版本</c>的portage产生的elog文件的简单组件。你可以通过设置<path>/etc/make.conf</path>里的一些变量来设置elog文件的存储。
 </p>
 
-<pre caption="Enabling elog in /etc/make.conf">
+<pre caption="在/etc/make.conf中启用elog">
 PORTAGE_ELOG_CLASSES="log"
 PORTAGE_ELOG_SYSTEM="save"
 </pre>
 
 <note>
-这只是存储elog信息的其中一条途径。请参考在<uri link="/doc/en/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
+这只是存储elog信息的其中一条途径。请参考在<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
 </note>
 
 <p>
