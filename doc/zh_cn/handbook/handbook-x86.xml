@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-x86.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.161 -->
+<!-- English CVS version: 1.162 -->
 
 <book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn">
 <title>Gentoo Linux x86手册</title>
@@ -21,6 +21,7 @@
  <key id="live-cd-size">697</key>
  <key id="release-dir">releases/x86/2007.0/</key>
  <key id="stage3">stage3-i686-2007.0.tar.bz2</key>
+ <key id="profile">default-linux/x86/2007.0</key>
  <key id="online-book">handbook-x86.xml</key>
  <key id="CFLAGS">-O2 -march=i686 -pipe</key>
 </values>
