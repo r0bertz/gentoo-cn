@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/en/conky-howto.xml">
+<title>Gentoo Linux Conky 指南</title>
+
+<author title="汪腾">
+  <mail link="twang.umn@gmail.com">汪腾</main>
+</author>
+<author title="Editor">
+  <mail link="brenden@rty.ca">Brenden Matthews</mail>
+</author>
+
+<abstract>
+本文档介绍如何安装与配置系统监视器Conky。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.3</version>
+<date>2007-07-01</date>
+
+<chapter>
+<title>背景</title>
+<section>
+<title>Conky 入门</title>
+<body>
+
+<p>
+你已经在你的计算机上安装了gentoo，而且已经学会了30种不同的命令来监测你的计算机的方方面面，以弄清你的计算机此时此刻正在做什么。然后，我们还可以做什么呢？有更简单的方法来监测系统性能，并且弄清它在忙活些什么吗？以及执行这些工作，到底耗费了多少系统资源呢？这就是系统监视器，比如Conky，所能告诉你的。
+</p>
+
+</body>
+</section>
+<section>
+<title>它做些什么</title>
+<body>
+
+<p>
+跟其它的系统监视器，比方说top，不同，Conky能够作为X任务程序运行，也可以把它拖拽到根窗口下（有一个选项可以使Conky输出信息到标准输出，但是这里，我们不讨论这一点）。它将它所搜集到的系统信息用文本，柱状图或者图形的方式显示出来。并且，不同于top，Conky输出信息的方式是完全可以由用户来定制的。另外，除了监视系统本身之外，Conky还可以告诉你一些某些音乐播放器（比如BMPx, 
+Music Player Daemon 和Audacious Media 
+Player)的信息，也可以告诉你邮件箱中有多少封新邮件以及其它很多东西。即使你所需要的功能Conky还没有提供的话，你甚至可以写一个脚本程序来获取你所需－－比如说RSS，POP3电子邮件计数，本地天气，boinc以至portage状态，这些脚本都已经完成了。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装Conky</title>
+<section>
+<title>基本安装</title>
+<body>
+
+<p>
+Gentoo提供了一个ebuild，以便快速方便的安装Conky。特别提一句，注意USE标记。很可能你会需要X11（<c>X</c>)。还有，除了mpd之外，如果你想Conky提供你所需要别的播放器（比如，Audacious(<c>audacious</c>))的支持的话，加上相关的USE。如果你想监测TCP端口，那么务必去掉<c>ipv6</c>USE，因为端口监测只对ipv4系统有效。
+</p>
+
+<p>
+还有一点，<c>truetype</c>USE的编译选项会利用Xft库，提供对TrueType字体的支持。大部分用户会愿意加上该项USE标记。
+</p>
+
+<pre caption="/etc/portage/package.use">
+<comment>（下面是一个例子）</comment>
+# <i>echo app-admin/conky truetype audacious -ipv6 >> /etc/portage/package.use
+</pre>
+
+<p>
+当你设置好USE标记之后，就可以安装Conky了
+</p>
+
+<pre caption="安装Conky">
+# <i>emerge -av conky</i>
+</pre>
+
+<p>
+运行命令<c>conky</c>，你可以看到Conky外观。这是一个你了解Conky外观一个好的参考，你也可以据此了解你想要改变甚至移除什么。
+</p>
+
+<pre caption="第一次运行Conky">
+$ <i>conky</i>
+</pre>
+
+<note>
+如果要使Conky显示避免闪烁，你应该为X加上Double Buffer Externsion 
+(DBE)。否则X服务器不能足够快的刷新窗口。你可以在你的<path>/etc/Xll/xorg.conf</path>文件<b>Section 
+"Module"</b>中添加一行<c>Load "dbe"</c>。
+</note>
+
+<p>
+当你了解了Conky外观是，你可以开始定制它了!
+</p>
+
+</body>
+</section>
+<section>
+<title>定制Conky</title>
+<body>
+
+<p>
+Conky会默认在用户目录下<path>~/.conkyrc</path>文件作为配置文件。这个文件包含了所有的配置选项和静态文字信息，色彩以及其他控制数据显示方式的变量。Conky也提供了一份配置范例，它保存在<path>/usr/share/doc/&lt;conky-version&gt;/conkyrc.sample.gz</path>中。用你所安装的Conky版本替换&lt;conky-version&gt;。
+</p>
+
+<pre caption="将范例配置文件复制到你的主目录中。">
+<comment>(用Conky版本号替换<b>1.4.0-r1</b>)</comment>
+$ <i>zcat /usr/share/doc/conky-1.4.0-r1/conkyrc.sample.gz >> ~/.conkyrc</i>
+</pre>
+
+<p>
+现在，用你喜欢的文本编辑器打开这份范例配置文件。你可能注意到在这份范例中有两个独立的部分。第一部分包括了了程序配置选项和控制程序行为。这包括<c>update_interval</c>，也就是说Conky多少时间间隔更新一次屏幕。第二部分包括了将要显示在屏幕上的文字，图形以及其他变量。这包括类似系统运行时间（<c>$uptime</c>），cpu使用率（<c>$cpu</c>）和其他所有你想要显示的项目。从文件一开始即为第一部分。<c>TEXT</c>之后则全为第二部分。文件中，注释以<c>#<c>开头。但是，请记住，即使文件中第二部分的某一行被注释，它仍将显示在屏幕上。
+</p>
+
+<p>
+你可以在<uri>http://conky.sourceforge.net/config_settings.html</uri>和<uri>http://conky.sourceforge.net/variables.html</uri>中找到所有配置选项和变量的列表。除此之外，<uri>http://conky.sourceforge.net/screenshots.html</uri>上有一些很炫的屏幕截图及其配置文件和脚本程序。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>扩展Conky</title>
+<section>
+<title>内建变量之后</title>
+<body>
+
+<p>
+你已经知道这么多了，而且你浏览过Conky文档，想寻找更多的有关变量。但是似乎Conky没有提供……。你很幸运！Conky正为此提供了一些变量。<c>$exec</c>会让Conky每次更新后运行一条指令，<c>$execi</c>会每个特定一段时间运行一条指令，<c>$texeci</c>会每个一段特定时间在Conky自身线程中运行一条指令。
+</p>
+
+<pre caption="脚本范例">
+<i>${exec grep 'sudo' /var/log/messages | tail -n 4}</i>
+<i>${execi 30 ~/scripts/emerge-status.sh}</i>
+<i>${texeci 600 ~/scripts/gmail.pl}</i>
+</pre>
+
+<note>
+虽然任何一个在shell中能够运行的程序，在这些变量中也能够运行。但是，有一点非常重要，请记住这些指令一定要能够自动退出。这意味着类似<c>tail 
+-f</c>的连续运行的程序<e>无法</e>正常工作。
+</note>
+
+</body>
+</section>
+</chapter>
+</guide>
