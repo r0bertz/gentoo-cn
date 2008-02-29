@@ -375,7 +375,7 @@
     <file id="x86-at-faq">/proj/en/base/x86/arch-testers-faq.xml</file>
     <file id="php-upgrade">/proj/zh_cn/php/php-upgrading.xml</file>
     <file id="jffnms">/doc/en/jffnms.xml</file>
-    <file id="conky">/doc/en/conky-howto.xml</file>
+    <file id="conky">/doc/zh_cn/conky-howto.xml</file>
     <file id="ldapdns">/doc/en/ldapdns-guide.xml</file>
     <file id="man-guide">/doc/en/man-guide.xml</file>
     <file id="info-guide">/doc/en/info-guide.xml</file>
