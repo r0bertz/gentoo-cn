@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header:$ -->
+<!-- English CVS version: 1.5 -->
+<guide link="/doc/zh_cn/man-guide.xml" lang="zh_cn">
+<title>Gentoo man手册指南</title>
+
+<author title="作者">
+  <mail link="chriswhite@gentoo.org">Chris White</mail>
+</author>
+
+<author title="译者">
+  <mail link="jjmmma@gmail.com">马吉军</mail>
+</author>
+
+<abstract>
+这篇指南帮助你如何使用man浏览man手册。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>2</version>
+<date>2006-06-18</date>
+
+<chapter>
+<title>简介</title>
+<section>
+<title>man程序</title>
+<body>
+
+<p>
+每一个人在他的linux人生中使用过它。它就是<c>man</c>命令。尽管man程序本身的结构看起来非常简单，然而，它除了滚动手册页之外，还有一些其他额外的功能。希望这篇文档能为你点亮man的那些功能。
+</p>
+
+</body>
+</section>
+<section>
+<title>Man结构</title>
+<body>
+
+<p>
+手册页主要报存在<path>/usr/share/man</path>目录下。
+其实，只要是列在<c>MANPATH</c>环境变量的路径中的手册页，man都能够找到。Gentoo一般将<c>MANPATH</c>变量保存在<path>/etc/env.d</path>中。在这些目录中，保存了一些结构为manX的文件夹。其中X表示章节号。一个标准的man布局可能如下所示：
+</p>
+
+<pre caption="标准man结构">
+$ <i>ls /usr/share/man | grep man</i>
+man0p
+man1
+man1p
+man2
+man3
+man3p
+man4
+man5
+man6
+man7
+man8
+man9
+mann
+</pre>
+
+<p>
+实际的章节号显示的很标准，但是注意这里有一个<path>mann</path>和几个<path>man#p</path>文件夹。下表列举了上面man目录，以及其中包含了什么：
+</p>
+
+<table>
+<tr>
+  <th>man目录</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>man0p</ti>
+  <ti>
+    和其他有目录名中有p的目录一样，这个<c>p</c>表示POSIX。在这个目录下的手册页描述各种POSIX头文件的功能。
+  </ti>
+</tr>
+<tr>
+  <ti>man1</ti>
+  <ti>
+    这一章节介绍标准命令。大部分程序将其手册页放在这里。因此，这一章节将会是最大的。
+  </ti>
+</tr>
+<tr>
+  <ti>man1p</ti>
+  <ti>
+    这一章节描述POSIX版本的命令。因为这里只描述基本的命令，因此会比man1小很多。
+  </ti>
+</tr>
+<tr>
+  <ti>man2</ti>
+  <ti>这一章节描述Linux内核系统调用。</ti>
+</tr>
+<tr>
+  <ti>man3</ti>
+  <ti>这一章节描述标准的c函数库。</ti>
+</tr>
+<tr>
+  <ti>man4</ti>
+  <ti>
+    这一章节描述特殊的设备。这些设备通常是面向内核的，不过<c>Xorg-X11</c>在这里也有一项。
+  </ti>
+</tr>
+<tr>
+  <ti>man5</ti>
+  <ti>
+    这一章节描述一些特定文件的结构以及程序将使用哪些文件。读者们可能对以下参考比较熟悉，<c>man 5 portage</c>是对<c>portage</c>文件结构的一些描述，还有<c>man 5 make.conf</c>是对<path>make.conf</path>文件结构的描述。
+  </ti>
+</tr>
+<tr>
+  <ti>man6</ti>
+  <ti>这一章节介绍游戏和一些特殊玩具。</ti>
+</tr>
+<tr>
+  <ti>man7</ti>
+  <ti>
+    这一章节描述一些标准和一些杂项。标准包括比如字符集，SQL语句，ISO标准以及正则表达式。
+  </ti>
+</tr>
+<tr>
+  <ti>man8</ti>
+  <ti>
+    这一章节描述管理员命令（通常由root用户执行的那些命令）。
+  </ti>
+</tr>
+<tr>
+  <ti>man9</ti>
+  <ti>
+    这一章节很少。应该是包含内核一些部分的文档。
+  </ti>
+</tr>
+<tr>
+  <ti>mann</ti>
+  <ti>
+    这一章节主要包含<c>Tcl/Tk</c>的一些文档。<c>n</c>表示新的（new）。
+  </ti>
+</tr>
+</table>
+
+<p>
+尽管不是全部的细节，这里列举了大部分人感兴趣的手册页。然而，当你想了解某个章节是干什么的，查查这张表格是最快捷的方法了。下一章介绍如何通过man遍历这里介绍的man结构。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>使用man结构</title>
+<section>
+<title>浏览man结构</title>
+<body>
+
+<p>
+现在我们知道了标准的man结构。我们开始通过命令查看。有时候我们希望减小我们的查找手册页的范围。第一种方法是通过指定章节。比如找出对man中的章节的描述，我们可以使用<c>man 章节号 intro</c>：
+</p>
+
+<pre caption="使用man intro找到章节号的描述">
+$ <i>man 3 intro</i>
+<comment>（为了适合这个文档，我们稍微修改了一下输出）</comment>
+INTRO(3)               Linux Programmer's Manual                INTRO(3)
+
+
+
+NAME
+       intro - Introduction to library functions
+
+DESCRIPTION
+       This chapter describes all library functions excluding the library
+       functions described in chapter 2, which implement system calls.
+       There are various function groups which can be identified by a
+       letter which is appended to the chapter number:
+....
+</pre>
+
+<p>
+遗憾的是，这样做不一定行！幸运的是，我们可以通过另外一种方法查找那些可能有多个返回结构的命令（比如一个库调用和系统命令有相同的命令时）。我们用<c>-K</c>参数，比如：
+</p>
+
+<pre caption="使用man -K查找字符串">
+$ <i>man -K sleep</i>
+/usr/share/man/man0p/time.h.0p.gz? [ynq] <i>n</i>
+/usr/share/man/man0p/unistd.h.0p.gz? [ynq] <i>n</i>
+/usr/share/man/man2/alarm.2.gz? [ynq] <i>n</i>
+/usr/share/man/man2/pause.2.gz? [ynq] <i>n</i>
+/usr/share/man/man2/futex.2.gz? [ynq] <i>n</i>
+/usr/share/man/man2/nanosleep.2.gz? [ynq] <i>y</i>
+/usr/share/man/man2/semop.2.gz? [ynq] <i>q</i>
+</pre>
+
+<p>
+有时候输出结果可能会很多。这时候最好指定更确切的关键字。现在我们知道怎么找到手册页了。接下来的章节介绍怎么查看手册页。
+</p>
+
+</body>
+</section>
+<section>
+<title>查看手册页</title>
+<body>
+
+<p>
+  查看手册页有两种方法。方法一，<c>man [手册页名字]</c>。方法二，<c>man
+ [章节] [手册页名字]</c>。我们以<c>bc</c>为例子。我们可以查看到第一篇关于<c>bc</c>的手册页（章节号将会是1，因为这是章节号最小的包含<c>bc</c>命令的章节）：
+</p>
+
+<pre caption="查看默认手册页">
+$ <i>man bc</i>
+bc(1)                                            bc(1)
+
+
+NAME
+       bc - An arbitrary precision calculator language
+...
+</pre>
+
+<p>
+然而，如果我们要找POSIX版的呢？那么我可以用第二种形式：
+</p>
+
+<pre caption="查看特定章节中的手册页">
+$ <i>man 1p bc</i>
+BC(P)        POSIX Programmer's Manual           BC(P)
+
+
+NAME
+       bc - arbitrary-precision arithmetic language
+...
+</pre>
+
+<p>
+手册页显示如上。现在我们查看到了手册页，接下来是怎么在上面工作。下一章介绍如何浏览和搜索。
+</p>
+
+</body>
+</section>
+<section>
+<title>浏览和搜索手册页</title>
+<body>
+
+<p>
+浏览手册页非常简单。使用向上和向下键一行一行翻阅。使用向上翻页和向下翻页键一页一页翻阅。注意，使用这样的浏览指令是假设环境变量<c>PAGER</c>设成了默认的<c>less</c>。less还有其他一些浏览命令。不过方向键一般足够了。
+</p>
+
+<pre caption="另外的less浏览键">
+  e  ^E  j  ^N  CR  *  前进一行（或N行）
+  y  ^Y  k  ^K  ^P  *  后退一行（或N行）
+  f  ^F  ^V  SPACE  *  前进一个窗口（或N行）
+  b  ^B  ESC-v      *  后退一个窗口（或N行）
+  z                 *  前进一个窗口（将窗口设置到N）
+  w                 *  后退一个窗口（将窗口设置到N）
+  ESC-SPACE         *  前进一个窗口，在文件末尾不停止
+  d  ^D             *  前进半个窗口（将这半个窗口设置到N）
+  u  ^U             *  后退半个窗口（将这半个窗口设置到N）
+  ESC-)  RightArrow *  向左半个屏幕宽（或N个位置）
+  ESC-(  LeftArrow  *  向右半个屏幕宽（或N个位置）
+  F                    一直前进，像"tail -f"一样
+</pre>
+
+<p>
+搜索更加有趣。最基本的搜索指令是
+<c>/字符串</c>和<c>?字符串</c>。
+第一个版本向前搜索，第二个版本向后搜索。
+这里的<c>字符串</c>是正则表达式字符串，在n<c>man 7 regex</c>中有描述。
+我们以搜索<c>emerge</c>的<c>-D</c>为例，首先找出emerge的手册页：
+</p>
+
+<pre caption="找出emerge的手册页">
+$ <i>man emerge</i>
+</pre>
+
+<p>
+然后，在屏幕上，按<c>/</c>就能显示出向前搜索的提示。我们输入搜索字符串：
+</p>
+
+<pre caption="显示向前搜索提示">
+     gracefully handles updating installed packages to newer releases as well.
+     It handles both source and binary packages, and it can be used to create
+     binary packages for distribution.
+
+EBUILDS, TBZ2S, CLASSES AND DEPENDENCIES
+/<i>\-D</i>
+</pre>
+
+<note>
+<c>\</c>符号使用来换码<c>-</c>符号。<c>\</c>一般用作正则表达式的一部分。
+</note>
+
+<p>
+这将搜索手册页，然后将锁定到被搜索的项：
+</p>
+
+<pre caption="向前搜索结果">
+  --deep (-D)
+        When used in conjunction with --update, this flag forces emerge to consider the entire
+        dependency tree of packages, instead of checking only the immediate dependencies of
+        the packages.  As an example, this catches updates in libraries that are not directly
+        listed in the  dependencies of a package.
+</pre>
+
+<p>
+如果你你搜索到结果之后还想再继续搜索同样的字符串，只要再次按<c>/</c>键，然后回车（即，不要再输入搜索字符串）就可以了。
+这将默认搜索上一次使用的搜索字符串。现在已经找到我们搜索的选项的手册页，上面解释了选项含义。
+再比如<c>man 5 portage</c>手册页。上面列了使用到的文件并解释了其用途。向前搜索几次就能找到结果，不过也有一个简单的方法
+来处理这个问题。用第二个搜索方法向后搜索。我们用这个方法查找<path>package.unmask</path>的描述。首先显示<c>man 5 portage</c>手册页：
+</p>
+
+<pre caption="显示man 5 portage手册页">
+$ <i>man 5 portage</i>
+</pre>
+
+<p>
+然后按<c>SHIFT+g</c>，将把你带到手册页末尾：
+</p>
+
+<pre caption="按SHIFT+g之后到达手册页末尾">
+SEE ALSO
+       emerge(1), ebuild(1), ebuild(5), make.conf(5)
+
+Portage 2.0.51        Jan 2004            PORTAGE(5)
+lines 418-442/442 (END)
+</pre>
+
+<p>
+现在，我们继续用<c>?字符串</c>方法向后搜索选项。首先按<c>?</c>键显示出搜索提示，然后输入<c>package.unmask</c>回车，我们这样查询：
+</p>
+
+<pre caption="指定我们的搜索">
+SEE ALSO
+       emerge(1), ebuild(1), ebuild(5), make.conf(5)
+
+Portage 2.0.51        Jan 2004           PORTAGE(5)
+?<i>package.unmask</i>
+</pre>
+
+<p>
+然后按回车显示出搜索结果：
+</p>
+
+<pre caption="我们的搜索结果">
+  package.unmask
+       Just like package.mask above, except here you list packages you want to unmask.
+       Useful for overriding the global  package.mask  file (see below).  Note that
+       this does not override packages that are masked via KEYWORDS.
+...
+</pre>
+
+<p>
+搜索完成！注意，和使用<c>/</c>一样，用<c>?</c>搜索时，不输入搜索字符串会默认用上一次搜索字符串。
+</p>
+
+</body>
+</section>
+<section>
+<title>结论</title>
+<body>
+
+<p>
+这一章总结man指导。希望这篇指导点亮手册页浏览的一线曙光，并给有经验的用户一点新的提示。
+喜欢用其他方法浏览手册页的用户也可以用以下工具：
+</p>
+
+<ul>
+  <li>app-text/man2html - 一个将手册页转成html的程序</li>
+  <li>app-text/tkman - 一个基于tk的手册页浏览器</li>
+</ul>
+
+<p>
+<c>KDE</c>的网页浏览器<c>Konqueror</c>也能用来浏览手册页。只要在地址条上输入<c>man:</c>。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
