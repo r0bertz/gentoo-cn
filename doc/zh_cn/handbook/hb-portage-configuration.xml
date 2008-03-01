@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-portage-configuration.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.15 -->
+<!-- English CVS version: 1.17 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 Portage所有的设置都可以通过不同的变量来完成，你可以设置在配置文件中或者设置成一个环境变量。
 </abstract>
 
-<version>1.7</version>
-<date>2007-03-25</date>
+<version>1.9</version>
+<date>2008-02-28</date>
 
 <section>
 <title>Portage的配置</title>
@@ -22,7 +22,7 @@ Portage所有的设置都可以通过不同的变量来完成，你可以设置�
 <body>
 
 <p>
-如前面所述，你可以在<path>/etc/make.conf</path>中定义许多变量来配置Portage。请参考<path>make.conf</path>的手册页以获得更详细和完整的信息:
+如前面所述，你可以在<path>/etc/make.conf</path>中定义许多变量来配置Portage。请参考<path>make.conf</path>的手册页以获得更详细和完整的信息：
 </p>
 
 <pre caption="阅读make.conf的手册页">
@@ -39,7 +39,7 @@ $ <i>man make.conf</i>
 <body>
 
 <p>
-当Portage构建应用程序时，他会将下面变量的内容传给编译器和configure脚本:
+当Portage构建应用程序时，他会将下面变量的内容传给编译器和configure脚本：
 </p>
 
 <ul>
@@ -90,7 +90,7 @@ Portage一般会用新文件覆盖掉旧文件，除非这些旧文件位于<e>�
 </p>
 
 <p>
-你可以利用<c>emerge --info</c>来获得目前CONFIG_PROTECT的设置:
+你可以利用<c>emerge --info</c>来获得目前CONFIG_PROTECT的设置：
 </p>
 
 <pre caption="获得CONFIG_PROTECT的设定">
@@ -98,11 +98,11 @@ $ <i>emerge --info | grep 'CONFIG_PROTECT='</i>
 </pre>
 
 <p>
-更多关于Portage配置文件保护的信息可以通过<c>emerge</c>获得:
+更多关于Portage配置文件保护的信息可以查看<c>emerge</c>手册页的CONFIGURATION FILES部分：
 </p>
 
 <pre caption="更多关于Portage配置文件保护的信息">
-$ <i>emerge --help config</i>
+$ <i>man emerge</i>
 </pre>
 
 </body>
@@ -125,7 +125,7 @@ $ <i>emerge --help config</i>
 <body>
 
 <p>
-当你的系统上没有所需要的信息和数据时，Portage就会从网络上获取数据。含有这些信息和数据的服务器的位置定义在以下变量中:
+当你的系统上没有所需要的信息和数据时，Portage就会从网络上获取数据。含有这些信息和数据的服务器的位置定义在以下变量中：
 </p>
 
 <ul>
@@ -138,7 +138,7 @@ $ <i>emerge --help config</i>
 </ul>
 
 <p>
-第3个变量设定rsync服务器的地址，此服务器用来更新你的Portage树:
+第3个变量设定rsync服务器的地址，此服务器用来更新你的Portage树：
 </p>
 
 <ul>
@@ -148,7 +148,7 @@ $ <i>emerge --help config</i>
 </ul>
 
 <p>
-GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首先你要<c>emerge mirrorselect</c>。更多信息参考mirrorselect的在线帮助:
+GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首先你要<c>emerge mirrorselect</c>。更多信息参考mirrorselect的在线帮助：
 </p>
 
 <pre caption="更多关于mirrorselect的信息">
@@ -188,7 +188,7 @@ Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以�
 <body>
 
 <p>
-你不能改变Portage用来更新Portage树所使用的rsync命令,但你可以设定一些与rsync命令相关的变量:
+你不能改变Portage用来更新Portage树所使用的rsync命令,但你可以设定一些与rsync命令相关的变量：
 </p>
 
 <ul>
@@ -198,11 +198,11 @@ Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以�
   <li>
     PORTAGE_RSYNC_EXTRA_OPTS可以用于在同步过程中设置附加选项。选项之间用空格分开。
     <ul>
-      <li>--timeout=&lt;number&gt;: 这里设定rsync连接超时的秒数。此变量默认为180秒。如果用户是使用拨号上网或者一台处理速度慢的电脑，这个值需要设到300或者更高。</li>
-      <li>--exclude-from=/etc/portage/rsync_excludes: 这个参数指定一个文件，内容是rsync在更新过程中需要忽略的软件包和/或者类别的列表。这个例子指定的是<path>/etc/portage/rsync_excludes</path>。请参考<uri link="?part=3&amp;chap=5">使用Portage树的子集</uri>以了解此文件的格式。</li>
-      <li>--quiet: 减少屏幕输出</li>
-      <li>--verbose: 在屏幕上输出完整的文件列表</li>
-      <li>--progress: 为每个文件显示一个进度条</li>
+      <li>--timeout=&lt;number&gt;： 这里设定rsync连接超时的秒数。此变量默认为180秒。如果用户是使用拨号上网或者一台处理速度慢的电脑，这个值需要设到300或者更高。</li>
+      <li>--exclude-from=/etc/portage/rsync_excludes： 这个参数指定一个文件，内容是rsync在更新过程中需要忽略的软件包和/或者类别的列表。这个例子指定的是<path>/etc/portage/rsync_excludes</path>。请参考<uri link="?part=3&amp;chap=5">使用Portage树的子集</uri>以了解此文件的格式。</li>
+      <li>--quiet： 减少屏幕输出</li>
+      <li>--verbose： 在屏幕上输出完整的文件列表</li>
+      <li>--progress： 为每个文件显示一个进度条</li>
     </ul>
   </li>
   <li>
@@ -251,7 +251,7 @@ Portage支持断点续传。默认是使用<c>wget</c>来实现，但你可以�
 </p>
 
 <p>
-更多关于nice值的信息, 请参考nice的手册页:
+更多关于nice值的信息, 请参考nice的手册页：
 </p>
 
 <pre caption="更多关于nice的信息">
