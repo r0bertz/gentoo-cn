@@ -5,7 +5,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/gentoolkit.xml" lang="zh_cn">
-<title>Gentoo工具包（GentooKit）</title>
+<title>Gentoo工具包（Gentoolkit）</title>
 
 <author title="作者">
   <mail link="mbutcher@aleph-null.tv">Matt Butcher</mail>
