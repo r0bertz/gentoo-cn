@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-system.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.5 -->
+<!-- English CVS version: 1.6 -->
 <sections>
 
-<version>8.1</version>
-<date>2007-07-26</date>
+<version>8.2</version>
+<date>2007-10-24</date>
 
 <section>
 <title>Chroot</title>
@@ -295,7 +295,7 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
 
 <pre caption="验证系统profile">
 # <i>ls -FGg /etc/make.profile</i>
-lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/default-linux/mips/2007.0/generic-be/o32/
+lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyval id="profile"/>
 </pre>
 
 <p>
