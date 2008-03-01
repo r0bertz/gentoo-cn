@@ -156,7 +156,7 @@ GENTOO_MIRRORS和SYNC变量可以由程序<c>mirrorselect</c>自动设定。首�
 </pre>
 
 <p>
-如果你需要使用代理服务器，你可以用HTTP_PROXY、FTP_PROXY和RSYNC_PROXY变量来设定它们。
+如果你需要使用代理服务器，你可以用http_proxy、ftp_proxy和RSYNC_PROXY变量来设定它们。
 </p>
 
 </body>

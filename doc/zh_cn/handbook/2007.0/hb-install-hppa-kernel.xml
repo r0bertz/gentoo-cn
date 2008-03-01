@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 
 <sections>
 
-<version>8.3</version>
-<date>2007-08-12</date>
+<version>8.4</version>
+<date>2008-01-12</date>
 
 <section>
 <title>时区</title>
@@ -104,10 +104,8 @@ lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; lin
 </p>
 
 <pre caption="选择experimental code/drivers">
-Code maturity level options ---&gt;
+General setup ---&gt;
   [*] Prompt for development and/or incomplete code/drivers
-General setup --->
-  [*] Support for hot-pluggable devices
 </pre>
 
 <p>
