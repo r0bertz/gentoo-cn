@@ -396,6 +396,7 @@
     <file id="overlays-policy">/proj/en/overlays/policy.xml</file>
     <file id="pam-upgrade">/proj/en/base/pam/upgrade-0.99.xml</file>
     <file id="embedded-handbook">/proj/en/base/embedded/handbook/index.xml</file>
+    <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
   </files>
   <docs>
     <doc id="name-logo">
