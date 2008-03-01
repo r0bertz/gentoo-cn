@@ -28,7 +28,7 @@
 <chapter>
 <title>背景</title>
 <section>
-<title>Conky 入门</title>
+<title>Conky 介绍</title>
 <body>
 
 <p>
@@ -89,7 +89,7 @@ $ <i>conky</i>
 </note>
 
 <p>
-当你了解了Conky外观是，你可以开始定制它了!
+当你了解了Conky外观后，你可以开始定制它了!
 </p>
 
 </body>
