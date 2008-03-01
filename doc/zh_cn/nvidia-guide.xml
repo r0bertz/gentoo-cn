@@ -12,10 +12,10 @@
 <author title="作者">
   <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
-<author title="编辑者">
+<author title="编辑">
   <mail link="curtis119@gentoo.org">M Curtis Napier</mail>
 </author>
-<author title="编辑者">
+<author title="编辑">
   <mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
 </author>
 <author title="译者">
@@ -25,8 +25,6 @@
 <abstract>
 许多Gentoo用户在自己的系统中使用了nVidia芯片组。nVidia提供了Linux下的专用驱动，它能使你的显卡性能得到充分发挥。这份指南指导您安装和配置这些驱动。
 </abstract>
-
-
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 -->
