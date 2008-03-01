@@ -110,7 +110,7 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 </note>
 
 <note>
-你要知道最近如果equery通过一个管道发送输出信息，它会改变输出信息的格式。那个通过管道传输的格式被认为更容易被工具格式化，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要equery的脚本，你需要了解这个。
+注意，equery如果通过一个管道输出信息，现在它会改变输出信息的格式。通过管道输出的格式是为了更容易被其他工具解析，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要调用equery的脚本，你注意这一点。
 </note>
 
 </body>
@@ -130,7 +130,7 @@ media-sound/audacious-1.1.2 (/usr/bin/audacious)
 </pre>
 
 <p>
-通过使用<c>-f</c>选项，你可以搜索符合任意的正规短语的文件所属的软件包。<c>-e</c>选项能够在第一个符合的软件包找到后就立即终止寻找。
+通过使用<c>-f</c>选项，你可以搜索匹配任意的正则表达式的文件所属的软件包。<c>-e</c>选项能够在一个匹配的软件包找到后终止寻找。
 </p>
 
 </body>
@@ -140,7 +140,7 @@ media-sound/audacious-1.1.2 (/usr/bin/audacious)
 <body>
 
 <p>
-有时候检查一个软件包的完整性是很有用的。<c>equery</c>可以通过验证md5 sums和时间戳来检验一个软件包是否被破坏、替换或是移除。
+有时候检查一个软件包的完整性是很有用的。<c>equery</c>可以通过验证md5校验和及时间戳来检验一个软件包是否被破坏、替换或是移除。
 </p>
 
 <pre caption="确认软件包的完整性">
@@ -150,17 +150,17 @@ media-sound/audacious-1.1.2 (/usr/bin/audacious)
 </pre>
 
 <p>
-请记住，如果你在安装完成后改变了配置文件，这些可能会被报告为 "not good"。
+请记住，如果你在安装完成后改变了配置文件，这些可能会被报告为"not good"。
 </p>
 
 </body>
 </section>
 <section>
-<title>列出所有依赖的软件包……</title>
+<title>列出所有依赖的……软件包</title>
 <body>
 
 <p>
-<c>equery</c>能够列出符合一个软件包的所有直接依赖关系。我们能够简单地使用<c>depends</c>函数来做这件事： 
+<c>equery</c>能够列出直接依赖某个软件包的所有包。我们能够简单地使用<c>depends</c>函数来做这件事： 
 </p>
 
 <pre caption="查找依赖于pygtk的软件包">
@@ -210,7 +210,7 @@ Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
 </body>
 </section>
 <section>
-<title>列出属于一个ebuild的软件包</title>
+<title>列出属于一个ebuild的文件</title>
 <body>
 
 <p>
@@ -257,7 +257,7 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-如果你想要寻找在你的系统上使用某个特定USE标记的软件包，<c>equery</c>包括了一个叫<c>hasuse</c>的函数。
+如果你想要在你的系统上查找使用某个特定USE标记的软件包，<c>equery</c>的<c>hasuse</c>的函数能够帮助你。
 </p>
 
 <pre caption="查找使用firefox这个USE标记的软件包">
