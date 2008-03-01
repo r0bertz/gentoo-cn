@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.45 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/ati-faq.xml" lang="zh_cn">
+<title>Gentoo Linux ATI FAQ</title>
+
+<author title="作者">
+  <mail link="lu_zero@gentoo.org">Luca Barbato</mail>
+</author>
+<author title="编辑">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="编辑">
+  <mail link="blubber@gentoo.org">Tiemo Kieft</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>
+本FAQ能帮助用户解决一些常见的有关ATI显卡的DRI和X11的安装和配置问题。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.6</version>
+<date>2007-11-29</date>
+
+<chapter>
+<title>硬件支持</title>
+<section>
+<title>支持我的ATI显卡么？</title>
+<body>
+
+<p>
+<uri link="http://www.freedesktop.org/Software/xorg">xorg-x11</uri>支持很多ATI显卡（但不是全部），至少是2D加速功能。3D的支持由xorg-x11或者ATI的<uri link="http://mirror.ati.com/support/drivers/linux/radeon-linux.html">闭源驱动</uri>提供。
+</p>
+
+<table>
+<tr>
+  <th>GPU</th>
+  <th>常用名</th>
+  <th>支持</th>
+</tr>
+<tr>
+  <ti>Rage128</ti>
+  <ti>Rage128</ti>
+  <ti>xorg</ti>
+</tr>
+<tr>
+  <ti>R100</ti>
+  <ti>Radeon7xxx, Radeon64</ti>
+  <ti>xorg</ti>
+</tr>
+<tr>
+  <ti>R200, R250, R280</ti>
+  <ti>Radeon8500, Radeon9000, Radeon9200</ti>
+  <ti>xorg, ATI DRI</ti>
+</tr>
+<tr>
+  <ti>R300, R400</ti>
+  <ti>Radeon 9500 - x850</ti>
+  <ti>xorg, ATI DRI</ti>
+</tr>
+<tr>
+  <ti>R500</ti>
+  <ti>Radeon X1300或者更高</ti>
+  <ti>ATI DRI，xorg的支持正在开发中</ti>
+</tr>
+<tr>
+  <ti>R600</ti>
+  <ti>Radeon HD 2000系列</ti>
+  <ti>ATI DRI</ti>
+</tr>
+<tr>
+  <ti>RV670</ti>
+  <ti>Radeon HD 3000系列</ti>
+  <ti>没有，正在开发中</ti>
+</tr>
+</table>
+
+<note>
+HD 3000系列显卡是基于R600芯片的，不过目前Linux暂无这些显卡的支持。开源的RadeonHD驱动将来能提供对这些显卡的支持，目前仍处于紧张的开发过程中。ATI将会发布新的支持2D／3D硬件加速的fglrx驱动。
+</note>
+
+</body>
+</section>
+<section>
+<title>
+  我有一个All-In-Wonder/Vivo显卡。它的多媒体功能是否能被支持？
+</title>
+<body>
+
+<p>
+<uri 
+link="http://gatos.sf.net">GATOS项目</uri>能支持这块显卡的多媒体功能。这些驱动已经被集成入了Xorg代码树。你不需要额外做什么事情；<c>x11-drivers/xf86-video-ati</c>将会正常支持这些功能。
+</p>
+
+</body>
+</section>
+<section>
+<title>我使用的不是x86架构。我有什么选择？</title>
+<body>
+
+<p>
+PPC或者Alpha平台上的X11支持非常类似x86的X11支持。不过，ATI的闭源驱动不能在PPC或者Alpha平台上运行，所以你用不上R300 GPU的3D功能。如果你有这样一个显卡并且希望X11能支持它，请联系<uri link="http://www.ati.com">ATI</uri>并让他们发布你的系统的GPU的规格。AMD64平台的闭源驱动已经发布了，所以AMD64用户可以享受到x86用户同样的功能。
+</p>
+
+<impo>
+要启用某些AMD64芯片组的apggart的支持，你需要禁用K8 IOMMU的支持。
+</impo>
+
+</body>
+</section>
+<section>
+<title>我有一个笔记本。我的ATI移动型号受支持么？</title>
+<body>
+
+<p>
+应该能支持，不过你可能会碰上由于这些芯片组的OEM PCI id而引起的配置问题。在大多数情况下，你可能需要自己来写配置文件或者使用<c>xorgconfig</c>工具。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装</title>
+<section>
+<title>软件包</title>
+<body>
+
+<p>
+获得你的ATI显卡的驱动有两种方式：
+</p>
+
+<ul>
+  <li><c>xorg-x11</c> ebuild提供了X11实现。</li>
+  <li>
+    <c>ati-drivers</c> ebuild提供了ATI闭源X驱动和内核模块。
+  </li>
+</ul>
+
+<p>
+如果你想使用ATI的<e>内部</e>agpgart支持，而不是Linux内核里提供的，你的内核里的agpgart驱动和芯片组相关驱动应该编译成模块或者根本不编译。
+</p>
+
+<note>
+请阅读<uri link="/doc/zh_cn/dri-howto.xml">硬件加速指南</uri>以获得更多有关为你的ATI显卡安装驱动的信息。
+</note>
+
+</body>
+</section>
+<section>
+<title>配置</title>
+<body>
+
+<p>
+建议使用<c>xorgcfg</c>或者<c>xorgconfig</c>来生成<path>xorg.conf</path>配置文件。或者，你可以使用Xorg自动配置选项：
+</p>
+
+<pre caption="自动配置X">
+# <i>X -configure</i>
+</pre>
+
+<p>
+欲知更多有关怎样获得一个基本的<c>xorg.conf</c>配置文件的信息，请参考<uri link="/doc/zh_cn/xorg-config.xml">Gentoo X服务器HowTo</uri>.
+</p>
+
+<note>
+你可以使用<c>aticonfig</c>如果你已经安装了<c>ati-drivers</c>软件包。
+</note>
+
+<impo>
+PPC用户可以使用独立的<c>Xorgautoconfig</c>配置工具，请安装<c>Xorgautoconfig</c>软件包，不过这不是必需的。
+</impo>
+
+</body>
+</section>
+<section>
+<title>切换到OpenGL</title>
+<body>
+
+<p>
+当X安装配置完，运行的时候，它就可以用ATI的OpenGL库：
+</p>
+
+<pre caption="运行eselect">
+# <i>eselect opengl set ati</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>更多资源</title>
+<section>
+<body>
+
+<p>
+请阅读<uri link="/doc/zh_cn/dri-howto.xml">硬件加速指南</uri>以获得更多的配置你的ATI显卡的信息。
+</p>
+
+<p>
+更多有关Gentoo Linux和ATI Radeon二进制驱动的信息可以在<uri link="http://odin.prohosting.com/wedge01/gentoo-radeon-faq.html">Wedge非官方Gentoo ATI Radeon FAQ</uri>上找到。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
