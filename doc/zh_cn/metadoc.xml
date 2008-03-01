@@ -107,7 +107,7 @@
     <file id="utf-8">/doc/en/utf-8.xml</file>
     <file id="cron-guide">/doc/en/cron-guide.xml</file>
     <file id="ldap-howto">/doc/en/ldap-howto.xml</file>
-    <file id="nvidia-guide">/doc/en/nvidia-guide.xml</file>
+    <file id="nvidia-guide">/doc/zh_cn/nvidia-guide.xml</file>
     <file id="ati-faq">/doc/en/ati-faq.xml</file>
     <file id="cvs-tutorial">/doc/en/cvs-tutorial.xml</file>
     <file id="devfs-guide">/doc/en/devfs-guide.xml</file>
@@ -377,7 +377,7 @@
     <file id="jffnms">/doc/en/jffnms.xml</file>
     <file id="conky">/doc/zh_cn/conky-howto.xml</file>
     <file id="ldapdns">/doc/en/ldapdns-guide.xml</file>
-    <file id="man-guide">/doc/en/man-guide.xml</file>
+    <file id="man-guide">/doc/zh_cn/man-guide.xml</file>
     <file id="info-guide">/doc/en/info-guide.xml</file>
     <file id="java-upgrade">/proj/en/java/java-upgrade.xml</file>
     <file id="kernel-config">/doc/en/kernel-config.xml</file>
