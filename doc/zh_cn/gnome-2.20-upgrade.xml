@@ -1,0 +1,107 @@
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
+<guide link="/doc/zh_cn/gnome-2.20-upgrade.xml" lang="zh_cn">
+
+<title>Gnome 2.20升级指南</title>
+<author title="Author">
+  <mail link="dang@gentoo.org">Daniel Gryniewicz</mail>
+</author>
+<author title="Author">
+  <mail link="leio@gentoo.org">Mart Raudsepp</mail>
+</author>
+<author title="译者">
+    <mail link="jingcheng01@gmail.com">井诚</mail>
+</author>
+
+<abstract>
+这是一篇关于从GNOME 2.18.x升级到GNOME 2.20.x的指南。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.1</version>
+<date>2007-11-22</date>
+
+<chapter>
+<title>变更</title>
+<section>
+<title>字体，主题，以及背景首选项</title>
+<body>
+
+<p>
+字体，主题和背景的控制面板已经被合并到“外观”控制面板中。这意味着，现在只要在
+由几个标签页构成的单一窗口中就能改变几乎任何与你的桌面外观相关的设置。访问
+“系统”->“首选项”->“外观”来更改这些设置。
+</p>
+
+</body>
+</section>
+<section>
+<title>Evolution中的垃圾邮件过滤器选择</title>
+<body>
+
+<p>
+Evolution现在有了关于垃圾邮件过滤器的真正选择。它来自于为Spamassassin和
+Bogofilter内建的插件，并且可以在运行时选择使用哪一个。选择过滤器的USE标记现
+在已取消了。访问“首选项”->“邮件首选项”->“垃圾邮件”，从下拉菜单中设置默认Junk
+插件来选择垃圾邮件插件。它将会告诉你是否已安装了正确的程序。如果你只安装了
+Spamassassin或者Bogofilter中的一个，它将会默认选择已安装的那个。如果二者都
+有，则默认选择Spamassassin。
+</p>
+
+</body>
+</section>
+<section>
+<title>迁移到Rarian文件元数据库</title>
+<body>
+
+<p>
+据我们所知，GNOME用户帮助文档已经一直由scrollkeeper包来维护和索引。然而很久
+以来它都没有上游维护者，而且还有相当多的问题，包括概念性的。
+</p>
+
+<p>
+GNOME 2.20以新Rarian包的形式给你一个代替品。它的好处包括允许yelp更快的生成
+目录，最终可解决所有的包在以scrollkeeper数据库更新形式安装用户文档时的安装
+时间过长问题，以及更多的好处。幸运的是，它拥有一个与scrollkeeper完全兼容的
+层，所以从scrollkeeper到rarian的迁移应该是毫无困难的。
+</p>
+
+<p>
+我们Gentoo GNOME组相信，我们已经使这个Gentoo Linux上的迁移在升级到Gnome 2.20的
+过程中毫无困难。这是通过迁移版本的scrollkeeper实现的，它只引入rarian包和其
+scrollkeeper兼容层，而不引入旧的scrollkeeper包。所以不必害怕，scrollkeeper的9999
+版本是该迁移的版本存根，而不是一个有效的CVS ebuild。近期稳定的Portage应该有能力
+进行成功的迁移，仅依靠其自身而不需要手工干预。
+</p>
+
+</body>
+</section>
+<section>
+<title>其他变更</title>
+<body>
+
+<p>
+关于本GNOME发布版的其他新情况，请参阅<uri link="http://www.gnome.org/start/2.20/notes/en/">GNOME 2.20发布说明</uri>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>已知问题</title>
+<section>
+<title>丢失Gnome电源管理托盘图标（已修正）</title>
+<body>
+
+<p>
+启动时丢失Gnome电源管理的系统图标问题已经得到修正了。如果你以前在适当的位置有自
+动工作区，应该在升级后移除它们。
+</p>
+</body>
+</section>
+</chapter>
+</guide>
