@@ -307,7 +307,8 @@ Gentoo/MIPS是隶属于Gentoo基金会的一个小项目，负责维护Gentoo Li
   </li>
   <li>
     <b>是否禁用了MTU包侦测同时设定了端口范围？</b><br />
-    SGI的机器需要<path>/proc/sys/net/ipv4/ip_no_pmtu_disc</path> = 1并且<path>/proc/sys/net/ipv4/ip_local_port_range</path> = "2048 32767"。详见<uri link="/doc/en/handbook/handbook-mips.xml?part=1&amp;chap=2#doc_chap4">Gentoo/MIPS手册</uri>。
+    SGI的机器需要<path>/proc/sys/net/ipv4/ip_no_pmtu_disc</path> = 1并且
+    <path>/proc/sys/net/ipv4/ip_local_port_range</path> = "2048 32767"。详见<uri link="/doc/zh_cn/handbook/handbook-mips.xml?part=1&amp;chap=2#doc_chap4">Gentoo/MIPS手册</uri>。
   </li>
   <li>
     服务器上的BOOTP给出了正确的详细信息吗？<br />

@@ -105,7 +105,7 @@ VIDEO_CARDS="fglrx"
 </pre>
 
 <p>
-更多有关如何设置Nvidia和ATI显卡的指导可以在<uri link="/doc/en/nvidia-guide.xml">Gentoo Linux nVidia Guide</uri>和<uri link="/doc/en/ati-faq.xml">Gentoo Linux ATI FAQ</uri>找到。如果你不知道应该选择何种驱动，请参考这些指导获得更多信息。
+更多有关如何设置Nvidia和ATI显卡的指导可以在<uri link="/doc/zh_cn/nvidia-guide.xml">Gentoo Linux nVidia指南</uri>和<uri link="/doc/zh_cn/ati-faq.xml">Gentoo Linux ATI FAQ</uri>找到。如果你不知道应该选择何种驱动，请参考这些指导获得更多信息。
 </p>
 
 <note>

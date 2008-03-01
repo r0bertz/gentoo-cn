@@ -221,11 +221,7 @@ Available kernel symlink targets:
 </note>
 
 <impo>
-每次你<uri 
-link="/doc/en/kernel-upgrade.xml">编译新内核</uri>或重新编译当前内核，你需要运行<c>emerge 
-nvidia-drivers</c>重新安装nVidia模块。一个更容易的保持由ebuild安装的模块可用的方式是安装<c>sys-kernel/module-rebuild</c>。一旦你已经安装了它，简单地运行<c>module-rebuild 
-populate</c>以把一个需要重新编译的包列表populate到数据库中。仅仅运行<c>module-rebuild 
-rebuild</c>来为你的新内核重建驱动就行了。
+每次你<uri link="/doc/en/kernel-upgrade.xml">编译新内核</uri>或重新编译当前内核，你需要运行<c>emerge nvidia-drivers</c>重新安装nVidia模块。一个更容易的保持由ebuild安装的模块可用的方式是安装<c>sys-kernel/module-rebuild</c>。一旦你已经安装了它，简单地运行<c>module-rebuild populate</c>以把一个需要重新编译的包列表populate到数据库中。仅仅运行<c>module-rebuild rebuild</c>来为你的新内核重建驱动就行了。
 </impo>
 
 <p>

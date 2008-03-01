@@ -405,7 +405,7 @@ KDE下的程序远远不止官方发布的这些。事实上还有成千上万�
 <body>
 
 <p>
-现在，让我们来看看努力的成果吧。你的妈妈也许告诫过你决不要以管理员身份去用KDE，所以我们还是以普通用户的身份来试用它吧。用你的帐号登录系统，并设置好环境，在<path>~/.xinitrc</path>中加入<c>exec startkde</c>，然后你就可以用<c>startx</c>这个命令来启动KDE了。(请参阅<uri link="/doc/en/xorg-config.xml">X Server Configuration Howto</uri>)中的<uri link="/doc/en/xorg-config.xml#using_startx">Using startx</uri>。
+现在，让我们来看看努力的成果吧。你的妈妈也许告诫过你决不要以管理员身份去用KDE，所以我们还是以普通用户的身份来试用它吧。用你的帐号登录系统，并设置好环境，在<path>~/.xinitrc</path>中加入<c>exec startkde</c>，然后你就可以用<c>startx</c>这个命令来启动KDE了。(请参阅<uri link="/doc/zh_cn/xorg-config.xml">X服务器配置Howto</uri>)中的<uri link="/doc/zh_cn/xorg-config.xml#using_startx">使用startx</uri>。
 </p>
 
 <pre caption="设置本地环境">
