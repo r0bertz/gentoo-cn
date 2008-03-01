@@ -108,7 +108,7 @@
     <file id="cron-guide">/doc/en/cron-guide.xml</file>
     <file id="ldap-howto">/doc/en/ldap-howto.xml</file>
     <file id="nvidia-guide">/doc/zh_cn/nvidia-guide.xml</file>
-    <file id="ati-faq">/doc/en/ati-faq.xml</file>
+    <file id="ati-faq">/doc/zh_cn/ati-faq.xml</file>
     <file id="cvs-tutorial">/doc/en/cvs-tutorial.xml</file>
     <file id="devfs-guide">/doc/en/devfs-guide.xml</file>
     <file id="distcc">/doc/en/distcc.xml</file>
