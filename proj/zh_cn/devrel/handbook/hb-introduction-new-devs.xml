@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.10 -->
 <sections>
 <version>1.0.3</version>
 <date>2007-11-01</date>
@@ -17,7 +17,7 @@
 <body>
 
 <p>
-这不是一本讲解如何使用CVS的手册。如果你需要了解如何使用CVS，请查看CVS的info或者<uri>/doc/en/cvs-tutorial.xml</uri>。相反地，这本手册特别关注如何在Gentoo的ebuild树中使用CVS和Repoman。
+这不是一本讲解如何使用CVS的手册。如果你需要了解如何使用CVS，请查看CVS的info或者<uri>/doc/zh_cn/cvs-tutorial.xml</uri>。相反地，这本手册特别关注如何在Gentoo的ebuild树中使用CVS和Repoman。
 </p>
 
 </body>
@@ -42,7 +42,7 @@ update -d -P
 </p>
 
 <p>
-最后，很多使用CVS的人喜欢使用压缩选项（-z#）。我们要求那些不通过拨号连接的开发者使用选项-z0（考虑到我们CVS仓库的内容和我们CVS服务器的负载），在没有压缩的情况下，你会感受到速度的<e>提升</e>。
+最后，很多使用CVS的人喜欢使用压缩选项（-z#）。我们要求那些不通过拨号连接的开发者使用选项-z0（考虑到我们CVS仓库的内容和我们CVS服务器的负载），在没有压缩的情况下，实际上你会感受到速度的<e>提升</e>。
 </p>
 
 </body>
@@ -56,7 +56,7 @@ update -d -P
 在Gentoo的CVS仓库中有一些很有用的模块。Ebuild被存放在<path>gentoo-x86</path>模块中。<path>gentoo</path>包含了网站，文档，开发者目录，开发者图片等的XML文件。<path>gentoo-projects</path>包含了各种各样的项目，并替换了<path>gentoo-src</path>cvs模块。<path>gentoo-src</path>被保留，成为了历史。如果你仍然在使用它，请转移到一个不同的cvs模块。
 </p>
 
-<pre caption="Checkout gentoo-x86">
+<pre caption="检出gentoo-x86">
 # cvs -d username@cvs.gentoo.org:/var/cvsroot co gentoo-x86
 </pre>
 
@@ -73,7 +73,7 @@ update -d -P
 Gentoo也为那些偏爱SVN的人提供了subversion服务。许多核心项目，比如<path>portage</path>和<path>baselayout</path>现在也架设在这里。
 </p>
 
-<pre caption="Checkout Portage">
+<pre caption="检出Portage">
 # svn co svn+ssh://username@cvs.gentoo.org/var/svnroot/portage
 </pre>
 
@@ -98,7 +98,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 </p>
 
 <note>
-由于cvs的checkout没有metadata cache，你的portage可能会变得很慢。
+由于cvs的检出的Portage树没有metadata cache，你的portage可能会变得很慢。
 </note> 
 
 <p>
@@ -140,8 +140,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 </pre>
 
 <p>
-记得加入包含维护者信息的metadata.xml文件。查看<uri link="?part=2&amp;chap=4">Gentoo 
-Metadata</uri>章节以获得更多的信息。
+记得加入包含维护者信息的metadata.xml文件。查看<uri link="?part=2&amp;chap=4">Gentoo Metadata</uri>章节以获得更多的信息。
 </p>
 
 <p>
@@ -165,9 +164,7 @@ Metadata</uri>章节以获得更多的信息。
 <body>
 
 <p>
-请一直使用<c>repoman commit</c>，而不是<c>cvs 
-commit</c>。Repoman是一个质量保障（QA）工具，它会执行基本的检查并且建立Manifests。如果你对repoman输出的某些部分不清楚，请查看<c>man 
-repoman</c>。另外，你可能会对不断地输入密码而感到厌倦；keychain（<uri>http://www.gentoo.org/proj/en/keychain.xml</uri>）可以帮助你。
+请一直使用<c>repoman commit</c>，而不是<c>cvs commit</c>。Repoman是一个质量保障（QA）工具，它会执行基本的检查并且建立Manifests。如果你对repoman输出的某些部分不清楚，请查看<c>man repoman</c>。另外，你可能会对不断地输入密码而感到厌倦；keychain（<uri>http://www.gentoo.org/proj/zh_cn/keychain.xml</uri>）可以帮助你。
 </p>
 
 <pre caption="使用repoman">
@@ -186,7 +183,7 @@ repoman</c>。另外，你可能会对不断地输入密码而感到厌倦；key
 <body>
 
 <p>
-如果你到cvs服务器有很高的ping时间，你可能会希望使用ssh主从设置（你只需要连接到其他的ssh服务器一次，然后让它来执行下面的命令）。这样，你省下了握手的时间，可以整体提高3倍的checkout/commit速度。只需要将下面的代码加入到你的设置中即可。
+如果你到cvs服务器有很高的ping时间，你可能会希望使用ssh主从设置（你只需要连接到其他的ssh服务器一次，然后通过这个连接来执行后面的命令）。这样，你省下了握手的时间，可以整体提高3倍的checkout/commit速度。只需要将下面的代码加入到你的设置中即可。
 </p>
 
 <pre caption="~/.ssh/config">
@@ -196,7 +193,7 @@ Host *
 </pre>
 
 <p>
-在这样做了之后，你可以启动一个后台的主连接。
+在这样做了之后，你可以用这个命令启动一个后台的主连接
 </p>
 
 <pre caption="在后台启动一个主连接">
@@ -215,8 +212,7 @@ $ ssh -M -N -f ${USER}@cvs.gentoo.org
 <body>
 
 <p>
-Distfiles被Gentoo镜像系统自动地获取。你只需要监视你的distfiles是否有读取错误。请查看<uri 
-link="/proj/en/infrastructure/mirrors/overview-distfile.xml">Distfiles概述向导</uri>以获得详细的指令。
+Gentoo镜像系统可自动获取Distfiles。你只需要监视你的distfiles是否有读取错误。请查看<uri link="/proj/en/infrastructure/mirrors/overview-distfile.xml">Distfiles概览</uri>以获得详细的指令。
 </p>
 
 </body>
@@ -230,8 +226,7 @@ link="/proj/en/infrastructure/mirrors/overview-distfile.xml">Distfiles概述向�
 </p>
 
 <p>
-开发者拥有发布网页的权力，http://dev.gentoo.org/~$YOURNAME。请查看<uri 
-link="http://www.gentoo.org/proj/en/infrastructure/dev-webspace.xml">网页空间配置向导</uri>以获得更多详细的信息。
+开发者拥有发布网页的权力，http://dev.gentoo.org/~$YOURNAME。请查看<uri link="http://www.gentoo.org/proj/en/infrastructure/dev-webspace.xml">网页空间配置指南</uri>以获得更多详细的信息。
 </p>
 
 </body>
@@ -241,17 +236,15 @@ link="http://www.gentoo.org/proj/en/infrastructure/dev-webspace.xml">网页空�
 <body>
 
 <p>
-我们有一项服务，<uri link="http://planet.gentoo.org">Planet 
-Gentoo</uri>。这项服务汇集由做贡献的开发者所写的文章。这项服务是可选的，但是我们鼓励你加入。这可以帮助开发者之间的交流，而且用户也会觉得很有趣，值得一读。
+我们有一项服务，<uri link="http://planet.gentoo.org">Planet Gentoo</uri>。这项服务汇集由做贡献的开发者所写的文章。这项服务是可选的，但是我们鼓励你加入。这可以促进开发者之间的交流，而且用户也会觉得很有趣，值得一读。
 </p>
 
 <p>
-为了能够在Planet 
-Gentoo上发布内容，你需要有一个你自己的博客。许多网站提供这种免费的服务，或者你可以自己架设一个博客（如果你有这个资源的话）。作为另外一种选择，我们可以为你建立一个博客。
+为了能够在Planet Gentoo上发布内容，你需要有一个你自己的博客。许多网站提供这种免费的服务，或者你可以自己架设一个博客（如果你有这个资源的话）。作为另外一种选择，我们可以为你建立一个博客。
 </p>
 
 <p>
-我们旨在保持Planet Gentoo的内容是与Gentoo相关的，或者是Gentoo相关的开发和事件。
+我们希望保持Planet Gentoo的内容是与Gentoo相关的，或者是Gentoo相关的开发和事件。
 </p>
 
 <p>
@@ -259,8 +252,7 @@ Gentoo上发布内容，你需要有一个你自己的博客。许多网站提�
 </p>
 
 <p>
-如果你在其他地方有一个博客，那么你需要提供一份XML的内容feed。如果你的博客是分类别的，我们需要一份关于"Gentoo"类别的XML 
-feed，而不是其他部分。这也许不是一个问题，因为几乎所有的博客都提供像这样的标准feed服务。
+如果你在其他地方有一个博客，那么你需要提供一份XML的内容feed。如果你的博客是分类别的，我们需要一份关于"Gentoo"类别的XML feed，而不是其他部分。这也许不是一个问题，因为几乎所有的博客都提供像这样的标准feed服务。
 </p>
 
 <p>
@@ -268,8 +260,7 @@ feed，而不是其他部分。这也许不是一个问题，因为几乎所有�
 </p>
 
 <p>
-如果你对Planet Gentoo做贡献有兴趣，请发邮件到<uri 
-link="mailto:user-relations@gentoo.org">user-relations@gentoo.org</uri>。你可以请求一个建立在Gentoo空间上的博客，或者给出你现有博客的详细信息。我们会处理好这些细节，并让你的博客正确地运行起来。
+如果你有兴趣对Planet Gentoo做贡献，请发邮件到<uri link="mailto:user-relations@gentoo.org">user-relations@gentoo.org</uri>。你可以请求一个建立在Gentoo空间上的博客，或者给出你现有博客的详细信息。我们会处理好这些细节，并让你的博客正确地运行起来。
 </p>
 
 </body>
