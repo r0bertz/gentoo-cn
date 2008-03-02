@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.4 -->
 <sections>
 <version>1.0.2</version>
 <date>2006-05-04</date>
@@ -26,17 +26,13 @@
 <body>
 
 <p>
-第一次尝试来建立一个管理结构来解决合作和交流的问题是在2003年，管理结构在<uri 
-link="http://www.gentoo.org/proj/en/glep/glep-0004.xml">GLEP 
-4</uri>中被讨论。当Gentoo不断地壮大，我们发现了一些和管理结构有关的问题，并且我们需要新的一个结构来解决这些问题。<uri 
-link="http://www.gentoo.org/proj/en/glep/glep-0039.html">GLEP 
-39</uri>描述了在这背后的原因和这次讨论的结果。
+第一次尝试来建立一个管理结构以解决合作和交流问题发生在2003年，<uri link="http://www.gentoo.org/proj/en/glep/glep-0004.xml">GLEP 4</uri>中描述了当时提议的管理结构。当Gentoo不断地壮大，我们发现了这个管理结构的一些问题，并且我们需要新的一个结构来解决这些问题。<uri link="http://www.gentoo.org/proj/en/glep/glep-0039.html">GLEP 39</uri>描述了在这背后的原因和这次讨论的结果。
 </p>
 
 </body>
 </section>
 <section>
-<title>按照GLEP 39规范的当前管理结构</title>
+<title>按照GLEP 39建立的当前的管理结构</title>
 <body>
 
 <p>
@@ -45,9 +41,7 @@ link="http://www.gentoo.org/proj/en/glep/glep-0039.html">GLEP
 
 <ul>
   <li>
-    只要一个项目存在，那么在<uri 
-link="http://www.gentoo.org/proj/en/">www.gentoo.org/proj/en/&lt;project 
-name&gt;</uri>上就会有相应的网页被维护（"维护"意味着页面上的信息是正确的，并且没有过期）。如果网页没有被维护，那么就可以认为这个项目已经死了。
+    只要一个项目存在，那么在<uri link="http://www.gentoo.org/proj/en/">www.gentoo.org/proj/en/&lt;project name&gt;</uri>上就会有相应的网页被维护（"维护"意味着页面上的信息是正确的，并且没有过期）。如果网页没有被维护，那么就可以认为这个项目已经死了。
   </li>
   <li>
     一个项目可能有一个或多个领导者。领导者由这个项目的成员推选出来。每12个月必须至少选举一次，选举可以随时举行。
@@ -64,30 +58,30 @@ name&gt;</uri>上就会有相应的网页被维护（"维护"意味着页面上�
 </ul>
 
 <p>
-全球的事务由选举出来的Gentoo议会来决定。
+全局的事务由选举出来的Gentoo议会来决定。
 </p>
 
 <ul>
   <li>
-    议会成员的数量是固定的。（在第一次的选举中，这个数字被确定为7个人，并被大家强烈地赞同。）
+    议会成员的数量是固定的。（在第一次的选举中，经大家口头表决通过，这个数字被确定为7个人。）
   </li>
   <li>
-    议会成员每年都由所有开发者全民选举产生。
+    议会成员每年都由全体开发者选举产生。
   </li>
   <li>议会至少每个月必须召开一次公开会议。</li>
   <li>
     议会的决定由参加者（或者他们的代理人）投票决定，采取少数服从多数的原则。
   </li>
   <li>
-    如果一个议会成员（或者他们指定的代理人）没有参加两次连续的会议，他们便被标识为懒惰者（slacker）。
+    如果一个议会成员（或者他们指定的代理人）连续两次没有参加的会议，他们便被标识为偷懒者（slacker）。
   </li>
   <li>
-    如果一个已经被标识为懒惰者的议会成员错过了另外一次会议（或者他们指定的代理人也没有出现），那么他们将失去这个职位，同时将举行一个新的选举以接替这个人。这个新产生的议会成员的任期会缩短，因为一年一度的选举还会重新选举出新的成员。
+    如果一个已经被标识为偷懒者的议会成员错过了另外一次会议（或者他们指定的代理人也没有出现），那么他们将失去这个职位，同时将举行一个新的选举以接替这个人。这个新产生的议会成员的任期会缩短，因为一年一度的选举还会重新选举出新的成员。
   </li>
   <li>
-    由于以前过渡的懒惰而被踢出去的议会成员可以竞争以后的选举，包括寻找他们的接班人的那次选举。当然，他们应该为他们成为懒惰者而进行辩护，并且应当知道这一点会被人指出来，如果他们自己不指出的话。
+    由于以前过渡的偷懒而被踢出去的议会成员可以竞争以后的选举，包括寻找他们的接班人的那次选举。当然，他们应该为他们偷懒的原因进行辩解，并且应当知道如果他们自己不辩解的话也会被人指出来。
   </li>
-  <li>当一个成员被选举出来的时候，这个懒惰者的标志被重置了。</li>
+  <li>当一个成员被选举出来的时候，这个偷懒者的标志会被去除。</li>
   <li>
     如果任何一个会议有少于一半的议会成员参加，那么一个新的选举必须在一个月之内举行。年度的选举时间便从这个时候开始计算。
   </li>
@@ -104,7 +98,7 @@ name&gt;</uri>上就会有相应的网页被维护（"维护"意味着页面上�
 <body>
 
 <p>
-作为新的管理结构的结果，全球事务由选举出来的议会决定。这给了Gentoo一个大概的方向——只影响一两个项目的小事务应该在所涉及的项目组内决定，也许还可以听取其他开发者的意见。议会应当成为一个公平的代表，因为每一个开发者都能够投票，所以利益应该以一种公平的方式来表现。如果议会做得很糟糕，而且大多数开发者对他们的工作不满意，这个议会可以被投票免去。
+采用了新管理结构的结果是全局事务由选举出来的议会决定。这给了Gentoo一个大概的方向——只影响一两个项目的小事务应该在所涉及的项目组内决定，也许还可以听取其他开发者的意见。议会应当成为开发者群体的一个公正的代表，因为每一个开发者都能够投票，所以利益应该以一种公平的方式来表现。如果议会做得很糟糕，而且大多数开发者对他们的工作不满意，这个议会可以被投票免去。
 </p>
 
 <p>
@@ -112,8 +106,7 @@ name&gt;</uri>上就会有相应的网页被维护（"维护"意味着页面上�
 </p>
 
 <p>
-大多数的项目都有一个操作和策略领导者（Operational and Strategic 
-lead），但是基本上这应当由项目来决定哪些职位该被创建并且是如何称呼的——这种规则同样适用于子项目。
+大多数的项目都有一个运作和策略领导者（Operational and Strategic lead），但是基本上应当由项目来决定哪些职位该被创建并且是如何称呼的——这条规则同样适用于子项目。
 </p>
 
 <p>
@@ -121,125 +114,9 @@ lead），但是基本上这应当由项目来决定哪些职位该被创建并�
 </p>
 
 <p>
-从各方面来说，当前的管理结构没有明确表明项目领导者的职责明细。项目领导者由项目的成员选出来，通常的职责是满足"任何成员所需"，如果这项职责没有完成，成员可以选举出一个新的领导者（如果他们可以找到一位接替者！
+从各方面来说，当前的管理结构没有明确表明项目领导者的职责明细。项目领导者由项目的成员选出来，通常的职责是满足“任何成员所需”，如果这项职责没有完成，成员可以选举出一个新的领导者（如果他们可以找到一位接替者！）
 </p>
 
 </body>
 </section>
-
-
-
-<!-- FIXME TODO...
-
-
-
-<section>
-
-<title>Decision making</title>
-
-<body>
-
-<p>
-
-Currently, GLEPs (Gentoo Linux Enhancement Proposals) can be approved
-
-or rejected by the appropriate top-level manager under which the GLEP
-
-falls. If there is no clearly-defined manager under which the GLEP
-
-falls, the GLEP will be voted upon by the Managers and Chief
-
-Architect, and must be approved unanimously. In all cases, a public,
-
-written explanation must be provided detailing why the GLEP was
-
-approved or rejected, either by the manager who approved/rejected it,
-
-or the head of the GLEP sub-project (Grant Goodyear) if the GLEP was
-
-voted upon by the management team. This summary is meant to reflect
-
-the decision that was made by some of the managers at an early manager
-
-meeting.
-
-</p>
-
-
-
-<p>
-
-Currently, there is no formal general voting procedure in place. In
-
-the interim, any item to be voted upon must be approved by "votable"
-
-by the Chief Architect. Before voting takes place, all managers must
-
-have an opportunity to present their ideas before the other managers,
-
-with the general originator(s) of the idea having the opportunity to
-
-present first. After that, the Chief Architect and Managers can
-
-present their ideas, with the Chief Architect having the opportunity
-
-to present last. After this has happened, voting can take place, and
-
-the item will be approved on an unanimous vote. Managers or the Chief
-
-Architect can choose to abstain from voting, and the vote can still
-
-pass with abstainers as long as at least 50% of the members have
-
-voted. The voting must take place at an official managers
-
-meeting. Non-attending managers are allowed to vote via email. The
-
-vote must be officially tallied and posted to the managers list.
-
-</p>
-
-
-
-<p>
-
-The reason for the "Chief Architect approval" clause it to prevent the
-
-voting process from being abused by allowing voting items that make no
-
-sense, such as those that begin with a "Should we continue to," where
-
-a "nay" result would result in a change in existing policy, as well as
-
-preventing managers for requesting that every small decision be voted
-
-upon. We currently have no clear policy to determine what is a
-
-"votable" item, and without this policy there needs to be some method
-
-to determine what is "votable" and what affects some immutable part of
-
-Gentoo.
-
-</p>
-
-
-
-<p>
-
-This section is subject to additional clarification and refinement in
-
-the future, as is the rest of this document. The purpose of this
-
-section is to document our currently-existing procedures rather than
-
-define ideal or "final" procedures.
-
-</p>
-
-</body>
-
-</section>
-
--->
 </sections>
