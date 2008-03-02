@@ -662,11 +662,11 @@ PORTAGE_ELOG_SYSTEM="save"
 </pre>
 
 <note>
-这只是存储elog信息的其中一条途径。请参考在<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage Handbook</uri>里的适当的页面来得到更多有关portage的elog系统如果工作的信息。
+这只是存储elog信息的其中一条途径。请参考<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=3&amp;chap=1#doc_chap4">Portage手册</uri>里的相关的页面来得到更多有关portage的elog系统的信息。
 </note>
 
 <p>
-一旦你配置了eread，只要运行<c>eread</c>就能查看你的log文件了。
+配置完eread之后，只要运行<c>eread</c>就能查看你的log文件了。
 </p>
 
 <pre caption="使用eread">
