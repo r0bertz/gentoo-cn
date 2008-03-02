@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.26 -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-disk.xml,v 1.3 2008/03/01 17:55:53 tell Exp $ -->
+<!-- English CVS version: 1.27 -->
 
 <sections>
 
-<version>8.1</version>
-<date>2007-06-26</date>
+<version>8.2</version>
+<date>2008-01-04</date>
 
 <section>
 <title>块设备介绍</title>
@@ -480,7 +480,7 @@ First cylinder (17-8727, default 17): <i>17</i>
 Last cylinder or +size or +sizeM or +sizeK (17-8727, default 8727): <i>+1000M</i>
 
 Command (m for help): <i>t</i>
-Partition number (1-4): <i>1</i>
+Partition number (1-4): <i>2</i>
 Hex code (type L to list codes): <i>82</i>
 Changed system type of partition 2 to 82 (Linux swap)
 </pre>
