@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
-<!-- English CVS version: 1.44 -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-kernel.xml,v 1.4 2008/03/01 18:08:10 tell Exp $ -->
+<!-- English CVS version: 1.45 -->
 
 <sections>
 
-<version>8.3</version>
-<date>2007-08-12</date>
+<version>8.4</version>
+<date>2008-01-12</date>
 
 <section>
 <title>时区</title>
@@ -103,11 +103,9 @@ lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; lin
 首先，开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
 </p>
 
-<pre caption="选择General setup下的experimental code/drivers">
-Code maturity level options ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
+<pre caption="选择experimental code/drivers">
 General setup ---&gt;
-  [*] Support for hot-pluggable devices
+  [*] Prompt for development and/or incomplete code/drivers
 </pre>
 
 <p>
