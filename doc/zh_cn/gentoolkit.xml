@@ -643,7 +643,7 @@ Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
 <body>
 
 <p>
-<c>glsa-check</c>是一个测试工具来留意多种GLSA（Gentoo Linux Security Advisory——Gentoo Linux安全建议），并且最后被整合到<c>emerge</c>和<c>equery</c>去了。请访问<uri link="/proj/en/portage/glsa-integration.xml">Portage GLSA整合页面</uri>来得到更多信息。
+<c>glsa-check</c>是一个测试性的工具，它可以跟踪GLSA（Gentoo Linux Security Advisory——Gentoo Linux安全建议），最后它将会被整合到<c>emerge</c>和<c>equery</c>去。请访问<uri link="/proj/en/portage/glsa-integration.xml">Portage GLSA整合页面</uri>来得到更多信息。
 </p>
 
 </body>
