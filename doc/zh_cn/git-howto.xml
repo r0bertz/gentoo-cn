@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/git-howto.xml" lang="zh_cn">
-<title>基于git的gentoo中文文档开发流程</title>
+<title>基于git的Gentoo中文文档开发流程</title>
 
 <author title="作者">
   <mail link="xudong.guan@gmail.com">管旭东</mail>
@@ -139,7 +139,7 @@ $ <i>git-config --global sendemail.smtpserver "/path/to/your/smtpserver"</i>
 </pre>
 
 <p>
-同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。smtpserver的值，如果使用msmtp，路径为/usr/bin/msmtp；如果使用ssmtp，路径为/usr/sbin/ssmtp。
+同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。如果使用msmtp，smtpserver的值为/usr/bin/msmtp；如果使用ssmtp，值为/usr/sbin/ssmtp。
 </p>
 
 <p>
@@ -166,6 +166,19 @@ $ <i>git clone http://www.gentoo-cn.org/git/gentoo-cn.git</i>
 </p>
 
 <p>
+然后创建一个本地（local）分支并检出此分支。以后所有的修改都请只在本地分支里进行。
+</p>
+
+<pre caption="创建并检出本地分支">
+$ <i>cd gentoo-cn</i>
+$ <i>git branch local</i>                        <comment># 创建分支</comment>
+$ <i>git checkout local</i>                      <comment># 检出分支</comment>
+$ <i>git branch</i>                              <comment># 显示分支</comment>
+  master
+* local                                          <comment># 带*的为当前活动分支</comment>
+</pre>
+
+<p>
 这时可以先用<c>gitk</c>看看当前的修改历史。
 </p>
 
@@ -187,7 +200,6 @@ $ <i>gitk --all</i>
 </p>
 
 <pre caption="在工作目录中添加一个文件">
-$ <i>cd gentoo-cn</i>
 $ <i>echo "this is a test" > new_file.xml</i>
 </pre>
 
@@ -201,9 +213,9 @@ $ <i>echo "this is a test" > new_file.xml</i>
 你可以随时用<c>git status</c>和<c>git diff</c>查看目前的工作拷贝和repository HEAD的差别。
 </p>
 
-<pre caption="建立新文件后，git status输出的结果">
+<pre caption="建立新文件后git status输出的结果">
 $ <i>git status</i>
-<comment># On branch master
+<comment># On branch local
 # Untracked files:
 #   (use "git add &lt;file&gt;..." to include in what will be committed)
 #
@@ -227,7 +239,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 <pre caption="添加文件">
 $ <i>git add new_file.xml</i>
 $ <i>git status</i>
-<comment># On branch master
+<comment># On branch local
 # Changes to be committed:
 #   (use "git reset HEAD &lt;file&gt;..." to unstage)
 #
@@ -275,7 +287,7 @@ index 0000000..0527e6b
 </pre>
 
 <p>
-不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，master^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可以查看提交对应的哈希值），等等。
+不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，local^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可以查看提交对应的哈希值），等等。请查看man git-rev-parse以获取更多有关信息。
 </p>
 
 </body>
@@ -327,14 +339,7 @@ Date:   Fri Jul 13 16:28:08 2007 +0100
 </p>
 
 <pre caption="整理你的上两个提交为一个新的提交">
-$ <i>git branch</i>                         <comment># 显示分支</comment>
-* master                             <comment># 带*的为当前活动分支</comment>
-$ <i>git checkout -b new_branch HEAD</i>    <comment># 建立并切换到新的分支</comment>
-Switched to a new branch "new_branch"
-$ <i>git branch</i>
-  master
-* new_branch
-$ <i>git reset HEAD^^</i>                   <comment># 回退两个历史，但保留工作拷贝</comment>
+$ <i>git reset HEAD^^</i>                        <comment># 回退两个历史，但保留工作拷贝</comment>
 $ <i>git status</i>
 <comment># On branch new_branch
 # Untracked files:
@@ -350,13 +355,10 @@ $ <i>git commit -a -m "Added new file new_file.xml</i>
 > 
 > 欢迎兄弟们使用。
 > "
-Created commit 39b648fef75b446331e7defa89438157a95d87ec
- 2 files changed, 40 insertions(+), 3 deletions(-)
- create mode 100644 new_file.xml
 </pre>
 
 <p>
-此时你原来的两次提交还保留在master分支上。而你现在的new_branch分支则保存了一个整理好的提交。同时写了一个更加详细的提交描述。现在建议用<c>gitk --all</c>看看两个分支的可视化效果。
+此时你现在的local分支保存了一个整理好的提交。同时写了一个更加详细的提交描述。现在建议用<c>gitk --all</c>看看两个分支的可视化效果。
 </p>
 
 <p>
@@ -382,59 +384,37 @@ Added new file new_file.xml
 <body>
 
 <p>
-当你的工作值得发布时，你可以用<c>git format-patch</c>和<c>git send-email</c>将你的工作发送到gentoo-china@googlegroups.com。(如果只是用于测试，可以发到一个个人的邮箱)
+当你要发布你的工作时，你可以用<c>git format-patch</c>产生补丁并用<c>git send-email</c>将补丁发送到gentoo-china@googlegroups.com(如果只是用于测试，可以发到一个个人的邮箱)。不过，与cvs/svn类似的是，补丁产生前之前应该先更新master分支，并且将本地分支rebase到master分支。rebase的概念类似于合并，但和git merge不完全一样。详情请查阅mag git-rebase。
 </p>
 
-<pre caption="用git format-patch自动生成发布邮件">
-$ <i>git format-patch HEAD^..HEAD -s</i>
+<pre caption="更新master分支且将本地分支rebase到master分支">
+$ <i>git checkout master</i>                     <comment># 检出master</comment>
+$ <i>git pull</i>                                <comment># 更新master</comment>
+$ <i>git checkout local</i>                      <comment># 检出local</comment>
+$ <i>git rebase master</i>                       <comment># rebase到master</comment>
+</pre>
+
+<p>
+如果你在local分支的修改和master里的修改有冲突，这ebase就会中断，并且提示你哪个文件中发生了冲突以及你应该怎样做。此时你应该手工解决冲突，然后执行提示的命令。
+</p>
+
+<pre caption="解决冲突">
+$ <i>vi new_file.xml</i>                         <comment># 解决文件中的冲突</comment>
+$ <i>git add new_file.xml</i>                    <comment># 标记为冲突已解决</comment>
+$ <i>git rebase --continue</i>                   <comment># 继续rebase</comment>
+</pre>
+
+<p>
+所有冲突解决完后，请用git format-patch自动生成要发布的邮件。
+</p>
+
+<pre caption="用git format-patch自动生成要发布的邮件">
+$ <i>git format-patch -s master</i>              <comment># 创建补丁</comment>
 0001-Added-new-file-new_file.xml.patch
-$ <i>cat 0001-Adde-new-file-new_file.xml.patch</i>
-From 39b648fef75b446331e7defa89438157a95d87ec Mon Sep 17 00:00:00 2001
-From: Xudong Guan &lt;xudong.guan@gmail.com&gt;
-Date: Fri, 13 Jul 2007 17:03:55 +0100
-Subject: [PATCH] Added new file new_file.xml
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-张兄，这是一个新添加的文件，他的用途主要是演示
-如何使用git.
-
-欢迎兄弟们使用。
-
-Signed-off-by: Xudong Guan &lt;xudong.guan@gmail.com&gt;
----
- new_file.xml |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
- create mode 100644 new_file.xml
-
-diff --git a/new_file.xml b/new_file.xml
-new file mode 100644
-index 0000000..030e90b
---- /dev/null
-+++ b/new_file.xml
-@@ -0,0 +1,2 @@
-+this is a test
-+this is the second line
--- 
-1.5.0.rc3.g8188e
 </pre>
 
 <pre caption="用git send-email发送邮件">
 $ <i>git send-email 0001-Added-file-new_file_xml.patch --to gentoo-china@googlegroups.com</i>
-Who should the emails appear to be from? [Xudong Guan &lt;xudong.guan@gmail.com&gt;] 
-Emails will be sent from: Xudong Guan &lt;xudong.guan@gmail.com&gt;
-Message-ID to be used as In-Reply-To for the first email? 
-0001-Added-file-new_file_xml.patch
-(mbox) Adding cc: Xudong Guan &lt;xudong.guan@gmail.com&gt; from line 'From: Xudong Guan &lt;xudong.guan@gmail.com&gt;'
-OK. Log says:
-Date: Fri, 13 Jul 2007 17:03:55 +0100
-Sendmail: /usr/sbin/sendmail
-From: Xudong Guan &lt;xudong.guan@gmail.com&gt;
-Subject: [PATCH] Added file new_file_xml
-Cc: Xudong Guan &lt;xudong.guan@gmail.com&gt;
-To: gentoo-china@googlegroups.com
-
-Result: OK
 </pre>
 
 </body>
@@ -456,66 +436,7 @@ Result: OK
 
 <pre caption="接收他人工作">
 $ <i>git am -s tmp.txt</i>
-1 patch(es) to process.
-
-Applying 'Added file new_file_xml'
-
-Wrote tree 5475985317e27b261f922ad35958837b0db4fa2f
-Committed: 6e1aac302bf0d1b12b52d9a11aad5a9f437e0982
 </pre>
-
-</body>
-</section>
-</chapter>
-<chapter>
-<title>分支处理</title>
-<section>
-<title>关于分支</title>
-<body>
-
-<p>
-与cvs不同，使用git建立分支非常容易和直观。通过gitk可以很容易理解分支的概念。git也鼓励多使用分支。你现在已经有了两个分支：一个是从clone得来的master分支，另一个是整理修改的new_branch分支。
-</p>
-
-<pre caption="查看你的分支">
-$ <i>git branch</i>
-master
-* new_branch
-$ <i>gitk --all</i>
-</pre>
-
-<p>
-切换活动分支也是通过<c>git checkout</c>。此时要保证工作拷贝没有未提交的修改。
-</p>
-
-<pre caption="切换活动分支">
-$ <i>git checkout master</i>
-$ <i>git branch</i>
-* master
-new_branch
-</pre>
-
-</body>
-</section>
-<section>
-<title>删除提交</title>
-<body>
-
-<p>
-以上我们对master分支做了很多修改，这在实际使用中不是一个好主意，因为你需要经常从主拷贝更新你的本地内容。你可以使用如下方法将你的修改移到另外一个分支上，并把主拷贝恢复原样。
-</p>
-
-<pre caption="恢复主拷贝">
-$ <i>git checkout master</i>          <comment># 回到master分支</comment>
-$ <i>git checkout -b trash master</i> <comment># 为master分支的修改建立trash分支</comment>
-$ <i>git checkout master</i>          <comment># 回到master分支</comment>
-$ <i>git reset --hard HEAD^^</i>      <comment># 删除最近两个提交</comment>
-$ <i>gitk --all</i>
-</pre>
-
-<p>
-如果需要，可以通过<c>git reset</c>和<c>git branch -d</c>彻底删除trash分支。
-</p>
 
 </body>
 </section>
