@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-arm-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
-<!-- English CVS version: 1.11 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.13 -->
 
 <sections>
 
-<version>8.4</version>
-<date>2007-08-12</date>
+<version>8.6</version>
+<date>2008-01-12</date>
 
 <section>
 <title>时区</title>
@@ -39,7 +39,7 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于ARM系统，我们使用<c>gentoo-sources</c>（包含额外的补丁，加强性能和稳定性）。
+对于ARM系统，我们使用<c>gentoo-sources</c>（包含一些附加特性的补丁）。
 </p>
 
 <p>
@@ -103,8 +103,8 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 不管您的机器是哪一种，都应当确保开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
 </p>
 
-<pre caption="选择General setup下的experimental code/drivers">
-Code maturity level options ---&gt;
+<pre caption="选择experimental code/drivers">
+General setup ---&gt;
   [*] Prompt for development and/or incomplete code/drivers
 </pre>
 
