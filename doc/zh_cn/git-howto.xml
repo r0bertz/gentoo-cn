@@ -33,7 +33,7 @@
 </author>
 
 <abstract>
-本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布到gentoo-china@googlegroups.com邮件列表上，供维护人员评阅和采纳。
+本文介绍了如何使用git来进行gentoo中文文档翻译工作的开发。本文的读者不需要有任何git基础。读完本文后，读者应该可以将自己的翻译或对现有工作的修改以补丁的形式发布到gentoo-china邮件列表上，供维护人员评阅和采纳。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -50,7 +50,7 @@
 <body>
 
 <note>
-请加上curl和tk USE标记。前者可以让你获取http协议的仓库，后者可以让你使用gitk工具。
+请加上curl和tk USE标记。前者可以让你获取http协议的仓库，后者可以让你使用<c>gitk</c>工具。
 </note>
 
 <pre caption="安装git">
@@ -68,7 +68,7 @@ $ <i>emerge -av msmtp</i>
 </pre>
 
 <p>
-然后设置msmtp，修改~/.msmtprc并设定权限：
+然后设置<c>msmtp</c>，修改~/.msmtprc并设定权限：
 </p>
 
 <pre caption="修改~/.msmtprc并设定权限">
@@ -100,7 +100,7 @@ $ <i>emerge -av ssmtp</i>
 </pre>
 
 <p>
-ssmtp的配置文件分别存储在/etc/ssmtp/ssmtp.conf和/etc/ssmtp/revaliases内。
+<c>ssmtp</c>的配置文件分别存储在<path>/etc/ssmtp/ssmtp.conf</path>和<path>/etc/ssmtp/revaliases</path>内。
 </p>
 
 <pre caption="修改/etc/ssmtp/ssmtp.conf">
@@ -129,7 +129,7 @@ user:yourname@gmail.com:smtp.gmail.com:587
 <body>
 
 <p>
-安装好了smtp程序之后，我们来配置git本身。git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来设定git的一些全局变量。
+安装好了smtp程序之后，我们来配置<c>git</c>本身。<c>git</c>的每个递交都会关联作者的email信息。在1.5.2.2版及以后的<c>git</c>中，可以使用<c>git-config</c>工具来设定<c>git</c>的一些全局变量。
 </p>
 
 <pre caption="设置自己的姓名、email地址及smtp服务器程序">
@@ -139,7 +139,7 @@ $ <i>git-config --global sendemail.smtpserver "/path/to/your/smtpserver"</i>
 </pre>
 
 <p>
-同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。如果使用msmtp，smtpserver的值为/usr/bin/msmtp；如果使用ssmtp，值为/usr/sbin/ssmtp。
+同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。如果使用<c>msmtp</c>，smtpserver的值为<path>/usr/bin/msmtp</path>；如果使用<c>ssmtp</c>，值为<path>/usr/sbin/ssmtp</path>。
 </p>
 
 <p>
@@ -162,11 +162,11 @@ $ <i>git clone http://www.gentoo-cn.org/git/gentoo-cn.git</i>
 </pre>
 
 <p>
-命令成功以后，会创建一个<path>gentoo-cn</path>目录。里面的有个隐藏的.git目录，称为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由度。
+命令成功以后，会创建一个<path>gentoo-cn</path>目录。里面的有个隐藏的<path>.git</path>目录，称为repository，包含了所有的历史数据。repository以外的其他文件称为工作拷贝（working copy），对其进行修改／删除不会影响repository的内容。Repository好比cvs/svn服务器中的内容，工作拷贝好比cvs/svn在客户端checkout出来的内容，可以随便修改。repository默认有一个分支（branch），叫master。当前分支的最新版本叫HEAD。和cvs/svn不同的是，基于git的开发是完全分布式的，没有一个集中的repository，任何开发者不但拥有工作拷贝，而且拥有所有的修改历史。这种开发方式给予开发者更多的信息和更大空间及自由度。
 </p>
 
 <p>
-然后创建一个本地（local）分支并检出此分支。以后所有的修改都请只在本地分支里进行。
+下一步请创建一个本地（local）分支并检出此分支。
 </p>
 
 <pre caption="创建并检出本地分支">
@@ -177,6 +177,10 @@ $ <i>git branch</i>                              <comment># 显示分支</commen
   master
 * local                                          <comment># 带*的为当前活动分支</comment>
 </pre>
+
+<note>
+以后所有的修改都请只在本地分支里进行。
+</note>
 
 <p>
 这时可以先用<c>gitk</c>看看当前的修改历史。
@@ -225,15 +229,12 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 </body>
 </section>
-</chapter>
-<chapter>
-<title>提交修改</title>
 <section>
 <title>添加文件到repository</title>
 <body>
 
 <p>
-上述<c>git status</c>输出表明新文件<path>new_file.xml</path>还没有添加到repository。你可以用<c>git add</c>完成这个任务。对修改和删除的已有的文件不需要额外步骤。
+上述<c>git status</c>输出表明新文件<path>new_file.xml</path>还没有添加到repository。你可以用<c>git add</c>完成这个任务。对修改和删除的已有的文件不需要额外步骤。另外由于此文件是新加入的，现在使用<c>git diff</c>将不会显示任何结果。
 </p>
 
 <pre caption="添加文件">
@@ -249,16 +250,19 @@ $ <i>git status</i>
 
 </body>
 </section>
+</chapter>
+<chapter>
+<title>提交修改</title>
 <section>
 <title>用git commit提交你的修改</title>
 <body>
 
 <p>
-你可以随时用<c>git commit</c>提交你的修改。刚开始使用git时，可以尽量多提交。因为和cvs/svn不同，这个拷贝是你个人的，你应该经常保存你的工作。你日后还可以对你的这些工作进一步整理，例如，合并多个提交结果，修改提交信息等，来形成最终可以发布到gentoo-china@googlegroups.com的工作。
+你可以随时用<c>git commit</c>提交你的修改。刚开始使用git时，可以尽量多提交。因为和cvs/svn不同，这个拷贝是你个人的，你应该经常保存你的工作。你日后还可以对你的这些工作进一步整理，例如，合并多个提交结果，修改提交信息等，来形成最终可以发布到<mail link="gentoo-china@googlegroups.com">Gentoo China邮件列表</mail>的工作。
 </p>
 
 <pre caption="提交你的修改">
-$ <i>git commit -a -s</i>
+$ <i>git commit -a -s -m "added a new file"</i>
 Created commit 96ffadde5682bc9b3d96582822bc4e75e8dccdca
  1 files changed, 1 insertions(+), 0 deletions(-)
  create mode 100644 new_file.xml
@@ -287,7 +291,7 @@ index 0000000..0527e6b
 </pre>
 
 <p>
-不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，local^^^，tag_name，提交对应SHA1哈希的前几位（用gitk或git whatchanged可以查看提交对应的哈希值），等等。请查看man git-rev-parse以获取更多有关信息。
+不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，local^^^，tag_name，提交对应SHA1哈希的前几位（用<c>gitk</c>或<c>git whatchanged</c>可以查看提交对应的哈希值）等等。请查看<c>man git-rev-parse</c>以获取更多有关信息。
 </p>
 
 </body>
@@ -341,7 +345,7 @@ Date:   Fri Jul 13 16:28:08 2007 +0100
 <pre caption="整理你的上两个提交为一个新的提交">
 $ <i>git reset HEAD^^</i>                        <comment># 回退两个历史，但保留工作拷贝</comment>
 $ <i>git status</i>
-<comment># On branch new_branch
+<comment># On branch local
 # Untracked files:
 #   (use "git add &lt;file&gt;..." to include in what will be committed)
 #
@@ -384,7 +388,7 @@ Added new file new_file.xml
 <body>
 
 <p>
-当你要发布你的工作时，你可以用<c>git format-patch</c>产生补丁并用<c>git send-email</c>将补丁发送到gentoo-china@googlegroups.com(如果只是用于测试，可以发到一个个人的邮箱)。不过，与cvs/svn类似的是，补丁产生前之前应该先更新master分支，并且将本地分支rebase到master分支。rebase的概念类似于合并，但和git merge不完全一样。详情请查阅mag git-rebase。
+当你要发布你的工作时，你可以用<c>git format-patch</c>产生补丁并用<c>git send-email</c>将补丁发送到<mail link="gentoo-china@googlegroups.com">Gentoo China邮件列表</mail>（如果只是用于测试，可以发到一个个人的邮箱）。不过，与cvs/svn类似的是，补丁产生前之前应该先更新master分支，并且将本地分支rebase到master分支。rebase的概念类似于合并，但和<c>git merge</c>不完全一样。详情请查阅<c>man git-rebase</c>。
 </p>
 
 <pre caption="更新master分支且将本地分支rebase到master分支">
@@ -395,7 +399,7 @@ $ <i>git rebase master</i>                       <comment># rebase到master</com
 </pre>
 
 <p>
-如果你在local分支的修改和master里的修改有冲突，这ebase就会中断，并且提示你哪个文件中发生了冲突以及你应该怎样做。此时你应该手工解决冲突，然后执行提示的命令。
+如果你在local分支的修改和master里的修改有冲突，这rebase就会中断，并且提示你哪个文件中发生了冲突以及你应该怎样做。此时你应该手工解决冲突，然后执行提示的命令。
 </p>
 
 <pre caption="解决冲突">
@@ -405,7 +409,7 @@ $ <i>git rebase --continue</i>                   <comment># 继续rebase</commen
 </pre>
 
 <p>
-所有冲突解决完后，请用git format-patch自动生成要发布的邮件。
+所有冲突解决完后，请用<c>git format-patch</c>自动生成要发布的邮件。
 </p>
 
 <pre caption="用git format-patch自动生成要发布的邮件">
