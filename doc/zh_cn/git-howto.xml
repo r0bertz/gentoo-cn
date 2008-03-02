@@ -158,7 +158,7 @@ $ <i>git-config --global sendemail.smtpserver "/path/to/your/smtpserver"</i>
 
 <pre caption="获取现有的主拷贝">
 $ <i>cd /path/to/work</i>
-$ <i>git clone http://gentoo-cn.org/.git</i>
+$ <i>git clone http://www.gentoo-cn.org/git/gentoo-cn.git</i>
 </pre>
 
 <p>
