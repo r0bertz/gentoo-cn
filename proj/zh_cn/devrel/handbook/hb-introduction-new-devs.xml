@@ -206,7 +206,7 @@ $ ssh -M -N -f ${USER}@cvs.gentoo.org
 </section>
 
 <section>
-<title>杂项</title>
+<title>其他事项</title>
 <subsection>
 <title>在镜像上放置文件</title>
 <body>
