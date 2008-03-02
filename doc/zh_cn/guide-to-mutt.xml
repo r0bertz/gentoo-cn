@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+
+<!-- $Header$ -->
+<!--English CVS version: 1.19-->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/guide-to-mutt.xml">
+
+<title>Mutt电子邮件快速入门指南</title>
+
+<author title="Author">
+  <mail link="mikpolniak@adelphia.net">Mike Polniak</mail>
+</author>
+<author title="Editor">
+  <mail link="antifa@gentoo.org">Ken Nowack</mail>
+</author>
+<author title="Contributor">
+  <mail link="hitch17@gmail.com">John Hitchings</mail>
+</author>
+<author title="译者">
+  <mail link="twang.umn@gmail.com">汪腾</mail>
+</author>
+<abstract>
+这份指南将向你介绍如何开始使用强大的命令行下强大的电子邮件工具：fetchmail, procmail, mutt, nbsmtp, msmtp。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.7</version>
+<date>2006-09-17</date>
+
+<chapter>
+<title>电子邮件介绍</title>
+<section>
+<body>
+
+<p>
+如果你不追求电子邮件客户端的精致用户图形界面，或者，你仅仅只是想尝试曾经没有用过的其他电子邮件客户端，以决定一款最适合自己的，那么，这就是你开始使用这些强大的命令行工具的简单途径：
+</p>
+
+<p>
+<b>fetchmail, procmail, mutt &amp; smtp</b>
+</p>
+
+<p>
+这些程序并不仅仅只是强大和高度可定制的，并且小巧而高效。一旦你准备好并开始运行这套电子邮件系统的时候，你会将对你能利用它所作的而感到吃惊。
+</p>
+
+<p>
+这只是一份简要的入门指南，我们将略去邮件传输代理（MTA），例如sendmail，postmail，或是exim，的相关部分。这意味着在这份指南中没有复杂的MTA配置。同样，本文也略去了如何使用25端口作为邮件服务端口的相关部分。
+</p>
+
+<p>
+我们这样做是因为fetchmail可以强制将它所接收到的邮件直接投递到邮件传输代理（MDA），而不是转发到25端口。而且，我们也不需要利用任何复杂的MTA来投递普通简单的外发邮件。
+</p>
+
+<p>
+为使你的电子邮件工作，这些是你所需要的：
+</p>
+
+<pre caption="获取所需程序">
+<i>emerge fetchmail nbsmtp procmail mutt</i>
+</pre>
+
+<p>
+然后，只需快捷的四步来配置文件，你就将一切就绪并运行一个崭新的电子邮件系统了。
+</p>
+
+<impo>
+每步之后，你可以测试一下以确保设置正确。这意味着，当你设置完成的时候，你就已经有一个完整可用的电子邮件系统了。
+</impo>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Fetchmail</title>
+<section>
+<body>
+
+<p>
+Fetchmai将邮件从远程服务器上取回，并将它转发到本地的投递系统中。你需要像这个示例一样，在你的主目录下配置<path>.fetchmailrc</path>文件：
+</p>
+
+<pre caption=".fetchmailrc示例">
+<i>poll mail.myisp.net protocol pop3 user "myname" password</i>
+</pre>
+
+<p>
+当你设置好<path>.fetchmailrc</path>文件后，你需要利用chmod指令来更改文件权限。该文件必须仅仅只对文件所有者可读。利用下面的指令设置文件权限：
+</p>
+
+<pre caption="更改文件权限">
+$ <i>chmod 600 .fetchmailrc</i>
+</pre>
+
+<p>
+如果你想观测fetchmail的运行状态，可用详细模式（-v）。利用-a以获取所有消息。并且，你必须使用-m选项使fetchmail将邮件发送到procmail程序。
+</p>
+
+<warn>
+调试时，利用（-k）将邮件保留在远程服务器上是个不错的主意。这样，万一出错，我们可以将邮件重新取回。
+</warn>
+
+<p>
+现在让我们来运行它并观看他的表演吧！
+</p>
+
+<pre caption="Fetchmail测试#1">
+$ <i>fetchmail -akv -m \"/usr/bin/procmail -d %T\"</i>
+</pre>
+
+<p>
+当你有了一个可以正常工作的邮件系统后，你可以设置该命令作为一个定时运行任务（cron），你也可以将它放在一个类似gkrellm的监视器中。Fetchmail也可以以后台模式运行。你可以指定运行间隔（以秒计数）。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Procmail</title>
+<section>
+<body>
+
+<p>
+Procmail用来过滤由Fetchmail转发过来的邮件。它同样起到MDA的作用：将邮件发送到你的邮件箱中，使得mutt（你的电子邮件客户端）能够读取。
+</p>
+
+<p>
+你需要在你的用户主目录中创建<path>.procmailrc</path>文件以使用procmail。为简洁起见，我们将使用一份非常简单的<path>.procmailrc</path>。这份文件将来自gentoo的三份邮件列表分类到三个不同的邮件箱中：<e>gentoo-dev, 
+gentoo-user</e>和<e>gentoo-annuounce</e>。
+</p>
+
+<note>
+Procmail分类规则叫做处方（recipe），同时，我会设置一些处方来过滤掉某些垃圾邮件。
+</note>
+
+<pre caption=".procmailrc示例">
+MAILDIR=$HOME/MuttMail                 ##你最好能保证该目录存在。
+LOGFILE=$HOME/.procmaillog
+LOGABSTRACT=no
+#VERBOSE=on...只在调试时使用
+VERBOSE=off
+FORMAIL=/usr/bin/formail
+NL="
+"
+##处方行以:0开头
+##处方行中不可包含注释
+##使用否条件!禁止某处方
+##条件行以*开头，你的朋友作为正则表达式（regxp）
+##条件行并列，*之后所有部分将被送到egrep
+##执行行紧接条件行之后。这里是一个邮件箱的名称。
+
+#使用formail获取副本。
+:0 Whc: .msgid.lock
+| $FORMAIL -D 16384 .msgid.cache
+
+:0 a
+$MAILDIR/duplicates
+
+#邮件被允许接受的发件人
+:0
+* ^From:.*(craig\@hotmail|renee\@local.com)
+$MAILDIR/friends
+
+#现在让我们清理掉一些垃圾
+:0
+* ^Subject:.*(credit|cash|money|debt|sex|sale|loan)
+$MAILDIR/spam
+
+#不接受html消息
+:0
+* ^Content-Type:.*html
+$MAILDIR/junk
+
+#把来自邮件列表的邮件放到相应邮件箱
+:0
+* ^List-Id:.*gentoo-user
+gentoo-user
+
+:0
+* ^List-Id:.*gentoo-dev
+gentoo-dev
+
+:0
+* ^List-Id:.*gentoo-announce
+gentoo-announce
+
+#获取来自gentoo的任何其他邮件
+:0
+* ^From:.*gentoo.org
+gentoo
+
+:0
+* ^From:.*@freshmeat\.net
+freshmeat
+
+################################
+#最后一条：不符合上述任何一条
+#规则的邮件进入到默认邮件箱
+################################
+
+:0
+* .*
+default
+
+#文件结束。
+</pre>
+
+<note>
+我们仅仅需要创建MAILDIR 
+<path>$HOME/MuttMail/</path>目录，Procmail会在该目录下创建其他所有所需的邮件箱文件，并且以执行行作为邮件箱名称。获取更多有用链接，请访问<uri>http://www.procmail.org/</uri>。
+</note>
+
+<p>
+你可以重新运行在上一节中我们曾经运行的fetchmail指令，来测试一下你的<path>.procmailrc</path>文件。记住，用-k选项以确保将所有邮件保留在远程服务器上。当我们需要重新运行fetchmail时，我们仍然拥有这些邮件。
+</p>
+
+
+<pre caption="Procmail测试 #1">
+$ <i>fetchmail -akv -m \"/usr/bin/procmail -d %T\"</i>
+</pre>
+
+<p>
+我们已经运行了fetchmail和procmail，进入<path>$HOME/MuttMail</path>，利用<c>less</c>或者文件管理器来读取你的邮件吧。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Mutt电子邮件客户端</title>
+<section>
+<body>
+
+<p>
+Mutt可以读取和撰写邮件。虽然它很强大而且高度可定制，可是它依然小巧而高效。
+</p>
+
+<p>
+Mutt支持对四种不同邮件箱格式的读写：mbox，MMDF，MH和Maildir。它可以自动探测邮件箱类型。本文中我们使用mbox：邮件箱中所有的消息将会保存在同一份文件中。
+</p>
+
+<p>
+Mutt也可以工作在远程IMAP服务器的文件夹中。查阅Mutt手册中4.11小节有关IMAP支持的部分，你也可以查询Mutt网站<uri>http://www.mutt.org/</uri>。
+</p>
+
+<p>
+当你在第一步emerge 
+mutt之后，它会安装一份配置文件在<path>/etc/mutt/Muttrc</path>。你还需要在你的主目录下创建一份<path>.muttrc</path>文件。
+</p>
+
+<pre caption=".muttrc示例">
+<comment>（请一定阅读一下这份很好的Mutt手册：/usr.share/doc/mutt*)
+（这里的任何设置将会覆盖/etc/mutt/Muttrc的系统设置）</comment>
+
+# cp /etc/mutt/Muttrc ~/.muttrc
+# nano -w .muttrc
+set pager_context=1
+set pager_index_lines=6                 #在页中显示小型索引
+set menu_scroll
+set pgp_verify_sig=no                   #在页中不显示 pgp
+set status_on_top                       #在顶部显示状态行
+set sort=threads                        #在索引中将消息按线程排列
+
+set status_format=" %r %b %f %n      Del %d      Msgs %m %l %> (%P)"
+set pager_format="%-10.10i %[!%a %b %d %R]"
+set date_format="!%H:%M %a %d %b     "
+set index_format="%4C %Z %[%b%d] %-15.15F %s"
+set folder_format="%2C %t %8s %d %N %f"
+
+#set sendmail="/usr/bin/nbsmtp -d isp.net -h smtp.isp.net -f yourname@isp.net"
+
+#set from="default-mailaddress"         #设置您的发送邮箱地址
+#set realname="myname"
+
+set record="$HOME/MuttMail/sent"        #发出的邮件储存在这
+set delete=yes                          #删除时不提示
+set include=yes				#回复时引用原文
+set fast_reply=yes			#回复时不询问回复地址
+set beep=no				#无声
+set markers=no				#自动换行时不显示 +
+set confirmappend=no			#save to 时不提示，=keep
+set to_chars=" +TCF"                    #邮件列表无 L
+
+set folder = $HOME/MuttMail
+mailboxes =gentoo-user
+mailboxes =gentoo-dev
+mailboxes =gentoo-announce
+mailboxes =gentoo
+mailboxes =freshmeat
+mailboxes =duplicates
+mailboxes =default
+mailboxes =sent
+mailboxes =friends
+mailboxes =junk
+mailboxes =spam
+mailboxes =keep
+
+save-hook .* =keep                      #默认保存(s)邮件的 mbox 为 =keep
+subscribe gentoo-user gentoo-dev        #订购这些列表
+
+bind pager h display-toggle-weed	#使用 h 键切换邮件头信息显示
+
+# 模拟旧式网址菜单
+macro index \cb |urlview\n 'call urlview to extract URLs out of a message'
+macro pager \cb |urlview\n 'call urlview to extract URLs out of a message'
+
+#使用 G 键运行 fetchmail
+macro index G "!fetchmail -a -m 'procmail -d %T'\r"
+macro pager G "!fetchmail -a -m 'procmail -d %T'\r"
+
+#用于编辑 .muttrc 文件并载入...不必重新运行
+macro generic ,sm ":source $HOME/.muttrc\r"
+macro generic \cj "!rxvt -bg wheat -e joe $HOME/.muttrc\r"
+
+# 显示邮件时，除去默认邮件头列表中的域
+# 忽略所有域然后反选您想看到的
+ignore *
+unignore  Date To From: Subject X-Mailer Organization User-Agent
+hdr_order Date From To Subject X-Mailer User-Agent Organization
+
+##您的 Mutt 一定需要一些颜色
+##这里提供了四级的引用文本
+##这些设置覆盖了/etc/mutt/Muttrc 中的系统设置
+
+#color quoted green  default
+color quoted1 magenta blue
+#color quoted2 yellow default
+#color quoted3 red default
+#color signature cyan cyan
+
+
+#这个色彩设置拷贝自 /etc/mutt/Muttrc.color
+#如果希望看到 /etc/mutt/Muttrc 中的默认色彩，可将它注释掉
+# Je vois la vie en rose :-)
+color	hdrdefault	brightcyan	blue
+color	header		brightwhite	blue "^from:"
+color   header          brightwhite    	blue   "^subject:"
+
+color   quoted          brightgreen     blue
+color   signature       brightwhite	blue
+
+color   indicator       blue	        green
+
+color   error           red             black
+mono    error           bold
+color   status          black cyan
+mono	status		bold
+color   tree            yellow   	blue
+
+color   tilde           brightmagenta   blue
+color	body	brightwhite		blue	"[-a-z_0-9.]+@[-a-z_0-9.]+"
+mono    body    bold                    "[-a-z_0-9.]+@[-a-z_0-9.]+"
+color   body            brightyellow    black   "^Good signature"
+mono    body            bold                    "^Good signature"
+color   body            brightwhite     red     "^Bad signature from.*"
+mono    body            bold                    "^Bad signature from.*"
+color   normal          white		blue
+color	message		green	black
+color	attachment	brightgreen	blue
+
+# 文件结束…但它可以继续再继续……：）
+</pre>
+
+<p>
+这仅仅是一份示例<path>.muttrc</path>。你还可以配置更多其他选项，比如整合GPG。请参阅 
+<uri>http://www.dotfiles.com/index.php?app_id=27</uri>以获取更多示例和帮助。
+</p>
+
+<p>
+你现在可以测试<path>.muttrc</path>。
+</p>
+
+<pre caption="测试.muttrc">
+$ <i>mutt -y</i>
+</pre>
+
+<p>
+它会打开Mutt并显示一份你在测试2中运行fetchmail指令后所创建的Mutt邮件箱的菜单。
+</p>
+
+<p>
+浏览Mutt邮件箱时，你可以按?获取帮助。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>SMTP</title>
+<section>
+<body>
+
+<p>
+最后一步就是配置好nbsmtp，“No-Brainer 
+SMTP“会将邮件发送到你的smtp服务器。这是最简单的设置，因为你仅仅需要在你的<path>.muttrc</path>文件中添加一行。
+</p>
+
+<p>
+domain：这是你想告诉nbsmtp其所属的域名。它应该和你的电子邮件地址域名保持一致。
+</p>
+
+<p>
+from@addr：这是你想让nbsmtp使用的发件人地址。注意，它可以和MUA中"From:"行不同。
+</p>
+
+<p>
+host:这是用来发送邮件的smtp服务器地址。
+</p>
+
+<pre caption="添加SMTP支持">
+$ <i>nano -w .muttrc</i>
+set sendmail="/usr/bin/nbsmtp -d isp.net -h smtp.isp.net -f
+urname@isp.net"
+</pre>
+
+<p>
+你现在已经准备妥当，可以发送一封邮件了。在Mutt页面或者索引页按<c>m</c>键来撰写一封测试邮件，并将它发送到自己的电子邮箱。除非你在<path>~/.muttrc</path>中用<c>editor=</c>指定文本编辑器，Mutt会使用EDITOR或VISUAL的值来确定。当你写完邮件时，按<c>y</c>发送邮件。如果么有发生错误的话，你会看到‘sending 
+mail’然后‘Mail sent’。
+</p>
+
+<p>
+请记住，在<path>.muttrc</path>我们利用<c>set 
+record="$HOME/MuttMail/sent"</c>来设置发件箱的保存地址。
+</p>
+
+<p>
+你已经完成了所有的测试了，请再次运行fetchmail将你所有的邮件，并验证你是否收到发送给自己的那封邮件。当你找到了那封测试邮件时，按<c>h</c>键以查阅邮件头的所有内容和邮件传送路径。
+</p>
+
+<note>
+urlview是一个你很可能想要安装的程序。它将会从邮件文本中提取网址并发送网址到你的浏览器中。
+</note>
+
+<pre caption="获取urlview">
+# <i>emerge urlview</i>
+</pre>
+
+<p>
+然后将<path>/usr/share/doc/urlview*/</path>复制为<path>~/.urlview</path>并设置你的浏览器指令。
+</p>
+
+<p>
+现在，已经拥有一个强大并高度可定制的邮件系统了。如果想享受这套邮件系统的灵活性，请阅读所有的文档以及手册，并在网上搜索<path>procmailrc</path>和<path>muttrc</path>，你将获得更多的用户配置文件。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>SMTP认证</title>
+<section>
+<title>使用nbSMTP</title>
+<body>
+
+<p>
+如果你需要使用用户名和密码来连接你的SMTP服务器的话，你可以在<path>.muttrc</path>中设置，<c>set 
+sendmail</c>，并写入<c>-U &lt;username&gt; -P &lt;password&gt;</c>。下面是一个示例：
+</p>
+
+<pre caption="设置SMTP用户名和密码">
+set sendmail=\"/usr/bin/nbsmtp -U <i>username</i> -P <i>password</i> -d
+isp.net -h smtp.isp.net -f urname@isp.net"
+</pre>
+
+<p>
+如果你不想在你的<path>.muttrc</path>中显示这些信息，你也可以创建<path>.nbsmtprc</path>文件来设置相关信息：
+</p>
+
+<pre caption="~/.nbsmtprc示例">
+auth_user = <i>username</i>
+auth_pass = <i>password</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>替代方案：使用msmtp</title>
+<body>
+
+<p>
+<c>msmtp</c>是对<c>nbsmtp</c>的简单替代方案，他们有很类似的功能。
+</p>
+
+<pre caption="安装msmtp">
+# <i>emerge msmtp</i>
+</pre>
+
+<p>
+现在以普通用户登录并创建<path>~/.msmtprc</path>文件来配置msmtp。你需要写入你的SMTP服务器的相关信息。请记住，为该文件设置一个安全的权限。
+</p>
+
+<pre caption="配置msmtp">
+$ <i>nano -w .msmtprc</i>
+account default
+host <i>smtp.your_provider.net</i>
+from <i>your_username@provider1.net</i>
+<comment>#查阅man获取更多认证选项</comment>
+auth login
+user <i>your_username</i>
+password <i>your_password</i>
+<comment>#如果你的SMTP服务器支持TLS加密，去掉下面一行的注释
+#tls</comment>
+</pre>
+
+<p>
+现在为该文件设置一个安全的权限：
+</p>
+
+<pre caption="为配置文件设置权限">
+<i>chmod 600 .msmtprc</i>
+</pre>
+
+<p>
+最后，在<path>.muttrc</path>中编辑或添加上下面一行：
+</p>
+
+<pre caption="让Mutt使用msmtp">
+$ <i>nano -w .muttrc</i>
+set sendmail="/usr/bin/msmtp"
+</pre>
+
+<p>
+开启<c>mutt</c>并给自己发送一封测试邮件以检查msmtp是否正常工作！查阅msmtp man页以获取更多配置选项和其他示例。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
