@@ -35,6 +35,9 @@ John P. Davis
 <author title="译者">
   <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
 </author>
+<author title="编辑">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
 
 <abstract>
 Gentoolkit是一套使得管理Gentoo系统更加轻松的软件集合。这个文档介绍了一些Gentoolkit里的工具的一些基本使用方法。
@@ -56,11 +59,11 @@ Gentoo是一个独一无二的发行版，并且存在一些别的发行版没�
 </p>
 
 <note>
-到现在为止，存在者两种版本的gentookit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。前者包含了管理脚本，而后者包含了一些专门帮助Gentoo开发的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本被收录到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
+到现在为止，存在着两种版本的gentoolkit：<c>app-portage/gentoolkit</c>和<c>app-portage/gentoolkit-dev</c>。前者包含了管理脚本，而后者包含了一些专门帮助Gentoo开发的脚本。如果你是一个开发者，你可以通过联系Gentoolkit维护者来让你的脚本被收录到<c>gentoolkit-dev</c>里。这个文档只讨论gentoolkit。 
 </note>
 
 <p>
-Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和留意在你的系统上发生的事。大部分的用户———特别是经常升级系统的用户，将会从安装gentoolkit里受益。
+Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和跟踪你的系统上发生的事。大部分的用户———特别是经常升级系统的用户，将会因gentoolkit受益。
 </p>
 
 </body>
@@ -102,15 +105,15 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-<c>equery</c>是一个显示大量有关于你系统上的软件包的有用信息和其他许多东西的工具。<c>equery --help</c>能给你完整的选项列表。
+<c>equery</c>是一个显示有关于你系统上的软件包的大量有用信息和其他许多东西的工具。<c>equery --help</c>能给你完整的选项列表。
 </p>
 
 <note>
-目前为止不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你也会见到每个命令都有一个缩写，比如说<c>b</c>而不是<c>belongs</c>。
+目前为止不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你也会见到每个命令都有一个缩写，比如说你可以使用<c>b</c>来代替<c>belongs</c>。
 </note>
 
 <note>
-注意，equery如果通过一个管道输出信息，现在它会改变输出信息的格式。通过管道输出的格式是为了更容易被其他工具解析，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要调用equery的脚本，你注意这一点。
+注意，现在如果equery的输出是通过管道发送的，它会改变输出信息的格式。通过管道输出的格式是为了更容易被其他工具解析，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要调用equery的脚本，你注意这一点。
 </note>
 
 </body>
@@ -123,7 +126,7 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <c>equery</c>也提供了寻找一个文件来自于哪个软件包的功能，使用<c>belongs</c>命令（或只是<c>b</c>）。
 </p>
 
-<pre caption="查找安装了某个给定文件的ebuild">
+<pre caption="查找哪个ebuild安装某个给定文件">
 # <i>equery belongs /usr/bin/audacious</i>
 [ Searching for file(s) /usr/bin/audacious in *... ]
 media-sound/audacious-1.1.2 (/usr/bin/audacious)
@@ -204,7 +207,7 @@ Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
 </pre>
 
 <p>
-比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，事实上<c>cdrtools</c>是被编写成需要virtual/libc的，而不是sys-libs/glibc，但是在例子里提到的系统上sys-libs/glibc提供了virtual/libc。
+比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，事实上<c>cdrtools</c>的ebuild里写的是需要virtual/libc的，而不是sys-libs/glibc，但是在例子里提到的系统上sys-libs/glibc提供了virtual/libc。
 </p>
 
 </body>
@@ -335,14 +338,14 @@ app-portage/gentoolkit-0.2.0
 </body>
 </section>
 <section>
-<title>USE标记的Package-wise列表</title>
+<title>每个软件包的USE标记列表</title>
 <body>
 
 <p>
 <c>equery</c>可以被用来给我们有关一个特定的软件包使用的USE标记的信息。它也可以告诉我们一个软件包正在使用的USE标记和可以使用的USE标记。
 </p>
 
-<pre caption="设置和取消USE标记">
+<pre caption="设置了的和没有设置的USE标记">
 # <i>equery uses wireshark</i>
 [ Colour Code : set unset ]
 [ Legend    : (U) Col 1 - Current USE flags        ]
@@ -404,7 +407,7 @@ app-portage/gentoolkit-0.2.0
 </p>
 
 <note>
-<c>euse</c>用5列的输出信息来显示一个USE标记是否被设置或取消和在哪里被设置或取消。那些列分别表示+/-(激活活取消）、是在环境里设置的、是在make.conf里设置的、是在make.Defaults里设置的和是在make.Globals里设置的。输出的信息就像这样[+ECDG]。 
+<c>euse</c>用5列的输出信息来显示一个USE标记是否被设置或取消和在哪里被设置或取消。那些列分别表示+/-(激活或取消）、在环境(Environment)变量里设置的、在make.Conf里设置的、在make.Defaults里设置的和在make.Globals里设置的。输出的信息就像这样[+ECDG]。 
 </note>
 
 <pre caption="常看所有活跃的USE标记">
@@ -502,7 +505,7 @@ zlib                [+ CD ]
 </pre>
 
 <p>
-相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a -l</c>命令只显示活跃的局部USE标记。<c>-g</c> &amp; <c>-l</c>是<c>euse</c>的子选项，并且需要一个选项在他们之前（像<c>-a</c>）来正确运行。
+相似地你可以使用<c>euse -a -g</c>命令来只显示活跃的全局USE标记。<c>euse -a -l</c>命令只显示活跃的局部USE标记。<c>-g</c>和<c>-l</c>是<c>euse</c>的子选项，并且需要一个选项（像<c>-a</c>）在他们之前才能正确运行。
 </p>
 
 <pre caption="查看活跃的局部USE标记">
@@ -569,7 +572,7 @@ USE="alsa acpi apache2 -arts cups cdr crypt cscope -doc fbcon \
 <body>
 
 <p>
-这个工具是Gentoo's Reverse Dependency（Gentoo反向依赖关系）的重建者。它可以通过扫描你已经安装了的ebuild文件来了解软件包是否因为一次它们依赖的软件包的升级而被破坏。它可以为你重新emerge这些软件包。但也可能是给定的软件包在当前的依赖环境下无法再工作了，在这种情况下你应该把这些破损的软件包升级到一个较新的版本。revdep-rebuild会通过标志来emerge，这让你能使用<c>--pretend</c>标志在你进行进一步工作前来查看哪些东西要被重新emerge。
+这是Gentoo's Reverse Dependency（Gentoo反向依赖关系）的重建工具。它可以通过扫描你已经安装了的ebuild文件来了解软件包是否因为一次它们依赖的软件包的升级而被破坏。它可以为你重新emerge这些软件包。但也可能是给定的软件包在当前的依赖环境下无法再工作了，在这种情况下你应该把这些破损的软件包升级到一个较新的版本。revdep-rebuild会传递参数给emerge，这让你能使用<c>--pretend</c>选项在你进行实际安装前来查看哪些东西将要被重新emerge。
 </p>
 
 <pre caption="假装（pretend mode）运行revdep-rebuild">
@@ -633,7 +636,7 @@ Now you can remove -p (or --pretend) from arguments and re-run revdep-rebuild.
 </pre>
 
 <p>
-如果你需要重新编译一些软件包，你可以在没有<c>-p</c>标志的情况下运行<c>revdep-rebuild</c>，然后被列出的软件包就会被重新emerge。
+如果你需要重新编译这些软件包，你可以在没有<c>-p</c>标志的情况下运行<c>revdep-rebuild</c>，然后被列出的软件包就会被重新emerge。
 </p>
 
 </body>
@@ -682,11 +685,11 @@ Choice?
 </pre>
 
 <p>
-选择一个数字，然后文件就会通过“PAGER”环境变量里指定的分页排版程序显示出来。如果“PAGER”变量没有被设置，它会使用<c>less</c>。
+选择一个数字，然后对应的文件就会通过“PAGER”环境变量里指定的分页排版程序显示出来。如果“PAGER”变量没有被设置，它会使用<c>less</c>。
 </p>
 
 <p>
-在显示了你指定的elog项目后，你将会被提问你是否想要删除那个文件。
+在显示了你指定的elog文件后，程序会问你是否想要删除那个文件。
 </p>
 
 </body>
