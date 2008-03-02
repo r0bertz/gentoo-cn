@@ -61,11 +61,14 @@ $ <i>emerge -av dev-util/git</i>
 <body>
 
 <p>
-git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来设定自己的个人信息。设定之前首先我们还是来安装和配置smtp程序。这里我们介绍是msmtp。
+git的每个递交都会关联作者的email信息。在1.5.2.2版及以后的git中，可以使用<c>git-config</c>工具来设定自己的个人信息。设定之前首先我们还是来安装和配置smtp程序。这里我们介绍是msmtp和ssmtp。
 </p>
 
+<subsection>
+<title>选择1：安装和配置msmtp</title>
+
 <pre caption="安装msmtp">
-$ <i>emerge msmtp</i>
+$ <i>emerge -av msmtp</i>
 </pre>
 
 <p>
@@ -88,17 +91,54 @@ $ <i>chmod 600 ~/.msmtprc</i>
 </pre>
 
 <p>
-请用你的email地址和密码代替上面的yourname@gmail.com和yourpassword。下面我们用git-config来设定git的一些全局变量。
+请用你的email地址和密码代替上面的yourname@gmail.com和yourpassword。
+</p>
+</subsection>
+
+<subsection>
+<title>选择2：安装和配置ssmtp</title>
+<pre caption="安装ssmtp">
+$ <i>emerge -av ssmtp</i>
+
+<p>
+ssmtp的配置文件分别存储在/etc/ssmtp/ssmtp.conf和/etc/ssmtp/revaliases内。
+</p>
+
+<pre caption="修改/etc/ssmtp/ssmtp.conf如下">
+root=yourname@gmail.com
+mailhub=smtp.gmail.com:587
+rewriteDomain=
+hostname=yourname@gmail.com
+UseSTARTTLS=YES
+AuthUser=yourname
+AuthPass=yourpassword
+FromLineOverride=YES
+</pre>
+
+<pre caption="修改/etc/ssmtp/revaliases如下">
+root:yourname@gmail.com:smtp.gmail.com:587
+user:yourname@gmail.com:smtp.gmail.com:587
+</pre>
+
+<p>
+请用你的email地址和密码代替上面的yourname@gmail.com和yourpassword，用你在的Gentoo Linux登录的用户名代替user。
+</p>
+</subsection>
+
+<p>
+下面我们用git-config来设定git的一些全局变量。
 </p>
 
 <pre caption="设置自己的姓名、email地址及smtp服务器程序">
 $ <i>git-config --global user.name 'Your Name'</i>
 $ <i>git-config --global user.email 'yourname@gmail.com'</i>
-$ <i>git-config --global sendemail.smtpserver "/usr/bin/msmtp"</i>
+$ <i>git-config --global sendemail.smtpserver "/path/to/your/smtpserver"</i>
 </pre>
 
 <p>
-同样，用你自己的名字、email地址代替上面的值，但smtpserver的值要和上面一样。如此设置后，这些信息就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
+同样，用你自己的名字、email地址代替上面的值，但smtpserver的值要和上面一样。对于msmtp，路径为/usr/bin/msmtp；对于ssmtp，路径为/usr/sbin/ssmtp。
+
+如此设置后，这些信息就会保存在<path>~/.gitconfig</path>文件中，作为用户个人的全局user相关设置。
 </p>
 
 </body>
