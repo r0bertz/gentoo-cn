@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.14 -->
+<!-- English CVS version: 1.15 -->
 
 <guide link="/doc/zh_cn/grub-error-guide.xml" lang="zh_cn">
 <title>Gentoo Grub错误汇总</title>
@@ -23,8 +23,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.8</version>
-<date>2005-12-21</date>
+<version>1.9</version>
+<date>2008-1-13</date>
 
 <chapter>
 <title>篇首语</title>
@@ -521,7 +521,7 @@ lrwxrwxrwx  1 root root 9 Mar  7 14:00 /mnt/gentoo/boot/grub/menu.lst -> grub.co
 </p>
 
 <pre caption="更新mtab文件">
-# <i>cp /proc/mounts /etc/mtab</i>
+# <i>grep -v rootfs /proc/mounts > /etc/mtab</i>
 </pre>
 
 </body>
