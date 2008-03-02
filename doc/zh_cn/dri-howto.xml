@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.40  -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/dri-howto.xml" lang="zh_cn">
+
+<title>硬件3D加速指南</title>
+
+<author title="作者">
+  <mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>
+</author>
+<author title="编辑">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>
+本文档是一个介绍通过使用Xorg和DRM来在Gentoo Linux里启用3D加速功能的指南。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.10</version>
+<date>2007-08-23</date>
+
+<chapter>
+<title>解释</title>
+<section>
+<title>什么是硬件3D加速，为什么我需要它？</title>
+<body>
+
+<p>
+使用硬件3D加速，三维渲染将会使用显卡上的图形处理器，而不会占据宝贵的CPU资源来绘制3D图像。它也被称作“硬件加速”而不是“软件加速”，因为如果没有这个3D加速，你的CPU将只能使用Mesa软件渲染库来绘制所有的3D图像，这会占用相当多的处理器资源。虽然Xorg一般会支持2D硬件加速，它经常缺少硬件3D加速。三维硬件加速在游戏、3D CAD和建模等需要渲染3D对象的场合下非常有价值。
+</p>
+
+</body>
+</section>
+<section>
+<title>我怎样获得硬件3D加速？</title>
+<body>
+
+<p>
+在很多情况下，二进制驱动和开源驱动都存在。推荐使用开源驱动，因为我们使用的是Linux并且开源是它的本质特征之一。有些时候，二进制驱动是唯一的选择，比如nVidia的显卡。二进制驱动有针对nVidia显卡的<c>x11-drivers/nvidia-drivers</c>以及针对ATI显卡的<c>x11-drivers/ati-drivers</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是DRI？</title>
+<body>
+
+<p>
+<uri link="http://dri.freedesktop.org/wiki/">Direct Rendering Infrastructure——直接渲染架构</uri>，也称DRI，是一个允许在安全和高效的方式下直接访问显卡硬件的架构。它包括对X服务器的改动，以及对几个客户端库和内核的改动。DRI的第一个重要应用是创建快速的OpenGL实现。
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是DRM，它和常规Xorg有何联系？</title>
+<body>
+
+<p>
+DRM（Direct Rendering Manager——直接渲染管理器）是Xorg的一个<e>改进</e>，它通过增加直接渲染所必要的内核模块来为显卡增加3D加速功能。
+</p>
+
+</body>
+</section>
+<section>
+<title>目的</title>
+<body>
+
+<p>
+本指南是给那些在Xorg里不能搞定直接渲染的人准备的。DRM对于下面这些驱动工作正常：
+</p>
+
+<ul>
+  <li>3dfx</li>
+  <li>i8x0</li>
+  <li>matrox</li>
+  <li>rage128</li>
+  <li>radeon</li>
+  <li>mach64</li>
+  <li>sis300</li>
+  <li>via</li>
+</ul>
+
+<p>
+请看<uri link="http://dri.freedesktop.org/">DRI主页</uri>以获取更多信息和文档。
+</p>
+
+</body>
+</section>
+<section>
+<title>回馈</title>
+<body>
+
+<p>
+如果有任何问题和建议，请发email给<mail link="dberkholz@gentoo.org">Donnie Berkholz</mail>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装Xorg和配置内核</title>
+<section>
+<title>安装Xorg</title>
+<body>
+
+<p>
+请阅读我们的<uri link="/doc/zh_cn/xorg-config.xml">Xorg配置指南</uri>来配置Xorg并使之运行起来。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置你的内核</title>
+<body>
+
+<p>
+检测你的芯片组并只启用该芯片组
+</p>
+
+<pre caption="检查你的AGP芯片组">
+# <i>emerge pciutils; lspci | grep AGP</i>
+# <i>00:01.0 PCI bridge: Intel Corp. 440BX/ZX/DX - 82443BX/ZX/DX AGP bridge (rev 03)</i>
+<comment>（因为硬件的不同，你的输出和上面的可能不一样。）</comment>
+</pre>
+
+<p>
+如果你的芯片组不被内核所支持，尝试给内核加上<c>agp=try_unsupported</c>参数可能能够成功。这将会使用Intel的一般性函数来充当AGP支持。要添加这个参数，请修改你的引导程序配置文件！
+</p>
+
+<p>
+大多数，如果不是全部，内核都应该有这些选项。这里配置时使用的是一个标准的<c>gentoo-sources</c>内核。
+</p>
+
+<pre caption="配置内核">
+# <i>ls -l /usr/src/linux </i>
+lrwxrwxrwx 1 root root 22 2007-02-14 20:12 /usr/src/linux -> linux-2.6.18-gentoo-r4
+<comment>（确保/usr/src/linux连接指向你现在的内核。）</comment>
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<pre caption="make menuconfig选项">
+Processor type and features --->
+&lt;*&gt; MTRR (Memory Type Range Register) support
+Device drivers --->
+   Character devices --->
+   &lt;M&gt; /dev/agpgart (AGP Support)
+   <comment>（agpgart选项在64位内核里不存在；只需要选择你的芯片组支持即可。）</comment>
+   &lt;M&gt; Intel 440LX/BX/GX, I8xx and E7x05 support
+<comment>（启用你的芯片组而不要照抄上面的例子。）</comment>
+   &lt;M&gt; Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
+</pre>
+
+</body>
+</section>
+<section>
+<title>编译和安装内核</title>
+<body>
+
+<pre caption="编译和安装内核">
+# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<p>
+不要忘记设置<path>grub.conf</path>或者<path>lilo.conf</path>并且执行<c>/sbin/lilo</c>如果你使用LILO的话。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>配置直接渲染</title>
+<section id="configure_xorg">
+<title>配置Xorg.conf</title>
+<body>
+
+<p>
+用你喜欢的文本编辑器打开<path>/etc/X11/xorg.conf</path>，编辑它以启用DRI和GLX。
+</p>
+
+<pre caption="xorg.conf">
+...
+Section "Module"
+  Load "dri"
+  Load "glx"
+  ...
+EndSection
+...
+Section "Device"
+  Driver "radeon"
+  <comment>（用你的驱动的名字替换radeon。）</comment>
+  ...
+EndSection
+...
+Section "dri"
+  Mode 0666
+EndSection
+</pre>
+
+</body>
+</section>
+<section>
+<title>modules.autoload.d的改动</title>
+<body>
+
+<p>
+你需要把你的显卡所用的模块名字加入<path>/etc/modules.autoload.d/kernel-2.6</path>来确保系统启动时这个模块能被自动加载。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+<comment>（根据实际改变模块的名字）</comment>
+intel-agp
+</pre>
+
+<note>
+如果你把<c>agpgart</c>编译成了模块，你也需要把它加入<path>/etc/modules.autoload.d/kernel-2.6</path>。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>测试3D加速</title>
+<section>
+<title>重启使用新内核</title>
+<body>
+
+<p>
+重启你的电脑使用你的新内核并以普通用户登录。是时候看看你的直接渲染是否已经启用而且它究竟有多厉害了。<c>glxinfo</c>和<c>glxgears</c>是<c>mesa-progs</c>包的一部分，所以运行这两个命令前要确保它们已经被安装。
+</p>
+
+<pre caption="测试渲染">
+$ <i>startx</i>
+<comment>（不需要加载你的驱动的模块或者agpgart，即使你把它们编译成了模块。）</comment>
+<comment>（它们会被自动加载。）</comment>
+$ <i>glxinfo | grep rendering</i>
+direct rendering: Yes
+<comment>（如果这里显示的是“No”,那么你没有3D加速。）</comment>
+$ <i>glxgears</i>
+<comment>（用默认大小的窗口测试你的FPS。这个数字应该比配置DRM前高出了许多。尽量在CPU空闲的时候测试。）</comment>
+</pre>
+
+<note>
+FPS可能会受你的屏幕的刷新率所限，所以如果<c>glxgears</c>显示FPS只有70-100时不要忘了这一点。<c>games-fps/ut2004-demo</c>是一个更好的测试工具，它可以给你真实世界的表现结果。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>优化你的显卡的表现</title>
+<section>
+<title>获取直接渲染的最高性能</title>
+<body>
+
+<p>
+有一些选项可以提高表现百分之30或以上。请在<path>/etc/X11/xorg.conf</path>里设定它们。不过，首先你要检查你的主板和显卡是否支持这些选项。
+</p>
+
+<p>
+首先，我们来看看你的显卡是否支持fast write。我们通过仔细分析<c>lspci</c>的输出来检查这一点。我们主要看“VGA compatible controller”的信息。
+</p>
+
+<pre caption="显卡检查">
+# <i>lspci -vv</i>
+01:00.0 VGA compatible controller: ATI Technologies Inc Radeon Mobility M6 LY (prog-if 00 [VGA])
+. . .
+Capabilities: [58] AGP version 2.0
+    Status: RQ=48 Iso- ArqSz=0 Cal=0 SBA+ ITACoh- GART64- HTrans- 64bit- FW+ AGP3- Rate=x1,x2,x4
+</pre>
+
+<p>
+虽然产生了很多信息，不过我们寻找的是“Capabilities”段的“Status”子段的<b>FW</b>。如果<b>FW+</b>出现在“Status”行，这表示这个显卡支持fast write。现在我们可以检查主板是否支持fast write。
+</p>
+
+<impo>
+如果你没有看到<b>FW+</b>，但是看到了<b>FW-</b>，你不能在<path>xorg.conf</path>启用fast write。你的显卡不支持fast write。
+</impo>
+
+<p>
+现在我们要确保主板也支持fast write。这次我们看你的<c>lspci</c>输出的“Host bridge”段。
+</p>
+
+<pre caption="主板检查">
+# <i>lspci -vv</i>
+00:00.0 Host bridge: Intel Corporation 82830 830 Chipset Host Bridge (rev 02)
+. . .
+Capabilities: [a0] AGP version 2.0
+    Status: RQ=32 Iso- ArqSz=0 Cal=0 SBA+ ITACoh- GART64- HTrans- 64bit- FW+ AGP3- Rate=x1,x2,x4
+</pre>
+
+<p>
+同样，检查你的AGP“Capabilities”段的“Status”子段。寻找<b>FW</b>。如果你看到<b>FW+</b>，你的主板支持fast 
+write。
+</p>
+
+<impo>
+记住，你的显卡和主板要有一样的<b>FW</b>能力。如果有一个设备在“Status”里显示<b>FW-</b>，你就不能在<path>xorg.conf</path>里启用fast 
+write。
+</impo>
+
+<p>
+假设一切正常而且你的主板和显卡都支持fast write，让我们在<path>/etc/X11/xorg.conf</path>里启用这个选项以获取你的硬件的最佳性能。
+</p>
+
+<pre caption="xorg.conf">
+Section "Device"
+  Option     "AGPMode" "4"
+  <comment>（这样FPS能从609上升到618。）</comment>
+  Option     "AGPFastWrite" "True"
+  <comment>（这一项没有可测量的效果，不过它可能导致系统不稳定。）</comment>
+  <comment>（你还需要在你的BIOS里设定它。）</comment>
+  Option     "EnablePageFlip" "True"
+  <comment>（这一项可以使FPS从618上升到702。它也是比较“危险的”，不过很少有人报告过问题。）</comment>
+  ...
+EndSection
+</pre>
+
+<warn>
+在VIA芯片组上启用<c>AGPFastWrite</c>几乎肯定会导致你的机器死机。VIA芯片组不能很好的支持fast write，所以你要自己承担使用这个设定的风险。
+</warn>
+
+<note>
+记住如果你想让fast write正常运作，你首先需要在你的BIOS里启用相关的设定。
+</note>
+
+<p>
+如果你想要设定更多的功能，请查看DRI网页上的<uri link="http://dri.freedesktop.org/wiki/FeatureMatrix">功能矩阵</uri>或者Sourceforge上的<uri link="http://dri.sourceforge.net/doc/dri_driver_features.phtml">功能列表</uri>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>疑难解答</title>
+<section>
+<title>不行啊。我无法启用直接渲染，而且我不知道为什么。</title>
+<body>
+
+<p>
+尝试在启动X服务器之前<c>modprobe radeon</c>（把<c>radeon</c>替换为你的驱动的名字）。再尝试把agpgart编译进内核，而不是编译成一个模块。
+</p>
+
+</body>
+</section>
+<section>
+<title>当我startx时，我得到了这个错误信息："[drm] failed to load kernel module agpgart"</title>
+<body>
+
+<p>
+这是因为你把agpgart编译进了内核，而不是编译成模块。如果运行起来没有问题，请忽略这个提示。
+</p>
+
+</body>
+</section>
+<section>
+<title>我有一个Radeon显卡，我想要TV-Out。</title>
+<body>
+
+<p>
+原来由<uri link="http://gatos.sf.net">GATOS</uri>项目开发的驱动已经被合并到Xorg里了。要启用TV-Out你不需要做什么事情；<c>x11-drivers/xf86-video-ati</c>将会正常支持这个功能。
+</p>
+
+</body>
+</section>
+<section>
+<title>
+不行啊。我的显卡太新了，根本不受支持。
+</title>
+<body>
+
+<p>
+请试试二进制驱动。对于<c>ati-drivers</c>来说，这里有两个连接<uri>http://ati.amd.com/support/drivers/linux/linux-radeon.html</uri>（x86）和<uri>http://ati.amd.com/support/drivers/linux64/linux64-radeon.html</uri>（amd64）。如果这些也不支持，就用fbdev。虽然它比较慢，但是它可以运行的起来。
+</p>
+
+</body>
+</section>
+<section>
+<title>我有一个PCI显卡，但是搞不定。帮帮忙！</title>
+<body>
+
+<p>
+编辑<path>/etc/X11/xorg.conf</path>。在"Device" section中启用ForcePCIMode。 
+</p>
+
+<pre caption="Enabling ForcePCIMode">
+Option "ForcePCIMode" "True"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>致谢</title>
+<section>
+<body>
+
+<ol>
+  <li>
+    Christopher Webber，感谢他提供了一个有关改变或者重编译内核的疑难解答问题。
+  </li>
+  <li>
+    Steve，感谢他建议在XF86Config里统一dri和DRI的大小写。
+  </li>
+</ol>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>参考</title>
+<section>
+<body>
+
+<ol>
+  <li><uri>http://forums.gentoo.org/viewtopic.php?t=46681</uri></li>
+  <li><uri>http://forums.gentoo.org/viewtopic.php?t=29264</uri></li>
+  <li><uri>http://dri.freedesktop.org/</uri></li>
+  <li><uri>http://www.retinalburn.net/linux/dri_status.html</uri></li>
+</ol>
+
+</body>
+</section>
+</chapter>
+</guide>
