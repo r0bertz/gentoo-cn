@@ -113,7 +113,7 @@
     <file id="devfs-guide">/doc/en/devfs-guide.xml</file>
     <file id="distcc">/doc/en/distcc.xml</file>
     <file id="cross-distcc">/doc/en/cross-compiling-distcc.xml</file>
-    <file id="dri-howto">/doc/en/dri-howto.xml</file>
+    <file id="dri-howto">/doc/zh_cn/dri-howto.xml</file>
     <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
     <file id="gentoo-upgrading">/doc/en/gentoo-upgrading.xml</file>
     <file id="2.6-migration">/doc/en/migration-to-2.6.xml</file>
