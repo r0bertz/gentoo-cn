@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.1 -->
+<sections>
+<version>1.0.3</version>
+<date>2007-11-01</date>
+
+<section>
+<title>使用CVS</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+这不是一本讲解如何使用CVS的手册。如果你需要了解如何使用CVS，请查看CVS的info或者<uri>/doc/en/cvs-tutorial.xml</uri>。相反地，这本手册特别关注如何在Gentoo的ebuild树中使用CVS和Repoman。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>配置</title>
+<body>
+
+<p>
+一般来说，你会希望在<path>~/.cvsrc</path>中加入下面的几句话。
+</p>
+
+<pre caption="~/.cvsrc">
+cvs -q -z0
+diff -u -B
+checkout -P
+update -d -P
+</pre>
+
+<p>
+为了确保digest的正确性，请将<c>cvs</c>加入到你的<c>FEATURES</c>设置中。
+</p>
+
+<p>
+最后，很多使用CVS的人喜欢使用压缩选项（-z#）。我们要求那些不通过拨号连接的开发者使用选项-z0（考虑到我们CVS仓库的内容和我们CVS服务器的负载），在没有压缩的情况下，你会感受到速度的<e>提升</e>。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>从CVS/SVN中checkout</title>
+<body>
+
+<p>
+在Gentoo的CVS仓库中有一些很有用的模块。Ebuild被存放在<path>gentoo-x86</path>模块中。<path>gentoo</path>包含了网站，文档，开发者目录，开发者图片等的XML文件。<path>gentoo-projects</path>包含了各种各样的项目，并替换了<path>gentoo-src</path>cvs模块。<path>gentoo-src</path>被保留，成为了历史。如果你仍然在使用它，请转移到一个不同的cvs模块。
+</p>
+
+<pre caption="Checkout gentoo-x86">
+# cvs -d username@cvs.gentoo.org:/var/cvsroot co gentoo-x86
+</pre>
+
+<p>
+在任何时候，在树中工作之前，总是记得要先更新，用来检查仓库中的内容是否有改变，以防止冲突的发生。如果你不希望等待整棵树的更新，你可以在任何一个子目录中进行更新，但不时地更新你的整棵树是个很好的主意。
+</p>
+
+<pre caption="更新gentoo-x86">
+# cd gentoo-x86
+# cvs update
+</pre>
+
+<p>
+Gentoo也为那些偏爱SVN的人提供了subversion服务。许多核心项目，比如<path>portage</path>和<path>baselayout</path>现在也架设在这里。
+</p>
+
+<pre caption="Checkout Portage">
+# svn co svn+ssh://username@cvs.gentoo.org/var/svnroot/portage
+</pre>
+
+</body>
+</subsection>
+
+<subsection>
+<title>更新Portage</title>
+<body>
+
+<p>
+如果你想使用CVS作为你主要的Portage树，那么你可以在<path>/etc/make.conf</path>中加入下面的几行，用你的名字替换其中的<c>you</c>。
+</p>
+
+<pre caption="修改/etc/make.conf来配合CVS的使用">
+SYNC="cvs://you@cvs.gentoo.org:/var/cvsroot"
+CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
+</pre>
+
+<p>
+不管你是否希望使用CVS来作为你主要的Portage树，你应当确保<c>cvs</c>在文件<path>/etc/make.conf</path>的<c>FEATURES</c>选项中。这将保证在制作digest的时候，Portage会下载ebuild在<c>SRC_URI</c>中引用的所有文件。
+</p>
+
+<note>
+由于cvs的checkout没有metadata cache，你的portage可能会变得很慢。
+</note> 
+
+<p>
+你可以在你的<c>FEATURES</c>中加入<c>digest</c>，让Portage自动创建新的digest，你也可以加入<c>autoaddcvs</c>，这样，<c>repoman</c>（用来commit到ebuild的一个工具）将会为你在CVS中自动加入缺少的digest。
+</p>
+
+<p>
+在支持的架构上，你应该总是在你的<c>FEATURES</c>中加入<c>sandbox</c>来保证ebuild不会直接修改根文件系统。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>增加／删除包</title>
+<body>
+
+<p>
+假设你准备在app-misc中加入一个全新的包<c>foo</c>：
+</p>
+
+<pre caption="增加一个包">
+<comment>（用你checkout出来的CVS树的位置来替换CVSROOT。）</comment>
+# cd $CVSROOT/app-misc
+<comment>（在CVS树中工作之前总是要先更新！）</comment>
+# cvs update
+# mkdir foo
+<comment>（这里，我们将foo包目录加入了CVS仓库。）</comment>
+# cvs add foo
+# cd foo
+<comment>（最好将你正在进行中的ebuild放置在CVS树之外的overlay中。）</comment>
+# cp /path/to/foo-1.0.ebuild ./
+<comment>（不要忘记创建ChangeLog文件——查看echangelog的man帮助。）</comment>
+<comment>（当建立digest的时候，确保PORTDIR_OVERLAY设置成CVS目录。）</comment>
+# ebuild foo-1.0.ebuild digest
+# cvs add foo-1.0.ebuild ChangeLog files
+<comment>（FEATURES=autoaddcvs将会为你做这些……）</comment>
+# cvs add files/digest-foo-1.0
+</pre>
+
+<p>
+记得加入包含维护者信息的metadata.xml文件。查看<uri link="?part=2&amp;chap=4">Gentoo 
+Metadata</uri>章节以获得更多的信息。
+</p>
+
+<p>
+在这个时刻，你已经准备好commit了（查看下面的Commits章节）。但如果当foo-1.1发布的时候你想要删除foo-1.0，该怎么办呢？
+</p>
+
+<pre caption="删除旧版本">
+# cd CVSROOT/app-misc/foo
+# cvs update
+# cvs remove -f foo-1.0.ebuild files/digest-foo-1.0
+</pre>
+
+<p>
+现在你已经准备好可以commit了。（查看下面的Commits章节）
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Commits</title>
+<body>
+
+<p>
+请一直使用<c>repoman commit</c>，而不是<c>cvs 
+commit</c>。Repoman是一个质量保障（QA）工具，它会执行基本的检查并且建立Manifests。如果你对repoman输出的某些部分不清楚，请查看<c>man 
+repoman</c>。另外，你可能会对不断地输入密码而感到厌倦；keychain（<uri>http://www.gentoo.org/proj/en/keychain.xml</uri>）可以帮助你。
+</p>
+
+<pre caption="使用repoman">
+<comment>（在运行repoman之前，请确保没有root用户所拥有的文件！）</comment>
+<comment>（"scan"扫描当前的目录来查看QA事务。"full"选项更加完整。）</comment>
+# repoman scan
+<comment>（"commit"先做scan，然后commit，同时更新digest。确认你已经
+加入了冗长而有用的CVS ChangeLog信息……）</comment>
+# repoman commit
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>提升CVS的速度</title>
+<body>
+
+<p>
+如果你到cvs服务器有很高的ping时间，你可能会希望使用ssh主从设置（你只需要连接到其他的ssh服务器一次，然后让它来执行下面的命令）。这样，你省下了握手的时间，可以整体提高3倍的checkout/commit速度。只需要将下面的代码加入到你的设置中即可。
+</p>
+
+<pre caption="~/.ssh/config">
+Host *
+  ControlMaster auto
+  ControlPath ~/.ssh/master-%r@%h:%p
+</pre>
+
+<p>
+在这样做了之后，你可以启动一个后台的主连接。
+</p>
+
+<pre caption="在后台启动一个主连接">
+<comment>你可以在ssh的man手册中找到下面参数的含义</comment>
+$ ssh -M -N -f ${USER}@cvs.gentoo.org
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section>
+<title>杂项</title>
+<subsection>
+<title>在镜像上放置文件</title>
+<body>
+
+<p>
+Distfiles被Gentoo镜像系统自动地获取。你只需要监视你的distfiles是否有读取错误。请查看<uri 
+link="/proj/en/infrastructure/mirrors/overview-distfile.xml">Distfiles概述向导</uri>以获得详细的指令。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>邮件和网页</title>
+<body>
+
+<p>
+我们的基础架构允许开发者管理他们自己的邮件。<uri>http://www.gentoo.org/proj/en/infrastructure/dev-email.xml</uri>包含了如何配置你的@gentoo.org邮件的指令。
+</p>
+
+<p>
+开发者拥有发布网页的权力，http://dev.gentoo.org/~$YOURNAME。请查看<uri 
+link="http://www.gentoo.org/proj/en/infrastructure/dev-webspace.xml">网页空间配置向导</uri>以获得更多详细的信息。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Planet Gentoo"博客"</title>
+<body>
+
+<p>
+我们有一项服务，<uri link="http://planet.gentoo.org">Planet 
+Gentoo</uri>。这项服务汇集由做贡献的开发者所写的文章。这项服务是可选的，但是我们鼓励你加入。这可以帮助开发者之间的交流，而且用户也会觉得很有趣，值得一读。
+</p>
+
+<p>
+为了能够在Planet 
+Gentoo上发布内容，你需要有一个你自己的博客。许多网站提供这种免费的服务，或者你可以自己架设一个博客（如果你有这个资源的话）。作为另外一种选择，我们可以为你建立一个博客。
+</p>
+
+<p>
+我们旨在保持Planet Gentoo的内容是与Gentoo相关的，或者是Gentoo相关的开发和事件。
+</p>
+
+<p>
+如果我们为你建立了博客，你的博客内容应当是主题相关的（关于Gentoo相关的文章）。你也需要了解，如果你失去了你的开发者状态，你将不能够在你的博客上编辑文章。
+</p>
+
+<p>
+如果你在其他地方有一个博客，那么你需要提供一份XML的内容feed。如果你的博客是分类别的，我们需要一份关于"Gentoo"类别的XML 
+feed，而不是其他部分。这也许不是一个问题，因为几乎所有的博客都提供像这样的标准feed服务。
+</p>
+
+<p>
+尽管这是常识，但是请注意你所写的内容。你的观点可能会被不恰当地理解为这是Gentoo的观点。请注意不要破坏我们的形象。
+</p>
+
+<p>
+如果你对Planet Gentoo做贡献有兴趣，请发邮件到<uri 
+link="mailto:user-relations@gentoo.org">user-relations@gentoo.org</uri>。你可以请求一个建立在Gentoo空间上的博客，或者给出你现有博客的详细信息。我们会处理好这些细节，并让你的博客正确地运行起来。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>
