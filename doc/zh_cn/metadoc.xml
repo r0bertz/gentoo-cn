@@ -239,7 +239,7 @@
     <file id="gnupg-user">/doc/en/gnupg-user.xml</file>
     <file id="ipv6">/doc/en/ipv6.xml</file>
     <file id="guide-localization">/doc/en/guide-localization.xml</file>
-    <file id="guide-to-mutt">/doc/en/guide-to-mutt.xml</file>
+    <file id="guide-to-mutt">/doc/zh_cn/guide-to-mutt.xml</file>
     <file id="uml">/doc/en/uml.xml</file>
     <file id="java">/doc/en/java.xml</file>
     <file id="openafs">/doc/en/openafs.xml</file>
