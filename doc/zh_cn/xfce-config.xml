@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-
 <!-- $Header$ -->
-<!-- English CVS version: 1.8 -->
+<!-- English CVS version: 1.17 -->
 
 <guide link="/doc/zh_cn/xfce-config.xml" lang="zh_cn">
 
@@ -24,8 +23,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.6</version>
-<date>2007-07-21</date>
+<version>1.13</version>
+<date>2008-02-24</date>
 
 <chapter>
 <title>介绍</title>
@@ -45,10 +44,6 @@
 这篇指南将不仅向你说明如何安装和配置一个最小化的Xfce环境，并且还将探索一些可用方案来创建一个功能齐全的桌面环境，保持与Xfce设计思想的一致：轻巧，快速和模块化。
 </p>
 
-<p>
-另外，本指南还将向你说明如何从4.2版本<uri link="#upgrade">升级</uri>到4.4版本。
-</p>
-
 </body>
 </section>
 </chapter>
@@ -64,28 +59,7 @@
 </p>
 
 <p>
-在我们安装功能齐全的最小化桌面之前，让我们花点时间来回顾一下我们将要安装的基本软件包。
-</p>
-
-<table>
-<tr>
-  <th>名称</th>
-  <th>描述</th>
-</tr>
-<tr>
-  <ti>xfce4</ti>
-  <ti>基本的Xfce桌面环境</ti>
-</tr>
-<tr>
-  <ti>xscreensaver</ti>
-  <ti>
-    带省电功能的屏保,并能够锁定屏幕安全
-  </ti>
-</tr>
-</table>
-
-<p>
-你可以自由地装上任何其它你想要软件包，但从现在开始，我们将坚持建议你安装一个快捷最小化的工作环境。请反复检查<path>/etc/make.conf</path>中的USE标记；你可能至少需要<c>USE="dbus -gnome hal startup-notification"</c>。
+接着，请确认<path>/etc/make.conf</path>文件里的USE标记；你可能至少想要<c>USE="-gnome -kde -qt3 -qt4 X dbus hal startup-notification xscreensaver"</c>。
 </p>
 
 <p>
@@ -93,7 +67,7 @@
 </p>
 
 <pre caption="安装Xfce">
-# <i>emerge -avt xfce4 xscreensaver</i>
+# <i>emerge -avt xfce4</i>
 </pre>
 
 <p>
@@ -255,7 +229,7 @@ Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>
 </p>
 
 <p>
-尽管<c>mousepad</c>已经是相当好了，但如果你需要一个功能齐全的文字处理器，同时又不想要臃肿的OpenOffice，那么装上<c>abiword</c>试试。<uri link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与业界标准文档类型完全互通的文字处理工具。
+尽管<c>mousepad</c>已经是相当好了，它是一个非常快捷的文本编辑器，但如果你需要一个功能齐全的文字处理器，同时又不想要臃肿的OpenOffice，那么装上<c>abiword</c>试试。<uri link="http://www.abisource.com">AbiWord</uri>是一个更加轻快，并且与业界标准文档类型完全互通的文字处理工具。它还可以通过安装<c>abiword-plugins</c>来进一步扩展更多的功能。
 </p>
 
 <pre caption="加入一个文档处理器">
@@ -263,11 +237,11 @@ Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>
 </pre>
 
 <p>
-你想要一个好用的电子邮件客户端／新闻广播员，但又不要求要像<c>mozilla-thunderbird</c>或者<c>evolution</c>，有什么好办法呢？装上<c>sylpheed-claws</c>或者<c>claws-mail</c>试试。
+你想要一个好用的电子邮件客户端／新闻广播员，但又不要求要像<c>mozilla-thunderbird</c>或者<c>evolution</c>，有什么好办法呢？装上<c>claws-mail</c>试试。
 </p>
 
 <p>
-在网上聊天方面，<c>irssi</c>是一个优秀的IRC客户端，它运行于终端里，小巧并且配置性极好。如果你更倾向于想要一个包含了所有聊天协议的客户端，那么你可能想要<c>emerge gaim</c>。
+在网上聊天方面，<c>irssi</c>是一个优秀的IRC客户端，它运行于终端里，小巧并且配置性极好。如果你更倾向于想要一个包含了所有聊天协议的客户端，那么你可能想要<c>emerge pidgin</c>。
 </p>
 
 <p>
@@ -309,15 +283,15 @@ Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>
 </pre>
 
 <p>
-这还远没有结束。我们还要挑选一个显示管理器然后设置一些合适的变量。尽管在Portage中有若干显示管理器可以选择，但在这篇指南中，我们将坚持两个选择：<c>xdm</c>和<c>gdm</c>。
+这还远没有结束。我们还要挑选一个显示管理器然后设置一些合适的变量。尽管在Portage中有若干显示管理器可以选择，但在这篇指南中，我们将坚持<uri link="http://slim.berlios.de">SLiM</uri>——简单登录管理器。
 </p>
 
 <p>
-<c>xdm</c>速度很快而且是轻量级的，但是它不够美观，并且定制性不好。如果你想要使用它，那先<c>emerge</c>它：
+<c>slim</c>速度很快而且是轻量级的，只需很少的依赖关系。它对于Xfce实在是太完美了！
 </p>
 
-<pre caption="安装XDM">
-# <i>emerge -avt xdm</i>
+<pre caption="安装SLiM">
+# <i>emerge -avt slim</i>
 </pre>
 
 <p>
@@ -325,28 +299,12 @@ Xfce绑定了一些有用的应用程序，包括<c>thunar</c>、<c>terminal</c>
 </p>
 
 <pre caption="编辑/etc/conf.d/xdm">
-DISPLAYMANAGER="xdm"
+DISPLAYMANAGER="slim"
 </pre>
 
 <p>
-把XSESSION="Xfce4"添加到<path>/etc/rc.conf</path>，这样<c>xdm</c>就能自动启动你的Xfce了。
+把<c>XSESSION="Xfce4"</c>添加到文件<path>/etc/rc.conf</path>，这样SLiM就能自动启动你的Xfce了。
 </p>
-
-<p>
-在你选择坚持用（相当难看的）<c>xdm</c>的同时，为什么不试一下<c>gdm</c>呢？配置它要容易得多，并且它要远远漂亮得多。首先，<c>emerge</c>它。注意到虽然它依赖一些软件，但这些软件都很很小，而且数量也比其它显示管理器所依赖的软件数量少。
-</p>
-
-<pre caption="安装GDM">
-# <i>emerge -avt gdm</i>
-</pre>
-
-<p>
-接着，把DISPLAYMANAGER变量的值改为<c>gdm</c>而不是<c>xdm</c>：
-</p>
-
-<pre caption="编辑/etc/conf.d/xdm">
-DISPLAYMANAGER="gdm"
-</pre>
 
 </body>
 </section>
@@ -363,7 +321,7 @@ DISPLAYMANAGER="gdm"
 </p>
 
 <p>
-如果你安装了GDM作为你的显示管理器，那看一下<uri link="http://www.gnome-look.org">Gnome-Look</uri>这上面的许多GDM主题。安装它们，你既可以在命令行下把它们解压到<path>/usr/share/gdm/themes/</path>，也可以以<b>root</b>身份运行<c>gdmsetup</c>，然后把归档文件（压缩包）拖放到GDM窗口。这里还有一些<uri link="http://gnome-look.org/content/show.php?content=45575">非常好的</uri>Gentoo<uri link="http://gnome-look.org/content/show.php?content=20071">主题</uri>。
+如果你安装了SLiM作为你的显示管理器，在Portage中的<c>slim-themes</c>包里还有很多它的主题。更多的主题，请看<uri link="http://slim.berlios.de/themes01.php">主题包</uri>。创建自己的SLiM主题也是相当容易的，请阅读<uri link="http://slim.berlios.de/themes_howto.php">如何创建主题</uri>。
 </p>
 
 <p>
@@ -378,81 +336,6 @@ EndSection
 
 <p>
 这仅仅是Xfce和Xorg-X11所要求的最低限度配置。但是，对硬件加速的设置则取决于你自己的显卡，这已经超出本文讨论的范围了。请阅读<uri link="/doc/zh_cn/index.xml?catid=desktop">桌面文档资源</uri>列表中的其它指南，来学会如何配置让你的显卡实现硬件加速。
-</p>
-
-</body>
-</section>
-</chapter>
-
-<chapter id="upgrade">
-<title>升级</title>
-<section>
-<title>从4.2升级到4.4</title>
-<body>
-
-<p>
-把Xfce从4.2升级到4.4并不麻烦，它就跟大多数的升级一样简单。在4.4版本里面，许多过时的软件包不是被淘汰就是它们的功能已经以其它方式被包含进桌面了。
-</p>
-
-<p>
-首先，更新你的Portage树（<c>emerge --sync</c>），然后看看Xfce有哪些组件可以升级（<c>emerge -pvtuD world</c>）。
-</p>
-
-<p>
-你会注意到有一些包阻止了你的升级，因为大多数4.2的包是不能与4.4的包共存的。这里有个直截了当的办法：只要像<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=1">Portage手册</uri>和<c>man emerge</c>所说的那样卸载掉这些阻挡你的包，然后级就能继续了。
-</p>
-
-<p>
-接着，你可能需要重建某些包，如跟<c>dbus</c>挂钩的应用程序。首先你需要安装<c>gentoolkit</c>。一旦<c>gentoolkit</c>安装好了，运行：
-</p>
-
-<pre caption="重建包">
-# <i>revdep-rebuild -p</i>
-<comment>（如果你在输出看到了任何关于有包被破坏的信息，那么运行下一条命令）</comment>
-# <i>revdep-rebuild</i>
-</pre>
-
-<note>
-更多的信息，请参考<c>man revdep-rebuild</c>和<uri link="/doc/zh_cn/gentoolkit.xml">Gentoolkit指南</uri>。
-</note>
-
-<p>
-一旦重建完成，再一次运行<c>revdep-rebuild -p</c>，这一次只是确定你已经有了一个干净可靠的系统。如果还出现任何出错信息，继续<c>revdep-rebuild -p</c>和<c>revdep-rebuild</c>直到再也没有关于有包被损坏的消息出现。由于Xfce相当广泛地使用了<c>dbus</c>，所以大多数的升级问题都源于<c>dbus</c>。
-</p>
-
-<p>
-接着，重启<c>dbus</c>和／或<c>hal</c>。
-</p>
-
-<pre caption="重启dbus和hal">
-# <i>/etc/init.d/dbus restart</i>
-# <i>/etc/init.d/hald restart</i>
-</pre>
-
-<p>
-最后，给你自己一个全新的环境。
-</p>
-
-<pre caption="更新环境变量">
-# <i>env-update &amp;&amp; source /etc/profile</i>
-</pre>
-
-</body>
-</section>
-<section>
-<title>设置</title>
-<body>
-
-<p>
-确定你熟悉了新Settings Manager里面所有的新选项。在桌面屏幕上进行操作是我们感兴趣的地方；Xfce现在可以管理你的桌面并且在上面安放图标了。
-</p>
-
-<p>
-还有一个Window Manager Tweaks窗口，在那里你可以调整窗口、工作区间还有透明化（如果支持的话）的属性值。Xfce4.4稍微改变了工作区间与焦点活动窗口之间的默认行为。如果你发现在一个工作区间里点击一个超链接，却把你在另外一个区间里的浏览器调了过来（或者类似烦人的窗口聚焦行为），那么设置Settings --> Window Manager Tweaks --> Focus --> Activate Focus Stealing Prevention试试。
-</p>
-
-<p>
-确定你阅读了<uri link="http://www.xfce.org/documentation/">Xfce文档</uri>并且通过<uri link="http://www.xfce.org/about/tour">Xfce历程</uri>了解了更多关于4.4的信息和学到了更多配置它的方法。
 </p>
 
 </body>
