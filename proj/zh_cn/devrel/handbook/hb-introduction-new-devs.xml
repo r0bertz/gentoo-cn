@@ -98,7 +98,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 </p>
 
 <note>
-由于cvs的检出的Portage树没有metadata cache，你的portage可能会变得很慢。
+由于cvs检出的Portage树没有metadata cache，你的portage可能会变得很慢。
 </note> 
 
 <p>
