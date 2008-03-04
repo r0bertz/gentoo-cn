@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Header$ -->
+<!-- English CVS version: 1.5 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+
+<version>1.2</version>
+<date>2005-11-25</date>
+
+<section>
+<title>简介</title>
+<body>
+<p>
+你的系统应该能够尽可能多地记录一些日志以捕捉一些能够表明攻击正在进行或者系统已经被攻破的警告或错误信息。攻击者经常在攻击之前扫描或者试探攻击。
+</p>
+
+<p>
+你的日志文件具有易读性和易管理性也是很重要的。Gentoo Linux允许你在安装的时候选择3种不同的日志记录器。
+</p>
+
+</body>
+</section>
+<section>
+<title>日志记录：Syslogd</title>
+<body>
+
+<p>
+从大体上说，Syslogd是Linux和Unix平台上使用最广泛的日志记录器。它拥有一些日志轮换组件，但是在一个cron作业里使用<path>/usr/sbin/logrotate</path>（你可以在<path>/etc/logrotate.conf</path>里配置logrotate）被证明可能是更强大的，因为<c>logrotate</c>有许多特性。日志轮换的频率决定于系统的负载。
+</p>
+
+<p>
+下面是一个额外添加过一些特性的标准的<path>syslog.conf</path>文件。我们把<c>cron</c>和<c>tty</c>这两行的注释取消掉了，并且加上了一个远程日志服务器。为了进一步提高安全性，你可以同时在两个地方添加日志。
+</p>
+
+<pre caption="/etc/syslog.conf">
+#  /etc/syslog.conf      syslogd的配置文件。
+#
+#                       更多信息请见syslog.conf(5)
+#                       man页.
+#                       这是来自Debian的, 现在我们在用它
+#                       Daniel Robbins, 5/15/99
+
+#
+# 首先是一些标准的日志文件。  是用facility记录的。
+#
+
+auth,authpriv.*                 /var/log/auth.log
+*.*;auth,authpriv.none          -/var/log/syslog
+cron.*                         /var/log/cron.log
+daemon.*                        -/var/log/daemon.log
+kern.*                          -/var/log/kern.log
+lpr.*                           -/var/log/lpr.log
+mail.*                          /var/log/mail.log
+user.*                          -/var/log/user.log
+uucp.*                          -/var/log/uucp.log
+local6.debug                    /var/log/imapd.log
+
+#
+# 邮件系统的日志. 请把它分开以便于
+# 可以更方便地使用脚本来格式化它。
+#
+mail.info                       -/var/log/mail.info
+mail.warn                       -/var/log/mail.warn
+mail.err                        /var/log/mail.err
+
+# INN 新闻系统的日志
+#
+news.crit                       /var/log/news/news.crit
+news.err                        /var/log/news/news.err
+news.notice                     -/var/log/news/news.notice
+
+#
+# 一些“捕捉一切”的日志文件.
+#
+*.=debug;\
+        auth,authpriv.none;\
+        news.none;mail.none     -/var/log/debug
+*.=info;*.=notice;*.=warn;\
+        auth,authpriv.none;\
+        cron,daemon.none;\
+        mail,news.none          -/var/log/messages
+
+#
+# 紧急事件和警告被送给每一个登录的人。
+#
+*.emerg                         *
+*.=alert                        *
+
+#
+# 我喜欢在一个我经常闲置的虚拟终端里显示信息。
+#
+daemon,mail.*;\
+       news.=crit;news.=err;news.=notice;\
+       *.=debug;*.=info;\
+       *.=notice;*.=warn       /dev/tty8
+
+#配置一个远程日志服务器
+*.*                        @logserver
+
+# 那个被命名的通道 /dev/xconsole是为”xconsole“ 组件准备的。在用它的时候，
+# 你必须调用”xconsole“,并且要带上“-file”选项 ：
+#
+#    $ xconsole -file /dev/xconsole [...]
+#
+# 请注意！调整以下的列表，否则如果你有一个
+#      比较繁忙的网站的话，你会疯掉的……
+#
+#daemon.*,mail.*;\
+#       news.crit;news.err;news.notice;\
+#       *.=debug;*.=info;\
+#       *.=notice;*.=warn       |/dev/xconsole
+
+local2.*                --/var/log/ppp.log
+</pre>
+
+<p>
+攻击者最有可能通过编辑或删除日志文件来抹除他们的行踪。通过使用一个或多个安装在其他机器上的远程日志服务器来记录日志，你可以使你的日志文件变得更安全来抵御入侵者。请运行<c>man syslog</c>来得到更多有关syslogd的信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>Metalog</title>
+<body>
+
+<p>
+Frank Dennis的<uri link="http://metalog.sourceforge.net">Metalog</uri>不能在远程服务器上记录日志文件，但是它在性能和记录日志的灵活性上有一些自己的优点。它可以通过程序名、紧急事件和facility（像syslogd）来记录日志文件，并且当它找到特定模式的时候,它会用一定形式的表达来与你能够运行的外部脚本相匹配。这在采取必要的行动时很有用。
+</p>
+
+<p>
+通常标准的配置就足够了。如果你想在一个密码错误发生的同时被邮件提醒的话，使用以下的脚本之一。
+</p>
+
+<p>
+针对postfix的：
+</p>
+
+<pre caption="针对postfix的/usr/local/sbin/mail_pwd_failures.sh">
+#! /bin/sh
+echo "$3" | mail -s "Warning (program : $2)" root
+</pre>
+
+<p>
+针对netqmail的：
+</p>
+
+<pre caption="针对netqmail的/usr/local/sbin/mail_pwd_failures.sh">
+#!/bin/sh
+echo "To: root
+Subject:Failure (Warning: $2)
+$3
+" | /var/qmail/bin/qmail-inject -f root
+</pre>
+
+<p>
+请记得运行<c>/bin/chmod +x /usr/local/sbin/mail_pwd_failures.sh</c>来确保这些脚本具有运行权限。
+</p>
+
+<p>
+然后找到<path>/etc/metalog/metalog.conf</path>，并且删掉文件里面"Password failures"这一行下面的命令行的注释，比如说：
+</p>
+
+<pre caption="/etc/metalog/metalog.conf">
+command  = "/usr/local/sbin/mail_pwd_failures.sh"
+</pre>
+
+</body>
+</section>
+<section>
+<title>Syslog-ng</title>
+<body>
+
+<p>
+Syslog-ng提供了一些与syslog和metalog类似的特性，但是又有一点区别。它可以根据等级和内容（像metalog一样）过滤信息，提供了类似于syslog的远程日志记录功能，通过syslogd处理日志文件（即使是来至于Solaris的数据流也可以处理），把日志输出到一个终端里，还可以运行程序，并且它可以作为一个日志服务器。基本上来说它是带有一些高级配置的两种记录器的优势组合产品。
+</p>
+
+<p>
+下面是一个经典的配置文件，它被轻微地改动过了。
+</p>
+
+<pre caption="/etc/syslog-ng/syslog-ng.conf">
+options { chain_hostnames(off); sync(0); };
+
+#读取日志文件的源地址
+source src { unix-stream("/dev/log"); internal(); };
+source kernsrc { file("/proc/kmsg"); };
+
+#定义目标
+destination authlog { file("/var/log/auth.log"); };
+destination syslog { file("/var/log/syslog"); };
+destination cron { file("/var/log/cron.log"); };
+destination daemon { file("/var/log/daemon.log"); };
+destination kern { file("/var/log/kern.log"); };
+destination lpr { file("/var/log/lpr.log"); };
+destination user { file("/var/log/user.log"); };
+destination mail { file("/var/log/mail.log"); };
+
+destination mailinfo { file("/var/log/mail.info"); };
+destination mailwarn { file("/var/log/mail.warn"); };
+destination mailerr { file("/var/log/mail.err"); };
+
+destination newscrit { file("/var/log/news/news.crit"); };
+destination newserr { file("/var/log/news/news.err"); };
+destination newsnotice { file("/var/log/news/news.notice"); };
+
+destination debug { file("/var/log/debug"); };
+destination messages { file("/var/log/messages"); };
+destination console { usertty("root"); };
+destination console_all { file("/dev/tty12"); };
+destination xconsole { pipe("/dev/xconsole"); };
+
+#创建过滤
+filter f_authpriv { facility(auth, authpriv); };
+filter f_syslog { not facility(authpriv, mail); };
+filter f_cron { facility(cron); };
+filter f_daemon { facility(daemon); };
+filter f_kern { facility(kern); };
+filter f_lpr { facility(lpr); };
+filter f_mail { facility(mail); };
+filter f_user { facility(user); };
+filter f_debug { not facility(auth, authpriv, news, mail); };
+filter f_messages { level(info..warn)
+        and not facility(auth, authpriv, mail, news); };
+filter f_emergency { level(emerg); };
+
+filter f_info { level(info); };
+filter f_notice { level(notice); };
+filter f_warn { level(warn); };
+filter f_crit { level(crit); };
+filter f_err { level(err); };
+filter f_failed { match("failed"); };
+filter f_denied { match("denied"); };
+
+#连接过滤和定义
+log { source(src); filter(f_authpriv); destination(authlog); };
+log { source(src); filter(f_syslog); destination(syslog); };
+log { source(src); filter(f_cron); destination(cron); };
+log { source(src); filter(f_daemon); destination(daemon); };
+log { source(kernsrc); filter(f_kern); destination(kern); };
+log { source(src); filter(f_lpr); destination(lpr); };
+log { source(src); filter(f_mail); destination(mail); };
+log { source(src); filter(f_user); destination(user); };
+log { source(src); filter(f_mail); filter(f_info); destination(mailinfo); };
+log { source(src); filter(f_mail); filter(f_warn); destination(mailwarn); };
+log { source(src); filter(f_mail); filter(f_err); destination(mailerr); };
+
+log { source(src); filter(f_debug); destination(debug); };
+log { source(src); filter(f_messages); destination(messages); };
+log { source(src); filter(f_emergency); destination(console); };
+
+#默认的日志
+log { source(src); destination(console_all); };
+</pre>
+
+<p>
+Syslog-ng很容易配置，但是也很容易因为配置文件过大而在里头落下一些东西。作者提供了一些额外的特性，比如说加密、验证、压缩和MAC（强制权限控制）控制。有了这些选项Syslog-ng就会变成一个完美的网络日志记录器，因为攻击者不能在那些日志上动手脚。
+</p>
+
+<p>
+并且syslog-ng还有另一个优势：它不需要以root身份登录运行！
+</p>
+
+</body>
+</section>
+
+<section>
+<title>使用Logcheck进行日志分析</title>
+<body>
+
+<p>
+当然，把日志文件隔离开只是胜利的一半。有一些程序，比如说是Logcheck，它可以使常规的日志分析更容易。Logcheck是一个脚本，它带有一个叫做<c>logtail</c>的二进制可执行文件。它是从你的cron守护程序里运行的，并且根据一套可疑活动的规则检查你的日志文件。然后它就会把输出的信息通过邮件发到root的邮箱。
+</p>
+<p>
+Logcheck和logtail是<c>app-admin/logsentry</c>软件包的一部分。
+</p>
+<p>
+Logcheck使用了四个文件来从不重要的日志中过滤出重要的日志信息。这些文件是<path>logcheck.hacking</path>（它包括了已知的黑客攻击信息）、<path>logcheck.violations</path>（它包括了显示安全违规的模式）、<path>logcheck.violations.ignore</path>（它包括了一些用来匹配违规文件的可能关键字，允许正常的关键字被忽略）和<path>logcheck.ignore</path>（它包括了要被忽略的关键字）。
+</p>
+
+<warn>
+不要让<path>logcheck.violations.ignore</path>空着。Logcheck将会使用<c>grep</c>来格式化日志文件。在一些版本上，可能会把空文件当作通配符。这样一来所有的违规就被忽略了。
+</warn>
+
+<!-- FIXME: Might want to add more details on logcheck here...I have to install
+
+it on Gentoo to figure out how it's configured! -->
+</body>
+</section>
+
+</sections>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Header$ -->
+<!-- English CVS version: 1.3 -->
+<!DOCTYPE book SYSTEM "/dtd/book.dtd">
+<book link="/doc/zh_cn/security/security-handbook.xml" lang="zh_cn">
+<title>Gentoo安全手册</title>
+
+<author title="作者">
+  <mail link="kn@insecurity.dk">Kim Nielsen</mail>
+</author>
+<author title="编辑">
+  <!-- zhen@gentoo.org -->
+John P. Davis
+</author>
+<author title="编辑">
+  <mail link="stocke2@gentoo.org">Eric R. Stockbridge</mail>
+</author>
+<author title="编辑">
+  <mail link="carl@gentoo.org">Carl Anderson</mail>
+</author>
+<author title="编辑">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="编辑">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="编辑">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="编辑">
+  <mail link="jaervosz@itu.dk">Sune Jeppesen</mail>
+</author>
+<author title="编辑">
+  <mail link="blubber@gentoo.org">Tiemo Kieft</mail>
+</author>
+<author title="编辑">
+  <mail link="klasikahl@gentoo.org">Zack Gilburd</mail>
+</author>
+<author title="编辑">
+  <mail link="krispykringle@gentoo.org">Dan Margolis</mail>
+</author>
+<author title="译者">
+  <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+</author>
+<author title="审校">
+	<mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>
+这是一个逐步增强Gentoo Linux安全性的详细指南
+</abstract>
+
+<license/>
+
+<version>1.0</version>
+<date>2005-05-31</date>
+
+
+
+<!--
+
+<section>
+
+<title>Enhancements for future releases of this Guide:</title>
+
+<body>
+
+
+
+<p>
+
+In version 0.6 (Backup)
+
+</p>
+
+<ul>
+
+<li>Arpwatch</li>
+
+<li>Full system backup using Systemimager</li>
+
+<li>Partial backup using tar</li>
+
+<li>Backing up postgres</li>
+
+</ul>
+
+
+
+
+
+<p>
+
+In version 0.8 (Penetration testing)
+
+</p>
+
+<ul>
+
+<li>Remote audits</li>
+
+<li>Network audits</li>
+
+<li>Host audits</li>
+
+<li>Software audits</li>
+
+</ul>
+
+
+
+<p>
+
+In version 1.0 (After a compromise)
+
+</p>
+
+<ul>
+
+<li>How to report an incident</li>
+
+<li>Forensics analysis</li>
+
+<li>Creating an image of the system without destroying evidence (Using dd)</li>
+
+<li>Trap and trace (Using tcpdump)</li>
+
+<li>.. More to come ..</li>
+
+<li>Restoring system</li>
+
+</ul>
+
+
+
+<note>
+
+Please note that each version concentrates on one subject at a time.  This is for
+
+quality assurance purposes.
+
+</note>
+
+
+
+</body>
+
+</section>
+
+-->
+<part>
+
+<title>系统安全</title>
+<abstract>
+增强你的系统的不同组件来使它更安全。
+</abstract>
+
+<chapter>
+<title>预安装注意事项</title>
+<abstract>
+为什么安全性对于每一个服务器管理员来说都很重要？
+</abstract>
+  <include href="shb-pre.xml"/>
+</chapter>
+
+<chapter>
+<title>加强安全性</title>
+<abstract>
+在安装前后加强安全性。
+</abstract>
+  <include href="shb-tight.xml"/>
+</chapter>
+
+<chapter>
+<title>日志记录</title>
+<abstract>
+Gentoo Linux允许你选择3种不同的日志记录器。
+</abstract>
+  <include href="shb-logging.xml"/>
+</chapter>
+
+<chapter>
+<title>挂载分区</title>
+<abstract>
+/etc/fstab提供了许多安全选项。
+</abstract>
+  <include href="shb-mounting.xml"/>
+</chapter>
+
+<chapter>
+<title>用户和组的权限</title>
+<abstract>
+控制你的资源使用。
+</abstract>
+  <include href="shb-limits.xml"/>
+</chapter>
+
+<chapter>
+<title>文件权限</title>
+<abstract>
+让你的文件更安全。
+</abstract>
+  <include href="shb-perms.xml"/>
+</chapter>
+
+<chapter>
+<title>PAM</title>
+<abstract>
+可插入的验证模块。
+</abstract>
+  <include href="shb-pam.xml"/>
+</chapter>
+
+<chapter>
+<title>TCP 封装（TCP Wrappers）</title>
+<abstract>
+控制服务的访问。
+</abstract>
+  <include href="shb-tcp.xml"/>
+</chapter>
+
+<chapter>
+<title>内核安全</title>
+<abstract>
+让你的内核更加安全。
+</abstract>
+  <include href="shb-kernel.xml"/>
+</chapter>
+
+<chapter>
+<title>提高服务的安全性</title>
+<abstract>
+确保你的守护进程的安全性。
+</abstract>
+  <include href="shb-services.xml"/>
+</chapter>
+
+<chapter>
+<title>Chroot和虚拟服务器</title>
+<abstract>
+隔离你的服务器。
+</abstract>
+  <include href="shb-chroot.xml"/>
+</chapter>
+
+<chapter>
+<title>防火墙</title>
+<abstract>
+过滤你的数据包。
+</abstract>
+  <include href="shb-firewalls.xml"/>
+</chapter>
+
+<chapter>
+<title>入侵检测</title>
+<abstract>
+检测入侵者。
+</abstract>
+  <include href="shb-intrusion.xml"/>
+</chapter>
+
+<chapter>
+<title>保持最新状态</title>
+<abstract>
+确保你得到了最新的安全更新。
+</abstract>
+  <include href="shb-uptodate.xml"/>
+</chapter>
+
+</part>
+</book>
