@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.199 -->
+<!-- English CVS version: 1.200 -->
 
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-<version>1.122</version>
+<version>1.123</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -365,7 +365,7 @@
     <file id="shb-uptodate">/doc/en/security/shb-uptodate.xml</file>
     <file id="apache-troubleshooting">/doc/en/apache-troubleshooting.xml</file>
     <file id="apache-upgrading">/doc/en/apache-upgrading.xml</file>
-    <file id="apache-developer">/doc/en/apache-developer.xml</file>
+    <file id="apache-developer">/proj/en/apache/apache-developer.xml</file>
     <file id="sudo-guide">/doc/zh_cn/sudo-guide.xml</file>
     <file id="freebsd-guide">/doc/en/gentoo-freebsd.xml</file>
     <file id="mips-faq">/doc/zh_cn/gentoo-mips-faq.xml</file>
