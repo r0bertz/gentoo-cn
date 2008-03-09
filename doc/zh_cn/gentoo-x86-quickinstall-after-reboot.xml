@@ -1,0 +1,200 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-after-reboot.xml,v 1.1 2008/01/01 21:32:30 neysx Exp $ -->
+<!-- English CVS version: 1.1 -->
+<!DOCTYPE included SYSTEM "/dtd/guide.dtd">
+
+<included>
+
+<version>1</version>
+<date>2008-01-01</date>
+
+<section id="after-reboot">
+<title>完成安装</title>
+<body>
+
+<note>
+在我们这台测试机器上，从minimal CD启动显示boot提示符开始，到重启后显示登录提示符， <b>总用时</b>为<b>00:42:31</b> 。没错，不到一个小时！注意这个时间还包含了stage3包、Portage快照和一些软件包的下载时间，以及配置内核所花的时间。
+</note>
+
+<p>
+以<c>root</c>身份登录，用<c>useradd</c>添加一个或多个用户，作为日常使用。
+</p>
+
+<pre caption="从另一台电脑连到你的新机器">
+<comment>（清理known_hosts文件中的内容，因为你的新机器已生成一个新的
+通用主机密钥）</comment>
+$ <i>nano -w ~/.ssh/known_hosts</i>
+<comment>（找出新机器的IP并删除那一行，保存并退出nano）</comment>
+
+<comment>#-#-#-#-#  choice  #-#-#-#-#
+（用你新机器的IP地址）
+#-#-#-#-#  choice  #-#-#-#-#
+（使用你新机器的IP地址）</comment>
+$ <i>ssh root@192.168.1.10</i>
+The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
+RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.
+Are you sure you want to continue connecting (yes/no)? <i>yes</i>
+Warning: Permanently added '192.168.1.10' (RSA) to the list of known hosts.
+Password: <comment>输入密码</comment>
+</pre>
+
+<pre caption="添加一个新用户">
+mybox ~ # <i>adduser -g users -G lp,wheel,audio,cdrom,portage,cron -m john</i>
+mybox ~ # <i>passwd john</i>
+New UNIX password: <comment>设置John的密码</comment>
+Retype new UNIX password: <comment>再次输入John的密码</comment>
+passwd: password updated successfully
+</pre>
+
+</body>
+</section>
+<section>
+<title>最后涉及的配置</title>
+<body>
+
+<p>
+开始选择最近的镜像，在<path>/etc/make.conf</path>中定义<c>SYNC</c>变量和<c>GENTOO_MIRRORS</c>变量，或者也可以使用<c>mirrorselect</c>。此时你还可以定义并行编译的进程数。
+</p>
+
+<pre caption="使用mirrorselect并设置MAKEOPTS">
+mybox ~ # <i>emerge mirrorselect</i>
+mybox ~ # <i>mirrorselect -i -o >> /etc/make.conf</i>
+mybox ~ # <i>mirrorselect -i -r -o >> /etc/make.conf</i>
+<comment>（通常，一个较好的值为处理器数加一）</comment>
+mybox ~ # <i>echo 'MAKEOPTS="-j2"' >> /etc/make.conf</i>
+</pre>
+
+<p>
+现在是启用或禁用一些USE参数的好时机。运行<c>emerge -vpe world</c>，列出所有当前已安装的软件包以及它们被启用和禁用的USE参数。编辑<path>/etc/make.conf</path>或使用下列命令定义USE变量：
+</p>
+
+<pre caption="查看当前使用的USE参数并启用或禁用其中的某些">
+mybox ~ # <i>emerge -vpe world</i>
+<comment>（Portage列出软件包和它们的USE参数。作为例子，让我们禁用ipv6和fortran，
+并启用unicode）</comment>
+mybox ~ # <i>echo 'USE="nptl nptlonly -ipv6 -fortran unicode"' >> /etc/make.conf</i>
+</pre>
+
+<p>
+新版本的glibc使用<path>/etc/locale.gen</path>来定义语言环境。
+</p>
+
+<pre caption="定义语言环境">
+mybox ~ # <i>cd /etc</i>
+mybox etc # <i>nano -w locale.gen</i>
+</pre>
+
+<p>
+最后但并非最轻松的，你可能想修改<path>/etc/make.conf</path>中的<c>CFLAGS</c>变量来优化编码，以满足你的特定需要。请注意极少需要一长串的参数列表，那样甚至可能导致系统崩溃。建议通过<c>march</c>选项指定处理器类型并赋上 
+<c>-O2 -pipe</c>参数。
+</p>
+
+<p>
+可能你还想转到 <b>~x86</b>。只有当你能够对付那些脆弱不良的ebuild和软件包时才能这么做。如果你倾向于保持系统的稳定性，请不要添加<c>ACCEPT_KEYWORDS</c>变量。添加<c>FEATURES="parallel-fetch ccache"</c>却是个好主意。
+</p>
+
+<pre caption="为make.conf作最后的修改">
+mybox etc # <i>nano -w make.conf</i>
+<comment>（在CFLAGS中将-march设为你的CPU类型）</comment>
+CFLAGS="-O2 -march=<i>athlon-xp</i> -pipe"
+<comment>（添加下面一行）</comment>
+FEATURES="parallel-fetch ccache"
+<comment>（只有清楚自己在干什么才添加下面一行）</comment>
+ACCEPT_KEYWORDS="~x86"
+</pre>
+
+<p>
+可能你会想重编译整个系统两次，以使你所作的最新配置完全生效。这要花很长的时间来完成，而只能得到微小的速度提升。你可以让系统自己随着以后新软件包的发布而逐步完成优化。不过，站在保持系统一致性的立场来看，重编译仍不失为一个好主意。请参考文档<uri link="/doc/zh_cn/gcc-upgrading.xml">Gentoo GCC升级指南</uri>，其中讨论了如何搭建一个具有良好一致性的system和world，以及这样做的好处。
+</p>
+
+<p>
+只重编译那些因你应用了新的USE参数或受此影响而需要升级的软件包，也要花费不少时间。可能还必须卸载会阻止你升级的软件包。在<c>emerge -vpuD --newuse world</c>的输出中寻找“[blocks <brite>B</brite>     ]”，用<c>emerge -C</c>卸载它们。
+</p>
+
+<pre caption="升级软件包">
+<comment>（安装ccache）</comment>
+mybox etc # <i>emerge ccache</i>
+
+<comment>（请注意转到~x86会导致很多软件包要升级）</comment>
+mybox etc # <i>emerge -vpuD --newuse world</i>
+<comment>（好好看一看软件包列表和它们的USE参数，
+有阻止的包就先卸载，然后启动漫长的过程）</comment>
+mybox etc # <i>time emerge -vuD --newuse world</i>
+<comment>（（重）编译了79个软件包）</comment>
+
+real  180m13.276s
+user  121m22.905s
+sys   36m31.472s
+
+<comment>（重编译libtool以避免一些潜在的问题）</comment>
+mybox etc # <i>emerge libtool</i>
+
+<comment>（更新配置文件，确保 <b>do not</b> 让etc-update更新你配置好的文件）</comment>
+mybox etc # <i>etc-update</i>
+
+<comment>（如果升级了perl，应该执行perl-cleaner脚本）</comment>
+mybox etc # <i>time perl-cleaner all</i>
+real  1m6.495s
+user  0m42.699s
+sys   0m10.641s
+
+<comment>（如果升级了python的主要软件包，应该执行python-updater脚本）</comment>
+mybox etc # <i>python-updater</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>接下来该做什么</title>
+<body>
+
+<p>
+想安装服务器应用程序还是一个桌面系统，取决于你打算让你的新Gentoo做什么。以下仅作为一个例子，统计了<c>emerge gnome</c>和<c>emerge kde</c>在~x86系统（按之前的描述安装的）上所花费的时间。两者是在同一起点开始安装的。
+</p>
+
+<p>
+去看看我们的<uri link="/doc/zh_cn/">文档目录</uri>，研究一下如何安装和配置你挑选的软件。
+</p>
+
+<impo>
+以下只是举个例子，并不意味着就作为推荐设置。
+</impo>
+
+<pre caption="Emerge GNOME">
+mybox etc # <i>emerge -vp gnome</i>
+<comment>（查看软件包列表和它们的USE参数，
+如果需要请编辑make.conf</comment>
+mybox etc # <i>nano -w /etc/make.conf</i>
+<comment>（定义了以下USE参数）</comment>
+USE="nptl nptlonly -ipv6 -fortran unicode svg hal dbus \
+     -kde -qt3 -qt4 -arts -eds -esd gnome gstreamer gtk firefox"
+
+mybox etc # <i>time emerge gnome</i>
+<comment>（安装了326个软件包）</comment>
+
+real  520m44.532s
+user  339m21.144s
+sys   146m22.337s
+</pre>
+
+<pre caption="Emerge KDE">
+mybox etc # <i>emerge -vp kde-meta</i>
+<comment>（查看软件包列表和它们的USE参数，
+如果需要请编辑make.conf</comment>
+mybox etc # <i>nano -w /etc/make.conf</i>
+<comment>定义了以下USE参数）</comment>
+USE="nptl nptlonly -ipv6 -fortran unicode svg hal dbus \
+     kde qt3 qt4 -arts -eds -esd -gnome -gstreamer -gtk -firefox"
+
+mybox etc # <i>time emerge kde-meta</i>
+<comment>（安装了391个软件包）</comment>
+
+real  1171m25.318s
+user  851m26.393s
+sys   281m45.629s
+</pre>
+
+</body>
+</section>
+
+</included>
