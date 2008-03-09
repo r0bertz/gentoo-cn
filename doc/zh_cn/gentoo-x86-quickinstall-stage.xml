@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-stage.xml,v 1.1 2008/01/01 21:32:30 neysx Exp $ -->
+<!-- English CVS version: 1.1 -->
+<!DOCTYPE included SYSTEM "/dtd/guide.dtd">
+
+<section>
+<title>安装Stage</title>
+<body>
+
+<p>
+首先确保正确设置了日期和时间。执行<c>date MMDDhhmmYYYY</c>，使用UTC时间。
+</p>
+
+<pre caption="设定日期和UTC时间">
+<comment>（查看时钟）</comment>
+livecd gentoo # <i>date</i>
+Mon Mar  6 00:14:13 UTC 2006
+
+<comment>（设置当前日期和时间，如果需要的话）</comment>
+livecd gentoo # <i>date 030600162006</i> <comment>（格式为MMDDhhmmYYYY）</comment>
+Mon Mar  6 00:16:00 UTC 2006
+</pre>
+
+<p>
+接下来，从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一份stage包。进入<path>/mnt/gentoo</path>，执行<c>tar xjpf &lt;stage3 tarball&gt;</c>解压stage包。
+</p>
+
+<pre caption="下载一份stage3压缩包">
+livecd gentoo # <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
+<comment>（选一个镜像，进入/x86/current/stages目录，高亮显示你需要的stage3包，
+即i686 stage3，按下D键下载）</comment>
+
+<comment>（<b>Or</b> 不选择最近的镜像，直接用wget下载）</comment>
+livecd gentoo # <i>wget ftp://gentoo.osuosl.org/pub/gentoo/releases/x86/current/stages/stage3-i686*tar.bz2</i>
+</pre>
+
+<pre caption="解开stage3压缩包">
+livecd gentoo # <i>time tar xjpf stage3*</i>
+
+real  1m14.157s
+user  1m2.920s
+sys   0m7.530s
+</pre>
+
+<p>
+安装最新的Portage快照。跟下载stage3压缩包一样：从我们的<uri link="/main/en/mirrors.xml">列表</uri>选择一个最近的镜像，下载最新的快照并解压。
+</p>
+
+<pre caption="下载最新的Portage快照">
+livecd gentoo # <i>cd /mnt/gentoo/usr</i>
+livecd usr # <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
+<comment>（选一个镜像，进入snapshots/目录，高亮显示 <b>portage-latest.tar.bz2</b> ，按下D键下载）</comment>
+
+<comment>（<b>Or</b> 不选择最近的镜像，直接用wget下载）</comment>
+livecd gentoo # <i>cd /mnt/gentoo/usr</i>
+livecd usr # <i>wget http://gentoo.osuosl.org/snapshots/portage-latest.tar.bz2</i>
+</pre>
+
+<pre caption="解开Portage快照">
+livecd usr # <i>time tar xjf portage-lat*</i>
+
+real  0m40.523s
+user  0m28.280s
+sys   0m8.240s
+</pre>
+
+</body>
+</section>
+<section>
+<title>切换系统</title>
+<body>
+
+<p>
+挂载<path>/proc</path>文件系统，拷贝<path>/etc/resolv.conf</path>文件，然后chroot到你的Gentoo环境。
+</p>
+
+<pre caption="Chroot">
+livecd usr # <i>cd /</i>
+livecd / # <i>mount -t proc proc /mnt/gentoo/proc</i>
+livecd / # <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/</i>
+livecd / # <i>chroot /mnt/gentoo /bin/bash</i>
+livecd / # <i>env-update &amp;&amp; source /etc/profile</i>
+>>> Regenerating /etc/ld.so.cache...
+</pre>
+
+</body>
+</section>
+<section>
+<title>设定时区</title>
+<body>
+
+<p>
+设置你的时区信息：使用<path>/usr/share/zoneinfo</path>中的正确条目。
+</p>
+
+<pre caption="设置时区">
+livecd / # <i>ls /usr/share/zoneinfo</i>
+<comment>（以上海为例）</comment>
+livecd / # <i>cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</i>
+livecd / # <i>date</i>
+Thu Aug 30 11:03:16 CST 2007
+</pre>
+
+</body>
+</section>
+<section>
+<title>设定主机名和域名</title>
+<body>
+
+<p>
+在<path>/etc/conf.d/hostname</path>和<path>/etc/hosts</path>中设置主机名。以下例子中我们用<c>mybox</c>作为主机名，用<c>at.myplace</c>作为域名。可以用nano编辑这些配置文件，或者使用下面的命令：
+</p>
+
+<pre caption="设置主机名和域名">
+livecd / # <i>cd /etc</i>
+livecd etc # <i>echo "127.0.0.1 mybox.at.myplace mybox localhost" > hosts</i>
+livecd etc # <i>sed -i -e 's/HOSTNAME.*/HOSTNAME="mybox"/' conf.d/hostname</i>
+<comment>（使用指定的主机名并检查）</comment>
+livecd etc # <i>hostname mybox</i>
+livecd etc # <i>hostname -f</i>
+mybox.at.myplace
+</pre>
+
+</body>
+</section>
+
+</included>
