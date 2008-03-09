@@ -1,0 +1,1793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide type="newsletter" lang="zh_cn">
+<title>Gentoo月报</title>
+<subtitle>2008年2月18日</subtitle>
+
+<!-- Be sure to add yourself if you write an article -->
+<author title="Editor">
+<mail link="anant"/>
+</author>
+
+<author title="Author">
+<mail link="andrey@falko.net">Andrey Falko</mail>
+</author>
+
+<author title="Author">
+<mail link="opfer"/>
+</author>
+
+<author title="Author">
+<mail link="dsd"/>
+</author>
+
+<author title="Author">
+<mail link="cardoe"/>
+</author>
+
+<author title="Author">
+<mail link="rabbe@bahnhof.se">Rabbe Fogelholm</mail>
+</author>
+
+<author title="Author">
+<mail link="dertobi123"/>
+</author>
+
+<author title="Author">
+<mail link="philantrop"/>
+</author>
+
+<author title="Translator">
+<mail link="go2study@gmail.com">胡晓可</mail>
+</author>
+
+<author title="Translator">
+<mail link="wangjun.sh@gmail.com">王军</mail>
+</author>
+
+<author title="Translater">
+<mail link="wcw8410@gmail.com">吴传文</mail>
+</author>
+
+<author title="Translater">
+<mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>这是第二期的Gentoo月报，覆盖时段为2008年1月至2008年2月。</abstract>
+
+<summary/>
+
+<version>Volume 1, Issue 2</version>
+<date>2008-01-18</date>
+
+<!-- GMN Intro -->
+<chapter>
+<title>介绍</title>
+
+<section>
+<title>本月GMN</title>
+<body>
+<p>欢迎阅读Gentoo月报第二期。首先，我们想感谢整个社区对Gentoo月报创刊号的热烈响应。我们收到了很多令人鼓舞的反馈，我们希望大家继续投稿。记住，GMN是读者意见的产物，关于如何参与到这项工作中，请参看本月报末尾相关部分。</p>
+<p>本期月报采纳了一些我们从读者中收到的有趣的建议。安全统计被删去了，因为它似乎只提供了很小的价值，但却使版面显得混乱。您依然有很多方式来查看GLSA：通过使用<c>glsa-check</c>（<uri link="http://packages.gentoo.org/package/app-portage/gentoolkit">gentoolkit</uri>的一部分）；通过订阅<uri link="http://www.gentoo.org/security/en/glsa/">GLSA页面</uri>或是<c>gentoo-announce</c><uri link="http://www.gentoo.org/main/en/lists.xml">邮件列表</uri>。</p>
+<p>图形化的bugzilla和包统计是我们这期月报的又一特色。不要忘了看彩色的图表啊！我们已在前面申明了的GMN的特色，现在您可以在论坛中针对Gentoo月报的某些问题发表看法。<uri link="http://forums.gentoo.org/viewtopic-p-4871969.html">讨论本期月报</uri>！</p>
+<p>我们希望您会喜欢本期Gentoo月报。</p>
+</body>
+</section>
+</chapter>
+
+<!-- Gentoo News -->
+<chapter>
+<title>Gentoo新闻</title>
+
+<section>
+<title>Gentoo理事选举</title>
+<body>
+  
+<p>Gentoo理事会选举当前正在进行。经过近一个月的提名，我们现在还剩下8位候选人供大家投票。投票将在2月28日截止。任何人，只要以前曾经在理事会选举中投过票的，或者在过去的365天（投票结束日期之前的365天）里做过Gentoo的开发者，都有资格参加投票。您可以在<uri link="http://www.gentoo.org/proj/en/elections/foundation-200802.xml">理事选举页面</uri>获得更多有关选举的信息和候选人的宣言。</p>
+
+</body>
+</section>
+
+<section>
+<title>内核安全修复：请尽快升级</title>
+<body>
+
+<p>上周末在Linux内核中发现两个主要的安全漏洞。这两个漏洞有相同的危害（本地用户获得root权限），并且都存在于vmsplice()系统调用中，内核2.6.17版本开始加入了该系统调用。因为没有配置选项来排除vmsplice()调用，因此每个人都可能受到它的危害。</p>
+
+<p>其中一个安全漏洞一直伴随着vmsplice()的存在而存在，所以2.6.17之后的内核版本都有此漏洞。该漏洞在内核版本2.6.24.2，2.6.23.16和2.6.22.18中已被修复。已为其分配了漏洞标识号<uri link="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0600">CVE-2008-0600</uri>。</p>
+
+<p>另外一个安全漏洞首次出现是在2.6.23版本中。在2.6.23.15和2.6.24.1中已被修复。这个漏洞被分配了<uri link="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0009">CVE-2008-0009</uri> 和<uri link="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2008-0010">CVE-2008-0010</uri>标志号。</p>
+
+<p><c>gentoo-sources-2.6.23-r8</c>和<c>gentoo-sources-2.6.24-r2</c>已经在星期一被加入了portage中，它们都修复了这两个漏洞。请尽快安装最新的<uri link="http://packages.gentoo.org/package/sys-kernel/gentoo-sources">gentoo-sources</uri>。</p>
+
+<p>完整的声明可以看<uri link="http://www.gentoo.org/news/20080213-vmsplice.xml">这里</uri>。</p>
+</body>
+</section>
+  
+<section>
+<title>KDE 4.0.1的提交</title>
+
+<body>
+<p>Gentoo的KDE团队很高兴通知大家，他们刚刚把KDE 4.0.1提交到Portage树中。</p>
+
+<p>KDE 4.0.1是第一个维护后的更新版本，修复了原先版本中的许多问题。这其中有对<uri link="http://packages.gentoo.org/package/kde-base/konqueror">Konqueror</uri>的稳定性问题修复和性能改进，以及它的Flash集成和JavaScript支持。<uri link="http://packages.gentoo.org/package/kde-base/kwin">KWin</uri>增强了合成和错误处理。几乎所有其它的KDE模块也都运行良好。</p>
+
+<p>完整的声明可以看<uri link="http://www.gentoo.org/news/20080210-kde-4.0.1.xml">这里</uri>。</p>
+
+</body>
+</section>
+
+<!-- Council Summary -->
+<section>
+<title>议会会议摘要</title>
+
+<body>
+<p>本月的<uri link="http://www.gentoo.org/proj/en/council/">Gentoo议会</uri>例会在2008年2月14日召开。议题有：</p>
+
+<ul>
+
+<li><b><uri link="http://www.gentoo.org/proj/en/glep/glep-0046.html">GLEP 46</uri></b>（允许在metadata.xml中使用upstream标签）：本GLEP已获得大家的认可。但是在本GLEP最终通过之前，发起者被要求解释为什么可用的协议里只限定在HTTP和HTTPS。</li>
+
+<li><b>EAPI=1</b>（详细的说明在哪里？）：大家普遍认为，在EAPI=0被完全通过之前，任何新的EAPI都不应该被加入。但是，对于是否及如何修改EAPI=1，并没有任何一致意见。<mail link="halcy0n"/>同意继续研究EAPI=0的包管理规范（PMS），并在下次会议上汇报新的进展。</li>
+
+</ul>
+
+<p>有些议题是上次会议留下来的。GLEPs <uri link="http://www.gentoo.org/proj/en/glep/glep-0054.html">54</uri>和<uri link="http://www.gentoo.org/proj/en/glep/glep-0055.html">55</uri>没有重新提交给议会讨论。</p>
+
+<ul>
+  
+<li><b>行为准则（CoC）的执行情况</b>：<mail link="dberkholz"/>在议会邮件列表上提出了一个简单的建议。议会支持该提议，Donnie将会跟进这件事。</li>
+
+<li><b>成为一名活跃开发者的文档</b>：无更新。</li>
+
+<li><b>“偷懒架构团队”</b>：无更新。</li>
+
+</ul>
+
+</body>
+</section>
+
+<!--- Coming up -->
+<section>
+<title>近期活动</title>
+<body>
+  
+<ul>
+
+<li><b><uri link="http://www.fosdem.org/2008/">FOSDEM</uri></b>：<b>2月23日至24日</b>。欧洲最好的社区活动之一。尽管Gentoo不会派代表正式出席这个会议，但您依然可以期待在会上遇到几个Gentoo的开发者和用户。</li>
+
+<li><b><uri link="http://www.gentoo.org/proj/en/bugday/index.xml">Bugday</uri></b>：想找到不花太多时间就能帮助Gentoo的方式吗？在<b>3月1日</b>参加我们每月一次的bugday活动，帮我们捉一些<uri link="http://bugday.gentoo.org/">bug</uri>吧。</li>
+
+<li><b><uri link="http://www.gentoo.org/proj/en/pr/events/clt2008-germany/">Chemnitzer Linux-Tage</uri></b>：<b>3月1日至2日</b>。有几个欧洲的Gentoo开发者和用户<uri link="http://www.gentoo.org/proj/en/pr/events/clt2008-germany/">计划</uri>参加，所以如果您计划在那个时间来访Chemnitz的话，请一定来参加！</li>
+
+<li><b><uri link="http://www.gentoo.org/proj/en/council/">议会会议</uri></b>：Gentoo议会每个月都会开会讨论影响整个Gentoo的重要技术问题。下次月会将在<b>3月13日</b>召开，欢迎大家参与——<e>UTC时间20：00，在irc.freenode.net上的#gentoo-council频道</e>。</li>
+
+<li><b><uri link="http://us.pycon.org/2008/about/">PyCon</uri></b>：<b>3月13日至17日</b>。在大会中特为对Gentoo感兴趣的与会者设置了一个“志同道合”（Birds Of a Feather）环节。如果您也感兴趣，可不要忘记在<uri link="http://forums.gentoo.org/viewtopic-t-659597.html">论坛上</uri>留个话。</li>
+
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Heard in the community -->
+<chapter>
+<title>倾听社区</title>
+
+<!-- How do teams work -->
+<section>
+<title>Emacs团队</title>
+
+<body>
+
+<p><b>介绍</b>：</p>
+<p>有些人可能想知道在Gentoo里维护一堆软件包是如何进行的，作为用户又应该如何帮忙。每个小组有自己特有的工作流程，但也有一些共同的模式。这个月，让我们看看<uri link="http://www.gentoo.org/proj/en/lisp/emacs/">Emacs</uri>小组是如何工作的。</p>
+
+<p><b>我们是谁，我们做什么</b>：</p>
+<p>Emacs团队由两个开发者组成，<mail link="ulm"/>和<mail link="opfer"/>，负责管理<uri link="http://packages.gentoo.org/category/app-emacs">app-emacs分类</uri>，还有GNU Emacs编辑器和几个小型的与emacs相关软件。另外，我们还关心由其它小组维护的包的Emacs支持（大部分通过USE=emacs来启用）。</p>
+
+
+<p><b>我们如何工作</b>：</p>
+<p>有两种工作方式：“主动”和“应动”。“应动”发生于当用户通过bug报告（首选途径）、IRC或是电子邮件提出要求时；“主动”则发生在团队成员间的邮件交流或IRC讨论。我们讨论已经遇到或可能发生的问题，并且努力找出最优的解决方案。在这里“最优”意味着让尽可能少的人遇到问题。这通常意味着要在性能和向后兼容性这两者之间取得平衡。</p>
+<p>团队的任何成员都可以处理漏洞报告。谁第一个对bug做出反应，谁就是负责人，除非其它人有更好的处理方案。新的软件包首先放在<uri link="http://overlays.gentoo.org/proj/emacs/">Emacs overlay</uri>中测试运行。该overlay是与一个Wiki系统联系起来的，我们在这个Wiki里保存临时的信息和进度报告。比如，我们在Wiki里收集对Emacs支持被破坏或不好的软件包。不管什么时候，只要我们中的一个人有了空闲，就修复这个问题，并且把这个条目从Wiki中删除掉。或者，如果这个问题不能被修复，就记录下一些附加的信息到这个条目，这样下个人就可以从上次的地方开始接手。Wiki还包括一些其它信息，如portage中哪些软件有新版本/修订版（包括对方的日期），还有对许多软件包的测试计划。</p>
+<p>
+稳定化是通过<uri link="http://bugs.gentoo.org/">bug跟踪器</uri>处理的。维护者提交一个新bug，在summary一栏填入“stable app-emacs/xyz-1.0”，在CC一栏中填入所有相关的架构团队（比如x86，amd64或者sparc）。然后架构团队开始测试这个包（在收集到测试计划的帮助下）并且把它标记为稳定版本。
+</p>
+
+<p><b>用户如何提供帮助</b>：</p>
+<p>最简单的方式是，如果您发现了一个问题，给我们汇报这个bug。即便是微小的漏洞，对整体的质量也是重要的，比如有个新版本的程序或者包无法在Portage里找到之类的问题。在新版本发布之后，请至少给维护者几天时间。如果您对某个问题不确定，请试着调查一下再说。请不要害怕提交“蠢”问题，与其使到一些真实存在的问题没被报告，我们更希望看到bug的最终由于INVALID（或类似的原因）而被关闭。报告前请先检查有没有重复的bug！</p>
+<p>欢迎用户加入到我们在<uri link="http://freenode.net/">Freenode</uri>开设的IRC频道#gentoo-lisp，在这里您可以得到各种Lisp（包括Emacs Lisp）的帮助。IRC是一种很好直接接触开发者的方式。<mail link="emacs@gentoo.org">Email</mail>也是很好的交流途径，但是不是很完美，因为电子邮件可能会丢失。电子邮件也比bug报告更容易被人遗忘。</p>
+<p>另外一种贡献方式是为overlay工作。但是我们不会轻易赋予提交权限，因为即便简单的修改也可能带来很大的危害。在证明自己有足够能力之后，受信任的用户当然可以获得提交权限。关于GNU Emacs是如何在Gentoo上运行的，请看<uri link="http://www.gentoo.org/proj/en/lisp/emacs/emacs.xml">维护者指南</uri>里的提示。</p>
+
+</body>
+</section>
+
+<!-- forums.gentoo.org -->
+<section>
+<title>Gentoo名列BIND测试第一名</title>
+<body>
+
+<p><uri link="http://www.isc.org/">Internet系统联盟</uri>做了一个基准测试来检验各种不同的操作系统运行<uri link="http://packages.gentoo.org/package/net-dns/bind">BIND 9</uri>时的适应状况。在所有被测系统中，运行于2.6.20.7内核之上的Gentoo Linux排第一名，每秒钟处理了93,000次查询！Fedora Core位列第二，每秒钟87,000次，紧随其后的是FreeBSD-7（每秒钟84,000次）。</p>
+<p>更多信息，请查阅ISC的<uri link="http://new.isc.org/proj/dnsperf/OStest.html">基准测试报告页</uri>。</p>
+
+</body>
+</section>
+
+<!-- planet.gentoo.org -->
+<section>
+<title>Planet Gentoo</title>
+
+<body>
+
+<p><b>如何联系开发人员</b></p>
+<p>有时候人们不知该如何联系开发人员。如何找到你想要的开发人员？<mail link="lu_zero"/>给了我们一些<uri link="http://planet.gentoo.org/developers/lu_zero/2008/01/21/how_to_contact_developers">提示</uri></p>
+
+<p><b>用户之音</b></p>
+<p><mail link="tsunam"/>给用户Matthew Summers提供了一个<uri link="http://tsunam.org/2008/01/21/guest-post-matthew-summers/">机会</uri>，来发表对Daniel Robbins提案的一些看法。</p>
+
+<p><b>Gentoo人在Chemnitzer Linux-Tage</b></p>
+<p><mail link="dertobi123"/>宣布了Gentoo开发人员和用户将<uri link="http://blog.scherbaum.info/2008/01/22/developer-meeting-at-the-chemnitzer-linux-tage-on-march-1st/">出席</uri>在德国举办的Chemnitzer Linux-Tage。开发人员会议将于2008年3月1日举行，每个人都被邀请去打声招呼。</p>
+
+<p><b>GCC 4.3状态</b></p>
+<p>在一个<uri link="http://psykil.livejournal.com/321090.html">简短的记录</uri>中，<mail link="dirtyepic"/>向我们报告了GCC 4.3在Gentoo中的最新情况。</p>
+
+<p><b>代码之夏（Summer of Code）方案</b></p>
+<p>虽然现在还是春天，<mail link="flameeyes"/>和<mail link="graaff"/>已经开始为今年的Google代码之夏考虑可行的方案了。</p>
+
+<p><b>Xen应用</b></p>
+<p><mail link="marineam"/>描述了Xen和Gentoo如何<uri link="http://mike.marineau.org/blog/gentoo/2008-02-02-gentoo-osl-and-xen">被用于</uri><uri link="http://www.osuosl.org/">开源实验室（Open Source Labs）</uri>。</p>
+
+<p><b>MIPS重回实验架构</b></p>
+<p>基于一些与版本相关的东西，<mail link="redhatter"/>宣布MIPS<uri link="http://stuartl.longlandclan.yi.org/blog/2008/02/03/gentoomips-notes-for-upcomming-release-20080/">现在是实验</uri>架构了，这意味着不会再有稳定版关键字了，只有<e>~mips</e>。造成此种状况的原因是缺少人手。</p>
+
+<p><b>内部库文件问题与修复</b></p>
+<p><mail link="flameeyes"/>的现时任务是消灭有害的软件自带库文件拷贝。他<uri link="http://blog.flameeyes.eu/articles/2008/01/21/and-what-about-imported-libraries">描述了</uri>为什么这些库文件是有害的，还给了一个<uri link="http://blog.flameeyes.eu/articles/2008/02/04/a-case-study-enchants-internal-hunspell-copy">额外的例子</uri>来说明如何修复此类问题。</p>
+
+<p><b>如何提升Gentoo的公共关系</b></p>
+<p>如果近来你关注了我们的首页，你会看到<mail link="dberkholz"/>工作到位，定时更新信息。他现在对于<uri link="http://www.gentoo.org/proj/en/pr/">公共关系组</uri>的最新变动<uri link="http://spyderous.livejournal.com/95223.html">提供了详细信息</uri>。</p>
+
+<p><b>用户关系</b></p>
+<p><mail link="tsunam"/>已经<uri link="http://tsunam.org/2008/02/13/user-relations-minutes/">总结</uri>了我们<uri link="http://www.gentoo.org/proj/en/userrel/">用户关系</uri>组的一个会议。</p>
+
+<p><b>Gentoo在龙芯上</b></p>
+<p>由中国制造的<uri link="http://en.wikipedia.org/wiki/Loongson">龙芯</uri>处理器是基于MIPS的，<mail link="redhatter"/><uri link="http://stuartl.longlandclan.yi.org/blog/2008/02/14/gentoomips-loongson-liveusb/">宣布</uri>Gentoo已有更多的实验性MIPS stages可以在该处理器上使用。</p>
+
+</body>
+
+</section>
+</chapter>
+
+<!-- Tips and Tricks -->
+<chapter>
+<title>心得技巧</title>
+
+<!-- Screenie -->
+<section>
+<title>Screenie</title>
+<body>
+
+<p>想更好的组织你的命令行screen（screen为一软件）对话吗？想为每一个执行的任务分配一个单独的screen对话吗？想要什么东西为你统筹安排吗？本期的GMN将向你介绍一个很棒的技巧：一个叫做screenie的小脚本程序。</p>
+
+<pre caption="安装Screenie">
+$ <i>emerge screenie</i>
+</pre>
+
+<p>开始运行程序</p>
+
+<pre caption="启动screenie">
+$ <i>screenie</i>
+</pre>
+
+<p>你应该看到以下内容：</p>
+
+<pre caption="加入作业">
+<comment>SCREENIE - terminal screen-session handler written by Marc O. Gloor &lt;mgloor&amp;fhzh.ch&gt;</comment>
+a) add job
+q) quit
+
+select:
+</pre>
+
+<p>我们加入一个叫做“Systems”的作业。点击<e>a</e>后，输入作业名称。如果你不知道当前存在的screen对话的进程号，那么直接点击“回车”。</p>
+
+<p>让我们加入第二个作业，名字叫做“Email”。现在你应该看到：</p>
+
+<pre caption="列出作业">
+<comment>SCREENIE - terminal screen-session handler written by Marc O. Gloor &lt;mgloor&amp;fhzh.ch&gt;</comment>
+1) 15468.Systems
+2) 15504.Email
+
+a) add job
+q) quit
+
+select:
+</pre>
+
+<p>现在手边有两个screen会话，你可以任意切换。选择其中的一个。现在你就可以在该screen会话中工作了。</p>
+
+<note>参看<uri link="http://www.gentoo.org/news/en/gwn/20030714-newsletter.xml#doc_chap9">心得技巧</uri>描述屏</note>
+
+<p>要切换到其他screen会话，按<e>CTRL+a+d</e>（或者你惯用的退出screen会话的方法）。你应该返回到一个screenie菜单，并且可以任意选择你想要的screen会话。</p>
+
+
+<p>screenie的用途之一是可以为每个任务分配一个screen会话，这样便可以使到每台机器里的多任务工作更加井井有序。这应该也会使长时间中断后重新开始工作变得更加容易。</p>
+
+</body>
+
+</section>
+
+</chapter>
+
+<!-- Gentoo developer moves -->
+<chapter>
+<title>人员变更</title>
+
+<section>   
+<title>总结</title>
+<body>  
+<p>Gentoo目前有<b>277</b>位活跃开发者，最近其中<b>47</b>位离开了。从初创到现在为止，Gentoo总共招募了<b>630</b>位开发者。</p>
+</body>
+</section>
+    
+<section>
+<title>离开</title>
+<body>
+
+<p>下列开发者最近离开Gentoo项目：</p>
+
+<ul>
+<li><e>本月无</e></li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>加入</title>
+<body>
+
+<p>下列开发者最近加入Gentoo项目：</p>
+
+<ul>
+<li>Ben de Groot（yngwin）：多媒体</li>
+</ul>
+
+</body>
+</section>
+
+<section>
+<title>变更</title>
+<body>
+
+<p>下列开发者最近改变了在Gentoo项目内的职位：</p>
+
+<ul>
+<li>Mark Loeser（halcy0n）加入cpp团队</li>
+<li>Michael Januszewski（spock）加入sci和sci-physics团队</li>
+<li>Jorge Manuel B. S. Vicetto（jmbsvicetto）加入kde团队</li>
+<li>Ryan Hill（dirtyepic）加入mips团队</li>
+</ul>
+
+</body>
+</section>
+
+</chapter>
+
+<!-- Portage summaries -->
+<chapter>
+<title>Portage</title>
+
+<section>
+<title>总结</title>
+<body>
+
+<p>本部分总结了portage树当前的状态</p>
+
+<table>
+<tr>
+  <th colspan="2">统计汇总</th>
+</tr>
+<tr>
+  <th>架构</th>
+  <ti>15</ti>
+</tr>
+<tr>
+  <th>类别</th>
+  <ti>151</ti>
+</tr>
+<tr>
+  <th>包</th>
+  <ti>12381</ti>
+</tr>
+<tr>
+  <th>ebuilds</th>
+  <ti>24076</ti>
+</tr>
+</table>
+
+<table>
+<tr>
+  <th colspan="5">关键字分布</th>
+</tr>
+<tr>
+  <th>架构</th>
+  <th>稳定</th>
+  <th>测试</th>
+  <th>合计</th>
+  <th>%占总包数</th>
+</tr>
+<tr>
+  <th>alpha</th>
+  <ti>3482</ti>
+  <ti>558</ti>
+  <ti>4040</ti>
+  <ti>32.63%</ti>
+</tr>
+<tr>
+  <th>amd64</th>
+  <ti>6598</ti>
+  <ti>3935</ti>
+  <ti>10533</ti>
+  <ti>85.07%</ti>
+</tr>
+<tr>
+  <th>arm</th>
+  <ti>1588</ti>
+  <ti>67</ti>
+  <ti>1655</ti>
+  <ti>13.37%</ti>
+</tr>
+<tr>
+  <th>hppa</th>
+  <ti>2259</ti>
+  <ti>554</ti>
+  <ti>2813</ti>
+  <ti>22.72%</ti>
+</tr>
+<tr>
+  <th>ia64</th>
+  <ti>3118</ti>
+  <ti>626</ti>
+  <ti>3744</ti>
+  <ti>30.24%</ti>
+</tr>
+<tr>
+  <th>m68k</th>
+  <ti>487</ti>
+  <ti>9</ti>
+  <ti>496</ti>
+  <ti>4.01%</ti>
+</tr>
+<tr>
+  <th>mips</th>
+  <ti>1295</ti>
+  <ti>476</ti>
+  <ti>1771</ti>
+  <ti>14.30%</ti>
+</tr>
+<tr>
+  <th>ppc</th>
+  <ti>6154</ti>
+  <ti>2774</ti>
+  <ti>8928</ti>
+  <ti>72.11%</ti>
+</tr>
+<tr>
+  <th>ppc64</th>
+  <ti>3305</ti>
+  <ti>706</ti>
+  <ti>4011</ti>
+  <ti>32.40%</ti>
+</tr>
+<tr>
+  <th>s390</th>
+  <ti>1194</ti>
+  <ti>43</ti>
+  <ti>1237</ti>
+  <ti>9.99%</ti>
+</tr>
+<tr>
+  <th>sh</th>
+  <ti>1407</ti>
+  <ti>38</ti>
+  <ti>1445</ti>
+  <ti>11.67%</ti>
+</tr>
+<tr>
+  <th>sparc</th>
+  <ti>4680</ti>
+  <ti>1332</ti>
+  <ti>6012</ti>
+  <ti>48.56%</ti>
+</tr>
+<tr>
+  <th>sparc-fbsd</th>
+  <ti>0</ti>
+  <ti>304</ti>
+  <ti>304</ti>
+  <ti>2.46%</ti>
+</tr>
+<tr>
+  <th>x86</th>
+  <ti>9171</ti>
+  <ti>3041</ti>
+  <ti>12212</ti>
+  <ti>98.64%</ti>
+</tr>
+<tr>
+  <th>x86-fbsd</th>
+  <ti>0</ti>
+  <ti>2431</ti>
+  <ti>2431</ti>
+  <ti>19.63%</ti>
+</tr>
+</table>
+
+<figure link="/images/gmn/20080218/keywords.png" short="Packages by keyword" caption="按关键字分类的包分布"/>
+  
+</body>
+</section>
+
+<section>
+<body>
+<p>这一章节列出了已经被移除或加入到portage树里的，以及已经发布“最后仪式”声明的即将被移除的包。要移除的包来源于很多地方，包括<uri link="/proj/en/qa/treecleaners/">树清理者项目</uri>和众多的开发者。列在最后仪式一节里的大部分包需要有人来维护，如果有人可以承担下维护的责任的话，它们可以得以继续保留在portage树里。</p>
+</body>
+</section>
+
+<section>
+<title>已经移除：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti>dev-util/poseidonCE</ti>
+<ti>2008年1月25日</ti>
+<ti><mail link="ali_bush@gentoo.org">Alistair Bush</mail></ti>
+</tr>
+
+<tr>
+<ti>www-servers/jetty</ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="wltjr@gentoo.org">William Thomson</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-java/jdbc2-oracle</ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="wltjr@gentoo.org">William Thomson</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-java/jdbc3-oracle</ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="wltjr@gentoo.org">William Thomson</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-java/quartz</ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="wltjr@gentoo.org">William Thomson</mail></ti>
+</tr>
+
+<tr>
+<ti>www-servers/jboss</ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="wltjr@gentoo.org">William Thomson</mail></ti>
+</tr>
+
+<tr>
+<ti>www-apache/mod_auth_external</ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-lisp/emacs-cl-cvs</ti>
+<ti>2008年1月30日</ti>
+<ti><mail link="ulm@gentoo.org">Ulrich Müller</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-drivers/xf86-video-ivtvdev</ti>
+<ti>2008年1月31日</ti>
+<ti><mail link="je_fro@gentoo.org">Jeffrey Gardner</mail></ti>
+</tr>
+
+<tr>
+<ti>net-misc/wanpipe</ti>
+<ti>2008年1月31日</ti>
+<ti><mail link="stkn@gentoo.org">Stefan Knoblich</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-java/aterm-java</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-biology/generic-genome-browser</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="je_fro@gentoo.org">Jeffrey Gardner</mail></ti>
+</tr>
+
+<tr>
+<ti>sys-kernel/ck-sources</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="marineam@gentoo.org">Michael Marineau</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-themes/openbox-themes</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ml/rpc</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ml/netclient</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ml/equeue</ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti>media-tv/nuppelvideo</ti>
+<ti>2008年2月04日</ti>
+<ti><mail link="phosphan@gentoo.org">Patrick Kursawe</mail></ti>
+</tr>
+
+<tr>
+<ti>app-shells/csh</ti>
+<ti>2008年2月04日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-wm/kahakai</ti>
+<ti>2008年2月04日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/pariguide</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/ksimus-boolean</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/ksimus-datarecorder</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/ksimus-floatingpoint</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/kalamaris</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>sci-mathematics/ksimus</ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-apps/mkcfm</ti>
+<ti>2008年2月06日</ti>
+<ti><mail link="dberkholz@gentoo.org">Donnie Berkholz</mail></ti>
+</tr>
+
+<tr>
+<ti>kde-base/poxml</ti>
+<ti>2008年2月07日</ti>
+<ti><mail link="philantrop@gentoo.org">Wulf Krueger</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/usb-pwc-re</ti>
+<ti>2008年2月13日</ti>
+<ti><mail link="phosphan@gentoo.org">Patrick Kursawe</mail></ti>
+</tr>
+
+<tr>
+<ti>media-video/usb-pwcx</ti>
+<ti>2008年2月13日</ti>
+<ti><mail link="phosphan@gentoo.org">Patrick Kursawe</mail></ti>
+</tr>
+
+<tr>
+<ti>net-p2p/eztorrent</ti>
+<ti>2008年2月14日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti>media-sound/gini</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/libmustux</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>net-libs/dclibc</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/streamtuner-live365</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/streamtuner-local</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/streamtuner-python</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-plugins/streamtuner-xiph</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-misc/fluxconf</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/libdts</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti>media-libs/hermes</ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="nyhm@gentoo.org">Tristan Heaven</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-themes/gaim-smileys</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/autoprofile</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/bangexec</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-assistant</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-encryption</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-extprefs</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-galago</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-hotkeys</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-latex</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-otr</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-rhythmbox</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-slashexec</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaim-xfire</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/gaimosd</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>x11-plugins/ignorance</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>app-accessibility/festival-gaim</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/gaim</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/gaim-blogger</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/gaim-bnet</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/gaim-meanwhile</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>net-im/gaim-snpp</ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="tester@gentoo.org">Olivier Crête</mail></ti>
+</tr>
+
+<tr>
+<ti>dev-ruby/http-access2</ti>
+<ti>2008年2月17日</ti>
+<ti><mail link="flameeyes@gentoo.org">Diego Pettenò</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<section>
+<title>已经加入：</title>
+<body>
+
+<table>
+
+<tr>
+<th>包：</th>
+<th>加入日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-lang/falcon">dev-lang/falcon</uri></ti>
+<ti>2008年1月21日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-gfx/rawstudio">media-gfx/rawstudio</uri></ti>
+<ti>2008年1月21日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-libs/gavl">media-libs/gavl</uri></ti>
+<ti>2008年1月21日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-sound/jackbeat">media-sound/jackbeat</uri></ti>
+<ti>2008年1月22日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-ruby/archive-tar-minitar">dev-ruby/archive-tar-minitar</uri></ti>
+<ti>2008年1月22日</ti>
+<ti><mail link="rbrown@gentoo.org">Richard Brown</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-ruby/color">dev-ruby/color</uri></ti>
+<ti>2008年1月22日</ti>
+<ti><mail link="rbrown@gentoo.org">Richard Brown</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/gnome-extra/gnome-device-manager">gnome-extra/gnome-device-manager</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="compnerd@gentoo.org">Saleem Abdulrasool</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emacs/distel">app-emacs/distel</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emacs/icicles">app-emacs/icicles</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="ulm@gentoo.org">Ulrich Müller</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/x11-misc/fme">x11-misc/fme</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="lack@gentoo.org">Jim Ramsay</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emacs/outline-magic">app-emacs/outline-magic</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emacs/wikipedia-mode">app-emacs/wikipedia-mode</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emacs/template">app-emacs/template</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="opfer@gentoo.org">Christian Faulhammer</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-apps/i2c-tools">sys-apps/i2c-tools</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="vapier@gentoo.org">Mike Frysinger</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-gfx/gnome-raw-thumbnailer">media-gfx/gnome-raw-thumbnailer</uri></ti>
+<ti>2008年1月23日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-misc/sphinx">app-misc/sphinx</uri></ti>
+<ti>2008年1月24日</ti>
+<ti><mail link="caleb@gentoo.org">Caleb Tennis</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-ruby/tclink">dev-ruby/tclink</uri></ti>
+<ti>2008年1月24日</ti>
+<ti><mail link="caleb@gentoo.org">Caleb Tennis</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-admin/eselect-python">app-admin/eselect-python</uri></ti>
+<ti>2008年1月24日</ti>
+<ti><mail link="hawking@gentoo.org">Ali Polatel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-libs/liboobs">dev-libs/liboobs</uri></ti>
+<ti>2008年1月24日</ti>
+<ti><mail link="eva@gentoo.org">Gilles Dartiguelongue</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-java/cldc-api">dev-java/cldc-api</uri></ti>
+<ti>2008年1月24日</ti>
+<ti><mail link="caster@gentoo.org">Vlastimil Babka</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/games-fps/worldofpadman">games-fps/worldofpadman</uri></ti>
+<ti>2008年1月25日</ti>
+<ti><mail link="nyhm@gentoo.org">Tristan Heaven</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-video/smplayer">media-video/smplayer</uri></ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/x11-themes/smplayer-themes">x11-themes/smplayer-themes</uri></ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-tex/pstplus">dev-tex/pstplus</uri></ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-tex/crosstex">dev-tex/crosstex</uri></ti>
+<ti>2008年1月26日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-sound/bristol">media-sound/bristol</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-sound/gigedit">media-sound/gigedit</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/gmpc-avahi">media-plugins/gmpc-avahi</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="angelos@gentoo.org">Christoph Mende</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-dotnet/podsleuth">dev-dotnet/podsleuth</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-dotnet/mono-zeroconf">dev-dotnet/mono-zeroconf</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/vdr-wapd">media-plugins/vdr-wapd</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="hd_brummy@gentoo.org">Joerg Bornkessel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-ml/ANSITerminal">dev-ml/ANSITerminal</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/vdr-pcd">media-plugins/vdr-pcd</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="hd_brummy@gentoo.org">Joerg Bornkessel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/vdr-chanman">media-plugins/vdr-chanman</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="hd_brummy@gentoo.org">Joerg Bornkessel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-libs/stops">media-libs/stops</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-sound/aeolus">media-sound/aeolus</uri></ti>
+<ti>2008年1月27日</ti>
+<ti><mail link="aballier@gentoo.org">Alexis Ballier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-java/svgsalamander">dev-java/svgsalamander</uri></ti>
+<ti>2008年1月28日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-java/flyingsaucer">dev-java/flyingsaucer</uri></ti>
+<ti>2008年1月28日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-lang/rubinius">dev-lang/rubinius</uri></ti>
+<ti>2008年1月29日</ti>
+<ti><mail link="caleb@gentoo.org">Caleb Tennis</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-lisp/emacs-cl">dev-lisp/emacs-cl</uri></ti>
+<ti>2008年1月30日</ti>
+<ti><mail link="ulm@gentoo.org">Ulrich Müller</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-crypt/nistp224">app-crypt/nistp224</uri></ti>
+<ti>2008年1月30日</ti>
+<ti><mail link="bangert@gentoo.org">Thilo Bangert</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-admin/srlog2">app-admin/srlog2</uri></ti>
+<ti>2008年1月30日</ti>
+<ti><mail link="bangert@gentoo.org">Thilo Bangert</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/x11-drivers/xf86-video-ivtv">x11-drivers/xf86-video-ivtv</uri></ti>
+<ti>2008年1月31日</ti>
+<ti><mail link="je_fro@gentoo.org">Jeffrey Gardner</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-cpp/ctemplate">dev-cpp/ctemplate</uri></ti>
+<ti>2008年1月31日</ti>
+<ti><mail link="dev-zero@gentoo.org">Tiziano Müller</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-cpp/sparsehash">dev-cpp/sparsehash</uri></ti>
+<ti>2008年1月31日</ti>
+<ti><mail link="dev-zero@gentoo.org">Tiziano Müller</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-video/hasciicam">media-video/hasciicam</uri></ti>
+<ti>2008年2月01日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-irc/conspire">net-irc/conspire</uri></ti>
+<ti>2008年2月01日</ti>
+<ti><mail link="chainsaw@gentoo.org">Tony Vroon</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-block/megacli">sys-block/megacli</uri></ti>
+<ti>2008年2月01日</ti>
+<ti><mail link="wschlich@gentoo.org">Wolfram Schlich</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-block/lsiutil">sys-block/lsiutil</uri></ti>
+<ti>2008年2月01日</ti>
+<ti><mail link="wschlich@gentoo.org">Wolfram Schlich</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/vdr-filebrowser">media-plugins/vdr-filebrowser</uri></ti>
+<ti>2008年2月02日</ti>
+<ti><mail link="hd_brummy@gentoo.org">Joerg Bornkessel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-misc/ng-utils">net-misc/ng-utils</uri></ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="stefaan@gentoo.org">Stefaan De Roeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-block/cec">sys-block/cec</uri></ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="caleb@gentoo.org">Caleb Tennis</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/media-plugins/vdr-vodcatcher">media-plugins/vdr-vodcatcher</uri></ti>
+<ti>2008年2月03日</ti>
+<ti><mail link="hd_brummy@gentoo.org">Joerg Bornkessel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/games-util/etswitch">games-util/etswitch</uri></ti>
+<ti>2008年2月04日</ti>
+<ti><mail link="drac@gentoo.org">Samuli Suominen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/metis">sci-libs/metis</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/colamd">sci-libs/colamd</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/camd">sci-libs/camd</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/ccolamd">sci-libs/ccolamd</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/cxsparse">sci-libs/cxsparse</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-util/lockrun">dev-util/lockrun</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="caleb@gentoo.org">Caleb Tennis</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/cholmod">sci-libs/cholmod</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/btf">sci-libs/btf</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/ldl">sci-libs/ldl</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/klu">sci-libs/klu</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/csparse">sci-libs/csparse</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-libs/suitesparse">sci-libs/suitesparse</uri></ti>
+<ti>2008年2月05日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-text/libspectre">app-text/libspectre</uri></ti>
+<ti>2008年2月06日</ti>
+<ti><mail link="zlin@gentoo.org">Bo Ørsted Andresen</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-perl/ShipIt">dev-perl/ShipIt</uri></ti>
+<ti>2008年2月06日</ti>
+<ti><mail link="robbat2@gentoo.org">Robin H. Johnson</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-physics/harminv">sci-physics/harminv</uri></ti>
+<ti>2008年2月06日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-physics/meep">sci-physics/meep</uri></ti>
+<ti>2008年2月06日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-mobilephone/obex-data-server">app-mobilephone/obex-data-server</uri></ti>
+<ti>2008年2月07日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-block/dellmgr">sys-block/dellmgr</uri></ti>
+<ti>2008年2月07日</ti>
+<ti><mail link="wschlich@gentoo.org">Wolfram Schlich</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/www-apache/mod_authn_pam">www-apache/mod_authn_pam</uri></ti>
+<ti>2008年2月07日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/www-apache/mod_flvx">www-apache/mod_flvx</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas-libraries">net-analyzer/openvas-libraries</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas-libnasl">net-analyzer/openvas-libnasl</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas-server">net-analyzer/openvas-server</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas-client">net-analyzer/openvas-client</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas-plugins">net-analyzer/openvas-plugins</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-analyzer/openvas">net-analyzer/openvas</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hanno@gentoo.org">Hanno Boeck</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-ruby/fastercsv">dev-ruby/fastercsv</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="nichoj@gentoo.org">Joshua Nichols</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/www-apache/mod_log_rotate">www-apache/mod_log_rotate</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="hollow@gentoo.org">Benedikt Boehm</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sci-visualization/zhu3d">sci-visualization/zhu3d</uri></ti>
+<ti>2008年2月08日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-misc/nullmodem">app-misc/nullmodem</uri></ti>
+<ti>2008年2月10日</ti>
+<ti><mail link="bangert@gentoo.org">Thilo Bangert</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-block/megactl">sys-block/megactl</uri></ti>
+<ti>2008年2月10日</ti>
+<ti><mail link="wschlich@gentoo.org">Wolfram Schlich</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-fs/shake">sys-fs/shake</uri></ti>
+<ti>2008年2月10日</ti>
+<ti><mail link="voyageur@gentoo.org">Bernard Cafarelli</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-emulation/systemsim-cell">app-emulation/systemsim-cell</uri></ti>
+<ti>2008年2月12日</ti>
+<ti><mail link="corsair@gentoo.org">Markus Rothe</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-python/dap">dev-python/dap</uri></ti>
+<ti>2008年2月13日</ti>
+<ti><mail link="bicatali@gentoo.org">Sebastien Fabbro</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-python/pywebdav">dev-python/pywebdav</uri></ti>
+<ti>2008年2月14日</ti>
+<ti><mail link="cedk@gentoo.org">Cédric Krier</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-cluster/openais">sys-cluster/openais</uri></ti>
+<ti>2008年2月14日</ti>
+<ti><mail link="wschlich@gentoo.org">Wolfram Schlich</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/app-editors/efte">app-editors/efte</uri></ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="omp@gentoo.org">David Shakaryan</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/games-rpg/nwmovies">games-rpg/nwmovies</uri></ti>
+<ti>2008年2月17日</ti>
+<ti><mail link="calchan@gentoo.org">Denis Dupeyron</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-print/adobeps">net-print/adobeps</uri></ti>
+<ti>2008年2月17日</ti>
+<ti><mail link="sbriesen@gentoo.org">Stefan Briesenick</mail></ti>
+</tr>
+
+</table>
+
+</body>
+</section>
+
+<!-- paste from the last rites script -->
+<section>
+<title>最后仪式</title>
+<body>
+<table>
+  
+<tr>
+<th>包：</th>
+<th>移除日期：</th>
+<th>联系人：</th>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-libs/dclibc">net-libs/dclibc</uri></ti>
+<ti>2008年2月15日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/net-p2p/eztorrent">net-p2p/eztorrent</uri></ti>
+<ti>2008年2月16日</ti>
+<ti><mail link="armin76@gentoo.org">Raúl Porcel</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/dev-java/jsx">dev-java/jsx</uri></ti>
+<ti>2008年2月19日</ti>
+<ti><mail link="betelgeuse@gentoo.org">Petteri Räty</mail></ti>
+</tr>
+
+<tr>
+<ti><uri link="http://packages.gentoo.org/package/sys-apps/list">sys-apps/list</uri></ti>
+<ti>2008年2月19日</ti>
+<ti><mail link="genstef@gentoo.org">Stefan Schweizer</mail></ti>
+</tr>
+
+</table>
+</body>
+</section>
+
+</chapter>
+
+<!-- Bugzilla -->
+<chapter>
+<title>Bugzilla</title>
+
+<section>
+<title>统计信息</title>
+<body>
+
+<p>Gentoo社区使用Bugzilla (<uri link="http://bugs.gentoo.org">bugs.gentoo.org</uri>)来记录和追踪bug、提示、建议等形式的和开发团队之间的交流。从2008年1月18日到2008年2月17日，这个站点记录下了：</p>
+
+<table>
+<tr>
+  <th>Bug动态</th>
+  <th>数量</th>
+</tr>
+<tr>
+  <th>新bug</th>
+  <ti>2746</ti>
+</tr>
+<tr>
+  <th>被关闭的bug</th>
+  <ti>1600</ti>
+</tr>
+<tr>
+  <th>还没修复的bug</th>
+  <ti>467</ti>
+</tr>
+<tr>
+  <th>被标记为重复的bug</th>
+  <ti>374</ti>
+</tr>
+<tr>
+  <th>重现的bug</th>
+  <ti>74</ti>
+</tr>
+</table>
+<figure link="/images/gmn/20080218/activity.png" short="Bug activity" caption="Bug发布"/>
+
+<p>在当前还未被修复的<b>10254</b>个bugs中：<b>18</b>个被标为<e>“blocker”</e>，<b>101</b>个被标为<e>“critical”</e>，还有<b>343</b>个被标为<e>“major”</e>。</p>
+
+</body>
+</section>
+
+<section>
+<title>被修复的bug排行榜</title>
+<body>
+
+<p>在这段时间内修复最多bug的开发者和团队有：</p>
+  
+<table>
+<tr>
+  <th>排名</th>
+  <th>开发者／团队</th>
+  <th>Bug数</th>
+</tr>
+<tr>
+  <ti>1</ti>
+  <ti>Gentoo核心系统软件包团队</ti>
+  <ti>73</ti>
+</tr>
+<tr>
+  <ti>2</ti>
+  <ti>Gentoo游戏</ti>
+  <ti>65</ti>
+</tr>
+<tr>
+  <ti>3</ti>
+  <ti>Gentoo mips团队</ti>
+  <ti>58</ti>
+</tr>
+<tr>
+  <ti>4</ti>
+  <ti>Gentoo KDE团队</ti>
+  <ti>54</ti>
+</tr>
+<tr>
+  <ti>5</ti>
+  <ti>Gentoo Mac OS X团队</ti>
+  <ti>47</ti>
+</tr>
+<tr>
+  <ti>6</ti>
+  <ti>Gentoo安全</ti>
+  <ti>42</ti>
+</tr>
+<tr>
+  <ti>7</ti>
+  <ti>Java团队</ti>
+  <ti>42</ti>
+</tr>
+<tr>
+  <ti>8</ti>
+  <ti>Gentoo Gnome桌面团队</ti>
+  <ti>42</ti>
+</tr>
+<tr>
+  <ti>0</ti>
+  <ti>其它</ti>
+  <ti>1176</ti>
+</tr>
+</table>
+
+<figure link="/images/gmn/20080218/closed.png" short="Bugs closed" caption="Bug关闭排行榜"/>
+
+</body>
+</section>
+
+<section>
+<title>bug分配排名</title>
+<body>
+
+<p>在这段时间内被分配得到最多bug的开发者和团队有：</p>
+
+<table>
+<tr>
+  <th>排名</th>
+  <th>开发者／团队</th>
+  <th>Bug数</th>
+</tr>
+<tr>
+  <ti>1</ti>
+  <ti>新软件包的默认受托人</ti>
+  <ti>91</ti>
+</tr>
+<tr>
+  <ti>2</ti>
+  <ti>孤立软件包的默认受托人</ti>
+  <ti>38</ti>
+</tr>
+<tr>
+  <ti>3</ti>
+  <ti>AMD64 项目</ti>
+  <ti>36</ti>
+</tr>
+<tr>
+  <ti>4</ti>
+  <ti>Gentoo核心系统软件包团队</ti>
+  <ti>32</ti>
+</tr>
+<tr>
+  <ti>5</ti>
+  <ti>退休管理员（Retirement Admin）</ti>
+  <ti>21</ti>
+</tr>
+<tr>
+  <ti>6</ti>
+  <ti>Python Gentoo团队</ti>
+  <ti>20</ti>
+</tr>
+<tr>
+  <ti>7</ti>
+  <ti>Perl Devs @ Gentoo</ti>
+  <ti>17</ti>
+</tr>
+<tr>
+  <ti>8</ti>
+  <ti>Stefaan De Roeck</ti>
+  <ti>15</ti>
+</tr>
+<tr>
+  <ti>0</ti>
+  <ti>其它</ti>
+  <ti>600</ti>
+</tr>
+</table>
+
+<figure link="/images/gmn/20080218/opened.png" short="Bugs assigned" caption="Bug分配排行榜"/>
+
+</body>
+</section>
+</chapter>
+
+<!-- GMN feedback information -->
+<chapter>
+<title>加入我们</title>
+<section>
+<body>
+
+<p>GMN依赖志愿者及社区成员每月为它提供内容。如果您有兴趣为GMN写文章，请发信到<mail>gmn-writers@gentoo.org</mail>，附上您的文章，文章的格式应为纯文本格式或GuideXML格式。</p>
+
+<!-- Don't forget to change the deadline date -->
+<note>下期截稿日是<e>2008年3月14日</e>。</note>
+
+<p>我们征求读者对GMN的反馈。如果你对文章、栏目有什么主意，或者对GMN有什么想法，不要犹豫，赶快发信给<mail>gmn-feedback@gentoo.org</mail>。</p>
+
+<p>您可以把关于GMN的反馈和评论发表到该<uri link="http://forums.gentoo.org/viewtopic-p-4871969.html">论坛帖子</uri>。</p>
+</body>
+</section>
+</chapter>
+
+<!-- GMN subscription information -->
+<chapter>
+<title>月报订阅</title>
+<section>
+<body>
+
+<p>订阅Gentoo月报，请发送一封空邮件到<mail>gentoo-gmn+subscribe@gentoo.org</mail>。</p> 
+
+<p>退订Gentoo月报，请从您订阅的邮箱发一封空邮件到<mail>gentoo-gmn+unsubscribe@gentoo.org</mail>。</p>
+
+</body>
+</section>
+</chapter>
+
+<!-- Other Languages -->
+<chapter>
+<title>其他语言</title>
+<section>
+<body>
+
+<p>Gentoo月报有下列语言的版本：</p>
+
+<ul>
+
+<li>
+<uri link="/news/en/gmn/index.xml">英文</uri>
+</li>
+
+<li>
+<uri link="/news/de/gmn/index.xml">德文</uri>
+</li>
+
+<li>
+<uri link="/news/it/gmn/index.xml">意大利文</uri>
+</li>
+
+<li>
+<uri link="/news/pl/gmn/index.xml">波兰文</uri>
+</li>
+
+<li>
+<uri link="/news/es/gmn/index.xml">西班牙文</uri>
+</li>
+
+<li>
+<uri link="/news/zh_cn/gmn/index.xml">简体中文</uri>
+</li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+</guide>
