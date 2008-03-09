@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-system.xml,v 1.2 2008/03/06 05:59:25 nightmorph Exp $ -->
+<!-- English CVS version: 1.2 -->
+<!DOCTYPE included SYSTEM "/dtd/guide.dtd">
+
+<section>
+<title>配置系统</title>
+
+<body test="func:keyval('raid+lvm')='no'">
+
+<p>
+编辑<path>/etc/fstab</path>，用实际的分区名代替<c>BOOT</c>、<c>ROOT</c>和<c>SWAP</c>。记得确认一下文件系统是否与所安装的相匹配。
+</p>
+
+<pre caption="fstab范例">
+livecd linux # <i>cd /etc</i>
+livecd etc # <i>nano -w fstab</i>
+/dev/<i>sda1</i>   /boot     ext2    noauto,noatime     1 2
+/dev/<i>sda3</i>   /         ext3    noatime            0 1
+/dev/<i>sda2</i>   none      swap    sw                 0 0
+</pre>
+
+</body>
+<body test="func:keyval('raid+lvm')='yes'">
+
+<p>
+编辑<path>/etc/fstab</path>，用实际的分区名代替<c>BOOT</c>、<c>ROOT</c>和<c>SWAP</c>，并添加逻辑卷。记得确认一下文件系统是否与所安装的相匹配。
+</p>
+
+<pre caption="fstab范例">
+livecd linux # <i>cd /etc</i>
+livecd etc # <i>nano -w fstab</i>
+/dev/<i>md1</i>          /boot                   ext2  noauto,noatime  1 2
+/dev/<i>md3</i>          /                       ext3  noatime         0 1
+/dev/<i>sda2</i>         none                    swap  sw,pri=1        0 0
+/dev/<i>sdb2</i>         none                    swap  sw,pri=1        0 0
+/dev/vg/usr       /usr                    ext3  noatime         1 2
+/dev/vg/portage   /usr/portage            ext2  noatime         1 2
+/dev/vg/distfiles /usr/portage/distfiles  ext2  noatime         1 2
+/dev/vg/home      /home                   ext3  noatime         1 2
+/dev/vg/opt       /opt                    ext3  noatime         1 2
+/dev/vg/tmp       /tmp                    ext2  noatime         1 2
+/dev/vg/var       /var                    ext3  noatime         1 2
+/dev/vg/vartmp    /var/tmp                ext2  noatime         1 2
+</pre>
+
+</body>
+<body>
+
+<p>
+在<path>/etc/conf.d/net</path>中配置网络。把<c>net.eth0</c>启动脚本添加到默认运行级别。如果有多张网卡，分别为它们建立符号链接到<c>net.eth0</c>启动脚本，并一起添加到默认运行级别。用<c>nano</c>编辑<path>/etc/conf.d/net</path>，或者使用如下命令：
+</p>
+
+<pre caption="配置网络">
+livecd etc # <i>cd conf.d</i>
+livecd conf.d # <i>echo 'config_eth0=( "192.168.1.10/24" )' >> net</i>
+livecd conf.d # <i>echo 'routes_eth0=( "default via 192.168.1.1" )' >> net</i>
+livecd conf.d # <i>rc-update add net.eth0 default</i>
+<comment>（如果你把网卡驱动编译为模块，
+需要将它添加到/etc/modules.autoload.d/kernel-2.6）</comment>
+livecd conf.d # <i>echo r8169 >> /etc/modules.autoload.d/kernel-2.6</i>
+<comment>（如果希望重启后通过ssh重新连接到新机器）</comment>
+livecd conf.d # <i>rc-update add sshd default</i>
+</pre>
+
+<note>
+如果需要支持PCMCIA卡，请emerge <c>pcmciautils</c>。
+</note>
+
+<p>
+执行<c>passwd</c>设置root密码。
+</p>
+
+<pre caption="设置root密码">
+livecd conf.d # <i>passwd</i>
+New UNIX password: <comment>输入密码</comment>
+Retype new UNIX password: <comment>再输入密码</comment>
+passwd: password updated successfully
+</pre>
+
+<p>
+编辑<path>/etc/conf.d/clock</path>以定义前面所使用的时区。
+</p>
+
+<pre caption="编辑/etc/conf.d/clock">
+livecd conf.d # <i>nano -w /etc/conf.d/clock</i>
+TIMEZONE="Asia/Shanghai"
+</pre>
+
+<p>
+检查系统配置，查看并编辑这些配置文件：<path>/etc/rc.conf</path>， <path>/etc/conf.d/rc</path>，<path>/etc/conf.d/keymaps</path>。
+</p>
+
+<pre caption="可选：编辑一些配置文件">
+livecd conf.d # <i>nano -w /etc/rc.conf</i>
+livecd conf.d # <i>nano -w /etc/conf.d/rc</i>
+livecd conf.d # <i>nano -w /etc/conf.d/keymaps</i>
+
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装系统工具</title>
+
+<body test="func:keyval('raid+lvm')='yes'">
+
+<p>
+安装RAID和LVM2实用工具。
+</p>
+
+<pre caption="安装RAID &amp; LVM2工具">
+livecd conf.d # <i>emerge mdadm lvm2</i>
+</pre>
+
+</body>
+<body>
+
+<p>
+安装一个系统日志如<c>syslog-ng</c>和一个cron守护进程如<c>vixie-cron</c>，并把它们添加到默认运行级别。
+</p>
+
+<note>
+Cron守护进程依赖于MTA。<c>mail-mta/ssmtp</c>会因依赖性而被一起安装。如果你想使用一种更高级的MTA，可以现在安装它。要是现在没空，暂时先安装ssmtp，以后再卸载并安装你要的MTA。
+</note>
+
+<pre caption="安装系统日志和cron守护进程">
+livecd conf.d # <i>time emerge syslog-ng vixie-cron</i>
+
+real  1m54.099s
+user  1m2.630s
+sys   0m34.620s
+livecd conf.d # <i>rc-update add syslog-ng default</i>
+livecd conf.d # <i>rc-update add vixie-cron default</i>
+</pre>
+
+<p>
+安装必要的文件系统工具（<c>xfsprogs</c>，<c>reiserfsprogs</c>或<c>jfsutils</c>）和网络工具（<c>dhcpcd</c>或<c>ppp</c>）。
+</p>
+
+<pre caption="安装其它工具">
+livecd conf.d # <i>emerge xfsprogs</i>       <comment>(如果使用XFS文件系统)</comment>
+livecd conf.d # <i>emerge jfsutils</i>       <comment>(如果使用JFS文件系统)</comment>
+livecd conf.d # <i>emerge reiserfsprogs</i>  <comment>(如果使用Reiser文件系统)</comment>
+livecd conf.d # <i>emerge dhcpcd</i>         <comment>(如果使用DHCP客户端)</comment>
+livecd conf.d # <i>emerge ppp</i>            <comment>(如果使用PPPoE ADSL连接)</comment>
+</pre>
+
+</body>
+</section>
+
+<section id="grub">
+<title>配置引导程序</title>
+
+<body>
+<p>
+安装并配置<c>grub</c>。
+</p>
+
+<pre caption="Emerge grub并编辑它的配置文件">
+livecd conf.d # <i>time emerge grub</i>
+
+real  1m4.634s
+user  0m39.460s
+sys   0m15.280s
+livecd conf.d # <i>nano -w /boot/grub/grub.conf</i>
+</pre>
+
+<pre caption="grub.conf范例">
+default 0
+timeout 10
+
+title Gentoo
+root (hd0,0)
+kernel /boot/kernel root=<keyval id="root"/>
+</pre>
+
+<pre caption="安装grub" test="not(contains(func:keyval('root'),'md'))">
+livecd conf.d # <i>grub</i>
+Probing devices to guess BIOS drives. This may take a long time.
+
+grub> <i>root (hd0,0)</i>
+ Filesystem type is ext2fs, partition type 0xfd
+
+grub> <i>setup (hd0)</i>
+ Checking if "/boot/grub/stage1" exists... yes
+ Checking if "/boot/grub/stage2" exists... yes
+ Checking if "/boot/grub/e2fs_stage1_5" exists... yes
+ Running "embed /boot/grub/e2fs_stage1_5 (hd0)"...  16 sectors are embedded.
+succeeded
+ Running "install /boot/grub/stage1 (hd0) (hd0)1+16 p (hd0,0)/boot/grub/stage2 /boot/
+grub/menu.lst"... succeeded
+Done.
+
+grub> <i>quit</i>
+</pre>
+
+<pre caption="在两个磁盘上安装grub" test="contains(func:keyval('root'),'md')">
+livecd conf.d # <i>grub</i>
+Probing devices to guess BIOS drives. This may take a long time.
+
+grub> <i>root (hd0,0)</i>
+ Filesystem type is ext2fs, partition type 0xfd
+
+grub> <i>setup (hd0)</i>
+ Checking if "/boot/grub/stage1" exists... yes
+ Checking if "/boot/grub/stage2" exists... yes
+ Checking if "/boot/grub/e2fs_stage1_5" exists... yes
+ Running "embed /boot/grub/e2fs_stage1_5 (hd0)"...  16 sectors are embedded.
+succeeded
+ Running "install /boot/grub/stage1 (hd0) (hd0)1+16 p (hd0,0)/boot/grub/stage2 /boot/
+grub/menu.lst"... succeeded
+Done.
+
+grub> <i>root (hd1,0)</i>
+ Filesystem type is ext2fs, partition type 0xfd
+
+grub> <i>setup (hd1)</i>
+
+grub> <i>quit</i>
+</pre>
+
+</body>
+</section>
+</included>
