@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mainpage SYSTEM "/dtd/guide.dtd">
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header: /doc/progress.xml, v 0.1 2006/01/06 r0bertz Exp $ -->
 
-<mainpage lang="zh_cn">
+<guide disclaimer="obsolete" lang="zh_cn">
 <title>Gentoo中文文档进度表</title>
 <author title="Author">
 <mail link="robert.zhangle@gmail.com">张乐</mail>
 </author>
+
+<abstract>Gentoo中文文档进度表</abstract>
 
 <version>0.1</version>
 <date>2007年5月25日</date>
@@ -16,6 +18,10 @@
 <title>列表分类</title>
 <section>
 <body>
+
+<warn>
+此进度表已经停止使用。新进度表的地址是：<uri>http://www.gentoo-cn.org/trads/</uri>。
+</warn>
 
 <ul>
 <li><uri link="#doc_chap2">Gentoo文档翻译进度表</uri></li>
@@ -2501,4 +2507,4 @@ N:暂不译；U:未翻译；T：已翻译；W:正在翻译；R:正在审校
 </body>
 </section>
 </chapter>
-</mainpage>
+</guide>
