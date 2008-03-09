@@ -3,6 +3,11 @@
 <!-- English CVS version: 1.2 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
+<included>
+
+<version>2</version>
+<date>2008-03-05</date>
+
 <section>
 <title>配置系统</title>
 
