@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-media.xml,v 1.1 2008/01/01 21:32:30 neysx Exp $ -->
+<!-- English CVS version: 1.1 -->
+<!DOCTYPE included SYSTEM "/dtd/guide.dtd">
+
+<included>
+
+<version>1</version>
+<date>2008-01-01</date>
+
+<section>
+<title>安装介质</title>
+<body>
+
+<p>
+从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一张光盘。可以在<path>releases/x86/&lt;release&gt;/installcd</path>中找到minimal CD的ISO文件，或者在<path>releases/x86/&lt;release&gt;/livecd</path>中找到LiveCD的ISO文件。<e>minimal</e>安装盘只适用于有网络环境的安装。<e>LiveCD</e>适用于无网络环境的安装，参考文档<uri link="/doc/zh_cn/handbook/2007.0/handbook-x86.xml">2007.0 x86安装手册</uri>。本指南推荐使用minimal CD。
+</p>
+
+<p>
+<uri link="/doc/zh_cn/faq.xml#isoburning">刻制</uri>光盘，用它引导机器。
+</p>
+
+</body>
+</section>
+<section>
+<title>从光盘启动</title>
+<body>
+
+<p>
+启动时按下<c>F2</c>查看有哪些引导选项。你可以启动<c>gentoo</c>或者<c>gentoo-nofb</c>，后者禁用帧缓冲。如果你用LiveCD引导，别忘了添上<c>nox</c>选项以防止启动X图形环境。有好几个选项可用于启用或禁用一些特性。正常情况下会检测出你的硬件并装载所有模块。如果内核无法正确引导或是在引导过程中挂机，你可能不得不尝试不同的配置。最安全的办法大概是使用<c>nodetect</c>选项，然后显式地载入需要的模块。
+</p>
+
+<pre caption="从minimal CD启动">
+Gentoo Linux Installation LiveCD                     http://www.gentoo.org
+Enter to Boot; F1 for kernels  F2 for options.
+boot: <i>gentoo-nofb</i>
+<comment>（或在有问题的情况下）</comment>
+boot: <i>gentoo-nofb nodetect</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>可选：装载模块</title>
+<body>
+
+<p>
+如果使用了<c>nodetect</c>选项，就要在启动后载入必要的模块。你还要配置好网络并拥有访问磁盘的权限。<c>lspci</c>命令能帮助你确认硬件信息。
+</p>
+
+<pre caption="载入必要的模块">
+livecd root # <i>lspci</i>
+<comment>（根据lspci的输出查看需要哪些模块）</comment>
+
+<comment>（以下只是个例子，实际以具体硬件为准）</comment>
+livecd root # <i>modprobe 3w-9xxx</i>
+livecd root # <i>modprobe r8169</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>网络配置</title>
+<body>
+
+<p>
+如果还没开启网络，可以用<c>net-setup</c>来配置网络。配置之前可能要先用<c>modprobe</c>为网卡载入支持模块。如果你有ADSL，请使用<c>pppoe-setup</c>和<c>pppoe-start</c>。要支持PPTP，首先编辑<path>/etc/ppp/chap-secrets</path>和<path>/etc/ppp/options.pptp</path>，然后使用<c>pptp &lt;server&nbsp;ip&gt;</c>。
+</p>
+
+<p>
+如果是无线连接，用<c>iwconfig</c>设置无线连接参数，然后再次执行<c>net-setup</c>或者手动运行<c>ifconfig</c>、<c>dhcpcd</c>和/或<c>route</c>。
+</p>
+
+<p>
+如果你用代理，不要忘了使用<c>export http_proxy</c>、<c>ftp_proxy</c>和<c>RSYNC_PROXY</c>初始化系统环境。
+</p>
+
+<pre caption="通过向导配置网络">
+livecd root # <i>net-setup eth0</i>
+</pre>
+
+<p>
+或者，你也可以手动打开网络。下面的例子把你电脑的IP地址配置为192.168.1.10，并把网关和域名服务器设为192.168.1.1。
+</p>
+
+<pre caption="手动配置网络">
+livecd root # <i>ifconfig eth0 192.168.1.10/24</i>
+livecd root # <i>route add default gw 192.168.1.1</i>
+livecd root # <i>echo nameserver 192.168.1.1 &gt; /etc/resolv.conf</i>
+</pre>
+
+<p>
+安装盘允许你启动一个<c>sshd</c>服务，添加用户，运行<c>irssi</c>（一个命令行的客户端聊天工具），还可以使用<c>lynx</c>或<c>links</c>进行网上冲浪。
+</p>
+
+</body>
+</section>
+<section>
+<title>可选：通过ssh连接到你的新机器</title>
+<body>
+
+<p>
+最有趣的功能当然是<c>sshd</c>。启动这个服务，从另一台机器连过来，然后从本指南复制/粘贴命令。
+</p>
+
+<pre caption="启动sshd">
+livecd root # <i>time /etc/init.d/sshd start</i>
+ * Generating hostkey ...
+<comment>（sshd生成密钥并显示更多输出）</comment>
+ * starting sshd ...                            [ok]
+
+real   0m13.688s
+user   0m9.420s
+sys    0m0.090s
+</pre>
+
+<p>
+现在设置一下安装盘的root密码，使你能通过另一台电脑连接。请注意正常情况下不推荐你允许root通过ssh连接。如果你的本地网络不太可靠，请设一个又长又复杂的密码。它只能使用一次，因为机器重启后就没掉了。
+</p>
+
+<pre caption="设置root密码">
+livecd root # <i>passwd</i>
+New UNIX password: <comment>输入密码</comment>
+Retype new UNIX password: <comment>输入密码</comment>
+passwd: password updated successfully
+</pre>
+
+<p>
+现在就可以在另一台电脑上打开一个终端并连接到你的新机器，在新的窗口中继续本指南接下去的内容，复制/粘贴文中的命令。
+</p>
+
+<pre caption="从另一台电脑连到你的新机器">
+<comment>#-#-#-#-#  choice  #-#-#-#-#
+（用你新机器的IP地址）
+#-#-#-#-#  choice  #-#-#-#-#
+（使用你新机器的IP地址）</comment>
+$ <i>ssh root@192.168.1.10</i>
+The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
+RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.
+Are you sure you want to continue connecting (yes/no)? <i>yes</i>
+Warning: Permanently added '192.168.1.10' (RSA) to the list of known hosts.
+Password: <comment>输入密码</comment>
+</pre>
+
+</body>
+</section>
+
+</included>
