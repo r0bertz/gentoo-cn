@@ -3,6 +3,11 @@
 <!-- English CVS version: 1.1 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
+<included>
+
+<version>1</version>
+<date>2008-01-01</date>
+
 <section>
 <title>安装Stage</title>
 <body>
