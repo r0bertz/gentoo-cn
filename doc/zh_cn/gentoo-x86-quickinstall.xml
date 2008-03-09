@@ -1,17 +1,22 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header$ -->
-<!-- English CVS version: 1.78 -->
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/zh_cn/gentoo-x86-quickinstall.xml,v 1.2 2008/03/01 15:41:38 r0bertz Exp $ -->
+<!-- English CVS version: 1.80 -->
 
-<guide link="/doc/zh_cn/gentoo-x86-quickinstall.xml" lang="zh_cn">
+<guide lang="zh_cn">
 <title>Gentoo Linux x86快速安装指南</title>
 
+<values>
+ <key id="raid+lvm">no</key>
+ <key id="root">/dev/sda3</key>
+</values>
+
 <author title="作者">
-  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+  <mail link="neysx"/>
 </author>
 <author title="作者">
-  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+  <mail link="swift"/>
 </author>
 <author title="作者">Steven Wagner</author>
 <author title="译者">
@@ -26,8 +31,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>19</version>
-<date>2007-06-02</date>
+<version>21</version>
+<date>2008-01-01</date>
 
 <chapter>
 <title>介绍</title>
@@ -36,6 +41,10 @@
 
 <p>
 本指南包含了完成一次从stage3开始安装Gentoo要用到的所有命令。你需要连接到Internet以下载stage3包和Portage快照。
+</p>
+
+<p>
+新手应参阅<uri link="/doc/zh_cn/handbook/index.xml">手册</uri>，其中有关于安装过程更完整的描述。
 </p>
 
 <p>
@@ -63,142 +72,11 @@ MemTotal:       509248 kB
 
 <chapter>
 <title>快速安装指南</title>
+
 <section>
-<title>安装介质</title>
-<body>
-
-<p>
-从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一张光盘。可以在<path>releases/x86/&lt;release&gt;/installcd</path>中找到minimal CD的ISO文件，或者在<path>releases/x86/&lt;release&gt;/livecd</path>中找到LiveCD的ISO文件。<e>minimal</e>安装盘只适用于有网络环境的安装。<e>LiveCD</e>适用于无网络环境的安装，参考文档<uri link="/doc/zh_cn/handbook/2007.0/handbook-x86.xml">2007.0 x86安装手册</uri>。本指南推荐使用minimal CD。
-</p>
-
-<p>
-<uri link="/doc/zh_cn/faq.xml#isoburning">刻制</uri>光盘，用它引导机器。
-</p>
-
-</body>
+ <include href="gentoo-x86-quickinstall-media.xml"/>
 </section>
-<section>
-<title>从光盘启动</title>
-<body>
 
-<p>
-启动时按下<c>F2</c>查看有哪些引导选项。你可以启动<c>gentoo</c>或者<c>gentoo-nofb</c>，后者禁用帧缓冲。如果你用LiveCD引导，别忘了添上<c>nox</c>选项以防止启动X图形环境。有好几个选项可用于启用或禁用一些特性。正常情况下会检测出你的硬件并装载所有模块。如果内核无法正确引导或是在引导过程中挂机，你可能不得不尝试不同的配置。最安全的办法大概是使用<c>nodetect</c>选项，然后显式地载入需要的模块。
-</p>
-
-<pre caption="从minimal CD启动">
-Gentoo Linux Installation LiveCD                     http://www.gentoo.org
-Enter to Boot; F1 for kernels  F2 for options.
-boot: <i>gentoo-nofb</i>
-<comment>（或在有问题的情况下）</comment>
-boot: <i>gentoo-nofb nodetect</i>
-</pre>
-
-</body>
-</section>
-<section>
-<title>可选：装载模块</title>
-<body>
-
-<p>
-如果使用了<c>nodetect</c>选项，就要在启动后载入必要的模块。你还要配置好网络并拥有访问磁盘的权限。<c>lspci</c>命令能帮助你确认硬件信息。
-</p>
-
-<pre caption="载入必要的模块">
-livecd root # <i>lspci</i>
-<comment>（根据lspci的输出查看需要哪些模块）</comment>
-
-<comment>（以下只是个例子，实际以具体硬件为准）</comment>
-livecd root # <i>modprobe 3w-9xxx</i>
-livecd root # <i>modprobe r8169</i>
-</pre>
-
-</body>
-</section>
-<section>
-<title>网络配置</title>
-<body>
-
-<p>
-如果还没开启网络，可以用<c>net-setup</c>来配置网络。配置之前可能要先用<c>modprobe</c>为网卡载入支持模块。如果你有ADSL，请使用<c>pppoe-setup</c>和<c>pppoe-start</c>。要支持PPTP，首先编辑<path>/etc/ppp/chap-secrets</path>和<path>/etc/ppp/options.pptp</path>，然后使用<c>pptp &lt;server&nbsp;ip&gt;</c>。
-</p>
-
-<p>
-如果是无线连接，用<c>iwconfig</c>设置无线连接参数，然后再次执行<c>net-setup</c>或者手动运行<c>ifconfig</c>、<c>dhcpcd</c>和/或<c>route</c>。
-</p>
-
-<p>
-如果你用代理，不要忘了使用<c>export http_proxy</c>、<c>ftp_proxy</c>和<c>RSYNC_PROXY</c>初始化系统环境。
-</p>
-
-<pre caption="通过向导配置网络">
-livecd root # <i>net-setup eth0</i>
-</pre>
-
-<p>
-或者，你也可以手动打开网络。下面的例子把你电脑的IP地址配置为192.168.1.10，并把网关和域名服务器设为192.168.1.1。
-</p>
-
-<pre caption="手动配置网络">
-livecd root # <i>ifconfig eth0 192.168.1.10/24</i>
-livecd root # <i>route add default gw 192.168.1.1</i>
-livecd root # <i>echo nameserver 192.168.1.1 &gt; /etc/resolv.conf</i>
-</pre>
-
-<p>
-安装盘允许你启动一个<c>sshd</c>服务，添加用户，运行<c>irssi</c>（一个命令行的客户端聊天工具），还可以使用<c>lynx</c>或<c>links</c>进行网上冲浪。
-</p>
-
-</body>
-</section>
-<section>
-<title>可选：通过ssh连接到你的新机器</title>
-<body>
-
-<p>
-最有趣的功能当然是<c>sshd</c>。启动这个服务，从另一台机器连过来，然后从本指南复制/粘贴命令。
-</p>
-
-<pre caption="启动sshd">
-livecd root # <i>time /etc/init.d/sshd start</i>
- * Generating hostkey ...
-<comment>（sshd生成密钥并显示更多输出）</comment>
- * starting sshd ...                            [ok]
-
-real   0m13.688s
-user   0m9.420s
-sys    0m0.090s
-</pre>
-
-<p>
-现在设置一下安装盘的root密码，使你能通过另一台电脑连接。请注意正常情况下不推荐你允许root通过ssh连接。如果你的本地网络不太可靠，请设一个又长又复杂的密码。它只能使用一次，因为机器重启后就没掉了。
-</p>
-
-<pre caption="设置root密码">
-livecd root # <i>passwd</i>
-New UNIX password: <comment>输入密码</comment>
-Retype new UNIX password: <comment>输入密码</comment>
-passwd: password updated successfully
-</pre>
-
-<p>
-现在就可以在另一台电脑上打开一个终端并连接到你的新机器，在新的窗口中继续本指南接下去的内容，复制/粘贴文中的命令。
-</p>
-
-<pre caption="从另一台电脑连到你的新机器">
-<comment>#-#-#-#-#  choice  #-#-#-#-#
-（用你新机器的IP地址）
-#-#-#-#-#  choice  #-#-#-#-#
-（使用你新机器的IP地址）</comment>
-$ <i>ssh root@192.168.1.10</i>
-The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
-RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.
-Are you sure you want to continue connecting (yes/no)? <i>yes</i>
-Warning: Permanently added '192.168.1.10' (RSA) to the list of known hosts.
-Password: <comment>输入密码</comment>
-</pre>
-
-</body>
-</section>
 <section>
 <title>准备磁盘</title>
 <body>
@@ -246,132 +124,16 @@ livecd ~ # <i>mkswap /dev/sda2 &amp;&amp; swapon /dev/sda2</i>
 livecd ~ # <i>mount /dev/sda3 /mnt/gentoo</i>
 livecd ~ # <i>mkdir /mnt/gentoo/boot</i>
 livecd ~ # <i>mount /dev/sda1 /mnt/gentoo/boot</i>
-</pre>
-
-</body>
-</section>
-<section>
-<title>安装Stage</title>
-<body>
-
-<p>
-首先确保正确设置了日期和时间。执行<c>date MMDDhhmmYYYY</c>，使用UTC时间。
-</p>
-
-<pre caption="设定日期和UTC时间">
-<comment>（查看时钟）</comment>
-livecd ~ # <i>date</i>
-Mon Mar  6 00:14:13 UTC 2006
-
-<comment>（设置当前日期和时间，如果需要的话）</comment>
-livecd ~ # <i>date 030600162006</i> <comment>（格式为MMDDhhmmYYYY）</comment>
-Mon Mar  6 00:16:00 UTC 2006
-</pre>
-
-<p>
-接下来，从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一份stage包。进入<path>/mnt/gentoo</path>，执行<c>tar xjpf &lt;stage3 tarball&gt;</c>解压stage包。
-</p>
-
-<pre caption="下载一份stage3压缩包">
 livecd ~ # <i>cd /mnt/gentoo</i>
-livecd gentoo # <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
-<comment>（选一个镜像，进入/x86/current/stages目录，高亮显示你需要的stage3包，
-即i686 stage3，按下D键下载）</comment>
-
-<comment>（<b>Or</b> 不选择最近的镜像，直接用wget下载）</comment>
-livecd ~ # <i>cd /mnt/gentoo</i>
-livecd gentoo # <i>wget ftp://gentoo.osuosl.org/pub/gentoo/releases/x86/current/stages/stage3-i686*tar.bz2</i>
-</pre>
-
-<pre caption="解开stage3压缩包">
-livecd gentoo # <i>time tar xjpf stage3*</i>
-
-real  1m13.157s
-user  1m2.920s
-sys   0m7.230s
-</pre>
-
-<p>
-安装最新的Portage快照。跟下载stage3压缩包一样：从我们的<uri link="/main/en/mirrors.xml">列表</uri>选择一个最近的镜像，下载最新的快照并解压。
-</p>
-
-<pre caption="下载最新的Portage快照">
-livecd gentoo # <i>cd /mnt/gentoo/usr</i>
-livecd usr # <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
-<comment>（选一个镜像，进入snapshots/目录，高亮显示 <b>portage-latest.tar.bz2</b> ，按下D键下载）</comment>
-
-<comment>（<b>Or</b> 不选择最近的镜像，直接用wget下载）</comment>
-livecd gentoo # <i>cd /mnt/gentoo/usr</i>
-livecd usr # <i>wget http://gentoo.osuosl.org/snapshots/portage-latest.tar.bz2</i>
-</pre>
-
-<pre caption="解开Portage快照">
-livecd usr # <i>time tar xjf portage*</i>
-
-real  0m51.523s
-user  0m28.680s
-sys   0m12.840s
 </pre>
 
 </body>
 </section>
+
 <section>
-<title>切换系统</title>
-<body>
-
-<p>
-挂载<path>/proc</path>文件系统，拷贝<path>/etc/resolv.conf</path>文件，然后chroot到你的Gentoo环境。
-</p>
-
-<pre caption="Chroot">
-livecd usr # <i>cd /</i>
-livecd / # <i>mount -t proc proc /mnt/gentoo/proc</i>
-livecd / # <i>cp -L /etc/resolv.conf /mnt/gentoo/etc/</i>
-livecd / # <i>chroot /mnt/gentoo /bin/bash</i>
-livecd / # <i>env-update &amp;&amp; source /etc/profile</i>
->>> Regenerating /etc/ld.so.cache...
-</pre>
-
-</body>
+ <include href="gentoo-x86-quickinstall-stage.xml"/>
 </section>
-<section>
-<title>设定时区</title>
-<body>
 
-<p>
-设置你的时区信息：使用<path>/usr/share/zoneinfo</path>中的正确条目。
-</p>
-
-<pre caption="设置时区">
-livecd / # <i>ls /usr/share/zoneinfo</i>
-<comment>（以上海为例）</comment>
-livecd / # <i>cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</i>
-livecd / # <i>date</i>
-Thu Aug 30 11:03:16 CST 2007
-</pre>
-
-</body>
-</section>
-<section>
-<title>设定主机名和域名</title>
-<body>
-
-<p>
-在<path>/etc/conf.d/hostname</path>和<path>/etc/hosts</path>中设置主机名。以下例子中我们用<c>mybox</c>作为主机名，用<c>at.myplace</c>作为域名。可以用nano编辑这些配置文件，或者使用下面的命令：
-</p>
-
-<pre caption="设置主机名和域名">
-livecd / # <i>cd /etc</i>
-livecd etc # <i>echo "127.0.0.1 mybox.at.myplace mybox localhost" > hosts</i>
-livecd etc # <i>sed -i -e 's/HOSTNAME.*/HOSTNAME="mybox"/' conf.d/hostname</i>
-<comment>（使用指定的主机名并检查）</comment>
-livecd etc # <i>hostname mybox</i>
-livecd etc # <i>hostname -f</i>
-mybox.at.myplace
-</pre>
-
-</body>
-</section>
 <section>
 <title>内核配置</title>
 <body>
@@ -402,197 +164,11 @@ livecd linux # <i>cp arch/i386/boot/bzImage /boot/kernel</i>
 
 </body>
 </section>
+
 <section>
-<title>配置系统</title>
-<body>
-
-<p>
-编辑<path>/etc/fstab</path>，用实际的分区名代替<c>BOOT</c>，<c>ROOT</c>和<c>SWAP</c>。记得确认一下文件系统是否与所安装的相匹配。
-</p>
-
-<pre caption="fstab范例">
-livecd linux # <i>cd /etc</i>
-livecd etc # <i>nano -w fstab</i>
-/dev/<i>sda1</i>   /boot     ext2    noauto,noatime     1 2
-/dev/<i>sda3</i>   /         ext3    noatime            0 1
-/dev/<i>sda2</i>   none      swap    sw                 0 0
-</pre>
-
-<p>
-在<path>/etc/conf.d/net</path>中配置网络。把<c>net.eth0</c>启动脚本添加到默认运行级别。如果有多张网卡，分别为它们建立符号链接到<c>net.eth0</c>启动脚本，并一起添加到默认运行级别。用<c>nano</c>编辑<path>/etc/conf.d/net</path>，或者使用如下命令：
-</p>
-
-<pre caption="配置网络">
-livecd etc # <i>cd conf.d</i>
-livecd conf.d # <i>echo 'config_eth0=( "192.168.1.10/24" )' >> net</i>
-livecd conf.d # <i>echo 'routes_eth0=( "default via 192.168.1.1" )' >> net</i>
-livecd conf.d # <i>rc-update add net.eth0 default</i>
-<comment>（如果你把网卡驱动编译为模块，
-需要将它添加到/etc/modules.autoload.d/kernel-2.6）</comment>
-livecd conf.d # <i>echo r8169 >> /etc/modules.autoload.d/kernel-2.6</i>
-<comment>（如果希望重启后通过ssh重新连接到新机器：）</comment>
-livecd conf.d # <i>rc-update add sshd default</i>
-</pre>
-
-<note>
-如果需要支持PCMCIA卡，请emerge <c>pcmciautils</c>。
-</note>
-
-<p>
-执行<c>passwd</c>设置root密码。
-</p>
-
-<pre caption="设置root密码">
-livecd conf.d # <i>passwd</i>
-New UNIX password: <comment>输入密码</comment>
-Retype new UNIX password: <comment>再输入密码</comment>
-passwd: password updated successfully
-</pre>
-
-<p>
-编辑<path>/etc/conf.d/clock</path>以定义前面所使用的时区。
-</p>
-
-<pre caption="编辑/etc/conf.d/clock">
-livecd conf.d # <i>nano -w /etc/conf.d/clock</i>
-TIMEZONE="Asia/Shanghai"
-</pre>
-
-<p>
-检查系统配置，查看并编辑这些配置文件：<path>/etc/rc.conf</path>， <path>/etc/conf.d/rc</path>，<path>/etc/conf.d/keymaps</path>。
-</p>
-
-<pre caption="可选：编辑一些配置文件">
-livecd conf.d # <i>nano -w /etc/rc.conf</i>
-livecd conf.d # <i>nano -w /etc/conf.d/rc</i>
-livecd conf.d # <i>nano -w /etc/conf.d/keymaps</i>
-
-</pre>
-
-</body>
+ <include href="gentoo-x86-quickinstall-system.xml"/>
 </section>
-<section>
-<title>安装系统工具</title>
-<body>
 
-<p>
-安装一个系统日志如<c>syslog-ng</c>和一个cron守护进程如<c>vixie-cron</c>，并把它们添加到默认运行级别。
-</p>
-
-<note>
-Cron守护进程依赖于MTA。<c>mail-mta/ssmtp</c>会因依赖性而被一起安装。如果你想使用一种更高级的MTA，可以现在安装它。要是现在没空，暂时先安装ssmtp，以后再卸载并安装你要的MTA。
-</note>
-
-<pre caption="安装系统日志和cron守护进程">
-livecd conf.d # <i>time emerge syslog-ng vixie-cron</i>
-
-real  1m52.699s
-user  1m1.630s
-sys   0m35.220s
-livecd conf.d # <i>rc-update add syslog-ng default</i>
-livecd conf.d # <i>rc-update add vixie-cron default</i>
-</pre>
-
-<p>
-安装必要的文件系统工具（<c>xfsprogs</c>，<c>reiserfsprogs</c>或<c>jfsutils</c>）和网络工具（<c>dhcpcd</c>或<c>ppp</c>）。
-</p>
-
-<pre caption="安装其它工具">
-livecd conf.d # <i>emerge xfsprogs</i>       <comment>(如果使用XFS文件系统)</comment>
-livecd conf.d # <i>emerge jfsutils</i>       <comment>(如果使用JFS文件系统)</comment>
-livecd conf.d # <i>emerge reiserfsprogs</i>  <comment>(如果使用Reiser文件系统)</comment>
-livecd conf.d # <i>emerge dhcpcd</i>         <comment>(如果使用DHCP客户端)</comment>
-livecd conf.d # <i>emerge ppp</i>            <comment>(如果使用PPPoE ADSL连接)</comment>
-</pre>
-
-</body>
-</section>
-<section>
-<title>配置引导程序</title>
-<body>
-
-<p>
-Emerge <c>grub</c>或<c>lilo</c>。配置<path>/boot/grub/grub.conf</path>或<path>/etc/lilo.conf</path>并安装你emerge的引导程序。
-</p>
-
-<p>
-<b>1. Using grub</b>
-</p>
-
-<pre caption="Emerge grub并编辑它的配置文件">
-livecd conf.d # <i>time emerge grub</i>
-
-real  1m8.634s
-user  0m39.460s
-sys   0m15.280s
-livecd conf.d # <i>nano -w /boot/grub/grub.conf</i>
-</pre>
-
-<pre caption="grub.conf范例">
-default 0
-timeout 10
-
-title=Gentoo
-root (hd0,0)
-kernel /boot/kernel root=/dev/sda3
-</pre>
-
-<pre caption="安装grub">
-livecd conf.d # <i>grub</i>
-Probing devices to guess BIOS drives. This may take a long time.
-
-grub> <i>root (hd0,0)</i>
- Filesystem type is ext2fs, partition type 0x83
-
-grub> <i>setup (hd0)</i>
- Checking if "/boot/grub/stage1" exists... yes
- Checking if "/boot/grub/stage2" exists... yes
- Checking if "/boot/grub/e2fs_stage1_5" exists... yes
- Running "embed /boot/grub/e2fs_stage1_5 (hd0)"...  16 sectors are embedded.
-succeeded
- Running "install /boot/grub/stage1 (hd0) (hd0)1+16 p (hd0,0)/boot/grub/stage2 /boot/
-grub/menu.lst"... succeeded
-Done.
-
-grub> <i>quit</i>
-</pre>
-
-<p>
-接着进入<uri link="#reboot">重启一节</uri>。
-</p>
-
-<p>
-<b>2. Using lilo</b>
-</p>
-
-<pre caption="Emerge lilo并编辑它的配置文件">
-livecd conf.d # <i>time emerge lilo</i>
-
-real  0m47.016s
-user  0m22.770s
-sys   0m5.980s
-livecd conf.d # <i>nano -w /etc/lilo.conf</i>
-</pre>
-
-<pre caption="lilo.conf范例">
-boot=/dev/sda
-prompt
-timeout=50
-default=gentoo
-
-image=/boot/kernel
-  label=Gentoo
-  read-only
-  root=/dev/sda3
-</pre>
-
-<pre caption="安装lilo">
-livecd conf.d # <i>lilo</i>
-Added Gentoo *
-</pre>
-
-</body>
-</section>
 <section id="reboot">
 <title>重启</title>
 <body>
@@ -610,193 +186,10 @@ livecd / # <i>reboot</i>
 
 </body>
 </section>
-<section id="after-reboot">
-<title>完成安装</title>
-<body>
 
-<note>
-在我们这台测试机器上，从minimal CD启动显示boot提示符开始，到重启后显示登录提示符， <b>总用时</b>为<b>00:42:31</b> 。没错，不到一个小时！注意这个时间还包含了stage3包、Portage快照和一些软件包的下载时间，以及配置内核所花的时间。
-</note>
-
-<p>
-以<c>root</c>身份登录，用<c>useradd</c>添加一个或多个用户，作为日常使用。
-</p>
-
-<pre caption="从另一台电脑连到你的新机器">
-<comment>（清理known_hosts文件中的内容，因为你的新机器已生成一个新的
-通用主机密钥）</comment>
-$ <i>nano -w ~/.ssh/known_hosts</i>
-<comment>（找出新机器的IP并删除那一行，保存并退出nano）</comment>
-
-<comment>#-#-#-#-#  choice  #-#-#-#-#
-（用你新机器的IP地址）
-#-#-#-#-#  choice  #-#-#-#-#
-（使用你新机器的IP地址）</comment>
-$ <i>ssh root@192.168.1.10</i>
-The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
-RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.
-Are you sure you want to continue connecting (yes/no)? <i>yes</i>
-Warning: Permanently added '192.168.1.10' (RSA) to the list of known hosts.
-Password: <comment>输入密码</comment>
-</pre>
-
-<pre caption="添加一个新用户">
-mybox ~ # <i>adduser -g users -G lp,wheel,audio,cdrom,portage,cron -m john</i>
-mybox ~ # <i>passwd john</i>
-New UNIX password: <comment>设置John的密码</comment>
-Retype new UNIX password: <comment>再次输入John的密码</comment>
-passwd: password updated successfully
-</pre>
-
-</body>
-</section>
 <section>
-<title>最后涉及的配置</title>
-<body>
-
-<p>
-开始选择最近的镜像，在<path>/etc/make.conf</path>中定义<c>SYNC</c>变量和<c>GENTOO_MIRRORS</c>变量，或者也可以使用<c>mirrorselect</c>。此时你还可以定义并行编译的进程数。
-</p>
-
-<pre caption="使用mirrorselect并设置MAKEOPTS">
-mybox ~ # <i>emerge mirrorselect</i>
-mybox ~ # <i>mirrorselect -i -o >> /etc/make.conf</i>
-mybox ~ # <i>mirrorselect -i -r -o >> /etc/make.conf</i>
-<comment>（通常，一个较好的值为处理器数加一）</comment>
-mybox ~ # <i>echo 'MAKEOPTS="-j2"' >> /etc/make.conf</i>
-</pre>
-
-<p>
-现在是启用或禁用一些USE参数的好时机。运行<c>emerge -vpe world</c>，列出所有当前已安装的软件包以及它们被启用和禁用的USE参数。编辑<path>/etc/make.conf</path>或使用下列命令定义USE变量：
-</p>
-
-<pre caption="查看当前使用的USE参数并启用或禁用其中的某些">
-mybox ~ # <i>emerge -vpe world</i>
-<comment>（Portage列出软件包和它们的USE参数。作为例子，让我们禁用ipv6和fortran，
-并启用unicode）</comment>
-mybox ~ # <i>echo 'USE="nptl nptlonly -ipv6 -fortran unicode"' >> /etc/make.conf</i>
-</pre>
-
-<p>
-新版本的glibc使用<path>/etc/locale.gen</path>来定义语言环境。
-</p>
-
-<pre caption="定义语言环境">
-mybox ~ # <i>cd /etc</i>
-mybox etc # <i>nano -w locale.gen</i>
-</pre>
-
-<p>
-最后但并非最轻松的，你可能想修改<path>/etc/make.conf</path>中的<c>CFLAGS</c>变量来优化编码，以满足你的特定需要。请注意极少需要一长串的参数列表，那样甚至可能导致系统崩溃。建议通过<c>march</c>选项指定处理器类型并赋上 
-<c>-O2 -pipe</c>参数。
-</p>
-
-<p>
-可能你还想转到 <b>~x86</b>。只有当你能够对付那些脆弱不良的ebuild和软件包时才能这么做。如果你倾向于保持系统的稳定性，请不要添加<c>ACCEPT_KEYWORDS</c>变量。添加<c>FEATURES="parallel-fetch ccache"</c>却是个好主意。
-</p>
-
-<pre caption="为make.conf作最后的修改">
-mybox etc # <i>nano -w make.conf</i>
-<comment>（在CFLAGS中将-march设为你的CPU类型）</comment>
-CFLAGS="-O2 -march=<i>athlon-xp</i> -pipe"
-<comment>（添加下面一行）</comment>
-FEATURES="parallel-fetch ccache"
-<comment>（只有清楚自己在干什么才添加下面一行）</comment>
-ACCEPT_KEYWORDS="~x86"
-</pre>
-
-<p>
-可能你会想重编译整个系统两次，以使你所作的最新配置完全生效。这要花很长的时间来完成，而只能得到微小的速度提升。你可以让系统自己随着以后新软件包的发布而逐步完成优化。不过，站在保持系统一致性的立场来看，重编译仍不失为一个好主意。请参考文档<uri link="/doc/zh_cn/gcc-upgrading.xml">Gentoo GCC升级指南</uri>，其中讨论了如何搭建一个具有良好一致性的system和world，以及这样做的好处。
-</p>
-
-<p>
-只重编译那些因你应用了新的USE参数或受此影响而需要升级的软件包，也要花费不少时间。可能还必须卸载会阻止你升级的软件包。在<c>emerge -vpuD --newuse world</c>的输出中寻找“[blocks <brite>B</brite>     ]”，用<c>emerge -C</c>卸载它们。
-</p>
-
-<pre caption="升级软件包">
-<comment>（安装ccache）</comment>
-mybox etc # <i>emerge ccache</i>
-
-<comment>（请注意转到~x86会导致很多软件包要升级）</comment>
-mybox etc # <i>emerge -vpuD --newuse world</i>
-<comment>（好好看一看软件包列表和它们的USE参数，
-有阻止的包就先卸载，然后启动漫长的过程）</comment>
-mybox etc # <i>time emerge -vuD --newuse world</i>
-<comment>（（重）编译了79个软件包）</comment>
-
-real  180m13.276s
-user  121m22.905s
-sys   36m31.472s
-
-<comment>（重编译libtool以避免一些潜在的问题）</comment>
-mybox etc # <i>emerge libtool</i>
-
-<comment>（更新配置文件，确保 <b>do not</b> 让etc-update更新你配置好的文件）</comment>
-mybox etc # <i>etc-update</i>
-
-<comment>（如果升级了perl，应该执行perl-cleaner脚本）</comment>
-mybox etc # <i>time perl-cleaner all</i>
-real  1m6.495s
-user  0m42.699s
-sys   0m10.641s
-
-<comment>（如果升级了python的主要软件包，应该执行python-updater脚本）</comment>
-mybox etc # <i>python-updater</i>
-</pre>
-
-</body>
+ <include href="gentoo-x86-quickinstall-after-reboot.xml"/>
 </section>
-<section>
-<title>接下来该做什么</title>
-<body>
 
-<p>
-想安装服务器应用程序还是一个桌面系统，取决于你打算让你的新Gentoo做什么。以下仅作为一个例子，统计了<c>emerge gnome</c>和<c>emerge kde</c>在~x86系统（按之前的描述安装的）上所花费的时间。两者是在同一起点开始安装的。
-</p>
-
-<p>
-去看看我们的<uri link="/doc/zh_cn/">文档目录</uri>，研究一下如何安装和配置你挑选的软件。
-</p>
-
-<impo>
-以下只是举个例子，并不意味着就作为推荐设置。
-</impo>
-
-<pre caption="Emerge GNOME">
-mybox etc # <i>emerge -vp gnome</i>
-<comment>（查看软件包列表和它们的USE参数，
-如果需要请编辑make.conf</comment>
-mybox etc # <i>nano -w /etc/make.conf</i>
-<comment>（定义了以下USE参数）</comment>
-USE="nptl nptlonly -ipv6 -fortran unicode svg hal dbus \
-     -kde -qt3 -qt4 -arts -eds -esd gnome gstreamer gtk firefox"
-
-mybox etc # <i>time emerge gnome</i>
-<comment>（安装了326个软件包）</comment>
-
-real  520m44.532s
-user  339m21.144s
-sys   146m22.337s
-</pre>
-
-<pre caption="Emerge KDE">
-mybox etc # <i>emerge -vp kde-meta</i>
-<comment>（查看软件包列表和它们的USE参数，
-如果需要请编辑make.conf</comment>
-mybox etc # <i>nano -w /etc/make.conf</i>
-<comment>定义了以下USE参数）</comment>
-USE="nptl nptlonly -ipv6 -fortran unicode svg hal dbus \
-     kde qt3 qt4 -arts -eds -esd -gnome -gstreamer -gtk -firefox"
-
-mybox etc # <i>time emerge kde-meta</i>
-<comment>（安装了391个软件包）</comment>
-
-real  1171m25.318s
-user  851m26.393s
-sys   281m45.629s
-</pre>
-
-</body>
-</section>
 </chapter>
 </guide>
