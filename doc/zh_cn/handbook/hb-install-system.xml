@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-system.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.107 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.108 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
-<version>8.1</version>
-<date>2007-07-26</date>
+<version>8.2</version>
+<date>2007-10-24</date>
 
 <section>
 <title>Chroot</title>
@@ -170,7 +170,7 @@ profile是每个Gentoo系统的构造块。它不仅指定了CHOST、CFLAGS以�
 
 <pre caption="验证系统profile">
 # <i>ls -FGg /etc/make.profile</i>
-lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/default-linux/x86/2007.0/
+lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyval id="profile"/>
 </pre>
 
 <p>

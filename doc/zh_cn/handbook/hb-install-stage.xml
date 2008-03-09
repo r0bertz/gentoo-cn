@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-stage.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.112 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.113 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 我们使用一个stage3文件来安装Gentoo。在这一章里我们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>8.4</version>
-<date>2007-06-28</date>
+<version>8.5</version>
+<date>2007-12-31</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -120,10 +120,10 @@ Fri Mar 29 16:21:18 UTC 2005
 </p>
 
 <p>
-如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然后把输出同镜像站上提供的MD5校验和对比。例如校验一个x86的stage tarball：
+如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>然后把输出同镜像站上提供的MD5校验和对比。
 </p>
 
-<pre caption="校验一个stage tarball完整性的例子">
+<pre caption="校验一个stage tarball的完整性">
 # <i>md5sum -c <keyval id="stage3"/>.DIGESTS</i>
 <keyval id="stage3"/>: OK
 </pre>
