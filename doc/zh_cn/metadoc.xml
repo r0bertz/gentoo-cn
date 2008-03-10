@@ -11,40 +11,40 @@
     <cat id="faq">常见问题</cat>
     <cat id="install">安装相关资源</cat>
     <cat id="install_guides" parent="install">安装指引</cat>
-    <cat id="install_other"  parent="install">其他安装相关文档</cat>
+    <cat id="install_other" parent="install">其他安装相关文档</cat>
     <cat id="upgrade">升级指引</cat>
     <cat id="gentoo">Gentoo系统文档</cat>
     <cat id="articles">已发表文章</cat>
-    <cat id="gentoo_portage"     parent="gentoo">Portage及相关文档</cat>
+    <cat id="gentoo_portage" parent="gentoo">Portage及相关文档</cat>
     <cat id="gentoo_configuring" parent="gentoo">配置Gentoo</cat>
-    <cat id="gentoo_choices"     parent="gentoo">Gentoo选择</cat>
-    <cat id="articles_gentoo"    parent="articles">Gentoo文章</cat>
-    <cat id="articles_linux"     parent="articles">学习Linux的文章</cat>
-    <cat id="articles_commth"    parent="articles">DeveloperWorks已发布文章</cat>
-    <cat id="articles_others"    parent="articles">其他文章</cat>
+    <cat id="gentoo_choices" parent="gentoo">Gentoo选择</cat>
+    <cat id="articles_gentoo" parent="articles">Gentoo文章</cat>
+    <cat id="articles_linux" parent="articles">学习Linux的文章</cat>
+    <cat id="articles_commth" parent="articles">DeveloperWorks已发布文章</cat>
+    <cat id="articles_others" parent="articles">其他文章</cat>
     <cat id="sysadmin">系统管理文档</cat>
-    <cat id="sysadmin_general"  parent="sysadmin">一般系统管理</cat>
+    <cat id="sysadmin_general" parent="sysadmin">一般系统管理</cat>
     <cat id="sysadmin_specific" parent="sysadmin">专项系统管理</cat>
     <cat id="gentoodev">Gentoo开发文档</cat>
     <cat id="gentoodev_policies" parent="gentoodev">Gentoo开发政策</cat>
-    <cat id="gentoodev_docs"     parent="gentoodev">开发相关文档</cat>
+    <cat id="gentoodev_docs" parent="gentoodev">开发相关文档</cat>
     <cat id="desktop">Gentoo桌面文档资源</cat>
     <cat id="desktop_install" parent="desktop">安装你的桌面</cat>
-    <cat id="desktop_config"  parent="desktop">配置你的桌面</cat>
-    <cat id="desktop_apps"    parent="desktop">应用程序专有文档</cat>
+    <cat id="desktop_config" parent="desktop">配置你的桌面</cat>
+    <cat id="desktop_apps" parent="desktop">应用程序专有文档</cat>
     <cat id="other">其他文档</cat>
     <cat id="project">项目相关文档</cat>
-    <cat id="project_base"    parent="project">基础项目文档</cat>
-    <cat id="project_devrel"  parent="project">开发者关系文档</cat>
-    <cat id="project_gdp"     parent="project">文档项目文档</cat>
+    <cat id="project_base" parent="project">基础项目文档</cat>
+    <cat id="project_devrel" parent="project">开发者关系文档</cat>
+    <cat id="project_gdp" parent="project">文档项目文档</cat>
     <cat id="project_hardened" parent="project">Hardened项目文档</cat>
-    <cat id="project_infra"   parent="project">基础设施项目文档</cat>
+    <cat id="project_infra" parent="project">基础设施项目文档</cat>
     <cat id="project_metastructure" parent="project">Metastructure项目文档</cat>
-    <cat id="project_pr"      parent="project">公共关系项目文档</cat>
-    <cat id="project_releng"  parent="project">发布工程项目文档</cat>
+    <cat id="project_pr" parent="project">公共关系项目文档</cat>
+    <cat id="project_releng" parent="project">发布工程项目文档</cat>
     <cat id="project_security" parent="project">安全项目文档</cat>
-    <cat id="project_forums"  parent="project">Gentoo论坛文档</cat>
-    <cat id="project_overlays"  parent="project">Gentoo Overlay文档</cat>
+    <cat id="project_forums" parent="project">Gentoo论坛文档</cat>
+    <cat id="project_overlays" parent="project">Gentoo Overlay文档</cat>
   </categories>
   <files>
     <file id="metadoc">/doc/zh_cn/metadoc.xml</file>
@@ -686,9 +686,6 @@
     </doc>
     <doc fileid="openafs">
       <memberof>sysadmin_specific</memberof>
-      <bugs>
-        <bug>68740</bug>
-      </bugs>
     </doc>
     <doc fileid="virt-mail-howto">
       <memberof>sysadmin_specific</memberof>
@@ -789,9 +786,6 @@
     </doc>
     <doc fileid="ati-faq">
       <memberof>desktop_install</memberof>
-      <bugs>
-        <bug>83806</bug>
-      </bugs>
     </doc>
     <doc fileid="kde-config">
       <memberof>desktop_install</memberof>
@@ -810,9 +804,6 @@
     </doc>
     <doc fileid="alsa-guide">
       <memberof>desktop_config</memberof>
-      <bugs>
-        <bug>48733</bug>
-      </bugs>
     </doc>
     <doc fileid="java">
       <memberof>desktop_config</memberof>
@@ -861,10 +852,6 @@
     </doc>
     <doc fileid="ldap-howto">
       <memberof>sysadmin_specific</memberof>
-      <bugs>
-        <bug>102481</bug>
-        <bug stopper="yes">115130</bug>
-      </bugs>
     </doc>
     <doc fileid="new-dev-training">
       <memberof>project_devrel</memberof>
