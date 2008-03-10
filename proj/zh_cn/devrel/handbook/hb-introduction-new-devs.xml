@@ -38,10 +38,6 @@ update -d -P
 </pre>
 
 <p>
-为了确保digest的正确性，请将<c>cvs</c>加入到你的<c>FEATURES</c>设置中。
-</p>
-
-<p>
 最后，很多使用CVS的人喜欢使用压缩选项（-z#）。我们要求那些不通过拨号连接的开发者使用选项-z0（考虑到我们CVS仓库的内容和我们CVS服务器的负载），在没有压缩的情况下，实际上你会感受到速度的<e>提升</e>。
 </p>
 
@@ -93,17 +89,9 @@ SYNC="cvs://you@cvs.gentoo.org:/var/cvsroot"
 CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 </pre>
 
-<p>
-不管你是否希望使用CVS来作为你主要的Portage树，你应当确保<c>cvs</c>在文件<path>/etc/make.conf</path>的<c>FEATURES</c>选项中。这将保证在制作digest的时候，Portage会下载ebuild在<c>SRC_URI</c>中引用的所有文件。
-</p>
-
 <note>
 由于cvs检出的Portage树没有metadata cache，你的portage可能会变得很慢。
 </note> 
-
-<p>
-你可以在你的<c>FEATURES</c>中加入<c>digest</c>，让Portage自动创建新的digest，你也可以加入<c>autoaddcvs</c>，这样，<c>repoman</c>（用来commit到ebuild的一个工具）将会为你在CVS中自动加入缺少的digest。
-</p>
 
 <p>
 在支持的架构上，你应该总是在你的<c>FEATURES</c>中加入<c>sandbox</c>来保证ebuild不会直接修改根文件系统。
@@ -132,11 +120,9 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 <comment>（最好将你正在进行中的ebuild放置在CVS树之外的overlay中。）</comment>
 # cp /path/to/foo-1.0.ebuild ./
 <comment>（不要忘记创建ChangeLog文件——查看echangelog的man帮助。）</comment>
-<comment>（当建立digest的时候，确保PORTDIR_OVERLAY设置成CVS目录。）</comment>
+<comment>（当建立manifest的时候，确保PORTDIR_OVERLAY设置成CVS目录。）</comment>
 # ebuild foo-1.0.ebuild digest
 # cvs add foo-1.0.ebuild ChangeLog files
-<comment>（FEATURES=autoaddcvs将会为你做这些……）</comment>
-# cvs add files/digest-foo-1.0
 </pre>
 
 <p>
@@ -150,7 +136,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 <pre caption="删除旧版本">
 # cd CVSROOT/app-misc/foo
 # cvs update
-# cvs remove -f foo-1.0.ebuild files/digest-foo-1.0
+# cvs remove -f foo-1.0.ebuild
 </pre>
 
 <p>
@@ -171,7 +157,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 <comment>（在运行repoman之前，请确保没有root用户所拥有的文件！）</comment>
 <comment>（"scan"扫描当前的目录来查看QA事务。"full"选项更加完整。）</comment>
 # repoman scan
-<comment>（"commit"先做scan，然后commit，同时更新digest。确认你已经
+<comment>（"commit"先做scan，然后commit，同时更新Manifest。确认你已经
 加入了冗长而有用的CVS ChangeLog信息……）</comment>
 # repoman commit
 </pre>
