@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/index.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
+<!-- $Header$ -->
 <!-- English CVS version: 1.72 -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
@@ -77,7 +77,7 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 
 <table>
 <tr>
-  <th>格式 </th>
+  <th>格式</th>
   <th>描述</th>
   <th>链接</th>
 </tr>
