@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ia64-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
-<!-- English CVS version: 1.12 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.15 -->
 
 <sections>
 
-<version>8.4</version>
-<date>2007-08-12</date>
+<version>8.7</version>
+<date>2008-01-14</date>
 
 <section>
 <title>时区</title>
@@ -39,7 +39,7 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于IA64架构的系统来说，我们将使用<c>gentoo-sources</c>（包含了一些提升稳定性和性能的补丁）。
+对于IA64架构的系统来说，我们将使用<c>gentoo-sources</c>（包含了一些增加了额外功能的补丁）。
 </p>
 
 <p>
@@ -107,11 +107,9 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 首先，开启"development and experimental code/drivers"。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
 </p>
 
-<pre caption="选择experimental code/drivers，General setup">
-Code maturity level options ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
+<pre caption="选择experimental code/drivers">
 General setup  ---&gt;
-  [*] Support for hot-pluggable devices
+  [*] Prompt for development and/or incomplete code/drivers
 </pre>
 
 <p>
@@ -198,7 +196,7 @@ Processor type and features  ---&gt;
 
 <pre caption="启用USB接口的输入设备支持">
 Device Drivers ---&gt;
-  USB Support ---&gt;
+  HID Support ---&gt;
     &lt;*&gt;   USB Human Interface Device (full HID) support
 </pre>
 
