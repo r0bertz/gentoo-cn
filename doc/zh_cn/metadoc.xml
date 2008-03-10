@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.200 -->
-
+<!-- English CVS version: 1.203 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-<version>1.123</version>
+<version>1.125</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -116,7 +115,7 @@
     <file id="dri-howto">/doc/zh_cn/dri-howto.xml</file>
     <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
     <file id="gentoo-upgrading">/doc/en/gentoo-upgrading.xml</file>
-    <file id="2.6-migration">/doc/en/migration-to-2.6.xml</file>
+    <file id="migration-2.6">/doc/en/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
     <file id="faq">/doc/zh_cn/faq.xml</file>
     <file id="gentoo-alpha-faq">/doc/en/gentoo-alpha-faq.xml</file>
@@ -172,10 +171,10 @@
     <file id="hb-install-sparc-medium">/doc/zh_cn/handbook/hb-install-sparc-medium.xml</file>
     <file id="hb-install-stage">/doc/zh_cn/handbook/hb-install-stage.xml</file>
     <file id="hb-install-tools">/doc/zh_cn/handbook/hb-install-tools.xml</file>
-    <file id="hb-install-x86+amd64-bootloader">/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml</file>
-    <file id="hb-install-x86+amd64-disk">/doc/zh_cn/handbook/hb-install-x86+amd64-disk.xml</file>
-    <file id="hb-install-x86+amd64-kernel">/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml</file>
-    <file id="hb-install-x86+amd64-medium">/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml</file>
+    <file id="hb-install-x86_amd64-bootloader">/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml</file>
+    <file id="hb-install-x86_amd64-disk">/doc/zh_cn/handbook/hb-install-x86+amd64-disk.xml</file>
+    <file id="hb-install-x86_amd64-kernel">/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml</file>
+    <file id="hb-install-x86_amd64-medium">/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml</file>
     <file id="hb-working-features">/doc/zh_cn/handbook/hb-working-features.xml</file>
     <file id="hb-working-portage">/doc/zh_cn/handbook/hb-working-portage.xml</file>
     <file id="hb-working-rcscripts">/doc/zh_cn/handbook/hb-working-rcscripts.xml</file>
@@ -193,40 +192,40 @@
     <file id="hb-net-modules">/doc/zh_cn/handbook/hb-net-modules.xml</file>
     <file id="hb-net-start">/doc/zh_cn/handbook/hb-net-start.xml</file>
     <file id="hb-net-wireless">/doc/zh_cn/handbook/hb-net-wireless.xml</file>
-    <file id="2007.0-handbook-amd64">/doc/zh_cn/handbook/2007.0/handbook-amd64.xml</file>
-    <file id="2007.0-handbook-hppa">/doc/zh_cn/handbook/2007.0/handbook-hppa.xml</file>
-    <file id="2007.0-handbook-ppc64">/doc/zh_cn/handbook/2007.0/handbook-ppc64.xml</file>
-    <file id="2007.0-handbook-ppc">/doc/zh_cn/handbook/2007.0/handbook-ppc.xml</file>
-    <file id="2007.0-handbook-sparc">/doc/zh_cn/handbook/2007.0/handbook-sparc.xml</file>
-    <file id="2007.0-handbook-x86">/doc/zh_cn/handbook/2007.0/handbook-x86.xml</file>
-    <file id="2007.0-hb-install-about">/doc/zh_cn/handbook/2007.0/hb-install-about.xml</file>
-    <file id="2007.0-hb-install-config">/doc/zh_cn/handbook/2007.0/hb-install-config.xml</file>
-    <file id="2007.0-hb-install-finalise">/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml</file>
-    <file id="2007.0-hb-install-hppa-bootloader">/doc/zh_cn/handbook/2007.0/hb-install-hppa-bootloader.xml</file>
-    <file id="2007.0-hb-install-hppa-disk">/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml</file>
-    <file id="2007.0-hb-install-hppa-kernel">/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml</file>
-    <file id="2007.0-hb-install-hppa-medium">/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml</file>
-    <file id="2007.0-hb-install-network">/doc/zh_cn/handbook/2007.0/hb-install-network.xml</file>
-    <file id="2007.0-hb-install-next">/doc/zh_cn/handbook/2007.0/hb-install-next.xml</file>
-    <file id="2007.0-hb-install-ppc64-bootloader">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml</file>
-    <file id="2007.0-hb-install-ppc64-disk">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml</file>
-    <file id="2007.0-hb-install-ppc64-kernel">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml</file>
-    <file id="2007.0-hb-install-ppc64-medium">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-medium.xml</file>
-    <file id="2007.0-hb-install-ppc-bootloader">/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml</file>
-    <file id="2007.0-hb-install-ppc-disk">/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml</file>
-    <file id="2007.0-hb-install-ppc-kernel">/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml</file>
-    <file id="2007.0-hb-install-ppc-medium">/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml</file>
-    <file id="2007.0-hb-install-sparc-bootloader">/doc/zh_cn/handbook/2007.0/hb-install-sparc-bootloader.xml</file>
-    <file id="2007.0-hb-install-sparc-disk">/doc/zh_cn/handbook/2007.0/hb-install-sparc-disk.xml</file>
-    <file id="2007.0-hb-install-sparc-kernel">/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml</file>
-    <file id="2007.0-hb-install-sparc-medium">/doc/zh_cn/handbook/2007.0/hb-install-sparc-medium.xml</file>
-    <file id="2007.0-hb-install-stage">/doc/zh_cn/handbook/2007.0/hb-install-stage.xml</file>
-    <file id="2007.0-hb-install-system">/doc/zh_cn/handbook/2007.0/hb-install-system.xml</file>
-    <file id="2007.0-hb-install-tools">/doc/zh_cn/handbook/2007.0/hb-install-tools.xml</file>
-    <file id="2007.0-hb-install-gli-dialog">/doc/zh_cn/handbook/2007.0/hb-install-gli-dialog.xml</file>
-    <file id="2007.0-hb-install-gli-medium">/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml</file>
-    <file id="2007.0-hb-install-gtkfe">/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml</file>
-    <file id="2007.0-index">/doc/zh_cn/handbook/2007.0/index.xml</file>
+    <file id="handbook-amd64-2007.0">/doc/zh_cn/handbook/2007.0/handbook-amd64.xml</file>
+    <file id="handbook-hppa-2007.0">/doc/zh_cn/handbook/2007.0/handbook-hppa.xml</file>
+    <file id="handbook-ppc64-2007.0">/doc/zh_cn/handbook/2007.0/handbook-ppc64.xml</file>
+    <file id="handbook-ppc-2007.0">/doc/zh_cn/handbook/2007.0/handbook-ppc.xml</file>
+    <file id="handbook-sparc-2007.0">/doc/zh_cn/handbook/2007.0/handbook-sparc.xml</file>
+    <file id="handbook-x86-2007.0">/doc/zh_cn/handbook/2007.0/handbook-x86.xml</file>
+    <file id="hb-install-about-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-about.xml</file>
+    <file id="hb-install-config-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-config.xml</file>
+    <file id="hb-install-finalise-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml</file>
+    <file id="hb-install-hppa-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-bootloader.xml</file>
+    <file id="hb-install-hppa-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml</file>
+    <file id="hb-install-hppa-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml</file>
+    <file id="hb-install-hppa-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml</file>
+    <file id="hb-install-network-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-network.xml</file>
+    <file id="hb-install-next-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-next.xml</file>
+    <file id="hb-install-ppc64-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml</file>
+    <file id="hb-install-ppc64-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml</file>
+    <file id="hb-install-ppc64-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml</file>
+    <file id="hb-install-ppc64-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-medium.xml</file>
+    <file id="hb-install-ppc-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml</file>
+    <file id="hb-install-ppc-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml</file>
+    <file id="hb-install-ppc-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml</file>
+    <file id="hb-install-ppc-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml</file>
+    <file id="hb-install-sparc-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-bootloader.xml</file>
+    <file id="hb-install-sparc-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-disk.xml</file>
+    <file id="hb-install-sparc-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml</file>
+    <file id="hb-install-sparc-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-medium.xml</file>
+    <file id="hb-install-stage-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-stage.xml</file>
+    <file id="hb-install-system-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-system.xml</file>
+    <file id="hb-install-tools-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-tools.xml</file>
+    <file id="hb-install-gli-dialog-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gli-dialog.xml</file>
+    <file id="hb-install-gli-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml</file>
+    <file id="hb-install-gtkfe-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml</file>
+    <file id="index-2007.0">/doc/zh_cn/handbook/2007.0/index.xml</file>
     <file id="lvm2">/doc/zh_cn/lvm2.xml</file>
     <file id="gentoo-kernel">/doc/en/gentoo-kernel.xml</file>
     <file id="gentoo-ppc-faq">/doc/en/gentoo-ppc-faq.xml</file>
@@ -259,7 +258,7 @@
     <file id="gentoo-x86-quickinstall-media">/doc/en/gentoo-x86-quickinstall-media.xml</file>
     <file id="gentoo-x86-quickinstall-stage">/doc/en/gentoo-x86-quickinstall-stage.xml</file>
     <file id="gentoo-x86-quickinstall-system">/doc/en/gentoo-x86-quickinstall-system.xml</file>
-    <file id="gentoo-x86-quickinstall+raid">/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml</file>
+    <file id="gentoo-x86-quickinstall_raid">/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml</file>
     <file id="vi-guide">/doc/en/vi-guide.xml</file>
     <file id="virt-mail-howto">/doc/en/virt-mail-howto.xml</file>
     <file id="mailfilter-guide">/doc/en/mailfilter-guide.xml</file>
@@ -273,7 +272,6 @@
     <file id="gnome-config">/doc/zh_cn/gnome-config.xml</file>
     <file id="gnome-upgrade">/proj/zh_cn/desktop/gnome/howtos/gnome-2.20-upgrade.xml</file>
     <file id="gpm">/doc/zh_cn/gpm.xml</file>
-    <file id="gentoo-security">/doc/en/gentoo-security.xml</file>
     <file id="home-router-howto">/doc/en/home-router-howto.xml</file>
     <file id="arm-requirements">/doc/en/arm-requirements.xml</file>
     <file id="power-management-guide">/doc/en/power-management-guide.xml</file>
@@ -397,920 +395,728 @@
     <file id="pam-upgrade">/proj/en/base/pam/upgrade-0.99.xml</file>
     <file id="embedded-handbook">/proj/en/base/embedded/handbook/index.xml</file>
     <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
+    <file id="texlive-migration-guide">/proj/en/tex/texlive-migration-guide.xml</file>
   </files>
   <docs>
-    <doc id="name-logo">
+    <doc fileid="name-logo">
       <memberof>other</memberof>
-      <fileid>name-logo</fileid>
     </doc>
-    <doc id="art-bash-ex-p1">
+    <doc fileid="art-bash-ex-p1">
       <memberof>articles_linux</memberof>
-      <fileid>art-bash-ex-p1</fileid>
     </doc>
-    <doc id="art-bash-ex-p2">
+    <doc fileid="art-bash-ex-p2">
       <memberof>articles_linux</memberof>
-      <fileid>art-bash-ex-p2</fileid>
     </doc>
-    <doc id="art-bash-ex-p3">
+    <doc fileid="art-bash-ex-p3">
       <memberof>articles_linux</memberof>
-      <fileid>art-bash-ex-p3</fileid>
     </doc>
-    <doc id="art-mk-distro-p1">
+    <doc fileid="art-mk-distro-p1">
       <memberof>articles_gentoo</memberof>
-      <fileid>art-mk-distro-p1</fileid>
     </doc>
-    <doc id="art-mk-distro-p2">
+    <doc fileid="art-mk-distro-p2">
       <memberof>articles_gentoo</memberof>
-      <fileid>art-mk-distro-p2</fileid>
     </doc>
-    <doc id="art-mk-distro-p3">
+    <doc fileid="art-mk-distro-p3">
       <memberof>articles_gentoo</memberof>
-      <fileid>art-mk-distro-p3</fileid>
     </doc>
-    <doc id="art-lpi-101-fundamentals-p1">
+    <doc fileid="art-lpi-101-fundamentals-p1">
       <memberof>articles_linux</memberof>
-      <fileid>art-lpi-101-fundamentals-p1</fileid>
     </doc>
-    <doc id="art-lpi-101-administration-p2">
+    <doc fileid="art-lpi-101-administration-p2">
       <memberof>articles_linux</memberof>
-      <fileid>art-lpi-101-administration-p2</fileid>
     </doc>
-    <doc id="art-lpi-101-intermediate-p3">
+    <doc fileid="art-lpi-101-intermediate-p3">
       <memberof>articles_linux</memberof>
-      <fileid>art-lpi-101-intermediate-p3</fileid>
     </doc>
-    <doc id="art-lpi-101-advanced-p4">
+    <doc fileid="art-lpi-101-advanced-p4">
       <memberof>articles_linux</memberof>
-      <fileid>art-lpi-101-advanced-p4</fileid>
     </doc>
-    <doc id="art-ct-dyn-iptables-fw">
+    <doc fileid="art-ct-dyn-iptables-fw">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-dyn-iptables-fw</fileid>
     </doc>
-    <doc id="art-ct-l-sed-p1">
+    <doc fileid="art-ct-l-sed-p1">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-sed-p1</fileid>
     </doc>
-    <doc id="art-ct-l-sed-p2">
+    <doc fileid="art-ct-l-sed-p2">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-sed-p2</fileid>
     </doc>
-    <doc id="art-ct-l-sed-p3">
+    <doc fileid="art-ct-l-sed-p3">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-sed-p3</fileid>
     </doc>
-    <doc id="art-ct-l-awk-p1">
+    <doc fileid="art-ct-l-awk-p1">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-awk-p1</fileid>
     </doc>
-    <doc id="art-ct-l-awk-p2">
+    <doc fileid="art-ct-l-awk-p2">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-awk-p2</fileid>
     </doc>
-    <doc id="art-ct-l-awk-p3">
+    <doc fileid="art-ct-l-awk-p3">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-awk-p3</fileid>
     </doc>
-    <doc id="art-ct-l-posix-p1">
+    <doc fileid="art-ct-l-posix-p1">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-posix-p1</fileid>
     </doc>
-    <doc id="art-ct-l-posix-p2">
+    <doc fileid="art-ct-l-posix-p2">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-posix-p2</fileid>
     </doc>
-    <doc id="art-ct-l-posix-p3">
+    <doc fileid="art-ct-l-posix-p3">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-l-posix-p3</fileid>
     </doc>
-    <doc id="art-ct-sta-iptables-fw">
+    <doc fileid="art-ct-sta-iptables-fw">
       <memberof>articles_commth</memberof>
-      <fileid>art-ct-sta-iptables-fw</fileid>
     </doc>
-    <doc id="afig-ct-ext3-intro">
+    <doc fileid="afig-ct-ext3-intro">
       <memberof>articles_commth</memberof>
-      <fileid>afig-ct-ext3-intro</fileid>
     </doc>
-    <doc id="samba-p1">
+    <doc fileid="samba-p1">
       <memberof>articles_commth</memberof>
-      <fileid>samba-p1</fileid>
     </doc>
-    <doc id="samba-p2">
+    <doc fileid="samba-p2">
       <memberof>articles_commth</memberof>
-      <fileid>samba-p2</fileid>
     </doc>
-    <doc id="samba-p3">
+    <doc fileid="samba-p3">
       <memberof>articles_commth</memberof>
-      <fileid>samba-p3</fileid>
     </doc>
-    <doc id="l-redesign-1">
+    <doc fileid="l-redesign-1">
       <memberof>articles_commth</memberof>
-      <fileid>l-redesign-1</fileid>
     </doc>
-    <doc id="l-redesign-2">
+    <doc fileid="l-redesign-2">
       <memberof>articles_commth</memberof>
-      <fileid>l-redesign-2</fileid>
     </doc>
-    <doc id="l-redesign-3">
+    <doc fileid="l-redesign-3">
       <memberof>articles_commth</memberof>
-      <fileid>l-redesign-3</fileid>
     </doc>
-    <doc id="l-redesign-4">
+    <doc fileid="l-redesign-4">
       <memberof>articles_commth</memberof>
-      <fileid>l-redesign-4</fileid>
     </doc>
-    <doc id="autotools-practices">
+    <doc fileid="autotools-practices">
       <memberof>articles_others</memberof>
-      <fileid>autotools-practices</fileid>
     </doc>
-    <doc id="hardware-stability-p1">
+    <doc fileid="hardware-stability-p1">
       <memberof>articles_others</memberof>
-      <fileid>hardware-stability-p1</fileid>
     </doc>
-    <doc id="hardware-stability-p2">
+    <doc fileid="hardware-stability-p2">
       <memberof>articles_others</memberof>
-      <fileid>hardware-stability-p2</fileid>
     </doc>
-    <doc id="partitioning-p1">
+    <doc fileid="partitioning-p1">
       <memberof>articles_linux</memberof>
-      <fileid>partitioning-p1</fileid>
     </doc>
-    <doc id="partitioning-p2">
+    <doc fileid="partitioning-p2">
       <memberof>articles_linux</memberof>
-      <fileid>partitioning-p2</fileid>
     </doc>
-    <doc id="partition-planning-tips">
+    <doc fileid="partition-planning-tips">
       <memberof>articles_linux</memberof>
-      <fileid>partition-planning-tips</fileid>
     </doc>
-    <doc id="maximum-swappage">
+    <doc fileid="maximum-swappage">
       <memberof>articles_linux</memberof>
-      <fileid>maximum-swappage</fileid>
     </doc>
-    <doc id="lvm-p1">
+    <doc fileid="lvm-p1">
       <memberof>articles_linux</memberof>
-      <fileid>lvm-p1</fileid>
     </doc>
-    <doc id="lvm-p2">
+    <doc fileid="lvm-p2">
       <memberof>articles_linux</memberof>
-      <fileid>lvm-p2</fileid>
     </doc>
-    <doc id="software-raid-p1">
+    <doc fileid="software-raid-p1">
       <memberof>articles_linux</memberof>
-      <fileid>software-raid-p1</fileid>
     </doc>
-    <doc id="software-raid-p2">
+    <doc fileid="software-raid-p2">
       <memberof>articles_linux</memberof>
-      <fileid>software-raid-p2</fileid>
     </doc>
-    <doc id="linux-kernel-compiling">
+    <doc fileid="linux-kernel-compiling">
       <memberof>articles_linux</memberof>
-      <fileid>linux-kernel-compiling</fileid>
     </doc>
-    <doc id="art-prompt-magic">
+    <doc fileid="art-prompt-magic">
       <memberof>articles_linux</memberof>
-      <fileid>art-prompt-magic</fileid>
     </doc>
-    <doc id="openssh-key-management-p1">
+    <doc fileid="openssh-key-management-p1">
       <memberof>articles_linux</memberof>
-      <fileid>openssh-key-management-p1</fileid>
     </doc>
-    <doc id="openssh-key-management-p2">
+    <doc fileid="openssh-key-management-p2">
       <memberof>articles_linux</memberof>
-      <fileid>openssh-key-management-p2</fileid>
     </doc>
-    <doc id="openssh-key-management-p3">
+    <doc fileid="openssh-key-management-p3">
       <memberof>articles_linux</memberof>
-      <fileid>openssh-key-management-p3</fileid>
     </doc>
-    <doc id="l-afig-p8">
+    <doc fileid="l-afig-p8">
       <memberof>articles_linux</memberof>
-      <fileid>l-afig-p8</fileid>
     </doc>
-    <doc id="bugzilla-howto">
+    <doc fileid="bugzie-howto">
       <memberof>other</memberof>
-      <fileid>bugzie-howto</fileid>
     </doc>
-    <doc id="mysql-howto">
+    <doc fileid="mysql-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>mysql-howto</fileid>
     </doc>
-    <doc id="postgres-howto">
+    <doc fileid="postgres-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>postgres-howto</fileid>
     </doc>
-    <doc id="bluetooth-guide">
+    <doc fileid="bt-guide">
       <memberof>desktop_config</memberof>
-      <fileid>bt-guide</fileid>
     </doc>
-    <doc id="utf-8">
+    <doc fileid="utf-8">
       <memberof>sysadmin_general</memberof>
       <memberof>desktop_config</memberof>
-      <fileid>utf-8</fileid>
     </doc>
-    <doc id="handbook_index">
+    <doc fileid="handbook_index">
       <memberof>install_guides</memberof>
-      <fileid>handbook_index</fileid>
     </doc>
-    <doc id="2007.0-index">
+    <doc fileid="index-2007.0">
       <memberof>install_guides</memberof>
-      <fileid>2007.0-index</fileid>
     </doc>
-    <doc id="gentoo-x86-quickinstall">
+    <doc fileid="gentoo-x86-quickinstall">
       <memberof>install_guides</memberof>
-      <fileid>gentoo-x86-quickinstall</fileid>
     </doc>
-    <doc id="gentoo-x86-quickinstall+raid">
+    <doc fileid="gentoo-x86-quickinstall_raid">
       <memberof>install_guides</memberof>
-      <fileid>gentoo-x86-quickinstall+raid</fileid>
     </doc>
-    <doc id="gentoo-sparc-quickinstall">
+    <doc fileid="gentoo-sparc-quickinstall">
       <memberof>install_guides</memberof>
-      <fileid>gentoo-sparc-quickinstall</fileid>
     </doc>
-    <doc id="amd64-howtos">
+    <doc fileid="amd64-howtos">
       <memberof>project_base</memberof>
-      <fileid>amd64-howtos</fileid>
     </doc>
-    <doc id="faq">
+    <doc fileid="faq">
       <memberof>faq</memberof>
-      <fileid>faq</fileid>
     </doc>
-    <doc id="gentoo-alpha-faq">
+    <doc fileid="gentoo-alpha-faq">
       <memberof>faq</memberof>
-      <fileid>gentoo-alpha-faq</fileid>
     </doc>
-    <doc id="gentoo-amd64-faq">
+    <doc fileid="gentoo-amd64-faq">
       <memberof>faq</memberof>
-      <fileid>gentoo-amd64-faq</fileid>
     </doc>
-    <doc id="gentoo-ppc-faq">
+    <doc fileid="gentoo-ppc-faq">
       <memberof>faq</memberof>
-      <fileid>gentoo-ppc-faq</fileid>
     </doc>
-    <doc id="gentoo-sparc-faq">
+    <doc fileid="gentoo-sparc-faq">
       <memberof>faq</memberof>
-      <fileid>gentoo-sparc-faq</fileid>
     </doc>
-    <doc id="altinstall">
+    <doc fileid="altinstall">
       <memberof>install_other</memberof>
-      <fileid>altinstall</fileid>
     </doc>
-    <doc id="lvm2">
+    <doc fileid="lvm2">
       <memberof>install_other</memberof>
-      <fileid>lvm2</fileid>
     </doc>
-    <doc id="gentoo-x86-tipsntricks">
+    <doc fileid="gentoo-x86-tipsntricks">
       <memberof>install_other</memberof>
-      <fileid>gentoo-x86-tipsntricks</fileid>
     </doc>
-    <doc id="new-upgrade-to-gentoo-1.4">
+    <doc fileid="new-upgrade-to-gentoo-1.4">
       <memberof>install_other</memberof>
       <memberof>upgrade</memberof>
-      <fileid>new-upgrade-to-gentoo-1.4</fileid>
     </doc>
-    <doc id="gentoo-upgrading">
+    <doc fileid="gentoo-upgrading">
       <memberof>install_other</memberof>
       <memberof>upgrade</memberof>
-      <fileid>gentoo-upgrading</fileid>
     </doc>
-    <doc id="2.6-migration">
+    <doc fileid="migration-2.6">
       <memberof>install_other</memberof>
       <memberof>upgrade</memberof>
-      <fileid>2.6-migration</fileid>
     </doc>
-    <doc id="genkernel">
+    <doc fileid="genkernel">
       <memberof>install_other</memberof>
-      <fileid>genkernel</fileid>
     </doc>
-    <doc id="portage-intro">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_portage</memberof>
-      <fileid vpart="2" vchap="1">handbook-x86</fileid>
+      <!--portage-intro-->
+      <bookref vchap="1" vpart="2"/>
     </doc>
-    <doc id="portage-features">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_portage</memberof>
-      <fileid vpart="2" vchap="3">handbook-x86</fileid>
+      <!--portage-features-->
+      <bookref vchap="3" vpart="2"/>
     </doc>
-    <doc id="working-with-portage">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_portage</memberof>
-      <fileid vpart="3">handbook-x86</fileid>
+      <!--working-with-portage-->
+      <bookref vpart="3"/>
     </doc>
-    <doc id="use-flags">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_portage</memberof>
-      <fileid vpart="2" vchap="2">handbook-x86</fileid>
+      <!--use-flags-->
+      <bookref vchap="2" vpart="2"/>
     </doc>
-    <doc id="gentoolkit">
+    <doc fileid="gentoolkit">
       <memberof>gentoo_portage</memberof>
-      <fileid>gentoolkit</fileid>
     </doc>
-    <doc id="portage-utils">
+    <doc fileid="portage-utils">
       <memberof>gentoo_portage</memberof>
-      <fileid>portage-utils</fileid>
     </doc>
-    <doc id="environment-variables">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_configuring</memberof>
-      <fileid vpart="2" vchap="5">handbook-x86</fileid>
+      <!--environment-variables-->
+      <bookref vchap="5" vpart="2"/>
     </doc>
-    <doc id="initscripts">
+    <doc fileid="handbook-x86">
       <memberof>gentoo_configuring</memberof>
-      <fileid vpart="2" vchap="4">handbook-x86</fileid>
+      <!--initscripts-->
+      <bookref vchap="4" vpart="2"/>
     </doc>
-    <doc id="gentoo-kernel">
+    <doc fileid="gentoo-kernel">
       <memberof>gentoo_choices</memberof>
-      <fileid>gentoo-kernel</fileid>
     </doc>
-    <doc id="security-handbook-index">
+    <doc fileid="security-handbook-index">
       <memberof>sysadmin_general</memberof>
-      <fileid>security-handbook-index</fileid>
     </doc>
-    <doc id="prelink-howto">
+    <doc fileid="prelink-howto">
       <memberof>sysadmin_general</memberof>
-      <fileid>prelink-howto</fileid>
     </doc>
-    <doc id="ipv6">
+    <doc fileid="ipv6">
       <memberof>sysadmin_general</memberof>
-      <fileid>ipv6</fileid>
     </doc>
-    <doc id="uml">
+    <doc fileid="uml">
       <memberof>sysadmin_general</memberof>
-      <fileid>uml</fileid>
     </doc>
-    <doc id="diskless-howto">
+    <doc fileid="diskless-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>diskless-howto</fileid>
     </doc>
-    <doc id="ltsp">
+    <doc fileid="ltsp">
       <memberof>sysadmin_specific</memberof>
-      <fileid>ltsp</fileid>
     </doc>
-    <doc id="distcc">
+    <doc fileid="distcc">
       <memberof>sysadmin_specific</memberof>
-      <fileid>distcc</fileid>
     </doc>
-    <doc id="cross-distcc">
+    <doc fileid="cross-distcc">
       <memberof>sysadmin_specific</memberof>
-      <fileid>cross-distcc</fileid>
     </doc>
-    <doc id="devfs-guide">
+    <doc fileid="devfs-guide">
       <memberof>sysadmin_specific</memberof>
-      <fileid>devfs-guide</fileid>
     </doc>
-    <doc id="udev-guide">
+    <doc fileid="udev-guide">
       <memberof>sysadmin_specific</memberof>
-      <fileid>udev-guide</fileid>
     </doc>
-    <doc id="printing-howto">
+    <doc fileid="printing-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>printing-howto</fileid>
     </doc>
-    <doc id="openafs">
+    <doc fileid="openafs">
       <memberof>sysadmin_specific</memberof>
-      <fileid>openafs</fileid>
+      <bugs>
+        <bug>68740</bug>
+      </bugs>
     </doc>
-    <doc id="virt-mail-howto">
+    <doc fileid="virt-mail-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>virt-mail-howto</fileid>
     </doc>
-    <doc id="mailfilter-guide">
+    <doc fileid="mailfilter-guide">
       <memberof>sysadmin_specific</memberof>
-      <fileid>mailfilter-guide</fileid>
     </doc>
-    <doc id="qmail-howto">
+    <doc fileid="qmail-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>qmail-howto</fileid>
     </doc>
-    <doc id="gentoo-sparc-netboot-howto">
+    <doc fileid="gentoo-sparc-netboot-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>gentoo-sparc-netboot-howto</fileid>
     </doc>
-    <doc id="gentoo-sparc-obpreference">
+    <doc fileid="gentoo-sparc-obpreference">
       <memberof>sysadmin_specific</memberof>
-      <fileid>gentoo-sparc-obpreference</fileid>
     </doc>
-    <doc id="quick-samba-howto">
+    <doc fileid="quick-samba-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>quick-samba-howto</fileid>
     </doc>
-    <doc id="home-router-howto">
+    <doc fileid="home-router-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>home-router-howto</fileid>
     </doc>
-    <doc id="gcc-optimization">
+    <doc fileid="gcc-optimization">
       <memberof>sysadmin_specific</memberof>
-      <fileid>gcc-optimization</fileid>
     </doc>
-    <doc id="gentoo-dev-handbook">
+    <doc fileid="gentoo-dev-handbook">
       <memberof>gentoodev</memberof>
       <memberof>project_devrel</memberof>
-      <fileid>gentoo-dev-handbook</fileid>
     </doc>
-    <doc id="doc-policy">
+    <doc fileid="doc-policy">
       <memberof>gentoodev_policies</memberof>
       <memberof>project_gdp</memberof>
-      <fileid>doc-policy</fileid>
     </doc>
-    <doc id="ebuild-submit">
+    <doc fileid="ebuild-submit">
       <memberof>gentoodev_docs</memberof>
-      <fileid>ebuild-submit</fileid>
     </doc>
-    <doc id="xml-guide">
+    <doc fileid="xml-guide">
       <memberof>gentoodev_docs</memberof>
-      <fileid>xml-guide</fileid>
     </doc>
-    <doc id="doc-tipsntricks">
+    <doc fileid="doc-tipsntricks">
       <memberof>gentoodev_docs</memberof>
       <memberof>project_gdp</memberof>
-      <fileid>doc-tipsntricks</fileid>
     </doc>
-    <doc id="handbook-release">
+    <doc fileid="handbook-release">
       <memberof>gentoodev_docs</memberof>
       <memberof>project_gdp</memberof>
-      <fileid>handbook-release</fileid>
     </doc>
-    <doc id="cvs-tutorial">
+    <doc fileid="cvs-tutorial">
       <memberof>gentoodev_docs</memberof>
-      <fileid>cvs-tutorial</fileid>
     </doc>
-    <doc id="about">
+    <doc fileid="about">
       <memberof>other</memberof>
-      <fileid>about</fileid>
     </doc>
-    <doc id="philosophy">
+    <doc fileid="philosophy">
       <memberof>other</memberof>
-      <fileid>philosophy</fileid>
     </doc>
-    <doc id="contract">
+    <doc fileid="contract">
       <memberof>other</memberof>
-      <fileid>contract</fileid>
     </doc>
-    <doc id="contact">
+    <doc fileid="contact">
       <memberof>other</memberof>
-      <fileid>contact</fileid>
     </doc>
-    <doc id="gentoo-graphics">
+    <doc fileid="gentoo-graphics">
       <memberof>other</memberof>
-      <fileid>gentoo-graphics</fileid>
     </doc>
-    <doc id="irc">
+    <doc fileid="irc">
       <memberof>other</memberof>
-      <fileid>irc</fileid>
     </doc>
-    <doc id="mailing-lists">
+    <doc fileid="mailing-lists">
       <memberof>other</memberof>
-      <fileid>mailing-lists</fileid>
     </doc>
-    <doc id="screenshots">
+    <doc fileid="screenshots">
       <memberof>other</memberof>
-      <fileid>screenshots</fileid>
     </doc>
-    <doc id="sponsors">
+    <doc fileid="sponsors">
       <memberof>other</memberof>
-      <fileid>sponsors</fileid>
     </doc>
-    <doc id="howto-obtain-support">
+    <doc fileid="howto-obtain-support">
       <memberof>other</memberof>
-      <fileid>howto-obtain-support</fileid>
     </doc>
-    <doc id="where-to-get">
+    <doc fileid="where-to-get">
       <memberof>other</memberof>
-      <fileid>where-to-get</fileid>
     </doc>
-    <doc id="site">
+    <doc fileid="site">
       <memberof>other</memberof>
-      <fileid>site</fileid>
     </doc>
-    <doc id="rsync">
+    <doc fileid="rsync">
       <memberof>other</memberof>
-      <fileid>rsync</fileid>
     </doc>
-    <doc id="source_mirrors">
+    <doc fileid="source_mirrors">
       <memberof>other</memberof>
-      <fileid>source_mirrors</fileid>
     </doc>
-    <doc id="xorg-config">
+    <doc fileid="xorg-config">
       <memberof>desktop_install</memberof>
-      <fileid>xorg-config</fileid>
     </doc>
-    <doc id="nvidia-guide">
+    <doc fileid="nvidia-guide">
       <memberof>desktop_install</memberof>
-      <fileid>nvidia-guide</fileid>
     </doc>
-    <doc id="ati-faq">
+    <doc fileid="ati-faq">
       <memberof>desktop_install</memberof>
-      <fileid>ati-faq</fileid>
+      <bugs>
+        <bug>83806</bug>
+      </bugs>
     </doc>
-    <doc id="kde-config">
+    <doc fileid="kde-config">
       <memberof>desktop_install</memberof>
-      <fileid>kde-config</fileid>
     </doc>
-    <doc id="gnome-config">
+    <doc fileid="gnome-config">
       <memberof>desktop_install</memberof>
-      <fileid>gnome-config</fileid>
     </doc>
-    <doc id="fluxbox-config">
+    <doc fileid="fluxbox-config">
       <memberof>desktop_install</memberof>
-      <fileid>fluxbox-config</fileid>
     </doc>
-    <doc id="xfce-config">
+    <doc fileid="xfce-config">
       <memberof>desktop_install</memberof>
-      <fileid>xfce-config</fileid>
     </doc>
-    <doc id="vserver-howto">
+    <doc fileid="vserver-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>vserver-howto</fileid>
     </doc>
-    <doc id="alsa-guide">
+    <doc fileid="alsa-guide">
       <memberof>desktop_config</memberof>
-      <fileid>alsa-guide</fileid>
+      <bugs>
+        <bug>48733</bug>
+      </bugs>
     </doc>
-    <doc id="java">
+    <doc fileid="java">
       <memberof>desktop_config</memberof>
       <memberof>sysadmin_specific</memberof>
-      <fileid>java</fileid>
     </doc>
-    <doc id="guide-localization">
+    <doc fileid="guide-localization">
       <memberof>desktop_config</memberof>
       <memberof>sysadmin_general</memberof>
-      <fileid>guide-localization</fileid>
     </doc>
-    <doc id="dri-howto">
+    <doc fileid="dri-howto">
       <memberof>desktop_config</memberof>
-      <fileid>dri-howto</fileid>
     </doc>
-    <doc id="power-management-guide">
+    <doc fileid="power-management-guide">
       <memberof>desktop_config</memberof>
-      <fileid>power-management-guide</fileid>
     </doc>
-    <doc id="gpm">
+    <doc fileid="gpm">
       <memberof>desktop_config</memberof>
-      <fileid>gpm</fileid>
     </doc>
-    <doc id="kde-split-ebuilds">
+    <doc fileid="kde-split-ebuilds">
       <memberof>desktop_install</memberof>
-      <fileid>kde-split-ebuilds</fileid>
     </doc>
-    <doc id="nano-basics-guide">
+    <doc fileid="nano-basics-guide">
       <memberof>desktop_apps</memberof>
-      <fileid>nano-basics-guide</fileid>
     </doc>
-    <doc id="vi-guide">
+    <doc fileid="vi-guide">
       <memberof>desktop_apps</memberof>
-      <fileid>vi-guide</fileid>
     </doc>
-    <doc id="gnupg-user">
+    <doc fileid="gnupg-user">
       <memberof>desktop_apps</memberof>
-      <fileid>gnupg-user</fileid>
     </doc>
-    <doc id="guide-to-mutt">
+    <doc fileid="guide-to-mutt">
       <memberof>desktop_apps</memberof>
-      <fileid>guide-to-mutt</fileid>
     </doc>
-    <doc id="shoutcast-config">
+    <doc fileid="shoutcast-config">
       <memberof>desktop_apps</memberof>
-      <fileid>shoutcast-config</fileid>
     </doc>
-    <doc id="vdr-guide">
+    <doc fileid="vdr-guide">
       <memberof>desktop_apps</memberof>
-      <fileid>vdr-guide</fileid>
     </doc>
-    <doc id="cron-guide">
+    <doc fileid="cron-guide">
       <memberof>sysadmin_general</memberof>
-      <fileid>cron-guide</fileid>
     </doc>
-    <doc id="kernel-upgrade">
+    <doc fileid="kernel-upgrade">
       <memberof>sysadmin_general</memberof>
       <memberof>upgrade</memberof>
-      <fileid>kernel-upgrade</fileid>
     </doc>
-    <doc id="ldap-howto">
+    <doc fileid="ldap-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>ldap-howto</fileid>
+      <bugs>
+        <bug>102481</bug>
+        <bug stopper="yes">115130</bug>
+      </bugs>
     </doc>
-    <doc id="new-dev-training">
+    <doc fileid="new-dev-training">
       <memberof>project_devrel</memberof>
-      <fileid>new-dev-training</fileid>
     </doc>
-    <doc id="devrel-policy">
+    <doc fileid="devrel-policy">
       <memberof>gentoodev_policies</memberof>
       <memberof>project_devrel</memberof>
-      <fileid>devrel-policy</fileid>
     </doc>
-    <doc id="translators-howto">
+    <doc fileid="translators-howto">
       <memberof>project_gdp</memberof>
-      <fileid>translators-howto</fileid>
     </doc>
-    <doc id="hardened-primer">
+    <doc fileid="hardened-primer">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-primer</fileid>
     </doc>
-    <doc id="hardened-faq">
+    <doc fileid="hardened-faq">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-faq</fileid>
     </doc>
-    <doc id="hardened-xorg">
+    <doc fileid="hardened-xorg">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-xorg</fileid>
     </doc>
-    <doc id="hardened-pax-quickstart">
+    <doc fileid="hardened-pax-quickstart">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-pax-quickstart</fileid>
     </doc>
-     <doc id="hardened-grsec">
-        <memberof>project_hardened</memberof>
-       <fileid>hardened-grsec</fileid>
-    </doc>
-    <doc id="hardened-capabilities">
+    <doc fileid="hardened-grsec">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-capabilities</fileid>
     </doc>
-    <doc id="hardened-selinux">
+    <doc fileid="hardened-capabilities">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-selinux</fileid>
     </doc>
-    <doc id="hardened-rsbac-overview">
+    <doc fileid="hardened-selinux">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-rsbac-overview</fileid>
     </doc>
-    <doc id="hardened-rsbac-quickstart">
+    <doc fileid="hardened-rsbac-overview">
       <memberof>project_hardened</memberof>
-      <fileid>hardened-rsbac-quickstart</fileid>
     </doc>
-    <doc id="infra-email">
+    <doc fileid="hardened-rsbac-quickstart">
+      <memberof>project_hardened</memberof>
+    </doc>
+    <doc fileid="infra-email">
       <memberof>project_infra</memberof>
-      <fileid>infra-email</fileid>
     </doc>
-    <doc id="infra-cvsssh">
+    <doc fileid="infra-cvsssh">
       <memberof>project_infra</memberof>
-      <fileid>infra-cvsssh</fileid>
     </doc>
-    <doc id="infra-machines">
+    <doc fileid="infra-machines">
       <memberof>project_infra</memberof>
-      <fileid>infra-machines</fileid>
     </doc>
-    <doc id="infra-servers">
+    <doc fileid="infra-servers">
       <memberof>project_infra</memberof>
-      <fileid>infra-servers</fileid>
     </doc>
-    <doc id="infra-tenshi">
+    <doc fileid="infra-tenshi">
       <memberof>project_infra</memberof>
-      <fileid>infra-tenshi</fileid>
     </doc>
-    <doc id="infra-ntp">
+    <doc fileid="infra-ntp">
       <memberof>project_infra</memberof>
-      <fileid>infra-ntp</fileid>
     </doc>
-    <doc id="infra-ssh">
+    <doc fileid="infra-ssh">
       <memberof>project_infra</memberof>
-      <fileid>infra-ssh</fileid>
     </doc>
-    <doc id="infra-syslog">
+    <doc fileid="infra-syslog">
       <memberof>project_infra</memberof>
-      <fileid>infra-syslog</fileid>
     </doc>
-    <doc id="infra-webspace">
+    <doc fileid="infra-webspace">
       <memberof>project_infra</memberof>
-      <fileid>infra-webspace</fileid>
     </doc>
-    <doc id="infra-faq">
+    <doc fileid="infra-faq">
       <memberof>project_infra</memberof>
-      <fileid>infra-faq</fileid>
     </doc>
-    <doc id="infra-rsync">
+    <doc fileid="infra-rsync">
       <memberof>project_infra</memberof>
-      <fileid>infra-rsync</fileid>
     </doc>
-    <doc id="metastructure-projectxml">
+    <doc fileid="metastructure-projectxml">
       <memberof>project_metastructure</memberof>
-      <fileid>metastructure-projectxml</fileid>
     </doc>
-    <doc id="pr-presentation">
+    <doc fileid="pr-presentation">
       <memberof>project_pr</memberof>
-      <fileid>pr-presentation</fileid>
     </doc>
-    <doc id="catalyst-faq">
+    <doc fileid="catalyst-faq">
       <memberof>project_releng</memberof>
-      <fileid>catalyst-faq</fileid>
     </doc>
-    <doc id="installer-design">
+    <doc fileid="installer-design">
       <memberof>project_releng</memberof>
-      <fileid>installer-design</fileid>
     </doc>
-    <doc id="releng-guidelines">
+    <doc fileid="releng-guidelines">
       <memberof>project_releng</memberof>
       <memberof>gentoodev_policies</memberof>
-      <fileid>releng-guidelines</fileid>
     </doc>
-    <doc id="profile-update">
+    <doc fileid="profile-update">
       <memberof>project_releng</memberof>
-      <fileid>profile-update</fileid>
     </doc>
-    <doc id="security-index">
+    <doc fileid="security-index">
       <memberof>project_security</memberof>
-      <fileid>security-index</fileid>
     </doc>
-    <doc id="security-policy">
+    <doc fileid="security-policy">
       <memberof>project_security</memberof>
       <memberof>gentoodev_policies</memberof>
-      <fileid>security-policy</fileid>
     </doc>
-    <doc id="security-coordination">
+    <doc fileid="security-coordination">
       <memberof>project_security</memberof>
-      <fileid>security-coordination</fileid>
     </doc>
-    <doc id="security-recruitment">
+    <doc fileid="security-recruitment">
       <memberof>project_security</memberof>
-      <fileid>security-recruitment</fileid>
     </doc>
-    <doc id="security-bugs">
+    <doc fileid="security-bugs">
       <memberof>project_security</memberof>
-      <fileid>security-bugs</fileid>
     </doc>
-    <doc id="forums-mod-guide">
+    <doc fileid="forums-guide">
       <memberof>project_forums</memberof>
-      <fileid>forums-guide</fileid>
     </doc>
-    <doc id="keychain-guide">
+    <doc fileid="keychain-guide">
       <memberof>desktop_apps</memberof>
       <memberof>sysadmin_specific</memberof>
-      <fileid>keychain-guide</fileid>
     </doc>
-    <doc id="metadoc-guide">
+    <doc fileid="metadoc-guide">
       <memberof>project_gdp</memberof>
-      <fileid>metadoc-guide</fileid>
     </doc>
-    <doc id="hpc-howto">
+    <doc fileid="hpc-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>hpc-howto</fileid>
     </doc>
-    <doc id="gnap-userguide">
+    <doc fileid="gnap-userguide">
       <memberof>project_base</memberof>
-      <fileid>gnap-userguide</fileid>
     </doc>
-    <doc id="embedded-handbook">
+    <doc fileid="embedded-handbook">
       <memberof>project_base</memberof>
-      <fileid>embedded-handbook</fileid>
     </doc>
-    <doc id="mips-requirements">
+    <doc fileid="mips-requirements">
       <memberof>install_other</memberof>
-      <fileid>mips-requirements</fileid>
     </doc>
-    <doc id="grub-error-guide">
+    <doc fileid="grub-error-guide">
       <memberof>install_other</memberof>
-      <fileid>grub-error-guide</fileid>
     </doc>
-    <doc id="usb-guide">
+    <doc fileid="usb-guide">
       <memberof>install_other</memberof>
-      <fileid>usb-guide</fileid>
     </doc>
-    <doc id="liveusb">
+    <doc fileid="liveusb">
       <memberof>install_other</memberof>
-      <fileid>liveusb</fileid>
     </doc>
-    <doc id="apache-troubleshooting">
+    <doc fileid="apache-troubleshooting">
       <memberof>sysadmin_specific</memberof>
-      <fileid>apache-troubleshooting</fileid>
     </doc>
-    <doc id="apache-upgrading">
+    <doc fileid="apache-upgrading">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>apache-upgrading</fileid>
     </doc>
-    <doc id="apache-developer">
+    <doc fileid="apache-developer">
       <memberof>gentoodev_docs</memberof>
-      <fileid>apache-developer</fileid>
     </doc>
-    <doc id="sudo-guide">
+    <doc fileid="sudo-guide">
       <memberof>sysadmin_general</memberof>
-      <fileid>sudo-guide</fileid>
     </doc>
-    <doc id="freebsd-guide">
+    <doc fileid="freebsd-guide">
       <memberof>install_guides</memberof>
       <memberof>project_base</memberof>
-      <fileid>freebsd-guide</fileid>
     </doc>
-    <doc id="mips-faq">
+    <doc fileid="mips-faq">
       <memberof>faq</memberof>
-      <fileid>mips-faq</fileid>
     </doc>
-    <doc id="mysql-upgrading">
+    <doc fileid="mysql-upgrading">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>mysql-upgrading</fileid>
     </doc>
-    <doc id="mysql-upgrade-slotted">
+    <doc fileid="mysql-upgrade-slotted">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>mysql-upgrade-slotted</fileid>
     </doc>
-    <doc id="gcc-upgrading">
+    <doc fileid="gcc-upgrading">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>gcc-upgrading</fileid>
     </doc>
-    <doc id="change-chost">
+    <doc fileid="change-chost">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>change-chost</fileid>
     </doc>
-    <doc id="x86-at-faq">
+    <doc fileid="x86-at-faq">
       <memberof>project_base</memberof>
-      <fileid>x86-at-faq</fileid>
     </doc>
-    <doc id="gnome-upgrade">
+    <doc fileid="gnome-upgrade">
       <memberof>desktop_install</memberof>
       <memberof>upgrade</memberof>
-      <fileid>gnome-upgrade</fileid>
     </doc>
-    <doc id="modular-x-howto">
+    <doc fileid="modular-x-howto">
       <memberof>desktop</memberof>
       <memberof>upgrade</memberof>
-      <fileid>modular-x-howto</fileid>
     </doc>
-    <doc id="porting-modular-x">
+    <doc fileid="porting-modular-x">
       <memberof>desktop</memberof>
       <memberof>gentoodev_docs</memberof>
-      <fileid>porting-modular-x</fileid>
     </doc>
-    <doc id="php-upgrade">
+    <doc fileid="php-upgrade">
       <memberof>sysadmin_specific</memberof>
       <memberof>upgrade</memberof>
-      <fileid>php-upgrade</fileid>
     </doc>
-    <doc id="jffnms">
+    <doc fileid="jffnms">
       <memberof>sysadmin_specific</memberof>
-      <fileid>jffnms</fileid>
     </doc>
-    <doc id="vpnc-howto">
+    <doc fileid="vpnc-howto">
       <memberof>sysadmin_specific</memberof>
-      <fileid>vpnc-howto</fileid>
     </doc>
-    <doc id="conky">
+    <doc fileid="conky">
       <memberof>desktop_config</memberof>
-      <fileid>conky</fileid>
     </doc>
-    <doc id="ldapdns">
+    <doc fileid="ldapdns">
       <memberof>sysadmin_specific</memberof>
-      <fileid>ldapdns</fileid>
     </doc>
-    <doc id="man-guide">
+    <doc fileid="man-guide">
       <memberof>sysadmin_general</memberof>
-      <fileid>man-guide</fileid>
     </doc>
-    <doc id="info-guide">
+    <doc fileid="info-guide">
       <memberof>sysadmin_general</memberof>
-      <fileid>info-guide</fileid>
     </doc>
-    <doc id="java-upgrade">
+    <doc fileid="java-upgrade">
       <memberof>upgrade</memberof>
-      <fileid>java-upgrade</fileid>
     </doc>
-    <doc id="kernel-config">
+    <doc fileid="kernel-config">
       <memberof>sysadmin_general</memberof>
-      <fileid>kernel-config</fileid>
     </doc>
-    <doc id="zsh">
+    <doc fileid="zsh">
       <memberof>sysadmin_general</memberof>
-      <fileid>zsh</fileid>
     </doc>
-    <doc id="qa-autofailure">
+    <doc fileid="qa-autofailure">
       <memberof>gentoodev_docs</memberof>
-      <fileid>qa-autofailure</fileid>
     </doc>
-    <doc id="qa-automagic">
+    <doc fileid="qa-automagic">
       <memberof>gentoodev_docs</memberof>
-      <fileid>qa-automagic</fileid>
     </doc>
-    <doc id="qa-backtraces">
+    <doc fileid="qa-backtraces">
       <memberof>sysadmin_specific</memberof>
-      <fileid>qa-backtraces</fileid>
     </doc>
-    <doc id="manually-fixing-portage">
+    <doc fileid="manually-fixing-portage">
       <memberof>gentoo_portage</memberof>
-      <fileid>manually-fixing-portage</fileid>
     </doc>
-    <doc id="xen-guide">
+    <doc fileid="xen-guide">
       <memberof>sysadmin_specific</memberof>
-      <fileid>xen-guide</fileid>
     </doc>
-    <doc id="overlays-userguide">
+    <doc fileid="overlays-userguide">
       <memberof>project_overlays</memberof>
       <memberof>gentoo_portage</memberof>
-      <fileid>overlays-userguide</fileid>
     </doc>
-    <doc id="overlays-devguide">
+    <doc fileid="overlays-devguide">
       <memberof>project_overlays</memberof>
       <memberof>gentdev_docs</memberof>
-      <fileid>overlays-devguide</fileid>
     </doc>
-    <doc id="overlays-policy">
+    <doc fileid="overlays-policy">
       <memberof>project_overlays</memberof>
       <memberof>gentdev_docs</memberof>
       <memberof>gentdev_policies</memberof>
-      <fileid>overlays-policy</fileid>
     </doc>
-    <doc id="pam-upgrade">
+    <doc fileid="pam-upgrade">
       <memberof>upgrade</memberof>
-      <fileid>pam-upgrade</fileid>
+    </doc>
+    <doc fileid="texlive-migration-guide">
+      <memberof>upgrade</memberof>
     </doc>
   </docs>
 </metadoc>
