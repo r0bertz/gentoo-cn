@@ -15,36 +15,10 @@
 
 <!ELEMENT sections   (abstract?, version, date, section+)>
 
-<!ELEMENT section  (title, body*, subsection*)>
-<!ATTLIST section  id   CDATA #IMPLIED
-                   test CDATA #IMPLIED>
+<!ELEMENT section  (include | (title, (body+ | subsection+)) )>
 
-<!ELEMENT subsection (title?, body+)>
+<!ELEMENT subsection (include | (title?, body+))>
 <!ATTLIST subsection id   CDATA #IMPLIED
                      test CDATA #IMPLIED>
 
-<!ELEMENT body    (%block.class;)+>
-<!ATTLIST body    test CDATA #IMPLIED>
-
-<!ATTLIST note    test CDATA #IMPLIED>
-
-<!ATTLIST impo    test CDATA #IMPLIED>
-
-<!ATTLIST warn    test CDATA #IMPLIED>
-
-<!ATTLIST pre     test CDATA #IMPLIED>
-
-<!ATTLIST p       test CDATA #IMPLIED>
-
-<!ATTLIST table   test CDATA #IMPLIED>
-
-<!ATTLIST tr      test CDATA #IMPLIED>
-
-<!ATTLIST ul      test CDATA #IMPLIED>
-
-<!ATTLIST ol      test CDATA #IMPLIED>
-
-<!ATTLIST li      test CDATA #IMPLIED>
-
-<!ELEMENT include EMPTY>
-<!ATTLIST include href CDATA #REQUIRED>
+<!ELEMENT body    (include | (%block.class;)+)>

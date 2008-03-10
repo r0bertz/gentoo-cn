@@ -36,11 +36,11 @@
    <xsl:if test="string-length(status) > 0">
      <status><xsl:value-of select="translate(normalize-space(status),'QWERTYUIOPLKJHGFDSAZXCVBNM','qwertyuioplkjhgfdsazxcvbnm')"/></status>
    </xsl:if>
-   <xsl:if test="email[@role='gentoo']">
-    <email role="gentoo"><xsl:value-of select="email[@role='gentoo'][1]"/></email>
+   <xsl:if test="email[substring-after(text(),'@')='gentoo.org']">
+    <email><xsl:value-of select="email[substring-after(text(),'@')='gentoo.org'][1]"/></email>
    </xsl:if>
-   <xsl:if test="email[@role!='gentoo']">
-    <email role="other"><xsl:value-of select="email[@role!='gentoo'][1]"/></email>
+   <xsl:if test="email[substring-after(text(),'@')!='gentoo.org']">
+    <email><xsl:value-of select="email[substring-after(text(),'@')!='gentoo.org'][1]"/></email>
    </xsl:if>
    </user>
  </xsl:for-each>
@@ -145,11 +145,11 @@
     <xsl:if test="status">
       <status><xsl:value-of select="status"/></status>
     </xsl:if>
-    <xsl:if test="email[@role='gentoo']">
-      <email role="gentoo"><xsl:value-of select="email[@role='gentoo']"/></email>
+    <xsl:if test="email[substring-after(text(),'@')='gentoo.org']">
+     <email><xsl:value-of select="email[substring-after(text(),'@')='gentoo.org'][1]"/></email>
     </xsl:if>
-    <xsl:if test="email[@role='other']">
-      <email role="other"><xsl:value-of select="email[@role='other']"/></email>
+    <xsl:if test="email[substring-after(text(),'@')!='gentoo.org']">
+     <email><xsl:value-of select="email[substring-after(text(),'@')!='gentoo.org'][1]"/></email>
     </xsl:if>
   </xsl:element>
 </xsl:template>

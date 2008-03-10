@@ -13,13 +13,13 @@
                   parent   CDATA  #IMPLIED>
 <!ELEMENT files   (file)*>
 <!ELEMENT file    (#PCDATA)*>
-<!ATTLIST file    id       CDATA  #REQUIRED>
+<!ATTLIST file    id       ID #REQUIRED>
 <!ELEMENT docs    (doc)*>
-<!ELEMENT doc     (memberof*,fileid,bugs?)>
-<!ATTLIST doc     id       CDATA  #REQUIRED>
+<!ELEMENT doc     (memberof*,bookref?,bugs?)>
+<!ATTLIST doc     fileid   CDATA  #REQUIRED>
 <!ELEMENT memberof         (#PCDATA)*>
-<!ELEMENT fileid  (#PCDATA)*>
-<!ATTLIST fileid  vpart    CDATA  #IMPLIED
+<!ELEMENT bookref  EMPTY>
+<!ATTLIST bookref vpart    CDATA  #IMPLIED
                   vchap    CDATA  #IMPLIED>
 <!ELEMENT bugs    (bug*)>
 <!ELEMENT bug     (#PCDATA)*>

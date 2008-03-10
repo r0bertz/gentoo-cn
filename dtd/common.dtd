@@ -52,13 +52,17 @@
 <!ELEMENT br                    EMPTY>
 
 <!ELEMENT note                  (#PCDATA|%inline.class;)*>
+<!ATTLIST note    test CDATA #IMPLIED>
 
 <!ELEMENT impo                  (#PCDATA|%inline.class;)*>
+<!ATTLIST impo    test CDATA #IMPLIED>
 
 <!ELEMENT warn                  (#PCDATA|%inline.class;)*>
+<!ATTLIST warn    test CDATA #IMPLIED>
 
 <!ELEMENT pre                   (#PCDATA|%pre.class;)*>
-<!ATTLIST pre                   caption CDATA #REQUIRED>
+<!ATTLIST pre                   caption CDATA #REQUIRED
+                                test    CDATA #IMPLIED>
 
 <!ELEMENT comment               (#PCDATA|%pre.class;|b)*>
 <!ELEMENT i                     (#PCDATA|%pre.class;)*>
@@ -72,20 +76,26 @@
 <!ATTLIST glepindex status CDATA #IMPLIED
                     index  CDATA "/proj/en/glep/gleps.xml">
 
+<!ATTLIST body    test CDATA #IMPLIED>
+
 <!ELEMENT p            (#PCDATA|%inline.class;)*>
-<!ATTLIST p      	  by CDATA #IMPLIED>
+<!ATTLIST p      	  by   CDATA #IMPLIED
+                    test CDATA #IMPLIED>
 
 <!ELEMENT table                 (tcolumn*, tr+)>
+<!ATTLIST table   test CDATA #IMPLIED>
 
 <!ELEMENT tcolumn               EMPTY>
 <!ATTLIST tcolumn               width CDATA #REQUIRED>
 
 <!ELEMENT tr                    (th|ti)+>
-<!ATTLIST tr     		id    CDATA #IMPLIED>
+<!ATTLIST tr     		id   CDATA #IMPLIED
+                    test CDATA #IMPLIED>
 
 <!ELEMENT th                    (#PCDATA|%inline.class;)*>
 <!ATTLIST th        colspan CDATA #IMPLIED 
-                    rowspan CDATA #IMPLIED>
+                    rowspan CDATA #IMPLIED
+                    align (left|center|right) "left">
 
 <!ELEMENT ti                    (#PCDATA|%ti.class;)*>
 <!ATTLIST ti        colspan CDATA #IMPLIED 
@@ -99,10 +109,13 @@
 <!ELEMENT dd                    (#PCDATA|%inline.class;|ul|ol)*>
 
 <!ELEMENT ul			(li+)>
+<!ATTLIST ul      test CDATA #IMPLIED>
 
 <!ELEMENT ol			(li+)>
+<!ATTLIST ol      test CDATA #IMPLIED>
 
 <!ELEMENT li                    (#PCDATA|%inline.class;|ul|ol)*>
+<!ATTLIST li      test CDATA #IMPLIED>
 
 <!ELEMENT sup                   (#PCDATA|%inline.class;)*>
 <!ELEMENT sub                   (#PCDATA|%inline.class;)*>
@@ -115,3 +128,9 @@
 <!ELEMENT keyval  EMPTY>
 <!ATTLIST keyval  id CDATA #REQUIRED>
 
+<!ATTLIST section  id   CDATA #IMPLIED
+                   test CDATA #IMPLIED>
+
+<!ELEMENT included ( version, date, (chapter|section|body)+ )>
+<!ELEMENT include EMPTY>
+<!ATTLIST include href CDATA #REQUIRED>

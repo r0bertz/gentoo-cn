@@ -3,12 +3,15 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:exslt="http://exslt.org/common"
                 xmlns:str="http://exslt.org/strings"
-                exclude-result-prefixes="exslt str">
+                xmlns:func="http://exslt.org/functions"
+                exclude-result-prefixes="exslt str func">
 
 <xsl:output encoding="UTF-8"
             method="xml"
             indent="yes"
             doctype-system="/dtd/guide.dtd"/>
+
+<xsl:include href="/xsl/inserts.xsl"/>
 
 <xsl:template match="glsa">
 <guide>
@@ -40,11 +43,20 @@ This is a Gentoo Linux Security Advisory
 </tr>
 <tr>
   <th>Release Date</th>
-  <ti><xsl:value-of select="announced"/></ti>
+  <ti><xsl:value-of select="func:format-date(announced)"/></ti>
 </tr>
 <tr>
   <th>Latest Revision</th>
-  <ti><xsl:value-of select="revised"/></ti>
+  <ti>
+   <xsl:choose>
+    <xsl:when test="func:is-date(substring(revised,1,10))">
+     <xsl:value-of select="concat(func:format-date(substring(revised,1,10)),substring(revised,11))"/>
+    </xsl:when>
+    <xsl:otherwise>
+      <xsl:value-of select="revised"/>
+    </xsl:otherwise>
+   </xsl:choose>
+  </ti>
 </tr>
 <tr>
   <th>Impact</th>

@@ -65,7 +65,7 @@
  </devs>
 </xsl:template>
 
-<!-- Process mail tag, see if we have a Gentoo dev, add @gentoo.org is required
+<!-- Process mail tag, see if we have a Gentoo dev, add @gentoo.org if required
      and pull name from roll-call if required
      Returns an xml element named mail with optional link attribute
   -->
@@ -126,6 +126,9 @@
     <xsl:when test="string-length($gmail)>0">
       <xsl:value-of select="$gmail"/>
     </xsl:when>
+    <xsl:when test="string-length($mail/@link)>0 and not(contains($mail/@link,'@'))">
+      <xsl:value-of select="concat($mail/@link, '@gentoo.org')"/>
+    </xsl:when>
     <xsl:when test="string-length($mail/@link)>0">
       <xsl:value-of select="$mail/@link"/>
     </xsl:when>
@@ -146,11 +149,11 @@
     <xsl:when test="string-length($gmail)>0 and string-length($mail/text())=0">
      <xsl:value-of select="$gmail"/>
     </xsl:when>
-    <xsl:when test="string-length($mail/text())=0">
+    <xsl:when test="string-length($mail/text())=0 and string-length($mail/@link)>0">
      <xsl:value-of select="$mail/@link"/>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:value-of select="."/>
+     <xsl:value-of select="$mail/text()"/>
     </xsl:otherwise>
    </xsl:choose>
  </xsl:variable>

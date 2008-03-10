@@ -1,4 +1,4 @@
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/dtd/glsa.dtd,v 1.12 2007/10/19 15:25:19 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/dtd/glsa.dtd,v 1.16 2007/11/05 00:54:20 robbat2 Exp $ -->
 <!ELEMENT glsa  (title,synopsis,product,announced,revised,bug*,access?,affected,background?,description,impact,workaround,resolution,references,license?,metadata*)>
 <!ATTLIST glsa  id  CDATA   #REQUIRED>
 

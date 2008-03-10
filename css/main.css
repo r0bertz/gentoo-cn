@@ -18,6 +18,10 @@ BODY {
 	font-weight: bold; 
 }
 
+dt {
+	font-weight: bold; 
+}
+
 .chapnum {
 	font-size: 0.85em;
 }
@@ -122,6 +126,7 @@ ol,ul {margin-top: 5px;}
 	color: #ffffff;
   background-color: #7a5ada;
 	font-weight: bold;
+  text-align: center;
 }
 
 .infosub {

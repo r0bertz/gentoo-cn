@@ -1,35 +1,23 @@
-<!ELEMENT userlist (user*)>
-<!ELEMENT user (realname, pgpkey,email+,joined,birthday, status?, roles?, location?, address*) >
-	<!ATTLIST user username ID #REQUIRED>
-	<!ELEMENT realname (firstname,familyname)>
-		<!ATTLIST realname fullname CDATA #IMPLIED>
-		<!ELEMENT firstname (#PCDATA) >
-		<!ELEMENT familyname (#PCDATA) >
-			<!ATTLIST familyname sort CDATA #IMPLIED>
-	<!ELEMENT pgpkey (#PCDATA)>
-	<!ELEMENT pgpfingerprint (#PCDATA)>
-	<!ELEMENT email (#PCDATA)>
-		<!ATTLIST email role ( primary | alias | secondary | gentoo ) #REQUIRED >
-	<!-- all dates should be DD MMMM YYYY - eg '15 October 2006' -->
-	<!ELEMENT joined (#PCDATA)>
-	<!ELEMENT retired (#PCDATA)>
-	<!ELEMENT birthday (#PCDATA)>
-	<!ELEMENT address (street, number, suffix?, zipcode, city, state?, country, formatted?)>
-		<!ATTLIST address role ( main | work | secondary | home ) #REQUIRED>
-		<!ELEMENT street (#PCDATA)>
-		<!ELEMENT number (#PCDATA)>
-		<!ELEMENT suffix (#PCDATA)>
-		<!ELEMENT zipcode (#PCDATA)>
-		<!ELEMENT city (#PCDATA)>
-		<!ELEMENT state (#PCDATA)>
-		<!ELEMENT country (#PCDATA)>
-			<!ATTLIST country fullname CDATA #IMPLIED>
-		<!ELEMENT formatted (#PCDATA)>
-			<!ATTLIST formatted xml:space (preserve) #FIXED 'preserve'>
-	<!ELEMENT status (#PCDATA)>
-	<!ELEMENT roles (#PCDATA)>
-	<!-- Location is the string displayed on the webpage -->
-	<!ELEMENT location (#PCDATA)>
-	    <!-- signed decimal numbers. degrees north/east. -->
-			<!ATTLIST location latitude  CDATA #IMPLIED
+<!ELEMENT userlist (user+)>
+<!ELEMENT user (realname, pgpkey, alias*, email+, joined, retired?, status?, roles?, location?) >
+  <!ATTLIST user username ID #REQUIRED>
+  <!ELEMENT realname (firstname,familyname)>
+    <!ATTLIST realname fullname CDATA #IMPLIED>
+    <!ELEMENT firstname (#PCDATA) >
+    <!ELEMENT familyname (#PCDATA) >
+      <!ATTLIST familyname sort CDATA #IMPLIED>
+  <!ELEMENT pgpkey (#PCDATA)>
+  <!ELEMENT alias (#PCDATA)>
+  <!ELEMENT email (#PCDATA)>
+
+  <!-- all dates should be YYYY-MM-DD - eg '2006-11-22' -->
+  <!ELEMENT joined (#PCDATA)>
+  <!ELEMENT retired (#PCDATA)>
+
+  <!ELEMENT status (#PCDATA)>
+  <!ELEMENT roles (#PCDATA)>
+  <!-- Location is the string displayed on the webpage -->
+  <!ELEMENT location (#PCDATA)>
+      <!-- signed decimal numbers. degrees north/east. -->
+      <!ATTLIST location latitude  CDATA #IMPLIED
                          longitude CDATA #IMPLIED>

@@ -140,10 +140,9 @@
             <xsl:with-param name="metadoc"  select="$metadoc"/>
             <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
             <xsl:with-param name="lang"     select="$lang"/>
-            <xsl:with-param name="fileid"   select="fileid/text()"/>
-            <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-            <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-            <xsl:with-param name="docid"    select="@id"/>
+            <xsl:with-param name="fileid"   select="@fileid"/>
+            <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+            <xsl:with-param name="vchap"    select="bookref/@vchap"/>
           </xsl:call-template>
           </b>
           <xsl:variable name="abstract">
@@ -151,10 +150,9 @@
               <xsl:with-param name="metadoc"  select="$metadoc"/>
               <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
               <xsl:with-param name="lang"     select="$lang"/>
-              <xsl:with-param name="fileid"   select="fileid/text()"/>
-              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-              <xsl:with-param name="docid"    select="@id"/>
+              <xsl:with-param name="fileid"   select="@fileid"/>
+              <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+              <xsl:with-param name="vchap"    select="bookref/@vchap"/>
             </xsl:call-template>
           </xsl:variable>
           <xsl:if test="string-length($abstract)>0">
@@ -187,10 +185,9 @@
                   <xsl:with-param name="metadoc"  select="$metadoc"/>
                   <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
                   <xsl:with-param name="lang"     select="$lang"/>
-                  <xsl:with-param name="fileid"   select="fileid/text()"/>
-                  <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-                  <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-                  <xsl:with-param name="docid"    select="@id"/>
+                  <xsl:with-param name="fileid"   select="@fileid"/>
+                  <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+                  <xsl:with-param name="vchap"    select="bookref/@vchap"/>
                 </xsl:call-template>
               </xsl:variable>
               <xsl:if test="not($docname='')">
@@ -202,10 +199,9 @@
                     <xsl:with-param name="metadoc"  select="$metadoc"/>
                     <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
                     <xsl:with-param name="lang"     select="$lang"/>
-                    <xsl:with-param name="fileid"   select="fileid/text()"/>
-                    <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-                    <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-                    <xsl:with-param name="docid"    select="@id"/>
+                    <xsl:with-param name="fileid"   select="@fileid"/>
+                    <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+                    <xsl:with-param name="vchap"    select="bookref/@vchap"/>
                   </xsl:call-template>
                 </xsl:variable>
                 <xsl:if test="string-length($abstract)>0">
@@ -229,7 +225,6 @@
   <xsl:param name="fileid"/>
   <xsl:param name="vpart"/>
   <xsl:param name="vchap"/>
-  <xsl:param name="docid"/>
   <xsl:variable name="link"><xsl:value-of select="exslt:node-set($metadoc)/metadoc/files/file[@id = $fileid]/text()"/></xsl:variable>
   <xsl:variable name="dlink" select="document($link)"/>
   <xsl:if test="not($dlink/missing)">
@@ -264,7 +259,6 @@
   <xsl:param name="fileid"/>
   <xsl:param name="vpart"/>
   <xsl:param name="vchap"/>
-  <xsl:param name="docid"/>
   <xsl:variable name="link"><xsl:value-of select="exslt:node-set($metadoc)/metadoc/files/file[@id = $fileid]/text()"/></xsl:variable>
 
   <xsl:choose>
@@ -341,10 +335,9 @@
               <xsl:with-param name="metadoc"  select="$metadoc"/>
               <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
               <xsl:with-param name="lang"     select="$lang"/>
-              <xsl:with-param name="fileid"   select="fileid"/>
-              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-              <xsl:with-param name="docid"    select="@id"/>
+              <xsl:with-param name="fileid"   select="@fileid"/>
+              <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+              <xsl:with-param name="vchap"    select="bookref/@vchap"/>
             </xsl:call-template>
           </xsl:variable>
           <xsl:variable name="docabstract">
@@ -353,10 +346,9 @@
               <xsl:with-param name="metadoc"  select="$metadoc"/>
               <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
               <xsl:with-param name="lang"     select="$lang"/>
-              <xsl:with-param name="fileid"   select="fileid"/>
-              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-              <xsl:with-param name="docid"    select="@id"/>
+              <xsl:with-param name="fileid"   select="@fileid"/>
+              <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+              <xsl:with-param name="vchap"    select="bookref/@vchap"/>
             </xsl:call-template>
            </xsl:if>
           </xsl:variable>
@@ -408,7 +400,12 @@
     <xsl:for-each select="exslt:node-set($metadoc)/metadoc/members/lead">
       <xsl:variable name="nickname" select="text()"/>
       <xsl:variable name="fullname" select="concat(exslt:node-set($userfile)/userlist/user[@username = $nickname]/realname/firstname, ' ', exslt:node-set($userfile)/userlist/user[@username = $nickname]/realname/familyname)"/>
-      <xsl:variable name="email"    select="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email"/>
+      <xsl:variable name="email">
+        <xsl:choose>
+          <xsl:when test="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email[contains(text(),'@gentoo.org')]"><xsl:value-of select="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email[contains(text(),'@gentoo.org')]"/></xsl:when>
+          <xsl:otherwise><xsl:value-of select="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email"/></xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
       <tr>
         <ti><xsl:value-of select="$fullname"/></ti>
         <ti><xsl:value-of select="$nickname"/></ti>
@@ -427,6 +424,7 @@
       <xsl:variable name="email">
         <xsl:choose>
           <xsl:when test="@mail"><xsl:value-of select="@mail"/></xsl:when>
+          <xsl:when test="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email[contains(text(),'@gentoo.org')]"><xsl:value-of select="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email[contains(text(),'@gentoo.org')]"/></xsl:when>
           <xsl:otherwise><xsl:value-of select="exslt:node-set($userfile)/userlist/user[@username = $nickname]/email"/></xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
@@ -495,7 +493,7 @@
     <xsl:variable name="version">
       <xsl:choose>
         <xsl:when test="starts-with($v, '$Id:')">
-          <!-- Extract version from $Id: metadoc.xsl,v 1.38 2007/09/14 08:39:08 neysx Exp $ tag -->
+          <!-- Extract version from $Id: metadoc.xsl,v 1.40 2008/03/09 21:17:04 neysx Exp $ tag -->
           <xsl:value-of select="substring-before(substring-after($v, ',v '),' ')"/>
         </xsl:when>
         <xsl:otherwise>
@@ -518,7 +516,7 @@
             <xsl:variable name="parentversion">
               <xsl:choose>
                 <xsl:when test="starts-with($pv, '$Id:')">
-                  <!-- Extract version from $Id: metadoc.xsl,v 1.38 2007/09/14 08:39:08 neysx Exp $ tag -->
+                  <!-- Extract version from $Id: metadoc.xsl,v 1.40 2008/03/09 21:17:04 neysx Exp $ tag -->
                   <xsl:value-of select="substring-before(substring-after($pv, ',v '),' ')"/>
                 </xsl:when>
                 <xsl:when test="string-length($pv)=0">?!?</xsl:when>
@@ -577,10 +575,9 @@
               <xsl:with-param name="metadoc"  select="$metadoc"/>
               <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
               <xsl:with-param name="lang"     select="$lang"/>
-              <xsl:with-param name="fileid"   select="fileid/text()"/>
-              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-              <xsl:with-param name="docid"    select="@id"/>
+              <xsl:with-param name="fileid"   select="@fileid"/>
+              <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+              <xsl:with-param name="vchap"    select="bookref/@vchap"/>
             </xsl:call-template>
           </ti>
           <ti>
@@ -620,10 +617,9 @@
               <xsl:with-param name="metadoc"  select="$metadoc"/>
               <xsl:with-param name="pmetadoc" select="$pmetadoc"/>
               <xsl:with-param name="lang"     select="$lang"/>
-              <xsl:with-param name="fileid"   select="fileid/text()"/>
-              <xsl:with-param name="vpart"    select="fileid/@vpart"/>
-              <xsl:with-param name="vchap"    select="fileid/@vchap"/>
-              <xsl:with-param name="docid"    select="@id"/>
+              <xsl:with-param name="fileid"   select="@fileid"/>
+              <xsl:with-param name="vpart"    select="bookref/@vpart"/>
+              <xsl:with-param name="vchap"    select="bookref/@vchap"/>
             </xsl:call-template>
           </ti>
           <ti>

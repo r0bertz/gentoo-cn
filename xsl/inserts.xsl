@@ -314,6 +314,9 @@
 <!-- Eval dynamic test on conditional tags -->
 <func:function name="func:keyval">
   <xsl:param name="key"/>
+  <xsl:if test="not(exslt:node-set($VALUES)/values/key[@id=$key])">
+   <xsl:message><xsl:value-of select="concat('Missing value for key ', $key)"/></xsl:message>
+  </xsl:if>
   <func:result select="exslt:node-set($VALUES)/values/key[@id=$key]"/>
 </func:function>
 
@@ -332,6 +335,7 @@
    </xsl:when>
    <xsl:otherwise>
     <span class="missing-value">${<xsl:value-of select="$id"/>}</span>
+    <xsl:message><xsl:value-of select="concat('Missing value for key ', $id)"/></xsl:message>
    </xsl:otherwise>
   </xsl:choose>
 </xsl:template>

@@ -5,7 +5,7 @@
 <!ATTLIST catmetadata pkgname CDATA "">
 
 <!-- Metadata for a package -->
-<!ELEMENT pkgmetadata ( (herd|maintainer|longdescription)* )>
+<!ELEMENT pkgmetadata ( (herd|maintainer|longdescription|use)* )>
 <!ATTLIST pkgmetadata pkgname CDATA "">
 
   <!-- One tag for each herd this package is assigned to. -->
@@ -15,7 +15,7 @@
   <!ELEMENT maintainer ( email, (description| name)* )>
 
   <!-- A long description of the package in freetext-->
-  <!ELEMENT longdescription (#PCDATA) >
+  <!ELEMENT longdescription (#PCDATA|pkg)* >
 
   <!-- The changelog of the package-->
   <!ELEMENT changelog (change)* >
@@ -37,6 +37,16 @@
         <!-- bug-id of a bug fixed by this change, multiple allowed. The 
           format of this is a number or alias for a bug. NOT including a 
           # character -->
+
+  <!-- description of what this USE flag does for this package -->
+  <!ELEMENT use (flag)* >
+    <!ELEMENT flag (#PCDATA|pkg)* >
+      <!-- name attribute holds the name of the USE flag -->
+      <!ATTLIST flag name CDATA #REQUIRED >
+
+  <!-- category/package information for cross-linking in descriptions
+    and useflag descriptions -->
+  <!ELEMENT pkg (#PCDATA) >
           
 <!-- Common attributes -->
 
@@ -46,6 +56,7 @@
   language "C" or "en", which is equivalent -->
   <!ATTLIST description lang CDATA "C" >
   <!ATTLIST longdescription lang CDATA "C" >
+  <!ATTLIST use lang CDATA "C" >
 
 <!-- The restrict attribute, this attribute specifies restrictions on 
   the applicability of tags on versions. The format of this attribute is 
@@ -58,6 +69,7 @@
   <!ATTLIST herd restrict CDATA #IMPLIED >
   <!ATTLIST maintainer restrict CDATA #IMPLIED >
   <!ATTLIST longdescription restrict CDATA #IMPLIED >
+  <!ATTLIST flag restrict CDATA #IMPLIED >
 
 
 

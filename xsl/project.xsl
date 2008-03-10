@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output encoding="UTF-8" method="xml" indent="yes" doctype-system="/dtd/guide.dtd"/>
-<xsl:include href="util.xsl"/>
+<xsl:include href="/xsl/util.xsl"/>
+<xsl:include href="/xsl/job.xsl"/>
 
 <xsl:variable name="rollcall" select='document("/proj/en/devrel/roll-call/userinfo.xml")'/>
 
@@ -47,7 +48,9 @@
 			</body></section>
 		</chapter>
 		</xsl:if>
+
 		<xsl:apply-templates select='extrachapter[@position="goals"]'/>
+
 		<xsl:if test="dev">
 		<chapter>
 			<title>Developers</title>
@@ -68,11 +71,14 @@
       <p>
        All developers can be reached by e-mail using <c>nickname@gentoo.org</c>.
       </p>
-      
-                        </body></section>
+      </body></section>
 		</chapter>
 		</xsl:if>
 		<xsl:apply-templates select='extrachapter[@position="devs"]'/>
+
+		<xsl:apply-templates select='recruitment'/>
+		<xsl:apply-templates select='extrachapter[@position="recruitment"]'/>
+
 		<xsl:if test="subproject|extraproject">
 		<chapter>
 			<title>Subprojects</title>
@@ -161,8 +167,21 @@
 		</xsl:if>		
 	
 		<xsl:apply-templates select='extrachapter[@position="bottom" or (not(@position) or @position="")]'/>
+
 	</guide>
 </xsl:template>
+
+<xsl:template match="recruitment">
+  <chapter id="JOBS">
+   <title>Recruitment</title>
+   <section><body><p>
+   We are currently looking for users interested in helping the project with
+   the following jobs:
+   </p></body></section>
+   <xsl:apply-templates select='job'/>
+  </chapter>
+</xsl:template>
+
 <xsl:template match="name|description">
 <xsl:value-of select="normalize-space(text())"/>
 </xsl:template>

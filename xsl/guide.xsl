@@ -25,6 +25,8 @@
 
 <xsl:include href="/xsl/devmap.xsl" />
 
+<xsl:include href="/xsl/doc-struct.xsl" />
+
 <!-- When using <pre>, whitespaces should be preserved -->
 <xsl:preserve-space elements="pre script"/>
 
@@ -102,12 +104,12 @@
       </xsl:if>
     </xsl:when>
     <xsl:otherwise>
-     <xsl:if test="count(/guide/chapter)&gt;1">
+     <xsl:if test="count(exslt:node-set($doc-struct)//chapter)&gt;1">
       <form name="contents" action="http://www.gentoo.org">
         <b><xsl:value-of select="func:gettext('Content')"/></b>:
         <select name="url" size="1" OnChange="location.href=form.url.options[form.url.selectedIndex].value" style="font-family:sans-serif,Arial,Helvetica">
-          <xsl:for-each select="chapter">
-            <xsl:variable name="chapid">doc_chap<xsl:number/></xsl:variable><option value="#{$chapid}"><xsl:number/>. <xsl:value-of select="title"/></option>
+          <xsl:for-each select="exslt:node-set($doc-struct)//chapter">
+            <option value="#doc_chap{position()}"><xsl:number/>. <xsl:value-of select="@title"/></option>
           </xsl:for-each>
         </select>
       </form>
@@ -147,7 +149,7 @@
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/www-gentoo-org.xml" title="Gentoo Website"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/forums-gentoo-org.xml" title="Gentoo Forums"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/bugs-gentoo-org.xml" title="Gentoo Bugzilla"/>
-<!--  <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/packages-gentoo-org.xml" title="Gentoo Packages"/> -->
+  <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/packages-gentoo-org.xml" title="Gentoo Packages"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/archives-gentoo-org.xml" title="Gentoo List Archives"/>
   
   <xsl:if test="//glsaindex or //glsa-latest">
@@ -253,7 +255,7 @@
 </xsl:template>
 
 
-<xsl:template match="/gleps|/devaway|/uris|/inserts|/glsa-index|opensearch:OpenSearchDescription">
+<xsl:template match="/included|/gleps|/devaway|/uris|/inserts|/glsa-index|opensearch:OpenSearchDescription">
  <xsl:message>
   <xsl:value-of select="concat('%%GORG%%Redirect=',$link,'?passthru=1')"/>
  </xsl:message>
@@ -279,11 +281,22 @@
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/www-gentoo-org.xml" title="Gentoo Website"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/forums-gentoo-org.xml" title="Gentoo Forums"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/bugs-gentoo-org.xml" title="Gentoo Bugzilla"/>
-<!--  <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/packages-gentoo-org.xml" title="Gentoo Packages"/> -->
+  <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/packages-gentoo-org.xml" title="Gentoo Packages"/>
   <link rel="search" type="application/opensearchdescription+xml" href="http://www.gentoo.org/search/archives-gentoo-org.xml" title="Gentoo List Archives"/>
   
+  <xsl:if test="/*[1][@redirect]">
+    <!-- Immediate HTML refresh in case redirect is not supported -->
+    <meta http-equiv="Refresh">
+      <xsl:attribute name="content"><xsl:value-of select="concat('0; URL=', /*[1]/@redirect)"/></xsl:attribute>
+    </meta>
+    <xsl:message>
+      <!-- Redirect using http header when supported -->
+      <xsl:value-of select="concat('%%GORG%%Redirect=',/*[1]/@redirect)"/>
+    </xsl:message>
+  </xsl:if>    
+
   <xsl:if test="/mainpage/newsitems">
-    <link rel="alternate" type="application/rss+xml" title="Gentoo Linux新闻RDF" href="http://www.gentoo-cn.org/rdf/zh_cn/gentoo-news.rdf" />
+    <link rel="alternate" type="application/rss+xml" title="Gentoo Linux News RDF" href="http://www.gentoo.org/rdf/en/gentoo-news.rdf" />
   </xsl:if>
   <xsl:choose>
     <xsl:when test="/mainpage | /news">
@@ -327,7 +340,7 @@
     <a href="{concat($www,'/')}"><img border="0" src="{concat($ROOT,'images/gtop-www.jpg')}" alt="Gentoo Logo"/></a>
     </td>
     <!-- Top bar menu -->
-    <td valign="bottom" align="left" bgcolor="#000000" colspan="2">
+    <td valign="bottom" align="left" bgcolor="#000000" colspan="2" lang="en">
       <p class="menu">
         <a class="menulink" href="{concat($www,'/main/en/about.xml')}">
          <xsl:choose>
@@ -339,15 +352,15 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/about.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        关于</a>
+        About</a>
         | 
         <a class="menulink" href="{concat($www,'/proj/en/index.xml')}">
           <xsl:if test="starts-with($tpath, '/proj/**/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
           </xsl:if>
-        项目</a>
+        Projects</a>
         |
-        <a class="menulink" href="{concat($www,'/doc/zh_cn/index.xml')}">
+        <a class="menulink" href="{concat($www,'/doc/en/index.xml')}">
          <xsl:choose>
           <xsl:when test="starts-with($tpath, '/doc/**/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
@@ -357,8 +370,8 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        文档</a>
-        | <a class="menulink" href="http://forums.gentoo.org">论坛</a>
+        Docs</a>
+        | <a class="menulink" href="http://forums.gentoo.org">Forums</a>
         |
         <a class="menulink" href="{concat($www,'/main/en/lists.xml')}">
          <xsl:choose>
@@ -370,20 +383,21 @@
             <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/lists.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        邮件列表</a>
+        Lists</a>
         | <a class="menulink" href="http://bugs.gentoo.org">Bugs</a>
+        | <a class="menulink" href="http://www.cafepress.com/officialgentoo/">Store</a>
         |
-        <a class="menulink" href="{concat($www,'/news/zh_cn/gwn/gwn.xml')}">
+        <a class="menulink" href="{concat($www,'/news/en/gmn/')}">
          <xsl:choose>
-          <xsl:when test="starts-with($tpath, '/news/**/gwn/')">
+          <xsl:when test="starts-with($tpath, '/news/**/gmn/')">
             <xsl:attribute name="class">highlight</xsl:attribute>
             <xsl:attribute name="href"><xsl:value-of select="$link"/></xsl:attribute>
           </xsl:when> 
-          <xsl:when test="not($isEnglish='Y' or document(concat('/news/', $glang, '/gwn/gwn.xml'))/missing)">
-            <xsl:attribute name="href"><xsl:value-of select="concat('/news/',$glang,'/gwn/gwn.xml')"/></xsl:attribute>
+          <xsl:when test="not($isEnglish='Y' or document(concat('/news/', $glang, '/gmn/index.xml'))/missing)">
+            <xsl:attribute name="href"><xsl:value-of select="concat('/news/',$glang,'/gmn/index.xml')"/></xsl:attribute>
           </xsl:when> 
          </xsl:choose>
-        周报</a>
+        GMN</a>
         |
         <a class="menulink" href="{concat($www,'/main/en/where.xml')}">
          <xsl:choose>
@@ -449,35 +463,35 @@
             <!--info goes here-->
             <table cellspacing="0" cellpadding="5" border="0">
               <tr>
-                <td valign="top" class="leftmenu">
+                <td valign="top" class="leftmenu" lang="en">
                   <p class="altmenu">
-                   安装：
+                   Installation:
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/zh_cn/handbook/index.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/en/handbook/index.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/handbook/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/handbook/index.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>Gentoo手册</xsl:text></a>
+                    <xsl:text>Gentoo&#xA0;Handbook</xsl:text></a>
                     <br/>
-                    <a class="altlink" href="{concat($www,'/doc/zh_cn/index.xml?catid=install#doc_chap2')}">
+                    <a class="altlink" href="{concat($www,'/doc/en/index.xml?catid=install#doc_chap2')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml?catid=install#doc_chap2')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>安装文档</xsl:text></a>
+                    <xsl:text>Installation&#xA0;Docs</xsl:text></a>
                    <br/><br/>
-                   文档：
+                   Documentation:
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/zh_cn/index.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/en/index.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/index.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/index.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>文档首页</xsl:text></a>
+                    <xsl:text>Home</xsl:text></a>
                     <br/>
-                    <a class="altlink" href="{concat($www,'/doc/zh_cn/list.xml')}">
+                    <a class="altlink" href="{concat($www,'/doc/en/list.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/doc/', $glang, '/list.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/doc/',$glang,'/list.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>文档列表</xsl:text></a>
+                    <xsl:text>Listing</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/about.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/about.xml'))/missing)">
@@ -497,27 +511,29 @@
                       </xsl:if> 
                     <xsl:text>Social&#xA0;Contract</xsl:text></a>
                    <br/><br/>
-                   资源：
-		   <br/>
-	            <a class="altlink" href="http://www.gentoo-cn.org/gitweb">Git仓库</a>
-                    <br/>
+                   Resources:
+                   <br/>
                     <a class="altlink" href="http://bugs.gentoo.org">Bug&#xA0;Tracker</a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/proj/en/devrel/roll-call/userinfo.xml')}">Developer&#xA0;List</a>
                     <br/>
                     <a class="altlink" href="http://forums.gentoo.org">Discussion&#xA0;Forums</a>
                     <br/>
+                    <a class="altlink" href="http://torrents.gentoo.org/">Gentoo&#xA0;BitTorrents</a>
+                    <br/>
+                    <a class="altlink" href="{concat($www,'/proj/en/glep/')}">Gentoo&#xA0;Linux Enhancement Proposals</a>
+                    <br/>
                     <a class="altlink" href="{concat($www,'/main/en/irc.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/irc.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/irc.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>IRC&#xA0;频道</xsl:text></a>
+                    <xsl:text>IRC&#xA0;Channels</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/lists.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/lists.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/lists.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>邮件列表</xsl:text></a>
+                    <xsl:text>Mailing&#xA0;Lists</xsl:text></a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/main/en/mirrors.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/mirrors.xml'))/missing)">
@@ -531,32 +547,35 @@
                       </xsl:if> 
                     <xsl:text>Name and Logo Guidelines</xsl:text></a>
                     <br/>
-<!--
                     <a class="altlink" href="http://packages.gentoo.org/">Online Package Database</a>
                     <br/>
--->
                     <a class="altlink" href="{concat($www,'/security/en/index.xml')}">Security Announcements</a>
                     <br/>
                     <a class="altlink" href="{concat($www,'/proj/en/devrel/staffing-needs/')}">Staffing&#xA0;Needs</a>
                     <br/>
-		   <br/>
-                   图片： 
+             		    <a class="altlink" href="http://vendors.gentoo.org/">Supporting&#xA0;Vendors</a>
+                    <br/>
+                    <a class="altlink" href="http://sources.gentoo.org/">View&#xA0;our&#xA0;CVS</a>
+                   <br/><br/>
+                   Graphics:
                    <br/>
-		   <a class="altlink" href="{concat('http://www.gentoo.org','/main/en/graphics.xml')}">
+                    <a class="altlink" href="{concat($www,'/main/en/graphics.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/graphics.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/graphics.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>标志和主题</xsl:text></a>
+                    <xsl:text>Logos and themes</xsl:text></a>
                     <br/>
-		    <a class="altlink" href="{concat('http://www.gentoo.org','/main/en/shots.xml')}">
+                    <a class="altlink" href="{concat($www,'/main/en/shots.xml')}">
                       <xsl:if test="not($isEnglish='Y' or document(concat('/main/', $glang, '/shots.xml'))/missing)">
                         <xsl:attribute name="href"><xsl:value-of select="concat('/main/',$glang,'/shots.xml')"/></xsl:attribute>
                       </xsl:if> 
-                    <xsl:text>屏幕截图</xsl:text></a>
+                    <xsl:text>ScreenShots</xsl:text></a>
                    <br/><br/>
-                   其余资源：
+                   Miscellaneous Resources:
                    <br/>
-                    <a class="altlink" href="{concat($www,'/doc/zh_cn/articles/')}">IBM dW/Intel文章存档</a>
+                    <a class="altlink" href="http://www.cafepress.com/officialgentoo/">Gentoo Linux Store</a>
+                    <br/>
+                    <a class="altlink" href="{concat($www,'/doc/en/articles/')}">IBM dW/Intel article archive</a>
                   </p>
                   <br/><br />
                 </td>
@@ -576,7 +595,7 @@
               <xsl:when test="/mainpage/newsitems">
               <p class="news">
                 <img class="newsicon" src="{concat($ROOT,'images/gentoo-new.gif')}" alt="Gentoo logo"/>
-                <span class="newsitem">We produce Gentoo Linux, a special flavor of Linux that
+                <span class="newsitem" lang="en">We produce Gentoo Linux, a special flavor of Linux that
                 can be automatically optimized and customized for just
                 about any application or need. Extreme performance,
                 configurability and a top-notch user and developer
@@ -593,7 +612,7 @@
               </xsl:for-each>
               <!-- Links to older news below news items -->
               <div class="news">
-               <p class="newshead">
+               <p class="newshead" lang="en">
                 <b>Older News</b>
                </p>
                <ul>
@@ -630,7 +649,7 @@
       <xsl:call-template name="rhcol"/>
     </td>
   </tr>
-  <tr>
+  <tr lang="en">
     <td align="right" class="infohead" colspan="3">
      <xsl:call-template name="copyright-footer"/>
     </td>
@@ -656,8 +675,7 @@
     <xsl:otherwise>/main/en/contact.xml</xsl:otherwise>
    </xsl:choose>
   </xsl:variable>
-Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有问
-题和建议请<a class="highlight" href="{concat($www, $contact)}">联系我们</a>.
+Copyright 2001-<xsl:value-of select="substring(func:today(),1,4)"/> Gentoo Foundation, Inc. Questions, Comments? <a class="highlight" href="{concat($www, $contact)}">Contact us</a>.
 </xsl:template>
 
 <!-- Mail template -->
@@ -699,18 +717,56 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 </xsl:template>
 
 <!-- FAQ Index & Chapter -->
-<xsl:template match="faqindex|chapter">
-  <xsl:variable name="chid"><xsl:number count="faqindex|chapter"/></xsl:variable>
+<xsl:template match="faqindex|chapter|/sections/section">
+ <xsl:if test="not(@test) or dyn:evaluate(@test)">
+  <xsl:variable name="uid" select="generate-id(.)" />
+  <xsl:variable name="chid">
+   <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[@uid=$uid]/preceding-sibling::chapter)"/>
+  </xsl:variable>
+
+  <xsl:variable name="partnum">
+   <xsl:value-of select="exslt:node-set($doc-struct)//bookpart[descendant::*[@uid=$uid]]/@pos"/>
+  </xsl:variable>
+  <xsl:variable name="chapnum">
+   <xsl:value-of select="exslt:node-set($doc-struct)//bookchap[descendant::*[@uid=$uid]]/@pos"/>
+  </xsl:variable>
+
   <xsl:choose>
+    <xsl:when test="include">
+      <xsl:apply-templates select="document(include/@href)//chapter"/>
+    </xsl:when>
+
     <xsl:when test="title">
+     <xsl:if test="not(position()=1 and title/text()=/mainpage/title)">
+
       <p class="chaphead">
-        <xsl:if test="@id"><a name="{@id}"/></xsl:if>
-        <a name="doc_chap{$chid}"/>
-        <xsl:if test="not(/mainpage) and (count(//faqindex)+count(//chapter))>1">
-          <span class="chapnum"><xsl:value-of select="$chid"/>.&#160;</span>
+        <xsl:if test="@id">
+          <a name="{@id}"/>
         </xsl:if>
+
+        <xsl:choose>
+          <xsl:when test="$TTOP='book' and $full != 0">
+            <a name="book_part{$partnum}_chap{$chapnum}__chap{$chid}"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <a name="doc_chap{$chid}"/>
+          </xsl:otherwise>
+        </xsl:choose>
+
+        <span class="chapnum">
+          <xsl:choose>
+            <xsl:when test="$TTOP='book'">
+              <xsl:value-of select="$chapnum" />.<xsl:number level="multiple" format="a. " value="$chid"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="$chid"/>.&#160;
+            </xsl:otherwise>
+          </xsl:choose>
+        </span>
         <xsl:value-of select="title"/>
       </p>
+
+     </xsl:if>
     </xsl:when>
     <xsl:otherwise>
       <xsl:if test="/guide">
@@ -722,25 +778,21 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
       </xsl:if>
     </xsl:otherwise>
   </xsl:choose>
-  <xsl:apply-templates select="body">
-    <xsl:with-param name="chid" select="$chid"/>
-  </xsl:apply-templates>
-  <xsl:apply-templates select="section">
-    <xsl:with-param name="chid" select="$chid"/>
-  </xsl:apply-templates>
+
+  <xsl:apply-templates select="section|subsection|body"/>
 
   <xsl:if test="name()='faqindex'">
     <!-- Generate FAQ index -->
 
-    <xsl:for-each select="./following-sibling::chapter">
-     <xsl:if test="section/title">
+    <xsl:for-each select="exslt:node-set($doc-struct)//chapter[position()>1]">
+     <xsl:if test="section[@title]">
       <p class="secthead">
-        <xsl:value-of select="title"/>
+        <xsl:value-of select="@title"/>
       </p>
       <xsl:variable name="nchap"><xsl:value-of select="1+position()"/></xsl:variable>
       <ul>
         <xsl:for-each select="section">
-         <xsl:if test="title">
+         <xsl:if test="@title">
           <li>
            <a>
             <xsl:attribute name="href">
@@ -753,7 +805,7 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
               </xsl:otherwise>
              </xsl:choose>
             </xsl:attribute>
-            <xsl:value-of select="title"/>
+            <xsl:value-of select="@title"/>
            </a>
           </li>
          </xsl:if>
@@ -762,75 +814,122 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
      </xsl:if>
     </xsl:for-each>
   </xsl:if>
+ </xsl:if>
 </xsl:template>
 
 
 <!-- Section template -->
-<xsl:template match="section">
-<xsl:param name="chid"/>
-<xsl:if test="title">
-  <xsl:variable name="sectid">doc_chap<xsl:value-of select="$chid"/>_sect<xsl:number/></xsl:variable>
-  <xsl:if test="@id">
-    <a name="{@id}"/>
-  </xsl:if>
-  <p class="secthead">
-    <a name="{$sectid}"><xsl:value-of select="title"/></a>
-  </p>
-</xsl:if>
-<xsl:apply-templates select="body">
-  <xsl:with-param name="chid" select="$chid"/>
-</xsl:apply-templates>
+<xsl:template match="section|/sections/section/subsection">
+ <xsl:if test="not(@test) or dyn:evaluate(@test)">
+
+  <xsl:variable name="uid" select="generate-id(.)" />
+  <xsl:variable name="chid">
+   <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[descendant::section[@uid=$uid]]/preceding-sibling::chapter)"/>
+  </xsl:variable>
+  <xsl:variable name="seid">
+   <xsl:value-of select="1+count(exslt:node-set($doc-struct)//section[@uid=$uid]/preceding-sibling::section)"/>
+  </xsl:variable>
+
+  <xsl:variable name="partnum">
+   <xsl:value-of select="exslt:node-set($doc-struct)//bookpart[descendant::*[@uid=$uid]]/@pos"/>
+  </xsl:variable>
+  <xsl:variable name="chapnum">
+   <xsl:value-of select="exslt:node-set($doc-struct)//bookchap[descendant::*[@uid=$uid]]/@pos"/>
+  </xsl:variable>
+
+  <xsl:choose>
+    <xsl:when test="include">
+      <xsl:apply-templates select="document(include/@href)//section"/>
+    </xsl:when>
+
+    <xsl:when test="title">
+      <xsl:variable name="sectid">
+        <xsl:choose>
+          <xsl:when test="$TTOP='book' and $full != 0">
+            <xsl:value-of select="concat('book_part', $partnum, '_chap', $chapnum, '__chap', $chid, '_sect', $seid)"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="concat('doc_chap', $chid, '_sect', $seid)"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:variable>
+
+      <p class="secthead">
+        <xsl:if test="@id">
+        <a name="{@id}"/></xsl:if>
+        <a name="{$sectid}"><xsl:value-of select="title"/></a>
+      </p>
+    </xsl:when>
+  </xsl:choose>
+
+  <xsl:apply-templates select="body"/>
+ </xsl:if>
 </xsl:template>
 
 <!-- Figure template -->
 <xsl:template match="figure">
-<xsl:param name="chid"/>
-<xsl:variable name="fignum"><xsl:number level="any" from="chapter" count="figure"/></xsl:variable>
-<xsl:variable name="figid">doc_chap<xsl:value-of select="$chid"/>_fig<xsl:value-of select="$fignum"/></xsl:variable>
-<xsl:variable name="llink">
-  <xsl:choose>
-    <xsl:when test="starts-with(@link,'http://www.gentoo.org/')">
-      <xsl:value-of select="concat($ROOT, substring-after(@link, 'http://www.gentoo.org/'))"/>
-    </xsl:when>
-    <xsl:when test="starts-with(@link,'/')">
-      <xsl:value-of select="concat($ROOT, substring-after(@link, '/'))"/>
+  <xsl:variable name="uid" select="generate-id(.)" />
+  <xsl:variable name="chid">
+   <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[descendant::figure[@uid=$uid]]/preceding-sibling::chapter)"/>
+  </xsl:variable>
+  <xsl:variable name="fignum">
+   <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[descendant::figure[@uid=$uid]]//figure[following::figure[@uid=$uid]])"/>
+  </xsl:variable>
+  <xsl:variable name="figid">
+   <xsl:choose>
+    <xsl:when test="($TTOP = 'book') and ($full != 0)">
+     <xsl:value-of select="concat('book_part', exslt:node-set($doc-struct)//bookpart[descendant::figure[@uid=$uid]]/@pos, '_chap', exslt:node-set($doc-struct)//bookchap[descendant::figure[@uid=$uid]]/@pos, '__chap', $chid, '_fig', $fignum)"/>
     </xsl:when>
     <xsl:otherwise>
-      <xsl:value-of select="@link"/>
+     <xsl:value-of select="concat('doc_chap', $chid, '_fig', $fignum)"/>
     </xsl:otherwise>
-  </xsl:choose>
-</xsl:variable>
-<br/>
-<a name="{$figid}"/>
-<table cellspacing="0" cellpadding="0" border="0">
-  <tr>
-    <td bgcolor="#7a5ada">
-      <p class="codetitle">
+   </xsl:choose>
+  </xsl:variable>
+
+  <xsl:variable name="llink">
+    <xsl:choose>
+      <xsl:when test="starts-with(@link,'http://www.gentoo.org/')">
+        <xsl:value-of select="concat($ROOT, substring-after(@link, 'http://www.gentoo.org/'))"/>
+      </xsl:when>
+      <xsl:when test="starts-with(@link,'/')">
+        <xsl:value-of select="concat($ROOT, substring-after(@link, '/'))"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="@link"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
+  <br/>
+  <a name="{$figid}"/>
+  <table cellspacing="0" cellpadding="0" border="0">
+    <tr>
+      <td bgcolor="#7a5ada">
+        <p class="codetitle">
+          <xsl:choose>
+            <xsl:when test="@caption">
+              <xsl:value-of select="func:gettext('Figure')"/>&#160;<xsl:value-of select="$chid"/>.<xsl:value-of select="$fignum"/><xsl:value-of select="func:gettext('SpaceBeforeColon')"/>: <xsl:value-of select="@caption"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="func:gettext('Figure')"/>&#160;<xsl:value-of select="$chid"/>.<xsl:value-of select="$fignum"/>
+            </xsl:otherwise>
+          </xsl:choose>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" bgcolor="#ddddff">
         <xsl:choose>
-          <xsl:when test="@caption">
-            <xsl:value-of select="func:gettext('Figure')"/>&#160;<xsl:value-of select="$chid"/>.<xsl:value-of select="$fignum"/><xsl:value-of select="func:gettext('SpaceBeforeColon')"/>: <xsl:value-of select="@caption"/>
+          <xsl:when test="@short">
+            <img src="{$llink}" alt="Fig. {$fignum}: {@short}"/>
           </xsl:when>
           <xsl:otherwise>
-            <xsl:value-of select="func:gettext('Figure')"/>&#160;<xsl:value-of select="$chid"/>.<xsl:value-of select="$fignum"/>
+            <img src="{$llink}" alt="Fig. {$fignum}"/>
           </xsl:otherwise>
         </xsl:choose>
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" bgcolor="#ddddff">
-      <xsl:choose>
-        <xsl:when test="@short">
-          <img src="{$llink}" alt="Fig. {$fignum}: {@short}"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <img src="{$llink}" alt="Fig. {$fignum}"/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </td>
-  </tr>
-</table>
-<br/>
+      </td>
+    </tr>
+  </table>
+  <br/>
 </xsl:template>
 
 <!--figure without a caption; just a graphical element-->
@@ -984,11 +1083,15 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 
 <!-- Body -->
 <xsl:template match="body">
-<xsl:param name="chid"/>
  <xsl:if test="not(@test) or dyn:evaluate(@test)">
-  <xsl:apply-templates>
-    <xsl:with-param name="chid" select="$chid"/>
-  </xsl:apply-templates>
+    <xsl:choose>
+      <xsl:when test="include">
+        <xsl:apply-templates select="document(include/@href)//body"/>
+      </xsl:when>
+     <xsl:otherwise>
+      <xsl:apply-templates select="./*[not(@test) or dyn:evaluate(@test)]"/>
+     </xsl:otherwise>
+    </xsl:choose>
  </xsl:if>
 </xsl:template>
 
@@ -999,10 +1102,25 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 
 <!-- Preserve whitespace, aka Code Listing -->
 <xsl:template match="pre">
-<xsl:param name="chid"/>
   <xsl:if test="not(@test) or dyn:evaluate(@test)">
-    <xsl:variable name="prenum"><xsl:number level="any" from="chapter" count="pre[not(ancestor-or-self::*[@test and not(dyn:evaluate(@test))])]"/></xsl:variable>
-    <xsl:variable name="preid">doc_chap<xsl:value-of select="$chid"/>_pre<xsl:value-of select="$prenum"/></xsl:variable>
+    <xsl:variable name="uid" select="generate-id(.)" />
+    <xsl:variable name="chid">
+     <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[descendant::pre[@uid=$uid]]/preceding-sibling::chapter)"/>
+    </xsl:variable>
+    <xsl:variable name="prenum">
+     <xsl:value-of select="1+count(exslt:node-set($doc-struct)//chapter[descendant::pre[@uid=$uid]]//pre[following::pre[@uid=$uid]])"/>
+    </xsl:variable>
+    <xsl:variable name="preid">
+     <xsl:choose>
+      <xsl:when test="($TTOP = 'book') and ($full != 0)">
+       <xsl:value-of select="concat('book_part', exslt:node-set($doc-struct)//bookpart[descendant::pre[@uid=$uid]]/@pos, '_chap', exslt:node-set($doc-struct)//bookchap[descendant::pre[@uid=$uid]]/@pos, '__chap', $chid, '_pre', $prenum)"/>
+      </xsl:when>
+      <xsl:otherwise>
+       <xsl:value-of select="concat('doc_chap', $chid, '_pre', $prenum)"/>
+      </xsl:otherwise>
+     </xsl:choose>
+    </xsl:variable>
+    
     <a name="{$preid}"/>
     <table class="ntable" width="100%" cellspacing="0" cellpadding="0" border="0">
       <tr>
@@ -1101,7 +1219,8 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
         <xsl:choose>
           <xsl:when test="starts-with(@link, '#doc_')">
             <xsl:variable name="locallink" select="substring-after(@link, 'doc_')" />
-            <a href="#book_{generate-id(/)}_{$locallink}"><xsl:apply-templates /></a>
+            <xsl:variable name="bodyid" select="generate-id(ancestor::body)"/>
+            <a href="{concat('#book_part',exslt:node-set($doc-struct)//bookpart[descendant::body[@uid=$bodyid]]/@pos,'_chap',exslt:node-set($doc-struct)//bookchap[descendant::body[@uid=$bodyid]]/@pos,'__',$locallink)}"><xsl:apply-templates /></a>
           </xsl:when>
           <xsl:otherwise>
             <a href="{@link}"><xsl:apply-templates/></a>
@@ -1283,16 +1402,14 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 </xsl:template>
 
 <!-- Table Heading, no idea why <th> hasn't been used -->
+<!-- 2008-03-09: th uses th, default is align:left for historical reasons -->
 <xsl:template match="th">
-<td class="infohead">
+<th class="infohead">
+  <xsl:if test="@align='left' or @align='right'">
+    <xsl:attribute name="style"><xsl:value-of select="concat('text-align:',@align)"/></xsl:attribute>
+  </xsl:if>
   <xsl:if test="@colspan">
     <xsl:attribute name="colspan"><xsl:value-of select="@colspan"/></xsl:attribute>
-    <!-- Center only when item spans several columns as
-         centering all <th> might disrupt some pages.
-         We might want to use a plain html <th> tag later.
-         Tip: to center a single-cell title, use <th colspan="1">
-       -->
-    <xsl:attribute name="style">text-align:center</xsl:attribute>
   </xsl:if>
   <xsl:if test="@rowspan">
     <xsl:attribute name="rowspan"><xsl:value-of select="@rowspan"/></xsl:attribute>
@@ -1300,7 +1417,7 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
   <b>
     <xsl:apply-templates/>
   </b>
-</td>
+</th>
 </xsl:template>
 
 <!-- Unnumbered List -->
@@ -1422,94 +1539,47 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 <xsl:template name="compare-versions">
 <xsl:param name="original"/>
 <xsl:param name="translation"/>
-  <xsl:choose>
-    <xsl:when test="$original/book and $translation/book">
-    <!-- /book == /book -->
-      <xsl:choose>
-        <xsl:when test="$full != 0">
-        <!-- if full != 0, then compare all files -->
-          <!-- Compare versions in master files -->
-          <xsl:if test="$original/book/version != $translation/book/version">X</xsl:if>
-          <!-- Compare versions in original chapters vs. translated chapters that have the same position -->
-          <xsl:for-each select="$original/book/part">
-            <xsl:variable name="part" select="position()"/>
-            <xsl:for-each select="chapter">
-              <xsl:variable name="chap" select="position()"/>
-              <xsl:variable name="ov" select="document($original/book/part[$part]/chapter[$chap]/include/@href)/sections/version"/>
-              <xsl:variable name="tv" select="document($translation/book/part[$part]/chapter[$chap]/include/@href)/sections/version"/>
-              <xsl:if test="$ov != $tv or not($tv)">X</xsl:if>
-            </xsl:for-each>
-          </xsl:for-each>
-        </xsl:when>
-        <xsl:when test="$part = '0' or $chap = '0'">
-        <!-- Table of contents, check master file -->
-          <xsl:if test="$original/book/version != $translation/book/version">X</xsl:if>
-        </xsl:when>
-        <xsl:otherwise>
-        <!-- Compare chapters at same position (/$part/$chap/) in English handbook and in translated one -->
-          <xsl:variable name="ov" select="document($original/book/part[position()=$part]/chapter[position()=$chap]/include/@href)/sections/version"/>
-          <xsl:variable name="tv" select="document($translation/book/part[position()=$part]/chapter[position()=$chap]/include/@href)/sections/version"/>
-          <xsl:if test="$ov != $tv or not($tv)">X</xsl:if>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:when>
-    <xsl:when test="$original/guide and $translation/guide">
-    <!-- /guide == /guide -->
-      <xsl:if test="$original/guide/version != $translation/guide/version">X</xsl:if>
-    </xsl:when>
-    <xsl:when test="$original/mainpage and $translation/mainpage">
-      <xsl:if test="$original/mainpage/version != $translation/mainpage/version">X</xsl:if>
-    </xsl:when>
-    <xsl:when test="$original/sections and $translation/sections">
-      <xsl:if test="$original/sections/version != $translation/sections/version">X</xsl:if>
-    </xsl:when>
-    <!-- If we did not compare book==book, mainpage==mainpage or guide==guide, then consider versions are different -->
-    <xsl:otherwise>X</xsl:otherwise>
-  </xsl:choose>
+
+ <xsl:choose>
+  <xsl:when test="$original/doc-struct/@type != $translation/doc-struct/@type">
+   <xsl:text>NoOriginal</xsl:text>
+  </xsl:when>
+
+  <xsl:when test="/book and $full='0' and $chap != '0' and $part != '0' and not($original/doc-struct/bookpart[@pos=$part]/bookchap[@pos=$chap])">
+   <xsl:text>NoOriginal</xsl:text>
+  </xsl:when>
+
+  <xsl:otherwise>
+   <xsl:variable name="orig-versions">
+    <xsl:for-each select="$original//version">
+      <xsl:value-of select="concat(.,' ')"/>
+    </xsl:for-each>
+   </xsl:variable>
+
+   <xsl:variable name="trans-versions">
+    <xsl:for-each select="$translation//version">
+      <xsl:value-of select="concat(.,' ')"/>
+    </xsl:for-each>
+   </xsl:variable>
+
+   <xsl:if test="$orig-versions != $trans-versions">Different</xsl:if>
+  </xsl:otherwise>
+ </xsl:choose>
+
 </xsl:template>
 
-<!-- Return the date of a document, for handbooks, it is the max(main file date, all included parts dates) -->
 <xsl:template name="maxdate">
-  <xsl:param name="thedoc"/>
-  <xsl:choose>
-    <xsl:when test="$thedoc/book">
-      <!-- In a book: look for max(/date, include_files/sections/date) -->
-      <xsl:for-each select="$thedoc/book/part/chapter/include">
-        <xsl:sort select="document(@href)/sections/date" order="descending" />
-        <xsl:if test="position() = 1">
-          <!-- Compare the max(date) from included files with the date in the master file
-               Of course, XSLT 1.0 knows no string comparison operator :-(
-               So we build a node set with the two dates and we sort it.
-            -->
-          <xsl:variable name="theDates">
-            <xsl:element name="bookDate">
-              <xsl:value-of select="$thedoc/book/date"/>
-            </xsl:element>
-            <xsl:element name="maxChapterDate">
-              <xsl:value-of select="document(@href)/sections/date"/>
-            </xsl:element>
-          </xsl:variable>
-          <xsl:variable name="sortedDates">  
-            <xsl:for-each select="exslt:node-set($theDates)/*">  
-              <xsl:sort select="." order="descending" />
-              <xsl:copy-of select="."/>
-            </xsl:for-each>   
-          </xsl:variable>
-          <!-- First date is the one we want -->
-          <xsl:value-of select="exslt:node-set($sortedDates)/*[position()=1]"/>
-        </xsl:if>
-      </xsl:for-each>
-    </xsl:when>
-    <xsl:when test="$thedoc/guide or $thedoc/sections or $thedoc/mainpage or $thedoc/news">
-      <xsl:value-of select="$thedoc/*[1]/date"/>
-    </xsl:when>
-  </xsl:choose>
+<xsl:param name="thedoc"/>
+  <xsl:for-each select="$thedoc//date">  
+  <xsl:sort select="." order="descending" />
+    <xsl:if test="position()=1"><xsl:value-of select="."/></xsl:if>
+  </xsl:for-each>   
 </xsl:template>
 
 <xsl:template name="contentdate">
   <xsl:variable name="docdate">
     <xsl:call-template name="maxdate">
-      <xsl:with-param name="thedoc" select="/"/>
+      <xsl:with-param name="thedoc" select="exslt:node-set($doc-struct)"/>
     </xsl:call-template>
   </xsl:variable>
   
@@ -1546,26 +1616,39 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
           <xsl:otherwise>
             <!-- Document is listed in both local metadoc.xml and English one, compare version numbers -->
             <xsl:variable name="pfile" select="$pmetadoc/metadoc/files/file[@id=$fileid]"/>
-            <xsl:variable name="versions">
-              <xsl:call-template name="compare-versions">
-                <xsl:with-param name="original" select ="document($pfile)"/>
-                <xsl:with-param name="translation" select ="/"/>
+
+            <xsl:variable name="orig-struct" xmlns="">
+              <xsl:call-template name="build-doc-struct">
+                <xsl:with-param name="doc" select="document($pfile)"/>
               </xsl:call-template>
             </xsl:variable>
-            <xsl:if test="string-length($versions) > 0">
-              <xsl:variable name="pdocdate">
-                <xsl:call-template name="maxdate">
-                  <xsl:with-param name="thedoc" select="document($pfile)"/>
-                </xsl:call-template>
-              </xsl:variable>
-              <xsl:variable name="res">
-                <xsl:apply-templates select="func:gettext('Outdated')">
-                  <xsl:with-param name="docdate" select="$pdocdate"/>
-                  <xsl:with-param name="paramlink" select="$pfile"/>
-                </xsl:apply-templates>
-              </xsl:variable>
-              <xsl:copy-of select="$res"/>
-            </xsl:if>
+
+            <xsl:variable name="versions">
+              <xsl:call-template name="compare-versions">
+                <xsl:with-param name="translation" select ="exslt:node-set($doc-struct)"/>
+                <xsl:with-param name="original" select ="exslt:node-set($orig-struct)"/>
+              </xsl:call-template>
+            </xsl:variable>
+
+            <xsl:choose>
+              <xsl:when test="$versions = 'Different'">
+                <xsl:variable name="pdocdate">
+                  <xsl:call-template name="maxdate">
+                    <xsl:with-param name="thedoc" select="exslt:node-set($orig-struct)"/>
+                  </xsl:call-template>
+                </xsl:variable>
+                <xsl:variable name="res">
+                  <xsl:apply-templates select="func:gettext('Outdated')">
+                    <xsl:with-param name="docdate" select="$pdocdate"/>
+                    <xsl:with-param name="paramlink" select="$pfile"/>
+                  </xsl:apply-templates>
+                </xsl:variable>
+                <xsl:copy-of select="$res"/>
+              </xsl:when>
+              <xsl:when test="contains($versions,'NoOriginal')">
+                <xsl:value-of select="func:gettext('NoOriginal')"/>
+              </xsl:when>
+            </xsl:choose>
           </xsl:otherwise>
         </xsl:choose>
       </xsl:otherwise>
@@ -1702,7 +1785,7 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
     </tr>
     </xsl:if>
 
-      <tr>
+      <tr lang="en">
       <td align="center" class="topsep">
         <p class="alttext">
           <b>Donate</b> to support our development efforts.
@@ -1722,28 +1805,48 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
         </form>
       </td>
     </tr>
-    <tr>
+    <tr lang="en">
     <td align="center" class="topsep">
-    <script type="text/javascript">&lt;!--
-           google_ad_client = "pub-3740337540082957";
-           google_ad_width = 120;
-           google_ad_height = 600;
-           google_ad_format = "120x600_as";
-           google_ad_type = "text_image";
-           //2007-10-06: HomeRightSkyscpIsAGeek
-           google_ad_channel = "1077535397";
-           google_color_border = "CCCCCC";
-           google_color_bg = "CCCCCC";
-           google_color_link = "000000";
-           google_color_text = "333333";
-           google_color_url = "666666";
-           google_ui_features = "rc:0";
-           //-->
-    </script>
-    <script type="text/javascript"
-             src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+            <a href="http://www.vr.org">
+	    <img src="{concat($images,'images/vr-ad.png')}" width="125" height="144" alt="Gentoo Centric Hosting: vr.org" border="0"/>
+        </a>
+	    <p class="alttext">
+	      <a href="http://www.vr.org/">VR Hosted</a>
+	    </p>
     </td>
+    </tr>
+    <tr lang="en">
+      <td align="center" class="topsep">
+      <a href="http://www.tek.net" target="_top">
+        <img src="{concat($images,'images/tek-gentoo.gif')}" width="125" height="125" alt="Tek Alchemy" border="0"/>
+      </a>
+      <p class="alttext">
+	  <a href="http://www.tek.net/">Tek Alchemy</a>
+      </p>
+      </td>
+    </tr>
+    <tr lang="en">
+    <td align="center" class="topsep">
+      <a href="http://www.sevenl.net" target="_top">
+        <img src="{concat($images,'images/sponsors/sevenl.gif')}" width="125" height="144" alt="SevenL.net" border="0"/>
+      </a>
+      <p class="alttext">
+	  <a href="http://www.sevenl.net/">SevenL.net</a>
+      </p>
+    </td>
+    </tr>
+    <tr lang="en">
+    <td align="center" class="topsep">
+        <a href="http://www.gni.com" target="_top">
+          <img src="{concat($images,'images/gni_logo.png')}" width="125" alt="Global Netoptex Inc." border="0"/>
+      </a>
+      <p class="alttext">
+	  <a href="http://www.gni.com">Global Netoptex Inc.</a>
+      </p>
+    </td>
+    </tr>
+    <tr>
+    <td align="center" class="topsep"/>
     </tr>
   </table>
 </xsl:template>
@@ -1754,12 +1857,17 @@ Copyright <xsl:value-of select="substring(func:today(),1,4)"/> Gentoo中文. 有
 <xsl:param name="link"/>
 
   <div class="news">
-    <p class="newshead">
+    <p class="newshead" lang="en">
       <b><xsl:value-of select="$thenews/title"/></b>
       <br/>
       <font size="0.90em">
-      发布于<xsl:copy-of select="func:format-date($thenews/date)"/>，
-      作者<xsl:value-of select="$thenews/poster"/>
+      Posted on <xsl:copy-of select="func:format-date($thenews/date)"/>
+       <xsl:variable name="poster">
+        <xsl:call-template name="smart-mail">
+         <xsl:with-param name="mail" select="$thenews/poster"/>
+        </xsl:call-template>
+       </xsl:variable>
+      by <xsl:value-of select="$poster"/>
       </font>
     </p>
     
