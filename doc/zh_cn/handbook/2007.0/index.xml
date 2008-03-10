@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/index.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.12 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.13 -->
 <guide link="/doc/zh_cn/handbook/2007.0/index.xml" lang="zh_cn">
 <title>Gentoo 2007.0无网络安装手册</title>
 
 <author title="作者">
-  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+  <mail link="swift"></mail>
 </author>
 <author title="译者">
   <mail link="chenjun.shen@gmail.com">沈辰俊</mail>
@@ -22,7 +22,7 @@ Gentoo 2007.0无网络安装手册的目的是将文档集中在一个条理分�
 
 <license/>
 
-<version>8.6</version>
+<version>8.7</version>
 <date>2007-06-06</date>
 
 <chapter>
