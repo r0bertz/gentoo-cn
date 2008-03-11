@@ -44,11 +44,11 @@
 </p>
 
 <p>
-新手应参阅<uri link="/doc/zh_cn/handbook/index.xml">手册</uri>，其中有关于安装过程更完整的描述。
+新手应当阅读<uri link="/doc/zh_cn/handbook/index.xml">手册</uri>，其中有关于安装过程更完整的描述。
 </p>
 
 <p>
-所有费时超过两秒的命令都会跟随着在屏幕上打印时间输出。这些命令的耗时是在一台AMD 2000 1.66 Ghz的PC上测试的，拥有512 MB内存和两个SATA硬盘。
+所有费时超过两秒的命令都会跟随着在屏幕上打印时间输出。这些命令的耗时是在一台AMD 2000 1.66Ghz的PC上测试的，拥有512MB内存和两个SATA硬盘。
 </p>
 
 <pre caption="测试机器的规格">

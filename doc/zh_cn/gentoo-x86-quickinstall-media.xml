@@ -130,10 +130,7 @@ passwd: password updated successfully
 </p>
 
 <pre caption="从另一台电脑连到你的新机器">
-<comment>#-#-#-#-#  choice  #-#-#-#-#
-（用你新机器的IP地址）
-#-#-#-#-#  choice  #-#-#-#-#
-（使用你新机器的IP地址）</comment>
+<comment>（使用你新机器的IP地址）</comment>
 $ <i>ssh root@192.168.1.10</i>
 The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
 RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.

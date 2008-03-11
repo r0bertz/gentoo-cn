@@ -26,10 +26,7 @@
 $ <i>nano -w ~/.ssh/known_hosts</i>
 <comment>（找出新机器的IP并删除那一行，保存并退出nano）</comment>
 
-<comment>#-#-#-#-#  choice  #-#-#-#-#
-（用你新机器的IP地址）
-#-#-#-#-#  choice  #-#-#-#-#
-（使用你新机器的IP地址）</comment>
+<comment>（使用你新机器的IP地址）</comment>
 $ <i>ssh root@192.168.1.10</i>
 The authenticity of host '192.168.1.10 (192.168.1.10)' can't be established.
 RSA key fingerprint is 96:e7:2d:12:ac:9c:b0:94:90:9f:40:89:b0:45:26:8f.
@@ -129,7 +126,7 @@ sys   36m31.472s
 <comment>（重编译libtool以避免一些潜在的问题）</comment>
 mybox etc # <i>emerge libtool</i>
 
-<comment>（更新配置文件，确保 <b>do not</b> 让etc-update更新你配置好的文件）</comment>
+<comment>（更新配置文件，确保 <b>不要</b>让etc-update更新你配置好的文件）</comment>
 mybox etc # <i>etc-update</i>
 
 <comment>（如果升级了perl，应该执行perl-cleaner脚本）</comment>

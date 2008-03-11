@@ -144,11 +144,11 @@ livecd conf.d # <i>rc-update add vixie-cron default</i>
 </p>
 
 <pre caption="安装其它工具">
-livecd conf.d # <i>emerge xfsprogs</i>       <comment>(如果使用XFS文件系统)</comment>
-livecd conf.d # <i>emerge jfsutils</i>       <comment>(如果使用JFS文件系统)</comment>
-livecd conf.d # <i>emerge reiserfsprogs</i>  <comment>(如果使用Reiser文件系统)</comment>
-livecd conf.d # <i>emerge dhcpcd</i>         <comment>(如果使用DHCP客户端)</comment>
-livecd conf.d # <i>emerge ppp</i>            <comment>(如果使用PPPoE ADSL连接)</comment>
+livecd conf.d # <i>emerge xfsprogs</i>       <comment>（如果使用XFS文件系统）</comment>
+livecd conf.d # <i>emerge jfsutils</i>       <comment>（如果使用JFS文件系统）</comment>
+livecd conf.d # <i>emerge reiserfsprogs</i>  <comment>（如果使用Reiser文件系统）</comment>
+livecd conf.d # <i>emerge dhcpcd</i>         <comment>（如果使用DHCP客户端）</comment>
+livecd conf.d # <i>emerge ppp</i>            <comment>（如果使用PPPoE ADSL连接）</comment>
 </pre>
 
 </body>
