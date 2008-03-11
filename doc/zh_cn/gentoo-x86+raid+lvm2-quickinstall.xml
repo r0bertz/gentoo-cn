@@ -1,0 +1,430 @@
+﻿<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml,v 1.20 2008/01/01 21:32:30 neysx Exp $ -->
+<!-- English CVS version: 1.20 -->
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide lang="zh_cn">
+<title> 含软Raid和LVM2的Gentoo Linux x86快速安装指南</title>
+
+<values>
+ <key id="raid+lvm">yes</key>
+ <key id="root">/dev/md3</key>
+</values>
+
+<author title="作者">
+  <mail link="neysx"/>
+</author>
+<author title="作者">
+  <mail link="swift"/>
+</author>
+<author title="作者">Steven Wagner</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+
+<abstract>
+这篇快速安装指南以一种相对简略的方式介绍Gentoo安装过程。目的是让没有太多时间的用户完成基于stage3的安装（含软Raid和LVM2）。想遵循本指南的用户须已有安装Gentoo Linux的经验。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>12</version>
+<date>2008-01-01</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<body>
+
+<p>
+本指南包含了完成一次从stage3开始安装Gentoo要用到的所有命令，包括实现建立在软RAID阵列之上的LVM2卷。本指南面向有经验的用户。你需要连接到Internet以下载stage3包和Portage快照。
+</p>
+
+<p>
+新手应当阅读<uri link="/doc/zh_cn/handbook/index.xml">手册</uri>，其中有关于安装过程更完整的描述。
+</p>
+
+<p>
+所有费时超过两秒的命令都会跟随着在屏幕上打印时间输出。这些命令的耗时是在一台AMD 2000 1.66Ghz的PC上测试的，拥有512MB内存和两个建立了JBOD配置的SATA硬盘（即Gentoo可以看到两个单独的硬盘）。你的主板上可能有集成一个“硬”RAID控制器，但那通常<b>不是</b>真正的硬RAID。
+</p>
+
+<pre caption="测试机器的规格">
+<comment>（下述配置和耗时情况帮你粗略估计完成整个安装过程大概需要的时间）</comment>
+
+# <i>grep bogo /proc/cpuinfo</i>
+bogomips       : 3337.81
+
+# <i>hdparm -tT /dev/sda /dev/sdb</i>
+/dev/sda:
+reads:   1048 MB in  2.00 seconds = 524.00 MB/sec
+ Timing buffered disk reads:  152 MB in  3.01 seconds =  50.50 MB/sec
+
+/dev/sdb:
+ Timing cached reads:   1048 MB in  2.00 seconds = 524.00 MB/sec
+ Timing buffered disk reads:  152 MB in  3.01 seconds =  50.50 MB/sec
+
+# <i>grep MemTotal /proc/meminfo</i>
+MemTotal:       509248 kB
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>快速安装指南</title>
+<section>
+ <include href="gentoo-x86-quickinstall-media.xml"/>
+</section>
+<section>
+<title>准备磁盘</title>
+<body>
+
+<p>
+加载软RAID和LVM2模块。
+</p>
+
+<pre caption="加载RAID和LVM2模块">
+livecd ~ # <i>modprobe raid0</i>
+livecd ~ # <i>modprobe raid1</i>
+<comment>（raid5、raid6和raid10也可用）</comment>
+
+livecd ~ # <i>modprobe dm-mod</i>
+</pre>
+
+<p>
+使用<c>fdisk</c>或者<c>cfdisk</c>创建分区规划。设备名可能是<path>/dev/sda</path>或者<path>/dev/hda</path>，前者为SATA或SCSI硬盘，后者为IDE硬盘。本指南使用下面的规划方案：
+</p>
+
+<table>
+  <tr>
+    <ti/>
+    <th><path>/dev/sda</path></th>
+    <th><path>/dev/sdb</path></th>
+    <th>Type</th>
+  </tr>
+  <tr>
+    <th><path>/dev/md1</path></th>
+    <th><path>/boot</path></th>
+    <th><path>/boot</path></th>
+    <ti>Raid-1 (mirroring)</ti>
+  </tr>
+  <tr>
+    <th/>
+    <th>swap</th>
+    <th>swap</th>
+    <ti>Normal partitions</ti>
+  </tr>
+  <tr>
+    <th><path>/dev/md3</path></th>
+    <th><path>/</path></th>
+    <th><path>/</path></th>
+    <ti>Raid-1 (mirroring)</ti>
+  </tr>
+  <tr>
+    <th><path>/dev/md4</path></th>
+    <th colspan="2">LVM2 volumes</th>
+    <ti>Raid-0 (striped)</ti>
+  </tr>
+</table>
+
+<impo>
+用于启动的分区必须设为striping模式，不能设为raid-5或raid-0。
+</impo>
+
+<note>
+如果你倾向于更好的稳定性，可以考虑将交换分区设为raid-1（或者甚至raid-5）。那样即使驱动器出故障，也不会破坏你的交换分区以及正在使用这个分区的应用程序。或者，如果你倾向于更好的性能，只要让内核使用独立的交换分区，这种分区默认设为striping模式。
+</note>
+
+<pre caption="创建分区">
+livecd ~ # <i>fdisk /dev/sda</i>
+<comment>（请确认使用的分区类型为fd）</comment>
+
+<comment>（本手册接下去使用以下分区规划）</comment>
+livecd ~ # <i>fdisk -l /dev/sda</i>
+
+Disk /dev/sda: 299.9 GB, 299989204992 bytes
+255 heads, 63 sectors/track, 36471 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1          11       88326   fd  Linux raid autodetect
+/dev/sda2              12          61      401625   82  Linux swap / Solaris
+/dev/sda3              62         311     2008125   fd  Linux raid autodetect
+/dev/sda4             312       36471   290455200   fd  Linux raid autodetect
+
+<comment> （严格按照第一个磁盘的规划来为第二个磁盘分区）</comment>
+livecd ~ # <i>fdisk /dev/sdb</i>
+</pre>
+
+<p>
+然后创建RAID节点和设备：
+</p>
+
+<pre caption="创建节点和设备">
+livecd ~ # <i>mknod /dev/md1 b 9 1</i>
+livecd ~ # <i>mknod /dev/md3 b 9 3</i>
+livecd ~ # <i>mknod /dev/md4 b 9 4</i>
+
+livecd ~ # <i>mdadm --create /dev/md1 --level=1 --raid-devices=2 /dev/sda1 /dev/sdb1</i>
+mdadm: array /dev/md1 started.
+livecd ~ # <i>mdadm --create /dev/md3 --level=1 --raid-devices=2 /dev/sda3 /dev/sdb3</i>
+mdadm: array /dev/md3 started.
+livecd ~ # <i>mdadm --create /dev/md4 --level=0 --raid-devices=2 /dev/sda4 /dev/sdb4</i>
+mdadm: array /dev/md4 started.
+
+<comment>（等待所有单元就绪）</comment>
+livecd ~ # <i>cat /proc/mdstat</i>
+Personalities : [raid0] [raid1]
+md4 : active raid0 sdb4[1] sda4[0]
+581006592 blocks 64k chunks
+
+md3 : active raid1 sdb3[1] sda3[0]
+1959808 blocks [2/2] [UU]
+
+md1 : active raid1 sdb1[1] sda1[0]
+88256 blocks [2/2] [UU]
+</pre>
+
+<p>
+然后在<path>/dev/md4</path>创建LVM2。以下配置方案仅作为一个<b>例子</b>：
+</p>
+
+<table>
+<tr>
+  <th>Directory</th>
+  <th>Size</th>
+  <th>File system</th>
+</tr>
+<tr>
+  <ti>/usr</ti>
+  <ti>8 GB</ti>
+  <ti>ext3</ti>
+</tr>
+<tr>
+  <ti>/usr/portage</ti>
+  <ti>2 GB</ti>
+  <ti>ext2, small block size, many inodes</ti>
+</tr>
+<tr>
+  <ti>/usr/portage/distfiles</ti>
+  <ti>4 GB</ti>
+  <ti>ext2, large bock size, less inodes</ti>
+</tr>
+<tr>
+  <ti>/home</ti>
+  <ti>10 GB</ti>
+  <ti>ext3</ti>
+</tr>
+<tr>
+  <ti>/opt</ti>
+  <ti>4 GB</ti>
+  <ti>ext3</ti>
+</tr>
+<tr>
+  <ti>/var</ti>
+  <ti>4 GB</ti>
+  <ti>ext3</ti>
+</tr>
+<tr>
+  <ti>/var/tmp</ti>
+  <ti>6 GB</ti>
+  <ti>ext2</ti>
+</tr>
+<tr>
+  <ti>/tmp</ti>
+  <ti>2 GB</ti>
+  <ti>ext2</ti>
+</tr>
+</table>
+
+<pre caption="创建LVM2卷">
+livecd ~ # <i>vgscan</i>
+  Reading all physical volumes.  This may take a while...
+  No volume groups found
+livecd ~ # <i>vgchange -a y</i>
+  No volume groups found
+
+<comment>（创建物理卷，我们的例子中只有一个物理卷）</comment>
+livecd ~ # <i>pvcreate /dev/md4</i>
+  Physical volume "/dev/md4" successfully created
+
+<comment>（创建卷组，我们的例子中也只有一个卷组）</comment>
+livecd ~ # <i>vgcreate vg /dev/md4</i>
+  Volume group "vg" successfully created
+
+<comment>（创建逻辑卷）</comment>
+livecd ~ # <i>lvcreate -L8G -nusr vg</i>
+  /dev/cdrom: open failed: Read-only file system
+  Logical volume "usr" created <comment>（未显示更多类似的信息）</comment>
+livecd ~ # <i>lvcreate -L2G -nportage vg</i>
+livecd ~ # <i>lvcreate -L4G -ndistfiles vg</i>
+livecd ~ # <i>lvcreate -L10G -nhome vg</i>
+livecd ~ # <i>lvcreate -L4G -nopt vg</i>
+livecd ~ # <i>lvcreate -L4G -nvar vg</i>
+livecd ~ # <i>lvcreate -L6G -nvartmp vg</i>
+livecd ~ # <i>lvcreate -L2G -ntmp vg</i>
+
+<comment>（显示卷组和逻辑卷）</comment>
+livecd ~ # <i>vgs</i>
+  VG   #PV #LV #SN Attr  VSize   VFree
+  vg     1   8   0 wz--n 554.09G 514.09G
+livecd ~ # <i>lvs</i>
+  LV        VG   Attr   LSize  Origin Snap%  Move Copy%
+  distfiles vg   -wi-a-  4.00G
+  home      vg   -wi-a- 10.00G
+  opt       vg   -wi-a-  4.00G
+  portage   vg   -wi-a-  2.00G
+  tmp       vg   -wi-a-  2.00G
+  usr       vg   -wi-a-  8.00G
+  var       vg   -wi-a-  4.00G
+  vartmp    vg   -wi-a-  6.00G
+</pre>
+
+<p>
+使用<c>mke2fs</c>，<c>mke2fs -j</c>，<c>mkreiserfs</c>，<c>mkfs.xfs</c>和<c>mkfs.jfs</c>建立文件系统。使用<c>mkswap</c>和<c>swapon</c>初始化交换分区。
+</p>
+
+<pre caption="创建文件系统并激活交换分区">
+<comment>（ext2完全满足/boot分区的需要）</comment>
+livecd ~ # <i>mke2fs /dev/md1</i>
+
+<comment>（主分区就用ext3吧）</comment>
+livecd ~ # <i>mke2fs -j /dev/md3</i>
+
+<comment>（在逻辑卷上创建文件系统）</comment>
+livecd ~ # <i>mke2fs -b 4096 -T largefile /dev/vg/distfiles</i>
+livecd ~ # <i>mke2fs -j /dev/vg/home</i>
+livecd ~ # <i>mke2fs -j /dev/vg/opt</i>
+livecd ~ # <i>mke2fs -b 1024 -N 200000 /dev/vg/portage</i>
+livecd ~ # <i>mke2fs /dev/vg/tmp</i>
+livecd ~ # <i>mke2fs -j /dev/vg/usr</i>
+livecd ~ # <i>mke2fs -j /dev/vg/var</i>
+livecd ~ # <i>mke2fs /dev/vg/vartmp</i>
+
+<comment>（创建并激活交换分区）</comment>
+livecd ~ # <i>mkswap /dev/sda2 &amp;&amp; mkswap /dev/sdb2</i>
+livecd ~ # <i>swapon -p 1 /dev/sda2 &amp;&amp; swapon -p 1 /dev/sdb2</i>
+<comment>（检验所有的交换分区使用相同的优先级）</comment>
+livecd ~ # <i>swapon -v -s</i>
+Filename                   Type            Size    Used    Priority
+/dev/sda2                  partition       401616  0       1
+/dev/sdb2                  partition       401616  0       1
+</pre>
+
+<p>
+把新建的文件系统挂载到<path>/mnt/gentoo</path>。同时为其它挂载点创建目录并挂载好。
+</p>
+
+<pre caption="挂在文件系统">
+livecd ~ # <i>mount /dev/md3 /mnt/gentoo</i>
+livecd ~ # <i>cd /mnt/gentoo</i>
+livecd gentoo # <i>mkdir boot home usr opt var tmp</i>
+livecd gentoo # <i>mount /dev/md1 /mnt/gentoo/boot</i>
+livecd gentoo # <i>mount /dev/vg/usr /mnt/gentoo/usr</i>
+livecd gentoo # <i>mount /dev/vg/home /mnt/gentoo/home</i>
+livecd gentoo # <i>mount /dev/vg/opt /mnt/gentoo/opt</i>
+livecd gentoo # <i>mount /dev/vg/tmp /mnt/gentoo/tmp</i>
+livecd gentoo # <i>mount /dev/vg/var /mnt/gentoo/var</i>
+livecd gentoo # <i>mkdir usr/portage var/tmp</i>
+livecd gentoo # <i>mount /dev/vg/vartmp /mnt/gentoo/var/tmp</i>
+livecd gentoo # <i>mount /dev/vg/portage /mnt/gentoo/usr/portage</i>
+livecd gentoo # <i>mkdir usr/portage/distfiles</i>
+livecd gentoo # <i>mount /dev/vg/distfiles /mnt/gentoo/usr/portage/distfiles</i>
+
+<comment>（为临时文件夹设置适当的权限）</comment>
+livecd gentoo # <i>chmod 1777 /mnt/gentoo/tmp /mnt/gentoo/var/tmp</i>
+</pre>
+
+</body>
+</section>
+
+<section>
+ <include href="gentoo-x86-quickinstall-stage.xml"/>
+</section>
+
+<section>
+<title>内核配置</title>
+<body>
+
+<p>
+安装一个内核源码包（通常为<c>gentoo-sources</c>），配置、编译并拷贝<path>arch/i386/boot/bzImage</path>文件到<path>/boot</path>。
+</p>
+
+<pre caption="安装内核源码包，编译和安装内核">
+livecd etc # <i>time emerge gentoo-sources</i>
+
+real  3m3.110s
+user  1m2.320s
+sys   0m34.990s
+livecd etc # <i>cd /usr/src/linux</i>
+livecd linux # <i>make menuconfig</i>
+
+<comment>（跟往常一样配置内核，确保将必需的raid和lvm模块编译进内核，即<b>不是</b>编译为模块。
+相同的配置应用于磁盘驱动和文件系统。）</comment>
+Multi-device support (RAID and LVM)  --->
+[*] Multiple devices driver support (RAID and LVM)
+  &lt;*&gt;   RAID support
+  &lt; &gt;     Linear (append) mode (NEW)
+  &lt;*&gt;     RAID-0 (striping) mode
+  &lt;*&gt;     RAID-1 (mirroring) mode
+  &lt; &gt;     RAID-10 (mirrored striping) mode (EXPERIMENTAL) (NEW)
+  &lt; &gt;     RAID-4/RAID-5 mode (NEW)
+  &lt; &gt;     RAID-6 mode (NEW)
+  &lt; &gt;     Multipath I/O support (NEW)
+  &lt; &gt;     Faulty test module for MD (NEW)
+  &lt;*&gt;   Device mapper support
+  &lt; &gt;     Crypt target support (NEW)
+  &lt; &gt;     Snapshot target (EXPERIMENTAL) (NEW)
+  &lt; &gt;     Mirror target (EXPERIMENTAL) (NEW)
+  &lt; &gt;     Zero target (EXPERIMENTAL) (NEW)
+  &lt; &gt;     Multipath target (EXPERIMENTAL) (NEW)
+  &lt; &gt;     Bad Block Relocation Device Target (EXPERIMENTAL) (NEW)
+
+livecd linux # <i>time make -j2</i>
+
+<comment>（所花的时间很大程度上决定于你所选的选项）</comment>
+real  5m5.869s
+user  4m32.320s
+sys   0m32.930s
+
+livecd linux # <i>make modules_install</i>
+livecd linux # <i>cp arch/i386/boot/bzImage /boot/kernel</i>
+</pre>
+
+</body>
+</section>
+
+<section>
+ <include href="gentoo-x86-quickinstall-system.xml"/>
+</section>
+
+<section id="reboot">
+<title>重启</title>
+<body>
+
+<p>
+退出chroot环境，卸载所有文件系统并重启：
+</p>
+
+<pre caption="重启">
+livecd conf.d # <i>exit</i>
+livecd / # <i>umount /mnt/gentoo/usr/portage/distfiles /mnt/gentoo/usr/portage /mnt/gentoo/usr</i>
+livecd / # <i>umount /mnt/gentoo/var/tmp /mnt/gentoo/tmp /mnt/gentoo/var /mnt/gentoo/opt</i>
+livecd / # <i>umount /mnt/gentoo/proc /mnt/gentoo/home /mnt/gentoo/boot /mnt/gentoo</i>
+livecd / # <i>reboot</i>
+<comment>（别忘了取出光盘）</comment>
+</pre>
+
+</body>
+</section>
+
+<section>
+ <include href="gentoo-x86-quickinstall-after-reboot.xml"/>
+</section>
+
+</chapter>
+</guide>
