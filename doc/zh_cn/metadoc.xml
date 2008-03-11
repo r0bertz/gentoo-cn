@@ -3,7 +3,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.203 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-<version>1.125</version>
+  <version>1.125</version>
   <members>
     <lead>r0bertz</lead>
   </members>
