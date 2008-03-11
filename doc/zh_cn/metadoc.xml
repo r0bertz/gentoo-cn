@@ -254,11 +254,11 @@
     <file id="qmail-howto">/doc/en/qmail-howto.xml</file>
     <file id="source_mirrors">/doc/en/source_mirrors.xml</file>
     <file id="gentoo-x86-quickinstall">/doc/zh_cn/gentoo-x86-quickinstall.xml</file>
-    <file id="gentoo-x86-quickinstall-after-reboot">/doc/en/gentoo-x86-quickinstall-after-reboot.xml</file>
-    <file id="gentoo-x86-quickinstall-media">/doc/en/gentoo-x86-quickinstall-media.xml</file>
-    <file id="gentoo-x86-quickinstall-stage">/doc/en/gentoo-x86-quickinstall-stage.xml</file>
-    <file id="gentoo-x86-quickinstall-system">/doc/en/gentoo-x86-quickinstall-system.xml</file>
-    <file id="gentoo-x86-quickinstall_raid">/doc/en/gentoo-x86+raid+lvm2-quickinstall.xml</file>
+    <file id="gentoo-x86-quickinstall-after-reboot">/doc/zh_cn/gentoo-x86-quickinstall-after-reboot.xml</file>
+    <file id="gentoo-x86-quickinstall-media">/doc/zh_cn/gentoo-x86-quickinstall-media.xml</file>
+    <file id="gentoo-x86-quickinstall-stage">/doc/zh_cn/gentoo-x86-quickinstall-stage.xml</file>
+    <file id="gentoo-x86-quickinstall-system">/doc/zh_cn/gentoo-x86-quickinstall-system.xml</file>
+    <file id="gentoo-x86-quickinstall_raid">/doc/zh_cn/gentoo-x86+raid+lvm2-quickinstall.xml</file>
     <file id="vi-guide">/doc/en/vi-guide.xml</file>
     <file id="virt-mail-howto">/doc/en/virt-mail-howto.xml</file>
     <file id="mailfilter-guide">/doc/en/mailfilter-guide.xml</file>
