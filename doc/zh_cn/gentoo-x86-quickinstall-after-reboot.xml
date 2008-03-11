@@ -126,7 +126,7 @@ sys   36m31.472s
 <comment>（重编译libtool以避免一些潜在的问题）</comment>
 mybox etc # <i>emerge libtool</i>
 
-<comment>（更新配置文件，确保 <b>不要</b>让etc-update更新你配置好的文件）</comment>
+<comment>（更新配置文件，确保<b>不要</b>让etc-update更新你配置好的文件）</comment>
 mybox etc # <i>etc-update</i>
 
 <comment>（如果升级了perl，应该执行perl-cleaner脚本）</comment>
