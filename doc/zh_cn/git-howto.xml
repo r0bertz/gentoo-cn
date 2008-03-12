@@ -171,8 +171,7 @@ $ <i>git clone http://www.gentoo-cn.org/git/gentoo-cn.git</i>
 
 <pre caption="创建并检出本地分支">
 $ <i>cd gentoo-cn</i>
-$ <i>git branch local</i>                        <comment># 创建分支</comment>
-$ <i>git checkout local</i>                      <comment># 检出分支</comment>
+$ <i>git checkout -b local</i>                   <comment># 创建并检出分支</comment>
 $ <i>git branch</i>                              <comment># 显示分支</comment>
   master
 * local                                          <comment># 带*的为当前活动分支</comment>
@@ -291,7 +290,7 @@ index 0000000..0527e6b
 </pre>
 
 <p>
-不加参数的<c>git diff</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，local^^^，tag_name，提交对应SHA1哈希的前几位（用<c>gitk</c>或<c>git whatchanged</c>可以查看提交对应的哈希值）等等。请查看<c>man git-rev-parse</c>以获取更多有关信息。
+<c>git diff HEAD</c>可以查看工作拷贝和HEAD的差别。<c>git diff HEAD^..HEAD</c>用于查看最后一次提交所作的修改。HEAD^表示最新版HEAD的上一个版本。类似的名称还有：HEAD^^，HEAD~2，local^^^，tag_name，提交对应SHA1哈希的前几位（用<c>gitk</c>或<c>git whatchanged</c>可以查看提交对应的哈希值）等等。请查看<c>man git-rev-parse</c>以获取更多有关信息。
 </p>
 
 </body>
@@ -343,7 +342,7 @@ Date:   Fri Jul 13 16:28:08 2007 +0100
 </p>
 
 <pre caption="整理你的上两个提交为一个新的提交">
-$ <i>git reset HEAD^^</i>                        <comment># 回退两个历史，但保留工作拷贝</comment>
+$ <i>git reset --soft HEAD^^</i>                 <comment># 回退两个历史，但保留工作拷贝</comment>
 $ <i>git status</i>
 <comment># On branch local
 # Untracked files:
@@ -351,7 +350,6 @@ $ <i>git status</i>
 #
 #       new_file.xml</comment>
 nothing added to commit but untracked files present (use "git add" to track)
-$ <i>git add new_file.xml</i>
 $ <i>git commit -a -m "Added new file new_file.xml</i>
 > 
 > 张兄，这是一个新添加的文件，他的用途主要是演示
@@ -413,7 +411,7 @@ $ <i>git rebase --continue</i>                   <comment># 继续rebase</commen
 </p>
 
 <pre caption="用git format-patch自动生成要发布的邮件">
-$ <i>git format-patch -s master</i>              <comment># 创建补丁</comment>
+$ <i>git format-patch master</i>                 <comment># 创建补丁</comment>
 0001-Added-new-file-new_file.xml.patch
 </pre>
 
