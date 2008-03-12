@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.19 -->
+<!-- English CVS version: 1.25 -->
 
 <guide link="/doc/zh_cn/gnome-config.xml" lang="zh_cn">
 
@@ -14,6 +14,9 @@
 <author title="编辑">
   <mail link="lars@strojny.net">Lars Strojny</mail>
 </author>
+<author title="编辑">
+  <mail link="nightmorph"/>
+</author>
 <author title="译者">
  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
 </author>
@@ -22,15 +25,15 @@
 </author>
 
 <abstract>
-GNOME是一个常用的桌面环境。本指南尝试描述所有关于GNOME的方方面面，包括安装、配置、使用……
+GNOME是一个应用广泛的桌面环境。本指南尝试描述所有关于GNOME的方方面面，包括安装、配置、使用……
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.16</version>
-<date>2007-07-05</date>
+<version>1.19</version>
+<date>2007-11-13</date>
 
 <chapter>
 <title>GNOME是什么？</title>
@@ -59,7 +62,7 @@ GNOME是一个桌面环境，也是一个开发平台。这份自由软件是众
 <body>
 
 <p>
-与任何一款大型自由软件项目一样，GNOME拥有广泛的用户和开发群。<uri link="http://www.gnomedesktop.org">Footnotes</uri>中为用户提供GNOME桌面的新闻，<uri link="http://planet.gnome.org">GnomePlanet</uri>面向热心人/贡献者的，而<uri link="http://developer.gnome.org">Developer.Gnome.Org</uri>是面向GNOME开发人员的。
+与任何一款大型自由软件项目一样，GNOME拥有广泛的用户和开发群。<uri link="http://www.gnomedesktop.org">Footnotes</uri>面向用户提供GNOME桌面的新闻，<uri link="http://planet.gnome.org">GnomePlanet</uri>面向热心人/贡献者，以及<uri link="http://developer.gnome.org">Developer.Gnome.Org</uri>面向GNOME开发人员。
 </p>
 
 </body>
@@ -72,15 +75,15 @@ GNOME是一个桌面环境，也是一个开发平台。这份自由软件是众
 <body>
 
 <p>
-开始安装GNOME之前，您可能要编辑一下USE变量。确保你的/etc/make.conf中列出的USE变量包含<c>gtk</c>和<c>gnome</c>。如果您想支持<c>hald</c>——硬件抽象层守护进程，请添加<c>hal</c>到你的USE标记中。USE变量<c>avahi</c>为GNOME提供DNS检测（类似Mac OS X下的Rendevouz）。如果您不想支持KDE（另一个大型桌面环境），去掉<c>qt*</c>、<c>arts</c>和<c>kde</c>变量。
+开始安装GNOME之前，您可能要编辑一下USE变量。确保你的/etc/make.conf中列出的USE变量包含<c>X</c>、<c>gtk</c>和<c>gnome</c>。如果您想支持<c>hald</c>——硬件抽象层守护进程，请添加<c>hal</c>到你的USE标记中。还有<c>dbus</c>，一个Gnome广泛使用的系统消息总线。USE标记<c>avahi</c>为GNOME提供DNS检测（类似Mac OS X下的Rendevouz）。如果您不想支持KDE（另一个大型桌面环境），去掉<c>qt3</c>、<c>qt3</c>、<c>arts</c>和<c>kde</c>。
 </p>
 
 <pre caption="/etc/make.conf中USE范例">
-USE="-qt3 -qt4 -arts -kde gtk gnome hal avahi"
+USE="-qt3 -qt4 -arts -kde X dbus gtk gnome hal avahi"
 </pre>
 
 <p>
-您可以添加<c>branding</c>USE标记来获得一个可爱的“Gentoo牌”启动画面，取代默认的Gnome启动画面：
+您可以添加<c>branding</c>USE标记来获得一个漂亮的“Gentoo牌”启动画面，取代默认的Gnome启动画面：
 </p>
 
 <pre caption="启用Gentoo品牌">
@@ -135,6 +138,9 @@ USE="-qt3 -qt4 -arts -kde gtk gnome hal avahi"
 <pre caption="将hald和avahi-dnsconfd添加到默认启动级别">
 # <i>/etc/init.d/hald start</i>
 # <i>rc-update add hald default</i>
+
+# <i>/etc/init.d/dbus start</i>
+# <i>rc-update add dbus default</i>
 
 # <i>/etc/init.d/avahi-dnsconfd start</i>
 # <i>rc-update add avahi-dnsconfd default</i>

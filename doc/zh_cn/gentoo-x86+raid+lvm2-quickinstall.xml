@@ -319,7 +319,7 @@ Filename                   Type            Size    Used    Priority
 把新建的文件系统挂载到<path>/mnt/gentoo</path>。同时为其它挂载点创建目录并挂载好。
 </p>
 
-<pre caption="挂在文件系统">
+<pre caption="挂载文件系统">
 livecd ~ # <i>mount /dev/md3 /mnt/gentoo</i>
 livecd ~ # <i>cd /mnt/gentoo</i>
 livecd gentoo # <i>mkdir boot home usr opt var tmp</i>
