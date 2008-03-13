@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding="UTF-8"?>
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.44 -->
+<!-- English CVS version: 1.45 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
 <guide link="/doc/zh_cn/nvidia-guide.xml" lang="zh_cn">
 <title>Gentoo Linux nVidia指南</title>
 
@@ -22,16 +23,19 @@
   <mail link="liuqing.com@gmail.com">刘清</mail>
 </author>
 
+
 <abstract>
 许多Gentoo用户在自己的系统中使用了nVidia芯片组。nVidia提供了Linux下的专用驱动，它能使你的显卡性能得到充分发挥。这份指南指导您安装和配置这些驱动。
 </abstract>
+
+
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.35</version>
-<date>2007-11-15</date>
+<version>1.36</version>
+<date>2008-03-06</date>
 
 <chapter>
 <title>简介</title>
@@ -67,12 +71,12 @@ portage树中的nVidia驱动由nVidia发布，构建于Linux内核之上。驱�
 
 <p>
 较老的卡（如GeForce 3或GeForce 
-4系列）需要96.x驱动。对于这些卡，你应该在<path>/etc/portage/package.mask</path>中屏蔽掉<c>&gt;=x11-drivers/nvidia-drivers-97.00</c>。这样将阻止安装你的显卡不兼容的新版驱动。
+4系列）需要96.x驱动。对于这些卡，你应该在<path>/etc/portage/package.mask</path>中屏蔽掉<c>>=x11-drivers/nvidia-drivers-97.00</c>。这样将阻止安装你的显卡不兼容的新版驱动。
 </p>
 
 <p>
 老的基于NV2x的显卡（如：TNT、TNT2、Geforce和GeForce 
-2)需要更老的71.x驱动（例如<c>nvidia-drivers-71.86.01</c>）。对于这类卡，你应该在<path>/etc/portage/package.mask</path>中屏蔽掉<c>&gt;=x11-drivers/nvidia-drivers-87.00</c>
+2)需要更老的71.x驱动（例如<c>nvidia-drivers-71.86.01</c>）。对于这类卡，你应该在<path>/etc/portage/package.mask</path>中屏蔽掉<c>>=x11-drivers/nvidia-drivers-87.00</c>
 </p>
 
 <p>
@@ -97,7 +101,7 @@ all</c>配置的内核，那就是可以的。如果不是，请再检查一下�
 
 <pre caption="打开内核模块加载的支持">
 Loadable module support ---&gt;
-  [*] Enable loadable module support 
+  [*] Enable loadable module support
 </pre>
 
 <p>
@@ -140,27 +144,27 @@ Graphics Support ---&gt;
 </pre>
 
 <p>
-一个不错的framebuffer替代物── <c>VESA</c>：
+一个framebuffer替代物── <c>VESA</c>：
 </p>
 
 <pre caption="打开VESA支持">
 Device Drivers ---&gt; 
 Graphics Support ---&gt;
-&lt;*&gt;   VESA VGA graphics support
+[*]   VESA VGA graphics support
 </pre>
 
 <p>
-然后，在"VESA driver 
-type"中选中<c>vesafb</c>或<c>vesafb-tng</c>。如果你用的是AMD64的处理器，你应该选择<c>vesafb</c>而不是<c>vesafb-tng</c>：
+或者，你可能想试试<c>uvesafb</c>，一种<uri link="http://dev.gentoo.org/~spock/projects/uvesafb/">高级的framebuffer</uri>。注意你可以把它编到内核里，也可以把它编成一个模块。后面的例子是把uvesafb编到内核里的。
 </p>
 
-<pre caption="选择framebuffer类型">
-(X) vesafb
-( ) vesafb-tng
+<pre caption="打开uvesafb支持">
+Device Drivers ---&gt; 
+Graphics Support ---&gt;
+&lt;*&gt;   Userspace VESA VGA graphics support
 </pre>
 
 <p>
-要了解更多的信息，如果在用<c>vesafb</c>可以读<path>/usr/src/linux/Documentation/fb/vesafb.txt</path>，否则就到<path>/usr/src/linux/Documentation/fb/</path>下找你使用的framebuffer的相应文档。
+要了解更多的信息，可以到<path>/usr/src/linux/Documentation/fb/</path>下找你使用的framebuffer的相应文档。
 </p>
 
 </body>
@@ -185,8 +189,7 @@ Available kernel symlink targets:
   [1]   linux-2.6.18-gentoo-r4 *
   [2]   linux-2.6.20-gentoo-r7
   [3]   linux-2.6.20-gentoo-r8
-
-<comment>（确认正确的内核被标了星号</comment>
+<comment>（确认正确的内核被标了星号）</comment>
 </pre>
 
 <p>
@@ -305,7 +308,7 @@ EndSection
 </body>
 </section>
 <section>
-<title>把你的用户加入video组</title>
+<title>把你的用户们加入video组</title>
 <body>
 
 <p>
