@@ -22,11 +22,11 @@
  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
 </author>
 <author title="译者">
-    <mail link="jingcheng01@gmail.com">井诚</mail>
+ <mail link="jingcheng01@gmail.com">井诚</mail>
 </author>
 
 <abstract>
-这份文档会在从Linux 2.4到Linux 2.6，从devfs到udev，从OSS到ALSA，以及从LVM到LVM2的迁移过程中给你帮助。
+这份文档会帮助你从Linux 2.4迁移到Linux 2.6，从devfs迁移到udev，从OSS迁移到ALSA，以及从LVM迁移到LVM2。
 </abstract>
 
 <version>0.4</version>
@@ -53,7 +53,7 @@
 性能：对普通程序的吞吐量大大提高了
  </li>
  <li>
-硬件支持：比起其他操作系统，现在Linux以开箱即用的形式支持更多的构架和硬件设备。
+硬件支持：现在的Linux可以直接支持的架构和硬件设备比起其他操作系统都要多。
  </li>
 </ul>
 
@@ -139,7 +139,7 @@ ALSA，即Advanced Linux Sound Architecture（高级Linux声音架构），是�
 </p>
 
 <p>
-如果你不是LVM用户，但觉得LVM2对你有帮助，那么你可以在将来依照<uri link="/doc/en/lvm2.xml">Gentoo LVM2安装指南</uri>把你的磁盘转换为这种格式。但是现在，让我们集中精力进行下面的2.6无缝迁移。
+如果你不是LVM用户，但觉得LVM2对你有帮助，那么你可以在将来依照<uri link="/doc/zh_cn/lvm2.xml">Gentoo LVM2安装指南</uri>把你的磁盘转换为这种格式。但是现在，让我们集中精力进行下面的2.6无缝迁移。
 </p>
 
 </body>
@@ -626,7 +626,7 @@ Device Drivers ---&gt;
 </warn>
 
 <p>
-还有，记得启用你所使用的文件系统的支持，以及系统里的硬件支持。如果你想利用DMA磁盘存取，确保启用对主板上IDE控制器的支持。请参考<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>部分作进一步的指导。
+还有，记得启用你所使用的文件系统的支持，以及系统里的硬件支持。如果你想利用DMA磁盘存取，确保启用对主板上IDE控制器的支持。请参考<uri link="/doc/zh_cn/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>部分作进一步的指导。
 </p>
 
 </body>
@@ -667,7 +667,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-请注意，以上步骤仅仅是示范，你应该依照<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>中的指示（参见<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章）来完成更新内核的过程。
+请注意，以上步骤仅仅是示范，你应该依照<uri link="/doc/zh_cn/handbook/index.xml">Gentoo手册</uri>中的指示（参见<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章）来完成更新内核的过程。
 </p>
 
 <p>
@@ -704,7 +704,7 @@ Device Drivers ---&gt;
 </p>
 
 <p>
-你应该选择适合自己的genkernel参数，但是不要忘了加上<c>--udev</c>参数！更多的信息参见<uri link="/doc/en/genkernel.xml">Gentoo Linux Genkernel指南</uri>和<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章。
+你应该选择适合自己的genkernel参数，但是不要忘了加上<c>--udev</c>参数！更多的信息参见<uri link="/doc/en/genkernel.xml">Gentoo Linux Genkernel指南</uri>和<uri link="/doc/zh_cn/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章。
 </p>
 
 <p>
@@ -734,7 +734,7 @@ initrd /initrd-2.6.10-gentoo-r4
 </p>
 
 <p>
-更多信息请再次参阅<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章节。
+更多信息请再次参阅<uri link="/doc/zh_cn/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章节。
 </p>
 
 </body>
