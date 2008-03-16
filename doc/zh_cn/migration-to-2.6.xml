@@ -1,0 +1,1006 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header$ -->
+<!-- English CVS version: 1.27 --> 
+
+<guide link="/doc/zh_cn/migration-to-2.6.xml" lang="zh_cn">
+<title>Gentoo Linux 2.6迁移完全指南</title>
+
+<author title="Author">
+ <mail link="dsd@gentoo.org">Daniel Drake</mail>
+</author>
+<author title="Contributor">
+ <mail link="sergey_zlodey@mail.ru">Sergey Galkin</mail>
+</author>
+<author title="Contributor">
+ <mail link="svyatogor@gentoo.org">Sergey Kuleshov</mail>
+</author>
+<author title="Editor">
+ <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="Editor">
+ <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="译者">
+    <mail link="jingcheng01@gmail.com">井诚</mail>
+</author>
+
+<abstract>
+这份文档会在从Linux 2.4到Linux 2.6，从devfs到udev，从OSS到ALSA，以及从LVM到LVM2的迁移过程中给你帮助。
+</abstract>
+
+<version>0.4</version>
+<date>2008-03-05</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>Linux 2.6有什么新特性？</title>
+<body>
+
+<p>
+这可不是个容易回答的问题。Linux 2.6是对新特性两年多的迅速开发和稳定化的结果，而且从构架上与2.4完全不同。一些主要的变化如下：
+</p>
+
+<ul>
+ <li>
+调度器/交互性改进：Linux在桌面系统上感觉非常流畅，在负载时运行得比2.4强多了
+ </li>
+ <li>
+可扩展性：现在Linux在小型嵌入式设备和多处理器系统这两种终端上都扩展得更好
+ </li>
+ <li>
+性能：对普通程序的吞吐量大大提高了
+ </li>
+ <li>
+硬件支持：比起其他操作系统，现在Linux以开箱即用的形式支持更多的构架和硬件设备。
+ </li>
+</ul>
+
+<p>
+Joseph Pranevich写了份非常详细的文档，<uri link="http://www.kniggit.net/wwol26.html">Linux的美妙世界</uri>，你或许会有兴趣瞧瞧。如果你对技术细节更感兴趣，可以参考<uri link="http://www.codemonkey.org.uk/docs/post-halloween-2.6.txt">后万圣节文档</uri>──但是一定要注意现在它已经有些过时了。
+</p>
+
+</body>
+</section>
+<section>
+<title>Gentoo和2.6</title>
+<body>
+
+<p>
+从Gentoo Linux 2005.0发行版开始，默认的内核是最新的2.6系列。系统默认的profile选自<path>/etc/make.profile</path>，它在2005.0或更高的版本中应该是一个符号链接，指向用来处理众多重要设置的<path>/usr/portage/profiles/default-linux/x86/2005.0</path>。
+</p>
+
+<p>
+如果你正在使用2.4的profile，请按下文所述，将其换成支持2.6内核的。
+</p>
+
+<pre caption="更改profile">
+# <i>rm -f /etc/make.profile</i>
+# <i>ln -snf /usr/portage/profiles/default-linux/x86/2005.1 /etc/make.profile</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>udev是什么？</title>
+<body>
+
+<p>
+在过去，Gentoo让用户使用<e>devfs</e>来管理<path>/dev</path>目录。<path>/dev</path>含有一系列允许系统程序与硬件（通过内核）通信的设备接口。
+</p>
+
+<p>
+<e>devfs</e>虽然是个很好的概念，但它却有一些内在的问题，而且自2.6.13起已经从主稳定树中被彻底移除了。
+</p>
+
+<p>
+<e>udev</e>是管理设备节点的新方法。它解决了之前的设备管理器问题，同时也试图解决一些其他的问题。
+</p>
+
+<p>
+以上或许对你来说不算什么，但并不意味着，辛勤工作的Gentoo开发人员很容易就完成了对devfs的迁移。对此请阅读<uri link="/doc/en/udev-guide.xml">Gentoo udev指南</uri>来获取更多的信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>ALSA是什么？</title>
+<body>
+
+<p>
+在Linux 2.4中，你大概曾用OSS（open sound system）驱动来驱动声卡。OSS现在已经被一个更新更好的声音驱动集合替代了：ALSA。
+</p>
+
+<p>
+ALSA，即Advanced Linux Sound Architecture（高级Linux声音架构），是当前Linux 2.6内核里一个新的声音驱动集合，拥有新的改进版API。它向后兼容OSS程序，供你选择正确的Linux内核配置选项！
+</p>
+
+<note>
+如果你没有任何声音/声频硬件，则可安全地跳过本文档中任何与ALSA相关的说明。
+</note>
+
+</body>
+</section>
+<section>
+<title>LVM是什么？</title>
+<body>
+
+<p>
+<e>逻辑卷管理</e>（LVM）是一组工具集，它允许你以非常灵活的方式管理磁盘存储。除此之外，它具有强大的分区控制功能（比如不用重启就调整分区大小），而且使像更改设备之类的操作相对简单一些。对于标准的基于分区的磁盘管理来说，LVM是另外一个选择。
+</p>
+
+<p>
+从历史上来讲，对LVM的支持已经在Linux 2.4中实现了。Linux 2.6有一个新版的LVM，叫做<e>LVM2</e>。该迁移过程需要你安装新版本的用户层工具（本文档稍后会提到），但仍会使你的数据保持原样！
+</p>
+
+<p>
+<e>如果你当前并未使用LVM来做数据存储管理，则LVM2迁移工作不适用于你。</e>如果是这样的话，你可安全地跳过本文档中任何关于LVM/LVM2的部分。升级到Linux 2.6并不要求你将数据存储到LVM分区中──你可以像以前一样在标准分区格式中保存数据。
+</p>
+
+<p>
+如果你不是LVM用户，但觉得LVM2对你有帮助，那么你可以在将来依照<uri link="/doc/en/lvm2.xml">Gentoo LVM2安装指南</uri>把你的磁盘转换为这种格式。但是现在，让我们集中精力进行下面的2.6无缝迁移。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>准备工作</title>
+<section>
+<title>更新系统</title>
+<body>
+
+<p>
+Linux 2.6中的一些变化也要求基础系统程序有所改变。在继续进行之前，你应该确保系统已相对比较新。为了完美地保证这一点，你应该在能升级的时候升级所有的world和system包。
+</p>
+
+<p>
+特别是，确定你有以下最新的稳定版本的包：
+</p>
+
+<ul>
+ <li><c>sys-apps/baselayout</c></li>
+ <li><c>sys-apps/util-linux</c></li>
+ <li>
+ <c>sys-kernel/genkernel</c> （仅当你希望使用genkernel而不是手工配置时）
+ </li>
+</ul>
+
+<pre caption="升级所有的world包">
+# <i>emerge --sync</i>
+# <i>emerge -ua world</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>modutils与module-init-tools</title>
+<body>
+
+<p>
+<c>sys-apps/modutils</c>是为Linux 2.4提供诸如<c>modprobe</c>，<c>rmmod</c>和<c>insmod</c>之类工具的包。
+</p>
+
+<p>
+Linux 2.6引入了一种新的模块格式，因此要求有新工具来处理这些模块。这些新工具都集中在<c>sys-apps/module-init-tools</c>包中。
+</p>
+
+<p>
+你现在应该移除modutils并安装module-init-tools：
+</p>
+
+<pre caption="从modutils切换到module-init-tools">
+# <i>emerge --unmerge sys-apps/modutils</i>
+# <i>emerge module-init-tools</i>
+</pre>
+
+<note>
+别担心──尽管你刚刚卸载了modutils，module-init-tools提供了对Linux 2.4的向后兼容，所以你仍然能启动进入到Linux 2.4来处理其模块。
+</note>
+
+<note>
+出于以上的原因，module-init-tools可能已经安装过了，并与你现有的Linux 2.4内核一起工作。如果是这种情况，你不需要担心这个阶段──你的系统已经准备好处理Linux 2.6的模块。
+</note>
+
+</body>
+</section>
+<section>
+<title>安装udev</title>
+<body>
+
+<p>
+这里不涉及任何配置问题。只需要使用<c>emerge</c>来安装udev：
+</p>
+
+<pre caption="安装udev">
+# <i>emerge -a udev</i>
+</pre>
+
+<p>
+现在你应该阅读<uri link="/doc/en/udev-guide.xml">Gentoo udev指南</uri>来更全面地了解udev和devfs之间的差别。
+</p>
+
+</body>
+</section>
+<section>
+<title>检查重要的设备节点</title>
+<body>
+
+<p>
+当系统启动时，它需要一些重要的设备节点。由于udev不包含在内核中，所以它并没有马上被激活。为了解决这一点，你必须确使一些重要的设备节点已经在你的磁盘上了。
+</p>
+
+<p>
+在初始安装时，我们的安装阶段文件会创建好必需的设备。但是，有些用户反映说并不是这么回事。我们将利用这个机会检查设备文件是否存在，如果不存在的话就创建它们。
+</p>
+
+<p>
+由于你现有的设备管理器会被挂载到<path>/dev</path>下，令我们不能直接访问它。所以我们会绑定挂载根分区到另一个位置，并从那里访问<path>/dev</path>目录。
+</p>
+
+<pre caption="捆绑挂载根分区并列出静态设备">
+# <i>mkdir -p /mnt/temp</i>
+# <i>mount -o bind / /mnt/temp</i>
+# <i>cd /mnt/temp/dev</i>
+# <i>ls -l console null</i>
+</pre>
+
+<p>
+如果上面的<e>ls</e>命令报告说<c>console</c>或者<c>null</c>不存在，那你必须像下面示范的那样，亲自创建它们，
+</p>
+
+<pre caption="创建缺失的console和null节点">
+# <i>mknod -m 660 console c 5 1</i>
+# <i>mknod -m 660 null c 1 3</i>
+</pre>
+
+<p>
+现在你应该卸载被绑定挂载的根分区，即使之前并未建立那些设备：
+</p>
+
+<pre caption="卸载被绑定挂载的根分区">
+# <i>cd</i>
+# <i>umount /mnt/temp</i>
+# <i>rmdir /mnt/temp</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装ALSA工具</title>
+<body>
+
+<p>
+ALSA要求你安装某些包来使应用程序能利用ALSA API。这些包也能让你控制混音器和音量。按照以下方法安装必要的工具：
+</p>
+
+<pre caption="安装ALSA工具和库">
+# <i>emerge -a alsa-lib alsa-utils alsa-tools alsa-headers alsa-oss</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装Linux 2.6源代码</title>
+
+<section>
+<title>选择并安装内核</title>
+<body>
+
+<p>
+首先需要做的是安装你选择的2.6内核源代码。Gentoo支持的内核当前有两个：<e>gentoo-sources</e>（桌面版）和<e>hardened-sources</e>（服务器版）。还有一些其他的选择，参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo Linux内核指南</uri>。
+</p>
+
+<p>
+在本指南中，我们将使用<c>gentoo-sources</c>为例。使用<c>emerge</c>工具来安装你选择的内核源代码集合：
+</p>
+
+<pre caption="安装gentoo-sources">
+# <i>emerge -a gentoo-sources</i>
+These are the packages that I would merge, in order:
+Calculating dependencies ...done!
+[ebuild NS ] sys-kernel/gentoo-sources-2.6.10-r4
+
+Do you want me to merge these packages? [Yes/No] <i>y</i>
+</pre>
+
+<p>
+当运行以上<c>emerge</c>时，如果你发现它想安装2.4版的gentoo-sources（比如<c>gentoo-sources-2.4.26</c>），这意味着你使用的profile不是为Linux 2.6用户而设计的。请按照<uri link="/doc/en/gentoo-upgrading.xml">Gentoo升级文档</uri>切换到基于2.6的profile，并重试安装2.6内核源代码。
+</p>
+
+</body>
+</section>
+<section>
+<title>更新/usr/src/linux符号链接</title>
+<body>
+
+<p>
+有众多的Gentoo工具组件依赖于<path>/usr/src/linux</path>，它是指向正在运行（或者希望编译）的内核源代码的符号链接。
+</p>
+
+<p>
+我们现在将要更新<path>/usr/src/linux</path>链接，使其指向刚刚安装的内核。继续我们的例子：
+</p>
+
+<pre caption="更新/usr/src/linux软链接">
+# <i>cd /usr/src</i>
+# <i>ln -sfn linux-2.6.10-gentoo-r4 linux</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="pitfalls">
+<title>Linux 2.6迁移中已知的易犯错误</title>
+<section>
+<body>
+
+<p>
+在我们卡在配置内核之前，我先来讲讲在迁移到Linux 2.6的过程中人们最常犯的错误，因为其中的某些错误会影响到配置新内核的方式。
+</p>
+
+<note>
+不是所有的这些错误都与本阶段相关，但我会在这里把它们都详细的说一说，回头你有空时可以参考一下。
+</note>
+
+</body>
+</section>
+<section>
+<title>不要对2.4的.config使用“make oldconfig”</title>
+<body>
+
+<note>
+如果你不理解这是什么意思，不必担心，只要你正确地遵循本指南的其余部分，就不会犯这个错误。
+</note>
+
+<p>
+由于内核中有大量的变化，你会被问到许许多多问题。许多尝试从2.4的.config文件来<c>make oldconfig</c>的人最终以创建了不工作的内核（比如屏幕上无输出，键盘无法输入等等）而收场。请不要自找麻烦，还是使用传统的<c>menuconfig</c>配置方法吧。
+</p>
+
+</body>
+</section>
+<section>
+<title>不要对CD/DVD写入功能使用ide-scsi</title>
+<body>
+
+<p>
+在Linux 2.4中，使CD/DVD写入结果更好的唯一方式是启用（相当丑陋的）<c>ide-scsi</c>模拟。谢天谢地，Linunx 2.6的IDE层更好地扩展了对CD/DVD刻录的支持。
+</p>
+
+<p>
+你不必启用任何额外的选项来支持CD写入。只要确保<e>不</e>启用你以前用的<c>ide-scsi</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>PC扬声器现在是可配置的选项</title>
+<body>
+
+<p>
+如果不特别启用新的PC扬声器选项（<c>CONFIG_INPUT_PCSPKR</c>），你就不会使控制台发出通常的哔哔声（或从PC扬声器中得到任何回应）：
+</p>
+
+<pre caption="PC扬声器选项的位置">
+Device Drivers ---&gt;
+ Input device support ---&gt;
+ [*] Misc
+ &lt;*&gt; PC Speaker support
+</pre>
+
+<note>
+此处的“PC扬声器”是指在系统启动时发出一声哔响的模拟扬声器，而不是用来播发音乐的一般声音硬件。
+</note>
+
+</body>
+</section>
+<section>
+<title>新的USB存储块设备驱动时有问题</title>
+<body>
+
+<p>
+就在这几天，一个新的USB存储设备驱动被加进了内核。在编写本文档时，该驱动（“ub”）仍处于其早期阶段，有用户发现它并不可靠。如果你遇到存取USB硬盘、USB闪存、USB读卡器、或者USB数码相机的问题，可以试试恢复到旧的SCSI类驱动：
+</p>
+
+<pre caption="禁用ub">
+Device Drivers ---&gt;
+ Block devices ---&gt;
+ &lt; &gt; Low Performance USB Block driver
+</pre>
+
+<note>
+旧的SCSI类驱动（USB Mass Storage支持）是默认启用的。可以在“Device Drivers --&gt; USB support”下找到它，但当ub启用时它通常是不会起效的。
+</note>
+
+</body>
+</section>
+<section>
+<title>usbdevfs重命名为usbfs</title>
+<body>
+
+<p>
+如果你已经编辑好了<path>/etc/fstab</path>文件来自定义USB设备文件系统挂载的方式，则可能不得不把文件系统类型<e>usbdevfs</e>修改为<e>usbfs</e>。
+</p>
+
+<note>
+最近的2.4内核也允许你使用“usbfs”以及“usbdevfs”，所以这么做不会破坏向后兼容性。
+</note>
+
+</body>
+</section>
+<section>
+<title>不要调整X的优先级</title>
+<body>
+
+<p>
+如果你是2.4桌面的用户，那你可能已经破解了系统来以更高的优先级运行X，因为有时侯这么做似乎能提供更好的桌面性能。
+</p>
+
+<p>
+2.6中有许多调度器的变化，这改变了上述行为。如果你继续以更高的优先级运行X，那它将会严格按照预想的那样（以很高的优先级运行<e>显示服务器</e>）工作，你会看到像声音口吃，程序载入时间慢等后果，这是因为你的CPU只为X服务而导致挂起得太久。
+</p>
+
+<p>
+Linux 2.6中，你不再需要为获得良好的交互性而调整桌面程序优先权。请去掉你的“优先级”破解！
+</p>
+
+</body>
+</section>
+<section>
+<title>X11配置文件现在应该对PS/2和USB鼠标使用/dev/input/mice</title>
+<body>
+
+<p>
+默认的udev配置引入的变化之一是，鼠标设备节点的组织方式不一样了。先前你可能已经有诸如<path>/dev/psaux</path>和<path>/dev/mouse</path>之类的节点。现在你将拥有像<path>/dev/input/mouse0</path>、<path>/dev/input/mouse1</path>这样的节点，以及集中式节点<path>/dev/input/mice</path>──它整合了来自所有鼠标的移动。
+</p>
+
+<p>
+由于旧的X配置通常引用<path>/dev/mouse</path>或<path>/dev/psaux</path>，你可能会在尝试启动X11时得到一个类似以下所示的错误：
+</p>
+
+<pre caption="首次在udev系统上启动X时的常见错误">
+(EE) xf86OpenSerial: Cannot open device /dev/mouse
+ No such file or directory.
+(EE) Mouse0: cannot open input device
+(EE) PreInit failed for input device "Mouse0"
+No core pointer
+</pre>
+
+<p>
+要纠正该错误，请在文本编辑器中打开你的X11配置文件，更新鼠标<e>InputDevice</e>部分，使用<path>/dev/input/mice</path>设备。如下例所示：
+</p>
+
+<pre caption="打开X11配置文件">
+# <i>nano -w /etc/X11/xorg.conf</i>
+</pre>
+
+<note>
+如果你仍在使用XFree86，那你的配置文件就应该是<path>/etc/X11/XF86Config</path>
+</note>
+
+<pre caption="鼠标InputDevice部分示例">
+Section "InputDevice"
+ Identifier "Mouse0"
+ Driver "mouse"
+ Option "Protocol" "auto"
+ Option "Device" "/dev/input/mice"
+EndSection
+</pre>
+
+<note>
+如果你使用串口鼠标，新的设备路径是<path>/dev/tts/0</path>，而不是<path>/dev/ttyS0</path>。
+</note>
+
+</body>
+</section>
+<section>
+<title>新的Serial-ATA（SATA）驱动以与以前不同的方式命名设备</title>
+<body>
+
+<p>
+如果你过去使用Linux 2.4下的早期Serial ATA驱动，则可能观察到你的SATA设备有类似<path>/dev/hde</path>这样的名字。
+</p>
+
+<p>
+Linux 2.6引入了一些新的SATA驱动（libata），它们是基于SCSI子系统的。由于这些驱动是基于SCSI的，所以你的SATA磁盘现在会显示为SCSI磁盘。你的首个SATA硬盘会被命名为<path>/dev/sda</path>。你还需要更新<path>/etc/fstab</path>文件来反映这一变化，而且在将来选择root/real_root内核启动参数时要记得这一点。
+</p>
+
+<note>
+libata已向后移植入近期的Linux 2.4版本中，所以你可能已经熟悉新的设备名了。
+</note>
+
+</body>
+</section>
+<section>
+<title>不再维护bootsplash</title>
+<body>
+
+<p>
+如果你用过<c>gentoo-sources-2.4</c>内核，你可能用了<e>bootsplash</e>功能来提供彩色的framebuffer控制台。
+</p>
+
+<p>
+bootsplash的开发者似乎对自己的有设计问题的项目失去了兴趣。然而，Gentoo开发者<e>Michał Januszewski</e>正在开发一个包含在gentoo-sources-2.6内核中的后继程序──<c>gensplash</c>。你自己可以按照Michal的<uri link="http://dev.gentoo.org/~spock/projects/gensplash/archive/gensplash-in-5-easy-steps.txt">简单5步Gensplash</uri>文档来熟悉gensplash是怎么运作的。
+</p>
+
+</body>
+</section>
+<section>
+<title>I2C驱动现在被包含在内核里</title>
+<body>
+
+<p>
+如果你使用<c>lm-sensors</c>来监控系统温度和电源级别，以前需要安装<c>i2c</c>包来提供硬件支持。
+</p>
+
+<p>
+I2C硬件驱动现在被包含在Linux 2.6内核中，不必安装额外的i2c包。记得将你的特定I2C设备支持编译到内核配置中，然后你就能像平时一样使用<c>lm-sensors</c>了。
+</p>
+
+</body>
+</section>
+
+
+</chapter>
+
+<chapter id="conf">
+<title>配置、建立和安装内核</title>
+<section>
+<body>
+
+<p>
+如同Linux 2.4一样，你有两个选择来管理新内核build。
+</p>
+
+<ol>
+ <li>
+默认方法是手工配置内核。这虽看起来令人畏惧，但随着对自己的系统日益了解这却是更好的方法。如果你希望手工配置新内核，请继续阅读<uri link="#manual">下一章</uri>。
+ </li>
+ <li>
+备选方法是使用我们的<c>genkernel</c>工具来为你自动配置、编译和安装内核。如果你希望使用<c>genkernel</c>请跳过下一章，从 <uri link="#genkernel">使用genkernel</uri>开始。
+ </li>
+</ol>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="manual">
+<title>默认：手工配置</title>
+<section>
+<title>配置内核</title>
+<body>
+
+<p>
+我们现在从配置内核开始。以通常的方式打开menuconfig：
+</p>
+
+<pre caption="调用menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+你可能已经在配置2.4内核时就对menuconfig熟悉了。幸运的是，它的前端几乎没什么变化。但是你会发现，内核选项现在组织的更好，而且有<e>许多</e>不在2.4中的新选项。
+</p>
+
+<p>
+确保启用了以下重要的内核选项：
+</p>
+
+<pre caption="必需的内核选项">
+File systems ---&gt;
+ Pseudo Filesystems ---&gt;
+ [*] /proc file system support
+ [*] Virtual memory file system support (former shm fs)
+
+<comment>（以下为udev必需）：</comment>
+General setup ---&gt;
+ [*] Support for hot-pluggable devices
+
+<comment>（以下为ALSA必需）：</comment>
+Device Drivers ---&gt;
+ Sound ---&gt;
+ &lt;*&gt; Sound card support
+ Advanced Linux Sound Architecture ---&gt;
+ &lt;M&gt; Advanced Linux Sound Architecture
+ &lt;M&gt; Sequencer support
+ &lt;M&gt; OSS Mixer API
+ [*] OSS Sequencer API
+<comment> （不要忘记在子菜单中选择你的声卡！）</comment>
+
+<comment>（如果使用LVM进行磁盘管理，则以下为必需）：</comment>
+Device Drivers ---&gt;
+ Multi-device support (RAID and LVM) ---&gt;
+ [*] Multiple devices driver support (RAID and LVM)
+ &lt;*&gt; Device mapper support
+</pre>
+
+<warn>
+之前你可能已经选了<path>/dev</path>文件系统支持（现在已标记为“废弃”）。不要启用devfs支持。我们已经安装了udev，从现在起用它替代devfs。
+</warn>
+
+<p>
+还有，记得启用你所使用的文件系统的支持，以及系统里的硬件支持。如果你想利用DMA磁盘存取，确保启用对主板上IDE控制器的支持。请参考<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>部分作进一步的指导。
+</p>
+
+</body>
+</section>
+<section>
+<title>建立内核</title>
+<body>
+
+<p>
+现在我们已配置好了内核，可以开始编译步骤了：
+</p>
+
+<pre caption="编译内核源代码">
+# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<note>
+你也许会回忆起在Linux 2.4中不得不执行<c>make dep</c>的情形。现在不必再这样了。
+</note>
+
+<p>
+等待内核编译完成（而且可以看到更多可读的编译输出）。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装内核</title>
+<body>
+
+<p>
+下一步是挂载你的<path>/boot</path>分区并将内核image复制过去。之后你必须手工更新引导程序的配置。
+</p>
+
+<pre caption="安装内核">
+# <i>mount /boot</i>
+# <i>cp arch/i386/boot/bzImage /boot/bzImage-2.6.10-gentoo-r4</i>
+</pre>
+
+<p>
+请注意，以上步骤仅仅是示范，你应该依照<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>中的指示（参见<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章）来完成更新内核的过程。
+</p>
+
+<p>
+当更新引导程序配置时，不要将指向2.4内核的旧入口移除。这样的话，如果有什么不工作你就可以很容易地在两个内核间切换。
+</p>
+
+<p>
+现在转到<uri link="#modules">模块配置</uri>部分继续。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="genkernel">
+<title>备选：使用genkernel</title>
+<section>
+<body>
+
+<p>
+如果你喜欢使用genkernel而不是手工配置内核，你就会很高兴听到以下这个消息：使用genkernel生成2.6内核与生成以前的2.4内核过程非常相似。
+</p>
+
+<p>
+你应该按照如下所示调用genkernel：
+</p>
+
+<pre caption="加上某些常见参数调用genkernel">
+# <i>genkernel --udev --menuconfig --bootloader=grub all</i>
+</pre>
+
+<p>
+在上面的示例中，我们也利用genkernel的特性打开menuconfig来让你自定义内核配置（如果你愿意），以及在编译后更新grub引导程序配置。
+</p>
+
+<p>
+你应该选择适合自己的genkernel参数，但是不要忘了加上<c>--udev</c>参数！更多的信息参见<uri link="/doc/en/genkernel.xml">Gentoo Linux Genkernel指南</uri>和<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章。
+</p>
+
+<p>
+如果你选择自己更新引导程序的配置文件，那么必须记得加上<c>udev</c>内核选项。示范的<e>grub</e>配置部分如下所示，但要记得为你自己的系统调整<e>real_root</e>参数。
+</p>
+
+<pre caption="genkernel + udev的GRUB配置示例">
+title Gentoo Linux (2.6 kernel)
+root (hd0,0)
+kernel /kernel-2.6.10-gentoo-r4 <i>udev</i> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/hda3
+initrd /initrd-2.6.10-gentoo-r4
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="modules">
+<title>模块配置</title>
+
+<section>
+<title>安装外部模块</title>
+<body>
+
+<p>
+很多用户会进一步依赖建在内核树之外的内核模块。常见的例子是二进制的ATI和Nvidia图像驱动。你现在需要针对<path>/usr/src/linux</path>下的2.6源代码编译安装这些模块。这也是你在2.4下所习惯的安装外部模块<c>emerge packagename</c>的常见情况。
+</p>
+
+<p>
+更多信息请再次参阅<uri link="/doc/en/handbook/index.xml">Gentoo手册</uri>的<uri link="/doc/en/handbook/handbook-x86.xml?part=1&amp;chap=7">配置内核</uri>章节。
+</p>
+
+</body>
+</section>
+<section>
+<title>自动载入模块</title>
+<body>
+
+<p>
+你或许已经决定将某些内核组件编译为模块（与直接编译进内核相反），且想如同2.4一样在启动时自动载入它们。与此同时，如果你从portage树中安装了任一外部模块（如上所述），你可能也想自动载入它们。
+</p>
+
+<p>
+你可以像2.4中那样做到这一点。仅需在文本编辑器中打开文件<path>/etc/modules.autoload.d/kernel-2.6</path>并列出你想要自动载入的模块名即可。
+</p>
+
+<pre caption="在nano中打开自动载入模块列表">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="载入3c59x和nvidia模块的自动载入列表示例">
+# /etc/modules.autoload.d/kernel-2.6: kernel modules to load when system boots.
+#
+# Note that this file is for 2.6 kernels.
+#
+# Add the names of modules that you'd like to load when the system
+# starts into this file, one per line. Comments begin with # and
+# are ignored. Read man modules.autoload for additional details.
+
+3c59x
+nvidia
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>从LVM到LVM2的迁移</title>
+<section>
+<title>升级到LVM2工具</title>
+<body>
+
+<note>
+如果你不使用LVM来管理磁盘存储，则可安全地跳过本章节，直接转到下一章。
+</note>
+
+<p>
+幸运的是，从LVM1用户工具升级到LVM2版是很简单的：
+</p>
+
+<pre caption="将用户工具从LVM1升级到LVM2">
+# <i>emerge --unmerge lvm-user</i>
+# <i>emerge lvm2</i>
+</pre>
+
+<note>
+你需要重新安装<c>lvm-user</c>，如果你打算启动2.4内核的话。这是因为<c>lvm2</c>本身对2.4内核不支持。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>启动进入Linux 2.6</title>
+<section>
+<body>
+
+<p>
+现在是启动进入Linux 2.6的时候了。关掉所有的程序并重启：
+</p>
+
+<pre caption="重启">
+# <i>umount /boot</i>
+# <i>reboot</i>
+</pre>
+
+<p>
+如果你到目前为止一直正确地按照本文档做，则重启后会在引导程序里得到两个选项：载入Linux 2.4或者Linux 2.6。
+</p>
+
+<p>
+一旦系统启动了，请检查一切是否工作。如果你在内核配置上出了错，别担心，可以返回到<uri link="#conf">配置、建立和安装内核</uri>部分来做出更改，重新编译和安装新内核，重启，再试一次！
+</p>
+
+</body>
+</section>
+<section>
+<title>配置及将ALSA解除静音</title>
+<body>
+
+<p>
+我们现在要完成ALSA配置并将音频声道解除静音。ALSA包提供了一个有用的工具来使这个过程变得相对容易一些：
+</p>
+
+<pre caption="调用ALSA自动配置工具">
+# <i>alsaconf</i>
+</pre>
+
+<p>
+本过程一步到底：使<e>/etc/modules.d/alsa</e>文件可自动更新，然后让ALSA可被载入。alsaconf之后就会结束。然而，如果你在系统上安装了多个声音设备，则需要多次运行它。
+</p>
+
+<p>
+现在你应该添加<c>alsasound</c>到boot运行级中，以使声音在关闭时被保存，在启动后被恢复：
+</p>
+
+<pre caption="添加alsasound到boot运行级中">
+# <i>rc-update add alsasound boot</i>
+</pre>
+
+<note>
+<c>alsaconf</c>工具为你的声音设备选择初始声音级别。如果该选择不正确的话，你可以在任何时候用<c>alsamixer</c>工具修改之。
+</note>
+
+</body>
+</section>
+<section>
+<title>此时有问题吗？</title>
+<body>
+
+<p>
+在本阶段你应该参考前面的<uri link="#pitfalls">Linux 2.6迁移中已知的易犯错误</uri>部分，它可能会解决你此时遇到的问题。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>头文件与NPTL</title>
+<section>
+<body>
+
+<p>
+现在你已经开始运行Linux 2.6了，希望所有的问题都已被解决。此时你应该更新Linux内核头文件并重新安装glibc以使用户区程序能利用新的Linux 2.6特性。
+</p>
+
+<pre caption="更新linux-headers">
+# <i>emerge -u linux-headers</i>
+</pre>
+
+<p>
+通常来讲，更新了头文件包之后你就该重新安装glibc。有这么个你可能会感兴趣的新特性──NPTL。NPTL是Linux 2.6中一个新的线程模型，它能更快地创建和销毁线程。这在大多数系统上不会有太大不同，但是你可能会希望在本迁移过程中启用该特性！如要启用NPTL，编辑<path>/etc/make.conf</path>，将<path>/etc/make.conf</path>加入你的USE变量。
+</p>
+
+<warn>
+如果你也选择了启用“nptlonly”标记，请注意你将不能再启动2.4的内核了。
+</warn>
+
+<p>
+现在重新安装glibc（即使你没有选择启用NPTL也应该这么做）。
+</p>
+
+<pre caption="针对新内核头文件重新安装glibc">
+# <i>emerge -a glibc</i>
+</pre>
+
+<p>
+如果你已启用了NPTL，现有的二进制包只有在重新编译后才能使用该特性。然而，<e>只有</e>从现在之后编译的任何二进制包才能使用NPTL。或许你希望现在就重新编译所有的二进制包，比如：
+</p>
+
+<pre caption="重新编译系统上所有的包">
+# <i>emerge -e world</i>
+</pre>
+
+<p>
+或者你可以让系统在更有新版本发布的包时“自然地”将其转换为NPTL。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>关闭备注</title>
+<section>
+<title>仍有问题？</title>
+<body>
+
+<p>
+随着量多得难以置信的工作注入Linux 2.6，以前工作的东西有时不可避免地不再正常。
+</p>
+
+<p>
+如果你的2.6内核有任何问题，而你可以确定该问题在Linux 2.4中并不存在，请在我们的<uri link="http://bugs.gentoo.org">Bugzilla</uri>上打开一个bug，我们会调查该问题。如果我们发现这是存在于主线内核中的问题，我们可能会请你在中央内核bugzilla上登记一个报告。
+</p>
+
+</body>
+</section>
+<section>
+<title>结论</title>
+<body>
+
+<p>
+希望你已经顺利完成了迁移，并且享受到Linux 2.6带来的超越2.4的优势。
+</p>
+
+<p>
+我想说声谢谢，对在本文档的早期就高效地“测试”了它，以及提供如何进行迁移的反馈信息的众多用户。对不起我没能回复所有的电子邮件（有太多的邮件了！），但是我确实阅读了每一封，并对本文档进行了适当的改进。尽情享受你的2.6加强版系统吧:)
+</p>
+
+</body>
+</section>
+<section>
+<title>将Linux 2.4从你的系统上删除</title>
+<body>
+
+<p>
+在运行了一段2.6之后，你或许会认定不再有使用Linux 2.4的任何需要了。将你的系统清除干净的步骤如下。<e>当你确定不再想要/需要使用2.4时，才能执行本部分的步骤！</e>
+</p>
+
+<p>
+2.4内核源代码可以像通常那样用emerge工具移除。比方说，假如你装有2.4版本的vanilla-source和gentoo-sources，可以用下面的命令来删除它们，同时保留2.6版本的不变：
+</p>
+
+<pre caption="示例：删除Linux 2.4源代码">
+# <i>emerge --unmerge =vanilla-sources-2.4.* =gentoo-sources-2.4.*</i>
+</pre>
+
+<p>
+Portage不会彻底清除你的2.4内核源代码安装，因为一些临时文件在编译期间就创建了。用以下命令可以安全地删除这些残余的文件：
+</p>
+
+<pre caption="删除残余的临时文件">
+# <i>rm -rf /usr/src/linux-2.4.*</i>
+</pre>
+
+<p>
+你可以进一步删除与旧2.4内核安装相关的模块和信息文件，因为不再需要它们了。
+</p>
+
+<pre caption="删除以前安装的2.4模块">
+# <i>rm -rf /lib/modules/2.4.*</i>
+</pre>
+
+<p>
+以前你用于启动的2.4内核二进制包也可被安全地删除。挂载<c>/boot</c>分区，然后删除那些image。你也应该更新引导程序配置来使它不再指向这些删除掉的内核image。
+</p>
+
+<p>
+一些Linux 2.4用户以前就安装了<c>alsa-driver</c>包以从Linux 2.6中新的音频能力受益。如果你是这样的用户，也遵循了本文档之前关于在2.6内核源代码上建立ALSA（与使用<c>alsa-driver</c>包相反）的建议，那么你可以安全地删除它来避免将来的冲突。
+</p>
+
+<p>
+另外，<c>lm-sensors</c>用户会用以前使用的<c>i2c</c>包来提供硬件驱动。正如已经提到的，I2C驱动现在被包含在内核中，所以这个包也可被删除，以避免未来有冲突。
+</p>
+
+<p>
+devfs管理守护程序，<c>devfsd</c>，也可以被安全地删除。因为现在我们使用<c>udev</c>来做设备管理。
+</p>
+
+<pre caption="删除alsa-driver，i2c和devfsd">
+# <i>emerge --unmerge alsa-driver i2c devfsd</i>
+</pre>
+
+<p>
+如果你是LVM2用户，你可能希望将数据转成LVM2数据格式来利用LVM2提供的便利。然而，该操作会阻止你用2.4的内核访问LVM数据。如果你仍想继续进行数据转换（这完全是可选的！），则应该阅读<c>vgconvert</c>手册中有关如何实现之的指导。下面展示一个例子，其中<c>main</c>是卷组名称。
+</p>
+
+<pre caption="将LVM1卷转换为LVM2格式">
+# <i>vgconvert -M2 main</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+</guide>
