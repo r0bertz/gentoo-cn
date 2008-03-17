@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.8 -->
+<!-- English CVS version: 1.9 -->
 
 <sections>
 
-<version>5.0</version>
-<date>2007-05-07</date>
+<version>5.1</version>
+<date>2007-11-27</date>
 
 <section>
 <title>做出您的选择</title>
@@ -22,11 +22,18 @@
 现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。
 </p>
 
-<p test="func:keyval('arch')='x86'">
-对于x86，Gentoo Linux提供了<uri
-link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
+</body>
+<body test="contains('AMD64 x86', func:keyval('arch'))">
+<p>
+对于<keyval id="arch"/>，Gentoo Linux提供了<uri link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
 </p>
 
+<warn test="func:keyval('arch')='AMD64'">
+在AMD64架构上不推荐使用LILO。
+</warn>
+
+</body>
+<body>
 <p>
 但在安装bootloader之前，我们要告诉您如何配置framebuffer（前提当然是您想使用它）。在framebuffer的帮助下，您系统的Linux命令行将拥有（有限的）图形特性（例如使用Gentoo提供的漂亮的bootsplash图片）。
 </p>
@@ -135,30 +142,19 @@ link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
 </tr>
 </table>
 
-</body>
-<body test="contains('AMD64 IA64',func:keyval('arch'))">
-
-<p>
+<p test="contains('AMD64 IA64',func:keyval('arch'))">
 最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>。将它们记下来；很快您将用到它们。
 </p>
 
-<p test="func:keyval('arch')='AMD64'">
-由于目前LILO还不能在AMD64位平台上正常工作，Gentoo只推荐使用GRUB。现在我们继续介
-绍它的<uri link="#grub">安装</uri>。
-</p>
-
-<p test="func:keyval('arch')='IA64'">
-现在你应该安装<uri link="#elilo">elilo引导程序</uri>.
-</p>
-
-</body>
-<body test="func:keyval('arch')='x86'">
-
-<p>
+<p test="func:keyval('arch')='x86'">
 最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>或者<c>video=vesafb:mtrr:3,ywrap,1024x768-32@85</c>。将它们记下来；很快您将用到它们。
 </p>
 
-<p>
+<p test="func:keyval('arch')='IA64'">
+现在，你应该安装<uri link="#elilo">elilo引导程序</uri>。
+</p>
+
+<p test="not(func:keyval('arch')='IA64')">
 接下来要继续安装<uri link="#grub">GRUB</uri><e>或</e><uri link="#lilo">LILO</uri>。
 </p>
 
@@ -393,11 +389,15 @@ grub&gt; <i>quit</i>            <comment>（退出GRUB shell）</comment>
 </body>
 </subsection>
 </section>
-<section id="lilo" test="func:keyval('arch')='x86'">
+<section id="lilo" test="contains('AMD64 x86', func:keyval('arch'))">
 <title>备选：使用LILO</title>
 <subsection>
 <title>安装LILO</title>
 <body>
+
+<warn test="func:keyval('arch')='AMD64'">
+在AMD64架构上不推荐使用LILO。
+</warn>
 
 <p>
 LILO，是LInuxLoader的简称，它是一个可靠且确实能担当重任的Linux的bootloader。尽管如此，它缺少一些GRUB具有的特性（这正是目前GRUB之所以流行的原因）。LILO仍被人们使用的原因在于：在一些系统中，GRUB不能工作而LILO可以。当然，也有一些用户是因为熟悉它而仍坚持使用它。无论是什么原因，Gentoo对两个bootloader都提供了支持，看到这里显然您已经选择了使用LILO。
