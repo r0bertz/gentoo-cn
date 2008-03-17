@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-working-rcscripts.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.30 -->
+<!-- English CVS version: 1.31 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 Gentoo使用一种特殊的初始化脚本格式，有很多特色，包括由依赖关系驱动的决定和虚拟初始化脚本。本章会解释所有这些特色以及如何与这些脚本打交道。
 </abstract>
 
-<version>1.24</version>
-<date>2007-07-07</date>
+<version>1.25</version>
+<date>2007-10-11</date>
 
 <section>
 <title>运行级别</title>
@@ -291,7 +291,7 @@ Gentoo提供了一个简单的方法来配置这样的一个服务：每一个�
 </p>
 
 <pre caption="在/etc/conf.d/apache2中定义的变量">
-APACHE2_OPTS="-D PHP4"
+APACHE2_OPTS="-D PHP5"
 </pre>
 
 <p>
