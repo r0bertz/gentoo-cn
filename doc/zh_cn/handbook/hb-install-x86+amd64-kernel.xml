@@ -1,18 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license
- See http://creativecommons.org/licenses/by-sa/2.5
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml,v 1.3 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.17 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml,v 1.3 2007/09/14 07:09:18 neysx Exp $ -->
+<!-- English CVS version: 1.21 -->
 <sections>
 
 <abstract>
 Linux内核是每个发行版的核心。本章节将解释如何配置您自己的内核。
 </abstract>
 
-<version>5.4</version>
-<date>2007-08-12</date>
+<version>5.8</version>
+<date>2008-01-14</date>
 
 <section>
 <title>时区</title>
@@ -41,12 +41,11 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p test="func:keyval('arch')='x86'">
-对于x86架构的系统来说，可以使用列表中的<c>gentoo-sources</c>（包含性能提升补丁的版本）。
+对于x86架构的系统来说，可以使用列表中的<c>gentoo-sources</c>（包含增加了额外功能的补丁）。
 </p>
 
 <p test="func:keyval('arch')='AMD64'">
-对于AMD64架构的系统来说，Gentoo提供<c>gentoo-sources</c>（打过专门针对amd64的补
-丁的提升了稳定性、性能和硬件支持的内核）。
+对于AMD64架构的系统来说，Gentoo提供<c>gentoo-sources</c>（包含增加了额外功能的补丁）。
 </p>
 
 <p>
@@ -115,7 +114,7 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 </p>
 
 <pre caption="选择experimental code/drivers">
-Code maturity level options ---&gt;
+General setup ---&gt;
   [*] Prompt for development and/or incomplete code/drivers
 </pre>
 
@@ -127,7 +126,7 @@ Code maturity level options ---&gt;
 <body test="func:keyval('arch')='AMD64'">
 
 <p>
-然后我们将精确的选择处理器类型。x86_64内核维护者强烈推荐用户打开MCE功能，这样他们能够得到任何硬件问题的通知。在x86_64中，这些错误并不是如同其他架构那样写入<c>dmesg</c>，而是写入<path>/dev/mcelog</path>。这需要安装<c>app-admin/mcelog</c>。
+然后我们将精确的选择处理器类型。x86_64内核维护者强烈推荐用户打开MCE功能，这样他们能够得到任何硬件问题的通知。在x86_64中，这些错误并不是如同其他架构那样写入<c>dmesg</c>，而是写入<path>/dev/mcelog</path>。这需要安装<c>app-admin/mcelog</c>。如果你想运行32位程序，请一定选中IA32 Emulation。默认情况下，Gentoo将会安装一个multilib系统（可以同时执行32位和64位程序），所以很大可能你会需要这个选项。
 </p>
 
 <pre caption="选择处理器类型和特性">
@@ -138,6 +137,8 @@ Processor type and features  --->
     ( ) AMD-Opteron/Athlon64
     ( ) Intel EM64T
     ( ) Generic-x86-64
+Executable file formats / Emulations  --->
+   [*] IA32 Emulation
 </pre>
 
 </body>
@@ -262,7 +263,7 @@ Processor type and features  ---&gt;
 
 <pre caption="启用USB接口的输入设备支持">
 Device Drivers ---&gt;
-  USB Support ---&gt;
+  HID Devices --->
     &lt;*&gt;   USB Human Interface Device (full HID) support
 </pre>
 
