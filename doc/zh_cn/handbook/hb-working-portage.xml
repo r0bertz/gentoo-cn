@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-working-portage.xml,v 1.3 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.64 -->
+<!-- English CVS version: 1.71 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本章节阐述了一些“简单”的步骤，这些步骤是用户要维护自己系统中的软件所必须知道的。
 </abstract>
 
-<version>1.58</version>
-<date>2007-08-23</date>
+<version>1.64</version>
+<date>2008-02-29</date>
 
 <section>
 <title>欢迎使用Portage</title>
@@ -164,7 +164,7 @@ $ <i>emerge --searchdesc pdf</i>
 </pre>
 
 <p>
-您可以在<path>/etc/make.conf</path>文件中全局的设置，或者在<path>/etc/portage/package.use</path>文件中单个的设置，来决定打开或关闭<c>doc</c> USE标记。在<uri link="?part=2&amp;chap=2">USE 标志</uri>章节中有相关用法的详细说明。
+最好的启用<c>doc</c>的方式是在<path>/etc/portage/package.use</path>里对想要启用的包单独启用，这样你就能只获得你想要的软件文档。全局启用此标记已知会导致循环依赖。欲了解更多信息请看<uri link="?part=2&amp;chap=2">USE标志</uri>一章。
 </p>
 
 <p>
