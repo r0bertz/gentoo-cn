@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-portage-tools.xml,v 1.3 2007/09/14 16:14:18 r0bertz Exp $ -->
-<!-- English CVS version: 1.9 -->
+<!-- English CVS version: 1.10 -->
 
 <sections>
 
@@ -13,19 +13,67 @@
 您可以通过Portage提供的一些附加工具为您的Gentoo旅程带来更多的快乐。通过下文的阅读你会学会如何使用dispatch-conf和其他的一些工具。
 </abstract>
 
-<version>1.4</version>
-<date>2007-01-23</date>
+<version>1.5</version>
+<date>2008-03-01</date>
+
+<section>
+<title>dispatch-conf</title>
+<body>
+
+<p>
+<c>dispatch-conf</c>是一个帮助合并<path>._cfg0000_&lt;名称&gt;</path>文件的工具。<path>._cfg0000_&lt;名称&gt;</path>文件是由Portage在它要覆盖被CONFIG_PROTECT变量所保护的某个目录里的文件时建立的。
+</p>
+
+<p>
+使用<c>dispatch-conf</c>能够在合并配置文件并升级更新的同时保持所有更新记录。<c>dispatch-conf</c>以RCS版本管理系统或是补丁的方式来保存配置文件间的差别。这意味着如果你在升级配置文件犯下错误时，你可以随时退回到你的配置文件的之前版本。
+</p>
+
+<p>
+使用<c>dispatch-conf</c>，你可以保持配置文件原来的样子，或者使用新的配置文件，你还可以编辑当前文件或交互式地合并更新。除此之外，<c>dispatch-conf</c>还有一些很棒的特性：
+</p>
+
+<ul>
+  <li>
+    可以自动合并仅有注释变更的文件；
+  </li>
+  <li>
+    可自动合并仅有空白符数量的不同的文件；
+  </li>
+</ul>
+
+<p>
+确定你先编辑了<path>/etc/dispatch-conf.conf</path>并创建了archive-dir变量设定的目录。
+</p>
+
+<pre caption="运行dispatch-conf">
+# <i>dispatch-conf</i>
+</pre>
+
+<p>
+当运行<c>dispatch-conf</c>的时候，程序会带你把每个改变了的配置文件挨个过一边。按<c>u</c>来用新配置文件更新（替换）现在的配置文件，然后继续处理下一个。按<c>z</c>来删除新配置文件，然后继续处理下一个。当处理完所有的配置文件之后，<c>dispatch-conf</c>就会退出。你也可以随时按<c>q</c>来退出。
+</p>
+
+<p>
+更多信息，请查阅<c>dispatch-conf</c>手册页。它会告诉你交互式的合并新旧配置文件，编辑新配置文件，检查两个文件间的差异等等。
+</p>
+
+<pre caption="阅读dispatch-conf手册页">
+$ <i>man dispatch-conf</i>
+</pre>
+
+</body>
+</section>
 
 <section>
 <title>etc-update</title>
 <body>
 
 <p>
-<c>etc-update</c>是一个帮助整合<path>._cfg0000_&lt;名称&gt;</path>文件的工具。它提供了交互的整合过程并且能自动整合微不足道的更新。<path>._cfg0000_&lt;名称&gt;</path>文件是Portage需要覆盖由CONFIG_PROTECT变量所保护的某个目录里的文件时建立的。
+你也可以使用<c>etc-update</c>来合并配置文件。它不像<c>dispatch-conf</c>那样简单易用，功能也少，但是它也能提供交互式合并功能并且能自动合并一些简单的改变。
 </p>
 
 <p>
-运行<c>etc-update</c>非常的简单与直观：
+不过，和<c>dispatch-conf</c>不同的是，<c>etc-update</c><e>不</e>保留你的配置文件的旧版本。一旦你更新了文件，旧版本就永远丢失了。所以要非常小心，因为使用<c>etc-update</c>与使用<c>dispatch-conf</c>相比<e>明显</e>的不安全。
 </p>
 
 <pre caption="运行etc-update">
@@ -84,42 +132,6 @@ q:      退出。
 <p>
 当你完成重要的配置文件的更新后，余下的其它配置文件你就可以采用自动更新的方法了。当无法再找到任何可更新的配置文件时<c>etc-update</c>将退出。
 </p>
-
-</body>
-</section>
-
-<section>
-<title>dispatch-conf</title>
-<body>
-
-<p>
-使用<c>dispatch-conf</c>能够在合并配置文件并升级更新的同时保持所有更新记录。<c>dispatch-conf</c>以RCS版本管理系统或是补丁的方式来保存配置文件间的差别。
-</p>
-
-<p>
-使用<c>etc-update</c>，你可以保持配置文件原来的样子，或者使用新的配置文件，你还可以编辑当前文件或交互式地合并更新。然而除此之外，<c>dispatch-conf</c>还有一些很棒的特性：
-</p>
-
-<ul>
-  <li>
-    可以自动合并仅有注释变更的文件；
-  </li>
-  <li>
-    可自动合并仅有空白符数量的不同的文件；
-  </li>
-</ul>
-
-<p>
-确定你先编辑了<path>/etc/dispatch-conf.conf</path>并创建了archive-dir变量设定的目录。
-</p>
-
-<p>
-更多信息，请查阅<c>dispatch-conf</c>在线帮助手册:
-</p>
-
-<pre caption="阅读dispatch-conf手册页">
-$ <i>man dispatch-conf</i>
-</pre>
 
 </body>
 </section>
