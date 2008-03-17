@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-working-use.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.48 -->
+<!-- English CVS version: 1.49 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 USE标记是Gentoo非常重要的一部分。在本章里，你将学习设定USE标记以及了解USE标记如何影响你的系统构建。
 </abstract>
 
-<version>1.37</version>
-<date>2007-07-04</date>
+<version>1.38</version>
+<date>2007-10-21</date>
 
 <section>
 <title>USE标记是什么？</title>
@@ -136,7 +136,7 @@ USE="-kde -qt3 -qt4 ldap"
 <body>
 
 <p>
-如果你想要为一个（或者几个）程序而不是系统范围内声明一个USE标记，你需要创建<path>/etc/portage</path>目录（如果没有这个目录的话），然后编辑<path>/etc/portage/package.use</path>文件。
+如果你想要为一个（或者几个）程序而不是系统范围内声明一个USE标记，你需要创建<path>/etc/portage</path>目录（如果没有这个目录的话），然后编辑<path>/etc/portage/package.use</path>文件。通常这是一个文件，不过它也可以是一个目录；请看<c>man portage</c>以获得更多信息。下面的例子假设<path>package.use</path>是一个文件。
 </p>
 
 <p>
