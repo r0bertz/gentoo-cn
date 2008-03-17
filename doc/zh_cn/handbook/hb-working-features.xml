@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-working-features.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.35 -->
+<!-- English CVS version: 1.36 -->
 
 <sections>
           
@@ -13,8 +13,8 @@
 学习Portage所拥有的特性，比如对分布式编译的支持，以及ccache等等。
 </abstract>
 
-<version>1.31</version>
-<date>2007-01-18</date>
+<version>1.32</version>
+<date>2008-03-02</date>
 
 <section>
 <title>Portage特性</title>
@@ -198,7 +198,7 @@ Portage支持用预编译包安装。尽管Gentoo本身并不提供预编译包�
 </p>
 
 <p>
-预编译包的更多扩展支持可以用<c>catalyst</c>得到。关于catalyst的更多信息请参阅<uri link="/proj/zh_cn/releng/catalyst/2.x/reference.xml">Catalyst参考手册</uri>以及<uri link="/proj/zh_cn/releng/catalyst/faq.xml">Catalyst FAQ</uri>.
+预编译包的更多扩展支持可以用<c>catalyst</c>得到。关于catalyst的更多信息请参阅<uri link="/proj/en/releng/catalyst/faq.xml">Catalyst FAQ</uri>.
 </p>
 
 </body>
