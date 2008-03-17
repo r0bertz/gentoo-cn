@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-modules.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.23 -->
+<!-- English CVS version: 1.24 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 Gentoo为您提供了灵活的网络支持——本节将告诉你怎样选择不同的DHCP客户端程序，如何配置网络的绑定和桥接以及配置VLAN等等相关的知识。
 </abstract>
 
-<version>8.2</version>
-<date>2007-04-13</date>
+<version>8.3</version>
+<date>2007-11-02</date>
 
 <section>
 <title>网络模块</title>
@@ -316,7 +316,7 @@ depend_bond0() {
 </p>
 
 <pre caption="/etc/conf.d/net中桥接的配置">
-<comment># 配置桥接——可以使用"man btctl"来获得更多信息</comment>
+<comment># 配置桥接——可以使用"man brctl"来获得更多信息</comment>
 brctl_br0=( "setfd 0" "sethello 0" "stp off" )
 
 <comment># 增加端口到网桥br0中</comment>
