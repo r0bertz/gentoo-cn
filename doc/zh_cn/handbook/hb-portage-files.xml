@@ -4,7 +4,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-portage-files.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
+<!-- $Header$ -->
 <!-- English CVS version: 1.18 -->
 
 <sections>
@@ -24,15 +24,15 @@
 <body>
 
 <p>
-Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当你打开它时，你就会发现所有的Portage配置选项都是通过变量来控制的。Portage听取的是什么变量的，这些变量分别又是什么意思，下面将详细解释。
+Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当你打开它时，你就会发现所有的Portage配置选项都是通过变量来控制的。Portage读取的是什么变量，这些变量分别又是什么意思，下面将详细解释。
 </p>
 
 <p>
-因为许多配置在不同的构架下是不同的，Portage也有默认的配置文件，它是你的profile的一部分。你的profile是<path>/etc/make.profile</path>这个链接所指向的；Portage的配置选项是在你的profile以及它所有的父profile中的<path>make.defaults</path>文件中设定的。我们稍后将详细解释profile及<path>/etc/make.profile</path>目录。
+因为许多配置命令在不同的架构下是不同的，Portage也有相应的各组默认配置文件，它们是你的profile的一部分。你的profile是<path>/etc/make.profile</path>这个链接文件指向的目录；Portage的配置选项是在你的profile以及所有被继承的profile中的<path>make.defaults</path>文件中设定的。我们稍后将详细解释profile及<path>/etc/make.profile</path>目录。
 </p>
 
 <p>
-如果打算改变配置变量，<e>不要</e>改动<path>/etc/make.globals</path>或是<path>make.defaults</path>。而应该修改<path>/etc/make.conf</path>，它比前面的文件有更高的优先级。你也会发现有一个<path>/etc/make.conf.example</path>。顾名思义，它是一个范例文件而已——Portage并不读取这个文件。
+如果打算改变配置变量，<e>不要</e>变更<path>/etc/make.globals</path>或是<path>make.defaults</path>。而应该修改<path>/etc/make.conf</path>，它比前面的几个文件有更高的优先级。你也会发现有一个<path>/etc/make.conf.example</path>。顾名思义，它是一个范例文件而已——Portage并不读取这个文件。
 </p>
 
 <p>
@@ -50,7 +50,7 @@ Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当�
 </p>
 
 <p>
-一个profile包含了Portage需要的架构相关的信息，比如该profile对应的system包含的软件包的列表，以及对这个profile来说不能运行的（或者被屏蔽掉）的软件列表，等等。
+一个profile包含了Portage需要的与架构相关的信息，比如该profile对应的system包含的软件包的列表，以及对这个profile来说不能运行的（或者被屏蔽掉）的软件列表，等等。
 </p>
 
 </body>
@@ -97,11 +97,11 @@ $ <i>man portage</i>
 <body>
 
 <p>
-先前提到的配置文件不能保存在其他地方——Portage总是会在这些确定的位置搜索配置文件。不过Portage还用了许多其他的位置来满足不同的目的：编译、保存源代码、保存portage树。
+先前提到的配置文件不能保存在其他地方——Portage总是会在这些特定的位置搜索配置文件。不过Portage还用了许多其他的位置来满足不同的目的：编译、保存源代码、保存portage树。
 </p>
 
 <p>
-所有的这些目的都有大家都知道的默认位置，不过你可以根据你自己的口味通过<path>/etc/make.conf</path>来改变它们。本章中的其他部分将解释Portage使用哪些特定的位置存放它们以及怎样改变它们在你的文件系统中的存放地点。
+所有的这些目的都有众所周知的默认位置，不过你可以根据你自己的喜好通过<path>/etc/make.conf</path>来改变它们。本章中的其他部分将解释Portage使用哪些特定的位置存放它们以及怎样改变它们在你的文件系统中的存放地点。
 </p>
 
 <p>
@@ -123,11 +123,11 @@ $ <i>man make.conf</i>
 <body>
 
 <p>
-Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定义的。当你把Portage树保存在其他位置（通过改变这个变量），不要忘了相应的改变符号链接<path>/etc/make.profile</path>的指向。
+Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定义的。当你把Portage树保存在其他位置（通过改变这个变量），不要忘了相应地改变符号链接<path>/etc/make.profile</path>指向的位置。
 </p>
 
 <p>
-如果你改变了PORTDIR变量，你可能也需要改变下面几个变量，因为它们不会注意到PORTDIR的改变。这是由于Portage处理变量的方式导致的：PKGDIR、DISTDIR、RPMDIR。
+如果你改变了PORTDIR变量，你可能也需要改变下面几个变量，因为它们不会知道PORTDIR变量的改变。这是Portage处理这些变量的方式导致的：PKGDIR、DISTDIR、RPMDIR。
 </p>
 
 </body>
@@ -137,7 +137,7 @@ Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定�
 <body>
 
 <p>
-虽然Portage并不默认使用预编译的二进制包，但却对其有广泛的支持。当你要求Portage使用预编译的二进制包时，它就会在<path>/usr/portage/packages</path>中寻找它们。这个位置是PKGDIR变量定义的。
+虽然Portage并不默认使用预编译的二进制包，但却对其有多方面的支持。当你要求Portage使用预编译的二进制包时，它就会在<path>/usr/portage/packages</path>中寻找它们。这个位置是通过PKGDIR变量定义的。
 </p>
 
 </body>
@@ -147,7 +147,7 @@ Portage树的默认位置是<path>/usr/portage</path>。这是PORTDIR变量定�
 <body>
 
 <p>
-程序的源代码默认保存于<path>/usr/portage/distfiles</path>。这个位置是DISTDIR变量定义的。
+程序的源代码默认保存于<path>/usr/portage/distfiles</path>。这个位置是通过DISTDIR变量定义的。
 </p>
 
 </body>
@@ -180,11 +180,11 @@ Portage缓存（包括修改时间、虚拟包、依赖关系树信息……）�
 <body>
 
 <p>
-Portage的临时文件默认保存在<path>/var/tmp</path>。这是PORTAGE_TMPDIR变量定义的。
+Portage的临时文件默认保存在<path>/var/tmp</path>。这是通过PORTAGE_TMPDIR变量定义的。
 </p>
 
 <p>
-如果你改变了PORTAGE_TMPDIR变量，你也需要改变下列的变量，因为它们不会注意到PORTAGE_TMPDIR的改变。这是由于PORTAGE处理变量的方式导致的：BUILD_PREFIX。
+如果你改变了PORTAGE_TMPDIR变量，你也需要改变下列的变量，因为它们不会知道PORTAGE_TMPDIR变量的改变。这是由于PORTAGE处理这些变量的方式导致的：BUILD_PREFIX。
 </p>
 
 </body>
@@ -194,7 +194,7 @@ Portage的临时文件默认保存在<path>/var/tmp</path>。这是PORTAGE_TMPDI
 <body>
 
 <p>
-Portage为每一个它所安装的软件包在<path>/var/tmp/portage</path>里创建特定的编译目录。这一位置是BUILD_PREFIX变量定义的。
+Portage为每一个它所安装的软件包在<path>/var/tmp/portage</path>里创建特定的编译目录。这一位置是通过BUILD_PREFIX变量定义的。
 </p>
 
 </body>
@@ -204,7 +204,7 @@ Portage为每一个它所安装的软件包在<path>/var/tmp/portage</path>里�
 <body>
 
 <p>
-默认情况下，Portage将所有的文件安装到当前文件系统（<path>/</path>）里。但是你可以通过改变环境变量ROOT来改变它。这在你想要创建一个新的构造镜像时是很有用的。
+默认情况下，Portage将所有的文件安装到当前文件系统（<path>/</path>）里。但是你可以通过改变环境变量ROOT来改变它。这在你想要创建一个新的编译镜像时是很有用的。
 </p>
 
 </body>
