@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.7 -->
+<!-- English CVS version: 1.1 -->
 
 <!--  The content of this document is licensed under the CC-BY-SA license -->
 <!--  See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <sections>
 
-<version>3.3</version>
+<version>4.0</version>
 <date>2007-06-02</date>
 
 <section>
@@ -18,16 +18,8 @@
 <body>
 
 <p>
-当Gentoo安装程序加载结束后，您会看到显示屏上欢迎的问候信息。它提供了一份友好的Gentoo安装步骤的说明。请仔细阅读每一个选项。每一个安装步骤都有详细帮助信息，请看每一屏的左侧。我们建议您在做出每个选择前，都先浏览帮助页面。请注意在安装过程中的任何时候您都可以保存您的配置进度，以便在中止后随时继续之前的安装。
+Gentoo Linux安装程序（GLI）提供了一个友好的在你的电脑上安装Gentoo的过程的介绍。请仔细阅读每一个选项。每一个安装步骤都有详细帮助信息，请看每一屏的左侧。我们建议您在做出每个选择前，都先浏览帮助页面。请注意在安装过程中的任何时候您都可以保存您的配置进度，并在之后随时继续之前的安装。
 </p>
-
-<p>
-这里提供三种可用的安装方法。选择<c>Networkless</c>来开始安装Gentoo Linux。
-</p>
-
-<note>
-选择<c>Networkless</c>方式会导致后面的一些配置选项不可用。
-</note>
 
 </body>
 </subsection>
@@ -56,59 +48,6 @@
 </section>
 
 <section>
-<title>网络磁盘挂载</title>
-<subsection>
-<title>可选：定义网络磁盘</title>
-<body>
-
-<p>
-本节中您可以设置和挂载任何已经存在的网络磁盘，以便在安装过程中和安装后使用。目前只支持NFS。
-
-</p>
-
-</body>
-</subsection>
-</section>
-
-<section>
-<title>make.conf</title>
-<subsection>
-<title>USE标记</title>
-<body>
-
-<p>
-因为您正在进行GRP/无网络安装，所以不能在安装之前选择USE标记。不过，当您重启进入安装完成的系统后，您就可以在<path>/etc/make.conf</path>中设置USE标志了。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>CFLAGS</title>
-<body>
-
-<p>
-不管怎样，您都应该在<e>CFLAGS</e>选项后面输入您的处理器类型和一些自定义的优化参数，比如<c>-O2</c>和<c>-pipe</c>。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>其他</title>
-<body>
-
-<p>
-任何其他您想设置以便以后使用的选项，现在都应该选择了。<e>建立二进制包</e>会为所有已经安装在系统里的包建立可以用于安装的二进制tarbll。<e>DistCC</e>允许其它计算机通过网络连接来分担您机器上的编译负载。
-</p>
-
-<p>
-您不能更改<e>CHOST</e>，更改它可能会严重破坏您已安装好的系统。<e>MAKEOPTS</e>定义了当您安装包的时候，可以同时并行编译的线程数。一个好的选择是系统的CPU数目加上一，但这个准则并非总是完美。在单处理器系统上，建议使用<c>-j2</c>。
-</p>
-
-</body>
-</subsection>
-</section>
-
-<section>
 <title>时区</title>
 <subsection>
 <title>选择您的时区</title>
@@ -116,20 +55,6 @@
 
 <p>
 从地图上选择离您所在地最近的一个地点。然后，您需要设定您的系统时钟使用UTC还是local时间。
-</p>
-
-</body>
-</subsection>
-</section>
-
-<section>
-<title>内核源代码</title>
-<subsection>
-<title>使用LiveCD的内核</title>
-<body>
-
-<p>
-使用GRP/无网络方式安装，您必须使用LiveCD上提供的内核。这只是一个由Gentoo的内核自动编译工具——<c>genkernel</c>编译的<c>gentoo-sources</c>内核，它可以在您开机的时候自动检测并设置您的硬件。
 </p>
 
 </body>
@@ -149,61 +74,6 @@
 <p>
 在<e>Hostname/Proxy Information/Other</e>标签页中，您需要为您的系统选择一个主机名称。如果需要，您还可以指定代理服务器和DNS设置。
 </p>
-
-</body>
-</subsection>
-</section>
-
-<section>
-<title>系统服务</title>
-<subsection>
-<title>Cron系统服务</title>
-<body>
-
-<p>
-Cron服务可以使您的程序在计划时间自动运行。虽然您不是一定<e>要</e>安装它，但它确实十分有用。因为这是一个无网络安装，所以你只能选择<c>vixie-cron</c>或者不要Cron服务。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>系统日志程序</title>
-<body>
-
-<p>
-系统日志程序是任何linux操作系统不可或缺的一部分。因为这是一个无网络安装，所以你只能选择<c>syslog-ng</c>或者不要日志程序。
-</p>
-
-</body>
-</subsection>
-</section>
-
-<section>
-<title>引导程序</title>
-<subsection>
-<body>
-
-<p>
-在这一节，您要选择一个引导程序，如果需要也可以设定额外的内核参数。因为这是一个无网络安装，所以你只能选择<c>grub</c>或者不要引导程序。
-</p>
-
-<p>
-您可以在<e>Boot Drive</e>中加入正确设置以指定从哪个硬盘启动。在Linux中，系统上的第一个IDE硬盘被称作<c>hda</c>，第二个IDE硬盘是<c>hdb</c>，依此类推。如果是SATA或SCSI硬盘，会称作为<c>sda</c>、<c>sdb</c>等，请为您的系统作出正确的选择。
-</p>
-
-<!-- more bootloader inclusions needed about vga, etc. just don't include pure
-CLI stuff, but only what can go on the extra kernel params line -->
-
-<p>
-如果您要给内核添加额外的参数，比如video和VGA设定，只需把它们添加到“Extra kernel parameters”部分。
-</p>
-
-<p>
-如果您的BIOS不能处理大容量硬盘，您需要加上<c>hdx=stroke</c>。如果您有SCSI设备，您应在内核参数中加入<c>doscsi</c>。
-</p>
-
-<!-- do we need to cover all the stuff about lilo/grub and kernel parameter
-lines and/or block devices here? -->
 
 </body>
 </subsection>
