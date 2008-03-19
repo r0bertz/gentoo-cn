@@ -1,20 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/handbook-ppc.xml,v 1.2 2007/09/14 17:37:36 r0bertz Exp $ -->
-<!-- English CVS version: 1.12 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.3 -->
 
-<book link="/doc/zh_cn/handbook/2007.0/handbook-ppc.xml" lang="zh_cn">
-<title>Gentoo Linux 2007.0 PPC无网络手册</title>
+<book link="/doc/zh_cn/handbook/2008.0/handbook-ppc.xml" lang="zh_cn">
+<title>Gentoo Linux 2008.0 PPC无网络手册</title>
 
 <values>
  <key id="arch">PPC</key>
- <key id="kernel-version">2.6.19-r5</key>
- <key id="kernel-name">kernel-2.6.19-gentoo-r5</key>
- <key id="kernel-gentoo">2.6.19-gentoo-r5</key>
- <key id="online-book">2007.0/handbook-ppc.xml</key>
- <key id="release-dir">releases/ppc/2007.0/ppc32/</key>
- <key id="stage3">stage3-ppc-2007.0.tar.bz2</key>
+ <key id="kernel-version">2.6.23-r8</key>
+ <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
+ <key id="kernel-gentoo">2.6.23-gentoo-r8</key>
+ <key id="online-book">2008.0/handbook-ppc.xml</key>
+ <key id="release-dir">releases/ppc/2008.0/ppc32/</key>
+ <key id="stage3">stage3-ppc-2008.0.tar.bz2</key>
  <key id="CFLAGS">-O2 -mcpu=powerpc -mtune=powerpc -fno-strict-aliasing -pipe</key>
 </values>
 
@@ -175,8 +175,8 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>8.1</version>
-<date>2007-06-06</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <part>
 <title>安装Gentoo</title>
