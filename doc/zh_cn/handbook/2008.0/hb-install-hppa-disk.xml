@@ -1,0 +1,289 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.5 -->
+
+<sections>
+
+<version>8.1</version>
+<date>2007-06-26</date>
+
+<section>
+<title>块设备介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个SCSI硬盘的<path>/dev/sda</path>。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分区和分片</title>
+<body>
+
+<p>
+尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。在大多数系统里，它们被称为<e>分区</e>。其他架构中使用了类似的技术，叫做<e>分片</e>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>多少和多大？</title>
+<body>
+
+<p>
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安装在那。理由也与<path>/home</path>目录类似：安全与备份。你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+</p>
+
+<p>
+正如你所看到的，这完全取决于你想要达到什么目的。独立的分区或卷有以下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每一个分区或卷选择最佳性能的文件系统
+</li>
+<li>
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间都用完
+</li>
+<li>
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势在多磁盘系统上比多分区系统上更为明显）
+</li>
+<li>
+  通过对一些分区的进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式 挂载，安全性会大大增强
+</li>
+</ul>
+
+<p>
+然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>使用HPPA上的fdisk来为你的磁盘分区</title>
+<body>
+
+<p>
+使用<c>fdisk</c>来创建你想要的分区：
+</p>
+
+<pre caption="为磁盘分区">
+# <i>fdisk /dev/sda</i>
+</pre>
+
+<p>
+HPPA机器使用PC标准的DOS分区表。要创建一个新的DOS分区表，使用<c>o</c>命令就可以了。
+</p>
+
+<pre caption="创建DOS分区表">
+# <i>fdisk /dev/sda</i>
+
+Command (m for help): <i>o</i>
+Building a new DOS disklabel.
+</pre>
+
+<p>
+PALO（HPPA引导程序）需要一个特殊的分区才能工作。你需要在你磁盘的开头创建一个至少16MB的分区。这个分区类型必须是<e>f0</e>（Linux/PA-RISC boot）。
+</p>
+
+<impo>
+如果你略过这一步，在没有PALO特殊分区的情况下继续安装，你的系统就将启动失败。并且，如果你的硬盘大于2GB，确保启动分区在你的硬盘的开头2GB之内。PALO不能读取保存于头2GB之外的内核。
+</impo>
+
+<pre caption="一个简单的默认分区计划">
+# <i>cat /etc/fstab</i>
+/dev/sda2    /boot   ext3    noauto,noatime   1 1
+/dev/sda3    none    swap    sw               0 0
+/dev/sda4    /       ext3    noatime          0 0
+
+# <i>fdisk /dev/sda</i>
+
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 4294 MB, 4294816768 bytes
+133 heads, 62 sectors/track, 1017 cylinders
+Units = cylinders of 8246 * 512 = 4221952 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1           8       32953   f0  Linux/PA-RISC boot
+/dev/sda2               9          20       49476   83  Linux
+/dev/sda3              21          70      206150   82  Linux swap
+/dev/sda4              71        1017     3904481   83  Linux
+</pre>
+
+<p>
+现在分区已经创建完毕，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你的分区已经创建完了，现在可以在上面安装文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+有好几个文件系统可以用。Ext2、ext3、XFS和reiserfs在HPPA架构上是稳定的。其他的文件系统都是实验性质的。
+</p>
+
+<p>
+<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+</p>
+
+<p>
+<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了，但是目前还没有足够的相关记录来对其一般稳定性做出积极或消极的评价。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>在分区上应用文件系统</title>
+<body>
+
+<p>
+要在分区或卷上创建文件系统，对于每种可能的文件系统都有专门的工具。
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+例如，要使启动分区（本例中的<path>/dev/sda2</path>）为ext2和根分区（本例中的<path>/dev/sda4</path>）为ext3,应该这样做：
+</p>
+
+<pre caption="在分区上应用文件系统">
+# <i>mke2fs /dev/sda2</i>
+# <i>mke2fs -j /dev/sda4</i>
+</pre>
+
+<p>
+现在在你新建的分区（或逻辑卷）上创建文件系统。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区标志">
+# <i>mkswap /dev/sda3</i>
+</pre>
+
+<p>
+使用<c>swapon</c>命令来激活交换分区：
+</p>
+
+<pre caption="激活交换分区。">
+# <i>swapon /dev/sda3</i>
+</pre>
+
+<p>
+创建和激活交换分区
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<subsection>
+<body>
+
+<p>
+现在你的分区都已经初始化了，并且安装了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令进行挂载。别忘记为每个你创建的分区建立所需的挂载目录。作为例子，我们来挂载根分区和启动分区：
+</p>
+
+<pre caption="挂载分区">
+# <i>mount /dev/sda4 /mnt/gentoo</i>
+# <i>mkdir /mnt/gentoo/boot</i>
+# <i>mount /dev/sda2 /mnt/gentoo/boot</i>
+</pre>
+
+<note>
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+</note>
+
+<p>
+我们还需要在<path>/proc</path>目录上挂载proc文件系统（内核的虚拟接口）。但是，我们首先需要把我们的文件放到分区上。
+</p>
+
+<p>
+请继续阅读<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

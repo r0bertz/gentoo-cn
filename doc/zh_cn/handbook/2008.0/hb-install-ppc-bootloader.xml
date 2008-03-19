@@ -1,0 +1,450 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.11 -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>选择一个引导程序</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在，您已经配置并编译好了内核，你将需要一个<e>引导程序</e>来启动你新安装的Linux。接下来将要使用的<e>引导程序</e>与你所拥有PPC机器的类型有关。
+</p>
+
+<p>
+如果你使用的是NewWorld架构的Apple或IBM机器，你需要使用<uri link="#yaboot">yaboot</uri>。OldWorld架构的Apple机器有两个选择，<uri link="#bootx">BootX</uri>（推荐）和<uri link="#quik">quik</uri>。虽然Pegasos机器并不需要一个引导程序，但是你仍然需要emerge <uri link="#bootcreator">bootcreator</uri>来创建SmartFirmware启动菜单。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="yaboot">
+<title>默认：使用yaboot</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<impo>
+yaboot只能用于NewWorld架构的Apple和IBM系统中！
+</impo>
+
+<p>
+为了能找到启动设备，yaboot需要能访问到在启动中由udev创建的设备节点以及sysfs文件系统。这两个文件系统分别可以在<path>/dev</path>以及<path>sys</path>下找到。为了达到这样的效果，你需要把安装光盘中根目录下的这两个文件系统“bind mount”到chroot环境中的<path>/dev</path>和<path>/sys</path>挂载点上。如果你已经bind mount了这些文件系统，那就没有必要再做了。
+</p>
+
+<pre caption="Bind mount device和sysfs文件系统">
+# <i>exit </i> # 这个命令会退出chroot
+# <i>mount -o bind /dev /mnt/gentoo/dev</i>
+# <i>mount -o bind /sys /mnt/gentoo/sys</i>
+# <i>chroot /mnt/gentoo /bin/bash</i>
+# <i>/usr/sbin/env-update &amp;&amp; source /etc/profile </i>
+</pre>
+
+<p>
+为了设置yaboot，你可以使用<c>yabootconfig</c>来为你自动创建一个配置文件。如果你在一台G5上安装了Gentoo（在这上面<c>yabootconfig</c>可能并不能正常工作），或者你计划从firewire或USB设备启动，那么你就需要手动配置yaboot了。
+</p>
+
+<note>
+当使用genkernel的时候，你需要手动修改yaboot.conf，即使yabootconfig已经使用过也需要修改。内核映像中的yaboot.conf需要做如下修改（使用vmlinux和initrd作为内核和initrd映像文件的名字）：
+</note>
+
+<pre caption="将genkernel启动参数加到yaboot.conf中">
+<comment>###########################################################
+## 如果你有一个以上的内核或是启动选项的组合，这部分内容可以被复制
+## ——用你内核和initrd映像的确切名字替换image和initrd的值。
+###########################################################</comment>
+image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
+  label=Linux
+  root=/dev/ram0
+  partition=3
+  initrd=/boot/initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/>
+  <comment># 你可以在此附加上额外的内核参数比如rootdelay=10用于USB/Firewire启动</comment>
+  append="real_root=/dev/hda3 init=/linuxrc"  
+  read-only
+<comment>##########################################################</comment>
+</pre>
+
+<ul>
+  <li><uri link="#yabootconfig">默认：使用yabootconfig</uri></li>
+  <li>
+    <uri link="#manual_yaboot">备选：手动yaboot配置</uri> 
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection id="yabootconfig">
+<title>默认：使用yabootconfig</title>
+<body>
+
+<p>
+<c>yabootconfig</c>会自动侦测在你机器上的分区并会设置诸如Linux、Mac OS和Mac OS X这样的双重或三重的启动组合。
+</p>
+
+<p>
+为了能使用<c>yabootconfig</c>，你的硬盘上必须拥有一个Apple_Bootstrap分区，并且<path>/etc/fstab</path>必须能反映出你的Linux分区状况（请注意Bootstrap分区<e>不</e>应该在你的fstab文件中）。虽然这些步骤应该已经完成了，但是还是请检查<path>/etc/fstab</path>后再进行下一步。现在可以安装<c>yaboot</c>了。
+</p>
+
+<pre caption = "从GRP方式安装yaboot">
+# <i>emerge --usepkg yaboot</i>
+</pre>
+
+<p>
+现在退出chroot并运行<c>yabootconfig --chroot /mnt/gentoo</c>。首先，程序会确认bootstrap分区的位置。如果你使用了建议的磁盘分区布局，那你的bootstrap分区应该是/dev/hda2。如果输出正确请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。<c>yabootconfig</c>会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。<c>mkofboot</c>是格式化Apple_Bootstrap分区以及安装yaboot的配置文件用的。在此之后请再次进入chroot。
+</p>
+
+<pre caption="重新进入chroot">
+# <i>chroot /mnt/gentoo /bin/bash</i>
+# <i>/usr/sbin/env-update &amp;&amp; source /etc/profile</i>
+</pre>
+
+<p>
+你可能需要校验<path>/etc/yaboot.conf</path>的内容。如果你在<path>/etc/yaboot.conf</path>中做了些更改（比如设置默认/启动的操作系统），请确保再次运行一次<c>ybin -v</c>以便将这些更改应用到Apple_Bootstrap分区中去。无论何时你对yaboot.conf做了任何改动，比如测试一个新内核时，永远记得要运行<c>ybin -v</c>来用以更新bootstrap分区。
+</p>
+
+<p>
+接下来请阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection id="manual_yaboot">
+<title>备选：手动yaboot配置</title>
+<body>
+
+<p>
+首先确保你已经在系统上安装了<c>yaboot</c>：
+</p>
+
+<pre caption="从GRP方式安装yaboot">
+# <i>emerge --usepkg yaboot</i>
+</pre>
+
+<p>
+虽然下面给出了一个<path>yaboot.conf</path>示例文件，但是你仍然需要通过修改它来满足你自己的要求。G5用户以及使用firewire和USB启动的用户应该注意他们的磁盘被Linux内核认为是SCSI磁盘，所以你需要将<path>/dev/hda</path>替换成<path>/dev/sda</path>。
+</p>
+
+<pre caption = "/etc/yaboot.conf">
+<comment>## /etc/yaboot.conf
+##
+## 运行：“man yaboot.conf”可以得到更多详细帮助。在未看帮助前请不要做任何改动！！
+## 也可以参考：/usr/share/doc/yaboot/examples可以得到一些配置的示例。
+##
+## 如果需要双重启动菜单，请添加以下一项或多项：
+## bsd=/dev/hdaX, macos=/dev/hdaY, macosx=/dev/hdaZ
+
+## bootstrap分区：</comment>
+
+boot=/dev/hda2
+
+<comment>## ofboot是Open Firmware的指定bootstrap分区的方式。
+## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
+## 你将一些必要的参数传给mkofboot/ybin程序）。
+## hd:X表示/dev/sdaX（或/dev/hdaX）。
+ 
+## G5用户应该去掉这一行的注释！！
+
+#ofboot=hd:2
+
+## 使用firewire启动的用户应该使用类似下面这行的指定方式：
+# ofboot=fw/node/sbp-2/disk@0:
+
+## 使用USB启动的用户应该使用类似下面这行的指定方式：
+# ofboot=usb/disk@0:
+
+## hd:代表OpenFireware能看到的第一个硬盘的缩写</comment>
+device=hd:
+
+<comment>## Firewire和USB用户需要指定整个OF设备名
+## 这个可以通过使用ofpath找到，它也同时包含在yaboot中。
+
+# device=fw/node@0001d200e00d0207/sbp-2@c000/disk@0:
+</comment>
+
+delay=5
+defaultos=macosx
+timeout=30
+install=/usr/lib/yaboot/yaboot
+magicboot=/usr/lib/yaboot/ofboot
+
+<comment>###########################################################
+## 如果你有一个以上的内核或是启动选项的组合，这部分内容可以被复制
+## ——用你内核映像的确切名字替换image值。
+###########################################################</comment>
+image=/boot/<keyval id="kernel-name"/>
+  label=Linux
+  root=/dev/hda3
+  partition=3
+<comment>#  append="rootdelay=10"  # 从USB/Firewire启动时必需</comment>
+  read-only
+<comment>##################
+
+## G5用户和某些G4用户需要设置
+##   macos=hd:13
+##   macosx=hd:12
+## 用以替代示例值。</comment>
+macos=/dev/hda13
+macosx=/dev/hda12
+enablecdboot
+enableofboot
+</pre>
+
+<p>
+一旦<path>yaboot.conf</path>配置完成，运行<c>mkofboot -v</c>来格式化Apple_bootstrap分区并安装配置好的设定。如果你在Apple_bootstrap分区创建好后修改了yaboot.conf，你可以运行<c>ybin -v</c>来更新设定。
+</p>
+
+<pre caption="配置bootstrap分区">
+# <i>mkofboot -v</i>
+</pre>
+
+<p>
+更多关于yaboot的信息，你可以参看<uri link="http://penguinppc.org/bootloaders/yaboot">yaboot项目</uri>。现在，请阅读<uri link="#reboot">重启系统</uri>来继续安装。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="bootx">
+<title>备选：BootX</title>
+<body>
+
+<impo>
+BootX只能用于使用MacOS 9及更早的操作系统的OldWorld架构的Apple机器！
+</impo>
+
+<p>
+因为BootX需要从运行着的MacOS里启动Linux，所以需要将内核从Linux分区拷贝到MacOS分区。首先，从chroot环境外挂载MacOS分区。使用<c>mac-fdisk -l</c>来查找MacOS分区号，这里使用sda6作为示例。当这个分区被挂载起来后，我们就要将内核拷贝至系统目录以便BootX能够找得到它。
+</p>
+
+<pre caption="将内核拷贝至MacOS分区">
+# <i>exit</i>
+cdimage ~# <i>mkdir /mnt/mac</i>
+cdimage ~# <i>mount /dev/sda6 /mnt/mac -t hfs</i>
+cdimage ~# <i>cp /mnt/gentoo/usr/src/linux/vmlinux "/mnt/mac/System Folder/Linux Kernels/<keyval id="kernel-name"/>"</i>
+</pre>
+
+<p>
+如果使用的是genkernel，内核和initrd都需要拷贝至MacOS分区。
+</p>
+
+<pre caption="将genkernel生成的内核和initrd拷贝至MacOS分区">
+# <i>exit</i>
+cdimage ~# <i>mkdir /mnt/mac</i>
+cdimage ~# <i>mount /dev/sda6 /mnt/mac -t hfs</i>
+cdimage ~# <i>cp /mnt/gentoo/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> "/mnt/mac/System Folder/Linux Kernels"</i>
+cdimage ~# <i>cp /mnt/gentoo/boot/initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/> "/mnt/mac/System Folder"</i>
+</pre>
+
+<p>
+现在内核已经拷贝完毕，我们需要重启来设置BootX。
+</p>
+
+<pre caption="卸载掉所有的分区并重启">
+cdimage ~# <i>cd /</i>
+cdimage ~# <i>umount /mnt/gentoo/proc /mnt/gentoo/dev /mnt/gentoo/sys /mnt/gentoo /mnt/mac</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然，请不要忘记将可启动的CD从光驱中取出，否则机器会再次启动CD，而不是MacOS。
+</p>
+
+<p>
+一旦机器启动至MacOS，打开BootX控制面板。如果你没有使用genkernel，选择<c>Options</c>后取消掉<c>Use specified RAM disk</c>。如果你使用了genkernel，请确认你使用的是genkernel生成的initrd而不是安装CD中的initrd。如果你使用的不是genkernel，这儿有个选项用于指定机器的Linux根磁盘和分区。请用适当的值将这些都填好。根据内核的配置情况，可能还会增加一些额外的启动参数。
+</p>
+
+<p>
+您可以配置BootX让MacOS在启动时自动启动Linux。如果你这样做了，你将会先看到你的机器启动了MacOS，然后在启动时，BootX会装载并启动Linux。更多详细信息请看<uri link="http://penguinppc.org/bootloaders/bootx/">BootX主页</uri>。
+</p>
+
+<impo>
+确保在你的内核中已经有了HFS和HFS+文件系统的支持，否则你将无法升级或改变位于你MacOS分区中的内核。
+</impo>
+
+<p>
+现在重新启动并启动至Linux中，并请继续阅读<uri link="?part=1&amp;chap=11">结束你的Gentoo安装</uri>。
+</p>
+
+</body>
+</section>
+<section id="quik">
+<title>备选：quik</title>
+<body>
+
+<p>
+quik允许OldWorld架构的Mac机器不需要MacOS就能启动。然而，这个功能的实现并不完美而且有一些古怪行为。如果你能用BootX，我们建议你还是用BootX而不要用它，毕竟前者比起后者更可靠且易于设置。
+</p>
+
+<p>
+首先，我们需要安装quik：
+</p>
+
+<pre caption="从GRP形式Emerge quik">
+# <i>emerge --usepkg quik</i>
+</pre>
+
+<p>
+接下来，我们需要设置它。修改<path>/etc/quik.conf</path>并把image设置为已经拷贝至你的启动分区中的那个内核映像。
+</p>
+
+<pre caption="配置quik.conf">
+# quik.conf示例
+init-message = "Gentoo 2007.0\n"
+<comment># 这个是启动分区</comment>
+partition = 2
+root = /dev/hda4
+timeout = 30
+default = gentoo
+<comment># 这个是你的内核</comment>
+image = /<keyval id="kernel-name"/>
+  label = gentoo
+</pre>
+
+<p>
+你的quik.conf文件<e>必须</e>和quik启动镜像存放在相同的磁盘上，它也可以是在相同磁盘的不同分区上，推荐你将它移动到你的启动分区上。
+</p>
+
+<pre caption="将quik.conf移动至/boot">
+# <i>mv /etc/quik.conf /boot/quik.conf</i>
+</pre>
+
+<p>
+现在我们将设置你的启动变量，因为quik在启动时需要加载它们。为此，我们需要使用一个叫做<c>nvsetenv</c>的程序。你想设置的这些变量随机器的不同而有所变化，在尝试这步之前最好先查找你机器的<uri link="http://penguinppc.org/bootloaders/quik/quirks.php">quirks</uri>。
+</p>
+
+<pre caption="设置启动变量">
+# <i>nvsetenv auto-boot true</i> <comment># 如果你想要启动至OF请设置成false，并不是所有的型号都能显示OF输出</comment>
+# <i>nvsetenv output-device video</i> <comment># 请检查quirks页面，在那儿你可以找到很多变化</comment>
+# <i>nvsetenv input-device kbd</i>
+# <i>nvsetenv boot-device scsi/sd@1:0</i> <comment># 对应SCSI</comment>
+# <i>nvsetenv boot-device ata/ata-disk@0:0</i> <comment># 对应ATA</comment>
+# <i>nvsetenv boot-file /boot/<keyval id="kernel-name"/> root=/dev/hda4</i> <comment>第一项是内核的路径，第二项是root分区。你可以在这一行末尾附加任何的内核选项。</comment>
+# <i>nvsetenv boot-command boot</i> <comment># 对于MacOS来说设置成bye，对于Linux来说设置成boot</comment>
+</pre>
+
+<note>
+在MacOS中也可以改变你的启动变量。根据不同的型号，有可能需要用<uri link="http://penguinppc.org/bootloaders/quik/BootVars.sit.hqx">bootvars</uri>或是<uri link="ftp://ftp.apple.com/developer/macosxserver/utilities/SystemDisk2.3.1.smi.bin">Apple系统磁盘</uri>。请参看以上的quik quirks页面以获得更多的信息。
+</note>
+
+<p>
+现在我们的机器已经设置好并能启动，我们需要确保已经正确安装了启动镜像文件。运行<c>quik -v -C /boot/quik.conf</c>。它会告诉你第一阶段QUIK启动块已经安装好了。
+</p>
+
+<note>
+如果出了什么错，你可以通过在通上电源前按住<c>command + option + p + r</c>来重设你的PRAM到默认值。这样会清除掉你用nvsetenv设置的值而且会允许你启动MacOS的启动盘或是Linux的启动盘。
+</note>
+
+<p>
+现在，请阅读<uri link="#reboot">重启系统</uri>来继续安装。
+</p>
+
+</body>
+</section>
+<section id="bootcreator">
+<title>备选：BootCreator</title>
+<body>
+
+<impo>
+BootCreator会为Pegasos创建一个漂亮的由Forth写成的的SmartFireware启动菜单。
+</impo>
+
+<p>
+首先确保你已经在系统上安装好<c>bootcreator</c>：
+</p>
+
+<pre caption = "从GRP形式安装bootcreator">
+# <i>emerge --usepkg bootcreator</i>
+</pre>
+
+<p>
+现在拷贝文件<path>/etc/bootmenu.example</path>至<path>/etc/bootmenu</path>并且根据你的需要修改它：
+</p>
+
+<pre caption = "修改bootcreator配置文件">
+# <i>cp /etc/bootmenu.example /etc/bootmenu</i>
+# <i>nano -w /etc/bootmenu</i>
+</pre>
+
+<p>
+以下是一个完整的<path>/etc/bootmenu</path>配置文件。应该用你所使用的内核和initrd映像的文件名来替换掉vmlinux和initrd。
+</p>
+
+<pre caption = "bootcreator配置文件">
+<comment>#
+# bootcreator 1.1的示例配置文件
+#</comment>
+
+[VERSION]
+1
+
+[TITLE]
+Boot Menu
+
+[SETTINGS]
+AbortOnKey = false
+Timeout    = 9
+Default    = 1
+
+[SECTION]
+Local HD -> Morphos      (Normal)
+ide:0 boot2.img ramdebug edebugflags="logkprintf"
+
+[SECTION]
+Local HD -> Linux (Normal)
+ide:0 <keyval id="kernel-name"/> video=radeonfb:1024x768@70 root=/dev/hda3
+
+[SECTION]
+Local HD -> Genkernel (Normal)
+ide:0 kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> root=/dev/ram0 real_root=/dev/hda3 init=/linuxrc initrd=initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/>
+</pre>
+
+<p>
+最终<path>bootmenu</path>必须转成Forth并被拷贝至你的启动分区，这样SmartFirmware才能读取它。因此你需要调用<c>bootcreator</c>：
+</p>
+
+<pre caption = "安装bootmenu">
+# <i>bootcreator /etc/bootmenu /boot/menu</i>
+</pre>
+
+<note>
+当你重启时请确认一下SmartFirmware的设置，<path>menu</path>文件就是那个会被默认加载的文件。
+</note>
+
+<p>
+现在，继续安装请看<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot环境且卸载掉所有已挂载的分区。随后键入那个已经等待多时的魔幻命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有的分区并重启">
+# <i>exit</i>
+livecd ~# <i>umount /mnt/gentoo/proc /mnt/gentoo/dev /mnt/gentoo/sys /mnt/gentoo</i>
+livecd ~# <i>reboot</i>
+</pre>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请阅读<uri link="?part=1&amp;chap=11">结束您的Gentoo安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

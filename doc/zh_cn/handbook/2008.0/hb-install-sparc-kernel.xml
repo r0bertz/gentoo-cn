@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
+<!-- English CVS version: 1.13 -->
+
+<sections>
+
+<version>8.4</version>
+<date>2008-01-12</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+首先你需要选择你的时区以便系统知道在哪里。在<path>/usr/share/zoneinfo</path>里找到你的时区，然后拷到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>时区，因为它们的名字并不代表所列的时区。比方说，<path>GMT-8</path>实际上是GMT+8。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设你想使用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源代码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+被所有发行版构造的核心就是Linux内核。它的层次介于用户程序和系统硬件之间。Gentoo给它的用户提供了很多内核源代码。一个完整的说明列表可以从<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。
+</p>
+
+<p>
+对基于sparc的系统我们有<c>sparc-sources</c>（推荐使用的2.6内核源代码）。
+</p>
+
+<p>
+下面的例子里我们来安装<c>sparc-sources</c>。
+</p>
+
+<pre caption="安装内核源码">
+# <i>emerge sparc-sources</i>
+</pre>
+
+<p>
+当你看一看<path>/usr/src</path>的时候应该能看到一个名为<path>linux</path>的符号链接指向你的内核源代码。在这个例子中，安装好的内核源代码指向<c>linux-<keyval id="kernel-version"/></c>。你的版本可能会不同，注意这一点。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root     root        12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
+</pre>
+
+<p>
+现在到了配置和编译内核的时候了。 
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>手工配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了。:)
+</p>
+
+<p>
+不管怎么说，有一件事<e>是</e>真的：当你开始手工配置内核的时候你必需要了解你的系统。绝大多数的信息可以用emerge来的pciutils（<c>emerge pciutils</c>）里的<c>lspci</c>来收集。你现在可以在chroot后的环境里使用<c>lspci</c>。你可以安全的忽略任何运行<c>lspci</c>所产生的<e>pcilib</e>警告（类似pcilib: cannot open/sys/bus/pci/devices）。或者你也可以在<e>非chrooted</e>的环境里运行<c>lspci</c>。结果是一样的。你也可以运行<c>lsmod</c>来查看安装光盘都加载了哪些内核模块（ 这也是个不错的提示，它可以教你该选择哪些模块）。
+</p>
+
+<p>
+现在进入你的内核源代码目录并执行<c>make menuconfig</c>。这将启动基于ncurses的配置菜单。
+</p>
+
+<pre caption="调用menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+映入眼帘的是很多配置部分。我们将先列出一些必需打开的选项（否则Gentoo将不会运行，或者在没有额外的微调时不能正常运转）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>激活必需的选项</title>
+<body>
+
+<p>
+首先，打开对开发和实验性质的代码或驱动。你需要这个，否则有些非常重要的代码或驱动将不会显示出来：
+</p>
+
+<pre caption="选择试验性的代码或驱动">
+General setup ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+现在到<c>File Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual memory</c>和<c>/proc file system</c>也选上：
+</p>
+
+<pre caption="选择必需的文件系统">
+File systems ---&gt;
+  Pseudo Filesystems ---&gt;
+    [*] /proc file system support
+    [*] Virtual memory file system support (former shm fs)
+
+<comment>（选中一个或多个你系统需要的选项）</comment>
+  &lt;*&gt; Ext3 journalling file system support
+  &lt;*&gt; Second extended fs support
+</pre>
+
+<p>
+如果你使用PPPoE来连接到Internet或者使用拨号的调制解调器，你需要在内核中启用以下选项：
+</p>
+
+<pre caption="选择PPPoE所必需的驱动">
+Device Drivers ---&gt;
+  Networking support ---&gt;
+    &lt;*&gt; PPP (point-to-point protocol) support
+    &lt;*&gt;   PPP support for async serial ports
+    &lt;*&gt;   PPP support for sync tty ports
+</pre>
+
+<p>
+这两个压缩选项并没有坏处但并不一定需要，<c>PPP over Ethernet</c>选项也是，它可能仅被<c>ppp</c>配置为内核方式的PPPoE需要。
+</p>
+
+<p>
+选择打开正确的总线支持：
+</p>
+
+<pre caption="打开SBUS/UPA">
+Console drivers ---&gt;
+  Frame-buffer support ---&gt;
+    [*] SBUS and UPA framebuffers             
+      [*] Creator/Creator3D support     <comment>（仅对许多Ultras中使用的UPA槽适配器）</comment>
+    [*] CGsix (GX,TurboGX) support      <comment>（仅对很多SPARCStations中使用的SBUS槽适配器）</comment>
+</pre>
+
+<p>
+理所当然你想OBP的支持
+</p>
+
+<pre caption="打开OBP支持">
+Misc Linux/SPARC drivers ---&gt;
+  [*]  /dev/openprom device support
+</pre>
+
+<p>
+你还需要特定的SCSI支持
+</p>
+
+<pre caption="打开特定的SCSI支持">
+SCSI support ---&gt;
+  SCSI low-level drivers ---&gt;
+    &lt;*&gt; Sparc ESP Scsi Driver             <comment>（仅对SPARC ESP的板载SCSI适配器）</comment>
+    &lt;*&gt; PTI Qlogic, ISP Driver            <comment>（仅对PTI或QLogic的SBUS SCSI控制器）</comment>
+    &lt;*&gt; SYM53C8XX Version 2 SCSI support  <comment>（仅对Ultra 60的板载SCSI适配器）</comment>
+</pre>
+
+<p>
+为了支持你的网卡，选择下面的一个：
+</p>
+
+<pre caption="打开网络支持">
+Network device support ---&gt;
+  Ethernet (10 or 100Mbit) ---&gt;
+    &lt;*&gt; Sun LANCE support                   <comment>（仅对SPARCStation，比较旧的Ultra系统作为Sbus选项）</comment>
+    &lt;*&gt; Sun Happy Meal 10/100baseT support  <comment>（仅对Ultra；同样支持PCI和Sbus上的"qfe"）四口以太网）</comment>
+    &lt;*&gt; DECchip Tulip (dc21x4x) PCI support <comment>（对于某些Netras，比如N1）</comment>
+  Ethernet (1000Mbit) ---&gt;
+    &lt;*&gt; Broadcom Tigon3 support <comment>（现代的Netra，Sun Fire机器）</comment>
+</pre>
+
+<p>
+当你有一台4口以太网接口的机器（10/100或是10/100/1000）的端口顺序和使用Solaris的时候不一样。你可以用<c>sys-apps/ethtool</c>来检查端口连接状态。
+</p>
+
+<p>
+当你配置完内核以后，继续<uri link="#compiling">编译和安装</uri>。无论如何，编译完内核以后，请检查它的大小：
+</p>
+
+<pre caption="检查内核大小">
+# <i>ls -lh vmlinux</i>
+-rw-r--r--    1 root     root         2.4M Oct 25 14:38 vmlinux
+</pre>
+
+<p>
+如果（未压缩）大小超过7.5MB，重新配置你的内核直到没有超过这些限制。把大多数的内核驱动都编译成模块是达到目的的一个办法。忽略这个将导致内核无法引导。
+</p>
+
+<p>
+同样的，如果你的内核刚好有一点点大，你可以试试用<c>strip</c>命令来剥离：
+</p>
+
+<pre caption="剥离内核">
+# <i>strip -R .comment -R .note vmlinux</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译和安装</title>
+<body>
+
+<p>
+选择你的内核已经配置好了，是时候编译和安装它了。退出配置然后开始编译：
+</p>
+
+<pre caption="编译内核">
+# <i>make &amp;&amp; make image modules_install</i>
+</pre>
+
+<p>
+当内核编译完成后，拷贝内核镜像到<path>/boot</path>。记得替换<path>&lt;kernel-version&gt;</path>为你内核的实际版本。
+</p>
+
+<pre caption="安装内核">
+# <i>cp arch/sparc64/boot/image /boot/&lt;kernel-version&gt;</i>
+</pre>
+
+<p>
+选择继续<uri link="#kernel_modules">安装独立内核模块</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="kernel_modules">
+<title>安装独立内核模块</title>
+<subsection>
+<title>配置模块</title>
+<body>
+
+<p>
+你应该在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出想要自动加载的模块。如果你愿意也可以对模块添加额外的参数。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+比如，为了自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>并输入模块的名字。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+3c59x
+</pre>
+
+<p>
+继续<uri link="?part=1&amp;chap=8">配置你的系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

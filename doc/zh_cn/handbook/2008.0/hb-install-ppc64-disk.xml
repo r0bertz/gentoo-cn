@@ -1,0 +1,586 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.8 -->
+<sections>
+
+<version>8.2</version>
+<date>2007-06-26</date>
+
+<section>
+<title>块设备介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，那么你的第一个硬盘设备会是<path>/dev/sda</path>。串口硬盘即使它们是IDE硬盘也会像<path>/dev/sda</path>表示。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分区和片段</title>
+<body>
+
+<p>
+尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。在大多数系统中，这些被称作<e>分区</e>。在其他一些构架中近似的称呼为<e>分片</e>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>默认分区方案</title>
+<body>
+
+<p>
+如果你没有兴趣为你的系统设计分区方案，你可以使用我们在本手册中使用的分区方案：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>文件系统</th>
+  <th>大小</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>分区表</ti>
+  <ti>31.5k</ti>
+  <ti>分区表</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>(bootstrap)</ti>
+  <ti>800k</ti>
+  <ti>Apple_Bootstrap</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>(swap)</ti>
+  <ti>512M</ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda4</path></ti>
+  <ti>ext3</ti>
+  <ti>磁盘剩余空间</ti>
+  <ti>root分区</ti>
+</tr>
+</table>
+
+<note>
+有些分区叫：<path>Apple_Driver43</path>、<path>Apple_Driver_ATA</path>、<path>Apple_FWDriver</path>、<path>Apple_Driver_IOKit</path>、<path>Apple_Patches</path>。如果你计划不再使用MacOS 9你可以将它们删除，因为MacOS X和Linux都不需要它们。你可以使用parted来删除这些不需要的分区，因为mac-fdisk无法删除它们。
+</note>
+
+<p>
+如果你对知道一个分区究竟应该多大或者你究竟需要多少个分区感兴趣，请继续阅读。否则请跳转到<uri link="#mac-fdisk">Apple G5：使用mac-fdisk来给磁盘分区</uri>或跳转到<uri link="#fdisk">IBM pSeries：使用fdisk来给磁盘分区</uri>
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>多少和多大？</title>
+<body>
+
+<p>
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安装在那。理由也与<path>/home</path>目录类似：安全与备份。你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+</p>
+
+<p>
+正如你所看到的，这完全取决于你想要达到什么目的。独立的分区或卷有以下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每一个分区或卷选择最佳性能的文件系统
+</li>
+<li>
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间都用完
+</li>
+<li>
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势在多磁盘系统上比多分区系统上更为明显）
+</li>
+<li>
+  通过对一些分区或卷进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式挂载，安全性会大大增强。
+</li>
+</ul>
+
+<p>
+然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲空间，而另一个没有空闲空间了。而且SCSI和SATA还有15个分区的限制。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="mac-fdisk">
+<title>默认：使用mac-fdisk（Apple G5）为你的磁盘分区</title>
+<body>
+
+<p>
+现在，使用<c>mac-fdisk</c>创建你的分区：
+</p>
+
+<pre caption="启动mac-fdisk">
+# <i>mac-fdisk /dev/sda</i>
+</pre>
+
+<p>
+首先删除你已经清空的分区为你Linux分区预留空间。在<c>mac-fdisk</c>中使用<c>d</c>来删除这些分区。它会询问你需要删除的分区号码。
+</p>
+
+<p>
+其次，使用<c>b</c>来创建一个<e>Apple_Bootstrap</e>分区。它会询问你从哪块开始。键入你第一个空余分区的号码，然后紧跟一个<c>p</c>。比如在这儿，是<c>2p</c>。
+</p>
+
+<note>
+这个分区并<e>不</e>是一个“boot”分区。它根本不被Linux所用；你不需要在上面放置任何文件系统，而且永远不要挂载它。PPC用户并不需要一个额外的<path>/boot</path>分区。
+</note>
+
+<p>
+现在按<c>c</c>创建一个交换分区。<c>mac-fdisk</c>将再一次询问你想要从那块开始你的分区。因为我们之前已经使用了<c>2</c>来创建Apple_Bootstrap分区，因此你现在需要键入<c>3p</c>。当你被询问到大小的时候，输入<c>512M</c>（或者你所需要的任意大小）。当被询问到名字的时候，输入<c>swap</c>（强制）。
+</p>
+
+<p>
+键入<c>c</c>，来创建root分区，紧跟<c>4p</c>用以选择root分区从哪块开始。当被询问到大小的时候，再次输入<c>4p</c>。<c>mac-fdisk</c>会将这种行为解释成“使用所有的空余空间”。当被问到名字的时候，键入<c>root</c>（强制）。
+</p>
+
+<p>
+完成分区，键入<c>w</c>将分区写入到磁盘上，键入<c>q</c>退出<c>mac-fdisk</c>。
+</p>
+
+<note>
+为了确保一切正常，你可以再次运行mac-fdisk来检测所有的分区是否已经创建好。如果你没有看到任何你创建的分区或者你所做的改动，在mac-fdisk中你需要按<c>i</c>来重新初始化你的分区。注意这将重新创建分区表并移除所有的分区。 
+</note>
+
+<p>
+现在你的分区已经创建好了，请继续阅读<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="fdisk">
+<title>IBM pSeries、iSeries和OpenPower：使用fdisk来为你的磁盘分区</title>
+<subsection>
+<body>
+
+<note>
+如果你计划使用RAID磁盘阵列来安装你的Gentoo系统而且你使用的是基于POWER5架构的硬件，你应该用<c>iprconfig</c>以Advanced Function格式来格式化磁盘和创建磁盘阵列。应该在安装完成后emerge <c>iprutils</c>。
+</note>
+
+<p>
+如果你拥有一个基于ipr的SCSI适配器，现在你需要启动ipr工具。
+</p>
+
+<pre caption="启动ipr工具">
+# <i>/etc/init.d/iprinit start</i>
+</pre>
+
+<p>
+接下里的部分将解释如何创建一个先前描述的分区布局示例，也就是：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>PPC PReP启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>root分区</ti>
+</tr>
+</table>
+
+<p>
+根据自己的偏好改变你的分区布局。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>查看目前的分区布局</title>
+<body>
+
+<p>
+<c>fdisk</c>是一个流行且功能强大的用于分割磁盘成分区的工具。在你的磁盘上启动<c>fdisk</c>（在我们的例子中，我们使用<path>/dev/sda</path>）：
+</p>
+
+<pre caption="启动fdisk">
+# <i>fdisk /dev/sda</i>
+</pre>
+
+<p>
+一旦在<c>fdisk</c>中，你会看到像这样的一个提示符：
+</p>
+
+<pre caption="fdisk提示符">
+Command (m for help):
+</pre>
+
+<p>
+键入<c>p</c>用以显示你的磁盘目前的分区配置：
+</p>
+
+<pre caption="一个示例分区配置">
+Command (m for help): p
+
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1          12       53266+  83  Linux
+/dev/sda2              13         233      981571+  82  Linux swap
+/dev/sda3             234         674     1958701+  83  Linux
+/dev/sda4             675        6761    27035410+   5  Extended
+/dev/sda5             675        2874     9771268+  83  Linux
+/dev/sda6            2875        2919      199836   83  Linux
+/dev/sda7            2920        3008      395262   83  Linux
+/dev/sda8            3009        6761    16668918   83  Linux
+
+Command (m for help):
+</pre>
+
+<p>
+这个硬盘有六个Linux文件系统（System一栏标记为“Linux”）和一个交换分区（标记为“Linux swap”）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>删除所有分区</title>
+<body>
+
+<p>
+我们会先删除所有硬盘上存在的分区。键入<c>d</c>来删掉一个分区。举个例子，删掉一个存在的分区<path>/dev/sda1</path>：
+</p>
+
+<note>
+如果你不想删除所有的分区，就只删掉那些你希望删除的分区。现在作者建议先将你的系统备份一下以避免不必要的损失。
+</note>
+
+<pre caption="删除一个分区">
+Command (m for help): <i>d</i>
+Partition number (1-4): <i>1</i>
+</pre>
+
+<p>
+这个分区已列入删除的进度表。如果你键入<c>p</c>它也不会出现，但是它还没有被删除，到你保存改动后它才会被删除。如果你犯了错想要取消掉未保存的改动，立即键入<c>q</c>并按回车，你的分区将不会被删除。
+</p>
+
+<p>
+现在假设你很想删除你系统上的所有分区，重复键入<c>p</c>来显示分区列表和键入<c>d</c>和分区的号码来删除它。最终，你会得到一个空白的分区表：
+</p>
+
+<pre caption="一个空白的分区表">
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+Device Boot    Start       End    Blocks   Id  System
+
+Command (m for help):
+</pre>
+
+<p>
+现在内存中的分区表已经空了，我们已经准备开始创建分区了。我们会使用之前讨论过的分区模式。当然，如果你不想要同样的分区模式，不要完全照抄如下的指南！
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>创建PPC PReP启动分区</title>
+<body>
+
+<p>
+我们首先创建一个小的PReP启动分区。键入<c>n</c>来创建一个新的分区，然后键入<c>p</c>来选择一个主分区，紧接着键入<c>1</c>来选择第一个主分区。当碰到要填写第一个柱面时，按回车键。遇到要填写最后一个柱面时，输入<c>+7M</c>来创建一个大小为7M的分区。在这之后，键入<c>t</c>设置分区类型，<c>1</c>用来选择你刚创建的分区，然后键入<c>41</c>来设置分区为“PPC PReP Boot”。最终，你需要将PReP分区标为可启动。
+</p>
+
+<note>
+PReP分区必须小于8M！
+</note>
+
+<pre caption="创建PReP启动分区">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+
+Command (m for help): <i>n</i>
+Command action
+      e   extended
+      p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>1</i>
+First cylinder (1-6761, default 1): 
+Using default value 1
+Last cylinder or +size or +sizeM or +sizeK (1-6761, default
+6761): <i>+8M</i>
+
+Command (m for help): <i>t</i>
+Selected partition 1
+Hex code (type L to list codes): <i>41</i>
+Changed system type of partition 1 to 41 (PPC PReP Boot)
+
+Command (m for help): <i>a</i>
+Partition number (1-4): <i>1</i>
+Command (m for help):
+</pre>
+
+<p>
+现在，当你键入<c>p</c>时，你会看到如下的分区信息：
+</p>
+
+<pre caption="创建启动分区">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1  *            1           3       13293   41  PPC PReP Boot
+
+Command (m for help):
+</pre>
+</body>
+</subsection>
+<subsection>
+<title>创建交换分区</title>
+<body>
+
+<p>
+让我们现在开始创建交换分区吧。首先键入<c>n</c>来创建一个新的分区，然后按<c>p</c>告知fdisk你想要一个主分区。接着按<c>2</c>来创建第二个主分区，我们例子中使用<path>/dev/sda2</path>。当遇到填写第一个柱面时，按回车。遇到填写最后一个柱面时，输入<c>+512M</c>来创建一个512M大小的分区。在这之后，键入<c>t</c>来设置分区类型，<c>2</c>来选择你刚刚键入的磁盘分区，接着键入<c>82</c>来设置分区类型为“Linux Swap”。在完成这些步骤后，键入<c>p</c>应该可以看到近似以下的分区表：
+</p>
+
+<pre caption="创建一个交换分区后的分区列表">
+Command (m for help): <i>p</i>
+
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1           3       13293   41  PPC PReP Boot
+/dev/sda2               4         117      506331   82  Linux swap
+
+Command (m for help):
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建root分区</title>
+<body>
+
+<p>
+最后，我们来创建root分区。首先键入<c>n</c>来创建一个新的分区，随后键入<c>p</c>来告诉fdisk你想要一个主分区。接着输入<c>3</c>来创建第三个主分区，我们例子中使用<path>/dev/sda3</path>。当遇到填写第一个柱面时，按回车。到遇到填写最后一个柱面时，按回车来创建一个使用余下所有磁盘上剩余空间的分区。在完成这些步骤后，键入<c>p</c>应该可以近似于如下的分区表：
+</p>
+
+<pre caption="创建好root分区后的分区列表">
+Command (m for help): p
+
+Disk /dev/sda: 30.7 GB, 30750031872 bytes
+141 heads, 63 sectors/track, 6761 cylinders
+Units = cylinders of 8883 * 512 = 4548096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1               1           3       13293   41  PPC PReP Boot
+/dev/sda2               4         117      506331   82  Linux swap
+/dev/sda3             118        6761    29509326   83  Linux
+
+Command (m for help):
+</pre>
+</body>
+</subsection>
+<subsection>
+<title>保存分区布局</title>
+<body>
+
+<p>
+保存分区布局和退出<c>fdisk</c>，键入<c>w</c>。
+</p>
+
+<pre caption="保存和退出fdisk">
+Command (m for help): <i>w</i>
+</pre>
+
+<p>
+现在你的分区已经创建好了，请继续阅读<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+至此你的分区都创建好了，是时候在上面放置文件系统了。如果你不介意选择什么文件系统而且对本手册中默认使用的文件系统满意，请继续看<uri link="#filesystems-apply">将文件系统应用到分区上</uri>。否则就继续阅读以了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<note>
+好几个文件系统可用。安装光盘中的内核支持ext2、ext3、ReiserFS。JFS和XFS可以通过内核模块的方式支持。
+</note>
+
+<p>
+<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+</p>
+
+<p>
+<b>XFS</b>是一种带元数据日志的文件系统，并且在Gentoo Linux的xfs-sources内核中可得到完整支持。它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了。 
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>应用文件系统到分区上</title>
+<body>
+
+<p>
+要在分区或卷上创建文件系统，对于每个可能的文件系统都有专门的工具：
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+例如，将root分区（本例中的<path>/dev/sda4</path>）设为ext3，你应该使用：
+</p>
+
+<pre caption="应用一个文件系统到分区上">
+# <i>mke2fs -j /dev/sda4</i>
+</pre>
+
+<p>
+现在在你新建的分区（或逻辑卷）上创建文件系统。
+</p>
+
+<impo>
+如果你的<path>/</path>选择使用ReiserFS，并且你将使用<c>yaboot</c>作为你的引导程序的话，不要改变ReiserFS的默认块大小，就像<uri link="?part=1&amp;chap=10">配置引导程序</uri>里所解释的。
+</impo>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是用于初始化交换分区的命令：
+</p>
+
+<pre caption="创建一个交换分区签名">
+# <i>mkswap /dev/sda3</i>
+</pre>
+
+<p>
+要激活交换分区，使用<c>swapon</c>：
+</p>
+
+<pre caption="激活这个交换分区">
+# <i>swapon /dev/sda3</i>
+</pre>
+
+<p>
+现在创建和激活之前命令中提及的交换分区。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区已经初始化好，而且也有了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令。不要忘记创建为每个你创建的分区必要的挂载目录。这里有个例子，我们创建了一个挂载点，并挂载root分区：
+</p>
+
+<pre caption="挂载分区">
+# <i>mkdir /mnt/gentoo</i>
+# <i>mount /dev/sda4 /mnt/gentoo</i> 
+</pre>
+
+<note>
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+</note>
+
+<p>
+请继续阅读<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>。
+</p>
+
+</body>
+</section>
+</sections>
