@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-network.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.4 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.3 -->
 
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>你需要连接网络吗？</title>
@@ -45,10 +45,6 @@
 
 <p>
 如果你用的是通用安装光盘，要确定是否有对应你的机器架构的stage3包，请查看一下<path>/mnt/cdrom/stages</path>目录中有没有一个stage与你的架构相匹配。如果没有，你仍可以选择使用跟你的硬件架构兼容的stage3包来安装。
-</p>
-
-<p>
-x86平台的安装程序LiveCD所构建的stage3包为i686及其更新架构作了优化，并使用了NPTL。amd64平台的安装程序LiveCD所构建的stage3包为普通amd64架构的应用作了优化，并使用了NPTL。
 </p>
 
 <p>
