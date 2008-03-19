@@ -1,16 +1,16 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-gli-dialog.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.4 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 
 <!--  The content of this document is licensed under the CC-BY-SA license -->
 <!--  See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <sections>
 
-<version>3.0</version>
-<date>2007-05-07</date>
+<version>4.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>欢迎</title>
@@ -27,15 +27,7 @@
 </pre>
 
 <p>
-当安装程序加载结束后，你会看到显示屏上欢迎的问候信息。它提供了一份友好的Gentoo安装步骤的说明。请仔细阅读每一个选项。屏幕顶端有每一个安装步骤的详细帮助信息。我们建议你在做出每个选择前，都参考一下帮助信息。请注意在安装过程中的任何时候您都可以保存你的配置进度，以便在中止后随时继续之前的安装。请使用（你键盘上的）<c>Tab</c>键选择屏幕上的菜单，使用<c>Enter</c>键来确认一个动作。
-</p>
-
-<p>
-这里提供两种可用的安装模式，<c>标准</c>和<c>高级</c>。第一种模式会为您设置许多选项而不需要人工干涉，第二种模式需要您在安装过程中做更多的选择。
-</p>
-
-<p>
-如果您选择<c>标准</c>，请略过下面一节直接进入<uri link="#partitioning">分区</uri>。否则，请接下去阅读。
+Gentoo Linux安装程序（GLI）提供了一个友好的Gentoo安装过程的介绍。记得认真阅读每一个选项。在安装的每一个步骤屏幕顶端都有详细的帮助信息。我们建议你在作每一个选择之前都好好读一读我们提供的帮助信息。注意，在安装的任何阶段，你都可以保存你当前的配置进度，并在以后的某个任意时间继续安装。按<c>制表</c>键（你的键盘上的）来在屏幕上的菜单间移动，按<c>回车</c>键来确认一个动作。
 </p>
 
 </body>
@@ -43,34 +35,6 @@
 </section>
 
 <section>
-<title>高级：安装前配置</title>
-<subsection>
-<title>手动配置网络</title>
-<body>
-
-<p>
-尽管我们安装时并不需要连接到Internet，但你可以手动设置将机器连入局域网，那样你就可以从局域网中的另一台机来远程安装Gentoo。
-</p>
-
-<p>
-如果您想通过SSH访问这台机器（以便进行远程安装），可以启动<c>sshd</c>，并设置一个root密码。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>加载额外的内核模块</title>
-<body>
-
-<p>
-如果您需要加载更多的内核模块以支持您的硬件，请输入它们的名字，用空格分开。
-</p>
-
-</body>
-</subsection>
-</section>
-
-<section id="partitioning">
 <title>分区</title>
 <subsection>
 <title>预备磁盘</title>
@@ -95,16 +59,6 @@
 <section>
 <title>系统配置</title>
 <subsection>
-<title>安装类型</title>
-<body>
-
-<p>
-因为您正在进行的是GRP/无网络方式的安装，所以您必须选择<c>无网络方式</c>，然后继续安装过程。
-</p>
-
-</body>
-</subsection>
-<subsection>
 <title>时区</title>
 <body>
 
@@ -124,16 +78,6 @@
 
 <p>
 下一节你可以选择使用DHCP或手动配置IP地址。一旦网络设备正确配置好了，你就要为系统设一个主机名。如果需要，您还可以指定一个域名以及任何必要的DNS服务器信息。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>Bootloader</title>
-<body>
-
-<p>
-在这一节，您可以选择系统引导程序（<c>grub</c>或无引导程序）。然后选择你的启动设备，最后如果需要，也可以指定额外的启动选项。
 </p>
 
 </body>
@@ -177,7 +121,7 @@ LiveCD已经包含了许多预编译包。如果您想安装的话，请勾上�
 <body>
 
 <p>
-如果您选择的是<c>高级</c>安装模式，那么现在您可以调整各种设定，包括键盘布局、图形化的显示管理器、默认编辑器，以及设定您的系统时钟（UTC时间还是local时间）。
+现在您可以调整各种设定，包括键盘布局、图形化的显示管理器、默认编辑器，以及设定您的系统时钟（UTC时间还是local时间）。
 </p>
 
 </body>
