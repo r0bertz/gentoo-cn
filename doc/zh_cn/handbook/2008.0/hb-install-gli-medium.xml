@@ -5,11 +5,11 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.7 -->
+<!-- English CVS version: 1.1 -->
 
 <sections>
 
-<version>8.2</version>
+<version>9.0</version>
 <date>2007-06-29</date>
 
 <section>
@@ -270,10 +270,10 @@ dodevfs         此选项在2.6系统中打开过时的设备文件系统（devf
                 noudev选项来使此选项生效。由于devfs是2.4内核的唯一选择，所以当使
                 用2.4内核启动的时候这个选项没有作用。
 
-doevms2         此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
-                lvm2同时使用并不安全。
+doevms          此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
+                lvm同时使用并不安全。
 
-dolvm2          此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms2同时使用
+dolvm           此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms同时使用
                 并不安全。
 
 noudev          此选项关闭了2.6内核中对udev的支持。这个选项需要与dodevfs选项一起
