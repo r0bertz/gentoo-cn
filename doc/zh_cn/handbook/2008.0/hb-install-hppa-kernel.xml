@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
-<!-- English CVS version: 1.12 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 
 <sections>
 
-<version>8.4</version>
-<date>2008-01-12</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>时区</title>
@@ -39,11 +39,11 @@ Linux内核是所有发行版的核心。它位于用户程序和系统硬件之
 </p>
 
 <p>
-对于HPPA架构，我们有<c>hppa-sources</c>。默认情况下这些源代码是基于2.6内核的。
+对于HPPA架构，我们有<c>gentoo-sources</c>。
 </p>
 
 <pre caption="安装内核源码">
-# <i>emerge hppa-sources</i>
+# <i>emerge gentoo-sources</i>
 </pre>
 
 <p>
@@ -100,16 +100,7 @@ lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; lin
 <body>
 
 <p>
-首先，开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动。
-</p>
-
-<pre caption="选择experimental code/drivers">
-General setup ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
-</pre>
-
-<p>
-现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
+首先进入<c>File Systems</c>来选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
 </p>
 
 <pre caption="选择需要的文件系统">
