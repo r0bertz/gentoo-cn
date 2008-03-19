@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.5 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
 
 <sections>
 
-<version>8.1</version>
-<date>2007-06-26</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>块设备介绍</title>
@@ -23,7 +23,7 @@
 </p>
 
 <p>
-一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个SCSI硬盘的<path>/dev/sda</path>。
+一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个IDE硬盘的<path>/dev/hda</path>。如果你使用SCSI硬盘，那么你的第一个硬盘将会是<path>/dev/sda</path>。Serial ATA硬盘也是<path>/dev/sda</path>，虽然它们是IDE硬盘。如果你正在使用内核里新的libata架构，所有的硬盘都将是<path>/dev/sd*</path>。
 </p>
 
 <p>
@@ -150,35 +150,9 @@ Units = cylinders of 8246 * 512 = 4221952 bytes
 </body>
 </subsection>
 <subsection>
-<title>文件系统？</title>
-<body>
-
-<p>
-有好几个文件系统可以用。Ext2、ext3、XFS和reiserfs在HPPA架构上是稳定的。其他的文件系统都是实验性质的。
-</p>
-
-<p>
-<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
-</p>
-
-<p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
-</p>
-
-<p>
-<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
-</p>
-
-<p>
-<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
-</p>
-
-<p>
-<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了，但是目前还没有足够的相关记录来对其一般稳定性做出积极或消极的评价。
-</p>
-
-</body>
+<include href="../hb-install-filesystems.xml"/>
 </subsection>
+
 <subsection id="filesystems-apply">
 <title>在分区上应用文件系统</title>
 <body>
@@ -250,7 +224,7 @@ Units = cylinders of 8246 * 512 = 4221952 bytes
 </pre>
 
 <p>
-创建和激活交换分区
+用上面的命令来创建和激活交换分区。
 </p>
 
 </body>
@@ -258,7 +232,6 @@ Units = cylinders of 8246 * 512 = 4221952 bytes
 </section>
 <section>
 <title>挂载</title>
-<subsection>
 <body>
 
 <p>
@@ -284,6 +257,5 @@ Units = cylinders of 8246 * 512 = 4221952 bytes
 </p>
 
 </body>
-</subsection>
 </section>
 </sections>
