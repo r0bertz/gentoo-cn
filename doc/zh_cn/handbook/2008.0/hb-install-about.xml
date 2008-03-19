@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-about.xml,v 1.2 2007/09/14 16:35:49 r0bertz Exp $ -->
-<!-- English CVS version: 1.8 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 
 <sections>
 
-<version>8.2</version>
-<date>2007-06-02</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>介绍</title>
