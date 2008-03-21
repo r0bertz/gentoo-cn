@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.9 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 --> 
+<!-- $Header -->
+<!-- English CVS version: 1.3 -->
 <sections>
 
-<version>8.1</version>
-<date>2007-06-29</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>硬件需求</title>
@@ -73,8 +73,7 @@
 </subsection>
 </section>
 
-<!-- Copy/paste of hb-install-x86-medium.xml, with s/x86/ppc/ 
- START -->
+<!-- START -->
 <section>
 <title>Gentoo通用安装光盘</title>
 <subsection>
@@ -268,7 +267,7 @@ boot: <i>apple video=ofonly</i>
 </p>
 
 <p>
-首先，下载<uri link="http://penguinppc.org/projects/bootx/">BootX</uri>并解包。从解包好的文件中复制<c>BootX Extension</c>到<c>Extensions Folder</c>中，并将BootX App Control Panel复制到<c>Control Panels</c>中，这两个目录都位于MacOS系统目录中。下一步，在系统目录中创建一个叫做“Linux Kernels”的目录，然后从光盘复制<c>apple</c>内核到这个目录中。最后，从安装光盘的<path>boot</path>目录中复制<c>apple.igz</c>到MacOS的<c>System Folder</c>中。
+首先，下载<uri link="http://penguinppc.org/bootloaders/bootx/">BootX</uri>并解包。从解包好的文件中复制<c>BootX Extension</c>到<c>Extensions Folder</c>中，并将BootX App Control Panel复制到<c>Control Panels</c>中，这两个目录都位于MacOS系统目录中。下一步，在系统目录中创建一个叫做“Linux Kernels”的目录，然后从光盘复制<c>apple</c>内核到这个目录中。最后，从安装光盘的<path>boot</path>目录中复制<c>apple.igz</c>到MacOS的<c>System Folder</c>中。
 </p>
 
 <p>
