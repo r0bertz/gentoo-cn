@@ -184,16 +184,16 @@ Gentoo参考平台，以下缩写为GRP，它是一个预构建好的软件包�
 
 <ul>
   <li>
-    The <b>amd64</b> 架构 (amd64)。 注意：目前这些软件包可以在安装程序LiveCD中获得。
+    <b>amd64</b>架构(amd64)。 注意：目前这些软件包可以在安装程序LiveCD中获得。
   </li>
   <li>
-    The <b>ppc</b> 架构 (ppc32) 
+    <b>ppc</b>架构(ppc32) 
   </li>
   <li>
-    The <b>sparc</b> 架构 (sparc64) 
+    <b>sparc</b>架构(sparc64) 
   </li>
   <li>
-    The <b>x86</b> 架构 (athlon, athlon-xp, athlon-mp, pentium-pro, pentium2, pentium3, pentium4 and pentium-m) 注意：i686硬件架构平台下的软件包可以在安装程序LiveCD中获得。
+    <b>x86</b>架构(athlon, athlon-xp, athlon-mp, pentium-pro, pentium2, pentium3, pentium4 and pentium-m) 注意：i686硬件架构平台下的软件包可以在安装程序LiveCD中获得。
   </li>
 </ul>
 
