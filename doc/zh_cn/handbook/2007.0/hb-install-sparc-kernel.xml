@@ -39,15 +39,15 @@
 </p>
 
 <p>
-对基于sparc的系统我们有<c>sparc-sources</c>（推荐使用的2.6内核源代码）。
+对基于sparc的系统我们有<c>gentoo-sources</c>（推荐使用的2.6内核源代码）。
 </p>
 
 <p>
-下面的例子里我们来安装<c>sparc-sources</c>。
+下面的例子里我们来安装<c>gentoo-sources</c>。
 </p>
 
 <pre caption="安装内核源码">
-# <i>emerge sparc-sources</i>
+# <i>emerge gentoo-sources</i>
 </pre>
 
 <p>

@@ -3,13 +3,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/hb-install-sparc-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.4 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>做出你的选择</title>
@@ -40,7 +40,7 @@
 现在打开你喜欢的编辑器（我们使用<c>nano</c>来做例子）并创建<path>/etc/silo.conf</path>。
 </p>
 
-<pre caption="创建 /etc/silo.conf">
+<pre caption="创建/etc/silo.conf">
 # <i>nano -w /etc/silo.conf</i>
 </pre>
 
@@ -48,7 +48,7 @@
 在下面你可以找到一个<path>silo.conf</path>的范例。它使用本手册一直使用的分区方案并用<path>kernel-<keyval id="kernel-version"/></path>作为内核镜像
 </p>
 
-<pre caption = "/etc/silo.conf 范例">
+<pre caption="/etc/silo.conf范例">
 partition = 1         <comment># 引导分区（= 根分区）</comment>
 root = /dev/sda1      <comment># 根分区</comment>
 timeout = 150         <comment># 引导默认选择前等待15秒钟</comment>

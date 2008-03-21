@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.7 -->
+<!-- English CVS version: 1.3 -->
 
 <sections>
 
-<version>8.1</version>
-<date>2007-06-29</date>
+<version>9.0</version>
+<date>2008-02-29</date>
 
 <section>
 <title>必需的硬件</title>
@@ -59,9 +59,7 @@
 </subsection>
 </section>
 
-
-<!-- Copy/Paste from hb-install-x86-medium.xml 
- START -->
+<!-- START -->
 <section>
 <title>Gentoo通用安装光盘</title>
 <subsection>
@@ -73,7 +71,7 @@
 </p>
 
 <p>
-使用stage1或者stage2 tarball进行安装Gentoo手册中没有文档 ── 关于这些事情，请看<uri link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>。
+使用stage1或者stage2 tarball进行安装Gentoo手册中没有文档──关于这些事情，请看<uri link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>。
 </p>
 
 </body>
@@ -119,7 +117,7 @@ Gentoo还提供了软件光盘。这不是一个安装光盘，而是个附加�
 <body>
 
 <p>
-你可以从我们的某个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘（如果你愿意也可以下载软件光盘）。安装光盘在<path><keyval id="release-dir"/>installcd</path>目录下；软件光盘在<path><keyval id="release-dir"/>packagecd</path>目录里。
+你可以从我们的某个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘。安装光盘在<path><keyval id="release-dir"/>installcd</path>目录下。
 </p>
 
 <p>
@@ -178,11 +176,11 @@ ok <i>boot cdrom</i>
 </pre>
 
 <p>
-你会看到SILO引导管理器（在安装光盘上）。如果需要，你可以输入回车来查看更多的帮助信息。输入<c>2617</c>（如果你的是一台FC-AL机器，请检查<uri link="http://www.gentoo.org/proj/en/base/sparc/sunhw.xml">硬件兼容性列表</uri>）或者是<c>2620</c>（对于所有其他人），然后按回车开始引导系统。
+你会看到SILO引导管理器（来自安装光盘上）。如果需要，你可以输入回车来查看更多的帮助信息。输入<c>gentoo</c>然后按回车开始引导系统。
 </p>
 
 <pre caption="接着从安装光盘开始引导">
-boot: <i>2620</i>
+boot: <i>gentoo</i>
 </pre>
 
 <p>
