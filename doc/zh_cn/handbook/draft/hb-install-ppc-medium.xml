@@ -1,0 +1,468 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.59 -->
+<sections>
+
+<version>8.2</version>
+<date>2008-03-11</date>
+
+<section>
+<title>硬件需求</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+在开始之前，我们首先列出安装Gentoo的硬件需求。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>硬件需求</title>
+<body>
+
+<table>
+<tr>
+  <th>Apple NewWorld机器</th>
+  <ti>
+    Power/PowerPC微处理器（G3、G4、G5）例如iMac、eMac、iBook PowerBook、Xserver、PowerMac 
+  </ti>
+</tr>
+<tr>
+  <th>Apple OldWorld机器</th>
+  <ti>
+    Open Firmware版本小于3的Apple机器，比如Beige G3、PCI PowerMac和PCI PowerBook。基于PCI的Apple克隆机应该也可以被支持。
+  </ti>
+</tr>
+<tr>
+  <th>Genesi</th>
+  <ti>
+    Pegasos I/II，Open式桌面工作站，Efika 
+  </ti>
+</tr>
+<tr>
+  <th>IBM</th>
+  <ti>
+    RS/6000、iSeries、pSeries 
+  </ti>
+</tr>
+<tr>
+  <th>内存</th>
+  <ti>至少64MB</ti>
+</tr>
+<tr>
+  <th>硬盘空间</th>
+  <ti>1.5GB(不包括交换分区)</ti>
+</tr>
+<tr>
+  <th>交换分区</th>
+  <ti>至少256MB</ti>
+</tr>
+</table>
+
+<p>
+请一定阅读<uri link="/doc/en/gentoo-ppc-faq.xml">Gentoo PPC FAQ</uri>以了解一些安装方面的普通事宜，或者如果你不了解现在你的桌子上摆着的PowerPC机器里有些什么，也可以阅读一下。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<!-- Copy/paste of hb-install-x86-medium.xml, with s/x86/ppc/ 
+ START -->
+<section>
+<title>Gentoo通用安装光盘</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+可以使用一个<e>stage3</e> tarball文件来安装Gentoo Linux。这个tarball是一个包含最小环境的文件，从这个环境你可以顺利安装好Gentoo Linux到你的系统上。
+</p>
+
+<p>
+使用stage1或stage2 tarball安装系统的方法在Gentoo手册中并无描述——相关事宜请阅读<uri link="/doc/en/faq.xml#stage12">Gentoo FAQ</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>Gentoo通用安装光盘</title>
+<body>
+
+<p>
+Gentoo安装光盘是可启动的光盘，它含有一个完整的Gentoo环境，允许你从光盘启动Linux。在启动过程中，它会自动检测你的硬件并加载相应的驱动程序。这些光盘是由Gentoo开发者维护的。
+</p>
+
+<p>
+目前有两种Gentoo安装光盘可用：
+</p>
+
+<ul>
+  <li>
+    Gentoo通用安装光盘包含了你安装Gentoo所需要的一切东西。它为通用架构提供了stage3文件，为一些你额外选择的应用程序提供了源代码，当然，当然，还有针对你的硬件构架的安装指南。
+  </li>
+  <li>
+    最小安装光盘只包含了一个最小的环境，它可以允许你启动并配置好网络以使你能连接上互联网。它没有包含任何额外的文件，也无法应用在目前的安装方法中。
+  </li>
+</ul>
+
+<p>
+Gentoo也提供了软件包光盘。这不是一个安装光盘，但它是一个你在安装你的Gentoo系统时的额外的资源。它包含了预构建的软件包（也被叫做GRP集），这些包可以让你在Gentoo安装好并在Portage树更新前简单并迅速地安装好额外的应用程序（比如OpenOffice.org、KDE、GNOME……）。
+</p>
+
+<p>
+软件包光盘的使用会在后面的文档中介绍。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<!-- STOP -->
+<section>
+<title>下载刻录并启动Gentoo通用安装光盘</title>
+<subsection>
+<title>下载和刻录安装光盘</title>
+<body>
+
+<p>
+你可以从我们任何一个<uri link="/main/en/mirrors.xml">镜像</uri>下载通用安装光盘。这些安装光盘位于<path><keyval id="release-dir"/>installcd</path>目录里；软件包光盘位于<path><keyval id="release-dir"/>packagecd</path>目录里。
+</p>
+
+<p>
+在那个目录里你可以找到一些ISO文件，这些都是你可以在CD-R上刻录的完整光盘镜像。
+</p>
+
+<p>
+在下载完文件后，你能验证它的完整性来判断它是否损坏：
+</p>
+
+<ul>
+  <li>
+    你可以检验它的MD5校验和并与我们提供的MD5校验和进行比对（比如通过使用Linux/Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>）。在Mac OS X中验证MD5校验和在<uri link="/doc/en/gentoo-ppc-fag.xml#doc_chap1">Gentoo PPC FAQ</uri>里有描述。
+  </li>
+  <li>
+    你可以验证我们提供的数字签名。要进行验证，你首先需要获得我们使用的公钥(0x17072058)。
+  </li>
+</ul>
+
+<p>
+使用GnuPG来获得我们的公钥，执行下面的命令：
+</p>
+
+<pre caption="获得公钥">
+$ <i>gpg --keyserver subkeys.pgp.net --recv-keys 0x17072058</i>
+</pre>
+
+<p>
+现在验证签名：
+</p>
+
+<pre caption="验证数字签名">
+$ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
+</pre>
+
+<p>
+要刻录这些下载的ISO文件，你必须选择raw方式刻录。具体方法主要取决于你所选择的刻录软件。这里我们将讨论<c>cdrecord</c>和<c>K3B</c>;更多的信息可以在<uri link="/doc/en/faq.xml#isoburning">Gentoo FAQ</uri>里找到。
+</p>
+
+<ul>
+  <li>
+    使用cdrecord，你只需简单的输入<c>cdrecord dev=/dev/hdc &lt;下载的iso文件&gt;</c>（用你的CD-RW设备的路径来代替<path>/dev/hdc</path>）。
+  </li>
+  <li>
+    使用K3B，选择<c>Tools</c> &gt; <c>Burn CD Image</c>。 然后你可以在'Image to Burn'区域定位你的ISO文件。最后点击<c>Start</c>。
+  </li>
+</ul>
+
+</body>
+</subsection>
+<subsection>
+<title>默认：通过Yaboot启动安装光盘</title>
+<body>
+
+<p>
+在NewWorld机器中放入安装光盘并启动系统。当你听到系统启动铃声的时候，按住'C'直到开始读取光盘。
+</p>
+
+<p>
+在安装光盘读取后，你会看到一个友好的欢迎消息和一个在屏幕底端的<e>boot:</e>提示符。
+</p>
+
+<p>
+我们提供了一个通用的内核，<e>apple</e>。这个内核为支持多CPU构建，但它仍然可以在单CPU的机器上启动。
+</p>
+
+<p>
+你可以在提示符中调整一些内核选项。以下的表格列举了一些你可以添加的启动选项：
+</p>
+
+<table>
+<tr>
+  <th>启动选项</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti><c>video</c></ti>
+  <ti>
+    这个选项后跟着以下表示厂商的标签中的一个：<c>nvidiafb</c>、<c>radeonfb</c>、<c>rivafb</c>、<c>atyfb</c>、<c>aty128</c>或<c>ofonly</c>。标签后你可以加上你想要的分辨率刷新率和色深数。比如，<c>video=radeonfb:1280x1024@75-32</c>会选择ATI Radeon frame buffer、采用的分辨率为1280x1024刷新率75Hz和色深32位。如果不是很明白要选择哪个，或者默认的设置无法工作，<c>video=ofonly</c>在大多数情况下都能工作。
+  </ti>
+</tr>
+<tr>
+  <ti><c>nol3</c></ti>
+  <ti>
+    在一些Powerbook上禁用掉Level 3缓存（至少17&quot;是必须的）
+  </ti>
+</tr>
+<tr>
+  <ti><c>dofirewire</c></ti>
+  <ti>
+    确保支持IEEE1394（火线）设备，比如外接磁盘。
+  </ti>
+</tr>
+<tr>
+  <ti><c>dopcmcia</c></ti>
+  <ti>
+    如果你想要在安装时使用PCMCIA驱动（比如PCMCIA网卡），你需要使用这个选项。
+  </ti>
+</tr>
+</table>
+
+<p>
+为了使用以上的选项，在<e>boot:</e>提示符后键入<e>apple</e>并可以紧跟需要的选项。在以下的例子中，我们强制使用Open Firmware的frambuffer来替代设备特定的驱动。
+</p>
+
+<pre caption="强制使用Open Firmware的framebuffer">
+boot: <i>apple video=ofonly</i>
+</pre>
+
+<p>
+如果你不需要添加任何的选项，在提示符界面简单按回车便行，接下来会从光盘上装载起一个完整的Gentoo Linux环境。继续阅读<uri link="#booted">当启动完毕后……</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>备选：在Pegasos机器上启动安装光盘</title>
+<body>
+
+<p>
+在Pegasos机器上简单地插入光盘并在SmartFirmware的启动－提示符界面输入<c>boot cd /boot/menu</c>。这样会打开一个小的启动菜单，在那儿你可以在一些预先配置好的video配置中选择。如果你需要一些特殊的启动选项，你可以像前面提到的yaboot那样添加命令行参数。比如：<c>boot cd /boot/pegasos video=radeonfb:1280x1024@75 mem=256M</c>。默认的内核选项（万一出错时你会需要它）已经预先配置好<c>console=ttyS0,115200 console=tty0 init=/linuxrc looptype=squashfs loop=/image.squashfs cdroot root=/dev/ram0</c>。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>备选：通过BootX启动安装光盘</title>
+<body>
+
+<p>
+如果你拥有一台OldWorld的Mac，那livecd的启动区将无法使用。最简单的解决方法是使用一个叫做BootX的工具来从MacOS 9或更早的版本启动到Linux环境。
+</p>
+
+<p>
+首先，下载<uri link="http://penguinppc.org/bootloaders/bootx/">BootX</uri>并解包。从解包好的文件中复制<c>BootX Extension</c>到<c>Extensions Folder</c>中，并将BootX App Control Panel复制到<c>Control Panels</c>中，这两个目录都位于MacOS系统目录中。下一步，在系统目录中创建一个叫做“Linux Kernels”的目录，然后从光盘复制<c>apple</c>内核到这个目录中。最后，从安装光盘的<path>boot</path>目录中复制<c>apple.igz</c>到MacOS的<c>System Folder</c>中。
+</p>
+
+<p>
+为了准备BootX，启动BootX App Control Panel。首先选择选项对话框并勾上<c>Use Specified RAM Disk</c>后从你的系统目录选择<c>apple.igz</c>。继续回到初始画面并请确保ramdisk大小至少为<c>32000</c>。最后，设置好如下所列的内核参数：
+</p>
+
+<pre caption="BootX内核参数">
+cdroot root=/dev/ram0 init=linuxrc loop=image.squashfs looptype=squashfs console=tty0 
+</pre>
+
+<note>
+先前yaboot的内核参数也可以应用到这儿。你可以添加上面列出的任意可用的内核参数。
+</note>
+
+<p>
+请再次检查以确保设置正确后保存。这可以在启动失败或者某些东西丢失时，省得你再打字。在窗口的顶部按下Linux按钮。如果一切正常，就应该启动到安装光盘了。继续阅读<uri link="#booted">当启动完毕后……</uri>
+</p>
+
+</body>
+</subsection>
+
+<subsection id="booted">
+<title>当启动完毕后……</title>
+<body>
+
+<p>
+首先你会在目前的终端上看到一个root的("#")提示符。当然你也可以通过键入Alt-F2、Alt-F3和Alt-F4切换到其他的终端。键入Alt-F1回到之前的终端。由于键盘布局的原因，你可能需要在键盘上按下Alt-fn-Fx。
+</p>
+
+<p>
+如果在一个使用非美语键盘布局的系统上安装Gentoo，使用<c>loadkeys</c>为你的键盘装载好键盘布局。为了列出可用的键盘布局，执行<c>ls /usr/share/keymaps/i386</c>。在NewWorld机器或Pegasos上不要使用<path>ppc</path>或<path>mac</path>中的键盘布局，因为它们只是为了基于ADB的OldWorld机器准备的。
+</p>
+
+<pre caption="列出可用的键盘布局">
+<comment>(在大多数系统上PPC使用x86键盘布局。安装光盘也提供了mac/ppc布局，
+它们是ADB布局且无法在安装光盘的内核下使用)</comment>
+# <i>ls /usr/share/keymaps/i386</i>
+</pre>
+
+<p>
+现在加载你选择的键盘布局
+</p>
+
+<pre caption="加载键盘布局">
+# <i>loadkeys be-latin1</i>
+</pre>
+
+<p>
+继续阅读<uri link="#hardware">额外硬件配置</uri>
+</p>
+
+</body>
+</subsection>
+<subsection id="hardware">
+<title>额外硬件配置</title>
+<body>
+
+<p>
+当安装光盘启动时，它会尝试检测所有的硬件设备和加载准确的内核模块来支持这些硬件。绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。
+</p>
+
+<p>
+在下一个例子中我们会试图装载<c>airport</c>模块。这个模块仅支持老式的Airport卡(802.11b)。由于固件发布的限制，安装光盘暂不支持Airport Extreme(802.11g)。
+</p>
+
+<pre caption="加载airport模块">
+# <i>modprobe airport</i>
+</pre>
+
+<p>
+在一些老式的iMac机器上，有时网卡无法被正常识别出来。这时需要用到BMAC驱动：
+</p>
+
+<pre caption="加载bmac模块">
+# <i>modprobe bmac</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：调整硬盘性能</title>
+<body>
+
+<p>
+如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。你可以使用<c>-tT</c>选项来测试你的硬盘的性能（多执行几次以得到更精确的结果）：
+</p>
+
+<pre caption="测试硬盘性能">
+# <i>hdparm -tT /dev/hda</i>
+</pre>
+
+<p>
+为了调整性能，你可以使用下面任何一个范例（或者自己试验），它们都是以<path>/dev/hda</path>作为例子（请把它替换成你目前使用的硬盘）
+</p>
+
+<pre caption="调整硬盘性能">
+<comment>激活DMA：</comment>
+# <i>hdparm -d 1 /dev/hda</i>
+<comment>激活DMA，并附加安全增强选项：</comment>
+# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+</pre>
+
+</body>
+</subsection>
+<subsection id="useraccounts">
+<title>可选：用户帐号</title>
+<body>
+
+<p>
+如果你打算为其他人提供你安装环境的访问权限，或者你不想以root帐号的身份（因为安全原因）使用<c>irssi</c>聊天的话，你需要创建必要的用户帐号，并改变root用户的密码。
+</p>
+
+<p>
+使用<c>passwd</c>工具来修改root用户密码：
+</p>
+
+<pre caption="修改root用户密码">
+# <i>passwd</i>
+New password: <comment>（输入新密码）</comment>
+Re-enter password: <comment>（再次输入密码）</comment>
+</pre>
+
+<p>
+要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以使用<c>useradd</c>和<c>passwd</c>来完成。在下个的例子中，我们创建一个名为&quot;john&quot;的用户。
+</p>
+
+<pre caption="创建一个新用户">
+# <i>useradd -m -G users john</i>
+# <i>passwd john</i>
+New password: <comment>（输入john的密码）</comment>
+Re-enter password: <comment>（再次输入john的密码）</comment>
+</pre>
+
+<p>
+你可以使用<c>su</c>从root用户切换到新建的用户：
+</p>
+
+<pre caption="切换用户">
+# <i>su - john</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：在安装时查看文档</title>
+<body>
+
+<p>
+如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），请确认你已经创建好了一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
+</p>
+
+<p>
+如果你想查看光盘里的文档，你可以立即运行<c>links</c>或<c>links -g</c>用一个图形化的浏览器来阅读文档：
+</p>
+
+<pre caption="查看光盘里的文档">
+# <i>links /mnt/cdrom/docs/html/index.html</i>
+</pre>
+
+<p>
+不过，首选的还是在线查看Gentoo手册，因为它比光盘里提供的要新。你也可以使用<c>links</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
+</p>
+
+<pre caption="查看在线文档">
+# <i>links http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
+</pre>
+
+<p>
+你可以按<c>Alt-F1</c>来回到原来的终端。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：启动SSH服务</title>
+<body>
+
+<p>
+如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（<e>只有</e>在你<b>完全信任</b>这位用户的情况下才行）。
+</p>
+
+<p>
+执行下面的命令来启动SSH服务：
+</p>
+
+<pre caption="启动SSH服务">
+# <i>/etc/init.d/sshd start</i>
+</pre>
+
+<p>
+在使用sshd之前，你必须设置好你的网络。请从<uri link="?part=1&amp;chap=3">配置网络</uri>一章继续。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

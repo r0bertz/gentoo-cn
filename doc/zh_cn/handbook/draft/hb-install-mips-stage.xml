@@ -1,0 +1,335 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-stage.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.8 -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>安装一个Stage Tarball</title>
+<subsection>
+<title>正确设置日期／时间</title>
+<body>
+
+<p>
+在继续之前，你需要检查和更新系统日期／时间。未正确设置的时钟可能会在将来导致奇怪的结果！
+</p>
+
+<p>
+确认当前日期／时间，请运行<c>date</c>：
+</p>
+
+<pre caption="确认日期／时间">
+# <i>date</i>
+Fri Mar 29 16:21:18 CEST 2005
+</pre>
+
+<p>
+如果显示的日期／时间不正确，可以使用<c>date MMDDhhmmYYYY</c>命令（<b>MM</b>是月，<b>DD</b>是日，<b>hh</b>是时，<b>mm</b>是分，<b>YYYY</b>是年）来更新它。在这一步，你应该使用UTC时间。稍后你可以设置你自己的时区。举个例子，设置时间为2005年3月29日16时21分：
+</p>
+
+<pre caption="设置UTC日期／时间">
+# <i>date 032916212005</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>做出你的选择</title>
+<body>
+
+<p>
+下一步你要做的是安装你所选择的<e>stage</e> tarball到你的系统里。 
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>下载Stage Tarball</title>
+<subsection>
+<body>
+
+<p>
+进入Gentoo的挂载点，也就是装Gentoo的分区挂载的地方（很可能是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入Gentoo的挂载点">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+下面这个表格指定了你的系统需要哪个stage。Stage可以从<uri link="/main/en/mirrors.xml">官方Gentoo镜像</uri>下载，它们在<c>releases/mips/current</c>目录下。
+</p>
+
+<table>
+<tr>
+  <th>字节序</th>
+  <th>CPU</th>
+  <th>位置</th>
+</tr>
+<tr>
+  <ti>
+    big endian<br/>
+    <e>(SGI用户)</e>
+  </ti>
+  <ti>
+    R4000<br/>
+    R4400<br/>
+    R4600
+  </ti>
+  <ti><c>mips3/stage#-mips3-RELEASE.tar.bz2</c></ti>
+</tr>
+<tr>
+  <ti>
+    big endian<br/>
+    <e>(SGI用户)</e>
+  </ti>
+  <ti>
+    R5000<br/>
+    RM5200<br/>
+    RM7000<br/>
+    R10000<br/>
+    R12000<br/>
+    R14000
+  </ti>
+  <ti><c>mips4/stage#-mips4-RELEASE.tar.bz2</c></ti>
+</tr>
+<tr>
+  <ti>
+    little endian<br/>
+    <e>(Cobalt用户)</e>
+  </ti>
+  <ti>
+    RM5230<br/>
+    RM5231
+  </ti>
+  <ti><c>cobalt/stage#-mipsel4-RELEASE.tar.bz2</c></ti>
+</tr>
+<tr>
+  <ti>
+    little endian<br/>
+    <e>(其他用户)</e>
+  </ti>
+  <ti>
+    所有的标准CPU类型
+  </ti>
+  <ti><c>cobalt/stage#-mipsel1-RELEASE.tar.bz2</c></ti>
+</tr>
+</table>
+
+<warn>
+虽然我们提供little endian MIPS1的stage，但是对于little endian MIPS系统的支持只局限于Cobalt服务器。它们是为那些想在目前不支持的平台上试验Gentoo的人提供的，所以我们假设你知道你在做什么。
+</warn>
+
+<p>
+如果你需要通过代理上网的，那么请export <c>http_proxy</c>和<c>ftp_proxy</c>这两个变量：
+</p>
+
+<pre caption="为wget设置代理信息">
+# <i>export http_proxy="http://proxy.server.com:port"</i>
+# <i>export ftp_proxy="http://proxy.server.com:port"</i>
+</pre>
+
+<p>
+Gentoo/MIPS netboot镜像提供了<c>wget</c>作为下载文件的工具。因为空间的限制，在SGI netboot镜像里不可能提供功能更完善的浏览器。LiveCD用户可以是用<c>elinks</c>。
+</p>
+
+<pre caption="用wget下载tarball">
+# <i>wget -c http://distfiles.gentoo.org/releases/mips/mips4/stage3-mips4-2007.0.tar.bz2</i>
+</pre>
+
+<p>
+如果你想校验所下载的stage tarball的完整性，使用<c>md5sum</c>或者<c>sha1sum</c>然后把输出同镜像站上提供的MD5校验和对比。例如校验一个mips4的stage tarball：
+</p>
+
+<pre caption="校验一个stage tarball完整性的例子">
+# <i>md5sum -c stage3-mips4-2007.0.tar.bz2.DIGESTS</i>
+stage3-mips4-2007.0.tar.bz2: OK
+# <i>sha1sum -c stage3-mips4-2007.0.tar.bz2.DIGESTS</i>
+stage3-mips4-2007.0.tar.bz2: OK
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>解开Stage Tarball</title>
+<body>
+
+<p>
+现在把你所下载的stage解压缩到系统里。我们使用GNU的<c>tar</c>命令来做，这是最简单的方法：
+</p>
+
+<pre caption="解开stage">
+# <i>tar -xjpf stage?-*.tar.bz2</i>
+</pre>
+
+<p>
+确保你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>表示解开（<e>Extract</e>），<c>v</c>表示详细信息（<e>Verbose</e>）可以用来查看解压缩时发生了什么（可选参数），<c>j</c>表示使用bzip2解压缩，<c>p</c>表示保留权限（<e>Preserve permissions</e>），还有<c>f</c>表示我们要解开一个文件，而不是标准输入。
+</p>
+
+<p>
+现在stage已经安装好，下面我们继续<uri link="#installing_portage">安装Portage</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section id="installing_portage">
+<title>安装Portage</title>
+<subsection>
+<title>解开一个Portage快照</title>
+<body>
+
+<p>
+现在你得安装一个Portage的快照，它包含的一堆文件告诉Portage哪些软件可以安装，有哪些profile可用等等。
+</p>
+
+</body>
+</subsection>
+<subsection id="installing_from_Internet">
+<title>下载和安装Portage快照</title>
+<body>
+
+<p>
+进入Gentoo文件系统的挂载点（很可能是<path>/mnt/gentoo</path>）：
+</p>
+
+<pre caption="进入Gentoo的挂载点">
+# <i>cd /mnt/gentoo</i>
+</pre>
+
+<p>
+从<uri link="/main/en/mirrors.xml">本地镜像</uri>下载一个portage快照。你可以在<path>snapshots/</path>目录下找到它们。使用和stage tarball一样的处理方式把它传输到目标系统里。
+</p>
+
+<pre caption="解开Portage快照">
+# <i>tar -xjf portage-*.tar.bz2 -C /mnt/gentoo/usr</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+
+<section id="compile_options">
+<title>配置编译选项</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你可设置一些影响Portage行为的变量来优化Gentoo。这些变量都可作为环境变量来设置（使用<c>export</c>），但是它们不是永久的。为了保持你的设置，Portage为你提供了<path>/etc/make.conf</path>，一个Portage的配置文件。这就是我们现在要编辑的文件。 
+</p>
+
+<note>
+所有可能的变量都用注释形式罗列在<path>/mnt/gentoo/etc/make.conf.example</path>里。要成功的安装Gentoo，你只需要设置下面提到的变量。
+</note>
+
+<p>
+打开一个文本编辑器，现在我们要改变我们下面将要讨论的优化变量。我们提供了两个编辑器，<c>vi</c>（Busybox的一部分）和<c>nano</c>。我们将假设你正在使用<c>nano</c>。
+</p>
+
+<pre caption="打开/etc/make.conf">
+# <i>nano -w /mnt/gentoo/etc/make.conf</i>
+</pre>
+
+<p>
+你很可能已经注意到了，<path>make.conf.example</path>文件的结构和一般的文件一样：注释行以"#"开头，其它行使用<c>VARIABLE="content"</c>的语法来定义变量。<path>make.conf</path>文件也使用相同的语法。其中的一些变量我们接下来讨论。 
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>CFLAGS和CXXFLAGS</title>
+<body>
+
+<p>
+<c>CFLAGS</c>和<c>CXXFLAGS</c>变量分别定义了<c>gcc</c> C和C++编译器的优化标记。尽管我们通常都在这里定义，你也可以对每个软件单独定义这些优化标记以获得最好的性能。因为每个程序都是不同的。
+</p>
+
+<p>
+在<path>make.conf</path>里你应该定义一些你认为可以使系统在<e>一般情况</e>下快速响应的优化标记。不要把实验性质的设置放到这个变量里来；过多的优化会使程序表现很差（崩溃，甚至更糟，不正常工作）。
+</p>
+
+<p>
+我们不会解释所有可能的优化选项。如果你想搞清楚它们，请阅读<uri link="http://gcc.gnu.org/onlinedocs/">GNU在线手册</uri>或者是<c>gcc</c> info页面（<c>info gcc</c>——只能在可工作的Linux系统中查看）。<path>make.conf.example</path>本身也包含了不少信息和范例；不要忘了也看看它。
+</p>
+
+<p>
+第一个设置是<c>-march=</c>标记，它指定了目标架构的名字。可能的选项会在<path>make.conf.example</path>里有说明（以注释形式出现）。例子有ISA级别（<c>mips1</c>……<c>mips4</c>）和CPU型号（<c>r4400</c>，<c>r4600</c>……等等）。对于纯ISA级别架构，可以简单的只指定<c>-mips3</c>而不必<c>-march=mips3</c>。
+</p>
+
+<pre caption="GCC -march和-mips#设定">
+<comment>（针对R4600系统……）</comment>
+-march=r4600
+
+<comment>（任何MIPS4级别的CPU……）</comment>
+-march=mips4
+
+<comment>（或者干脆直接指定ISA级别……）</comment>
+-mips4
+</pre>
+
+<p>
+第二个是<c>-O</c>标记（是大写的O，而不是数字零），它是指定<c>gcc</c>的优化级别的标记。可能的级别有<c>s</c>（为优化文件大小），<c>0</c>（零——不优化），<c>1</c>、<c>2</c>或者<c>3</c>是为了获得更快速度的优化标记（每个级别都包含前一级标记的优化措施，并额外增加了一些）。比如等级2优化：
+</p>
+
+<pre caption="GCC优化设定">
+-O2
+</pre>
+
+<p>
+在MIPS世界里很重要的一个设定是<c>-mabi=</c>参数。MIPS有3个不同的ABI：<c>32</c>（纯32位，也称<c>o32</c>），<c>64</c>（全64位，也称<c>n64</c>）和<c>n32</c>（32位数据结构和64位指令的混合体）。你想用哪个就用这个参数来选择。注意你需要有你所选择的ABI的库。比如，在layman的术语里，这意味着你不能在32位userland（甚至<c>n32</c> userland）里使用<c>-mabi=64</c>。
+</p>
+
+<p>
+另一个普遍使用的优化标记是<c>-pipe</c>（不同编译阶段通信使用管道而不是临时文件）。 它对产生的代码没有任何影响。
+</p>
+
+<p>
+使用<c>-fomit-frame-pointer</c>（它将不在寄存器里为不需要帧指针的函数保存帧指针）可能会在调试程序的时候造成严重后果！
+</p>
+
+<p>
+在你定义<c>CFLAGS</c>和<c>CXXFLAGS</c>的时候，你需要把这些优化标记都合并起来，就像下面这个例子：
+</p>
+
+<pre caption="定义CFLAGS和CXXFLAGS变量">
+CFLAGS="-mabi=32 -mips4 -pipe -O2"
+CXXFLAGS="${CFLAGS}"                  <comment># 两个变量使用相同的设置</comment>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>MAKEOPTS</title>
+<body>
+
+<p>
+通过使用<c>MAKEOPTS</c>你可以定义在安装软件的时候同时可以产生并行编译的数目。你的CPU数目加一是个不错的选择，但是这个准则并不永远都是完美的。
+</p>
+
+<pre caption="单CPU系统的MAKEOPTS">
+MAKEOPTS="-j2"
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>设置已准备好，让我们开始！</title>
+<body>
+
+<p>
+根据你的喜好更新<path>/mnt/gentoo/etc/make.conf</path>并保存（<c>nano</c>用户可以敲<c>Ctrl-X</c>）。你现在准备好可以继续<uri link="?part=1&amp;chap=6">安装Gentoo基本系统</uri>了。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

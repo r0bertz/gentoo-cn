@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ia64-disk.xml,v 1.2 2007/09/14 16:14:18 r0bertz Exp $ -->
+<!-- English CVS version: 1.6 -->
+
+<sections>
+
+<version>3.2</version>
+<date>2007-07-26</date>
+
+<section>
+<title>块设备介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+一开始我们先介绍<e>块设备</e>。最著名的块设备可能就是Linux系统中表示第一个IDE驱动器的<path>/dev/hda</path>。如果你的系统使用SCSI或SATA驱动器，则你的第一个硬盘驱动器会是<path>/dev/sda</path>。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>磁盘分区</title>
+<body>
+
+<p>
+尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不 这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。在 <keyval id="arch"/>系统中，这些被称作<e>分区</e>。 
+</p>
+
+<p>
+安腾系统使用EFI（Extensible Firmware Interface），可扩展固件接口，用以启动。EFI能够理解的分区表被称为GPT，或GUID分区表。能够理解GPT的分区程序叫“parted”，也是我们之后要使用的工具。另外，EFI只能认FAT文件系统，所以EFI启动分区也只能是这个文件系统，“elilo”安装的内核就放在那里。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>高级存储</title>
+<body>
+
+<p>
+此<keyval id="arch"/>安装光盘提供了对EVMS和LVM2的支持。EVMS和LVM2提高了你的分区设置的灵活性。在安装指南中，我们将把精力集中在“常规”分区上，但是了解一下我们支持EVMS和LVM2也是有好处的。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>默认分区方案</title>
+<body>
+
+<p>
+如果你没有兴趣为你的系统设计分区方案，你可以使用我们在本手册中使用的方案：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>文件系统</th>
+  <th>大小</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>vfat</ti>
+  <ti>32M</ti>
+  <ti>EFI启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>(swap)</ti>
+  <ti>512M</ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>ext3</ti>
+  <ti>剩余磁盘</ti>
+  <ti>根分区</ti>
+</tr>
+</table>
+
+<p>
+如果你想知道一个分区应该多大，或者你需要多少个分区，继续阅读。否则请阅读<uri link="#parted">使用parted来为你的磁盘分区</uri>来给你的磁盘分区。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>多少和多大？</title>
+<body>
+
+<p>
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安装在那。理由也与<path>/home</path>目录类似：安全与备份。你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+</p>
+
+<p>
+正如你所看到的，这完全取决于你想要达到什么目的。独立的分区或卷有以下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每一个分区或卷选择最佳性能的文件系统
+</li>
+<li>
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间 都用完
+</li>
+<li>
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势 在多磁盘系统上比多分区系统上更为明显）
+</li>
+<li>
+  通过对一些分区或卷进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式挂载，安全性会大大增强。
+</li>
+</ul>
+
+<p>
+然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲 空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
+</p>
+
+<p>
+作为分区的例子，我们向你示范一个用于演示的有20GB磁盘的笔记本（包含网站服务器、邮件服务器、gnome……）：
+</p>
+
+<pre caption="文件系统使用实例">
+$ <i>df -h</i>
+Filesystem    Type    Size  Used Avail Use% Mounted on
+/dev/hda5     ext3    509M  132M  351M  28% /
+/dev/hda2     ext3    5.0G  3.0G  1.8G  63% /home
+/dev/hda7     ext3    7.9G  6.2G  1.3G  83% /usr
+/dev/hda8     ext3   1011M  483M  477M  51% /opt
+/dev/hda9     ext3    2.0G  607M  1.3G  32% /var
+/dev/hda1     ext2     51M   17M   31M  36% /boot
+/dev/hda6     swap    516M   12M  504M   2% &lt;not mounted&gt;
+<comment>（留作它用的未分配空间：2GB）</comment>
+</pre>
+
+<p>
+这里的<path>/usr</path>快满了（使用了83%），但是一旦所有的软件都安装好了，<path>/usr</path>目录就不会如此的增长了。尽管分配给<path>/var</path>目录的空间看似过多了，但是要记住，Portage默认使用这个分区来编译软件包。如果你想使你的<path>/var</path>目录保持一个合理的大小，如1GB，你需要更改<path>/etc/make.conf</path>文件中的<c>PORTAGE_TMPDIR</c>来指定一个拥有足够的空闲空间的分区，用以编译诸如OpenOffice这样巨大的软件包。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="parted">
+<title>使用parted来为你的磁盘分区</title>
+<subsection>
+<body>
+
+<p>
+下面来解释如何创建前面说明的那个示例分区布局，即：
+</p>
+
+<table>
+<tr>
+  <th>分区</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti><path>/dev/sda1</path></ti>
+  <ti>EFI启动分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda2</path></ti>
+  <ti>交换分区</ti>
+</tr>
+<tr>
+  <ti><path>/dev/sda3</path></ti>
+  <ti>根分区</ti>
+</tr>
+</table>
+
+<p>
+根据你自己的喜好来改变分区布局。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>查看当前分区布局</title>
+<body>
+
+<p>
+<c>parted</c>是一个GNU分区编辑器。启动你磁盘上<c>parted</c>程序（在示例中，我们使用<path>/dev/sda</path>）：
+</p>
+
+<pre caption="启动parted">
+# <i>parted /dev/sda</i>
+</pre>
+
+<p>
+一旦启动到<c>parted</c>中，你将看到如下提示：
+</p>
+
+<pre caption="parted提示">
+GNU Parted 1.6.22
+Copyright (C) 1998 - 2005 Free Software Foundation, Inc.
+This program is free software, covered by the GNU General Public License.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+Using /dev/sda
+(parted)
+</pre>
+
+<p>
+目前有一个可用的命令是<c>help</c>，如果你想要看一些其余可用的命令你应该使用它。另一个命令是<c>print</c>用以显示你目前磁盘的分区配置：
+</p>
+
+<pre caption="分区配置示例">
+(parted) <i>print</i>
+Disk geometry for /dev/sda: 0.000-34732.890 megabytes
+Disk label type: gpt
+Minor    Start       End     Filesystem  Name                  Flags
+1          0.017    203.938  fat32                             boot
+2        203.938   4243.468  linux-swap
+3       4243.469  34724.281  ext3
+</pre>
+
+<p>
+这个特定的配置和我们之前推荐的非常相似。注意第二行（分区表的类型）是GPT。如果不是这样，则ia64系统将不能从磁盘启动。作为向导，我们将删除分区并创建新的。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>删除所有分区</title>
+<body>
+
+<note>
+fdisk及其他一些分区程序在你给出写入指令之前不会做出改动。与它们不同的是，parted会立即做出改动。所以一旦你开始添加和删除分区之后，你将无法全身而退……磁盘已经被改写了。
+</note>
+
+<p>
+删除所有分区以及从头开始的简便方法是使用<c>mklabel</c>命令创建一个新的分区表，它可以确保我们使用正确的分区类型。这样完成之后，你就会有一张空白的GPT分区表了。
+</p>
+
+<pre caption="创建一个新的分区表">
+(parted) <i>mklabel gpt</i>
+(parted) <i>print</i>
+Disk geometry for /dev/sda: 0.000-34732.890 megabytes
+Disk label type: gpt
+Minor    Start       End     Filesystem  Name                  Flags
+</pre>
+
+<p>
+现在，分区表是空的，我们就可以创建分区了。我们将使用前面讨论过的那个默认的分区布局。当然，如果你不想要相同的分区方案就不要按照下面的指令来做！
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>创建EFI启动分区</title>
+<body>
+
+<p>
+我们首先创建一个小的EFI启动分区。这个分区需要FAT文件系统因为ia64固件只能读取这种文件系统。我们的例子会把它设置为32M，这对于存储内核和elilo配置已经合适了。你可以预计每个ia64内核大约5M，所以这样的设置会留给你一些用于将来增长以及感受新体验的空间。
+</p>
+
+<pre caption="创建启动分区">
+(parted) <i>mkpart primary fat32 0 32</i>
+(parted) <i>print</i>
+Disk geometry for /dev/sda: 0.000-34732.890 megabytes
+Disk label type: gpt
+Minor    Start       End     Filesystem  Name                  Flags
+1          0.017     32.000  fat32
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建交换分区</title>
+<body>
+
+<p>
+现在让我们来创建交换分区吧。经典的做法是让交换分区的大小两倍于你系统中物理内存的大小。在现代系统中有着大量的物理内存，所以这种做法不是必须的了。对于大部分桌面系统来说，一个512M大小的交换分区足够了。对于服务器来说，你可以考虑再多分一点空间用以应付服务器预期的需求。
+</p>
+
+<pre caption="创建交换分区">
+(parted) <i>mkpart primary linux-swap 32 544</i>
+(parted) <i>print</i>
+Disk geometry for /dev/sda: 0.000-34732.890 megabytes
+Disk label type: gpt
+Minor    Start       End     Filesystem  Name                  Flags
+1          0.017     32.000  fat32
+2         32.000    544.000
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>创建根分区</title>
+<body>
+
+<p>
+最终，我们来创建根分区吧。我们的设置使根分区占用磁盘所有剩余的空间。我们默认使用ext3文件系统，但是如果你喜欢也可以使用ext2、jfs、reiserfs或xfs文件系统。真正创建文件系统的步骤并不是在这儿，但是分区表包含了表明每个分区上的文件系统的标记，而且最好让这个标记和你实际希望使用的文件系统类型保持一致。
+</p>
+
+<pre caption="创建根分区">
+(parted) <i>mkpart primary ext3 544 34732.890</i>
+(parted) <i>print</i>
+Disk geometry for /dev/sda: 0.000-34732.890 megabytes
+Disk label type: gpt
+Minor    Start       End     Filesystem  Name                  Flags
+1          0.017     32.000  fat32
+2         32.000    544.000
+3        544.000  34732.874
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>退出parted</title>
+<body>
+
+<p>
+从parted中退出，请输入<c>quit</c>。这儿没有必要使用一个独立的步骤来保存你的分区布局，因为parted之前已经保存过了。只要你离开，parted就会提醒你更新<c>/etc/fstab</c>，这步在之后的向导中我们会完成。
+</p>
+
+<pre caption="从parted中离开">
+(parted) <i>quit</i>
+Information: Don't forget to update /etc/fstab, if necessary.
+</pre>
+
+<p>
+现在分区已经创建完毕，你可以继续阅读<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你的分区已经创建完了，现在可以在上面创建文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+Linux内核支持各种各样的文件系统。我们将介绍vfat、ext2、ext3、ReiserFS、XFS和JFS，因为它们是Linux系统中使用最普遍的文件系统。
+</p>
+
+<p>
+<b>vfat</b>是更新了可以接受长文件名的MS-DOS文件系统。它也是ia64系统上EFI固件唯一可以识别的文件系统。ia64系统上的启动分区必须是vfat，但作为你存储数据的分区，你应该使用下述文件系统的任意一个。
+</p>
+
+<p>
+<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好且可靠的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+</p>
+
+<p>
+<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了，但是目前还没有足够的相关记录来对其一般稳定性做出积极或消极的评价。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>在分区上应用文件系统</title>
+<body>
+
+<p>
+要在分区或卷上创建文件系统，对于每种可能的文件系统都有专门的工具：
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>vfat</ti>
+  <ti><c>mkdosfs</c></ti>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+例如，要使启动分区（本例中的<path>/dev/sda1</path>）为vfat和根分区（本例中的<path>/dev/sda3</path>）为ext3，应该这样做：
+</p>
+
+<pre caption="在分区上应用文件系统">
+# <i>mkdosfs /dev/sda1</i>
+# <i>mke2fs -j /dev/sda3</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区标志">
+# <i>mkswap /dev/sda2</i>
+</pre>
+
+<p>
+使用<c>swapon</c>命令来激活交换分区：
+</p>
+
+<pre caption="激活交换分区">
+# <i>swapon /dev/sda2</i>
+</pre>
+
+<p>
+使用上面提到的命令来创建和激活交换分区。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区都已经初始化了，并且安装了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令进行挂载。别忘记为每个你创建的分区建立所需的挂载目录。作为例子，我们来挂载根分区和启动分区：
+</p>
+
+<pre caption="挂载根分区">
+# <i>mount /dev/sda3 /mnt/gentoo</i>
+</pre>
+
+<note>
+与其余一些Gentoo支持的架构不同的是，在ia64上<path>/boot</path>并不被挂载。原因是EFI启动分区会自动地被挂载以及每次你运行elilo命令时会被写入。因为这点，/boot分区位于根分区，而且它是elilo配置引用内核的存储位置。
+</note>
+
+<note>
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+</note>
+
+<p>
+我们还需要在<path>/proc</path>目录上挂载proc文件系统（内核的虚拟接口）。但是，我们首先需要把我们的文件放到分区上。
+</p>
+
+<p>
+请继续阅读<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>。
+</p>
+
+</body>
+</section>
+</sections>

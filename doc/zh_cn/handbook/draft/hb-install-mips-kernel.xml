@@ -1,0 +1,277 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
+<!-- English CVS version: 1.30 -->
+
+<sections>
+
+<version>8.3</version>
+<date>2007-08-12</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设您要用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+</p>
+
+<p>
+基于MIPS的系统只能选择一个内核源代码<c>mips-sources</c>。这个补丁集和其他架构的补丁集是不同的，因为它有很多针对MIPS架构的补丁。
+</p>
+
+<pre caption="安装内核源码……">
+# <i>emerge mips-sources</i>
+</pre>
+
+<impo>
+在Origin 200/2000、Indigo2 Impact (R10000)、Octane/Octane2和O2上，需要一个64位内核来启动系统。对于这些机器，你应该<c>emerge kgcc64</c>来创建一个交叉编译器来编译64位内核。
+</impo>
+
+<pre caption="安装kgcc64……">
+# <i>emerge kgcc64</i>
+</pre>
+
+<p>
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>mips-sources-<keyval id="kernel-version"/></c>。您的版本可能有所不同，所以请你记住这一点。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root     root           12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
+</pre>
+
+<p>
+现在是时候配置和编译你的内核代码了。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>内核编译与安装</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+前面，我们介绍过怎样手工配置内核源代码。但是因为我们支持的系统的数量太多，手工配置这里就不太现实了。本节向您展示了多种内核配置方法。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>使用内核代码里的示例配置</title>
+<body>
+
+<p>
+很多受支持的系统都在内核源代码里有一个隐藏的示例.config。不过不是所有的系统都有。对于有的系统来说，可以使用下面表格里的命令来配置。
+</p>
+
+<table>
+<tr>
+  <th>系统</th>
+  <th>配置命令</th>
+</tr>
+<tr>
+  <ti>Cobalt服务器</ti>
+  <ti><c>make cobalt_defconfig</c></ti>
+</tr>
+<tr>
+  <ti>Indy, Indigo2 (R4k), Challenge S</ti>
+  <ti><c>make ip22_defconfig</c></ti>
+</tr>
+<tr>
+  <ti>Origin 200/2000</ti>
+  <ti><c>make ip27_defconfig</c></ti>
+</tr>
+<tr>
+  <ti>Indigo2 Impact (R10k)</ti>
+  <ti>
+    <c>make ip28_defconfig</c> 
+  </ti>
+</tr>
+<tr>
+  <ti>O2</ti>
+  <ti><c>make ip32_defconfig</c></ti>
+</tr>
+</table>
+
+</body>
+</subsection>
+
+<subsection>
+<title>使用来自安装媒介的正在运行的内核的配置</title>
+<body>
+
+<p>
+所有的Gentoo安装镜像都提供一个内核配置文件，<path>/proc/config.gz</path>。很多情况下都可以利用这个配置文件。不过最好还是你的内核源代码和你正在运行的内核的源代码相差不多。要解开它，只需要像下面那样用<c>zcat</c>命令就可以。
+</p>
+
+<pre caption="从/proc/config.gz解出.config">
+# <i>zcat /proc/config.gz > .config</i>
+</pre>
+
+<impo>
+这个内核配置是netboot镜像用的。也就是它需要就近找到一个根文件系统，要么是initramfs里的一个目录，要么是一个initrd回环设备。所以当你运行<c>make menuconfig</c>时，不要忘记进到General Setup里禁用initramfs的选项。
+</impo>
+
+</body>
+</subsection>
+
+<subsection>
+<title>硬件兼容性数据库</title>
+<body>
+
+<p>
+为了帮助用户找到可以用的设定，有人建立了一个硬件兼容性数据库。这个数据库列出了很多不同MIPS设备的支持，而且允许用户贡献他们知道可以用的内核配置。这个站点的地址是<uri>http://stuartl.longlandclan.hopto.org/gentoo/mips</uri>。
+</p>
+
+<p>
+如果你觉得这个服务有用，欢迎你贡献你的笔记和.config文件，以使别人可以从你的经验中受益。不过要注意的是，从这个站点下载的任何配置文件都不能保证一定可用。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>根据你的需要调整配置</title>
+<body>
+
+<p>
+当你找到一个配置之后，下载到你的内核源代码目录里，重命名为<path>.config</path>。在那个目录里，运行<c>make oldconfig</c>来更新配置文件，在编译开始前你还能定制这个配置文件。
+</p>
+
+<pre caption="编译内核">
+# <i>cd /usr/src/linux</i>
+# <i>cp /path/to/example-config .config</i>
+# <i>make oldconfig</i>
+<comment>(在每个提示只需要按回车来接受默认设定……后面我们再调整)</comment>
+# <i>make menuconfig</i>
+</pre>
+
+<impo>
+在Kernel Hacking部分，有一个选项叫“你正在使用交叉编译器么？”这个会告诉内核Makefile在编译内核时把“<c>mips-linux-</c>”（或者<c>mipsel-linux-</c>……等等）加在<c>gcc</c>和<c>as</c>前。这个选项应该被关闭，即时是在交叉编译时。如果你确实需要调用交叉编译器，请定义<c>CROSS_COMPILE</c>变量就像下面一节所演示的。
+</impo>
+
+<impo>
+Octane系统上JFS和ALSA有一个已知问题，ALSA不能工作。鉴于JFS在MIPS上只是试验性质，建议目前不要使用JFS。
+</impo>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译与安装</title>
+<body>
+
+<p>
+既然现在您的内核已经配置成功了，那么就是时候编译并且安装它了。退出配置界面并且开启编译进程：
+</p>
+
+<note>
+在64位机器上，你需要指定<c>CROSS_COMPILE=mips64-unknown-linux-gnu-</c>（或者<c>mips64el-...</c>如果这是个little endian系统）来使用64位编译器。
+</note>
+
+<pre caption="编译内核">
+<comment>（本机编译）</comment>
+# <i>make vmlinux modules modules_install</i>
+
+<comment>（在target机器上交叉编译）</comment>
+<comment>（根据实际情况修改mips64-unknown-linux-gnu-）</comment>
+# <i>make vmlinux modules modules_install CROSS_COMPILE=mips64-unknown-linux-gnu-</i>
+
+<comment>（当在另一个机器上编译的时候，比如x86机器，使用）</comment>
+<comment>（下面的命令来编译内核并且安装模块到）</comment>
+<comment>（一个特定的目录，以方便移动到目标机器里。）</comment>
+# <i>make vmlinux modules CROSS_COMPILE=mips64-unknown-linux-gnu-</i>
+# <i>make modules_install INSTALL_MOD_PATH=/somewhere</i>
+</pre>
+
+<impo>
+当为Indy、Indigo2 (R4k)、Challenge S和O2编译64位内核时，请使用<c>vmlinux.32</c>目标，而不要用<c>vmlinux</c>。否则，你的系统将不能启动。这样做因为PROM不支持ELF64格式。
+</impo>
+
+<pre caption="使用vmlinux.32目标">
+# <i>make vmlinux.32</i>
+<comment>（这将创建vmlinux.32――这就是你最终的内核）</comment>
+</pre>
+
+<p>
+当内核编译完毕，把内核镜像复制到<path>/</path>． 
+</p>
+
+<note>
+在Cobalt服务器上，引导程序需要的是一个压缩了的内核镜像。复制到<path>/boot</path>之后记得用<c>gzip -9</c>来压缩一下内核镜像．
+</note>
+
+<pre caption="安装内核">
+# <i>cp vmlinux /boot/kernel-<keyval id="kernel-version"/></i>
+
+<comment>（Cobalt服务器――压缩内核镜像）</comment>
+# <i>gzip -9v /boot/kernel-<keyval id="kernel-version"/></i>
+</pre>
+
+</body>
+</subsection>
+</section>
+<section id="kernel_modules">
+<title>安装独立内核模块</title>
+<subsection>
+<title>配置内核模块</title>
+<body>
+
+<p>
+您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+例如，要自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>然后输入模块的名字。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+3c59x
+</pre>
+
+<p>
+现在请从<uri link="?part=1&amp;chap=8">配置您的系统</uri>一章来继续您的安装。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

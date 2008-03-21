@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.20 -->
+
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>做出您的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。
+</p>
+
+<p>
+Linux/Alpha下存在数种引导程序。你必须选择其中一个受支持的引导程序，而不是全部。你可以从<uri link="#aboot">aBoot</uri>和<uri link="#milo">MILO</uri>中选择一个。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="aboot">
+<title>默认：使用aboot</title>
+<body>
+
+<note>
+<c>aboot</c>只支持从这些分区引导：<b>ext2</b>和<b>ext3</b>分区。
+</note>
+
+<p>
+首先在我们的系统上安装aboot。我们当然是用<c>emerge</c>来安装：
+</p>
+
+<pre caption="安装aboot">
+# <i>emerge aboot</i>
+</pre>
+
+<p>
+下一步是使磁盘可引导。这会让你在引导系统时启动<c>aboot</c>。我们通过将<c>aboot</c>引导程序写入磁盘的起始位置使它可引导。
+</p>
+
+<pre caption="使磁盘可引导">
+# <i>swriteboot -f3 /dev/sda /boot/bootlx</i> 
+# <i>abootconf /dev/sda 2</i>
+</pre>
+
+<note>
+如果你使用的分区规划跟我们在本章中所使用的不同，那么你必须相应地修改这些命令。请阅读相关的手册页（<c>man 8 swriteboot</c>和<c>man 8 abootconf</c>）。并且，如果你的root文件系统用的是JFS文件系统，必须通过添加<c>ro</c>内核选项使它在刚开始以只读方式挂载。
+</note>
+
+<p>
+另外，你可以通过设置aboot配置文件和一些SRM变量来让Gentoo自动启动。你可以试着从Linux来设置这些变量，不过通过SRM控制台本身来做更容易。
+</p>
+
+<pre caption="自动启动Gentoo">
+# <i>echo '0:2/boot/vmlinux.gz root=/dev/sda2' &gt; /etc/aboot.conf</i>
+# <i>cd /proc/srm_environment/named_variables</i>
+# <i>echo -n 0 &gt; boot_osflags</i>
+# <i>echo -n '' &gt; boot_file</i>
+# <i>echo -n 'BOOT' &gt; auto_action</i>
+# <i>echo -n 'dkc100' &gt; bootdef_dev</i>
+<comment>（用你的启动设备代替dkc100）</comment>
+</pre>
+
+<p>
+如果之后你需要再进入SRM控制台（还原Gentoo安装、设置某些变量等等），只要按下CTRL+C中止自动加载过程。
+</p>
+
+<p>
+如果你是使用串口控制台安装，要记得在<path>aboot.conf</path>中加入串口控制台启动参数。参考<path>/etc/aboot.conf.example</path>获取更多信息。
+</p>
+
+<p>
+现在aboot已经配置并准备好可以用了。请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="milo">
+<title>备选：使用MILO</title>
+<body>
+
+<p>
+继续之前，你先要决定如何使用MILO。本节中我们假设你想制作一个MILO启动软盘。如果你要从你硬盘上的一个MS-DOS分区启动，须相应地修改这些命令。
+</p>
+
+<p>
+我们使用<c>emerge</c>来安装MILO。
+</p>
+
+<pre caption="安装MILO">
+# <i>emerge milo</i>
+</pre>
+
+<p>
+MILO安装好之后，<path>/opt/milo</path>中会出现一些MILO镜像文件（image）。用下面的命令制作一张配合MILO使用的启动软盘。记得要为你的alpha系统选用正确的镜像文件。
+</p>
+
+<pre caption="将MILO安装到软盘">
+<comment>（首先插入一张空的软盘）</comment>
+# <i>fdformat /dev/fd0</i>
+# <i>mformat a:</i>
+# <i>mcopy /opt/milo/milo-2.2-18-gentoo-ruffian a:\milo</i>
+# <i>mcopy /opt/milo/linload.exe a:\lilnload.exe</i>
+<comment>（仅当你有一个Ruffian系统：</comment>     
+  # <i>mcopy /opt/milo/ldmilo.exe a:\ldmilo.exe</i>
+<comment>）</comment>
+# <i>echo -ne '\125\252' | dd of=/dev/fd0 bs=1 seek=510 count=2</i>
+</pre>
+
+<p>
+现在你的MILO启动软盘已经准备好启动Gentoo Linux了。你可能需要在你的ARCS固件中设置环境变量来起动MILO；这在<uri link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>中有完整的解释，其中附有常见系统上的一些例子，以及交互模式下命令使用的示例。
+</p>
+
+<p>
+我们<e>强烈</e>建议你阅读<uri link="http://tldp.org/HOWTO/MILO-HOWTO/">MILO-HOWTO</uri>。
+</p>
+
+<p>
+接下来请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有分区并重启">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然您别忘了取出可引导的光盘盘，否则重启后引导的将是这张光盘而不是您的新Gentoo系统。
+</p>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请以<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+
+</sections>

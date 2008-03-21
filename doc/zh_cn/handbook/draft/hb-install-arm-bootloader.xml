@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-arm-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.3 -->
+
+<sections>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>做出您的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。 
+</p>
+
+<p>
+Linux/ARM下存在数种引导程序。您必须选择其中一个受支持的引导程序，而不是全部。 这取决于机器类型，可能您根本没别的选择！
+</p>
+
+<table>
+ <tr>
+  <th>机器</th>
+  <th>受支持的引导程序</th>
+ </tr>
+ <tr>
+  <ti><uri link="http://www.netwinder.org/about.html">NetWinder</uri></ti>
+  <ti><uri link="#nettrom">NeTTrom</uri></ti>
+ </tr>
+ <tr>
+  <ti><uri link="http://en.wikipedia.org/wiki/NSLU2">NSLU2（也称SLUG）</uri></ti>
+  <ti><uri link="#redboot">RedBoot</uri></ti>
+ </tr>
+ <tr>
+  <ti><uri link="http://www.giantshoulderinc.com/hardware.html">Loft</uri></ti>
+  <ti><uri link="#redboot">RedBoot</uri></ti>
+ </tr>
+</table>
+
+</body>
+</subsection>
+</section>
+<section id="nettrom">
+<title>NeTTrom</title>
+<subsection>
+<title>升级NeTTrom</title>
+<body>
+
+<p>
+NeTTrom引导程序是为NetWinder机器专门开发的固件。由于历史原因，其它ARM板都不使用NeTTrom，它的源代码已不再提供。不过，最新版固件的镜像文件仍四处流传，所以你要做的第一件事是升级到最新的2.3.3版本。本章可作为一份快速指南，而不能取代完整的<uri link="http://www.netwinder.org/howto/Firmware-HOWTO-3.html">固件升级HOWTO</uri>。
+</p>
+
+<p>
+为了刷新固件，您需要最新的发行版、刷新工具集和适当的内核支持。NetWinder刷新驱动程序位于内核中的<c>Character devices</c>之下，称为<c>NetWinder flash support</c>。
+</p>
+
+<pre caption="安装NeTTrom和NetWinder工具集">
+# <i>emerge sys-boot/nettrom sys-block/nwutil</i>
+</pre>
+
+<warn>
+如果固件刷新出错，您将无法通过软件工具来修复。请确保您已做了防范电源失效的所有保护措施，并且阅读了flashwrite（8）的man手册页。
+</warn>
+
+<p>
+现在您拥有了最新版本的固件，安装了刷新工具集，您的内核中已支持刷新驱动，并且您已经阅读了flashwrite（8）的man手册页，让我们来刷新这小孩儿！
+</p>
+
+<pre caption="刷新NetWinder固件">
+<comment>首先备份您现有的固件</comment>
+# <i>dd if=/dev/nwflash of=/boot/nettrom.old bs=1</i>
+
+<comment>然后写入新的固件</comment>
+# <i>flashwrite /boot/nettrom</i>
+
+<comment>最后验证已正确写入（用nettrom的实际大小代替BYTESIZE）</comment>
+# <i>dd if=/dev/nwflash of=/boot/nettrom.new bs=1 count=BYTESIZE</i>
+# <i>cmp /boot/nettrom /boot/nettrom.new</i>
+</pre>
+
+<p>
+如果一切顺利，您就可以重启系统了而不应该留下一砖一瓦。因此让我们继续来实际地引导一个内核。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>使用NeTTrom</title>
+<body>
+
+<p>
+NeTTrom能够以多种不同的方式启动内核，我们将介绍最常见的两种方式：嵌入在闪存中和从ext2分区载入。
+</p>
+
+<p>
+通过nwlilo工具可以很容易地将内核嵌入到闪存中。您只需简单地指定嵌入内核所在的路径以及内核的命令行参数（注意“root=”的值非常重要），就好了！
+</p>
+
+<pre caption="将内核安装到闪存">
+# <i>nwlilo /boot/zImage "root=/dev/hda2 video=cyber2000fb"</i>
+</pre>
+
+<p>
+另一种方式是将vmlinux ELF文件复制到ext2启动分区下，然后配置NeTTrom去将它载入。 当您复制好内核，就请重启机器，NeTTrom只能从它自己内部来配置。要中断自动引导过程，请按两次<c>*</c>键，然后再按回车键。下面的例子中，我们假定您的ext2启动分区位于<path>/dev/hda1</path>，主分区位于<path>/dev/hda3</path>。
+</p>
+
+<pre caption="配置NeTTrom">
+NeTTrom> <i>load-defaults</i>
+NeTTrom> <i>setenv kernconfig fs</i>
+NeTTrom> <i>setenv kerndev /dev/hda1</i>
+NeTTrom> <i>setenv rootdev /dev/hda3</i>
+NeTTrom> <i>setenv kernfile /boot/vmlinux</i>
+NeTTrom> <i>setenv cmdappend [自定义内核命令行设置]</i>
+NeTTrom> <i>save-all</i>
+NeTTrom> <i>boot</i>
+</pre>
+
+<p>
+NetWinder机器中DMA硬件损坏的情况并不是很少见，因此如果您的磁盘在开启DMA时报错，只需简单地添加<c>ide=nodma</c>到上面例子中的<c>cmdappend</c>行。
+</p>
+
+<p>
+请查阅<uri link="http://www.netwinder.org/howto/Firmware-HOWTO.html">NetWinder固件——HOWTO</uri>，以获取完整的NeTTrom命令指南/参考资料。
+</p>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="redboot">
+<title>RedBoot</title>
+<subsection>
+<title>升级RedBoot</title>
+<body>
+
+<p>
+由于<uri link="http://www.cygwin.com/redboot/">RedBoot</uri>使用方便，使它越来越流行。固件升级的过程中太容易出错了，因此我们不会在这里介绍这个过程:)。如果您确实想升级，请访问<uri link="http://www.cygwin.com/redboot/">RedBoot主页</uri>。
+</p>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+<!-- TODO: write this
+<subsection>
+<title>Using RedBoot</title>
+<body>
+
+</body>
+</subsection>
+-->
+</section>
+<section id="uboot">
+<title>Das U-Boot</title>
+<subsection>
+<title>升级Das U-Boot</title>
+<body>
+
+<p>
+<uri link="http://u-boot.sourceforge.net/">Das U-Boot</uri>的特点在于它的便捷和强大的功能。我们不会在这里介绍如何升级您的版本，因为这个过程太容易出错了:)。 如果您确实想升级，请访问<uri link="http://u-boot.sourceforge.net/">U-Boot主页</uri>。
+</p>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+<!-- TODO: write this
+<subsection>
+<title>Using Das U-Boot</title>
+<body>
+
+</body>
+</subsection>
+-->
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有分区并重启">
+">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然您别忘了取出可引导的CD盘，否则重启后引导的将是这张CD而不是您的新Gentoo系统。
+</p>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请以<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

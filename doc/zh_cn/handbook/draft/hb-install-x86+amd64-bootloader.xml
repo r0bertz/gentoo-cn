@@ -1,0 +1,624 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
+<!-- English CVS version: 1.9 -->
+
+<sections>
+
+<version>5.1</version>
+<date>2007-11-27</date>
+
+<section>
+<title>做出您的选择</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+现在，您已经配置并编译好了内核，必需的一些系统配置文件也已经就位，是时候安装一个叫做<e>引导程序</e>的程序来“引燃”您的内核并启动系统了。
+</p>
+
+</body>
+<body test="contains('AMD64 x86', func:keyval('arch'))">
+<p>
+对于<keyval id="arch"/>，Gentoo Linux提供了<uri link="#grub">GRUB</uri>和<uri link="#lilo">LILO</uri>。
+</p>
+
+<warn test="func:keyval('arch')='AMD64'">
+在AMD64架构上不推荐使用LILO。
+</warn>
+
+</body>
+<body>
+<p>
+但在安装bootloader之前，我们要告诉您如何配置framebuffer（前提当然是您想使用它）。在framebuffer的帮助下，您系统的Linux命令行将拥有（有限的）图形特性（例如使用Gentoo提供的漂亮的bootsplash图片）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>可选：Framebuffer</title>
+<body>
+
+<p>
+<e>如果</e>您已经为您的内核加上了framebuffer支持（或者您使用<c>genkernel</c>的默认内核配置），您就可以在bootloader配置文件中加入一个<c>vga</c>和／或一个<c>video</c>内核参数来启用它。
+</p>
+
+<p test="func:keyval('arch')='x86'">
+首先，您需要知道您使用的是什么类型的framebuffer设备。如果您用的是加过Gentoo补丁
+的内核树（例如<c>gentoo-sources</c>），您将可以选择<c>vesafb-tng</c>作
+为<e>VESA驱动类型</e>（对于这些内核来说这是默认选择）。在这种情况下，您使用的
+是<c>vesafb-tng</c>驱动，您将<e>不需要</e>设置<c>vga</c>参数。否则您使用的就
+是<c>vesafb</c>驱动，您将<e>需要</e>设置<c>vga</c>参数。
+</p>
+
+<p test="contains('AMD64 IA64',func:keyval('arch'))">
+64位系统必须使用<c>vesafb</c>驱动，并且需要在内核启动参数中添加<c>vga</c>参数。
+</p>
+
+<p>
+<c>vga</c>参数用来控制您的<c>vesafb</c> framebuffer屏幕的分辨率和颜色深度。正如<path>/usr/src/linux/Documentation/fb/vesafb.txt</path>（您安装内核源码包的同时就会安装这一文件）里说明的那样，您需要将与您想使用的分辨率和色深相对应的VESA数值传递给此参数。
+</p>
+
+<p>
+下表列出了可用的分辨率和对应的颜色深度，您在里面可以找到需要传递给<c>vga</c>参数的值。
+</p>
+
+<table>
+<tr>
+  <ti></ti>
+  <th>640x480</th>
+  <th>800x600</th>
+  <th>1024x768</th>
+  <th>1280x1024</th>
+</tr>
+<tr>
+  <th>256</th>
+  <ti>0x301</ti>
+  <ti>0x303</ti>
+  <ti>0x305</ti>
+  <ti>0x307</ti>
+</tr>
+<tr>
+  <th>32k</th>
+  <ti>0x310</ti>
+  <ti>0x313</ti>
+  <ti>0x316</ti>
+  <ti>0x319</ti>
+</tr>
+<tr>
+  <th>64k</th>
+  <ti>0x311</ti>
+  <ti>0x314</ti>
+  <ti>0x317</ti>
+  <ti>0x31A</ti>
+</tr>
+<tr>
+  <th>16M</th>
+  <ti>0x312</ti>
+  <ti>0x315</ti>
+  <ti>0x318</ti>
+  <ti>0x31B</ti>
+</tr>
+</table>
+
+<p>
+<c>video</c>参数用来控制framebuffer的显示参数。此参数的内容形式是首先指定framebuffer驱动（2.6内核使用<c>vesafb</c>，2.4使用<c>vesa</c>），后面跟着的是您想启用的控制语句。<path>/usr/src/linux/Documentation/fb/vesafb.txt</path>文件里列出了所有变量。最常用的选项是：
+</p>
+
+<table>
+<tr>
+  <th>控制选项</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>ywrap</ti>
+  <ti>
+    假设显卡支持显存回卷操作（也就是说显存里的数据填充到尽头的时候会接着从起始处继续）
+  </ti>
+</tr>
+<tr>
+  <ti>mtrr:n</ti>
+  <ti>
+    设置MTRR寄存器. <c>n</c> 可以是：<br/>
+    0 - 禁用<br/>
+    1 - 不使用cache<br/>
+    2 - write-back<br/>
+    3 - write-combining<br/>
+    4 - write-through 
+  </ti>
+</tr>
+<tr test="func:keyval('arch')='x86'">
+  <ti><c>模式</c></ti>
+  <ti>
+    (只针对<c>vesafb-tng</c>)<br/>
+    设定分辨率，颜色深度和刷新率。
+    例如，<c>1024x768-32@85</c>对应的分辨率是1024x768，32位色深和85Hz的刷新率。
+  </ti>
+</tr>
+</table>
+
+<p test="contains('AMD64 IA64',func:keyval('arch'))">
+最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>。将它们记下来；很快您将用到它们。
+</p>
+
+<p test="func:keyval('arch')='x86'">
+最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>或者<c>video=vesafb:mtrr:3,ywrap,1024x768-32@85</c>。将它们记下来；很快您将用到它们。
+</p>
+
+<p test="func:keyval('arch')='IA64'">
+现在，你应该安装<uri link="#elilo">elilo引导程序</uri>。
+</p>
+
+<p test="not(func:keyval('arch')='IA64')">
+接下来要继续安装<uri link="#grub">GRUB</uri><e>或</e><uri link="#lilo">LILO</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="grub" test="contains('AMD64 x86',func:keyval('arch'))">
+<title>默认：使用GRUB</title>
+<subsection>
+<title>了解GRUB的术语</title>
+<body>
+
+<p>
+理解GRUB最重要的在于熟悉它如何表述硬盘驱动器和分区。在GRUB中，您的Linux分区<path>/dev/hda1</path>（IDE硬盘）或者<path>/dev/sda1</path>（SATA/SCSI硬盘）分区将很可能都被称为<path>(hd0,0)</path>。请注意<path>hd0,0</path>两边的括号——它们是必须加上的。
+</p>
+
+<p>
+硬盘是从0而不是从“a”开始，分区从0而不是1开始。要明确的是，hd设备只指硬盘，而不包括atapi-ide设备，例如cdrom播放器和刻录机。同样的标识构造方式也适用于SCSI驱动器。（正常情况下，除非BIOS被配置为从SCSI驱动器引导，否则SCSI硬盘的标识数字会比IDE的高。）当您要求BIOS从一个不同的硬盘引导时（例如您的主IDE接口上的从盘），<e>那个</e>硬盘就会被视为<path>hd0</path>。
+</p>
+
+<p>
+假设您有一个硬盘是<path>/dev/hda</path>，一个cdrom播放器是<path>/dev/hdb</path>，一个刻录机是<path>/dev/hdc</path>，第二个硬盘是<path>/dev/hdd</path>，而且没有SCSI硬盘，那么<path>/dev/hdd7</path>将会被GRUB标识为<path>(hd1,6)</path>。听起来这很奇妙，而且它确实很奇妙，但正如我们即将见到的，即使您拥有许多的硬盘和分区，而且对GRUB的数字标识方案不甚了解，GRUB还是为您提供了一个tab补全机制，这将大大方便您的操作。
+</p>
+
+<p>
+我们已经有了一些感觉了，是时候安装GRUB了。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>安装GRUB</title>
+<body>
+
+<p>
+要安装GRUB，首先让我们emerge它：
+</p>
+
+<impo test="func:keyval('arch')='AMD64'">
+如果您使用的是一个non-multilib的<uri
+link="?part=1&amp;chap=6#doc_chap2">profile</uri>，您<b>不</b>应该emerge grub，
+应该emerge <c>grub-static</c>。
+</impo>
+
+<pre caption="安装GRUB">
+# <i>emerge grub</i>
+</pre>
+
+<p>
+尽管现在已经安装完GRUB，我们仍需要为其写一个配置文件，并将其安置到硬盘的主引导记录中，使它能自动引导您新创建的内核。您可以使用<c>nano</c>（或其他可用的编辑器）来创建配置文件<path>/boot/grub/grub.conf</path>：
+</p>
+
+<pre caption="创建/boot/grub/grub.conf">
+# <i>nano -w /boot/grub/grub.conf</i>
+</pre>
+
+<p>
+现在我们将详细地写一个<path>grub.conf</path>。您在下面的内容中可以找到两个可能的针对本指南中前面章节给出的分区方式例子的<path>grub.conf</path>。我们只详细地评述第一个<path>grub.conf</path>。确保您使用<e>您自己的</e>内核镜像文件名，以及如果有的话，<e>您自己的</e>的initrd镜像文件名。
+</p>
+
+<ul>
+  <li>
+    第一个<path>grub.conf</path>是为未使用<c>genkernel</c>来构建内核的用户准备的
+  </li>
+  <li>
+    第二个<path>grub.conf</path>则是为使用<c>genkernel</c>来构建内核的用户准备的
+  </li>
+</ul>
+
+<note>
+如果您使用JFS来作为root文件系统，您就<e>必须</e>在<c>kernel</c>那行添加上“ro”参数，因为JFS文件系统在其允许被加载为可读写状态前需要使用这个参数来重放它的日志。
+</note>
+
+<pre caption="不使用genkernel的用户的grub.conf">
+<comment># 默认选择哪个列表来引导。0表示第一个， 1表示第二个，以此类推。</comment>
+default 0
+<comment># 引导默认列表前等待多少秒</comment>
+timeout 30
+<comment># 使用漂亮、“臃肿”的spalsh图像来增加一点趣味:)
+# 如果您没有安装显卡，请将这行注释掉</comment>
+splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+
+title=Gentoo Linux <keyval id="kernel-version"/>
+<comment># 内核镜像（或者操作系统）所在分区</comment>
+root (hd0,0)
+kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3
+
+title=Gentoo Linux <keyval id="kernel-version"/> (rescue)
+<comment># 内核镜像（或者操作系统）所在分区</comment>
+root (hd0,0)
+kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3 init=/bin/bb
+
+<comment># 接下来的四行只有在您与Windows系统进行双启动的情况下才需要。</comment>
+<comment># 本例中，windows系统位于/dev/hda6。</comment>
+title=Windows XP
+rootnoverify (hd0,5)
+makeactive
+chainloader +1
+</pre>
+
+<pre caption="使用genkernel的用户的grub.conf">
+default 0
+timeout 30
+splashimage=(hd0,0)/boot/grub/splash.xpm.gz
+
+title=Gentoo Linux <keyval id="kernel-version"/>
+root (hd0,0)
+kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev
+initrd /boot/<keyval id="genkernel-initrd"/>
+
+<comment># 只有在双启动的情况下才需要以下内容</comment>
+title=Windows XP
+rootnoverify (hd0,5)
+makeactive
+chainloader +1
+</pre>
+
+<note>
+在kernel行末尾加上<c>udev</c>的目的是为了规避某些genkernel版本存在的一个bug。<e>如果</e>您本来使用的是udev（默认如此）的话，将可能出现此bug。
+</note>
+
+<p>
+如果您使用与此不同的分区方案和／或内核镜像，请相应地进行调整。无论怎样，请确保紧跟在GRUB设备（例如<path>(hd0,0)</path>）后面的是相对于挂载点的路径，而不是根目录。换句话说，<path>(hd0,0)/grub/splash.xpm.gz</path>的实际目标是<path>/boot/grub/splash.xpm.gz</path>，因为<path>(hd0,0)</path>就是<path>/boot</path>分区。
+</p>
+
+<p>
+另外，如果您选择使用不同的分区方案并且没有将<path>/boot</path>置于一个独立的分区，上述示例代码中<path>/boot</path>前缀实际上是<e>必需</e>的。如果您使用我们所建议的分区方案，则不一定非要使用<path>/boot</path>前缀，但即便加了它，由于/boot分区里有一个<path>boot</path>符号链接指向当前目录，也可以正常工作。简单的说，无论您是否定义了一个独立的<path>/boot</path>分区，上述例子应该都能正常工作。
+</p>
+
+<p>
+如果您需要传递任何其他的参数给内核，简单地在内核命令后面加上它们就可以了。我们已经传递了一个参数（<c>root=/dev/hda3</c>或<c>real_root=/dev/hda3</c>），但您也可以加上其他的，例如我们前面讨论过的为framebuffer加上<c>video</c>和／或<c>vga</c>参数等等。
+</p>
+
+<p>
+如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>hdx=stroke</c>的参数。
+</p>
+
+<p>
+<c>genkernel</c>用户需知道他们的内核使用与安装光盘相同的启动参数。例如，若您有SCSI设备时，您就需要添加<c>doscsi</c>这个内核启动参数。
+</p>
+
+<p>
+现在请保存<path>grub.conf</path>文件并退出。您仍需要将GRUB安装到MBR（主引导记录），以便重启时GRUB能自动执行。
+</p>
+
+<p>
+GRUB的开发者推荐使用<c>grub-install</c>。尽管如此，如果在某些情况下<c>grub-install</c>无法正常工作，您依然可以选择进行手动安装GRUB。
+</p>
+
+<p>
+从<uri link="#grub-install-auto">默认：使用grub-install安装GRUB</uri>或者<uri link="#grub-install-manual">备选：使用手动指令安装GRUB</uri>继续。
+</p>
+
+</body>
+</subsection>
+<subsection id="grub-install-auto">
+<title>默认：使用grub-install安装GRUB</title>
+<body>
+
+<p>
+为了安装GRUB，您将需要执行<c>grub-install</c>命令。尽管如此，当我们处于chroot的环境时，<c>grub-install</c>并不能正常的工作。我们还需要创建一个<path>/etc/mtab</path>，在里面列出所有已加载的文件系统。幸运的是，有一个简单的方法来完成这个任务——将<path>/proc/mounts</path>拷贝成<path>/etc/mtab</path>，如果您没有创建一个独立的boot分区，请排除<c>rootfs</c>行。下面的命令在两种情况下都可以正常工作：
+</p>
+
+<pre caption="创建/etc/mtab">
+# <i>grep -v rootfs /proc/mounts &gt; /etc/mtab</i>
+</pre>
+
+<p>
+现在我们就可以用<c>grub-install</c>来安装GRUB了：
+</p>
+
+<pre caption="执行grub-install">
+# <i>grub-install --no-floppy /dev/hda</i>
+</pre>
+
+<p>
+如果您还有更多与GRUB相关的问题，请查阅<uri link="http://www.gnu.org/software/grub/grub-faq.html">GRUB FAQ</uri>或者<uri link="http://www.gnu.org/software/grub/manual/">GRUB手册</uri>。
+</p>
+
+<p>
+从<uri link="#reboot">重启系统</uri>章节继续。
+</p>
+
+</body>
+</subsection>
+<subsection id="grub-install-manual">
+<title>备选：使用手动指令安装GRUB</title>
+<body>
+
+<p>
+您可以通过输入<c>grub</c>来开始配置GRUB。呈现在您面前的将是grub命令提示符<path>grub&gt;</path>。现在，您需要输入正确的命令来将GRUB引导记录安装到您的硬盘中。
+</p>
+
+<pre caption="启动GRUB shell">
+# <i>grub --no-floppy</i>
+</pre>
+
+<note>
+如果您的系统中没有任何的软盘驱动器，在上面的命令后面加上<c>--no-floppy</c>选项，防止grub检测（实际上不存在的）软驱。
+</note>
+
+<p>
+在此示例配置中，我们想让我们安装的GRUB可以从boot分区<path><keyval id="/boot"/></path>读取信息，同时我们将GRUB引导记录安装到硬盘的MBR（主引导记录）中，这样当打开电脑时您首先可以看到的就是GRUB引导的界面。当然，如果您安装时没有按照示例配置来做，请相应的更改一些命令。
+</p>
+
+<p>
+GRUB的tab自动补全机制可以在GRUB中使用。例如，如果您输入“<c>root (</c>”之后按下TAB键，一个设备列表就会呈现在您面前（例如<path>hd0</path>）。如果您输入“<c>root (hd0,</c>”之后按下TAB键，系统又将返回一个已有的分区列表，以便您选择（例如<path>hd0,0</path>）。
+</p>
+
+<p>
+利用tab补全，设置GRUB将不会那么困难。现在我们继续设置GRUB，如何？ :-)
+</p>
+
+<pre caption="将GRUB安装到硬盘主引导记录中">
+grub&gt; <i>root (hd0,0)</i>    <comment>（指定您的/boot目录所在分区）</comment>
+grub&gt; <i>setup (hd0)</i>     <comment>（将GRUB安装到硬盘主引导记录）</comment>
+grub&gt; <i>quit</i>            <comment>（退出GRUB shell）</comment>
+</pre>
+
+<note>
+如果您想将GRUB安装到某一个分区而不是硬盘主引导记录中，您需要调整<c>setup</c>命令，使其指向正确的分区。例如，如果您要将GRUB安装到<path>/dev/hda3</path>，对应的命令应该是<c>setup (hd0,2)</c>。但是只有少数用户需要这么做。
+</note>
+
+<p>
+如果您还有更多与GRUB相关的问题，请查阅<uri link="http://www.gnu.org/software/grub/grub-faq.html">GRUB FAQ</uri>或者<uri link="http://www.gnu.org/software/grub/manual/">GRUB手册</uri>。
+</p>
+
+<p>
+从<uri link="#reboot">重启系统</uri>章节继续。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="lilo" test="contains('AMD64 x86', func:keyval('arch'))">
+<title>备选：使用LILO</title>
+<subsection>
+<title>安装LILO</title>
+<body>
+
+<warn test="func:keyval('arch')='AMD64'">
+在AMD64架构上不推荐使用LILO。
+</warn>
+
+<p>
+LILO，是LInuxLoader的简称，它是一个可靠且确实能担当重任的Linux的bootloader。尽管如此，它缺少一些GRUB具有的特性（这正是目前GRUB之所以流行的原因）。LILO仍被人们使用的原因在于：在一些系统中，GRUB不能工作而LILO可以。当然，也有一些用户是因为熟悉它而仍坚持使用它。无论是什么原因，Gentoo对两个bootloader都提供了支持，看到这里显然您已经选择了使用LILO。
+</p>
+
+<p>
+安装LILO是件轻而易举的事；只需<c>emerge</c>就好了。
+</p>
+
+<pre caption="安装LILO">
+# <i>emerge lilo</i>
+</pre>
+
+</body>
+</subsection>
+<subsection>
+<title>配置LILO</title>
+<body>
+
+<p>
+要配置LILO，您必须创建<path>/etc/lilo.conf</path>文件。打开一个您喜欢的编辑器（为保持一致性，在本手册中我们使用<c>nano</c>）然后创建它。
+</p>
+
+<pre caption="创建/etc/lilo.conf">
+# <i>nano -w /etc/lilo.conf</i>
+</pre>
+
+<p>
+前面章节中我们已经提醒您记下您所创建的内核镜像文件名。在接下来的示例<path>lilo.conf</path>中，我们使用的是示例的分区方案。这里有两个独立的部分：
+</p>
+
+<ul>
+  <li>
+    一个是为那些不使用<c>genkernel</c>建立内核的用户准备的
+  </li>
+  <li>
+    另一个是为那些使用<c>genkernel</c>建立内核的用户准备的
+  </li>
+</ul>
+
+<p>
+请确保您使用的是<e>您自己的</e>内核镜像的文件名，以及（如果用到的话）<e>您自己的</e>initrd镜像的文件名。
+</p>
+
+<note>
+如果您使用JFS来作为root文件系统，您就<e>必须</e>在每个引导项目的后面添加上形如<c>append="ro"</c>的一行内容，因为JFS文件系统在其允许被加载为可读写状态前需要使用这个参数来重放它的日志。
+</note>
+
+<pre caption="示例/etc/lilo.conf">
+boot=/dev/hda             <comment># 将LILO安装到硬盘主引导扇区</comment>
+prompt                    <comment># 给用户选择其他引导项目的机会</comment>
+timeout=50                <comment># 引导默认引导项目前等待5秒钟</comment>
+default=gentoo            <comment># 当等待结束后引导“gentoo”项目</comment>
+
+<comment># 给不使用genkernel的用户的</comment>
+image=/boot/<keyval id="kernel-name"/>
+  label=gentoo            <comment># 我们为此引导项目起的名字</comment>
+  read-only               <comment># 以只读root状态开始。此处不要改变！</comment>
+  root=/dev/hda3          <comment># 定位root文件系统</comment>
+
+image=/boot/<keyval id="kernel-name"/>
+  label=gentoo.rescue     <comment># 我们为此引导项目起的名字</comment>
+  read-only               <comment># 以只读root状态开始。此处不要改变！</comment>
+  root=/dev/hda3          <comment># 定位root文件系统</comment>
+  append="init=/bin/bb"   <comment># 启动Gentoo的静态急救shell</comment>
+
+<comment># 给使用genkernel的用户的</comment>
+image=/boot/<keyval id="genkernel-name"/>
+  label=gentoo
+  read-only
+  root=/dev/ram0
+  append="init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev"
+  initrd=/boot/<keyval id="genkernel-initrd"/>
+
+<comment># 下边的两行只有在您与Windows系统进行双启动的情况下才需要</comment>
+<comment># 在本例中，Windows位于/dev/hda6</comment>
+other=/dev/hda6
+  label=windows
+</pre>
+
+<note>
+在append行末尾加上<c>udev</c>的目的是为了规避某些genkernel版本存在的一个bug。<e>如果</e>您本来使用的是udev（默认如此）的话，将可能出现此bug。
+</note>
+
+<note>
+如果您使用了与此不同的分区方案和/或者内核镜像，请进行相应的调整。
+</note>
+
+<p>
+如果您需要为内核传递任何额外的参数，可以在相应的启动项目里添加一个<c>append</c>语句。例如，我们加上<c>video</c>参数来启用framebuffer：
+</p>
+
+<pre caption="使用append来添加内核参数">
+image=/boot/<keyval id="kernel-name"/>
+  label=gentoo
+  read-only
+  root=/dev/hda3
+  <i>append="video=vesafb:mtrr,ywrap,1024x768-32@85"</i>
+</pre>
+
+<p>
+如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>hdx=stroke</c>的参数。
+</p>
+
+<p>
+<c>genkernel</c>用户需知道他们的内核使用与安装光盘相同的启动参数。例如，若您有SCSI设备时，您需添加<c>doscsi</c>这个内核启动参数。
+</p>
+
+<p>
+现在让我们保存文件并退出。要最终完成，您还得运行<c>/sbin/lilo</c>，这样LILO才能将<path>/etc/lilo.conf</path>应用到您的系统（也就是将其自身安装到硬盘中）。请记住每当你安装了一个新内核或改变了菜单的任何内容时，您也需要再运行一次<c>/sbin/lilo</c>。
+</p>
+
+<pre caption="完成LILO的安装">
+# <i>/sbin/lilo</i>
+</pre>
+
+<p>
+如果您还有更多与LILO有关的问题，请参阅它的<uri link="http://en.wikipedia.org/wiki/LILO_(boot_loader)">wikipedia页面</uri>。
+</p>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="elilo" test="func:keyval('arch')='IA64'">
+<title>默认：安装elilo</title>
+<body>
+
+<p>
+在IA64平台上，引导程序叫elilo。首先你需要在你的机器上安装它。
+</p>
+
+<pre caption="安装elilo">
+# <i>emerge elilo</i>
+</pre>
+
+<p>
+elilo的配置文件是<path>/etc/elilo.conf</path>。示例配置文件在典型的文档目录下<path>/usr/share/doc/elilo-&lt;ver&gt;/</path>。这里是另外一个配置文件示例：
+</p>
+
+<pre caption="/etc/elilo.conf示例">
+boot=/dev/sda1
+delay=30
+timeout=50
+default=Gentoo
+append="console=ttyS0,9600"
+prompt
+
+image=/vmlinuz
+ label=Gentoo
+ root=/dev/sda2
+ read-only
+
+image=/vmlinuz.old
+ label=Gentoo.old
+ root=/dev/sda2
+ read-only
+</pre>
+
+<p>
+以<c>boot</c>开始的这一行告诉elilo启动分区的位置（在这个例子里是<path>/dev/sda1</path>）。<c>delay</c>设定了在非交互模式下自动启动默认启动项前等待的时间，单位是10<sup>分之一</sup>秒。<c>timeout</c>和delay作用类似，但是是在交互模式下。<c>default</c>设定了默认的内核项（内核项是在下面定义的）。<c>append</c>添加了额外的内核命令行参数。<c>prompt</c>把elilo的默认行为设定为交互模式。
+</p>
+
+<p>
+由<c>image</c>开始的区段定义了不同的可启动镜像。每个镜像都有一个好看的<c>label</c>，一个<c>根（root）</c>文件系统，并且将只以<c>只读（read-only）</c>方式挂载根文件系统。
+</p>
+
+<p>
+当配置完成后，只需运行<c>elilo --efiboot</c>。<c>--efiboot</c>参数会在EFI启动管理器里添加一个Gentoo Linux的菜单项。
+</p>
+
+<pre caption="应用elilo的配置">
+# <i>elilo --efiboot</i>
+</pre>
+
+<p>
+现在请继续阅读<uri link="#reboot">重启系统</uri>.
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
+</p>
+
+<pre caption="卸载所有分区和重启" test="func:keyval('arch')='IA64'">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/sys /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+  	 
+<pre caption="卸载所有分区和重启" test="not(func:keyval('arch')='IA64')">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然您别忘了取出可引导的光盘盘，否则重启后引导的将是这张光盘而不是您的新Gentoo系统。
+</p>
+
+<p test="func:keyval('arch')='IA64'">
+当你重启的时候，你应该可以在EFI启动管理器里看到一个新的Gentoo Linux菜单选项，这个选项
+就可以启动Gentoo。
+</p>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请阅读<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

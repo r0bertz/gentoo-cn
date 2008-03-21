@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+See http://creativecommons.org/licenses/by-sa/2.5 
+$Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-hppa-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.16 -->
+<sections>
+
+<version>8.0</version>
+<date>2007-05-30</date>
+
+<section>
+<title>安装PALO</title>
+<body>
+
+<p>
+PA-RISC平台上的引导程序叫palo。首先你要在你的机器上安装它。
+</p>
+
+<pre caption="安装PALO">
+# <i>emerge palo</i>
+</pre>
+
+<p>
+它的配置文件路径是<path>/etc/palo.conf</path>。这里有一个例子：
+</p>
+
+<pre caption = "/etc/palo.conf示例">
+--commandline=2/<keyval id="kernel-name"/> root=/dev/sda4
+--recoverykernel=/vmlinux.old
+--init-partitioned=/dev/sda
+</pre>
+
+<p>
+第一行告诉palo内核的位置和它所使用的启动参数。<c>2/<keyval id="kernel-name"/></c>的意思是文件名为<c>/<keyval id="kernel-name"/></c>的内核位于第二个分区。要注意的是，内核文件的路径是相对于分区，而不是相对于你的根目录的。
+</p>
+
+<p>
+第二行指明了使用哪个修复内核。如果这是你第一次安装并且你没有修复内核，请注释掉这行。第三行指明了palo位于哪个磁盘。
+</p>
+
+<p>
+当配置完成后，请运行<c>palo</c>。
+</p>
+
+<pre caption = "应用PALO的配置">
+# <i>palo</i>
+</pre>
+
+<p>
+从<uri link="#reboot">重启系统</uri>章节继续。
+</p>
+
+</body>
+</section>
+<section id="reboot">
+<title>重启系统</title>
+<subsection>
+<body>
+
+<p>
+退出chroot的环境，卸载所有已挂载的分区。然后输入您已经等待多时的那个魔术般的命令：<c>reboot</c>。
+</p>
+
+<pre caption="退出chroot，卸载所有分区并重启">
+# <i>exit</i>
+cdimage ~# <i>cd</i>
+cdimage ~# <i>umount /mnt/gentoo/boot /mnt/gentoo/dev /mnt/gentoo/proc /mnt/gentoo</i>
+cdimage ~# <i>reboot</i>
+</pre>
+
+<p>
+当然您别忘了取出可引导的光盘盘，否则重启后引导的将是这张光盘而不是您的新Gentoo系统。
+</p>
+
+<p>
+当重启进入到您新装的Gentoo系统之后，请以<uri link="?part=1&amp;chap=11">结束Gentoo的安装</uri>来完成剩下的工作。
+</p>
+
+</body>
+</subsection>
+</section>
+</sections>

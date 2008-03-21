@@ -1,0 +1,379 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header$ -->
+<!-- English CVS version: 1.57 -->
+<sections>
+
+<version>8.5</version>
+<date>2008-01-12</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设您要用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+</p>
+
+<p>
+我们建议你在PPC上使用<c>gentoo-sources</c>，它是最新的2.6版本的内核。
+</p>
+
+<pre caption="安装内核源码">
+# <i>emerge gentoo-sources</i>
+</pre>
+
+<p>
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>gentoo-sources-<keyval id="kernel-version"/></c>。你的版本号可能会不同，所以请记住这点。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx    1 root     root           22  Mar 18 16:23 /usr/src/linux -&gt; linux-<keyval id="kernel-gentoo"/>
+</pre>
+
+<p>
+现在，我们开始配置和编译您的内核。您可以用<c>genkernel</c>来做这件事。这将会建立一个和安装光盘所用的内核类似的通用内核。不过我们将首先说明如何“手动”配置一个内核，因为这是优化您系统环境的最佳方法。
+</p>
+
+<p>
+如果您希望手动配置您的内核，点击<uri link="#manual">默认：手动配置</uri>。如果您希望使用<c>genkernel</c>，您可以阅读<uri link="#genkernel">备选：使用genkernel</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="manual">
+<title>默认：手动配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了:)
+</p>
+
+<p>
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。另外一个查找哪些组件功能需要激活的好地方是检查成功启动好的内核消息日志。键入<c>dmesg</c>用来查看内核消息。
+</p>
+
+<p>
+现在进入你的内核源代码目录，是时候来配置你的内核了。在大多数的PowerPC机器上首先运行<c>make pmac32_defconfig</c>为你的配置增加默认设置。在默认设置生成后，运行<c>make menuconfig</c>会出现一个基于ncurses的配置菜单。
+</p>
+
+<pre caption="调用menuconfig">
+# <i>cd /usr/src/linux</i>
+# <i>make pmac32_defconfig</i>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者没有调整下根本不能运行）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>启用必须的选项</title>
+<body>
+
+<p>
+首先，开启development and experimental code/drivers。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
+</p>
+
+<pre caption="选择experimental code/drivers">
+General setup ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+现在转到<c>File Systems</c>，选中你使用的文件系统的支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
+</p>
+
+<pre caption="选中必需的文件系统">
+File systems ---&gt;
+  Pseudo Filesystems ---&gt;
+<comment>（/proc可能被强制选上了，如果这样你会看到---）</comment>
+    [*] /proc file system support
+    [*] Virtual memory file system support (former shm fs)
+  Partition Types ---&gt;
+    [*] Advanced partition support
+    [*]   Amiga partition table support
+    [*]   Macintosh partition map support
+
+<comment>（选中下面你的系统所需的一个或多个选项）</comment>
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; Ext3 journalling file system support
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; XFS filesystem support
+</pre>
+
+<p>
+NewWorld或OldWorld机器的用户也需要加入对于HFS的支持。OldWorld用户需要这个为了将编译好的内核复制到MacOS分区。NewWorld用户需要这个配置特殊的Apple_Bootstrap分区：
+</p>
+
+<pre caption="启用HFS支持">
+File Systems ---&gt;
+  Miscellaneous filesystems ---&gt;
+    &lt;M&gt; Apple Macintosh file system support
+    &lt;M&gt; Apple Extended HFS file system support
+</pre>
+
+<p>
+如果您在使用PPPoE接入Internet或者您在使用拨号的调制解调器，您需要下面的选项：
+</p>
+
+<pre caption="选中PPPoE需要的驱动">
+Device Drivers ---&gt;
+  Network device support ---&gt;
+    &lt;*&gt; PPP (point-to-point protocol) support
+    &lt;*&gt;   PPP support for async serial ports
+    &lt;*&gt;   PPP support for sync tty ports
+</pre>
+
+<p>
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成是使用核心PPPoE时才会用到它。
+</p>
+
+<p>
+不要忘了在内核中包含网卡的支持！大多数新的Apple电脑使用SunGEM以太网驱动。老的iMac通常使用BMAC驱动。
+</p>
+
+<pre caption="选中网络驱动">
+Device Drivers ---&gt;
+  Network device support ---&gt;
+    Ethernet (10 or 100Mbit) ---&gt;
+      [*] Ethernet (10 or 100Mbit)
+      &lt;*&gt;   Generic Media Independent Interface device support
+      &lt;*&gt;   MACE (Power Mac ethernet) support
+      &lt;*&gt;   BMAC (G3 ethernet) support
+      &lt;*&gt;   Sun GEM support
+</pre>
+
+<p>
+目前，完全的kernel preemption在PPC上仍然不稳定以及可能导致编译错误和随机段错误。我们<e>强烈</e>建议你不要使用这个特性。<e>Voluntary Preemption</e>和<e>No Forced Preemption</e>都是安全的。
+</p>
+
+<pre caption="确保Preemptible Kernel选项是关闭的">
+Kernel options ---&gt;
+<comment>（选择一个）</comment>
+  Preemption Model 
+    (X) No Forced Preemption (Server)
+    (X) Voluntary Kernel Preemption (Desktop)
+</pre>
+
+<p>
+如果你想从Firewire启动，你需要选中这些选项。如果你不想把它们编译进内核，你需要在initrd中包含这些模块和它们的依赖关系。
+</p>
+
+<pre caption="支持从firewire设备启动">
+Device Drivers ---&gt;
+  IEEE 1394 (FireWire) support ---&gt;
+    &lt;*&gt; IEEE 1394 (FireWire) support
+    &lt;*&gt;   OHCI-1394 support
+    &lt;*&gt;   SBP-2 support (Harddisks etc.)
+</pre>
+
+<p>
+如果你想要从USB启动，你需要选中这些选项。如果你不想把它们编译进内核，你需要在iniitrd中包含这些模块和它们的依赖关系。
+</p>
+
+<pre caption="支持从USB设备启动">
+Device Drivers ---&gt;
+  USB support ---&gt;
+    &lt;*&gt; Support for Host-side USB
+    &lt;*&gt;   OHCI HCD support
+    &lt;*&gt;   USB Mass Storage support
+</pre>
+
+<p>
+不要关闭内核framebuffer支持，因为有了它才能成功启动。如果你正在使用基于NVIDIA 的芯片组，你应当使用Open Firmware framebuffer。如果你使用的是基于ATI的芯片组，你应当使用基于你的芯片组（Mach64，Rage128或Radeon）的framebuffer驱动。
+</p>
+
+<pre caption="选择一个Framebuffer驱动">
+Device Drivers ---&gt;
+  Graphics support ---&gt;
+    &lt;*&gt; Support for frame buffer devices
+    [*] Open Firmware frame buffer device support
+    &lt;*&gt; ATI Radeon display support
+    &lt;*&gt; ATI Rage128 display support
+    &lt;*&gt; ATI Mach64 display support
+    Console display driver support ---&gt;
+      &lt;*&gt; Framebuffer Console support
+</pre>
+
+<note>
+如果你选中了超过一个framebuffer设备，它可能会默认使用一个非最理想的驱动。所以，要么只使用一个framebuffer设备，要么通过在启动时附加一个视频行告诉内核要使用的驱动来指定使用哪个设备，如<c>video=radeonfb</c>。
+</note>
+
+<p>
+当你配置好你的内核后，请继续阅读<uri link="#compiling">编译和安装</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译和安装</title>
+<body>
+
+<p>
+现在你的内核已配置好，是时候来编译和安装它了。退出配置菜单，然后运行以下命令：
+</p>
+
+<pre caption="编译内核">
+# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<p>
+当你的内核编译完成之后，复制内核镜像至如下<path>/boot</path>目录。如果你有一个独立的启动分区，比如在Pegasos机器上，要确保其已被正常挂载。如果你用BootX来启动，我们等一下再复制内核。
+</p>
+
+<p>
+Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的引导程序不同。未压缩的内核被称为vmlinux，在内核完成编译后它将被置于<path>/usr/src/linux</path>中。如果你使用了一台Pegasos机器，Pegasos的firmware需要一个压缩好的名为zImage的内核，它可以在<path>/usr/src/linux/arch/powerpc/boot/images</path>目录中找到。
+</p>
+
+<pre caption="安装内核">
+# <i>cd /usr/src/linux</i>
+<comment>注意，你的内核版本可能不同</comment>
+<comment>(Apple/IBM)</comment>
+# <i>cp vmlinux /boot/<keyval id="kernel-name"/></i>
+<comment>(Pegasos)</comment>
+# <i>cp arch/powerpc/boot/images/zImage /boot/&lt;kernel-version&gt;</i> 
+</pre>
+
+<p>
+现在请继续阅读<uri link="#kernel_modules">安装独立的内核模块</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="kernel_modules">
+<title>安装独立内核模块</title>
+<subsection>
+<title>配置模块</title>
+<body>
+
+<p>
+你应该将你想在启动时加载的模块列在<path>/etc/modules.autoload.d/kernel-2.6</path>中。如果你需要你也能为你的模块加上额外的选项。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+比如，要自动加载<c>3c59x</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名，一行一个模块。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+3c59x
+</pre>
+
+<p>
+请阅读<uri link="?part=1&amp;chap=8">配置你的系统</uri>来继续安装。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="genkernel">
+<title>备选：使用genkernel</title>
+<body>
+
+<p>
+现在您的内核源码树已经安装了，是时候用<c>genkernel</c>脚本自动编译您的内核了。<c>genkernel</c>是使用类似安装光盘中的内核配置来配置内核的。这表明当您用<c>genkernel</c>建立内核时，您的系统在启动时候将会如同安装光盘那样识别您所有的硬件。因为genkernel不需要手动配置内核，所以它对于那些不想自己编译特定内核的用户来说是一个理想的解决方案。
+</p>
+
+<p>
+现在，让我们看看如何使用genkernel。首先，emerge genkernel ebuild：
+</p>
+
+<pre caption="Emerging genkernel">
+# <i>emerge genkernel</i>
+</pre>
+
+<p>
+接下来，复制安装光盘使用的内核配置到genkernel用于寻找默认内核配置的地方：
+</p>
+
+<pre caption="复制安装光盘的内核配置">
+# <i>zcat /proc/config.gz > /usr/share/genkernel/ppc/kernel-config-2.6</i>
+</pre>
+
+<p>
+如果你使用firewire或USB设备启动，你需要增加一些模块到initrd中。编辑<path>/usr/share/genkernel/ppc/modules_load</path>然后修改<c>MODULES_FIREWIRE="ieee1394 ohci1394 sbp2"</c>用以支持firewire或者是<c>MODULES_USB="usbcore ohci-hcd ehci-hcd usb-storage"</c>用以支持USB。
+</p>
+
+<p>
+在编译你的源代码前，fstab需要轻微地调整下。fstab剩余部分会在接下来的步骤中完成，所以现在不用担心细节方面。如果你之前没有创建过一个单独的启动分区（不是bootstrap，它们是不同的），从<path>/etc/fstab</path>中移除掉引用<path>/boot</path>的那一行。在大多数Apple的机器上都需要这样做。
+</p>
+
+<pre caption="在没有启动分区的机器上将/boot从/etc/fstab中删掉">
+# <i>nano -w /etc/fstab</i>
+<comment>删除这一行</comment>
+/dev/BOOT		/boot		ext2		noauto,noatime	1 2
+</pre>
+
+<p>
+现在通过运行<c>genkernel --genzimage all</c>来编译你的内核源代码。对于Pegasos机器，我们需要使用一个不同的配置文件以及创建一个zImage，而不是Apple机器使用的vmlinux内核。注意，因为<c>genkernel</c>编译的内核支持大多数的硬件，所以编译需要相当一会儿的时间才能完成！
+</p>
+
+<p>
+请注意，如果你放置内核的分区不是使用ext2或ext3文件系统，你可能需要使用<c>genkernel --menuconfig all</c>来手动配置你的内核，然后<e>在</e>内核中（也就是说：<e>不是</e>作为一个模块）添加你的文件系统支持。EVMS2或LVM2的用户可能也需要添加<c>--evms2</c>或<c>--lvm2</c>参数。
+</p>
+
+<pre caption="运行genkernel">
+# <i>genkernel all</i>
+</pre>
+
+<pre caption="在Pegasos上运行genkernel">
+# <i>genkernel --genzimage --kernel-config=/usr/share/genkernel/ppc/Pegasos all</i>
+</pre>
+
+<p>
+一旦<c>genkernel</c>完成，一个内核、全套模块和<e>初始root磁盘</e>（initrd）都会被创建好。在后面文档中配置引导程序的时候，我们会使用到这个内核和initrd。写下你将来要用的内核和initrd文件的名字，在配置引导程序时你需要它们。在启动至自动检测硬件之后（就像安装CD上那样）你“真正”的系统启动前，initrd将会立即启动。同时确保复制下需要的启动参数，因为一个使用genkernel编译的内核的成功启动也需要这些。
+</p>
+
+<pre caption="检查创建好的内核镜像名和initrd">
+<comment>注意，你的内核版本可能不同</comment>
+# <i>ls /boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> /boot/initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/></i>
+</pre>
+
+<p>
+现在请继续阅读<uri link="?part=1&amp;chap=8">配置你的系统</uri>。
+</p>
+
+</body>
+</section>
+</sections>
+

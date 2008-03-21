@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-finalise.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
+<!-- English CVS version: 1.49 -->
+
+<sections>
+
+<abstract>
+您几乎已经完成了。接下来我们只需要为您的系统创建一个（或更多）用户就可以了。
+</abstract>
+
+<version>8.0</version>
+<date>2007-05-07</date>
+
+<section>
+<title>用户管理</title>
+<subsection>
+<title>为日常使用添加一个用户</title>
+<body>
+
+<p>
+在Unix/Linux系统中，用root进行工作是一件<e>危险</e>的事情，应该尽量避免。因此我们<e>强烈</e>推荐您为日常使用添加一个普通用户。
+</p>
+
+<p>
+用户所属的组定义了其可以执行的活动。下表中列出了许多您可能希望使用的重要组：
+</p>
+
+<table>
+<tr>
+  <th>组</th>
+  <th>描述</th>
+</tr>
+<tr>
+  <ti>audio</ti>
+  <ti>允许使用声音设备</ti>
+</tr>
+<tr>
+  <ti>cdrom</ti>
+  <ti>允许直接使用光驱</ti>
+</tr>
+<tr>
+  <ti>floppy</ti>
+  <ti>允许直接使用软驱</ti>
+</tr>
+<tr>
+  <ti>games</ti>
+  <ti>允许运行游戏</ti>
+</tr>
+<tr>
+  <ti>portage</ti>
+  <ti>允许以普通用户的身份执行<c>emerge --pretend</c></ti>
+</tr>
+<tr>
+  <ti>usb</ti>
+  <ti>允许使用USB设备</ti>
+</tr>
+<tr>
+  <ti>plugdev</ti>
+  <ti>
+    允许挂载和使用可拔插设备，例如摄像头和U盘
+  </ti>
+</tr>
+<tr>
+  <ti>video</ti>
+  <ti>
+    允许使用视频采集设备和硬件加速
+  </ti>
+</tr>
+<tr>
+  <ti>wheel</ti>
+  <ti>允许使用<c>su</c></ti>
+</tr>
+</table>
+
+<p>
+例如，要创建一个名为<c>john</c>的用户，并使其隶属于<c>wheel</c>组，<c>users</c>组和<c>audio</c>组，请先用root用户登录（只有root有权限创建用户），然后执行<c>useradd</c>命令：
+</p>
+
+<pre caption="添加一个日常使用的用户">
+Login: <i>root</i>
+Password: <comment>(您的root密码)</comment>
+
+# <i>useradd -m -G users,wheel,audio -s /bin/bash john</i>
+# <i>passwd john</i>
+Password: <comment>（输入john用户使用的密码）</comment>
+Re-enter password: <comment>（再次输入以便进行校验）</comment>
+</pre>
+
+<p>
+有时，普通用户可能需要以root身份执行一些任务，这时您可以使用<c>su -</c>来临时取得root权限。另外一种方法就是使用<c>sudo</c>包，如果配置正确，使用它将会非常安全。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>磁盘清理</title>
+<subsection>
+<title>移除tarball</title>
+<body>
+
+<p>
+现在您的gentoo已经结束了安装并完成了重启，如果一切顺利，您就可以将下载下来的stage3 tarball和Portage快照文件从硬盘里清除掉了。请记住它们是被下载到您的<path>/</path>目录中的。
+</p>
+
+<pre caption="移除stage3 tarball">
+# <i>rm /stage3-*.tar.bz2*</i>
+</pre>
+
+<pre caption="移除Portage快照文件">
+# <i>rm /portage-latest.tar.bz2*</i>
+</pre>
+
+</body>
+</subsection>
+</section>
+</sections>

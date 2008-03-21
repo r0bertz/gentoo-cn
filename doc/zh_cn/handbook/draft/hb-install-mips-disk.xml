@@ -1,0 +1,584 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.24 -->
+<sections>
+
+<version>2.1</version>
+<date>2007-06-26</date>
+
+<section>
+<title>块设备介绍</title>
+<subsection>
+<title>块设备</title>
+<body>
+
+<p>
+我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
+</p>
+
+<p>
+一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个SCSI硬盘的<path>/dev/sda</path>。
+</p>
+
+<p>
+上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>分区</title>
+<body>
+
+<p>
+尽管在理论上可以使用一整块磁盘来安装你的Linux系统，但是在实际中几乎从不这样做。相反，整个磁盘块设备被分割成更小、更容易管理的块设备。它们被称为<e>分区</e>。 
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>设计分区方案</title>
+<subsection>
+<title>多少和多大？</title>
+<body>
+
+<p>
+分区的数目主要根据你的系统环境来决定。例如，如果你有很多用户，你可能更希望把你的<path>/home</path>目录独立出来，因为这样做可以增加安全性，备份起来也更容易。如果你安装Gentoo用来做邮件服务器，你的<path>/var</path>目录应该独立出来，因为邮件都存储在<path>/var</path>目录中。选择一个好的文件系统将最大限度地提高你的系统性能。游戏服务器应该把<path>/opt</path>目录独立出来，因为大多数游戏服务端软件都安装在那。理由也与<path>/home</path>目录类似：安全与备份。你一定要使<path>/usr</path>目录保持足够大：因为它将不仅包含大部分应用程序，而且Portage树本身就需要大约500M空间，这还不包括存储在其中的各种源代码包。
+</p>
+
+<p>
+正如你所看到的，这完全取决于你想要达到什么目的。独立的分区或卷有以下优点：
+</p>
+
+<ul>
+<li>
+  你可以为每一个分区或卷选择最佳性能的文件系统
+</li>
+<li>
+  如果一个有问题的工具不停地向一个分区或卷写文件，也不会把你整个系统的可用空间 都用完
+</li>
+<li>
+  如果需要，可以减少文件系统检测的时间，因为多个检测可以并行的进行（尽管这个优势在多磁盘系统上比多分区系统上更为明显）
+</li>
+<li>
+  通过对一些分区的进行只读、nosuid（忽略setuid位）、noexec（忽略可执行位）等方式 挂载，安全性会大大增强
+</li>
+</ul>
+
+<p>
+然而，多分区系统有一大缺点：如果配置的不合理，可能导致系统中一个分区有很大的空闲空间，而另一个没有空闲空间了。SCSI和SATA还有15个分区的限制。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>使用MIPS上的fdisk来为你的磁盘分区</title>
+<subsection>
+<title>SGI机器：创建一个SGI盘标</title>
+<body>
+
+<p>
+SGI系统里的所有磁盘都需要一个<e>SGI盘标</e>，它和Sun和MS-DOS盘标的功能类似——保存有关磁盘分区的信息。创建一个新的SGI盘标将会在磁盘上创建两个特殊的分区：
+</p>
+
+<ul>
+  <li>
+    <e>SGI卷头</e>（第9分区）：这个分区很重要。这是引导程序保存的地方，某些情况下还保存内核镜像。
+  </li>
+  <li>
+    <e>SGI卷</e>（第11分区）：这个分区的目的类似于Sun盘标的第三个分区“Whole disk”。这个分区跨越整个磁盘，不要碰它。除了以某种未知方式帮助PROM（或者IRIX会以某些方式用到它）之外，它没有其他什么特殊用途。
+  </li>
+</ul>
+
+<warn>
+SGI卷头<e>必须</e>从柱面0开始。否则，你将不能从这个磁盘启动。
+</warn>
+
+<p>
+下面是从<c>fdisk</c>里截取出来的片段。请阅读它并修改它以适应你的需要……
+</p>
+
+<pre caption="创建SGI盘标">
+# <i>fdisk /dev/sda</i>
+
+Command (m for help): <i>x</i>
+
+Expert command (m for help): <i>m</i>
+Command action
+   b   move beginning of data in a partition
+   c   change number of cylinders
+   d   print the raw data in the partition table
+   e   list extended partitions
+   f   fix partition order
+   g   create an IRIX (SGI) partition table
+   h   change number of heads
+   m   print this menu
+   p   print the partition table
+   q   quit without saving changes
+   r   return to main menu
+   s   change number of sectors/track
+   v   verify the partition table
+   w   write table to disk and exit
+
+Expert command (m for help): <i>g</i>
+Building a new SGI disklabel. Changes will remain in memory only,
+until you decide to write them. After that, of course, the previous
+content will be irrecoverably lost.
+
+Expert command (m for help): <i>r</i>
+
+Command (m for help): <i>p</i>
+
+Disk /dev/sda (SGI disk label): 64 heads, 32 sectors, 17482 cylinders
+Units = cylinders of 2048 * 512 bytes
+
+----- partitions -----
+Pt#     Device  Info     Start       End   Sectors  Id  System
+ 9:  /dev/sda1               0         4     10240   0  SGI volhdr
+11:  /dev/sda2               0     17481  35803136   6  SGI volume
+----- Bootinfo -----
+Bootfile: /unix
+----- Directory Entries -----
+
+Command (m for help):
+</pre>
+
+<note>
+如果你的磁盘已经有了一个SGI盘标，那么fdisk不将允许再创建一个新的盘标。有两个方法可以解决这个问题。一个是创建一个Sun或者MS-DOS盘标，把改动写入磁盘，然后重启fdisk。第二个是用空数据覆盖分区表，用这个命令：<c>dd if=/dev/zero of=/dev/sda bs=512 count=1</c>。
+</note>
+</body>
+</subsection>
+
+<subsection>
+<title>把SGI卷头调整到正好的大小</title>
+<body>
+
+<impo>
+这一步通常是需要的，因为<c>fdisk</c>里的一个bug。由于某些原因，卷头不能被正确的创建，结果是它开始和结束都是在柱面0。这将导致不能创建多个分区。为了解决这个问题……请接着读。
+</impo>
+
+<p>
+既然SGI盘标已经建立了，下面就可以定义分区了。上面的例子为你定义了两个分区。这两个是特殊分区，一般不要改动它。不过，为了安装Gentoo，我们将需要加载引导程序，可能还有多个内核镜像（取决于系统类型）直接到卷头里。卷头本身可以保存最多<e>八个</e>任意大小的镜像，每个镜像的名字八个字符。
+</p>
+
+<p>
+把卷头变大的过程不是很简单；需要一点小技巧。因为fdisk的奇怪行为，我们不能简单的删除并重新添加卷头。在下面提供的例子里，我们将创建一个50MB的卷头，以及一个50MB的/boot分区。你的磁盘的实际布局可能与此不同，下面这个只是一个示例。
+</p>
+
+<pre caption="正确的改变SGI卷头的大小">
+Command (m for help): <i>n</i>
+Partition number (1-16): <i>1</i>
+First cylinder (5-8682, default 5): <i>51</i>
+ Last cylinder (51-8682, default 8682): <i>101</i>
+
+<comment>（注意到fdisk是怎样允许第一个分区最小只能从柱面5开始创建？你是否也这样尝试删除和重新）
+（创建SGI卷头？你应该遇到过一模一样的情况。在我们的例子里，我们希望/boot分区为50MB，）
+（所以我们让它从柱面51开始（卷头需要从柱面0开始，记得么？），并让它在柱面101结束，这样）
+（大小约为50MB（误差在1-5MB上下）。）</comment>
+
+Command (m for help): <i>d</i>
+Partition number (1-16): <i>9</i>
+
+<comment>（删除第9分区（SGI卷头））</comment>
+
+Command (m for help): <i>n</i>
+Partition number (1-16): <i>9</i>
+First cylinder (0-50, default 0): <i>0</i>
+ Last cylinder (0-50, default 50): <i>50</i>
+
+<comment>（重新创建第9分区，正好在第1分区前结束）</comment>
+</pre>
+
+<p>
+如果你不确定怎样使用<c>fdisk</c>，看一看下面Cobalts的分区指令。概念是完全一样的——只是要记得不要动卷头和whole disk分区。
+</p>
+
+<p>
+这些完成后，你就可以任意创建其他的分区了。当所有的分区划分完毕后，记得把交换分区的ID改为<c>82</c>，也就是Linux Swap。如果不改，ID将为<c>83</c>，Linux Native。
+</p>
+
+<p>
+现在分区已经创建完毕，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+
+<subsection>
+<title>Cobalt机器：为你的磁盘分区</title>
+<body>
+
+<p>
+在Cobalt机器上，BOOTROM期望看到一个MS-DOS主引导扇区，所以分区是相对简单的——实际上，这和在Inter x86机器上分区是一样的。<e>不过</e>你要记得一些事情。
+</p>
+
+<ul>
+  <li>
+    Cobalt固件要求<path>/dev/hda1</path>是一个格式化为<e>EXT2 Revision 0</e>的Linux分区。<e>不可以是EXT2 Revision 1!</e>（Cobalt BOOTROM只能理解EXT2r0）
+  </li>
+  <li>
+    前面说到的分区的根目录里必须有一个gzip压缩的ELF镜像，<path>vmlinux.gz</path>，它将会作为内核被加载
+  </li>
+</ul>
+
+<p>
+因为这个原因，我建议创建一个大约20MB的<path>/boot</path>分区，格式化为EXT2r0，以供你在里面安装CoLo和你的内核。这样你就能在你的根文件系统上运行一个现代文件系统（EXT3或者ReiserFS）。
+</p>
+
+<p>
+我下面将假设你已经创建了<path>/dev/hda1</path>以便后来加载作为<path>/boot</path>分区。如果你希望把它作为<path>/</path>，你需要记得PROM的要求。
+</p>
+
+<p>
+好了，我们继续……要创建分区，你在命令行提示符处键入<c>fdisk /dev/hda</c>。你需要知道的主要命令有这些：
+</p>
+
+<ul>
+  <li>
+    <c>o</c>：清除旧的分区表，开启一个新的空MS-DOS分区表
+  </li>
+  <li>
+    <c>n</c>：新分区
+  </li>
+  <li>
+    <c>t</c>：改变分区类型
+    <ul>
+      <li>欲改为Linux Swap键入<c>82</c>，改为Linux FS键入<c>83</c></li>
+    </ul>
+  </li>
+  <li>
+    <c>d</c>：删除分区
+  </li>
+  <li>
+    <c>p</c>：显示分区表
+  </li>
+  <li>
+    <c>q</c>：退出——不改动旧分区表。
+  </li>
+  <li>
+    <c>w</c>：退出——把当前分区表写入磁盘。
+  </li>
+</ul>
+
+<pre caption="为磁盘分区">
+# <i>fdisk /dev/hda</i>
+
+The number of cylinders for this disk is set to 19870.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+   (e.g., DOS FDISK, OS/2 FDISK)
+
+<comment>（开始先清除所有已有的分区）</comment>
+Command (m for help): <i>o</i>
+Building a new DOS disklabel. Changes will remain in memory only,
+until you decide to write them. After that, of course, the previous
+content won't be recoverable.
+
+
+The number of cylinders for this disk is set to 19870.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+   (e.g., DOS FDISK, OS/2 FDISK)
+Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
+
+<comment>（现在你可以用'p'命令来检验分区表已经空了）</comment>
+
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 10.2 GB, 10254827520 bytes
+16 heads, 63 sectors/track, 19870 cylinders
+Units = cylinders of 1008 * 512 = 516096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+
+<comment>（创建/boot分区）</comment>
+
+Command (m for help): <i>n</i>
+Command action
+   e   extended
+   p   primary partition (1-4)
+<i>p</i>
+Partition number (1-4): <i>1</i>
+
+<comment>（这里只需要按回车来接受默认值）</comment>
+
+First cylinder (1-19870, default 1):
+Last cylinder or +size or +sizeM or +sizeK (1-19870, default 19870): <i>+20M</i>
+
+<comment>（现在如果我们再打'p'，我们应该看到新分的区）</comment>
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 10.2 GB, 10254827520 bytes
+16 heads, 63 sectors/track, 19870 cylinders
+Units = cylinders of 1008 * 512 = 516096 bytes
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/hda1               1          40       20128+  83  Linux
+
+<comment>（剩余的，我喜欢放到扩展分区里，所以我创建扩展分区）</comment>
+
+Command (m for help): <i>n</i>
+Command action
+   e   extended
+   p   primary partition (1-4)
+<i>e</i>
+Partition number (1-4): <i>2</i>
+
+<comment>（一样，默认值就可以了，只需按回车。）</comment>
+
+First cylinder (41-19870, default 41):
+Using default value 41
+
+<comment>（这里我们希望用整个磁盘，所以只需再次按回车）</comment>
+Last cylinder or +size or +sizeM or +sizeK (41-19870, default 19870):
+Using default value 19870
+
+<comment>（现在，/分区——我使用独立分区挂载/usr、/var等……所以/可以很小。根据你自己的喜好来调节。）</comment>
+
+Command (m for help): <i>n</i>
+Command action
+   l   logical (5 or over)
+   p   primary partition (1-4)
+<i>l</i>
+First cylinder (41-19870, default 41):<i>&lt;Press ENTER&gt;</i>
+Using default value 41
+Last cylinder or +size or +sizeM or +sizeK (41-19870, default 19870): <i>+500M</i>
+
+<comment>（……所有其他分区创建方法类似……）</comment>
+
+<comment>（最后，交换分区。我推荐至少250MB的交换分区，最好是1GB）</comment>
+
+Command (m for help): <i>n</i>
+Command action
+   l   logical (5 or over)
+   p   primary partition (1-4)
+<i>l</i>
+First cylinder (17294-19870, default 17294): <i>&lt;Press ENTER&gt;</i>
+Using default value 17294
+Last cylinder or +size or +sizeM or +sizeK (1011-19870, default 19870): <i>&lt;Press ENTER&gt;</i>
+Using default value 19870
+
+<comment>（如果我们现在检查我们的分区表，所有的分区已经就绪了，除了一件事……</comment>
+
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 10.2 GB, 10254827520 bytes
+16 heads, 63 sectors/track, 19870 cylinders
+Units = cylinders of 1008 * 512 = 516096 bytes
+
+Device Boot      Start         End      Blocks      ID  System
+/dev/hda1               1          21       10552+  83  Linux
+/dev/hda2              22       19870    10003896    5  Extended
+/dev/hda5              22        1037      512032+  83  Linux
+/dev/hda6            1038        5101     2048224+  83  Linux
+/dev/hda7            5102        9165     2048224+  83  Linux
+/dev/hda8            9166       13229     2048224+  83  Linux
+/dev/hda9           13230       17293     2048224+  83  Linux
+/dev/hda10          17294       19870     1298776+  83  Linux
+
+<comment>（注意第10分区，我们的交换分区仍然是类型83？）</comment>
+
+Command (m for help): <i>t</i>
+Partition number (1-10): <i>10</i>
+Hex code (type L to list codes): <i>82</i>
+Changed system type of partition 10 to 82 (Linux swap)
+
+<comment>（这样就可以修正了……为了验证，我们再看一下……）</comment>
+
+Command (m for help): <i>p</i>
+
+Disk /dev/hda: 10.2 GB, 10254827520 bytes
+16 heads, 63 sectors/track, 19870 cylinders
+Units = cylinders of 1008 * 512 = 516096 bytes
+
+Device Boot      Start         End      Blocks      ID  System
+/dev/hda1               1          21       10552+  83  Linux
+/dev/hda2              22       19870    10003896    5  Extended
+/dev/hda5              22        1037      512032+  83  Linux
+/dev/hda6            1038        5101     2048224+  83  Linux
+/dev/hda7            5102        9165     2048224+  83  Linux
+/dev/hda8            9166       13229     2048224+  83  Linux
+/dev/hda9           13230       17293     2048224+  83  Linux
+/dev/hda10          17294       19870     1298776+  82  Linux Swap
+
+<comment>（现在，我们写入新的分区表。）</comment>
+
+Command (m for help): <i>w</i>
+The partition table has been altered!
+
+Calling ioctl() to re-read partition table.
+Syncing disks.
+
+#
+</pre>
+
+<p>
+现在分区已经创建完毕，你可以继续<uri link="#filesystems">创建文件系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+
+<section id="filesystems">
+<title>创建文件系统</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+你的分区已经创建完了，现在可以在上面安装文件系统了。如果你并不介意选择何种文件系统，而且乐意使用本手册中所使用的默认设置，请阅读<uri link="#filesystems-apply">在分区上应用文件系统</uri>。否则，继续阅读本文来了解可用的文件系统……
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>文件系统？</title>
+<body>
+
+<p>
+有好几个文件系统可用。ReiserFS，EXT2和EXT3在MIPS架构上是稳定的，其他的都是实验性的。
+</p>
+
+<p>
+<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。当你启动系统碰巧遇到文件系统状态不一致时，日志文件系统不会在那里耽搁很长时间。
+</p>
+
+<p>
+<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好且可靠的文件系统。
+</p>
+
+<p>
+<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
+</p>
+
+<p>
+<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
+</p>
+
+<p>
+<b>JFS</b>是IBM的高性能日志文件系统。它最近已经可以投入实用了，但是目前还没有足够的相关记录来对其一般稳定性做出积极或消极的评价。
+</p>
+
+</body>
+</subsection>
+<subsection id="filesystems-apply">
+<title>在分区上应用文件系统</title>
+<body>
+
+<p>
+要在分区或卷上创建文件系统，对于每种可能的文件系统都有专门的工具。
+</p>
+
+<table>
+<tr>
+  <th>文件系统</th>
+  <th>创建命令</th>
+</tr>
+<tr>
+  <ti>ext2</ti>
+  <ti><c>mke2fs</c></ti>
+</tr>
+<tr>
+  <ti>ext3</ti>
+  <ti><c>mke2fs -j</c></ti>
+</tr>
+<tr>
+  <ti>reiserfs</ti>
+  <ti><c>mkreiserfs</c></ti>
+</tr>
+<tr>
+  <ti>xfs</ti>
+  <ti><c>mkfs.xfs</c></ti>
+</tr>
+<tr>
+  <ti>jfs</ti>
+  <ti><c>mkfs.jfs</c></ti>
+</tr>
+</table>
+
+<p>
+例如，要使启动分区（本例中的<path>/dev/hda1</path>）为ext2和根分区（本例中的<path>/dev/hda3</path>）为ext3,应该这样做：
+</p>
+
+<pre caption="在分区上应用文件系统">
+# <i>mke2fs /dev/sda1</i>
+# <i>mke2fs -j /dev/sda3</i>
+</pre>
+
+<p>
+现在在你新建的分区（或逻辑卷）上创建文件系统。
+</p>
+
+<warn>
+如果你在Cobalt服务器上安装，记得<path>/dev/hda1</path>必须是<e>EXT2 revision 0</e>；所有其他文件系统（比如EXT2 revision 1、EXT3、ReiserFS、XFS、JFS还有其他的)<e>都不行！</e>你可以用这个命令来格式化：<c>mke2fs -r 0 /dev/hda1</c>。
+</warn>
+
+</body>
+</subsection>
+<subsection>
+<title>激活交换分区</title>
+<body>
+
+<p>
+<c>mkswap</c>是创建和初始化交换分区的命令：
+</p>
+
+<pre caption="创建交换分区标志">
+# <i>mkswap /dev/sda2</i>
+</pre>
+
+<p>
+使用<c>swapon</c>命令来激活交换分区：
+</p>
+
+<pre caption="激活交换分区">
+# <i>swapon /dev/sda2</i>
+</pre>
+
+<p>
+使用上面提到的命令来创建和激活交换分区。
+</p>
+
+</body>
+</subsection>
+</section>
+<section>
+<title>挂载</title>
+<body>
+
+<p>
+现在你的分区都已经初始化了，并且安装了文件系统，是时候来挂载这些分区了。使用<c>mount</c>命令进行挂载。别忘记为每个你创建的分区建立所需的挂载目录。作为例子，我们来挂载根分区和启动分区：
+</p>
+
+<pre caption="挂载分区">
+# <i>mount /dev/sda3 /mnt/gentoo</i>
+# <i>mkdir /mnt/gentoo/boot</i>
+# <i>mount /dev/sda1 /mnt/gentoo/boot</i>
+</pre>
+
+<note>
+如果你希望<path>/tmp</path>目录在一个独立的分区上，确保在挂载之后修改它的权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。这同样适用于<path>/var/tmp</path>目录。
+</note>
+
+<p>
+我们还需要在<path>/proc</path>目录上挂载proc文件系统（内核的虚拟接口）。但是，我们首先需要把我们的文件放到分区上。
+</p>
+
+<p>
+请继续阅读<uri link="?part=1&amp;chap=5">安装Gentoo安装文件</uri>。
+</p>
+
+</body>
+</section>
+</sections>

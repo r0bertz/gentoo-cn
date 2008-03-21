@@ -1,0 +1,281 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.72 -->
+
+<guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
+<title>Gentoo手册</title>
+
+<author title="作者">
+  <mail link="swift"/>
+</author>
+
+<author title="译者">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+
+<author title="译者">
+  <mail link="wcw8410@gmail.com">吴传文</mail>
+</author>
+
+<author title="译者">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>
+Gentoo手册的目的是将文档集中在一个条理分明的手册中。这份手册包含了基于网络的系统安装指南以及讲述如何使用Gentoo和Portage的章节。
+</abstract>
+
+<license/>
+
+<version>0.47</version>
+<date>2007-06-07</date>
+
+<chapter>
+<title>Gentoo手册的成果</title>
+<section>
+<title>已有的语言</title>
+<body>
+
+<p>Gentoo手册目前有如下语言版本：</p>
+
+<p>
+<!--<uri link="/doc/pt_br/handbook/">巴西葡萄牙文</uri> |
+<uri link="/doc/cs/handbook/">捷克文</uri> |
+<uri link="/doc/da/handbook/">Danish </uri> |-->
+<uri link="/doc/de/handbook/">德文</uri> |
+<uri link="/doc/en/handbook/">英文</uri> |
+<uri link="/doc/fr/handbook/">法文</uri> |
+<!--<uri link="/doc/id/handbook/">Indonesian</uri> |-->
+<uri link="/doc/it/handbook/">意大利文</uri> |
+<!--<uri link="/doc/ja/handbook/">日文</uri> |-->
+<uri link="/doc/pl/handbook/">波兰文</uri> |
+<!--<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |-->
+<!--<uri link="/doc/ru/handbook/">俄文</uri> |-->
+<uri link="/doc/zh_cn/handbook">简体中文</uri> |
+<uri link="/doc/es/handbook/">西班牙文</uri>
+</p>
+
+</body>
+</section>
+<section>
+<title>介绍</title>
+<body>
+
+<p>
+欢迎来到Gentoo手册的主页。这个页面将会告诉你一些Gentoo手册的相关解释，将会回答你绝大多数有关这个手册的问题。我们将谈到手册背后的、当前的状态、以后的打算以及怎样处理报告等。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>查看手册</title>
+<section>
+<body>
+
+<table>
+<tr>
+  <th>格式</th>
+  <th>描述</th>
+  <th>链接</th>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>最新版本，每章一页，最适合于在线浏览</ti>
+  <ti>
+    <uri link="handbook-x86.xml">x86</uri>, 
+    <uri link="handbook-sparc.xml">sparc</uri>,
+    <uri link="handbook-amd64.xml">amd64</uri>, 
+    <uri link="handbook-ppc.xml">ppc</uri>, 
+    <uri link="handbook-ppc64.xml">ppc64</uri>, 
+    <uri link="handbook-alpha.xml">alpha</uri>, 
+    <uri link="handbook-hppa.xml">hppa</uri>, 
+    <uri link="handbook-mips.xml">mips</uri>,
+    <uri link="handbook-ia64.xml">ia64</uri>,
+    <uri link="handbook-arm.xml">arm</uri>
+  </ti>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>最新版本，所有内容集中于一页</ti>
+  <ti>
+    <uri link="handbook-x86.xml?full=1">x86</uri>, 
+    <uri link="handbook-sparc.xml?full=1">sparc</uri>, 
+    <uri link="handbook-amd64.xml?full=1">amd64</uri>, 
+    <uri link="handbook-ppc.xml?full=1">ppc</uri>, 
+    <uri link="handbook-ppc64.xml?full=1">ppc64</uri>, 
+    <uri link="handbook-alpha.xml?full=1">alpha</uri>, 
+    <uri link="handbook-hppa.xml?full=1">hppa</uri>, 
+    <uri link="handbook-mips.xml?full=1">mips</uri>,
+    <uri link="handbook-ia64.xml?full=1">ia64</uri>,
+    <uri link="handbook-arm.xml?full=1">arm</uri>
+  </ti>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>最新版本，所有内容集中于一页，适合打印</ti>
+  <ti>
+    <uri link="handbook-x86.xml?style=printable&amp;full=1">x86</uri>, 
+    <uri link="handbook-sparc.xml?style=printable&amp;full=1">sparc</uri>, 
+    <uri link="handbook-amd64.xml?style=printable&amp;full=1">amd64</uri>, 
+    <uri link="handbook-ppc.xml?style=printable&amp;full=1">ppc</uri>,
+    <uri link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri>, 
+    <uri link="handbook-alpha.xml?style=printable&amp;full=1">alpha</uri>, 
+    <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>, 
+    <uri link="handbook-mips.xml?style=printable&amp;full=1">mips</uri>,
+    <uri link="handbook-ia64.xml?style=printable&amp;full=1">ia64</uri>,
+    <uri link="handbook-arm.xml?style=printable&amp;full=1">arm</uri>
+  </ti>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>2007.0无网络安装指南</ti>
+  <ti>
+    <uri link="/doc/zh_cn/handbook/2007.0/index.xml">2007.0 Gentoo手册</uri>
+  </ti>
+</tr>
+</table>
+
+<p>
+我们也有基于特定发行版本的手册，它们包含了使用光盘进行<b>无网络</b>安装的安装指南。如果你对无网络安装感兴趣，请参阅<uri link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>过去发行的版本</title>
+<body>
+
+<p>
+由于历史原因，我们也保留了过去版本的手册（自从2006.1以来）。要查看可打印的分页版本请点击右上方的“打印”按钮。如果要看整页模式，在URL后加上<path>?full=1</path>。
+</p>
+
+<warn>
+这些手册<e>不</e>再被维护。
+</warn>
+
+<table>
+<tr>
+  <th>发行版本</th>
+  <th>架构</th>
+</tr>
+<tr>
+  <ti>2006.1</ti>
+  <ti>
+    <uri link="2006.1/handbook-alpha.xml">alpha</uri>,
+    <uri link="2006.1/handbook-amd64.xml">amd64</uri>,
+    <uri link="2006.1/handbook-hppa.xml">hppa</uri>,
+    <uri link="2006.1/handbook-ppc.xml">ppc</uri>,
+    <uri link="2006.1/handbook-ppc64.xml">ppc64</uri>,
+    <uri link="2006.1/handbook-sparc.xml">sparc</uri>,
+    <uri link="2006.1/handbook-x86.xml">x86</uri>
+  </ti>
+</tr>
+</table>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>关于手册的信息</title>
+<section>
+<title>目标</title>
+<body>
+
+<p>
+Gentoo手册的目标是创建一份描述Gentoo Linux各方各面的有条有理的文档。它将已有的几篇指南组合为一篇相连的手册，所以同样的这样一份手册可以用于每一种可能的架构、每一种安装过程和每个用户。这不仅有利于我们的维护，也可以让用户看到这其中的区别是很小的，而其他架构也不会成为一个单独的文档列出来。
+</p>
+
+<p>
+这也允许我们对难点进行详细解释并且给出更多的例子。我们再也不会被迫将所有的文档写入一个单独显示的页面，这样读者阅读文档会更加流畅。
+</p>
+
+</body>
+</section>
+<section>
+<title>状态</title>
+<body>
+
+<p>
+目前，手册的第四部分<uri link="handbook-x86.xml?part=4">Gentoo网络配置</uri>已经完成并正式发布了。这个部分包含了深入全面的网络配置选项，适合目前稳定的baselayout。
+ 
+</p>
+
+<p>
+如果你对手册的开发感兴趣，请使用<mail link="gentoo-doc@gentoo.org">gentoo文档邮件列表</mail>来发布所有的回馈。
+</p>
+
+</body>
+</section>
+<section>
+<title>报告bug和请求改进</title>
+<body>
+
+<p>
+如果你发现手册中的一个bug，请访问我们的<uri link="http://bugs.gentoo.org">Gentoo Linux Bugzilla</uri>并给<e>Documentation</e>项目的<e>Installation Handbook</e>模块提交bug报告。
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter id="faq">
+<title>常见问题</title>
+<section>
+<title>难道不能动态地为每个选择创建手册吗？</title>
+<body>
+
+<p>
+任何事情都是可能的，但是我们不这样做是基于以下这些原因的。
+</p>
+
+<p>
+<b>维护</b>这样的指南将会更困难。不光是因为我们要将bug报告映射到特定的决定（比所有bug报告告诉我们的他们曾经做过的选择更进一步），而且我们将更难顺利地编写这篇指南：我们将不得不更仔细的检查手册中的每一行，以及前后的一致性等等。
+</p>
+
+<p>
+虽然我们目前只有在线版本，但<b>其他的格式</b>也将会开发出来，如PDF版本。如果我们要给每个架构、每个选项都创建PDF文件，我们将必须提供大量的PDF文件，但它们之间只有小部分的章节不同。这是对资源的一种浪费 :)。
+</p>
+
+<p>
+每个用户作出的决定地方可能<b>彼此不同</b>。这会让用户连打印出这篇手册都很困难——我们首先必须在开始之前告诉用户所有可能的选择，这时很可能他们就已经被吓跑了。
+</p>
+
+<p>
+“安装Gentoo”这一部分<b>不是</b>Gentoo手册的唯一部分。它只是手册的第一部分，而接下来的部分不受用户选择的影响。只是为安装指南而动态地创建手册有些杀鸡用牛刀了。
+</p>
+
+<p>
+不把每个可能选项的说明分开，用户可以非常方便的看到其他选项的结果。这使得用户可以<b>更好地浏览安装指南</b>。
+</p>
+
+</body>
+</section>
+<section>
+<title>我在Gentoo手册中找不到关于stage1的信息</title>
+<body>
+
+<p>
+使用stage1或stage2 tarball的安装指南可以在<uri link="/doc/zh_cn/faq.xml#stage12">Gentoo FAQ</uri>中找到。现在只支持stage3安装。
+</p>
+
+</body>
+</section>
+<section>
+<title>我不同意……</title>
+<body>
+
+<p>
+请<uri link="http://bugs.gentoo.org">提交</uri>您的意见；反对但未提出有建设性的反馈并不能解决任何问题。文档是为了整个社区而写的，所以我们很感激大家提出反馈意见。
+</p>
+
+<p>
+但是，你必须知道开发文档时所做的大多数决定都是基于大家同意的模型上。编写/组织一个所有人都感到满意的文档是<e>不可能</e>的。我们认为当前的文档实施办法对绝大多数人有益，因此你也应该能够接受。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>

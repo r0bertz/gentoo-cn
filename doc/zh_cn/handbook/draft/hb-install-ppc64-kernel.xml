@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 
+ $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ppc64-kernel.xml,v 1.2 2007/09/13 19:59:27 r0bertz Exp $ -->
+<!-- English CVS version: 1.34 -->
+<sections>
+
+<version>8.4</version>
+<date>2008-01-12</date>
+
+<section>
+<title>时区</title>
+<body>
+
+<p>
+您首先需要选择您自己的时区，这样可以让系统知道它的位置在哪里。您可以在<path>/usr/share/zoneinfo</path>中找到您所在的时区，然后把它复制到<path>/etc/localtime</path>。请不要使用<path>/usr/share/zoneinfo/Etc/GMT*</path>下的时区，因为它们“名不副实”。例如，<path>GMT-8</path>事实上是GMT+8区。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设您要用GMT）</comment>
+# <i>cp /usr/share/zoneinfo/GMT /etc/localtime</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>安装源码</title>
+<subsection>
+<title>选择内核</title>
+<body>
+
+<p>
+Linux内核是所有发行版的核心。它位于用户程序和系统硬件之间。Gentoo提供给我们几个可选的内核源码。完整的清单参见<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>。
+</p>
+
+<p>
+对于PPC64你应该使用<c>gentoo-sources</c>。
+</p>
+
+<pre caption="安装内核源码">
+# <i>emerge gentoo-sources</i>
+</pre>
+
+<p>
+当您查看<path>/usr/src</path>时，您将会看到一个叫做<path>linux</path>的符号链接指向您安装的内核源码。在我们这个例子中，安装的源码指向<c>gentoo-sources-<keyval id="kernel-version"/></c>。你的版本可能会不同，所以请记住这点。
+</p>
+
+<pre caption="查看内核源码符号链接">
+# <i>ls -l /usr/src/linux</i>
+lrwxrwxrwx   1 root   root      12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyval id="kernel-version"/>
+</pre>
+
+<p>
+现在，我们开始配置和编译您的内核。您可以用“genkernel”来做这件事。这将会建立一个和安装光盘所用的内核类似的通用内核。不过目前PPC64并不能完全工作正常。
+</p>
+
+<p>
+现在请继续阅读<uri link="#manual">手动配置你的系统</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="manual">
+<title>手动配置</title>
+<subsection>
+<title>介绍</title>
+<body>
+
+<p>
+手动配置内核经常被Linux使用者认为是最困难的步骤。事实并非如此——当您手动配置几次内核之后，您就不会再觉得它有多么难了:)
+</p>
+
+<p>
+然而，一件事情<e>是</e>真的：在手动配置内核之前，您必须了解您的系统。您可以安装pciutils（<c>emerge pciutils</c>），用其中的<c>lspci</c>来了解您需要的大部分信息。您现在可以在chroot的环境中运行<c>lspci</c>。您可以忽略任何<e>pcilib</e>的警告。（类似于pcilib: cannot open/sys/bus/pci/devices）。此外，您也可以在<e>非chroot</e>的环境执行<c>lspci</c>。结果相同。您还可以运行<c>lsmod</c>来查看安装光盘使用了哪些内核模块。（这也是个不错的提示，它可以教你该选择哪些模块）。
+</p>
+
+<pre caption="调用menuconfig">
+# <i>cd /usr/src/linux</i>
+<comment>重要事项：如果你使用32位userland，你必须修改在/usr/src/linux中的顶层Makefile文件
+然后改变CROSS_COMPILE选项为CROSS_COMPILE ?= powerpc64-unknown-linux-gnu-。
+你必须在运行make menuconfig之前做这个，否则可能导致内核编译问题。</comment>
+# <i>make menuconfig</i>
+</pre>
+
+<p>
+您将会看到一些配置条目。首先我们将会列出一些您必须启用的选项（否则Gentoo将不能正常运行或者在没有额外的调试下根本不能运行）。
+</p>
+
+</body>
+</subsection>
+<subsection>
+<title>启用必须的选项</title>
+<body>
+
+<p>
+首先，开启development and experimental code/drivers。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动。
+</p>
+
+<pre caption="选择experimental code/drivers">
+General setup ---&gt;
+  [*] Prompt for development and/or incomplete code/drivers
+</pre>
+
+<p>
+现在转到<c>File Systems</c>，选中支持你使用的文件系统。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>以及<c>/dev/pts file system for Unix98 PTYs</c>：
+</p>
+
+<pre caption="选中必需的文件系统">
+File systems ---&gt;
+  [*] Virtual memory file system support (former shm fs)
+  [*] /proc file system support
+  [*] /dev/pts file system for Unix98 PTYs
+
+<comment>（选中下面你的系统所需的一个或多个选项）</comment>
+  &lt;*&gt; Reiserfs support
+  &lt;*&gt; Ext3 journalling file system support
+  &lt;*&gt; JFS filesystem support
+  &lt;*&gt; Second extended fs support
+  &lt;*&gt; XFS filesystem support
+</pre>
+
+<note>
+你会发现在<c>Pseduo filesystems</c>中提及的选项只不过是<c>File systems</c>中一部分。
+</note>
+
+<p>
+如果您在使用PPPoE接入Interne或者您在使用拨号的调制解调器，您需要下面内核中的选项（你会发现在<c>Networking support</c>中提到的选项只是<c>Device Drivers</c>中的一部分：
+</p>
+
+<pre caption="选中PPPoE需要的驱动">
+Network device support ---&gt;
+  &lt;*&gt; PPP (point-to-point protocol) support
+  &lt;*&gt;   PPP support for async serial ports
+  &lt;*&gt;   PPP support for sync tty ports
+</pre>
+
+<p>
+两个压缩选项不会造成什么错误，不过它们不是必需的。<c>PPP over Ethernet</c>选项也不是必需的，只在使用<c>ppp</c>并被配置成是使用核心模式PPPoE时才会用到它。
+</p>
+
+<p>
+如果您需要它，请不要忘记在内核中包含对您的网卡的支持。
+</p>
+
+<p>
+禁掉ADB raw keycodes：
+</p>
+
+<pre caption="禁掉ADB raw keycodes">
+Macintosh Device Drivers ---&gt;
+  [ ] Support for ADB raw keycodes
+</pre>
+
+<p>
+当你配置好你的内核后，请继续阅读<uri link="#compiling">编译和安装</uri>。
+</p>
+
+</body>
+</subsection>
+<subsection id="compiling">
+<title>编译和安装</title>
+<body>
+
+<p>
+现在你的内核已配置好，是时候来编译和安装它了。退出配置菜单，然后运行编译内核的命令：
+</p>
+
+<pre caption="编译内核">
+（Apple/IBM）# <i>make &amp;&amp; make modules_install</i>
+</pre>
+
+<p>
+当你的内核编译完成之后，复制内核镜像至<path>/boot</path>目录。记住用你实际的内核版本替换<path>&lt;kernel-version&gt;</path>：
+</p>
+
+<pre caption="安装内核">
+（Apple/IBM）# <i>cp vmlinux /boot/&lt;kernel-version&gt;</i>
+</pre>
+
+<p>
+现在请继续阅读<uri link="#kernel_modules">配置内核模块</uri>。
+</p>
+
+</body>
+</subsection>
+</section>
+<section id="kernel_modules">
+<title>配置模块</title>
+<body>
+
+<p>
+你应该将你想在启动时加载的模块列在<path>/etc/modules.autoload.d/kernel-2.6</path>中。如果你需要你也能为你的模块加上额外的选项。
+</p>
+
+<p>
+要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
+</p>
+
+<pre caption="查看所有可用的模块">
+# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
+</pre>
+
+<p>
+比如，要自动加载<c>3c59x.ko</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名。
+</p>
+
+<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
+# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
+</pre>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+3c59x
+</pre>
+
+<p>
+请阅读<uri link="?part=1&amp;chap=8">配置你的系统</uri>来继续安装。
+</p>
+
+</body>
+</section>
+</sections>
