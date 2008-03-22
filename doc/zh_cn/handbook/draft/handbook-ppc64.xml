@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-ppc64.xml,v 1.2 2007/09/14 17:37:35 r0bertz Exp $ -->
-<!-- English CVS version: 1.73 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.28 -->
 <book link="/doc/zh_cn/handbook/handbook-ppc64.xml" lang="zh_cn">
 <title>Gentoo Linux PPC64手册</title>
 
 <values>
  <key id="arch">PPC64</key>
- <key id="kernel-version">2.6.19-r7</key>
- <key id="kernel-name">kernel-2.6.19-gentoo-r7</key>
+ <key id="kernel-version">2.6.23-r8</key>
+ <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
  <key id="online-book">handbook-ppc64.xml</key>
- <key id="release-dir">releases/ppc/2007.0/ppc64/</key>
- <key id="stage3">stage3-ppc64-32ul-2007.0.tar.bz2</key>
- <key id="profile">default-linux/ppc/ppc64/2007.0/32bit-userland</key>
+ <key id="release-dir">releases/ppc/2008.0/ppc64/</key>
+ <key id="stage3">stage3-ppc64-32ul-2008.0.tar.bz2</key>
+ <key id="profile">default-linux/ppc/ppc64/2008.0/32bit-userland</key>
  <key id="CFLAGS">-O2 -pipe</key>
 </values>
 
@@ -176,8 +176,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>8.1</version>
-<date>2007-10-24</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <part>
 <title>安装Gentoo</title>

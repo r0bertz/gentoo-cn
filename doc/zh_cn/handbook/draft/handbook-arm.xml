@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/handbook-arm.xml,v 1.2 2007/09/14 17:37:35 r0bertz Exp $ -->
-<!-- English CVS version: 1.69 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.18 -->
 <book link="/doc/zh_cn/handbook/handbook-arm.xml" lang="zh_cn">
 <title>Gentoo Linux ARM手册</title>
 
@@ -174,8 +174,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <part>
 <title>安装Gentoo</title>
