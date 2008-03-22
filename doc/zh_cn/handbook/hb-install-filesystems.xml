@@ -5,11 +5,11 @@
 
 <included>
 
-<version>3</version>
+<version>3.0</version>
 <date>2008-03-03</date>
 
 <section id="filesystemsdesc">
-<title>Filesystems</title>
+<title>文件系统</title>
 <body>
 
 <p test="contains('x86 Alpha',func:keyval('arch'))">
