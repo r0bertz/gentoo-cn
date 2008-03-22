@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-next.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.26 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.11 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 现在你已经拥有了你自己的Gentoo操作系统了，但是下一步该做什么呢？
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>文档</title>

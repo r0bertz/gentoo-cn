@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ppc64-medium.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.36 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.32 -->
 
 <sections>
 
-<version>8.1</version>
-<date>2007-06-29</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -60,9 +60,7 @@
 </subsection>
 </section>
 
-
-<!-- Copy/paste from hb-install-x86-medium.xml, with s/x86/ppc64/ 
- START -->
+<!-- START -->
 <section>
 <title>Gentoo安装光盘</title>
 <subsection>
@@ -78,7 +76,7 @@
 </p>
 
 <p>
-如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2007.0/index.xml">Gentoo 2007.0手册</uri>里的说明。
+如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2008.0/index.xml">Gentoo 2008.0手册</uri>里的说明。
 </p>
 
 <p>
@@ -105,7 +103,7 @@
 <body>
 
 <p>
-被叫做<c>install-ppc64-minimal-2007.0.iso</c>的最小安装光盘只用了124M磁盘空间。你可以用它安装Gentoo，但是只能用于有网络的环境。
+被叫做<c>install-ppc64-minimal-2008.0.iso</c>的最小安装光盘只用了124M磁盘空间。你可以用它安装Gentoo，但是只能用于有网络的环境。
 </p>
 
 <table>
@@ -132,7 +130,7 @@
 <body>
 
 <p>
-被叫做<c>install-ppc64-universal-2007.0.iso</c>的通用安装光盘占用460MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
+被叫做<c>install-ppc64-universal-2008.0.iso</c>的通用安装光盘占用460MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
 </p>
 
 <table>
@@ -212,7 +210,7 @@ Gentoo/PPC64团队同时为32位userland和64位userland提供了stage和软件�
 </p>
 
 <p>
-万一你怀疑下载的文件是否损坏，你可以检测它的MD5校验码同我们提供的进行比较（比如<path>install-ppc64-minimal-2007.0.iso.DIGESTS</path>）。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验码。
+万一你怀疑下载的文件是否损坏，你可以检测它的MD5校验码同我们提供的进行比较（比如<path>install-ppc64-minimal-2008.0.iso.DIGESTS</path>）。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验码。
 </p>
 
 <p>
@@ -296,7 +294,17 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 <tr>
   <ti><c>bootfrom=X</c></ti>
   <ti>
-    从一个不同的设备启动
+    从其他设备启动
+  </ti>
+</tr>
+<tr>
+  <ti><c>dosshd</c></ti>
+  <ti>启用<c>sshd</c>。对于无人职守安装有用。</ti>
+</tr>
+<tr>
+  <ti><c>passwd=foo</c></ti>
+  <ti>
+    将foo设定为root用户密码。可与<c>dosshd</c>一起用于远程安装。
   </ti>
 </tr>
 </table>
