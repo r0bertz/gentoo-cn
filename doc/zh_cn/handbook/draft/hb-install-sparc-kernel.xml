@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.33 -->
+<!-- English CVS version: 1.30 -->
 <sections>
 
-<version>8.4</version>
-<date>2008-01-12</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>时区</title>
@@ -33,7 +33,7 @@
 <body>
 
 <p>
-被所有发行版构造的核心就是Linux内核。它的层次介于用户程序和系统硬件之间。Gentoo给它的用户提供了很多内核源代码。一个完整的说明列表可以从<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。
+所有发行版构造的核心就是Linux内核。它的层次介于用户程序和系统硬件之间。Gentoo给它的用户提供了很多内核源代码。一个完整的说明列表可以从<uri link="/doc/en/gentoo-kernel.xml">Gentoo内核指南</uri>中获得。
 </p>
 
 <p>
@@ -47,6 +47,10 @@
 <pre caption="安装内核源码">
 # <i>emerge gentoo-sources</i>
 </pre>
+
+<note>
+如果你正在使用qla2xxx磁盘控制器，你需要<c>emerge =vanilla-sources-2.6.16*</c>（<e>不是</e><c>gentoo-sources</c>），因为自2.6.17内核开始不再支持此控制器。
+</note>
 
 <p>
 当你看一看<path>/usr/src</path>的时候应该能看到一个名为<path>linux</path>的符号链接指向你的内核源代码。在这个例子中，安装好的内核源代码指向<c>linux-<keyval id="kernel-version"/></c>。你的版本可能会不同，注意这一点。
@@ -98,16 +102,7 @@ lrwxrwxrwx    1 root     root        12 Oct 13 11:04 /usr/src/linux -&gt; linux-
 <body>
 
 <p>
-首先，打开对开发和实验性质的代码或驱动。你需要这个，否则有些非常重要的代码或驱动将不会显示出来：
-</p>
-
-<pre caption="选择试验性的代码或驱动">
-General setup ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
-</pre>
-
-<p>
-现在到<c>File Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual memory</c>和<c>/proc file system</c>也选上：
+首先到<c>File Systems</c>里选择你使用的文件系统的支持。<e>不要</e>把它们编成模块，不然Gentoo将无法挂载你的分区。<c>Virtual memory</c>和<c>/proc file system</c>也选上：
 </p>
 
 <pre caption="选择必需的文件系统">
@@ -232,47 +227,16 @@ Network device support ---&gt;
 </pre>
 
 <p>
-选择继续<uri link="#kernel_modules">安装独立内核模块</uri>。
+现在请从<uri link="#kernel_modules">内核模块</uri>一节继续安装。
 </p>
 
 </body>
 </subsection>
 </section>
 <section id="kernel_modules">
-<title>安装独立内核模块</title>
+<title>内核模块</title>
 <subsection>
-<title>配置模块</title>
-<body>
-
-<p>
-你应该在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出想要自动加载的模块。如果你愿意也可以对模块添加额外的参数。
-</p>
-
-<p>
-要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
-</p>
-
-<pre caption="查看所有可用的模块">
-# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
-</pre>
-
-<p>
-比如，为了自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>并输入模块的名字。
-</p>
-
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
-# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
-</pre>
-
-<pre caption="/etc/modules.autoload.d/kernel-2.6">
-3c59x
-</pre>
-
-<p>
-继续<uri link="?part=1&amp;chap=8">配置你的系统</uri>。
-</p>
-
-</body>
+<include href="hb-install-kernelmodules.xml"/>
 </subsection>
 </section>
 </sections>

@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.108 -->
+<!-- English CVS version: 1.35 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
-<version>8.2</version>
-<date>2007-10-24</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>Chroot</title>
@@ -178,7 +178,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyv
 </p>
 
 <p>
-系统也为某些架构提供了可用的<c>desktop</c>和<c>server</c>的子profile。请查看一下是否可以在<path>2007.0/</path>profile里面找到这两个子profile。你也许想看一下<c>desktop</c> profile的<path>make.defaults</path>是否适合你的需要。
+系统也为某些架构提供了可用的<c>desktop</c>和<c>server</c>的子profile。请查看一下是否可以在<path>2008.0/</path>profile里面找到这两个子profile。你也许想看一下<c>desktop</c> profile的<path>make.defaults</path>是否适合你的需要。
 </p>
 
 <p>
@@ -194,7 +194,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyv
 </p>
 
 <pre test="func:keyval('arch')='AMD64'" caption="切换到non-multilib profile">
-# <i>ln -snf /usr/portage/profiles/default-linux/amd64/2007.0/no-multilib /etc/make.profile</i>
+# <i>ln -snf /usr/portage/profiles/default-linux/amd64/2008.0/no-multilib /etc/make.profile</i>
 </pre>
 
 </body>

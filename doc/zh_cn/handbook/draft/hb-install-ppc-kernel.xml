@@ -254,7 +254,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-现在请继续阅读<uri link="#kernel_modules">内核模块</uri>一节。
+现在请从<uri link="#kernel_modules">内核模块</uri>一节继续安装。
 </p>
 
 </body>
@@ -324,7 +324,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-现在请继续阅读<uri link="#kernel_modules">内核模块</uri>一节。
+现在请从<uri link="#kernel_modules">内核模块</uri>一节继续安装。
 </p>
 
 </body>

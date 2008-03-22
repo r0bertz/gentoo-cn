@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-tools.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.46 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.27 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 在这一章中我们将帮助你选择并安装一些重要的工具。
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>系统日志工具</title>

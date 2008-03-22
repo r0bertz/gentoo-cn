@@ -3,12 +3,12 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-sparc-medium.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.45 -->
+ $Header$ -->
+<!-- English CVS version: 1.41 -->
 <sections>
 
-<version>8.1</version>
-<date>2007-06-29</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>必需的硬件</title>
@@ -56,8 +56,7 @@
 </body>
 </subsection>
 </section>
-<!-- Copy/Paste from hb-install-x86-medium.xml 
-START -->
+<!-- START -->
 <section>
 <title>Gentoo安装光盘</title>
 <subsection>
@@ -73,7 +72,7 @@ START -->
 </p>
 
 <p>
-如果你想在脱离网络连接的情况下安装Gentoo，请使用<uri link="2007.0/index.xml">Gentoo 2007.0手册</uri>。
+如果你想在脱离网络连接的情况下安装Gentoo，请使用<uri link="2008.0/index.xml">Gentoo 2008.0手册</uri>。
 </p>
 
 <p>
@@ -100,7 +99,7 @@ START -->
 <body>
 
 <p>
-最小安装光盘叫做<c>install-sparc64-minimal-2007.0.iso</c>并且只需要32MB的磁盘空间。你可以使用这个安装光盘来安装Gentoo，但是仅在有Internet连接的时候。
+最小安装光盘叫做<c>install-sparc64-minimal-2008.0.iso</c>并且只需要44MB的磁盘空间。你可以使用这个安装光盘来安装Gentoo，但是仅在有Internet连接的时候。
 </p>
 
 <table>
@@ -127,7 +126,7 @@ START -->
 <body>
 
 <p>
-通用安装光盘叫做<c>install-sparc64-universal-2007.0.iso</c>并需要287MB的空间。你可以使用这张安装光盘来安装Gentoo，甚至你可以脱离网络环境进行安装，万一你想在另一台电脑上安装Gentoo，而不是现在你安装的Gentoo上面:)
+通用安装光盘叫做<c>install-sparc64-universal-2008.0.iso</c>并需要295MB的空间。你可以使用这张安装光盘来安装Gentoo，甚至你可以脱离网络环境进行安装，万一你想在另一台电脑上安装Gentoo，而不是现在你安装的Gentoo上面:)
 </p>
 
 <table>
@@ -242,11 +241,11 @@ ok <i>boot cdrom</i>
 </pre>
 
 <p>
-映入眼帘的将是SILO引导管理器（安装光盘上的）。如果你愿意，输入回车来获得更多帮助信息。键入<c>2617</c>（如果你有一个FC-AL机器；请检查<uri link="http://www.gentoo.org/proj/en/base/sparc/sunhw.xml">硬件兼容性列表</uri>）或者<c>2620</c>（所有其他人），然后按回车继续引导系统：
+映入眼帘的将是SILO引导管理器（安装光盘上的）。如果需要，你可以输入回车来查看更多的帮助信息。输入<c>gentoo</c>然后按回车开始引导系统。
 </p>
 
 <pre caption="接着从安装光盘开始引导">
-boot: <i>2620</i>
+boot: <i>gentoo</i>
 </pre>
 
 <p>

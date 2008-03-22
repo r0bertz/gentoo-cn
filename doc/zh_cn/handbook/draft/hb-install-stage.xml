@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.113 -->
+<!-- English CVS version: 1.51 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 我们使用一个stage3文件来安装Gentoo。在这一章里我们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>8.5</version>
-<date>2007-12-31</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -193,11 +193,11 @@ ls: /mnt/cdrom/stages: No such file or directory
 </pre>
 
 <p>
-现在我们来解开你选择的stage tarball。我们将使用<c>tar</c>。确保你使用了同样的参数（<c>xvjpf</c>）。<c>v</c>参数是可选的，而且有些版本的<c>tar</c>不支持它。接下来的一个例子里，我们解开stage tarball <path>stage3-&lt;subarch&gt;-2007.0.tar.bz2</path>。确保用你的stage来替换tarball的文件名。
+现在我们来解开你选择的stage tarball。我们将使用<c>tar</c>。确保你使用了同样的参数（<c>xvjpf</c>）。<c>v</c>参数是可选的，而且有些版本的<c>tar</c>不支持它。接下来的一个例子里，我们解开stage tarball <path>stage3-&lt;subarch&gt;-2008.0.tar.bz2</path>。确保用你的stage来替换tarball的文件名。
 </p>
 
 <pre caption="解开stage tarball">
-# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2007.0.tar.bz2</i>
+# <i>tar xvjpf /mnt/cdrom/stages/stage3-&lt;subarch&gt;-2008.0.tar.bz2</i>
 </pre>
 
 <p>
