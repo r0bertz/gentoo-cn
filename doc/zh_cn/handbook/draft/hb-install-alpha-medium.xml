@@ -3,13 +3,13 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-alpha-medium.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.46 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.29 -->
 
 <sections>
 
-<version>8.2</version>
-<date>2007-06-29</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -68,7 +68,7 @@
 </p>
 
 <p>
-如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2007.0/index.xml">Gentoo 2007.0手册</uri>里的说明。
+如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2008.0/index.xml">Gentoo 2008.0手册</uri>里的说明。
 </p>
 
 <p>
@@ -96,7 +96,7 @@
 <body>
 
 <p>
-这个最小安装光盘名为<c>install-alpha-minimal-2007.0.iso</c>。大小只有65MB。你必须在有网络的环境下用它来安装Gentoo。
+这个最小安装光盘名为<c><keyval id="min-cd-name"/></c>，大小只有47MB。你必须在有网络的环境下使用此光盘来安装Gentoo。
 </p>
 <!--
 <table>
@@ -123,7 +123,7 @@
 <body>
 
 <p>
-通用安装光盘名为<c>install-alpha-universal-2007.0.iso</c>，大约占用一张光盘的316MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
+通用安装光盘名为<c>install-alpha-universal-2008.0.iso</c>，大约占用一张光盘的316MB。你可以用它来安装Gentoo，即使在是无网络的环境中也可以，比如万一你在其他电脑上安装Gentoo就用的着了:)
 </p>
 
 <table>
@@ -193,7 +193,7 @@ stage3是一个含有最小Gentoo环境的压缩包，适合按照手册继续�
 </p>
 
 <p>
-如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path>install-alpha-minimal-2007.0.iso.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
+如果你想知道文件是否在下载过程中损坏，你可以检查它的MD5校验和，并和我们提供的MD5校验和（如<path><keyval id="min-cd-name"/>.DIGESTS</path>）进行比较。你可以使用Linux和Unix下的<c>md5sum</c>工具或者Windows下的<uri link="http://www.etree.org/md5com.html">md5sum</uri>来检查它的MD5校验和。
 </p>
 
 <p>
