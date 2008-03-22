@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header$ -->
-<!-- English CVS version: 1.57 -->
+<!-- English CVS version: 1.44 -->
 <sections>
 
-<version>8.5</version>
-<date>2008-01-12</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>时区</title>
@@ -99,16 +99,7 @@ lrwxrwxrwx    1 root     root           22  Mar 18 16:23 /usr/src/linux -&gt; li
 <body>
 
 <p>
-首先，开启development and experimental code/drivers。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
-</p>
-
-<pre caption="选择experimental code/drivers">
-General setup ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
-</pre>
-
-<p>
-现在转到<c>File Systems</c>，选中你使用的文件系统的支持。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
+首先进入<c>File Systems</c>并选中你使用的文件系统。<e>不要</e>将它们编译成模块，否则Gentoo将无法正常地挂载你的分区。另外选中<c>/proc file system</c>和<c>Virtual memory</c>。如果你使用一台Pegasos请确保加入对于Amiga分区的支持，或者如果你使用Apple机器时请确保加入对于Macintosh分区的支持。
 </p>
 
 <pre caption="选中必需的文件系统">
@@ -263,44 +254,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-现在请继续阅读<uri link="#kernel_modules">安装独立的内核模块</uri>。
-</p>
-
-</body>
-</subsection>
-</section>
-<section id="kernel_modules">
-<title>安装独立内核模块</title>
-<subsection>
-<title>配置模块</title>
-<body>
-
-<p>
-你应该将你想在启动时加载的模块列在<path>/etc/modules.autoload.d/kernel-2.6</path>中。如果你需要你也能为你的模块加上额外的选项。
-</p>
-
-<p>
-要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
-</p>
-
-<pre caption="查看所有可用的模块">
-# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
-</pre>
-
-<p>
-比如，要自动加载<c>3c59x</c>模块，编辑文件<path>kernel-2.6</path>并在其中输入模块名，一行一个模块。
-</p>
-
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
-# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
-</pre>
-
-<pre caption="/etc/modules.autoload.d/kernel-2.6">
-3c59x
-</pre>
-
-<p>
-请阅读<uri link="?part=1&amp;chap=8">配置你的系统</uri>来继续安装。
+现在请继续阅读<uri link="#kernel_modules">内核模块</uri>一节。
 </p>
 
 </body>
@@ -370,10 +324,18 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 </pre>
 
 <p>
-现在请继续阅读<uri link="?part=1&amp;chap=8">配置你的系统</uri>。
+现在请继续阅读<uri link="#kernel_modules">内核模块</uri>一节。
 </p>
 
 </body>
+</section>
+<section id="kernel_modules">
+<title>内核模块</title>
+
+<subsection>
+<include href="hb-install-kernelmodules.xml"/>
+</subsection>
+
 </section>
 </sections>
 

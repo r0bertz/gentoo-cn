@@ -304,7 +304,7 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 <tr>
   <ti><c>passwd=foo</c></ti>
   <ti>
-    将foo设定为root用户密码。可与<c>dosshd</c>一起用于远程安装。
+    将foo设定为root用户密码。与<c>dosshd</c>一起在远程安装时使用。
   </ti>
 </tr>
 </table>

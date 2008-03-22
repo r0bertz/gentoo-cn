@@ -3,32 +3,17 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-ppc-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.45 -->
+ $Header$ -->
+<!-- English CVS version: 1.31 -->
 <sections>
 
-<version>8.3</version>
-<date>2007-06-26</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>块设备介绍</title>
 <subsection>
-<title>块设备</title>
-<body>
-
-<p>
-我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
-</p>
-
-<p>
-首先，我们介绍<e>块设备</e>。最常见的块设备就是你Linux系统中代表第一个IDE磁盘的<path>/dev/hda</path>。如果你安装用的是SCSI，FireWire，USB或是SATA磁盘，那么你的第一个硬盘设备会是<path>/dev/sda</path>。另外的磁盘会用字母序枚举列出。举个例子，第三个IDE磁盘就是<path>/dev/hdc</path>。
-</p>
-
-<p>
-上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
-</p>
-
-</body>
+<include href="hb-install-blockdevices.xml"/>
 </subsection>
 <subsection>
 <title>分区</title>
@@ -368,30 +353,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </body>
 </subsection>
 <subsection>
-<title>文件系统？</title>
-<body>
-
-<p>
-PowerPC架构上可用的文件系统有不少。ext2、ext3、ReiserFS和XFS它们各有长处和短处。
-</p>
-
-<p>
-<b>ext2</b>是经考验证明可靠的Linux文件系统，但是没有元数据日志，这意味这在启动系统时的ext2文件系统的日常检查相当耗时。现在相当一部分的新一代的日志文件系统可供选择，它们可以非常迅速检查一致性，并且比那些非日志文件系统更受欢迎。
-</p>
-
-<p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好及可靠的文件系统。
-</p>
-
-<p>
-<b>ReiserFS</b>是基于B+树的文件系统，它有着非常全面的性能，并且在处理小文件（小于4k的文件）上远远胜过ext2和ext3，通常是它们的10倍至15倍。ReiserFS是一种适用范围极其广泛且具有元数据日志的文件系统。它坚固且不仅可以用于一般用途的文件系统，而且还适用于极端情况下，如创建大文件系统、超大型文件和包含无数小文件的目录。
-</p>
-
-<p>
-<b>XFS</b>是一种带元数据日志的文件系统，它有一个健壮的特性集，并且对可伸缩性进行了优化。我们仅推荐在带有高端SCSI设备或光纤通道存储和不间断电源供电的Linux系统上使用这个文件系统。因为XFS会大量地在内存中缓存正在传输的数据，如果系统意外关机，那些设计不合理的程序（写入文件到磁盘时未做足准备措施的程序，而且这种程序相当多）可能会丢失大量数据。
-</p>
-
-</body>
+<include href="hb-install-filesystems.xml"/>
 </subsection>
 <subsection>
 <title>激活交换分区</title>
