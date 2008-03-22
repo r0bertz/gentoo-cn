@@ -376,7 +376,7 @@ Ebuilds文件中包含了特定的字段，里面为Portage提供了此软件的
     <b>~arch keyword</b> 意味着这个软件没有经过充分的测试，不能进入稳定分支，请等待一段时间后在尝试使用它。
   </li>
   <li>
-    <b>-arch keyword</b> 或 <b>-* keyword</b> 意味着这个软件不能工作在您机器的体系结构中。如果您确信它能工作那么请到我们的<uri link="http://bugs.gentoo.org">bugzilla</uri>网站提交一个bug报告。
+    <b>-arch keyword</b>或<b>-* keyword</b> 意味着这个软件不能工作在您机器的体系结构中。如果您确信它能工作那么请到我们的<uri link="http://bugs.gentoo.org">bugzilla</uri>网站提交一个bug报告。
   </li>
   <li>
     <b>missing keyword</b> 意味着这个软件还没有在您机器的体系结构中进行过测试。您可以咨询相应体系结构移植小组是否能对它进行测试，或者您自己为他们进行这样的测试并将您得到的结论提交到我们的<uri link="http://bugs.gentoo.org">bugzilla</uri>网站。

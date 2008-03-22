@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.9 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.13 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你可以用许多方法安装Gentoo。本章讲解怎样用最小安装光盘安装Gentoo，尽管使用安装程序LiveCD也是可以的。
 </abstract>
 
-<version>5.2</version>
-<date>2007-06-29</date>
+<version>6.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -110,7 +110,7 @@
 </p>
 
 <impo>
-如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2007.0/">Gentoo 2007.0手册</uri>里的说明。
+如果你想在无网络条件下安装Gentoo或是想进行自动安装，请参考<uri link="2008.0/">Gentoo 2008.0手册</uri>里的说明。
 </impo>
 
 <p>
@@ -339,10 +339,12 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 - nohotplug     禁止加载hotplug服务
 - noapic        禁用apic（如果有硬件问题尝试此选项，比如网卡、scsi等）
 - noevms        禁止加载EVMS2模块
-- nolvm2        禁止加载LVM2模块
+- nolvm         禁止加载LVM2模块
 - hdx=stroke    允许你对整个硬盘进行分区，即使你的BIOS不能处理大硬盘。
 - noload=module1,[module2,[...]]
                 禁止加载特定的内核模块
+- dosshd	启动sshd，对于无人职守安装有用
+- passwd=foo	将foo设置为root用户密码；与dosshd一起在远程安装时使用
 </pre>
 
 <p>

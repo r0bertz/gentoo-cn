@@ -504,7 +504,7 @@ Command (m for help): <i>w</i>
 </pre>
 
 <note>
-如果你想把<path>/tmp</path>作为一个单独的分区，确信在挂载以后修改权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。<path>/var/tmp</path>也要这么做。
+如果你想把<path>/tmp</path>作为一个单独的分区，请一定在挂载以后修改权限：<c>chmod 1777 /mnt/gentoo/tmp</c>。<path>/var/tmp</path>也要这么做。
 </note>
 
 <p>

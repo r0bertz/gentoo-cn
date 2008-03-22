@@ -4,13 +4,13 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-x86+amd64-bootloader.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.9 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.11 -->
 
 <sections>
 
-<version>5.1</version>
-<date>2007-11-27</date>
+<version>6.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>做出您的选择</title>
@@ -48,16 +48,8 @@
 <e>如果</e>您已经为您的内核加上了framebuffer支持（或者您使用<c>genkernel</c>的默认内核配置），您就可以在bootloader配置文件中加入一个<c>vga</c>和／或一个<c>video</c>内核参数来启用它。
 </p>
 
-<p test="func:keyval('arch')='x86'">
-首先，您需要知道您使用的是什么类型的framebuffer设备。如果您用的是加过Gentoo补丁
-的内核树（例如<c>gentoo-sources</c>），您将可以选择<c>vesafb-tng</c>作
-为<e>VESA驱动类型</e>（对于这些内核来说这是默认选择）。在这种情况下，您使用的
-是<c>vesafb-tng</c>驱动，您将<e>不需要</e>设置<c>vga</c>参数。否则您使用的就
-是<c>vesafb</c>驱动，您将<e>需要</e>设置<c>vga</c>参数。
-</p>
-
-<p test="contains('AMD64 IA64',func:keyval('arch'))">
-64位系统必须使用<c>vesafb</c>驱动，并且需要在内核启动参数中添加<c>vga</c>参数。
+<p>
+首先，您需要知道您使用的是什么类型的framebuffer设备。如果您用的是加过Gentoo补丁的内核源代码（例如<c>gentoo-sources</c>），您将可以选择<c>uvesafb</c>作为<e>VESA驱动</e>。这样的话，您使用的就是<c>uvesafb</c>驱动，您将<e>不需要</e>设置<c>vga</c>参数。否则您使用的就是<c>vesafb</c>驱动，您将<e>需要</e>设置<c>vga</c>参数。
 </p>
 
 <p>
@@ -107,7 +99,7 @@
 </table>
 
 <p>
-<c>video</c>参数用来控制framebuffer的显示参数。此参数的内容形式是首先指定framebuffer驱动（2.6内核使用<c>vesafb</c>，2.4使用<c>vesa</c>），后面跟着的是您想启用的控制语句。<path>/usr/src/linux/Documentation/fb/vesafb.txt</path>文件里列出了所有变量。最常用的选项是：
+<c>video</c>语句用来控制framebuffer的显示参数。此语句中需指定欲使用的framebuffer驱动以及你想启用的控制语句。<path>/usr/src/linux/Documentation/fb/vesafb.txt</path>文件里列出了所有变量。最常用的选项是：
 </p>
 
 <table>
@@ -122,7 +114,7 @@
   </ti>
 </tr>
 <tr>
-  <ti>mtrr:n</ti>
+  <ti>mtrr:<c>n</c></ti>
   <ti>
     设置MTRR寄存器. <c>n</c> 可以是：<br/>
     0 - 禁用<br/>
@@ -132,22 +124,18 @@
     4 - write-through 
   </ti>
 </tr>
-<tr test="func:keyval('arch')='x86'">
+<tr>
   <ti><c>模式</c></ti>
   <ti>
-    (只针对<c>vesafb-tng</c>)<br/>
+    (只针对<c>uvesafb</c>)<br/>
     设定分辨率，颜色深度和刷新率。
     例如，<c>1024x768-32@85</c>对应的分辨率是1024x768，32位色深和85Hz的刷新率。
   </ti>
 </tr>
 </table>
 
-<p test="contains('AMD64 IA64',func:keyval('arch'))">
-最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>。将它们记下来；很快您将用到它们。
-</p>
-
-<p test="func:keyval('arch')='x86'">
-最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>或者<c>video=vesafb:mtrr:3,ywrap,1024x768-32@85</c>。将它们记下来；很快您将用到它们。
+<p>
+最后这两个参数的内容可能类似这样<c>vga=0x318 video=vesafb:mtrr:3,ywrap</c>或者<c>video=uvesafb:mtrr:3,ywrap,1024x768-32@85</c>。将它们记下来；很快您将用到它们。
 </p>
 
 <p test="func:keyval('arch')='IA64'">
@@ -237,19 +225,19 @@ timeout 30
 # 如果您没有安装显卡，请将这行注释掉</comment>
 splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-title=Gentoo Linux <keyval id="kernel-version"/>
+title Gentoo Linux <keyval id="kernel-version"/>
 <comment># 内核镜像（或者操作系统）所在分区</comment>
 root (hd0,0)
 kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3
 
-title=Gentoo Linux <keyval id="kernel-version"/> (rescue)
+title Gentoo Linux <keyval id="kernel-version"/> (rescue)
 <comment># 内核镜像（或者操作系统）所在分区</comment>
 root (hd0,0)
 kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3 init=/bin/bb
 
 <comment># 接下来的四行只有在您与Windows系统进行双启动的情况下才需要。</comment>
 <comment># 本例中，windows系统位于/dev/hda6。</comment>
-title=Windows XP
+title Windows XP
 rootnoverify (hd0,5)
 makeactive
 chainloader +1
@@ -260,13 +248,13 @@ default 0
 timeout 30
 splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
-title=Gentoo Linux <keyval id="kernel-version"/>
+title Gentoo Linux <keyval id="kernel-version"/>
 root (hd0,0)
 kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev
 initrd /boot/<keyval id="genkernel-initrd"/>
 
 <comment># 只有在双启动的情况下才需要以下内容</comment>
-title=Windows XP
+title Windows XP
 rootnoverify (hd0,5)
 makeactive
 chainloader +1
