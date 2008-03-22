@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-config.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.96 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.28 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你需要编辑一些重要的配置文件。在这一章中将对这些重要的配置文件作概述，并且介绍如何配置它们。
 </abstract>
 
-<version>8.3</version>
-<date>2007-08-01</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>文件系统信息</title>
