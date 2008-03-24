@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/xsl/metadoc.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
+
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_tw/index.xml,v 1.2 2008/02/18 19:00:59 r0bertz Exp $ -->
+<!-- English CVS version: 1.110 -->
+
+<!DOCTYPE dynamic SYSTEM "/dtd/metadoc.dtd">
+
+<dynamic metadoc="/doc/zh_tw/metadoc.xml">
+<version>9</version>
+
+<title>Gentoo文檔資源</title>
+<intro>
+
+<section>
+<title>語言版本</title>
+<body>
+
+<p>
+我們的文檔提供了下列語言版本：
+</p>
+
+<p>
+<!--<uri link="/doc/pt_br/">Brazilian Portuguese</uri> |-->
+<uri link="/doc/cs/">捷克文</uri> |
+<!--<uri link="/doc/da/">Danish</uri> |-->
+<!--<uri link="/doc/nl/">Dutch</uri> |-->
+<uri link="/doc/en/">英文</uri> |
+<!--<uri link="/doc/fi/">Finnish</uri> |-->
+<uri link="/doc/fr/">法文</uri> |
+<uri link="/doc/de/">德文</uri> |
+<!--<uri link="/doc/hu/">Hungarian</uri> |-->
+<uri link="/doc/it/">意大利文</uri> |
+<!--<uri link="/doc/ja/">Japanese</uri> |
+<uri link="/doc/ko/">Korean</uri> |-->
+<uri link="/doc/pl/">波蘭文</uri> |
+<!--<uri link="/doc/ro/">Romanian</uri> |-->
+<uri link="/doc/ru/">俄文</uri> |
+<uri link="/doc/zh_tw/">簡體中文</uri> |
+<uri link="/doc/es/">西班牙文</uri>
+<!--<uri link="/doc/zh_tw/">Traditional Chinese</uri>-->
+</p>
+
+</body>
+</section>
+<section>
+<title>介紹</title>
+<body>
+
+<p>
+歡迎瀏覽Gentoo文檔資源。本頁將給您提供我們所提供的文檔的快速預覽。絕大多數文檔都遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5/deed.zh">知識共享-署名-相同方式共享</uri>許可協議——一個開源文檔協議——而發布。所有文檔都提供方便打印的格式。要以這種格式瀏覽，在URL后加上<path>?style=printable</path>。這樣你就可以在每個文檔的右上角發現一個“打印”鏈接。
+</p>
+
+<p>
+如果你發現我們文檔中的bug或者有建議要提，請使用我們的<uri link="http://bugs.gentoo.org">Bug跟蹤系統</uri>，為“Documentation”或者“Doc Other”提交一個bug報告。這些bug報告將由<uri link="/proj/en/gdp/">Gentoo文檔項目</uri>處理。
+</p>
+
+</body>
+</section>
+<section>
+<title>文檔倉庫</title>
+<body>
+
+<p>
+我們的文檔是<uri link="index.xml#doc_chap2">分類的</uri>并且可以分層瀏覽。如果你想快速瀏覽所有提供的文檔，不需附加信息，請看我們的<uri link="list.xml">文檔列表</uri>頁。我們也有一個我們全部文檔的<uri link="list.xml?desc=1">完整列表</uri>，包含了它們的描述信息。
+</p>
+
+</body>
+</section>
+
+</intro>
+
+<catid>faq</catid>
+<catid>install</catid>
+<catid>desktop</catid>
+<catid>upgrade</catid>
+<catid>gentoo</catid>
+<catid>sysadmin</catid>
+<catid>gentoodev</catid>
+<catid>project</catid>
+<catid>other</catid>
+
+</dynamic>
