@@ -114,7 +114,7 @@
     <file id="cross-distcc">/doc/en/cross-compiling-distcc.xml</file>
     <file id="dri-howto">/doc/zh_tw/dri-howto.xml</file>
     <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
-    <file id="gentoo-upgrading">/doc/en/gentoo-upgrading.xml</file>
+    <file id="gentoo-upgrading">/doc/zh_tw/gentoo-upgrading.xml</file>
     <file id="migration-2.6">/doc/en/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
     <file id="faq">/doc/zh_tw/faq.xml</file>

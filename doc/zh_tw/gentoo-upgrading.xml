@@ -1,8 +1,9 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-upgrading.xml,v 1.39 2008/03/05 08:26:01 nightmorph Exp $ -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.39 -->
 
-<guide link="/doc/en/gentoo-upgrading.xml">
+<guide link="/doc/zh_tw/gentoo-upgrading.xml" lang="zh_tw">
 <title>Gentoo 升級指南</title>
 
 <author title="Author">
@@ -14,12 +15,12 @@
 <author title="Editor">
   <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
-<author title="Chinese Translator">
+<author title="Translator">
   <mail link="sinsun@gmail.com">彭新舜</mail>
 </author>
 
 <abstract>
-這份文件解釋如何將Gentoo升級至新發布的版本
+這份文件解釋如何將Gentoo升級至新發布的版本。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
