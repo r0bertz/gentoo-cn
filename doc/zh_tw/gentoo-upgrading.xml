@@ -1,0 +1,622 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-upgrading.xml,v 1.39 2008/03/05 08:26:01 nightmorph Exp $ -->
+
+<guide link="/doc/en/gentoo-upgrading.xml">
+<title>Gentoo 升級指南</title>
+
+<author title="Author">
+  <mail link="greg_g@gentoo.org">Gregorio Guidi</mail>
+</author>
+<author title="Editor">
+  <mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="Editor">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="Chinese Translator">
+  <mail link="sinsun@gmail.com">彭新舜</mail>
+</author>
+
+<abstract>
+這份文件解釋如何將Gentoo升級至新發布的版本
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>2.9</version>
+<date>2008-03-05</date>
+
+<chapter>
+<title>Gentoo升級步驟</title>
+<section>
+<title>哲學</title>
+<body>
+
+<p>
+在這個Gentoo世界，升級的概念是相當不同於其他的Linux套件。你可能已經知道我們
+從來不走「傳統」的升級方式，像是：等待新的版本發布、下載它、燒錄出來、放入
+光盤然後照著升級指示運作。
+</p>
+
+<p>
+要知道（要當個Gentoo使用者的話）讓一個超級使用者處在科技尖端，這個步驟是非常
+挫折的。甚至連其他版本的超級使用者可能也會如此感覺。有了流行又廣播的工具，像
+是 apt 或 apt-rpm 讓升級可以頻繁又快速。從一開始，Gentoo就是以快速、增衍的概念
+升級。總之，沒有其他版本像Gentoo能滿足這類要求的使用者。
+</p>
+
+<p>
+理想上，你只需要安裝一次就永遠不用理會新的發行版：只要你跟隨下列指示 <uri
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=1">此 Portage
+指示</uri> 在 <uri link="/doc/en/handbook/">Gentoo 手冊</uri>
+解釋了如何讓你的系統隨時更新。而這通常會讓一些核心地改變使系統需要手動來更新
+</p>
+
+</body>
+</section>
+<section>
+<title>發布及概況</title>
+<body>
+
+<p>
+有個Gentoo版本的重複問題：「為甚麼總是一直推出新的版本？如果他們不打算
+讓使用者升級軟體呢？」
+這邊有幾個原因：
+</p>
+
+<ul>
+  <li>
+    新的版本表示新的安裝光盤以及補丁與新功能
+  </li>
+  <li>
+    新版本提供升級的GRP套件，所以使用者可以「快速」安裝(stage3 + 已編譯套件)
+	使系統不會有過期問題。
+  </li>
+  <li>
+    最後，新版本的發布會一次又一次地實踐上個版本不全的新功能
+  </li>
+</ul>
+
+<p>
+當新發布包含不相容的功能或者提供核心套件與設定使得系統深入地被修改，
+我們說他提供了新的<e>profile</e>.（暫譯Profile為設定檔）
+</p>
+
+<p>
+一個 <e>profile</e> 是一個設定檔，儲存於次目錄<path>/usr/portage/profiles</path>，
+也就是稱為ebuilds的東西，那些為重要的<e>system</e>套件，包含默認的USE flags與默認
+的映射的虛擬套件，以及系統運作的架構。
+</p>
+
+<p>
+使用中的profile是決定於符號連結<path>/etc/make.profile</path>
+指向次目錄於<path>/usr/portage/profiles</path> 此為profile所在。
+比如：默認的x86 2007.0 profile可以在<path>/usr/portage/profiles/default-linux/x86/2007.0</path>
+找到。在父目錄的檔案也是profile（也因此被其他次目錄分享）。
+這就是我們所說的<e>cascaded profiles（階梯型設定檔）</e>.
+</p>
+
+<p>
+被取代的過時Profiles存放在<path>/usr/portage/profiles</path>
+與現存使用的放在一起，但是已被標注為廢用。那些放在<path>deprecated</path>的profiles表示
+這些profile應該被「升級」(upgraded to)。Portage使用這些訊息來自動地警告你應該更新為
+新的profile。
+</p>
+
+<p>
+這邊有許多原因去創造新的profile：新發布的核心套件(例如 <c>baselayout</c>, <c>gcc</c>, 或 
+<c>glibc</c>) 這些與以前的版本不相容，默認USE flags的改變或者是virtual mappings，又或者
+是全系統的設定被改變。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>跟上新的發布</title>
+<section>
+<title>發布隨著未改變的Profile</title>
+<body>
+
+<p>
+如果新的Gentoo版本不包含新的profile，那你可以安全地假裝它不曾發生。:)
+</p>
+
+<p>
+假如你更新你安裝的套件 
+<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=1">如同在Gentoo Handbook所言
+</uri>，那你的系統將會被安裝為如同全新的版本。
+</p>
+
+</body>
+</section>
+<section>
+<title>發布隨著改變的Profile</title>
+<body>
+
+<p>
+假使版本（如2007.0 for x86）創建了新的profile，你必須選擇移植(migrate)到新的profiles。
+</p>
+
+<p>
+自然地，你不會被強迫如此，你可以繼續使用舊的profiles繼續更新你的套件
+<uri link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=1">如同Gentoo手冊解釋過的</uri>.
+</p>
+
+<p>
+無論如何，Gentoo強力的建議更新你的profile如果系統變得殘缺。當此狀況發生，
+代表著Gentoo發展人員不再計畫支援該軟件。
+</p>
+
+<p>
+如果你決定移植(migrate)到新的profile，那你將要手動地執行更新。
+這個更新可能是許多個別地從舊版到新版的一個一個手動執行升級。
+這決定於新系統的新profile有多深層的改變。
+</p>
+
+<p>
+在最簡單的狀況中，你只需改變<path>/etc/make.profile</path>的符號連結(symlink)，
+最糟糕的狀況中你只需重新編譯你的系統，從頭開始，像整齊的巫毒舞一般，一步一步來。
+移植(Migration)通常寫在發行說明上面。你也可找到<uri link="#instructions">教學</uri>在
+這份文件最後。
+</p>
+
+</body>
+</section>
+<section>
+<title>已支援的 profiles</title>
+<body>
+
+<p>
+你可以查閱profiles的列表，只需在你被Gentoo開發者正式支援的電腦前輸入 <c>emerge eselect</c>
+然後執行下列命令：
+</p>
+
+<pre caption="查閱以支援的 profiles">
+# <i>eselect profile list</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter id="instructions">
+<title>更新Profile教學</title>
+<section id="general">
+<title>一般指令</title>
+<body>
+
+<impo>
+確定你的Portage在執行任何profile改變前是更新過的
+</impo>
+
+<p>
+首先，執行 <c>emerge eselect</c>。 此 <c>eselect</c> 工具會讓你輕鬆地閱覽與選擇
+profiles。無須你手動創造或移除符號連結(symlinks)。
+</p>
+
+<pre caption="以eselect選擇Profile">
+<comment>(查閱可利用的 profiles)</comment>
+# <i>eselect profile list</i>
+
+<comment>(選擇選單上你需要的profile編號)</comment>
+# <i>eselect profile set &lt;number&gt;</i>
+</pre>
+
+<p>
+如果你仍偏好手動改變profiles，只需這樣做：
+</p>
+
+<pre caption="手動改變 profiles">
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/</i>&lt;selected profile&gt;<i> /etc/make.profile</i>
+</pre>
+
+<note>
+這邊有 <b>desktop</b> 與 <b>server</b> 兩種subprofiles（次設定檔）於大部分架構。
+小心檢驗這些profiles，因為它們可能更適合你的最小默認profiles。
+</note>
+
+</body>
+</section>
+<section>
+<title>升級至 2007.0 或 2006.1</title>
+<body>
+
+<p>
+如果你想升級這些profiles，你應該注意新系統只默認Unicode為默認值。
+具體而言： UNICODE="yes" 是設定在 <path>/etc/rc.conf</path>. 
+要讓它運行，你必須創建一個Unicode locale給你的系統。
+請閱讀<uri link="/doc/en/utf-8.xml">UTF-8 guide</uri> 學習如何創建一個合適的地區設定(locale)。
+</p>
+
+<p>
+另一種方法（不建議），假如你不想設定locale，你應該指定
+UNICODE="no" 於 <path>/etc/rc.conf</path>， 然後 re-emerge <c>baselayout</c> (或是
+等下次你的 <c>baselayout</c> 更新) 搭配USE flag <c>-unicode</c> 
+你可以設定 <c>-unicode</c> 搭配 <c>baselayout</c>，或者你能設定所有套件
+全區域地加上USE選項於<path>/etc/make.conf</path>.
+</p>
+
+<pre caption="選項: 移除 Unicode 支援">
+<comment>(只讓 baselayout 移除 Unicode 支援)</comment>
+# <i>echo "sys-apps/baselayout -unicode" >> /etc/portage/package.use</i>
+# <i>emerge -a baselayout</i>
+
+<comment>(全系統移除 Unicode 支援)</comment>
+# <i>nano -w /etc/make.conf</i>
+USE="-unicode"
+# <i>emerge -a baselayout</i>
+</pre>
+
+<note>
+假如你升級到2007.0 profile於Sparc架構，那你需要下列GCC升級
+<uri link="/doc/en/gcc-upgrading.xml">GCC 升級指南</uri>， 以 <c>gcc-4</c> 為默認編譯器。
+</note>
+
+<p>
+終於，隨著 <uri link="#general">一般指令</uri> 來更新你的profile。
+</p>
+
+</body>
+</section>
+<section>
+<title>升級至 2006.0</title>
+<body>
+
+<p>
+轉移到2006.0 profile，請將 <path>/etc/make.profile</path> 指向
+符號連結(symlink)到新的目錄。請確定在你改變profiles時你的Portage已經更新。
+</p>
+
+<pre caption="轉移到 2006.0 profile">
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/</i>&lt;selected profile&gt;<i> /etc/make.profile</i>
+</pre>
+
+<p>
+<b>alpha</b> - 使用2.4核心(kernel)的使用者或者不想使用NPTL者，應該要用
+此profile default-linux/alpha/no-nptl profile.  更多可利用資源於 <uri
+link="/proj/en/releng/release/2006.0/alpha-release-notes.xml">此 alpha 版本筆記</uri>.
+</p>
+
+<p>
+<b>ppc</b> - ppc32與ppc64的合併已經開始。ppc32 profile已經改成以各方面而言最精簡的
+profile，位於 default-linux/ppc/ppc32。適合桌面用戶的profile已被最佳化，位於
+default-linux/ppc/ppc32/2006.0。這邊有一些替代設定檔(subprofiles)適合 G3 以及
+G4 處理器，以及 G3/Pegasos 和 G4/Pegasos 適用於 Pegasos Open Desktop
+Workstation。確定你選擇正確的替代設定檔(subprofile)當你移植到2006.0 profile。
+</p>
+
+<p>
+<b>sparc</b> - 升級至 <b>2.4</b>-kernel based 2006.0/2.4 profile
+需要使用者手動介入(unmerging java stuff) 以及 <c>emerge -e
+world</c> 因為 <uri link="/doc/en/gcc-upgrading.xml">gcc
+upgrade</uri>.<br/>
+升級至 <b>2.6</b>-kernel based 2006.0 profile 視為不穩定狀態，需要更改
+ <path>/etc/portage/package.unmask</path> 至
+umask a 2.6 version of <c>gentoo-sources</c> 然後重新編譯系統。
+</p>
+
+<p>
+<b>其他所有架構</b> - 目前沒有幾楚上的profile變動。沒有特別的動作需要執行。
+</p>
+
+</body>
+</section>
+<section>
+<title>升級至 2005.1</title>
+<body>
+
+<p>
+升級至2005.1 profile，請指向 <path>/etc/make.profile</path>
+symlink 到新目錄。確定你改變profile前，Portage已更新。
+</p>
+
+<pre caption="改變至 2005.1 profile">
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/</i>&lt;selected profile&gt;<i> /etc/make.profile</i>
+</pre>
+
+<p>
+<b>所有架構</b> - 目前沒有基礎上的profile變動。沒有特別的動作需要執行。
+</p>
+
+<p>
+<b>ppc</b> - 隨著2005.1發行，ppc與ppc64 profiles已經合併，還有許多替代設定檔(subprofiles)給特別的架構
+確定你選擇正確的替代設定檔(subprofile)當你移植到2005.1 profile。
+</p>
+
+</body>
+</section>
+<section>
+<title>升級至 2005.0</title>
+<body>
+
+<p>
+隨著升級至2005.0，許多架構增加定義profiles。確定你閱讀正確說明書以及其中
+的profiles說明，在你決定移植至2005.0前。大部分架構默認為2.6 kernel，而
+2.4 kernel為備用選項。
+</p>
+
+<p>
+某些架構需要一些手動操作轉換profile。此狀況請一步一步的跟隨下列的表格
+更改profile。
+</p>
+
+<table>
+<tr>
+  <th>Profile</th>
+  <th>Description</th>
+  <th>Specific Upgrade Guide</th>
+</tr>
+<tr>
+  <ti>default-linux/alpha/2005.0</ti>
+  <ti>Default Alpha 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/alpha/2005.0/2.4</ti>
+  <ti>Alpha 2005.0 profile for 2.4 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/amd64/2005.0</ti>
+  <ti>Default AMD64 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/amd64/2005.0/no-multilib</ti>
+  <ti>AMD64 2005.0 profile for multilib-disabled system installations</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/arm/2005.0</ti>
+  <ti>Default ARM 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/hppa/2005.0</ti>
+  <ti>Default HPPA 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/hppa/2005.0/2.4</ti>
+  <ti>HPPA 2005.0 profile for 2.4 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/mips/2005.0</ti>
+  <ti>Default MIPS 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/mips/cobalt/2005.0</ti>
+  <ti>Cobalt specific MIPS 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/mips/mips64/n32/2005.0</ti>
+  <ti>2005.0 profile for n32-supporting MIPS platforms</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/mips/mips64/ip28/2005.0</ti>
+  <ti>Indigo2 Impact specific 64-bit 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/mips/mips64/2005.0</ti>
+  <ti>64-bit MIPS 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/ppc/2005.0</ti>
+  <ti>Default PPC 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/ppc64/2005.0</ti>
+  <ti>Default PPC64 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/s390/2005.0</ti>
+  <ti>Default S390 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/sparc/sparc32/2005.0</ti>
+  <ti>Default Sparc 32-bit 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<!-- http://dev.gentoo.org/~dsd/kernel-2.6.htm 
+     No subprofiles for sparc
+<tr>
+  <ti>default-linux/sparc/sparc32/2005.0/2.6</ti>
+  <ti>Sparc 32-bit 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+-->
+<tr>
+  <ti>default-linux/sparc/sparc64/2005.0</ti>
+  <ti>Default Sparc 64-bit 2005.0 profile</ti>
+  <ti></ti>
+</tr>
+<!-- http://dev.gentoo.org/~dsd/kernel-2.6.htm
+     No subprofiles for sparc
+<tr>
+  <ti>default-linux/sparc/sparc64/2005.0/2.6</ti>
+  <ti>Sparc 64-bit 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+-->
+<tr>
+  <ti>default-linux/x86/2005.0</ti>
+  <ti>Default x86 2005.0 profile for 2.6 kernels</ti>
+  <ti></ti>
+</tr>
+<tr>
+  <ti>default-linux/x86/2005.0/2.4</ti>
+  <ti>x86 2005.0 profile for 2.4 kernels</ti>
+  <ti></ti>
+</tr>
+</table>
+
+<p>
+轉換選擇的profile，請指向 <path>/etc/make.profile</path>
+符號連結(symlink) 至新目錄。確定你改變profile前，Portage已更新！
+</p>
+
+<pre caption="改變至 2005.0 profile">
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/</i>&lt;selected profile&gt;<i> /etc/make.profile</i>
+</pre>
+
+<p>
+假使你使用Linux 2.4-based系統，但你想轉移至2.6-based kernel，確定你已經閱讀我們的
+ <uri link="/doc/en/migration-to-2.6.xml">Gentoo
+Linux 2.6 Migration Guide</uri>.
+</p>
+
+</body>
+</section>
+<section>
+<title>升級至 2004.3</title>
+<body>
+
+<p>
+隨著升級至2004.3 profiles，使用者不會見到大的系統改變（參閱下方）。總之，
+Gentoo開發者決定推出這個新的profile且取消不少舊的，以達成加速
+<e>stacked profiles</e>，隨著新的profiles <path>/usr/portage/profiles</path>
+路徑，取代了
+<path>/usr/portage/profiles/default-linux/x86/2004.3</path> (被Portage 2.0.51 與之前版本支援)。
+</p>
+
+<p>
+轉換到2004.3 profile，請指向 <path>/etc/make.profile</path>至新路徑
+</p>
+
+<warn>
+別忘記改變profile<e>之前</e>更新Portage!!!
+</warn>
+
+<pre caption="更新 /etc/make.profile symlink">
+<comment>substitute &lt;arch&gt; with your arch</comment>
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/default-linux/&lt;arch&gt;/2004.3 /etc/make.profile</i>
+</pre>
+
+<p>
+<b>All archs</b> - 如上述，這裡沒有太大的改變，特別注意這 <c>sys-apps/slocate</c>
+與<c>net-misc/dhcpcd</c> 已不再是系統套件。這表示如果你執行
+<c>emerge --depclean</c>, Portage 將試著移除它們
+如果你需要這些套件，把它加入
+<path>/var/lib/portage/world</path> 在更改profile後，或者手動emerge它們。
+</p>
+
+<p>
+<b>ppc</b> - <c>sys-fs/udev</c> 現在已經是默認檔，取代
+<c>sys-fs/devfs</c> 給新的機器。雖然不會影響舊機器。
+</p>
+
+</body>
+</section>
+<section>
+<title>更新 Portage 到支援的層次性Profiles(Cascading Profiles)</title>
+<body>
+
+<p>
+雖然這段落不像整合於這份升級文件，但是非常重要。任何設定檔(profile)列過的，
+都需要Portage的支援層次性設定檔(cascading profiles)。然而，一些廢棄的
+profiles不允許使用者升級Portage或者使用已不存在的profile。這會讓升級
+Portage失敗。
+</p>
+
+<p>
+為了解決此問題，使用者可以設定暫時的符號連結(temporary symbolic link)到
+<e>廢棄</e> profile，使得系統得以升級Portage，接著能隨著指南更新。
+
+請替代 <c>&lt;arch&gt;</c> 成為你的系統架構:
+</p>
+
+<pre caption="經由廢棄的 profile 更新 Portage">
+# <i>rm /etc/make.profile</i>
+# <i>cd /etc</i>
+# <i>ln -sf ../usr/portage/profiles/obsolete/&lt;arch&gt; make.profile</i>
+# <i>emerge -n '>=sys-apps/portage-2.0.51'</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>升級至 2004.2</title>
+<body>
+
+<p>
+轉換至2004.2 profile，請指向 <path>/etc/make.profile</path> 
+symlink 至新路徑。
+</p>
+
+<warn>
+在改變profile前，別忘了<e>升級</e>Portage
+</warn>
+
+<pre caption="Updating the /etc/make.profile symlink">
+<comment>替代 &lt;arch&gt; 成你的架構</comment>
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/default-linux/&lt;arch&gt;/2004.2 /etc/make.profile</i>
+</pre>
+
+<p>
+<b>x86</b> - 這份profile改變默認的X11實行方案由
+<c>x11-base/xfree</c> 改為 <c>x11-base/xorg-x11</c>。這項改變
+更改到 <e>默認</e> 數值，而且關係重大，無論是否已安裝X server。
+如果你已安裝，它將不會影響你，你有權利更改X server為任何版本。
+</p>
+
+<p>
+<b>amd64</b> - 目前沒有基礎上的profile變動。沒有特別的動作需要執行。
+</p>
+
+</body>
+</section>
+<section>
+<title>升級至 2004.0</title>
+<body>
+
+<p>
+轉換到2004.0 profile，請指向 <path>/etc/make.profile</path> 
+symlink 到新目錄：
+</p>
+
+<pre caption="更新 the /etc/make.profile symlink">
+<comment>替換 &lt;arch&gt; 成你的架構</comment>
+# <i>rm /etc/make.profile</i>
+# <i>ln -s ../usr/portage/profiles/default-&lt;arch&gt;-2004.0 /etc/make.profile</i>
+</pre>
+
+<p>
+<b>All archs</b> - 目前沒有基礎上的profile變動。沒有特別的動作需要執行。
+</p>
+
+</body>
+</section>
+<section>
+<title>升級 1.4 profiles 之前的版本到 1.4</title>
+<body>
+
+<p>
+這份文件提供升級指南，雖然有些複雜，你可以參閱
+<uri link="/doc/en/new-upgrade-to-gentoo-1.4.xml">here</uri>.
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
