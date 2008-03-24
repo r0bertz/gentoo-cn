@@ -2,9 +2,9 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.3 -->
+<!-- English CVS version: 1.4 -->
 
-<book link="/doc/zh_cn/handbook/2008.0/handbook-x86.xml" lang="zh_cn">
+<book disclaimer="draft" lang="zh_cn">
 <title>Gentoo Linux 2008.0 x86无网络手册</title>
 
 <values>
