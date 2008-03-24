@@ -1,58 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE inserts SYSTEM "/dtd/inserts.dtd">
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/inserts.xml,v 1.1 2006/09/01 10:47:13 neysx Exp $-->
-<inserts lang="zh_cn">
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_tw/inserts.xml,v 1.1 2006/09/01 10:47:13 neysx Exp $-->
+<inserts lang="zh_tw">
   <version>1</version>
-  <insert name="Content">内容</insert>
-  <insert name="Credits">致谢</insert>
+  <insert name="Content">內容</insert>
+  <insert name="Credits">致謝</insert>
   <insert name="Updated">更新于<docdate/></insert>
-  <insert name="Outdated">本文档的<uri link="$originalversion">原始版本</uri>最后更新于<docdate/></insert>
+  <insert name="Outdated">本文檔的<uri link="$originalversion">原始版本</uri>最后更新于<docdate/></insert>
   <!-- Doc not in /doc/LL/metadoc.xml -->
-  <insert name="NoIndex">本翻译已经不再被维护</insert>
+  <insert name="NoIndex">本翻譯已經不再被維護</insert>
   <!-- Doc in /doc/LL/metadoc.xml but not in /doc/en/metadoc.xml-->
-  <insert name="NoOriginal">本翻译的原始版本已经不再被维护</insert>
-  <insert name="Summary">总结</insert>
-  <insert name="Figure">图示</insert>
+  <insert name="NoOriginal">本翻譯的原始版本已經不再被維護</insert>
+  <insert name="Summary">總結</insert>
+  <insert name="Figure">圖示</insert>
   <insert name="Note">注意</insert>
   <insert name="Warning">警告</insert>
   <insert name="Important">重要</insert>
-  <insert name="CodeListing">代码</insert>
-  <insert name="GLinuxDoc">Gentoo Linux文档</insert>
-  <insert name="PrintableDoc">可打印Linux文档</insert>
-  <insert name="PrintablePrj">可打印Linux项目</insert>
+  <insert name="CodeListing">代碼</insert>
+  <insert name="GLinuxDoc">Gentoo Linux文檔</insert>
+  <insert name="PrintableDoc">可打印Linux文檔</insert>
+  <insert name="PrintablePrj">可打印Linux項目</insert>
   <insert name="SpaceBeforeColon"/>
   <insert name="Print">打印</insert>
   <insert name="PrintTip">查看利于打印版本</insert>
-  <insert name="Home">主页</insert>
-  <insert name="License">本文档的内容遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5">知识共享-署名-相同方式共享</uri>许可协议</insert>
-  <insert name="hb_file">指向书中其他部分的连接欠奉</insert>
+  <insert name="Home">主頁</insert>
+  <insert name="License">本文檔的內容遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5">知識共享-署名-相同方式共享</uri>許可協議</insert>
+  <insert name="hb_file">指向書中其他部分的連接欠奉</insert>
   <!-- Metadoc stuff -->
-  <insert name="GLinuxDocCat">Gentoo Linux文档类别</insert>
-  <insert name="members">成员</insert>
-  <insert name="member">成员</insert>
-  <insert name="lead">领导</insert>
+  <insert name="GLinuxDocCat">Gentoo Linux文檔類別</insert>
+  <insert name="members">成員</insert>
+  <insert name="member">成員</insert>
+  <insert name="lead">領導</insert>
   <insert name="name">姓名</insert>
-  <insert name="nick">昵称</insert>
+  <insert name="nick">昵稱</insert>
   <insert name="email">E-mail</insert>
-  <insert name="position">职位</insert>
+  <insert name="position">職位</insert>
   <insert name="files">文件</insert>
   <insert name="filename">文件名</insert>
   <insert name="version">版本</insert>
   <insert name="original">原始版本</insert>
-  <insert name="editing">编辑中</insert>
+  <insert name="editing">編輯中</insert>
   <insert name="N/A">N/A</insert>
   <insert name="bugs">Bugs</insert>
-  <insert name="showstoppers">显示顶部</insert>
+  <insert name="showstoppers">顯示頂部</insert>
   <insert name="normalbugs">普通Bug</insert>
-  <insert name="document">文档</insert>
+  <insert name="document">文檔</insert>
   <insert name="bugid">Bug ID</insert>
-  <insert name="untranslated">未翻译的文件</insert>
+  <insert name="untranslated">未翻譯的文件</insert>
    
   <!-- Disclaimer and redirect stuff -->
-  <insert name="disclaimer">声明</insert>
-  <insert name="articles">本文的原始版本最初发表于IBM developerWorks，现在所有权归属Westtech Information Services。本文档是原始文档的更新版本，包含了Gentoo Linux文档团队所做的很多改进。<br/>现在无人积极维护本文档。</insert>
-  <insert name="oldbook">本手册已经被新版本代替了，不再被维护。</insert>
-  <insert name="draft">本文档正在撰写中，不应该视本文为官方版本。</insert>
-  <insert name="obsolete">本文档已经不再有效且不再被维护了。</insert>
-  <insert name="redirect">几秒钟后您将会被重定向到<uri link="$redirect">新版本</uri>。</insert>
+  <insert name="disclaimer">聲明</insert>
+  <insert name="articles">本文的原始版本最初發表于IBM developerWorks，現在所有權歸屬Westtech Information Services。本文檔是原始文檔的更新版本，包含了Gentoo Linux文檔團隊所做的很多改進。<br/>現在無人積極維護本文檔。</insert>
+  <insert name="oldbook">本手冊已經被新版本代替了，不再被維護。</insert>
+  <insert name="draft">本文檔正在撰寫中，不應該視本文為官方版本。</insert>
+  <insert name="obsolete">本文檔已經不再有效且不再被維護了。</insert>
+  <insert name="redirect">几秒鐘后您將會被重定向到<uri link="$redirect">新版本</uri>。</insert>
 </inserts>

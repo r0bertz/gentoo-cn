@@ -2,22 +2,22 @@
 <?xml-stylesheet href="/xsl/metadoc.xsl" type="text/xsl"?>
 <?xml-stylesheet href="/xsl/guide.xsl" type="text/xsl"?>
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/overview.xml,v 1.2 2007/08/21 10:40:19 neysx Exp $ -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_tw/overview.xml,v 1.2 2007/08/21 10:40:19 neysx Exp $ -->
 
 <!DOCTYPE dynamic SYSTEM "/dtd/metadoc.dtd">
 
-<dynamic metadoc="/doc/zh_cn/metadoc.xml">
+<dynamic metadoc="/doc/zh_tw/metadoc.xml">
 <version>1</version>
 
-<title>文档开发情况概览</title>
+<title>文檔開發情況概覽</title>
 
 <intro>
 <section>
-<title>介绍</title>
+<title>介紹</title>
 <body>
 
 <p>
-在这里你将看到所有已经提供的文档以及重要bug等信息的概览。
+在這里你將看到所有已經提供的文檔以及重要bug等信息的概覽。
 </p>
 
 </body>
