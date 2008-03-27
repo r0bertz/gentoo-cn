@@ -115,7 +115,7 @@
     <file id="dri-howto">/doc/zh_cn/dri-howto.xml</file>
     <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
     <file id="gentoo-upgrading">/doc/zh_cn/gentoo-upgrading.xml</file>
-    <file id="migration-2.6">/doc/en/migration-to-2.6.xml</file>
+    <file id="migration-2.6">/doc/zh_cn/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
     <file id="faq">/doc/zh_cn/faq.xml</file>
     <file id="gentoo-alpha-faq">/doc/en/gentoo-alpha-faq.xml</file>
