@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding="utf-8"?>
-
 <!-- $Header$ -->
 <!-- English CVS version: 1.11 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
@@ -18,15 +17,12 @@
   <mail link="robert.zhangle@gmail.com">张乐</mail>
 </author>
 
-
 <abstract>
-这个文档试图去帮助那些想要手动修复破损的sys-apps/portage的安装的人。
+希望这个文档可以帮助到那些想要手动修复破损的sys-apps/portage的安装的人。
 </abstract>
 
-
-
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
 <version>0.3</version>
@@ -51,12 +47,13 @@
 <p>
 第一步是获取一个最新版本portage的压缩包。在以下的文章中我们使用<e>portage-2.1.1</e>作为一个例子（因为这是在写这篇文章的时候最新的稳定版本），如果可能的话请用软件包树里最新的版本来替换。 
 </p>
+
 <warn>
 如果你当前安装的python的版本小于2.4的话（你可以使用<c>python -V</c>来查看版本），那么你必须选择一个与之相兼容的portage版本。如果你有一个大于2.3版本的python就使用<e>portage-2.1.1.tar.bz2</e>，如果你有一个2.2版本的python就使用<e>portage-2.0.51.22.tar.bz2</e>。
 </warn>
 
 <p>
-在一些特定的损坏情况下，portage可能还可以为你下载压缩包，所以请先试着运行<c>emerge --fetchonly sys-apps/portage</c>，只有当这个方法行不通的时候，你才必须手动下载压缩包：
+在一些特定的情况下，portage虽然损坏但可能还可以为你下载压缩包，所以请先试着运行<c>emerge --fetchonly sys-apps/portage</c>，只有当这个方法行不通的时候，你才必须手动下载压缩包：
 </p>
 
 <pre caption="使用wget下载portage压缩包">
@@ -94,7 +91,7 @@
 </pre>
 
 <p>
-如果你不是在FreeBSD上使用Gentoo，那么你就要移除sed wrapper脚本，因为我们已经不再需要它了，而且大家也知道它和老版本的bash在一起会造成许多问题：
+如果你不是在FreeBSD上使用Gentoo，那么你就要移除sed wrapper脚本，因为我们已经不再需要它了，而且已知它和老版本的bash一起使用会造成许多问题：
 </p>
 
 <pre caption="移除sed wrapper脚本">
@@ -104,12 +101,13 @@
 <note>
 如果你之前不小心unmerge了portage或者因为其他原因丢失了<path>/etc/make.globals</path>，你也应该复制<path>cnf/make.globals</path>到<path>/etc</path>目录里，否则portage可能会有一些很奇怪的错误。
 </note>
+
 <note>
 如果前一个版本的portage是低于2.1的，那么你就需要在继续下一步之前运行<c>emerge --metadata</c>。这是必要的，因为它会把ebuild的metadata转换成portage2.1或以上版本所使用的新格式。如果你不确定上一个版本的poratge版本号，你运行这个命令也没有什么大碍。
 </note>
 
 <p>
-现在你应该又有了一个能工作的portage。为了确定现在你的系统是处于一个稳定的状态，你需要立刻再次运行<c>emerge sys-apps/portage</c>。
+现在你应该又有了一个能运行的portage。为了确定现在你的系统是处于一个稳定的状态，你需要立刻再次运行<c>emerge sys-apps/portage</c>。
 </p>
 
 <p>
