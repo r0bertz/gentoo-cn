@@ -220,8 +220,8 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 - nolvm         禁止加载LVM2模块
 - noload=module1,[module2,[...]]
                 禁止加载特定的内核模块
-- dosshd	启动sshd，对于无人职守安装有用
-- passwd=foo	将foo设置为root用户密码；与dosshd一起在远程安装时使用
+- dosshd        启动sshd，对于无人职守安装有用
+- passwd=foo    将foo设置为root用户密码；与dosshd一起在远程安装时使用
 </pre>
 
 <p>

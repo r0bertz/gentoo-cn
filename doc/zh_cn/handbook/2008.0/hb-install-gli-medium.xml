@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.2 -->
 
 <sections>
 
@@ -194,14 +194,14 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 你也能够设置内核选项。那些选项都是可选的设置，你可以根据自己的意愿打开或者关闭他们。以下列表与你在启动界面按下F2至F7键收到的信息相同。
 </p>
 
-<pre caption="可传递给你选择的内核的选项">
+<pre caption="可以使用的内核选项">
 <comment>硬件选项：</comment>
 acpi=on         加载对ACPI的支持，在启动光盘的同时启动acpid后台程序。这个选项只有
                 在你的系统需要ACPI才能正常运行的情况下才需要。启用超线程的支持
                 这个选项不是必需的。
 
 acpi=off        完全关闭ACPI。这在一些比较老的系统上有用，同时也是使用高级电源管
-                理（APM）的必要选项。这也将关闭你的处理器对超线程的任何支持。
+                理（APM）的必要选项。这也将关闭对你的处理器的超线程的支持。
 
 console=X       这个选项可以设置光盘的串口访问。第一个选项是设备，在x86上通常为
                 ttyS0，后面可以跟其他选项并用逗号分隔。默认选项为9600,8,n,1。
@@ -211,9 +211,6 @@ dmraid=X        这个选项用于向设备映射器RAID子系统传递参数。
 
 doapm           这个选项加载高级电源管理（APM）驱动支持。这需要你同时使用acpi=off
                 选项。
-
-doslowusb       这个选项在启动过程中增加一些额外的暂停，主要是为了IBM
-                BladeCenter的慢速USB CDROM。
 
 dopcmcia        这个选项加载了对PCMCIA和Cardbus硬件的支持，也使得pcmcia卡的
                 cardmgr能够在光盘启动的时候运行起来。这个选项只有在从
@@ -264,27 +261,16 @@ nosound         此选项关闭了声音支持和音量的设置。这个选项�
 
 nousb           此选项关闭了USB模块的自动加载。这个选项在调试USB问题时有用。
 
-<comment>卷/设备管理：</comment>
+slowusb         这个选项在启动过程中增加一些额外的暂停，主要是为了一些慢速USB
+                CDROM，例如IBM BladeCenter的。
 
-dodevfs         此选项在2.6系统中打开过时的设备文件系统（devfs）。你需要同时使用
-                noudev选项来使此选项生效。由于devfs是2.4内核的唯一选择，所以当使
-                用2.4内核启动的时候这个选项没有作用。
+<comment>卷/设备管理：</comment>
 
 doevms          此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
                 lvm同时使用并不安全。
 
 dolvm           此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms同时使用
                 并不安全。
-
-noudev          此选项关闭了2.6内核中对udev的支持。这个选项需要与dodevfs选项一起
-                使用。由于2.4内核不支持udev，所以如果启动2.4内核时此选项不起作用。
-
-unionfs         在支持Unionfs的光盘镜像文件上打开此支持。这个选项将在tmpfs上创建一
-                个可写的Unionfs overlay，允许你在光盘上改变任何文件。
-
-unionfs=X       在支持Unionfs的光盘镜像文件上打开此支持。这个选项将在你指定的设备
-                上创建一个可写的Unionfs overlay。这个设备必须是格式化过的，并且
-                文件系统是内核可辨认的类型且可写的。
 
 <comment>其他选项：</comment>
 
@@ -296,8 +282,15 @@ docache         此选项把光盘中整个运行部分缓存到内存中，你�
 doload=X        此选项使得初始内存盘加载任何列出的及其依赖的模块。把X替换成模
                 块名称。多个模块可以用一个逗号分隔的列表来指定。
 
+dosshd          启动sshd，对于无人职守安装有用
+
+passwd=foo      将foo设置为root用户密码；若使用dosshd必须使用此选项，否则我们会
+                将root密码设为随机值。
+
 noload=X        此选项使得初始内存盘跳过那些指定的可能引起问题的模块。语法同
                 doload。
+
+nonfs           启动是不启动portmap/nfsmount。
 
 nox             此选项使得一个支持X的LiveCD不自动启动X，而是启动到命令行模式。
 
@@ -307,6 +300,10 @@ scandelay       此选项使光盘在启动过程的特定部分暂停10秒，�
 scandelay=X     此选项允许你在启动过程的特定部分指定暂停指定的秒数，以允许那些
                 初始化比较慢的设备能够被使用。把X替换成暂停的秒数。
 </pre>
+
+<note>
+此CD将会先检查“no*”选项，然后再检查“do*”选项，所以你可以以你指定的顺序来覆盖任意选项。
+</note>
 
 <p>
 现在启动你的光盘，选择一个内核（如果你不喜欢默认的<c>gentoo</c>内核）和启动选项。例如：我们给你演示如何以<c>dopcmcia</c>内核参数启动<c>gentoo</c>内核：
