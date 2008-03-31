@@ -77,7 +77,7 @@
 
 <p>关于本期GMN的一切都可以在相应的<uri link="http://forums.gentoo.org/viewtopic-p-4968869.html">论坛帖子</uri>中讨论。我们盼望得到您的回应。</p>
 
-<p>读报愉快！</p>
+<p>请您欣赏！</p>
 
 </body>
 </section>
@@ -170,9 +170,9 @@ SPARC架构团队高兴地宣布对<mail link="armin76"/>作为其运作经理�
 <title>澳洲：linux.conf.au</title>
 <body>
 
-<p>大约在一月底的时候，发生了Gentoo在澳洲的第一个“大事件”。在<uri link="http://mel8ourne.org/">linux.conf.au</uri>活动期间，有大约三十位用户、开发者以及其他一些Gentoo爱好者，聚集在墨尔本大学的一个讲座大厅，举行了一系列会谈。这便是第一次的<uri link="http://mel8ourne.org/programme/tuesday#gentoo">Gentoo Down Under Mini-Conf</uri>。</p>
+<p>大约在一月底的时候，Gentoo在澳大利亚的一个第一次发生了。在<uri link="http://mel8ourne.org/">linux.conf.au</uri>活动期间，有大约三十位用户、开发者以及其他一些Gentoo爱好者，聚集在墨尔本大学的一个讲座大厅，举行了一系列会谈。这便是第一次的<uri link="http://mel8ourne.org/programme/tuesday#gentoo">Gentoo Down Under小型会议</uri>。</p>
 
-<p>早晨的活动由Sura Mendis开始，他向Mini-Conf——还有那些进错房间的人——介绍了Gentoo究竟是什么。不幸的是，关于Gentoo Hardened项目的讲话被取消了，但这看起来并没有影响到Ivan Miljenovic，他继续这个话题并谈论了许多有助于Gentoo日常管理的工具。早茶过后，Patrick Ohearn介绍了Paludis，之后是<mail link="mark_alec"/>的pkgcore。有趣的是，与会者中没有一个人使用过上面两个工具，只有少数人之前听说过。Mini-Conf在Andrew Cowie带来的名为“Looking back up the river”的演讲中结束，该演讲第一次发表在Gentoo UK 2007上。此次活动举办得很成功，在午餐的时候，人们还在接着讨论上午的那些话题。</p>
+<p>早晨的活动由Sura Mendis开始，他向与会者——还有那些进错房间的人——介绍了Gentoo究竟是什么。不幸的是，关于Gentoo Hardened项目的讲话被取消了，但这看起来并没有影响到Ivan Miljenovic，他继续这个话题并谈论了许多有助于Gentoo日常管理的工具。早茶过后，Patrick Ohearn介绍了Paludis，之后是<mail link="mark_alec"/>的pkgcore。有趣的是，与会者中没有一个人使用过上面两个工具，只有少数人之前听说过。会议在Andrew Cowie带来的名为“Looking back up the river”的演讲中结束，该演讲第一次发表在Gentoo UK 2007上。此次活动举办得很成功，在午餐的时候，人们还在接着讨论上午的那些话题。</p>
 
 <figure link="/images/gmn/20080317/gentoo-down-under08.jpg" short="Gentoo speakers and users" caption="从左到右依次是：Mark Kowarsky（mark_alec），Andrew Cowie（AfC），Ivan Miljenovic（ivanm），Shyam Mani（fox2mike），Sura Mendis，Aaron Carroll（Flathead），Patrick Ohearn（patoh）"/>
 
@@ -249,7 +249,7 @@ SPARC架构团队高兴地宣布对<mail link="armin76"/>作为其运作经理�
 <title>加密USB交换</title>
 <body>
 
-<p>如今大容量的高速USB闪存比以往任何时候都便宜。由于容量高达2G甚至是4G，这些闪存可以用来代替硬盘上的交换分区。当机器在向交换分区读／写数据时，系统处于颠簸状态，大量的时间被浪费在寻址上面。在闪存上进行交换可以使寻址时间小到几乎可以忽略不计。</p>
+<p>如今大容量的高速USB闪存比以往任何时候都便宜。由于容量高达2G甚至是4G，这些闪存可以用来代替硬盘上的交换分区。当机器在向交换分区读／写数据时，大量的时间被浪费在寻址上面。在闪存上进行交换可以使寻址时间小到几乎可以忽略不计。</p>
 
 <p><b>速率成卖点：</b>市场上能拿得到的闪存驱动器都自称写操作速度可以稳定到达20MBps，读操作可以稳定达到30MBps。购买这些闪存时需要注意，速度标识为诸如133X和200X的样式。其中的X因子和CD ROM驱动器的是一样的：代表150KBps。</p>
 
