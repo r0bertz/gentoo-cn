@@ -53,7 +53,7 @@
 <mail link="r0bertz@gentoo.org">张乐</mail>
 </author>
 
-<abstract>这是第二期的Gentoo月报，覆盖时段为2008年1月至2008年2月。</abstract>
+<abstract>这是第二期的Gentoo月报，覆盖时段为2008年1月至2月。</abstract>
 
 <summary/>
 
@@ -1583,7 +1583,7 @@ select:
   <ti>74</ti>
 </tr>
 </table>
-<figure link="/images/gmn/20080218/activity.png" short="Bug activity" caption="Bug发布"/>
+<figure link="/images/gmn/20080218/activity.png" short="Bug activity" caption="Bug分布"/>
 
 <p>在当前还未被修复的<b>10254</b>个bugs中：<b>18</b>个被标为<e>“blocker”</e>，<b>101</b>个被标为<e>“critical”</e>，还有<b>343</b>个被标为<e>“major”</e>。</p>
 
@@ -1760,30 +1760,12 @@ select:
 <p>Gentoo月报有下列语言的版本：</p>
 
 <ul>
-
-<li>
-<uri link="/news/en/gmn/index.xml">英文</uri>
-</li>
-
-<li>
-<uri link="/news/de/gmn/index.xml">德文</uri>
-</li>
-
-<li>
-<uri link="/news/it/gmn/index.xml">意大利文</uri>
-</li>
-
-<li>
-<uri link="/news/pl/gmn/index.xml">波兰文</uri>
-</li>
-
-<li>
-<uri link="/news/es/gmn/index.xml">西班牙文</uri>
-</li>
-
-<li>
-<uri link="/news/zh_cn/gmn/index.xml">简体中文</uri>
-</li>
+  <li><uri link="/news/en/gmn/index.xml">英文</uri></li>
+  <li><uri link="/news/de/gmn/index.xml">德文</uri></li>
+  <li><uri link="/news/it/gmn/index.xml">意大利文</uri></li>
+  <li><uri link="/news/pl/gmn/index.xml">波兰文</uri></li>
+  <li><uri link="/news/es/gmn/index.xml">西班牙文</uri></li>
+  <li><uri link="/news/zh_cn/gmn/index.xml">简体中文</uri></li>
 </ul>
 
 </body>
