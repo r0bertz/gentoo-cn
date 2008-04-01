@@ -4,8 +4,8 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-about.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.42 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.37 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本章介绍了本手册所讲解的安装方式。
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>介绍</title>
@@ -96,11 +96,11 @@ Gentoo的安装可以被分成10个步骤，从第2章到第11章，每一步都
 </p>
 
 <p>
-这份文档讲解了如何使用Gentoo安装光盘或者在某些情况下使用网络启动来安装Gentoo。这种安装方式假设你想要使用最新的软件包。如果你想要进行无网络安装，你应该阅读<uri link="/doc/zh_cn/handbook/2007.0/">Gentoo 2007.0手册</uri>，那里面包含无网络安装指南。
+这份文档讲解了如何使用Gentoo安装光盘或者在某些情况下使用网络启动来安装Gentoo。这种安装方式假设你想要使用最新的软件包。如果你想要进行无网络安装，你应该阅读<uri link="/doc/zh_cn/handbook/2008.0/">Gentoo 2008.0手册</uri>，那里面包含无网络安装指南。
 </p>
 
 <p>
-请注意，如果你打算用GRP（Gentoo参考平台，一套供即时使用的预编译软件包），你<e>一定</e>要依照<uri link="/doc/zh_cn/handbook/2007.0/">Gentoo 2007.0手册</uri>来安装。
+请注意，如果你打算用GRP（Gentoo参考平台，一套供即时使用的预编译软件包），你<e>一定</e>要依照<uri link="/doc/zh_cn/handbook/2008.0/">Gentoo 2008.0手册</uri>来安装。
 </p>
 
 <p>

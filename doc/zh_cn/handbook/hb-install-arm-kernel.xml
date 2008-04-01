@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.13 -->
+<!-- English CVS version: 1.9 -->
 
 <sections>
 
-<version>8.6</version>
-<date>2008-01-12</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>时区</title>
@@ -98,15 +98,6 @@ lrwxrwxrwx    1 root   root    12 Oct 13 11:04 /usr/src/linux -&gt; linux-<keyva
 <p>
 鉴于嵌入设备的特殊属性，我们将在这里介绍已知的arm板配置。如果您的机器不在列表中，那么您应当访问相关的社区站点，搜询如何正确配置您的内核。
 </p>
-
-<p>
-不管您的机器是哪一种，都应当确保开启“development and experimental code/drivers”。您必须激活它，否则，您将无法看到一些非常重要的代码/驱动：
-</p>
-
-<pre caption="选择experimental code/drivers">
-General setup ---&gt;
-  [*] Prompt for development and/or incomplete code/drivers
-</pre>
 
 <p>
 请从以下列表中选择您的机器来进入配置章节。
@@ -248,7 +239,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-现在请从<uri link="#kernel_modules">内核模块</uri>继续。
+现在请从<uri link="#kernel_modules">内核模块</uri>一节继续安装。
 </p>
 
 </body>
@@ -256,38 +247,7 @@ Device Drivers ---&gt;
 <section id="kernel_modules">
 <title>内核模块</title>
 <subsection>
-<title>配置内核模块</title>
-<body>
-
-<p>
-您可以在<path>/etc/modules.autoload.d/kernel-2.6</path>中列出您需要自动加载的模块。如果您愿意，您也可以加上模块的选项。
-</p>
-
-<p>
-要查看所有可用的模块，运行如下的<c>find</c>命令。不要忘记把“&lt;kernel version&gt;”替换成你刚编译好的内核版本：
-</p>
-
-<pre caption="查看所有可用的模块">
-# <i>find /lib/modules/&lt;kernel version&gt;/ -type f -iname '*.o' -or -iname '*.ko'</i>
-</pre>
-
-<p>
-例如，要自动加载<c>3c59x.ko</c>模块，编辑<path>kernel-2.6</path>文件，输入模块的名字。
-</p>
-
-<pre caption="编辑/etc/modules.autoload.d/kernel-2.6">
-# <i>nano -w /etc/modules.autoload.d/kernel-2.6</i>
-</pre>
-
-<pre caption="/etc/modules.autoload.d/kernel-2.6">
-3c59x
-</pre>
-
-<p>
-现在请从<uri link="?part=1&amp;chap=8">配置您的系统</uri>一章来继续您的安装。
-</p>
-
-</body>
+<include href="hb-install-kernelmodules.xml"/>
 </subsection>
 </section>
 </sections>

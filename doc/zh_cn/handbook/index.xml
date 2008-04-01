@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.72 -->
+<!-- English CVS version: 1.19 -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
 <title>Gentoo手册</title>
@@ -29,8 +29,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 
 <license/>
 
-<version>0.47</version>
-<date>2007-06-07</date>
+<version>0.48</version>
+<date>2008-03-22</date>
 
 <chapter>
 <title>Gentoo手册的成果</title>
@@ -53,8 +53,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 <uri link="/doc/pl/handbook/">波兰文</uri> |
 <!--<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |-->
 <!--<uri link="/doc/ru/handbook/">俄文</uri> |-->
-<uri link="/doc/zh_cn/handbook">简体中文</uri> |
-<uri link="/doc/es/handbook/">西班牙文</uri>
+<uri link="/doc/zh_cn/handbook">简体中文</uri>
+<!--<uri link="/doc/es/handbook/">西班牙文</uri>-->
 </p>
 
 </body>
@@ -131,15 +131,15 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 </tr>
 <tr>
   <ti>HTML</ti>
-  <ti>2007.0无网络安装指南</ti>
+  <ti>2008.0无网络安装指南</ti>
   <ti>
-    <uri link="/doc/zh_cn/handbook/2007.0/index.xml">2007.0 Gentoo手册</uri>
+    <uri link="/doc/zh_cn/handbook/2008.0/index.xml">2008.0 Gentoo手册</uri>
   </ti>
 </tr>
 </table>
 
 <p>
-我们也有基于特定发行版本的手册，它们包含了使用光盘进行<b>无网络</b>安装的安装指南。如果你对无网络安装感兴趣，请参阅<uri link="/doc/zh_cn/handbook/2007.0/index.xml">Gentoo Linux 2007.0手册</uri>。
+我们也有基于特定发行版本的手册，它们包含了使用光盘进行<b>无网络</b>安装的安装指南。如果你对无网络安装感兴趣，请参阅<uri link="/doc/zh_cn/handbook/2008.0/index.xml">Gentoo Linux 2008.0手册</uri>。
 </p>
 
 </body>
@@ -171,6 +171,17 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
     <uri link="2006.1/handbook-ppc64.xml">ppc64</uri>,
     <uri link="2006.1/handbook-sparc.xml">sparc</uri>,
     <uri link="2006.1/handbook-x86.xml">x86</uri>
+  </ti>
+</tr>
+<tr>
+  <ti>2007.0</ti>
+  <ti>
+    <uri link="2007.0/handbook-amd64.xml">amd64</uri>,
+    <uri link="2007.0/handbook-hppa.xml">hppa</uri>,
+    <uri link="2007.0/handbook-ppc.xml">ppc</uri>,
+    <uri link="2007.0/handbook-ppc64.xml">ppc64</uri>,
+    <uri link="2007.0/handbook-sparc.xml">sparc</uri>,
+    <uri link="2007.0/handbook-x86.xml">x86</uri>
   </ti>
 </tr>
 </table>

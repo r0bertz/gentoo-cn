@@ -1,38 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-sparc-disk.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.30 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- $Header$ -->
+<!-- English CVS version: 1.23 -->
 <sections>
 
-<version>4.1</version>
-<date>2007-06-26</date>
+<version>5.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>块设备入门</title>
 <subsection>
-<title>块设备</title>
-<body>
-
-<p>
-我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
-</p>
-
-<p>
-我们从介绍<e>块设备</e>开始。最典型的块设备可能是Linux系统里的第一个SCSI硬盘，即<path>/dev/sda</path>。
-</p>
-
-<p>
-上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
-</p>
-
-<p>
-块设备作为一些条目出现在<path>/dev/</path>里。一般来说，第一个SCSI驱动器被命名为<path>/dev/sda</path>，第二个叫<path>/dev/sdb</path>，依此类推。IDE驱动器的命名也类似，只是他们以hd-作为前缀而不是sd-。如果你使用IDE驱动器，那么第一个是<path>/dev/hda</path>，第二个是<path>/dev/hdb</path>，等等。
-</p>
-
-</body>
+<include href="hb-install-blockdevices.xml"/>
 </subsection>
 <subsection>
 <title>分区</title>
@@ -422,22 +403,7 @@ Command (m for help): <i>w</i>
 </body>
 </subsection>
 <subsection>
-<title>文件系统？</title>
-<body>
-
-<p>
-有很多文件系统可用，有些在SPARC上已经稳定。比如ext2和ext3都工作的很好。其它的文件系统可能会工作不正常。
-</p>
-
-<p>
-<b>ext2</b>是可靠的Linux文件系统。它不支持日志，也就是说周期性的检查在启动的时候会非常消耗时间。确实有新一代的日志文件系统能够在启动的时候非常快速得完成一致性检查，所以通常首选那些未做日志的副本。一般来说，日志文件系统可以避免系统启动的长时间延迟以及文件系统的不一致状态。
-</p>
-
-<p>
-<b>ext3</b>是ext2文件系统的带日志版本，提供了元数据日志模式，目的是为了快速恢复数据，此外还提供了其他的增强日志模式，如完整数据日志模式和有序数据日志模式。它使用了HTree索引，在几乎所有的情况下都能保持高性能。简而言之，ext3是非常好且可靠的文件系统。
-</p>
-
-</body>
+<include href="hb-install-filesystems.xml"/>
 </subsection>
 <subsection id="filesystems-apply">
 <title>在分区上建立文件系统</title>

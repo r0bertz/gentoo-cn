@@ -3,12 +3,12 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-stage.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.8 -->
+ $Header$ -->
+<!-- English CVS version: 1.12 -->
 <sections>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -141,7 +141,7 @@ Gentoo/MIPS netboot镜像提供了<c>wget</c>作为下载文件的工具。因�
 </p>
 
 <pre caption="用wget下载tarball">
-# <i>wget -c http://distfiles.gentoo.org/releases/mips/mips4/stage3-mips4-2007.0.tar.bz2</i>
+# <i>wget -c http://distfiles.gentoo.org/releases/mips/mips4/stage3-mips4-2008.0.tar.bz2</i>
 </pre>
 
 <p>
@@ -149,10 +149,10 @@ Gentoo/MIPS netboot镜像提供了<c>wget</c>作为下载文件的工具。因�
 </p>
 
 <pre caption="校验一个stage tarball完整性的例子">
-# <i>md5sum -c stage3-mips4-2007.0.tar.bz2.DIGESTS</i>
-stage3-mips4-2007.0.tar.bz2: OK
-# <i>sha1sum -c stage3-mips4-2007.0.tar.bz2.DIGESTS</i>
-stage3-mips4-2007.0.tar.bz2: OK
+# <i>md5sum -c stage3-mips4-2008.0.tar.bz2.DIGESTS</i>
+stage3-mips4-2008.0.tar.bz2: OK
+# <i>sha1sum -c stage3-mips4-2008.0.tar.bz2.DIGESTS</i>
+stage3-mips4-2008.0.tar.bz2: OK
 </pre>
 
 </body>

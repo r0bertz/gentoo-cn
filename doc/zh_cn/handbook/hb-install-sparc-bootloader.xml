@@ -3,12 +3,12 @@
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-sparc-bootloader.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.20 -->
+ $Header$ -->
+<!-- English CVS version: 1.19 -->
 <sections>
 
 <version>3.0</version>
-<date>2007-05-07</date>
+<date>2008-03-22</date>
 
 <section>
 <title>做出你的选择</title>

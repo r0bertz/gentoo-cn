@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.59 -->
+<!-- English CVS version: 1.46 -->
 <sections>
 
-<version>8.2</version>
-<date>2008-03-11</date>
+<version>9.0</version>
+<date>2008-03-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -73,8 +73,7 @@
 </subsection>
 </section>
 
-<!-- Copy/paste of hb-install-x86-medium.xml, with s/x86/ppc/ 
- START -->
+<!-- START -->
 <section>
 <title>Gentoo通用安装光盘</title>
 <subsection>
@@ -230,6 +229,16 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
   <ti><c>dopcmcia</c></ti>
   <ti>
     如果你想要在安装时使用PCMCIA驱动（比如PCMCIA网卡），你需要使用这个选项。
+  </ti>
+</tr>
+<tr>
+  <ti><c>dosshd</c></ti>
+  <ti>启用<c>sshd</c>。对于无人职守安装有用。</ti>
+</tr>
+<tr>
+  <ti><c>passwd=foo</c></ti>
+  <ti>
+    将foo设定为root用户密码。与<c>dosshd</c>一起在远程安装时使用。
   </ti>
 </tr>
 </table>
