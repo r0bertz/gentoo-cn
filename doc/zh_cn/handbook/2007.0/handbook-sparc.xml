@@ -2,9 +2,9 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/2007.0/handbook-sparc.xml,v 1.2 2007/09/14 17:37:36 r0bertz Exp $ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 
-<book link="/doc/zh_cn/handbook/2007.0/handbook-sparc.xml" lang="zh_cn">
+<book link="/doc/zh_cn/handbook/2007.0/handbook-sparc.xml" lang="zh_cn" disclaimer="oldbook">
 <title>Gentoo Linux 2007.0 SPARC无网络手册</title>
 
 <values>

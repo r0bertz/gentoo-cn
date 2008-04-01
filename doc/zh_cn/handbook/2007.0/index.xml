@@ -2,8 +2,8 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.13 -->
-<guide link="/doc/zh_cn/handbook/2007.0/index.xml" lang="zh_cn">
+<!-- English CVS version: 1.14 -->
+<guide link="/doc/zh_cn/handbook/2007.0/index.xml" lang="zh_cn" disclaimer="oldbook">
 <title>Gentoo 2007.0无网络安装手册</title>
 
 <author title="作者">
