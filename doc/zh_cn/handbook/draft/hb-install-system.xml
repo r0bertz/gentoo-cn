@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.35 -->
+<!-- English CVS version: 1.36 -->
 
 <sections>
 
@@ -194,7 +194,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyv
 </p>
 
 <pre test="func:keyval('arch')='AMD64'" caption="切换到non-multilib profile">
-# <i>ln -snf /usr/portage/profiles/default-linux/amd64/2008.0/no-multilib /etc/make.profile</i>
+# <i>ln -snf /usr/portage/profiles/default/linux/amd64/2008.0/no-multilib /etc/make.profile</i>
 </pre>
 
 </body>
