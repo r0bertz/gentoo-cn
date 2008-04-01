@@ -3,7 +3,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.204 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-  <version>1.126</version>
+  <version>1.127</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -192,40 +192,40 @@
     <file id="hb-net-modules">/doc/zh_cn/handbook/hb-net-modules.xml</file>
     <file id="hb-net-start">/doc/zh_cn/handbook/hb-net-start.xml</file>
     <file id="hb-net-wireless">/doc/zh_cn/handbook/hb-net-wireless.xml</file>
-    <file id="handbook-amd64-2007.0">/doc/zh_cn/handbook/2007.0/handbook-amd64.xml</file>
-    <file id="handbook-hppa-2007.0">/doc/zh_cn/handbook/2007.0/handbook-hppa.xml</file>
-    <file id="handbook-ppc64-2007.0">/doc/zh_cn/handbook/2007.0/handbook-ppc64.xml</file>
-    <file id="handbook-ppc-2007.0">/doc/zh_cn/handbook/2007.0/handbook-ppc.xml</file>
-    <file id="handbook-sparc-2007.0">/doc/zh_cn/handbook/2007.0/handbook-sparc.xml</file>
-    <file id="handbook-x86-2007.0">/doc/zh_cn/handbook/2007.0/handbook-x86.xml</file>
-    <file id="hb-install-about-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-about.xml</file>
-    <file id="hb-install-config-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-config.xml</file>
-    <file id="hb-install-finalise-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-finalise.xml</file>
-    <file id="hb-install-hppa-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-bootloader.xml</file>
-    <file id="hb-install-hppa-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-disk.xml</file>
-    <file id="hb-install-hppa-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-kernel.xml</file>
-    <file id="hb-install-hppa-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-hppa-medium.xml</file>
-    <file id="hb-install-network-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-network.xml</file>
-    <file id="hb-install-next-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-next.xml</file>
-    <file id="hb-install-ppc64-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-bootloader.xml</file>
-    <file id="hb-install-ppc64-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-disk.xml</file>
-    <file id="hb-install-ppc64-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-kernel.xml</file>
-    <file id="hb-install-ppc64-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc64-medium.xml</file>
-    <file id="hb-install-ppc-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-bootloader.xml</file>
-    <file id="hb-install-ppc-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-disk.xml</file>
-    <file id="hb-install-ppc-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-kernel.xml</file>
-    <file id="hb-install-ppc-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-ppc-medium.xml</file>
-    <file id="hb-install-sparc-bootloader-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-bootloader.xml</file>
-    <file id="hb-install-sparc-disk-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-disk.xml</file>
-    <file id="hb-install-sparc-kernel-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-kernel.xml</file>
-    <file id="hb-install-sparc-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-sparc-medium.xml</file>
-    <file id="hb-install-stage-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-stage.xml</file>
-    <file id="hb-install-system-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-system.xml</file>
-    <file id="hb-install-tools-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-tools.xml</file>
-    <file id="hb-install-gli-dialog-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gli-dialog.xml</file>
-    <file id="hb-install-gli-medium-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gli-medium.xml</file>
-    <file id="hb-install-gtkfe-2007.0">/doc/zh_cn/handbook/2007.0/hb-install-gtkfe.xml</file>
-    <file id="index-2007.0">/doc/zh_cn/handbook/2007.0/index.xml</file>
+    <file id="handbook-amd64-2008.0">/doc/zh_cn/handbook/2008.0/handbook-amd64.xml</file>
+    <file id="handbook-hppa-2008.0">/doc/zh_cn/handbook/2008.0/handbook-hppa.xml</file>
+    <file id="handbook-ppc64-2008.0">/doc/zh_cn/handbook/2008.0/handbook-ppc64.xml</file>
+    <file id="handbook-ppc-2008.0">/doc/zh_cn/handbook/2008.0/handbook-ppc.xml</file>
+    <file id="handbook-sparc-2008.0">/doc/zh_cn/handbook/2008.0/handbook-sparc.xml</file>
+    <file id="handbook-x86-2008.0">/doc/zh_cn/handbook/2008.0/handbook-x86.xml</file>
+    <file id="hb-install-about-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-about.xml</file>
+    <file id="hb-install-config-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-config.xml</file>
+    <file id="hb-install-finalise-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-finalise.xml</file>
+    <file id="hb-install-hppa-bootloader-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-hppa-bootloader.xml</file>
+    <file id="hb-install-hppa-disk-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-hppa-disk.xml</file>
+    <file id="hb-install-hppa-kernel-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-hppa-kernel.xml</file>
+    <file id="hb-install-hppa-medium-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-hppa-medium.xml</file>
+    <file id="hb-install-network-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-network.xml</file>
+    <file id="hb-install-next-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-next.xml</file>
+    <file id="hb-install-ppc64-bootloader-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc64-bootloader.xml</file>
+    <file id="hb-install-ppc64-disk-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc64-disk.xml</file>
+    <file id="hb-install-ppc64-kernel-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc64-kernel.xml</file>
+    <file id="hb-install-ppc64-medium-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc64-medium.xml</file>
+    <file id="hb-install-ppc-bootloader-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc-bootloader.xml</file>
+    <file id="hb-install-ppc-disk-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc-disk.xml</file>
+    <file id="hb-install-ppc-kernel-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc-kernel.xml</file>
+    <file id="hb-install-ppc-medium-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-ppc-medium.xml</file>
+    <file id="hb-install-sparc-bootloader-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-sparc-bootloader.xml</file>
+    <file id="hb-install-sparc-disk-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-sparc-disk.xml</file>
+    <file id="hb-install-sparc-kernel-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-sparc-kernel.xml</file>
+    <file id="hb-install-sparc-medium-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-sparc-medium.xml</file>
+    <file id="hb-install-stage-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-stage.xml</file>
+    <file id="hb-install-system-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-system.xml</file>
+    <file id="hb-install-tools-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-tools.xml</file>
+    <file id="hb-install-gli-dialog-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-gli-dialog.xml</file>
+    <file id="hb-install-gli-medium-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-gli-medium.xml</file>
+    <file id="hb-install-gtkfe-2008.0">/doc/zh_cn/handbook/2008.0/hb-install-gtkfe.xml</file>
+    <file id="index-2008.0">/doc/zh_cn/handbook/2008.0/index.xml</file>
     <file id="lvm2">/doc/zh_cn/lvm2.xml</file>
     <file id="gentoo-kernel">/doc/en/gentoo-kernel.xml</file>
     <file id="gentoo-ppc-faq">/doc/en/gentoo-ppc-faq.xml</file>
@@ -558,7 +558,7 @@
     <doc fileid="handbook_index">
       <memberof>install_guides</memberof>
     </doc>
-    <doc fileid="index-2007.0">
+    <doc fileid="index-2008.0">
       <memberof>install_guides</memberof>
     </doc>
     <doc fileid="gentoo-x86-quickinstall">
