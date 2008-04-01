@@ -53,8 +53,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 <uri link="/doc/pl/handbook/">波兰文</uri> |
 <!--<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |-->
 <!--<uri link="/doc/ru/handbook/">俄文</uri> |-->
-<uri link="/doc/zh_cn/handbook">简体中文</uri> |
-<uri link="/doc/es/handbook/">西班牙文</uri>
+<uri link="/doc/zh_cn/handbook">简体中文</uri>
+<!--<uri link="/doc/es/handbook/">西班牙文</uri>-->
 </p>
 
 </body>
