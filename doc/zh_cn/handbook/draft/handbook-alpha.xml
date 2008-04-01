@@ -11,10 +11,10 @@
  <key id="/boot">/dev/sda1</key>
  <key id="kernel-version">2.6.23-r8</key>
  <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
- <key id="min-cd-name">install-alpha-minimal-2008.0.iso</key>
+ <key id="min-cd-name">install-alpha-minimal-2008.0_beta1.iso</key>
  <key id="online-book">handbook-alpha.xml</key>
- <key id="release-dir">releases/alpha/2008.0/</key>
- <key id="stage3">stage3-alpha-2008.0.tar.bz2</key>
+ <key id="release-dir">releases/alpha/2008.0_beta1/</key>
+ <key id="stage3">stage3-alpha-2008.0_beta1.tar.bz2</key>
  <key id="profile">default-linux/alpha/2008.0</key>
  <key id="CFLAGS">-mieee -pipe -O2 -mcpu=ev6</key>
 </values>
