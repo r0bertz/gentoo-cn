@@ -259,7 +259,7 @@
     <file id="gentoo-x86-quickinstall-stage">/doc/zh_cn/gentoo-x86-quickinstall-stage.xml</file>
     <file id="gentoo-x86-quickinstall-system">/doc/zh_cn/gentoo-x86-quickinstall-system.xml</file>
     <file id="gentoo-x86-quickinstall_raid">/doc/zh_cn/gentoo-x86+raid+lvm2-quickinstall.xml</file>
-    <file id="vi-guide">/doc/en/vi-guide.xml</file>
+    <file id="vi-guide">/doc/zh_cn/vi-guide.xml</file>
     <file id="virt-mail-howto">/doc/en/virt-mail-howto.xml</file>
     <file id="mailfilter-guide">/doc/en/mailfilter-guide.xml</file>
     <file id="genkernel">/doc/en/genkernel.xml</file>
