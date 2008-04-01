@@ -12,8 +12,8 @@
  <key id="kernel-version">2.6.23-r8</key>
  <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
  <key id="online-book">2008.0/handbook-ppc64.xml</key>
- <key id="release-dir">releases/ppc/2008.0/ppc64/</key>
- <key id="stage3">stage3-ppc64-32ul-2008.0.tar.bz2</key>
+ <key id="release-dir">releases/ppc/2008.0_beta1/ppc64/</key>
+ <key id="stage3">stage3-ppc64-32ul-2008.0_beta1.tar.bz2</key>
  <key id="CFLAGS">-O2 -pipe</key>
 </values>
 

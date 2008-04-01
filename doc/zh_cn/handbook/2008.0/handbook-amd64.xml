@@ -9,7 +9,7 @@
 
 <values>
  <key id="arch">AMD64</key>
- <key id="release-dir">releases/amd64/2008.0/</key>
+ <key id="release-dir">releases/amd64/2008.0_beta1/</key>
  <key id="online-book">2008.0/handbook-amd64.xml</key>
 </values>
 

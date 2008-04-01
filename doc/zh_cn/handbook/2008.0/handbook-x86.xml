@@ -9,7 +9,7 @@
 
 <values>
  <key id="arch">x86</key>
- <key id="release-dir">releases/x86/2008.0/</key>
+ <key id="release-dir">releases/x86/2008.0_beta1/</key>
  <key id="online-book">2008.0/handbook-x86.xml</key>
 </values>
 
