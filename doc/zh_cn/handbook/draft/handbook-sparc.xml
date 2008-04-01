@@ -3,7 +3,7 @@
 
 <!-- $Header$ -->
 <!-- English CVS version: 1.41 -->
-<book link="/doc/zh_cn/handbook/handbook-sparc.xml" lang="zh_cn">
+<book link="/doc/zh_cn/handbook/handbook-sparc.xml" lang="zh_cn" disclaimer="draft">
 <title>Gentoo Linux SPARC手册</title>
 
 <values>
