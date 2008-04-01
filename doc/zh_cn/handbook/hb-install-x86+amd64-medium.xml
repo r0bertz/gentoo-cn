@@ -69,7 +69,11 @@
 </tr>
 <tr>
   <th>CPU</th>
-  <ti colspan="2">任何AMD64 CPU或者EM64T CPU</ti>
+  <ti colspan="2">
+    任何AMD64 CPU或者<uri
+    link="http://en.wikipedia.org/wiki/EMT64#Intel_64">EM64T
+    CPU</uri>（Core 2 Duo &amp; Quad处理器是EM64T CPU）
+  </ti>
 </tr>
 <tr>
   <th>内存</th>
@@ -320,115 +324,199 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 <body>
 
 <p>
-你也可以使用内核选项。他们代表了一些你可以激活或取消的设置。下面的列表和你在启动界面里敲击F2所看到的一样。
+你也可以使用内核选项。他们代表了一些你可以激活或取消的设置。你在启动界面里敲击F2就可以看到下面的选项。
 </p>
 
-<pre caption="可以使用的内核选项">
-<comment>硬件选项：</comment>
-acpi=on         加载对ACPI的支持，在启动光盘的同时启动acpid后台程序。这个选项只有
-                在你的系统需要ACPI才能正常运行的情况下才需要。启用超线程的支持
-                这个选项不是必需的。
+<p>
+<brite>硬件选项：</brite>
+</p>
 
-acpi=off        完全关闭ACPI。这在一些比较老的系统上有用，同时也是使用高级电源管
-                理（APM）的必要选项。这也将关闭对你的处理器的超线程的支持。
+<dl>
+<dt>acpi=on</dt>
+<dd>
+  加载对ACPI的支持，在启动光盘的同时启动acpid后台程序。这个选项只有
+  在你的系统需要ACPI才能正常运行的情况下才需要。启用超线程的支持
+  这个选项不是必需的。
+</dd>
+<dt>acpi=off</dt>
+<dd>
+  完全关闭ACPI。这在一些比较老的系统上有用，同时也是使用高级电源管
+  理（APM）的必要选项。这也将关闭对你的处理器的超线程的支持。
+</dd>
+<dt>console=X</dt>
+<dd>
+  这个选项可以设置光盘的串口访问。第一个选项是设备，在x86上通常为
+  ttyS0，后面可以跟其他选项并用逗号分隔。默认选项为9600,8,n,1。
+</dd>
+<dt>dmraid=X</dt>
+<dd>
+  这个选项用于向设备映射器RAID子系统传递参数。传递的参数必须包含
+  在引号内。
+</dd>
+<dt>doapm</dt>
+<dd>
+  这个选项加载高级电源管理（APM）驱动支持。这需要你同时使用acpi=off
+  选项。
+</dd>
+<dt>dopcmcia</dt>
+<dd>
+  这个选项加载了对PCMCIA和Cardbus硬件的支持，也使得pcmcia卡的
+  cardmgr能够在光盘启动的时候运行起来。这个选项只有在从
+  PCMCIA/Cardbus设备启动的时候才需要。
+</dd>
+<dt>doscsi</dt>
+<dd>
+  这个选项加载对大部分SCSI控制器的支持。在大多数USB设备启动的时候
+  也需要这个选项，因为USB设备使用内核中的SCSI子系统。
+</dd>
+<dt>hda=stroke</dt>
+<dd>
+  这个选项允许你对整个硬盘进行分区，即使你的BIOS不能处理大硬盘。
+  此选项仅使用在使用旧BIOS的机器上。使用时把hda替换为需要这个选项
+  的设备。
+</dd>
+<dt>ide=nodma</dt>
+<dd>
+  此选项强制关闭内核中的DMA，一些IDE和CDROM驱动需要这个选项。如果
+  你的系统在读取IDE接口的光驱的时候遇到麻烦，可以尝试一下此选项。
+  此选项同时也将关闭hdparm的默认设置。
+</dd>
+<dt>noapic</dt>
+<dd>
+  此选项关闭了在一些新主板上存在的高级可编程中断控制器。它在一些旧
+  的硬件上会引发一些问题。
+</dd>
+<dt>nodetect</dt>
+<dd>
+  此选项降会关闭光盘会做的所有自动检测，包括设备检测和DHCP探测。这
+  在调试有问题的光盘或驱动的时候有用。
+</dd>
+<dt>nodhcp</dt>
+<dd>
+  此选项将禁止在检测到的网卡上进行DHCP探测。这对仅有静态地址的网络
+  很有用。
+</dd>
+<dt>nodmraid</dt>
+<dd>
+  关闭了设备映射RAID的支持，例如用于板载IDE/SATA RAID的控制器。
+</dd>
+<dt>nofirewire</dt>
+<dd>
+  此选项关闭了Firewire模块加载。这个选项只有在你的Firewire硬件导致
+  光盘启动出现问题的时候才需要。
+</dd>
+<dt>nogpm</dt>
+<dd>
+  此选项关闭了gpm控制台鼠标支持。
+</dd>
+<dt>nohotplug</dt>
+<dd>
+  此选项关闭启动时对热插拔（hotplug）和冷插拔（coldplug）启动脚本的加
+  载。这个选项在调试失败的光盘和驱动的时候有用。
+</dd>
+<dt>nokeymap</dt>
+<dd>
+  此选项禁止了键盘布局选择。
+</dd>
+<dt>nolapic</dt>
+<dd>
+  此选项关闭了在单处理器内核上的本地APIC。
+</dd>
+<dt>nosata</dt>
+<dd>
+  此选项关闭了对串行ATA（SATA）模块的加载。当你的系统的SATA子系统有
+  问题的时候，此选项有用。
+</dd>
+<dt>nosmp</dt>
+<dd>
+  此选项关闭了在支持SMP（对称式多处理）的内核中的SMP功能。这个选项用
+  于调试在特定的驱动和主板上与SMP相关的问题。
+</dd>
+<dt>nosound</dt>
+<dd>
+  此选项关闭了声音支持和音量的设置。这个选项在声音支持出现问题的系
+  统上有用。
+</dd>
+<dt>nousb</dt>
+<dd>
+  此选项关闭了USB模块的自动加载。这个选项在调试USB问题时有用。
+</dd>
+<dt>slowusb</dt>
+<dd>
+  这个选项在启动过程中增加一些额外的暂停，主要是为了一些慢速USB
+  CDROM，例如IBM BladeCenter的。
+</dd>
+</dl>
 
-console=X       这个选项可以设置光盘的串口访问。第一个选项是设备，在x86上通常为
-                ttyS0，后面可以跟其他选项并用逗号分隔。默认选项为9600,8,n,1。
+<p>
+<brite>卷/设备管理：</brite>
+</p>
 
-dmraid=X        这个选项用于向设备映射器RAID子系统传递参数。传递的参数必须包含
-                在引号内。
+<dl>
+<dt>doevms</dt>
+<dd>
+  此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
+  lvm同时使用并不安全。
+</dd>
+<dt>dolvm</dt>
+<dd>
+  此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms同时使用
+  并不安全。
+</dd>
+</dl>
 
-doapm           这个选项加载高级电源管理（APM）驱动支持。这需要你同时使用acpi=off
-                选项。
+<p>
+<brite>其他选项：</brite>
+</p>
 
-dopcmcia        这个选项加载了对PCMCIA和Cardbus硬件的支持，也使得pcmcia卡的
-                cardmgr能够在光盘启动的时候运行起来。这个选项只有在从
-                PCMCIA/Cardbus设备启动的时候才需要。
-
-doscsi          这个选项加载对大部分SCSI控制器的支持。在大多数USB设备启动的时候
-                也需要这个选项，因为USB设备使用内核中的SCSI子系统。
-
-hda=stroke      这个选项允许你对整个硬盘进行分区，即使你的BIOS不能处理大硬盘。
-                此选项仅使用在使用旧BIOS的机器上。使用时把hda替换为需要这个选项
-                的设备。
-
-ide=nodma       此选项强制关闭内核中的DMA，一些IDE和CDROM驱动需要这个选项。如果
-                你的系统在读取IDE接口的光驱的时候遇到麻烦，可以尝试一下此选项。
-                此选项同时也将关闭hdparm的默认设置。
-
-noapic          此选项关闭了在一些新主板上存在的高级可编程中断控制器。它在一些旧
-                的硬件上会引发一些问题。
-
-nodetect        此选项降会关闭光盘会做的所有自动检测，包括设备检测和DHCP探测。这
-                在调试有问题的光盘或驱动的时候有用。
-
-nodhcp          此选项将禁止在检测到的网卡上进行DHCP探测。这对仅有静态地址的网络
-                很有用。
-
-nodmraid        关闭了设备映射RAID的支持，例如用于板载IDE/SATA RAID的控制器。
-
-nofirewire      此选项关闭了Firewire模块加载。这个选项只有在你的Firewire硬件导致
-                光盘启动出现问题的时候才需要。
-
-nogpm           此选项关闭了gpm控制台鼠标支持。
-
-nohotplug       此选项关闭启动时对热插拔（hotplug）和冷插拔（coldplug）启动脚本的加
-                载。这个选项在调试失败的光盘和驱动的时候有用。
-
-nokeymap        此选项禁止了键盘布局选择。
-
-nolapic         此选项关闭了在单处理器内核上的本地APIC。
-
-nosata          此选项关闭了对串行ATA（SATA）模块的加载。当你的系统的SATA子系统有
-                问题的时候，此选项有用。
-
-nosmp           此选项关闭了在支持SMP（对称式多处理）的内核中的SMP功能。这个选项用
-                于调试在特定的驱动和主板上与SMP相关的问题。
-
-nosound         此选项关闭了声音支持和音量的设置。这个选项在声音支持出现问题的系
-                统上有用。
-
-nousb           此选项关闭了USB模块的自动加载。这个选项在调试USB问题时有用。
-
-slowusb         这个选项在启动过程中增加一些额外的暂停，主要是为了一些慢速USB
-                CDROM，例如IBM BladeCenter的。
-
-<comment>卷/设备管理：</comment>
-
-doevms          此选项打开了对IBM的可插拔EVMS（企业卷管理系统）的支持。这个选项与
-                lvm同时使用并不安全。
-
-dolvm           此选项打开对Linux逻辑卷管理（lvm2）的支持。这个选项与evms同时使用
-                并不安全。
-
-<comment>其他选项：</comment>
-
-debug           启用调试代码。这个选项会在屏幕上显示很多数据，可能会很凌乱。
-
-docache         此选项把光盘中整个运行部分缓存到内存中，你就可以umount /mnt/cdrom
-                然后mount另一个CDROM。此选项要求你至少有两倍于CDROM的可用内存。
-
-doload=X        此选项使得初始内存盘加载任何列出的及其依赖的模块。把X替换成模
-                块名称。多个模块可以用一个逗号分隔的列表来指定。
-
-dosshd          启动sshd，对于无人职守安装有用
-
-passwd=foo      将foo设置为root用户密码；若使用dosshd必须使用此选项，否则我们会
-                将root密码设为随机值。
-
-noload=X        此选项使得初始内存盘跳过那些指定的可能引起问题的模块。语法同
-                doload。
-
-nonfs           启动是不启动portmap/nfsmount。
-
-nox             此选项使得一个支持X的LiveCD不自动启动X，而是启动到命令行模式。
-
-scandelay       此选项使光盘在启动过程的特定部分暂停10秒，以允许那些初始化比较慢的
-                设备能够被使用。
-
-scandelay=X     此选项允许你在启动过程的特定部分指定暂停指定的秒数，以允许那些
-                初始化比较慢的设备能够被使用。把X替换成暂停的秒数。
-</pre>
+<dl>
+<dt>debug</dt>
+<dd>
+  启用调试代码。这个选项会在屏幕上显示很多数据，可能会很凌乱。
+</dd>
+<dt>docache</dt>
+<dd>
+  此选项把光盘中整个运行部分缓存到内存中，你就可以umount /mnt/cdrom
+  然后mount另一个CDROM。此选项要求你至少有两倍于CDROM的可用内存。
+</dd>
+<dt>doload=X</dt>
+<dd>
+  此选项使得初始内存盘加载任何列出的及其依赖的模块。把X替换成模
+  块名称。多个模块可以用一个逗号分隔的列表来指定。
+</dd>
+<dt>dosshd</dt>
+<dd>
+  启动sshd，对于无人职守安装有用
+</dd>
+<dt>passwd=foo</dt>
+<dd>
+  将foo设置为root用户密码；若使用dosshd必须使用此选项，否则我们会
+  将root密码设为随机值。
+</dd>
+<dt>noload=X</dt>
+<dd>
+  此选项使得初始内存盘跳过那些指定的可能引起问题的模块。语法同
+  doload。
+</dd>
+<dt>nonfs</dt>
+<dd>
+  启动是不启动portmap/nfsmount。
+</dd>
+<dt>nox</dt>
+<dd>
+  此选项使得一个支持X的LiveCD不自动启动X，而是启动到命令行模式。
+</dd>
+<dt>scandelay</dt>
+<dd>
+  此选项使光盘在启动过程的特定部分暂停10秒，以允许那些初始化比较慢的
+  设备能够被使用。
+</dd>
+<dt>scandelay=X</dt>
+<dd>
+  此选项允许你在启动过程的特定部分指定暂停指定的秒数，以允许那些
+  初始化比较慢的设备能够被使用。把X替换成暂停的秒数。
+</dd>
+</dl>
 
 <note>
 此CD将会先检查“no*”选项，然后再检查“do*”选项，所以你可以以你指定的顺序来覆盖任意选项。
