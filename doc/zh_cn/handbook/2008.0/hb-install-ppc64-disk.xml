@@ -13,22 +13,7 @@
 <section>
 <title>块设备介绍</title>
 <subsection>
-<title>块设备</title>
-<body>
-
-<p>
-我们要好好了解下Gentoo Linux以及普通Linux中有关磁盘方面的知识，这包括Linux文件系统、分区和块设备。然后，一旦你熟悉了磁盘和文件系统的方方面面，我们将会指导你设置分区和文件系统，为你安装Gentoo Linux做好准备。
-</p>
-
-<p>
-一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个IDE硬盘的<path>/dev/hda</path>。如果你使用SCSI硬盘，那么你的第一个硬盘将会是<path>/dev/sda</path>。Serial ATA硬盘也是<path>/dev/sda</path>，虽然它们是IDE硬盘。如果你正在使用内核里新的libata架构，所有的硬盘都将是<path>/dev/sd*</path>。
-</p>
-
-<p>
-上面介绍的块设备代表磁盘的抽象接口。用户程序可以使用这些块设备来与你的磁盘进行交互，而不用理会你的驱动器到底是IDE、SCSI还是其他的。程序可以把磁盘当作一系列连续的、可随机访问的512字节大小的块来访问。
-</p>
-
-</body>
+<include href="../hb-install-blockdevices.xml"/>
 </subsection>
 <subsection>
 <title>分区和片段</title>
