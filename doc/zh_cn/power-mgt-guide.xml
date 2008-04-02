@@ -1,0 +1,1373 @@
+<?xml version='1.0' encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header:$--> 
+<!--English CVS version: 1.35-->
+<guide link="/doc/en/power-management-guide.xml" lang="zh_cn">
+<title>电源管理指导</title>
+
+<author title="作者">
+  <mail link="earthwings@gentoo.org">Dennis Nienhüser</mail>
+</author>
+<author title="编辑">
+  <mail link="chriswhite@gentoo.org">Chris White</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者">
+  <mail link="acevery@gmail.com">余钰炜</mail>
+</author>
+
+<abstract>
+电源管理是延长移动系统上电池使用时间的关键，比如在笔记本电脑上。这篇指导将帮你在你的笔记本上设置它。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.39</version>
+<date>2008-01-31</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<body>
+
+<p>
+最近的几年中，笔记本电脑电池的容量和寿命都有了很大的提高。然而现代的处理器比旧的更加耗能而每一代新的笔记本电脑又增加了许多蚕食电源的设备。正因为如此，电源管理比以前任何时候都重要。增加电池的使用时间并不意味着你需要多买一个电池。很大程度可以通过使用智能的电源管理策略来实现。
+</p>
+
+</body>
+</section>
+<section>
+<title>概述</title>
+<body>
+
+<p>
+请注意，这篇指导描述的是<e>笔记本电脑</e>的电源管理。虽然其中有些小节也可适用于<e>服务器</e>，但其它的部分则不适用并可能造成损害。所以请不要把本指导应用于服务器，除非你确实知道你在干什么。
+</p>
+
+<p>
+因为这篇指导的确比较长，这个短短的概述帮你统领全篇。
+</p>
+
+<p>
+<uri 
+link="#doc_chap2">前提条件</uri>一章讲了使接下来的设备部分能有效实现的一些前提条件。其中包括了BIOS的设定、内核的编译以及用户方面的简化设定。接下来的三章聚焦于典型的耗电设备: 
+处理器、显示器和硬盘。它们都可以被单独配置。<uri link="#doc_chap3">CPU 
+电源管理</uri>展示了如何通过调整处理器的主频来尽可能地节省电源，同时不损失太多的性能。在<uri 
+link="#doc_chap5">硬盘电源管理</uri>中有一些不同的、避免你硬盘不必要地工作的小技巧(附带地，也使硬盘的工作噪声降低)。关于显卡、无线网卡及USB的注意事项请见<uri 
+link="#doc_chap6">其它设备的电源管理</uri>，而其它章节则致力于(非常试验性的)<uri 
+link="#doc_chap7">休眠状态</uri>。最后<uri link="#doc_chap8">常见问题</uri>中列出了一些易犯的错误。
+</p>
+
+</body>
+</section>
+<section>
+<title>每部分的电源预算</title>
+<body>
+
+<figure link="/images/energy-budget.png" short="每部分消耗了多少电量？" caption="每部分的电量预算"/>
+
+<p>
+几乎每部分都可以在不同的状态下工作——关闭、休眠、空闲、激活，即消耗不同的电量。电量主要消耗于LCD显示器、CPU、芯片组和硬盘。通常情况下，我们可以在BIOS中激活操作系统无关的电源管理，但是在操作系统中的智能设置则可以适应于不同的情况，从而实现更多。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>前提条件</title>
+<section>
+<body>
+
+<p>
+在讨论如何使单独的设备能实现电源管理之前，先确定已经具备了一些必要的条件。在设置好BIOS后，一些内核的选项需要选上——简单地说就是ACPI、休眠状态(sleep 
+states)和CPU降频(CPU frequency 
+scaling)。因为在大多数情况下，节能就意味着性能的损失或是响应速度的下降，所以应该仅在使用电池时启用。使用一个新的运行级别<e>battery</e>，意为电池，将会很方便。
+</p>
+
+</body>
+</section>
+<section>
+<title>BIOS部分</title>
+<body>
+
+<p>
+首先，我们来看看和电源管理有关的BIOS设定。最好的方式是将BIOS的设置和操作系统的策略结合起来，不过现在最好把绝大部分BIOS相关的部分禁用掉。以确保它不会干扰你的策略。不要忘了在你完成了其他设置后再检查一下你的BIOS设置。
+</p>
+
+</body>
+</section>
+<section>
+<title>设定USE标记</title>
+<body>
+
+<p>
+请检查一下<c>acpi</c>的USE标记已经在<path>/etc/make.conf</path>中设置了。其他你可能感兴趣的USE标记是<c>apm</c>、<c>lm-sensors</c>、<c>nforce2</c>、<c>nvidia</c>、<c>pmu</c>。查阅<path>/usr/portage/profiles/use*.desc</path>来获得更多的细节。如果你忘了设置这些标记，你可以用<c>--newuse</c>参数重新<c>emerge</c>那些受影响的包。
+</p>
+
+</body>
+</section>
+<section>
+<title>配置内核</title>
+<body>
+
+<p>
+ACPI(高级配置与电源接口)的内核支持依然在开发中。使用最新的内核确保你可以最大程度地利用它。
+</p>
+
+<p>
+Portage中有多个不同的内核。我推荐使用<c>gentoo-sources</c>或者<c>tuxonice-sources</c>。后者包括了TuxOnIce的补丁，参见有关<uri 
+link="#doc_chap7">休眠状态</uri>的章节。当配置内核的时候，至少应启用下面这些选项：
+</p>
+
+<pre caption="电源管理的内核最简设置（内核2.6）">
+Power Management Options ---&gt;
+  [*] Power Management Support
+  [ ] Software Suspend
+
+  ACPI( Advanced Configuration and Power Interface ) Support ---&gt;
+    [*] ACPI Support
+    [ ]   Sleep States
+    [ ]     /proc/acpi/sleep (deprecated)
+    [*]   AC Adapter
+    [*]   Battery
+    &lt;M&gt;   Button
+    &lt;M&gt;   Video
+    [ ]   Generic Hotkey
+    &lt;M&gt;   Fan
+    &lt;M&gt;   Processor
+    &lt;M&gt;     Thermal Zone
+    &lt; &gt;   ASUS/Medion Laptop Extras
+    &lt; &gt;   IBM ThinkPad Laptop Extras
+    &lt; &gt;   Toshiba Laptop Extras
+    (0)   Disable ACPI for systems before Jan 1st this year
+    [ ]   Debug Statements
+    [*]   Power Management Timer Support
+    &lt; &gt;   ACPI0004,PNP0A05 and PNP0A06 Container Driver (EXPERIMENTAL)
+
+  CPU Frequency Scaling ---&gt;
+    [*] CPU Frequency scaling
+    [ ]   Enable CPUfreq debugging
+    &lt; &gt;   CPU frequency translation statistics
+    [ ]     CPU frequency translation statistics details
+          Default CPUFreq governor (userspace)
+    &lt;*&gt;   'performance' governor
+    &lt;*&gt;   'powersave' governor
+    &lt;*&gt;   'ondemand' cpufreq policy governor
+    &lt;*&gt;   'conservative' cpufreq governor
+    &lt;*&gt;   CPU frequency table helpers
+    &lt;M&gt; ACPI Processor P-States driver
+    &lt;*&gt; <i>CPUFreq driver for your processor</i>
+</pre>
+
+<p>
+自己决定你是否需要休眠（Software Suspend）、挂起状态（Sleep States）（见正文）。如果你用的是ASUS、Median、IBM 
+ThinkPad或者Toshiba的笔记本，就选择相应的部分。
+</p>
+
+<p>
+内核需要知道如何为你处理器启动CPU降频。因为每种CPU都有不同的接口，所以你得为你的处理器选择正确的驱动。要小心的是——比如，在Pentim 
+M的系统上启用<c>Intel Pentium 4 clock 
+modulation</c>会导致奇怪的结果。如果你不能确定选择哪一个，查阅一下内核的文档。
+</p>
+
+<p>
+编译你的内核，确保开机时加载了正确的模块并启动进入你新的启用了ACPI的内核。接着运行<c>emerge 
+sys-power/acpid</c>以获得acpi的后台程序。它会通知你相关的事件，如从AC电源切换到电池或者合上了笔记本。如果你没有把相应的模块编译进内核的话，一定要确保已经加载了它们。然后通过执行 
+<c>/etc/init.d/acpid start</c>来启动acpid。很快你就会看到如何使用它。
+</p>
+
+<pre caption="安装acpid">
+# <i>emerge sys-power/acpid</i>
+# <i>/etc/init.d/acpid start</i>
+# <i>rc-update add acpid default</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>创建"battery"运行级别</title>
+<body>
+
+<p>
+默认的策略是当且仅当需要的时候启动电源管理——使用电池的时候。为了能方便地在AC电源和电池的状态间切换，创建一个运行级别<c>battery</c>来控制启动和关闭电源管理的脚本。
+</p>
+
+<note>
+如果你不喜欢使用另一个运行级别的办法，你可以安全地跳过这部分。不过，跳过这一步就需要一些技巧来设置了。下面的都是假设有一个<c>battery</c>的运行级别存在的。
+</note>
+
+<pre caption="创建battery运行级别">
+# <i>cd /etc/runlevels</i>
+# <i>cp -a default battery</i>
+</pre>
+
+<p>
+完成了。你新的运行级别<c>battery</c>包含了所有<c>default</c>级别中的东西，但是还没有它们之间的自动切换，让我们改变一下吧。
+</p>
+
+</body>
+</section>
+<section>
+<title>响应ACPI事件</title>
+<body>
+
+<p>
+典型的ACPI事件有合上笔记本、电源切换及按下休眠键等。其中一个重要的事件是切换电源，此时应该导致一次运行级别的切换。一个小脚本会处理它。
+</p>
+
+<p>
+首先，你需要一个脚本根据电源情况在<c>default</c>和<c>battery</c>间切换。这个脚本使用<c>sys-power/powermgmt-base</c>中的<c>on_ac_power</c>命令——所以确定这个包已经安装在你的系统上了。
+</p>
+
+<pre caption="安装powermgmt-base">
+# <i>emerge powermgmt-base</i>
+</pre>
+
+<p>
+现在你可以通过在shell中执行<c>on_ac_power &amp;&amp; echo AC available || echo Running 
+on 
+batteries</c>来知道电源的状况。下面这个脚本是用来改变运行级别的。将它保存为<path>/etc/acpi/actions/pmg_switch_runlevel.sh</path>。
+</p>
+
+<pre caption="/etc/acpi/actions/pmg_switch_runlevel.sh">
+#!/bin/bash
+
+<comment># BEGIN configuration</comment>
+RUNLEVEL_AC="default"
+RUNLEVEL_BATTERY="battery"
+<comment># END configuration</comment>
+
+
+if [ ! -d "/etc/runlevels/${RUNLEVEL_AC}" ]
+then
+    logger "${0}: Runlevel ${RUNLEVEL_AC} does not exist. Aborting."
+    exit 1
+fi
+
+if [ ! -d "/etc/runlevels/${RUNLEVEL_BATTERY}" ]
+then
+    logger "${0}: Runlevel ${RUNLEVEL_BATTERY} does not exist. Aborting."
+    exit 1
+fi
+
+if on_ac_power
+then
+    if [[ "$(&lt;/var/lib/init.d/softlevel)" != "${RUNLEVEL_AC}" ]]
+    then
+        logger "Switching to ${RUNLEVEL_AC} runlevel"
+         /sbin/rc ${RUNLEVEL_AC}
+    fi
+elif [[ "$(&lt;/var/lib/init.d/softlevel)" != "${RUNLEVEL_BATTERY}" ]]
+then
+    logger "Switching to ${RUNLEVEL_BATTERY} runlevel"
+    /sbin/rc ${RUNLEVEL_BATTERY}
+fi
+</pre>
+
+<p>
+不要忘了<c>chmod +x 
+/etc/acpi/actions/pmg_switch_runlevel.sh</c>使脚本可以执行。最后一件事是在电源切换的时候运行这个脚本。这是通过acpid获取ACPI事件实现的。在大多数笔记本上，这些事件叫做<c>ac_adapter</c>和<c>battery</c>，不过在你的机子上可能是不同的。
+</p>
+
+<pre caption="确定切换电源的ACPI事件">
+# <i>tail -f /var/log/messages | grep "received event"</i>
+</pre>
+
+<p>
+执行上面的命令并拔下电源线，你看见像下面的输出：
+</p>
+
+<pre caption="电源切换输出例子">
+[Tue Sep 20 17:39:06 2005] received event "ac_adapter AC 00000080 00000000"
+[Tue Sep 20 17:39:06 2005] received event "battery BAT0 00000080 00000001"
+</pre>
+
+<p>
+我们感兴趣的部分是<c>received 
+event</c>后面的引号部分。它会匹配我们下面要创建的文件中有关事件的行。如果你的系统产生了多个事件或相同的事件，不用担心。只要产生了任何事件，运行级别的改变就会工作。
+</p>
+
+<pre caption="/etc/acpi/events/pmg_ac_adapter">
+<comment># replace "ac_adapter" below with the event generated on your laptop</comment>
+<comment># For example, ac_adapter.* will match ac_adapter AC 00000080 00000000</comment>
+event=ac_adapter.*
+action=/etc/acpi/actions/pmg_switch_runlevel.sh %e
+</pre>
+
+<pre caption="/etc/acpi/events/pmg_battery">
+<comment># replace "battery" below with the event generated on your laptop</comment>
+<comment># For example, battery.* will match battery BAT0 00000080 00000001</comment>
+event=battery.*
+action=/etc/acpi/actions/pmg_switch_runlevel.sh %e
+</pre>
+
+<p>
+最后acpid要重新启动来识别这些改变。
+</p>
+
+<pre caption="完成acpid运行级别切换">
+# <i>/etc/init.d/acpid restart</i>
+</pre>
+
+<p>
+试一下：插拔电源并查看系统的日志中"Switching to AC mode"或"Switching to battery 
+mode"消息。如果这个脚本不能正确地检测电源状况，请参见<uri link="#doc_chap8">常见问题部分</uri>。
+</p>
+
+<p>
+因为事件机制的特性，不管是用AC电源或是电池，你的笔记本会启动到<c>default</c>的运行级别中。当用AC电源启动的时候，这是好事，但如果我们需要从电池启动的话，我们就希望进入的是battery的运行级别。一个解决的办法是在内核的启动参数中加上<c>softlevel=battery</c>，但是它很倾向于忘记选择。一个更好的办法是在启动的最后假造一个ACPI事件，让<path>pmg_switch_runlevel.sh</path>脚本决定是否需要切换运行级别。用你喜欢的文本编辑器打开<path>/etc/conf.d/local.start</path>并加入下面几行：
+</p>
+
+<pre caption="编辑local.start以实现启动时运行级别的调整">
+<comment># Fake acpi event to switch runlevel if running on batteries</comment>
+/etc/acpi/actions/pmg_switch_runlevel.sh "battery/battery"
+</pre>
+
+<p>
+像这样准备，你就可以为单独的设备激活电源管理策略。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>CPU电源管理</title>
+<section>
+<body>
+
+<p>
+移动处理器能够在不同的主频下运行。有些则允许改变电压。大多数情况下，你的CPU不需要全速运行，将它的主频降下来可以节省很多电量——经常是不牺牲任何性能。
+</p>
+
+</body>
+</section>
+<section>
+<title>一些技术术语</title>
+<body>
+
+<p>
+你可能对CPU降频相关的一些术语不是很清楚，这里是一个简介。
+</p>
+
+<p>
+首先，内核需要能够改变处理器的主频。<b>CPUfreq processor 
+driver</b>即<b>CPU主频驱动</b>知道用来在你的CPU上的相应命令。所以在你的内核中选择正确的驱动是很重要的。你应该在上面就已经完成了。一旦内核知道如何改变主频，它就需要知道它应该设置哪个主频。这是根据<b>policy</b>，即<b>策略</b>来完成的，它由<b>CPUfreq 
+policy</b>即<b>CPU主频策略</b>和<b>governor</b>即<b>管理器</b>组成。CPU主频策略是定义CPU主频范围的两个值——最大主频和最小主频。管理器则决定选择最大最小值间的哪一个可用的主频。例如，<b>powersave 
+governor</b>总是选择可用的最低主频，而<b>performance governor</b>则总选择最高的主频。<b>userspace 
+governor</b>并不做决定，而是取用户（或者是用户控制的程序）想要的——即从<path>/sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed</path>中读取。
+</p>
+
+<p>
+这听起来不像是动态的主频改变而且事实上它的确不是动态的，不过可以通过多种途径实现。例如<b>ondemand 
+governor</b>根据当前的CPU负载来做决定。同样的任务可以由许多用户端的程序来完成，如<c>cpudyn</c>、<c>cpufreqd</c>、<c>powernowd</c>等等。ACPI事件则可以用来根据电源情况，启用或禁用动态降频。
+</p>
+
+</body>
+</section>
+<section>
+<title>手动设定主频</title>
+<body>
+
+<p>
+降低CPU的速度和电压有两个好处：首先耗电比较小，其次发热量也会比全速运行时有所改善。显然，缺点是你会损失一些性能。可以说降低处理器的速度是一种性能和省电上的均衡。
+</p>
+
+<note>
+并非所有的笔记本都支持主频的改变。如果不确定，那就看一下<uri 
+link="#doc_chap8">常见问题</uri>中支持降频的处理器的列表有没有你的CPU。
+</note>
+
+<p>
+现在让我们来测试一下你CPU降频能不能工作。让我们装上另一个非常方便用于debug的工具：<c>sys-power/cpufrequtils</c>。
+</p>
+
+<pre caption="确定CPU主频">
+# <i>emerge cpufrequtils</i>
+# <i>cpufreq-info</i>
+</pre>
+
+<p>
+这是一个输出的例子：
+</p>
+
+<pre caption="cpufreq-info的输出例子">
+cpufrequtils 0.3: cpufreq-info (C) Dominik Brodowski 2004
+Report errors and bugs to linux@brodo.de, please.
+analyzing CPU 0:
+  driver: centrino
+  CPUs which need to switch frequency at the same time: 0
+  hardware limits: 600 MHz - 1.40 GHz
+  available frequency steps: 600 MHz, 800 MHz, 1000 MHz, 1.20 GHz, 1.40 GHz
+  available cpufreq governors: conservative, ondemand, powersave, userspace, performance
+  current policy: frequency should be within 924 MHz and 1.40 GHz.
+    The governor "performance" may decide which speed to use
+    within this range.
+  current CPU frequency is 1.40 GHz.
+</pre>
+
+<p>
+现在让我们用<c>cpufreq-set</c>来折腾一下来看看主频调整能否工作。比如，运行一下<c>cpufreq-set -g 
+ondemand</c>来激活ondemand管理器，然后用<c>cpufreq-info</c>来确认一下。如果它没有像预期的那样工作，你或许可以从指导末尾的<uri 
+link="#doc_chap8">常见问题部分</uri>中找到答案。
+</p>
+
+</body>
+</section>
+<section>
+<title>主频自适应</title>
+<body>
+
+<p>
+上面的方法是不错，但是不方便在日常中应用。最好让你的系统自动设置主频。有很多方式来达到这个目的。下面的表格的介绍帮你你决定采用哪一个。它可以简要地分为三类：<b>内核类</b>，即需要内核支持；<b>后台类</b>，即用运行在后台的程序来做；<b>图形界面类</b>，即提供图形界面方便用户设置和调整。
+</p>
+
+<table>
+<tr>
+  <th>名称</th>
+  <th>类别</th>
+  <th>调整依据</th>
+  <th>内核管理器</th>
+  <th>进一步的管理器</th>
+  <th>评价</th>
+</tr>
+<tr>
+  <ti>'ondeman'管理器</ti>
+  <ti>内核类</ti>
+  <ti>CPU负载</ti>
+  <ti>未知</ti>
+  <ti>未知</ti>
+  <ti>
+    当CPU有负载的时候选用最大的主频，当CPU空闲的时候一步步降低。通过<path>/sys/devices/system/cpu/cpu0/cpufreq/ondemand/</path>做进一步的设置。依然需要用户方面的工具（程序或脚本）来完成管理器的变更或类似的任务。
+  </ti>
+</tr>
+<tr>
+  <ti>'conservative'管理器</ti>
+  <ti>内核类</ti>
+  <ti>CPU负载</ti>
+  <ti>未知</ti>
+  <ti>未知</ti>
+  <ti>
+    和ondemand管理器不同的是，在CPU负载高的时候conservative并不直接跳上最高的主频，而是采用步进的方式来升高主频。
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="http://mnm.uib.es/~gallir/cpudyn/">cpudyn</uri></ti>
+  <ti>后台程序</ti>
+  <ti>CPU负载</ti>
+  <ti>Performance，powersave</ti>
+  <ti>动态</ti>
+  <ti>
+    同时支持硬盘的挂起——但是<e>laptop mode</e>在大多数情况下会做得更好。
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="http://sourceforge.net/projects/cpufreqd/">cpufreqd</uri></ti>
+  <ti>后台程序</ti>
+  <ti>电池状况、CPU负载、温度、运行的程序等等</ti>
+  <ti>全部可用</ti>
+  <ti>没有</ti>
+  <ti>
+    成熟的（但稍显复杂）的设置。可以通过传感器插件（lm_sensors）扩展或同一些NVidia显卡的显存或核心协作。Cpufreqd是支持SMP（对称多CPU）的，同时可以选择在运行时手动控制。
+  </ti>
+</tr>
+<tr>
+  <ti>
+    <uri link="http://www.deater.net/john/powernowd.html">powernowd</uri>
+  </ti>
+  <ti>后台程序</ti>
+  <ti>CPU负载</ti>
+  <ti>没有</ti>
+  <ti>被动、正弦、激进的</ti>
+  <ti>
+    支持SMP
+  </ti>
+</tr>
+<tr>
+  <ti>
+    <uri 
+link="http://projects.simpledesigns.com.pl/project/ncpufreqd/">ncpufreqd</uri>
+  </ti>
+  <ti>后台程序</ti>
+  <ti>温度</ti>
+  <ti>没有</ti>
+  <ti>Powersave、performance</ti>
+  <ti>
+    根据系统的温度在performance和powersave管理器间切换。对于那些发热量声名狼藉的笔记本很有用。
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="http://www.goop.org/~jeremy/speedfreq/">speedfreq</uri></ti>
+  <ti>后台程序</ti>
+  <ti>CPU负载</ti>
+  <ti>没有</ti>
+  <ti>动态、powersave、performance、固定速度</ti>
+  <ti>
+    方便地通过客户端/服务器界面设置。要求用2.6的内核。不再被维护，有错误而从Portage中移除了。如果你还在用它，请改用cpufreqd。
+  </ti>
+</tr>
+<tr>
+  <ti><uri link="http://cpuspeedy.sourceforge.net/">gtk-cpuspeedy</uri></ti>
+  <ti>图形界面</ti>
+  <ti>没有</ti>
+  <ti>没有</ti>
+  <ti>没有</ti>
+  <ti>
+    Gnome程序，一个图形界面的工具让你手动设置CPU主频。没有提供任何自动的功能。
+  </ti>
+</tr>
+<tr>
+  <ti>klaptopdaemon</ti>
+  <ti>图形界面</ti>
+  <ti>电池状态</ti>
+  <ti>全部可用</ti>
+  <ti>没有</ti>
+  <ti>
+    仅支持KDE，需要'ondemand'管理器以动态降频。
+  </ti>
+</tr>
+</table>
+
+<p>
+虽然根据负载来调整主频看似简单。但是不好的算法可能会导致CPU不断地在两个主频间振荡，或者在不必要的高主频上浪费电量。
+</p>
+
+<p>
+选择哪个？如果你拿不定主意，试试<c>cpufreqd</c>：
+</p>
+
+<pre caption="安装cpufreqd">
+# <i>emerge cpufreqd</i>
+</pre>
+
+<p>
+<c>cpufreqd</c>可以通过编辑<path>/etc/cpufreqd.conf</path>来设置。cpufreqd自带的默认配置文件可能稍显复杂。我建议你用Gentoo的前开发人员Henrik 
+Brix Andersen的设置来替换它（见下文）。请注意，你需要使用cpufreqd-2.0.0或以上的版本。更早的版本的设置格式是不同的。
+</p>
+
+<pre caption="/etc/cpufreqd.conf（cpufreqd-2.0.0或以上）">
+[General]
+pidfile=/var/run/cpufreqd.pid
+poll_interval=3
+enable_plugins=acpi_ac, acpi_battery
+enable_remote=1
+remote_group=wheel
+verbosity=5
+[/General]
+
+[Profile]
+name=ondemand
+minfreq=0%
+maxfreq=100%
+policy=ondemand
+[/Profile]
+
+[Profile]
+name=conservative
+minfreq=0%
+maxfreq=100%
+policy=conservative
+[/Profile]
+
+[Profile]
+name=powersave
+minfreq=0%
+maxfreq=100%
+policy=powersave
+[/Profile]
+
+[Profile]
+name=performance
+minfreq=0%
+maxfreq=100%
+policy=performance
+[/Profile]
+
+[Rule]
+name=battery
+ac=off
+profile=conservative
+[/Rule]
+
+[Rule]
+name=battery_low
+ac=off
+battery_interval=0-10
+profile=powersave
+[/Rule]
+
+[Rule]
+name=ac
+ac=on
+profile=ondemand
+[/Rule]
+</pre>
+
+<p>
+现在你可以启动cpufreqd后台程序了。把它加到<c>default</c>和<c>battery</c>的运行级别上。
+</p>
+
+<pre caption="启动cpufreqd">
+# <i>rc-update add cpufreqd default battery</i>
+# <i>rc</i>
+</pre>
+
+<p>
+有时候你想手动选择其它的策略而不是按后台程序做的，比如当电池电量已经很低了，但是你知道很快就有电源了。在这种情况下你可以通过<c>cpufreqd-set 
+manual</c>来启动cpufreqd的手动模式，然后选择一个你设置的模式（可以通过<c>cpufreqd-get</c>列出）。你也可以通过执行<c>cpufreqd-set 
+dynamic</c>离开手动模式。
+</p>
+
+<warn>
+不要同时运行多个上述的程序，不然可以会出现一直在两个主频间切换的奇怪现象。
+</warn>
+
+</body>
+</section>
+<section>
+<title>确定一下结果</title>
+<body>
+
+<p>
+最后检查一下你的新策略能很好地工作。一个简单的办法就是监控一下你的笔记本CPU的工作频率：
+</p>
+
+<pre caption="监控CPU频率">
+# <i>watch grep \"cpu MHz\" /proc/cpuinfo</i>
+</pre>
+
+<p>
+如果<path>/proc/cpuinfo</path>没有更新的话（参见<uri 
+link="#doc_chap8">常见问题</uri>），用<c>sys-apps/x86info</c>来监控CPU频率：
+</p>
+
+<pre caption="CPU频率监控备用方案">
+# <i>watch x86info -mhz</i>
+</pre>
+
+<p>
+根据你的设置，CPU频率应该在高负载时升高，没负载的时候下降或保持不变。如果你用的是<c>cpufreqd</c>并且在<path>cpufreqd.conf</path>中将verbosity设为5或更高，你就能从<c>syslog</c>中获得额外的报告信息。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>LCD电源管理</title>
+<section>
+<body>
+
+<p>
+正如你在<uri link="#doc_chap1_fig1">figure 
+1.1</uri>中看到的，LCD是最大的耗电大户（对于非移动的CPU可能不适用）。所以不需要的时候把显示器关掉是非常重要的，可能的话降低它背光的亮度。大多数笔记本都可能控制背光的亮度。
+</p>
+
+</body>
+</section>
+<section>
+<title>挂起设置</title>
+<body>
+
+<p>
+首先检查一下你显示器挂起／休眠／关闭的时间设置。因为这跟你使用的窗口管理器有很大的关系，我将让你自己搞清楚。一般只有两个地方：可以通过<c>setterm 
+-blank &lt;number-of-minutesM&gt;</c>，<c>setterm -powersave 
+on</c>和<c>setterm -powerdown 
+&lt;number-of-minutesM&gt;</c>来变暗终端。对于X.org，修改<path>/etc/X11/xorg.conf</path>中的类似配置：
+</p>
+
+<pre caption="X.org中LCD挂起的设置">
+Section "ServerFlags"
+  Option  "blank time"  "5"  <comment># Blank the screen after 5 minutes (Fake)</comment>
+  Option  "standby time"  "10"  <comment># Turn off screen after 10 minutes (DPMS)</comment>
+  Option  "suspend time"  "20"  <comment># Full suspend after 20 minutes</comment>
+  Option  "off time"  "30"  <comment># Turn off after half an hour</comment>
+  [...]
+EndSection
+
+[...]
+
+Section "Monitor"
+  Identifier  [...]
+  Option  "DPMS"
+  [...]
+EndSection
+</pre>
+
+</body>
+</section>
+<section>
+<title>背光亮度</title>
+<body>
+
+<p>
+可能更重要的是背光亮度。如果你需要通过工具来设置背光亮度，就写一个脚本来调低电池模式下的亮度，并把它放到你的<c>battery</c>运行级别中。下面这个脚本应该适用于大多数的IBM 
+Thinkpad和东芝的笔记本。你需要设置一些相应的内核选项（IBM 
+Thinkpad的情况）。对于东芝的笔记本，装上<c>sys-power/acpitool</c>并跳过下面的<c>thinkpad_acpi</c>（以前叫<c>ibm_acpi</c>）设置。
+</p>
+
+<warn>
+设置背光在thinkpad_acpi中是试验性的。它直接控制硬件并可能对你的系统造成严重的损坏损坏。请阅读<uri 
+link="http://ibm-acpi.sourceforge.net/">thinkpad_acpi的主页</uri>
+</warn>
+
+<p>
+为了可以设置亮度，thinkpad_acpi模块要用experimental参数加载。
+</p>
+
+<pre caption="自动加载thinkpad_acpi模块">
+<comment>（请先阅读上面的警告再做这个！）</comment>
+# <i>echo "options thinkpad_acpi experimental=1" >> /etc/modules.d/thinkpad_acpi</i>
+# <i>/sbin/update-modules</i>
+# <i>echo thinkpad_acpi >> /etc/modules.autoload.d/kernel-2.6</i>
+# <i>modprobe thinkpad_acpi</i>
+</pre>
+
+<p>
+这样应该就可以不用看到警告信息并在模块加载后生成<path>/proc/acpi/ibm/brightness</path>文件。通过一个启动脚本就可以根据电源的情况调节亮度了。
+</p>
+
+<pre caption="/etc/conf.d/lcd-brightness">
+<comment># See /proc/acpi/ibm/brightness for available values</comment>
+<comment># Please read /usr/src/linux/Documentation/thinkpad-acpi.txt</comment>
+
+<comment># brightness level in ac mode. Default is 7.</comment>
+BRIGHTNESS_AC=7
+
+<comment># brightness level in battery mode. Default is 4.</comment>
+BRIGHTNESS_BATTERY=4
+</pre>
+
+<pre caption="/etc/init.d/lcd-brightness">
+#!/sbin/runscript
+
+set_brightness() {
+    if on_ac_power
+    then
+        LEVEL=${BRIGHTNESS_AC:-7}
+    else
+        LEVEL=${BRIGHTNESS_BATTERY:-4}
+    fi
+
+    if [ -f /proc/acpi/ibm/brightness ]
+    then
+        ebegin "Setting LCD brightness"
+        echo "level ${LEVEL}" > /proc/acpi/ibm/brightness
+        eend $?
+    elif [[ -e /usr/bin/acpitool &amp;&amp; -n $(acpitool -T | grep "LCD brightness") ]]
+    then
+        ebegin "Setting LCD brightness"
+        acpitool -l $LEVEL >/dev/null || ewarn "Unable to set lcd brightness"
+        eend $?
+    else
+        ewarn "Setting LCD brightness is not supported."
+        ewarn "For IBM Thinkpads, check that thinkpad_acpi is loaded into the kernel"
+        ewarn "For Toshiba laptops, you've got to install sys-power/acpitool"
+    fi
+}
+
+start() {
+    set_brightness
+}
+
+stop () {
+    set_brightness
+}
+</pre>
+
+<p>
+当完成后，确认亮度可以按照电源情况自动调节后，把它加到battery运行级别中。
+</p>
+
+<pre caption="开启亮度自动调节">
+# <i>chmod +x /etc/init.d/lcd-brightness</i>
+# <i>rc-update add lcd-brightness battery</i>
+# <i>rc</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>硬盘电源管理</title>
+<section>
+<body>
+
+<p>
+硬盘在休眠状态下消耗较少的电量。所以当硬盘未使用一定时间后，激活硬盘的节电模式是合理的。我将告诉你两个可能的方式来实现它。首先，laptop-mode可以通过避免或延迟写硬盘而节约大量电量。缺点是延迟写硬盘可能在电量耗尽或内核崩溃时造成数据丢失。如果你不喜欢那样，你就需要确定没有进程频繁地写硬盘。第二个选择，你可以通过<c>hdparm</c>来启用你硬盘的节电模式。
+</p>
+
+</body>
+</section>
+<section>
+<title>延长空闲时间——laptop-mode</title>
+<body>
+
+<p>
+最近的2.6内核包含了据称的<c>laptop-mode</c>。当被激活时，修改过的缓存就在读磁盘的时候写入，或在10分钟后写入（原先是30秒）。这样就你硬盘需要转动的次数最小化。
+</p>
+
+<pre caption="自动启动laptop-mode">
+# <i>emerge laptop-mode-tools</i>
+</pre>
+
+<p>
+<c>laptop-mode-tools</c>的设置文件是<path>/etc/laptop-mode/laptop-mode.conf</path>。根据你喜欢的方式修改它，它已经注释得很好了。运行<c>rc-update 
+add laptop_mode battery</c>让它自动启动。
+</p>
+
+<p>
+laptop-mode-tools的最近版本（1.11或以上）包含了一个新的工具<c>lm-profiler</c>。它会监视你系统中磁盘的使用和网络服务，并建议你关掉不需要的。你既可以通过laptop-mode-tools中内置的运行级别支持（会被Gentoo的<c>/sbin/rc</c>重置）或用你的<c>default</c>/<c>battery</c>运行级别（推荐）
+</p>
+
+<pre caption="运行lm-profiler的输出示例">
+# <i>lm-profiler</i>
+Profiling session started.
+Time remaining: 600 seconds
+[4296896.602000] amarokapp
+Time remaining: 599 seconds
+[4296897.714000] sort
+[4296897.970000] mv
+Time remaining: 598 seconds
+Time remaining: 597 seconds
+[4296900.482000] reiserfs/0
+</pre>
+
+<p>
+当分析你的系统10分钟后，lm-profiler就会列出这段时间内可能造成磁盘访问的服务。
+</p>
+
+<pre caption="lm-profiler建议禁用一些服务">
+Program:     "atd"
+Reason:      standard recommendation (program may not be running)
+Init script: /etc/init.d/atd (GUESSED)
+
+Do you want to disable this service in battery mode? [y/N]: <i>n</i>
+</pre>
+
+<p>
+在上面例子中，根据建议禁用atd，你可以运行<c>rc-update del atd 
+battery</c>。注意不要禁用你系统正常工作需要的服务。不要禁用你不清楚的服务。
+</p>
+
+</body>
+</section>
+<section>
+<title>Limiting Write Accesses</title>
+<body>
+
+<p>
+如果你不想用laptop-mode，你就需要特别小心地禁用那些频繁读磁盘的程序——<c>syslogd</c>是一个很好的例子。你可能不想将完全它关掉，但你可以修改它的设置文件，这样"不需要"的东西就不会被记入日志，也就不会导致硬盘访问。<c>Cups</c>会周期性地写磁盘，所以可以考虑将它关掉，需要的时候再手动启动。
+</p>
+
+<pre caption="在battery运行级别中关闭cpus">
+# <i>rc-update del cupsd battery</i>
+</pre>
+
+<p>
+你也可以用laptop-mode-tools（见上文）中的<c>lm-profiler</c>来找出要禁用的服务。当你完成后，向配置hdparm继续。
+</p>
+
+</body>
+</section>
+<section>
+<title>hdparm</title>
+<body>
+
+<p>
+第二个可能是用<c>hdparm</c>。如果你已经用了laptop-mode就跳过这部分。不然，就编辑<path>/etc/conf.d/hdparm</path>并为你的磁盘驱动器加入下列的值。这个例子假设你的硬盘是<b>hda</b>。
+</p>
+
+<pre caption="用/etc/conf.d/hdparm来挂起磁盘">
+hda_args="-q -S12"
+</pre>
+
+<p>
+这样你就可以激活你硬盘的电源管理。如果你想关闭其电源管理，你可以编辑<path>/etc/conf.d/hdparm</path>，把值改为<c>-q 
+-S0</c>，或直接运行<c>hdparm -q -S0 /dev/hda</c>。
+</p>
+
+<p>
+查看<c>man hdparm</c>中更多的选项。虽然你可以在battery的运行级别中通过<c>/etc/init.d/hdparm 
+start</c>手动开启<c>hdparm</c>，但让它自动开启和关闭比较轻松些。把<c>hdparm</c>加到battery的运行级别中它就可以自动启动电源管理了。
+</p>
+
+<pre caption="自动启动硬盘挂起设置">
+# <i>rc-update add hdparm battery</i>
+</pre>
+
+<impo>
+注意你硬盘的睡眠／停转的设定。把它设得太小可能会损耗你的硬盘。
+</impo>
+
+</body>
+</section>
+<section>
+<title>其他的技巧</title>
+<body>
+
+<p>
+另外的就是在电池模式下关闭你的swap。在运行swapon／swapoff的切换前，先确定有足够的内存且swap没有使用很多，不然你可能会有大麻烦。
+</p>
+
+<p>
+如果你不想使用laptop-mode，你依然可以通过把一些特定的目录以<c>tmpfs</c>挂载来最小化磁盘的读写，此时写的操作不是在磁盘上的，而是在内存中，并且umount后就丢失了。一般情况下，把<path>/tmp</path>像这样挂载是不错的选择——它会在每次重启的时候被清空，无论是挂载在硬盘上还是内存中。激活它，你需要在内核中启动tmpfs的支持，并在<path>/etc/fstabl</path>中加入如下的一行：
+</p>
+
+<pre caption="编辑/etc/fstab使/tmp更飞速">
+none  /tmp  tmpfs  size=32m  0 0
+</pre>
+
+<warn>
+请注意size参数并根据你的系统来修改它。如果你不确定，就不要使用它，它很容易成为一个性能瓶颈。如果你想把<path>/var/log</path>像这样挂载，一定要在umount前把日志文件写入磁盘。它们非常重要。不要试图像这样挂载<path>/var/tmp</path>。Portage用它来编译......
+</warn>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>其他设备的电源管理</title>
+<section>
+<title>显卡</title>
+<body>
+
+<p>
+如果你用的是支持PowerPlay（显卡核心GPU的动态时钟调整）的ATI显卡，你可以在X.org中启用它。打开<path>/etc/X11/xorg.conf</path>并在Device中加入（或启用）<c>DynamicClocks</c>选项。注意，这个选项可能会导致一些系统崩溃。
+</p>
+
+<pre caption="在X.org中启用ATI的PowerPlay支持">
+Section "Device"
+[...]
+Option      "DynamicClocks" "on"
+EndSection
+</pre>
+
+</body>
+</section>
+<section>
+<title>无线的电源管理</title>
+<body>
+
+<p>
+无线网卡消耗了一定的电量。把它们像硬盘一样纳电源管理模式中。
+</p>
+
+<note>
+这个脚本假设你的无线网卡是<c>wlan0</c>；请把它改成你的机子上的真实网卡
+</note>
+
+<p>
+把下面的选项加到<path>/etc/conf.d/net</path>中以自动启用无线网卡的电源管理：
+</p>
+
+<pre caption="无线网卡的自动电源管理">
+iwconfig_wlan0="power on"
+</pre>
+
+<p>
+查看<c>man 
+iwconfig</c>以获得更多细节和更多的选项，如唤醒的周期和超时。如果你驱动和接入点支持改变信标（beacon）的发送间隔，那它就可以节省更多的电量。
+</p>
+
+</body>
+</section>
+<section>
+<title>USB电源管理</title>
+<body>
+
+<p>
+关于USB电源消耗有两个问题：第一，USB鼠标、数码相机或U盘在插入的时候都会耗电。你可以避免这个问题（当它们不用的时候，不要移除它们）。第二，当有USB设备插入的时候，USB控制器会周期性地访问接口从而阻止CPU进入睡眠模式。内核提供了一个试验性的选项通过<path>/sys</path>中的<path>power/state</path>来启用USB设备的挂起。
+</p>
+
+<pre caption="在内核中启用USB设备的挂起">
+Device Drivers
+  USB support
+    [*]   Support for Host-side USB
+      [*]   USB suspend/resume (EXPERIMENTAL)
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>睡眠状态：挂起、待机、休眠（到磁盘）</title>
+<section>
+<body>
+
+<p>
+ACPI定义了不用的睡眠状态。其中比较重要的是
+</p>
+
+<ul>
+  <li>S1即待机</li>
+  <li>S3即挂起到内存，即挂起 </li>
+  <li>S4即挂起到磁盘，即休眠</li>
+</ul>
+
+<p>
+它们可以系统没有使用但又不想关机的时候调用。
+</p>
+
+</body>
+</section>
+<section>
+<title>挂起（S3）</title>
+<body>
+
+<p>
+ACPI对这些睡眠状态的支持标记为试验性的是有原因的。APM的睡眠状态看起来更稳定些，但你不能将APM和ACPI同时使用。
+</p>
+
+<pre caption="各种睡眠状态的内核设置">
+  Power Management Options ---&gt;
+    [*]  Power Management support
+      ACPI (Advanced Configuration and Power Interface) Support ---&gt;
+        [*]  ACPI Support
+          [*]   Sleep States
+</pre>
+
+<p>
+当你正确设置内核后，你就可以用<c>hibernate-script</c>来激活挂起或待机模式。让我们先将它装起来。
+</p>
+
+<pre caption="安装hibernate-script">
+# <i>emerge hibernate-script</i>
+</pre>
+
+<p>
+一些设置需要在<path>/etc/hibernate</path>中完成。
+</p>
+
+<p>
+设置挂起的话，编辑<path>/etc/hibernate</path>中的<path>sysfs-ram.conf</path>。<c>USESysfsPowerState 
+mem</c>总是对的，但是如果你需要对挂起（或其他睡眠状态）做更进一步的设置，你应该把它们加到<path>/etc/hibernate/hibernate.conf</path>中。里面的注释和选项的名称应该可以指引你的。如果你使用网络共享的nfs或samba，确保你关掉相应的启动脚本来避免超时。
+</p>
+
+<note>
+关于睡眠状态更多的信息，参见<c>man hibernate.conf</c>
+</note>
+
+<p>
+准备好了吗？现在是你运行下个命令前备份任何数据的最后机会了。注意，你可能需要按一个特殊的键如<c>Fn</c>来从挂起中恢复。
+</p>
+
+<pre caption="挂起">
+# <i>hibernate-ram</i>
+</pre>
+
+<p>
+如果你仍在往下读，那上面的可能没有问题。你也可以类似地设置待机（S1）。修改<path>sysfs-ram.conf</path>，把"UseSysfsPowerState 
+men"改为"UseSysfsPowerState standby"。S3和S4是更有吸引力的睡眠状态，因为它们能节省更多的电量。
+</p>
+
+</body>
+</section>
+<section>
+<title>休眠（S4）</title>
+<body>
+
+<p>
+这部分介绍休眠，它把当前运行的系统的镜像在关机前写入磁盘。当恢复的时候，镜像就被加载，你就可以在你休眠前的工作点继续了。
+</p>
+
+<warn>
+在休眠中不要改变不可热插拔的硬件。不要试图加载另外一个内核的镜像。在休眠前关闭任何NFS或sambla的服务端／客户端。
+</warn>
+
+<p>
+现在有两个支持S4的方法。最初的一个是swsusp，另一个新的是带有漂亮界面（带有fbsplash支持）的tuxonice（之前的suspend2）。一份<uri 
+link="http://tuxonice.net/features.html#compare">特性对比</uri>可以在<uri 
+link="http://www.tuxonice.net">tuxonice主页</uri>上找到。曾经有一个挂起到硬盘（pmdisk），一个从swsusp分支出来的项目，后来又合并回去了。
+</p>
+
+<p>
+TuxOnIce并未包含在主流的内核中，所以你既可以用<uri 
+link="http://tuxonice.net">tuxonice.net</uri>提供的patch给内核打补丁，也可以用<c>sys-kernel/tuxonice-sources</c>。
+</p>
+
+<p>
+swusp和TuxOnIce在内核中的部分如下：
+</p>
+
+<pre caption="各种睡眠状态的内核设置">
+Power Management Options ---&gt;
+  <comment>(hibernate with swsusp)</comment>
+  [*] Software Suspend
+      <comment>(replace /dev/SWAP with your swap partition)</comment>
+      (/dev/SWAP)      Default resume partition
+
+  <comment>(hibernate with TuxOnIce)</comment>
+  Enhanced Hibernation (TuxOnIce)
+    --- Image Storage (you need at least one writer)
+    [*]     File Writer
+    [*]    Swap Writer
+    ---   General Options
+    [*]    LZF image compression
+    <comment>(replace /dev/SWAP with your swap partition)</comment>
+    (swap:/dev/SWAP)   Default resume device name
+    [ ]     Allow Keep Image Mode
+</pre>
+
+<p>
+swsusp的设置非常简单。如果你没有把储存用的swap位置写在内核的配置中，就把它作为内核参数<c>resume=/dev/SWAP</c>直接传递。如果引导因为镜像损坏而不能运行，就用<c>noresume</c>内核参数。<c>hibernate-cleanup</c>启动脚本会使swsusp的镜像在启动中失效。
+</p>
+
+<pre caption="使swsusp镜像在启动中失效">
+# <i>rc-update add hibernate-cleanup boot</i>
+</pre>
+
+<p>
+激活swsusp的休眠，你需要在<path>/etc/hibernate/sysfs-disk</path>中设置<c>UseSysfsPowerState 
+disk</c>并使用休眠脚本。
+</p>
+
+<warn>
+在开始做这步之前备份你的数据。运行在下面的命令前执行<c>sync</c>将缓存的数据写入磁盘。首先在X外尝试，接着在X运行但没有登陆时。
+</warn>
+
+<p>
+如果你遇到因为uhci或类似模块导致的内核的错误，试着将它们编译成模块，然后将它们卸载后再进入睡眠模式。其相应的设置在<path>common.conf</path>中。
+</p>
+
+<pre caption="用swsusp休眠">
+# <i>nano -w /etc/hibernate/common.conf</i>
+<comment>（确定你已经备份好你的数据了）</comment>
+# <i>hibernate</i>
+</pre>
+
+<p>
+接下来的部分讨论如何设置TuxOnIce在挂起和恢复中用漂亮的fbsplash。
+</p>
+
+<p>
+前面的设置部分和swsusp类似。如果你没有把你swap分区的位置记录在内核配置中，你需要把它作为内核参数<c>resume=swap:/dev/SWAP</c>直接传递。如果内核因为损坏的镜像而不能启动，加上<c>noresume</c>参数。另外，<c>hibernate-cleanup</c>会让TuxOnIce的镜像在启动中失效。
+</p>
+
+<pre caption="使TuxOnIce的镜像在启动中失效">
+# <i>rc-update add hibernate-cleanup boot</i>
+</pre>
+
+<p>
+现在编辑<path>/etc/hibernate/suspend2.conf</path>，启动你需要的<c>TuxOnIce</c>选项。但现在先不要在<c>common.conf</c>中启用<c>fbsplash</c>选项。
+</p>
+
+<pre caption="用TuxOnIce休眠">
+# <i>nano -w /etc/hibernate/suspend2.conf</i>
+<comment>（确定你已经备份好你的数据了）</comment>
+# <i>hibernate</i>
+</pre>
+
+<p>
+请配置<c>fbsplash</c>，如果你还没有配置好。启用休眠中fbsplash的支持，你需要<c>sys-apps/tuxonice-userui</c>。另外，你需要启用<c>fbsplash</c>的USE标记。
+</p>
+
+<pre caption="安装tuxonice-userui">
+# <i>echo "sys-apps/tuxonice-userui fbsplash" >> /etc/portage/package.use</i>
+<comment>（它可能被~arch屏敝屏蔽了，所以你需要为它启用keywords）</comment>
+# <i>echo "sys-apps/tuxonice-userui" >> /etc/portage/package.keywords</i>
+# <i>emerge tuxonice-userui</i>
+</pre>
+
+<p>
+它的ebuild告诉你得生成一个链接到你想用的主题。例如，使用<c>livecd-2005.1</c>的主题，运行下面的命令：
+</p>
+
+<pre caption="在休眠中使用livecd-2005.1的主题">
+# <i>ln -sfn /etc/splash/livecd-2005.1 /etc/splash/suspend2</i>
+</pre>
+
+<p>
+如果你不想在最初恢复时看到黑屏，你就需要把<c>tuxoniceui_fbsplash</c>加到你的initrd镜像中。假设你用<c>splash_geninitramfs</c>生成了一个initrd镜像，并将其保存为<path>/boot/fbsplash-emergence-1024x768</path>，下面将告诉你怎样做。
+</p>
+
+<pre caption="将tuxoniceui_fbsplash加到initrd中">
+# <i>mount /boot</i>
+# <i>mkdir ~/initrd.d</i>
+# <i>cp /boot/fbsplash-emergence-1024x768 ~/initrd.d/</i>
+# <i>cd ~/initrd.d</i>
+# <i>gunzip -c fbsplash-emergence-1024x768 | cpio -idm --quiet -H newc</i>
+# <i>rm fbsplash-emergence-1024x768</i>
+# <i>cp /usr/sbin/tuxoniceui_fbsplash sbin/</i>
+# <i>find . | cpio --quiet --dereference -o -H newc | gzip -9 > /boot/fbsplash-tuxonice-emergence-1024x768</i>
+</pre>
+
+<p>
+之后调整一下<path>grub.conf</path>（或 
+<path>lilo.conf</path>）使你的TuxOnIce内核使用<path>/boot/fbsplash-tuxonice-emergence-1024x768</path>作为initrd镜像。你可以测试一下看是否设置正确。
+</p>
+
+<pre caption="fbsplash休眠测试">
+# <i>tuxoniceui_fbsplash -t</i>
+</pre>
+
+<p>
+在打开<path>/etc/hibernate/common.conf</path>并激活fbsplash选项后。执行<c>hibernate</c>然后享受吧。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>常见问题</title>
+<section>
+<body>
+
+<p>
+<e>问：</e>我试着改变CPU的主频，但是<path>/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor</path>不存在。
+</p>
+
+<p>
+<e>答：</e>确认你的处理器支持降频且你选择了正确的CPU频率驱动。这里是一份cpufreq（内核2.6.7）支持的处理器清单：ARM 
+Integrater、ARM－SA1100、ARM-SA1110、AMD Elan-SC400、SC410、AMD mobile K6-2+、AMD 
+mobile K6-3+、AMD mobile Duron、AMD mobile Athlon、AMD Opteron、AMD Athlon 
+64、Cyrix Media GXm、Intel mobile PIII及一些特定芯片组上的Intel mobile PIII-M、Intel 
+Pentium 4、Intel Xeon、Intel Pentium M（Centrino）、National Semiconductors Geode 
+GX、Transmeta Crusoe、VIA Cyrix 3／C3、UltraSPARC-III、SuperH 
+SH-3、SH-4、许多"PowerBook"和"iBook2"及一些ACPI 2.0兼容系统上的处理器（当且仅当"ACPI Processor 
+Performance States"对ACPI／BIOS可用的时候）。
+</p>
+
+<p>
+<e>问：</e>我的笔记本支持降频，但<path>/sys/devices/system/cpu/cpu0/cpufreq/</path>是空的。
+</p>
+
+<p>
+<e>答：</e>用<c>dmesg | grep 
+ACPI</c>查看ACPI相关的错误信息。试着升级BIOS，特别有报告是DSDT损坏时。你也可以试着自己修复它（不在本篇的讨论范围内）。
+</p>
+
+<p>
+<e>问：</e>我的笔记本支持降频，但根据<path>/proc/cpuinfo</path>主频并没有改变。
+</p>
+
+<p>
+<e>答：</e>可能你在内核中启用了对称多处理器支持（CONFIG_SMP）。禁用它应该就可以了。一些旧的内核有一个bug导致这个问题。这种情况下，你可以执行<c>emerge 
+x86info</c>，根据要求升级你的内核并用<c>x86info-mhz</c>检查CPU的主频。
+</p>
+
+<p>
+<e>问：</e>我可以改变CPU的主频，但范围没有其他操作系统那么大。
+</p>
+
+<p>
+<e>答：</e>你可以将降频和ACPI节流（throttling）结合使用来获得更小的最低频率。注意，节流并不会节省很多电量，它主要的用于热量管理的（让你的笔记本保持安静和较低的温度）。你可以通过<c>cat 
+/proc/acpi/processor/CPU/throttling</c>来知道当前的节流，并通过<c> echo -n "0:x" > 
+/proc/acpi/processor/CPU/limit</c>来设定，这里的x是<path>/proc/acpi/processor/CPU/throttling</path>中列出的Tx状态值中的一个。
+</p>
+
+<p>
+<e>问：</e>当配置内核的时候，有pwersave，performance和userspace，但ondemand却没有。我在哪里可以找到它？
+</p>
+
+<p>
+<e>答：</e>ondemand管理器仅在最近的内核中有，试着升级一下内核。
+</p>
+
+<p>
+<e>问：</e>电池的使用时间好像比以前更差了。
+</p>
+
+<p>
+<e>答：</e>检查一下你BIOS的设定。可能你忘了重新开启一些设定了。
+</p>
+
+<p>
+<e>问：</e>我的电池已经充满，但KDE报告说仅剩0％的电量，然后迅速关机了。
+</p>
+
+<p>
+<e>答：</e>检查一下你内核中的电池支持。如果你将它编译成模块，确认你已经加载它了。
+</p>
+
+<p>
+<e>问：</e>我系统日志报告一些像这样的东西"logger: ACPI group battery / action battery is not 
+definded"。
+</p>
+
+<p>
+<e>答：</e>这条信息是由acpid的<path>/etc/acpi/default.sh</path>脚本生成的。你可以安全地忽略它。如果你想要去除它，你可以将相应的行从<path>/etc/acpi/default.sh</path>中注释掉，如下所示：
+</p>
+
+<pre caption="禁用unkown acpi事情警告">
+        *)      # logger "ACPI action $action is not defined"
+</pre>
+
+<p>
+<e>问</e>我有一台Dell Inspiron 51XX但我得不到任何ACPI事件。
+</p>
+
+<p>
+这貌似是一个内核的bug。参见<uri 
+link="http://bugme.osdl.org/show_bug.cgi?id=1752">这里</uri>。
+</p>
+
+<p>
+<e>问：</e>我激活了<path>xorg.conf</path>中的<c>DynamicClocks</c>选项，结果现在X.org崩溃了／黑屏／我的笔记本不能正常关机。
+</p>
+
+<p>
+<e>答：</e>这出现在一些系统上。你不得不禁用<c>DynamicClocks</c>。
+</p>
+
+<p>
+<e>问：</e>我想用TuxOnIce，但它告诉我说我的swap分区太小了。但重新分区不可行。
+</p>
+
+<p>
+<e>答：</e>如果你的系统中有足够大的空闲空间，你可以用文件形式（filewriter）而不用swap形式（swapwriter）。<c>hibernate-script</c>能很好地支持。更多的信息可以在<path>/usr/src/linux/Documentation/power/tuxonice.txt</path>中找到。
+</p>
+
+<p>
+<e>问：</e>我刚刚买了一个新的电池，但它只持续了几分钟！我做错了什么？
+</p>
+
+<p>
+<e>答：</e>首先按制造商的建议对电池正确充电。
+</p>
+
+<p>
+<e>问：</e>上面的办法没有用。我还能做什么？
+</p>
+
+<p>
+<e>答：</e>有一些电池声称是"新"的但实际上是旧的。试着这么做：
+</p>
+
+<pre caption="检查电池的状态">
+$ <i>grep capacity /proc/acpi/battery/BAT0/info</i>
+design capacity:     47520 mWh
+last full capacity:  41830 mWh
+</pre>
+
+<p>
+如果"last full capacity"和"design capacity"有很大的不同，你的电池很可能已经损坏了。试着要求保修吧。
+</p>
+
+<p>
+<e>问：</e>我的问题没有在上面列出。我接下来应该怎么做？
+</p>
+
+<p>
+<e>答：</e>不要担心直接联系我，<mail link="earthwings@gentoo.org">Dennis 
+Nienhüser</mail>。<uri link="http://forums.gentoo.org">Gentoo 
+Forums</uri>也是一个获得帮助的好地方。如果你更喜欢IRC，试试<uri 
+link="irc://irc.freenode.net">irc.freenode.net</uri>上的<c>#gentoo-laptop</c>频道。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
+
