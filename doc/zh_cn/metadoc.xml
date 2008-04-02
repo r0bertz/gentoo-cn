@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.206 -->
+<!-- English CVS version: 1.207 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-  <version>1.128</version>
+  <version>1.129</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -178,6 +178,7 @@
     <file id="hb-install-blockdevices">/doc/zh_cn/handbook/hb-install-blockdevices.xml</file>
     <file id="hb-install-filesystems">/doc/zh_cn/handbook/hb-install-filesystems.xml</file>
     <file id="hb-install-kernelmodules">/doc/zh_cn/handbook/hb-install-kernelmodules.xml</file>
+    <file id="hb-install-kernelparams">/doc/zh_cn/handbook/hb-install-kernelparams.xml</file>
     <file id="hb-working-features">/doc/zh_cn/handbook/hb-working-features.xml</file>
     <file id="hb-working-portage">/doc/zh_cn/handbook/hb-working-portage.xml</file>
     <file id="hb-working-rcscripts">/doc/zh_cn/handbook/hb-working-rcscripts.xml</file>
