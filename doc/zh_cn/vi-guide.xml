@@ -74,7 +74,7 @@
 vi有很多版本，而我将会向你展示如何使用一个叫做<c>vim</c>的版本。vim非常流行，并有使vi漂亮了很多的众多扩展（当我示范vim专用的命令时，我会加以说明）。如果你需要安装vim，可以从<uri link="http://www.vim.org/">www.vim.org</uri>那里得到它。除了增强版的命令行vi，vim还增加了gvim，一个漂亮的图形化编辑器，可以被配置来调用优秀的GTK+图形化界面库。这是我系统上的gvim截图：
 </p>
 
-<figure link="/images/vishot.png" short="截图" caption="VIM截图"/>
+<figure link="/images/vishot-zh_cn.png" short="截图" caption="VIM截图"/>
 
 <p>
 如果你是vi新手，请让gvim运行在你的系统上。对于初学者来说，在图形化界面下使用vi可以使事情变得简单一些。
@@ -215,7 +215,7 @@ vi也允许你向左右按词移动。按<c>w</c>键移到下一个词的<e>第�
 我们已经讲过了许多命令，现在是把它们转录到备忘单的时候了。为此你需要一张信纸，或者A4大小的纸张（我们将会把许多信息都记在这张单子上！）。这张图片展示了我的备忘单，转录了到现在为止所有我们讲到的命令。如果可能的话请模仿我的布局，这样我们可以把所有的信息都集中在一张单子里。
 </p>
 
-<figure link="/images/vicheat-first.png" short="备忘单的第一部分"
+<figure link="/images/vicheat-first-zh_cn.png" short="备忘单的第一部分"
 caption="备忘单"/>
 
 </body>
@@ -302,7 +302,7 @@ caption="备忘单"/>
 到更新备忘单的时候了！加上到目前为止我们讲过的命令后，你的备忘单看起来应该是这样的：
 </p>
 
-<figure link="/images/vicheat-edit.png" short="备忘单" caption="含有编辑命令的备忘单"/>
+<figure link="/images/vicheat-edit-zh_cn.png" short="备忘单" caption="含有编辑命令的备忘单"/>
 
 </body>
 </section>
@@ -382,7 +382,7 @@ vi除了允许（数字）（移动命令）的组合，还允许<c>d</c>或<c>c
 是再次更新备忘单的时候了。现在它看起来应该是这个样子：
 </p>
 
-<figure link="/images/vicheat-compound.png" short="备忘单" caption="含有复合命令的备忘单"/>
+<figure link="/images/vicheat-compound-zh_cn.png" short="备忘单" caption="含有复合命令的备忘单"/>
 
 </body>
 </section>
@@ -408,7 +408,7 @@ vi除了允许（数字）（移动命令）的组合，还允许<c>d</c>或<c>c
 剪切和粘贴的最佳方法是使用<e>可视化模式</e>，它是被加入到诸如vim和elvis等现代版本的vi中的一种特殊模式。你可以将可视化模式看做为一种“高亮文本”模式。一旦文本被高亮，它就可以被复制或删除，然后粘贴。如果你正在使用gvim，即可用拖拽鼠标左键滑过某段区域的方式来高亮。
 </p>
 
-<figure link="/images/vihighlight.png" short="高亮的文本" caption="含有高亮文本的VIM "/>
+<figure link="/images/vihighlight-zh_cn.png" short="高亮的文本" caption="含有高亮文本的VIM "/>
 
 <p>
 另外，你也可以按<c>v</c>键进入可视化模式（如果你在控制台中使用vi，这可能是你唯一的选择）。然后，用移动命令（通常是方向键）来移动光标，你将能高亮某个文本区域。一旦文本被高亮了，我们就准备好剪切或复制它们了。
@@ -448,7 +448,7 @@ vi除了允许（数字）（移动命令）的组合，还允许<c>d</c>或<c>c
 嗯，我们已经抵达了vi教程的末尾了！在将所有高级编辑命令添加到你的备忘单之后，它看起来应该是这样的：
 </p>
 
-<figure link="/images/vicheat-final.png" short="备忘单" caption="终极备忘单"/>
+<figure link="/images/vicheat-final-zh_cn.png" short="备忘单" caption="终极备忘单"/>
 
 <p>
 将你的备忘单常置于手边，并开始使用vi来编辑文件和编写邮件。有需要时参考备忘单；你会发现一周之内，你能记住几乎所有的命令，而你的vi工作效率会直冲云霄！
