@@ -47,7 +47,7 @@ John P. Davis
 </author>
 
 <abstract>
-这是一个逐步增强Gentoo Linux安全性的详细指南
+这是一个逐步强化Gentoo Linux的详细指南
 </abstract>
 
 <license/>
@@ -152,7 +152,7 @@ quality assurance purposes.
 
 <title>系统安全</title>
 <abstract>
-增强你的系统的不同组件来使它更安全。
+加强你的系统的不同组件来使它更安全。
 </abstract>
 
 <chapter>
@@ -164,9 +164,9 @@ quality assurance purposes.
 </chapter>
 
 <chapter>
-<title>加强安全性</title>
+<title>增强安全性</title>
 <abstract>
-在安装前后加强安全性。
+在安装时和安装后增强系统安全性。
 </abstract>
   <include href="shb-tight.xml"/>
 </chapter>
@@ -230,7 +230,7 @@ Gentoo Linux允许你选择3种不同的日志记录器。
 <chapter>
 <title>提高服务的安全性</title>
 <abstract>
-确保你的守护进程的安全性。
+确保你的守护进程是安全的。
 </abstract>
   <include href="shb-services.xml"/>
 </chapter>

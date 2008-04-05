@@ -14,15 +14,15 @@
 <body>
 
 <p>
-在挂载一个<c>ext2</c>，<c>ext3</c>或者<c>reiserfs</c>格式的分区的时候，你有几个能够应用到<path>/etc/fstab</path>里面的选项。这些选项是：
+在挂载一个<c>ext2</c>，<c>ext3</c>或者<c>reiserfs</c>格式的分区的时候，你有几个能够加入到<path>/etc/fstab</path>里面的选项。这些选项是：
 </p>
 
 <ul>
 <li>
-  <c>nosuid</c> － 将会忽略SUID bit，并且让它像一个正常文件一样
+  <c>nosuid</c> － 忽略SUID bit，并且使它像一个正常文件一样
 </li>
 <li>
-  <c>noexec</c> - 将会阻止来自这个分区的文件的执行
+  <c>noexec</c> - 阻止来自这个分区的文件的执行
 </li>
 <li>
   <c>nodev</c> - 忽略设备
@@ -50,12 +50,13 @@ proc /proc proc defaults 0 0
 </warn>
 
 <note>
-更多有关磁盘限额的信息请看<uri link="?part=1&amp;chap=5#quotas">the Quotas section</uri>。
+更多有关磁盘限额的信息请查看<uri 
+link="?part=1&amp;chap=5#quotas">磁盘限额</uri>。
 </note>
 
 <note>
-我没有给<path>/var</path>加上<c>noexec</c>或者<c>nosuid</c>选项，即使来自这个挂载点的文件通常是永远不会被执行的。这是因为netqmail被安装到了<path>/var/qmail</path>，并且必须被允许执行并处理一个SUID文件。
-除非我要升级Gentoo，否则我把<path>/usr</path>设置成只读模式，因为我除升级外从来不向里头写任何东西。然后我重新用读写模式挂载系统文件，接着升级，最后再次挂载。
+即使来自<path>/var</path>的文件通常是永远不会被执行,我也没有给它加上<c>noexec</c>或者<c>nosuid</c>选项，这是因为我安装了netqmail，它被安装在<path>/var/qmail</path>，并且它必须被允许执行和处理一个SUID文件。
+除非我要升级Gentoo，否则我把<path>/usr</path>设置成只读模式，这是因为我除了升级以外从来不写任何东西到那里面去。在我要升级Gentoo的时候，我会重新用读写模式挂载文件系统，接着升级，最后再次使用只读模式挂载它。
 </note>
 
 <note>

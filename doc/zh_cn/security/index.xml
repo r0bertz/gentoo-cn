@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/security/index.xml" lang="zh_cn">
+<title>Gentoo安全手册</title>
+
+<author title="作者">
+  <mail link="curtis119@gentoo.org">M. Curtis Napier</mail>
+</author>
+<author title="编辑">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="译者">
+  <mail link="jjj3112007@gmail.com">Zezhou Jiang</mail>
+</author>
+<author title="审校">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
+
+<abstract>
+这是一个逐步强化Gentoo Linux的详细指南
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.1</version>
+<date>2005-07-06</date>
+
+<chapter>
+<title>简介</title>
+<section>
+<body>
+
+<p>
+本手册旨在帮助那些在服务器环境下使用Gentoo并希望加强安全性的人。
+</p>
+
+<p>
+如果在读完本手册后，你对更多有关于Gentoo系统安全的信息感兴趣的话，请参见<uri 
+link="/proj/en/hardened/">强化Gentoo计划</uri>
+</p>
+
+</body>
+</section>
+</chapter>
+<chapter>
+<title>查看手册</title>
+<section>
+<body>
+
+<table>
+<tr>
+  <th>格式</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>
+    <uri link="security-handbook.xml">每页显示一个章节,在线浏览的最佳选择</uri>
+  </ti>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti><uri link="security-handbook.xml?full=1">在一个页面内显示全部内容</uri></ti>
+</tr>
+<tr>
+  <ti>HTML</ti>
+  <ti>
+    <uri 
+link="security-handbook.xml?style=printable&amp;full=1">在一个页面内显示全部内容，适合打印</uri>
+  </ti>
+</tr>
+</table>
+
+</body>
+</section>
+</chapter>
+</guide>
