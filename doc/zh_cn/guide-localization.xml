@@ -1,0 +1,480 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- English CVS version: 1.48 -->
+
+<guide link="/doc/zh_cn/guide-localization.xml" lang="zh_cn">
+<title>Gentoo Linux本地化指南</title>
+<author title="作者">
+  Alexander Holler
+</author>
+<author title="译者/编辑">
+  <mail link="slucy@uchicago.edu">Steven Lucy</mail>
+</author>
+<author title="编辑">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="编辑">
+  <mail link="pylon@gentoo.org">Lars Weiler</mail>
+</author>
+<author title="编辑">
+  <mail link="dertobi123@gentoo.org">Tobias Scherbaum</mail>
+</author>
+<author title="编辑">
+  <mail link="flammie@gentoo.org">Flammie Pirinen</mail>
+</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+
+<abstract>
+本指南帮助用户将他们的Gentoo Linux发行版本地化为任何欧洲的locale。本文是由德语文档翻译而来的，因此它以德国作为案例分析。其中包含欧元货币符号的使用配置。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.36</version>
+<date>2007-10-04</date>
+
+<chapter>
+<title>时区</title>
+<section>
+<body>
+
+<p>
+你需要选择时区让系统知道你的地理位置，以保持正确的时间。在<path>/usr/share/zoneinfo</path>中查找你的时区。然后在<path>/etc/conf.d/clock</path>中设置时区。请忽略<path>/usr/share/zoneinfo/Etc/GMT*</path>时区，因为它们的名字并不表示所指的地区。比如，<path>GMT-8</path>实际上是GMT+8。
+</p>
+
+<pre caption="设置时区信息">
+# <i>ls /usr/share/zoneinfo</i>
+<comment>（假设你要使用布鲁塞尔）</comment>
+# <i>nano -w /etc/conf.d/clock</i>
+TIMEZONE="Europe/Brussels"
+
+# <i>date</i>
+Wed Mar  8 00:46:05 CET 2006
+</pre>
+
+<note>
+确保代表时区的英文缩写（本案例中为"CET"）正是你的地区。
+</note>
+
+<note>
+你可以做一个用户级的设置，在shell的rc文件（如bash的<path>.bash_profile</path>）中将<c>TZ</c>变量的值设为<path>/usr/share/zoneinfo</path>下的任何东西。本案例中<c>TZ="Europe/Berlin"</c>。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>硬件时钟</title>
+<section>
+<body>
+
+<p>
+Gentoo Linux安装过程中，大多数情况下硬件时钟都是被设成UTC（或GMT，格林威治标准时间），而时区则定为实际的本地时间。如果出于某种原因，你需要将硬件时钟设为非UTC，那么你就要编辑<path>/etc/conf.d/clock</path>，将CLOCK的值由<c>UTC</c>改为<c>local</c>。
+</p>
+
+<pre caption="本地时钟vs.格林威治时钟">
+<comment>（推荐：）</comment>
+CLOCK="UTC"
+<comment>（或者：）</comment>
+CLOCK="local"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Locale系统</title>
+<section>
+<title>locale是什么？</title>
+<body>
+
+<p>
+一份Locale是一组信息的集合，大多数程序利用它来确定特定的国家和语言设置。这些locale以及它们包含的数据是系统库的一部分，可以在大多数系统中的<path>/usr/share/locale</path>目录下找到。locale的名称通常命名为<c>ab_CD</c>的形式，其中<c>ab</c>是两个（或三个）字母的语言代号（在ISO-639中指定），<c>CD</c>是两个字母的国家代号（在ISO-3166中指定）。一些变量常常附加在locale名称的后面，例如<c>en_GB.utf8</c>或<c>de_DE@euro</c>。更多关于locale及相关的文章请考察<uri link="http://en.wikipedia.org/wiki/Locale">维基百科</uri>。
+</p>
+
+</body>
+</section>
+<section id="variables">
+<title>locale环境变量</title>
+<body>
+
+<p>
+Locale的设置保存在环境变量中。典型情况下设置在<path>/etc/env.d/02locale</path>（系统全局设置）和<path>~/.bashrc</path>（特定用户设置）文件中。这些变量分别决定locale各方面的设置，下面的表格给出了具体说明，优先级高的变量排在表格的上面（即上面的变量会覆盖处在它们下面的变量设置）。所有变量都会取一个前述<c>ab_CD</c>格式的locale名称作为值。
+</p>
+
+<table>
+<tr>
+  <th>变量名</th>
+  <th>说明</th>
+</tr>
+<tr>
+  <ti>LC_ALL</ti>
+  <ti>
+    一次性定义全部locale设置。这是最高优先级的locale设置，将覆盖所有其它设置。
+  </ti>
+</tr>
+<tr>
+  <ti>LC_COLLATE</ti>
+  <ti>
+    定义按字母排序字符串。例如这会影响目录列表的分类显示。
+  </ti>
+</tr>
+<tr>
+  <ti>LC_CTYPE</ti>
+  <ti>
+    定义系统的字符处理性能。这决定哪些字符能被视为字母、数字，等等。这个变量如果生效还决定所使用的字符集。
+  </ti>
+</tr>
+<tr>
+  <ti>LC_MESSAGES</ti>
+  <ti>
+    用于一些使用基于消息机制的本地化方式进行本地化的应用程序（详细资料请参阅接下去的章节，包括使用这样配置的多数Gnu程序，以及如何让不使用这样配置的程序运行）。
+  </ti>
+</tr>
+<tr>
+  <ti>LC_MONETARY</ti>
+  <ti>定义货币单位和货币型数值的格式。</ti>
+</tr>
+<tr>
+  <ti>LC_NUMERIC</ti>
+  <ti>
+    定义非货币型数值的格式。影响到千位分隔符和小数分隔符等。
+  </ti>
+</tr>
+<tr>
+  <ti>LC_TIME</ti>
+  <ti>定义日期和时间的格式。</ti>
+</tr>
+<tr>
+  <ti>LC_PAPER</ti>
+  <ti>定义默认的纸张尺寸。</ti>
+</tr>
+<tr>
+  <ti>LANG</ti>
+  <ti>
+    一次性定义全部locale设置。此设置能被单个LC_*或者甚至LC_ALL的设置覆盖。
+  </ti>
+</tr>
+</table>
+
+<note>
+尽管大多数程序只根据LC_ALL来运行，不过如果设置了LC_ALL而没有设置LANG，有些程序还是会不遵守规矩。如果想玩得安全一点，将它们<e>两个一起</e>设置。
+</note>
+
+<p>
+最典型的情况是用户只在用户级设置LANG变量，可能还有LC_CTYPE，通过添加定义到shell启动文件中，手动从命令行定义环境变量。
+</p>
+
+<pre caption="在~/.bashrc中设置用户的locale">
+export LANG="de_DE@euro"
+</pre>
+
+<note>
+如果要使用欧元货币符号（€），将<c>@euro</c>附加到你的locale后面
+</note>
+
+<p>
+也可能为所有用户和程序设置一个系统全局locale：
+</p>
+
+<pre caption="在/etc/env.d/02locale中设置默认的系统locale">
+LC_ALL="de_DE@euro"
+LANG="de_DE@euro"
+</pre>
+
+<p>
+通常的做法是只使用每个用户的locale设置，而不设置默认的系统locale。这种情况下系统locale默认为一个特定值<c>"C"</c>，由于历史原因这个值映射为英语locale。
+</p>
+
+<p>
+为了让支持基于消息机制的本地化的程序运行，你可能需要设定<c>nls</c>（本地语言支持）USE标记来编译程序。
+</p>
+
+<p>
+设置好正确的locale后，一定要更新环境变量使系统知道所做的更改：
+</p>
+
+<pre caption="更新环境">
+<comment>（更新系统全局默认的locale：）</comment>
+# <i>env-update &amp;&amp; source /etc/profile</i>
+
+<comment>（更新特定用户的locale：）</comment>
+$ <i>source ~/.bashrc</i>
+</pre>
+
+<p>
+更新环境后，你需要按下<c>Ctrl-Alt-Backspace</c>杀死X服务器，登出，然后以用户身份登入。
+</p>
+
+<p>
+现在，检验一下所做的更改是否已经生效了：
+</p>
+
+<pre caption="检验环境更改">
+$ <i>env | grep -i LC_</i>
+</pre>
+
+<p>
+另外还有一个本地化变量叫做LINGUAS。它影响到安装在基于gettext的程序中的本地化文件。它还决定某些特殊软件包用到的本地化，比如<c>kde-base/kde-i18n</c>和<c>app-office/openoffice</c>。这个变量的值为一组以空格隔开的语言代号序列，建议将其设置在<path>/etc/make.conf</path>中：
+</p>
+
+<pre caption="在make.conf中设置LINGUAS">
+# <i>nano -w /etc/make.conf</i>
+<comment>加入LINGUAS变量中。例如，德语、芬兰语和英语:)</comment>
+LINGUAS="de fi en"
+</pre>
+
+
+</body>
+</section>
+<section>
+<title>生成指定的Locale</title>
+<body>
+
+<p>
+如果你用一个默认不可用的locale，则应当使用<c>localedef</c>来生成你的locale。比如：
+</p>
+
+<pre caption="使用localedef生成一个locale">
+# <i>localedef -c -i en_US -f ISO-8859-15 en_US.ISO-8859-15</i>
+</pre>
+
+<p>
+生成locale之后，你可以export一个合适的LANG变量。
+</p>
+
+<pre caption="Export LANG变量">
+# <i>export LANG="en_US.ISO-8859-15"</i>
+</pre>
+
+<p>
+做了改动之后一定要更新环境：
+</p>
+
+<pre caption="更新环境">
+# <i>env-update &amp;&amp; source /etc/profile</i>
+</pre>
+
+<p>
+更新环境后，你需要按下<c>Ctrl-Alt-Backspace</c>杀死X服务器，登出，然后以用户身份登入。
+</p>
+
+</body>
+</section>
+<section>
+<title>为glibc生成locale</title>
+<body>
+
+<p>
+可能你在系统中只要用到一个或者两个locale。你可以在<path>/etc/locale.gen</path>中指定所需的的locale。
+</p>
+
+<pre caption="添加locale到/etc/locale.gen">
+en_GB ISO-8859-1
+en_GB.UTF-8 UTF-8
+de_DE ISO-8859-1
+de_DE@euro ISO-8859-15
+</pre>
+
+<p>
+下一步是执行<c>locale-gen</c>。它会生成<path>/etc/locale.gen</path>文件中指定的所有locale。
+</p>
+
+<note>
+<c>locale-gen</c>在<c>glibc-2.3.6-r4</c>及更新版本中可用。如果你的glibc版本较旧，那么现在就应该更新了。
+</note>
+
+<p>
+你可以通过执行<c>locale -a</c>来检验所选的locale是否可用。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>控制台下的键盘布局</title>
+<section>
+<body>
+
+<p>
+控制台下使用的键盘布局通过<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量来设定。其有效值可以在<path>/usr/share/keymaps/<c>{arch}</c>/</path>下找到。<path>i386</path>下进一步细分了布局（如<path>qwerty/</path>、<path>azerty/</path>等）。有些语言有多个选择项，你可能要试验后再决定哪个最适合自己的需求。
+</p>
+
+<pre caption="设置控制台的键盘映射">
+KEYMAP="de"
+KEYMAP="de-latin1"
+KEYMAP="de-latin1-nodeadkeys"
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>X服务器下的键盘布局</title>
+<section>
+<body>
+
+<p>
+X服务器下使用的键盘布局通过<path>/etc/X11/xorg.conf</path>中的<c>XkbLayout</c>选项来指定。
+</p>
+
+<pre caption="设置X的键盘映射">
+ Section "InputDevice"
+     Identifier  "Keyboard1"
+     ...
+     Option "XkbLayout"    "de"
+     #Option "XkbModel"     "pc105"    <comment>## 这适用于国际键盘。</comment>
+     # Option "XkbVariant"  "nodeadkeys" <comment>## 这将被用于xterm的输入</comment>
+     ...
+</pre>
+
+<p>
+如果你有一个国际键盘布局，则必须将<c>XkbModel</c>选项设置为<c>pc102</c>或<c>pc105</c>，这样才可以映射你键盘上附加的特殊按键。
+</p>
+
+<p>
+Deadkey允许你按下某些键不马上显示，而是与另一个字母组合得到一个单一的字符如é、è、á、à……等等。将<c>XkbVariant</c>设置为<c>nodeadkeys</c>允许在X终端中输入这些特殊字符。
+</p>
+
+<p>
+如果你想在多个键盘布局之间切换（例如英语和俄语），须要做的全部事情就是在<path>xorg.conf</path>中添加几行内容，指定想要的布局及快捷键命令。
+</p>
+
+<pre caption="在两个键盘布局之间切换">
+ Section "InputDevice"
+     Identifier  "Keyboard1"
+     ...
+     Option "XkbLayout"    "us,ru"
+     Option "XkbOptions"   "grp:alt_shift_toggle,grp_led:scroll"
+</pre>
+
+<p>
+这里，<c>XkbOptions</c>允许你通过简单地按下<c>Alt-Shift</c>来在各个键盘布局之间转换。得益于<c>grp_led:scroll</c>选项，也可以通过控制Scroll Lock灯亮或灯灭来转换。这是个得心应手的视觉指示器，指出此时你正在使用的键盘布局。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>KDE</title>
+<section>
+<body>
+
+<p>
+对于KDE你必须安装<c>kde-base/kde-i18n</c>软件包。Kde-i18n与前面描述的<uri link="#variables">LINGUAS变量</uri>有关。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>控制台下的欧元符号</title>
+<section>
+<body>
+
+<p>
+为了让控制台显示欧元符号，你需要将<path>/etc/conf.d/consolefont</path>中的<c>CONSOLEFONT</c>设置为<path>/usr/share/consolefonts/</path>下的一个文件（不含<c>.psfu.gz</c>）。<c>lat9w-16</c>有欧元符号。
+</p>
+
+<pre caption="设置控制台字体">
+CONSOLEFONT="lat9w-16"
+</pre>
+
+<p>
+应检验一下<c>CONSOLEFONT</c>是否在boot启动级别：
+</p>
+
+<pre caption="检验启动级别是否正确">
+# <i>rc-update -v show | grep -i consolefont</i>
+</pre>
+
+<p>
+如果显示结果没有关于<c>CONSOLEFONT</c>的启动级别，就要把它添加到正确的级别：
+</p>
+
+<pre caption="添加consolefont到boot">
+# <i>rc-update add consolefont boot</i>
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>X中的欧元符号</title>
+<section>
+<title>绝大部分应用程序</title>
+<body>
+
+<p>
+要让欧元符号在X中正确地工作有点麻烦。首先要做的事是修改<path>/usr/share/fonts/misc/fonts.alias</path>中<c>fixed</c>和<c>variable</c>的定义，将末尾的<c>iso8859-1</c>替换为<c>iso8859-15</c>。
+</p>
+
+<pre caption="设置默认的X字体">
+fixed        -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso8859-15
+variable     -*-helvetica-bold-r-normal-*-*-120-*-*-*-*-iso8859-15
+</pre>
+
+<p>
+有些应用程序使用它们自己的字体，你必须分别告诉它们使用一个含欧元符号的字体。你可以在<path>.Xdefaults</path>中做特定用户级别的设置（可以将这个文件复制到<path>/etc/skel/</path>下给新用户使用），也可以在<path>/usr/share/X11/app-defaults/</path>下的一个资源文件中为任何应用程序做全局级别的设置（如xterm）。一般在这些文件中你只要修改现有的一行内容，而不需要添加新的一行。举个例子，更改我们的xterm的字体：
+</p>
+
+<pre caption="为xterm设定字体">
+<comment>（在你的主目录下）</comment>
+$ <i>echo 'XTerm*font: fixed' >> .Xresources </i>
+$ <i>xrdb -merge .Xresources</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>(X)Emacs中的欧元符号</title>
+<body>
+
+<p>
+要在(X)Emacs中使用欧元符号，将下面的内容加入<path>.Xdefaults</path>：
+</p>
+
+<pre caption="为emacs设定字体">
+Emacs.default.attributeFont: -*-courier-medium-r-*-*-*-120-*-*-*-*-iso8859-15
+</pre>
+
+<p>
+对于XEmacs（非纯Emacs），必须多做点事。在<path>/home/user/.xemacs/init.el</path>中加入：
+</p>
+
+<pre caption="为xemacs设定字体">
+(define-key global-map '(EuroSign) '[€])
+</pre>
+
+<note>
+[]中的符号为欧元符号。
+</note>
+
+</body>
+</section>
+<section>
+<title>OpenOffice.Org</title>
+<body>
+
+<p>
+当前稳定版的<c>app-office/openoffice</c>和<c>app-office/openoffice-bin</c>的ebuild支持<uri link="#variables">LINGUAS变量</uri>，用以选择已安装的GUI语言包。要了解关于你的语言的GUI翻译、排版、拼写校验以及其它本地化的情况，请参考<uri link="http://l10n.openoffice.org/languages.html">OpenOffice.Org本地化网站</uri>。
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
