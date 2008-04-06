@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.163 -->
+<!-- English CVS version: 1.165 -->
 
 <book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn" disclaimer="draft">
 <title>Gentoo Linux x86手册</title>
@@ -18,7 +18,7 @@
  <key id="min-cd-name">install-x86-minimal-2008.0_beta1.iso</key>
  <key id="min-cd-size">57</key>
  <key id="live-cd-name">livecd-i686-installer-2008.0_beta1.iso</key>
- <key id="live-cd-size">697</key>
+ <key id="live-cd-size">655</key>
  <key id="release-dir">releases/x86/2008.0_beta1/</key>
  <key id="stage3">stage3-i686-2008.0_beta1.tar.bz2</key>
  <key id="profile">default-linux/x86/2008.0</key>
@@ -190,8 +190,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-04-06</date>
 
 <part>
 <title>安装Gentoo</title>
