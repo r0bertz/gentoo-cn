@@ -21,7 +21,7 @@
 </author>
 
 <abstract>
-这是一个逐步强化Gentoo Linux的详细指南
+这是一个逐步强化Gentoo Linux的详细指南。
 </abstract>
 
 
@@ -44,7 +44,7 @@
 
 <p>
 如果在读完本手册后，你对更多有关于Gentoo系统安全的信息感兴趣的话，请参见<uri 
-link="/proj/en/hardened/">强化Gentoo计划</uri>
+link="/proj/en/hardened/">强化Gentoo项目</uri>。
 </p>
 
 </body>
