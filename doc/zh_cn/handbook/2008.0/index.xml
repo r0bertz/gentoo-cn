@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.10 -->
+<!-- English CVS version: 1.11 -->
 <guide disclaimer="draft" lang="zh_cn">
 <title>Gentoo 2008.0无网络安装手册</title>
 
@@ -39,7 +39,7 @@ Gentoo Linux 2008.0无网络安装手册提供了以下几种语言版本：
 <p>
 <uri link="/doc/en/handbook/2008.0/">英文</uri> |
 <uri link="/doc/de/handbook/2008.0/">德文</uri> |
-<uri link="doc/it/handbook/2008.0/">意大利文</uri> |
+<uri link="/doc/it/handbook/2008.0/">意大利文</uri> |
 <uri link="/doc/pl/handbook/2008.0">波兰文</uri> | 
 <uri link="/doc/zh_cn/handbook/2008.0">简体中文</uri>
 </p>
