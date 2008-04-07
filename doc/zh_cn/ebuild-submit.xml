@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<!-- $Header$ -->
+<!-- English CVS version:1.5 -->
+<guide link = "/doc/zh_cn/ebuild-submit.xml" lang="zh_cn">
+<title>贡献ebuild</title>
+
+<author title="作者">
+  <mail link="mbutcher@frii.com">Matt Butcher</mail>
+</author>
+<author title="译者">
+  <mail link="guanqun.lu@gmail.com">陆冠群</mail>
+</author>
+
+
+<abstract>
+这份指南解释了如何通过Bugzilla系统来提交ebuild包。
+</abstract>
+
+<version>1.5</version>
+<date>2005-10-24</date>
+
+<chapter>
+<title>开始</title>
+<section>
+<title>建立一个Bugzilla帐号</title>
+<body>
+
+<p>
+将你的浏览器指向<uri>http://bugs.gentoo.org</uri>。这是Bugzilla的bug跟踪数据库的URL地址。在页面的一列链接中，有一项是"Open 
+a new Bugzilla account"，如果你还没有这么做过（比如：提交一个bug），那么请点击这个链接，创建一个新的帐号。
+</p>
+
+</body>
+</section>
+<section>
+<title>不要提交CPAN的ebuild包</title>
+<body>
+
+<p>
+Portage提供了一个叫做<c>g-cpan.pl</c>的工具，它会利用Portage在你的Gentoo系统上安装某个指定的CPAN模块，同时在Portage数据库中保存必要的信息（比如依赖性、提供的文件，等等），就好像你安装一个ebuild一样。因而，没有必要（也不推荐）提交CPAN的ebuild包。
+</p>
+
+<p>
+希望了解更多关于<c>g-cpan.pl</c>的信息，请查阅它的man手册。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>提交ebuild</title>
+<section>
+<title>创建一个新的bug</title>
+<body>
+
+<p>
+在主页或者登录页面的下方有一个黄色的框。选择<c>New - 
+Expert</c>。或者，你可以直接登录到<uri>http://bugs.gentoo.org/enter_bug.cgi</uri>。这两种方法都能够使你进入<c>Enter 
+Bug</c>页面。
+</p>
+
+<note>
+在Bugzilla系统中，所有的条目都是bug。这包括新提交的ebuild。每个bug都会被赋予一个跟踪id。特别是当你有其他的ebuild依赖于这个包的时候，请记住这个ID。
+</note>
+
+<p>
+Bugzilla可以跟踪多个项目。比如，在Gentoo中，其他的项目可能包括文档或者用于管理网站的工具。在这些列表中，ebuild总是应该被提交到<c>Gentoo 
+Linux</c>。
+</p>
+
+<p>
+点击<c>Gentoo Linux</c>将会显示一个新的bug条目表单。
+</p>
+
+</body>
+</section>
+<section>
+<title>填写bug表单</title>
+<body>
+
+<p>
+表单上的第一个域是<c>version</c>。如果你知道你的包属于哪个版本，那么在这里选择相应的版本号。否则，请选择<c>unspecified</c>。接着，设置component域。所有ebuild脚本的component类型都要设置成<c>Ebuilds</c>。
+</p>
+
+<impo>
+Ebuild的component类型<e>总是</e>应该设置成<c>Ebuild</c>。其他的类别，比如<c>GNOME</c>，<c>Libraries</c>和<c>Server</c>可能看起来适合你的ebuild类型，但他们是在提交相关包的bug时所使用的，而不是在提交ebuild的时候。 
+</impo>
+
+<p>
+对于ebuild来说，不需要设置<c>Platform</c>、 <c>OS</c>和<c>Priority</c>类别。
+</p>
+
+<p>
+<c>Severity</c>域应该设置成<c>enhancement</c>。
+</p>
+
+<p>
+保持<c>Assigned To</c>为空。如果你尚未改变Bugzilla的邮件设定，那么，作为一名汇报者，在bug更新的时候你将自动收到邮件。
+</p>
+
+<p>
+在<c>Summary</c>域填写简单的说明，用以表示你所提交的包名称以及是否是一个更新抑或是一个新的提交。像这样的描述就不错：<c>foo-bar-x.y.z.ebuild(New 
+Package)</c>或者<c>foo-x.y.z.ebuild (Update)</c>。
+</p>
+
+<p>
+<c>Description</c>域应该尽可能详细地填写。这是一个来自第7号bug的例子：
+</p>
+
+<pre caption="例子描述">
+Hi!
+
+Please find attached gramps-0.7.0.ebuild and a patch so that it will 
+compile against python-2.2
+
+gramps is the Genealogical Research and Analysis Management Programming
+System.  It is a very cool gnome/python app.  If you are in the US, you
+can head over to http://www.familysearch.com/ and you can probably find a 
+GEDCOM file for your family tree to import into gramps. (Mormons sure do like 
+geneaology)
+
+I suggest app-misc/gramps Also, this ebuild depend on Imaging and ReportLab
+previously submitted
+
+tod
+</pre>
+
+<p>
+写完综述之后，点击<c>Commit</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>附加ebuild脚本</title>
+<body>
+
+<p>
+在<c>Enter Bug</c>页面点击<c>submit</c>之后，你会来到<c>Posting Bug</c>页面。注意其bug号。
+</p>
+
+<p>
+在该页面的下方，有一个到<c>Create a new attachment</c>的链接。点击这个链接。
+</p>
+
+<p>
+使用文本输入框或者<c>Browse</c>对话框来选择文件。在<c>Description</c>中，输入ebuild文件的名字，和你在上一页填写<c>Summary</c>的情况类似。
+</p>
+
+<p>
+确保将内容类型设置成"text/plain"，以及选中<c>select from list</c>单选按钮。
+</p>
+
+<p>
+在这个表单上没有其他所需要填写的域了。点击<c>Submit</c>就完成了ebuild的提交过程。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>多个ebuild</title>
+<section>
+<title>依赖性</title>
+<body>
+
+<p>
+万一你想提交多个ebuild，并且其中的一些ebuild依赖于其他的ebuild，这时，标记出他们的依赖性将是十分有用的。再次查看bug可以让你添加另外一份说明。请在这里添加相应的依赖信息。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
