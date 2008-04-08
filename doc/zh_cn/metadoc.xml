@@ -113,7 +113,7 @@
     <file id="distcc">/doc/en/distcc.xml</file>
     <file id="cross-distcc">/doc/en/cross-compiling-distcc.xml</file>
     <file id="dri-howto">/doc/zh_cn/dri-howto.xml</file>
-    <file id="ebuild-submit">/doc/en/ebuild-submit.xml</file>
+    <file id="ebuild-submit">/doc/zh_cn/ebuild-submit.xml</file>
     <file id="gentoo-upgrading">/doc/zh_cn/gentoo-upgrading.xml</file>
     <file id="migration-2.6">/doc/zh_cn/migration-to-2.6.xml</file>
     <file id="altinstall">/doc/en/altinstall.xml</file>
@@ -241,7 +241,7 @@
     <file id="gentoo-sparc-quickinstall">/doc/en/gentoo-sparc-quickinstall.xml</file>
     <file id="gnupg-user">/doc/en/gnupg-user.xml</file>
     <file id="ipv6">/doc/en/ipv6.xml</file>
-    <file id="guide-localization">/doc/en/guide-localization.xml</file>
+    <file id="guide-localization">/doc/zh_cn/guide-localization.xml</file>
     <file id="guide-to-mutt">/doc/zh_cn/guide-to-mutt.xml</file>
     <file id="uml">/doc/en/uml.xml</file>
     <file id="java">/doc/en/java.xml</file>
