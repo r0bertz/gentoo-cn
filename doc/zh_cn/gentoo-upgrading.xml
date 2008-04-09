@@ -3,7 +3,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.39 -->
 
-<guide link="/doc/zh_cn/gentoo-upgrading.xml" lang="zh_cn">
+<guide link="/doc/zh_cn/gentoo-upgrading.xml" lang="zh_cn" disclaimer="draft">
 <title>Gentoo 升级指南</title>
 
 <author title="Author">
@@ -17,6 +17,9 @@
 </author>
 <author title="Translator">
   <mail link="sinsun@gmail.com">彭新舜</mail>
+</author>
+<author title="Editor">
+  <mail link="r0bertz@gentoo.org">张乐</mail>
 </author>
 
 <abstract>
@@ -43,10 +46,7 @@
 </p>
 
 <p>
-要知道（要当个Gentoo使用者的话）让一个超级使用者处在科技尖端，这个步骤是非常
-挫折的。甚至连其他版本的超级使用者可能也会如此感觉。有了流行又广播的工具，像
-是 apt 或 apt-rpm 让升级可以频繁又快速。从一开始，Gentoo就是以快速、增衍的概念
-升级。总之，没有其他版本像Gentoo能满足这类要求的使用者。
+要知道（然后最终成为一个Gentoo使用者）一个高级用户要想时刻用上最新的软件，这个过程是非常痛苦的。甚至连其他版本的高级用户可能也会如此感觉，尽管现在已经广泛使用并且仍在继续普及的apt或apt-rpm等工具使得快速而频繁的升级成为可能。但是，没有其他版本像Gentoo这样更能满足这类要求的使用者。从一开始，Gentoo就是围绕快速、递增的升级观念而设计的。
 </p>
 
 <p>
