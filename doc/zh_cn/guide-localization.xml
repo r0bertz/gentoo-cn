@@ -25,6 +25,9 @@
   <mail link="flammie@gentoo.org">Flammie Pirinen</mail>
 </author>
 <author title="译者">
+  <mail link="joanphan@gmail.com">Hans Joanphan</mail>
+</author>
+<author title="译者">
   <mail link="tysnoo@gmail.com">叶宝泰</mail>
 </author>
 
@@ -136,7 +139,7 @@ Locale的设置保存在环境变量中。典型情况下设置在<path>/etc/env
 <tr>
   <ti>LC_MESSAGES</ti>
   <ti>
-    用于一些使用基于消息机制的本地化方式进行本地化的应用程序（详细资料请参阅接下去的章节，包括使用这样配置的多数Gnu程序，以及如何让不使用这样配置的程序运行）。
+    使用基于消息机制的本地化方式的应用程序的本地化信息（绝大多数GNU程序皆属此类，请看下面的章节以获知如何让支持以及不支持此机制的程序本地化）。
   </ti>
 </tr>
 <tr>
@@ -347,7 +350,7 @@ Deadkey允许你按下某些键不马上显示，而是与另一个字母组合�
 </p>
 
 <p>
-如果你想在多个键盘布局之间切换（例如英语和俄语），须要做的全部事情就是在<path>xorg.conf</path>中添加几行内容，指定想要的布局及快捷键命令。
+如果想在多个键盘布局之间切换（例如英语和俄语），你要做的全部事情就是在<path>xorg.conf</path>中添加几行内容，指定想要的布局及快捷键命令。
 </p>
 
 <pre caption="在两个键盘布局之间切换">
