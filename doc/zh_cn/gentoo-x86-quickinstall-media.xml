@@ -1,19 +1,19 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-media.xml,v 1.1 2008/01/01 21:32:30 neysx Exp $ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.2 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
 <included>
 
-<version>1</version>
-<date>2008-01-01</date>
+<version>2</version>
+<date>2008-04-01</date>
 
 <section>
 <title>安装介质</title>
 <body>
 
 <p>
-从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一张光盘。可以在<path>releases/x86/&lt;release&gt;/installcd</path>中找到minimal CD的ISO文件，或者在<path>releases/x86/&lt;release&gt;/livecd</path>中找到LiveCD的ISO文件。<e>minimal</e>安装盘只适用于有网络环境的安装。<e>LiveCD</e>适用于无网络环境的安装，参考文档<uri link="/doc/zh_cn/handbook/2007.0/handbook-x86.xml">2007.0 x86安装手册</uri>。本指南推荐使用minimal CD。
+从我们的<uri link="/main/en/mirrors.xml">镜像</uri>下载一张光盘。可以在<path>releases/x86/&lt;release&gt;/installcd</path>中找到minimal CD的ISO文件，或者在<path>releases/x86/&lt;release&gt;/livecd</path>中找到LiveCD的ISO文件。<e>minimal</e>安装盘只适用于有网络环境的安装。<e>LiveCD</e>适用于无网络环境的安装，参考文档<uri link="/doc/zh_cn/handbook/2008.0/handbook-x86.xml">2008.0 x86安装手册</uri>。本指南推荐使用minimal CD。
 </p>
 
 <p>

@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/en/gentoo-x86-quickinstall-stage.xml,v 1.1 2008/01/01 21:32:30 neysx Exp $ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.2 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
 <included>
 
-<version>1</version>
-<date>2008-01-01</date>
+<version>2</version>
+<date>2008-04-06</date>
 
 <section>
 <title>安装Stage</title>
@@ -32,11 +32,11 @@ Mon Mar  6 00:16:00 UTC 2006
 
 <pre caption="下载一份stage3压缩包">
 livecd gentoo # <i>links http://www.gentoo.org/main/en/mirrors.xml</i>
-<comment>（选一个镜像，进入/x86/current/stages目录，高亮显示你需要的stage3包，
+<comment>（选一个镜像，进入/x86/2008.0_beta1/stages目录，高亮显示你需要的stage3包，
 即i686 stage3，按下D键下载）</comment>
 
 <comment>（<b>或者</b>不选择最近的镜像，直接用wget下载）</comment>
-livecd gentoo # <i>wget ftp://gentoo.osuosl.org/pub/gentoo/releases/x86/current/stages/stage3-i686*tar.bz2</i>
+livecd gentoo # <i>wget ftp://gentoo.osuosl.org/pub/gentoo/releases/x86/2008.0_beta1/stages/stage3-i686*tar.bz2</i>
 </pre>
 
 <pre caption="解开stage3压缩包">
