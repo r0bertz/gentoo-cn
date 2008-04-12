@@ -5,7 +5,7 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 <sections>
 <version>1.0.2</version>
 <date>2006-05-04</date>
@@ -53,7 +53,7 @@
   <li>项目没有必要一定是长期的。</li>
   <li>一个项目可能与其他的项目发生冲突。这也没有关系。</li>
   <li>
-    任何开发者都可以建立一个项目，只需要在<path>gentoo/xml/htdocs/proj/en</path>下建立一个新的页面（更准确地说是目录和网页）就可以了。
+    任何开发者都可以建立一个项目，只需要在<path>gentoo/xml/htdocs/proj/en</path>下建立一个新的页面（更准确地说是目录和网页），并且在gentoo-dev-announce邮件列表上通告一下就可以了。
   </li>
 </ul>
 
