@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version:1.5 -->
+<!-- English CVS version:1.13 -->
 <guide link = "/doc/zh_cn/ebuild-submit.xml" lang="zh_cn">
 <title>贡献ebuild</title>
 
