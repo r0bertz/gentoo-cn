@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.208 -->
+<!-- English CVS version: 1.210 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-  <version>1.130</version>
+  <version>1.132</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -400,6 +400,7 @@
     <file id="embedded-handbook">/proj/en/base/embedded/handbook/index.xml</file>
     <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
     <file id="texlive-migration-guide">/proj/en/tex/texlive-migration-guide.xml</file>
+    <file id="openrc-migration">/doc/en/openrc-migration.xml</file>
   </files>
   <docs>
     <doc fileid="name-logo">
@@ -686,6 +687,7 @@
       <memberof>sysadmin_specific</memberof>
     </doc>
     <doc fileid="printing-howto">
+      <memberof>desktop_config</memberof>
       <memberof>sysadmin_specific</memberof>
     </doc>
     <doc fileid="openafs">
@@ -856,6 +858,10 @@
     </doc>
     <doc fileid="ldap-howto">
       <memberof>sysadmin_specific</memberof>
+    </doc>
+    <doc fileid="openrc-migration">
+      <memberof>sysadmin_specific</memberof>
+      <memberof>upgrade</memberof>
     </doc>
     <doc fileid="new-dev-training">
       <memberof>project_devrel</memberof>

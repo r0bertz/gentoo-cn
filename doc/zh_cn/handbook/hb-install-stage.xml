@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.114 -->
+<!-- English CVS version: 1.115 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 我们使用一个stage3文件来安装Gentoo。在这一章里我们将教你如何解压缩stage3文件和配置Portage。
 </abstract>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-04-14</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -101,7 +101,7 @@ Fri Mar 29 16:21:18 UTC 2005
 </p>
 
 <p>
-进入<path><keyval id="release-dir"/>stages/</path>目录里。你将会看到所有适合你的计算机体系结构的stage文件（它们也可能放在各个独立的子体系名称的子目录里）。选择一个，然后按<c>D</c>来下载。下载完以后，再按<c>Q</c>退出浏览器。
+进入<path><keyval id="release-dir"/></path>目录里。你将会看到所有适合你的计算机体系结构的stage文件（它们也可能放在各个独立的子体系名称的子目录里）。选择一个，然后按<c>D</c>来下载。下载完以后，再按<c>Q</c>退出浏览器。
 </p>
 
 <p test="'x86'=func:keyval('arch')">

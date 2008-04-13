@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding="utf-8"?>
 <!-- $Header$ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/proj/zh_cn/portage/doc/manually-fixing-portage.xml" lang="zh_cn">
@@ -37,6 +37,10 @@
 <p>
 这个部分将会告诉你如何在无法运行<c>emerge sys-apps/portage</c>的时候手动升级或修复你的portage安装。虽然这并不难，但你仍然需要很小心地来完成，所以请一步一步跟着以下的指南（在必要的时候用一下常识）。
 </p>
+
+<note>
+有个脚本可以自动完成下面讲述的步骤，可以在<uri link="http://dev.gentoo.org/~genone/scripts/get_portage_back.sh">这里</uri>获得。
+</note>
 
 </body>
 </section>

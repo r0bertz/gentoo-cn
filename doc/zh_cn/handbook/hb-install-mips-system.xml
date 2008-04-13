@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE sections SYSTEM "/dtd/book.dtd">
 
-<!-- The content of this document is licensed under the CC-BY-SA license 
- See http://creativecommons.org/licenses/by-sa/2.5 
- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-system.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
-<!-- English CVS version: 1.6 -->
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-install-mips-system.xml,v 1.1 2007/08/16 14:28:25 neysx Exp $ -->
+<!-- English CVS version: 1.7 -->
 <sections>
 
-<version>8.2</version>
+<version>9.0</version>
 <date>2008-04-02</date>
 
 <section>
@@ -91,7 +91,7 @@
 </p>
 
 <p>
-如果系统警告你有一个新版本的Portage可用，你可以 使用<c>emerge portage</c>来更新它。
+如果系统警告你有一个新版本的Portage可用，你可以使用<c>emerge --oneshot portage</c>来更新它。
 </p>
 
 </body>

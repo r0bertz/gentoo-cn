@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.109 -->
+<!-- English CVS version: 1.110 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-04-14</date>
 
 <section>
 <title>Chroot</title>
@@ -144,7 +144,7 @@
 </p>
 
 <p>
-如果系统警告你有一个新版本的Portage可用，你可以使用<c>emerge portage</c>来更新它。</p>
+如果系统警告你有一个新版本的Portage可用，你可以使用<c>emerge --oneshot portage</c>来更新它。</p>
 
 </body>
 </subsection>
