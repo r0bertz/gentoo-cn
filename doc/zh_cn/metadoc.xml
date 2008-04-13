@@ -391,7 +391,7 @@
     <file id="qa-autofailure">/proj/en/qa/autofailure.xml</file>
     <file id="qa-automagic">/proj/en/qa/automagic.xml</file>
     <file id="qa-backtraces">/proj/en/qa/backtraces.xml</file>
-    <file id="manually-fixing-portage">/proj/en/portage/doc/manually-fixing-portage.xml</file>
+    <file id="manually-fixing-portage">/proj/zh_cn/portage/doc/manually-fixing-portage.xml</file>
     <file id="xen-guide">/doc/en/xen-guide.xml</file>
     <file id="overlays-userguide">/proj/en/overlays/userguide.xml</file>
     <file id="overlays-devguide">/proj/en/overlays/devguide.xml</file>
