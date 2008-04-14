@@ -1,0 +1,1110 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!-- $Header$ -->
+<!-- English CVS version: 1.47 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/utf-8.xml" lang="zh_cn" disclaimer="draft">
+<title>在 Gentoo 下使用 UTF-8</title>
+
+<author title="作者">
+  <mail link="slarti@gentoo.org">Thomas Martin</mail>
+</author>
+<author title="贡献者">
+  <mail link="devil@gentoo.org.ua">Alexander Simonov</mail>
+</author>
+<author title="编辑">
+  <mail link="fox2mike@gentoo.org">Shyam Mani</mail>
+</author>
+<author title="译者">
+  <mail link="goldenshore999@gmail.com">周骞</mail>
+</author>
+
+<abstract>
+这个指南将会向你展示如何在Gentoo Linux系统下设置以及使用 UTF-8 Unicode 字符集。
+在此之前，先把Unicode的好处阐述一下，然后针对 UTF-8 论述。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license />
+
+<version>2.25</version>
+<date>2007-04-17</date>
+
+<chapter>
+<title>字符编码</title>
+<section>
+<title>什么是字符编码</title>
+<body>
+
+<p>
+电脑本身是不认识文字的。相反的，每一个字符都是用一个数字来表示。在以前，每一组
+用来表示字母和和字符的数字（也称作编码系统，编码或者字符集）都会被电脑硬件的限
+制而在大小上被限制。
+
+Computers do not understand text themselves. Instead, every character is
+represented by a number. Traditionally, each set of numbers used to represent
+alphabets and characters (known as a coding system, encoding or character set)
+was limited in size due to limitations in computer hardware.
+</p>
+
+</body>
+</section>
+<section>
+<title>字符编码的历史</title>
+<body>
+
+<p>
+最普遍的（至少最被广泛接受的）字符集是 <b>ASCII</b> (美国信息互换标准代码)。
+很多人都认为ASCII是最成功的软件标准。现代ASCII编码是在1986年被美国国家标准协会
+统一的。
+</p>
+
+<p>
+ASCII是严格限制在的7比特大小，就是她会用7位二进制数的组合来表示数字，在十进制中
+范围是从0到127。他们包括了32个不可视的控制字符，大多数是从0到31之间的范围，还有
+就是结束控制字符以及位处127的DEL/删除字符。从32到126的都是可视字符：空格，标点，
+拉丁字母和数字。
+
+ASCII is strictly seven-bit, meaning that it uses bit patterns representable
+with seven binary digits, which provides a range of 0 to 127 in decimal. These
+include 32 non-visible control characters, most between 0 and 31, with the
+final control character, DEL or delete at 127.  Characters 32 to 126 are
+visible characters: a space, punctuation marks, Latin letters and numbers.
+</p>
+
+<p>
+ASCII中的第八位原来是用来作为校验的奇偶位。如果不需要的话则置为0。这样的话，每一个
+ASCII字符都可以用一个字节表示。
+
+The eighth bit in ASCII was originally used as a parity bit for error checking.
+If this is not desired, it is left as 0. This means that, with ASCII, each
+character is represented by a single byte.
+</p>
+
+<p>
+虽然在现代英语通讯中ASCII已经足够了，但是其他的欧洲语言中所包括的特色字符就不那
+么容易解决了。开发出 ISO 8859 标准就是用来解决这些需求的。他们向后和ASCII兼容，
+但是与ASCII不同，第八位没有被留空，而是用来给相应的编码增加127个位置。ISO 8859的
+限制迎来了曙光，现在已经有15种ISO 8859标准的变种（8859-1到8859-15)。除了在ASCII
+兼容的范围内的字节外，同样字节表示的字符会经常出现冲突。为了让交互性情况更复杂，
+微软的某些版本的Windows使用Windows-1252编码，而不是西欧语言编码。这个是
+ISO 8859-1编码的超集，但是却有那么几个不同。但是幸亏，他们都和ASCII编码兼容。
+
+Although ASCII was enough for communication in modern English, in other
+European languages that include accented characters, things were not so easy.
+The ISO 8859 standards were developed to meet these needs.  They were backwards
+compatible with ASCII, but instead of leaving the eighth bit blank, they used
+it to allow another 127 characters in each encoding. ISO 8859's limitations
+soon came to light, and there are currently 15 variants of the ISO 8859
+standard (8859-1 through to 8859-15).  Outside of the ASCII-compatible byte
+range of these character sets, there is often conflict between the letters
+represented by each byte. To complicate interoperability between character
+encodings further, Windows-1252 is used in some versions of Microsoft Windows
+instead for Western European languages. This is a superset of ISO 8859-1,
+however it is different in several ways. These sets do all retain ASCII
+compatibility, however.
+</p>
+
+<p>
+在其他操作系统仍然为同一个语言使用不同字符集的时候，如 Shift-JIS 和 
+ISO-2022-JP，开发完全不同的单字节编码，如为非拉丁字母日文韩文（以及在一定程度上
+的中文）开发的EUC（扩展UNIX编码）编码，会增加更多的混乱。那些查看斯拉夫语
+(cyrillic)象形文字的用户需要在俄罗斯人和保加利亚人用的KOI8-R和乌克兰人用的
+KOI8-U之间选择，或者其他的斯拉夫语编码体系如失败的ISO 8859-5编码，以及常见的
+Windows-1251编码等。所有的这些字符集几乎和ASCII的都有兼容问题（虽然KOI8编码把斯
+拉夫语字符按照拉丁顺序排列，这样如果第八位被去掉的话，这些字符一样可以在ASCII终
+端中通过意译去解读。
+
+The necessary development of completely different single-byte encodings for
+non-Latin alphabets, such as EUC (Extended Unix Coding) which is used for
+Japanese and Korean (and to a lesser extent Chinese) created more confusion,
+while other operating systems still used different character sets for the same
+languages, for example, Shift-JIS and ISO-2022-JP.  Users wishing to view
+cyrillic glyphs had to choose between KOI8-R for Russian and Bulgarian or
+KOI8-U for Ukrainian, as well as all the other cyrillic encodings such as the
+unsuccessful ISO 8859-5, and the common Windows-1251 set. All of these
+character sets broke most compatibility with ASCII (although KOI8 encodings
+place cyrillic characters in Latin order, so in case the eighth bit is
+stripped, text is still decipherable on an ASCII terminal through case-reversed
+transliteration.)
+</p>
+
+<p>
+这带来了混乱，而且对于多语言交互来说是几乎不能胜任的，尤其在不同字母的情况下。
+接下来， Unicode。
+
+This has led to confusion, and also to an almost total inability for
+multilingual communication, especially across different alphabets. Enter
+Unicode.
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是Unicode?</title>
+<body>
+
+<p>
+Unicode克服了传统字符集的单字节限制。她有17个“位面”，每个位面有65,536个代码点
+总共可以装下1,114,112个字符。第一个位面，也叫"基本多文种平面"或BMP，包括了几乎
+所有你会用到的东西，很多人误认为Unicode是一个16位的字符集。
+
+Unicode throws away the traditional single-byte limit of character sets.  It
+uses 17 "planes" of 65,536 code points to describe a maximum of 1,114,112
+characters. As the first plane, aka. "Basic Multilingual Plane" or BMP,
+contains almost everything you will ever use, many have made the wrong
+assumption that Unicode was a 16-bit character set.
+</p>
+
+<p>
+Unicode可以用多种方式去表示，但是两个最普遍的方法是<b>UTF</b>（Unicode
+Transformation Format，Unicode转换格式）和<b>UCS</b>（Universal Character Set，
+通用字符集）。跟在UTF后边的一个数字指定了一个单元中的比特数，而UCS则是字节数。
+因为UTF-8的整8位特性，她已成为最广泛传播的Unicode文字交互手段，她也是本文的主题。
+
+Unicode has been mapped in many different ways, but the two most common are
+<b>UTF</b> (Unicode Transformation Format) and <b>UCS</b> (Universal Character
+Set). A number after UTF indicates the number of bits in one unit, while the
+number after UCS indicates the number of bytes. UTF-8 has become the most
+widespread means for the interchange of Unicode text as a result of its
+eight-bit clean nature, and it is the subject of this document.
+</p>
+
+</body>
+</section>
+<section>
+<title>UTF-8</title>
+<body>
+
+<p>
+UTF-8是一个变长的字符编码，也就是说她会用1到4个字节去表示一个符号。这样，第一
+个UTF-8的字节是用来编码ASCII的，这样也就让她可以和ASCII完全兼容。UTF-8意味着在
+数据体积增加少许后ASCII和拉丁字母可以互相交互，因为只用了第一个比特。东方字符
+如日本字的用户，很不爽得被分配到了更高的字节范围，因为这样会造成最多50％数据的
+重复。
+
+UTF-8 is a variable-length character encoding, which in this instance means
+that it uses 1 to 4 bytes per symbol. So, the first UTF-8 byte is used for
+encoding ASCII, giving the character set full backwards compatibility with
+ASCII. UTF-8 means that ASCII and Latin characters are interchangeable with
+little increase in the size of the data, because only the first bit is used.
+Users of Eastern alphabets such as Japanese, who have been assigned a higher
+byte range are unhappy, as this results in as much as a 50% redundancy in their
+data.
+</p>
+
+</body>
+</section>
+<section>
+<title>UTF-8能为你做什么</title>
+<body>
+
+<p>
+UTF-8允许你在一个符合标准的和国际多文字环境中工作，并且不会产生过多的数据重复。
+UTF-8是在Internet上，Email中，IRC还有几乎其他所有媒体中传输非ASCII字符的首选方
+法。尽管如此，很多人还是认为在线交流用UTF-8是属于滥用。在讨论频道，邮件列表和新
+闻组中用<e>非ASCII</e>UTF8之前，最好注意他们对UTF-8的态度。
+
+UTF-8 allows you to work in a standards-compliant and internationally accepted
+multilingual environment, with a comparatively low data redundancy. UTF-8 is
+the preferred way for transmitting non-ASCII characters over the Internet,
+through Email, IRC or almost any other medium. Despite this, many people regard
+UTF-8 in online communication as abusive. It is always best to be aware of the
+attitude towards UTF-8 in a specific channel, mailing list or Usenet group
+before using <e>non-ASCII</e> UTF-8.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Gentoo Linux中设置UTF-8</title>
+<section>
+<title>查找或建立UTF-8场所(Locale)</title>
+<body>
+
+<p>
+现在你已经理解Unicode的原理了，就可以在你的系统中开始使用UTF-8了。
+Now that you understand the principles behind Unicode, you're ready to start
+using UTF-8 with your system.
+</p>
+
+<p>
+使用UTF-8的初步要求是要有一个支持国家语言支持(NLS)的glibc。推荐的方法是设置文件
+<path>/etc/locale.gen</path>。关于如何使用这个文件并不在这个文档涉及的范围内，可
+以在<uri link="/doc/en/guide-localization.xml#doc_chap3_sect3">Gentoo 本地化指南
+</uri>。
+
+The preliminary requirement for UTF-8 is to have a version of glibc installed
+that has national language support. The recommend means to do this is the
+<path>/etc/locale.gen</path> file. It is beyond the scope of this document to
+explain the usage of this file though. It is explained in the <uri
+link="/doc/en/guide-localization.xml#doc_chap3_sect3">Gentoo Localization
+Guide</uri>.
+</p>
+
+<p>
+下一步，我们需要判断对应我们语言的UTF-8 locale是否已经存在，还是需要去创建。
+
+Next, we'll need to decide whether a UTF-8 locale is already available for our
+language, or whether we need to create one.
+</p>
+
+<pre caption="检查 UTF-8 locale 是否已经存在">
+<comment>（把"en_GB"替换成你想要的locale设置）</comment>
+# <i>locale -a | grep 'en_GB'</i>
+en_GB
+en_GB.UTF-8
+</pre>
+
+<p>
+我们需要从这条命令的结果中提取结尾类似<c>.UTF-8</c>的行。如果没有结尾是像<c>
+.UTF-8</c>结尾的行，那么我们需要创建一个兼容UTF-8的locale.
+
+From the output of this command line, we need to take the result with a suffix
+similar to <c>.UTF-8</c>. If there is no result with a suffix similar to
+<c>.UTF-8</c>, we need to create a UTF-8 compatible locale.
+</p>
+
+<note>
+只有在你的语言没有相应的UTF-8 locale的时候才运行以下命令。
+
+Only execute the following code listing if you do not have a UTF-8 locale
+available for your language.
+</note>
+
+<pre caption="创建一个UTF-8 locale">
+<comment>（把"en_GB"替换成你想要的locale设置）</comment>
+# <i>localedef -i en_GB -f UTF-8 en_GB.UTF-8</i>
+</pre>
+
+<p>
+另外一个指定UTF-8 locale的方法就是在文件<path>/etc/locale.gen</path>中增添相应
+的locale，然后运行命令<c>locale-gen</c>生成需要的locale。
+
+Another way to include a UTF-8 locale is to add it to the
+<path>/etc/locale.gen</path> file and generate necessary locales with
+<c>locale-gen</c> command.
+</p>
+
+<pre caption="/etc/locale.gen 其中一行">
+en_GB.UTF-8 UTF-8
+</pre>
+
+</body>
+</section>
+<section>
+<title>设置Locale</title>
+<body>
+
+<p>
+要使用新locale我们需要设置一个环境变量：<c>LANG</c>（你可以通过设置<c>LC_ALL
+</c>变量来覆盖这个变量）。还有其他很多不同的方法去设置；有的人倾向针对某一个
+用户设置UTF-8环境，这时候他们需要在他们自己的<path>~/.profile</path>中设置，
+（如果用<c>/bin/sh</c>的话）；或者如果你用<c>/bin/bash</c>的话，就在<path>
+~/.bash_profile</path>或者<path>~/.bashrc</path>设置。
+
+There is one environment variable that needs to be set in order to use our new
+UTF-8 locales: <c>LANG</c> (you can override this variable with the
+<c>LC_ALL</c> setting as well). There are also many different ways to set it;
+some people prefer to only have a UTF-8 environment for a specific user, in
+which case they set them in their <path>~/.profile</path> (if you use
+<c>/bin/sh</c>), <path>~/.bash_profile</path> or <path>~/.bashrc</path> (if you
+use <c>/bin/bash</c>).
+</p>
+
+<p>
+其他的则选择设置全局locale。有一种特殊的情况作者是特别推荐的，就是在使用
+<path>/etc/init.d/xdm</path>的时候，因为这个启动脚本会在任何shell启动文件
+被source(引入)前启动显示管理器和桌面，这样也就是比任何环境变量都要早。
+
+Others prefer to set the locale globally. One specific circumstance where 
+the author particularly recommends doing this is when 
+<path>/etc/init.d/xdm</path> is in use, because
+this init script starts the display manager and desktop before any of the
+aforementioned shell startup files are sourced, and so before any of the
+variables are in the environment.
+</p>
+
+<p>
+全局local设置应该在文件<path>/etc/env.d/02locale</path>中完成。这个文件看起来
+应该和以下内容类似：
+
+Setting the locale globally should be done using
+<path>/etc/env.d/02locale</path>. The file should look something like the
+following:
+</p>
+
+<pre caption="Demonstration /etc/env.d/02locale">
+<comment>（不用再说了，把你的locale代替掉"en_GB.UTF-8"）</comment>
+LANG="en_GB.UTF-8"
+</pre>
+
+<note>
+你可以用<c>LC_ALL</c>代替<c>LANG</c>。这个会把locale的所有分类都设置上，包括数
+字和币种等。在很少情况下，这会引起一些问题。但是，大多数用户应该是不会因使用
+<c>LC_ALL</c>而碰到问题。关于<c>LC_ALL</c>影响到的分类的信息，请阅读<uri
+link="http://www.gnu.org/software/libc/manual/html_node/Locale-Categories.html#Locale-Categories">
+GNU locale页</uri>。
+
+You can also substitute <c>LC_ALL</c> for <c>LANG</c>. This sets your locale
+for all categories, including numerical and currency values. On a very few
+systems, it might cause some issues. However, most users should be able to use
+<c>LC_ALL</c> without problems. For more information on the categories affected
+by using <c>LC_ALL</c>, please read the <uri
+link="http://www.gnu.org/software/libc/manual/html_node/Locale-Categories.html#Locale-Categories">GNU
+locale page</uri>.
+</note>
+
+<p>
+下一步，环境必须要为之前的改变更新。
+
+Next, the environment must be updated with the change.
+</p>
+
+<pre caption="更新环境">
+# <i>env-update</i>
+>>> Regenerating /etc/ld.so.cache...
+ * Caching service dependencies ...
+# <i>source /etc/profile</i>
+</pre>
+
+<p>
+现在，不带参数的运行<c>locale</c>命令，看看我们是否已经正确设置了环境变量。
+
+Now, run <c>locale</c> with no arguments to see if we have the correct
+variables in our environment:
+</p>
+
+<pre caption="Checking if our new locale is in the environment">
+# <i>locale</i>
+LANG=
+LC_CTYPE="en_GB.UTF-8"
+LC_NUMERIC="en_GB.UTF-8"
+LC_TIME="en_GB.UTF-8"
+LC_COLLATE="en_GB.UTF-8"
+LC_MONETARY="en_GB.UTF-8"
+LC_MESSAGES="en_GB.UTF-8"
+LC_PAPER="en_GB.UTF-8"
+LC_NAME="en_GB.UTF-8"
+LC_ADDRESS="en_GB.UTF-8"
+LC_TELEPHONE="en_GB.UTF-8"
+LC_MEASUREMENT="en_GB.UTF-8"
+LC_IDENTIFICATION="en_GB.UTF-8"
+LC_ALL=en_GB.UTF-8
+</pre>
+
+<p>
+好了。你已经在使用UTF-8 locale了，下一个麻烦就是配置你的日用程序了。
+
+That's everything. You are now using UTF-8 locales, and the next hurdle is the
+configuration of the applications you use from day to day.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>应用支持</title>
+<section>
+<body>
+
+<p>
+当Unicode刚开始在软件世界得到动力的时候，多字节字符集和被用来写日常使用的程序的
+C等语言不是很合拍。即使是今天，有的程序仍然不能正确处理UTF-8。幸运的是，大多数
+都没问题！
+
+When Unicode first started gaining momentum in the software world, multibyte
+character sets were not well suited to languages like C, in which many of the
+day-to-day programs people use are written.  Even today, some programs are not
+able to handle UTF-8 properly.  Fortunately, most are!
+</p>
+
+</body>
+</section>
+<section>
+<title>文件名，NTFS和FAT</title>
+<body>
+
+<p>
+在内核选项中，有那么几个NLS选项，但是千万别被混淆了。大多数情况下，你只需要在
+内核中加入UTF-8 NLS支持，以及将默认的NLS选项设置成utf8就可以了。
+
+There are several NLS options in the Linux kernel configuration menu, but it is
+important to not become confused! For the most part, the only thing you need to
+do is to build UTF-8 NLS support into your kernel, and change the default NLS
+option to utf8.
+</p>
+
+<pre caption="UTF-8 NLS的内核配置步骤">
+File Systems --&gt;
+  Native Language Support --&gt;
+    (utf8) Default NLS Option
+    &lt;*&gt; NLS UTF8
+    <comment>(Also &lt;*&gt; other character sets that are in use in
+    your FAT filesystems or Joilet CD-ROMs.)</comment>
+</pre>
+
+<p>
+如果你计划加载NTFS分区，你也许需要为mount指定一个<c>nls=</c>选项。如果你计划加载
+FAT分区，你也许需要为mount指定一个<c>codepage=</c>选项。你也可以在内核配置中为
+FAT设置一个默认的codepage。注意，mount命令中指定的<c>codepage</c>会覆盖内核中
+的设置。
+
+If you plan on mounting NTFS partitions, you may need to specify an <c>nls=</c>
+option with mount. If you plan on mounting FAT partitions, you may need to
+specify a <c>codepage=</c> option with mount. Optionally, you can also set a
+default codepage for FAT in the kernel configuration. Note that the
+<c>codepage</c> option with mount will override the kernel settings.
+</p>
+
+<pre caption="内核中的FAT设置">
+File Systems --&gt;
+  DOS/FAT/NT Filesystems  --&gt;
+    (437) Default codepage for fat
+</pre>
+
+<p>
+你应该避免把<c>Default iocharset for fat</c>设置成UTF-8，因为这个是不推荐的。相
+反，你可以在mount的时候加入选项utf8=true。可以从<c>man mount</c>和内核文档
+<path>/usr/src/linux/Documentation/filesystems/vfat.txt</path>获取更多相关的信
+息。
+
+You should avoid setting <c>Default iocharset for fat</c> to UTF-8, as it is
+not recommended. Instead, you may want to pass the option utf8=true when
+mounting your FAT partitions. For further information, see <c>man mount</c> and
+the kernel documentation at
+<path>/usr/src/linux/Documentation/filesystems/vfat.txt</path>.
+</p>
+
+<p>
+如果想改变文件名的编码，可以用<c>app-text/convmv</c>。
+For changing the encoding of filenames, <c>app-text/convmv</c> can be used.
+</p>
+
+<pre caption="convmv使用例子">
+# <i>emerge --ask app-text/convmv</i>
+<comment>（命令格式）</comment>
+# <i>convmv -f &lt;current-encoding&gt; -t utf-8 &lt;filename&gt;</i>
+<comment>（把iso-8859-1换成你想要的原始编码）</comment>
+# <i>convmv -f iso-8859-1 -t utf-8 filename</i>
+</pre>
+
+<p>
+如果想改变文件<e>内容</e>，那么请使用由<c>glibc</c>提供的工具<c>iconv</c>。
+
+For changing the <e>contents</e> of files, use the <c>iconv</c> utility,
+bundled with <c>glibc</c>:
+</p>
+
+<pre caption="iconv使用例子">
+<comment>（把iso-8859-1换成你想要的原始编码）</comment>
+<comment>（检查输出是否合法）</comment>
+# <i>iconv -f iso-8859-1 -t utf-8 filename</i> 
+<comment>（要转换文件，你必须创建一个新文件）</comment>
+# <i>iconv -f iso-8859-1 -t utf-8 filename > newfile</i>
+</pre>
+
+<p>
+<c>app-text/recode</c> 也可以用来做这个事情。
+<c>app-text/recode</c> can also be used for this purpose.
+</p>
+
+</body>
+</section>
+<section>
+<title>系统终端</title>
+<body>
+
+<impo>
+在终端用Uicode，你需要>=sys-apps/baselayout-1.11.9。
+You need >=sys-apps/baselayout-1.11.9 for Unicode on the console.
+</impo>
+
+<p>
+在终端下开启UTF-8，你要编辑<path>/etc/rc.conf</path>并且设置<c>UNICODE="yes"
+</c>，还要阅读该文件内相应的注释－－如果你想好好发觉Unicode，那么一个带有足够
+字的字体是很重要的。为了不出错，确定你已经按照<uri link="#doc_chap1">第一章
+</uri>中所说正确得建立了一个Unicode locale。
+
+To enable UTF-8 on the console, you should edit <path>/etc/rc.conf</path> and
+set <c>UNICODE="yes"</c>, and also read the comments in that file -- it is
+important to have a font that has a good range of characters if you plan on
+making the most of Unicode. For this to work, make sure you have properly
+created a Unicode locale as explained in <uri link="#doc_chap1">Chapter 1</uri>.
+</p>
+
+<p>
+<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量，应该是一个Unicode
+keymap.
+The <c>KEYMAP</c> variable, set in <path>/etc/conf.d/keymaps</path>, should
+have a Unicode keymap specified. 
+</p>
+
+<pre caption="/etc/conf.d/keymaps 例子片段">
+<comment>（把 "uk" 替换成你自己键盘的布局）</comment>
+KEYMAP="uk"
+</pre>
+
+</body>
+</section>
+<section>
+<title>Ncurses和Slang</title>
+<body>
+
+<note>
+如果你没安装或者不用Slang的话，忽略这段中相关Slang的信息。
+
+Ignore any mention of Slang in this section if you do not have it installed or
+do not use it.
+</note>
+
+<p>
+在<path>/etc/make.conf</path>里边的全局USE标记中加入<c>unicode</c>是很明智的，
+然后再根据需要重新emerge <c>sys-libs/ncurses</c>和<c>sys-libs/slang</c>。
+Portage在升级你的系统时也会自动帮你搞定的。
+
+It is wise to add <c>unicode</c> to your global USE flags in
+<path>/etc/make.conf</path>, and then to remerge <c>sys-libs/ncurses</c> and
+<c>sys-libs/slang</c> if appropriate. Portage will do this automatically when
+you update your system:
+</p>
+
+<pre caption="升级你的系统">
+# <i>emerge --update --deep --newuse world</i>
+</pre>
+
+<p>
+我们还需要重新编译依赖这些包的包，这样USE的改变就会被应用。我们用到的工具
+（<c>revdep-rebuild</c>）是包<c>gentoolkit</c>的一部分。
+
+We also need to rebuild packages that link to these, now the USE changes have
+been applied. The tool we use (<c>revdep-rebuild</c>) is part of the
+<c>gentoolkit</c> package.
+</p>
+
+<pre caption="重新编译连接到ncurses或者slang的程序">
+# <i>revdep-rebuild --soname libncurses.so.5</i>
+# <i>revdep-rebuild --soname libslang.so.1</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>KDE，GNOME和Xfce</title>
+<body>
+
+<p>
+所有主流桌面系统都完全支持Unicode，除了之前已经提及的设置外也不需要进一步设置
+什么了。这是因为底层的图形工具包（Qt或GTK+2）已经支持UTF-8。这样，所有由这些工
+具包写出来的程序都是原生的支持UTF-8的。
+
+All of the major desktop environments have full Unicode support, and will
+require no further setup than what has already been covered in this guide. This
+is because the underlying graphical toolkits (Qt or GTK+2) are UTF-8 aware.
+Subsequently, all applications running on top of these toolkits should be
+UTF-8-aware out of the box.
+</p>
+
+<p>
+当然，也有例外，比如的Xlib和GTK+1。GTK+1需要在~/.gtkrc里边有一个iso-10646-1的
+字体设置，例如<c>-misc-fixed-*-*-*-*-*-*-*-*-*-*-iso10646-1</c>。还有就是使用
+Xlib或者Xaw的程序需要有类似的设置，不然他们会罢工的。
+
+The exceptions to this rule come in Xlib and GTK+1. GTK+1 requires a
+iso-10646-1 FontSpec in the ~/.gtkrc, for example
+<c>-misc-fixed-*-*-*-*-*-*-*-*-*-*-iso10646-1</c>. Also, applications using
+Xlib or Xaw will need to be given a similar FontSpec, otherwise they will not
+work.
+</p>
+
+<note>
+如果你安装了Gnome1 Control Center的某个版本的话，就用她来设置好了。选任何一个
+iso10646-1的字体就可以了。
+
+If you have a version of the gnome1 control center around, use that instead.
+Pick any iso10646-1 font from there.
+</note>
+
+<pre caption="例子 ~/.gtkrc (为GTK+1) 定义兼容Unicode的字体">
+style "user-font"
+{
+    fontset="-misc-fixed-*-*-*-*-*-*-*-*-*-*-iso10646-1"
+}
+widget_class "*" style "user-font"
+</pre>
+
+<p>
+如果有一个程序同时支持Qt和GTK+2的图形界面，那么GTK+2的图形界面应该会更好的支持
+Unicode。
+
+If an application has support for both a Qt and GTK+2 GUI, the GTK+2 GUI will
+generally give better results with Unicode.
+</p>
+
+</body>
+</section>
+<section>
+<title>X11和字体</title>
+<body>
+
+<impo>
+<c>x11-base/xorg-x11</c>对Unicode的支持比XFree86更好，<e>极度</e>推荐。
+
+<c>x11-base/xorg-x11</c> has far better support for Unicode than XFree86
+and is <e>highly</e> recommended.
+</impo>
+
+<p>
+TrueType字体支持Unicode，而且Xorg自带的大多数字体都有很好的字符支持，当然，他
+们也不可能把每一个Unicode字型都提供了。要为X提供东亚字符支持（包括Bitstream
+Vera字体集合）的话，记得在USE标记中加入<c>cjk</c>。很多其他的程序也使用这个use，
+所以很值得把她加入永久的USE标记。
+
+TrueType fonts have support for Unicode, and most of the fonts that ship with
+Xorg have impressive character support, although, obviously, not every single
+glyph available in Unicode has been created for that font. To build fonts
+(including the Bitstream Vera set) with support for East Asian letters with X,
+make sure you have the <c>cjk</c> USE flag set. Many other applications utilise
+this flag, so it may be worthwhile to add it as a permanent USE flag.
+</p>
+
+<p>
+还有，Porage有几个字体包也支持Unicode。
+
+Also, several font packages in Portage are Unicode aware.
+</p>
+
+<pre caption="可选：安装一些支持Unicode的字体">
+# <i>emerge terminus-font intlfonts freefonts cronyx-fonts corefonts</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>窗口管理器和终端模拟器</title>
+<body>
+
+<p>
+不基于GTK或Qt的窗口管理器一般都会有很不错的Unicode支持，因为他们一般都用Xft库
+来处理字体的。如果你的窗口管理器不用Xft处理字体，你仍然可以把之前提及的字体设
+置作为Unicode字体使用。(就是<c>-misc-fixed-*-*-*-*-*-*-*-*-*-*-iso10646-1</c>)
+
+Window managers not built on GTK or Qt generally have very good Unicode
+support, as they often use the Xft library for handling fonts. If your window
+manager does not use Xft for fonts, you can still use the FontSpec mentioned in
+the previous section as a Unicode font.
+</p>
+
+<p>
+使用Xft并支持Unicode的终端模拟器更难获得。除了Konsole和gnome-terminal外，
+Portage中最好的选择就是<c>x11-terms/rxvt-unicode</c>，<c>xfce-extra/terminal
+</c>，<c>gnustep-apps/terminal</c>，<c>x11-terms/mlterm</c>，或者编译时带了
+<c>unicode</c>USE的<c>x11-terms/xterm</c>并且用<c>uxterm</c>启动。
+<c>app-misc/screen</c>在用<c>screen -U</c>启动的时候也支持UTF-8的，或者将以下内
+容加入到<path>~/.screenrc</path>：
+
+Terminal emulators that use Xft and support Unicode are harder to come by.
+Aside from Konsole and gnome-terminal, the best options in Portage are
+<c>x11-terms/rxvt-unicode</c>, <c>xfce-extra/terminal</c>,
+<c>gnustep-apps/terminal</c>, <c>x11-terms/mlterm</c>, or plain
+<c>x11-terms/xterm</c> when built with the <c>unicode</c> USE flag and invoked
+as <c>uxterm</c>. <c>app-misc/screen</c> supports UTF-8 too, when invoked as
+<c>screen -U</c> or the following is put into the <path>~/.screenrc</path>:
+</p>
+
+<pre caption="~/.screenrc for UTF-8">
+defutf8 on
+</pre>
+
+</body>
+</section>
+<section>
+<title>Vim，Emacs，Xemacs和Nano</title>
+<body>
+
+<p>
+Vim完全支持UTF-8，而且还有内置UTF-8文件检测。可以用<c>:help mbyte.txt</c>获取
+更多的信息。
+
+Vim provides full UTF-8 support, and also has builtin detection of UTF-8 files. 
+For further information in Vim, use <c>:help mbyte.txt</c>.
+</p>
+
+<p>
+Emacs 22.x 以及更高的版本也完全支持UTF-8。Xemacs 22.x暂时还不支持组合字符。
+
+Emacs 22.x and higher has full UTF-8 support as well. Xemacs 22.x does not
+support combining characters yet. 
+</p>
+
+<p>
+低版本的Emacs和Xemacs也许需要安装<c>app-emacs/mule-ucs</c>或
+<c>app-xemacs/mule-ucs</c>，然后把以下内容加入到<path>~/.emacs</path>来获得对
+UTF-8中CJK（中日韩）语言的支持。
+
+Lower versions of Emacs and/or Xemacs might require you to install 
+<c>app-emacs/mule-ucs</c> and/or <c>app-xemacs/mule-ucs</c>
+and add the following code to your <path>~/.emacs</path> to have support for CJK
+languages in UTF-8:
+</p>
+
+<pre caption="Emacs CJK UTF-8 支持">
+(require 'un-define)
+(require 'jisx0213)
+(set-language-environment "Japanese")
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+</pre>
+
+<p>
+Nano从1.3.6版本以后都完全支持UTF-8的。
+
+Nano has provided full UTF-8 support since version 1.3.6.
+</p>
+
+</body>
+</section>
+<section>
+<title>Shells</title>
+<body>
+
+<p>
+现在，<c>bash</c>通过GNU readline库完全支持Unicode。Z Shell（<c>zsh</c>）如果
+有<c>unicode</c>USE标志的话，也可以提供Unicode支持。
+
+Currently, <c>bash</c> provides full Unicode support through the GNU readline
+library. Z Shell (<c>zsh</c>) offers Unicode support with the <c>unicode</c> USE
+flag.
+</p>
+
+<p>
+C shell，<c>tcsh</c>和<c>ksh</c>完全不支持UTF-8的。
+
+The C shell, <c>tcsh</c> and <c>ksh</c> do not provide UTF-8 support at all.
+</p>
+
+</body>
+</section>
+<section>
+<title>Irssi</title>
+<body>
+
+<p>
+Irssi完全支持UTF-8，虽然她还是要求用户去设置一个选项。
+
+Irssi has complete UTF-8 support, although it does require a user
+to set an option.
+</p>
+
+<pre caption="为Irssi开启UTF-8">
+/set term_charset UTF-8
+</pre>
+
+<p>
+那些把非ASCII字符按非UTF-8字处理的频道，可以用<c>/recode</c>命令来转换这些字符。
+输入<c>/help recode</c>可以获取更多信息。
+For channels where non-ASCII characters are often exchanged in non-UTF-8
+charsets, the <c>/recode</c> command may be used to convert the characters.
+Type <c>/help recode</c> for more information.
+</p>
+
+</body>
+</section>
+<section>
+<title>Mutt</title>
+<body>
+
+<p>
+Mutt邮件用户代理有很不错的Unicode支持。你不需要在配置文件中加入任何东西就可以
+让Mutt支持UTF-8。如果你的配置文件（包括签名）都是UTF-8编码的话，Mutt不需要任何
+修改就可以在Unicode环境中正确工作。
+
+The Mutt mail user agent has very good Unicode support. To use UTF-8 with Mutt,
+you don't need to put anything in your configuration files. Mutt will work
+under unicode enviroment without modification if all your configuration files
+(signature included) are UTF-8 encoded.
+</p>
+
+<note>
+你也许还会在用Mutt阅读邮件的时候看到'?'。这是有人用的邮件客户端没有正确的指出
+所用的字符集。除了让他们好好配置软件外似乎没什么别的方法了。
+
+You may still see '?' in mail you read with Mutt. This is a result of people
+using a mail client which does not indicate the used charset. You can't do much
+about this than to ask them to configure their client correctly.
+</note>
+
+<p>
+可以参考<uri link="http://wiki.mutt.org/index.cgi?MuttFaq/Charset">Mutt Wiki
+</uri>获取更多信息。
+
+Further information is available from the <uri
+link="http://wiki.mutt.org/index.cgi?MuttFaq/Charset">Mutt Wiki</uri>.
+</p>
+
+</body>
+</section>
+<section>
+<title>Man</title>
+<body>
+
+<p>
+Man页面是任何Linux机器都包括的部分。为了确保man页面中的Unicode字符被正确渲染，
+文件<path>/etc/man.conf</path>中的一行需要被替换：
+
+Man pages are an integral part of any Linux machine. To ensure that any 
+unicode in your man pages render correctly, edit <path>/etc/man.conf</path> 
+and replace a line as shown below.
+</p>
+
+<pre caption="man.conf的Unicod支持">
+<comment>（原始）</comment>
+NROFF           /usr/bin/nroff -Tascii -c -mandoc
+<comment>（替换后）</comment>
+NROFF           /usr/bin/nroff -mandoc -c
+</pre>
+
+</body>
+</section>
+<section>
+<title>elinks和links</title>
+<body>
+
+<p>
+这些是常用的基于文本的浏览器，我们看看怎么为她们打开UTF-8支持。在<c>elinks</c>
+和<c>links</c>中，有两个方法的，浏览器中Setup选项设置或者直接修改配置文件。要
+在Setup选项中设置的话，首先用<c>elinks</c>或<c>links</c>打开一个网站，然后按
+<c>Alt+S</c>进入Setup菜单，再选择Terminal选项，或者按T。下拉到最后一个选项
+<c>UTF-8 I/O</c>并且按回车选择她。然后保存并且离开菜单。<c>links</c>中你也许需
+要再按一次<c>Alt+S</c>然后按<c>S</c>来保存设置。要在配置文件中改变，请看以下内
+容。
+
+These are commonly used text-based browsers, and we shall see how we can enable
+UTF-8 support on them. On <c>elinks</c> and <c>links</c>, there are two ways to
+go about this, one using the Setup option from within the browser or editing the
+config file. To set the option through the browser, open a site with
+<c>elinks</c> or <c>links</c> and then <c>Alt+S</c> to enter the Setup Menu then
+select Terminal options, or press <c>T</c>. Scroll down and select the last
+option <c>UTF-8 I/O</c> by pressing Enter. Then Save and exit the menu. On
+<c>links</c> you may have to do a repeat <c>Alt+S</c> and then press <c>S</c> to
+save. The config file option, is shown below.
+</p>
+
+<pre caption="为elinks/links开启UTF-8">
+<comment>（elinks的话，编辑/etc/elinks/elinks.conf或者~/.elinks/elinks.conf，
+把以下这行加入到文件里）</comment>
+set terminal.linux.utf_8_io = 1
+
+<comment>（links的话，编辑~/.links/links.cfg，把以下这样加入到文件中）</comment>
+terminal "xterm" 0 1 0 us-ascii utf-8
+</pre>
+
+</body>
+</section>
+<section>
+<title>Samba</title>
+<body>
+
+<p>
+Samba是一套为UNIX系统，如Macs,Linux和FreeBSD，而实现SMB（服务器消息块）协议的软
+件。这个协议有的时候也会被称作公共Internet文件系统（CIFS）。Samba也包括了
+NetBIOS系统－Windows网络中用来文件共享的。
+Samba is a software suite which implements the SMB (Server Message Block)
+protocol for UNIX systems such as Macs, Linux and FreeBSD. The protocol
+is also sometimes referred to as the Common Internet File System (CIFS). Samba
+also includes the NetBIOS system - used for file sharing over windows networks.
+</p>
+
+<pre caption="为Samba开启UTF-8">
+<comment>（编辑/etc/samba/smb.conf，把以下内容添加到[global]部分）</comment>
+dos charset = 1255
+unix charset = UTF-8
+display charset = UTF-8
+</pre>
+
+</body>
+</section>
+<section>
+<title>测试</title>
+<body>
+
+<p>
+Internet有很多UTF-8测试网站的。<c>net-www/w3m</c>，<c>net-www/links</c>，<c>
+net-www/elinks</c>，<c>net-www/lynx</c>和其他基于Mozilla的浏览器（包括火狐）都
+支持UTF-8。Konqourer和Opera也完全支持UTF-8。
+
+There are numerous UTF-8 test websites around.  <c>net-www/w3m</c>,
+<c>net-www/links</c>, <c>net-www/elinks</c>, <c>net-www/lynx</c> and all
+Mozilla based browsers (including Firefox) support UTF-8. Konqueror and Opera
+have full UTF-8 support too.
+</p>
+
+<p>
+当使用那些纯文本Web浏览器的时候，一定要确保所在的终端也支持Unicode。
+
+When using one of the text-only web browsers, make absolutely sure you are
+using a Unicode-aware terminal.
+</p>
+
+<p>
+如果你看到某些字符显示为一个小方框并且中间有字母或者数字的，那么就是说你的字体
+没有UTF-8想要的相应的符号或者字型。所以就用一个方框代替，并且里边是对应该字符
+的UTF-8的十六进制码。
+If you see certain characters displayed as boxes with letters or numbers
+inside, this means that your font does not have a character for the symbol or
+glyph that the UTF-8 wants. Instead, it displays a box with the hex code of the
+UTF-8 symbol.
+</p>
+
+<ul>
+  <li>
+    <uri link="http://www.w3.org/2001/06/utf-8-test/UTF-8-demo.html">一个W3C 
+    UTF-8测试页面</uri>
+  </li>
+  <li>
+    <uri link="http://titus.uni-frankfurt.de/indexe.htm?/unicode/unitest.htm">
+    一个UTF-8测试页面，由法兰克福大学提供</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>输入法</title>
+<body>
+
+<p>
+在X中<e>Dead keys</e>可以用来输入一些不包括在你键盘上的字符。方法是按下你的右
+Alt键（在有的国家也叫AltGr），同时你也可以选择多按一个回车以左的非字母键（修改
+键）_，然后松开他们，最后按一个字母键。这样Dead key应该会修改她的了。在按下
+AltGr以及修改键的时候，Shift键也可以被用来进一步修改输入内容。
+
+<e>Dead keys</e> may be used to input characters in X that are not included on
+your keyboard. These work by pressing your right Alt key (or in some countries,
+AltGr) and an optional key from the non-alphabetical section of the keyboard to
+the left of the return key at once, releasing them, and then pressing a letter.
+The dead key should modify it. Input can be further modified by using the Shift
+key at the same time as pressing the AltGr and modifier.
+</p>
+
+<p>
+在X中开启Deak Keys，你需要一个支持她的布局。大多数欧洲布局都默认有Dead key支持
+的，但是，北美布局似乎并不是这样。虽然在一定程度上不同的布局有不一致的地方，但
+是简单的解决方法似乎就是例如直接指定"en_US"布局而不是"us"布局。布局是在文件
+<path>/etc/X11/xorg.conf</path>里边这样设置的：
+
+To enable dead keys in X, you need a layout that supports it. Most European
+layouts already have dead keys with the default variant.  However, this is not
+true of North American layouts. Although there is a degree of inconsistency
+between layouts, the easiest solution seems to be to use a layout in the form
+"en_US" rather than "us", for example. The layout is set in
+<path>/etc/X11/xorg.conf</path> like so:
+</p>
+
+<pre caption="/etc/X11/xorg.conf snippet">
+Section "InputDevice"
+    Identifier "Keyboard0"
+    Driver     "kbd"
+    Option     "XkbLayout" "en_US" <comment># 而不是仅仅 "us"</comment>
+    <comment>（其他 Xkb 选项可以放这里）</comment>
+EndSection
+</pre>
+
+<note>
+如果你是北美布局或者你的布局Dead key不工作的时候才需要做之前的这个修改。欧洲用
+户的Deak keys应该是直接就可以用的。
+
+The preceding change only needs to be applied if you are using a North American
+layout, or another layout where dead keys do not seem to be working. European
+users should have working dead keys as is.
+</note>
+
+<p>
+这个修改要在X服务重新启动后才会生效。要是你想马上生效的话，用<c>setxkbmap</c>
+工具。比如<c>setxkbmap en_US</c>。
+
+This change will come into effect when your X server is restarted. To apply the
+change now, use the <c>setxkbmap</c> tool, for example, <c>setxkbmap en_US</c>.
+</p>
+
+<p>
+对Dead keys的描述也许通过例子是最简单的。虽然结果是根据locale而变化的，但是概
+念是不变的。例子中包括了UTF-8，所以你需要告诉你的浏览器用UTF-8模式浏览，或者有
+一个已经配置好的UTF-8 locale。
+It is probably easiest to describe dead keys with examples. Although the
+results are locale dependent, the concepts should remain the same regardless of
+locale. The examples contain UTF-8, so to view them you need to either tell
+your browser to view the page as UTF-8, or have a UTF-8 locale already
+configured.
+</p>
+
+<p>
+同时按下键AltGr和键[，松开，再按键a，就可以得到字符ä。
+同时按下键AltGr和键[，松开，再按键e，就可以得到字符ë。
+同时按下键AltGr和键;，松开，再按键a，就可以得到字符á。
+同时按下键AltGr和键;，松开，再按键e，就可以得到字符é。
+
+When I press AltGr and [ at once, release them, and then press a, 'ä' is
+produced. When I press AltGr and [ at once, and then press e, 'ë' is produced.
+When I press AltGr and ; at once, 'á' is produced, and when I press AltGr and ;
+at once, release them, and then press e, 'é' is produced.
+</p>
+
+<p>
+同时按下键AltGr，Shift和[，松开，再按键a，得到一个北欧Scandinavian å。类似的，
+同时按下键AltGr，Shift和[，但是<e>只</e>松开[，然后再按一下[，就可以得到“°”。
+虽然看起来很像，但是这个（U+02DA）并不是度数那个符号（U+00B0）。同理这个也可以
+在其他方言中使用－AltGr和[同时按，松开[，再按[就可以得到“¨”。
+
+
+By pressing AltGr, Shift and [ at once, releasing them, and then pressing a, a
+Scandinavian 'å' is produced. Similarly, when I press AltGr, Shift and [ at
+once, release <e>only</e> the [, and then press it again, '˚' is produced.
+Although it looks like one, this (U+02DA) is not the same as a degree symbol
+(U+00B0). This works for other accents produced by dead keys — AltGr and [,
+releasing only the [, then pressing it again makes '¨'.
+</p>
+
+<p>
+AltGr可以单独和字母键组合。比如，AltGr和m，可以组合出一个希腊小写字母mu：'µ'。
+AltGr和s组合出一个ß。很多欧洲用户会期待（因为键盘上这么标明的）AltGr和4能组合
+出一个欧元符号€。
+
+AltGr can be used with alphabetical keys alone. For example, AltGr and m, a
+Greek lower-case letter mu is produced: 'µ'. AltGr and s produce a
+scharfes s or esszet: 'ß'. As many Europeanusers would expect (because
+it is marked on their keyboard), AltGr and 4 (or E depending on the keyboard
+layout) produces a Euro sign, '€'.
+</p>
+
+</body>
+</section>
+<section>
+<title>资源</title>
+<body>
+
+<ul>
+  <li>
+    <uri link="http://en.wikipedia.org/wiki/Unicode">Wikipedia上的Unicode页</uri>
+  </li>
+  <li>
+    <uri link="http://en.wikipedia.org/wiki/UTF-8">Wikipedia上的UTF-8页</uri>
+  </li>
+  <li><uri link="http://www.unicode.org">Unicode.org</uri></li>
+  <li><uri link="http://www.utf-8.com">UTF-8.com</uri></li>
+  <li><uri link="http://www.ietf.org/rfc/rfc3629.txt">RFC 3629</uri></li>
+  <li><uri link="http://www.ietf.org/rfc/rfc2277.txt">RFC 2277</uri></li>
+  <li>
+    <uri
+    link="http://www.tbray.org/ongoing/When/200x/2003/04/26/UTF">字符 vs. 字节</uri>
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
