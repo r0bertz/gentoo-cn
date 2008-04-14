@@ -4,7 +4,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/utf-8.xml" lang="zh_cn" disclaimer="draft">
-<title>在 Gentoo 下使用 UTF-8</title>
+<title>在Gentoo下使用UTF-8</title>
 
 <author title="作者">
   <mail link="slarti@gentoo.org">Thomas Martin</mail>
@@ -20,8 +20,7 @@
 </author>
 
 <abstract>
-这个指南将会向你展示如何在Gentoo Linux系统下设置以及使用 UTF-8 Unicode 字符集。
-在此之前，先把Unicode的好处阐述一下，然后针对 UTF-8 论述。
+这个指南将会向你展示如何在Gentoo Linux系统下设置以及使用UTF-8 Unicode字符集。在此之前，先把Unicode的好处阐述一下，然后针对UTF-8论述。
 </abstract>
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -38,14 +37,7 @@
 <body>
 
 <p>
-电脑本身是不认识文字的。相反的，每一个字符都是用一个数字来表示。在以前，每一组
-用来表示字母和和字符的数字（也称作编码系统，编码或者字符集）都会被电脑硬件的限
-制而在大小上被限制。
-
-Computers do not understand text themselves. Instead, every character is
-represented by a number. Traditionally, each set of numbers used to represent
-alphabets and characters (known as a coding system, encoding or character set)
-was limited in size due to limitations in computer hardware.
+电脑本身是不认识文字的。相反的，每一个字符都是用一个数字来表示。在以前，每一个用来表示字母和字符的数字集合（称作编码系统、编码或者字符集）都会因电脑硬件所限而在大小上有所限制。
 </p>
 
 </body>
