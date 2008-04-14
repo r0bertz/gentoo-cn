@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<!-- $Header$ -->
+<!-- English CVS version: 1.1 -->
+
+<guide link="/doc/zh_cn/openrc-migration.xml" lang="zh_cn" disclaimer="draft">
+<title>基础布局Baselayout和OpenRC迁移指南</title>
+
+<author title="作者">
+  <mail link="cardoe"/>
+</author>
+<author title="作者">
+  <mail link="nightmorph"/>
+</author>
+<author title="贡献者">
+  <mail link="uberlord"/>
+</author>
+<author title="译者">
+  <mail link="goldenshore999@gmail.com">周骞</mail>
+</author>
+
+<abstract>
+这个指南会指导你如何从baselayout-1迁移到baselayout-2和OpenRC。
+
+This guide shows you how to migrate from baselayout-1 to baselayout-2 and
+OpenRC.
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.0</version>
+<date>2008-04-11</date>
+
+<chapter>
+<title>背景知识</title>
+<section>
+<title>什么是baselayout？</title>
+<body>
+
+<p>
+为了让所有系统能正常得工作，Baselayout提供了一个基础的文件集合，比如<path>
+/etc/hosts</path>。她也为Gentoo提供了基础的文件系统布局（如目录<path>/etc
+</path>，<path>/var</path>，<path>/usr</path>，<path>/home</path>）
+
+Baselayout provides a basic set of files that are necessary for all systems to
+function properly， such as <path>/etc/hosts</path>. It also provides the basic
+filesystem layout used by Gentoo (i.e. <path>/etc</path>， <path>/var</path>，
+<path>/usr</path>， <path>/home</path> directories).
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是OpenRC？</title>
+<body>
+
+<p>
+OpenRC是一个基于依赖关系的rc系统，可以和任何一个系统的init一起工作，一般指的是
+<path>/sbin/init</path>。但是她<e>不</e>是用来代替<path>/sbin/init</path>的。
+Gentoo Linux默认使用的init是由<c>sys-apps/sysvinit</c>提供，而Gentoo/FreeBSD则
+使用由<c>sys-freebsd/freebsd-sbin</c>提供的FreeBSD init。
+
+OpenRC is a dependency-based rc system that works with whatever init is provided
+by the system， normally <path>/sbin/init</path>. However， it is <e>not</e> a
+replacement for <path>/sbin/init</path>. The default init used by Gentoo Linux
+is <c>sys-apps/sysvinit</c>， while Gentoo/FreeBSD uses the FreeBSD init provided
+by <c>sys-freebsd/freebsd-sbin</c>.
+</p>
+</body>
+</section>
+<section>
+<title>那么干嘛要迁移？</title>
+<body>
+
+<p>
+最初的Gentoo的rc系统是为baselayout-1建立并且完全是由bash写出来的。这里有几个缺
+陷。比如在启动的时候需要访问某些系统调用，而这样就需要增加基于C的调用。这些调
+用都是静态连接的，从而会让rc系统的耗时增加。
+
+Originally Gentoo's rc system was built into baselayout 1 and written entirely
+in bash. This led to several limitations. For example， certain system calls need
+to be accessed during boot and this required C-based callouts to be added. These
+callouts were each statically linked， causing the rc system to bloat over time.
+</p>
+
+<p>
+而且，在Gentoo涉及到其他平台如Gentoo/FreeBSD和Gentoo嵌入式之后，就更不可能要求
+有一个基于bash的rc系统了。完全用C写的baselayout-2应运而生，她只需要一个兼容
+POSIX的shell。在开发baselayout-2的时候我们决定把rc系统和仅仅提供基础文件和文件
+系统布局的baselayout分成不同的包会更好。OpenRC诞生了。
+
+Additionally， as Gentoo expanded to other platforms like
+Gentoo/FreeBSD and Gentoo Embedded， it became impossible to require a bash-based
+rc system. This led to a development of baselayout 2， which is written in
+C and only requires a POSIX-compliant shell. During the development of
+baselayout 2， it was determined that it was a better fit if baselayout merely
+provided the base files and filesystem layout for Gentoo and the rc system
+was broken off into its own package. Thus we have OpenRC.
+</p>
+
+<p>
+OpenRC主要由<uri link="http://roy.marples.name/openrc">Roy Marples</uri>开发，
+她支持Gentoo现在的所有变种（如Gentoo Linux，Gentoo/FreeBSD，Gentoo嵌入式和Gentoo
+Vserver）以及其他的平台如FreeBSD和NetBSD。
+
+OpenRC is primarily developed by <uri link="http://roy.marples.name/openrc">Roy
+Marples</uri> and supports all current Gentoo variations (i.e. Gentoo Linux，
+Gentoo/FreeBSD， Gentoo Embedded， and Gentoo Vserver) and other platforms such as
+FreeBSD and NetBSD.
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>迁移到OpenRC</title>
+<section>
+<body>
+
+<p>
+迁移到OpenRC的过程是比较直接的；你的包管理器在常规升级的时候就已经包括了。重要
+的是在你安装新的<c>>=sys-apps/baselayout-2</c>和<c>sys-apps/openrc</c>之后的步
+骤。运行<c>dispatch-conf</c>是<e>绝对必要</e>的，并且要确保把<path>/etc</path>
+完全更新。<brite>不这么做的话系统会无法启动</brite>，你还需要根据以下步骤并使用
+Gentoo LiveCD来修复你的系统。
+
+Migration to OpenRC is fairly straightforward; it will be pulled in as part
+of your regular upgrade process by your package manager. The most important
+step actually comes after you install the new <c>>=sys-apps/baselayout-2</c>
+and <c>sys-apps/openrc</c> packages. It is <e>critical</e> that you run 
+<c>dispatch-conf</c> and ensure your <path>/etc</path>
+is up to date before rebooting. <brite>Failure to do so will result in an unbootable
+system</brite> and will require the use of the Gentoo LiveCD to perform the steps
+below to repair your system.
+</p>
+
+<p>
+更新完配置文件后，在重启前复查以下几点。
+
+Once you've finished updating your config files， there are a few things to
+verify prior to rebooting.</p>
+	
+</body>
+</section>
+
+<section id="rc_conf">
+<title>/etc/conf.d/rc</title>
+<body>
+
+<p>
+文件<path>/etc/conf.d/rc</path>不再被使用，所以里边的设置需要被迁移到<path>
+/etc/rc.conf</path>中相应的设置。请通读<path>/etc/rc.conf</path>和<path>
+/etc/conf.d/rc</path>后再迁移设置。在完成修改后删除文件<path>/etc/conf.d/rc
+</path>。
+
+<path>/etc/conf.d/rc</path> has been deprecated and any settings you have in
+there will need to be migrated to the appropriate settings in
+<path>/etc/rc.conf</path>. Please read through <path>/etc/rc.conf</path> and
+<path>/etc/conf.d/rc</path> and migrate the settings. Once you are complete，
+delete <path>/etc/conf.d/rc</path>.
+</p>
+
+</body>
+</section>
+
+<section id="modules">
+<title>内核模块</title>
+<body>
+
+<p>
+一般情况下，当你想在启动的时候自动加载某些模块的话，就把模块名连同参数一起
+加入到<path>/etc/modules.autoload.d/kernel-2.6</path>里边。baselayout-2不再用
+这个文件了。在baselayout-2里，不管内核的版本是多少，自动加载模块和模块参数都被
+放到了<path>/etc/conf.d/modules</path>文件里边。
+
+Normally， when you want certain kernel modules automatically loaded at boot， you
+place them into <path>/etc/modules.autoload.d/kernel-2.6</path> along with any
+parameters you wanted to pass to them. In baselayout-2， this file is not used
+anymore. Instead， autoloaded modules and module parameters are placed in one
+file， <path>/etc/conf.d/modules</path>， no matter the kernel version.
+</p>
+
+<p>
+例子：老式的配置文件
+
+An example old style configuration would be:
+</p>
+
+<pre caption="/etc/modules.autoload.d/kernel-2.6">
+ivtv
+cx88_dvb video_br=2
+</pre>
+
+<p>
+转换后应该是这样的：
+
+Converting the above example would result in the following:
+</p>
+
+<pre caption="/etc/conf.d/modules">
+<comment># 启动时自动加载模块列表</comment>
+modules_2_6="ivtv cx88_dvb"
+<comment># 模块参数</comment>
+module_cx88_dvb_args_2_6="video_br=2"
+</pre>
+
+<p>
+以上例子中，模块以及其参数只会在使用2.6.x系列内核情况下生效。新版本配置文件允
+许在针对不同内核版本的情况下对模块和参数进行细致微调。
+
+In the above examples， the modules and their parameters would only be passed
+to 2.6.x series kernels. The new configuration allows for fine grained
+control over the modules and parameters based on kernel version.
+</p>
+
+<p>
+一个更深入的例子：
+
+An in-depth example would be:
+</p>
+
+<pre caption="一个关于/etc/conf.d/modules的详细例子">
+<comment># 不管内核是什么版本，都加载模块ochi1394和ieee1394</comment>
+modules="ohci1394 ieee1394"
+<comment># 只有在2.6.X系列内核的时候加载tun和usbserial</comment>
+modules_2_6="tun usbserial"
+<comment># 只有在2.6.23内核时，才加载cx88_dvb</comment>
+modules_2_6_23="cx88_dvb"
+<comment># 内核版本2.6.23-gentoo-r5才加载ivtv</comment>
+modules_2_6_23_gentoo_r5="ivtv"
+
+<comment># 内核版本为2.6.23-gentoo-r5的时候，传递参数video_br=2给内核模块cx88_dvb</comment>
+module_cx88_dvb_args_2_6_23_gentoo_r5="video_br=2"
+<comment># 2.6.x系列内核的话，传递vendor和product参数给usbserial模块</comment>
+module_usbserial_args_2_6="vendor=0x1410 product=0x2110"
+<comment># 不管内核是什么版本，传递debug参数给模块ieee1394</comment>
+module_ieee1394_args="debug" 
+</pre>
+
+<note>
+请注意<b>module_</b>和<b>modules_</b>之间的区别。
+Please note the difference between <b>module_</b> and <b>modules_</b>.
+</note>
+
+</body>
+</section>
+<section id="volume">
+<title>卷管理</title>
+<body>
+
+<p>
+在你切换到OpenRC和baselayout-2的时候，块储存设备的卷管理服务的迁移也应该自动完
+成了。但是如果没自动完成的话，你需要按照以下说明进行处理。
+
+Volume management services for your block storage devices should be
+automatically migrated for you when you switch to OpenRC and baselayout-2.
+However， in case they aren't， you'll need to follow the instructions below.
+</p>
+
+<p>
+默认情况下块储存设备的卷管理服务不再被启动。意味着这些lvm，raid，swap，
+device-mapper (dm)，dm-crypt，evms和类似的服务不会自动运行了。如果你要用到这些
+附加服务，你需要手动把相应的启动脚本加入到<c>boot</c> runlevel。不然，你的系统
+有可能不能正常启动。在你安装不同的卷管理服务的时候，相应的启动脚本会被安装到目
+录<path>/etc/init.d</path>里边。你必须确认<c>boot</c>runlevel包括了正确的启动脚
+本。
+
+Volume management services for your block storage devices are no longer run by
+default. This means that lvm， raid， swap， device-mapper (dm)， dm-crypt， evms， and the
+like will not be run automatically. If you use these addons， you will have to
+add the proper initscript to the <c>boot</c> runlevel. Otherwise， it's possible
+your system will not boot. When you install the various volume management
+services， they will install an appropriate initscript in
+<path>/etc/init.d</path>. You must ensure the appropriate initscript is in the
+<c>boot</c> runlevel.
+</p>
+
+<p>
+尽管OpenRC ebuild会尝试帮你完成迁移工作，你还是应该复查一下所有的卷管理服务看
+看她们是否被正确迁移。
+
+While the OpenRC ebuild will attempt to do this migration for you， you should
+verify that it migrated all the volume management services properly.
+</p>
+
+<pre caption="检查boot runlevel的所有服务">
+# <i>ls -l /etc/runlevels/boot/</i>
+</pre>
+
+<p>
+如果你知道你使用了mdraid，lvm和swap，但是却没在上边结果中看到的话，那你要运行以
+下命令把启动脚本增加到<c>boot</c> runlevel中。
+
+If you know you use mdraid， lvm， and swap but do not see them above， you would run
+the following to add initscripts to the <c>boot</c> runlevel.
+</p>
+
+<pre caption="把缺失的卷管理服务增加到boot runlevel中">
+# <i>rc-update add raid boot</i>
+# <i>rc-update add lvm boot</i>
+# <i>rc-update add swap boot</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>时钟</title>
+<body>
+
+<p>
+时钟设置不再在<path>/etc/conf.d/clock</path>中进行了，而是由系统原生的时钟调整
+工具完成。这就是说Linux下你需要修改文件<path>/etc/conf.d/hwclock</path>，而在
+FreeBSD中你需要修改文件<path>/etc/conf.d/adjkerntz</path>。
+
+Clock settings have been renamed from <path>/etc/conf.d/clock</path> to your
+system's native tool for adjusting the clock. This means on Linux it will be
+<path>/etc/conf.d/hwclock</path> and on FreeBSD it will be
+<path>/etc/conf.d/adjkerntz</path>.
+</p>
+
+<p>
+还有，TIMEZONE变量也不在这个文件里设置了。其内容可以在文件<path>/etc/timezone
+</path>中找到。请复查这几个文件并确定她们的正确性。
+
+Additionally， the <c>TIMEZONE</c> variable is no longer in this file. Its
+contents are instead found in the <path>/etc/timezone</path> file. Please review
+both of these files to ensure their correctness.
+</p>
+
+</body>
+</section>
+
+<section>
+<title>XSESSION</title>
+<body>
+
+<p>
+XSESSION变量也不再在文件<path>/etc/rc.conf</path>中设置了。可以在由包<c>
+x11-apps/xinit</c>提供的文件<path>/etc/env.d/90xsession</path>里设置XSESSION变
+量。
+
+The XSESSION variable is no longer found in <path>/etc/rc.conf</path>. The
+<c>x11-apps/xinit</c> package now provides <path>/etc/env.d/90xsession</path>，
+which can be used to set the XSESSION variable.
+</p>
+
+<p>
+默认是<b>不</b>会迁移这个变量的，所以你需要编辑文件<path>/etc/env.d/90xsession
+</path>。
+
+This variable will <b>NOT</b> be migrated for you by default， so you will need
+to edit <path>/etc/env.d/90xsession</path>.
+</p>
+
+<impo>
+在<path>/etc/env.d</path>里创建文件后必须运行命令<c>env-update</c>然后登出再登录
+才能让修改生效。
+
+You must run <c>env-update</c> after creating a file in <path>/etc/env.d</path>，
+and then logout and login for it to take effect.
+</impo>
+
+</body>
+</section>
+<section>
+<title>EDITOR</title>
+<body>
+
+<p>
+EDITOR变量也不在<path>/etc/rc.conf</path>里了，也没有由其他包来提供这个设置。
+鼓励用户在他们自己的<path>~/.bashrc</path>文件中设置这个变量，或者新建一个文件
+<path>/etc/env.d/99editor</path>并且在里边设置。
+
+The EDITOR variable is no longer found in <path>/etc/rc.conf</path>， and at this
+time is not provided by any other package. Users are encouraged to set it as
+needed in their <path>~/.bashrc</path> file or create
+<path>/etc/env.d/99editor</path> and set it there. 
+</p>
+
+<impo>
+在<path>/etc/env.d</path>里创建文件后必须运行命令<c>env-update</c>然后登出再登录
+才能让修改生效。如果是在<path>~/.bashrc</path>里设置变量的话，你可以用命令<c>
+source ~/.bashrc</c>重新source。
+
+You must run <c>env-update</c> after creating a file in <path>/etc/env.d</path>，
+and then logout and login for it to take effect. If you set the variable in
+<path>~/.bashrc</path>， you can re-source the file with 
+<c>source
+~/.bashrc</c>.
+</impo>
+
+</body>
+</section>
+<section>
+<title>完成</title>
+<body>
+
+<p>
+在你完成了配置文件和启动脚本的更新后，最后一件事就是<b>重启</b>。这一步是必须
+的，因为系统状态信息在升级中不会被保留下来，所以你需要重启来达到这个目的。
+
+Once you've finished updating your config files and initscripts， the last thing
+to do is <b>reboot</b>. This is necessary because system state information is
+not preserved during the upgrade， so you'll need to provide it with a fresh
+boot.
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
+
