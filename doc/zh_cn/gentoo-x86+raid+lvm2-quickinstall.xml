@@ -132,7 +132,7 @@ livecd ~ # <i>modprobe dm-mod</i>
 </table>
 
 <impo>
-用于启动的分区必须设为striping模式，不能设为raid-5或raid-0。
+用于启动的分区绝不能设为striping模式。它不能是raid-5或raid-0。
 </impo>
 
 <note>

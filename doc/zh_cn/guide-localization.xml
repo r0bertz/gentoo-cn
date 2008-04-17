@@ -35,10 +35,6 @@
 本指南帮助用户将他们的Gentoo Linux发行版本地化为任何欧洲的locale。本文是由德语文档翻译而来的，因此它以德国作为案例分析。其中包含欧元货币符号的使用配置。
 </abstract>
 
-<!-- The content of this document is licensed under the CC-BY-SA license -->
-<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
-<license/>
-
 <version>1.36</version>
 <date>2007-10-04</date>
 
@@ -231,7 +227,7 @@ $ <i>env | grep -i LC_</i>
 
 <pre caption="在make.conf中设置LINGUAS">
 # <i>nano -w /etc/make.conf</i>
-<comment>加入LINGUAS变量中。例如，德语、芬兰语和英语:)</comment>
+<comment>（加入LINGUAS变量中。例如，德语、芬兰语和英语：）</comment>
 LINGUAS="de fi en"
 </pre>
 
