@@ -398,9 +398,9 @@
     <file id="overlays-policy">/proj/en/overlays/policy.xml</file>
     <file id="pam-upgrade">/proj/en/base/pam/upgrade-0.99.xml</file>
     <file id="embedded-handbook">/proj/en/base/embedded/handbook/index.xml</file>
-    <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
     <file id="texlive-migration-guide">/proj/en/tex/texlive-migration-guide.xml</file>
-    <file id="openrc-migration">/doc/en/openrc-migration.xml</file>
+    <file id="openrc-migration">/doc/zh_cn/openrc-migration.xml</file>
+    <file id="git-howto">/doc/zh_cn/git-howto.xml</file>
   </files>
   <docs>
     <doc fileid="name-logo">
