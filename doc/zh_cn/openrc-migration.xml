@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.10 -->
 
 <guide link="/doc/zh_cn/openrc-migration.xml" lang="zh_cn">
 <title>基础布局Baselayout和OpenRC迁移指南</title>
@@ -30,8 +30,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.0</version>
-<date>2008-04-11</date>
+<version>1.6</version>
+<date>2008-04-21</date>
 
 <chapter>
 <title>背景知识</title>
@@ -163,25 +163,36 @@ module_ieee1394_args="debug"
 
 </body>
 </section>
-<section id="volume">
-<title>卷管理</title>
+<section id="boot">
+<title>Boot运行级别</title>
 <body>
 
 <p>
-在你切换到OpenRC和baselayout-2的时候，块储存设备的卷管理服务的迁移也应该自动完成了。但是如果没自动完成的话，你需要按照以下说明进行处理。
+此<c>boot</c>运行级别为每台机器完成了几个重要的启动步骤。比如，确保你的根文件系统以读写方式挂载，确保你的文件系统已经检查过错误，确保你的挂载点确实存在，还有确保<path>/proc</path>伪文件系统在启动过程中已经挂载。
 </p>
 
 <p>
-默认情况下块储存设备的卷管理服务不再被启动。意味着这些lvm，raid，swap，device-mapper (dm)，dm-crypt，evms和类似的服务不会自动运行了。如果你要用到这些附加服务，你需要手动把相应的启动脚本加入到<c>boot</c> runlevel。不然，你的系统有可能不能正常启动。在你安装不同的卷管理服务的时候，相应的启动脚本会被安装到目录<path>/etc/init.d</path>里边。你必须确认<c>boot</c> runlevel包括了正确的启动脚本。
+在OpenRC里，默认情况下块储存设备的卷管理服务不再被自动启动。这些卷管理服务包括lvm、raid、swap、device-mapper（dm）、dm-crypt和evms等等。你必须确保这些服务对应的启动脚本确实在<c>boot</c>运行级别里，否则你的系统可能不能正常启动。
 </p>
 
 <p>
-尽管OpenRC ebuild会尝试帮你完成迁移工作，你还是应该复查一下所有的卷管理服务看
-看她们是否被正确迁移。
+尽管OpenRC ebuild会尝试帮你完成迁移工作，你还是应该复查一下所有的卷管理服务看看她们是否被正确迁移：
 </p>
 
-<pre caption="检查boot runlevel的所有服务">
+<pre caption="显示boot运行级别的所有服务">
 # <i>ls -l /etc/runlevels/boot/</i>
+</pre>
+
+<p>
+如果在上面的结果里你没有看到root、procfs、mtab、swap和fsck，请运行下面的命令把她们加入<c>boot</c>运行级别：
+</p>
+
+<pre caption="把必需的服务加入boot运行级别">
+# <i>rc-update add root boot</i>
+# <i>rc-update add procfs boot</i>
+# <i>rc-update add mtab boot</i>
+# <i>rc-update add fsck boot</i>
+# <i>rc-update add swap boot</i>
 </pre>
 
 <p>
@@ -189,10 +200,42 @@ module_ieee1394_args="debug"
 下命令把启动脚本增加到<c>boot</c> runlevel中。
 </p>
 
-<pre caption="把缺失的卷管理服务增加到boot runlevel中">
+<pre caption="把raid和lvm加入boot运行级别">
 # <i>rc-update add raid boot</i>
 # <i>rc-update add lvm boot</i>
-# <i>rc-update add swap boot</i>
+</pre>
+
+</body>
+</section>
+<section>
+<title>网络</title>
+<body>
+
+<p>
+因为baselayout和OpenRC被拆分成了两个不同的包，你的net.eth0启动脚本在升级过程中可能消失。请依照下面的步骤来替换这个脚本：
+</p>
+
+<pre caption="添加回缺失的net.eth0脚本">
+# <i>cd /etc/init.d</i>
+# <i>ln -s net.lo net.eth0</i>
+</pre>
+
+<p>
+如果你还缺失了其他网络启动脚本，请使用上面的命令来把她们添加回来。只需要把<c>eth0</c>替换成你的网络界面的名字即可。
+</p>
+
+<p>
+还有，<path>/etc/conf.d/net</path>里的配置不再使用bash风格的数组。请查看<path>/usr/share/doc/openrc/net.example</path>以获取配置指令。这个转化应该很简单，以一个静态IP的配置为例：
+</p>
+
+<pre caption="旧的/etc/conf.d/net风格">
+config_eth0=( "192.168.1.37 netmask 255.255.255.0 brd 192.168.1.255" )
+routes_eth0=( "default via 192.168.1.100" )
+</pre>
+
+<pre caption="新的/etc/conf.d/net风格">
+config_eth0="192.168.1.37 netmask 255.255.255.0 brd 192.168.1.255"
+routes_eth0="default via 192.168.1.100"
 </pre>
 
 </body>
@@ -202,12 +245,20 @@ module_ieee1394_args="debug"
 <body>
 
 <p>
-设置时钟的文件不再叫<path>/etc/conf.d/clock</path>了，而是由系统原生的时钟调整工具的名字命名。这就是说Linux下这个文件叫<path>/etc/conf.d/hwclock</path>，而在FreeBSD中叫<path>/etc/conf.d/adjkerntz</path>。
+设置时钟的文件不再叫<path>/etc/conf.d/clock</path>了，而是由系统原生的时钟调整工具的名字命名。这就是说Linux下这个文件叫<path>/etc/conf.d/hwclock</path>，而在FreeBSD中叫<path>/etc/conf.d/adjkerntz</path>。<path>/etc/init.d</path>里的启动脚本的名字也相应的改变了，所以请确保她已经在适当的运行级别里了。
 </p>
 
 <p>
-还有，TIMEZONE变量也不再在这个文件里设置了。应该把这个变量的值写入文件<path>/etc/timezone</path>。请复查这两个文件并确定她们的正确性。
+还有，TIMEZONE变量也不再在这个文件里设置了。应该把这个变量的值写入文件<path>/etc/timezone</path>。如果这个文件不存在，你需要创建这个文件，并在里面写入你的时区。请复查这两个文件并确定她们的正确性。
 </p>
+
+<p>
+这个文件的正确的值是你的时区相对于此目录<path>/usr/share/zoneinfo</path>的路径。比如，对于居住在中国的人来说，下面的是一个正确的设定。
+</p>
+
+<pre caption="/etc/timezone">
+Asia/Shanghai
+</pre>
 
 </body>
 </section>
@@ -233,11 +284,11 @@ XSESSION变量也不再在文件<path>/etc/rc.conf</path>中设置了。可以�
 </body>
 </section>
 <section>
-<title>EDITOR</title>
+<title>EDITOR／PAGER</title>
 <body>
 
 <p>
-EDITOR变量也不在<path>/etc/rc.conf</path>里了，也没有由其他包来提供这个设置。我们鼓励用户在他们自己的<path>~/.bashrc</path>文件中设置这个变量，或者新建一个文件<path>/etc/env.d/99editor</path>并且在里边设置。
+EDITOR变量也不在<path>/etc/rc.conf</path>里了。EDITOR和PAGER变量的默认值都在/etc/profile里设定。如果你想改变，请在你自己的<path>~/.bashrc</path>（或起同等作用的）文件中设置这两个变量，或者新建一个文件<path>/etc/env.d/99editor</path>并且在里边设置系统默认值。
 </p>
 
 <impo>
