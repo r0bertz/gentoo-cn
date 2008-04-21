@@ -99,8 +99,8 @@ daemon,mail.*;\
 #配置一个远程日志服务器
 *.*                        @logserver
 
-# 那个被命名的通道“/dev/xconsole”是为”xconsole“ 组件准备的。在使用它的时候，
-# 你必须调用”xconsole“,并且要带上“-file”选项 ：
+# 那个被命名的通道“/dev/xconsole”是为“xconsole” 组件准备的。在使用它的时候，
+# 你必须调用“xconsole”,并且要带上“-file”选项 ：
 #
 #    $ xconsole -file /dev/xconsole [...]
 #
@@ -126,8 +126,7 @@ local2.*                --/var/log/ppp.log
 <body>
 
 <p>
-Frank Dennis的<uri 
-link="http://metalog.sourceforge.net">Metalog</uri>不能在远程服务器上记录日志文件，但是它在性能和记录日志的灵活性上有一些自己的优点。它可以通过程序名、紧急事件和facility（像syslogd）来记录日志文件，并且当它找到特定模式的时候,它会用正则表达式来与你能够运行的外部脚本相匹配。这在采取必要的行动时很有用。
+Frank Dennis的<uri link="http://metalog.sourceforge.net">Metalog</uri>不能在远程服务器上记录日志文件，但是它在性能和记录日志的灵活性上有一些自己的优点。它可以通过程序名、紧急事件和facility（像syslogd）来记录日志文件，并且当它找到特定模式的时候,它会用正则表达式来与你能够运行的外部脚本相匹配。这在采取必要的行动时很有用。
 </p>
 
 <p>
