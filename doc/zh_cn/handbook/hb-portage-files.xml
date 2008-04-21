@@ -13,8 +13,8 @@
 当你想要深入了解Portage的时候，你需要知道它将文件和数据放在了什么地方。
 </abstract>
 
-<version>1.11</version>
-<date>2007-06-11</date>
+<version>1.12</version>
+<date>2008-04-17</date>
 
 <section>
 <title>Portage文件</title>
@@ -83,7 +83,7 @@ Portage附带了一个默认的配置文件<path>/etc/make.globals</path>。当�
 </ul>
 
 <p>
-更多关于<path>/etc/portage</path>目录的信息及你能创建的文件的完整列表可以在Portage的手册页中找到：
+这些并不需要一定是文件；它们也可以是有包含单个软件包信息文件的目录。更多关于<path>/etc/portage</path>目录的信息及你能创建的文件的完整列表可以在Portage的手册页中找到：
 </p>
 
 <pre caption="阅读Portage的手册页">
