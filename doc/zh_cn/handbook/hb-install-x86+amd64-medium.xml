@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.13 -->
+<!-- English CVS version: 1.14 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 你可以用许多方法安装Gentoo。本章讲解怎样用最小安装光盘安装Gentoo，尽管使用安装程序LiveCD也是可以的。
 </abstract>
 
-<version>6.2</version>
-<date>2008-04-02</date>
+<version>6.3</version>
+<date>2008-04-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -279,40 +279,24 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
 下面你可以看到一个对已有内核的简述：
 </p>
 
-</body>
-<body test="func:keyval('arch')='x86'">
-
 <table>
 <tr>
   <th>内核</th>
   <th>描述</th>
 </tr>
-<tr>
+<tr test="func:keyval('arch')='x86'">
   <ti>gentoo</ti>
   <ti>默认的2.6内核带有对多CPU的支持</ti>
 </tr>
-<tr>
-  <ti>gentoo-nofb</ti>
-  <ti>和<c>gentoo</c>一样，但不支持framebuffer</ti>
-</tr>
-<tr>
-  <ti>memtest86</ti>
-  <ti>检测内存错误</ti>
-</tr>
-</table>
-
-</body>
-<body test="func:keyval('arch')='AMD64'">
-<table>
-<tr>
-  <th>内核</th>
-  <th>描述</th>
-</tr>
-<tr>
+<tr test="func:keyval('arch')='AMD64'">
   <ti>gentoo</ti>
   <ti>
     默认的内核带有对K8 CPU的支持（包括NUMA支持）和对EM64T CPU的支持
   </ti>
+</tr>
+<tr>
+  <ti>gentoo-nofb</ti>
+  <ti>与<c>gentoo</c>相同，但是不支持framebuffer</ti>
 </tr>
 <tr>
   <ti>memtest86</ti>

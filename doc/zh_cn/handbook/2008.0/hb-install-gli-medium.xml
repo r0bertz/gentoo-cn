@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 
 <sections>
 
-<version>9.1</version>
-<date>2008-04-02</date>
+<version>9.2</version>
+<date>2008-04-22</date>
 
 <section>
 <title>硬件需求</title>
@@ -174,15 +174,15 @@ $ <i>gpg --verify &lt;签名文件&gt; &lt;下载的iso&gt;</i>
   <ti>gentoo</ti>
   <ti>默认的2.6内核，带有多CPU支持</ti>
 </tr>
-<tr test="func:keyval('arch')='x86'">
-  <ti>gentoo-nofb</ti>
-  <ti>与<c>gentoo</c>相同，但是不支持framebuffer</ti>
-</tr>
 <tr test="func:keyval('arch')='AMD64'">
   <ti>gentoo</ti>
   <ti>
     支持K8 CPU（带NUMA支持）和EM64T CPU的默认内核
   </ti>
+</tr>
+<tr>
+  <ti>gentoo-nofb</ti>
+  <ti>与<c>gentoo</c>相同，但是不支持framebuffer</ti>
 </tr>
 <tr>
   <ti>memtest86</ti>

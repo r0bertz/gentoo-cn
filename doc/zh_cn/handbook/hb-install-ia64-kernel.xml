@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.16 -->
+<!-- English CVS version: 1.17 -->
 
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-04-22</date>
 
 <section>
 <title>时区</title>
@@ -140,16 +140,6 @@ File systems ---&gt;
 <comment>（确保为EFI分区启用了VFAT支持）</comment>
 DOS/FAT/NT Filesystems  --->
   &lt;*&gt; VFAT (Windows-95) fs support
-</pre>
-
-<p>
-不要忘记给您的硬盘打开DMA：
-</p>
-
-<pre caption="启用DMA">
-Device Drivers ---&gt;
-  ATA/ATAPI/MFM/RLL support ---&gt;
-    [*] Generic PCI bus-master DMA support
 </pre>
 
 <p>

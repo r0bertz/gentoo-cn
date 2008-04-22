@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/handbook/hb-net-management.xml,v 1.2 2007/09/14 07:09:18 neysx Exp $ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 本章是为笔记本电脑用户和频繁切换网络的用户准备的。
 </abstract>
 
-<version>8.0</version>
-<date>2007-05-07</date>
+<version>9.0</version>
+<date>2008-04-22</date>
 
 <section>
 <title>网络管理</title>
@@ -59,11 +59,11 @@ ifplugd_eth0="--api-mode=wlan"
 </pre>
 
 <p>
-除了管理多个网络连接之外，你可能需要增加一个工具来使得管理多个DNS服务器和配置更加容易。当你通过DHCP来获取IP地址时，这将非常有用。只需要emerge <c>resolvconf-gentoo</c>.
+除了管理多个网络连接之外，你可能需要增加一个工具来使得管理多个DNS服务器和配置更加容易。当你通过DHCP来获取IP地址时，这将非常有用。只需要emerge <c>openresolv</c>.
 </p>
 
-<pre caption="安装resolvconf-gentoo">
-# <i>emerge resolvconf-gentoo</i>
+<pre caption="安装openresolv">
+# <i>emerge openresolv</i>
 </pre>
 
 <p>
