@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.73 -->
+<!-- English CVS version: 1.74 -->
 
 <guide link="/doc/zh_cn/handbook/index.xml" lang="zh_cn">
 <title>Gentoo手册</title>
@@ -29,8 +29,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 
 <license/>
 
-<version>0.48</version>
-<date>2008-04-02</date>
+<version>0.49</version>
+<date>2008-04-27</date>
 
 <chapter>
 <title>Gentoo手册的成果</title>
@@ -53,8 +53,8 @@ Gentoo手册的目的是将文档集中在一个条理分明的手册中。这�
 <uri link="/doc/pl/handbook/">波兰文</uri> |
 <!--<uri link="/doc/ro/handbook/">罗马尼亚文</uri> |-->
 <!--<uri link="/doc/ru/handbook/">俄文</uri> |-->
-<uri link="/doc/zh_cn/handbook">简体中文</uri>
-<!--<uri link="/doc/es/handbook/">西班牙文</uri>-->
+<uri link="/doc/zh_cn/handbook/">简体中文</uri>
+<uri link="/doc/es/handbook/">西班牙文</uri>
 </p>
 
 </body>

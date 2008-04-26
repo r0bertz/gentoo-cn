@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.165 -->
+<!-- English CVS version: 1.166 -->
 
 <book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn" disclaimer="draft">
 <title>Gentoo Linux x86手册</title>
@@ -11,16 +11,16 @@
  <key id="arch">x86</key>
  <key id="arch-sub">i386</key>
  <key id="/boot">/dev/hda1</key>
- <key id="kernel-version">2.6.23-r8</key>
- <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
- <key id="genkernel-name">kernel-genkernel-x86-2.6.23-gentoo-r8</key>
- <key id="genkernel-initrd">initramfs-genkernel-x86-2.6.23-gentoo-r8</key>
- <key id="min-cd-name">install-x86-minimal-2008.0_beta1.iso</key>
+ <key id="kernel-version">2.6.24-r5</key>
+ <key id="kernel-name">kernel-2.6.24-gentoo-r5</key>
+ <key id="genkernel-name">kernel-genkernel-x86-2.6.24-gentoo-r5</key>
+ <key id="genkernel-initrd">initramfs-genkernel-x86-2.6.24-gentoo-r5</key>
+ <key id="min-cd-name">install-x86-minimal-2008.0_beta2.iso</key>
  <key id="min-cd-size">57</key>
- <key id="live-cd-name">livecd-i686-installer-2008.0_beta1.iso</key>
+ <key id="live-cd-name">livecd-i686-installer-2008.0_beta2.iso</key>
  <key id="live-cd-size">655</key>
- <key id="release-dir">releases/x86/2008.0_beta1/</key>
- <key id="stage3">stage3-i686-2008.0_beta1.tar.bz2</key>
+ <key id="release-dir">releases/x86/2008.0_beta2/</key>
+ <key id="stage3">stage3-i686-2008.0_beta2.tar.bz2</key>
  <key id="profile">default-linux/x86/2008.0</key>
  <key id="online-book">handbook-x86.xml</key>
  <key id="CFLAGS">-O2 -march=i686 -pipe</key>
@@ -190,8 +190,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.1</version>
-<date>2008-04-06</date>
+<version>9.2</version>
+<date>2008-04-27</date>
 
 <part>
 <title>安装Gentoo</title>
