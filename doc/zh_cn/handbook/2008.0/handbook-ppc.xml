@@ -2,19 +2,19 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.8 -->
+<!-- English CVS version: 1.9 -->
 
 <book disclaimer="draft" lang="zh_cn">
 <title>Gentoo Linux 2008.0 PPC无网络手册</title>
 
 <values>
  <key id="arch">PPC</key>
- <key id="kernel-version">2.6.23-r8</key>
- <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
- <key id="kernel-gentoo">2.6.23-gentoo-r8</key>
+ <key id="kernel-version">2.6.24-r5</key>
+ <key id="kernel-name">kernel-2.6.24-gentoo-r5</key>
+ <key id="kernel-gentoo">2.6.24-gentoo-r5</key>
  <key id="online-book">2008.0/handbook-ppc.xml</key>
- <key id="release-dir">releases/ppc/2008.0_beta1/</key>
- <key id="stage3">stage3-ppc-2008.0_beta1.tar.bz2</key>
+ <key id="release-dir">releases/ppc/2008.0_beta2/</key>
+ <key id="stage3">stage3-ppc-2008.0_beta2.tar.bz2</key>
  <key id="CFLAGS">-O2 -mcpu=powerpc -mtune=powerpc -fno-strict-aliasing -pipe</key>
 </values>
 
@@ -175,8 +175,8 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.1</version>
-<date>2008-04-02</date>
+<version>9.2</version>
+<date>2008-04-27</date>
 
 <part>
 <title>安装Gentoo</title>

@@ -2,14 +2,14 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.6 -->
+<!-- English CVS version: 1.7 -->
 
 <book disclaimer="draft" lang="zh_cn">
 <title>Gentoo Linux 2008.0 AMD64无网络手册</title>
 
 <values>
  <key id="arch">AMD64</key>
- <key id="release-dir">releases/amd64/2008.0_beta1/</key>
+ <key id="release-dir">releases/amd64/2008.0_beta2/</key>
  <key id="online-book">2008.0/handbook-amd64.xml</key>
 </values>
 
@@ -168,8 +168,8 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-04-27</date>
 
 <part>
 <title>安装Gentoo</title>
