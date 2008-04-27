@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+--> 
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+
+<version>1.1</version>
+<date>2006-03-04</date>
+
+<section>
+<title>USE标记</title>
+<body>
+
+<p>
+<path>make.conf</path>文件包含了一些用户定义的USE标志，<path>/etc/make.profile/make.defaults</path>文件包含了Gentoo Linux默认的USE标记。就这篇指南来说，以下的一些USE标记是比较重要的：<c>pam</c>（可拔插验证模块）、<c>tcpd</c>（TCP wrappers）和<c>ssl</c>（安全套接层协议）。这些都包含在了默认的USE标记里。
+</p>
+
+</body>
+</section>
+<section id = "passwording_GRUB">
+<title>GRUB的密码保护</title>
+<body>
+
+<p>
+GRUB支持两种不同的方式来给你的引导程序加上密码。第一种方法是使用plain text（纯文本），另一种是使用md5+salt加密。
+</p>
+
+<pre caption="/boot/grub/grub.conf">
+timeout 5
+password changeme
+</pre>
+
+<p>
+这样将会添加一个内容为<c>changeme</c>的密码。如果在启动的时候没有输入密码，GRUB将会选择进入默认的选项。
+</p>
+
+<p>
+在添加一个md5密码的时候，你必须把你的密码转换成加密的格式，就像<path>/etc/shadow</path>这个文件的格式一样。请参见<c>man crypt</c>来得到更多的信息。就拿加密过的密码<e>changeme</e>来说吧，加密后你就会看到它会变成<c>$1$T7/dgdIJ$dJM.n2wZ8RG.oEiIOwJUs</c>。
+</p>
+
+<p>
+你可以在GRUB shell直接加密你的密码：
+</p>
+
+<pre caption="GRUB shell里的md5加密">
+#<i>/sbin/grub</i>
+
+GRUB version 0.92 (640K lower / 3072K upper memory)
+
+   [ Minimal BASH-like line editing is supported. For the first word, TAB lists
+     possible command completions. Anywhere else TAB lists the possible
+     completions of a device/filename. ]
+
+grub> <i>md5crypt</i>
+
+Password: <i>********</i>
+<comment>（再提示中输入“changeme”）</comment>
+Encrypted: $1$T7/dgdIJ$dJM.n2wZ8RG.oEiIOwJUs.
+
+grub> <i>quit</i>
+</pre>
+
+<p>
+然后剪切并粘贴你的加密过的密码到<path>/boot/grub/grub.conf</path>里面。
+</p>
+
+<pre caption="/boot/grub/grub.conf">
+timeout 5
+password --md5 $1$T7/dgdIJ$dJM.n2wZ8RG.oEiIOwJUs.
+</pre>
+
+<p>
+如果你的系统是远程的，把超时时间设置成5秒钟是比较方便的，这个设置还能够在没有键盘互动的情况下重新启动系统。请运行<c>info grub</c>来得到更多有关GRUB密码的信息。
+</p>
+
+</body>
+</section>
+<section id = "passwording_LILO">
+<title>使用密码保护LILO</title>
+<body>
+
+<p>
+LILO也支持两种处理密码的方式：全局设置和为每个媒体介质分别设置，然而这两种方式都是用明文存储的。
+</p>
+
+<p>
+全局密码是在配置文件的头部设置的，并且它被用于每一个可启动的媒体介质：
+</p>
+
+<pre caption="/etc/lilo.conf">
+password=changeme
+restricted
+delay=3
+</pre>
+
+<p>
+而为每个媒体介质分别设置密码就如同以下展示的一样：
+</p>
+
+<pre caption="/etc/lilo.conf">
+image=/boot/bzImage
+      read-only
+      password=changeme
+      restricted
+</pre>
+
+<p>
+如果<c>restricted</c>选项不存在，LILO会每次启动都请求密码。
+</p>
+
+<p>
+为了在<path>lilo.conf</path>里存储新信息，你必须运行<c>/sbin/lilo</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>制约终端使用</title>
+<body>
+
+<p>
+<path>/etc/securetty</path>文件允许你指定哪一个<c>tty</c>（终端）设备是允许root用户登陆的。
+</p>
+
+<p>
+如果你在使用devfs的话，我们建议你只留下<c>vc/1</c>这一行，其余的全部加上注释；如果你在使用udev，我们建议你只留下<c>tty1</c>这一行。这样会确保root只能登陆一次，并且只能在一个终端里登陆。
+</p>
+
+<note>
+在"wheel"组里的用户任然可以在别的终端里使用<c>su -</c>来成为root。
+</note>
+
+<pre caption="/etc/securetty">
+<comment>（对于devfs）</comment>
+vc/1
+<comment>（对于udev）</comment>
+tty1
+</pre>
+
+</body>
+</section>
+
+
+</sections>
