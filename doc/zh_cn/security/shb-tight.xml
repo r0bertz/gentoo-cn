@@ -62,7 +62,7 @@ GRUB version 0.92 (640K lower / 3072K upper memory)
 grub> <i>md5crypt</i>
 
 Password: <i>********</i>
-<comment>（再提示中输入“changeme”）</comment>
+<comment>（在提示中输入“changeme”）</comment>
 Encrypted: $1$T7/dgdIJ$dJM.n2wZ8RG.oEiIOwJUs.
 
 grub> <i>quit</i>
