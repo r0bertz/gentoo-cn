@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>块设备介绍</title>
@@ -62,25 +62,25 @@ Apple New World架构的机器是相当容易配置的。第一个分区通常�
   <th>描述</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>32k</ti>
   <ti>无</ti>
   <ti>Apple分区表</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>800k</ti>
   <ti>HFS</ti>
   <ti>Apple Bootstrap</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda4</path></ti>
+  <ti><path>/dev/sda4</path></ti>
   <ti>磁盘剩余空间</ti>
   <ti>ext3, reiserfs, xfs</ti>
   <ti>Linux Root分区</ti>
@@ -109,25 +109,25 @@ Apple Old World架构的机器相对来说配置起来有点复杂。第一个�
   <th>描述</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>32k</ti>
   <ti>无</ti>
   <ti>Apple分区表</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>32MB</ti>
   <ti>ext2</ti>
   <ti>Quik启动分区（只针对quik）</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda4</path></ti>
+  <ti><path>/dev/sda4</path></ti>
   <ti>磁盘剩余空间</ti>
   <ti>ext3, reiserfs, xfs</ti>
   <ti>Linux Root分区</ti>
@@ -152,19 +152,19 @@ Pegasos分区布局相对Apple布局来说简单。第一个是启动分区，�
   <th>描述</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>32MB</ti>
   <ti>affs1或ext2</ti>
   <ti>启动分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux交换分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>磁盘剩余空间</ti>
   <ti>ext3, reiserfs, xfs</ti>
   <ti>Linux Root分区</ti>
@@ -189,19 +189,19 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
   <th>描述</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>800k</ti>
   <ti>无</ti>
   <ti>PReP Boot分区（类型 0x41）</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>512MB</ti>
   <ti>Swap</ti>
   <ti>Linux Swap （类型0x82）</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>磁盘剩余空间</ti>
   <ti>ext3, reiserfs, xfs</ti>
   <ti>Linux Root （类型0x83）</ti>
@@ -261,7 +261,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <pre caption="启动mac-fdisk">
-# <i>mac-fdisk /dev/hda</i>
+# <i>mac-fdisk /dev/sda</i>
 </pre>
 
 <p>
@@ -311,7 +311,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <pre caption="启动parted">
-# <i>parted /dev/hda</i>
+# <i>parted /dev/sda</i>
 </pre>
 
 <p>
@@ -364,7 +364,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <pre caption="创建一个交换分区签名">
-# <i>mkswap /dev/hda3</i>
+# <i>mkswap /dev/sda3</i>
 </pre>
 
 <p>
@@ -372,7 +372,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <pre caption="激活一个交换分区">
-# <i>swapon /dev/hda3</i>
+# <i>swapon /dev/sda3</i>
 </pre>
 
 <p>
@@ -413,11 +413,11 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </table>
 
 <p>
-例如，将root分区（本例中的<path>/dev/hda4</path>）设为ext3，你应该使用：
+例如，将root分区（本例中的<path>/dev/sda4</path>）设为ext3，你应该使用：
 </p>
 
 <pre caption="应用一个文件系统到分区上">
-# <i>mke2fs -j /dev/hda4</i>
+# <i>mke2fs -j /dev/sda4</i>
 </pre>
 
 <p>
@@ -444,7 +444,7 @@ IBM PowerPC引用平台（PReP）需要在磁盘首分区上有一个小的PReP�
 </p>
 
 <pre caption="挂载分区">
-# <i>mount /dev/hda4 /mnt/gentoo</i>
+# <i>mount /dev/sda4 /mnt/gentoo</i>
 </pre>
 
 <note>

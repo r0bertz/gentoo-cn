@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.5 -->
+<!-- English CVS version: 1.6 -->
 <sections>
 
-<version>6.0</version>
-<date>2008-04-02</date>
+<version>6.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>硬件需求</title>
@@ -202,141 +202,29 @@ $ <i>gpg --verify &lt;signature file&gt; &lt;downloaded iso&gt;</i>
 你也可以使用内核选项。他们代表了一些你可以激活或取消的设置。
 </p>
 
-<pre caption="可以使用的内核选项">
-- agpgart       加载agpgart（在显卡有问题、锁屏的情况下使用）
-- ide=nodma     为有故障的IDE设备强制关闭DMA
-- doscsi        扫描scsi设备（将导致某些网卡不能工作）
-- dopcmcia      为PCMCIA光驱启动pcmcia服务
-- nofirewire    在initrd中禁用firewire模块（用于firewire光驱等等）
-- nokeymap      对于非US键盘布局，禁用keymap选择
-- docache       把光盘中运行部分全部缓存到内存中，可以让你卸载/mnt/cdrom去用于
-                挂载其他的光驱
-- nodetect      使hwsetup/kudzu和hotplug不运行
-- nousb         禁止从initrd中加载usb模块，禁用hotplug
-- nodhcp        如果检测到网卡，则不自动运行dhcp
-- nohotplug     禁止加载hotplug服务
-- noapic        禁用apic（如果有硬件问题尝试此选项，比如网卡、scsi等）
-- noevms        禁止加载EVMS2模块
-- nolvm         禁止加载LVM2模块
-- noload=module1,[module2,[...]]
-                禁止加载特定的内核模块
-- dosshd        启动sshd，对于无人职守安装有用
-- passwd=foo    将foo设置为root用户密码；与dosshd一起在远程安装时使用
-</pre>
+</body>
+<body>
+<include href="hb-install-kernelparams.xml"/>
+</body>
+
+<body>
+
+<note>
+本CD将会先检查“no*”选项，然后再检查“do*”选项，所以你可以以你指定的顺序来覆盖任意选项。
+</note>
 
 <p>
 然后你看到一个启动画面和一个进度条。如果你正在把Gentoo安装到一个使用非US键盘的电脑中，你必须在提示符时选择好你的键盘布局。如果10秒钟内没有选择，系统会以默认的键盘布局（US键盘）继续启动过程。一旦启动完成，你将会自动以“root”超级用户身份登录这个“Live” Gentoo Linux。在当前终端里你将会有个root提示符（"#"），你可以通过按Alt-F2、Alt-F3和Alt-F4切换到其他的终端（如果你有视频终端并连接着键盘），按Alt-F1回到你开始的那个终端。
 </p>
 
 <p>
-现在从<uri link="#hardware">其他硬件配置</uri>继续。
+现在从<uri link="#hardware">额外硬件配置</uri>继续。
 </p>
-
 </body>
-</subsection>
-<subsection id="hardware">
-<title>其他硬件配置</title>
-<body>
 
-<p>
-当安装光盘启动时，它会尝试检测所有的硬件设备和加载准确的内核模块来支持这些硬件。绝大多数情况下，它会做的很好。但是，有些情况下，它可能没有自动加载你需要的内核模块。如果PCI自动检测错过了你系统里的一些硬件，你需要手动为它们加载相应的内核模块。
-</p>
-
-<p>
-在下一个例子中，我们尝试加载<c>8139too</c>模块（支持某种网卡）：
-</p>
-
-<pre caption="加载内核模块">
-# <i>modprobe 8139too</i>
-</pre>
-
-</body>
 </subsection>
 <subsection>
-<title>可选：调整硬盘性能</title>
-<body>
-
-<p>
-如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。你可以使用<c>-tT</c>选项来测试你的硬盘的性能（多执行几次以得到更精确的结果）：
-</p>
-
-<pre caption="测试硬盘性能">
-# <i>hdparm -tT /dev/hda</i>
-</pre>
-
-<p>
-为了调整性能，你可以使用下面任何一个范例（或者自己试验），它们都是以<c>/dev/hda</c>作为例子（替换成你使用的硬盘）：
-</p>
-
-<pre caption="调整硬盘性能">
-<comment>（激活DMA：）</comment>
-# <i>hdparm -d 1 /dev/hda</i>
-<comment>（激活安全性能选项：)</comment>
-# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
-</pre>
-
-</body>
-</subsection>
-<subsection id="useraccounts">
-<title>可选：用户帐号</title>
-<body>
-
-<p>
-如果你打算给其他的人提供你的安装环境的访问权限，或者你不想用root用户权限（因为安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
-</p>
-
-<p>
-使用<c>passwd</c>命令来修改root用户密码：
-</p>
-
-<pre caption="修改root用户密码">
-# <i>passwd</i>
-New password: <comment>(Enter your new password)</comment>
-Re-enter password: <comment>(Re-enter your password)</comment>
-</pre>
-
-<p>
-要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以使用<c>useradd</c>和<c>passwd</c>来完成。在下个的例子中，我们创建一个名为"john"的用户。
-</p>
-
-<pre caption="创建一个新用户">
-# <i>useradd -m -G users john</i>
-# <i>passwd john</i>
-New password: <comment>(输入john的密码)</comment>
-Re-enter password: <comment>(再次输入john的密码)</comment>
-</pre>
-
-<p>
-你可以使用<c>su</c>从root用户切换到新建的用户：
-</p>
-
-<pre caption="切换用户">
-# <i>su - john</i>
-</pre>
-
-</body>
-</subsection>
-<subsection>
-<title>可选：启动SSH服务</title>
-<body>
-
-<p>
-如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（<e>只有</e>在你<b>完全信任</b>这位用户的情况下才行）。
-</p>
-
-<p>
-执行下面的命令来启动SSH服务：
-</p>
-
-<pre caption="启动SSH服务">
-# <i>/etc/init.d/sshd start</i>
-</pre>
-
-<p>
-在使用sshd之前，你必须设置好你的网络。请从<uri link="?part=1&amp;chap=3">配置网络</uri>一章继续。
-</p>
-
-</body>
+<include href="hb-install-bootconfig.xml"/>
 </subsection>
 </section>
 </sections>

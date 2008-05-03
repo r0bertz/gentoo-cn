@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>必需的硬件</title>
@@ -197,114 +197,8 @@ boot: <i>gentoo</i>
 
 </body>
 </subsection>
-<subsection id="hardware">
-<title>额外硬件的配置</title>
-<body>
-
-<p>
-如果不是所有的硬件都被支持，你需要加载适当的内核模块。
-</p>
-
-<p>
-接下来的例子中我们尝试加载<c>8139too</c>模块（以支持某些网卡）：
-</p>
-
-<pre caption="加载内核模块">
-# <i>modprobe 8139too</i>
-</pre>
-
-</body>
-</subsection>
-<subsection id="useraccounts">
-<title>可选：用户账号</title>
-<body>
-
-<p>
-如果你打算让其它人进入你的安装环境或者你想以非根用户身份（为安全考虑）使用<c>irssi</c>来聊天，你需要创建必需的用户账号并且更改根用户的密码。
-</p>
-
-<p>
-修改根用户密码，使用<c>passwd</c>工具：
-</p>
-
-<pre caption="更改根用户密码">
-# <i>passwd</i>
-New password: <comment>(Enter your new password)</comment>
-Re-enter password: <comment>(Re-enter your password)</comment>
-</pre>
-
-<p>
-为了创建用户账号，我们先输入他们的信息，接着是密码。我们使用<c>useradd</c>和<c>passwd</c>来做这些事。在下一个例子中，我们将创建一个叫&quot;john&quot;的用户。
-</p>
-
-<pre caption="创建用户账号">
-# <i>useradd -m -G users john</i>
-# <i>passwd john</i>
-New password: <comment>(Enter john's password)</comment>
-Re-enter password: <comment>(Re-enter john's password)</comment>
-</pre>
-
-<p>
-你可以使用<c>su</c>从根用户改变用户id为新建的用户：
-</p>
-
-<pre caption="改变用户id">
-# <i>su - john</i>
-</pre>
-
-</body>
-</subsection>
 <subsection>
-<title>可选：在安装时查看文档</title>
-<body>
-
-<p>
-在安装过程中你想查看Gentoo手册（要么是光盘上的或者在线的），确定你有建立一个用户账号（查看<uri link="#useraccounts">可选：用户账号</uri>。然后按<c>Alt-F2</c>切换到一个新的终端并登陆。
-</p>
-
-<p>
-如果你想马上查看光盘里的文档，运行<c>links</c>来查看：
-</p>
-
-<pre caption="查看光盘上的文档">
-# <i>links /mnt/cdrom/docs/handbook/html/index.html</i>
-</pre>
-
-<p>
-然而，你最好是使用在线的Gentoo手册，因为它比光盘中的更新一些。你也可以用<c>links</c>来查看，但是得在完成了<e>配置你的网络</e>以后（否则你将无法连接到Internet上查看文档）：
-</p>
-
-<pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/en/handbook/<keyval id="online-book"/></i>
-</pre>
-
-<p>
-你可用按<c>Alt-F1</c>来返回最初的那个终端。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>可选：启动SSH守护进程</title>
-<body>
-
-<p>
-如果你想让其它用户在安装过程中访问你的电脑（大概因为他们来帮你安装Gentoo，甚至是代你安装）。你需要为他们建立账户也许还要告诉他们你的根用户密码（<e>仅仅</e>在你<b>完全信任</b>那个用户的时候）。
-</p>
-
-<p>
-为了打开SSH守护进程，执行以下命令：
-</p>
-
-<pre caption="打开SSH守护进程">
-# <i>/etc/init.d/sshd start</i>
-</pre>
-
-<p>
-为了能使用sshd，你需要先设置好网络。继续到下一章<uri link="?part=1&amp;chap=3">配置你的网络</uri>。
-</p>
-
-</body>
+<include href="../hb-install-bootconfig.xml"/>
 </subsection>
 </section>
 </sections>

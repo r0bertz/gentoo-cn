@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.6 -->
+<!-- English CVS version: 1.7 -->
 
 <sections>
 
-<version>9.1</version>
-<date>2008-04-22</date>
+<version>9.2</version>
+<date>2008-05-04</date>
 
 <section>
 <title>文件系统信息</title>
@@ -68,11 +68,7 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 让我们看看<path>/boot</path>分区的挂载选项是怎么写的。这仅仅是个例子，如果你没有或者不能创建<path>/boot</path>，请不要复制它。
 </p>
 
-<p test="contains(func:keyval('/boot'), '/dev/hd')">
-在我们默认的<keyval id="arch"/>分区例子中，<path>/boot</path>通常是指<path><keyval id="/boot"/></path>分区（如果使用的是SCSI或者SATA设备的话，设备文件就会是<path>/dev/sda*</path>），文件系统类型通常采用<c>ext2</c>格式。由于这个分区在系统引导的时候需要检测，所以我们可以这样写：
-</p>
-
-<p test="contains(func:keyval('/boot'), '/dev/sd')">
+<p>
 在我们默认的<keyval id="arch"/>分区例子中，<path>/boot</path>一般为<path><keyval id="/boot"/></path>分区，且采用<e>ext2</e>文件系统。这个分区在引导过程中需要自检，因此我们这样写：
 </p>
 
@@ -87,12 +83,8 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 </body>
 <body>
 
-<p test="not(func:keyval('arch')='SPARC')">
+<p>
 增加符合你分区方案的规则，为你的光驱（当然，如果你有其他分区或者驱动器，也为它们）添加挂载规则。
-</p>
-
-<p test="func:keyval('arch')='SPARC'">
-增加符合你分区方案的规则，为<path>/proc/openprom</path>和你的光驱（当然，如果你有其他分区或者驱动器，也为它们）添加挂载规则。
 </p>
 
 <p>
@@ -122,23 +114,13 @@ Gentoo系统默认的<path>/etc/fstab</path>文件<e>不是有效的fstab文件<
 /dev/sda5   /var            ext3        noatime              0 2
 /dev/sda6   /home           ext3        noatime              0 2
 
+<comment># 必须添加这条openprom规则</comment>
 openprom    /proc/openprom  openpromfs  defaults             0 0
 
 /dev/cdrom  /mnt/cdrom      auto        noauto,user          0 0
 </pre>
 
-<note test="func:keyval('arch')='PPC'">
-不同型号的PPC机器之间差别是很大的。请务必你根据自己的系统改写以下的例子。
-</note>
-
-<pre caption="/etc/fstab的一个完整例子" test="func:keyval('arch')='PPC'">
-/dev/hda4   /            ext3    noatime              0 1
-/dev/hda3   none         swap    sw                   0 0
-
-/dev/cdrom  /mnt/cdrom   auto    noauto,user          0 0
-</pre>
-
-<pre caption="/etc/fstab的一个完整例子" test="func:keyval('arch')='PPC64'">
+<pre caption="/etc/fstab的一个完整例子" test="func:keyval('arch')='PPC' or func:keyval('arch')='PPC64'">
 /dev/sda4   /            ext3    noatime              0 1
 /dev/sda3   none         swap    sw                   0 0
 

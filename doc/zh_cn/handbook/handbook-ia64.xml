@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 <book lang="zh_cn">
 <title>Gentoo Linux/IA64手册</title>
 
@@ -189,8 +189,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.1</version>
-<date>2008-04-27</date>
+<version>9.2</version>
+<date>2008-05-04</date>
 
 <part>
 <title>安装Gentoo</title>

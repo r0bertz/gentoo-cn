@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.31 -->
+<!-- English CVS version: 1.32 -->
 <sections>
 
-<version>5.0</version>
-<date>2008-04-02</date>
+<version>5.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>块设备入门</title>
@@ -24,7 +24,7 @@
 </p>
 
 <p>
-第一个SCSI磁盘上的第一个分区是<path>/dev/sda1</path>，第二个是<path>/dev/sda2</path>依此类推。类似的，第一个IDE磁盘上的前两个分区是<path>/dev/hda1</path>和<path>/dev/hda2</path>
+第一个SCSI磁盘上的第一个分区是<path>/dev/sda1</path>，第二个是<path>/dev/sda2</path>依此类推。
 </p>
 
 <p>
@@ -45,7 +45,7 @@ Sun系统上的第三个分区被留出来作为一个特殊的切片名为"whol
 <body>
 
 <p>
-如果你对制订一个分区方案没有兴趣，那么可以采用下表的建议，一个适合多数系统的方案。对基于IDE硬盘的系统，把下面的<c>sda</c>替换成<c>hda</c>。
+如果你对制订一个分区方案没有兴趣，那么可以采用下表的建议，一个适合多数系统的方案。
 </p>
 
 <p>

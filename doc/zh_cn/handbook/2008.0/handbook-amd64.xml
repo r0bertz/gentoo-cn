@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.7 -->
+<!-- English CVS version: 1.8 -->
 
 <book lang="zh_cn">
 <title>Gentoo Linux 2008.0 AMD64无网络手册</title>
@@ -168,8 +168,8 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.1</version>
-<date>2008-04-27</date>
+<version>9.2</version>
+<date>2008-05-04</date>
 
 <part>
 <title>安装Gentoo</title>

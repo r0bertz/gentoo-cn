@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.2 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
 <included>
 
-<version>1</version>
-<date>2008-04-02</date>
+<version>2</version>
+<date>2008-05-04</date>
 
 <section id="blockdevicesdesc">
 <title>块设备</title>
@@ -16,7 +16,7 @@
 </p>
 
 <p>
-一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个IDE硬盘的<path>/dev/hda</path>。如果你使用SCSI硬盘，那么你的第一个硬盘将会是<path>/dev/sda</path>。Serial ATA硬盘也是<path>/dev/sda</path>，虽然它们是IDE硬盘。如果你正在使用内核里新的libata架构，所有的硬盘都将是<path>/dev/sd*</path>。
+一开始我们先介绍<e>块设备</e>。最有名的块设备可能就是Linux系统中表示第一个IDE硬盘的<path>/dev/sda</path>。SCSI硬盘和Serial ATA硬盘都是<path>/dev/sda</path>。如果你正在使用内核里新的libata架构，即便IDE硬盘也会是<path>/dev/sd*</path>。如果你用的是旧的设备架构，你的第一个IDE硬盘将是<path>/dev/hda</path>。
 </p>
 
 <p>

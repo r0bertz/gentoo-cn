@@ -6,7 +6,7 @@
 <included>
 
 <version>1</version>
-<date>2008-05-02</date>
+<date>2008-05-04</date>
 
 <section id="hardware">
 <title>额外硬件配置</title>
@@ -35,19 +35,19 @@
 </p>
 
 <pre caption="测试硬盘性能">
-# <i>hdparm -tT /dev/hda</i>
+# <i>hdparm -tT /dev/sda</i>
 </pre>
 
 <p>
-为了调整性能，你可以使用下面任何一个范例（或者自己试验），它们都是以<c>/dev/hda</c>作为例子（替换成你使用的硬盘）：
+为了调整性能，你可以使用下面任何一个范例（或者自己试验），它们都是以<c>/dev/sda</c>作为例子（替换成你使用的硬盘）：
 </p>
 
 <pre caption="调整硬盘性能">
 <comment>(激活DMA:)</comment>
-# <i>hdparm -d 1 /dev/hda</i>
+# <i>hdparm -d 1 /dev/sda</i>
 
 <comment>(激活DMA，并附加安全选项：)</comment>
-# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/sda</i>
 </pre>
 
 </body>

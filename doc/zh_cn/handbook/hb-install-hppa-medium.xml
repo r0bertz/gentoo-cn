@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.48 -->
+<!-- English CVS version: 1.49 -->
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>硬件需求</title>
@@ -363,115 +363,8 @@ console=ttyS0 <i>hdb=scsi</i>
 
 </body>
 </subsection>
-<subsection id="hardware">
-<title>额外硬件配置</title>
-<body>
-
-<p>
-大多数hppa机器有一个板载以太网卡。旧的机器使用编译进内核的lasi驱动。新的机器使用编译成模块的tulip驱动。要使用后者，你需要加载它的驱动。
-</p>
-
-<p>
-在下一个例子中，我们尝试加载<c>tulip</c>模块（支持某种网卡）：
-</p>
-
-<pre caption="加载内核模块">
-# <i>modprobe tulip</i>
-</pre>
-
-</body>
-</subsection>
-
-<subsection id="useraccounts">
-<title>可选：用户帐号</title>
-<body>
-
-<p>
-如果你打算为其他人提供你安装环境的访问权限，或者你不想以root帐号的身份（因为安全原因）使用irssi聊天，你需要创建必要的用户帐号，并改变root用户的密码。
-</p>
-
-<p>
-使用<c>passwd</c>命令来修改root用户密码：
-</p>
-
-<pre caption="修改root用户密码">
-# <i>passwd</i>
-New password: <comment>（输入新密码）</comment>
-Re-enter password: <comment>（再次输入密码）</comment>
-</pre>
-
-<p>
-要创建用户帐号，首先输入他们的用户名，再输入他的密码。我们可以使用<c>useradd</c>和<c>passwd</c>来完成。在下个的例子中，我们创建一个名为“john”的用户。
-</p>
-
-<pre caption="创建一个新用户">
-# <i>useradd -m -G users john</i>
-# <i>passwd john</i>
-New password: <comment>（输入john的密码）</comment>
-Re-enter password: <comment>（再次输入john的密码）</comment>
-</pre>
-
-<p>
-你可以使用su从root用户切换到新建的用户：
-</p>
-
-<pre caption="切换用户">
-# <i>su - john</i>
-</pre>
-
-</body>
-</subsection>
 <subsection>
-<title>可选：在安装时查看文档</title>
-<body>
-
-<p>
-如果你想在安装的时候查看Gentoo手册（不管是光盘中的还是在线的），请确认你已经创建好了一个用户帐号（请查看<uri link="#useraccounts">可选：用户帐号</uri>）。然后按<c>Alt-F2</c>打开一个新的终端并登录进入。
-</p>
-
-<p>
-如果你想查看光盘里的文档，你可以立即运行<c>links</c>来阅读：
-</p>
-
-<pre caption="查看光盘里的文档">
-# <i>links /mnt/cdrom/docs/handbook/html/index.html</i>
-</pre>
-
-<p>
-不过，首选的还是在线查看Gentoo手册，因为它比光盘里提供的要新。你也可以使用<c>links</c>阅读它，但是必须在完成<e>配置网络</e>这一章后才行（否则你不能到因特网上查看文档）：
-</p>
-
-<pre caption="查看在线文档">
-# <i>links http://www.gentoo.org/doc/zh_cn/handbook/<keyval id="online-book"/></i>
-</pre>
-
-<p>
-你可以按<c>Alt-F1</c>来回到原来的终端。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>可选：启动SSH服务</title>
-<body>
-
-<p>
-如果你想在安装Gentoo的过程中允许别的用户登录你的电脑（可能是因为别的用户愿意帮助你安装Gentoo，甚至是代你安装），你需要为他们创建用户帐号，甚至提供root用户密码（<e>只有</e>在你<b>完全信任</b>这位用户的情况下才行）。
-</p>
-
-<p>
-执行下面的命令来启动SSH服务：
-</p>
-
-<pre caption="启动SSH服务">
-# <i>/etc/init.d/sshd start</i>
-</pre>
-
-<p>
-在使用sshd之前，你必须设置好你的网络。请从<uri link="?part=1&amp;chap=3">配置网络</uri>一章继续。
-</p>
-
-</body>
+<include href="hb-install-bootconfig.xml"/>
 </subsection>
 </section>
 </sections>

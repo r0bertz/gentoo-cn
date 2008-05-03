@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.10 -->
+<!-- English CVS version: 1.11 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 为了能够安装Gentoo，你必须创建所需的分区。本章讲解如何给磁盘分区以备后用。
 </abstract>
 
-<version>6.0</version>
-<date>2008-04-02</date>
+<version>6.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>块设备介绍</title>
@@ -34,7 +34,7 @@
 </p>
 
 <p>
-<e>主分区</e>是把自己的信息储存在MBR（主引导记录）中的分区。由于MBR非常小（512个字节），所以仅可以定义4个主分区（例如，<path>/dev/hda1</path>到<path>/dev/hda4</path>）。
+<e>主分区</e>是把自己的信息储存在MBR（主引导记录）中的分区。由于MBR非常小（512个字节），所以仅可以定义4个主分区（例如，<path>/dev/sda1</path>到<path>/dev/sda4</path>）。
 </p>
 
 <p>
@@ -76,19 +76,19 @@
   <th>说明</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>ext2</ti>
   <ti>32M</ti>
   <ti>启动分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>(swap)</ti>
   <ti>512M</ti>
   <ti>交换分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>ext3</ti>
   <ti>剩余磁盘</ti>
   <ti>根分区</ti>
@@ -139,13 +139,13 @@
 <pre caption="文件系统使用实例">
 $ <i>df -h</i>
 Filesystem    Type    Size  Used Avail Use% Mounted on
-/dev/hda5     ext3    509M  132M  351M  28% /
-/dev/hda2     ext3    5.0G  3.0G  1.8G  63% /home
-/dev/hda7     ext3    7.9G  6.2G  1.3G  83% /usr
-/dev/hda8     ext3   1011M  483M  477M  51% /opt
-/dev/hda9     ext3    2.0G  607M  1.3G  32% /var
-/dev/hda1     ext2     51M   17M   31M  36% /boot
-/dev/hda6     swap    516M   12M  504M   2% &lt;not mounted&gt;
+/dev/sda5     ext3    509M  132M  351M  28% /
+/dev/sda2     ext3    5.0G  3.0G  1.8G  63% /home
+/dev/sda7     ext3    7.9G  6.2G  1.3G  83% /usr
+/dev/sda8     ext3   1011M  483M  477M  51% /opt
+/dev/sda9     ext3    2.0G  607M  1.3G  32% /var
+/dev/sda1     ext2     51M   17M   31M  36% /boot
+/dev/sda6     swap    516M   12M  504M   2% &lt;not mounted&gt;
 <comment>（留作它用的未分配空间：2GB）</comment>
 </pre>
 
@@ -171,15 +171,15 @@ Filesystem    Type    Size  Used Avail Use% Mounted on
   <th>说明</th>
 </tr>
 <tr>
-  <ti><path>/dev/hda1</path></ti>
+  <ti><path>/dev/sda1</path></ti>
   <ti>启动分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda2</path></ti>
+  <ti><path>/dev/sda2</path></ti>
   <ti>交换分区</ti>
 </tr>
 <tr>
-  <ti><path>/dev/hda3</path></ti>
+  <ti><path>/dev/sda3</path></ti>
   <ti>根分区</ti>
 </tr>
 </table>
@@ -195,11 +195,11 @@ Filesystem    Type    Size  Used Avail Use% Mounted on
 <body>
 
 <p>
-<c>fdisk</c>是一个流行且强大的工具，用来把你的磁盘划分为分区。启动你磁盘上<c>fdisk</c>程序（在示例中，我们使用<path>/dev/hda</path>）：
+<c>fdisk</c>是一个流行且强大的工具，用来把你的磁盘划分为分区。启动你磁盘上<c>fdisk</c>程序（在示例中，我们使用<path>/dev/sda</path>）：
 </p>
 
 <pre caption="启动fdisk">
-# <i>fdisk /dev/hda</i>
+# <i>fdisk /dev/sda</i>
 </pre>
 
 <p>
@@ -217,19 +217,19 @@ Command (m for help):
 <pre caption="分区配置示例">
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 240 heads, 63 sectors, 2184 cylinders
+Disk /dev/sda: 240 heads, 63 sectors, 2184 cylinders
 Units = cylinders of 15120 * 512 bytes
 
 Device Boot    Start       End    Blocks   Id  System
-/dev/hda1             1        14    105808+  83  Linux
-/dev/hda2            15        49    264600   82  Linux swap
-/dev/hda3            50        70    158760   83  Linux
-/dev/hda4            71      2184  15981840    5  Extended
-/dev/hda5            71       209   1050808+  83  Linux
-/dev/hda6           210       348   1050808+  83  Linux
-/dev/hda7           349       626   2101648+  83  Linux
-/dev/hda8           627       904   2101648+  83  Linux
-/dev/hda9           905      2184   9676768+  83  Linux
+/dev/sda1             1        14    105808+  83  Linux
+/dev/sda2            15        49    264600   82  Linux swap
+/dev/sda3            50        70    158760   83  Linux
+/dev/sda4            71      2184  15981840    5  Extended
+/dev/sda5            71       209   1050808+  83  Linux
+/dev/sda6           210       348   1050808+  83  Linux
+/dev/sda7           349       626   2101648+  83  Linux
+/dev/sda8           627       904   2101648+  83  Linux
+/dev/sda9           905      2184   9676768+  83  Linux
 
 Command (m for help): 
 </pre>
@@ -245,7 +245,7 @@ Command (m for help):
 <body>
 
 <p>
-首先，我们将把磁盘上的所有分区删除。键入<c>d</c>来删除一个分区。例如，要删除存在的<path>/dev/hda1</path>：
+首先，我们将把磁盘上的所有分区删除。键入<c>d</c>来删除一个分区。例如，要删除存在的<path>/dev/sda1</path>：
 </p>
 
 <pre caption="删除分区">
@@ -262,7 +262,7 @@ Partition number (1-4): <i>1</i>
 </p>
 
 <pre caption="空的分区表">
-Disk /dev/hda: 30.0 GB, 30005821440 bytes
+Disk /dev/sda: 30.0 GB, 30005821440 bytes
 240 heads, 63 sectors/track, 3876 cylinders
 Units = cylinders of 15120 * 512 = 7741440 bytes
 
@@ -304,12 +304,12 @@ Last cylinder or +size or +sizeM or +sizeK (1-3876, default 3876): <i>+32M</i>
 <pre caption="已创建的启动分区">
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 30.0 GB, 30005821440 bytes
+Disk /dev/sda: 30.0 GB, 30005821440 bytes
 240 heads, 63 sectors/track, 3876 cylinders
 Units = cylinders of 15120 * 512 = 7741440 bytes
 
 Device Boot    Start       End    Blocks   Id  System
-/dev/hda1          1        14    105808+  83  Linux
+/dev/sda1          1        14    105808+  83  Linux
 </pre>
 
 <p>
@@ -323,19 +323,19 @@ Device Boot    Start       End    Blocks   Id  System
 <body>
 
 <p>
-我们现在来创建交换分区。键入<c>n</c>创建一个新分区，然后键入<c>p</c>来告诉fdisk你创建的是主分区。接着输入<c>2</c>来创建第2个主分区，在本例中是<path>/dev/hda2</path>。当提示输入第一个柱面的时候，直接敲回车。当提示输入最后一个柱面的时候，输入<c>+512M</c>来创建一个512MB大小的分区。在这之后，键入<c>t</c>来设置分区类型，键入<c>2</c>选择你刚刚创建的那个分区，然后再输入<c>82</c>把分区类型设置成“Linux Swap”。完成以上这些步骤之后，键入<c>p</c>，应该显示一个与下面类似的分区表：
+我们现在来创建交换分区。键入<c>n</c>创建一个新分区，然后键入<c>p</c>来告诉fdisk你创建的是主分区。接着输入<c>2</c>来创建第2个主分区，在本例中是<path>/dev/sda2</path>。当提示输入第一个柱面的时候，直接敲回车。当提示输入最后一个柱面的时候，输入<c>+512M</c>来创建一个512MB大小的分区。在这之后，键入<c>t</c>来设置分区类型，键入<c>2</c>选择你刚刚创建的那个分区，然后再输入<c>82</c>把分区类型设置成“Linux Swap”。完成以上这些步骤之后，键入<c>p</c>，应该显示一个与下面类似的分区表：
 </p>
 
 <pre caption="创建交换分区后的分区列表">
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 30.0 GB, 30005821440 bytes
+Disk /dev/sda: 30.0 GB, 30005821440 bytes
 240 heads, 63 sectors/track, 3876 cylinders
 Units = cylinders of 15120 * 512 = 7741440 bytes
 
 Device Boot    Start       End    Blocks   Id  System
-/dev/hda1 *        1        14    105808+  83  Linux
-/dev/hda2         15        81    506520   82  Linux swap
+/dev/sda1 *        1        14    105808+  83  Linux
+/dev/sda2         15        81    506520   82  Linux swap
 </pre>
 
 </body>
@@ -345,20 +345,20 @@ Device Boot    Start       End    Blocks   Id  System
 <body>
 
 <p>
-最后，我们来创建根分区。键入<c>n</c>创建一个新分区，然后键入<c>p</c>来告诉fdisk你创建的是主分区。接着输入<c>3</c>来创建第3个主分区，在本例中是<path>/dev/hda3</path>。当提示输入第一个柱面的时候，直接敲回车。当提示输入最后一个柱面的时候，单击回车把你磁盘上的剩余空间创建一个分区。完成以上这些步骤之后，键入<c>p</c>，应该显示一个与下面类似的分区表：
+最后，我们来创建根分区。键入<c>n</c>创建一个新分区，然后键入<c>p</c>来告诉fdisk你创建的是主分区。接着输入<c>3</c>来创建第3个主分区，在本例中是<path>/dev/sda3</path>。当提示输入第一个柱面的时候，直接敲回车。当提示输入最后一个柱面的时候，单击回车把你磁盘上的剩余空间创建一个分区。完成以上这些步骤之后，键入<c>p</c>，应该显示一个与下面类似的分区表：
 </p>
 
 <pre caption="创建根分区后的分区列表">
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 30.0 GB, 30005821440 bytes
+Disk /dev/sda: 30.0 GB, 30005821440 bytes
 240 heads, 63 sectors/track, 3876 cylinders
 Units = cylinders of 15120 * 512 = 7741440 bytes
 
 Device Boot    Start       End    Blocks   Id  System
-/dev/hda1 *        1        14    105808+  83  Linux
-/dev/hda2         15        81    506520   82  Linux swap
-/dev/hda3         82      3876  28690200   83  Linux
+/dev/sda1 *        1        14    105808+  83  Linux
+/dev/sda2         15        81    506520   82  Linux swap
+/dev/sda3         82      3876  28690200   83  Linux
 </pre>
 
 </body>
@@ -433,12 +433,12 @@ Command (m for help): <i>w</i>
 </table>
 
 <p>
-例如，要使启动分区（本例中的<path>/dev/hda1</path>）为ext2和根分区（本例中的<path>/dev/hda3</path>）为ext3,应该这样做：
+例如，要使启动分区（本例中的<path>/dev/sda1</path>）为ext2和根分区（本例中的<path>/dev/sda3</path>）为ext3,应该这样做：
 </p>
 
 <pre caption="在分区上应用文件系统">
-# <i>mke2fs /dev/hda1</i>
-# <i>mke2fs -j /dev/hda3</i>
+# <i>mke2fs /dev/sda1</i>
+# <i>mke2fs -j /dev/sda3</i>
 </pre>
 
 <p>
@@ -456,7 +456,7 @@ Command (m for help): <i>w</i>
 </p>
 
 <pre caption="创建交换分区标志">
-# <i>mkswap /dev/hda2</i>
+# <i>mkswap /dev/sda2</i>
 </pre>
 
 <p>
@@ -464,7 +464,7 @@ Command (m for help): <i>w</i>
 </p>
 
 <pre caption="激活交换分区">
-# <i>swapon /dev/hda2</i>
+# <i>swapon /dev/sda2</i>
 </pre>
 
 <p>
@@ -483,9 +483,9 @@ Command (m for help): <i>w</i>
 </p>
 
 <pre caption="挂载分区">
-# <i>mount /dev/hda3 /mnt/gentoo</i>
+# <i>mount /dev/sda3 /mnt/gentoo</i>
 # <i>mkdir /mnt/gentoo/boot</i>
-# <i>mount /dev/hda1 /mnt/gentoo/boot</i>
+# <i>mount /dev/sda1 /mnt/gentoo/boot</i>
 </pre>
 
 <note>

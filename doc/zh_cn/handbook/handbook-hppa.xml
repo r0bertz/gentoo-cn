@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.134 -->
+<!-- English CVS version: 1.135 -->
 <book lang="zh_cn">
 <title>Gentoo Linux HPPA手册</title>
 
@@ -178,8 +178,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.2</version>
-<date>2008-04-02</date>
+<version>9.3</version>
+<date>2008-05-04</date>
 
 <part>
 <title>安装Gentoo</title>

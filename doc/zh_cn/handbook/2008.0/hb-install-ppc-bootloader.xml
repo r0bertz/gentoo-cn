@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>选择一个引导程序</title>
@@ -68,7 +68,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
   partition=3
   initrd=/boot/initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/>
   <comment># 你可以在此附加上额外的内核参数比如rootdelay=10用于USB/Firewire启动</comment>
-  append="real_root=/dev/hda3 init=/linuxrc"  
+  append="real_root=/dev/sda3 init=/linuxrc"  
   read-only
 <comment>##########################################################</comment>
 </pre>
@@ -99,7 +99,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 </pre>
 
 <p>
-现在退出chroot并运行<c>yabootconfig --chroot /mnt/gentoo</c>。首先，程序会确认bootstrap分区的位置。如果你使用了建议的磁盘分区布局，那你的bootstrap分区应该是/dev/hda2。如果输出正确请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。<c>yabootconfig</c>会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。<c>mkofboot</c>是格式化Apple_Bootstrap分区以及安装yaboot的配置文件用的。在此之后请再次进入chroot。
+现在退出chroot并运行<c>yabootconfig --chroot /mnt/gentoo</c>。首先，程序会确认bootstrap分区的位置。如果你使用了建议的磁盘分区布局，那你的bootstrap分区应该是/dev/sda2。如果输出正确请键入<c>Y</c>。如果出现错误，请再次仔细检查你的<path>/etc/fstab</path>。<c>yabootconfig</c>会接着扫描你的系统设置，创建<path>/etc/yaboot.conf</path>并运行<c>mkofboot</c>。<c>mkofboot</c>是格式化Apple_Bootstrap分区以及安装yaboot的配置文件用的。在此之后请再次进入chroot。
 </p>
 
 <pre caption="重新进入chroot">
@@ -130,7 +130,7 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 </pre>
 
 <p>
-虽然下面给出了一个<path>yaboot.conf</path>示例文件，但是你仍然需要通过修改它来满足你自己的要求。G5用户以及使用firewire和USB启动的用户应该注意他们的磁盘被Linux内核认为是SCSI磁盘，所以你需要将<path>/dev/hda</path>替换成<path>/dev/sda</path>。
+虽然下面给出了一个<path>yaboot.conf</path>示例文件，但是你仍然需要通过修改它来满足你自己的要求。
 </p>
 
 <pre caption = "/etc/yaboot.conf">
@@ -140,16 +140,16 @@ image=/boot/kernel-genkernel-ppc-<keyval id="kernel-gentoo"/>
 ## 也可以参考：/usr/share/doc/yaboot/examples可以得到一些配置的示例。
 ##
 ## 如果需要双重启动菜单，请添加以下一项或多项：
-## bsd=/dev/hdaX, macos=/dev/hdaY, macosx=/dev/hdaZ
+## bsd=/dev/sdaX, macos=/dev/sdaY, macosx=/dev/sdaZ
 
 ## bootstrap分区：</comment>
 
-boot=/dev/hda2
+boot=/dev/sda2
 
 <comment>## ofboot是Open Firmware的指定bootstrap分区的方式。
 ## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
 ## 你将一些必要的参数传给mkofboot/ybin程序）。
-## hd:X表示/dev/sdaX（或/dev/hdaX）。
+## hd:X表示/dev/sdaX。
  
 ## G5用户应该去掉这一行的注释！！
 
@@ -182,7 +182,7 @@ magicboot=/usr/lib/yaboot/ofboot
 ###########################################################</comment>
 image=/boot/<keyval id="kernel-name"/>
   label=Linux
-  root=/dev/hda3
+  root=/dev/sda3
   partition=3
 <comment>#  append="rootdelay=10"  # 从USB/Firewire启动时必需</comment>
   read-only
@@ -192,8 +192,8 @@ image=/boot/<keyval id="kernel-name"/>
 ##   macos=hd:13
 ##   macosx=hd:12
 ## 用以替代示例值。</comment>
-macos=/dev/hda13
-macosx=/dev/hda12
+macos=/dev/sda13
+macosx=/dev/sda12
 enablecdboot
 enableofboot
 </pre>
@@ -301,7 +301,7 @@ quik允许OldWorld架构的Mac机器不需要MacOS就能启动。然而，这个
 init-message = "Gentoo 2008.0\n"
 <comment># 这个是启动分区</comment>
 partition = 2
-root = /dev/hda4
+root = /dev/sda4
 timeout = 30
 default = gentoo
 <comment># 这个是你的内核</comment>
@@ -327,7 +327,7 @@ image = /<keyval id="kernel-name"/>
 # <i>nvsetenv input-device kbd</i>
 # <i>nvsetenv boot-device scsi/sd@1:0</i> <comment># 对应SCSI</comment>
 # <i>nvsetenv boot-device ata/ata-disk@0:0</i> <comment># 对应ATA</comment>
-# <i>nvsetenv boot-file /boot/<keyval id="kernel-name"/> root=/dev/hda4</i> <comment>第一项是内核的路径，第二项是root分区。你可以在这一行末尾附加任何的内核选项。</comment>
+# <i>nvsetenv boot-file /boot/<keyval id="kernel-name"/> root=/dev/sda4</i> <comment>第一项是内核的路径，第二项是root分区。你可以在这一行末尾附加任何的内核选项。</comment>
 # <i>nvsetenv boot-command boot</i> <comment># 对于MacOS来说设置成bye，对于Linux来说设置成boot</comment>
 </pre>
 
@@ -400,11 +400,11 @@ ide:0 boot2.img ramdebug edebugflags="logkprintf"
 
 [SECTION]
 Local HD -> Linux (Normal)
-ide:0 <keyval id="kernel-name"/> video=radeonfb:1024x768@70 root=/dev/hda3
+ide:0 <keyval id="kernel-name"/> video=radeonfb:1024x768@70 root=/dev/sda3
 
 [SECTION]
 Local HD -> Genkernel (Normal)
-ide:0 kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> root=/dev/ram0 real_root=/dev/hda3 init=/linuxrc initrd=initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/>
+ide:0 kernel-genkernel-ppc-<keyval id="kernel-gentoo"/> root=/dev/ram0 real_root=/dev/sda3 init=/linuxrc initrd=initramfs-genkernel-ppc-<keyval id="kernel-gentoo"/>
 </pre>
 
 <p>

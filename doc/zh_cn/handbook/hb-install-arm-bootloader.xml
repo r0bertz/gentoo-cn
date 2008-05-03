@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>做出您的选择</title>
@@ -105,18 +105,18 @@ NeTTrom能够以多种不同的方式启动内核，我们将介绍最常见的�
 </p>
 
 <pre caption="将内核安装到闪存">
-# <i>nwlilo /boot/zImage "root=/dev/hda2 video=cyber2000fb"</i>
+# <i>nwlilo /boot/zImage "root=/dev/sda2 video=cyber2000fb"</i>
 </pre>
 
 <p>
-另一种方式是将vmlinux ELF文件复制到ext2启动分区下，然后配置NeTTrom去将它载入。 当您复制好内核，就请重启机器，NeTTrom只能从它自己内部来配置。要中断自动引导过程，请按两次<c>*</c>键，然后再按回车键。下面的例子中，我们假定您的ext2启动分区位于<path>/dev/hda1</path>，主分区位于<path>/dev/hda3</path>。
+另一种方式是将vmlinux ELF文件复制到ext2启动分区下，然后配置NeTTrom去将它载入。 当您复制好内核，就请重启机器，NeTTrom只能从它自己内部来配置。要中断自动引导过程，请按两次<c>*</c>键，然后再按回车键。下面的例子中，我们假定您的ext2启动分区位于<path>/dev/sda1</path>，主分区位于<path>/dev/sda3</path>。
 </p>
 
 <pre caption="配置NeTTrom">
 NeTTrom> <i>load-defaults</i>
 NeTTrom> <i>setenv kernconfig fs</i>
-NeTTrom> <i>setenv kerndev /dev/hda1</i>
-NeTTrom> <i>setenv rootdev /dev/hda3</i>
+NeTTrom> <i>setenv kerndev /dev/sda1</i>
+NeTTrom> <i>setenv rootdev /dev/sda3</i>
 NeTTrom> <i>setenv kernfile /boot/vmlinux</i>
 NeTTrom> <i>setenv cmdappend [自定义内核命令行设置]</i>
 NeTTrom> <i>save-all</i>

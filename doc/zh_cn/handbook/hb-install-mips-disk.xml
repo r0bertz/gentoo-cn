@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.25 -->
+<!-- English CVS version: 1.26 -->
 <sections>
 
-<version>3.0</version>
-<date>2008-04-02</date>
+<version>3.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>块设备介绍</title>
@@ -205,7 +205,7 @@ First cylinder (0-50, default 0): <i>0</i>
 
 <ul>
   <li>
-    Cobalt固件要求<path>/dev/hda1</path>是一个格式化为<e>EXT2 Revision 0</e>的Linux分区。<e>不可以是EXT2 Revision 1!</e>（Cobalt BOOTROM只能理解EXT2r0）
+    Cobalt固件要求<path>/dev/sda1</path>是一个格式化为<e>EXT2 Revision 0</e>的Linux分区。<e>不可以是EXT2 Revision 1!</e>（Cobalt BOOTROM只能理解EXT2r0）
   </li>
   <li>
     前面说到的分区的根目录里必须有一个gzip压缩的ELF镜像，<path>vmlinux.gz</path>，它将会作为内核被加载
@@ -217,11 +217,11 @@ First cylinder (0-50, default 0): <i>0</i>
 </p>
 
 <p>
-我下面将假设你已经创建了<path>/dev/hda1</path>以便后来加载作为<path>/boot</path>分区。如果你希望把它作为<path>/</path>，你需要记得PROM的要求。
+我下面将假设你已经创建了<path>/dev/sda1</path>以便后来加载作为<path>/boot</path>分区。如果你希望把它作为<path>/</path>，你需要记得PROM的要求。
 </p>
 
 <p>
-好了，我们继续……要创建分区，你在命令行提示符处键入<c>fdisk /dev/hda</c>。你需要知道的主要命令有这些：
+好了，我们继续……要创建分区，你在命令行提示符处键入<c>fdisk /dev/sda</c>。你需要知道的主要命令有这些：
 </p>
 
 <ul>
@@ -252,7 +252,7 @@ First cylinder (0-50, default 0): <i>0</i>
 </ul>
 
 <pre caption="为磁盘分区">
-# <i>fdisk /dev/hda</i>
+# <i>fdisk /dev/sda</i>
 
 The number of cylinders for this disk is set to 19870.
 There is nothing wrong with that, but this is larger than 1024,
@@ -280,7 +280,7 @@ Warning: invalid flag 0x0000 of partition table 4 will be corrected by w(rite)
 
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 10.2 GB, 10254827520 bytes
+Disk /dev/sda: 10.2 GB, 10254827520 bytes
 16 heads, 63 sectors/track, 19870 cylinders
 Units = cylinders of 1008 * 512 = 516096 bytes
 
@@ -303,12 +303,12 @@ Last cylinder or +size or +sizeM or +sizeK (1-19870, default 19870): <i>+20M</i>
 <comment>（现在如果我们再打'p'，我们应该看到新分的区）</comment>
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 10.2 GB, 10254827520 bytes
+Disk /dev/sda: 10.2 GB, 10254827520 bytes
 16 heads, 63 sectors/track, 19870 cylinders
 Units = cylinders of 1008 * 512 = 516096 bytes
 
    Device Boot      Start         End      Blocks   Id  System
-/dev/hda1               1          40       20128+  83  Linux
+/dev/sda1               1          40       20128+  83  Linux
 
 <comment>（剩余的，我喜欢放到扩展分区里，所以我创建扩展分区）</comment>
 
@@ -357,19 +357,19 @@ Using default value 19870
 
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 10.2 GB, 10254827520 bytes
+Disk /dev/sda: 10.2 GB, 10254827520 bytes
 16 heads, 63 sectors/track, 19870 cylinders
 Units = cylinders of 1008 * 512 = 516096 bytes
 
 Device Boot      Start         End      Blocks      ID  System
-/dev/hda1               1          21       10552+  83  Linux
-/dev/hda2              22       19870    10003896    5  Extended
-/dev/hda5              22        1037      512032+  83  Linux
-/dev/hda6            1038        5101     2048224+  83  Linux
-/dev/hda7            5102        9165     2048224+  83  Linux
-/dev/hda8            9166       13229     2048224+  83  Linux
-/dev/hda9           13230       17293     2048224+  83  Linux
-/dev/hda10          17294       19870     1298776+  83  Linux
+/dev/sda1               1          21       10552+  83  Linux
+/dev/sda2              22       19870    10003896    5  Extended
+/dev/sda5              22        1037      512032+  83  Linux
+/dev/sda6            1038        5101     2048224+  83  Linux
+/dev/sda7            5102        9165     2048224+  83  Linux
+/dev/sda8            9166       13229     2048224+  83  Linux
+/dev/sda9           13230       17293     2048224+  83  Linux
+/dev/sda10          17294       19870     1298776+  83  Linux
 
 <comment>（注意第10分区，我们的交换分区仍然是类型83？）</comment>
 
@@ -382,19 +382,19 @@ Changed system type of partition 10 to 82 (Linux swap)
 
 Command (m for help): <i>p</i>
 
-Disk /dev/hda: 10.2 GB, 10254827520 bytes
+Disk /dev/sda: 10.2 GB, 10254827520 bytes
 16 heads, 63 sectors/track, 19870 cylinders
 Units = cylinders of 1008 * 512 = 516096 bytes
 
 Device Boot      Start         End      Blocks      ID  System
-/dev/hda1               1          21       10552+  83  Linux
-/dev/hda2              22       19870    10003896    5  Extended
-/dev/hda5              22        1037      512032+  83  Linux
-/dev/hda6            1038        5101     2048224+  83  Linux
-/dev/hda7            5102        9165     2048224+  83  Linux
-/dev/hda8            9166       13229     2048224+  83  Linux
-/dev/hda9           13230       17293     2048224+  83  Linux
-/dev/hda10          17294       19870     1298776+  82  Linux Swap
+/dev/sda1               1          21       10552+  83  Linux
+/dev/sda2              22       19870    10003896    5  Extended
+/dev/sda5              22        1037      512032+  83  Linux
+/dev/sda6            1038        5101     2048224+  83  Linux
+/dev/sda7            5102        9165     2048224+  83  Linux
+/dev/sda8            9166       13229     2048224+  83  Linux
+/dev/sda9           13230       17293     2048224+  83  Linux
+/dev/sda10          17294       19870     1298776+  82  Linux Swap
 
 <comment>（现在，我们写入新的分区表。）</comment>
 
@@ -456,7 +456,7 @@ Syncing disks.
 </table>
 
 <p>
-例如，要使启动分区（本例中的<path>/dev/hda1</path>）为ext2和根分区（本例中的<path>/dev/hda3</path>）为ext3,应该这样做：
+例如，要使启动分区（本例中的<path>/dev/sda1</path>）为ext2和根分区（本例中的<path>/dev/sda3</path>）为ext3,应该这样做：
 </p>
 
 <pre caption="在分区上应用文件系统">
@@ -469,7 +469,7 @@ Syncing disks.
 </p>
 
 <warn>
-如果你在Cobalt服务器上安装，记得<path>/dev/hda1</path>必须是<e>EXT2 revision 0</e>；所有其他文件系统（比如EXT2 revision 1、EXT3、ReiserFS、XFS、JFS还有其他的)<e>都不行！</e>你可以用这个命令来格式化：<c>mke2fs -r 0 /dev/hda1</c>。
+如果你在Cobalt服务器上安装，记得<path>/dev/sda1</path>必须是<e>EXT2 revision 0</e>；所有其他文件系统（比如EXT2 revision 1、EXT3、ReiserFS、XFS、JFS还有其他的)<e>都不行！</e>你可以用这个命令来格式化：<c>mke2fs -r 0 /dev/sda1</c>。
 </warn>
 
 </body>

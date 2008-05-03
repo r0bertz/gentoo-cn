@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 --> 
 <!-- $Header$ -->
-<!-- English CVS version: 1.3 -->
+<!-- English CVS version: 1.4 -->
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>做出您的选择</title>
@@ -110,20 +110,20 @@ yabootconfig/ybin在IBM机器上无法工作。你必须通过另外一种方式
 ## 也可以参考：/usr/share/doc/yaboot/examples可以得到一些配置的示例。
 
 ## 如果需要双重启动菜单，请添加以下一项或多项：
-## bsd=/dev/hdaX, macos=/dev/hdaY, macosx=/dev/hdaZ
+## bsd=/dev/sdaX, macos=/dev/sdaY, macosx=/dev/sdaZ
 
 ## 我们的bootstrap分区：</comment>
 
-boot=/dev/hda2
+boot=/dev/sda2
 
 <comment>## ofboot是Open Fireware指定bootstrap分区的方式。
 ## 如果没有定义过这个变量，则yaboot会在G5和某些G4机器上失效（除非
 ## 你将一些必要的参数传给mkofboot/ybin程序）。
-## hd:X表示/dev/sdaX（或/dev/hdaX）。</comment>
+## hd:X表示/dev/sdaX。</comment>
 
 ofboot=hd:2
 
-<comment>## hd:是open firmware称呼hda的方式</comment>
+<comment>## hd:是open firmware称呼sda的方式</comment>
 device=hd:
 
 delay=5
@@ -137,7 +137,7 @@ magicboot=/usr/lib/yaboot/ofboot
 ## ——用你的内核版本替换<keyval id="kernel-name"/> #################</comment>
 image=/boot/<keyval id="kernel-name"/>
   label=Linux
-  root=/dev/hda3
+  root=/dev/sda3
   partition=3
   read-only
 

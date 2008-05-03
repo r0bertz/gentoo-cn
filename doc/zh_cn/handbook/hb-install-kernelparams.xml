@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header$ -->
-<!-- English CVS version: 1.1 -->
+<!-- English CVS version: 1.2 -->
 <!DOCTYPE included SYSTEM "/dtd/guide.dtd">
 
 <included>
 
-<version>1</version>
-<date>2008-04-01</date>
+<version>2</version>
+<date>2008-05-04</date>
 
 <body>
 <p>
@@ -51,10 +51,10 @@
   这个选项加载对大部分SCSI控制器的支持。在大多数USB设备启动的时候
   也需要这个选项，因为USB设备使用内核中的SCSI子系统。
 </dd>
-<dt>hda=stroke</dt>
+<dt>sda=stroke</dt>
 <dd>
   这个选项允许你对整个硬盘进行分区，即使你的BIOS不能处理大硬盘。
-  此选项仅使用在使用旧BIOS的机器上。使用时把hda替换为需要这个选项
+  此选项仅使用在使用旧BIOS的机器上。使用时把sda替换为需要这个选项
   的设备。
 </dd>
 <dt>ide=nodma</dt>

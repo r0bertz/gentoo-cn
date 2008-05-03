@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.5 -->
+<!-- English CVS version: 1.6 -->
 
 <sections>
 
-<version>9.2</version>
-<date>2008-04-22</date>
+<version>9.3</version>
+<date>2008-05-04</date>
 
 <section>
 <title>硬件需求</title>
@@ -254,18 +254,18 @@ boot: <i>gentoo dopcmcia</i>
 </p>
 
 <pre caption="测试硬盘性能">
-# <i>hdparm -tT /dev/hda</i>
+# <i>hdparm -tT /dev/sda</i>
 </pre>
 
 <p>
-为了调整性能，你可以使用下面任何一个实例（或者自己试验），它们都是以<path>/dev/hda </path>作为示例的对象（请替换成您使用的硬盘）。
+为了调整性能，你可以使用下面任何一个实例（或者自己试验），它们都是以<path>/dev/sda </path>作为示例的对象（请替换成您使用的硬盘）。
 </p>
 
 <pre caption="调整硬盘性能">
 <comment>（激活DMA:）</comment>
-# <i>hdparm -d 1 /dev/hda</i>
+# <i>hdparm -d 1 /dev/sda</i>
 <comment>（或使用安全的性能选项：）</comment>
-# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/hda</i>
+# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/sda</i>
 </pre>
 
 </body>

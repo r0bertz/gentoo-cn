@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.10 -->
+<!-- English CVS version: 1.11 -->
 
 <sections>
 
-<version>6.0</version>
-<date>2008-04-02</date>
+<version>6.1</version>
+<date>2008-05-04</date>
 
 <section>
 <title>做出您的选择</title>
@@ -156,7 +156,7 @@
 <body>
 
 <p>
-理解GRUB最重要的在于熟悉它如何表述硬盘驱动器和分区。在GRUB中，您的Linux分区<path>/dev/hda1</path>（IDE硬盘）或者<path>/dev/sda1</path>（SATA/SCSI硬盘）分区将很可能都被称为<path>(hd0,0)</path>。请注意<path>hd0,0</path>两边的括号——它们是必须加上的。
+理解GRUB最重要的在于熟悉它如何表述硬盘驱动器和分区。在GRUB中，您的Linux分区<path>/dev/sda1</path>将很可能都被称为<path>(hd0,0)</path>。请注意<path>hd0,0</path>两边的括号——它们是必须加上的。
 </p>
 
 <p>
@@ -164,7 +164,7 @@
 </p>
 
 <p>
-假设您有一个硬盘是<path>/dev/hda</path>，一个cdrom播放器是<path>/dev/hdb</path>，一个刻录机是<path>/dev/hdc</path>，第二个硬盘是<path>/dev/hdd</path>，而且没有SCSI硬盘，那么<path>/dev/hdd7</path>将会被GRUB标识为<path>(hd1,6)</path>。听起来这很奇妙，而且它确实很奇妙，但正如我们即将见到的，即使您拥有许多的硬盘和分区，而且对GRUB的数字标识方案不甚了解，GRUB还是为您提供了一个tab补全机制，这将大大方便您的操作。
+假设您有一个硬盘是<path>/dev/sda</path>，还有两个分别是<path>/dev/sdb</path>和<path>/dev/sdc</path>，那么<path>/dev/hdd7</path>将会被GRUB标识为<path>(hd1,6)</path>。听起来这有些不合常理，确实如此。但正如我们即将见到的，GRUB为您提供了一个tab补全机制，这将大大方便您的操作。即使您拥有许多的硬盘和分区，而且对GRUB的数字标识方案不甚了解，也不用怕。
 </p>
 
 <p>
@@ -228,15 +228,15 @@ splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 title Gentoo Linux <keyval id="kernel-version"/>
 <comment># 内核镜像（或者操作系统）所在分区</comment>
 root (hd0,0)
-kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3
+kernel /boot/<keyval id="kernel-name"/> root=/dev/sda3
 
 title Gentoo Linux <keyval id="kernel-version"/> (rescue)
 <comment># 内核镜像（或者操作系统）所在分区</comment>
 root (hd0,0)
-kernel /boot/<keyval id="kernel-name"/> root=/dev/hda3 init=/bin/bb
+kernel /boot/<keyval id="kernel-name"/> root=/dev/sda3 init=/bin/bb
 
 <comment># 接下来的四行只有在您与Windows系统进行双启动的情况下才需要。</comment>
-<comment># 本例中，windows系统位于/dev/hda6。</comment>
+<comment># 本例中，windows系统位于/dev/sda6。</comment>
 title Windows XP
 rootnoverify (hd0,5)
 makeactive
@@ -250,7 +250,7 @@ splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
 title Gentoo Linux <keyval id="kernel-version"/>
 root (hd0,0)
-kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev
+kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda3 udev
 initrd /boot/<keyval id="genkernel-initrd"/>
 
 <comment># 只有在双启动的情况下才需要以下内容</comment>
@@ -273,11 +273,11 @@ chainloader +1
 </p>
 
 <p>
-如果您需要传递任何其他的参数给内核，简单地在内核命令后面加上它们就可以了。我们已经传递了一个参数（<c>root=/dev/hda3</c>或<c>real_root=/dev/hda3</c>），但您也可以加上其他的，例如我们前面讨论过的为framebuffer加上<c>video</c>和／或<c>vga</c>参数等等。
+如果您需要传递任何其他的参数给内核，简单地在内核命令后面加上它们就可以了。我们已经传递了一个参数（<c>root=/dev/sda3</c>或<c>real_root=/dev/sda3</c>），但您也可以加上其他的，例如我们前面讨论过的为framebuffer加上<c>video</c>和／或<c>vga</c>参数等等。
 </p>
 
 <p>
-如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>hdx=stroke</c>的参数。
+如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>sda=stroke</c>的参数。请把sda替换成需要这个参数的设备。
 </p>
 
 <p>
@@ -315,7 +315,7 @@ GRUB的开发者推荐使用<c>grub-install</c>。尽管如此，如果在某些
 </p>
 
 <pre caption="执行grub-install">
-# <i>grub-install --no-floppy /dev/hda</i>
+# <i>grub-install --no-floppy /dev/sda</i>
 </pre>
 
 <p>
@@ -363,7 +363,7 @@ grub&gt; <i>quit</i>            <comment>（退出GRUB shell）</comment>
 </pre>
 
 <note>
-如果您想将GRUB安装到某一个分区而不是硬盘主引导记录中，您需要调整<c>setup</c>命令，使其指向正确的分区。例如，如果您要将GRUB安装到<path>/dev/hda3</path>，对应的命令应该是<c>setup (hd0,2)</c>。但是只有少数用户需要这么做。
+如果您想将GRUB安装到某一个分区而不是硬盘主引导记录中，您需要调整<c>setup</c>命令，使其指向正确的分区。例如，如果您要将GRUB安装到<path>/dev/sda3</path>，对应的命令应该是<c>setup (hd0,2)</c>。但是只有少数用户需要这么做。
 </note>
 
 <p>
@@ -435,7 +435,7 @@ LILO，是LInuxLoader的简称，它是一个可靠且确实能担当重任的Li
 </note>
 
 <pre caption="示例/etc/lilo.conf">
-boot=/dev/hda             <comment># 将LILO安装到硬盘主引导扇区</comment>
+boot=/dev/sda             <comment># 将LILO安装到硬盘主引导扇区</comment>
 prompt                    <comment># 给用户选择其他引导项目的机会</comment>
 timeout=50                <comment># 引导默认引导项目前等待5秒钟</comment>
 default=gentoo            <comment># 当等待结束后引导“gentoo”项目</comment>
@@ -444,12 +444,12 @@ default=gentoo            <comment># 当等待结束后引导“gentoo”项目<
 image=/boot/<keyval id="kernel-name"/>
   label=gentoo            <comment># 我们为此引导项目起的名字</comment>
   read-only               <comment># 以只读root状态开始。此处不要改变！</comment>
-  root=/dev/hda3          <comment># 定位root文件系统</comment>
+  root=/dev/sda3          <comment># 定位root文件系统</comment>
 
 image=/boot/<keyval id="kernel-name"/>
   label=gentoo.rescue     <comment># 我们为此引导项目起的名字</comment>
   read-only               <comment># 以只读root状态开始。此处不要改变！</comment>
-  root=/dev/hda3          <comment># 定位root文件系统</comment>
+  root=/dev/sda3          <comment># 定位root文件系统</comment>
   append="init=/bin/bb"   <comment># 启动Gentoo的静态急救shell</comment>
 
 <comment># 给使用genkernel的用户的</comment>
@@ -457,12 +457,12 @@ image=/boot/<keyval id="genkernel-name"/>
   label=gentoo
   read-only
   root=/dev/ram0
-  append="init=/linuxrc ramdisk=8192 real_root=/dev/hda3 udev"
+  append="init=/linuxrc ramdisk=8192 real_root=/dev/sda3 udev"
   initrd=/boot/<keyval id="genkernel-initrd"/>
 
 <comment># 下边的两行只有在您与Windows系统进行双启动的情况下才需要</comment>
-<comment># 在本例中，Windows位于/dev/hda6</comment>
-other=/dev/hda6
+<comment># 在本例中，Windows位于/dev/sda6</comment>
+other=/dev/sda6
   label=windows
 </pre>
 
@@ -482,12 +482,12 @@ other=/dev/hda6
 image=/boot/<keyval id="kernel-name"/>
   label=gentoo
   read-only
-  root=/dev/hda3
+  root=/dev/sda3
   <i>append="video=vesafb:mtrr,ywrap,1024x768-32@85"</i>
 </pre>
 
 <p>
-如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>hdx=stroke</c>的参数。
+如果您使用的是2.6.7或更高版本的内核，并且您使用硬盘跳线来使主板的BIOS能正确处理大硬盘，那么在启动内核时您还需要附加<c>sda=stroke</c>的参数。请把sda替换成需要这个参数的设备。
 </p>
 
 <p>
