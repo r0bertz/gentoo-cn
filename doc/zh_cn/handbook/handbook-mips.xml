@@ -3,7 +3,7 @@
 
 <!-- $Header$ -->
 <!-- English CVS version: 1.123 -->
-<book link="/doc/zh_cn/handbook/handbook-mips.xml" lang="zh_cn" disclaimer="draft">
+<book lang="zh_cn">
 <title>Gentoo Linux/MIPS手册</title>
 
 <values>

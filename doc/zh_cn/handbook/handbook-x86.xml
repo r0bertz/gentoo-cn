@@ -4,7 +4,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.166 -->
 
-<book link="/doc/zh_cn/handbook/handbook-x86.xml" lang="zh_cn" disclaimer="draft">
+<book lang="zh_cn">
 <title>Gentoo Linux x86手册</title>
 
 <values>

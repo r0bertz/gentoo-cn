@@ -3,7 +3,7 @@
 
 <!-- $Header$ -->
 <!-- English CVS version: 1.70 -->
-<book link="/doc/zh_cn/handbook/handbook-arm.xml" lang="zh_cn" disclaimer="draft">
+<book lang="zh_cn">
 <title>Gentoo Linux ARM手册</title>
 
 <values>
