@@ -19,14 +19,13 @@
 </author>
 
 <abstract>
-这个是旧的Gentoo手册的替代文档。新的Gentoo手册安装架构不同而区分开了（差不多如此），因此就不在使用handbook.xml这个名字了。
-
+这个是旧的Gentoo手册的替代文档。新的Gentoo手册安装架构不同而区分开了（差不多如此），因此就不再使用handbook.xml这个名字了。
 </abstract>
 
 <license/>
 
 <version>1.1</version>
-<date>April 5, 2004</date>
+<date>2004-04-05</date>
 
 <chapter>
 <title>Gentoo Linux手册</title>
