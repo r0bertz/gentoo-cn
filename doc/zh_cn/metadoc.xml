@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE metadoc SYSTEM "/dtd/metadoc.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.210 -->
+<!-- English CVS version: 1.212 -->
 <metadoc lang="zh_cn" parent="/doc/en/metadoc.xml">
-  <version>1.132</version>
+  <version>1.134</version>
   <members>
     <lead>r0bertz</lead>
   </members>
@@ -176,6 +176,7 @@
     <file id="hb-install-x86_amd64-kernel">/doc/zh_cn/handbook/hb-install-x86+amd64-kernel.xml</file>
     <file id="hb-install-x86_amd64-medium">/doc/zh_cn/handbook/hb-install-x86+amd64-medium.xml</file>
     <file id="hb-install-blockdevices">/doc/zh_cn/handbook/hb-install-blockdevices.xml</file>
+    <file id="hb-install-bootconfig">/doc/en/handbook/hb-install-bootconfig.xml</file>
     <file id="hb-install-filesystems">/doc/zh_cn/handbook/hb-install-filesystems.xml</file>
     <file id="hb-install-kernelmodules">/doc/zh_cn/handbook/hb-install-kernelmodules.xml</file>
     <file id="hb-install-kernelparams">/doc/zh_cn/handbook/hb-install-kernelparams.xml</file>
@@ -246,7 +247,7 @@
     <file id="uml">/doc/en/uml.xml</file>
     <file id="java">/doc/en/java.xml</file>
     <file id="openafs">/doc/en/openafs.xml</file>
-    <file id="kde-config">/doc/zh_cn/kde-config.xml</file>
+    <file id="kde-config">/proj/zh_cn/desktop/kde/kde-config.xml</file>
     <file id="nano-basics-guide">/doc/zh_cn/nano-basics-guide.xml</file>
     <file id="shoutcast-config">/doc/en/shoutcast-config.xml</file>
     <file id="vdr-guide">/doc/zh_cn/vdr-guide.xml</file>
@@ -343,7 +344,7 @@
     <file id="metadoc-guide">/proj/en/gdp/doc/metadoc-guide.xml</file>
     <file id="hpc-howto">/doc/en/hpc-howto.xml</file>
     <file id="gnap-userguide">/proj/en/base/embedded/gnap-userguide.xml</file>
-    <file id="kde-split-ebuilds">/doc/en/kde-split-ebuilds.xml</file>
+    <file id="kde-split-ebuilds">/proj/en/desktop/kde/kde-split-ebuilds.xml</file>
     <file id="grub-error-guide">/doc/zh_cn/grub-error-guide.xml</file>
     <file id="usb-guide">/doc/zh_cn/usb-guide.xml</file>
     <file id="liveusb">/doc/zh_cn/liveusb.xml</file>
