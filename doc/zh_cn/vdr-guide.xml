@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.7 -->
+<!-- English CVS version: 1.9 -->
 
 <guide link="/doc/zh_cn/vdr-guide.xml" lang="zh_cn">
 <title>Gentoo Linux VDR指南</title>
@@ -22,6 +22,9 @@
 <author title="译者">
   <mail link="kunxi@kunxi.org">奚焜</mail>
 </author>
+<author title="译者">
+  <mail link="guanqun.lu@gmail.com">陆冠群</mail>
+</author>
 
 <abstract>
 本指南向您展示如何配置Gentoo Linux来支持DVB和VDR。
@@ -31,8 +34,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.4</version>
-<date>2007-01-02</date>
+<version>1.6</version>
+<date>2008-03-21</date>
 
 <chapter>
 <title>DVB简介</title>
@@ -188,7 +191,7 @@ input: TerraTec/qanu USB2.0 Highspeed DVB-T Receiver remote control as /class/in
 
 <pre caption="安装vdr-remote">
 # <i>emerge vdr-remote</i>
-# <i>emerge --config vdr-remote</i>
+# <i>eselect vdr-plugin enable remote</i>
 </pre>
 
 <p>
@@ -358,7 +361,7 @@ em8300模块需要根据卡的版本号作一些配置。
 
 <pre caption="安装软解压插件">
 # <i>emerge vdr-softdevice</i>
-# <i>emerge --config vdr-softdevice</i>
+# <i>eselect vdr-plugin enable softdevice</i>
 </pre>
 
 <p>
@@ -370,7 +373,7 @@ em8300模块需要根据卡的版本号作一些配置。
 </p>
 
 <note>
-如果您不希望采用一个独立的键盘布局来控制softdevice/shm的VDR，您可以用Matthias Schwarzott的<uri link="http://dev.gentoo.org/~zzam/remote.softdevice-shm.conf">devspace</uri>。复制上述文件到<path>/etc/vdr/remote.conf</path>，对其运行<c>chown vdr:vdr</c>使其能正常工作。</note>
+如果您不希望采用一个独立的键盘布局来控制VDR，您可以用Matthias Schwarzott的<uri link="http://dev.gentoo.org/~zzam/vdr_remote_conf/">devspace</uri>，其中包括适用于softdevice/shm和xineliboutput的文件，更多的正在添加中。复制上述文件到<path>/etc/vdr/remote.conf</path>，对其运行<c>chown vdr:vdr</c>使其能正常工作。</note>
 
 <p>
 继续<uri link="#channel_list">配置您的频道列表</uri>。
@@ -388,7 +391,7 @@ em8300模块需要根据卡的版本号作一些配置。
 
 <pre caption="安装vdr-xineliboutput">
 # <i>emerge vdr-xineliboutput</i>
-# <i>emerge --config vdr-xineliboutput</i>
+# <i>eselect vdr-plugin enable xineliboutput</i>
 </pre>
 
 <p>
@@ -482,7 +485,7 @@ $ <i>dvbscan -o vdr /usr/share/dvb/scan/dvb-t/de-Nuernberg &gt; /etc/vdr/channel
 
 <pre caption="安装并激活vdr-reelchannelscan">
 # <i>emerge vdr-reelchannelscan</i>
-# <i>emerge --config vdr-reelchannelscan</i>
+# <i>eselect vdr-plugin enable reelchannelscan</i>
 </pre>
 
 </body>
