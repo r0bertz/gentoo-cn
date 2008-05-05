@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.80 -->
+<!-- English CVS version: 1.81 -->
 
 <guide link="/doc/zh_cn/alsa-guide.xml" lang="zh_cn">
 <title>Gentoo Linux ALSA指南</title>
@@ -19,6 +19,9 @@
 <author title="译者">
   <mail link="kunxi@kunxi.org">奚焜</mail>
 </author>
+<author title="译者">
+  <mail link="guanqun.lu@gmail.com">陆冠群</mail>
+</author>
 
 <abstract>
 本文档可以帮助用户在Gentoo Linux上设置ALSA
@@ -28,8 +31,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>2.22</version>
-<date>2007-05-07</date>
+<version>2.23</version>
+<date>2008-03-05</date>
 
 <chapter>
 <title>简介</title>
@@ -52,7 +55,11 @@ ALSA的主要特性包括：高效地支持从消费类入门级声卡到专业�
 <body>
 
 <p>
-Gentoo的一个主要优势在于用户可以最大限度的控制如何安装和配置系统。Gentoo上的ALSA秉承了同样的原则。有两种方法可以使ALSA运行在您的系统上。我们将在下一章分别予以详细讨论。
+从历史上来说，Gentoo提供了两种方法可以使ALSA运行在您的系统上：<e>内核自带的</e>驱动和外部的<c>alsa-driver</c>软件包。这两种方案基本上完成的是同一项任务，这使得对于外部软件包的支持变得异常困难和耗时。Gentoo维护者决定不再继续对<c>alsa-driver</c>软件包进行支持，而是将他们的资源集中在Linux内核中的ALSA驱动部分。这份指南将只集中介绍如何通过在内核自带的驱动来配置ALSA。
+</p>
+
+<p>
+如果你仍然需要<c>alsa-driver</c>软件包，请发邮件至<mail link="alsa-bugs@gentoo.org">Gentoo ALSA维护团队</mail>，并告之为何在内核自带的驱动不能正常工作，记得包括具体的出错信息。
 </p>
 
 </body>
@@ -61,99 +68,12 @@ Gentoo的一个主要优势在于用户可以最大限度的控制如何安装�
 
 <chapter>
 <title>安装ALSA</title>
-<section>
-<title>可选</title>
-<body>
-
-<warn>
-下述方法是互斥的，您不能够将ALSA编入内核，同时使用<c>media-sound/alsa-driver</c>，
-</warn>
-
-<p>
-两个选项是:
-</p>
-
-<ol>
-  <li>
-    采用内核提供的ALSA。这也是我们推荐的方法。
-  </li>
-  <li>采用Gentoo的<c>media-sound/alsa-driver</c>软件包。</li>
-</ol>
-
-<p>
-内核自带的驱动和<c>alsa-driver</c>软件包可能有细微的差别；一方出现的特性和修复可能并没有加入到另一方。上游的开发者也意识到这一点，但是这两个驱动事实上是ALSA项目完全不同的开发分支；它们不完全一样。您应该知道它们有细微的不同，所以如果一个无法正常工作，就试试另一个吧！在我们作选择之前，让我们先看看各自的特点。
-</p>
-
-<p>
-如果您打算采用内核提供的ALSA，以下是优点和缺点：
-</p>
-
-<table>
-<tr>
-  <th>内核自带的ALSA</th>
-  <th>优点和缺点</th>
-</tr>
-<tr>
-  <th>+</th>
-  <ti>
-    不需要安装其他的软件包；内核已经集成了驱动。
-  </ti>
-</tr>
-<tr>
-  <th>+</th>
-  <ti>一揽子解决方案，不需要反复的emerge。</ti>
-</tr>
-<tr>
-  <th>-</th>
-  <ti>也许和<c>alsa-driver</c>使用的版本有些许不同。</ti>
-</tr>
-</table>
-
-<p>
-如果您采用<c>alsa-driver</c>，
-</p>
-
-<table>
-<tr>
-  <th>alsa-driver</th>
-  <th>优点和缺点</th>
-</tr>
-<tr>
-  <th>+</th>
-  <ti>也许是ALSA项目最新的驱动</ti>
-</tr>
-<tr>
-  <th>+</th>
-  <ti>对开发音频驱动会有帮助。</ti>
-</tr>
-<tr>
-  <th>-</th>
-  <ti>每一次重编内核都需要重新emerge <c>alsa-driver</c>。</ti>
-</tr>
-<tr>
-  <th>-</th>
-  <ti>需要关闭某些内核选性使其能正常工作。</ti>
-</tr>
-</table>
-
-</body>
-</section>
-<section>
-<title>所以……</title>
-<body>
-
-<p>
-如上所述，<c>alsa-driver</c>和内核自带的ALSA驱动的差别非常细微；考虑到易用性，我们建议您<e>首先</e>采用内核自带的驱动。在您向 <uri link="https://bugs.gentoo.org">Gentoo Bugzilla</uri> 提交任何和声音相关的问题之前，请先试着用<c>alsa-driver</c>重现它们，再提交缺陷报告。
-</p>
-
-</body>
-</section>
 <section id="lspci">
 <title>在您开始之前</title>
 <body>
 
 <p>
-无论您采用哪种方式，您必须要知道您的声卡用什么驱动。大多数情况下，声卡（板载和独立声卡）基于PCI总线，<c>lspci</c>将帮助您获取所需的信息。如果您没有安装<c>lspci</c>，请<c>emerge sys-apps/pciutils</c>。如果您使用的是USB声卡，<c>sys-apps/usbutils</c>的<c>lsusb</c><e>或许</e>有用。ISA声卡的用户，请试一下<c>sys-apps/isapnptools</c>。下列页面对使用ISA声卡的用户<e>也许</e>有所帮助：
+首先，您需要知道您的声卡用什么驱动。大多数情况下，声卡（板载和独立声卡）基于PCI总线，<c>lspci</c>将帮助您获取所需的信息。如果您没有安装<c>lspci</c>，请<c>emerge sys-apps/pciutils</c>。如果您使用的是USB声卡，<c>sys-apps/usbutils</c>的<c>lsusb</c><e>或许</e>有用。ISA声卡的用户，请试一下<c>sys-apps/isapnptools</c>。下列页面对使用ISA声卡的用户<e>也许</e>有所帮助：
 </p>
 
 <ul>
@@ -192,12 +112,8 @@ Gentoo的一个主要优势在于用户可以最大限度的控制如何安装�
 </body>
 </section>
 <section id="kernel">
-<title>采用内核提供的ALSA</title>
+<title>配置内核</title>
 <body>
-
-<p>
-如果您喜欢简洁，就选择这个方法。
-</p>
 
 <note>
 自从2005.0版，Gentoo Linux使用2.6系列作为默认的内核。请确认您的内核是2.6系列。以下方法并<e>不适用</e>于2.4内核。
@@ -278,75 +194,6 @@ USB Devices   ---&gt;
 
 </body>
 </section>
-<section id="alsa-driver">
-<title>采用ALSA驱动软件包</title>
-<body>
-
-<p>
-所以您决定采用<c>alsa-driver</c>的方法。让我们开始吧。为了保证只编译您的声卡驱动，我们要作一些小的调整。这并非必要，但是可以避免编译不需要的设备驱动。
-</p>
-
-<p>
-如果您不清楚您的声卡需要什么样的驱动，请参看本文的<uri link="#lspci">lspci</uri>部分。如果您知道驱动的名字（在此以<c>emu10k1</c>为例），编辑<path>/etc/make.conf</path>，加入变量<c>ALSA_CARDS</c>。
-</p>
-
-<pre caption="编辑/etc/make.conf，加入ALSA_CARDS">
-<comment>（对于一块声卡）</comment>
-ALSA_CARDS="emu10k1"
-<comment>（对于多块声卡，用空格分隔名字）</comment>
-ALSA_CARDS="emu10k1 via82xx"
-</pre>
-
-<p>
-如果您已经编译了内核，又希望使用<c>alsa-driver</c>，请在执行下一步之前确定下列条件，否则<c>alsa-driver</c>很有可能无法正常工作。下述代码提供了一种检查的方法。
-</p>
-
-<note>
-<c>genkernel</c> 可以前进至<uri link="#doc_chap2_pre6">安装alsa-driver</uri>, 他们的默认配置符合下列条件。
-</note>
-
-<ol>
-  <li>
-  <c>CONFIG_SOUND</c>被启用。（启用基本的声音支持）
-  </li>
-  <li>
-  <c>CONFIG_SOUND_PRIME</c>没有被启用。（内置的OSS支持被禁用）
-  </li>
-  <li>
-  <c>CONFIG_SND</c>没有被启用。（内置的ALSA支持被禁用）
-  </li>
-  <li>
-  <path>/usr/src/linux</path>指向使用ALSA的内核源代码。
-  </li>
-</ol>
-
-<pre caption=".config检查">
-<comment>（假设linux符号链接指向正确的内核源代码）</comment>
-# <i>cd /usr/src/linux</i>
-# <i>grep SOUND .config</i>
-<comment>（1.为真）</comment>
-CONFIG_SOUND=y
-<comment>（2.为真）</comment>
-CONFIG_SOUND_PRIME is not set
-# <i>grep SND .config</i>
-<comment>（并且3.为真）</comment>
-CONFIG_SND is not set
-</pre>
-
-<p>
-下一步就是键入魔咒……哦，不，不是abracadabra。
-</p>
-
-<pre caption="安装alsa-driver">
-# <i>emerge alsa-driver</i>
-</pre>
-
-<impo>
-请注意，由于先前的驱动会被删除，您必须在（重新）编译内核以后，运行<c>emerge alsa-driver</c>。您可以安装<c>module-rebuild</c>软件包来简化这个步骤。它会跟踪模块包，并为您重新编译它们。首先运行<c>module-rebuild populate</c>来产生列表，然后在每一次（重新）编译内核后，运行<c>module-rebuild rebuild</c>, 所有外置的模块都会重新编译。
-</impo>
-
-</body>
-</section>
 </chapter>
 
 <chapter>
@@ -364,7 +211,7 @@ CONFIG_SND is not set
 </pre>
 
 <note>
-如果您在<uri link="#kernel">内核</uri>里激活了ALSA,<e>并且</e>没有将其编译成模块，请前进至<uri link="#initscript">ALSA启动脚本</uri>部分。否则您需要配置ALSA。由<c>alsa-utils</c>提供的<c>alsaconf</c>使得这个过程相当容易。
+如果您<e>没有</e>将ALSA编译成模块，请前进至<uri link="#initscript">ALSA启动脚本</uri>部分。否则您需要配置ALSA。由<c>alsa-utils</c>提供的<c>alsaconf</c>使得这个过程相当容易。
 </note>
 
 </body>
@@ -601,6 +448,8 @@ Mixers:
 0: SigmaTel STAC9721/23
 </pre>
 
+<!-- TODO: remove this a few months after alsa-driver leaves the tree -->
+
 <p>
 其他用户碰到的常见问题是可怖的"Unknown symbol in module"错误。举例如下。
 </p>
@@ -676,8 +525,10 @@ snd: Unknown parameter `device_mode'
 </pre>
 
 <p>
-通常是一个叫<path>alsa</path>的文件包含了一行: <c>options snd device_mode=0666</c>。删除此行，重启alsasound服务应该能够解决问题。
+通常是一个叫<path>alsa</path>的文件包含了一行: <c>options snd device_mode=0666</c>。删除此行，重启<c>alsasound</c>服务应该能够解决问题。
 </p>
+
+<!-- End of removal notice -->
 
 </body>
 </section>
@@ -690,7 +541,7 @@ snd: Unknown parameter `device_mode'
 <body>
 
 <p>
-首先请确定<path>/etc/make.conf</path>有<c>midi</c> USE标记。如果没有，请加上它。您需要重新emerge任何使用了<c>midi</c>标记的ALSA软件包，比如<c>alsa-lib</c>，<c>alsa-utils</c>和<c>alsa-driver</c>。
+首先请确定<path>/etc/make.conf</path>有<c>midi</c> USE标记。如果没有，请加上它。您需要重新emerge任何使用了<c>midi</c>标记的ALSA软件包，比如<c>alsa-lib</c>和<c>alsa-utils</c>。
 </p>
 
 <p>
@@ -796,8 +647,7 @@ timidity需要一个SoundFont来播放声音。幸运的是ebuild会为您安装
 <body>
 
 <p>
-如果ALSA被编译为内核模块（或者您安装了<c>alsa-driver</c>），您可以同时在您的系统中使用多块声卡。您仅需要在<path>/etc/modules.d/alsa</path>里指定启动的顺序。此文件用驱动名来标记您的声卡。0是第一块卡，1是第二块卡，以此类推。这是一个有两块声卡系统的例子。 
- 
+如果ALSA被编译为内核模块，您可以同时在您的系统中使用多块声卡。您仅需要在<path>/etc/modules.d/alsa</path>里指定启动的顺序。此文件用驱动名来标记您的声卡。0是第一块卡，1是第二块卡，以此类推。这是一个有两块声卡系统的例子。
 </p>
 
 <pre caption="两块声卡的/etc/modules.d/alsa配置">
