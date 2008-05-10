@@ -122,7 +122,7 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 <comment>（当建立manifest的时候，确保PORTDIR_OVERLAY设置成CVS目录。）</comment>
 # ebuild foo-1.0.ebuild digest
 # ${EDITOR} metadata.xml
-<comment>你不再需要一个文件目录了。</comment>
+<comment>你不一定再需要files目录了。</comment>
 # cvs add foo-1.0.ebuild metadata.xml files
 <comment>（不要忘记创建ChangeLog文件——查看echangelog的man帮助。）</comment>
 # echangelog "New ebuild for foo. Ebuild written by me. Fixes bug #XXXXXX."
