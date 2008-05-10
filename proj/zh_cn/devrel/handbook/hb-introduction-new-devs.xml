@@ -5,10 +5,10 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.13 -->
 <sections>
-<version>1.0.3</version>
-<date>2007-11-01</date>
+<version>1.0.4</version>
+<date>2008-05-03</date>
 
 <section>
 <title>使用CVS</title>
@@ -119,14 +119,17 @@ CVSROOT=":ext:you@cvs.gentoo.org:/var/cvsroot"
 # cd foo
 <comment>（最好将你正在进行中的ebuild放置在CVS树之外的overlay中。）</comment>
 # cp /path/to/foo-1.0.ebuild ./
-<comment>（不要忘记创建ChangeLog文件——查看echangelog的man帮助。）</comment>
 <comment>（当建立manifest的时候，确保PORTDIR_OVERLAY设置成CVS目录。）</comment>
 # ebuild foo-1.0.ebuild digest
-# cvs add foo-1.0.ebuild ChangeLog files
+# ${EDITOR} metadata.xml
+<comment>你不再需要一个文件目录了。</comment>
+# cvs add foo-1.0.ebuild metadata.xml files
+<comment>（不要忘记创建ChangeLog文件——查看echangelog的man帮助。）</comment>
+# echangelog "New ebuild for foo. Ebuild written by me. Fixes bug #XXXXXX."
 </pre>
 
 <p>
-记得加入包含维护者信息的metadata.xml文件。查看<uri link="?part=2&amp;chap=4">Gentoo Metadata</uri>章节以获得更多的信息。
+查看<uri link="?part=2&amp;chap=4">Gentoo Metadata</uri>章节以获得更多的信息。
 </p>
 
 <p>
