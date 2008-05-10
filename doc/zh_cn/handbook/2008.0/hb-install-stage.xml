@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.3 -->
+<!-- English CVS version: 1.5 -->
 
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.2</version>
+<date>2008-05-11</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -79,8 +79,12 @@ ls: /mnt/cdrom/stages: No such file or directory
 现在我们来解开你所选择的stage tarball，使用的是<c>tar</c>这个工具。请确认你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>参数代表<e>Extract</e>（解压缩），<c>v</c>参数代表<e>Verbose</e>（可选参数，添加该参数后可以看到在解开tar包的过程中发生了些什么），<c>j</c>参数代表<e>使用bzip2解压缩</e>，<c>p</c>参数代表<e>Preserve permissiions</e>（保留权限），而<c>f</c>参数代表我们想要解开的是一个文件而不是来自于标准输入的数据。在接下来的一个例子里，我们将解开stage tarball <path><keyval id="stage3"/></path>。请确保用你的stage文件名来替换我们给出的tarball文件名。
 </p>
 
-<pre caption="解开stage tarball">
+<pre caption="解开stage tarball" test="not(func:keyval('arch')='PPC64') and not(func:keyval('arch')='PPC')">
 # <i>tar xvjpf /mnt/cdrom/stages/<keyval id="stage3"/></i>
+</pre>
+
+<pre caption="解开stage tarball" test="func:keyval('arch')='PPC64' or func:keyval('arch')='PPC'">
+# <i>tar xvjpf /mnt/cdrom/stages/ppc&lt;32 or 64&gt;/<keyval id="stage3"/></i>
 </pre>
 
 <p>

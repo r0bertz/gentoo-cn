@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.135 -->
+<!-- English CVS version: 1.136 -->
 <book lang="zh_cn">
 <title>Gentoo Linux HPPA手册</title>
 
@@ -11,10 +11,10 @@
  <key id="/boot">/dev/sda2</key>
  <key id="kernel-version">2.6.23-gentoo-r8</key>
  <key id="kernel-name">kernel-2.6.23-gentoo-r8</key>
- <key id="min-cd-name">install-hppa-minimal-2008.0_beta1.iso</key>
+ <key id="min-cd-name">install-hppa-minimal-2008.0_beta2.iso</key>
  <key id="online-book">handbook-hppa.xml</key>
  <key id="release-dir">releases/hppa/2008.0_beta1/hppa2.0/</key>
- <key id="stage3">stage3-hppa2.0-2008.0_beta1.tar.bz2</key>
+ <key id="stage3">stage3-hppa2.0-2008.0_beta2.tar.bz2</key>
  <key id="profile">default-linux/hppa/2008.0</key>
  <key id="CFLAGS">-march=2.0 -O2 -pipe</key>
 </values>
@@ -178,8 +178,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.3</version>
-<date>2008-05-04</date>
+<version>9.4</version>
+<date>2008-05-11</date>
 
 <part>
 <title>安装Gentoo</title>

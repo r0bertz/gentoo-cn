@@ -4,15 +4,15 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.23 -->
+<!-- English CVS version: 1.24 -->
 <sections>
 
 <abstract>
 Linux内核是每个发行版的核心。本章节将解释如何配置您自己的内核。
 </abstract>
 
-<version>6.1</version>
-<date>2008-04-22</date>
+<version>6.2</version>
+<date>2008-05-11</date>
 
 <section>
 <title>时区</title>
@@ -233,6 +233,10 @@ Processor type and features  ---&gt;
 <note>
 在多核心系统中，处理器的数目相当于核心的数目。
 </note>
+
+<p test="func:keyval('arch')='x86'">
+如果你有多于4GB的内存，你需要启用"High Memory Support (64G)"。
+</p>
 
 <p>
 如果您使用USB输入装置（比如键盘或者鼠标）那么不要忘记支持它们：

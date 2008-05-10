@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 <guide disclaimer="draft" lang="zh_cn">
 <title>Gentoo 2008.0无网络安装手册</title>
 
@@ -22,8 +22,8 @@ Gentoo 2008.0无网络安装手册的目的是将文档集中在一个条理分�
 
 <license/>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-05-11</date>
 
 <chapter>
 <title>Gentoo Linux 2008.0无网络安装手册</title>
@@ -80,8 +80,8 @@ Gentoo Linux 2008.0无网络安装手册提供了以下几种语言版本：
     <uri link="handbook-sparc.xml">sparc</uri>,
     <uri link="handbook-amd64.xml">amd64</uri>,
     <uri link="handbook-ppc.xml">ppc</uri>,
-    <uri link="handbook-ppc64.xml">ppc64</uri>,
-    <uri link="handbook-hppa.xml">hppa</uri>
+    <uri link="handbook-ppc64.xml">ppc64</uri><!--,
+    <uri link="handbook-hppa.xml">hppa</uri>-->
   </ti>
 </tr>
 <tr>
@@ -92,8 +92,8 @@ Gentoo Linux 2008.0无网络安装手册提供了以下几种语言版本：
     <uri link="handbook-sparc.xml?full=1">sparc</uri>,
     <uri link="handbook-amd64.xml?full=1">amd64</uri>,
     <uri link="handbook-ppc.xml?full=1">ppc</uri>,
-    <uri link="handbook-ppc64.xml?full=1">ppc64</uri>,
-    <uri link="handbook-hppa.xml?full=1">hppa</uri>
+    <uri link="handbook-ppc64.xml?full=1">ppc64</uri><!--,
+    <uri link="handbook-hppa.xml?full=1">hppa</uri>-->
   </ti>
 </tr>
 <tr>
@@ -104,8 +104,8 @@ Gentoo Linux 2008.0无网络安装手册提供了以下几种语言版本：
     <uri link="handbook-sparc.xml?style=printable&amp;full=1">sparc</uri>,
     <uri link="handbook-amd64.xml?style=printable&amp;full=1">amd64</uri>,
     <uri link="handbook-ppc.xml?style=printable&amp;full=1">ppc</uri>,
-    <uri link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri>,
-    <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>
+    <uri link="handbook-ppc64.xml?style=printable&amp;full=1">ppc64</uri><!--,
+    <uri link="handbook-hppa.xml?style=printable&amp;full=1">hppa</uri>-->
   </ti>
 </tr>
 </table>
