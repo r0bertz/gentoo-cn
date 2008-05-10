@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- $Header$ -->
+<!-- English CVS Version: 1.52 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+<guide link="/doc/zh_cn/gentoo-kernel.xml" lang="zh_cn" disclaimer="draft">
+<title>Gentoo Linux内核指南</title>
+<author title="作者">
+  <mail link="swift@gentoo.org">Sven Vermeulen</mail>
+</author>
+<author title="贡献者">
+  <mail link="lostlogic@gentoo.org">Brandon Low</mail>
+</author>
+<author title="编辑">
+  <mail link="dsd@gentoo.org">Daniel Drake</mail>
+</author>
+<author title="编辑">
+  <mail link="carl@gentoo.org">Carl Anderson</mail>
+</author>
+<author title="编辑">
+  <mail link="peesh@gentoo.org">Jorge Paulo</mail>
+</author>
+<author title="编辑">
+  <mail link="bennyc@gentoo.org">Benny Chuang</mail>
+</author>
+<author title="编辑">
+  <mail link="greg_g@gentoo.org">Gregorio Guidi</mail>
+</author>
+<author title="编辑">
+  <mail link="fox2mike@gentoo.org">Shyam Mani</mail>
+</author>
+<author title="编辑">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者">
+  <mail link="guanqun.lu@gmail.com">陆冠群</mail>
+</author>
+
+<abstract>
+这份文档概述了由Gentoo通过Portage树提供的所有内核代码。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.20</version>
+<date>2008-02-03</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<body>
+
+<p>
+和Gentoo Linux的其他方面一样，Gentoo内核团队的哲学在于给您，用户，尽可能多的选择的自由。如果你查看一下<c>emerge -s 
+sources</c>的输出结果，你会看到有一大堆的内核供你选择。在这份文档中，我将试着简单地描述每个Gentoo设计的补丁集，同样，我们也会解释其他我们提供给你的内核代码包。
+</p>
+
+<p>
+Linux 2.4由Willy Tarreau维护。Linus Torvalds（Linux最初的创造者）将2.4分支的维护交给了Marcelo 
+Tosatti，而这时，Linus开始开发更新颖的2.6内核代码树。Marcelo的工作是将2.4内核变得稳定和安全，他做得很好，而且已经将维护交给了Willy。请注意：2.4内核代码树现在只接受有关于安全和bug的修正。实际的开发在2.6内核代码树中进行。
+</p>
+
+<p>
+Linux 2.6由Andrew Morton维护，他和Linus 
+Torvalds紧密合作，来开发一个快速的、强大的、有丰富特性的Linux内核。开发以一种不可想象的速度在进行着，而且这个内核代码树现在已经非常成熟。
+</p>
+
+<p>
+一些很不寻常的系统架构并不完全和Linux 2.6兼容，而一些用户更加偏爱经过反复使用和测试的2.4内核。尽管这样，请注意：Linux 
+2.4现在不再开发——只有bug和安全方面的修正才会被接受到新的发布中。如果可以的话，我们建议你升级到Linux 2.6。你可能会发现<uri 
+link="/doc/zh_cn/migration-to-2.6.xml">迁移文档</uri>很有用。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>支持的内核包</title>
+<section>
+<title>genkernel</title>
+<body>
+
+<p>
+<c>Genkernel</c>是一个用来自动侦测硬件并且自动配置内核的内核工具集。对于那些不习惯于手动编译内核的用户，这个包值得推荐。
+</p>
+
+<p>
+想获得更多的信息，请阅读<uri link="/doc/en/genkernel.xml">Gentoo Linux 
+Genkernel指南</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>通常目的：gentoo-sources</title>
+<body>
+
+<p>
+对于大多数用户而言，我们推荐<c>gentoo-sources</c>内核。自从2005.0发布之后，Gentoo 
+Linux将2.6的内核作为默认的内核。除非你很特殊地在使用2.4的profile，在<e>大多数</e>的架构上，<c>gentoo-sources</c>将是2.6的内核。
+</p>
+
+<p>
+<c>gentoo-sources</c>是一个建立在Linux 
+2.6之上的内核，简要地安装了解决安全问题的补丁、内核bug的补丁和用来提高不常见系统架构兼容性的补丁。Linux 
+2.6是现在官方的稳定内核树，而且开发劲头很迅速。为了获得最高的性能、最好的硬件支持和巨大的特性集，我们推荐2.6内核而不是更老的2.4内核。
+</p>
+
+<p>
+2.4的<c>gentoo-sources</c>内核补丁和包含在2.6中的补丁类似，另外添加了一些增加功能和提高性能的补丁。
+</p>
+
+<p>
+<c>gentoo-sources</c>包吸收了大多数Gentoo内核团队的资源。由一组优秀的开发者呈现给你，比如你可以信赖的内核黑客Greg 
+Kroah-Hartman（他是udev的维护者而且对官方Linux内核中的USB和PCI子系统负责）。
+</p>
+
+</body>
+</section>
+<section>
+<title>适合服务器的内核包：hardened-sources和rsbac-sources</title>
+<body>
+
+<p>
+<c>hardened-sources</c>基于官方的Linux内核而且定位于运行在服务器系统上的Gentoo用户。它提供了各种Gentoo 
+Hardened子项目的补丁（比如对于<uri 
+link="http://www.nsa.gov/selinux/">LSM/SELinux</uri>和<uri 
+link="http://grsecurity.net">grsecurity</uri>的支持），另外它还有稳定性和安全性方面的提高。和<c>gentoo-sources</c>一样，它有2.6和2.4两个版本。请查阅<uri>http://www.gentoo.org/proj/en/hardened/</uri>以获得更多的信息。
+</p>
+
+<p>
+<c>rsbac-sources</c>包含了可以使用基于规则集的访问控制的补丁（<uri 
+link="http://www.rsbac.org">RSBAC</uri>），而且有2.4和2.6两种不同的版本供使用。该软件包由Gentoo 
+Hardened的一个子项目<uri link="/proj/en/hardened/rsbac/">RSBAC项目</uri>来维护。
+</p>
+
+<impo>
+这些内核提供了强大的补丁来增强安全性。在你使用他们之前请先阅读<uri link="/proj/en/hardened/">文档</uri>。
+</impo>
+
+</body>
+</section>
+<section>
+<title>与架构相关的内核</title>
+<body>
+
+<p>
+<c>hppa-sources</c>，<c>mips-sources</c>，<c>sh-sources</c>，<c>sparc-sources</c>和<c>xbox-sources</c>，正如他们的名字所揭示的一样，都通过安装补丁的方式来使得在某个特定的架构上运行地最好。他们同样也包含一些来自其他补丁集（前面和后面所提到的补丁集）的补丁用以支持特定的硬件和相关的特性。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>不支持的内核包</title>
+<section>
+<body>
+
+<p>
+现在我要简要地介绍<path>sys-kernel/*-sources</path>之中的一些内核，你可以使用<c>emerge -s 
+sources</c>命令来查看。让我们按照字母的先后顺序来介绍。出于礼貌和敬意，我们提供这些内核，但是Gentoo团队并不支持这些众多的补丁集。
+</p>
+
+</body>
+</section>
+<section>
+<title>git-sources</title>
+<body>
+
+<p>
+<c>git-sources</c>包跟踪上游开发内核树每天的快照。如果你对内核开发或者内核测试感兴趣，你应该运行这个内核。你可以将bug汇报至<uri 
+link="http://bugme.osdl.org/">Linux内核bug跟踪</uri>或者LKML（Linux内核邮件列表）。
+</p>
+
+</body>
+</section>
+<section>
+<title>mm-sources</title>
+<body>
+
+<p>
+<c>mm-sources</c>建立在<c>vanilla-sources</c>之上，并且包含了Andrew 
+Morton的补丁集。他们包括了将要被接收到官方内核去的实验性的和具有前瞻性的特性（或者由于他们使得你的电脑冒火了而遭到拒绝）。他们总是在快速地发展而且在每一周之间都改变地相当剧烈；内核的黑客使用他们来作为测试新事物的平台。
+</p>
+
+<p>
+如果你乐于挑战并且认为<c>vanilla-sources</c>只适合弱者使用，那么可以尝试<c>mm-sources</c>。请注意该内核是高度实验性的，而且并不保证可以预期地工作。
+</p>
+
+</body>
+</section>
+<section>
+<title>openvz-sources</title>
+<body>
+
+<p>
+OpenVZ是一个建立在Linux之上的服务器虚拟化解决方案。OpenVZ在单个的物理服务器上创建隔离的、安全的虚拟化私人服务器（VPS）和虚拟化环境来支持更好的服务器利用率并且保证用户程序之间不发生冲突。想获得更多的信息，请查看<uri>http://www.openvz.org</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>tuxonice-sources</title>
+<body>
+
+<p>
+<c>tuxonice-sources</c>（先前是<c>suspend2-sources</c>）安装过gentoo-sources的补丁和<uri 
+link="http://www.tuxonice.net">TuxOnIce</uri>的补丁（后者是suspend-to-disk的一个改进的实现，以前被称为<e>suspend2</e>）。
+</p>
+
+<p>
+该内核推荐给那些经常需要挂起他们的笔记本电脑然后在其他地方继续工作的笔记本电脑用户。
+</p>
+
+</body>
+</section>
+<section>
+<title>usermode-sources</title>
+<body>
+
+<p>
+<c>usermode-sources</c>是User Mode 
+Linux的内核补丁。该内核允许Linux运行在Linux之上，而该Linux又可以运行在另外的Linux之上，如此无穷尽也。User Mode 
+Linux用来测试和提供虚拟化的服务器支持。想获得更多关于该项贡献提高了Linux的稳定性和扩展性的信息，请查看<uri>http://user-mode-linux.sourceforge.net</uri>。 
+</p>
+
+<p>
+想了解更多关于UML和Gentoo的信息，请阅读<uri link="/doc/en/uml.xml">Gentoo UML指南</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>vanilla-sources</title>
+<body>
+
+<p>
+下一个内核代码（作为Linux用户的大多数可能熟悉）是<c>vanilla-sources</c>。这是发布在<uri>http://www.kernel.org/</uri>的官方内核代码。请注意我们并不对该内核安装补丁——这是给那些希望运行完全没有修改过的Linux内核的用户使用的。我们建议您使用<c>gentoo-sources</c>。
+</p>
+
+<p>
+和<c>gentoo-sources</c>类似，在这个包下面可以找到两个内核的版本：2.4和2.6。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>以前提供过的内核包</title>
+<section>
+<title>aa-sources</title>
+<body>
+
+<p>
+<c>aa-sources</c>曾经是一个由很多补丁修改的内核。上游的维护者已经停止发布内核补丁集，因为这个包已经过期，所以它被移出了。
+</p>
+
+</body>
+</section>
+<section>
+<title>alpha-sources</title>
+<body>
+
+<p>
+<c>alpha-sources</c>曾经是一个为了提高对于Alpha架构的硬件兼容性而打过补丁的2.4内核。这些开发的补丁现在已经被收入到主线内核中。Alpha用户现在可以运行任何近期的内核，而没有必要去安装其他的补丁。
+</p>
+
+</body>
+</section>
+<section>
+<title>ck-sources</title>
+<body>
+
+<p>
+<c>ck-sources</c>是Con 
+Kolivas的内核补丁集。该补丁集主要用来提高系统的灵敏性和交互性并且能够通过调节来支持不同的工作负载（从服务器的到桌面的）。这个补丁集十分成熟，已经通过了多次的开发和调整。每次发布的重点在于稳定性和安全性。更多的信息可以在<uri>http://kernel.kolivas.org</uri>上获得，支持可以在<c>irc.oftc.net</c>上的<c>#ck</c>频道获得。
+</p>
+
+</body>
+</section>
+<section>
+<title>development-sources</title>
+<body>
+
+<p>
+<c>development-sources</c>，来自kernel.org的官方的2.6内核，可以在<c>vanilla-sources</c>包中找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>gentoo-dev-sources</title>
+<body>
+
+<p>
+<c>gentoo-dev-sources</c>，一个安装过bug补丁，安全补丁和稳定性补丁的2.6内核，现在可以在<c>gentoo-sources</c>包下找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>grsec-sources</title>
+<body>
+
+<p>
+<c>grsec-sources</c>内核代码安装最新的grsecurity更新（grsecurity版本2.0及以上），在其他安全相关的补丁中，该补丁包括了对于PaX的支持。由于grsecurity补丁包含在<c>hardened-sources</c>软件包中，该软件包现在已经不在Portage树中了。
+</p>
+
+</body>
+</section>
+<section>
+<title>hardened-dev-sources</title>
+<body>
+
+<p>
+<c>hardened-dev-sources</c>内核现在可以在<c>hardened-sources</c>包中找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>rsbac-dev-sources</title>
+<body>
+
+<p>
+<c>rsbac-dev-sources</c>内核现在可以在<c>rsbac-sources</c>包中找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>selinux-sources</title>
+<body>
+
+<p>
+<c>selinux-sources</c>，一个包括了许多安全增强的2.4内核，已经被2.6内核中的关于安全性的开发所废弃。SELinux的功能可以在<c>hardened-sources</c>包中找到。
+</p>
+
+</body>
+</section>
+<section>
+<title>uclinux-sources</title>
+<body>
+
+<p>
+<c>uclinux-sources</c>针对没有MMU的CPU和嵌入式设备。要了解更多的信息，请查看<uri>http://www.uclinux.org</uri>。由于缺少安全补丁和可用来测试的硬件，该软件包不再出现在Portage树中。
+</p>
+
+</body>
+</section>
+<section>
+<title>win4lin-sources</title>
+<body>
+
+<p>
+<c>win4lin-sources</c>是安装过补丁的内核代码，用以支持用户层的win4lin工具，该工具允许Linux用户几乎是原速地运行很多Microsoft 
+Windows (TM)程序。由于安全的问题，该软件包被移出。
+</p>
+
+</body>
+</section>
+</chapter>
+</guide>
