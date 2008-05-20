@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/zh_cn/gentoo-x86-quickinstall.xml,v 1.2 2008/03/01 15:41:38 r0bertz Exp $ -->
-<!-- English CVS version: 1.80 -->
+<!-- $Header: $ -->
+<!-- English CVS version: 1.81 -->
 
 <guide lang="zh_cn">
 <title>Gentoo Linux x86快速安装指南</title>
@@ -31,8 +31,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>21</version>
-<date>2008-01-01</date>
+<version>22</version>
+<date>2008-05-02</date>
 
 <chapter>
 <title>介绍</title>
@@ -82,7 +82,7 @@ MemTotal:       509248 kB
 <body>
 
 <p>
-使用<c>fdisk</c>或者<c>cfdisk</c>创建分区规划。至少需要一个交换分区（类别为82）和一个Linux分区（类别为83）。下面是我们的手册选用的方案，创建包括一个<path>/boot</path>分区，一个交换分区和一个主分区。设备名可能是<path>/dev/sda</path>或者<path>/dev/hda</path>，前者为SATA或SCSI硬盘，后者为IDE硬盘。
+使用<c>fdisk</c>或者<c>cfdisk</c>创建分区规划。至少需要一个交换分区（类别为82）和一个Linux分区（类别为83）。下面是我们的手册选用的方案，创建包括一个<path>/boot</path>分区，一个交换分区和一个主分区。将<path>/dev/sda</path>替换为你自己的磁盘。
 </p>
 
 <pre caption="创建分区">
