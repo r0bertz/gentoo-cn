@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mainpage SYSTEM "/dtd/guide.dtd">
+<!-- English CVS version: 1.4 -->
+<mainpage>
+<title>联系Gentoo Linux</title>
+
+<author title="作者">
+  <mail link="wolf31o2@gentoo.org">Chris Gianelloni</mail>
+</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+
+<abstract>
+怎么联系Gentoo
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.1</version>
+<date>2006-08-01</date>
+
+<chapter>
+<title>我应该与谁联系？</title>
+<section>
+<title>目录</title>
+<body>
+
+<ul>
+  <li><uri link="#intro">介绍</uri></li>
+  <li><uri link="#pr">公共关系/活动</uri></li>
+  <li><uri link="#www">网站管理员</uri></li>
+  <li><uri link="#trustees">Gentoo基金会</uri></li>
+</ul>
+
+</body>
+</section>
+
+<section id="intro">
+<title>介绍</title>
+<body>
+
+<p>
+“Gentoo”意味着很多东西。它是一个基于社区的Linux发行版。它是一个关于软件包管理的哲学。它又是一个非营利组织。本文试图让您与Gentoo内部正确的小组取得联系，以便您的信件能得到尽快处理。
+</p>
+
+<p>
+对于即将举行的活动、访谈、一般问题的相关信息，或者仅仅是想找出关于Gentoo和Gentoo产品的更多信息，您可能会希望同Gentoo<uri link="#pr">公共关系</uri>项目中的某个人交谈。
+</p>
+
+<p>
+对于架设在<c>gentoo.org</c>域上的任何其它Gentoo网站，以及相关的信息，您可能会希望同Gentoo的<uri link="#www">网站管理员</uri>交谈。
+</p>
+
+<p>
+对于Gentoo基金会的相关信息，或者任何涉及Gentoo知识产权、商标和版权的事，您可能会希望跟Gentoo基金会的<uri link="#trustees">董事会</uri>交谈。
+</p>
+
+<p>
+如果您正在寻求关于Gentoo Linux或者任何其它Gentoo产品或项目方面的支持，那么您应该前往我们的<uri link="/main/en/support.xml">支持</uri>页面获取进一步信息。
+</p>
+
+</body>
+</section>
+
+<section id="pr">
+<title>公共关系</title>
+<body>
+
+<p>
+Gentoo<uri link="/proj/en/pr/">公共关系</uri>项目，和它的<uri link="/proj/en/pr/events/">活动</uri>子项目负责宣传有关Gentoo的消息，以及协调Gentoo出席社区内部的各种贸易展出和展览会。
+</p>
+
+<p>
+公关团队最可能是您希望联系的团队，因为他们是进入Gentoo内部运作的大门。如果您正在寻找一篇文章的材料，寻访某个人，或者仅仅是想了解更多关于Gentoo以及它提供了什么，请留步公关团队。联系公关团队，只要发一封电子邮件到<mail>pr@gentoo.org</mail>然后团队中的某个人会尽快跟您联系。
+</p>
+
+</body>
+</section>
+
+<section id="www">
+<title>网站管理员</title>
+<body>
+
+<p>
+维护Gentoo的web站点是一项艰巨可怖的任务。Gentoo拥有一个专注的网站管理员团队，我们的站点在他们的维持下显得引人注目并且处于持续更新状态。如果您有关于任何一个Gentoo web站点的问题或意见，那么这个团队就是您要寻找的。可以通过发送电子邮件到<mail>www@gentoo.org</mail>与他们取得联系。
+</p>
+
+</body>
+</section>
+
+<section id="trustees">
+<title>Gentoo基金会董事会</title>
+<body>
+
+<p>
+<uri link="/foundation/en/">Gentoo基金会</uri>是一个非营利组织，它体现为Gentoo知识产权的保护者。董事会是由选举产生的Gentoo美国法人监理。如果您的问题是法律性质的，那么您应该发送电子邮件到<mail>trustees@gentoo.org</mail>然后会有个董事会成员尽快回复您。
+</p>
+
+</body>
+</section>
+
+</chapter>
+</mainpage>
