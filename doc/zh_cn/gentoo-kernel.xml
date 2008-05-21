@@ -38,10 +38,8 @@
 </author>
 
 <abstract>
-这份文档概述了由Gentoo通过Portage树提供的所有内核代码。
+这份文档概述了由Gentoo的Portage树提供的所有内核代码。
 </abstract>
-
-
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 -->
@@ -56,7 +54,7 @@
 <body>
 
 <p>
-和Gentoo Linux的其他方面一样，Gentoo内核团队的哲学在于给您，用户，尽可能多的选择的自由。如果你查看一下<c>emerge -s 
+和Gentoo Linux的其他方面一样，Gentoo内核团队的哲学在于给用户您尽可能多的选择的自由。如果你查看一下<c>emerge -s 
 sources</c>的输出结果，你会看到有一大堆的内核供你选择。在这份文档中，我将试着简单地描述每个Gentoo设计的补丁集，同样，我们也会解释其他我们提供给你的内核代码包。
 </p>
 
