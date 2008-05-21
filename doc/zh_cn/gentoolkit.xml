@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.30 --> 
+<!-- English CVS version: 1.31 --> 
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/gentoolkit.xml" lang="zh_cn">
@@ -91,7 +91,7 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-一个程序可能有的任何的文档（除了man页）被存储在<path>/usr/share/doc/gentoolkit-[版本]/[程序名]/</path>里面。
+一个程序可能有的所有文档（除了man页）都被存储在了<path>/usr/share/doc/gentoolkit-[版本]/[程序名]/</path>里面。
 </p>
 
 </body>
@@ -109,11 +109,11 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 </p>
 
 <note>
-目前为止不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你也会见到每个命令都有一个缩写，比如说你可以使用<c>b</c>来代替<c>belongs</c>。
+目前为止不是所有的<c>equery --help</c>列出的特性都被实现了。没有被实现的特性都被很清楚地提到了。你会看到每一个命令都有一个缩写形式，比如说你可以使用<c>b</c>来代替<c>belongs</c>。
 </note>
 
 <note>
-注意，现在如果equery的输出是通过管道发送的，它会改变输出信息的格式。通过管道输出的格式是为了更容易被其他工具解析，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要调用equery的脚本，你注意这一点。
+请注意，如果equery的输出是通过管道发送的，它会改变输出信息的格式。通过管道输出的格式是为了更容易被其他工具解析，但是你可以通过加入<c>--no-pipe</c>选项来关掉它。如果你写了需要调用equery的脚本，你应该注意这一点。
 </note>
 
 </body>
@@ -123,10 +123,10 @@ Gentoolkit包含了一整套有用的工具来帮助你管理你的软件包和�
 <body>
 
 <p>
-<c>equery</c>也提供了寻找一个文件来自于哪个软件包的功能，使用<c>belongs</c>命令（或只是<c>b</c>）。
+<c>equery</c>也提供了寻找一个文件来自于哪个软件包的功能，你可以通过使用<c>belongs</c>命令（或只是<c>b</c>）来实现这一功能。
 </p>
 
-<pre caption="查找哪个ebuild安装某个给定文件">
+<pre caption="查找某个给定的文件是通过哪一个ebuild安装的">
 # <i>equery belongs /usr/bin/audacious</i>
 [ Searching for file(s) /usr/bin/audacious in *... ]
 media-sound/audacious-1.1.2 (/usr/bin/audacious)
@@ -153,17 +153,17 @@ media-sound/audacious-1.1.2 (/usr/bin/audacious)
 </pre>
 
 <p>
-请记住，如果你在安装完成后改变了配置文件，这些可能会被报告为"not good"。
+请记住，如果你在安装完成后修改了配置文件，这些文件可能会被报告为"not good"。
 </p>
 
 </body>
 </section>
 <section>
-<title>列出所有依赖的……软件包</title>
+<title>列出所有依赖的软件包</title>
 <body>
 
 <p>
-<c>equery</c>能够列出直接依赖某个软件包的所有包。我们能够简单地使用<c>depends</c>函数来做这件事： 
+<c>equery</c>能够列出直接依赖于某个软件包的所有软件包。我们只要通过使用<c>depends</c>函数就能使用这个功能了： 
 </p>
 
 <pre caption="查找依赖于pygtk的软件包">
@@ -183,7 +183,7 @@ x11-libs/vte-0.11.11-r1
 <body>
 
 <p>
-<c>equery</c>可以向我们给出一个特定软件包的依赖关系图表。这个依赖关系图表向我们展示了指定软件包的所有一系列直接或间接相关软件包的列表
+<c>equery</c>可以向我们给出一个特定软件包的依赖关系图表。这个依赖关系图表向我们列出了指定软件包的所有一系列直接或间接依赖的软件包的列表
 </p>
 
 <pre caption="cdrtools的依赖关系树">
@@ -207,7 +207,7 @@ Displaying dependencies for app-cdr/cdrtools-2.01_alpha37
 </pre>
 
 <p>
-比如说，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，事实上<c>cdrtools</c>的ebuild里写的是需要virtual/libc的，而不是sys-libs/glibc，但是在例子里提到的系统上sys-libs/glibc提供了virtual/libc。
+在这个例子中，cdrtools直接依赖于glibc，而linux-headers是cdrtools的间接依赖。请记住输出的信息也包括一些虚拟的软件包的信息。在上面的例子中，事实上<c>cdrtools</c>的ebuild里写的是需要virtual/libc的，而不是sys-libs/glibc，但是在这个例子中，系统中的sys-libs/glibc提供了virtual/libc。
 </p>
 
 </body>
@@ -260,7 +260,7 @@ app-portage/gentoolkit-0.2.0
 <body>
 
 <p>
-如果你想要在你的系统上查找使用某个特定USE标记的软件包，<c>equery</c>的<c>hasuse</c>的函数能够帮助你。
+如果你想要在你的系统上查找使用某个特定USE标记的软件包，<c>equery</c>的<c>hasuse</c>函数能够帮助你。
 </p>
 
 <pre caption="查找使用firefox这个USE标记的软件包">
