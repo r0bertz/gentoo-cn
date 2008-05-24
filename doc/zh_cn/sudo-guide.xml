@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!--$Header$-->
-<!--English CVS version 1.11-->
+<!--English CVS version 1.12-->
 
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
@@ -29,7 +29,7 @@
 <chapter>
 <title>关于 Sudo</title>
 <section>
-<title>授予权限</title>
+<title>权限的授予</title>
 <body>
 
 <p>
@@ -129,7 +129,7 @@ swift  localhost = /usr/bin/emerge, /usr/bin/ebuild, /usr/sbin/emerge-webrsync
 </pre>
 
 <p>
-可以更精确的设定命令，而不是仅仅光秃秃的一个命令。这样可以限制某一命令的一些选项的使用。在sudoers文件中，<c>sudo</c>工具容许在路径名或命令行参数中使用shell风格的通配符，但它们并非正则表达式。
+可以更精确的设定命令，而不是仅仅光秃秃的一个命令。这样可以限制某一命令的一些选项的使用。在sudoers文件中，<c>sudo</c>工具容许在路径名或命令行参数中使用shell风格的通配符。但是要注意，这里不支持正则表达式作为参数。
 </p>
 
 <p>
