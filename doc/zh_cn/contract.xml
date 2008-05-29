@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE mainpage SYSTEM "/dtd/guide.dtd">
+<!-- English CVS version: 1.13 -->
+
+<mainpage>
+<title>Gentoo社群契约</title>
+
+<author title="作者">
+  The Gentoo Project
+</author>
+<author title="编辑">
+  <mail link="curtis119@gentoo.org">Curtis Napier</mail>
+</author>
+<author title="译者">
+  <mail link="tysnoo@gmail.com">叶宝泰</mail>
+</author>
+
+<abstract>
+本文包含对Gentoo社区的一份承诺，是关于Gentoo软件的自由使用权、Gentoo开发过程的开放性以及我们回馈给自由软件社区的反馈信息。
+</abstract>
+
+<license/>
+
+<version>1.10</version>
+<date>2006-04-30</date>
+
+<chapter>
+<title>Gentoo社群契约</title>
+<section>
+<body>	
+
+<p>
+这篇社群契约的目的在于明确描述Gentoo项目开发团队的整体开发政策和标准。本文的部分内容来自<uri link="http://www.debian.org/social_contract">Debian社群契约</uri>。这些内容总体上跟原来很相似，有些部分经过澄清和补充，还有些部分我们认为是多余的被删除了。欢迎您批评指正。请将意见发送到我们的<mail link="gentoo-dev@gentoo.org">gentoo-dev@gentoo.org</mail>邮件列表。
+</p>
+
+</body>
+</section>
+<section>
+<title>Gentoo是什么？</title>
+<body>
+
+<p>
+Gentoo本身是自由知识的一份汇集。文中所指的“知识”可以定义为涉及到操作系统及其组成要素相关的概念或领域的文档和元数据，以及许多开发人员贡献给Gentoo项目的<uri link="http://www.fsf.org/philosophy/free-sw.html">自由软件</uri>。
+</p>
+
+<p>
+Gentoo——操作系统，是来自上述“知识”的基本概念。一个Gentoo操作系统应当满足自建主机系统的要求。换句话说，这种操作系统应能够通过使用前面提到的工具和元数据从零开始构建自己。如果一个结合官方Gentoo项目的产品不满足这些要求，那么这个产品就不符合作为一个Gentoo操作系统。
+</p>
+
+<p>
+一张官方的Gentoo项目清单列于<uri link="http://www.gentoo.org/proj/en/metastructure/projects.xml">Gentoo元架构</uri>下。一个Gentoo项目不需要为了被官方承认而去制作一个Gentoo操作系统。
+</p>
+
+</body>
+</section>
+<section>
+<title>Gentoo是并且将始终是自由软件</title>
+<body>
+
+<p>
+我们将以自由软件、元数据或文档的方式发布我们对Gentoo的贡献，内容遵循GNU通用公共许可证版本2（或更新，我们酌情决定）或知识共享-署名-相同方式共享版本2（或更新，我们酌情决定）。任何对Gentoo的外来贡献（以可自由发布的源代码、二进制文件、元数据或文档的形式）都可能被纳入Gentoo，只要我们在法律上有权这样做。然而，除非遵守GNU通用公共许可证、GNU宽通用公共许可证、知识共享-署名-相同方式共享或者被开源促进会（<uri link="http://www.opensource.org/licenses/index.html">OSI</uri>）认可的其它许可证，否则Gentoo绝不会<e>依赖</e>于任何零碎的软件或元数据。
+</p>
+
+<note>
+我们正在考虑延伸上述条款，要求所有Gentoo的核心组件必须遵守被OSI<e>和</e>自由软件基金会（<uri link="http://www.gnu.org/">FSF</uri>）认可的许可证之一。
+</note>
+
+</body>
+</section>
+<section>
+<title>我们将回馈自由软件社区</title>
+<body>
+
+<p>
+我们会跟自由软件的作者建立联系并尽可能与他们合作。我们会向那些作品被我们系统收录的“上游”作者提交bug修补、改进、用户需求，等等。我们还将为<e>我们</e>对Gentoo所作的贡献，以及我们对Gentoo用到的外来资源所做的任何改进或变更（不论是以补丁、“sed tweaks”或是其它什么的形式），做出清晰的文档。我们确信如果对我们的改进和变更做了清晰的文档和解释，它们对于更广泛的自由软件社区就会显得更加富有意义。因为不是每个人都有时间或能力去理解包含在补丁或优化自身中平白的变更信息。
+</p>
+
+</body>
+</section>
+<section>
+<title>我们绝不隐瞒问题</title>
+<body>
+
+<p>
+我们会让我们的<uri link="http://bugs.gentoo.org/">bug报告数据库</uri>对公众视野一直保持开放；用户在线提交的报告会立即的出现在其他人的视线内。
+</p>
+
+<p>
+例外情况是当我们收到安全相关或开发者相关的，要求在某个最终期限之前不要公开的信息时。
+</p>
+
+</body>
+</section>
+</chapter>
+</mainpage>
