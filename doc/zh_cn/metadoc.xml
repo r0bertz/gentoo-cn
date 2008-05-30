@@ -290,7 +290,7 @@
     <file id="doc-policy">/proj/en/gdp/doc/doc-policy.xml</file>
     <file id="doc-tipsntricks">/proj/en/gdp/doc/doc-tipsntricks.xml</file>
     <file id="handbook-release">/proj/en/gdp/doc/handbook-release.xml</file>
-    <file id="about">/main/en/about.xml</file>
+    <file id="about">/main/zh_cn/about.xml</file>
     <file id="philosophy">/main/en/philosophy.xml</file>
     <file id="contract">/main/en/contract.xml</file>
     <file id="contact">/main/en/contact.xml</file>
