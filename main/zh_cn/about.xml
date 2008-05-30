@@ -4,7 +4,7 @@
 <!-- English CVS version: 1.39 -->
 
 <mainpage>
-<title>About Gentoo</title>
+<title>关于Gentoo</title>
 <author title="作者">
   <mail link="drobbins@gentoo.org">Daniel Robbins</mail>
 </author>
@@ -57,15 +57,15 @@ Gentoo是一个基于Linux或FreeBSD的免费操作系统，它能为几乎任�
 </p>
 
 <p>
-得益于一种称为Portage的技术，Gentoo能成为理想的安全服务器、开发工作站、专业桌面、游戏系统、嵌入式解决方案，或者别的东西——无论你需要它成为什么样子。由于它近乎无限的适应性，我们把Gentoo称作<b>元</b>发行版。
+得益于一种称为Portage的技术，Gentoo能成为理想的安全服务器、开发工作站、专业桌面、游戏系统、嵌入式解决方案或者别的东西——你想让它成为什么，它就可以成为什么。由于它近乎无限的适应性，我们把Gentoo称作<b>元</b>发行版。
 </p>
 
 <p>
-当然，Gentoo的意义不仅仅在于它所提供的这份软件。它是围绕着一个发行版建立起来的社区，由300多名开发人员和数以千记的用户共同驱动。发行版项目为用户提供各种途径来享用Gentoo：文档、基础设施（邮件列表、站点、论坛……）、版本发布工程、软件移植、质量保证、安全跟进、强化（hardening），等等。
+当然，Gentoo的意义不仅仅在于它所提供的软件。它是围绕着一个发行版建立起来的社区，由300多名开发人员和数以千记的用户共同驱动。发行版项目为用户提供各种途径来享用Gentoo：文档、基础设施（邮件列表、站点、论坛……）、版本发布工程、软件移植、质量保证、安全跟进、强化（hardening），等等。
 </p>
 
 <p>
-为了商讨和协助Gentoo的全球开发，每年推选出一个<uri link="/proj/en/council/">7人议会</uri>，对Gentoo项目中的全球性问题、方针政策和发展进步做出决定。
+为了商讨和协助Gentoo的全局开发，每年推选出一个<uri link="/proj/en/council/">7人议会</uri>，对Gentoo项目中的全局性问题、方针政策和发展进步做出决定。
 </p>
 
 </body>
@@ -75,7 +75,7 @@ Gentoo是一个基于Linux或FreeBSD的免费操作系统，它能为几乎任�
 <body>
 
 <p>
-<b>Portage</b>是Gentoo的核心，履行许多关键的职责。其一，Portage是Gentoo的<e>软件发行</e>系统。Gentoo下要获取最新的软件，打一个命令：<c>emerge --sync</c>。这个命令告诉Portage从Internet更新你本地的“Portage树”。本地Portage树包含一份完整的脚本收集，Portage用以创建和安装最新的Gentoo软件包。当前，我们的Portage树中拥有<uri link="http://packages.gentoo.org/categories">超过10000个软件包</uri>，软件包更新和新软件包仍在<uri link="http://packages.gentoo.org">持续加入中</uri>。
+<b>Portage</b>是Gentoo的核心，履行许多关键的职责。其一，Portage是Gentoo的<e>软件发行</e>系统。Gentoo下要获取最新的软件，打一个命令：<c>emerge --sync</c>。这个命令告诉Portage从网上更新你本地的“Portage树”。本地Portage树包含一份完整的脚本集合，Portage以之创建和安装最新的Gentoo软件包。当前，我们的Portage树中拥有<uri link="http://packages.gentoo.org/categories">超过10000个软件包</uri>，软件包更新和新软件包<uri link="http://packages.gentoo.org">每时每刻都在加入中</uri>。
 </p>
 
 <p>
