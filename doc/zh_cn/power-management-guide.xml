@@ -2,8 +2,8 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header:$--> 
-<!--English CVS version: 1.35-->
-<guide link="/doc/en/power-management-guide.xml" lang="zh_cn">
+<!--English CVS version: 1.36-->
+<guide link="/doc/zh_cn/power-management-guide.xml" lang="zh_cn">
 <title>电源管理指导</title>
 
 <author title="作者">
@@ -30,7 +30,7 @@
 <license/>
 
 <version>1.39</version>
-<date>2008-01-31</date>
+<date>2008-06-02</date>
 
 <chapter>
 <title>介绍</title>

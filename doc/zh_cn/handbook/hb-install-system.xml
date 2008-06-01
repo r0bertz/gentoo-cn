@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.110 -->
+<!-- English CVS version: 1.111 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 安装并配置完stage3以后，你就会有一个可用的Gentoo基本系统了。这一章将教你如何达到这一状态。
 </abstract>
 
-<version>9.1</version>
-<date>2008-04-14</date>
+<version>9.2</version>
+<date>2008-06-02</date>
 
 <section>
 <title>Chroot</title>
@@ -196,6 +196,10 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyv
 <pre test="func:keyval('arch')='AMD64'" caption="切换到non-multilib profile">
 # <i>ln -snf /usr/portage/profiles/default/linux/amd64/2008.0/no-multilib /etc/make.profile</i>
 </pre>
+
+<note>
+子profile <c>developer</c>是专为Gentoo Linux开发任务而准备的，而<e>不是</e>用来帮助构建一般性的开发环境的。
+</note>
 
 </body>
 </subsection>

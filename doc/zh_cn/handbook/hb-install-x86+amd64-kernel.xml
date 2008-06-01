@@ -4,15 +4,15 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.24 -->
+<!-- English CVS version: 1.25 -->
 <sections>
 
 <abstract>
 Linux内核是每个发行版的核心。本章节将解释如何配置您自己的内核。
 </abstract>
 
-<version>6.2</version>
-<date>2008-05-11</date>
+<version>6.3</version>
+<date>2008-06-02</date>
 
 <section>
 <title>时区</title>
@@ -148,9 +148,6 @@ Processor type and features ---&gt;
 现在进入<c>File Systems</c>并且选择您使用的文件系统。请<e>不要</e>把它们编译成模块，否则您的Gentoo系统将不能挂载您的分区。同时您也要启用<c>Virtual memory</c>和<c>/proc file system</c>的支持。
 </p>
 
-</body>
-<body test="func:keyval('arch')='x86'">
-
 <pre caption="选择需要的文件系统">
 File systems ---&gt;
   Pseudo Filesystems ---&gt;
@@ -165,43 +162,14 @@ File systems ---&gt;
   &lt;*&gt; Second extended fs support
   &lt;*&gt; XFS filesystem support
 </pre>
-
-</body>
-<body test="func:keyval('arch')='AMD64'">
-
-<pre caption="选择需要的文件系统">
-File systems ---&gt;
-  Pseudo Filesystems ---&gt;
-    [*] /proc file system support
-    [*] Virtual memory file system support (former shm fs)
-
-<comment>#-#-#-#-#  choice  #-#-#-#-#
-（依照你系统的需要启用下面所列出的一个或是多个选项）</comment>
-  &lt;*&gt; Reiserfs support
-  &lt;*&gt; Ext3 journalling file system support
-  &lt;*&gt; JFS filesystem support
-  &lt;*&gt; Second extended fs support
-  &lt;*&gt; XFS filesystem support
-</pre>
-
-</body>
-<body>
 
 <p>
 如果您在使用PPPoE接入Interne或者您在使用拨号的调制解调器，您需要下面的选项：
 </p>
 
-<pre caption="选择PPPoE驱动" test="func:keyval('arch')='AMD64'">
+<pre caption="选择PPPoE驱动">
 Device Drivers ---&gt;
   Networking Support ---&gt;
-    &lt;*&gt; PPP (point-to-point protocol) support
-    &lt;*&gt;   PPP support for async serial ports
-    &lt;*&gt;   PPP support for sync tty ports
-</pre>
-
-<pre caption="选择PPPoE驱动" test="func:keyval('arch')='x86'">
-Device Drivers ---&gt;
-  Networking support ---&gt;
     &lt;*&gt; PPP (point-to-point protocol) support
     &lt;*&gt;   PPP support for async serial ports
     &lt;*&gt;   PPP support for sync tty ports

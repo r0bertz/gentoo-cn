@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.14 -->
+<!-- English CVS version: 1.16 -->
 
 <guide link="/doc/zh_cn/vi-guide.xml" lang="zh_cn">
 <title>学习vi──备忘单方法</title>
@@ -24,7 +24,7 @@
 </abstract>
 
 <version>1.1.7</version>
-<date>2005-07-21</date>
+<date>2008-06-02</date>
 
 <chapter>
 <title>新手上路</title>
