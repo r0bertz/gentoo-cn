@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.41 -->
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+<guide link="/doc/zh_cn/java.xml" lang="zh_cn" disclaimer="draft">
+<title>Gentoo Java指南</title>
+
+<author title="作者">
+ <mail link="nichoj@gentoo.org">Joshua Nichols</mail>
+</author>
+<author title="作者">
+ <mail link="karltk@gentoo.org">Karl Trygve Kalleberg</mail>
+</author>
+<author title="编辑">
+ <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+<author title="译者"> 
+  <mail link="foo@bar.com">谭继鹏</mail> 
+</author>
+
+<abstract>
+这篇指南会向您介绍Java，并且说明如何在Gentoo Linux中使用Java。
+</abstract>
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>0.16</version>
+<date>2008-01-01</date>
+
+<chapter>
+<title>什么是JAVA</title>
+<section>
+<title>简介</title>
+<body>
+
+<p>
+Java是Sun 
+Microsystems开发的一门面向对象的程序语言，可以在不用重新编译的前提下运行在不同的平台上，当然也可以被编译成本地程序，良好的移植性和内存垃圾回收是Java受欢迎的主要原因。Java编译器会将代码转换成Java字节码作为中间层来使JRE（Java运行环境）具有独立平台运行的特性。
+</p>
+
+<p>
+为了运行Java字节码， 
+必须首先安装JRE（Java运行环境）。JRE会提供核心库，一个独立平台的Java虚拟机和浏览器插件。JDK（Java开发工具）则集成了编程所开发需的工具，例如字节码编译器和调试器。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>在你开始之前</title>
+<section>
+<title>已经安装</title>
+<body>
+
+<p>
+如果已经安装过Java，不论是任何版本都请参照<uri 
+link="/proj/en/java/java-upgrade.xml">Java升级指南</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>全新安装</title>
+<body>
+
+<p>
+全新安装不需要其它准备工作。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>安装虚拟机</title>
+<section>
+<title>选择</title>
+<body>
+
+<p>
+Gentoo提供了多种运行环境（JRE）和开发工具（JDK）。我们现有的选择是：
+</p>
+
+<table>
+<tr>
+  <th>提供商</th>
+  <th>JDK</th>
+  <th>JRE</th>
+</tr>
+<tr>
+  <ti>The Blackdown Java Kit</ti>
+  <ti>dev-java/blackdown-jdk</ti>
+  <ti>dev-java/blackdown-jre</ti>
+</tr>
+<tr>
+  <ti>Sun's Java Kit</ti>
+  <ti>dev-java/sun-jdk</ti>
+  <ti>dev-java/sun-jre-bin</ti>
+</tr>
+<tr>
+  <ti>The IBM Java Kit</ti>
+  <ti>dev-java/ibm-jdk-bin</ti>
+  <ti>dev-java/ibm-jre-bin</ti>
+</tr>
+<tr>
+  <ti>BEA WebLogic's J2SE Development Kit</ti>
+  <ti>dev-java/jrockit-jdk-bin</ti>
+</tr>
+</table>
+
+
+<!--
+
+TODO: list free implementations? 
+
+note about not drop-in replacements
+
+kaffe/sablevm/gcj/jamvm 
+
+-->
+<p>
+默认安装的Java JDK／JRE 1.4是Blackdown提供的，它是完全免费的。
+</p>
+
+<p>
+Sun，IBM和BEA的JRE／JDK运行一般会快一些，但是在下载和安装之前，你需要做更多的工作，比如接受许可认证（IBM需要你先注册用户）。
+</p>
+
+</body>
+</section>
+<section>
+<title>安装JRE／JDK</title>
+<body>
+
+<p>
+你可以使用<c>emerge virtual/jdk</c>来安装profile默认的JDK。你也可以使用<c>emerge 
+virtual/jre</c>安装profile默认的JRE。
+</p>
+
+<p>
+Sun近期重新制作了一个更适合Linux的JDK／JRE许可认证。从Java 1.5开始，用户可以在不做任何额外工作的前提下，免费下载JDK／JRE。
+</p>
+
+<note>
+如果你要安装JDK，就不用在安装JRE，因为JRE是JDK的一部分。
+</note>
+
+</body>
+</section>
+<section>
+<title>安装获取受限制的虚拟机</title>
+<body>
+
+<p>
+正如刚才所说，在安装某些JDK和JRE前你需要做一些额外的工作。首先emerge你需要的软件包，之后ebuild会告诉你在哪里可以下载所需的文件。
+</p>
+
+<p>
+把需要的软件包放在<path>/usr/portage/distfiles</path>。完成后重新emerge安装JRE／JDK。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>配置你的虚拟机</title>
+<section>
+<title>简介</title>
+<body>
+
+<p>
+Gentoo支持安装多个JDK或者JRE并且不会造成任何冲突。
+</p>
+
+<p>
+使用<c>java-config</c>工具，你可以更改系统设置（root用户）。普通用户可以使用<c>java-config</c>改变个人设置。
+</p>
+
+<note>
+你也可以使用<e>eselect</e>来改变系统和用户的虚拟机。参照<c>eselect java-vm help</c>。
+</note>
+
+</body>
+</section>
+<section>
+<title>设定默认虚拟机</title>
+<body>
+
+<p>
+运行<c>java-config --list-available-vms</c>会显示在你机器上现有的JRE和JDK。如下例：
+</p>
+
+<pre caption="显示可用虚拟机">
+# <i>java-config --list-available-vms</i>
+The following VMs are available for generation-2:
+1)      Blackdown JDK 1.4.2.03 [blackdown-jdk-1.4.2]
+2)      Blackdown JRE 1.4.2.03 [blackdown-jre-1.4.2]
+3)      Blackdown 32bit JRE 1.4.2.03 [emul-linux-x86-java-1.4.2]
+4)      Sun 32bit JRE 1.5.0.08 [emul-linux-x86-java-1.5]
+5)      Kaffe 1.1.7 [kaffe]
+*)      Sun JDK 1.5.0.08 [sun-jdk-1.5]
+</pre>
+
+<p>
+<e>*</e>标志出了你现在正在使用的虚拟机（系统虚拟机或者用户虚拟机）括号（<e>[]</e>）中的名字代表这个虚拟机的ID或者handle。你可以使用handle或ID来设置系统虚拟机：java-config --set-system-vm。下面是一个更改系统VM的例子。
+</p>
+
+<pre caption="设定系统虚拟机">
+<comment>（通过handle（推荐））</comment>
+# <i>java-config --set-system-vm blackdown-jdk-1.4</i>
+现在将会使用blackdown-jdk-1.4做为你的generation-2系统VM
+<comment>（通过ID）</comment>
+# <i>java-config --set-system-vm 6</i>
+Now using sun-jdk-1.5 as your generation-2 system JVM
+</pre>
+
+<p>
+作为一个普通用户，你可以使用<c>java-config --set-user-vm</c>。
+</p>
+
+<note>
+你不用再<c>source profile</c>来使用户／系统虚拟机的改动起效。
+</note>
+
+</body>
+</section>
+<section id="preferred-vm">
+<title>首选虚拟机</title>
+<body>
+
+<p>
+当安装Java软件包，虚拟机会在需要时被切换。
+</p>
+
+<p>
+因为有很多的不同的虚拟机可以选择，我们没有足够的资源去测试和确认所有的软件包都能在上面正常工作。所以请确定所有的软件包都成功安装。我们为每个平台都定制了一份<e>默认的／受支持的虚拟机</e>列表，你可以在<path>/usr/share/java-config-2/config/jdk-defaults.conf</path>文件中找到。当你在安装Java软件包时，如果emerge检测到该列表中的某个虚拟机已经安装，它会自动使用该虚拟机，而不是system-vm。
+</p>
+
+<p>
+有时需要在安装软件时切换虚拟机。例如，system-vm设定为1.4，当你安装需要1.5版的软件包时，虚拟机会被暂时切换。
+</p>
+
+<p>
+当然，Gentoo给予了用户充分的选择权利，你可以重写在<path>/etc/java-config-2/build/jdk.conf</path>中默认的配置，完全控制使用哪一个虚拟机。如下例：
+</p>
+
+<pre caption="/etc/java-config-2/build/jdk.conf实例">
+<comment>我一直倾向使用sun-jdk，例如，sun-jdk-1.4，sun-jdk-1.5等等。</comment>
+*=sun-jdk
+</pre>
+
+<pre caption="/etc/java-config-2/build/jdk.conf实例">
+<comment>除了明确需要1.3或1.4版虚拟机，我一直使用sun-jdk-1.5</comment>
+*=sun-jdk-1.5
+</pre>
+
+<pre caption="/etc/java-config-2/build/jdk.conf实例">
+<comment># 对如1.3版优先使用sun-jdk 1.4。当sun-jdk 1.4不可用时，用ibm-jdk-bin替代
+#对于1.4版，使用blackdown-jdk，1.5版使用sun-jdk </comment>
+1.3=sun-jdk-1.4 ibm-jdk-bin 
+1.4=blackdown-jdk
+1.5=sun-jdk
+</pre>
+
+<warn>
+你不一定要更改这个文件。如果你使用了一个不被支持的虚拟机，可能发生错误。而且这样产生的bug会在使用受支持的虚拟机时产生的bug被处理完之后才会被处理。
+</warn>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>编译器</title>
+<section>
+<body>
+
+<p>
+对于任何的JDK，你可以使用Javac来调用标准的编译器。在build时，你除了可以设定虚拟机，也可以设定编译器。简单说，你可以在<path>/etc/java-config-2/build/compilers.conf</path>里定义你首选的编译器。
+</p>
+
+<pre caption="/etc/java-config-2/build/compilers.conf.">
+# 如果ebuild支持它
+# 它会从头到尾的检查COMPILERS变量里的值
+# 并且使用第一个已经安装的编译器
+
+COMPILERS="ecj-3.1 jikes javac"
+</pre>
+
+<p>
+部分编译器不支持所有可能的-target和-source参数。所以每一个在列表中的编译器都会被检测来确定它是否支持所需要的-source／-target。javac适用于任何情况，如果在列表中没有发现合适的编译器，javac会被调用。
+</p>
+
+<p>
+每个编译器的细节如下：
+</p>
+
+<table>
+<tr>
+  <th>名称</th>
+  <th>Handle</th>
+  <th>软件包</th>
+  <th>简介</th>
+</tr>
+<tr>
+  <ti>javac</ti>
+  <ti>javac</ti>
+  <ti>N/A</ti>
+  <ti>
+    默认编译器，包含在JDK中。
+  </ti>
+</tr>
+<tr>
+  <ti>jikes</ti>
+  <ti>jikes</ti>
+  <ti>dev-java/jikes</ti>
+  <ti>
+    jikes最开始被IBM开发。有趣的是，它运行一般要比javac快。但是请注意，它的语法要求更严格，并且会出现一些在javac下不会出现的一些问题。它还不支持Java 1.5的句法。
+  </ti>
+</tr>
+<tr>
+  <ti>Eclipse Java编译器</ti>
+  <ti>ecj-3.1</ti>
+  <ti>=dev-java/eclipse-ecj-3.1*</ti>
+  <ti>
+    ECJ是Eclipse开发工具用的编译器。它的速度很快，并且支持Java 1.5句法。
+  </ti>
+</tr>
+</table>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>设定默认CLASSPATH</title>
+<section>
+<body>
+
+<warn>
+下面的段落已被认为已经过时，很可能在以后被删除。我们强烈建议你不使用它们，因为你的Java项目应该管理自己的CLASSPATH。如果你指定一个默认的CLASSPATH，部分程序可能因为发现未预期的class产生错误。
+</warn>
+
+<p>
+<c>java-config</c> 也可以用来设定一个系统级别的CLASSPATH，当然也可以设定一个用户级别的CLASSPATH.
+</p>
+
+<p>
+首先，你要列出所有在你系统上安装的Java库
+</p>
+
+<pre caption="列出class">
+# <i>java-config --list-available-packages</i>
+[xerces-2] The next generation of high performance, fully compliant XML parsers in the Apache Xerces family (/usr/share/xerces-2/package.env)
+[junit] Simple framework to write repeatable tests (/usr/share/junit/package.env)
+[bsh] BeanShell: A small embeddable Java source interpreter (/usr/share/bsh/package.env)
+[bcel] The Byte Code Engineering Library: analyze, create, manipulate Java class files (/usr/share/bcel/package.env)
+[log4j] A low-overhead robust logging package for Java (/usr/share/log4j/package.env)
+...
+</pre>
+
+<p>
+再一次，在括号（<e>[]</e>）中指的是你在<c>java-config --set-system-classpath</c>使用的ID。如下例：
+</p>
+
+<pre caption="设定classpath">
+# <i>java-config --set-system-classpath log4j,xerces-2</i>
+</pre>
+
+<note>
+当前文件夹（<path>.</path>）不会被添加到系统classpath，应该被添加到你的系统登录profile。
+</note>
+
+<p>
+你不需要注销，登录或者sourcing <path>/etc/profile</path>来更新你的环境变量。 
+</p>
+
+<p>
+对于用户，<c>java-config 
+--set-user-classpath</c>会建立<path>~/.gentoo/java-env-classpath</path>。之后你应该source 
+shell's profile. 
+</p>
+
+<pre caption="Sourcing用户指定classpath">
+<i>if [[ -f \"${HOME}/.gentoo/java-env-classpath\" ]]; then
+       source ${HOME}/.gentoo/java-env-classpath\n fi</i>
+</pre>
+
+<p>
+如果你真的想要设定一个系统级别或者用户指定的classpath，你可以添加下面的代码到你的shell profile，但是我们不建议你这么做。
+</p>
+
+<pre caption="设定classpath">
+# <i>export CLASSPATH=\"${CLASSPATH}:$(java-config --classpath log4j,xerces-2)\"</i> 
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Java浏览器插件</title>
+<section>
+<title>安装插件</title>
+<body>
+
+<p>
+你可以使用<c>nsplugin</c>USE标记，emerge Java虚拟机来安装Java浏览器插件。
+</p>
+
+<note>
+<c>nsplugin</c>不是对所有构架的机器都提供版本。在安装前请用<c>emerge -pv 
+&lt;java-vm&gt;</c>来检查你的机器是否被支持。
+</note>
+
+<p>
+Portage允许你安装多个不同版本的Java插件，但是只有一个会被浏览器使用。你可以用以下指令查看可用的插件：
+</p>
+
+<pre caption="查看可用插件">
+# eselect java-nsplugin list
+   [1]   sun-jre-bin-1.5
+   [2]   blackdown-jre-1.4.2
+</pre>
+
+<p>
+在这个例子中<c>sun-jre-bin</c>被选择做为浏览器插件。
+</p>
+
+<pre caption="选择一个插件">
+# <i>eselect java-nsplugin set sun-jre-bin-1.5</i>
+</pre>
+
+<p>
+确认选择了正确的插件：
+</p>
+
+<pre caption="确认正确的插件">
+# eselect java-nsplugin list
+   [1]   sun-jre-bin-1.5  current
+   [2]   blackdown-jre-1.4.2
+</pre>
+
+<p>
+Java.com也提供了一个链接<uri 
+link="http://java.com/en/download/installed.jsp">确认你安装了插件。</uri>。如果你使用基于Mozilla的浏览器，你可以地址栏输入<c>about:plugins</c>来确认你的Java 
+插件。
+</p>
+
+</body>
+</section>
+<section>
+<title>multilib系统的插件</title>
+<body>
+
+<p>
+如果你的系统包括了64位和32位multilib（例如，AMD64），你只能使用32位Java插件。
+</p>
+
+<p>
+你可以使用<c>nsplugin</c> USE标记，emerge<c>emul-linux-x86-java</c>来使用32位插件。
+</p>
+
+<pre caption="安装32位插件">
+# <i>echo "app-emulation/emul-linux-x86-java nsplugin" >> /etc/portage/package.use</i>
+# <i>emerge emul-linux-x86-java</i>
+</pre>
+
+<p>
+下一步，检查可用的插件：
+</p>
+
+<pre caption="查看可用插件">
+# <i>eselect java-nsplugin list</i>
+Available 32-bit Java browser plugins
+  [1]   emul-linux-x86-java-1.4.2
+  [2]   emul-linux-x86-java-1.5
+</pre>
+
+<p>
+你必须选择一个32位的浏览器（比如<c>mozilla-firefox-bin</c>）来使用你32位的插件，64位的<c>konqueror</c>会直接调用你的Java虚拟机，所以konqueror可以使用64位的blackdown，不需要任何额外的配置。
+</p>
+
+<p>
+现在，选择适合你32位浏览器的正确插件：
+</p>
+
+<pre caption="选择插件">
+# <i>eselect java-nsplugin set 32bit emul-linux-x86-java-1.5</i>
+</pre>
+
+<p>
+核实选择了正确的插件：
+</p>
+
+<pre caption="确认正确的插件">
+# <i>eselect java-nsplugin list</i>
+Available 32-bit Java browser plugins
+  [1]   emul-linux-x86-java-1.4.2
+  [2]   emul-linux-x86-java-1.5  current
+</pre>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>Java的USE标记</title>
+<section>
+<title>设定USE标记</title>
+<body>
+
+<p>
+更多关于USE标记的信息，参照Gentoo手册，<uri 
+link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE flags</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>标记</title>
+<body>
+
+<ul>
+  <li><b>java</b>标记可以让多种不同的程序支持Java</li>
+  <li>
+    <b>nsplugin</b>标记让基于Mozilla的浏览器（包括Firefox）支持Java。你需要它来运行Java 
+applet在基于Mozilla的浏览器。
+  </li>
+  <li>
+    <b>source</b>标记会安装以zip形式安装软件包的源代码。这个一般是让IDE给你使用的库添加源代码。
+  </li>
+  <li><b>jce</b>标记添加了对Java加密引擎的支持</li>
+  <li>
+    对于Java的软件包，<b>doc</b>标记将会使用javadoc建立API文档
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>附加资料</title>
+<section>
+<title>离线资料</title>
+<body>
+
+<ul>
+  <li>java-config man page</li>
+  <li><c>java-config --help</c></li>
+</ul>
+
+</body>
+</section>
+<section>
+<title>在线资料</title>
+<body>
+
+<ul>
+  <li>
+    The <uri link="http://www.gentoo.org/proj/en/java/">Java Project  Page</uri>
+  </li>
+  <li>
+    The <uri 
+link="http://news.gmane.org/gmane.linux.gentoo.java">gentoo-java</uri>, <uri 
+link="http://news.gmane.org/gmane.linux.gentoo.user">gentoo-user</uri>, and 
+<uri link="http://news.gmane.org/gmane.linux.gentoo.devel">gentoo-dev</uri> 
+mailing list archives
+  </li>
+  <li>#gentoo and #gentoo-java on irc.freenode.net</li>
+  <li>
+    <uri 
+link="http://en.wikipedia.org/wiki/Java_programming_language">Wikipedia's 
+entry for Java</uri>
+  </li>
+  <li>
+    如果你关于这篇文档有建议或者问题，请发邮件到Gentoo Java team：<mail>java@gentoo.org</mail>
+  </li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
+
