@@ -180,7 +180,7 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <chapter>
 <title>关于如何安装Gentoo Linux</title>
 <abstract>
-不熟悉Gentoo的用户并不总是了解Gentoo的一切都是选择。 
+不熟悉Gentoo的用户并不总是了解Gentoo就意味着选择。 
 </abstract>
   <include href="hb-install-about.xml"/>
 </chapter>
