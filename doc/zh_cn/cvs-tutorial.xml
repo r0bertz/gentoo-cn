@@ -16,7 +16,7 @@
 </author>
 
 <author title="Translator">
-  <mail link="gentoo.kay@gmail.org">王文沛</mail>
+  <mail link="gentoo.kay@gmail.com">王文沛</mail>
 </author>
 
 <author title="Editor">
@@ -27,8 +27,8 @@
 本教程向读者介绍了一个叫做CVS的版本控制软件，由于它的灵活性而被全球的开发者广泛使用。作为为新接触CVS的人而设计的教程，本文可以让一般用户和新开发者快速的上手。不管你是想用CVS来获取指定文件的最新版本，还是想像一个熟练的开发者一样使用CVS，本教程都会适合你。
 </abstract>
 
-<version>1.8</version>
-<date>2005-05-23</date>
+<version>1.9</version>
+<date>2008-05-20</date>
 
 <chapter>
 <title>简介</title>
@@ -700,6 +700,26 @@ This is the part added by another developer
 
 </body>
 </section>
+
+<section>
+<title>还原旧版本</title>
+<body>
+
+<p>
+如果CVS不具备还原旧版本的功能，那它就称不上一个好的版本控制系统，你可以依据指定日期来还原文件，当然你也可以依据指定版本号来还原。如下的例子将把现行的<path>filename</path>覆写为版本1.202的<path>filename</path>：
+</p>
+
+<pre caption="用版本号来还原文件">
+$ <i>cvs update -p -r 1.202 filename &gt; filename</i>
+</pre>
+
+<p>
+如果你打算使用日期来还原文件，使用<c>-D</c> 参数。你可以使用规范的时间、日期格式，但你也可以使用与时间有关的名词，例如<e>yesterday</e>或者<e>last week</e>。
+</p>
+
+</body>
+</section>
+
 <section>
 <title>学习完成！</title>
 <body>
