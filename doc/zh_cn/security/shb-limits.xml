@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.7 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+
+<version>1.4</version>
+<date>2007-07-08</date>
+
+<section id="limits_conf">
+<title>/etc/security/limits.conf</title>
+<body>
+
+<p>
+对资源的使用进行控制可以非常有效的避免本地的拒绝服务（DoS），或者限制登入系统的组或用户的最大数。不过，太严格的设置会妨碍系统运转，还会造成程序运行失败，因此你首先需要搞清楚每个设置的含义。
+</p>
+
+<pre caption="/etc/security/limits.conf">
+*    soft core 0
+*    hard core 0
+*    hard nproc 15
+*    hard rss 10000
+*    -    maxlogins 2
+@dev hard core 100000
+@dev soft nproc 20
+@dev hard nproc 35
+@dev -    maxlogins 10
+</pre>
+
+<p>
+如果你打算把<c>nproc</c>或者<c>maxlogins</c>设置为0,那还不如直接删掉这些用户。上面的例子为<c>dev</c>组设置了进程数，core文件大小以及<c>maxlogins</c>最大登入数。其他的都为默认设置。
+</p>
+
+<note>
+<path>/etc/security/limits.conf</path>是PAM包的一部分，并且只对使用PAM的包有效。
+</note>
+
+</body>
+</section>
+<section>
+<title>/etc/limits</title>
+<body>
+
+<p>
+<path>/etc/limits</path>和限制文件<path>/etc/security/limits.conf</path>非常相似。唯一不同的是格式，并且只对用户或者通配符（不是组）有效。让我们来看一个范例：
+</p>
+
+<pre caption="/etc/limits">
+*   L2 C0 U15 R10000
+kn L10 C100000 U35
+</pre>
+
+<p>
+这里我们先设置了默认值，在对用户kn进行单独设置。Limits是sys-apps/shadow包的一部分。如果你在<path>/etc/make.conf</path>里启用了<c>pam</c>的话，就没必要在这个文件里设任何限制了。
+</p>
+
+</body>
+</section>
+<section id="quotas">
+<title>限额</title>
+<body>
+
+<warn>
+确定你当前使用的文件系统支持限额。为了在ReiserFS上使用限额，你必须用来自<uri link = "ftp://ftp.namesys.com/pub/reiserfs-for-2.4/testing/quota-2.4.20">Namesys</uri>的补丁为内核打补丁。用户工具可以从<uri link = "http://www.sf.net/projects/linuxquota/">Linux磁盘限额项目</uri>处取得。当ReiserFS的限额功能启用后，你在使用中可能会遇到其他一些问题──已经警告过你了！
+</warn>
+
+<p>
+启用磁盘限额，针对用户或者组进行磁盘使用量的限制。限额功能需要在内核中被启用，并且添加到<path>/etc/fstab</path>的挂载点中。相应的内核选项在<c>File systems-&gt;Quota support</c>之下。使用如下设置，重新编译内核然后使用新的内核重新启动系统。
+</p>
+
+<p>
+让我们用<c>emerge quota</c>来开始安装限额工具吧。然后修改你的<path>/etc/fstab</path>并添加<c>usrquota</c>和<c>grpquota</c>到你想要限制磁盘使用的分区，就像下面这样：
+</p>
+
+<pre caption="/etc/fstab">
+/dev/sda1 /boot ext2 noauto,noatime 1 1
+/dev/sda2 none swap sw 0 0
+/dev/sda3 / reiserfs notail,noatime 0 0
+/dev/sda4 /tmp ext3 noatime,nodev,nosuid,noexec,usrquota,grpquota 0 0
+/dev/sda5 /var ext3 noatime,nodev,usrquota,grpquota 0 0
+/dev/sda6 /home ext3 noatime,nodev,nosuid,usrquota,grpquota 0 0
+/dev/sda7 /usr reiserfs notail,noatime,nodev,ro 0 0
+/dev/cdroms/cdrom0 /mnt/cdrom iso9660 noauto,ro 0 0
+proc /proc proc defaults 0 0
+</pre>
+
+<p>
+在你启用限额的每个分区上创建限额文件（<path>aquota.user</path>和<path>aquota.group</path>）并放置在分区的根目录中。
+</p>
+
+<pre caption="创建限额文件">
+# <i>touch /tmp/aquota.user</i>
+# <i>touch /tmp/aquota.group</i>
+# <i>chmod 600 /tmp/aquota.user</i>
+# <i>chmod 600 /tmp/aquota.group</i>
+</pre>
+
+<p>
+这一步必须在每一个启用了限额的分区上做好。在添加和配置完限额文件后，我们需要把<c>quota</c>脚本添加到boot运行级别。
+</p>
+
+<impo>
+XFS会在内部进行限额检查，而且<e>不</e>需要<c>quota</c>脚本被添加到boot运行级别。可能还有其他也有类似行为的文件系统没有在这篇文档中提及，因此请阅读你所使用的文件系统的手册来了解它是如何处理限额检查的。
+</impo>
+
+<pre caption="添加quota到boot运行级别">
+# <i>rc-update add quota boot</i>
+</pre>
+
+<p>
+现在我们可以在<path>/etc/crontab</path>中添加一行来让系统每周检查一次限额的情况：
+</p>
+
+<pre caption="添加限额检查到crontab">
+0 3 * * 0 /usr/sbin/quotacheck -avug.
+</pre>
+
+<p>
+在重新启动电脑以后，该对用户和组设置限额了。<c>edquota -u kn</c>将会打开$EDITOR中定义的编辑器（默认是nano）并让你对用户kn设置限额。<c>edquota -g</c>将对组做同样的事。
+</p>
+
+<pre caption="对用户kn设置限额">
+Quotas for user kn:
+/dev/sda4: blocks in use: 2594, limits (soft = 5000, hard = 6500)
+         inodes in use: 356, limits (soft = 1000, hard = 1500)
+</pre>
+
+<p>
+想知道更多详细用法请<c>man edquota</c>或者阅读<uri link="http://www.tldp.org/HOWTO/Quota.html">Quota mini howto</uri>。
+</p>
+
+</body>
+</section>
+<section>
+<title>/etc/login.defs</title>
+<body>
+
+<p>
+如果你的安全策略要求用户每隔一周必须修改他们的密码，把<c>PASS_MAX_DAYS</c>的值改为14,<c>PASS_WARN_AGE</c>改为7。建议你使用口令老化，因为用暴力的办法可以破解任何密码，只要时间足够。我们同样鼓励你把<c>LOG_OK_LOGINS</c>设置为yes。
+</p>
+
+</body>
+</section>
+<section>
+<title>/etc/login.access</title>
+<body>
+
+<p>
+<path>login.access</path>文件也是sys-apps/shadow包的一部分，他提供登录访问控制表。这张表用来基于用户名，组名或者主机名来控制谁能登录，谁不能登录。默认的情况下，所有系统中的用户都允许登录，因此这个文件里只有注释和范例。倘若你想让你的服务器或工作站更安全，我们建议你设置这个文件，这样除了你自己（管理员）没人能进入控制台。
+</p>
+
+<note>
+这些设置对root无效。
+</note>
+
+<pre caption="/etc/login.access">
+-:ALL EXCEPT wheel sync:console
+-:wheel:ALL EXCEPT LOCAL .gentoo.org
+</pre>
+
+<impo>
+在配置这些选项的时候请千万小心，因为如果你没有root权限的话，有些错误会让你再也无法访问到电脑了。
+</impo>
+
+<note>
+这些设置对SSH无效，因为在默认情况下，SSH并不执行<c>/bin/login</c>。不过可以在<path>/etc/ssh/sshd_config</path>中设置<c>UseLogin yes</c>来启用它。
+</note>
+
+<p>
+这个设置可以让wheel组的成员从本地登录或者从gentoo.org这个域登录。这可能有些变态，不过安全一点总比出了问题好。
+</p>
+
+</body>
+</section>
+
+
+</sections>
