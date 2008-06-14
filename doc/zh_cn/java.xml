@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
- 
-
 
 <!-- $Header$ -->
 <!-- English CVS version: 1.41 -->
@@ -18,17 +16,15 @@
 <author title="编辑">
  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
 </author>
-<author title="译者"> 
-  <mail link="foo@bar.com">Jipeng Tan</mail> 
+<author title="译者">
+ <mail link="foo@bar.com">Jipeng Tan</mail>
 </author>
 
 <abstract>
 这篇指南会向您介绍Java，并且说明如何在Gentoo Linux中使用Java。
 </abstract>
 
-
-
-<!-- The content of this document is licensed under the CC-BY-SA license 
+<!-- The content of this document is licensed under the CC-BY-SA license
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
@@ -42,13 +38,11 @@
 <body>
 
 <p>
-Java是Sun 
-Microsystems开发的一门面向对象的程序语言，可以在不用重新编译的前提下运行在不同的平台上，当然也可以被编译成本地程序，良好的移植性和内存垃圾回收是Java受欢迎的主要原因。Java编译器会将代码转换成Java字节码作为中间层来使JRE（Java运行环境）具有独立平台运行的特性。
+Java是Sun Microsystems开发的一门面向对象的程序语言，可以在不用重新编译的前提下运行在不同的平台上，当然也可以被编译成本地程序，良好的移植性和内存垃圾回收是Java受欢迎的主要原因。Java编译器会将代码转换成Java字节码作为中间层来使JRE（Java运行环境）具有独立平台运行的特性。
 </p>
 
 <p>
-为了运行Java字节码， 
-必须首先安装JRE（Java运行环境）。JRE会提供核心库，一个独立平台的Java虚拟机和浏览器插件。JDK（Java开发工具）则集成了编程所开发需的工具，例如字节码编译器和调试器。
+为了运行Java字节码，必须首先安装JRE（Java运行环境）。JRE会提供核心库，一个独立平台的Java虚拟机和浏览器插件。JDK（Java开发工具）则集成了编程所开发需的工具，例如字节码编译器和调试器。
 </p>
 
 </body>
@@ -62,8 +56,7 @@ Microsystems开发的一门面向对象的程序语言，可以在不用重新�
 <body>
 
 <p>
-如果已经安装过Java，不论是任何版本都请参照<uri 
-link="/proj/en/java/java-upgrade.xml">Java升级指南</uri>。
+如果已经安装过Java，不论是什么版本都请参照<uri link="/proj/en/java/java-upgrade.xml">Java升级指南</uri>。
 </p>
 
 </body>
@@ -120,11 +113,11 @@ Gentoo提供了多种运行环境（JRE）和开发工具（JDK）。我们现�
 
 <!--
 
-TODO: list free implementations? 
+TODO: list free implementations?
 
 note about not drop-in replacements
 
-kaffe/sablevm/gcj/jamvm 
+kaffe/sablevm/gcj/jamvm
 
 -->
 <p>
@@ -142,8 +135,7 @@ Sun，IBM和BEA的JRE／JDK运行速度一般会快一些，但是在下载和�
 <body>
 
 <p>
-你可以使用<c>emerge virtual/jdk</c>来安装profile默认的JDK。你也可以使用<c>emerge 
-virtual/jre</c>安装profile默认的JRE。
+你可以使用<c>emerge virtual/jdk</c>来安装profile默认的JDK。你也可以使用<c>emerge virtual/jre</c>安装profile默认的JRE。
 </p>
 
 <p>
@@ -166,7 +158,7 @@ Sun近期重新制作了一个更适合Linux的JDK／JRE许可认证。从Java 1
 </p>
 
 <p>
-把需要的软件包放在<path>/usr/portage/distfiles</path>。完成后从新emerge安装JRE／JDK。
+把需要的软件包放在<path>/usr/portage/distfiles</path>。完成后重新emerge安装JRE／JDK。
 </p>
 
 </body>
@@ -188,7 +180,7 @@ Gentoo支持安装多个JDK或者JRE并且不会造成任何冲突。
 </p>
 
 <note>
- 你也可以使用<e>eselect</e>来改变系统和用户的虚拟机。参照<c>eselect java-vm help</c>。
+你也可以使用<e>eselect</e>来改变系统和用户的虚拟机。参照<c>eselect java-vm help</c>。
 </note>
 
 </body>
@@ -213,8 +205,7 @@ The following VMs are available for generation-2:
 </pre>
 
 <p>
-<e>*</e>标志出了你现在正在使用的虚拟机（系统虚拟机或者用户虚拟机）括号（<e>[]</e>）中的名字代表这个虚拟机的ID或者handle。你可以使用handle或ID来设置系统虚拟机：java-config 
---set-system-vm。下面是一个更改系统VM的例子。
+<e>*</e>标志出了你现在正在使用的虚拟机（系统虚拟机或者用户虚拟机）括号（<e>[]</e>）中的名字代表这个虚拟机的ID或者handle。你可以使用handle或ID来设置系统虚拟机：java-config --set-system-vm。下面是一个更改系统虚拟机的例子。
 </p>
 
 <pre caption="设定系统虚拟机">
@@ -231,13 +222,13 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 </p>
 
 <note>
-你不用再使用<c>source</c> profile来更新用户／系统虚拟机。
+你不必再执行<c>source profile</c>来使用户／系统虚拟机的改动起效。
 </note>
 
 </body>
 </section>
 <section id="preferred-vm">
-<title>首选虚拟机</title>gtkdiff
+<title>首选虚拟机</title>
 <body>
 
 <p>
@@ -267,8 +258,9 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 </pre>
 
 <pre caption="/etc/java-config-2/build/jdk.conf实例">
-<comment>＃ 对于1.3版优先使用sun-jdk 1.4。当sun-jdk 1.4不可用时，用ibm-jdk-bin替代， 对于1.4版，使用blackdown-jdk，1.5版使用sun-jdk </comment>
-1.3=sun-jdk-1.4 ibm-jdk-bin 
+<comment># 对于1.3版优先使用sun-jdk 1.4。当sun-jdk 1.4不可用时，用ibm-jdk-bin替代
+# 对于1.4版，使用blackdown-jdk，1.5版使用sun-jdk</comment>
+1.3=sun-jdk-1.4 ibm-jdk-bin
 1.4=blackdown-jdk
 1.5=sun-jdk
 </pre>
@@ -291,9 +283,9 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 </p>
 
 <pre caption="/etc/java-config-2/build/compilers.conf.">
-+# 如果ebuild支持它
-+# 它会从头到尾的检查COMPILERS变量里的值
-+# 并且使用第一个已经安装的编译器
+# 如果ebuild支持它
+# 它会从头到尾的检查COMPILERS变量里的值
+# 并且使用第一个已经安装的编译器
 
 COMPILERS="ecj-3.1 jikes javac"
 </pre>
@@ -326,8 +318,7 @@ COMPILERS="ecj-3.1 jikes javac"
   <ti>jikes</ti>
   <ti>dev-java/jikes</ti>
   <ti>
-    jikes是IBM开发的。有趣的是，它的运行速度一般要比javac快。但是请注意，它的语法要求更严格，并且会出现一些在javac下不会出现的一些问题。它还不支持Java 
-1.5的句法。
+    jikes是IBM开发的。有趣的是，它的运行速度一般要比javac快。但是请注意，它的语法要求更严格，并且会出现一些在javac下不会出现的一些问题。它还不支持Java 1.5的句法。
   </ti>
 </tr>
 <tr>
@@ -372,8 +363,7 @@ COMPILERS="ecj-3.1 jikes javac"
 </pre>
 
 <p>
-再一次，在括号（<e>[]</e>）中的名字代表你在<c>java-config 
---set-system-classpath</c>使用的ID。如下例：
+和前面一样，在括号（<e>[]</e>）中的名字代表你在<c>java-config --set-system-classpath</c>使用的ID。如下例：
 </p>
 
 <pre caption="设定classpath">
@@ -385,13 +375,11 @@ COMPILERS="ecj-3.1 jikes javac"
 </note>
 
 <p>
-你不需要注销，登录或者sourcing <path>/etc/profile</path>来更新你的环境变量。 
+你不需要注销，登录或者sourcing <path>/etc/profile</path>来更新你的环境变量。
 </p>
 
 <p>
-对于用户，<c>java-config 
---set-user-classpath</c>会建立<path>~/.gentoo/java-env-classpath</path>。之后你应该source 
-shell's profile。 
+对于用户，<c>java-config --set-user-classpath</c>会建立<path>~/.gentoo/java-env-classpath</path>。之后你应该source shell的profile。
 </p>
 
 <pre caption="Sourcing用户指定classpath">
@@ -404,7 +392,7 @@ shell's profile。
 </p>
 
 <pre caption="设定classpath">
-# <i>export CLASSPATH=\"${CLASSPATH}:$(java-config --classpath log4j,xerces-2)\"</i> 
+# <i>export CLASSPATH=\"${CLASSPATH}:$(java-config --classpath log4j,xerces-2)\"</i>
 </pre>
 
 </body>
@@ -454,9 +442,7 @@ Portage允许你安装多个不同版本的Java插件，但是只有一个会被
 </pre>
 
 <p>
-Java.com也提供了一个链接<uri 
-link="http://java.com/en/download/installed.jsp">来确认你安装了插件。</uri>。如果你使用基于Mozilla的浏览器，你可以地址栏输入<c>about:plugins</c>来确认你的Java 
-插件。
+Java.com也提供了一个链接<uri link="http://java.com/en/download/installed.jsp">来确认你安装了插件。</uri>。如果你使用基于Mozilla的浏览器，你可以地址栏输入<c>about:plugins</c>来确认你的Java插件。
 </p>
 
 </body>
@@ -523,8 +509,7 @@ Available 32-bit Java browser plugins
 <body>
 
 <p>
-更多关于USE标记的信息，参照Gentoo手册，<uri 
-link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE flags</uri>。
+更多关于USE标记的信息，参照Gentoo手册<uri link="/doc/zh_cn/handbook/handbook-x86.xml?part=2&amp;chap=2">USE标记</uri>。
 </p>
 
 </body>
@@ -536,8 +521,7 @@ link="/doc/en/handbook/handbook-x86.xml?part=2&amp;chap=2">USE flags</uri>。
 <ul>
   <li><b>java</b>标记可以让多种不同的程序支持Java</li>
   <li>
-    <b>nsplugin</b>标记让基于Mozilla的浏览器（包括Firefox）支持Java。你需要它来运行Java 
-applet在基于Mozilla的浏览器。
+    <b>nsplugin</b>标记让基于Mozilla的浏览器（包括Firefox）支持Java。你需要它来在基于Mozilla的浏览器上运行Java applet。
   </li>
   <li>
     <b>source</b>标记会安装以zip形式安装软件包的源代码。这个一般是让IDE给你使用的库添加源代码。
@@ -571,23 +555,17 @@ applet在基于Mozilla的浏览器。
 
 <ul>
   <li>
-    The <uri link="http://www.gentoo.org/proj/en/java/">Java Project  Page</uri>
+    Gentoo的<uri link="http://www.gentoo.org/proj/en/java/">Java项目主页</uri>
   </li>
   <li>
-    The <uri 
-link="http://news.gmane.org/gmane.linux.gentoo.java">gentoo-java</uri>, <uri 
-link="http://news.gmane.org/gmane.linux.gentoo.user">gentoo-user</uri>, and 
-<uri link="http://news.gmane.org/gmane.linux.gentoo.devel">gentoo-dev</uri> 
-mailing list archives
+    Gentoo的<uri link="http://news.gmane.org/gmane.linux.gentoo.java">gentoo-java</uri>, <uri link="http://news.gmane.org/gmane.linux.gentoo.user">gentoo-user</uri>, and <uri link="http://news.gmane.org/gmane.linux.gentoo.devel">gentoo-dev</uri>邮件列表归档
   </li>
-  <li>#gentoo and #gentoo-java on irc.freenode.net</li>
+  <li>irc.freenode.net上的#gentoo和#gentoo-java频道</li>
   <li>
-    <uri 
-link="http://en.wikipedia.org/wiki/Java_programming_language">Wikipedia's 
-entry for Java</uri>
+    <uri link="http://en.wikipedia.org/wiki/Java_programming_language">Wikipedia上的Java条目</uri>
   </li>
   <li>
-    如果你关于这篇文档有建议或问题，请发邮件到Gentoo Java team：<mail>java@gentoo.org</mail>
+    如果你对于这篇文档有建议或问题，请发邮件到Gentoo Java团队：<mail>java@gentoo.org</mail>
   </li>
 </ul>
 
@@ -595,4 +573,3 @@ entry for Java</uri>
 </section>
 </chapter>
 </guide>
-
