@@ -52,6 +52,10 @@ GMN将会通过网页（HTML）和邮件列表（纯文本）的形式发行。�
   <th>摘要</th>
 </tr>
 <tr>
+  <ti><uri link="/news/zh_cn/gmn/20080526-newsletter.xml">2008年5月26日</uri></ti>
+  <ti>Gentoo基金会状况，Google“代码之夏”访谈，网络监控等</ti>
+</tr>
+<tr>
   <ti><uri link="/news/zh_cn/gmn/20080424-newsletter.xml">2008年4月24日</uri></ti>
   <ti>2008“代码之夏”，采访Hyves，加速系统启动等</ti>
 </tr>
