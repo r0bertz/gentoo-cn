@@ -4,7 +4,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.8 -->
 
-<guide link="/proj/zh_cn/desktop/x11/porting-modular-x-howto.xml" lang="zh_cn" disclaimer="draft">
+<guide link="/proj/zh_cn/desktop/x11/porting-modular-x-howto.xml" lang="zh_cn">
 <title>模块化X移植指南</title>
 
 <author title="Author">
@@ -37,7 +37,7 @@
 </p>
 
 <p>
-你可以研读<uri link="http://www.gentoo.org/proj/en/desktop/x/x11/modular-x-howto.xml#doc_chap1_sect1">模块化X迁移指南</uri>页上的细节。
+你可以研读<uri link="http://www.gentoo.org/proj/en/desktop/x/x11/modular-x-howto.xml#doc_chap1_sect1">模块化X迁移指南</uri>上的细节。
 </p>
 
 </body>
@@ -45,24 +45,24 @@
 </chapter>
 
 <chapter>
-<title>依赖检查</title>
+<title>依赖关系检查</title>
 <section>
 <body>
 
 <p>
-我们想要尽可能全面地列举依赖关系，以使人们的系统上不必到处都是诸如XPrint之类用不到的东西。所以你想要直接依赖于需要的库和包，而不是任何类型的虚拟库/包。
+我们想要尽可能精确的列举依赖关系，以使人们的系统上不必到处都是诸如XPrint之类用不到的东西。所以你想要直接依赖于需要的库和头文件，而不是任何类型的虚拟包。
 </p>
 
 <p>
-而且，我们不能保证，人们仅仅因为安装了一个metabuild就仍会把子包装上。消除掉该损坏的可能性将节省我们大量的时间，不必花在标记bug为无效上。
+而且，我们不能保证人们仅仅因为已经安装了元软件包，子软件包就一定已经被装上。消除掉这种不确定因素的将节省我们大量的时间。因为否则的话，我们就要花很多时间来把一些本不必存在的bug标记为无效。
 </p>
 
 <p>
-如果我发现有任何包依赖于其他任一metabuild，我不会急着去争论，陷维护者于无尽的迷雾。
+如果我发现有任何包依赖于任一元软件包，我将会和该软件包的维护者争论到底。
 </p>
 
 <p>
-第一步是安装模块化X，或者找个已经安装了它的人。这可以通过chroot实现──没有必要实际运行X，你只需要有它的文件来做依赖检查就够了。
+第一步是安装模块化X，或者找个已经安装了它的人。这可以通过chroot实现──没有必要实际运行X，你只需要有它的文件来做依赖关系检查就够了。
 </p>
 
 <pre caption="取得必需的脚本">
@@ -77,7 +77,7 @@ $ <i>wget http://dev.gentoo.org/~dberkholz/scripts/linking_libs.sh \
 </impo>
 
 <p>
-第一个脚本，<c>linking_libs.sh</c>，针对软件包所有链接到的库来检查编译日志，并打印那些库所属的包。如要获取编译日志，你可以在<path>/etc/make.conf</path>中设置PORT_LOGDIR，或者使用输出重定向。
+第一个脚本，<c>linking_libs.sh</c>，检查编译日志以找到该软件包所有链接到的库，并打印那些库所属的包。如要获取编译日志，你可以在<path>/etc/make.conf</path>中设置PORT_LOGDIR，或者使用输出重定向。
 </p>
 
 <pre caption="对gdm包运行linking_libs.sh">
@@ -88,35 +88,35 @@ $ <i>linking_libs.sh /var/log/portage/8430-gdm-2.8.0.7.log</i>
 </pre>
 
 <p>
-第二个脚本，<c>included_headers.sh</c>，扫描解压的源码包中以#include开头的行，并抓取包含在&lt;&gt;中的include文件。至2005年9月9日时，对于""风格的include它工作得同&lt;&gt;一样好。
+第二个脚本，<c>included_headers.sh</c>，扫描解压的源码包中以#include开头的行，并抓取包含在&lt;&gt;中的include文件。截至2005年9月9日，对于""风格的include它也能处理得和&lt;&gt;一样好。
 </p>
 
 <p>
-第三个脚本，<c>checkdeps.rb</c>，使用来自pax-utils的<c>scanelf</c>扫描软件包中已安装的文件。这对二进制包或隐藏了编译输出的包很有帮助。这是个Ruby脚本，因此它依赖于dev-lang/ruby以及app-misc/pax-utils。第四个脚本，<c>pkgutil.rb</c>，依赖于<c>checkdeps.rb</c>。
+第三个脚本，<c>checkdeps.rb</c>，使用来自pax-utils的<c>scanelf</c>来扫描一个软件包所安装的文件。它适用于二进制包或隐藏了编译输出的包。这是个Ruby脚本，因此它依赖于dev-lang/ruby以及app-misc/pax-utils。第四个脚本，<c>pkgutil.rb</c>，依赖于<c>checkdeps.rb</c>。
 </p>
 
 <p>
-运行前两个脚本应该能给你提供一个良好的列表，包括RDEPEND（对于库文件）和DEPEND（对于头文件和库文件）。如果一个库文件出现在RDPEND列表而不在DEPEND列表中，这就可疑了；它可能是一个“错误依赖”（无任何原因而链接的库）。libXt就是这样一个已知的正确依赖；许多包通过检查libXt头文件来检查X。
+运行前两个脚本应该能给你提供一个很好的列表，包括RDEPEND（对于库）和DEPEND（对于头文件和库）。如果一个库出现在RDPEND列表而不在DEPEND列表中，这就可疑了；它可能是一个“错误依赖关系”（无任何原因而链接的库）。libXt是已知的具有如此特征的一个正确依赖关系；许多包通过检查libXt头文件来检查X。
 </p>
 
 <p>
-<c>included_headers.sh</c>中的相对头文件搜索偶尔会发现错误的头文件，因为有很多头文件命名一致，从而会返回一个不正确的包。通常这是非常明显的，比如Windows头文件就认为app-emulation/wine是一个依赖。
+<c>included_headers.sh</c>中的相对头文件搜索偶尔会找到错误的头文件，因为有一些头文件的名字是一样的，从而会返回一个不正确的包。通常这是非常明显的，比如Windows头文件会令它认为app-emulation/wine是一个依赖关系。
 </p>
 
 <p>
-如果你指定<c>-d</c>选项，你偶尔会遇到某个库文件或头文件“没找到！”。这可能表示你已经卸载了该包编译时需要的一个头文件，或者它是一个你未使用的可选头文件。如果是库文件的话，这可能表示你卸载了该库，或者它可能只是一个从未安装的内建的静态库。
+如果你指定<c>-d</c>选项，你偶尔会遇到某个库文件或头文件“Not found!”。这可能表示你在该包编译后卸载了它所需要的一个头文件，或者它是一个你尚未使用的可选头文件。如果是库文件的话，这可能表示你卸载了该库，或者它可能只是一个从未安装的内部构建的静态库。
 </p>
 
 <p>
-花时间来查出这些过去未被找到的头/库文件是否需要被添加到依赖列表是值得的，特别是对头文件，因为你不需要安装这些头文件来运行扫描。
+花点时间来查查这些未被找到的头/库文件是否需要被添加到依赖关系列表是值得的，特别是对头文件，因为你不需要安装这些头文件就可以运行扫描。
 </p>
 
 <p>
-在一些情况中，软件包要求某种形式的一个真实的X服务器。但是如果软件包在安装过程中事实上并不需要它，我鼓励你不要将它放到RDEPEND中。如果程序实际上运行在另一台机器上因而只需要本地库文件和头文件的话，这就会破坏掉没脑子的X安装。
+在一些情况中，软件包要求某种形式的一个真实的X服务器。但是如果软件包在安装过程中事实上并不需要它，我鼓励你不要将它放到RDEPEND中。因为这样会破坏headless X配置，在这种配置里程序实际上运行在另一台机器上因而只需要本地库文件和头文件。
 </p>
 
 <p>
-在portage树中已经有了一些X服务器，所以如果你确实需要X服务器，请把它们都包括进去。模块化X的服务器在xorg-server中；xdirectfb中有一个DirectFB服务器；kdrive提供了微型X服务器；当然还有旧的&lt;xorg-x11-7。一定要指明xorg-x11的版本限制，以保证安装一个X服务器而不是metabuild。在不远的将来，我期待kdrive移到xserver中。如果你确实需要一个X服务器，请联系X组的成员。如果很多软件包需要X服务器，我们可能为其创建一个虚拟。
+在portage树中已经有了一些X服务器，所以如果你确实需要X服务器，请把它们都包括进去。模块化X的服务器在xorg-server中；xdirectfb中有一个DirectFB服务器；kdrive提供了微型X服务器；当然还有旧的&lt;xorg-x11-7。一定要指明xorg-x11的版本范围，以保证安装一个X服务器而不是元软件包。在不远的将来，我期待kdrive被移到xserver中。如果你确实需要一个X服务器，请联系X组的成员。如果很多软件包需要X服务器，我们可能为其创建一个虚拟包。
 </p>
 
 </body>
@@ -124,12 +124,12 @@ $ <i>linking_libs.sh /var/log/portage/8430-gdm-2.8.0.7.log</i>
 </chapter>
 
 <chapter>
-<title>依赖结构</title>
+<title>依赖关系结构</title>
 <section>
 <body>
 
 <p>
-要真正添加依赖──你会需要像这样的一个结构：    
+要真正添加依赖关系──你会需要像这样的一个结构：    
 </p>
 
 <pre caption="RDEPEND/DEPEND结构">
@@ -151,23 +151,23 @@ DEPEND="${RDEPEND}
 </pre>
 
 <impo>
-由之前那些脚本生成的一些结果<e>将会</e>是冗余的。如过一个库的RDEPEND包含了另一个库，那么你不必把它们都放进依赖中。如果一个库的DEPEND包含了一个原型，那么你<e>必须</e>将其置于该软件包的DEPEND列表中。<c>libXaw</c>、<c>libXmu</c>、<c>libXpm</c>、<c>libXcursor</c>和<c>libXt</c>都是可能引入很多其他库的候选者。只要运行<c>emerge -ep $library | grep lib[SIX]</c>就能列出它们。同时记住，其他像<c>gtk+</c>这样的包已经被移植到模块化依赖中了，所以它们也能引入其所需的库。
+由之前那些脚本生成的一些结果<e>将</e>是多余的。如过一个库的RDEPEND包含了另一个库，那么你不必把它们都放进依赖关系中。如果一个库的DEPEND包含了一个协议（proto），那么你<e>必须</e>将其置于该软件包的DEPEND列表中。<c>libXaw</c>、<c>libXmu</c>、<c>libXpm</c>、<c>libXcursor</c>和<c>libXt</c>这些库都有可能引入很多其他库。只要运行<c>emerge -ep $library | grep lib[SIX]</c>就能列出它们。同时记住，其他像<c>gtk+</c>这样的包已经被改写为使用模块化依赖关系了，所以它们也能引入其所需的库。
 </impo>
 
 <note>
-两个USE标记都会引入X，但是它们之间并不相互依赖。在这种情况下，你或者需要重复X依赖部分，或者需要将其定义在其他地方并以${X_DEPEND}的形式包括进来。如果定义到其他地方，记得同时将该定义部分包含到各个USE标记中。
+如果有两个USE标记都会引入X，但是它们之间并不相互依赖。在这种情况下，你或者需要重复X依赖关系部分，或者需要将其定义在其他地方，比如定义为变量X_DEPEND，并包含这个变量${X_DEPEND}。如果定义到其他地方，记得同时将该定义部分包含到各个USE标记中。
 </note>
 
 <p>
-此处的目的是对新的模块化X做默认配置，但同时也允许人们满足对旧的单体式xorg-x11包的依赖。我们正在彻底抛弃virtual/x11，来鼓励对正确依赖的列举。
+这样的依赖关系结构可以默认使用新的模块化X配置，但同时如果人们还在用旧的整体式xorg-x11包的话，该依赖关系仍然可以被满足。我们正在彻底抛弃virtual/x11，以此来鼓励人们列举出精确的依赖关系。
 </p>
 
 <p>
-对于首次对整个树做依赖运算，移植任务组只修复~arch用户能得到的最新ebuild，以及任何更新的ebuild（KEWORDS=-*或package.mask）。单独的软件包维护者可能选择这么做，并让不被支持的ebuild逐步从树中淡出。但是他们可能想把他们所有的ebuild都一次移植完。Repoman很快会因任何强制依赖virtual/x11的ebuild而挂掉。
+对于整个树的首次修改，移植任务组只修复~arch用户能得到的最新ebuild，以及任何更新的ebuild（KEWORDS=-*或package.mask）。单独的软件包维护者可能选择这么做，并让不支持模块化X的ebuild逐步从树中淡出。但是他们最好把他们所有的ebuild都一次移植完。Repoman很快会因遇到任何强制依赖virtual/x11的ebuild而挂掉。
 </p>
 
 <impo>
-这应该让~arch用户默认使用模块化X，同时让非~arch用户使用virtual/x11。
+这就可以让~arch用户默认使用模块化X，同时让非~arch用户使用virtual/x11。
 </impo>
 
 </body>
@@ -180,11 +180,11 @@ DEPEND="${RDEPEND}
 <body>
 
 <p>
-许多人不使用xinerama的USE标记。但是，如果当你运行<c>inluded_headers.sh</c>时，x11-proto/xineramaproto就会显示为一个依赖，然后添加它到xinerama标记的DEPEND中，并添加x11-libs/libXinerama到xinerama标记的RDEPEND中。
+许多人不使用xinerama的USE标记。但是，如果当你运行<c>inluded_headers.sh</c>时，x11-proto/xineramaproto就会显示为一个依赖关系，然后添加它到xinerama标记的DEPEND中，并添加x11-libs/libXinerama到xinerama标记的RDEPEND中。
 </p>
 
 <p>
-Caleb提出了一个好观点，那就是，对于拥有大量可选的X库依赖的包，如何处理它所有的USE标记？在许多情况下，总是强制开启或关闭标记是合乎情理的。而且，你可以通过标记分组的方式让事情更简单一些。确保你是以标记的功能来命名它们，而不是它们使用的库或者包。
+Caleb提出了一个好观点，那就是，对于拥有大量可选的X库依赖关系的包，如何处理它所有的USE标记？在许多情况下，总是强制开启或关闭标记是合乎情理的。而且，你可以通过把标记分组的方式让事情更简单一些。确保你是以标记的功能来命名它们，而不是它们使用的库或者包。
 </p>
 
 </body>
@@ -197,7 +197,7 @@ Caleb提出了一个好观点，那就是，对于拥有大量可选的X库依�
 <body>
 
 <p>
-如果你是开发人员，提交它们。如果不是，提交一个新bug，分配给包维护者（在metadata.xml中）。让它阻塞bug<uri link="http://bugs.gentoo.org/112675">#112675</uri>。附加一个补丁来修正依赖。
+如果你是开发人员，请检入它们。如果不是，请提交一个新bug，分配给包维护者（在metadata.xml中）。让它阻挡bug<uri link="http://bugs.gentoo.org/112675">#112675</uri>，并附加一个修正依赖关系的补丁。
 </p>
 
 </body>
