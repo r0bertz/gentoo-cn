@@ -304,7 +304,7 @@
     <file id="site">/proj/en/site.xml</file>
     <file id="kernel-upgrade">/doc/en/kernel-upgrade.xml</file>
     <file id="modular-x-howto">/proj/en/desktop/x/x11/modular-x-howto.xml</file>
-    <file id="porting-modular-x">/proj/en/desktop/x/x11/porting-modular-x-howto.xml</file>
+    <file id="porting-modular-x">/proj/zh_cn/desktop/x/x11/porting-modular-x-howto.xml</file>
     <file id="new-dev-training">/proj/en/devrel/new-dev-training.xml</file>
     <file id="devrel-policy">/proj/en/devrel/policy.xml</file>
     <file id="translators-howto">/proj/en/gdp/doc/translators-howto.xml</file>
