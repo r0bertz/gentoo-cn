@@ -3,7 +3,7 @@
 <!-- $Header$ -->
 <!-- English CVS version: 1.26 -->
 
-<guide link="/doc/zh_cn/xorg-config.xml" lang="zh_cn" disclaimer="draft">
+<guide link="/doc/zh_cn/xorg-config.xml" lang="zh_cn">
 
 <title>X服务器配置指南</title>
 
