@@ -4,12 +4,12 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.48 -->
+<!-- English CVS version: 1.49 -->
 
 <sections>
 
-<version>9.1</version>
-<date>2008-05-04</date>
+<version>9.2</version>
+<date>2008-06-17</date>
 
 <section>
 <title>硬件需求</title>
@@ -244,7 +244,7 @@ SRM是基于Alpha Console Subsystem规范的，它为OpenVMS、Tru64 UNIX和Linu
 </p>
 
 <p>
-现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。如果没装<c>MILO</c>，可以使用<uri link="http://dev.gentoo.org/~taviso/milo/">taviso的主页</uri>上预编译的<c>MILO</c>镜像文件。
+现在来启动一张Alpha安装光盘，将光碟放入光驱并重启系统。你可以使用SRM来启动安装光盘。如果不能使用SRM启动，则只好使用<c>MILO</c>。
 </p>
 
 <pre caption="使用SRM来启动光盘">
