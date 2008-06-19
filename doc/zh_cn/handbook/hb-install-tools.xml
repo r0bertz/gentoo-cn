@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.47 -->
+<!-- English CVS version: 1.48 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 在这一章中我们将帮助你选择并安装一些重要的工具。
 </abstract>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-06-20</date>
 
 <section>
 <title>系统日志工具</title>
@@ -91,7 +91,7 @@ Gentoo提供了三个可选的cron守护进程：<c>dcron</c>、<c>fcron</c>和<
 <body>
 
 <p>
-根据你所使用的文件系统的不同，你需要安装必须的文件系统工具（用于检查文件系统完整性、创建额外的文件系统等）。
+根据你所使用的文件系统的不同，你需要安装必须的文件系统工具（用于检查文件系统完整性、创建额外的文件系统等）。请注意管理ext2/ext3文件系统的工具（<c>e2fsprogs</c>）已经做为系统的一部分被安装了。
 </p>
 
 <p>
