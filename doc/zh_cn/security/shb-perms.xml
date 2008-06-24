@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- $Header$ -->
+<!-- English CVS version:1.4 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+<author title="译者">
+<mail link="druggo@gmail.com">杨小广</mail>
+</author>
+
+<version>1.1</version>
+<date>2006-09-16</date>
+
+<section>
+<title>所有人可读</title>
+<body>
+
+<p>
+普通用户应该没有权限访问配置文件或密码。攻击者可以从数据库或网站窃取密码用来更改数据，情况可能更糟，他们甚至会删除所有数据。因此你的文件权限正确与否至关重要。如果你确定某个文件只有root会用到，那么赋予他<c>0600</c>权限并使用<c>chown</c>更改到正确的属主。
+</p>
+
+</body>
+</section>
+<section>
+<title>所有人或组可读</title>
+<body>
+
+<pre caption="寻找所有人可写的文件和目录">
+# <i>find / -type f \( -perm -2 -o -perm -20 \) -exec ls -lg {} \; 2>/dev/null >writable.txt</i>
+# <i>find / -type d \( -perm -2 -o -perm -20 \) -exec ls -ldg {} \; 2>/dev/null >>writable.txt</i>
+</pre>
+
+<p>
+这将创建一个巨大的文件，其内容是对所有人或组具有写权限的文件列表。检查这些文件的权限并对所有人可写的文件执行<c>/bin/chmod o-w</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>SUID/SGID文件</title>
+<body>
+
+<p>
+SUID或SGID位被设置的文件将以<e>所有</e>者或组的权限执行而不是执行者的权限。通常这些位被用在必须以root身份运行的文件上。这些文件可以导致本地用户获得root权限（如果他们有安全漏洞的话）。这很危险，无论如何必须避免这些文件SUID或SGID位被设置。如果你用不到这些文件，对他们运行<c>chmod 
+0</c>或者卸载含有这些文件的包（使用<c>equery</c>来检查他们属于哪个包；如果你没有这个命令，那么直接输入<c>emerge 
+gentoolkit</c>来安装它）。否则使用<c>chmod -s</c>关闭SUID位。
+</p>
+
+<pre caption="寻找setuid文件">
+# <i>find / -type f \( -perm -004000 -o -perm -002000 \) -exec ls -lg {} \; 2>/dev/null >suidfiles.txt</i>
+</pre>
+
+<p>
+这将创建一个包含所有SUID或SGID文件列表的文件。
+</p>
+
+<pre caption="setuid可执行文件列表">
+/bin/su
+/bin/ping
+/bin/mount
+/bin/umount
+/var/qmail/bin/qmail-queue
+/usr/bin/chfn
+/usr/bin/chsh
+/usr/bin/crontab
+/usr/bin/chage
+/usr/bin/expiry
+/usr/bin/sperl5.6.1
+/usr/bin/newgrp
+/usr/bin/passwd
+/usr/bin/gpasswd
+/usr/bin/procmail
+/usr/bin/suidperl
+/usr/lib/misc/pt_chown
+/usr/sbin/unix_chkpwd
+/usr/sbin/traceroute
+/usr/sbin/pwdb_chkpwd
+</pre>
+
+<p>
+默认情况下Gentoo 
+Linux没有多少SUID文件（然而这依赖你安装了什么），但是你可能也会有像上面一样列表。大多数命令不应该被普通用户使用，而仅仅只被root使用。用<c>chmod 
+-s</c>关闭<c>ping</c>、<c>mount</c>、<c>umount</c>、<c>chfn</c>、<c>chsh</c>、<c>newgrp</c>、<c>suidperl</c>、<c>pt_chown</c>以及<c>traceroute</c>的SUID位。不要去除<c>su</c>、<c>qmail-queue</c>或者<c>unix_chkpwd</c>的SUID位。去除他们将使你不能执行<c>su</c>，接受邮件。通过清除SUID位（可以安全清除的时候），你也杜绝了一个普通用户（或者攻击者）使用这些文件取得root权限的可能性。
+</p>
+
+<p>
+在我系统中仅有的几个SUID文件是<c>su</c>、<c>passwd</c>、<c>gpasswd</c>、<c>qmail-queue</c>、<c>unix_chkpwd</c>和<c>pwdb_chkpwd</c>。如果运行X的话，你可能还有更多，因为X需要通过SUID提高权限。
+</p>
+
+</body>
+</section>
+<section>
+<title>SUID/SGID可执行文件和硬链接</title>
+<body>
+
+<p>
+当一个文件没有任何链接指向他的时候，才能被删除。这貌似有点奇怪，但是考虑一下，一个文件名类似<path>/usr/bin/perl</path>它实际上链接到存放数据的inode上。文件可以被任意数目的链接指向，在所有的链接被删除以前，该文件始终存在。
+</p>
+
+<p>
+如果你的用户能够访问没有以<c>nosuid</c>或<c>noexec</c>参数挂载的分区（例如<path>/tmp</path>、<path>/home</path>、或<path>/var/tmp</path>不是单独的分区）你需要注意确保用户不会创建到SUID或SGID可执行文件的硬链接，不然在Portage更新以后他们还有访问旧版本的权限。
+</p>
+
+<warn>
+如果你收到portage发出关于残留硬链接的警告，并且你的用户可以读写允许执行SUID/SGID文件的分区，你必须仔细的阅读这一节。你的某个用户可能打算保留程序的旧版本来试图规避你的更新动作。如果用户无法创建他们自己的SUID文件，或者只能用动态装载来执行程序（使用<c>noexec</c>挂载的分区），你就不用担心了。
+</warn>
+
+<note>
+用户不需要拥有文件的读权限即可对它建立一个链接，只需要有该文件所在目录的读权限就可以了。
+</note>
+
+<p>
+为了检查一个文件拥有多少个链接，可以使用<c>stat</c>命令。
+</p>
+
+<pre caption="stat命令">
+$ stat /bin/su
+  File: `/bin/su'
+  Size: 29350           Blocks: 64         IO Block: 131072 regular file
+Device: 900h/2304d      Inode: 2057419     Links: 1
+Access: (4711/-rws--x--x)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2005-02-07 01:59:35.000000000 +0000
+Modify: 2004-11-04 01:46:17.000000000 +0000
+Change: 2004-11-04 01:46:17.000000000 +0000
+</pre>
+
+<p>
+查找有多个链接的SUID和SGID文件，你可以使用<c>find</c>。
+</p>
+
+<pre caption="查找拥有多个链接的suid/sgid可执行文件">
+$ find / -type f \( -perm -004000 -o -perm -002000 \) -links +1 -ls
+</pre>
+
+</body>
+</section>
+</sections>
