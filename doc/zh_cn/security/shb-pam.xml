@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.4 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+
+<version>1.1</version>
+<date>2006-08-03</date>
+
+<section>
+<title>PAM</title>
+<body>
+
+<p>
+PAM是可以为程序中用户认证提供备选方案的一组共享库。<c>pam</c> USE标记默认是被打开的。因此Gentoo Linux的PAM设置是非常合理的，不过还是有改进的余地。首先安装cracklib。
+</p>
+
+<pre caption="安装cracklib">
+# <i>emerge cracklib</i>
+</pre>
+
+<pre caption="/etc/pam.d/passwd">
+auth     required pam_unix.so shadow nullok
+account  required pam_unix.so
+password required pam_cracklib.so difok=3 retry=3 minlen=8 dcredit=-2 ocredit=-2
+password required pam_unix.so md5 use_authtok
+session  required pam_unix.so
+</pre>
+
+<p>
+这将添加cracklib来确保用户的密码至少是8个字符并且包含2个数字、2个其他字符，还要和上次的密码至少有3个字符不一样。这会强制用户选择好的密码（密码策略）。想知道更多的选项，请看<uri·link="http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/sag-pam_cracklib.html">PAM</uri>文档。
+</p>
+
+<pre caption="/etc/pam.d/sshd">
+auth     required pam_unix.so nullok
+auth     required pam_shells.so
+auth     required pam_nologin.so
+auth     required pam_env.so
+account  required pam_unix.so
+password required pam_cracklib.so difok=3 retry=3 minlen=8 dcredit=-2 ocredit=-2 use_authtok
+password required pam_unix.so shadow md5
+session  required pam_unix.so
+session  required pam_limits.so
+</pre>
+
+<p>
+每一个在<path>/etc/pam.d</path>中没有配置文件的服务将使用<path>/etc/pam.d/other</path>里的规则。默认设置是<c>deny</c>，他们本该如此。但我希望有一些日志记录，因此我添加了<c>pam_warn.so</c>。最后一个设置是<c>pam_limits</c>，由<path>/etc/security/limits.conf</path>文件来控制。查看<uri·link="?part=1&amp;chap=5#limits_conf">/etc/security/limits.conf</uri>以获得更多相关设置。
+</p>
+
+<pre caption="/etc/pam.d/other">
+auth     required pam_deny.so
+auth     required pam_warn.so
+account  required pam_deny.so
+account  required pam_warn.so
+password required pam_deny.so
+password required pam_warn.so
+session  required pam_deny.so
+session  required pam_warn.so
+</pre>
+
+</body>
+</section>
+</sections>
