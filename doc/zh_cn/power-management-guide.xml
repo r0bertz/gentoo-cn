@@ -29,8 +29,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.39</version>
-<date>2008-06-02</date>
+<version>1.40</version>
+<date>2008-06-29</date>
 
 <chapter>
 <title>介绍</title>
@@ -726,7 +726,7 @@ link="http://ibm-acpi.sourceforge.net/">thinkpad_acpi的主页</uri>
 <pre caption="自动加载thinkpad_acpi模块">
 <comment>（请先阅读上面的警告再做这个！）</comment>
 # <i>echo "options thinkpad_acpi experimental=1" >> /etc/modules.d/thinkpad_acpi</i>
-# <i>/sbin/update-modules</i>
+# <i>update-modules</i>
 # <i>echo thinkpad_acpi >> /etc/modules.autoload.d/kernel-2.6</i>
 # <i>modprobe thinkpad_acpi</i>
 </pre>
