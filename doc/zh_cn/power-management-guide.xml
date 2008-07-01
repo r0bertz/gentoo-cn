@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header:$--> 
-<!--English CVS version: 1.36-->
+<!--English CVS version: 1.37-->
 <guide link="/doc/zh_cn/power-management-guide.xml" lang="zh_cn">
 <title>电源管理指导</title>
 
@@ -22,8 +22,6 @@
 <abstract>
 电源管理是延长移动系统上电池使用时间的关键，比如在笔记本电脑上。这篇指导将帮你在你的笔记本上设置它。
 </abstract>
-
-
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 -->
