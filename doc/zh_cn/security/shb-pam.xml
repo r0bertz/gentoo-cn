@@ -32,7 +32,7 @@ session  required pam_unix.so
 </pre>
 
 <p>
-这将添加cracklib来确保用户的密码至少是8个字符并且包含2个数字、2个其他字符，还要和上次的密码至少有3个字符不一样。这会强制用户选择好的密码（密码策略）。想知道更多的选项，请看<uri·link="http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/sag-pam_cracklib.html">PAM</uri>文档。
+这将添加cracklib来确保用户的密码至少是8个字符并且包含2个数字、2个其他字符，还要和上次的密码至少有3个字符不一样。这会强制用户选择好的密码（密码策略）。想知道更多的选项，请看<uri link="http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/sag-pam_cracklib.html">PAM</uri>文档。
 </p>
 
 <pre caption="/etc/pam.d/sshd">
@@ -48,7 +48,7 @@ session  required pam_limits.so
 </pre>
 
 <p>
-每一个在<path>/etc/pam.d</path>中没有配置文件的服务将使用<path>/etc/pam.d/other</path>里的规则。默认设置是<c>deny</c>，他们本该如此。但我希望有一些日志记录，因此我添加了<c>pam_warn.so</c>。最后一个设置是<c>pam_limits</c>，由<path>/etc/security/limits.conf</path>文件来控制。查看<uri·link="?part=1&amp;chap=5#limits_conf">/etc/security/limits.conf</uri>以获得更多相关设置。
+每一个在<path>/etc/pam.d</path>中没有配置文件的服务将使用<path>/etc/pam.d/other</path>里的规则。默认设置是<c>deny</c>，他们本该如此。但我希望有一些日志记录，因此我添加了<c>pam_warn.so</c>。最后一个设置是<c>pam_limits</c>，由<path>/etc/security/limits.conf</path>文件来控制。查看<uri link="?part=1&amp;chap=5#limits_conf">/etc/security/limits.conf</uri>以获得更多相关设置。
 </p>
 
 <pre caption="/etc/pam.d/other">
