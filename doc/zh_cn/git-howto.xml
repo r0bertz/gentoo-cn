@@ -440,6 +440,14 @@ $ <i>git send-email 0001-Added-file-new_file_xml.patch --to gentoo-china@googleg
 $ <i>git am -s tmp.txt</i>
 </pre>
 
+<p>
+假如打补丁失败，在修正补丁后，执行：
+</p>
+
+<pre caption="修正补丁之后">
+$ <i>git am -s -r</i>
+</pre>
+
 </body>
 </section>
 </chapter>
