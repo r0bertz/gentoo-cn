@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.6 -->
+<!-- English CVS version: 1.7 -->
 
 <sections>
 
-<version>9.3</version>
-<date>2008-05-04</date>
+<version>9.4</version>
+<date>2008-07-05</date>
 
 <section>
 <title>硬件需求</title>
@@ -241,31 +241,6 @@ boot: <i>gentoo dopcmcia</i>
 
 <pre caption="加载内核模块">
 # <i>modprobe 8139too</i>
-</pre>
-
-</body>
-</subsection>
-<subsection>
-<title>可选：调整硬盘性能</title>
-<body>
-
-<p>
-如果你是高级用户，你可能想使用<c>hdparm</c>调整IDE硬盘的性能。你可以在root权限下使用<c>hdparm</c>程序。你可以使用<c>-tT</c>选项来测试你的硬盘的性能（多执行几次以得到更精确的结果）：
-</p>
-
-<pre caption="测试硬盘性能">
-# <i>hdparm -tT /dev/sda</i>
-</pre>
-
-<p>
-为了调整性能，你可以使用下面任何一个实例（或者自己试验），它们都是以<path>/dev/sda </path>作为示例的对象（请替换成您使用的硬盘）。
-</p>
-
-<pre caption="调整硬盘性能">
-<comment>（激活DMA:）</comment>
-# <i>hdparm -d 1 /dev/sda</i>
-<comment>（或使用安全的性能选项：）</comment>
-# <i>hdparm -d 1 -A 1 -m 16 -u 1 -a 64 /dev/sda</i>
 </pre>
 
 </body>

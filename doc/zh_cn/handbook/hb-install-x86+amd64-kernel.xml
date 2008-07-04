@@ -4,15 +4,15 @@
 <!-- The content of this document is licensed under the CC-BY-SA license -->
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <!-- $Header$ -->
-<!-- English CVS version: 1.25 -->
+<!-- English CVS version: 1.26 -->
 <sections>
 
 <abstract>
 Linux内核是每个发行版的核心。本章节将解释如何配置您自己的内核。
 </abstract>
 
-<version>6.3</version>
-<date>2008-06-02</date>
+<version>6.4</version>
+<date>2008-07-05</date>
 
 <section>
 <title>时区</title>
@@ -212,7 +212,7 @@ Processor type and features  ---&gt;
 
 <pre caption="启用USB接口的输入设备支持">
 Device Drivers ---&gt;
-  USB Support ---&gt;
+  [*] HID Devices---&gt;
     &lt;*&gt;   USB Human Interface Device (full HID) support
 </pre>
 
