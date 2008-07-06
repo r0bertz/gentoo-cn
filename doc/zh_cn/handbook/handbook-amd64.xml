@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.148 -->
+<!-- English CVS version: 1.149 -->
 <book lang="zh_cn">
 <title>Gentoo Linux AMD64手册</title>
 
@@ -14,12 +14,12 @@
  <key id="kernel-name">kernel-2.6.24-gentoo-r5</key>
  <key id="genkernel-name">kernel-genkernel-amd64-2.6.24-gentoo-r5</key>
  <key id="genkernel-initrd">initramfs-genkernel-amd64-2.6.24-gentoo-r5</key>
- <key id="min-cd-name">install-amd64-minimal-2008.0_beta2.iso</key>
+ <key id="min-cd-name">install-amd64-minimal-2008.0.iso</key>
  <key id="min-cd-size">50</key>
- <key id="live-cd-name">livecd-amd64-installer-2008.0_beta2.iso</key>
+ <key id="live-cd-name">livecd-amd64-installer-2008.0.iso</key>
  <key id="live-cd-size">701</key>
- <key id="release-dir">releases/amd64/2008.0_beta2/</key>
- <key id="stage3">stage3-amd64-2008.0_beta2.tar.bz2</key>
+ <key id="release-dir">releases/amd64/2008.0/</key>
+ <key id="stage3">stage3-amd64-2008.0.tar.bz2</key>
  <key id="profile">default-linux/amd64/2008.0</key>
  <key id="CFLAGS">-march=k8 -O2 -pipe</key>
  <key id="online-book">handbook-amd64.xml</key>
@@ -184,8 +184,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.4</version>
-<date>2008-05-04</date>
+<version>9.5</version>
+<date>2008-07-07</date>
 
 <part>
 <title>安装Gentoo</title>

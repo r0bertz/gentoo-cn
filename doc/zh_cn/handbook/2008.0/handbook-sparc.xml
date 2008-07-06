@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.8 -->
+<!-- English CVS version: 1.9 -->
 
 <book lang="zh_cn">
 <title>Gentoo Linux 2008.0 SPARC无网络手册</title>
@@ -11,10 +11,10 @@
  <key id="arch">SPARC</key>
  <key id="kernel-name">kernel-2.6.24-gentoo-r5</key>
  <key id="kernel-version">2.6.24-r5</key>
- <key id="min-cd-name">install-sparc-minimal-2008.0_beta2.iso</key>
+ <key id="min-cd-name">install-sparc-minimal-2008.0.iso</key>
  <key id="online-book">2008.0/handbook-sparc.xml</key>
- <key id="release-dir">releases/sparc/2008.0_beta2/sparc64/</key>
- <key id="stage3">stage3-sparc64-2008.0_beta2.tar.bz2</key>
+ <key id="release-dir">releases/sparc/2008.0/sparc64/</key>
+ <key id="stage3">stage3-sparc64-2008.0.tar.bz2</key>
  <key id="CFLAGS">-O2 -mcpu=ultrasparc -pipe</key>
 </values>
 
@@ -169,8 +169,8 @@ Gentoo无网络手册目的是要将Gentoo/Linux的相关资料都集中收编�
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.2</version>
-<date>2008-05-04</date>
+<version>9.3</version>
+<date>2008-07-07</date>
 
 <part>
 <title>安装Gentoo</title>
