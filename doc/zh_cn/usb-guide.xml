@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Header$ -->
-<!-- English CVS version:1.17 -->
+<!-- $Header: /var/www/viewcvs.gentoo.org/raw_cvs/gentoo/xml/htdocs/doc/zh_cn/usb-guide.xml,v 1.4 2008/05/25 19:06:03 r0bertz Exp $ -->
+<!-- English CVS version:1.18 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 <guide link="/doc/zh_cn/usb-guide.xml" lang="zh_cn">
 <title>Gentoo Linux USB指南</title>
@@ -20,8 +20,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.13</version>
-<date>2007-04-09</date>
+<version>1.14</version>
+<date>2007-06-21</date>
 
 <chapter>
 <title>简介</title>
@@ -113,10 +113,6 @@ USB设备可以有单独的驱动程序，也可以使用系统提供的驱动�
 <title>获得内核</title>
 <body>
 
-<note>
-自从2005.0发行版本之后，Gentoo Linux就使用2.6内核作为默认内核。除非你特别指明使用2.4内核，<c>gentoo-sources</c>面向大部分计算机系统提供2.6内核。请检查你的内核版本，然后进行相应地配置。
-</note>
-
 <p>
 首先emerge你所要使用的内核源码，这里所使用的是<c>gentoo-sources</c>。关于Portage中其它的内核源码说明，请参考<uri link="/doc/en/gentoo-kernel.xml">Gentoo Linux Kernel Guide</uri>。
 </p>
@@ -140,19 +136,19 @@ USB设备可以有单独的驱动程序，也可以使用系统提供的驱动�
 
 </body>
 </section>
-<section id="newkernelconfig">
-<title>2.6.x内核配置选项</title>
+<section>
+<title>内核配置选项</title>
 <body>
 
 <p>
-现在来配置2.6内核中用于启用USB设备支持的一些选项。如果你使用的是2.4内核，请按照<uri link="#oldkernelconfig">2.4.x 内核配置选项</uri>进行。
+现在来看一下需要启用哪些内核选项以确保我们的硬件能够得到正确的 USB 支持。
 </p>
 
 <note>
 本文档示例只针对一些基本的USB支持，当然这也是大多数人所需要的，譬如USB块存储设备（数码相机与U盘驱动）。若对一些特殊的USB设备进行配置，请参考设备的用户手册，或者在网上搜索一下内核是否已经实现了对这些设备的支持，再或者使用你所能找到的对应驱动程序。请注意，本文为了简化问题，所有的示例配置都是编译到内核中去的，如果你希望使用内核的模块机制，在确认要编译哪些模块时，相应地调整一下内核配置文件。
 </note>
 
-<pre caption="2.6 kernel的make menuconfig选项">
+<pre caption="make menuconfig选项">
 Device Drivers  ---&gt;
   SCSI device support  ---&gt;
 
@@ -180,7 +176,6 @@ USB support  ---&gt;
 &lt;*&gt; USB Printer support
 &lt;*&gt; USB Mass Storage support
 
-<comment>(然后是HID设置。如果你有USB接口的键盘、鼠标、游戏手柄等输入设备，必须要启用这些选项)</comment>
 --- USB Input Devices
 &lt;*&gt; USB Human Interface Device (full HID) support
  [*]   HID input layer support
@@ -196,64 +191,17 @@ USB Serial Converter support  ---&gt;
 </pre>
 
 <p>
-内核选项已经配置完毕，（重新）编译内核，使用新内核重启机器就可以实现对USB设备的支持了。现在，可以阅读<uri link="#postkern">查看USB工作状况</uri>一节，查看USB设备是否正常工作。
+如果你拥有 USB 主板、鼠标、控制杆或者其它类型的输入设备，则有必要启用 HID 支持。请阅读“设备驱动”一节，并像下面这样启用 HID：
 </p>
 
-</body>
-</section>
-<section id="oldkernelconfig">
-<title>2.4.x 内核配置选项</title>
-<body>
-
-<p>
-现在来配置一下在2.6内核中用于启用USB设备支持的一些选项。如果你使用的是2.6内核，请按照<uri link="#newkernelconfig">2.6.x内核配置选项</uri>进行。
-</p>
-
-<note>
-本文档示例只针对一些基本的USB支持，当然这也是大多数人所需要的，譬如USB块存储设备（数码相机与U盘驱动）。若对一些特殊的USB设备进行配置，请参考设备的用户手册，或者在网上搜索一下内核是否已经实现了对这些设备的支持，再或者使用你所能找到的对应驱动程序。请注意，本文为了简化问题，所有的示例配置都是编译到内核中去的，如果你希望使用内核的模块机制，在确认要编译哪些模块时，相应地调整一下内核配置文件。
-</note>
-
-<pre caption="2.4 kernel的make menuconfig选项" >
-<comment>(此处配置只针对那些拥有USB输入设备的用户，Input core support在下面设置USB HID时是必需的)</comment>
-Input core support  ---&gt;
-   &lt;*&gt; Input core support
-   &lt; &gt;   Keyboard support
-   &lt; &gt;   Mouse support
-   &lt; &gt;   Event interface support
-
-USB support  ---&gt;
-
-<comment>(这是根集线器，对于USB支持而言是必须的。如果你想把它编译成模块，那么它就叫做usbcore.o)</comment>
-&lt;*&gt; Support for USB
-
-<comment>(启用这一选项可以让你在/porc/bus/usb中查看USB设备，推荐启用)</comment>
- [*]   Preliminary USB device filesystem
-
-<comment>(至少要选择一个HCD。如果你不能确定，就都选上好了)</comment>
---- USB Host Controller Drivers
-&lt;*&gt;   UHCI Alternate Driver (JE) support
-&lt; &gt;   OHCI (Compaq, iMacs, OPTi, SiS, ALi, ...) support
-
-<comment>(此处是具体USB设备选项，根据你的需要来选择)</comment>
---- USB Device Class drivers
-&lt; &gt;   USB Audio support
-&lt;*&gt;   USB Mass Storage support
-&lt; &gt;   USB Modem (CDC ACM) support
-&lt;*&gt;   USB Printer support
-
-<comment>(下面是HID选项，如果你有USB输入设备，这里是必选的)</comment>
---- USB Human Interface Devices (HID)
-&lt;*&gt;   USB Human Interface Device (full HID) support
- [*]     HID input layer support
-
-<comment>(如果你有串口-USB转接器，譬如Prolific 2303，你需要开启这一选项)</comment>
-USB Serial Converter support  ---&gt;
-    &lt;*&gt; USB Serial Converter support
-    &lt;*&gt; USB Prolific 2303 Single Port Serial Driver (NEW)
+<pre caption="Enabling HID support">
+Device Drivers ---&gt;
+  [*] HID Devices  ---&gt;
+    &lt;*&gt;   USB Human Interface Device (full HID) support
 </pre>
 
 <p>
-内核选项已经配置完毕，（重新）编译内核，使用新内核重启机器就可以实现对USB设备的支持了。
+内核选项已经配置完毕，你可以（重新）编译内核，然后使用新内核重启机器就可以实现对USB设备的支持了。现在你可以向下阅读<uri link="#postkern">查看USB设备工作状况</uri>，查看是否设备是否正常工作。
 </p>
 
 </body>
