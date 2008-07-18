@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- $Header$ -->
+<!-- English CVS version: 1.1 -->
+<!DOCTYPE sections SYSTEM "/dtd/book.dtd">
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
+<sections>
+
+<version>1.0</version>
+<date>2005-05-31</date>
+
+<section>
+<title>TCP Wrappers</title>
+<body>
+
+<p>
+这是控制某些服务的访问权限的一种方法，通常这些服务由inetd运行（Gentoo里没有这个），不过也可以用在xinetd和其他一些服务上。
+</p>
+
+<note>
+这类服务需要在它的服务参数（在xinetd中）里执行tcpd。更多信息请参考xinetd的章节。
+</note>
+
+<pre caption="/etc/hosts.deny">
+ALL:PARANOID
+</pre>
+
+<pre caption="/etc/hosts.allow">
+ALL: LOCAL @wheel
+time: LOCAL, .gentoo.org
+</pre>
+
+<p>
+正如你所看到的，格式和<path>/etc/login.access</path>的非常类似。tcpd支持设置指定的服务；它不会和<path>/etc/login.access</path>中的设置存在重复的问题，因为这些设置仅仅对使用tcp wrappers的服务有效。
+</p>
+
+<p>
+它还能够在服务被访问到的时候执行命令（可以用在当拨号用户被接入的时候）但是我们不推荐这么做，因为我们常常庸人自扰。比如，你配置了一个脚本当有人触发了拒绝规则（deny rule）的时候发一封邮件，但是接着有个攻击者启动了DoS攻击会持续触发拒绝规则。这将引发大量I/O操作和邮件，所以千万别这么做！更多信息请阅读手册<c>man 5 hosts_access</c>。
+</p>
+
+</body>
+</section>
+
+</sections>
