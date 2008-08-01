@@ -2,7 +2,7 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.170 -->
+<!-- English CVS version: 1.171 -->
 
 <book lang="zh_cn">
 <title>Gentoo Linux x86手册</title>
@@ -190,8 +190,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>9.5</version>
-<date>2008-07-07</date>
+<version>9.6</version>
+<date>2008-08-02</date>
 
 <part>
 <title>安装Gentoo</title>

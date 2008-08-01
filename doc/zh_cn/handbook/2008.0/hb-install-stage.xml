@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.6 -->
+<!-- English CVS version: 1.7 -->
 
 <sections>
 
-<version>9.3</version>
-<date>2008-07-07</date>
+<version>9.4</version>
+<date>2008-08-02</date>
 
 <section>
 <title>安装一个Stage Tarball</title>
@@ -82,29 +82,6 @@ ls: /mnt/cdrom/stages: No such file or directory
 <pre caption="解开stage tarball">
 # <i>tar xvjpf /mnt/cdrom/stages/<keyval id="stage3"/></i>
 </pre>
-
-<p>
-现在stage已经安装好，下面我们继续<uri link="#installing_portage">安装Portage</uri>。
-</p>
-
-</body>
-</subsection>
-<subsection>
-<title>解开Stage Tarball</title>
-<body>
-
-<p>
-现在把你所下载的stage解压缩到系统里。我们使用<c>tar</c>命令来做，这是最简单的方法：
-</p>
-
-<pre caption="解开stage">
-# <i>tar xvjpf stage3-*.tar.bz2</i>
-</pre>
-
-<p>
-请确认你使用了同样的参数（<c>xvjpf</c>）。<c>x</c>参数代表<e>Extract</e>，<c>v</c>参数代表<e>Verbose</e>（可选参数，添加该参数后可以看到在解开tar包的过程中发生了些什么），<c>j</c>参数代表<e>使用bzip2解压缩</e>，<c>p</c>参数代表<e>Preserve permissiions</e>（保留权限），而<c>f</c>参数代表我们想要解开的是一个文件而不是来自于标准输入的数据。
-
-</p>
 
 <p>
 现在stage已经安装好，下面我们继续<uri link="#installing_portage">安装Portage</uri>。
