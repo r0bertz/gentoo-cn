@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+<!-- $Header$ --> 
+<!-- English CVS version: 1.28 --> 
+
+<guide link="/doc/zh_cn/gentoo-amd64-faq.xml" lang="zh_cn" disclaimer="draft">
+<title>Gentoo Linux/AMD64常见问题</title>
+
+<author title="编辑">
+  <mail link="blubb@gentoo.org">Simon Stelling</mail>
+</author>
+<author title="编辑">
+  <mail link="metalgod@gentoo.org">Luis Medinas</mail>
+</author>
+<author title="编辑">
+  <mail link="gerrynjr@gentoo.org">Gerald J. Normandin Jr.</mail>
+</author>
+<author title="编辑">
+  <mail link="neysx@gentoo.org">Xavier Neys</mail>
+</author>
+<author title="译者"> 
+  <mail link="ritksm@gmail.com">江泽洲</mail> 
+</author> 
+
+<abstract>
+这是《Gentoo Linux/AMD64常见问题
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license -->
+<!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.19</version>
+<date>2008-07-25</date>
+
+<faqindex>
+<title>问题</title>
+<section>
+<title>关于《Gentoo Linux/AMD64常见问题》的介绍</title>
+<body>
+
+<p>
+此文档涵盖了关于Gentoo/AMD64的最普遍的几个问题。我们旨在帮助用户并提供一些有关Gentoo/AMD64的有用信息。你可以在论坛、IRC或者邮件列表里找到其中的一部分问题。如果你对这篇《常见问题》有任何意见或疑问的话，我们很欢迎你发送邮件到<mail>amd64@gentoo.org</mail>来联系我们。
+</p>
+
+</body>
+</section>
+</faqindex>
+
+<chapter>
+<title>安装</title>
+<section id="cflags">
+<title>对于AMD64/EM64T构架我应该使用哪些CFLAGS？</title>
+<body>
+
+<p>
+你应该尽可能地简化你的<c>CFLAGS</c>来避免未来发生的一些系统问题。以下是被支持的<c>CFLAGS</c>：<c>-O2 -march=k8
+-pipe</c>（对于非EM64T系统）和<c>-O2 -march=nocona -pipe</c>（对于EM64T系统）。
+</p>
+
+</body>
+</section>
+<section id="kernel">
+<title>对于AMD64构架我应该使用哪一种内核？</title>
+<body>
+
+<p>
+你可以使用几乎所有在Portage里面的内核源码。我们推荐你使用<c>gentoo-sources</c>，因为它是特别为Gentoo
+Linux设计的内核。它包含了许多针对AMD64构架的补丁，所以它是唯一一个被Gentoo/AMD64官方支持的内核。
+</p>
+
+<warn>
+你应该对一些没有经过完全测试的内核特性保持警惕，比如<c>PREEMPT</c>。
+</warn>
+
+<p>
+请确保你已经在内核里激活了<c>IA32_EMULATION</c>选项。
+</p>
+
+<pre caption="在内核源码里激活IA32 Emulation">
+# <i>cd /usr/src/linux</i>
+# <i>make menuconfig</i>
+
+Executable file formats / Emulations  ---&gt;
+  [*] IA32 Emulation
+</pre>
+
+<warn>
+如果你在multilib系统上禁用了这个选项，你可能会遇到编译失败的情况。
+</warn>
+
+</body>
+</section>
+<section id="perfup">
+<title>如果我使用64位系统来取代32位系统，系统的性能会提高吗？</title>
+<body>
+
+<p>
+这是一个很难回答的问题。在某些情况下，你可能会得到性能的提升，然而在其他情况下可能就没有提升了。对于日常使用来说，64位和32位几乎没有区别。64位CPU在进行浮点运算的时候一般比较快，然而这些运算通常发生在使用多媒体应用程序和3D渲染的情况下。这一篇<uri
+link="http://enterprise.linux.com/enterprise/05/06/09/1413209.shtml?tid=121">文章</uri>可能能够引起你的兴趣。在我们的<uri
+link="http://forums.gentoo.org">论坛</uri>里也有一个极好的<uri
+link="http://forums.gentoo.org/viewtopic-t-349691.html">板块</uri>。
+</p>
+
+</body>
+</section>
+<section id="multilib">
+<title>什么是multilib，我又该如何使用它呢？</title>
+<body>
+
+<p>
+每一个AMD64处理器都能够像运行64位代码一样运行32位代码。然而，当你拥有一个32位应用程序时，你不能把它和64位lib库混在一起使用，反之亦然。但是你可以在原生环境下运行32位应用程序，前提是你可以提供它所需要的所有32位共享lib库。你可以选择相应的profile来决定是否想要multilib支持。默认的profile是支持multilib的。
+</p>
+
+<warn>
+目前来说，你无法从一个不支持multilib的profile转向一个支持multilib的profile，所以请在使用不支持multilib的profile前再三考虑一下。
+</warn>
+
+</body>
+</section>
+<section id="chroot32">
+<title>我要如何建立一个32位的chroot？</title>
+<body>
+
+<p>
+请阅读<uri link="/proj/en/base/amd64/howtos/chroot.xml">32位chroot指南</uri>。
+</p>
+
+</body>
+</section>
+<section id="upgradex86">
+<title>我能通过emerge -e world命令从x86系统升级到amd64系统吗？</title>
+<body>
+
+<p>
+由于<c>x86构架</c>和<c>amd64构架</c>在安装上的几个不同之处，升级是不可能的。请重新安装你的系统。amd64构架的安装过程和x86构架的有一些不同，所以请使用<uri
+link="/doc/en/handbook/handbook-amd64.xml">AMD64安装手册</uri>。
+</p>
+
+</body>
+</section>
+<section id="reiser4">
+<title>我能使用Reiser4吗？</title>
+<body>
+
+<p>
+对于所有由“Gentoo内核计划”（Gentoo Kernel
+project）提供的内核都不支持Reiser4，所以AMD64小组也没有支持它。答案是否定的。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>硬件</title>
+<section id="videobindrivers">
+<title>我的二进制NVIDIA或ATI驱动能够工作吗？</title>
+<body>
+
+<p>
+可以，NVIDIA和ATI提供了可以在AMD64构架上工作的驱动。你可以运行<c>emerge
+nvidia-drivers</c>或者<c>emerge ati-drivers</c>命令来安装它们。如果你对这些驱动还有疑问，你应该读一读<uri
+link="/doc/en/nvidia-guide.xml">Nvidia指南</uri>或者<uri
+link="/doc/en/ati-faq.xml">ATI常见问题</uri>。
+</p>
+
+</body>
+</section>
+<section id="coolnquiet">
+<title>我应该如何使用Cool'n'Quiet或者PowerNow特性？</title>
+<body>
+
+<p>
+你必须把对这些特性的支持编译到你的内核中。你需要激活以下特性：
+</p>
+
+<pre caption="针对Cool'n'Quiet或者PowerNow的内核选项">
+Power management options ---&gt;
+  [*] Power Management support
+CPU Frequency scaling ---&gt;
+  [*] CPU Frequency scaling
+  [*] CPU frequency table helpers
+  [*] AMD Opteron/Athlon64 PowerNow!
+</pre>
+
+<p>
+然后运行<c>emerge cpudyn</c>，接着使用你最喜欢的编辑器来编辑<path>/etc/conf.d/cpudyn</path>文件。
+</p>
+
+<pre caption="/etc/conf.d/cpudyn文件范例">
+INTERVAL=1
+CPU_UP=0.5
+CPU_DOWN=0.9
+THROTTLING_LOW=7
+CPUFREQ_25="/sys/devices/system/cpu/cpu0/cpufreq /sysfs/devices/system/cpu/cpu0/cpufreq"
+CPUFREQ_ACPI="/proc/acpi/processor/CPU0/throttling"
+</pre>
+
+<p>
+现在你只需要运行<c>rc-update add cpudyn default</c>来确保它在你每次启动系统的时候都启动了。
+</p>
+
+<note>
+如果你想得到更多有关CPU电源管理的心得，你可能会想看一看<uri
+link="/doc/en/power-management-guide.xml#doc_chap3">电源管理指南</uri>。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>应用程序</title>
+<section id="flash">
+<title>我能让Macromedia Flash工作起来吗？</title>
+<body>
+
+<p>
+可以。为了使Flash工作起来，你需要一个32位的浏览器，比如<c>mozilla-firefox-bin</c>或者<c>opera</c>，因为Macromedia不提供Flash的64位版本。在你使用emerge安装了你最喜欢的浏览器的预编译包之后，你可以通过运行<c>emerge
+netscape-flash</c>来安装Flash。
+</p>
+
+</body>
+</section>
+<section id="OOo">
+<title>我能让OpenOffice.org工作起来吗？</title>
+<body>
+
+<p>
+早于2.0.4版本的OpenOffice没有为64位系统编译的版本，所以你需要使用32位的二进制版本，它被存放在Portage里并命名为<c>app-office/openoffice-bin</c>。如果你觉得你有足够的勇气，你可以运行<c>emerge
+openoffice</c>，但是请注意64位的版本现在还没有进行过足够的测试，所以它还不能被看成是稳定的。
+</p>
+
+</body>
+</section>
+<section id="masked">
+<title>我想要安装某一个软件包，但是emerge显示了以下信息：（masked by: ~amd64 keyword）</title>
+<body>
+
+<p>
+这条信息表示这个软件包仍然处在“测试版本”的软件库中。请阅读<c>man portage</c>或者<uri
+link="/doc/en/handbook/handbook-amd64.xml">AMD64手册</uri>里的<uri
+link="/doc/en/handbook/handbook-amd64.xml?part=3&amp;chap=3">混合软件包分支</uri>章节来得到更多信息。
+</p>
+
+</body>
+</section>
+<section id="keyword">
+<title>我想要安装某一个软件包，但是emerge显示了以下信息：（masked by: missing keyword）</title>
+<body>
+
+<p>
+这条信息表示这个软件包还没有被测试过。这<e>不</e>意味着这个软件包不能正常工作。你可以通过接受这个软件包的另一个构架来解除对它的锁定。以下的例子向你展示了你可以告诉Portage来接受针对某一给定软件包的任何keyword。
+</p>
+
+<pre caption="添加软件包keyword的例子">
+# <i>echo "category/packagename **" >> /etc/portage/package.keywords</i>
+# <i>emerge packagename</i>
+</pre>
+
+<p>
+如果这对你有用，请告诉我们并且提交一个Bug到<uri
+link="http://bugs.gentoo.org/">Gentoo的Bugzilla</uri>，以便AMD64团队可以给那个软件包确定一个keyword，然后其他用户就可以从你的测试中受益了。
+</p>
+
+<warn>
+请不要尝试像<c>ACCEPT_KEYWORDS="~x86" emerge packagename</c>这样的命令。它很可能会破坏你的软件包库。
+</warn>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>我要如何帮助Gentoo/AMD64计划？</title>
+<section id="project">
+<title>我要如何帮助？</title>
+<body>
+
+<p>
+随着amd64构架的日益流行，我们也需要更多的帮助。对于提高Gentoo/AMD64的品质，我们还有很多需要做。一个普通的用户可以通过以下方式来帮助我们：
+</p>
+
+<ul>
+  <li>提交一般性的bug报告</li>
+  <li>测试还没有被标记上<c>~amd64</c>的软件。</li>
+  <li>
+    加入<uri link="/proj/en/base/amd64/at/">平台测试者计划（Arch Testers project）</uri>
+  </li>
+  <li>
+    在邮件列表、论坛或者IRC频道里帮忙回答问题
+  </li>
+  <li>上传补丁</li>
+</ul>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>其他资源</title>
+<section id="other">
+<title>我在那里能得到更多有关Gentoo/AMD64的帮助或信息？</title>
+<body>
+
+<p>
+如果你有一些这里没有回答的疑问，你可以试着浏览被列在<uri
+link="/proj/en/base/amd64/">我们的计划的主页</uri>上的其他资源。你也可以在<c>irc.freenode.net</c>上的<c>#gentoo-amd64</c>频道里或者在<uri
+link="http://forums.gentoo.org/viewforum-f-46.html">Gentoo/AMD64论坛</uri>里亦或者在<c>gentoo-amd64@lists.gentoo.org</c>邮件列表里提出你的疑问。
+</p>
+
+</body>
+</section>
+</chapter>
+
+</guide>
