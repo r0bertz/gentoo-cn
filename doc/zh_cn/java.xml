@@ -19,6 +19,9 @@
 <author title="译者">
  <mail link="foo@bar.com">Jipeng Tan</mail>
 </author>
+<author title="审校">
+ <mail link="r0bertz@gentoo.org">张乐</mail>
+</author>
 
 <abstract>
 这篇指南会向您介绍Java，并且说明如何在Gentoo Linux中使用Java。
@@ -38,11 +41,11 @@
 <body>
 
 <p>
-Java是Sun Microsystems开发的一门面向对象的程序语言，可以在不用重新编译的前提下运行在不同的平台上，当然也可以被编译成本地程序，良好的移植性和内存垃圾回收是Java受欢迎的主要原因。Java编译器会将代码转换成Java字节码作为中间层来使JRE（Java运行环境）具有独立平台运行的特性。
+Java是Sun Microsystems开发的一门面向对象的程序语言，可以在不用重新编译的前提下运行在不同的平台上。虽然也可以被编译成原生程序，但良好的移植性和内存垃圾回收才是Java受欢迎的主要原因。Java编译器会将Java代码转换成Java字节码作为中间层在JRE（Java运行环境）上而不是直接在操作系统上运行，这就使平台无关成为了可能。
 </p>
 
 <p>
-为了运行Java字节码，必须首先安装JRE（Java运行环境）。JRE会提供核心库，一个独立平台的Java虚拟机和浏览器插件。JDK（Java开发工具）则集成了编程所开发需的工具，例如字节码编译器和调试器。
+为了运行Java字节码，必须首先安装JRE（Java运行环境）。JRE会提供核心库，一个独立平台的Java虚拟机和浏览器插件等等。JDK（Java开发工具）则集成了编程所开发需的工具，例如字节码编译器和调试器。
 </p>
 
 </body>
@@ -90,22 +93,22 @@ Gentoo提供了多种运行环境（JRE）和开发工具（JDK）。我们现�
   <th>JRE</th>
 </tr>
 <tr>
-  <ti>The Blackdown Java Kit</ti>
+  <ti>Blackdown Java Kit</ti>
   <ti>dev-java/blackdown-jdk</ti>
   <ti>dev-java/blackdown-jre</ti>
 </tr>
 <tr>
-  <ti>Sun's Java Kit</ti>
+  <ti>Sun Java Kit</ti>
   <ti>dev-java/sun-jdk</ti>
   <ti>dev-java/sun-jre-bin</ti>
 </tr>
 <tr>
-  <ti>The IBM Java Kit</ti>
+  <ti>IBM Java Kit</ti>
   <ti>dev-java/ibm-jdk-bin</ti>
   <ti>dev-java/ibm-jre-bin</ti>
 </tr>
 <tr>
-  <ti>BEA WebLogic's J2SE Development Kit</ti>
+  <ti>BEA WebLogic J2SE Development Kit</ti>
   <ti>dev-java/jrockit-jdk-bin</ti>
 </tr>
 </table>
@@ -121,11 +124,11 @@ kaffe/sablevm/gcj/jamvm
 
 -->
 <p>
-默认安装的Java JDK／JRE 1.4是Blackdown提供的，它是完全免费的。
+默认安装的Java JDK／JRE 1.4是Blackdown提供的，它是完全免费且不需要注册的。
 </p>
 
 <p>
-Sun，IBM和BEA的JRE／JDK运行速度一般会快一些，但是在下载和安装之前，你需要做更多的工作，比如接受许可认证（IBM需要你先注册用户）。
+Sun、IBM和BEA的JRE／JDK运行速度一般会快一些，但是在下载和安装之前，你需要做更多的工作，比如接受许可认证（IBM需要你先注册用户）。
 </p>
 
 </body>
@@ -135,7 +138,7 @@ Sun，IBM和BEA的JRE／JDK运行速度一般会快一些，但是在下载和�
 <body>
 
 <p>
-你可以使用<c>emerge virtual/jdk</c>来安装profile默认的JDK。你也可以使用<c>emerge virtual/jre</c>安装profile默认的JRE。
+你可以使用<c>emerge virtual/jdk</c>来安装profile默认的JDK。或者，你可以使用<c>emerge virtual/jre</c>安装profile默认的JRE。
 </p>
 
 <p>
@@ -143,18 +146,17 @@ Sun近期重新制作了一个更适合Linux的JDK／JRE许可认证。从Java 1
 </p>
 
 <note>
-
-如果你要安装JDK，就不用在安装JRE，因为JRE是JDK的一部分。
+如果你要安装JDK，就不用再安装JRE，因为JRE是JDK的一部分。
 </note>
 
 </body>
 </section>
 <section>
-<title>安装获取受限制的虚拟机</title>
+<title>安装不能通过命令行下载的虚拟机</title>
 <body>
 
 <p>
-正如刚才所说，在安装某些JDK和JRE前你需要做一些额外的工作。首先emerge你需要的软件包，之后ebuild会告诉你在哪里可以下载所需的文件。
+正如刚才所说，在安装某些JDK和JRE前你需要多做一些步骤。你只需要照常emerge你需要的软件包，之后ebuild会告诉你在哪里可以下载所需的文件。
 </p>
 
 <p>
@@ -176,7 +178,7 @@ Gentoo支持安装多个JDK或者JRE并且不会造成任何冲突。
 </p>
 
 <p>
-使用<c>java-config</c>工具，你可以更改系统设置（root用户）。普通用户可以使用<c>java-config</c>改变个人设置。
+使用<c>java-config</c>工具，你可以更改系统设置（需要root用户）。普通用户可以使用<c>java-config</c>改变个人设置。
 </p>
 
 <note>
@@ -205,7 +207,7 @@ The following VMs are available for generation-2:
 </pre>
 
 <p>
-<e>*</e>标志出了你现在正在使用的虚拟机（系统虚拟机或者用户虚拟机）括号（<e>[]</e>）中的名字代表这个虚拟机的ID或者handle。你可以使用handle或ID来设置系统虚拟机：java-config --set-system-vm。下面是一个更改系统虚拟机的例子。
+<e>*</e>标志出了你现在正在使用的虚拟机（系统虚拟机或者用户虚拟机）。括号（<e>[]</e>）中的名字代表这个虚拟机的ID或者handle。你可以使用handle或ID来设置系统虚拟机：java-config --set-system-vm。下面是一个更改系统虚拟机的例子。
 </p>
 
 <pre caption="设定系统虚拟机">
@@ -232,15 +234,15 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 <body>
 
 <p>
-当安装Java软件包，虚拟机会在需要时被切换。
+当安装Java写成的软件的时候，虚拟机将会在需要时被切换。
 </p>
 
 <p>
-因为有很多的不同的虚拟机可以选择，我们没有足够的资源去测试和确认所有的软件包都能在上面正常工作。所以请确定所有的软件包都成功安装。我们为每个平台都定制了一份<e>默认的／受支持的虚拟机</e>列表，你可以在<path>/usr/share/java-config-2/config/jdk-defaults.conf</path>文件中找到。当你在安装Java软件包时，如果emerge检测到该列表中的某个虚拟机已经安装，它会自动使用该虚拟机，而不是system-vm。
+因为有很多的不同的虚拟机可以选择，我们没有足够的资源去测试和确认所有的软件包都能在上面正常工作。所以为确保所有的软件包都能成功安装，我们为每个平台都定制了一份<e>默认的／受支持的虚拟机</e>列表。此列表可以在<path>/usr/share/java-config-2/config/jdk-defaults.conf</path>文件中找到。当你在安装Java软件包时，如果系统检测到该列表中的某个虚拟机已经安装，它会自动使用该虚拟机，而不是system-vm。
 </p>
 
 <p>
-有时需要在安装软件时切换虚拟机。例如，system-vm设定为1.4，当你安装需要1.5版的软件包时，虚拟机会被暂时切换。
+有时需要在安装软件时切换虚拟机。例如，system-vm设定为1.4，当你安装需要1.5版的软件包时，虚拟机会被临时切换。
 </p>
 
 <p>
@@ -248,12 +250,12 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 </p>
 
 <pre caption="/etc/java-config-2/build/jdk.conf实例">
-<comment>我一直倾向使用sun-jdk，例如，sun-jdk-1.4，sun-jdk-1.5等等。</comment>
+<comment>我只想使用sun-jdk，例如1.4版使用sun-jdk-1.4、1.5版使用sun-jdk-1.5等等。</comment>
 *=sun-jdk
 </pre>
 
 <pre caption="/etc/java-config-2/build/jdk.conf实例">
-<comment>除了明确需要1.3或1.4版虚拟机，我一直使用sun-jdk-1.5</comment>
+<comment>我只想使用sun-jdk-1.5，除了指明需要1.3或1.4版虚拟机的情况</comment>
 *=sun-jdk-1.5
 </pre>
 
@@ -279,10 +281,10 @@ Now using sun-jdk-1.5 as your generation-2 system JVM
 <body>
 
 <p>
-对于任何的JDK，你可以使用Javac来调用标准的编译器。在build时，你除了可以设定虚拟机，也可以设定编译器。简单说，你可以在<path>/etc/java-config-2/build/compilers.conf</path>里定义你首选的编译器。
+对于任何的JDK，你可以使用javac来调用标准的编译器。在编译时，你除了可以设定虚拟机，也可以设定编译器。简单说，你可以在<path>/etc/java-config-2/build/compilers.conf</path>里定义你首选的编译器。
 </p>
 
-<pre caption="/etc/java-config-2/build/compilers.conf.">
+<pre caption="/etc/java-config-2/build/compilers.conf">
 # 如果ebuild支持它
 # 它会从头到尾的检查COMPILERS变量里的值
 # 并且使用第一个已经安装的编译器
@@ -291,7 +293,7 @@ COMPILERS="ecj-3.1 jikes javac"
 </pre>
 
 <p>
-部分编译器不支持所有可能的-target和-source参数。所以每一个在列表中的编译器都会被检测来确定它是否支持所需要的-source／-target。javac适用于任何情况，如果在列表中没有发现合适的编译器，javac会被调用。
+部分编译器不支持所有可能的-target和-source参数。所以每一个在列表中的编译器都会被检测来确定它是否支持所需要的-source／-target。javac支持所有的参数，所以如果在列表中没有发现合适的编译器，javac会被调用。
 </p>
 
 <p>
@@ -341,15 +343,15 @@ COMPILERS="ecj-3.1 jikes javac"
 <body>
 
 <warn>
-下面的段落已被认为已经过时，很可能在以后被删除。我们强烈建议你不使用它们，因为你的Java项目应该管理自己的CLASSPATH。如果你指定一个默认的CLASSPATH，部分程序可能因为发现未预期的class产生错误。
+下面的段落已被认为已经过时，很可能在以后被删除。我们强烈建议你不要使用它们，因为你的Java项目应该管理自己的CLASSPATH。如果你指定一个默认的CLASSPATH，部分程序可能因为发现未预期的class而产生错误。
 </warn>
 
 <p>
-<c>java-config</c> 也可以用来设定一个系统级别的CLASSPATH，当然也可以设定一个用户级别的CLASSPATH。
+<c>java-config</c>也可以用来设定系统级别的CLASSPATH和用户级别的CLASSPATH。
 </p>
 
 <p>
-首先，你要列出所有在你系统上安装的Java库
+首先，你要列出所有在你系统上安装的Java库：
 </p>
 
 <pre caption="列出class">
@@ -363,7 +365,7 @@ COMPILERS="ecj-3.1 jikes javac"
 </pre>
 
 <p>
-和前面一样，在括号（<e>[]</e>）中的名字代表你在<c>java-config --set-system-classpath</c>使用的ID。如下例：
+和前面一样，在括号（<e>[]</e>）中的名字代表你将传递给<c>java-config --set-system-classpath</c>的ID。如下例：
 </p>
 
 <pre caption="设定classpath">
@@ -375,16 +377,17 @@ COMPILERS="ecj-3.1 jikes javac"
 </note>
 
 <p>
-你不需要注销，登录或者sourcing <path>/etc/profile</path>来更新你的环境变量。
+你需要注销并重新登录或者source <path>/etc/profile</path>来更新你的环境变量。
 </p>
 
 <p>
-对于用户，<c>java-config --set-user-classpath</c>会建立<path>~/.gentoo/java-env-classpath</path>。之后你应该source shell的profile。
+对于用户，<c>java-config --set-user-classpath</c>会建立<path>~/.gentoo/java-env-classpath</path>。之后你应该从你的shell的profile里source这个文件。
 </p>
 
-<pre caption="Sourcing用户指定classpath">
-<i>if [[ -f \"${HOME}/.gentoo/java-env-classpath\" ]]; then
-       source ${HOME}/.gentoo/java-env-classpath\n fi</i>
+<pre caption="Source用户专有的classpath">
+<i>if [[ -f "${HOME}/.gentoo/java-env-classpath" ]]; then
+	source ${HOME}/.gentoo/java-env-classpath
+fi</i>
 </pre>
 
 <p>
@@ -392,7 +395,7 @@ COMPILERS="ecj-3.1 jikes javac"
 </p>
 
 <pre caption="设定classpath">
-# <i>export CLASSPATH=\"${CLASSPATH}:$(java-config --classpath log4j,xerces-2)\"</i>
+# <i>export CLASSPATH="${CLASSPATH}:$(java-config --classpath log4j,xerces-2)"</i>
 </pre>
 
 </body>
@@ -406,7 +409,7 @@ COMPILERS="ecj-3.1 jikes javac"
 <body>
 
 <p>
-你可以使用<c>nsplugin</c>USE标记，emerge Java虚拟机来安装Java浏览器插件。
+你可以在启用<c>nsplugin</c> USE标记的情况下emerge Java虚拟机来安装Java浏览器插件。
 </p>
 
 <note>
@@ -442,7 +445,7 @@ Portage允许你安装多个不同版本的Java插件，但是只有一个会被
 </pre>
 
 <p>
-Java.com也提供了一个链接<uri link="http://java.com/en/download/installed.jsp">来确认你安装了插件。</uri>。如果你使用基于Mozilla的浏览器，你可以地址栏输入<c>about:plugins</c>来确认你的Java插件。
+Java.com也提供了一个链接<uri link="http://java.com/en/download/installed.jsp">来验证你已经安装的插件</uri>。如果你使用基于Mozilla的浏览器，你可以地址栏输入<c>about:plugins</c>来验证你的Java插件。
 </p>
 
 </body>
@@ -452,11 +455,11 @@ Java.com也提供了一个链接<uri link="http://java.com/en/download/installed
 <body>
 
 <p>
-如果你的系统包括了64位和32位multilib（例如，AMD64），你只能使用32位Java插件。
+如果你的系统包括了64位和32位multilib（例如AMD64），你只能使用32位Java插件。
 </p>
 
 <p>
-你可以使用<c>nsplugin</c> USE标记，emerge<c>emul-linux-x86-java</c>来使用32位插件。
+你可以使用<c>nsplugin</c> USE标记emerge <c>emul-linux-x86-java</c>来使用32位插件。
 </p>
 
 <pre caption="安装32位插件">
