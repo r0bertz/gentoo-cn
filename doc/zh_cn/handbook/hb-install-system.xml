@@ -220,7 +220,7 @@ lrwxrwxrwx  1 48 Apr  8 18:51 /etc/make.profile -> ../usr/portage/profiles/<keyv
 </p>
 
 <p>
-默认的<c>USE</c>设置位于你profile的<path>make.defaults</path>文件里。你可以在符号连接<path>/etc/make.profile</path>所指向的目录里找到<path>make.defaults</path>文件。默认的<c>USE</c>设置是所有<path>make.defaults</path>文件里<c>USE</c>的集合。所有你放在<path>/etc/make.conf</path>里的<c>USE</c>都会根据默认设置重新计算。如果你添加了一些<c>USE</c>的设置，它会被增加到默认的列表里。如果你删除了一些<c>USE</c>设置（通过放一个减号到它前面），它将被从默认的列表里移除（如果它确实在默认列表里的话）。<e>绝对不</e>要改变<path>/etc/make.profile</path>目录里的任何东西，它会在你更新Portage的时候被覆盖掉！
+默认的<c>USE</c>设置位于你profile的<path>make.defaults</path>文件里。你可以在符号连接<path>/etc/make.profile</path>所指向的目录和它所有的父目录里找到<path>make.defaults</path>文件。默认的<c>USE</c>设置是所有<path>make.defaults</path>文件里<c>USE</c>的集合。所有你放在<path>/etc/make.conf</path>里的<c>USE</c>都会根据默认设置重新计算。如果你添加了一些<c>USE</c>的设置，它会被增加到默认的列表里。如果你删除了一些<c>USE</c>设置（通过放一个减号到它前面），它将被从默认的列表里移除（如果它确实在默认列表里的话）。<e>绝对不</e>要改变<path>/etc/make.profile</path>目录里的任何东西，它会在你更新Portage的时候被覆盖掉！
 </p>
 
 <p>
