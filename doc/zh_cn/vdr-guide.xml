@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.9 -->
+<!-- English CVS version: 1.10 -->
 
 <guide link="/doc/zh_cn/vdr-guide.xml" lang="zh_cn">
 <title>Gentoo Linux VDR指南</title>
@@ -34,8 +34,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.6</version>
-<date>2008-03-21</date>
+<version>1.7</version>
+<date>2008-06-12</date>
 
 <chapter>
 <title>DVB简介</title>
@@ -239,7 +239,7 @@ B: KEY=108fc210 2043 0 0 0 0 8000 2080 1 9e1680 0 0 ffc
 </p>
 
 <p>
-<c>lircd</c>需要知道设备名。加入此行到<path>/etc/conf.d/lirc.conf</path>。请用您的实际驱动名和设备名替换<c>devinput</c>和<c>event1</c>。
+<c>lircd</c>需要知道设备名。加入此行到<path>/etc/conf.d/lircd</path>。请用您的实际驱动名和设备名替换<c>devinput</c>和<c>event1</c>。
 </p>
 
 <pre caption="加入lircd选项">
