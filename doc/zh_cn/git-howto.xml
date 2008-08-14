@@ -75,6 +75,7 @@ $ <i>emerge -av msmtp</i>
 $ <i>cat > ~/.msmtprc</i>
 defaults
 tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
 account gmail
 host smtp.gmail.com
 from yourname@gmail.com
