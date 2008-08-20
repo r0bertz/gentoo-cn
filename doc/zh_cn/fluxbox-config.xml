@@ -72,7 +72,7 @@ Fluxbox也可以通过第三方软件来扩展。这常见于硬件资源有限�
 <body>
 
 <p>
-Gentoo提供了ebuild来安装简便地Fluxbox。并且通过<c>gnome</c> and 
+Gentoo提供了ebuild来简便地安装Fluxbox。并且通过<c>gnome</c> and 
 <c>kde</c>USE标记来提供对前述环境的兼容性。但根据作者的经验，并不需要这些USE标记。如果你想要qt，gtk+，或者任何KDE/GNOME实用工具，只要单独的emerge然后配置就可以了。例如，作者就在Fluxbox里使用了KDE可选的刻录工具<c>k3b</c>。
 </p>
 
