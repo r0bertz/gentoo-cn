@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-
 <!-- $Header$ -->
 <!-- English CVS version: 1.14 -->
 
-<guide link="/proj/zh_cn/desktop/gnome/howtos/gnome-2.22-upgrade.xml" lang="zh_cn" disclaimer="draft">
+<guide link="/proj/zh_cn/desktop/gnome/howtos/gnome-2.22-upgrade.xml" lang="zh_cn">
 <title>Gnome 2.22升级指南</title>
 
 <author title="作者">
@@ -20,11 +19,13 @@
 <author title="译者">
   <mail link="guanqun.lu@gmail.com">陆冠群</mail>
 </author>
+<author title="审校">
+  <mail link="r0bertz"/>
+</author>
 
 <abstract>
 这是一份指导你如何从GNOME 2.20.x升级到GNOME 2.22.x的指南。
 </abstract>
-
 
 
 <!-- The content of this document is licensed under the CC-BY-SA license -->
@@ -41,12 +42,11 @@
 <body>
 
 <p>
-自动挂载在Gnome
-2.22中做了一些重大的改动。现在，自动挂载由Nautilus来处理而不是<c>gnome-base/gnome-volume-manager</c>。当然，<c>gnome-volume-manager</c>仍然可以用来侦测新的硬件，比如照相机。
+Gnome 2.22中的自动挂载发生了一些重大的改动。现在，自动挂载由Nautilus来处理而不是<c>gnome-base/gnome-volume-manager</c>。不过，<c>gnome-volume-manager</c>仍然是有用的。它被用来侦测新的硬件，比如照相机。
 </p>
 
 <p>
-由于这个改动，对于想保持以前行为的用户，在<c>gnome-volume-manager</c>上我们提供了一个<c>automount</c>的use标记。对于以前在非Gnome桌面情况下启动<c>gnome-volume-manager</c>的用户，我们强烈建议他们启用这个use标记。而相反，我们强烈建议Gnome用户不要启用这个use标记，因为这会和Nautilus出现冲突。
+由于这个改动，我们给<c>gnome-volume-manager</c>增加了一个<c>automount</c>的use标记，以方便想保持以前行为的用户。对于以前在非Gnome桌面情况下启动<c>gnome-volume-manager</c>的用户，我们强烈建议他们启用这个use标记。相反的，对于Gnome用户我们强烈建议不要启用这个use标记，因为这会和Nautilus出现冲突。
 </p>
 
 </body>
@@ -56,9 +56,7 @@
 <body>
 
 <p>
-从2.22开始，Seahorse(<c>app-crypt/seahorse</c>)就是官方的密钥和密码管理器，用来替代GNOME Keyring
-Manager(<c>gnome-extra/gnome-keyring-manager</c>)。它可以处理GPG和SSH的密钥，并且可以用来管理存储在你的GNOME
-keyring中的密码。
+从2.22开始，Seahorse（<c>app-crypt/seahorse</c>）就是官方的密钥和密码管理器，用来替代GNOME Keyring Manager（<c>gnome-extra/gnome-keyring-manager</c>）。它可以处理GPG和SSH的密钥，并且可以用来管理存储在你的GNOME keyring中的密码。
 </p>
 
 <p>
@@ -72,13 +70,11 @@ keyring中的密码。
 <body>
 
 <p>
-从GNOME 2.20开始，GNOME
-Keyring(<c>gnome-base/gnome-keyring</c>)开始提供PAM模块(<path>pam_gnome_keyring.so</path>)。它可以在你登录的时候自动将你的keyring去锁，这样你就省去了输入两次密码的麻烦。
+从GNOME 2.20开始，GNOME Keyring（<c>gnome-base/gnome-keyring</c>）开始提供PAM模块（<path>pam_gnome_keyring.so</path>）。它可以在你登录的时候自动为你的keyring去锁，这样你就省去了输入两次密码的麻烦。
 </p>
 
 <p>
-在GNOME
-2.22中，这个特性现在变得更加可配置，感谢<c>sys-auth/pambase</c>，它现在有一个<c>gnome-keyring</c>的use标记。当这个标记启用的时候，在<path>/etc/pam.d/</path>下的PAM配置文件会自动地将<path>pam_keyring.so</path>插入到正确的位置。只要记得在安装<c>pambase</c>之后使用<c>dispatch-conf</c>或者其他类似的工具来更新那些文件。
+在GNOME 2.22中，这个特性现在变得更加可配置，这要归功于现在拥有<c>gnome-keyring</c>use标记的<c>sys-auth/pambase</c>。当这个标记启用的时候，在<path>/etc/pam.d/</path>下的PAM配置文件会自动地将<path>pam_keyring.so</path>插入到正确的位置。只是不要忘记在安装<c>pambase</c>之后使用<c>dispatch-conf</c>或者其他类似的工具来更新那些文件。
 </p>
 
 </body>
@@ -88,8 +84,7 @@ Keyring(<c>gnome-base/gnome-keyring</c>)开始提供PAM模块(<path>pam_gnome_ke
 <body>
 
 <p>
-请查看<uri link="http://library.gnome.org/misc/release-notes/2.22/">GNOME 2.22
-Release Notes</uri>来获得在这个重大的发布中还有哪些新的特性。
+请查看<uri link="http://library.gnome.org/misc/release-notes/2.22/">GNOME 2.22发行注记</uri>来获得在这个重大的发布中还有哪些新的特性。
 </p>
 
 </body>
@@ -113,8 +108,7 @@ Release Notes</uri>来获得在这个重大的发布中还有哪些新的特性�
 </pre>
 
 <warn>
-如果你提交和Python相关的bug，并且你仍然在使用Python
-2.4，我们<c>将</c>要求你升级到2.5。GNOME团队<e>不</e>对基于Python 2.4的GNOME 2.22提供支持。
+如果你提交和Python相关的bug，并且你仍然在使用Python 2.4，我们<c>将</c>要求你升级到2.5。GNOME团队<e>不</e>对基于Python 2.4的GNOME 2.22提供支持。
 </warn>
 
 </body>
@@ -124,13 +118,11 @@ Release Notes</uri>来获得在这个重大的发布中还有哪些新的特性�
 <body>
 
 <p>
-在GNOME
-2.22中，一些软件包被分割成两个独立的软件包，用以允许其他的应用程序来使用以前的内部库。比如在<c>totem</c>中的播放列表的分析库现在被分割出来，成为<c>dev-libs/totem-pl-parser</c>，所以<c>rhythmbox</c>可以依赖之，而不再需要依赖整个<c>totem</c>。
+在GNOME 2.22中，一些软件包被分割成两个独立的软件包，用以允许其他的应用程序来使用以前的内部库。比如在<c>totem</c>中的播放列表的分析库现在被分割出来，成为<c>dev-libs/totem-pl-parser</c>，所以<c>rhythmbox</c>可以依赖之，而不再需要依赖整个<c>totem</c>。
 </p>
 
 <p>
-这会产生一些新的相互阻止的情况，用以防止软件包之间的文件冲突。为了解决这个问题，请依照在<uri
-link="http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?full=1#blocked">handbook</uri>中Portage部分说明的合适的步骤。一般来说，暂时删除发生冲突的软件包，然后继续，最后通过元软件包或者其他依赖于它的GNOME部分来安装刚才删除的软件包。
+这会产生一些新的相互阻止的情况，用以防止软件包之间的文件冲突。为了解决这个问题，就像Portage所告诉你的，按照<uri link="http://www.gentoo.org/doc/zh_cn/handbook/handbook-x86.xml?full=1#blocked">手册</uri>中正确的指引来做就可以了。一般来说，也就是暂时删除引发冲突的软件包，然后照常继续，刚才删除的软件包最后会通过安装元软件包或者其他依赖于它的GNOME组件来被重新安装上。
 </p>
 
 </body>
@@ -140,19 +132,19 @@ link="http://www.gentoo.org/doc/en/handbook/handbook-x86.xml?full=1#blocked">han
 <body>
 
 <p>
-GDM使用目录<path>/usr/share/xsessions/*</path>下面的文件来决定用户已经安装的桌面环境，并同时出现在"Sessions"菜单中可供选择。
+GDM会查看目录<path>/usr/share/xsessions/*</path>下面的文件以获知用户已经安装了哪些桌面环境，并将它们在“Sessions”菜单中列出以供选择。
 </p>
 
 <p>
-GNOME的文件现在由<c>gnome-base/gnome-session-2.22</c>来提供，而不是<c>gnome-base/gdm</c>。由于这个原因，存在一些为了防止文件冲突而发生的阻止的情况，而这种阻止的情况可能会导致session文件丢失。
+GNOME的session文件现在由<c>gnome-base/gnome-session-2.22</c>来提供，而不是<c>gnome-base/gdm</c>。由于这个原因，我们加入了必要的软件包阻挡以防止产生文件冲突，此冲突可能会导致session文件丢失。
 </p>
 
 <p>
-唯一有可能出问题的是<c>gnome-session</c>在为了解决GDM升级的阻止情况而被卸载之后没有升级到2.22。表现出来的状况将是在GDM的"Session"菜单中缺少GNOME的选项，在这种情况下，请检查你安装了<c>gnome-session-2.22.0</c>或者更高的版本。
+唯一有可能出问题的是<c>gnome-session</c>在为清除GDM升级阻挡而被卸载之后没有升级到2.22。表现出来的状况将是在GDM的“Sessions”菜单中缺少GNOME的选项。如果是这样的话，请检查你是否安装了<c>gnome-session-2.22.0</c>或者更高的版本。
 </p>
 
 <p>
-注意这个问题不会出现在使用<c>gnome-base/gnome</c>元软件包的用户中，因为它会再次从<c>gnome-session</c>软件包中提取相应的文件。
+注意这个问题不会出现在使用<c>gnome-base/gnome</c>元软件包的用户身上，因为此元软件包会再次引入正确的<c>gnome-session</c>软件包。
 </p>
 
 </body>
