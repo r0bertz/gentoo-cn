@@ -25,7 +25,7 @@
 </author> 
 
 <abstract>
-这是《Gentoo Linux/AMD64常见问题
+这是Gentoo Linux/AMD64系统的常见问题
 </abstract>
 
 
@@ -44,7 +44,7 @@
 <body>
 
 <p>
-此文档涵盖了关于Gentoo/AMD64的最普遍的几个问题。我们旨在帮助用户并提供一些有关Gentoo/AMD64的有用信息。你可以在论坛、IRC或者邮件列表里找到其中的一部分问题。如果你对这篇《常见问题》有任何意见或疑问的话，我们很欢迎你发送邮件到<mail>amd64@gentoo.org</mail>来联系我们。
+此文档涵盖了关于Gentoo/AMD64的几个最普遍的问题。我们旨在帮助用户并提供一些有关Gentoo/AMD64的有用信息。你可以在论坛、IRC或者邮件列表里找到其中的一部分问题。如果你对这篇《常见问题》有任何意见或疑问的话，我们很欢迎你发送邮件到<mail>amd64@gentoo.org</mail>来联系我们。
 </p>
 
 </body>
@@ -69,7 +69,7 @@
 <body>
 
 <p>
-你可以使用几乎所有在Portage里面的内核源码。我们推荐你使用<c>gentoo-sources</c>，因为它是特别为Gentoo
+你几乎可以使用所有储存在Portage里面的内核源码。我们推荐你使用<c>gentoo-sources</c>，因为它是特别为Gentoo
 Linux设计的内核。它包含了许多针对AMD64构架的补丁，所以它是唯一一个被Gentoo/AMD64官方支持的内核。
 </p>
 
@@ -90,7 +90,7 @@ Executable file formats / Emulations  ---&gt;
 </pre>
 
 <warn>
-如果你在multilib系统上禁用了这个选项，你可能会遇到编译失败的情况。
+如果你在使用multilib的系统上禁用了这个选项，你可能会遭遇编译失败。
 </warn>
 
 </body>
@@ -100,7 +100,7 @@ Executable file formats / Emulations  ---&gt;
 <body>
 
 <p>
-这是一个很难回答的问题。在某些情况下，你可能会得到性能的提升，然而在其他情况下可能就没有提升了。对于日常使用来说，64位和32位几乎没有区别。64位CPU在进行浮点运算的时候一般比较快，然而这些运算通常发生在使用多媒体应用程序和3D渲染的情况下。这一篇<uri
+这是一个很难回答的问题。在某些情况下，你会感受到系统性能的提升，然而在一些其他情况下你就感受不到了。对于日常使用来说，64位和32位几乎没有区别。64位CPU在进行浮点运算的时候一般比较快，然而这些运算通常发生在使用多媒体应用程序和3D渲染的情况下。这一篇<uri
 link="http://enterprise.linux.com/enterprise/05/06/09/1413209.shtml?tid=121">文章</uri>可能能够引起你的兴趣。在我们的<uri
 link="http://forums.gentoo.org">论坛</uri>里也有一个极好的<uri
 link="http://forums.gentoo.org/viewtopic-t-349691.html">板块</uri>。
@@ -127,7 +127,7 @@ link="http://forums.gentoo.org/viewtopic-t-349691.html">板块</uri>。
 <body>
 
 <p>
-请阅读<uri link="/proj/en/base/amd64/howtos/chroot.xml">32位chroot指南</uri>。
+请阅读<uri link="/proj/en/base/amd64/howtos/chroot.xml">《32位chroot指南》</uri>。
 </p>
 
 </body>
@@ -137,8 +137,8 @@ link="http://forums.gentoo.org/viewtopic-t-349691.html">板块</uri>。
 <body>
 
 <p>
-由于<c>x86构架</c>和<c>amd64构架</c>在安装上的几个不同之处，升级是不可能的。请重新安装你的系统。amd64构架的安装过程和x86构架的有一些不同，所以请使用<uri
-link="/doc/en/handbook/handbook-amd64.xml">AMD64安装手册</uri>。
+由于<c>x86构架</c>和<c>amd64构架</c>在安装上的几个不同之处，升级是不可能的。所以请重新安装你的系统。amd64构架的安装过程和x86构架的有一些不同，所以请使用<uri
+link="/doc/en/handbook/handbook-amd64.xml">《AMD64安装手册》</uri>。
 </p>
 
 </body>
@@ -165,8 +165,8 @@ project）提供的内核都不支持Reiser4，所以AMD64小组也没有支持�
 <p>
 可以，NVIDIA和ATI提供了可以在AMD64构架上工作的驱动。你可以运行<c>emerge
 nvidia-drivers</c>或者<c>emerge ati-drivers</c>命令来安装它们。如果你对这些驱动还有疑问，你应该读一读<uri
-link="/doc/en/nvidia-guide.xml">Nvidia指南</uri>或者<uri
-link="/doc/en/ati-faq.xml">ATI常见问题</uri>。
+link="/doc/en/nvidia-guide.xml">《Nvidia指南》</uri>或者<uri
+link="/doc/en/ati-faq.xml">《ATI常见问题》</uri>。
 </p>
 
 </body>
@@ -202,12 +202,12 @@ CPUFREQ_ACPI="/proc/acpi/processor/CPU0/throttling"
 </pre>
 
 <p>
-现在你只需要运行<c>rc-update add cpudyn default</c>来确保它在你每次启动系统的时候都启动了。
+现在你只需要运行<c>rc-update add cpudyn default</c>来确保它在你每一次启动系统的时候都启动了。
 </p>
 
 <note>
 如果你想得到更多有关CPU电源管理的心得，你可能会想看一看<uri
-link="/doc/en/power-management-guide.xml#doc_chap3">电源管理指南</uri>。
+link="/doc/en/power-management-guide.xml#doc_chap3">《电源管理指南》</uri>。
 </note>
 
 </body>
@@ -217,23 +217,23 @@ link="/doc/en/power-management-guide.xml#doc_chap3">电源管理指南</uri>。
 <chapter>
 <title>应用程序</title>
 <section id="flash">
-<title>我能让Macromedia Flash工作起来吗？</title>
+<title>我能让Macromedia Flash正常工作吗？</title>
 <body>
 
 <p>
-可以。为了使Flash工作起来，你需要一个32位的浏览器，比如<c>mozilla-firefox-bin</c>或者<c>opera</c>，因为Macromedia不提供Flash的64位版本。在你使用emerge安装了你最喜欢的浏览器的预编译包之后，你可以通过运行<c>emerge
+可以。为了使Flash正常工作，你需要一个32位的浏览器，比如<c>mozilla-firefox-bin</c>或者<c>opera</c>，因为Macromedia不提供Flash的64位版本。在你使用emerge安装了你最喜欢的浏览器的预编译包之后，你可以通过运行<c>emerge
 netscape-flash</c>来安装Flash。
 </p>
 
 </body>
 </section>
 <section id="OOo">
-<title>我能让OpenOffice.org工作起来吗？</title>
+<title>我能让OpenOffice.org正常工作吗？</title>
 <body>
 
 <p>
 早于2.0.4版本的OpenOffice没有为64位系统编译的版本，所以你需要使用32位的二进制版本，它被存放在Portage里并命名为<c>app-office/openoffice-bin</c>。如果你觉得你有足够的勇气，你可以运行<c>emerge
-openoffice</c>，但是请注意64位的版本现在还没有进行过足够的测试，所以它还不能被看成是稳定的。
+openoffice</c>，但是请注意，到目前为止64位的版本还没有进行过足够的测试，所以它还不能够被当作是稳定的。
 </p>
 
 </body>
@@ -244,8 +244,8 @@ openoffice</c>，但是请注意64位的版本现在还没有进行过足够的�
 
 <p>
 这条信息表示这个软件包仍然处在“测试版本”的软件库中。请阅读<c>man portage</c>或者<uri
-link="/doc/en/handbook/handbook-amd64.xml">AMD64手册</uri>里的<uri
-link="/doc/en/handbook/handbook-amd64.xml?part=3&amp;chap=3">混合软件包分支</uri>章节来得到更多信息。
+link="/doc/en/handbook/handbook-amd64.xml">《AMD64安装手册》</uri>里的<uri
+link="/doc/en/handbook/handbook-amd64.xml?part=3&amp;chap=3">《混合软件包分支》</uri>这一章节来得到更多信息。
 </p>
 
 </body>
