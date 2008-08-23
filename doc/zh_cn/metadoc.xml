@@ -103,7 +103,7 @@
     <file id="mysql-howto">/doc/en/mysql-howto.xml</file>
     <file id="postgres-howto">/doc/en/postgres-howto.xml</file>
     <file id="bt-guide">/doc/en/bluetooth-guide.xml</file>
-    <file id="utf-8">/doc/en/utf-8.xml</file>
+    <file id="utf-8">/doc/zh_cn/utf-8.xml</file>
     <file id="cron-guide">/doc/en/cron-guide.xml</file>
     <file id="ldap-howto">/doc/en/ldap-howto.xml</file>
     <file id="nvidia-guide">/doc/zh_cn/nvidia-guide.xml</file>
