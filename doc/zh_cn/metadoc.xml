@@ -119,7 +119,7 @@
     <file id="altinstall">/doc/en/altinstall.xml</file>
     <file id="faq">/doc/zh_cn/faq.xml</file>
     <file id="gentoo-alpha-faq">/doc/en/gentoo-alpha-faq.xml</file>
-    <file id="gentoo-amd64-faq">/doc/en/gentoo-amd64-faq.xml</file>
+    <file id="gentoo-amd64-faq">/doc/zh_cn/gentoo-amd64-faq.xml</file>
     <file id="handbook-alpha">/doc/zh_cn/handbook/handbook-alpha.xml</file>
     <file id="handbook-amd64">/doc/zh_cn/handbook/handbook-amd64.xml</file>
     <file id="handbook-arm">/doc/zh_cn/handbook/handbook-arm.xml</file>
