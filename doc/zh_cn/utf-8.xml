@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <!-- $Header$ -->
-<!-- English CVS version: 1.47 -->
+<!-- English CVS version: 1.48 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/utf-8.xml" lang="zh_cn">
@@ -31,7 +31,7 @@
 <license />
 
 <version>2.25</version>
-<date>2007-04-17</date>
+<date>2008-09-05</date>
 
 <chapter>
 <title>字符编码</title>
