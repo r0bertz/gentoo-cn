@@ -348,7 +348,7 @@
     <file id="grub-error-guide">/doc/zh_cn/grub-error-guide.xml</file>
     <file id="usb-guide">/doc/zh_cn/usb-guide.xml</file>
     <file id="liveusb">/doc/zh_cn/liveusb.xml</file>
-    <file id="fluxbox-config">/doc/en/fluxbox-config.xml</file>
+    <file id="fluxbox-config">/doc/zh_cn/fluxbox-config.xml</file>
     <file id="vserver-howto">/proj/en/vps/vserver-howto.xml</file>
     <file id="security-handbook-index">/doc/en/security/index.xml</file>
     <file id="security-handbook">/doc/en/security/security-handbook.xml</file>
