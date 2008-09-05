@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.106 -->
+<!-- English CVS version: 1.113 -->
 
 <guide link="/doc/zh_cn/faq.xml" lang="zh_cn">
 <title>Gentoo Linux常见问题</title>
@@ -51,194 +51,32 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>3.6</version>
-<date>2006-02-13</date>
+<version>3.11</version>
+<date>2008-09-05</date>
 
-<chapter>
-<title>问题：</title>
+<faqindex>
+<title>问题</title>
 <section>
-<title>让我们开始</title>
+<title>介绍</title>
 <body>
 
 <p>
 请注意很多问题都已经在官方的Gentoo文档和指南中给出了答案。这里只是简单列出一些常见问题。为了解决那些这里没有作出解答的问题，同时为了对Gentoo和GNU/Linux的工作机制有个更深入的理解，请您阅读一下文档或者是man page。
 </p>
 
-<ul>
-  <li>
-    <uri link="#pronunciation">Gentoo这个词该如何发音，它有什么意义吗？</uri>
-  </li>
-  <li>
-    <uri link="#differences">Gentoo有什么与众不同的地方？</uri>
-  </li>
-</ul>
-
 </body>
 </section>
-<section>
-<title>安装</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#optimizations">当我使用了“-O9 -ffast-math -fomit-frame-pointer”优化选项后系统变的很不稳定，请问有什么解决办法吗？</uri>
-  </li>
-  <li>
-    <uri link="#password">如何才能更改root（或是其他用户）的密码？</uri>
-  </li>
-  <li>
-    <uri link="#useradd">如何添加一个普通用户？</uri>
-  </li>
-  <li>
-    <uri link="#su">为什么一个用户无法通过su来变成root？</uri>
-  </li>
-  <li>
-    <uri link="#devfs">我如何做才能禁用掉devfs？</uri>
-  </li>
-  <li>
-    <uri link="#upgrade">我能把Gentoo从一个版本升级到另一个版本而不去重装吗？</uri>
-  </li>
-  <li>
-    <uri link="#bootrescue">我的内核无法启动，我现在该怎么办？</uri>
-  </li>
-  <li>
-    <uri link="#proxy">我的代理服务器需要认证，我该怎么办？</uri>
-  </li>
-  <li>
-    <uri link="#isoburning">怎样刻录一个ISO文件？</uri>
-  </li>
-  <li>
-    <uri link="#cpus">我该为自己的CPU选择哪一个CD/stage？</uri>
-  </li>
-  <li>
-    <uri link="#dhcp">我无法在重启后连接到网络，哪里出错了呢？</uri>
-  </li>
-  <li>
-    <uri link="#dualboot">我想从grub或是lilo启动Windows，但是黑屏了，我该怎么办呢？</uri>
-  </li>
-  <li>
-    <uri link="#stage12">我该怎样使用Stage1或Stage2的tarball来安装Gentoo？</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-<section>
-<title>软件包管理系统</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#ebuilds">软件包是以什么格式保存的？</uri>
-  </li>
-  <li>
-    <uri link="#configure">我想自己执行./configure这步，可以吗？</uri>
-  </li>
-  <li>
-    <uri link="#firewall">我该怎样做才能在防火墙后使用emerge？</uri>
-  </li>
-  <li>
-    <uri link="#norsync">如果我不能用rsync，该怎么办？</uri>
-  </li>
-  <li>
-    <uri link="#manualdownload">我家中使用的是很慢的modem连接。我能在其他地方下载源文件后再把它们加入到自己的系统中吗？</uri>
-  </li>
-  <li>
-    <uri link="#distfiles">源文件的tarball集中存放在/usr/portage/distfiles/中。把这些文件删除安全吗？</uri>
-  </li>
-  <li>
-    <uri link="#tmpportage">在/var/tmp/portage中有什么？把这个文件夹中的文件和目录删除安全吗？</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-<section>
-<title>使用方法</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#intkeyboard">怎样设置国际化键盘布局？</uri>
-  </li>
-  <li>
-    <uri link="#rootdns">DNS域名解析只对root用户起作用。</uri>
-  </li>
-  <li>
-    <uri link="#crontab">为什么我的用户没办法使用他们自己的crontab？</uri>
-  </li>
-  <li>
-    <uri link="#numlock">怎样让numlock在启动时自动打开？</uri>
-  </li>
-  <li>
-    <uri link="#clear">如何在我登出的时候对我的终端清屏？</uri>
-  </li>
-  <li>
-    <uri link="#suinx">我无法用su得到的root帐户启动X应用程序</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-<section>
-<title>维护</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#filecorruption">ReiserFS和文件系统损坏——如何才能修复它们，等等</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-<section>
-<title>开发</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#reportbugs">我在哪里报告问题？</uri>
-  </li>
-  <li>
-    <uri link="#releases">每隔多久会推出一个新版本？</uri>
-  </li>
-  <li>
-    <uri link="#beeping">我的扬声器像发疯似的乱叫，怎么做才能禁用终端响铃？</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-<section>
-<title>资源</title>
-<body>
-
-<ul>
-  <li>
-    <uri link="#resources">我在哪里能找到Gentoo Linux更多的信息？</uri>
-  </li>
-  <li>
-    <uri link="#buycd">我能买到Gentoo Linux的CD吗？</uri>
-  </li>
-  <li>
-    <uri link="#help">这个FAQ里没有包含我的问题。我该怎么办呢？</uri>
-  </li>
-</ul>
-
-</body>
-</section>
-</chapter>
+</faqindex>
 
 <chapter>
 <title>让我们开始</title>
 
 <section id="pronunciation">
-<title>Gentoo这个词该如何发音，它有什么意义吗？</title>
+<title>Gentoo这个词该如何发音，它有什么意义？</title>
 <body>
 
 <p>
-<e>Gentoo</e>是一种体型较小的，行动快速的企鹅，读音为"gen-too"（"Gentoo"中的"g"不发重音，它类似于"gentle"中的"g"），Gentoo企鹅的学名是<e>Pygoscelis papua</e>。Gentoo这个名字是福克兰群岛（马尔维纳斯群岛）的居民给它们取的。
+<e>Gentoo</e>读音为"gen-too"（"Gentoo"中的"g"不发重音，它类似于"gentle"中的"g"）。<uri link="http://en.wikipedia.org/wiki/Gentoo_penguin">Gentoo企鹅</uri>的学名是<e>Pygoscelis papua</e>。Gentoo这个名字是<uri link="http://en.wikipedia.org/wiki/Falkland_Islands">福克兰群岛（马尔维纳斯群岛）</uri>的居民给它们取的。
 </p>
 
 </body>
@@ -318,20 +156,6 @@ Gentoo是一个活跃的发行版，整个版本使用的是一个快速的开�
 
 </body>
 </section>
-<section id="devfs">
-<title>我如何做才能禁用掉devfs？</title>
-<body>
-
-<p>
-Gentoo可以使用内核级的devfs、用户层的udev或者静态的<path>/dev</path>目录。随着2.6版本内核的来临以及在各个架构平台上的逐渐稳定，我们推荐使用udev。请查看<uri link="/doc/en/udev-guide.xml">udev指南</uri>获得一些如何配置udev的信息。 
-</p>
-
-<p>
-如果你想要使用静态的<path>/dev</path>，请在<path>/etc/conf.d/rc</path>中设置<c>RC_DEVICES="static"</c>。
-</p>
-
-</body>
-</section>
 <section id="upgrade">
 <title>
 我能把Gentoo从一个版本升级到另一个版本而不去重装吗？
@@ -392,8 +216,8 @@ Gentoo可以使用内核级的devfs、用户层的udev或者静态的<path>/dev<
 </p>
 
 <pre caption="/etc/make.conf">
-HTTP_PROXY="http://username:password@yourproxybox.org:portnumber"
-FTP_PROXY="ftp://username:password@yourproxybox.org:portnumber"
+http_proxy="http://username:password@yourproxybox.org:portnumber"
+ftp_proxy="ftp://username:password@yourproxybox.org:portnumber"
 RSYNC_PROXY="rsync://username:password@yourproxybox.server:portnumber"
 </pre>
 
@@ -571,7 +395,7 @@ Gentoo的安装手册只是描述了如何使用stage3的tarball来安装Gentoo�
 <body>
 
 <p>
-可以的，但是这么做既费事，也不是推荐的做法。因为做这一步需要对Portage的内部机制和命令有很好的理解，所以相反我们推荐由你自己为ebuild打补丁并让它为你做你想要的任何事，然后再把它放进Portage overlay里（这也是为什么它会存在的道理）。这样做对管理来说<e>大</e>有好处，并且这样可以兼顾到易用性。请查看一下<uri link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild HOWTO</uri>了解更多详情。
+可以的，但是这么做既费事，也不是推荐的做法。因为做这一步需要对Portage的内部机制和命令有很好的理解，所以相反我们推荐由你自己为ebuild打补丁并让它为你做你想要的任何事，然后再把它放进一个Portage overlay里（这也是为什么overlay会存在的道理）。这样做对管理来说<e>大</e>有好处，并且这样可以兼顾到易用性。请查看一下<uri link="/proj/en/devrel/handbook/handbook.xml?part=2&amp;chap=1">Ebuild HOWTO</uri>了解更多详情。
 </p>
 
 </body>
@@ -641,7 +465,7 @@ Gentoo的安装手册只是描述了如何使用stage3的tarball来安装Gentoo�
 <body>
 
 <p>
-修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量。为使终端能正确显示你的键盘布局里的扩展字符，你还需要在<path>/etc/conf.d/consolefont</path>之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>（想要了解更多如何本地化你的使用环境的详情，请参考<uri link="/doc/en/guide-localization.xml">我们的本地化指南</uri>）。
+修改<path>/etc/conf.d/keymaps</path>中的<c>KEYMAP</c>变量。为使终端能正确显示你的键盘布局里的扩展字符，你还需要在<path>/etc/conf.d/consolefont</path>之中定义变量<c>CONSOLETRANSLATION</c>和<c>CONSOLEFONT</c>（想要了解更多如何本地化你的使用环境的详情，请参考<uri link="/doc/zh_cn/guide-localization.xml">我们的本地化指南</uri>）。
 </p>
 
 <pre caption="重新启动keymaps">
@@ -709,20 +533,6 @@ $ <i>echo clear &gt;&gt; ~/.bash_logout</i>
 # <i>echo clear &gt;&gt; /etc/skel/.bash_logout</i></pre>
 </body>
 
-</section>
-<section id="suinx">
-<title>我无法用su得到的root帐户启动X应用程序</title>
-<body>
-
-<p>
-这种情况只发生在当你是通过图形界面登录的时候。<c>startx</c>的用户没有这个问题。这个问题是Gentoo的PAM里的一个<uri link="http://bugs.gentoo.org/show_bug.cgi？id=14560">bug</uri>，解决方法也相当简单：在<path>/etc/profile</path>中添加下面这一行。
-</p>
-
-<pre caption="export XAUTHORITY">
-export XAUTHORITY="${HOME}/.Xauthority"
-</pre>
-
-</body>
 </section>
 </chapter>
 
