@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 <!-- $Header$ -->
-<!-- English CVS version: 1.6 --> 
+<!-- English CVS version: 1.8 -->
 
 <guide link="/doc/zh_cn/conky-howto.xml" lang="zh_cn">
 <title>Gentoo Linux Conky 指南</title>
 
 <author title="Editor">
   <mail link="brenden@rty.ca">Brenden Matthews</mail>
+</author>
+<author title="Editor">
+  <mail link="nightmorph"/>
 </author>
 <author title="译者">
   <mail link="twang.umn@gmail.com">汪腾</mail>
@@ -22,8 +25,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.3</version>
-<date>2007-07-01</date>
+<version>1.5</version>
+<date>2008-09-06</date>
 
 <chapter>
 <title>背景</title>
@@ -60,7 +63,11 @@ Gentoo提供了一个ebuild，以便快速方便的安装Conky。特别提一句
 </p>
 
 <p>
-还有一点，<c>truetype</c> USE的编译选项会利用Xft库，提供对TrueType字体的支持。大部分用户会愿意加上该项USE标记。
+还有一点，<c>truetype</c> USE标记会利用Xft库，给Conky加上对TrueType字体的支持。大部分用户会愿意加上该项USE标记。
+</p>
+
+<p>
+你可以加上<c>vim-syntax</c>或者<c>nano-syntax</c> USE标记来为Conky的配置文件增加语法高亮，具体添加哪个取决于您的选择。
 </p>
 
 <pre caption="/etc/portage/package.use">
@@ -99,12 +106,11 @@ $ <i>conky</i>
 <body>
 
 <p>
-Conky会默认在用户目录下<path>~/.conkyrc</path>文件作为配置文件。这个文件包含了所有的配置选项和静态文字信息，色彩以及其他控制数据显示方式的变量。Conky也提供了一份配置范例，它保存在<path>/usr/share/doc/&lt;conky-version&gt;/conkyrc.sample.gz</path>中。用你所安装的Conky版本替换&lt;conky-version&gt;。
+Conky会默认在用户目录下<path>~/.conkyrc</path>文件作为配置文件。这个文件包含了所有的配置选项和静态文字信息，色彩以及其他控制数据显示方式的变量。Conky也提供了一份配置范例，它保存在<path>/etc/conky/conky.conf</path>中。
 </p>
 
 <pre caption="将范例配置文件复制到你的主目录中">
-<comment>(用Conky版本号替换<b>1.4.0-r1</b>)</comment>
-$ <i>zcat /usr/share/doc/conky-1.4.0-r1/conkyrc.sample.gz >> ~/.conkyrc</i>
+$ <i>cp /etc/conky/conky.conf ~/.conkyrc</i>
 </pre>
 
 <p>
