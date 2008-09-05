@@ -5,7 +5,7 @@
 
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
-<guide link="/doc/zh_cn/fluxbox-config.xml" lang="zh_cn" disclaimer="draft">
+<guide link="/doc/zh_cn/fluxbox-config.xml" lang="zh_cn">
 <title>Fluxbox配置指南</title>
 
 <author title="作者">
@@ -24,11 +24,9 @@
   <mail link="r0bertz" />
 </author>
 
-
 <abstract>
 这份指南展示了如何设置X11上的Fluxbox窗口管理器。
 </abstract>
-
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.0 -->
