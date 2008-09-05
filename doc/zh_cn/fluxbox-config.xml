@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- $Header$ -->
-<!-- ENGLISH CVS version:1.31 -->
+<!-- English CVS version: 1.31 -->
 
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
@@ -20,12 +20,14 @@
 <author title="译者">
   <mail link="huaihuaixiaoshao@gmail.com">黄曦</mail>
 </author>
+<author title="审校">
+  <mail link="r0bertz" />
+</author>
 
 
 <abstract>
-这份指南展示了如何设置X11上的Fluxbox窗口管理器
+这份指南展示了如何设置X11上的Fluxbox窗口管理器。
 </abstract>
-
 
 
 <!-- The content of this document is licensed under the CC-BY-SA license 
@@ -42,15 +44,15 @@
 <body>
 
 <p>
-对于那些不熟悉Linux桌面模型的人来说，窗口管理器(WM)就是由X11运行来管理其他图形界面程序的应用程序。窗口管理器控制每个窗口的位置，尺寸，以及经由哪个桌面来访问。这可以自动由一系列用户定义的规则或是在运行时用鼠标和快捷键来完成，取决于特定的窗口管理器。
+为了照顾不熟悉Linux桌面模型的朋友，先介绍一下，窗口管理器（WM，即Window Manager）就是由X11运行的来管理其他图形界面程序的应用程序。窗口管理器控制每个窗口的位置，尺寸，以及经由哪个桌面来访问。这可以自动由一系列用户定义的规则或是在运行时用鼠标和快捷键来完成，取决于特定的窗口管理器。
 </p>
 
 <p>
-然而，有些窗口管理器除了管理窗口之外还有更多的功能。Fluxbox也提供了载入应用程序，配置快捷键，设置桌面背景的平台，以及通过slit组件来显示信息。GNOME的默认窗口管理器，Metacity，就没有包括这些功能，但是可以通过其他的GNOME程序来做这些事。所以，不能确切地说Fluxbox是一个轻量级的WM。但是，因为Fluxbox包括了基本桌面环境必须的组件，许多人就可以用它来代替像GNOME或KDE一类的大型桌面套件。
+然而，有些窗口管理器除了管理窗口之外还有更多的功能。Fluxbox也提供了一个平台以用来载入应用程序、配置快捷键、设置桌面背景，以及通过slit组件来显示信息。GNOME的默认窗口管理器，Metacity，就没有包括这些功能，但是可以通过其他的GNOME程序来做这些事。所以，真的不能说Fluxbox是一个轻量级的窗口管理器。但是，因为Fluxbox包括了基本桌面环境必须的组件，许多人就可以用它来代替像GNOME或KDE一类的大型桌面套件。
 </p>
 
 <p>
-让人更加疑惑的是，Fluxbox可以代替GNOME或KDE的默认的WM。一些人觉得GNOME的窗口管理器Metacity太简陋，没有他们所需的弹性，但是Fluxbox又缺少一套完整桌面环境所内置整合的应用程序。因此，可以用Fluxbox来管理窗口，用GNOME来做剩下的事。请注意，这样的组合会因功能的部分重叠而产生一些问题。
+让人更加疑惑的是，Fluxbox可以代替GNOME或KDE的默认的窗口管理器。一些人觉得GNOME的窗口管理器Metacity太简陋，没有他们所需的灵活性，但是Fluxbox又缺少一套完整桌面环境所内置整合的应用程序。因此，可以用Fluxbox来管理窗口，用GNOME来做剩下的事。请注意，这样的组合会因功能的部分重叠而产生一些问题。
 </p>
 
 <p>
@@ -58,7 +60,7 @@ Fluxbox也可以通过第三方软件来扩展。这常见于硬件资源有限�
 </p>
 
 <p>
-这份指南是针对Fluxbox新手，感兴趣或者那些只是想获得更多的Gentoo/Fluxbox体验的人而设的。这份指南也将展示如何通过和Fluxbox一起工作的很好的第三方程序获得更多（仅仅是可选的）功能。
+这份指南是针对Fluxbox新手，感兴趣或者那些只是想获得更多的Gentoo/Fluxbox体验的人而设的。这份指南也将介绍一些能在Fluxbox里很好运行的第三方程序，通过它们我们可以获得更多（可选的）功能。
 </p>
 
 </body>
@@ -72,14 +74,11 @@ Fluxbox也可以通过第三方软件来扩展。这常见于硬件资源有限�
 <body>
 
 <p>
-Gentoo提供了ebuild来简便地安装Fluxbox。并且通过<c>gnome</c> 和 
-<c>kde</c>USE标记来提供对前述环境的兼容性。但根据作者的经验，并不需要这些USE标记。如果你想要qt，gtk+，或者任何KDE/GNOME实用工具，只要单独的emerge然后配置就可以了。例如，作者就在Fluxbox里使用了KDE可选的刻录工具<c>k3b</c>。
+Gentoo提供了ebuild来简便地安装Fluxbox。并且通过<c>gnome</c>和<c>kde</c> USE标记来提供对前述环境的兼容性。但根据作者的经验，并不需要这些USE标记。如果你想要qt，gtk+，或者任何KDE/GNOME实用工具，只要单独的emerge然后配置就可以了。例如，作者就在Fluxbox里使用了KDE可选的刻录工具<c>k3b</c>。
 </p>
 
 <p>
-拥有一个X 
-显示的锁程序来阻止非授权用户是必要的，所以可以emerge<c>xlockmore</c>。大多数用户会想要一个设置背景的实用工具，我们可以emerge 
-<c>eterm</c>，同时也是个不错的X11终端。
+拥有一个桌面锁定程序来阻止非授权用户是必要的，所以可以emerge <c>xlockmore</c>。大多数用户会想要一个设置背景的实用工具，我们可以emerge <c>eterm</c>，同时也是个不错的X11终端。
 </p>
 
 <pre caption="安装Fluxbox">
@@ -102,7 +101,7 @@ Gentoo提供了ebuild来简便地安装Fluxbox。并且通过<c>gnome</c> 和
 <body>
 
 <p>
-Fluxbox是个X11运行的简单程序。如果需要，可以<c>startx</c>然后在xterm里键入<c>fluxbox</c>来运行它。但这至少是烦人的。如果不需要启动到GUI，而只是想手动运行X11，那么就要让X作为一个普通（非root）用户自动载入运行Fluxbox：
+Fluxbox是个X11运行的简单程序。如果需要，可以<c>startx</c>然后在xterm里键入<c>fluxbox</c>来运行它。但这很烦人。如果不需要启动到GUI，而只是想手动运行X11，那么可以让X启动时自动载入运行Fluxbox，请以一个普通（非root）用户执行这条命令：
 </p>
 
 <pre caption="编辑你的xinit">
@@ -110,7 +109,7 @@ $ <i>echo "exec startfluxbox" > ~/.xinitrc</i>
 </pre>
 
 <p>
-这对于大多数用户来说并不理想，他们始终都要求有桌面环境；如果每次启动都要使用GUI，<c>startx</c>就是件痛苦的事。这也存在未察觉的安全风险。如果用户使用<c>xlock</c>锁住X11显示，但却是从控制台运行X11，那么能够物理地访问这台计算机的人可以切换到控制台，杀死X11,接着使用你的账户。解决这个问题唯一方法就是在后台运行X11或者从屏幕里运行。然后卸下显示器，接着从控制台登出，这样虽然繁琐但是最有效。如果使用图形登录管理器，这个问题就不存在了。但这样又必须作为root来运行X11,这可能又是件坏事。在写这篇文字时，作者还没有发现对当前本版漏洞的利用，但如果有人在乎的话，就应该不用X11或者用上述方法处理显示器。注意这不是Fluxbox的问题，而是X11自身的问题。
+这对于大多数用户来说并不理想，他们始终都要求有桌面环境；如果每次启动都要使用GUI，<c>startx</c>就是件痛苦的事。这也存在未察觉的安全风险。如果用户使用<c>xlock</c>锁住X11显示，但却是从控制台运行X11，那么能够物理地访问这台计算机的人可以切换到控制台，杀死X11，接着使用你的账户。解决这个问题唯一方法就是在后台运行X11或者从screen里运行。然后脱离screen，接着从控制台登出，这样虽然繁琐但是最有效。如果使用图形登录管理器，这个问题就不存在了。但这样又必须作为root来运行X11，这可能又是件坏事。在写这篇文字时，作者还没有发现对当前本版漏洞的利用，但如果有人在乎的话，就应该不用X11或者用上述方法处理显示器。注意这不是Fluxbox的问题，而是X11自身的问题。
 </p>
 
 
@@ -123,9 +122,7 @@ thanks to Josh Nichols for helping cleanup this section. see comment #4 on bug
 
 -->
 <p>
-有大量的图形登录管理器可供选择;在这里我们用<uri 
-link="http://slim.berlios.de">SLiM</uri>。你可以选择其他的管理器，但SLiM可以和Fluxbox，或是你可能已经安装的任何其他桌面环境如GNOME，KDE， 
-或 Xfce一起工作地很好。
+有大量的图形登录管理器可供选择；在这里我们用<uri link="http://slim.berlios.de">SLiM</uri>。你可以选择其他的管理器，但SLiM很适用于Fluxbox，也适用于你可能已经安装的任何其他桌面环境如GNOME，KDE或Xfce等。
 </p>
 
 <pre caption="登录管理器">
@@ -134,8 +131,7 @@ link="http://slim.berlios.de">SLiM</uri>。你可以选择其他的管理器，�
 </pre>
 
 <impo>
-确定用emerge <c>slim</c> 然后添加 
-<b>xdm</b>到启动脚本，而不是其他的方法！换用其他方法将导致失败。接着我们要改动系统范围的配置文件：
+一定要先emerge <c>slim</c>然后添加<b>xdm</b>到default运行级别，而不是倒过来！颠倒次序将导致失败。接着我们要改动系统范围的配置文件：
 </impo>
 
 <pre caption="编辑/etc/conf.d/xdm">
@@ -145,14 +141,14 @@ DISPLAYMANAGER="slim"
 </body>
 </section>
 <section>
-<title>主题和美工</title>
+<title>主题和美工作品</title>
 <body>
 
 <p>
-如果真的只想留下最少的足迹可以跳过这个章节。让用户制定WM的外观还是不错的。我们将安装针对Fluxbox的主题,以及Gentoo为各种WM做的，能够用在任何*box WM上的美工，主题。
+如果真的想获得最小内存使用量的可以跳过这个章节。让用户制定窗口管理器的外观还是不错的。我们将安装Fluxbox专用主题，各种窗口管理器都适用的Gentoo美工作品，以及能够用在任何*box窗口管理器上的主题。
 </p>
 
-<pre caption="安装主题和美工">
+<pre caption="安装主题和美工作品">
 # <i>emerge commonbox-styles commonbox-styles-extra \
   fluxbox-styles-fluxmod gentoo-artwork</i>
 </pre>
@@ -164,8 +160,7 @@ DISPLAYMANAGER="slim"
 <body>
 
 <p>
-下一步，为<c>vim</c>安装针对Fluxbox的配色方案。这可以使得Fluxbox的键和初始化文件阅读起来更容易。这只是个小小的vim插件，所以非常推荐你安装（除非你那些emacs用户，那样的话我推荐你<c>emerge 
--C emacs &amp;&amp; emerge gvim</c> ;-)）。
+下一步，为<c>vim</c>安装针对Fluxbox的配色方案。这可以使得Fluxbox的键和初始化文件阅读起来更容易。这只是个小小的vim插件，所以非常推荐你安装（除非你那些emacs用户，那样的话我推荐你<c>emerge -C emacs &amp;&amp; emerge gvim</c> ;-)）。
 </p>
 
 <pre caption="安装Fluxbox语法">
@@ -176,11 +171,11 @@ DISPLAYMANAGER="slim"
 </body>
 </section>
 <section>
-<title>应用程序装载器</title>
+<title>应用程序启动器</title>
 <body>
 
 <p>
-每个窗口管理器都有（也应该有）惯用程序用来装载应用程序，而不需要打开一个终端从里面运行应用程序。Fluxbox已经安装好的装载器叫做<c>fbrun</c>。可以在命令行键入<c>fbrun</c>来运行它，但是从命令行运行<c>fbrun</c>，再从<c>fbrun</c>装载应用程序还不如直接从命令行运行应用程序。所以需要定义一个快捷键或者在fluxbox菜单插入一个指向<c>fbrun</c>的入口，或者两者都要。
+每个窗口管理器都有（也应该有）惯用程序用来启动应用程序，而不需要打开一个终端从里面运行应用程序。Fluxbox已经安装好的启动器叫做<c>fbrun</c>。可以在命令行键入<c>fbrun</c>来运行它，但是从命令行运行<c>fbrun</c>再从<c>fbrun</c>启动应用程序还不如直接从命令行运行应用程序。所以需要定义一个快捷键或者在fluxbox菜单插入一个指向<c>fbrun</c>的入口，或者两者都要。
 </p>
 
 <p>
@@ -196,8 +191,7 @@ DISPLAYMANAGER="slim"
 </p>
 
 <p>
-要获取更多信息，比如关于命令行选项，请通过键入<c>man 
-fbrun</c>来阅读手册。记得去使用命令行选项，再编辑键和/或菜单文件一遍来包含这些选项是必要的。
+要获取更多信息，比如关于命令行选项，请通过键入<c>man fbrun</c>来阅读手册。记的要想使用命令行选项的话，必须再次编辑键和/或菜单文件一遍以加入这些选项。
 </p>
 
 </body>
@@ -207,13 +201,11 @@ fbrun</c>来阅读手册。记得去使用命令行选项，再编辑键和/或�
 <body>
 
 <p>
-Fluxbox自带的一套默认键绑定很弱，只能用来切换窗口和桌面，仅此而已。在改动之前，有一些事情需要知道，在Fluxbox键配置文件里，有一些古怪的修饰语。Mod1表示 
-"Alt" 键,Mod4则是尴尬的(windows)键。 
-Control和Shift就是Control和Shift。通常来说，最好还是用Alt/Windows键。因为其他的X11程序倾向于使用Control和Shift来定义他们自己的快捷键。
+Fluxbox自带的一套默认键绑定很弱，只能用来切换窗口和桌面，仅此而已。在改动之前，有一些事情需要知道，在Fluxbox键配置文件里，有一些古怪的修饰语。Mod1表示"Alt"键,Mod4则是不能说出口的(windows)键。Control和Shift就是Control和Shift。通常来说，最好还是用Alt/Windows键。因为其他的X11程序倾向于使用Control和Shift来定义他们自己的快捷键。
 </p>
 
 <p>
-所有这些都是独立的，可以轻松地省略任何不需要的，或者按你自己的需要修改。这份指南用的都是作者认为最通用的程序，软件包名如果和这里出现的不同就请替换之。请阅读Fluxbox手册以获得更多的信息。
+所有这些都是彼此独立的，可以轻松地省略任何不需要的，或者按你自己的需要修改。这份指南用的都是作者认为最通用的程序，软件包名如果和这里出现的不同就请替换之。请阅读Fluxbox手册以获得更多的信息。
 </p>
 
 <p>
@@ -235,7 +227,7 @@ Mod1 v   :ExecCommand gvim
 # (假定用的是alsa。如果你用oss，那自己看着办吧)</comment>
 Mod1 e   :ExecCommand Eterm -name alsa -e alsamixer
 
-<comment># 这是载入用来装载其他程序的fbrun</comment>
+<comment># 这是载入用来启动其他程序的fbrun</comment>
 Mod1 r   :ExecCommand fbrun
 
 <comment># 程序控制。让我们轻松点……</comment>
@@ -262,7 +254,7 @@ white -fade 90 -bl -tn xterm -fn \
 <body>
 
 <p>
-桌面系统通常需要配置一个X11系统监视器。Gkrellm是个常用的监视器，但是本着Fluxbox最小化的精神，我们打算用个轻量级的监视器：<c>conky</c>。如果需要，可以换用其他监视器：指南到处都有。
+桌面系统通常需要配置一个X11系统监视器。Gkrellm是个常用的监视器，但是本着Fluxbox最小化的精神，我们打算用个轻量级的监视器：<c>conky</c>。如果需要，可以换用其他监视器；指南到处都有。
 </p>
 
 <pre caption="安装conky">
@@ -270,8 +262,7 @@ white -fade 90 -bl -tn xterm -fn \
 </pre>
 
 <p>
-默认的conky配置文件相当弱，阅读手册或是<uri link="/doc/en/conky-howto.xml">Gentoo Linux Conky 
-Howto</uri>可以获得更多信息。
+默认的conky配置文件相当弱，阅读手册或是<uri link="/doc/zh_cn/conky-howto.xml">Gentoo Linux Conky指南</uri>可以获得更多信息。
 </p>
 
 </body>
@@ -281,7 +272,7 @@ Howto</uri>可以获得更多信息。
 <body>
 
 <p>
-Fluxbox没有自带在桌面绘制图标的工具程序：每件事都要用快捷键或者右击菜单来处理。iDesk是个能满足这个需求的程序。其目标就是像我们这样使用最轻量WM又想在根窗口显示图标的用户，它甚至还能支持像透明之类的有趣特效！尽管名叫iDesk，它却跟Apple或Mac没关系(在作者所知的范围内)。安装iDesk一如：
+Fluxbox没有自带在桌面绘制图标的工具程序：每件事都要用快捷键或者右击菜单来处理。iDesk是个能满足这个需求的程序。其目标就是像我们这样使用最轻量窗口管理器又想在根窗口显示图标的用户，它甚至还能支持像透明之类的有趣特效！尽管名叫iDesk，它却跟Apple或Mac没关系(在作者所知的范围内)。安装iDesk一如：
 </p>
 
 <pre caption="安装idesk">
@@ -298,12 +289,7 @@ appreciated!
 
 -->
 <p>
-一旦装好，iDesk就需要通过配置以便按照我们的需要来显示图标。它的配置文件在<path>~/.ideskrc</path>。这是个冗长的工作，并且这个指南也不能完全涵盖。以下的资源对你配置iDesk有所帮助：<c>man 
-idesk</c>, <uri 
-link="http://idesk.sourceforge.net/wiki/index.php/Idesk-usage">iDesk's Usage 
-Guide</uri> 和 <uri 
-link="http://forums.gentoo.org/viewtopic-t-87262.html">thread in the Gentoo 
-Forums</uri>。
+装好之后，我们需要配置iDesk以令它可以按照我们的需要来显示图标。它的配置文件是<path>~/.ideskrc</path>。配置iDesk是个冗长的工作，这个指南也不能完全涵盖。以下的资源对你配置iDesk有所帮助：<c>man idesk</c>，<uri link="http://idesk.sourceforge.net/wiki/index.php/Idesk-usage">iDesk使用指南</uri>和<uri link="http://forums.gentoo.org/viewtopic-t-87262.html">Gentoo论坛里的贴子</uri>。
 </p>
 
 </body>
@@ -313,24 +299,21 @@ Forums</uri>。
 <body>
 
 <p>
-请注意Gentoo不需要文件管理器。这是完全有可能的，在命令行做所有文件操作更加简洁（作者窃以为）。但是并非所有人都认同……
+请注意Gentoo不需要文件管理器。这是完全可行的，在命令行做所有文件操作更加简洁（作者窃以为）。但是并非所有人都认同……
 </p>
 
 <p>
-Gentoo/Fluxbox的新用户会因为缺少像Gnome里<c>nautilus</c>一样的图形文件管理器而叛逃。Fluxbox自身确实没有提供一个这样的程序，但一般说来，弄一个也不难。有很多可以选择，这份指南只给出三个，其中一个是为<uri 
-link="#gentoo">minimalist</uri>里那些喜欢文字界面的人而设，另外两个是为<uri 
-link="#rox">icons</uri>和<uri 
-link="#thunar">click</uri>一类用户而设。当然，如果有可能，可以三个都装上，逐个试试。
+Gentoo/Fluxbox的新用户会因为缺少像Gnome里<c>nautilus</c>一样的图形文件管理器而叛逃。Fluxbox自身确实没有提供一个这样的程序，但一般说来，弄一个也不难。有很多可以选择，这份指南只给出三个，其中一个是为那些喜欢文字界面<uri link="#gentoo">最低限度要求者</uri>而设，另外两个是为喜欢<uri link="#rox">可点击</uri>的<uri link="#thunar">图标</uri>的用户而设。当然，如果有可能，可以三个都装上，逐个尝试。
 </p>
 
 </body>
 </section>
 <section id="gentoo">
-<title>Gentoo 文件管理器 - Minimalism</title>
+<title>Gentoo文件管理器——最低限度</title>
 <body>
 
 <p>
-Gentoo是个致力于提供GUI界面带来的便利同时又避免随该界面而来的各种臃肿的文件管理器。
+Gentoo是个致力于在提供GUI界面的便利的同时避免一般GUI界面所带来的各种臃肿的文件管理器。
 </p>
 
 <pre caption="安装Gentoo文件管理器">
@@ -338,20 +321,17 @@ Gentoo是个致力于提供GUI界面带来的便利同时又避免随该界面�
 </pre>
 
 <note>
-Gentoo文件管理器是个独立于Gentoo Linux 发行的项目。需要更多的信息，请查阅<uri 
-link="/main/en/name-logo.xml#doc_chap4">Name and Logo Usage 
-Guidelines</uri>。
+Gentoo文件管理器是个独立于Gentoo Linux发行版的项目。需要更多的信息，请查阅<uri link="/main/en/name-logo.xml#doc_chap4">名称与图标使用指引</uri>。
 </note>
 
 <p>
-Gentoo文件管理器的目标是完全地通过GUI来配置，所以调节是件轻松的事。
+Gentoo文件管理器的目标是完全地通过GUI来配置，所以请根据需要随意调节。
 </p>
-
 
 </body>
 </section>
 <section id="rox">
-<title>Rox 文件管理器 - 包括图标</title>
+<title>Rox文件管理器——包含图标</title>
 <body>
 
 <p>
@@ -363,7 +343,7 @@ Rox是个使用图标和文字的文件管理器并且和Windows的Explorer相�
 </pre>
 
 <p>
-Rox的行为类似"传统"文件管理器，所以它的界面应该是直观的。如果不是，还请查阅手册。
+Rox的行为类似“传统”文件管理器，所以它的界面应该是很直观的。如果实在有不清楚的，还请查阅手册。
 </p>
 
 </body>
@@ -373,7 +353,7 @@ Rox的行为类似"传统"文件管理器，所以它的界面应该是直观的
 <body>
 
 <p>
-<uri link="http://thunar.xfce.org/">Thunar</uri>是个轻量，快速的文件管理器，就像Rox
+<uri link="http://thunar.xfce.org/">Thunar</uri>是个轻量快速的文件管理器，和Rox类似，它的行为也类似“传统”文件管理器。它包含了图标和文字，容易使用。虽然它一开始是为<uri link="http://www.xfce.org">Xfce</uri>设计的，它也是基于Fluxbox的系统的一个很好的补充。
 </p>
 
 <pre caption="安装Thunar">
@@ -387,7 +367,7 @@ Rox的行为类似"传统"文件管理器，所以它的界面应该是直观的
 <body>
 
 <p>
-许多WM都带有查看目录中图片的实用工具，并且不允许编辑（由<c>gimp</c>或类似的来做）。如果你用命令行，<c>gentoo</c>，或者<c>rox</c>作为文件管理器这是必要的。虽然<c>thunar</c>可以显示缩略图，但有一个独立的轻量级图片查看器还是不错的。
+许多窗口管理器都带有查看目录中图片的实用工具，并且不允许编辑（一般用<c>gimp</c>或类似的程序来编辑）。如果你用命令行、<c>gentoo</c>或者<c>rox</c>作为文件管理器，图片查看器是必要的。虽然<c>thunar</c>可以显示缩略图，但有一个独立的轻量级图片查看器还是不错的。
 </p>
 
 <pre caption="安装gqview">
@@ -395,17 +375,17 @@ Rox的行为类似"传统"文件管理器，所以它的界面应该是直观的
 </pre>
 
 <p>
-<c>gqview</c>可以在任何目录载入，可以浏览任何支持的图片格式。
+<c>gqview</c>可以从任何目录启动，可以浏览任何支持的图片格式。
 </p>
 
 </body>
 </section>
 <section>
-<title>设置主题，背景，启动脚本</title>
+<title>设置主题、背景和启动脚本</title>
 <body>
 
 <p>
-fluxbox有许多主题，可以通过右击菜单由"Fluxbox menu，"到"System Styles。"来选取。这些主题通常会设置单一颜色或者有一定梯度的背景。大多数人更愿意设置自己的背景，并且在选择主题时保持不变。要达到这个目的，我们要编辑Fluxbox的另外一个控制启动行为的配置文件。所以请启动文本编辑器，打开<path>~/.fluxbox/startup</path>。
+fluxbox有许多主题，可以通过右击菜单由"Fluxbox menu"到"System Styles"来选取。这些主题通常会设置单一颜色或者有一定梯度的背景。大多数人更愿意设置自己的背景，并且在选择主题时保持不变。要达到这个目的，我们要编辑Fluxbox的另外一个控制启动行为的配置文件。所以请启动文本编辑器，打开<path>~/.fluxbox/startup</path>。
 </p>
 
 <p>
@@ -413,13 +393,12 @@ fluxbox有许多主题，可以通过右击菜单由"Fluxbox menu，"到"System 
 </p>
 
 <pre caption="编辑Fluxbox启动">
-<comment># Gentoo的Fluxbox启动script
+<comment># Gentoo的Fluxbox startup脚本
 
 # 持续运行而不只是跑一下的程序
-
 # 需要在命令的结尾跟上"&amp;"。
 
-# 展示Fluxbox溅射屏幕
+# 展示Fluxbox欢迎屏幕
 #fbsetbg -C /usr/share/fluxbox/splash.jpg
 
 # 这是设置背景。你需要有一个程序来做这个。(推荐x11-terms/eterm)
@@ -442,8 +421,7 @@ exec /usr/bin/fluxbox -log ~/.fluxbox/log
 <body>
 
 <p>
-作者使用文本编辑器来创建菜单。如果这对你来说很有吸引力，请跳过这个章节，从<uri link="#manual_menu">editing menus by 
-hand</uri>开始继续。
+作者使用文本编辑器来创建菜单。如果这对你来说很有吸引力，请跳过这个章节，从<uri link="#manual_menu">手动编辑菜单</uri>开始继续。
 </p>
 
 <p>
@@ -459,11 +437,11 @@ $ <i>fluxbox-generate_menu -is -ds</i>
 </pre>
 
 <p>
-推荐使用<c>fluxbox-generate_menu -is -ds</c>而不是其他不了解Gentoo目录结构的程序。
+推荐使用<c>fluxbox-generate_menu -is -ds</c>，而不要用其他不了解Gentoo目录结构的程序。
 </p>
 
 <note>
-用这种方法自动生成菜单然后再手动做些修改是可以的。手动创建和编辑<path>~/.fluxbox/usermenu</path>(语法见下个章节)可以得到一个不会在下次创建脚本时被清除的个性化菜单。
+用这种方法自动生成菜单之外还可以手动做些修改。手动创建和编辑<path>~/.fluxbox/usermenu</path>（语法见下个章节）可以得到一个不会在下次创建脚本时被清除的个性化菜单。
 </note>
 
 </body>
@@ -477,7 +455,7 @@ Fluxbox菜单是个遵循相当简单语法的文本文件，语法在本节描�
 </p>
 
 <p>
-菜单的程序执行入口由<c>[exec]</c>元素定义。你可以在<c>[begin]</c>（菜单根）以下，或者<c>[submenu]</c>与相应的<c>[end]</c>行（子菜单定义）之间定义一个入口，例如：
+执行程序的菜单项由<c>[exec]</c>元素定义。你可以在<c>[begin]</c>（菜单根）以下，或者在<c>[submenu]</c>及与之对应的<c>[end]</c>行（子菜单定义）之间定义一个菜单项，例如：
 </p>
 
 <pre caption="定义新的菜单入口">
@@ -495,20 +473,15 @@ Fluxbox菜单是个遵循相当简单语法的文本文件，语法在本节描�
 </pre>
 
 <p>
-根菜单定义由<c>[begin]</c>标签开始，接着是菜单名，放在圆括号里，相应地以<c>[end]</c>标签结束。所有的菜单命令（在这里叫做标签）由方括号关闭，菜单名由圆括号关闭，实际的命令由大括号关闭。注释在文件里是允许的，由<c>#</c>开始的行就是。
+根菜单定义由<c>[begin]</c>标签开始，接着是菜单名，放在圆括号里，相应地以<c>[end]</c>标签结束。所有的菜单命令（在这里叫做标签）都包含在方括号内，菜单名包含在圆括号内，实际的命令包含在大括号内。注释在文件里是允许的，由<c>#</c>开始的行就是。
 </p>
 
 <p>
-如上例所示，第一个<c>[exec]</c>行定义了一个名为"XTerm White on 
-Black"的新入口。入口将会像从命令行里运行一样运行<c>xterm -ls -fg white -bg 
-black</c>。下一个是用<c>[submenu]</c>标签定义的子菜单，接着是个叫做"More 
-terminals"带着两个<c>[exec]</c>命令的段。任何子菜单都必须有相应的<c>[end]</c>标签。
+如上例所示，第一个<c>[exec]</c>行定义了一个名为"XTerm White on Black"的新菜单项。菜单项将会像从命令行里运行一样运行<c>xterm -ls -fg white -bg black</c>。下一个是用<c>[submenu]</c>标签定义的子菜单，接着是子菜单名"More terminals"，还有两个<c>[exec]</c>命令。任何子菜单都必须有相应的<c>[end]</c>标签。
 </p>
 
 <p>
-还有其他菜单命令可以用在你的<path>~/.fluxbox/menu</path>文件里。请查阅<uri 
-link="http://fluxbox.org/docbook.php">official documentation</uri> 
-获取更多可用的在线信息。
+还有其他菜单命令可以用在你的<path>~/.fluxbox/menu</path>文件里。请查阅<uri link="http://fluxbox.org/docbook.php">官方文档</uri>获取更多可用的在线信息。
 </p>
 
 </body>
@@ -520,7 +493,7 @@ link="http://fluxbox.org/docbook.php">official documentation</uri>
 
 <ul>
   <li><uri link="http://fluxbox-wiki.org">Fluxbox wiki</uri></li>
-  <li>Fluxbox开发者和用户在irc.freenode.net的频道是#fluxbox</li>
+  <li>irc.freenode.net上的Fluxbox开发者和用户频道是#fluxbox</li>
 </ul>
 
 </body>
@@ -530,8 +503,7 @@ link="http://fluxbox.org/docbook.php">official documentation</uri>
 <body>
 
 <p>
-恭喜！Fluxbox现在已经安装，配置好，可以投入使用了。有任何问题或者建议，请给作者发邮件和/或到Gentoo的<uri 
-link="http://bugs.gentoo.org">Bugzilla</uri>报告bug。
+恭喜！Fluxbox现在已经安装，配置好，可以投入使用了。有任何问题或者建议，请给作者发邮件到Gentoo的<uri link="http://bugs.gentoo.org">Bugzilla</uri>报告bug。
 </p>
 
 </body>
