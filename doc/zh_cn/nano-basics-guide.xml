@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.25 -->
+<!-- English CVS version: 1.26 -->
 
 <guide link="/doc/zh_cn/nano-basics-guide.xml" lang="zh_cn">
 
@@ -24,7 +24,7 @@ Sherman Boyd
 </abstract>
 
 <version>1.6</version>
-<date>2006-01-05</date>
+<date>2008-09-06</date>
 
 <chapter>
 <title>Nano基础</title>
