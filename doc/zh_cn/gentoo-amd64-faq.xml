@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ --> 
-<!-- English CVS version: 1.28 --> 
+<!-- English CVS version: 1.29 --> 
 
 <guide link="/doc/zh_cn/gentoo-amd64-faq.xml" lang="zh_cn">
 <title>Gentoo Linux/AMD64常见问题</title>
@@ -31,8 +31,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.19</version>
-<date>2008-07-25</date>
+<version>1.20</version>
+<date>2008-09-02</date>
 
 <faqindex>
 <title>问题</title>
@@ -131,6 +131,10 @@ Executable file formats / Emulations  ---&gt;
 
 <p>
 由于<c>x86构架</c>和<c>amd64构架</c>在安装上的几个不同之处，升级是不可能的。所以请重新安装你的系统。amd64构架的安装过程和x86构架的有一些不同，所以请使用<uri link="/doc/zh_cn/handbook/handbook-amd64.xml">AMD64安装手册</uri>。
+</p>
+
+<p>
+而且，在x86系统上创建的二进制文件很可能不能被amd64系统上的程序读取。特别是你不能简单地把数据库（例如MySQL、innoDB、Berkeley DB、SQLite、OpenLDAP等等）原封不动地复制到另一个系统上。在你试图把你的数据库恢复到一个amd64系统上之前，你需要把数据库转换成"独立构架"（architecture-independent）格式，比如说纯文本文件。
 </p>
 
 </body>
