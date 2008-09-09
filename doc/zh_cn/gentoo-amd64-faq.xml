@@ -134,7 +134,7 @@ Executable file formats / Emulations  ---&gt;
 </p>
 
 <p>
-而且，在x86系统上创建的二进制文件很可能不能被amd64系统上的程序读取。特别是你不能简单地把数据库（例如MySQL、innoDB、Berkeley DB、SQLite、OpenLDAP等等）原封不动地复制到另一个系统上。在你试图把你的数据库恢复到一个amd64系统上之前，你需要把数据库转换成"独立构架"（architecture-independent）格式，比如说纯文本文件。
+而且，在x86系统上创建的二进制文件很可能不能被amd64系统上的程序读取。特别是你不能简单地把数据库（例如MySQL、innoDB、Berkeley DB、SQLite、OpenLDAP等等）原封不动地复制到另一个系统上。在你试图把你的数据库恢复到一个amd64系统上之前，你需要把数据库转换成“构架无关”格式，比如说纯文本文件。
 </p>
 
 </body>
