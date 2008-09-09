@@ -222,7 +222,7 @@ $ <i>env | grep -i LC_</i>
 </pre>
 
 <p>
-另外还有一个本地化变量叫做LINGUAS。它影响到安装在基于gettext的程序中的本地化文件。它还决定某些特殊软件包用到的本地化，比如<c>kde-base/kde-i18n</c>和<c>app-office/openoffice</c>。这个变量的值为一组以空格隔开的语言代号序列，建议将其设置在<path>/etc/make.conf</path>中：
+另外还有一个本地化变量叫做LINGUAS。它会影响到基于gettext的程序将会安装的本地化文件。它还能决定某些特殊软件包的本地化，比如<c>kde-base/kde-i18n</c>和<c>app-office/openoffice</c>。这个变量的值为一组以空格隔开的语言代码，建议将其设置在<path>/etc/make.conf</path>中：
 </p>
 
 <pre caption="在make.conf中设置LINGUAS">
