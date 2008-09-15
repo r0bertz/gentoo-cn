@@ -4,11 +4,11 @@
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 
  $Header$ -->
-<!-- English CVS version: 1.58 -->
+<!-- English CVS version: 1.60 -->
 <sections>
 
-<version>9.0</version>
-<date>2008-04-02</date>
+<version>9.1</version>
+<date>2008-09-16</date>
 
 <section>
 <title>时区</title>
@@ -250,7 +250,7 @@ Yaboot和BootX需要使用一个未被压缩的内核，这点与很多其他的
 <comment>(Apple/IBM)</comment>
 # <i>cp vmlinux /boot/<keyval id="kernel-name"/></i>
 <comment>(Pegasos)</comment>
-# <i>cp arch/powerpc/boot/images/zImage /boot/&lt;kernel-version&gt;</i> 
+# <i>cp arch/powerpc/boot/images/zImage /boot/<keyval id="kernel-name" /></i>
 </pre>
 
 <p>

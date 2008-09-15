@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.11 -->
+<!-- English CVS version: 1.12 -->
 
 <sections>
 
-<version>6.1</version>
-<date>2008-05-04</date>
+<version>6.2</version>
+<date>2008-09-16</date>
 
 <section>
 <title>做出您的选择</title>
@@ -213,6 +213,10 @@ link="?part=1&amp;chap=6#doc_chap2">profile</uri>，您<b>不</b>应该emerge gr
 </ul>
 
 <note>
+Grub根据BIOS来决定设备名。如果你改变了你的BIOS设定，你的设备字母和序号也会改变。比如如果你改变了你的设备的启动顺序，你就需要改变你的grub配置。
+</note>
+
+<note>
 如果您使用JFS来作为root文件系统，您就<e>必须</e>在<c>kernel</c>那行添加上“ro”参数，因为JFS文件系统在其允许被加载为可读写状态前需要使用这个参数来重放它的日志。
 </note>
 
@@ -250,7 +254,7 @@ splashimage=(hd0,0)/boot/grub/splash.xpm.gz
 
 title Gentoo Linux <keyval id="kernel-version"/>
 root (hd0,0)
-kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda3 udev
+kernel /boot/<keyval id="genkernel-name"/> root=/dev/ram0 init=/linuxrc ramdisk=8192 real_root=/dev/sda3 
 initrd /boot/<keyval id="genkernel-initrd"/>
 
 <comment># 只有在双启动的情况下才需要以下内容</comment>
@@ -259,10 +263,6 @@ rootnoverify (hd0,5)
 makeactive
 chainloader +1
 </pre>
-
-<note>
-在kernel行末尾加上<c>udev</c>的目的是为了规避某些genkernel版本存在的一个bug。<e>如果</e>您本来使用的是udev（默认如此）的话，将可能出现此bug。
-</note>
 
 <p>
 如果您使用与此不同的分区方案和／或内核镜像，请相应地进行调整。无论怎样，请确保紧跟在GRUB设备（例如<path>(hd0,0)</path>）后面的是相对于挂载点的路径，而不是根目录。换句话说，<path>(hd0,0)/grub/splash.xpm.gz</path>的实际目标是<path>/boot/grub/splash.xpm.gz</path>，因为<path>(hd0,0)</path>就是<path>/boot</path>分区。
@@ -457,7 +457,7 @@ image=/boot/<keyval id="genkernel-name"/>
   label=gentoo
   read-only
   root=/dev/ram0
-  append="init=/linuxrc ramdisk=8192 real_root=/dev/sda3 udev"
+  append="init=/linuxrc ramdisk=8192 real_root=/dev/sda3"
   initrd=/boot/<keyval id="genkernel-initrd"/>
 
 <comment># 下边的两行只有在您与Windows系统进行双启动的情况下才需要</comment>
@@ -465,10 +465,6 @@ image=/boot/<keyval id="genkernel-name"/>
 other=/dev/sda6
   label=windows
 </pre>
-
-<note>
-在append行末尾加上<c>udev</c>的目的是为了规避某些genkernel版本存在的一个bug。<e>如果</e>您本来使用的是udev（默认如此）的话，将可能出现此bug。
-</note>
 
 <note>
 如果您使用了与此不同的分区方案和/或者内核镜像，请进行相应的调整。

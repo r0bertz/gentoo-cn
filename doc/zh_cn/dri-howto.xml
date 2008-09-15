@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.41 -->
+<!-- English CVS version: 1.42 -->
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <guide link="/doc/zh_cn/dri-howto.xml" lang="zh_cn">
@@ -25,14 +25,12 @@
 本文档是一个介绍通过使用Xorg和DRM来在Gentoo Linux里启用3D加速功能的指南。
 </abstract>
 
-
-
 <!-- The content of this document is licensed under the CC-BY-SA license 
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.10</version>
-<date>2008-06-02</date>
+<version>1.11</version>
+<date>2008-09-16</date>
 
 <chapter>
 <title>解释</title>
@@ -159,12 +157,13 @@ lrwxrwxrwx 1 root root 22 2007-02-14 20:12 /usr/src/linux -> linux-2.6.18-gentoo
 Processor type and features --->
 &lt;*&gt; MTRR (Memory Type Range Register) support
 Device drivers --->
-   Character devices --->
-   &lt;M&gt; /dev/agpgart (AGP Support)
+   Graphic support --->
+   &lt;M&gt; /dev/agpgart (AGP Support) --->
    <comment>（agpgart选项在64位内核里不存在；只需要选择你的芯片组支持即可。）</comment>
    &lt;M&gt; Intel 440LX/BX/GX, I8xx and E7x05 support
 <comment>（启用你的芯片组而不要照抄上面的例子。）</comment>
-   &lt;M&gt; Direct Rendering Manager (XFree86 4.1.0 and higher DRI support)
+   &lt;M&gt; Direct Rendering Manager (XFree86 4.1.0 and higher DRI support) --->
+     &lt;M&gt; <comment>（从列表里选择你的显卡）</comment>
 </pre>
 
 </body>

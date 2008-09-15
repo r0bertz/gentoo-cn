@@ -5,12 +5,12 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.18 -->
+<!-- English CVS version: 1.19 -->
 
 <sections>
 
-<version>9.2</version>
-<date>2008-07-05</date>
+<version>9.3</version>
+<date>2008-09-16</date>
 
 <section>
 <title>时区</title>
@@ -235,7 +235,7 @@ Device Drivers ---&gt;
 </pre>
 
 <p>
-现在执行<c>genkernel --udev all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间！
+现在执行<c>genkernel all</c>编译您的内核源码。请注意，<c>genkernel</c>编译出的内核支持几乎所有硬件，编译需要一段很长的时间！
 </p>
 
 <note>
@@ -243,7 +243,7 @@ EVMS2或LVM2的用户可能需要在genkernel命令行上添加<c>--evms2</c>或
 </note>
 
 <pre caption="运行genkernel">
-# <i>genkernel --udev all</i>
+# <i>genkernel all</i>
 </pre>
 
 <p>
