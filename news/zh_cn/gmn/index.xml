@@ -52,6 +52,10 @@ GMN将会通过网页（HTML）和邮件列表（纯文本）的形式发行。�
   <th>摘要</th>
 </tr>
 <tr>
+  <ti><uri link="/news/zh_cn/gmn/20080831-newsletter.xml">2008年8月31日</uri></ti>
+  <ti>移除PHP4, Google“代码之夏”访谈，基于Gentoo的新发行版等</ti>
+</tr>
+<tr>
   <ti><uri link="/news/zh_cn/gmn/20080728-newsletter.xml">2008年7月28日</uri></ti>
   <ti>2008.0发布，Gentoo在Peel Fresco Music Lounge等</ti>
 </tr>
