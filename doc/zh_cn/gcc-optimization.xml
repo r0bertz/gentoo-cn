@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
+
+
+
+<!-- $Header $ 
+ English CVS version 1.14 -->
+<guide link="/doc/zh_cn/gcc-optimization.xml" lang="zh_cn" disclaimer="draft">
+<title>编译优化指南</title>
+
+<author title="作者">
+  <mail link="nightmorph@gentoo.org">Joshua Saddler</mail>
+</author>
+
+<author title="译者">
+  <mail link="huaihuaixiaoshao@gmail.com">黄曦</mail>
+</author>
+
+<abstract>
+这份指南介绍使用安全健壮的CFLAGS和CXXFLAGS来优化编译代码，并讲述了优化背后的一般理论。
+</abstract>
+
+
+
+<!-- The content of this document is licensed under the CC-BY-SA license 
+ See http://creativecommons.org/licenses/by-sa/2.5 -->
+<license/>
+
+<version>1.9</version>
+<date>2008-07-21</date>
+
+<chapter>
+<title>介绍</title>
+<section>
+<title>什么是CFLAGS和CXXFLAGS</title>
+<body>
+
+<p>
+环境变量CFLAGS和CXXFLAGS指示GNU编译器集合，<c>gcc</c>，在编译源代码时使用哪些开关。CFLAGS用于C代码，CXXFLAGS用于C++代码。
+</p>
+
+<p>
+它们可以用来减少程序的调试信息数量，增加错误警告等级，以及优化代码的生成。在<uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Invoking-GCC.html#Invoking-GCC">GNU gcc handbook</uri>维护着一个可用的选项及其作用的完整列表。
+</p>
+
+</body>
+</section>
+<section>
+<title>如何使用？</title>
+<body>
+
+<p>
+使用CFLAGS和CXXFLAGS有两种方法。第一，在每个程序由automake生成的Makefile中使用。
+</p>
+
+<p>
+但是，安装Portage树中的软件包时并不能这么干，而要在<path>/etc/make.conf</path>中设置CFLAGS和CXXFLAGS。这样所有的软件包都会用你指定的选项来编译。
+</p>
+
+<pre caption="/etc/make.conf中的CFLAGS">
+CFLAGS="-march=athlon64 -O2 -pipe"
+CXXFLAGS="${CFLAGS}"
+</pre>
+
+<p>
+如你所见，用CFLAGS中的所有选项来设置CXXFLAGS。在多数情况下这就是你想要的。你可以不用为CXXFLAGS指定额外的选项了。
+</p>
+
+</body>
+</section>
+<section>
+<title>误解</title>
+<body>
+
+<p>
+指定CFLAGS和CXXFLAGS是使由源代码生成的二进制文件更小更快的有效手段。不过也可能产生副作用，如二进制文件体积膨胀，执行缓慢，甚至造成编译失败！
+</p>
+
+<p>
+CFLAGS不是万灵药;它们不会自动使你的系统跑的更快或减少二进制文件占用的磁盘空间。大把地增加标记以优化（压榨）系统是绝对要失败的方案。过犹不及。
+</p>
+
+<p>
+尽管网上有些人吹的很好，过激的CFLAGS和CXXFLAGS给你程序带来的坏处远多于好处。牢记那些标记出现在最前面的是因为它们用于特定场合的特定目的。特定的CFLAG对有些代码有用不代表它就适合用来编译你机器上安装的每一个软件。
+</p>
+
+</body>
+</section>
+<section>
+<title>准备好了？</title>
+<body>
+
+<p>
+现在你已经了解其中的一些风险了，让我们看一些对你计算机来说健壮，安全的优化。这对你下次向<uri link="http://bugs.gentoo.org">Bugzilla</uri>报告问题大有好处，你会因此受到开发者的青睐。（开发者通常会要求你用最少的CFLAGS重新编译软件包以观察问题是否持续存在。记住，过激的标记会使代码崩溃。）
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>优化</title>
+<section>
+<title>基础</title>
+<body>
+
+<p>
+使用CFLAGS和CXXFLAGS的目的是生成契合你系统的代码。如果可以的话，能生成精简而快速的代码，起到完美的作用。有时候前述条件是互斥的，所以我们会选择已知工作良好的组合。理想来说，它们能最大程度地适用于所有的CPU构架。我们也会在稍后提到激进的标记以便让你知道该注意些什么。我们不会讨论到在<c>gcc</c>手册中提到的每一个选项(有上百个之多)，但是基本的，常用的标记都会涵盖到。
+</p>
+
+<note>
+当你不能确定一个标记的作用时，请查阅 <uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Optimize-Options.html#Optimize-Options"> gcc manual</uri>的相关章节。如果还有疑问，试试Google，或者检索<c>gcc</c> <uri link="http://gcc.gnu.org/lists.html">mailing lists</uri>。
+</note>
+
+</body>
+</section>
+<section>
+<title>-march</title>
+<body>
+
+<p>
+第一个重要的选项是<c>-march</c>。这个选项告诉编译器该为你的处理器<uri link="http://en.wikipedia.org/wiki/Microarchitecture">architecture</uri> (或<e>arch</e>)生成何种代码，它表示为特定类型的CPU生成代码。指示不同的CPU具有不同的性能，支持不同的指令集，以及不同的执行代码方式。<c>-march</c>标记指示编译器根据你CPU的性能，特征，指令集，怪癖等生成特定的代码。
+</p>
+
+<p>
+即使<path>/etc/make.conf</path>中的CHOST变量指定了所使用的通用构架，<c>-march</c>还是可以用来为特定的处理器优化程序。x86和x86-64（也包括其他的）的CPU尤其应该利用<c>-march</c>标记。
+</p>
+
+<p>
+你用哪种类型的CPU？用以下命令检测：
+</p>
+
+<pre caption="检测CPU信息">
+$ <i>cat /proc/cpuinfo</i>
+</pre>
+
+<p>
+现在来实战<c>-march</c>。这是旧的Pentium III芯片的例子：
+</p>
+
+<pre caption="/etc/make.conf: Pentium III">
+CFLAGS="-march=pentium3"
+CXXFLAGS="${CFLAGS}"
+</pre>
+
+<p>
+这个则是64位AMD CPU的例子：
+</p>
+
+<pre caption="/etc/make.conf: AMD64">
+CFLAGS="-march=athlon64"
+CXXFLAGS="${CFLAGS}"
+</pre>
+
+
+<p>
+<c>-mtune</c>和<c>-mcpu</c>标记也是可用的。这两个标记通常只在<c>-march</c>选项不可用的时候才用到;特定的处理器可能要求使用<c>-mtune</c>甚至<c>-mcpu</c>。糟糕的是，<c>gcc</c>在不同构架的行为并非完全一致。
+</p>
+
+<p>
+对于x86和x86-64的CPU，<c>-march</c>将使用所指定CPU全部的可用指令集和正确的ABI来生成代码;并不会向后兼容其他旧式的CPU。如果你不需要在除了你当前运行Gentoo之外的机器上执行代码，那么就可以继续使用<c>-march</c>。你仅需在为i386和i486之类的旧式CPU生成代码时考虑如何使用<c>-mtune</c>。使用<c>-mtune</c>生成代码比使用<c>-march</c>更通用;虽然它能为特定的CPU优化代码，但是并不涉及繁多的指令集和ABI。别在x86或x86-64系统上使用<c>-mcpu</c>，因为在这两个构架上已经废弃了。
+</p>
+
+<p>
+只有非x86/x86-64 CPU (如Sparc， Alpha，和 PowerPC)可能要求使用<c>-mtune</c>或<c>-mcpu</c>来代替<c>-march</c>。在这些构架上，<c>-mtune</c>/<c>-mcpu</c>的行为有时就像<c>-march</c> (在 x86/x86-64上). . . 只是换了个名称。<c>gcc</c>在诸构架上行为和标记的命名并不一致。所以请查阅<c>gcc</c> <uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Submodel-Options.html#Submodel-Options">manual</uri> 确认在你的系统上该用哪个。
+</p>
+
+<note>
+要获得更多建议性的<c>-march</c>/<c>-mtune</c>/<c>-mcpu</c>设置，请读合适你构架的<uri link="/doc/zh_cn/handbook/">Gentoo安装手册</uri>。还有就是<uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Submodel-Options.html#Submodel-Options">architecture-specific options</uri>上的<c>gcc</c>手册列表，其中更加详细地解释了<c>-march</c>，<c>-mcpu</c>，和<c>-mtune</c>之间的区别。
+</note>
+
+</body>
+</section>
+<section>
+<title>-O</title>
+<body>
+
+<p>
+接下来是<c>-O</c>变量。这个选项控制所有的优化等级。使用优化选项会使编译过程耗费更多的时间，并且占用更多的内存，尤其是在提高优化等级的时候。
+</p>
+
+<p>
+<c>-O</c>设置一共有五种：<c>-O0</c>， <c>-O1</c>， <c>-O2</c>， <c>-O3</c>，和<c>-Os</c>。 你只能在<path>/etc/make.conf</path>里面设置其中的一种。
+</p>
+
+<p>
+除了<c>-O0</c>以外的<c>-O</c>设置一次启用多个附加标记，请查阅gcc手册的<uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Optimize-Options.html#Optimize-Options">optimization options</uri>章节，以便了解每个<c>-O</c>等级启用了哪些标记，及它们有何作用。
+</p>
+
+<p>
+让我们来逐一考察各个优化等级：
+</p>
+
+<ul>
+  <li>
+    <c>-O0</c>：这个等级(字母"O"后面跟个零)关闭所有优化选项，并且也是没有在CFLAGS或CXXFLAGS中设置<c>-O</c>等级时的默认等级。这样就不会优化代码，这通常不是我们想要的。
+  </li>
+  <li>
+    <c>-O1</c>：这是最基本的优化等级。编译器会在不花费太多编译时间的同时试图生成更快更小的代码。这非常基本，但大都能顺利完成工作。
+  </li>
+  <li>
+    <c>-O2</c>：<c>-O1</c>的进阶。这是<e>推荐的</e>优化等级，除非你有特殊的需求。<c>-O2</c>会比<c>-O1</c>启用多一些标记。设置了<c>-O2</c>后，编译器会试图提高代码性能而忽略体积和大量占用的编译时间。
+  </li>
+  <li>
+    <c>-O3</c>：这是最高最危险的优化等级。用这个选项会延长编译代码的时间，并且<e>不应在系统范围内和<c>gcc</c>4.x配合使用</e>。自从3.x版本以来<c>gcc</c>的行为已经有了极大地改变。在3.x，<c>-O3</c>生成的代码也只是比<c>-O2</c>快一点点而已，而<c>gcc</c>4.x中还未必更快。用<c>-O3</c>来编译所有的软件包<e>将</e>产生更大体积更耗内存的二进制文件，大大增加编译失败的机会或不可预知的程序行为（包括错误）。这样做将得不偿失，记住过犹不及。<b>在<c>gcc</c> 4.x.中使用<c>-O3</c>是不推荐的</b>。
+  </li>
+  <li>
+    <c>-Os</c>：这个等级用来优化代码尺寸。其中启用了<c>-O2</c>中不会增加占用磁盘空间的生成代码选项。这对于磁盘空间极其紧张或者CPU缓存较小的机器非常有用。但也可能产生些许问题，因此软件树中的大部分ebuild都过滤掉这个等级的优化。使用<c>-Os</c>是不推荐的。
+  </li>
+</ul>
+
+<p>
+正如前面所提到的，<c>-O2</c>是推荐的优化等级。如果编译软件出现错误，请先检查是否启用了<c>-O3</c>。再试试把CFLAGS和CXXFLAGS倒回到较低的等级，如<c>-O1</c>甚或<c>-O0 -g2 -ggdb</c>（用来报告错误和检查可能存在的问题），再重新编译。
+</p>
+
+</body>
+</section>
+<section>
+<title>-pipe</title>
+<body>
+
+<p>
+<c>-pipe</c>是个安全而有趣的标记。它对代码生成毫无影响，但是可以加快编译过程。此标记指示编译器在不同编译时期使用管道而不是临时文件。
+</p>
+
+</body>
+</section>
+<section>
+<title>-fomit-frame-pointer</title>
+<body>
+
+<p>
+这是个用来削减代码尺寸的常用标记。在所有不影响除错（例如x86-64）的构架上的<c>-O</c>等级(除了<c>-O0</c>)中都启用了它，但是也可能需要手动添加到你的标记中。GNU 
+<c>gcc</c>手册没有明确指出使用<c>-O</c>时也启用这个标记的所有构架，所以你需要显式地在x86上启用它。使用这个标记会使除错难以进行。
+</p>
+
+<p>
+另外，它还使Java写的故障排查程序难以实现，因为使用标记不仅仅波及Java代码。标记虽然有用，但也会使除错变得困难，无法回溯调试。然而，你不准备做软件除错并且没有在CFLAGS中加入<c>-ggdb</c>之类与除错相关的标记，那就可以试试<c>-fomit-frame-pointer</c>。
+</p>
+
+<impo>
+<!--
+
+source for this info:
+
+http://www.coyotegulch.com/products/acovea/aco5p4gcc40.html
+
+-->
+请<e>勿</e>联合使用<c>-fomit-frame-pointer</c>和与之相似的<c>-momit-leaf-frame-pointer</c>。开启后者并无多大用处，因为<c>-fomit-frame-pointer</c>已经把事情搞定了。此外，<c>-momit-leaf-frame-pointer</c>还将消极地降低代码性能。
+
+</impo>
+
+</body>
+</section>
+<section>
+<title>-msse, -msse2, -msse3, -mmmx, -m3dnow</title>
+<body>
+
+<p>
+这些标记启用了x86和x86-64构架的<uri link="http://en.wikipedia.org/wiki/Streaming_SIMD_Extensions">SSE</uri>,<uri link="http://en.wikipedia.org/wiki/SSE2">SSE2</uri>, <uri link="http://en.wikipedia.org/wiki/SSSE3">SSE3</uri>, <uri link="http://en.wikipedia.org/wiki/MMX">MMX</uri>, and <uri link="http://en.wikipedia.org/wiki/3dnow">3DNow!</uri>指令集。他们主要用于多媒体，游戏，及其他浮点运算密集的任务，虽然也包括了一些其他的数学增强指令。比较新的CPU都具有这些指令。
+</p>
+
+<impo>
+运行<c>cat /proc/cpuinfo</c>以确认你的CPU是否支持这些指令集。输出会包括所有支持的指令集。注意<b>pni</b>是SSE3的别名。
+</impo>
+
+<p>
+只要正确设置了<c>-march</c>就不需要添加额外的标记(例如，<c>-march=nocona</c>暗含了<c>-msse3</c>)。要注意的是<c>-march</c>并不包含新的VIA和AMD64 CPU所支持的指令集（例如SSE3）。对于这些CPU就需要在检查<c>cat /proc/cpuinfo</c>输出之后手动加入适当的标记。
+</p>
+
+<note>
+请查阅<uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/i386-and-x86_002d64-Options.html#i386-and-x86_002d64-Options">列表</uri>所列出x86和x86-64特定的标记以便确认适当的CPU类型标记启用了哪些指令集。如果指令已经列出了，就会由恰当的<c>-march</c>设置开启，不再需要手动加入了。
+</note>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>优化的常见问题</title>
+<section>
+<title>我通过-funroll-loops -fomg-optimize获得了更好的性能！</title>
+<body>
+
+<p>
+并非如此，这样<e>认为</e>只是因为你深信标记越多越好而已。在系统范围使用激进的标记对应用软件无益。即使<c>gcc</c> <uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/Optimize-Options.html#Optimize-Options">manual</uri>也提到使用<c>-funroll-loops</c>和<c>-funroll-all-loops</c>会使代码膨胀运行减慢。但是由于某些原因，这两个标记，以及<c>-ffast-math</c>，<c>-fforce-mem</c>， <c>-fforce-addr</c>和类似的标记，还在那些想获得最多吹牛资本的玩家中流行着。
+</p>
+
+<p>
+事实上那些都是危险的过激标志。好好逛逛<uri link="http://forums.gentoo.org">Gentoo论坛</uri> 和 <uri link="http://bugs.gentoo.org">Bugzilla</uri>看看这些标记有什么好的：一点也不好！
+</p>
+
+<p>
+你无需在全局范围的CFLAGS或CXXFLAGS中使用那些标记。他们只会影响性能，就好似迫使一个高性能系统运行在崩溃的边缘。这些标记除了使代码膨胀和得到非法或无法解决bug之外并无他用。
+</p>
+
+<p>
+你不需要这些危险的标记。<b>切勿使用</b>。谨遵基本的:<c>-march</c>,<c>-O</c>,和<c>-pipe</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>比3还高的-O等级又怎样？</title>
+<body>
+
+<p>
+有些用户吹嘘说使用<c>-O4</c>，<c>-O9</c>等可以获得更高的性能，但事实上比3更高的<c>-O</c>是无效的。就算编译器可以接受像<c>-O4</c>之类的CFLAGS，编译时也会忽略掉。最高只对<c>-O3</c>进行优化。
+</p>
+
+<p>
+需要更多证据？查阅<c>gcc</c> <uri link="http://gcc.gnu.org/viewcvs/trunk/gcc/opts.c?revision=124622&amp;view=markup">source code</uri>:
+</p>
+
+<pre caption="-O源代码">
+if (optimize >= 3)
+    {
+      flag_inline_functions = 1;
+      flag_unswitch_loops = 1;
+      flag_gcse_after_reload = 1;
+      /* Allow even more virtual operators.  */
+      set_param_value ("max-aliased-vops", 1000);
+      set_param_value ("avg-aliased-vops", 3);
+    }
+</pre>
+
+<p>
+如你所见，任何大于3的值都只被当成<c>-O3</c>。
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是冗余标记？</title>
+<body>
+
+<p>
+有些人在<c>-O</c>等级变量已经指定的情况下仍多余地开启<path>/etc/make.conf</path>中的CFLAGS和CXXFLAGS。这的确可以避免遗漏，还能防止标记被过滤或替换。
+</p>
+
+<p>
+在Portage树中不少ebuild都过滤或替换了标记。这么做通常是因为某些软件包在特定的<c>-O</c>等级下无法编译，或者源代码对附加的标记过于敏感。ebuild可能过滤部分或全部CFLAGS和CXXFLAGS，或者将<c>-O</c>替换为其他等级。
+</p>
+
+<p>
+The <uri link="http://devmanual.gentoo.org/ebuild-writing/functions/src_compile/build-environment/index.html">Gentoo Developer Manual</uri>概述了过滤替换在何处及如何起作用。
+</p>
+
+<p>
+通过为一个特定的等级额外地追加标记可以避免<c>-O</c>过滤，比如<c>-O3</c>，可以这样做：
+</p>
+
+<pre caption="指定额外的CFLAGS">
+CFLAGS="-O3 -finline-functions -funswitch-loops"
+</pre>
+
+<p>
+然而，<brite>这样做可不好</brite>。过滤CFLAGS必有其原因。如果标记被过滤，那就意味着用彼标记来编译某个软件包是不安全的。毫无疑问，用<c>-O3</c>编译整个系统是<e>不</e>安全的，如果开启了这个等级中的某些标记，对于特定软件包将产生问题。别以为你比那些包的维护者更聪明。<e>请相信开发者</e>。过滤和替换标记是为了你好！如果ebuild指定了其他的标记，就别再动它了。
+</p>
+
+<p>
+当你用不可接受的标记来构建软件包时很可能会不断地遇到问题。这时到Bugzilla报告问题，你在<path>/etc/make.conf</path>中使用的标记可能已经上榜了，你会被告知要去掉那些标记再重新编译。请勿使用多余的标记免得重新编译的麻烦。别以为你比开发者更懂。
+</p>
+
+</body>
+</section>
+<section>
+<title>什么是LDFLAGS？</title>
+<body>
+
+<p>
+在基本的profile里Gentoo开发者已经设置了基本的，安全的LDFLAGS，所以没必要去改动。
+</p>
+
+</body>
+</section>
+<section>
+<title>可以为单个包分别指定标记吗？</title>
+<body>
+
+<p>
+为单个包指定CFLAGS或者其他变量是不支持的。这里给出了<uri link="http://forums.gentoo.org/viewtopic-p-3832057.html#3832057">相当滥的</uri>手段强制软件包这么做。
+</p>
+
+<p>
+你<e>不应</e>强制Portage使用单个包的指定标记，因为这不受任何支持还很可能产生错综复杂的问题。只要在<path>/etc/make.conf</path>设置系统范围的标记就可以了。
+</p>
+
+</body>
+</section>
+</chapter>
+
+<chapter>
+<title>资源</title>
+<section>
+<body>
+
+<p>
+以下资源对优化的深入理解有所帮助：
+</p>
+
+<ul>
+  <li>
+    The <uri link="http://gcc.gnu.org/onlinedocs/gcc-4.1.2/gcc/">GNU gcc manual</uri>
+  </li>
+  <li>
+    <uri link="/doc/zh_cn/handbook/">Gentoo安装手册</uri>的第五章
+  </li>
+  <li><c>man make.conf</c></li>
+  <li><uri link="http://zh.wikipedia.org">Wikipedia</uri></li>
+  <li>
+    <uri 
+link="http://www.coyotegulch.com/products/acovea/">Acovea</uri>，是个用来评定不同的编译器标记对于生成代码影响的测评套件，虽然它给出的代码建议不宜在系统范围使用。可以在Portage里通过<c>emerge acovea</c>安装。
+  </li>
+  <li><uri link="http://forums.gentoo.org">Gentoo论坛</uri></li>
+</ul>
+
+</body>
+</section>
+</chapter>
+</guide>
