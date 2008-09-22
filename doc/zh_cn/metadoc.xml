@@ -387,7 +387,7 @@
     <file id="zsh">/doc/en/zsh.xml</file>
     <file id="change-chost">/doc/en/change-chost.xml</file>
     <file id="xfce-config">/doc/zh_cn/xfce-config.xml</file>
-    <file id="gcc-optimization">/doc/en/gcc-optimization.xml</file>
+    <file id="gcc-optimization">/doc/zh_cn/gcc-optimization.xml</file>
     <file id="vpnc-howto">/doc/en/vpnc-howto.xml</file>
     <file id="qa-autofailure">/proj/en/qa/autofailure.xml</file>
     <file id="qa-automagic">/proj/en/qa/automagic.xml</file>
