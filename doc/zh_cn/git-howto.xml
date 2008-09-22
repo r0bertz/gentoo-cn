@@ -136,11 +136,11 @@ user:yourname@gmail.com:smtp.gmail.com:587
 <pre caption="设置自己的姓名、email地址及smtp服务器程序">
 $ <i>git-config --global user.name 'Your Name'</i>
 $ <i>git-config --global user.email 'yourname@gmail.com'</i>
-$ <i>git-config --global sendemail.smtpserver "/path/to/your/smtpserver"</i>
+$ <i>git-config --global sendemail.smtpserver "/usr/sbin/sendmail"</i>
 </pre>
 
 <p>
-同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。如果使用<c>msmtp</c>，smtpserver的值为<path>/usr/bin/msmtp</path>；如果使用<c>ssmtp</c>，值为<path>/usr/sbin/ssmtp</path>。
+同样，用你自己的名字、email地址代替上面的Your Name和yourname@gmail.com。Gentoo里安装smtp服务器程序时都会附带安装一个/usr/sbin/sendmail符号连接，指向真正的smtp服务器程序可执行文件。所以直接把smtp服务器设定为此符号连接即可。
 </p>
 
 <p>
