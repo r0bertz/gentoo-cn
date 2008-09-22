@@ -411,7 +411,7 @@ $ <i>iconv -f ISO2022JP -t UTF-8 file1.sql &gt; file2.sql</i>
 <body>
 
 <p>
-为了apache使用utf8，你必须调节以下在<path>httpd.conf</path>文件里的变量：AddDefaultCharset，CharsetDefault和CharsetSourceEnc。如果你的html文件源码没有用utf8编码，那它们必须<b>must</b>被<c>iconv</c>或者<c>recode</c>转换。
+为了apache使用utf8，你必须调节以下在<path>httpd.conf</path>文件里的变量：AddDefaultCharset，CharsetDefault和CharsetSourceEnc。如果你的html文件源码没有用utf8编码，那它们<b>必须</b>经过<c>iconv</c>或者<c>recode</c>的转换。
 </p>
 
 </body>
