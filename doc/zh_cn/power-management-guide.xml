@@ -27,8 +27,8 @@
  See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.40</version>
-<date>2008-06-29</date>
+<version>1.41</version>
+<date>2008-09-28</date>
 
 <chapter>
 <title>介绍</title>
@@ -1360,8 +1360,8 @@ last full capacity:  41830 mWh
 <p>
 <e>答：</e>不要担心直接联系我，<mail link="earthwings@gentoo.org">Dennis 
 Nienhüser</mail>。<uri link="http://forums.gentoo.org">Gentoo 
-Forums</uri>也是一个获得帮助的好地方。如果你更喜欢IRC，试试<uri 
-link="irc://irc.freenode.net">irc.freenode.net</uri>上的<c>#gentoo-laptop</c>频道。
+Forums</uri>也是一个获得帮助的好地方。如果你更喜欢IRC，试试
+<c>#gentoo-laptop</c><uri link="irc://irc.gentoo.org">频道</uri>。
 </p>
 
 </body>
