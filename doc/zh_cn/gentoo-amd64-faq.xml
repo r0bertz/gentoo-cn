@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ --> 
-<!-- English CVS version: 1.29 --> 
+<!-- English CVS version: 1.30 --> 
 
 <guide link="/doc/zh_cn/gentoo-amd64-faq.xml" lang="zh_cn">
 <title>Gentoo Linux/AMD64常见问题</title>
@@ -19,6 +19,9 @@
 <author title="编辑">
   <mail link="neysx@gentoo.org">Xavier Neys</mail>
 </author>
+<author title="编辑">
+  <mail link="nightmorph"/>
+</author>
 <author title="译者"> 
   <mail link="ritksm@gmail.com">江泽洲</mail> 
 </author> 
@@ -31,8 +34,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>1.20</version>
-<date>2008-09-02</date>
+<version>1.21</version>
+<date>2008-09-10</date>
 
 <faqindex>
 <title>问题</title>
@@ -212,7 +215,15 @@ CPUFREQ_ACPI="/proc/acpi/processor/CPU0/throttling"
 <body>
 
 <p>
-可以。为了使Flash正常运行，你需要一个32位的浏览器，比如<c>mozilla-firefox-bin</c>或者<c>opera</c>，因为Macromedia不提供Flash的64位版本。在你使用emerge安装了你最喜欢的浏览器的预编译包之后，你可以通过运行<c>emerge netscape-flash</c>来安装Flash。
+当然可以。即使Macromedia没有提供64位版本的flash，我们仍然可以通过两种方法来使用flash。
+</p>
+
+<p>
+首先，你可以使用一个32位的浏览器（比如说<c>mozilla-firefox-bin</c>或者<c>opera</c>），然后你就可以使用32位的flash了。在emerge了你最喜欢的浏览器的bin包之后，你可以通过运行<c>emerge netscape-flash</c>来安装flash。
+</p>
+
+<p>
+其次，你也可以使用一个64位的浏览器（比如说<c>mozilla-firefox</c>），然后你可以通过emerge安装<c>nspluginwrapper</c>来使用32位的flash。通过<c>nspluginwrapper</c>，你可以在64位浏览器上加载32位的插件。首先安装你的浏览器和<c>netscape-flash</c>，然后再安装<c>nspluginwrapper</c>。这个组件将会自动地为你的浏览器侦测并安装flash。
 </p>
 
 </body>
