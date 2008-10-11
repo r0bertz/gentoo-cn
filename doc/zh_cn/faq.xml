@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.113 -->
+<!-- English CVS version: 1.114 -->
 
 <guide link="/doc/zh_cn/faq.xml" lang="zh_cn">
 <title>Gentoo Linux常见问题</title>
@@ -36,6 +36,9 @@
 <author title="Editor">
   <mail link="smithj@gentoo.org">Jonathan Smith</mail>
 </author>
+<author title="Editor">
+   <mail link="nightmorph"/>
+</author>
 <author title="Translator">
   <mail link="linuxfans.linky@gmail.com">范华</mail>
 </author>
@@ -51,8 +54,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>3.11</version>
-<date>2008-09-05</date>
+<version>3.12</version>
+<date>2008-10-11</date>
 
 <faqindex>
 <title>问题</title>
@@ -557,7 +560,7 @@ $ <i>echo clear &gt;&gt; ~/.bash_logout</i>
 <body>
 
 <p>
-请您使用我们的<uri link="https://bugs.gentoo.org">Bugzilla</uri>.如果你不能肯定你的问题确实是个bug，你可以加入<uri link="http://www.freenode.net">FreeNode</uri>IRC网络中的<c>#gentoo-cn</c>或<c>#gentoo</c>频道询问一下。
+请您使用我们的<uri link="https://bugs.gentoo.org">Bugzilla</uri>.如果你不能肯定你的问题确实是个bug，你可以加入<uri link="irc://irc.gentoo.org/gento">#gentoo</uri> IRC频道询问一下。
 </p>
 
 </body>
@@ -633,7 +636,7 @@ Gentoo的软件包通常会在主要的作者释出新的代码后不久就进�
 <body>
 
 <p>
-首先，应该浏览一下相关的<uri link="/doc/zh_cn/index.xml">文档</uri>，这是个好的起步。如果失败了，你可以参考一些在<uri link="http://www.google.com">Google</uri>中列出的Gentoo Linux邮件列表。如果你要在邮件列表里搜索东西，比如搜索“foo”只需要键入“lists.gentoo.org foo”就可以了。如果所有这一切都失败了，或是你只是想和其他Gentoo用户待在一起，请加入我们的irc：<c>irc.freenode.net</c>上的<c>#gentoo-cn</c>和<c>#gentoo</c>频道.
+首先，应该浏览一下相关的<uri link="/doc/zh_cn/index.xml">文档</uri>，这是个好的起步。如果失败了，你可以参考一些在<uri link="http://www.google.com">Google</uri>中列出的Gentoo Linux邮件列表。如果你要在邮件列表里搜索东西，比如搜索“foo”只需要键入“lists.gentoo.org foo”就可以了。如果所有这一切都失败了，或是你只是想和其他Gentoo用户待在一起，请加入我们的irc：<uri link="irc://irc.gentoo.org/gentoo">#gentoo</uri>。
 
 </p>
 
