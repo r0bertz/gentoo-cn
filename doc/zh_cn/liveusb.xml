@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version:1.14 -->
+<!-- English CVS version:1.15 -->
 
 <guide link="/doc/zh_cn/liveusb.xml" lang="zh_cn">
 <title>Gentoo Linux LiveUSB HOWTO</title>
@@ -25,8 +25,8 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 <license/>
 
-<version>3</version>
-<date>2008-07-28</date>
+<version>4</version>
+<date>2008-09-11</date>
 
 <chapter>
 <title>简介</title>
@@ -141,7 +141,7 @@ mkdosfs 2.11 (12 Mar 2005)
 <pre caption="安装主引导记录">
 <comment>（确认系统已经安装了sys-boot/syslinux-3.00或更新的版本）</comment>
 # <i>emerge -av '>sys-boot/syslinux-3'</i>
-# <i>dd if=/usr/share/syslinux/mbr.bin of=/dev/sdc</i>
+# <i>dd if=/usr/lib/syslinux/mbr.bin of=/dev/sdc</i>
 0+1 records in
 0+1 records out
 304 bytes (304 B) copied, 0.0162317 s, 18.7 kB/s
