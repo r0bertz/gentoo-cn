@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE inserts SYSTEM "/dtd/inserts.dtd">
-<!-- $Header: /var/cvsroot/gentoo/xml/htdocs/doc/zh_cn/inserts.xml,v 1.1 2006/09/01 10:47:13 neysx Exp $-->
+<!-- $Header$ -->
+<!-- English CVS version: 1.2 -->
 <inserts lang="zh_cn">
-  <version>1</version>
+  <version>2</version>
   <insert name="Content">内容</insert>
   <insert name="Credits">致谢</insert>
   <insert name="Updated">更新于<docdate/></insert>
@@ -23,6 +24,8 @@
   <insert name="SpaceBeforeColon"/>
   <insert name="Print">打印</insert>
   <insert name="PrintTip">查看利于打印版本</insert>
+  <insert name="ShowFullHB">查看全部</insert>
+  <insert name="ShowFullHBTip">在一页中查看整个手册</insert>
   <insert name="Home">主页</insert>
   <insert name="License">本文档的内容遵循<uri link="http://creativecommons.org/licenses/by-sa/2.5">知识共享-署名-相同方式共享</uri>许可协议</insert>
   <insert name="hb_file">指向书中其他部分的连接欠奉</insert>
