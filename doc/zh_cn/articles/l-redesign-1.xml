@@ -2,7 +2,7 @@
 <!DOCTYPE guide SYSTEM "/dtd/guide.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.4 -->
+<!-- English CVS version: 1.5 -->
 
 <guide link="/doc/zh_cn/articles/l-redesign-1.xml" disclaimer="articles" lang="zh_cn">
 <title>gentoo.org重新设计，第1部分：一个重生的站点</title>
@@ -28,8 +28,8 @@ developerWorks, and is property of Westtech Information Services. This
 document is an updated version of the original article, and contains
 various improvements made by the Gentoo Linux Documentation team -->
 
-<version>1.0</version>
-<date>2005-10-10</date>
+<version>1.1</version>
+<date>2008-10-12</date>
 
 <chapter>
 <title>任性的人</title>
