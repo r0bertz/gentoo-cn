@@ -5,7 +5,7 @@
 <!-- See http://creativecommons.org/licenses/by-sa/2.5 -->
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.53 -->
+<!-- English CVS version: 1.54 -->
 
 <sections>
 
@@ -13,8 +13,8 @@
 要下载最新的源代码，你要先设置好网络。
 </abstract>
 
-<version>5.0</version>
-<date>2008-04-02</date>
+<version>5.1</version>
+<date>2008-10-12</date>
 
 <section>
 <title>自动网络检测</title>
@@ -337,6 +337,10 @@ eth0      IEEE 802.11-DS  ESSID:"GentooNode"
 <p>
 对大多数用户来说，可能只有两处设置需要重点修改，即ESSID（亦称无线网络名）或WEP密钥。如果前面列出的ESSID和AP地址正是你的无线AP的ESSID和地址，并且你不使用WEP，那么你的无线网络已工作正常。如果你需要修改你的ESSID或添加一个WEP密钥，可以参照下列命令：
 </p>
+
+<note>
+如果你的无线网络使用的是WPA或者WPA2，你将需要使用<c>wpa_supplicant</c>。欲获取更多有关在Gentoo Linux里配置无线网络的信息，请阅读Gentoo手册中的<uri link="?part=4&amp;chap=4">无线网络</uri>一章。
+</note>
 
 <pre caption="修改ESSID和/或添加WEP密钥">
 <comment>（这里设置网络名为“GentooNode”）</comment>
