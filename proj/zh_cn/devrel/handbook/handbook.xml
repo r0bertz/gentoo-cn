@@ -2,9 +2,9 @@
 <!DOCTYPE book SYSTEM "/dtd/book.dtd">
 
 <!-- $Header$ -->
-<!-- English CVS version: 1.10 -->
+<!-- English CVS version: 1.11 -->
 
-<book link="handbook.xml" lang="zh_cn">
+<book link="/proj/zh_cn/devrel/handbook/handbook.xml" lang="zh_cn">
   <title>Gentoo开发者手册</title>
   
 <!-- Author names only -->
@@ -57,6 +57,10 @@
 
   <author title ="Author">
       <mail link="musikc@gentoo.org">Chrissy Fullam</mail>
+  </author>
+
+  <author title="Author">
+      <mail link="rane@gentoo.org">Łukasz Damentko</mail>
   </author>
 
   <author title="Author">
@@ -131,8 +135,8 @@
   <!-- See http://creativecommons.org/licenses/by-sa/1.0 -->
   <license/>
 
-  <version>1.0.3</version>
-  <date>2007-08-17</date>
+  <version>2</version>
+  <date>2008-10-12</date>
 
   <part>
     <title>介绍</title>
@@ -175,9 +179,17 @@
     <chapter>
       <title>开发者等级</title>
       <abstract>
-	本节简要介绍了Gentoo开发者等级和管理结构
+	本节简要介绍了Gentoo开发者等级和管理结构。
       </abstract>
       <include href="hb-introduction-hierarchy.xml"/>
+    </chapter>
+
+    <chapter>
+      <title>工作人员策略</title>
+      <abstract>
+        本节介绍了Gentoo工作人员的招募和退休策略。
+      </abstract>
+      <include href="hb-introduction-staffers.xml"/>
     </chapter>
   </part>
 
