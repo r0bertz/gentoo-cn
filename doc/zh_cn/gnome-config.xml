@@ -75,7 +75,7 @@ GNOME是一个桌面环境，也是一个开发平台。这份自由软件是众
 <body>
 
 <p>
-开始安装GNOME之前，您可能要编辑一下USE变量。确保你的/etc/make.conf中列出的USE变量包含<c>X</c>、<c>gtk</c>和<c>gnome</c>。如果您想支持<c>hald</c>——硬件抽象层守护进程，请添加<c>hal</c>到你的USE标记中。还有<c>dbus</c>，一个Gnome广泛使用的系统消息总线。USE标记<c>avahi</c>为GNOME提供DNS检测（类似Mac OS X下的Rendevouz）。如果您不想支持KDE（另一个大型桌面环境），去掉<c>qt3</c>、<c>qt3</c>、<c>arts</c>和<c>kde</c>。
+开始安装GNOME之前，您可能要编辑一下USE变量。确保你的/etc/make.conf中列出的USE变量包含<c>X</c>、<c>gtk</c>和<c>gnome</c>。如果您想支持<c>hald</c>——硬件抽象层守护进程，请添加<c>hal</c>到你的USE标记中。还有<c>dbus</c>，一个Gnome广泛使用的系统消息总线。USE标记<c>avahi</c>为GNOME提供DNS检测（类似Mac OS X下的Rendevouz）。如果您不想支持KDE（另一个大型桌面环境），去掉<c>qt3</c>、<c>qt4</c>、<c>arts</c>和<c>kde</c>。
 </p>
 
 <pre caption="/etc/make.conf中USE范例">
